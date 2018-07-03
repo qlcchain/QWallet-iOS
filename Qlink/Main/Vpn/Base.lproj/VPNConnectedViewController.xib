@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VPNConnectedViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="vpnNameLab" destination="YjQ-9z-jsv" id="PuS-Kg-tay"/>
+                <outlet property="vpnUserBtn" destination="obR-B3-fno" id="cLJ-Mg-kxU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcm-ri-aOr">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIf-Je-nJ9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tO-ac-0Zd">
+                                    <rect key="frame" x="15" y="10" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="7T1-kI-efS"/>
+                                        <constraint firstAttribute="width" constant="40" id="bI5-bd-aN4"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="hPl-5k-RI5"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VPN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVl-6z-lRQ">
+                                    <rect key="frame" x="171" y="19.5" width="33" height="21"/>
+                                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="4tO-ac-0Zd" firstAttribute="centerY" secondItem="NIf-Je-nJ9" secondAttribute="centerY" id="4uD-xu-l90"/>
+                                <constraint firstItem="fVl-6z-lRQ" firstAttribute="centerY" secondItem="NIf-Je-nJ9" secondAttribute="centerY" id="GWx-NZ-mqL"/>
+                                <constraint firstItem="fVl-6z-lRQ" firstAttribute="centerX" secondItem="NIf-Je-nJ9" secondAttribute="centerX" id="LbE-4W-ndy"/>
+                                <constraint firstAttribute="height" constant="60" id="St4-Zq-0cG"/>
+                                <constraint firstItem="4tO-ac-0Zd" firstAttribute="leading" secondItem="NIf-Je-nJ9" secondAttribute="leading" constant="15" id="cAY-dT-jQh"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obR-B3-fno">
+                            <rect key="frame" x="113" y="147" width="149" height="149"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="149" id="Q8W-f2-RLW"/>
+                                <constraint firstAttribute="height" constant="149" id="huS-Me-LVy"/>
+                            </constraints>
+                            <state key="normal" image="img_person"/>
+                            <connections>
+                                <action selector="headerAction:" destination="-1" eventType="touchUpInside" id="Y29-Wi-ai9"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="wqm-KR-keo">
+                            <rect key="frame" x="15" y="358" width="345" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="yyj-vu-6ZW"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="DCd-bd-EE9">
+                            <rect key="frame" x="15" y="496" width="345" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="H7r-od-nJ8"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONNECTED." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5Q-86-bsH">
+                            <rect key="frame" x="137.5" y="420" width="100" height="21"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserID / IP Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFb-eg-vHG">
+                            <rect key="frame" x="37" y="523" width="78.5" height="11"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="9"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.3985712756849315" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SomeCustomID / 47.90.56.140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjQ-9z-jsv">
+                            <rect key="frame" x="37" y="544" width="206" height="18"/>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_connected_vpn" translatesAutoresizingMaskIntoConstraints="NO" id="JEE-uM-JlO">
+                            <rect key="frame" x="298" y="523" width="33" height="39"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="39" id="NzN-vY-NPb"/>
+                                <constraint firstAttribute="width" constant="33" id="aef-Ak-Kzs"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="eH3-gA-W4A">
+                            <rect key="frame" x="15" y="582" width="345" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="13h-ED-lwY"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="obR-B3-fno" firstAttribute="centerX" secondItem="dcm-ri-aOr" secondAttribute="centerX" id="1Ao-u4-3WY"/>
+                        <constraint firstItem="NIf-Je-nJ9" firstAttribute="top" secondItem="dcm-ri-aOr" secondAttribute="top" id="2vw-i2-bhY"/>
+                        <constraint firstItem="obR-B3-fno" firstAttribute="top" secondItem="NIf-Je-nJ9" secondAttribute="bottom" constant="87" id="3yQ-OJ-xJz"/>
+                        <constraint firstAttribute="trailing" secondItem="DCd-bd-EE9" secondAttribute="trailing" constant="15" id="4bl-mW-aBS"/>
+                        <constraint firstItem="H5Q-86-bsH" firstAttribute="centerX" secondItem="dcm-ri-aOr" secondAttribute="centerX" id="8Cc-5e-ZP8"/>
+                        <constraint firstItem="DCd-bd-EE9" firstAttribute="leading" secondItem="dcm-ri-aOr" secondAttribute="leading" constant="15" id="9p1-mV-1Of"/>
+                        <constraint firstItem="H5Q-86-bsH" firstAttribute="top" secondItem="wqm-KR-keo" secondAttribute="bottom" constant="55" id="AM0-WM-gQg"/>
+                        <constraint firstItem="wqm-KR-keo" firstAttribute="leading" secondItem="dcm-ri-aOr" secondAttribute="leading" constant="15" id="Lxe-KP-3sB"/>
+                        <constraint firstItem="jFb-eg-vHG" firstAttribute="top" secondItem="DCd-bd-EE9" secondAttribute="bottom" constant="20" id="PcL-ks-PRv"/>
+                        <constraint firstItem="YjQ-9z-jsv" firstAttribute="top" secondItem="jFb-eg-vHG" secondAttribute="bottom" constant="10" id="Rb7-KU-vuY"/>
+                        <constraint firstAttribute="trailing" secondItem="NIf-Je-nJ9" secondAttribute="trailing" id="THt-DK-WJm"/>
+                        <constraint firstAttribute="trailing" secondItem="wqm-KR-keo" secondAttribute="trailing" constant="15" id="XWG-g4-XVi"/>
+                        <constraint firstItem="JEE-uM-JlO" firstAttribute="top" secondItem="DCd-bd-EE9" secondAttribute="bottom" constant="20" id="aa5-wb-KbE"/>
+                        <constraint firstItem="jFb-eg-vHG" firstAttribute="leading" secondItem="dcm-ri-aOr" secondAttribute="leading" constant="37" id="acY-6g-6hA"/>
+                        <constraint firstItem="wqm-KR-keo" firstAttribute="top" secondItem="obR-B3-fno" secondAttribute="bottom" constant="62" id="cbc-sf-Ugs"/>
+                        <constraint firstItem="YjQ-9z-jsv" firstAttribute="leading" secondItem="jFb-eg-vHG" secondAttribute="leading" id="fht-vi-Sox"/>
+                        <constraint firstItem="eH3-gA-W4A" firstAttribute="top" secondItem="YjQ-9z-jsv" secondAttribute="bottom" constant="20" id="ibN-pq-VmO"/>
+                        <constraint firstAttribute="trailing" secondItem="eH3-gA-W4A" secondAttribute="trailing" constant="15" id="loK-Jk-C9P"/>
+                        <constraint firstItem="eH3-gA-W4A" firstAttribute="leading" secondItem="dcm-ri-aOr" secondAttribute="leading" constant="15" id="n2j-nc-vdR"/>
+                        <constraint firstItem="DCd-bd-EE9" firstAttribute="top" secondItem="H5Q-86-bsH" secondAttribute="bottom" constant="55" id="oWK-i4-lbj"/>
+                        <constraint firstAttribute="trailing" secondItem="JEE-uM-JlO" secondAttribute="trailing" constant="44" id="u5A-EN-Rwu"/>
+                        <constraint firstItem="NIf-Je-nJ9" firstAttribute="leading" secondItem="dcm-ri-aOr" secondAttribute="leading" id="uen-8P-Ryi"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="dcm-ri-aOr" secondAttribute="trailing" id="544-W4-aaq"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="dcm-ri-aOr" secondAttribute="bottom" id="5Ay-E9-0Aw"/>
+                <constraint firstItem="dcm-ri-aOr" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="b3p-tB-MQI"/>
+                <constraint firstItem="dcm-ri-aOr" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="s7o-fT-3cv"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="-77" y="18"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_purple_box" width="339" height="7"/>
+        <image name="icon_back" width="38" height="38"/>
+        <image name="icon_connected_vpn" width="33" height="39"/>
+        <image name="img_person" width="149" height="149"/>
+    </resources>
+</document>

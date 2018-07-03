@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="b4M-6d-oiV" userLabel="HistoryWifiCell" customClass="HistoryWifiCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b4M-6d-oiV" id="XFA-iC-OqC">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EjI-vK-RJd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBj-dD-NS9">
+                                <rect key="frame" x="18" y="0.0" width="284" height="74.5"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-rw-wHu">
+                                        <rect key="frame" x="0.0" y="0.0" width="284" height="74.5"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="icon_myvpn" translatesAutoresizingMaskIntoConstraints="NO" id="P5l-CJ-QtD">
+                                        <rect key="frame" x="14" y="16" width="19" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="GWQ-Nr-NjX"/>
+                                            <constraint firstAttribute="width" constant="19" id="P5i-uK-Eij"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a407-5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1d-4m-ats">
+                                        <rect key="frame" x="42" y="14" width="51" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18-02-04 15:32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="els-AE-gdo">
+                                        <rect key="frame" x="42" y="40" width="76.5" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="0.6588235294" green="0.65098039220000004" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_button_one" translatesAutoresizingMaskIntoConstraints="NO" id="hOa-I3-s30">
+                                        <rect key="frame" x="233" y="17.5" width="40" height="40"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ecg-rw-wHu" secondAttribute="bottom" id="8aQ-9j-hyj"/>
+                                    <constraint firstItem="Ecg-rw-wHu" firstAttribute="leading" secondItem="mBj-dD-NS9" secondAttribute="leading" id="MwF-Cd-U5p"/>
+                                    <constraint firstItem="D1d-4m-ats" firstAttribute="centerY" secondItem="P5l-CJ-QtD" secondAttribute="centerY" id="Q0r-iz-9Nr"/>
+                                    <constraint firstItem="hOa-I3-s30" firstAttribute="centerY" secondItem="mBj-dD-NS9" secondAttribute="centerY" id="V3c-r6-5ED"/>
+                                    <constraint firstItem="P5l-CJ-QtD" firstAttribute="leading" secondItem="mBj-dD-NS9" secondAttribute="leading" constant="14" id="Wgr-d3-fOZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="hOa-I3-s30" secondAttribute="trailing" constant="11" id="Yz5-mx-1mx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ecg-rw-wHu" secondAttribute="trailing" id="nm6-fQ-Drb"/>
+                                    <constraint firstItem="D1d-4m-ats" firstAttribute="leading" secondItem="P5l-CJ-QtD" secondAttribute="trailing" constant="9" id="nv9-uh-pG3"/>
+                                    <constraint firstItem="els-AE-gdo" firstAttribute="top" secondItem="D1d-4m-ats" secondAttribute="bottom" constant="8" id="odr-Db-hhL"/>
+                                    <constraint firstItem="els-AE-gdo" firstAttribute="leading" secondItem="D1d-4m-ats" secondAttribute="leading" id="qT6-hK-lNt"/>
+                                    <constraint firstItem="P5l-CJ-QtD" firstAttribute="top" secondItem="mBj-dD-NS9" secondAttribute="top" constant="16" id="v16-SZ-mzO"/>
+                                    <constraint firstItem="Ecg-rw-wHu" firstAttribute="top" secondItem="mBj-dD-NS9" secondAttribute="top" id="vXE-Ep-nlI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mBj-dD-NS9" firstAttribute="leading" secondItem="EjI-vK-RJd" secondAttribute="leading" constant="18" id="5Hj-rA-WHE"/>
+                            <constraint firstAttribute="bottom" secondItem="mBj-dD-NS9" secondAttribute="bottom" constant="5" id="OnQ-MK-Hw5"/>
+                            <constraint firstItem="mBj-dD-NS9" firstAttribute="top" secondItem="EjI-vK-RJd" secondAttribute="top" id="Wi8-UC-QLn"/>
+                            <constraint firstAttribute="trailing" secondItem="mBj-dD-NS9" secondAttribute="trailing" constant="18" id="r7M-i5-VzB"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="EjI-vK-RJd" secondAttribute="trailing" id="50D-Ao-VXZ"/>
+                    <constraint firstItem="EjI-vK-RJd" firstAttribute="top" secondItem="XFA-iC-OqC" secondAttribute="top" id="Wse-q0-GJd"/>
+                    <constraint firstItem="EjI-vK-RJd" firstAttribute="leading" secondItem="XFA-iC-OqC" secondAttribute="leading" id="YHV-FR-W3D"/>
+                    <constraint firstAttribute="bottom" secondItem="EjI-vK-RJd" secondAttribute="bottom" id="bdl-xZ-Ra9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="NYw-Q9-IMu"/>
+            <connections>
+                <outlet property="headImgView" destination="P5l-CJ-QtD" id="0L0-jL-LRp"/>
+                <outlet property="imgVIew" destination="hOa-I3-s30" id="1ia-VE-blf"/>
+                <outlet property="lblName" destination="D1d-4m-ats" id="47g-jL-7y1"/>
+                <outlet property="lblTime" destination="els-AE-gdo" id="5si-pn-tsw"/>
+            </connections>
+            <point key="canvasLocation" x="-233" y="118"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bg_continue" width="8" height="44"/>
+        <image name="icon_button_one" width="40" height="40"/>
+        <image name="icon_myvpn" width="17" height="17"/>
+    </resources>
+</document>

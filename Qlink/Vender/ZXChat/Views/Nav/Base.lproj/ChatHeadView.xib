@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="wVB-WB-Mpc" customClass="ChatHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOr-4K-LnS">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eK-Xd-2Ct">
+                            <rect key="frame" x="15" y="13.5" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="17J-5m-g1n"/>
+                                <constraint firstAttribute="height" constant="40" id="p1O-ph-FPd"/>
+                            </constraints>
+                            <state key="normal" image="icon_back"/>
+                            <connections>
+                                <action selector="backAction:" destination="wVB-WB-Mpc" eventType="touchUpInside" id="Iam-Fi-u5X"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEIZE VPN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOf-0Y-4SA">
+                            <rect key="frame" x="148" y="23" width="79" height="21"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="nOf-0Y-4SA" firstAttribute="centerY" secondItem="KOr-4K-LnS" secondAttribute="centerY" id="gF4-ij-Sax"/>
+                        <constraint firstItem="6eK-Xd-2Ct" firstAttribute="centerY" secondItem="KOr-4K-LnS" secondAttribute="centerY" id="mJa-3P-sPg"/>
+                        <constraint firstItem="nOf-0Y-4SA" firstAttribute="centerX" secondItem="KOr-4K-LnS" secondAttribute="centerX" id="o5r-jN-iwF"/>
+                        <constraint firstItem="6eK-Xd-2Ct" firstAttribute="leading" secondItem="KOr-4K-LnS" secondAttribute="leading" constant="15" id="ye3-5r-kBf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="4Rt-9D-UAH" firstAttribute="bottom" secondItem="KOr-4K-LnS" secondAttribute="bottom" id="9dR-dp-Vj2"/>
+                <constraint firstItem="KOr-4K-LnS" firstAttribute="top" secondItem="4Rt-9D-UAH" secondAttribute="top" id="AUr-Oi-qK8"/>
+                <constraint firstItem="KOr-4K-LnS" firstAttribute="leading" secondItem="4Rt-9D-UAH" secondAttribute="leading" id="IfB-U7-txz"/>
+                <constraint firstItem="4Rt-9D-UAH" firstAttribute="trailing" secondItem="KOr-4K-LnS" secondAttribute="trailing" id="O8s-l6-61j"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="4Rt-9D-UAH"/>
+            <connections>
+                <outlet property="titleLab" destination="nOf-0Y-4SA" id="Utg-ff-fCa"/>
+            </connections>
+            <point key="canvasLocation" x="102" y="-65"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_back" width="38" height="38"/>
+    </resources>
+</document>

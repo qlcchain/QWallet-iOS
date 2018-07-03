@@ -1,0 +1,35 @@
+//
+//  RatesMode.h
+//  Qlink
+//
+//  Created by 旷自辉 on 2018/4/8.
+//  Copyright © 2018年 pan. All rights reserved.
+//
+
+#import "BBaseModel.h"
+@class NEO;
+@class GAS;
+@class BNB;
+
+@interface RatesMode : BBaseModel
+
+@property (nonatomic , strong) NEO *neoInfo;
+@property (nonatomic , strong) GAS *gasInfo;
+@property (nonatomic , strong) BNB *bnbInfo;
+@end
+
+@interface NEO : BBaseModel
+
+@property (nonatomic , strong) NSString *qlc;
+
+@end
+
+@interface GAS : BBaseModel
+
+@property (nonatomic , strong) NSString *qlc;
+@end
+
+@interface BNB : BBaseModel
+
+@property (nonatomic , strong) NSString *qlc;
+@end

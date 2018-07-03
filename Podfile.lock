@@ -1,0 +1,81 @@
+PODS:
+  - AFNetworking (3.2.0):
+    - AFNetworking/NSURLSession (= 3.2.0)
+    - AFNetworking/Reachability (= 3.2.0)
+    - AFNetworking/Security (= 3.2.0)
+    - AFNetworking/Serialization (= 3.2.0)
+    - AFNetworking/UIKit (= 3.2.0)
+  - AFNetworking/NSURLSession (3.2.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.0)
+  - AFNetworking/Security (3.2.0)
+  - AFNetworking/Serialization (3.2.0)
+  - AFNetworking/UIKit (3.2.0):
+    - AFNetworking/NSURLSession
+  - BGFMDB (2.0.6):
+    - BGFMDB/BG (= 2.0.6)
+    - BGFMDB/FMDB (= 2.0.6)
+  - BGFMDB/BG (2.0.6):
+    - BGFMDB/FMDB
+  - BGFMDB/FMDB (2.0.6)
+  - Bugly (2.5.0)
+  - CocoaLumberjack/Default (3.4.1)
+  - CocoaLumberjack/Swift (3.4.1):
+    - CocoaLumberjack/Default
+  - Hero (1.2.0)
+  - IQKeyboardManager (6.0.0)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.1.0)
+  - MJExtension (3.0.13)
+  - OLImageView (1.5.1):
+    - OLImageView/Core (= 1.5.1)
+  - OLImageView/Core (1.5.1)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+
+DEPENDENCIES:
+  - AFNetworking
+  - BGFMDB (~> 2.0.6)
+  - Bugly
+  - CocoaLumberjack/Swift
+  - Hero
+  - IQKeyboardManager
+  - Masonry
+  - MBProgressHUD
+  - MJExtension
+  - OLImageView
+  - SDWebImage
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - BGFMDB
+    - Bugly
+    - CocoaLumberjack
+    - Hero
+    - IQKeyboardManager
+    - Masonry
+    - MBProgressHUD
+    - MJExtension
+    - OLImageView
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
+  BGFMDB: ff4a0ba1f6b4a8de2d39ecec846094f515dbef32
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
+  Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
+  IQKeyboardManager: fdba62488e23c48a3fa8591635aff166ed946632
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  OLImageView: e03cd533ce6b1a155acb9f708ab9b2e71ea070d5
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+
+PODFILE CHECKSUM: 748c2180d4aef726fd02a2a17d550513c0d22ff2
+
+COCOAPODS: 1.5.0

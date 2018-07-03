@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="heJ-uZ-DVa" customClass="GuideVpnListView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFX-II-xiR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_vpn_list" translatesAutoresizingMaskIntoConstraints="NO" id="TBz-Z9-CNj">
+                            <rect key="frame" x="13" y="180" width="349" height="119"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="349" id="Wjy-Gv-Fcr"/>
+                                <constraint firstAttribute="height" constant="119" id="nKb-gj-jAA"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7s-0R-KaF">
+                            <rect key="frame" x="25" y="307" width="325" height="44.5"/>
+                            <string key="text">Pick one online VPN asset
+The little green spot means online</string>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="6pL-lG-Omn"/>
+                        <constraint firstAttribute="trailing" secondItem="K7s-0R-KaF" secondAttribute="trailing" constant="25" id="Grj-Xs-i6U"/>
+                        <constraint firstItem="K7s-0R-KaF" firstAttribute="leading" secondItem="NFX-II-xiR" secondAttribute="leading" constant="25" id="PWC-gK-mXn"/>
+                        <constraint firstItem="TBz-Z9-CNj" firstAttribute="centerX" secondItem="NFX-II-xiR" secondAttribute="centerX" id="ShW-NX-BFI"/>
+                        <constraint firstItem="K7s-0R-KaF" firstAttribute="top" secondItem="TBz-Z9-CNj" secondAttribute="bottom" constant="8" id="pXt-bj-0bl"/>
+                        <constraint firstItem="TBz-Z9-CNj" firstAttribute="top" secondItem="NFX-II-xiR" secondAttribute="top" constant="180" id="rPC-VI-tLk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="NFX-II-xiR" firstAttribute="leading" secondItem="y5S-df-6Ql" secondAttribute="leading" id="DgV-ej-bgu"/>
+                <constraint firstItem="NFX-II-xiR" firstAttribute="top" secondItem="heJ-uZ-DVa" secondAttribute="top" id="HR1-7V-vnR"/>
+                <constraint firstItem="NFX-II-xiR" firstAttribute="trailing" secondItem="y5S-df-6Ql" secondAttribute="trailing" id="iKf-k8-POO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="y5S-df-6Ql"/>
+            <connections>
+                <outlet property="topOffset" destination="rPC-VI-tLk" id="5nz-pw-oxu"/>
+            </connections>
+            <point key="canvasLocation" x="349.5" y="138.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_floating_layer_vpn_list" width="349" height="119"/>
+    </resources>
+</document>

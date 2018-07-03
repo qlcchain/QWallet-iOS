@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="OjF-nz-cB8" customClass="GuideVpnListConnectView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gF1-HN-aBU">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_vpn_list" translatesAutoresizingMaskIntoConstraints="NO" id="nrD-X5-rPD">
+                            <rect key="frame" x="13" y="180" width="349" height="119"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="119" id="OSe-pq-zqM"/>
+                                <constraint firstAttribute="width" constant="349" id="bMG-ld-B7C"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check your balance in the Wallet page anytime you like" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sM-BE-yob">
+                            <rect key="frame" x="25" y="307" width="325" height="44.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7sM-BE-yob" secondAttribute="trailing" constant="25" id="8Hl-ss-faH"/>
+                        <constraint firstItem="nrD-X5-rPD" firstAttribute="top" secondItem="gF1-HN-aBU" secondAttribute="top" constant="180" id="B0X-uq-NJe"/>
+                        <constraint firstItem="7sM-BE-yob" firstAttribute="top" secondItem="nrD-X5-rPD" secondAttribute="bottom" constant="8" id="Chk-Dy-U4X"/>
+                        <constraint firstItem="7sM-BE-yob" firstAttribute="leading" secondItem="gF1-HN-aBU" secondAttribute="leading" constant="25" id="Pik-YS-Vf3"/>
+                        <constraint firstAttribute="height" constant="400" id="eHG-nq-L4l"/>
+                        <constraint firstItem="nrD-X5-rPD" firstAttribute="centerX" secondItem="gF1-HN-aBU" secondAttribute="centerX" id="xgJ-xy-urI"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gF1-HN-aBU" firstAttribute="leading" secondItem="OjF-nz-cB8" secondAttribute="leading" id="aTa-hG-K58"/>
+                <constraint firstItem="gF1-HN-aBU" firstAttribute="top" secondItem="OjF-nz-cB8" secondAttribute="top" id="smR-F0-A50"/>
+                <constraint firstItem="gF1-HN-aBU" firstAttribute="trailing" secondItem="OjF-nz-cB8" secondAttribute="trailing" id="vLZ-OG-T9L"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="topOffset" destination="B0X-uq-NJe" id="PjE-hh-2AS"/>
+            </connections>
+            <point key="canvasLocation" x="349.5" y="138.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_floating_layer_vpn_list" width="349" height="119"/>
+    </resources>
+</document>

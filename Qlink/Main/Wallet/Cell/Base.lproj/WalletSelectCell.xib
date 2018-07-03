@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="walletselectcell" rowHeight="36" id="KGk-i7-Jjw" customClass="WalletSelectCell">
+            <rect key="frame" x="0.0" y="0.0" width="381" height="36"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="381" height="35.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_myvpn" translatesAutoresizingMaskIntoConstraints="NO" id="YLz-AJ-AVS">
+                        <rect key="frame" x="17" y="8" width="19" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="19" id="axT-uw-a2D"/>
+                            <constraint firstAttribute="height" constant="19" id="w1M-Nx-VdB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OaG-sg-r1V">
+                        <rect key="frame" x="56" y="10" width="278" height="15.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_shape_two" translatesAutoresizingMaskIntoConstraints="NO" id="u1R-cS-dmt">
+                        <rect key="frame" x="12" y="34.5" width="357" height="0.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="v4P-a2-ktp"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_the_selected" translatesAutoresizingMaskIntoConstraints="NO" id="BeU-Aq-SFZ">
+                        <rect key="frame" x="344" y="7.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="tYD-b2-dYE"/>
+                            <constraint firstAttribute="height" constant="20" id="xwk-zH-hag"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="OaG-sg-r1V" firstAttribute="leading" secondItem="YLz-AJ-AVS" secondAttribute="trailing" constant="20" id="DeB-Ts-8JT"/>
+                    <constraint firstItem="u1R-cS-dmt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="FFo-5Z-Mab"/>
+                    <constraint firstAttribute="bottom" secondItem="u1R-cS-dmt" secondAttribute="bottom" id="HnB-NC-dCI"/>
+                    <constraint firstItem="BeU-Aq-SFZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Tqr-ut-unB"/>
+                    <constraint firstItem="YLz-AJ-AVS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="UTx-Gu-RLQ"/>
+                    <constraint firstItem="OaG-sg-r1V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Zug-P2-xYp"/>
+                    <constraint firstItem="YLz-AJ-AVS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="jdC-6L-Bjm"/>
+                    <constraint firstAttribute="trailing" secondItem="u1R-cS-dmt" secondAttribute="trailing" constant="12" id="mYg-Ap-wun"/>
+                    <constraint firstAttribute="trailing" secondItem="BeU-Aq-SFZ" secondAttribute="trailing" constant="17" id="n9C-9W-8N9"/>
+                    <constraint firstItem="BeU-Aq-SFZ" firstAttribute="leading" secondItem="OaG-sg-r1V" secondAttribute="trailing" constant="10" id="oMo-Zz-39H"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="lblWalletKey" destination="OaG-sg-r1V" id="h73-gd-DCb"/>
+                <outlet property="selectBtn" destination="BeU-Aq-SFZ" id="9W8-Hp-7sk"/>
+            </connections>
+            <point key="canvasLocation" x="63.5" y="2"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bg_shape_two" width="1" height="1"/>
+        <image name="icon_myvpn" width="19" height="19"/>
+        <image name="icon_the_selected" width="20" height="20"/>
+    </resources>
+</document>

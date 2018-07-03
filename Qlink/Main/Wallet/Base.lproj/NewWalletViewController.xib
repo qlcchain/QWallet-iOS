@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewWalletViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ewY-2o-yrd">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <subviews>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="tab_wallet_highlight" translatesAutoresizingMaskIntoConstraints="NO" id="LEp-4N-vh3">
+                            <rect key="frame" x="177" y="20" width="21" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="21" id="Eoh-Gd-XFz"/>
+                                <constraint firstAttribute="height" constant="18" id="uNs-ae-eaI"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpP-f8-Fwt">
+                            <rect key="frame" x="137.5" y="63" width="100.5" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="UPT-Tu-YBH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="bQh-Ln-FJg">
+                            <rect key="frame" x="20" y="106" width="335" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="byi-YK-Yl0"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjL-4Q-ZPp">
+                            <rect key="frame" x="71.5" y="143" width="233.5" height="35.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35.5" id="cgu-wr-qlN"/>
+                            </constraints>
+                            <string key="text">Hello again!
+Do you want to add another wallet?</string>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rf8-rI-xfa">
+                            <rect key="frame" x="73" y="380.5" width="229" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="pyD-RA-vHy"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="BACK" backgroundImage="bg_gray_button"/>
+                            <connections>
+                                <action selector="clickBack:" destination="-1" eventType="touchUpInside" id="2Xo-yv-wC3"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="2T5-Uq-irm">
+                            <rect key="frame" x="20" y="459.5" width="335" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="7" id="2F3-O5-ut1"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03g-d2-vXV">
+                            <rect key="frame" x="73" y="206.5" width="229" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="7So-nf-RMM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="CREATE NEW WALLET" backgroundImage="bg_continue">
+                                <color key="titleColor" red="0.32156862749999998" green="0.0" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickCreateWallet:" destination="-1" eventType="touchUpInside" id="PXb-Qq-Hwn"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Obc-8A-fHc">
+                            <rect key="frame" x="73" y="264.5" width="229" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="yvt-G9-aVd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="ENTER PRIVATE KEY" backgroundImage="bg_continue">
+                                <color key="titleColor" red="0.32156862749999998" green="0.0" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickPrivateKey:" destination="-1" eventType="touchUpInside" id="Ln6-IC-QGE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6y-qL-fMs">
+                            <rect key="frame" x="73" y="322.5" width="229" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="To8-LE-fZe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="SCAN PRIVATE KEY QR" backgroundImage="bg_continue">
+                                <color key="titleColor" red="0.32156862749999998" green="0.0" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="clickQR:" destination="-1" eventType="touchUpInside" id="VYu-aj-3nq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Obc-8A-fHc" firstAttribute="leading" secondItem="03g-d2-vXV" secondAttribute="leading" id="3F8-ft-VQO"/>
+                        <constraint firstItem="rf8-rI-xfa" firstAttribute="trailing" secondItem="Q6y-qL-fMs" secondAttribute="trailing" id="3T8-wh-p9T"/>
+                        <constraint firstItem="Obc-8A-fHc" firstAttribute="trailing" secondItem="03g-d2-vXV" secondAttribute="trailing" id="3fo-Fc-UXd"/>
+                        <constraint firstItem="03g-d2-vXV" firstAttribute="leading" secondItem="ewY-2o-yrd" secondAttribute="leading" constant="73" id="AYJ-qM-TUB"/>
+                        <constraint firstAttribute="trailing" secondItem="03g-d2-vXV" secondAttribute="trailing" constant="73" id="Bcu-HW-ZjL"/>
+                        <constraint firstItem="LjL-4Q-ZPp" firstAttribute="top" secondItem="bQh-Ln-FJg" secondAttribute="bottom" constant="30" id="Bu4-tf-5Ls"/>
+                        <constraint firstItem="03g-d2-vXV" firstAttribute="top" secondItem="LjL-4Q-ZPp" secondAttribute="bottom" constant="28" id="FbN-2D-oWX"/>
+                        <constraint firstItem="Q6y-qL-fMs" firstAttribute="top" secondItem="Obc-8A-fHc" secondAttribute="bottom" constant="14" id="J9O-3R-wcZ"/>
+                        <constraint firstItem="Q6y-qL-fMs" firstAttribute="trailing" secondItem="Obc-8A-fHc" secondAttribute="trailing" id="LFU-CB-xTm"/>
+                        <constraint firstItem="2T5-Uq-irm" firstAttribute="top" secondItem="rf8-rI-xfa" secondAttribute="bottom" constant="35" id="MYS-d6-nXk"/>
+                        <constraint firstItem="Obc-8A-fHc" firstAttribute="top" secondItem="03g-d2-vXV" secondAttribute="bottom" constant="14" id="N8w-RQ-LvT"/>
+                        <constraint firstItem="bQh-Ln-FJg" firstAttribute="leading" secondItem="ewY-2o-yrd" secondAttribute="leading" constant="20" id="PM9-ln-Ce0"/>
+                        <constraint firstItem="rf8-rI-xfa" firstAttribute="leading" secondItem="Q6y-qL-fMs" secondAttribute="leading" id="RXO-9a-id1"/>
+                        <constraint firstItem="2T5-Uq-irm" firstAttribute="leading" secondItem="ewY-2o-yrd" secondAttribute="leading" constant="20" id="SSD-P1-FFg"/>
+                        <constraint firstItem="LEp-4N-vh3" firstAttribute="centerX" secondItem="ewY-2o-yrd" secondAttribute="centerX" id="YFI-mW-zw5"/>
+                        <constraint firstItem="LjL-4Q-ZPp" firstAttribute="centerX" secondItem="ewY-2o-yrd" secondAttribute="centerX" id="ZaM-ds-diO"/>
+                        <constraint firstItem="ZpP-f8-Fwt" firstAttribute="centerX" secondItem="ewY-2o-yrd" secondAttribute="centerX" id="a1p-R0-aYo"/>
+                        <constraint firstItem="Q6y-qL-fMs" firstAttribute="leading" secondItem="Obc-8A-fHc" secondAttribute="leading" id="bmE-dV-yYB"/>
+                        <constraint firstItem="rf8-rI-xfa" firstAttribute="top" secondItem="Q6y-qL-fMs" secondAttribute="bottom" constant="14" id="dRX-hE-iP0"/>
+                        <constraint firstItem="ZpP-f8-Fwt" firstAttribute="top" secondItem="LEp-4N-vh3" secondAttribute="bottom" constant="25" id="nMI-xU-xx7"/>
+                        <constraint firstItem="LEp-4N-vh3" firstAttribute="top" secondItem="ewY-2o-yrd" secondAttribute="top" constant="20" id="qOZ-1A-36H"/>
+                        <constraint firstItem="bQh-Ln-FJg" firstAttribute="top" secondItem="ZpP-f8-Fwt" secondAttribute="bottom" constant="22" id="r5o-0T-bbN"/>
+                        <constraint firstAttribute="trailing" secondItem="bQh-Ln-FJg" secondAttribute="trailing" constant="20" id="rCi-i4-zLX"/>
+                        <constraint firstAttribute="trailing" secondItem="2T5-Uq-irm" secondAttribute="trailing" constant="20" id="tPy-Y2-AtV"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ewY-2o-yrd" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="13D-Vw-QMS"/>
+                <constraint firstItem="ewY-2o-yrd" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="CrS-NH-URh"/>
+                <constraint firstItem="ewY-2o-yrd" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="RkH-ht-s9Q"/>
+                <constraint firstItem="ewY-2o-yrd" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="avt-3l-aQ2"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_continue" width="8" height="44"/>
+        <image name="bg_gray_button" width="9" height="44"/>
+        <image name="bg_purple_box" width="339" height="7"/>
+        <image name="tab_wallet_highlight" width="22" height="18"/>
+    </resources>
+</document>

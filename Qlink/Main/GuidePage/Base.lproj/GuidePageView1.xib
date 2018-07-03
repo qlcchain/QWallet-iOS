@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GuidePageView1">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDV-CI-tY0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ios Wallet" translatesAutoresizingMaskIntoConstraints="NO" id="J2O-kV-RLN">
+                            <rect key="frame" x="0.0" y="113.5" width="375" height="240"/>
+                        </imageView>
+                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="kpc-4M-TIN">
+                            <rect key="frame" x="0.0" y="554.5" width="375" height="37"/>
+                            <color key="pageIndicatorTintColor" red="0.89807850119999999" green="0.89404243230000002" blue="0.90196311470000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="currentPageIndicatorTintColor" red="0.69019607839999997" green="0.68235294120000001" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </pageControl>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create A Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGH-BW-Rnr">
+                            <rect key="frame" x="101" y="418.5" width="174" height="29.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="24"/>
+                            <color key="textColor" red="0.28235294117647058" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 QLC Rewards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCg-kw-n7Z">
+                            <rect key="frame" x="91" y="451" width="193.5" height="29.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="24"/>
+                            <color key="textColor" red="0.28235294119999998" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※Testnet rewards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ku-lq-vrF">
+                            <rect key="frame" x="247.5" y="638.5" width="117.5" height="18.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="kpc-4M-TIN" secondAttribute="bottom" constant="75.5" id="9nx-rV-dJU"/>
+                        <constraint firstItem="FCg-kw-n7Z" firstAttribute="top" secondItem="VGH-BW-Rnr" secondAttribute="bottom" constant="3" id="A6t-0v-yKx"/>
+                        <constraint firstItem="J2O-kV-RLN" firstAttribute="leading" secondItem="fDV-CI-tY0" secondAttribute="leading" id="G9u-jO-fDN"/>
+                        <constraint firstItem="VGH-BW-Rnr" firstAttribute="centerX" secondItem="fDV-CI-tY0" secondAttribute="centerX" id="NM4-mH-SBg"/>
+                        <constraint firstAttribute="trailing" secondItem="J2O-kV-RLN" secondAttribute="trailing" id="OG9-0Y-VCY"/>
+                        <constraint firstItem="FCg-kw-n7Z" firstAttribute="centerX" secondItem="fDV-CI-tY0" secondAttribute="centerX" id="SIR-Zd-WYO"/>
+                        <constraint firstAttribute="trailing" secondItem="kpc-4M-TIN" secondAttribute="trailing" id="U1o-cw-bao"/>
+                        <constraint firstItem="VGH-BW-Rnr" firstAttribute="top" secondItem="J2O-kV-RLN" secondAttribute="bottom" constant="65" id="WH9-cX-sR7"/>
+                        <constraint firstAttribute="trailing" secondItem="5Ku-lq-vrF" secondAttribute="trailing" constant="10" id="kQh-aT-Oc8"/>
+                        <constraint firstItem="kpc-4M-TIN" firstAttribute="top" secondItem="FCg-kw-n7Z" secondAttribute="bottom" constant="74" id="rLn-wW-7zL"/>
+                        <constraint firstItem="kpc-4M-TIN" firstAttribute="leading" secondItem="fDV-CI-tY0" secondAttribute="leading" id="rWj-fe-iaF"/>
+                        <constraint firstAttribute="bottom" secondItem="5Ku-lq-vrF" secondAttribute="bottom" constant="10" id="rgx-6U-w8p"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fDV-CI-tY0" secondAttribute="bottom" id="FBf-yI-tJc"/>
+                <constraint firstItem="fDV-CI-tY0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aSo-nB-kRx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fDV-CI-tY0" secondAttribute="trailing" id="hAB-TC-BOq"/>
+                <constraint firstItem="fDV-CI-tY0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ojy-PH-cQo"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="50.5" y="52.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ios Wallet" width="375" height="240"/>
+    </resources>
+</document>

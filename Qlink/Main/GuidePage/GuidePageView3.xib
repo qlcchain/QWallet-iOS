@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GuidePageView3">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nSz-xP-4Wr">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ios Share with Friends" translatesAutoresizingMaskIntoConstraints="NO" id="U86-NO-cQs">
+                            <rect key="frame" x="0.0" y="113.5" width="375" height="240"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share with Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hkh-4s-boc">
+                            <rect key="frame" x="85" y="418.5" width="206.5" height="29.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="24"/>
+                            <color key="textColor" red="0.28235294119999998" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Surprise for You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsa-bm-qO4">
+                            <rect key="frame" x="88.5" y="451" width="198.5" height="29.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="24"/>
+                            <color key="textColor" red="0.28235294119999998" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgf-pR-vaS">
+                            <rect key="frame" x="99" y="525" width="177" height="42"/>
+                            <color key="backgroundColor" red="0.28235294119999998" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="177" id="Lzs-7J-lvB"/>
+                                <constraint firstAttribute="height" constant="42" id="hcl-ze-kqA"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                            <state key="normal" title="Got it">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Pgf-pR-vaS" firstAttribute="top" secondItem="nsa-bm-qO4" secondAttribute="bottom" constant="44.5" id="6Ml-Un-DNb"/>
+                        <constraint firstItem="nsa-bm-qO4" firstAttribute="top" secondItem="Hkh-4s-boc" secondAttribute="bottom" constant="3" id="LKo-Ve-HnE"/>
+                        <constraint firstItem="U86-NO-cQs" firstAttribute="leading" secondItem="nSz-xP-4Wr" secondAttribute="leading" id="N57-Zr-tEt"/>
+                        <constraint firstItem="nsa-bm-qO4" firstAttribute="centerX" secondItem="nSz-xP-4Wr" secondAttribute="centerX" id="UD2-Od-j7T"/>
+                        <constraint firstAttribute="trailing" secondItem="U86-NO-cQs" secondAttribute="trailing" id="ZIw-ia-BQc"/>
+                        <constraint firstItem="Pgf-pR-vaS" firstAttribute="centerX" secondItem="nSz-xP-4Wr" secondAttribute="centerX" id="e3o-dO-hY0"/>
+                        <constraint firstAttribute="bottom" secondItem="Pgf-pR-vaS" secondAttribute="bottom" constant="100" id="eJj-zu-Yea"/>
+                        <constraint firstItem="Hkh-4s-boc" firstAttribute="top" secondItem="U86-NO-cQs" secondAttribute="bottom" constant="65" id="lrM-NB-T6m"/>
+                        <constraint firstItem="Hkh-4s-boc" firstAttribute="centerX" secondItem="nSz-xP-4Wr" secondAttribute="centerX" id="pOb-5Z-Q9U"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nSz-xP-4Wr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="M4k-uk-9jO"/>
+                <constraint firstAttribute="trailing" secondItem="nSz-xP-4Wr" secondAttribute="trailing" id="MMC-GR-CLQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nSz-xP-4Wr" secondAttribute="bottom" id="a2N-5C-jjT"/>
+                <constraint firstItem="nSz-xP-4Wr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="g2Q-jr-eWb"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="gotBtn" destination="Pgf-pR-vaS" id="pJA-jp-ZqX"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="ios Share with Friends" width="375" height="240"/>
+    </resources>
+</document>

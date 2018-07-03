@@ -1,0 +1,56 @@
+//
+//  WilsonParkingPrefixHeader.pch
+//  WilsonParking
+//
+//  Created by Jelly Foo on 2017/3/9.
+//  Copyright © 2017年 Autotoll. All rights reserved.
+//
+
+#ifndef WilsonParkingPrefixHeader_pch
+#define WilsonParkingPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+// 宏
+#import "ServerMacro.h"
+#import "GlobalMacro.h"
+#import "WAMacroUtil.h"
+
+// 类目
+#import "UIView+Frame.h"
+#import "UIView+Toast.h"
+#import "UIImage+Color.h"
+#import "UIColor+Random.h"
+#import "UIView+Visuals.h"
+#import "NSString+EmptyUtil.h"
+#import "GlobalMacro.h"
+#import "NSStringUtil.h"
+#import "UIView+HUD.h"
+#import "NSString+Localizable.h"
+
+// 请求
+#import "RequestService.h"
+
+// 第三方
+#import "Masonry.h"
+//#import <MJExtension/MJExtension.h>
+
+// 工具
+#import "HWUserdefault.h"
+#import "QGradientView.h"
+//#import "SkyRadiusView.h"
+#import "JsonUtil.h"
+#import "ConfigUtil.h"
+#import "ToxManage.h"
+#import "UserManage.h"
+
+// mode
+#import "CurrentWalletInfo.h"
+
+#endif /* WilsonParkingPrefixHeader_pch */

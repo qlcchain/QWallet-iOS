@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="bk0-Qa-IXc" customClass="GuideVpnCountryView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7b-P8-rb2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_countries" translatesAutoresizingMaskIntoConstraints="NO" id="tjy-ES-qWf">
+                            <rect key="frame" x="154" y="80" width="101" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="101" id="Qei-RG-CUW"/>
+                                <constraint firstAttribute="height" constant="50" id="lQu-4X-fln"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="prioritize the list by server location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vs0-IL-SJz">
+                            <rect key="frame" x="25" y="138" width="325" height="22.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="vs0-IL-SJz" firstAttribute="leading" secondItem="Y7b-P8-rb2" secondAttribute="leading" constant="25" id="43g-XE-RVL"/>
+                        <constraint firstAttribute="trailing" secondItem="vs0-IL-SJz" secondAttribute="trailing" constant="25" id="E7g-br-PAe"/>
+                        <constraint firstAttribute="height" constant="250" id="PaR-wI-CFU"/>
+                        <constraint firstItem="tjy-ES-qWf" firstAttribute="top" secondItem="Y7b-P8-rb2" secondAttribute="top" constant="80" id="dC5-gR-G7C"/>
+                        <constraint firstItem="vs0-IL-SJz" firstAttribute="top" secondItem="tjy-ES-qWf" secondAttribute="bottom" constant="8" id="rkD-KW-Kgl"/>
+                        <constraint firstItem="tjy-ES-qWf" firstAttribute="centerX" secondItem="Y7b-P8-rb2" secondAttribute="centerX" constant="17" id="upg-yS-o1y"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Y7b-P8-rb2" secondAttribute="trailing" id="NKt-A5-XSY"/>
+                <constraint firstItem="Y7b-P8-rb2" firstAttribute="top" secondItem="bk0-Qa-IXc" secondAttribute="top" id="oLn-Ir-mtd"/>
+                <constraint firstItem="Y7b-P8-rb2" firstAttribute="leading" secondItem="bk0-Qa-IXc" secondAttribute="leading" id="zOa-87-Xbp"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="topOffset" destination="dC5-gR-G7C" id="c9g-ro-WUg"/>
+            </connections>
+            <point key="canvasLocation" x="349.5" y="138.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_floating_layer_countries" width="101" height="50"/>
+    </resources>
+</document>

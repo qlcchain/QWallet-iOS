@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WalletAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzB-NG-yj2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </button>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiq-D7-9Ja">
+                    <rect key="frame" x="18" y="223.5" width="339" height="220"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="K8l-ru-v6b">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="220"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONFIRM WITHDRAWAL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYC-YH-4Kx">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="56"/>
+                            <color key="backgroundColor" red="0.28627450980392155" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="CDB-ZE-kUw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcX-wh-tFe">
+                            <rect key="frame" x="173.5" y="141" width="143.5" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="YES" backgroundImage="bg_purple_button"/>
+                            <state key="highlighted" backgroundImage="bg_back"/>
+                            <connections>
+                                <action selector="clickYes:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Dt-JF-fuV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alb-jH-UwC">
+                            <rect key="frame" x="22" y="141" width="143.5" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="xvJ-lI-dfQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="CANCEL" backgroundImage="bg_gray_button"/>
+                            <state key="highlighted" backgroundImage="bg_back"/>
+                            <connections>
+                                <action selector="clickCancel:" destination="iN0-l3-epB" eventType="touchUpInside" id="EGJ-th-zbk"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sure you want to send 15.22015 QLC to AR9erhFhFVUn2JJ5TNG4Ug87PG7bd9PFHF?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXU-Og-7iA">
+                            <rect key="frame" x="17" y="83" width="305" height="33"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" id="3FN-fl-ZgM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWI-Ll-ZX4">
+                            <rect key="frame" x="86.5" y="141" width="165" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="165" id="8k5-Xi-3k1"/>
+                                <constraint firstAttribute="height" constant="44" id="Idq-e5-gTe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
+                            <state key="normal" title="OK" backgroundImage="bg_purple_button"/>
+                            <state key="highlighted" backgroundImage="bg_back"/>
+                            <connections>
+                                <action selector="clickYes:" destination="iN0-l3-epB" eventType="touchUpInside" id="3mj-T1-jGa"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="YYC-YH-4Kx" firstAttribute="top" secondItem="fiq-D7-9Ja" secondAttribute="top" id="1JR-nw-oID"/>
+                        <constraint firstItem="QcX-wh-tFe" firstAttribute="height" secondItem="Alb-jH-UwC" secondAttribute="height" id="BwN-5l-V35"/>
+                        <constraint firstItem="YYC-YH-4Kx" firstAttribute="leading" secondItem="fiq-D7-9Ja" secondAttribute="leading" id="ElF-hc-Ebo"/>
+                        <constraint firstItem="Alb-jH-UwC" firstAttribute="leading" secondItem="fiq-D7-9Ja" secondAttribute="leading" constant="22" id="FBn-P8-lgs"/>
+                        <constraint firstAttribute="bottom" secondItem="QcX-wh-tFe" secondAttribute="bottom" constant="35" id="GrP-lR-XZ9"/>
+                        <constraint firstItem="HXU-Og-7iA" firstAttribute="top" secondItem="YYC-YH-4Kx" secondAttribute="bottom" constant="27" id="KvL-MU-cRy"/>
+                        <constraint firstItem="QcX-wh-tFe" firstAttribute="leading" secondItem="Alb-jH-UwC" secondAttribute="trailing" constant="8" id="TeO-Jf-Dum"/>
+                        <constraint firstItem="HXU-Og-7iA" firstAttribute="leading" secondItem="fiq-D7-9Ja" secondAttribute="leading" constant="17" id="WIk-bc-Wqe"/>
+                        <constraint firstItem="K8l-ru-v6b" firstAttribute="leading" secondItem="fiq-D7-9Ja" secondAttribute="leading" id="Y8z-nd-iP9"/>
+                        <constraint firstAttribute="bottom" secondItem="Alb-jH-UwC" secondAttribute="bottom" constant="35" id="auP-MP-kas"/>
+                        <constraint firstAttribute="trailing" secondItem="QcX-wh-tFe" secondAttribute="trailing" constant="22" id="dqY-UC-dNH"/>
+                        <constraint firstAttribute="trailing" secondItem="YYC-YH-4Kx" secondAttribute="trailing" id="eFu-U7-99c"/>
+                        <constraint firstAttribute="trailing" secondItem="HXU-Og-7iA" secondAttribute="trailing" constant="17" id="euc-rW-P4K"/>
+                        <constraint firstItem="PWI-Ll-ZX4" firstAttribute="top" secondItem="HXU-Og-7iA" secondAttribute="bottom" constant="25" id="h10-d3-9xA"/>
+                        <constraint firstAttribute="trailing" secondItem="K8l-ru-v6b" secondAttribute="trailing" id="hSj-IL-hf9"/>
+                        <constraint firstItem="Alb-jH-UwC" firstAttribute="top" secondItem="HXU-Og-7iA" secondAttribute="bottom" constant="25" id="mxP-7q-rSi"/>
+                        <constraint firstAttribute="bottom" secondItem="K8l-ru-v6b" secondAttribute="bottom" id="pyC-Ob-TRN"/>
+                        <constraint firstItem="K8l-ru-v6b" firstAttribute="top" secondItem="fiq-D7-9Ja" secondAttribute="top" id="u1k-mm-QBZ"/>
+                        <constraint firstItem="PWI-Ll-ZX4" firstAttribute="centerX" secondItem="fiq-D7-9Ja" secondAttribute="centerX" id="wTp-uP-gRt"/>
+                        <constraint firstItem="QcX-wh-tFe" firstAttribute="width" secondItem="Alb-jH-UwC" secondAttribute="width" id="x3e-rC-452"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="IzB-NG-yj2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6g4-1M-MBy"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fiq-D7-9Ja" secondAttribute="trailing" constant="18" id="Jzc-eY-Cmr"/>
+                <constraint firstItem="IzB-NG-yj2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UJo-5G-zxl"/>
+                <constraint firstItem="fiq-D7-9Ja" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="bO9-nO-XJg"/>
+                <constraint firstItem="fiq-D7-9Ja" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tDS-qy-ya3"/>
+                <constraint firstAttribute="bottom" secondItem="IzB-NG-yj2" secondAttribute="bottom" id="tra-uz-bWO"/>
+                <constraint firstItem="IzB-NG-yj2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vsU-Mr-9Zt"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bgImageView" destination="K8l-ru-v6b" id="uqq-uX-JJe"/>
+                <outlet property="bgView" destination="fiq-D7-9Ja" id="CU8-Ow-Tdf"/>
+                <outlet property="cancelBtn" destination="Alb-jH-UwC" id="lS2-1a-oeG"/>
+                <outlet property="lblMsg" destination="HXU-Og-7iA" id="rTP-Qn-hNG"/>
+                <outlet property="lblTitle" destination="YYC-YH-4Kx" id="q40-B0-0E0"/>
+                <outlet property="okBtn" destination="PWI-Ll-ZX4" id="wfT-JB-Py3"/>
+                <outlet property="yesBtn" destination="QcX-wh-tFe" id="bfh-q1-bLs"/>
+            </connections>
+            <point key="canvasLocation" x="-247.5" y="-127.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_back" width="8" height="44"/>
+        <image name="bg_continue" width="8" height="44"/>
+        <image name="bg_gray_button" width="9" height="44"/>
+        <image name="bg_purple_button" width="5" height="42"/>
+    </resources>
+</document>
