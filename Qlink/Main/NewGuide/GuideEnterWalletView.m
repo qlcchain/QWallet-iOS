@@ -25,7 +25,7 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_ENTER_WALLET];
+    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_ENTER_WALLET];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_ENTER_WALLET];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *keyWindow = [UIApplication sharedApplication].keyWindow;
@@ -45,10 +45,10 @@
         
         if (IS_iPhone_5) {
             _topOffset.constant = 27;
-            _rightOffset.constant = 14;
+            _rightOffset.constant = 12;
         } else if (IS_iPhone_6) {
             _topOffset.constant = 27;
-            _rightOffset.constant = 14;
+            _rightOffset.constant = 12;
         } else if (IS_iPhone6_Plus) {
             _topOffset.constant = 27;
             _rightOffset.constant = 14;

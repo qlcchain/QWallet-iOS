@@ -522,7 +522,21 @@ static BOOL refreshAnimate = YES;
 
 // 添加浮层
 - (void)addNewGuideClickWallet {
-    CGRect hollowOutFrame = CGRectMake((3.0*(2.0+1.0)-2.0)*SCREEN_WIDTH/(3.0*3.0), SCREEN_HEIGHT - 49, 49, 49);
+    CGFloat x = 0;
+    CGFloat width = 49;
+    CGFloat height = 49;
+    CGFloat y = SCREEN_HEIGHT - height;
+    if (IS_iPhone_5) {
+        x = SCREEN_WIDTH - width - 30;
+    } else if (IS_iPhone_6) {
+        x = SCREEN_WIDTH - width - 40;
+    } else if (IS_iPhone6_Plus) {
+        x = SCREEN_WIDTH - width - 44;
+    } else if (IS_iPhoneX) {
+        x = SCREEN_WIDTH - width - 38;
+        y = y - 34;
+    }
+    CGRect hollowOutFrame = CGRectMake(x, y, width, height);
     @weakify_self
     [[GuideClickWalletView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
         [weakSelf addNewGuideClickAdd];
@@ -530,7 +544,8 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)addNewGuideCountry {
-    CGRect hollowOutFrame = CGRectMake((SCREEN_WIDTH - 55)/2.0, 96, 55, 24);
+    CGFloat y = IS_iPhoneX?96 + 24:96;
+    CGRect hollowOutFrame = CGRectMake((SCREEN_WIDTH - 55)/2.0, y, 55, 24);
     @weakify_self
     [[GuideVpnCountryView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
         [weakSelf addNewGuideVpnList];
@@ -538,14 +553,16 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)addNewGuideVpnList {
-    CGRect hollowOutFrame = CGRectMake(17, 177, SCREEN_WIDTH - 17*2, 64);
+    CGFloat y = IS_iPhoneX?177 + 24:177;
+    CGRect hollowOutFrame = CGRectMake(17, y, SCREEN_WIDTH - 17*2, 64);
     [[GuideVpnListView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
         
     }];
 }
 
 - (void)addNewGuideVpnListConnect {
-    CGRect hollowOutFrame = CGRectMake(17, 177, SCREEN_WIDTH - 17*2, 64);
+    CGFloat y = IS_iPhoneX?177 + 24:177;
+    CGRect hollowOutFrame = CGRectMake(17, y, SCREEN_WIDTH - 17*2, 64);
     [[GuideVpnListConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
         
     }];

@@ -23,16 +23,11 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
+    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_LIST];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
-        //        CGRect hollowOutFrame = [toView.superview convertRect:toView.frame toView:bgView];
-        //        CGPoint center = CGPointMake((hollowOutFrame.origin.x*2.0+hollowOutFrame.size.width)/2.0, (hollowOutFrame.origin.y*2.0+hollowOutFrame.size.height)/2.0);
-        //        CGFloat radius = (hollowOutFrame.size.width)/2.0;
-        //        @weakify_self
         UIView *guideBgView = [GuideVpnListView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
-        //        UIView *guideBgView = [GuideVpnCountryView showNewGuideCircleWithArcCenter:center radius:radius];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
             [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_VPN_LIST];
             UIView *tapView = gestureRecoginzer.view;
@@ -46,12 +41,14 @@
         
         if (IS_iPhone_5) {
             _topOffset.constant = 173;
+            //TODO:虚线图片不对
         } else if (IS_iPhone_6) {
             _topOffset.constant = 173;
         } else if (IS_iPhone6_Plus) {
             _topOffset.constant = 173;
+            //TODO:虚线图片不对
         } else if (IS_iPhoneX) {
-            _topOffset.constant = 173;
+            _topOffset.constant = 173 + 24;
         }
         
         [bgView addSubview:self];

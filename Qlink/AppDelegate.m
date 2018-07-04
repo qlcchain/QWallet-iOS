@@ -70,6 +70,8 @@
     [self configExceptionHandler];
     // 配置FMDB
     [self configureFMDB];
+    // 删除手机VPN配置
+    [SystemUtil deleteVPNConfig];
     // 发送json请求
     [ToxManage sendReqeuestToxJson];
     // 创建p2pid

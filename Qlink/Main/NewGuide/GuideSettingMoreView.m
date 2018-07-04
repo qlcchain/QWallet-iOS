@@ -26,7 +26,7 @@
 }
 
 - (void)showGuideToCircle1:(CGRect)circleFrame1 circle2:(CGRect)circleFrame2 tapBlock:(void (^)(void))tapB {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_SETTING_MORE];
+    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_SETTING_MORE];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_SETTING_MORE];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *keyWindow = [UIApplication sharedApplication].keyWindow;
@@ -48,14 +48,14 @@
         
         if (IS_iPhone_5) {
             _topOffset.constant = 27;
-            _rightOffset.constant = 14;
+            _rightOffset.constant = 12;
             _bottomOffset.constant = -3;
-            _leftOffset.constant = 18;
+            _leftOffset.constant = 2;
         } else if (IS_iPhone_6) {
             _topOffset.constant = 27;
-            _rightOffset.constant = 14;
+            _rightOffset.constant = 12;
             _bottomOffset.constant = -3;
-            _leftOffset.constant = 18;
+            _leftOffset.constant = 10;
         } else if (IS_iPhone6_Plus) {
             _topOffset.constant = 27;
             _rightOffset.constant = 14;
@@ -64,8 +64,8 @@
         } else if (IS_iPhoneX) {
             _topOffset.constant = 27+24;
             _rightOffset.constant = 14;
-            _bottomOffset.constant = -3;
-            _leftOffset.constant = 18;
+            _bottomOffset.constant = -3 + 34;
+            _leftOffset.constant = 10;
         }
         
         [keyWindow addSubview:self];
