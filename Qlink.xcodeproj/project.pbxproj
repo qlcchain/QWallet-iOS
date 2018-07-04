@@ -194,8 +194,6 @@
 		58A074242092FD8400470E37 /* TransferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A074232092FD8400470E37 /* TransferUtil.m */; };
 		58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A2495820D0F60C00781549 /* WebKit.framework */; };
 		58A2495C20D207AB00781549 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A2495B20D207AB00781549 /* VersionManager.m */; };
-		58A4DB0A20EB0DC6001C241D /* ConfigurationRelease.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB0320EB0DC6001C241D /* ConfigurationRelease.plist */; };
-		58A4DB0B20EB0DC6001C241D /* ConfigurationDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB0520EB0DC6001C241D /* ConfigurationDebug.plist */; };
 		58A4DB0F20EB13C8001C241D /* GuideVpnAddView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DB0E20EB13C8001C241D /* GuideVpnAddView.m */; };
 		58A4DB1120EB13D8001C241D /* GuideVpnAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB1020EB13D8001C241D /* GuideVpnAddView.xib */; };
 		58A4DB1420EB1F38001C241D /* GuideBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DB1320EB1F38001C241D /* GuideBaseView.m */; };
@@ -213,6 +211,8 @@
 		58A4DB3220EB6E58001C241D /* GuideEnterWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB3120EB6E58001C241D /* GuideEnterWalletView.xib */; };
 		58A4DB3520EB724E001C241D /* GuideSettingMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DB3420EB724E001C241D /* GuideSettingMoreView.m */; };
 		58A4DB3720EB7256001C241D /* GuideSettingMoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB3620EB7256001C241D /* GuideSettingMoreView.xib */; };
+		58A4DB4220EC69D6001C241D /* ConfigurationRelease.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB3B20EC69D6001C241D /* ConfigurationRelease.plist */; };
+		58A4DB4320EC69D6001C241D /* ConfigurationDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DB3D20EC69D6001C241D /* ConfigurationDebug.plist */; };
 		58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DEAA206234AC00E72F52 /* AppDelegate.m */; };
 		58A4DEAE206234AC00E72F52 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DEAD206234AC00E72F52 /* LaunchViewController.m */; };
 		58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DEB4206234AC00E72F52 /* LaunchScreen.storyboard */; };
@@ -752,8 +752,6 @@
 		58A2495820D0F60C00781549 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		58A2495A20D207AB00781549 /* VersionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionManager.h; sourceTree = "<group>"; };
 		58A2495B20D207AB00781549 /* VersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionManager.m; sourceTree = "<group>"; };
-		58A4DB0320EB0DC6001C241D /* ConfigurationRelease.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ConfigurationRelease.plist; sourceTree = "<group>"; };
-		58A4DB0520EB0DC6001C241D /* ConfigurationDebug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ConfigurationDebug.plist; sourceTree = "<group>"; };
 		58A4DB0D20EB13C8001C241D /* GuideVpnAddView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideVpnAddView.h; sourceTree = "<group>"; };
 		58A4DB0E20EB13C8001C241D /* GuideVpnAddView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideVpnAddView.m; sourceTree = "<group>"; };
 		58A4DB1020EB13D8001C241D /* GuideVpnAddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideVpnAddView.xib; sourceTree = "<group>"; };
@@ -780,6 +778,11 @@
 		58A4DB3320EB724E001C241D /* GuideSettingMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideSettingMoreView.h; sourceTree = "<group>"; };
 		58A4DB3420EB724E001C241D /* GuideSettingMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideSettingMoreView.m; sourceTree = "<group>"; };
 		58A4DB3620EB7256001C241D /* GuideSettingMoreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideSettingMoreView.xib; sourceTree = "<group>"; };
+		58A4DB3B20EC69D6001C241D /* ConfigurationRelease.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ConfigurationRelease.plist; sourceTree = "<group>"; };
+		58A4DB3D20EC69D6001C241D /* ConfigurationDebug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ConfigurationDebug.plist; sourceTree = "<group>"; };
+		58A4DB3F20EC69D6001C241D /* WAMacroUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMacroUtil.h; sourceTree = "<group>"; };
+		58A4DB4020EC69D6001C241D /* ServerMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerMacro.h; sourceTree = "<group>"; };
+		58A4DB4120EC69D6001C241D /* GlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMacro.h; sourceTree = "<group>"; };
 		58A4DEA6206234AC00E72F52 /* Qlink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qlink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A4DEA9206234AC00E72F52 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		58A4DEAA206234AC00E72F52 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1227,9 +1230,6 @@
 		73EA1B1E207B3EF600B4F71D /* WalletSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletSelectCell.m; sourceTree = "<group>"; };
 		73F1C8FC2089E699001F1A0F /* VPNFileUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNFileUtil.h; sourceTree = "<group>"; };
 		73F1C8FD2089E699001F1A0F /* VPNFileUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNFileUtil.m; sourceTree = "<group>"; };
-		73FF63D320EB7DC500E29B3B /* WAMacroUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMacroUtil.h; sourceTree = "<group>"; };
-		73FF63D420EB7DC500E29B3B /* ServerMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerMacro.h; sourceTree = "<group>"; };
-		73FF63D520EB7DC500E29B3B /* GlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMacro.h; sourceTree = "<group>"; };
 		93185A7AFF490BBB8104B577 /* Pods-Qlink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.release.xcconfig"; sourceTree = "<group>"; };
 		C8C9F75488743A3ABC4DAD17 /* Pods-Qlink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.debug.xcconfig"; sourceTree = "<group>"; };
 		F1A3E51F89966A6974D528B9 /* Pods-Qlink.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -2036,31 +2036,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		58A4DB0120EB0DC6001C241D /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				58A4DB0220EB0DC6001C241D /* Release */,
-				58A4DB0420EB0DC6001C241D /* Debug */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
-		58A4DB0220EB0DC6001C241D /* Release */ = {
-			isa = PBXGroup;
-			children = (
-				58A4DB0320EB0DC6001C241D /* ConfigurationRelease.plist */,
-			);
-			path = Release;
-			sourceTree = "<group>";
-		};
-		58A4DB0420EB0DC6001C241D /* Debug */ = {
-			isa = PBXGroup;
-			children = (
-				58A4DB0520EB0DC6001C241D /* ConfigurationDebug.plist */,
-			);
-			path = Debug;
-			sourceTree = "<group>";
-		};
 		58A4DB0C20EB11EF001C241D /* NewGuide */ = {
 			isa = PBXGroup;
 			children = (
@@ -2094,6 +2069,41 @@
 			path = NewGuide;
 			sourceTree = "<group>";
 		};
+		58A4DB3920EC69D6001C241D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				58A4DB3A20EC69D6001C241D /* Release */,
+				58A4DB3C20EC69D6001C241D /* Debug */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		58A4DB3A20EC69D6001C241D /* Release */ = {
+			isa = PBXGroup;
+			children = (
+				58A4DB3B20EC69D6001C241D /* ConfigurationRelease.plist */,
+			);
+			path = Release;
+			sourceTree = "<group>";
+		};
+		58A4DB3C20EC69D6001C241D /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				58A4DB3D20EC69D6001C241D /* ConfigurationDebug.plist */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		58A4DB3E20EC69D6001C241D /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				58A4DB3F20EC69D6001C241D /* WAMacroUtil.h */,
+				58A4DB4020EC69D6001C241D /* ServerMacro.h */,
+				58A4DB4120EC69D6001C241D /* GlobalMacro.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
 		58A4DE9D206234AC00E72F52 = {
 			isa = PBXGroup;
 			children = (
@@ -2119,8 +2129,8 @@
 		58A4DEA8206234AC00E72F52 /* Qlink */ = {
 			isa = PBXGroup;
 			children = (
-				73FF63D220EB7DC500E29B3B /* Macros */,
-				58A4DB0120EB0DC6001C241D /* Config */,
+				58A4DB3920EC69D6001C241D /* Config */,
+				58A4DB3E20EC69D6001C241D /* Macros */,
 				730DA8F720886A7800CE1909 /* CustomViews */,
 				580D913420625A4300B12506 /* Base */,
 				580D90C520625A4300B12506 /* Categorys */,
@@ -2456,16 +2466,6 @@
 			path = NotifactionView;
 			sourceTree = "<group>";
 		};
-		73FF63D220EB7DC500E29B3B /* Macros */ = {
-			isa = PBXGroup;
-			children = (
-				73FF63D320EB7DC500E29B3B /* WAMacroUtil.h */,
-				73FF63D420EB7DC500E29B3B /* ServerMacro.h */,
-				73FF63D520EB7DC500E29B3B /* GlobalMacro.h */,
-			);
-			path = Macros;
-			sourceTree = "<group>";
-		};
 		F2B7452EF089D21E85A1F2EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2668,6 +2668,7 @@
 				5860ADAE20CFB60500EEB6CE /* LaunchViewController.xib in Resources */,
 				5860ADB520CFB61000EEB6CE /* ChatHeadView.xib in Resources */,
 				5860AD9220CFB5DD00EEB6CE /* WalletPublicAddressViewController.xib in Resources */,
+				58A4DB4220EC69D6001C241D /* ConfigurationRelease.plist in Resources */,
 				5860ACDC20CFB49800EEB6CE /* VPNRegisterViewController.xib in Resources */,
 				5860ACF120CFB4C900EEB6CE /* ChooseContinentViewController.xib in Resources */,
 				737F90B720E3965D008BC9C2 /* GuidePageView3.xib in Resources */,
@@ -2711,7 +2712,6 @@
 				5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */,
 				5860ACC720CFB46900EEB6CE /* VPNFileInputView.xib in Resources */,
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
-				58A4DB0B20EB0DC6001C241D /* ConfigurationDebug.plist in Resources */,
 				5860ACAB20CFB43E00EEB6CE /* WifiViewController.xib in Resources */,
 				5860AD4520CFB56700EEB6CE /* BuyQlcView.xib in Resources */,
 				5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */,
@@ -2728,8 +2728,8 @@
 				5860ACCE20CFB47400EEB6CE /* VpnTabCell.xib in Resources */,
 				737F909D20E3960A008BC9C2 /* GuidePageView1.xib in Resources */,
 				5860AD3020CFB53000EEB6CE /* SettingCell.xib in Resources */,
-				58A4DB0A20EB0DC6001C241D /* ConfigurationRelease.plist in Resources */,
 				5860AD5A20CFB58800EEB6CE /* MyAssetsView.xib in Resources */,
+				58A4DB4320EC69D6001C241D /* ConfigurationDebug.plist in Resources */,
 				58A4DB2320EB5699001C241D /* GuideVpnListView.xib in Resources */,
 				5860AD5320CFB57E00EEB6CE /* WalletAddressView.xib in Resources */,
 				580D91C02063B27300B12506 /* VAGRounded-Bold.ttf in Resources */,

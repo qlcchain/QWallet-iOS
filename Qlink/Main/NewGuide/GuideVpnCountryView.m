@@ -23,16 +23,11 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_SERVER_LOCATION];
+    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_SERVER_LOCATION];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_SERVER_LOCATION];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
-        //        CGRect hollowOutFrame = [toView.superview convertRect:toView.frame toView:bgView];
-//        CGPoint center = CGPointMake((hollowOutFrame.origin.x*2.0+hollowOutFrame.size.width)/2.0, (hollowOutFrame.origin.y*2.0+hollowOutFrame.size.height)/2.0);
-//        CGFloat radius = (hollowOutFrame.size.width)/2.0;
-        //        @weakify_self
         UIView *guideBgView = [GuideVpnCountryView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
-//        UIView *guideBgView = [GuideVpnCountryView showNewGuideCircleWithArcCenter:center radius:radius];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
             [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_VPN_SERVER_LOCATION];
             UIView *tapView = gestureRecoginzer.view;

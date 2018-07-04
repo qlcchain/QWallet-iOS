@@ -24,14 +24,12 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_CLICK_WALLET];
+    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_CLICK_WALLET];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_CLICK_WALLET];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
-//        CGRect hollowOutFrame = [toView.superview convertRect:toView.frame toView:bgView];
         CGPoint center = CGPointMake((hollowOutFrame.origin.x*2.0+hollowOutFrame.size.width)/2.0, (hollowOutFrame.origin.y*2.0+hollowOutFrame.size.height)/2.0);
         CGFloat radius = (hollowOutFrame.size.width)/2.0;
-        //        @weakify_self
         UIView *guideBgView = [GuideClickWalletView showNewGuideCircleWithArcCenter:center radius:radius];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
             [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_CLICK_WALLET];
