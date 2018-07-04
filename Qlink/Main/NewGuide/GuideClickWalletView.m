@@ -44,16 +44,16 @@
         
         if (IS_iPhone_5) {
             _bottomOffset.constant = -2;
-            _rightOffset.constant = 20;
+            _rightOffset.constant = 5;
         } else if (IS_iPhone_6) {
             _bottomOffset.constant = -2;
-            _rightOffset.constant = 20;
+            _rightOffset.constant = 15;
         } else if (IS_iPhone6_Plus) {
             _bottomOffset.constant = -2;
             _rightOffset.constant = 20;
         } else if (IS_iPhoneX) {
-            _bottomOffset.constant = -2;
-            _rightOffset.constant = 20;
+            _bottomOffset.constant = -2+34;
+            _rightOffset.constant = 13;
         }
         
         [bgView addSubview:self];

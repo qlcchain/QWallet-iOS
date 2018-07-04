@@ -51,15 +51,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)addNewGuide {
-    if (IS_iPhone_5) {
-        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-        [self.scrollView setContentOffset:bottomOffset animated:NO];
-    }
-    CGRect hollowOutFrame = [_connectBtn.superview convertRect:_connectBtn.frame toView:[UIApplication sharedApplication].keyWindow];
-    [[GuideVpnConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:nil];
-}
-
 #pragma mark - Noti
 
 - (void)addObserve {
@@ -98,6 +89,15 @@
 }
 
 #pragma mark - ConfigView
+- (void)addNewGuide {
+    if (IS_iPhone_5) {
+        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+        [self.scrollView setContentOffset:bottomOffset animated:NO];
+    }
+    CGRect hollowOutFrame = [_connectBtn.superview convertRect:_connectBtn.frame toView:[UIApplication sharedApplication].keyWindow];
+    [[GuideVpnConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:nil];
+}
+
 - (void)updateVpnUserBtn {
     __weak typeof(_vpnUserBtn) weakVpnUserBtn = _vpnUserBtn;
     NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],_vpnInfo.imgUrl];

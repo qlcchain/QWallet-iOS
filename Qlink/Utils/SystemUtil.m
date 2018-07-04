@@ -44,9 +44,16 @@
  app退出时。配置
  */
 + (void) configureAPPTerminate {
-    
 //    NSLog(@"applicationState = %ld",(long)[UIApplication sharedApplication].applicationState);
-    
+    [SystemUtil deleteVPNConfig];
+    [ToxManage readDataToKeychain];
+    // 结束p2p连接
+   // if ([ToxManage getP2PConnectionStatus]) {
+    //    [ToxManage endP2PConnection];
+   // }
+}
+
++ (void)deleteVPNConfig {
     if (![SystemUtil isSpecialDevice]) {
         // 断开vpn连接
         [VPNUtil.shareInstance stopVPN];
@@ -55,12 +62,6 @@
         // 删除当前VPNInfo
         [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
     }
-    
-    [ToxManage readDataToKeychain];
-    // 结束p2p连接
-   // if ([ToxManage getP2PConnectionStatus]) {
-    //    [ToxManage endP2PConnection];
-   // }
 }
 
 + (BOOL)isSpecialDevice {

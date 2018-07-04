@@ -41,12 +41,14 @@
         
         if (IS_iPhone_5) {
             _topOffset.constant = 173;
+            //TODO:虚线图片不对
         } else if (IS_iPhone_6) {
             _topOffset.constant = 173;
         } else if (IS_iPhone6_Plus) {
             _topOffset.constant = 173;
+            //TODO:虚线图片不对
         } else if (IS_iPhoneX) {
-            _topOffset.constant = 173;
+            _topOffset.constant = 173 + 24;
         }
         
         [bgView addSubview:self];

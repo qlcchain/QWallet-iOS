@@ -46,7 +46,7 @@
         } else if (IS_iPhone6_Plus) {
             _topOffset.constant = 91;
         } else if (IS_iPhoneX) {
-            _topOffset.constant = 91;
+            _topOffset.constant = 91 + 24;
         }
         
         [bgView addSubview:self];

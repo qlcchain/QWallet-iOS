@@ -121,7 +121,21 @@
 
 - (void)addNewGuideSettingMore {
     CGRect circleFrame1 = [_settingBtn.superview convertRect:_settingBtn.frame toView:[UIApplication sharedApplication].keyWindow];
-    CGRect circleFrame2 = CGRectMake((3.0*(0.0+1.0)-2.0)*SCREEN_WIDTH/(3.0*3.0), SCREEN_HEIGHT - 49, 49, 49);
+    CGFloat circle2x = 0;
+    CGFloat circle2width = 49;
+    CGFloat circle2height = 49;
+    CGFloat circle2y = SCREEN_HEIGHT - circle2height;
+    if (IS_iPhone_5) {
+        circle2x = 30;
+    } else if (IS_iPhone_6) {
+        circle2x = 38;
+    } else if (IS_iPhone6_Plus) {
+        circle2x = 45;
+    } else if (IS_iPhoneX) {
+        circle2x = 38;
+        circle2y = circle2y - 34;
+    }
+    CGRect circleFrame2 = CGRectMake(circle2x, circle2y, circle2width, circle2height);
     [[GuideSettingMoreView getNibView] showGuideToCircle1:circleFrame1 circle2:circleFrame2 tapBlock:^{
         
     }];
