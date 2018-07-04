@@ -18,6 +18,7 @@
 #import "UserManage.h"
 #import "Qlink-Swift.h"
 #import "QlinkTabbarViewController.h"
+#import "GuidenSettingView.h"
 
 // 标题部分
 //#define WALLET_DETAIL   NSStringLocalizable(@"wallet_details")// 钱包详情
@@ -87,33 +88,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-//    [self addNewGuide];
+    [self addNewSettingGuide];
 }
 
 #pragma mark - Config View
-//- (void)addNewGuide {
-////    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_WALLET_DETAIL];
-//    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_WALLET_DETAIL];
-//    if (!guideLocal || [guideLocal boolValue] == NO) {
-//        UIView *guideBV = [NewGuideUtil showNewGuideWithKey:NEW_GUIDE_WALLET_DETAIL TapBlock:nil];
-//        UIImage *guideImg = [UIImage imageNamed:@"img_floating_layer_settings"];
-//        UIImageView *guideImgV = [[UIImageView alloc] init];
-//        guideImgV.frame = CGRectZero;
-//        if (IS_iPhone_5) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 98, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone_6) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 98, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone6_Plus) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 98, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhoneX) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 122, guideImg.size.width, guideImg.size.height);
-//        }
-//
-//        guideImgV.image = guideImg;
-//        [guideBV addSubview:guideImgV];
-//    }
-//}
+- (void)addNewSettingGuide {
+
+    CGRect hollowOutFrame = CGRectMake(18, 82+STATUS_BAR_HEIGHT, SCREEN_WIDTH-36, 50);
+    @weakify_self
+    [[GuidenSettingView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
+        
+    }];
+}
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

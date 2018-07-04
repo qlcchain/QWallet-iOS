@@ -12,6 +12,7 @@
 #import "QlinkTabbarViewController.h"
 #import "NSDate+Category.h"
 #import "UnderlineView.h"
+#import "GuideUnlockWalletView.h"
 
 @interface UnlockWalletViewController ()
 
@@ -41,7 +42,7 @@
     [super viewDidAppear:animated];
     
     [self pwtfBecomeFirstResponder];
-//    [self addNewGuide];
+    [self addNewGuideUnlockWallet];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,32 +59,18 @@
 }
 
 #pragma mark - Config View
-//- (void)addNewGuide {
-////    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_UNLOCK_WALLET];
-//    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_UNLOCK_WALLET];
-//    if (!guideLocal || [guideLocal boolValue] == NO) {
-//        [self pwtfResignFirstResponder];
-//        @weakify_self
-//        UIView *guideBV = [NewGuideUtil showNewGuideWithKey:NEW_GUIDE_UNLOCK_WALLET TapBlock:^{
-//            [weakSelf pwtfBecomeFirstResponder];
-//        }];
-//        UIImage *guideImg = [UIImage imageNamed:@"img_floating_layer_password"];
-//        UIImageView *guideImgV = [[UIImageView alloc] init];
-//        guideImgV.frame = CGRectZero;
-//        if (IS_iPhone_5) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 28, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone_6) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 28, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone6_Plus) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 28, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhoneX) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 50, guideImg.size.width, guideImg.size.height);
-//        }
-//        
-//        guideImgV.image = guideImg;
-//        [guideBV addSubview:guideImgV];
-//    }
-//}
+- (void) addNewGuideUnlockWallet {
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_UNLOCK_WALLET];
+    NSNumber *guideLocal = nil;//[HWUserdefault getObjectWithKey:NEW_GUIDE_UNLOCK_WALLET];
+    if (!guideLocal || [guideLocal boolValue] == NO) {
+        [self pwtfResignFirstResponder];
+        CGRect hollowOutFrame = CGRectMake((SCREEN_WIDTH-145)/2,14+STATUS_BAR_HEIGHT,145,88);
+        @weakify_self
+        [[GuideUnlockWalletView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
+            [weakSelf pwtfBecomeFirstResponder];
+        }];
+    }
+}
 
 #pragma mark - Action
 - (IBAction)pwEyeAction:(UIButton *)sender {

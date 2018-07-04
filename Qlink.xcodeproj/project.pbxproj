@@ -365,6 +365,12 @@
 		73EA1B1B207B07AA00B4F71D /* WalletChangeWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EA1B19207B07AA00B4F71D /* WalletChangeWalletViewController.m */; };
 		73EA1B20207B3EF600B4F71D /* WalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EA1B1E207B3EF600B4F71D /* WalletSelectCell.m */; };
 		73F1C8FE2089E699001F1A0F /* VPNFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F1C8FD2089E699001F1A0F /* VPNFileUtil.m */; };
+		73FF63D820EC6D9100E29B3B /* GuideUnlockWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF63D720EC6D9100E29B3B /* GuideUnlockWalletView.m */; };
+		73FF63DC20EC6DC800E29B3B /* GuideUnlockWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF63DB20EC6DC800E29B3B /* GuideUnlockWalletView.xib */; };
+		73FF63DF20EC9F5500E29B3B /* GuideNewWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF63DE20EC9F5500E29B3B /* GuideNewWalletView.m */; };
+		73FF63E120EC9F6300E29B3B /* GuideNewWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF63E020EC9F6300E29B3B /* GuideNewWalletView.xib */; };
+		73FF63E420ECA90500E29B3B /* GuidenSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF63E320ECA90500E29B3B /* GuidenSettingView.m */; };
+		73FF63E620ECA91000E29B3B /* GuidenSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF63E520ECA91000E29B3B /* GuidenSettingView.xib */; };
 		7F4538A66F4431A83CB2C569 /* Pods_Qlink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA980B5D481A5FA6E3154F3 /* Pods_Qlink.framework */; };
 /* End PBXBuildFile section */
 
@@ -1230,6 +1236,15 @@
 		73FF63D320EB7DC500E29B3B /* WAMacroUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMacroUtil.h; sourceTree = "<group>"; };
 		73FF63D420EB7DC500E29B3B /* ServerMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerMacro.h; sourceTree = "<group>"; };
 		73FF63D520EB7DC500E29B3B /* GlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMacro.h; sourceTree = "<group>"; };
+		73FF63D620EC6D9100E29B3B /* GuideUnlockWalletView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideUnlockWalletView.h; sourceTree = "<group>"; };
+		73FF63D720EC6D9100E29B3B /* GuideUnlockWalletView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideUnlockWalletView.m; sourceTree = "<group>"; };
+		73FF63DB20EC6DC800E29B3B /* GuideUnlockWalletView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideUnlockWalletView.xib; sourceTree = "<group>"; };
+		73FF63DD20EC9F5500E29B3B /* GuideNewWalletView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideNewWalletView.h; sourceTree = "<group>"; };
+		73FF63DE20EC9F5500E29B3B /* GuideNewWalletView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideNewWalletView.m; sourceTree = "<group>"; };
+		73FF63E020EC9F6300E29B3B /* GuideNewWalletView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideNewWalletView.xib; sourceTree = "<group>"; };
+		73FF63E220ECA90500E29B3B /* GuidenSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidenSettingView.h; sourceTree = "<group>"; };
+		73FF63E320ECA90500E29B3B /* GuidenSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuidenSettingView.m; sourceTree = "<group>"; };
+		73FF63E520ECA91000E29B3B /* GuidenSettingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuidenSettingView.xib; sourceTree = "<group>"; };
 		93185A7AFF490BBB8104B577 /* Pods-Qlink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.release.xcconfig"; sourceTree = "<group>"; };
 		C8C9F75488743A3ABC4DAD17 /* Pods-Qlink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.debug.xcconfig"; sourceTree = "<group>"; };
 		F1A3E51F89966A6974D528B9 /* Pods-Qlink.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -2090,6 +2105,15 @@
 				58A4DB3320EB724E001C241D /* GuideSettingMoreView.h */,
 				58A4DB3420EB724E001C241D /* GuideSettingMoreView.m */,
 				58A4DB3620EB7256001C241D /* GuideSettingMoreView.xib */,
+				73FF63D620EC6D9100E29B3B /* GuideUnlockWalletView.h */,
+				73FF63D720EC6D9100E29B3B /* GuideUnlockWalletView.m */,
+				73FF63DB20EC6DC800E29B3B /* GuideUnlockWalletView.xib */,
+				73FF63DD20EC9F5500E29B3B /* GuideNewWalletView.h */,
+				73FF63DE20EC9F5500E29B3B /* GuideNewWalletView.m */,
+				73FF63E020EC9F6300E29B3B /* GuideNewWalletView.xib */,
+				73FF63E220ECA90500E29B3B /* GuidenSettingView.h */,
+				73FF63E320ECA90500E29B3B /* GuidenSettingView.m */,
+				73FF63E520ECA91000E29B3B /* GuidenSettingView.xib */,
 			);
 			path = NewGuide;
 			sourceTree = "<group>";
@@ -2669,6 +2693,7 @@
 				5860ADB520CFB61000EEB6CE /* ChatHeadView.xib in Resources */,
 				5860AD9220CFB5DD00EEB6CE /* WalletPublicAddressViewController.xib in Resources */,
 				5860ACDC20CFB49800EEB6CE /* VPNRegisterViewController.xib in Resources */,
+				73FF63E620ECA91000E29B3B /* GuidenSettingView.xib in Resources */,
 				5860ACF120CFB4C900EEB6CE /* ChooseContinentViewController.xib in Resources */,
 				737F90B720E3965D008BC9C2 /* GuidePageView3.xib in Resources */,
 				73C1BA13207E184F0080C59F /* HMScanner.bundle in Resources */,
@@ -2721,6 +2746,7 @@
 				5860ACF820CFB4D300EEB6CE /* ChooseCountryViewController.xib in Resources */,
 				737F90AA20E39641008BC9C2 /* GuidePageView2.xib in Resources */,
 				5860AD1B20CFB51200EEB6CE /* WalletSelectCell.xib in Resources */,
+				73FF63DC20EC6DC800E29B3B /* GuideUnlockWalletView.xib in Resources */,
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
 				580D91BB2063AE5300B12506 /* Roboto-MediumItalic.ttf in Resources */,
@@ -2734,6 +2760,7 @@
 				5860AD5320CFB57E00EEB6CE /* WalletAddressView.xib in Resources */,
 				580D91C02063B27300B12506 /* VAGRounded-Bold.ttf in Resources */,
 				5860AD6820CFB59C00EEB6CE /* HistoryRecordsViewController.xib in Resources */,
+				73FF63E120EC9F6300E29B3B /* GuideNewWalletView.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
 				5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */,
@@ -2874,6 +2901,7 @@
 				73B6F4CF20AEC08E004B7219 /* ScriptBuilder.swift in Sources */,
 				730DA8FA20886AC700CE1909 /* StatuImageView.m in Sources */,
 				73A05A352081D91600974483 /* UIView+HYBImageCliped.m in Sources */,
+				73FF63D820EC6D9100E29B3B /* GuideUnlockWalletView.m in Sources */,
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				73B6F4CC20AEC08E004B7219 /* Base58.swift in Sources */,
 				58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */,
@@ -3038,6 +3066,7 @@
 				58CF1032207CBFDF0026F28E /* UnderlineView.m in Sources */,
 				58A4DB2120EB5690001C241D /* GuideVpnListView.m in Sources */,
 				7377D179206B9E730072E628 /* VPNMode.m in Sources */,
+				73FF63E420ECA90500E29B3B /* GuidenSettingView.m in Sources */,
 				58AE1ADD2074D23C00CE983B /* WalletInfo.m in Sources */,
 				588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */,
 				580D916C20625A4400B12506 /* HWUserdefault.m in Sources */,
@@ -3048,6 +3077,7 @@
 				73B6F4D420AEC08E004B7219 /* ValueIn.swift in Sources */,
 				73B6F4D620AEC08E004B7219 /* ValueOut.swift in Sources */,
 				5807D649208061A20049565D /* ShadowImageView.m in Sources */,
+				73FF63DF20EC9F5500E29B3B /* GuideNewWalletView.m in Sources */,
 				73C1BA11207E18270080C59F /* HMScannerMaskView.m in Sources */,
 				580D914920625A4400B12506 /* UIImage+Alpha.m in Sources */,
 				580D914520625A4400B12506 /* UIImage+Merge.m in Sources */,
