@@ -8,6 +8,12 @@
 
 #import "GuidenSettingView.h"
 
+@interface GuidenSettingView ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *dottedBoxView;
+
+@end
+
 @implementation GuidenSettingView
 
 + (GuidenSettingView *)getNibView {
@@ -17,13 +23,12 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-    //    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_WALLET_DETAIL];
-    NSNumber *guideLocal = nil;//[HWUserdefault getObjectWithKey:NEW_GUIDE_WALLET_DETAIL];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_WALLET_DETAIL];
+    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_WALLET_DETAIL];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
         
         UIView *guideBgView = [GuidenSettingView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
-        //        UIView *guideBgView = [GuideVpnCountryView showNewGuideCircleWithArcCenter:center radius:radius];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
             [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_WALLET_DETAIL];
             UIView *tapView = gestureRecoginzer.view;
@@ -35,13 +40,15 @@
             }
         }];
         if (IS_iPhone_5) {
-            
+            _topOffset.constant = 95 + 4;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_settings_5"];
         } else if (IS_iPhone_6) {
             
         } else if (IS_iPhone6_Plus) {
-            
+            _topOffset.constant = 95 - 3;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_settings_6p"];
         } else if (IS_iPhoneX) {
-            _topOffset.constant = 95-20;
+            _topOffset.constant = 95 - 20;
         }
         
         [bgView addSubview:self];

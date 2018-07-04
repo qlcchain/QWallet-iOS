@@ -1,36 +1,36 @@
 //
-//  GuideVpnListConnectView.m
+//  GuideBackupKeyView.m
 //  Qlink
 //
-//  Created by Jelly Foo on 2018/7/3.
+//  Created by Jelly Foo on 2018/7/4.
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import "GuideVpnListConnectView.h"
+#import "GuideBackupKeyView.h"
 
-@interface GuideVpnListConnectView ()
+@interface GuideBackupKeyView ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topOffset;
 @property (weak, nonatomic) IBOutlet UIImageView *dottedBoxView;
 
 @end
 
-@implementation GuideVpnListConnectView
+@implementation GuideBackupKeyView
 
-+ (GuideVpnListConnectView *)getNibView {
-    GuideVpnListConnectView *nibView = [[[NSBundle mainBundle] loadNibNamed:@"GuideVpnListConnectView" owner:self options:nil] firstObject];
++ (GuideBackupKeyView *)getNibView {
+    GuideBackupKeyView *nibView = [[[NSBundle mainBundle] loadNibNamed:@"GuideBackupKeyView" owner:self options:nil] firstObject];
     
     return nibView;
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST_CONNECT];
-    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_LIST_CONNECT];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
+    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_LIST];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
-        UIView *guideBgView = [GuideVpnListConnectView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
+        UIView *guideBgView = [GuideBackupKeyView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_VPN_LIST_CONNECT];
+            [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_VPN_LIST];
             UIView *tapView = gestureRecoginzer.view;
             [tapView removeFromSuperview];
             [tapView removeGestureRecognizer:gestureRecoginzer];
@@ -41,15 +41,15 @@
         }];
         
         if (IS_iPhone_5) {
-            _topOffset.constant = 173;
-            //TODO:虚线图片不对
+            _topOffset.constant = 145;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_copy_address_5"];
         } else if (IS_iPhone_6) {
-            _topOffset.constant = 173;
+            _topOffset.constant = 145;
         } else if (IS_iPhone6_Plus) {
-            _topOffset.constant = 173 - 4;
-            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_vpn_list_6p"];
+            _topOffset.constant = 145 - 10;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_copy_address_6p"];
         } else if (IS_iPhoneX) {
-            _topOffset.constant = 173 + 24;
+            _topOffset.constant = 145 + 24;
         }
         
         [bgView addSubview:self];

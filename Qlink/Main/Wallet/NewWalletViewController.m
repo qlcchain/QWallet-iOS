@@ -69,9 +69,8 @@
 
 #pragma mark - Config View
 - (void)addNewWalletGuide {
-//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_CREATE_NEW_WALLET];
     CGRect hollowOutFrame = [_createBtn.superview convertRect:_createBtn.frame toView:[UIApplication sharedApplication].keyWindow];
-    @weakify_self
+//    @weakify_self
     [[GuideNewWalletView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
         
     }];

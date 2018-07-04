@@ -61,7 +61,7 @@
 #pragma mark - Config View
 - (void) addNewGuideUnlockWallet {
 //    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_UNLOCK_WALLET];
-    NSNumber *guideLocal = nil;//[HWUserdefault getObjectWithKey:NEW_GUIDE_UNLOCK_WALLET];
+    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_UNLOCK_WALLET];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         [self pwtfResignFirstResponder];
         CGRect hollowOutFrame = CGRectMake((SCREEN_WIDTH-145)/2,14+STATUS_BAR_HEIGHT,145,88);
