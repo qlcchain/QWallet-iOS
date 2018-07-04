@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GuideUnlockWalletView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hoB-zP-qlF">
+                    <rect key="frame" x="0.0" y="20" width="375" height="300"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_unlock_wallet_instructions" translatesAutoresizingMaskIntoConstraints="NO" id="4VD-pS-Pk1">
+                            <rect key="frame" x="112.5" y="14" width="202" height="94"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="94" id="Qel-NB-fOd"/>
+                                <constraint firstAttribute="width" constant="202" id="yBQ-Zj-Dce"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secure your QLC token and assets" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMW-K1-n2y">
+                            <rect key="frame" x="61" y="123" width="283.5" height="22.5"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="LMW-K1-n2y" firstAttribute="top" secondItem="4VD-pS-Pk1" secondAttribute="bottom" constant="15" id="IpV-cG-Up3"/>
+                        <constraint firstItem="LMW-K1-n2y" firstAttribute="trailing" secondItem="4VD-pS-Pk1" secondAttribute="trailing" constant="30" id="dF6-qa-YyK"/>
+                        <constraint firstItem="4VD-pS-Pk1" firstAttribute="centerX" secondItem="hoB-zP-qlF" secondAttribute="centerX" constant="26.5" id="j73-k4-Vvi"/>
+                        <constraint firstItem="4VD-pS-Pk1" firstAttribute="top" secondItem="hoB-zP-qlF" secondAttribute="top" constant="14" id="qq4-HJ-iXd"/>
+                        <constraint firstAttribute="height" constant="300" id="ugf-nX-O7G"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="hoB-zP-qlF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="68V-R0-0Gl"/>
+                <constraint firstItem="hoB-zP-qlF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LxF-Id-DjS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hoB-zP-qlF" secondAttribute="trailing" id="tNi-wM-nMG"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="topOffset" destination="qq4-HJ-iXd" id="a13-V2-iPe"/>
+            </connections>
+            <point key="canvasLocation" x="28" y="41"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_floating_layer_unlock_wallet_instructions" width="202" height="94"/>
+    </resources>
+</document>
