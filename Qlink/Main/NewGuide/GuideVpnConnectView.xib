@@ -33,11 +33,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_vpn_connect" translatesAutoresizingMaskIntoConstraints="NO" id="7Ui-VE-7NX">
-                            <rect key="frame" x="181" y="141" width="173" height="81"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="173" id="ZfO-vG-U7V"/>
-                                <constraint firstAttribute="height" constant="81" id="zqp-hK-bW6"/>
-                            </constraints>
+                            <rect key="frame" x="181" y="142" width="173" height="80"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,6 +56,7 @@
             <connections>
                 <outlet property="bottomOffset" destination="GJA-tl-fEc" id="M6I-H7-lPK"/>
                 <outlet property="centerOffset" destination="sd4-Fr-sXE" id="u53-IA-YtK"/>
+                <outlet property="dottedBoxView" destination="7Ui-VE-7NX" id="9ht-OD-S9G"/>
             </connections>
             <point key="canvasLocation" x="349.5" y="138.5"/>
         </view>

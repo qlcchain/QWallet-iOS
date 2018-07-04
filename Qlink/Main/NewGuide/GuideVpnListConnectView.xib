@@ -24,10 +24,6 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_vpn_list" translatesAutoresizingMaskIntoConstraints="NO" id="nrD-X5-rPD">
                             <rect key="frame" x="13" y="180" width="349" height="119"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="119" id="OSe-pq-zqM"/>
-                                <constraint firstAttribute="width" constant="349" id="bMG-ld-B7C"/>
-                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check your balance in the Wallet page anytime you like" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sM-BE-yob">
                             <rect key="frame" x="25" y="307" width="325" height="44.5"/>
@@ -55,6 +51,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="dottedBoxView" destination="nrD-X5-rPD" id="gx4-oZ-ZoT"/>
                 <outlet property="topOffset" destination="B0X-uq-NJe" id="PjE-hh-2AS"/>
             </connections>
             <point key="canvasLocation" x="349.5" y="138.5"/>

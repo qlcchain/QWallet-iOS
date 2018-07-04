@@ -23,14 +23,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_copy_address" translatesAutoresizingMaskIntoConstraints="NO" id="lCE-Mo-fyL">
-                            <rect key="frame" x="17" y="38" width="341" height="421"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="421" id="GKF-wQ-Yy1"/>
-                                <constraint firstAttribute="width" constant="341" id="msM-dl-ApZ"/>
-                            </constraints>
+                            <rect key="frame" x="17.5" y="38" width="340" height="421"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure you backup this" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZv-Fm-B6U">
-                            <rect key="frame" x="25" y="467" width="325" height="22.5"/>
+                            <rect key="frame" x="25" y="443" width="325" height="22.5"/>
                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -41,7 +37,7 @@
                         <constraint firstItem="lCE-Mo-fyL" firstAttribute="top" secondItem="Iqd-z8-SLz" secondAttribute="top" constant="38" id="BhX-C6-GEu"/>
                         <constraint firstItem="lCE-Mo-fyL" firstAttribute="centerX" secondItem="Iqd-z8-SLz" secondAttribute="centerX" id="GSd-z8-zEh"/>
                         <constraint firstItem="xZv-Fm-B6U" firstAttribute="leading" secondItem="Iqd-z8-SLz" secondAttribute="leading" constant="25" id="bC6-YZ-3ZN"/>
-                        <constraint firstItem="xZv-Fm-B6U" firstAttribute="top" secondItem="lCE-Mo-fyL" secondAttribute="bottom" constant="8" id="cb6-bS-V8T"/>
+                        <constraint firstItem="xZv-Fm-B6U" firstAttribute="top" secondItem="lCE-Mo-fyL" secondAttribute="bottom" constant="-16" id="cb6-bS-V8T"/>
                         <constraint firstAttribute="trailing" secondItem="xZv-Fm-B6U" secondAttribute="trailing" constant="25" id="wBy-ea-hdE"/>
                     </constraints>
                 </view>
@@ -55,6 +51,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="dottedBoxView" destination="lCE-Mo-fyL" id="0WO-9y-Pby"/>
                 <outlet property="topOffset" destination="BhX-C6-GEu" id="idO-nj-Q03"/>
             </connections>
             <point key="canvasLocation" x="343" y="134"/>

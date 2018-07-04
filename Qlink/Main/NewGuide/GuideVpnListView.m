@@ -11,6 +11,7 @@
 @interface GuideVpnListView ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topOffset;
+@property (weak, nonatomic) IBOutlet UIImageView *dottedBoxView;
 
 @end
 
@@ -23,7 +24,7 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_LIST];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
@@ -45,8 +46,8 @@
         } else if (IS_iPhone_6) {
             _topOffset.constant = 173;
         } else if (IS_iPhone6_Plus) {
-            _topOffset.constant = 173;
-            //TODO:虚线图片不对
+            _topOffset.constant = 173 - 4;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_vpn_list_6p"];
         } else if (IS_iPhoneX) {
             _topOffset.constant = 173 + 24;
         }

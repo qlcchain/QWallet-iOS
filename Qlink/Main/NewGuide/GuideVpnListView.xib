@@ -25,10 +25,6 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_vpn_list" translatesAutoresizingMaskIntoConstraints="NO" id="TBz-Z9-CNj">
                             <rect key="frame" x="13" y="180" width="349" height="119"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="349" id="Wjy-Gv-Fcr"/>
-                                <constraint firstAttribute="height" constant="119" id="nKb-gj-jAA"/>
-                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7s-0R-KaF">
                             <rect key="frame" x="25" y="307" width="325" height="44.5"/>
@@ -59,6 +55,7 @@ The little green spot means online</string>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="y5S-df-6Ql"/>
             <connections>
+                <outlet property="dottedBoxView" destination="TBz-Z9-CNj" id="es9-8O-HBf"/>
                 <outlet property="topOffset" destination="rPC-VI-tLk" id="5nz-pw-oxu"/>
             </connections>
             <point key="canvasLocation" x="349.5" y="138.5"/>

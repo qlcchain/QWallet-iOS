@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,7 +39,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpP-f8-Fwt">
-                            <rect key="frame" x="137.5" y="63" width="100.5" height="21"/>
+                            <rect key="frame" x="133.5" y="63" width="109" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="UPT-Tu-YBH"/>
                             </constraints>
@@ -54,7 +54,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjL-4Q-ZPp">
-                            <rect key="frame" x="71.5" y="143" width="233.5" height="35.5"/>
+                            <rect key="frame" x="69" y="143" width="239" height="35.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35.5" id="cgu-wr-qlN"/>
                             </constraints>
@@ -85,6 +85,7 @@ Do you want to add another wallet?</string>
                             <rect key="frame" x="73" y="206.5" width="229" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="7So-nf-RMM"/>
+                                <constraint firstAttribute="width" constant="229" id="Vfk-Pu-b9T"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
                             <state key="normal" title="CREATE NEW WALLET" backgroundImage="bg_continue">
@@ -126,8 +127,6 @@ Do you want to add another wallet?</string>
                         <constraint firstItem="Obc-8A-fHc" firstAttribute="leading" secondItem="03g-d2-vXV" secondAttribute="leading" id="3F8-ft-VQO"/>
                         <constraint firstItem="rf8-rI-xfa" firstAttribute="trailing" secondItem="Q6y-qL-fMs" secondAttribute="trailing" id="3T8-wh-p9T"/>
                         <constraint firstItem="Obc-8A-fHc" firstAttribute="trailing" secondItem="03g-d2-vXV" secondAttribute="trailing" id="3fo-Fc-UXd"/>
-                        <constraint firstItem="03g-d2-vXV" firstAttribute="leading" secondItem="ewY-2o-yrd" secondAttribute="leading" constant="73" id="AYJ-qM-TUB"/>
-                        <constraint firstAttribute="trailing" secondItem="03g-d2-vXV" secondAttribute="trailing" constant="73" id="Bcu-HW-ZjL"/>
                         <constraint firstItem="LjL-4Q-ZPp" firstAttribute="top" secondItem="bQh-Ln-FJg" secondAttribute="bottom" constant="30" id="Bu4-tf-5Ls"/>
                         <constraint firstItem="03g-d2-vXV" firstAttribute="top" secondItem="LjL-4Q-ZPp" secondAttribute="bottom" constant="28" id="FbN-2D-oWX"/>
                         <constraint firstItem="Q6y-qL-fMs" firstAttribute="top" secondItem="Obc-8A-fHc" secondAttribute="bottom" constant="14" id="J9O-3R-wcZ"/>
@@ -135,6 +134,7 @@ Do you want to add another wallet?</string>
                         <constraint firstItem="2T5-Uq-irm" firstAttribute="top" secondItem="rf8-rI-xfa" secondAttribute="bottom" constant="35" id="MYS-d6-nXk"/>
                         <constraint firstItem="Obc-8A-fHc" firstAttribute="top" secondItem="03g-d2-vXV" secondAttribute="bottom" constant="14" id="N8w-RQ-LvT"/>
                         <constraint firstItem="bQh-Ln-FJg" firstAttribute="leading" secondItem="ewY-2o-yrd" secondAttribute="leading" constant="20" id="PM9-ln-Ce0"/>
+                        <constraint firstItem="03g-d2-vXV" firstAttribute="centerX" secondItem="ewY-2o-yrd" secondAttribute="centerX" id="RH1-sl-VBP"/>
                         <constraint firstItem="rf8-rI-xfa" firstAttribute="leading" secondItem="Q6y-qL-fMs" secondAttribute="leading" id="RXO-9a-id1"/>
                         <constraint firstItem="2T5-Uq-irm" firstAttribute="leading" secondItem="ewY-2o-yrd" secondAttribute="leading" constant="20" id="SSD-P1-FFg"/>
                         <constraint firstItem="LEp-4N-vh3" firstAttribute="centerX" secondItem="ewY-2o-yrd" secondAttribute="centerX" id="YFI-mW-zw5"/>

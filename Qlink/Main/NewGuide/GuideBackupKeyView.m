@@ -11,6 +11,7 @@
 @interface GuideBackupKeyView ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topOffset;
+@property (weak, nonatomic) IBOutlet UIImageView *dottedBoxView;
 
 @end
 
@@ -23,7 +24,7 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_LIST];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_LIST];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
@@ -41,12 +42,12 @@
         
         if (IS_iPhone_5) {
             _topOffset.constant = 145;
-            //TODO:虚线图片不对
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_copy_address_5"];
         } else if (IS_iPhone_6) {
             _topOffset.constant = 145;
         } else if (IS_iPhone6_Plus) {
-            _topOffset.constant = 145;
-            //TODO:虚线图片不对
+            _topOffset.constant = 145 - 10;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_copy_address_6p"];
         } else if (IS_iPhoneX) {
             _topOffset.constant = 145 + 24;
         }
