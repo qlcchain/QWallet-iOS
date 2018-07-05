@@ -242,6 +242,16 @@ class VPNUtil: NSObject {
     }
     
     private func stopTunnel() {
+        if let _ = self.providerManager {
+        } else {
+            NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
+                guard error == nil else {
+                    // Handle an occured error
+                    return
+                }
+                self.providerManager = managers?.first ?? NETunnelProviderManager()
+            }
+        }
         self.providerManager?.connection.stopVPNTunnel()
     }
     
