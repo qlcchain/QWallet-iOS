@@ -167,12 +167,28 @@ class VPNUtil: NSObject {
     
     func removeFromPreferences() {
         print("调用removeFromPreferences 移除手机vpn配置")
-        self.providerManager?.removeFromPreferences(completionHandler: { (error) in
-            guard error == nil else {
-                // Handle an occured error
-                return
+        if let _ = self.providerManager {
+            self.providerManager?.removeFromPreferences(completionHandler: { (error) in
+                guard error == nil else {
+                    // Handle an occured error
+                    return
+                }
+            })
+        } else {
+            NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
+                guard error == nil else {
+                    // Handle an occured error
+                    return
+                }
+                self.providerManager = managers?.first ?? NETunnelProviderManager()
+                self.providerManager?.removeFromPreferences(completionHandler: { (error) in
+                    guard error == nil else {
+                        // Handle an occured error
+                        return
+                    }
+                })
             }
-        })
+        }
     }
     
     @objc func vpnchange() {
@@ -243,6 +259,7 @@ class VPNUtil: NSObject {
     
     private func stopTunnel() {
         if let _ = self.providerManager {
+            self.providerManager?.connection.stopVPNTunnel()
         } else {
             NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
                 guard error == nil else {
@@ -250,9 +267,10 @@ class VPNUtil: NSObject {
                     return
                 }
                 self.providerManager = managers?.first ?? NETunnelProviderManager()
+                self.providerManager?.connection.stopVPNTunnel()
             }
         }
-        self.providerManager?.connection.stopVPNTunnel()
+        
     }
     
 }
