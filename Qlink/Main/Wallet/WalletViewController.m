@@ -267,21 +267,32 @@
                 [weakSelf jumpQRVCWithAddressView:bView.lblAddress];
                 break;
             case SendNowType:
-                // gas 检查
-                if ([self.balanceInfo.gas floatValue] <= 0.00000001) {
-                    [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
-                } else {
-                 // 确认是否交易
-                        NSString *msg = [NSString stringWithFormat:@"%@ %@ %@%@?",NSStringLocalizable(@"want_send"),bView.txtMoney.text,NSStringLocalizable(@"qlc_to"),bView.lblAddress.text];
-                        NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
-                        [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:bView.txtMoney.text]];
+                
+                if (1) {
+                    // 确认是否交易
+                    NSString *msg = [NSString stringWithFormat:@"%@ %@ %@%@?",NSStringLocalizable(@"want_send"),bView.txtMoney.text,NSStringLocalizable(@"qlc_to"),bView.lblAddress.text];
+                    NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
+                    [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:bView.txtMoney.text]];
                     @weakify_self
-                        [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
-                            
-                             [weakSelf sendFundsRequestWithAddressTo:bView.lblAddress.text.trim qlc:bView.txtMoney.text.trim];
-                        }];
-                    
+                    [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
+                        [weakSelf sendFundsRequestWithAddressTo:bView.lblAddress.text.trim qlc:bView.txtMoney.text.trim];
+                    }];
                 }
+//                // gas 检查
+//                if (!([self.balanceInfo.gas floatValue] <= 0.00000001)) {
+//                    [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
+//                } else {
+//                 // 确认是否交易
+//                        NSString *msg = [NSString stringWithFormat:@"%@ %@ %@%@?",NSStringLocalizable(@"want_send"),bView.txtMoney.text,NSStringLocalizable(@"qlc_to"),bView.lblAddress.text];
+//                        NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
+//                        [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:bView.txtMoney.text]];
+//                    @weakify_self
+//                        [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
+//
+//                             [weakSelf sendFundsRequestWithAddressTo:bView.lblAddress.text.trim qlc:bView.txtMoney.text.trim];
+//                        }];
+//
+//                }
                
                 break;
                 
