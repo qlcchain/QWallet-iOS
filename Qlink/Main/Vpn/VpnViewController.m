@@ -561,9 +561,7 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)addNewGuideVpnListConnect {
-    if (<#condition#>) {
-        <#statements#>
-    }
+    
     CGFloat y = IS_iPhoneX?177 + 24:177;
     CGRect hollowOutFrame = CGRectMake(17, y, SCREEN_WIDTH - 17*2, 64);
     [[GuideVpnListConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
