@@ -315,7 +315,7 @@ dispatch_source_t _timer;
     model.type = recordSaveReq;
     NSString *p2pid = [ToxManage getOwnP2PId];
    
-    NSDictionary *dataDic = @{@"appVersion":APP_Build,@"assetName":vpnInfo.vpnName,@"qlcCount ":vpnInfo.cost,@"p2pId":p2pid,@"transactiomType":[NSString stringWithFormat:@"%ld",(long)type],@"exChangeId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"timestamp":[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:[NSDate date]]],@"txid":[NSStringUtil getNotNullValue:vpnInfo.recordId]};
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnInfo.vpnName,QLC_COUNT:vpnInfo.cost,@"p2pId":p2pid,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:vpnInfo.recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:[NSDate date]]],TX_ID:[NSStringUtil getNotNullValue:vpnInfo.recordId]};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:vpnInfo.p2pId];
