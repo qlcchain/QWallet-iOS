@@ -113,6 +113,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self refreshVPNConnect];
+    if (_isConnectVPN) {
+        [self addNewGuideVpnListConnect];
+    }
     [self addNewGuideClickWallet];
 }
 
@@ -142,8 +145,6 @@
     }
     if (!_isConnectVPN) { // 更新本地保存的vpn
         [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
-    } else {
-        [self addNewGuideVpnListConnect];
     }
     [self configSourceAndRefresh:NO];
 }
@@ -561,9 +562,6 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)addNewGuideVpnListConnect {
-    if (<#condition#>) {
-        <#statements#>
-    }
     CGFloat y = IS_iPhoneX?177 + 24:177;
     CGRect hollowOutFrame = CGRectMake(17, y, SCREEN_WIDTH - 17*2, 64);
     [[GuideVpnListConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
