@@ -186,6 +186,7 @@ class VPNUtil: NSObject {
                         // Handle an occured error
                         return
                     }
+                
                 })
             }
         }
