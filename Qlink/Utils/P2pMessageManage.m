@@ -82,7 +82,6 @@
         if ([[NSStringUtil getNotNullValue:recordType] integerValue] == 3 || [[NSStringUtil getNotNullValue:recordType] integerValue] == 5) { // VPN
             [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"qlcCount"]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"txid"]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"assetName"]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"p2pId"]] connectType:1 isReported:NO];
             // 发送本地通知
-           
             [TransferUtil sendLocalNotificationWithQLC:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"qlcCount"]] isIncome:YES];
         }
     } else if ([type isEqualToString:joinGroupChatReq]) { // 申请加入群聊的请求
