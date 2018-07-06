@@ -16,8 +16,9 @@
 #import "HistoryRecrdInfo.h"
 
 
-int requestCont = 0;
+#define TIMER_SEC  30
 
+int requestCont = 0;
 dispatch_source_t _timer;
 
 @implementation TransferUtil
@@ -64,7 +65,7 @@ dispatch_source_t _timer;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
     //dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC); // 开始时间
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),60.0*NSEC_PER_SEC, 0); //每60秒执行
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),TIMER_SEC*NSEC_PER_SEC, 0); //每30秒执行
     dispatch_source_set_event_handler(_timer, ^{
         [TransferUtil sendFundsRequestWithType:3 withVPNInfo:[TransferUtil currentConnectVPNInfo]];
     });
