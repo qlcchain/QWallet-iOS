@@ -199,7 +199,7 @@ public class NeoClient {
     
     func sendFullNodeRequest(_ url: String, params: [Any]?, completion :@escaping (NeoClientResult<JSONDictionary>) -> ()) {
         let request = NSMutableURLRequest(url: URL(string: url)!)
- 
+        
         request.httpMethod = "GET"
         request.timeoutInterval = 60
         request.cachePolicy = .reloadIgnoringLocalCacheData
@@ -413,6 +413,12 @@ public class NeoClient {
                 completion(.failure(.invalidData))
                 return
             }
+            
+            let amountFormatter = NumberFormatter()
+            amountFormatter.minimumFractionDigits = 0
+            amountFormatter.maximumFractionDigits = 8
+            amountFormatter.numberStyle = .decimal
+            
             let dataDic = responser["data"] as! Dictionary<String,AnyObject>
             if  dataDic != nil {
                 var gasDic = dataDic["GAS"] as! Dictionary<String,AnyObject>
@@ -424,15 +430,32 @@ public class NeoClient {
                         {
                             let assetDic = NSMutableDictionary(dictionary: valueDic as! Dictionary<String , AnyObject>)
                             
-                            let gass:[String : Any] = ["asset":"0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7","index":Int(assetDic["index"] as! String),"txid":assetDic["txid"] as! String,"value":assetDic["value"] as! String,"createdAtBlock":0]
-                        
+                            var indexValue:Int = 0
+                            if let indexTemp = assetDic["index"] {
+                                indexValue = Int(indexTemp as! String) ?? 0
+                            }
+                            
+                            var valueStr :String = "";
+                            let assetValue = assetDic["value"];
+                            if !(assetValue is String) {
+                                valueStr = "0.00000001";
+                            } else {
+                                let dd: Double = Double(assetValue as! String)!
+                                if (dd <= 0) {
+                                    valueStr = "0.00000001"
+                                } else {
+                                    valueStr = amountFormatter.string(from: NSNumber(value:dd))!
+                                }
+                            }
+                            let gass:[String : Any] = ["asset":"0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7","index":indexValue,"txid":assetDic["txid"] as! String,"value":valueStr,"createdAtBlock":0]
+                            
                             endDatas.append(gass)
-                           
+                            
                         }
                     }
                 }
             }
-
+            
             var neoDic = dataDic["NEO"] as! Dictionary<String,AnyObject>
             if neoDic != nil {
                 let dataArr1 = neoDic["unspent"] as! Array<AnyObject>
@@ -440,13 +463,31 @@ public class NeoClient {
                     for valueDic in dataArr1
                     {
                         let assetDic = NSMutableDictionary(dictionary: valueDic as! Dictionary<String , AnyObject>)
-                        let neos:[String : Any] = ["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":Int(assetDic["index"] as! String),"txid":assetDic["txid"] as! String,"value":assetDic["value"] as! String,"createdAtBlock":0]
+                        
+                        var indexValue = 0
+                        if let indexTemp = assetDic["index"] {
+                            indexValue = Int(indexTemp as! String) ?? 0
+                        }
+                        var valueStr :String = "";
+                        let assetValue = assetDic["value"];
+                        if !(assetValue is String) {
+                            valueStr = "0.00000001";
+                        } else {
+                            let dd: Double = Double(assetValue as! String)!
+                            if (dd <= 0) {
+                                valueStr = "0.00000001"
+                            } else {
+                                valueStr = amountFormatter.string(from: NSNumber(value:dd))!
+                            }
+                            
+                        }
+                        let neos:[String : Any] = ["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":indexValue,"txid":assetDic["txid"] as! String,"value":valueStr,"createdAtBlock":0]
                         endDatas.append(neos)
-
+                        
                     }
                 }
             }
-    
+            
             if endDatas.count == 0 {
                 completion(.failure(.invalidData))
                 return
@@ -454,38 +495,38 @@ public class NeoClient {
             let jsonObject:[String:Any] = ["data":endDatas]
             let decoder = JSONDecoder()
             guard let data = try? JSONSerialization.data(withJSONObject:jsonObject, options: .prettyPrinted),
-            let assets = try? decoder.decode(Assets.self, from: data) else {
-                completion(.failure(.invalidData))
-                return
+                let assets = try? decoder.decode(Assets.self, from: data) else {
+                    completion(.failure(.invalidData))
+                    return
             }
             let result = NeoClientResult.success(assets)
             completion(result)
-           
+            
             
         }) { (request, error) in
             completion(.failure(NeoClientError.noInternet))
         }
         
-//        let url = fullNodeAPI + address + "/" + apiURL.getUTXO.rawValue
-//        print("url =" ,url,"params = ",params)
-//        sendFullNodeRequest(url, params: params) { result in
-//
-//            switch result {
-//            case .failure(let error):
-//                completion(.failure(error))
-//            case .success(let response):
-//                let decoder = JSONDecoder()
-//                guard let data = try? JSONSerialization.data(withJSONObject: response["result"], options: .prettyPrinted),
-//                    let assets = try? decoder.decode(Assets.self, from: data) else {
-//                        completion(.failure(.invalidData))
-//                        return
-//                }
-//                print("response = ",response);
-//                let result = NeoClientResult.success(assets)
-//                completion(result)
-//            }
-//        }
-//
+        //        let url = fullNodeAPI + address + "/" + apiURL.getUTXO.rawValue
+        //        print("url =" ,url,"params = ",params)
+        //        sendFullNodeRequest(url, params: params) { result in
+        //
+        //            switch result {
+        //            case .failure(let error):
+        //                completion(.failure(error))
+        //            case .success(let response):
+        //                let decoder = JSONDecoder()
+        //                guard let data = try? JSONSerialization.data(withJSONObject: response["result"], options: .prettyPrinted),
+        //                    let assets = try? decoder.decode(Assets.self, from: data) else {
+        //                        completion(.failure(.invalidData))
+        //                        return
+        //                }
+        //                print("response = ",response);
+        //                let result = NeoClientResult.success(assets)
+        //                completion(result)
+        //            }
+        //        }
+        //
         //            let jjj:[String:Any] =  ["data":[["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":0,"txid":"0x5fa38ee91b0b0e3ff6d21657686f2654309b5964bc9574ce7da7ddb7cab61514","value":"1","createdAtBlock":2055671],["asset":"0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7","index":1,"txid":"0x217b6e3b8030edfe0c336cced9ed3aadd1af5bb24f84bd75753252976c504868","value":"3.6735","createdAtBlock":2188201]]]
         
     }
@@ -533,7 +574,7 @@ public class NeoClient {
     
     public func sendRawTransaction(with data: Data,amount:Double,address:String, completion: @escaping(NeoClientResult<Bool>) -> ()) {
         
-       let exchangeID = WalletUtil.getExChangeId;
+        let exchangeID = WalletUtil.getExChangeId;
         let parames = ["exchangeId":exchangeID,"address":address,"neo":amount,"tx":data.fullHexString] as [String : Any];
         RequestService .request(withUrl:"/api/neo/neoExchangeQlcV2.json", params: parames, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
             
