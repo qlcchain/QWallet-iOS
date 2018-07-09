@@ -125,7 +125,7 @@
 // 刷新vpn连接状态
 - (void)refreshVPNConnect {
     _isConnectVPN = NO;
-    NEVPNStatus status = [VPNUtil.shareInstance vpnConnectStatus];
+    NEVPNStatus status = [VPNUtil.shareInstance getVpnConnectStatus];
     switch (status) {
         case NEVPNStatusConnected:
         {
@@ -167,7 +167,7 @@
 - (void)requestQueryVpn:(BOOL)isDefault {
     @weakify_self
     // 默认v2接口，选择国家用v3接口
-    NSDictionary *params = isDefault?@{@"country":@"others"}:@{@"country":self.selectCountryM.country};
+    NSDictionary *params = isDefault?@{@"country":@"Others"}:@{@"country":self.selectCountryM.country};
     NSString *url = isDefault?queryVpnV2_Url:queryVpnV3_Url;
     
     [RequestService requestWithUrl:url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -260,10 +260,11 @@
     [self.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *vpnInfo = obj;
         vpnInfo.isConnected = NO;
+        vpnInfo.connectStatus = VpnConnectStatusNone;
         if (_isConnectVPN) {
-            
             NSString *currentConnnectVPN = [TransferUtil currentVPNName];
             vpnInfo.isConnected = [currentConnnectVPN isEqualToString:vpnInfo.vpnName]?YES:NO;
+            vpnInfo.connectStatus = [currentConnnectVPN isEqualToString:vpnInfo.vpnName]?VpnConnectStatusConnected:VpnConnectStatusNone;
             if (vpnInfo.isConnected) {
                 connectIndex = idx;
             } else {

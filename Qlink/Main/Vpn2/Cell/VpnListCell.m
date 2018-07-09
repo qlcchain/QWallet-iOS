@@ -76,6 +76,10 @@
     }
 //    _actionImageView.image = isOwner? [UIImage imageNamed:@"icon_seize"]:[UIImage imageNamed:@"icon_seize_two"];
 //    _seizeBtn.userInteractionEnabled = !isOwner;
+    UIImage *connectingImage = [UIImage imageNamed:@"icon_connection"];
+    UIImage *notConnectImage = [UIImage imageNamed:@"icon_not_connected"];
+    UIImage *connectedImage = [UIImage imageNamed:@"icon_complete"];
+    [_connectBtn setImage:_vpnInfo.connectStatus==VpnConnectStatusNone?notConnectImage:_vpnInfo.connectStatus==VpnConnectStatusConnecting?connectingImage:connectedImage forState:UIControlStateNormal];
 }
 
 - (IBAction)connectAction:(UIButton *)sender {

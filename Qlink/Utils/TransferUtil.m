@@ -31,7 +31,7 @@ dispatch_source_t _timer;
 + (VPNInfo *) currentConnectVPNInfo
 {
     //
-    NEVPNStatus status = [VPNUtil.shareInstance vpnConnectStatus];
+    NEVPNStatus status = [VPNUtil.shareInstance getVpnConnectStatus];
     if (status != NEVPNStatusConnected) {
         [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
         return nil;

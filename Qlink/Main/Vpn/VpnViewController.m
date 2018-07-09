@@ -136,7 +136,7 @@
 // 刷新vpn连接状态
 - (void)refreshVPNConnect {
     _isConnectVPN = NO;
-    NEVPNStatus status = [VPNUtil.shareInstance vpnConnectStatus];
+    NEVPNStatus status = [VPNUtil.shareInstance getVpnConnectStatus];
     switch (status) {
         case NEVPNStatusConnected:
         {

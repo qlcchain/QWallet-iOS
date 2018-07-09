@@ -68,7 +68,7 @@ class VPNUtil: NSObject {
         self.stopTunnel()
     }
     
-    func vpnConnectStatus() -> NEVPNStatus {
+    func getVpnConnectStatus() -> NEVPNStatus {
 //        self.getProviderManager(connect: false)
         guard let manager = self.providerManager else { return NEVPNStatus.invalid }
         return manager.connection.status;
