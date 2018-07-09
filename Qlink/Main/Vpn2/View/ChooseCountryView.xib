@@ -23,10 +23,16 @@
                 <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLI-Ks-Mcu">
                     <rect key="frame" x="0.0" y="0.0" width="421" height="392"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="clickBgBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="LeA-ZL-obF"/>
+                    </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XK7-Ft-k9n">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XK7-Ft-k9n">
                     <rect key="frame" x="38" y="0.0" width="345" height="331"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="I0u-QH-PJR">
+                            <rect key="frame" x="0.0" y="0.0" width="345" height="331"/>
+                        </imageView>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xS1-G4-lec">
                             <rect key="frame" x="0.0" y="0.0" width="345" height="55"/>
                             <subviews>
@@ -37,13 +43,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whp-oT-arQ">
-                                    <rect key="frame" x="8" y="32" width="118.5" height="18"/>
+                                    <rect key="frame" x="8" y="30" width="118.5" height="18"/>
                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                     <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray_max" translatesAutoresizingMaskIntoConstraints="NO" id="eY6-Ym-WcW">
-                                    <rect key="frame" x="328" y="38" width="9" height="6"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_expand" translatesAutoresizingMaskIntoConstraints="NO" id="eY6-Ym-WcW">
+                                    <rect key="frame" x="331" y="36" width="6" height="6"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" red="0.28235294119999998" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,19 +57,31 @@
                                 <constraint firstItem="hBN-Z6-h9U" firstAttribute="top" secondItem="xS1-G4-lec" secondAttribute="top" constant="10" id="0w7-Yv-gif"/>
                                 <constraint firstAttribute="trailing" secondItem="eY6-Ym-WcW" secondAttribute="trailing" constant="8" id="EN2-0c-nmY"/>
                                 <constraint firstItem="eY6-Ym-WcW" firstAttribute="centerY" secondItem="whp-oT-arQ" secondAttribute="centerY" id="Piv-bd-ixk"/>
-                                <constraint firstItem="whp-oT-arQ" firstAttribute="top" secondItem="hBN-Z6-h9U" secondAttribute="bottom" constant="10" id="bF2-f4-Nnn"/>
+                                <constraint firstItem="whp-oT-arQ" firstAttribute="top" secondItem="hBN-Z6-h9U" secondAttribute="bottom" constant="8" id="bF2-f4-Nnn"/>
                                 <constraint firstItem="whp-oT-arQ" firstAttribute="leading" secondItem="xS1-G4-lec" secondAttribute="leading" constant="8" id="hXB-82-5Z0"/>
                                 <constraint firstItem="hBN-Z6-h9U" firstAttribute="leading" secondItem="xS1-G4-lec" secondAttribute="leading" constant="8" id="ofx-ej-PKp"/>
                                 <constraint firstAttribute="height" constant="55" id="xno-eF-blS"/>
                             </constraints>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OAv-hj-fzn">
+                            <rect key="frame" x="17" y="55" width="311" height="276"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="I0u-QH-PJR" firstAttribute="leading" secondItem="XK7-Ft-k9n" secondAttribute="leading" id="AO6-IZ-k0E"/>
+                        <constraint firstAttribute="trailing" secondItem="OAv-hj-fzn" secondAttribute="trailing" constant="17" id="Ej9-TU-sDr"/>
+                        <constraint firstAttribute="bottom" secondItem="I0u-QH-PJR" secondAttribute="bottom" id="FDE-dB-5b2"/>
+                        <constraint firstAttribute="bottom" secondItem="OAv-hj-fzn" secondAttribute="bottom" id="GsZ-Sz-MtD"/>
                         <constraint firstAttribute="height" constant="331" id="HRp-j3-3Oh"/>
+                        <constraint firstItem="OAv-hj-fzn" firstAttribute="leading" secondItem="XK7-Ft-k9n" secondAttribute="leading" constant="17" id="JjH-G2-OZP"/>
                         <constraint firstAttribute="trailing" secondItem="xS1-G4-lec" secondAttribute="trailing" id="Sfb-Ck-8ys"/>
+                        <constraint firstAttribute="trailing" secondItem="I0u-QH-PJR" secondAttribute="trailing" id="TGD-qM-AWW"/>
                         <constraint firstItem="xS1-G4-lec" firstAttribute="leading" secondItem="XK7-Ft-k9n" secondAttribute="leading" id="an0-1L-q8q"/>
+                        <constraint firstItem="I0u-QH-PJR" firstAttribute="top" secondItem="XK7-Ft-k9n" secondAttribute="top" id="nTd-fI-2gY"/>
                         <constraint firstItem="xS1-G4-lec" firstAttribute="top" secondItem="XK7-Ft-k9n" secondAttribute="top" id="suH-VQ-63p"/>
+                        <constraint firstItem="OAv-hj-fzn" firstAttribute="top" secondItem="xS1-G4-lec" secondAttribute="bottom" id="xNe-IS-gxM"/>
                     </constraints>
                 </view>
             </subviews>
@@ -81,10 +99,18 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="21.5" y="-205"/>
+            <connections>
+                <outlet property="bgView" destination="XK7-Ft-k9n" id="VcH-lr-Au6"/>
+                <outlet property="myTabView" destination="OAv-hj-fzn" id="tev-od-YO9"/>
+                <outlet property="tabContraintH" destination="HRp-j3-3Oh" id="74M-fO-lJb"/>
+                <outlet property="tabContraintTop" destination="ppN-M6-rYY" id="PmU-U5-kCj"/>
+                <outlet property="topContraintH" destination="xno-eF-blS" id="7dy-Ca-dzf"/>
+            </connections>
+            <point key="canvasLocation" x="-182" y="-227"/>
         </view>
     </objects>
     <resources>
-        <image name="icon_gray_max" width="9" height="6"/>
+        <image name="bg_continue" width="8" height="44"/>
+        <image name="icon_expand" width="6" height="6"/>
     </resources>
 </document>

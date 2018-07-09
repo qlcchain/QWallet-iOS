@@ -61,4 +61,28 @@
     return countryName?:@"China";
 }
 
++ (NSMutableArray *) getAllCountry
+{
+    __block NSMutableArray *countryArr = [NSMutableArray array];
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ContinentAndCountryBean" ofType:@"json"]];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    [dic[@"continent"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        ContinentModel *continentM = [ContinentModel getObjectWithKeyValues:obj];
+        [continentM.country enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CountryModel *countryM = obj;
+            [countryArr addObject:countryM];
+        }];
+       
+    }];
+    // 对国家进行字母排序
+    NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+    [countryArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        CountryModel *model1 = obj1;
+        CountryModel *model2 = obj2;
+        NSRange range = NSMakeRange(0,model1.name.length);
+        return [model1.name compare:model2.name options:comparisonOptions range:range];
+    }];
+    return countryArr;
+}
+
 @end

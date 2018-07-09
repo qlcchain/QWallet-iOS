@@ -382,6 +382,8 @@
 		73FF64A620F3365C00E29B3B /* ChooseCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF64A520F3365C00E29B3B /* ChooseCountryView.m */; };
 		73FF64A820F3366900E29B3B /* ChooseCountryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64A720F3366900E29B3B /* ChooseCountryView.xib */; };
 		73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64A920F342D700E29B3B /* GoogleService-Info.plist */; };
+		73FF64AE20F34AE200E29B3B /* VPN2ChooseCountryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF64AC20F34AE200E29B3B /* VPN2ChooseCountryCell.m */; };
+		73FF64AF20F34AE200E29B3B /* VPN2ChooseCountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64AD20F34AE200E29B3B /* VPN2ChooseCountryCell.xib */; };
 		7F4538A66F4431A83CB2C569 /* Pods_Qlink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA980B5D481A5FA6E3154F3 /* Pods_Qlink.framework */; };
 /* End PBXBuildFile section */
 
@@ -1332,6 +1334,9 @@
 		73FF64A520F3365C00E29B3B /* ChooseCountryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryView.m; sourceTree = "<group>"; };
 		73FF64A720F3366900E29B3B /* ChooseCountryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseCountryView.xib; sourceTree = "<group>"; };
 		73FF64A920F342D700E29B3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		73FF64AB20F34AE200E29B3B /* VPN2ChooseCountryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPN2ChooseCountryCell.h; sourceTree = "<group>"; };
+		73FF64AC20F34AE200E29B3B /* VPN2ChooseCountryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPN2ChooseCountryCell.m; sourceTree = "<group>"; };
+		73FF64AD20F34AE200E29B3B /* VPN2ChooseCountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VPN2ChooseCountryCell.xib; sourceTree = "<group>"; };
 		93185A7AFF490BBB8104B577 /* Pods-Qlink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.release.xcconfig"; sourceTree = "<group>"; };
 		C8C9F75488743A3ABC4DAD17 /* Pods-Qlink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.debug.xcconfig"; sourceTree = "<group>"; };
 		F1A3E51F89966A6974D528B9 /* Pods-Qlink.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -2035,6 +2040,9 @@
 				581781A720F2FBCD003E74F2 /* VpnListCell.h */,
 				581781A820F2FBCD003E74F2 /* VpnListCell.m */,
 				581781A920F2FBCD003E74F2 /* VpnListCell.xib */,
+				73FF64AB20F34AE200E29B3B /* VPN2ChooseCountryCell.h */,
+				73FF64AC20F34AE200E29B3B /* VPN2ChooseCountryCell.m */,
+				73FF64AD20F34AE200E29B3B /* VPN2ChooseCountryCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2902,6 +2910,7 @@
 				73FF63E720EDCC2A00E29B3B /* GuideVpnAddView.xib in Resources */,
 				73B6F4E420AEC08E004B7219 /* strip-frameworks.sh in Resources */,
 				5860ACD520CFB48100EEB6CE /* ChooseCountryCell.xib in Resources */,
+				73FF64AF20F34AE200E29B3B /* VPN2ChooseCountryCell.xib in Resources */,
 				5860ACFF20CFB4E000EEB6CE /* VPNConnectViewController.xib in Resources */,
 				581781B020F2FC02003E74F2 /* VpnToastView.xib in Resources */,
 			);
@@ -3259,6 +3268,7 @@
 				580D914E20625A4400B12506 /* UIButton+Block.m in Sources */,
 				58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */,
 				580D915220625A4400B12506 /* UIView+Nib.m in Sources */,
+				73FF64AE20F34AE200E29B3B /* VPN2ChooseCountryCell.m in Sources */,
 				73B6F4E620AEC08E004B7219 /* Account.swift in Sources */,
 				580D914F20625A4400B12506 /* UIColor+Random.m in Sources */,
 				73B6F4C920AEC08E004B7219 /* validator.swift in Sources */,
