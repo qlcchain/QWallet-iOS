@@ -9,6 +9,12 @@
 #import "BBaseModel.h"
 #import <BGFMDB/BGFMDB.h>
 
+typedef enum : NSUInteger {
+    VpnConnectStatusNone = 0,
+    VpnConnectStatusConnecting,
+    VpnConnectStatusConnected,
+} VpnConnectStatus;
+
 @interface VPNMode : BBaseModel
 
 @property (nonatomic , copy) NSString *country;
@@ -60,6 +66,10 @@
 @property (nonatomic , copy) NSString *recordId;
 // vpn扣费时间
 @property (nonatomic, copy) NSString *tranTime;
+
+@property (nonatomic, copy) NSString *connsuccessNum;
+@property (nonatomic, copy) NSString *onlineTime;
+@property (nonatomic) VpnConnectStatus connectStatus;
 
 - (BOOL)isOwner;
 - (BOOL)isFriend;
