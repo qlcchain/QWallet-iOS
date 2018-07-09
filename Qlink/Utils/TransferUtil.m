@@ -25,7 +25,7 @@ dispatch_source_t _timer;
 
 /**
  获取当前连接vpn
-
+ 
  @return vpn
  */
 + (VPNInfo *) currentConnectVPNInfo
@@ -45,7 +45,7 @@ dispatch_source_t _timer;
 
 /**
  获取当前连接vpn name
-
+ 
  @return vpn name
  */
 + (NSString *) currentVPNName
@@ -74,16 +74,16 @@ dispatch_source_t _timer;
 
 /**
  是否可以连接资产
-
+ 
  @return 是。不是
  */
 + (BOOL) isConnectionAssetsAllowedWithCost:(NSString *)cost
 {
     BOOL isConnect = NO;
     if (AppD.balanceInfo) {
-//        if ([AppD.balanceInfo.gas floatValue] > 0.00000001 && [AppD.balanceInfo.qlc floatValue] >= [cost floatValue]) {
-//            isConnect = YES;
-//        }
+        //        if ([AppD.balanceInfo.gas floatValue] > 0.00000001 && [AppD.balanceInfo.qlc floatValue] >= [cost floatValue]) {
+        //            isConnect = YES;
+        //        }
         
         if ([AppD.balanceInfo.qlc floatValue] >= [cost floatValue]) {
             isConnect = YES;
@@ -173,6 +173,8 @@ dispatch_source_t _timer;
             });
         } else {
             
+            // NSLog(@"%@ txid = %@",vpnInfo.vpnName,complete);
+            
             // 发送交易请求
             NSNumber *typeNum = @(3);
             NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":[CurrentWalletInfo getShareInstance].address ,@"tx":complete,@"qlc":vpnInfo.cost,@"fromP2pId":[NSStringUtil getNotNullValue:[ToxManage getOwnP2PId]],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.address],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
@@ -180,7 +182,7 @@ dispatch_source_t _timer;
                 typeNum = @(1);
                 parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"type":typeNum,@"addressFrom":[CurrentWalletInfo getShareInstance].address ,@"tx":complete,@"qlc":vpnInfo.cost,@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.address]};
             }
-
+            
             [RequestService requestWithUrl:transTypeOperate_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
                 [AppD.window hideHud];
                 if ([[responseObject objectForKey:Server_Code] integerValue] == 0){
@@ -228,34 +230,34 @@ dispatch_source_t _timer;
         }
         
         
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [AppD.window hideHud];
-//            if (!complete) {
-//                DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    [TransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
-//                });
-//            } else {
-//                if (tranType == 3 || tranType == 5) { // vpn连接
-//                    //TODO:转账成功之后发p2p消息告诉接收者
-//                    [TransferUtil sendVPNConnectSuccessMessageWithVPNInfo:vpnInfo withType:type];
-//                }
-//                if (tranType == 6) {
-//                    tranType = 5;
-//                }
-//                // 获取当前资产
-//                [TransferUtil sendGetBalanceRequest];
-//                // 发送扣款通知
-//                [TransferUtil sendLocalNotificationWithQLC:vpnInfo.cost isIncome:NO];
-//                [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:@"" neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:@"" connectType:0 isReported:NO];
-//            }
-//        });
+        //        dispatch_async(dispatch_get_main_queue(), ^{
+        //            [AppD.window hideHud];
+        //            if (!complete) {
+        //                DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
+        //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //                    [TransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
+        //                });
+        //            } else {
+        //                if (tranType == 3 || tranType == 5) { // vpn连接
+        //                    //TODO:转账成功之后发p2p消息告诉接收者
+        //                    [TransferUtil sendVPNConnectSuccessMessageWithVPNInfo:vpnInfo withType:type];
+        //                }
+        //                if (tranType == 6) {
+        //                    tranType = 5;
+        //                }
+        //                // 获取当前资产
+        //                [TransferUtil sendGetBalanceRequest];
+        //                // 发送扣款通知
+        //                [TransferUtil sendLocalNotificationWithQLC:vpnInfo.cost isIncome:NO];
+        //                [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:@"" neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:@"" connectType:0 isReported:NO];
+        //            }
+        //        });
     }];
 }
 
 /**
  获取注册vpn时扣费地址
-
+ 
  @param info 注册vpninfo
  @param type 操作类型
  */
@@ -299,7 +301,7 @@ dispatch_source_t _timer;
         DDLogDebug(@"获取资产失败：%@",error.description);
         requestCont ++;
         if (requestCont <2) {
-             [TransferUtil sendGetBalanceRequest];
+            [TransferUtil sendGetBalanceRequest];
         } else {
             requestCont = 0;
         }
@@ -315,7 +317,7 @@ dispatch_source_t _timer;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = recordSaveReq;
     NSString *p2pid = [ToxManage getOwnP2PId];
-   
+    
     NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnInfo.vpnName,QLC_COUNT:vpnInfo.cost,@"p2pId":p2pid,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:vpnInfo.recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:[NSDate date]]],TX_ID:[NSStringUtil getNotNullValue:vpnInfo.recordId]};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
@@ -326,7 +328,7 @@ dispatch_source_t _timer;
 
 /**
  发送本地通知
-
+ 
  @param qlc qlc
  @param isIncome 是否是收入
  */
@@ -339,7 +341,7 @@ dispatch_source_t _timer;
     UNTimeIntervalNotificationTrigger *trigger1 = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:.5 repeats:NO];
     
     NSString *qlcCount = [NSString stringWithFormat:@"%.2f",[qlc floatValue]];
-                                                
+    
     NSString *alertBody = [NSString stringWithFormat:@"%@ %@ qlc",NSStringLocalizable(@"spending"),qlcCount];
     NSString *alertTitle = NSStringLocalizable(@"spend_account");
     if (isIncome) {
@@ -351,7 +353,7 @@ dispatch_source_t _timer;
     notiContent.userInfo = @{@"type":@"1",@"qlc":qlcCount,@"title":alertTitle,@"body":alertBody};
     // 执行通知注册
     
-     UNNotificationRequest *notificationRequest = [UNNotificationRequest requestWithIdentifier:@"sendQLC" content:notiContent trigger:trigger1];
+    UNNotificationRequest *notificationRequest = [UNNotificationRequest requestWithIdentifier:@"sendQLC" content:notiContent trigger:trigger1];
     
     [center addNotificationRequest:notificationRequest withCompletionHandler:^(NSError * _Nullable error) {
         NSLog(@"error = %@",error);
