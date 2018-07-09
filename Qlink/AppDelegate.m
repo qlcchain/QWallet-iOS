@@ -30,6 +30,8 @@
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
 
+@import Firebase;
+
 @interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
     UIBackgroundTaskIdentifier backTaskI;
 }
@@ -43,7 +45,8 @@
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    // [WalletUtil removeAllKey];
-
+   // 配置Firebase
+    [FIRApp configure];
     // 配置DDLog
     [self configDDLog];
     // 配置app语言

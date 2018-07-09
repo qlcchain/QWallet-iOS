@@ -28,6 +28,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
 #import "WalletAlertView.h"
+#import "VpnToastView.h"
 
 extern NSString * const CSToastPositionTop;
 extern NSString * const CSToastPositionCenter;
@@ -54,4 +55,6 @@ extern NSString * const CSToastPositionBottom;
       tapCallback:(void(^)(void))tapCallback;
 
 - (void) showWalletAlertViewWithTitle:(NSString *) alertTitle msg:(NSMutableAttributedString *) msgArrtrbuted isShowTwoBtn:(BOOL) isTwo block:(void (^)(void))calculateBlock;
+
+- (void) showVPNToastAlertViewWithTopImageName:(NSString *) imageName content:(NSString *) content block:(void (^)(void))clickYesBlock;;
 @end
