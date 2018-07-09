@@ -379,6 +379,9 @@
 		73FF645C20EDCD8A00E29B3B /* GuideUnlockWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF645E20EDCD8A00E29B3B /* GuideUnlockWalletView.xib */; };
 		73FF646920EDCD9700E29B3B /* GuideNewWalletView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF646B20EDCD9700E29B3B /* GuideNewWalletView.xib */; };
 		73FF647620EDCDA800E29B3B /* GuidenSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF647820EDCDA800E29B3B /* GuidenSettingView.xib */; };
+		73FF64A620F3365C00E29B3B /* ChooseCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF64A520F3365C00E29B3B /* ChooseCountryView.m */; };
+		73FF64A820F3366900E29B3B /* ChooseCountryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64A720F3366900E29B3B /* ChooseCountryView.xib */; };
+		73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64A920F342D700E29B3B /* GoogleService-Info.plist */; };
 		7F4538A66F4431A83CB2C569 /* Pods_Qlink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA980B5D481A5FA6E3154F3 /* Pods_Qlink.framework */; };
 /* End PBXBuildFile section */
 
@@ -1325,6 +1328,10 @@
 		73FF649020EDE91D00E29B3B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/GuideNewWalletView.strings; sourceTree = "<group>"; };
 		73FF649420EDE95B00E29B3B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GuideNewWalletView.strings"; sourceTree = "<group>"; };
 		73FF649820EDE98A00E29B3B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/GuideNewWalletView.strings; sourceTree = "<group>"; };
+		73FF64A420F3365C00E29B3B /* ChooseCountryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseCountryView.h; sourceTree = "<group>"; };
+		73FF64A520F3365C00E29B3B /* ChooseCountryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryView.m; sourceTree = "<group>"; };
+		73FF64A720F3366900E29B3B /* ChooseCountryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseCountryView.xib; sourceTree = "<group>"; };
+		73FF64A920F342D700E29B3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93185A7AFF490BBB8104B577 /* Pods-Qlink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.release.xcconfig"; sourceTree = "<group>"; };
 		C8C9F75488743A3ABC4DAD17 /* Pods-Qlink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.debug.xcconfig"; sourceTree = "<group>"; };
 		F1A3E51F89966A6974D528B9 /* Pods-Qlink.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1407,6 +1414,7 @@
 		580D90C42062594C00B12506 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				73FF64A920F342D700E29B3B /* GoogleService-Info.plist */,
 				58A4DEA9206234AC00E72F52 /* AppDelegate.h */,
 				58A4DEAA206234AC00E72F52 /* AppDelegate.m */,
 				58A4DEAC206234AC00E72F52 /* LaunchViewController.h */,
@@ -2014,6 +2022,9 @@
 				581781AC20F2FBF5003E74F2 /* VpnToastView.h */,
 				581781AD20F2FBF5003E74F2 /* VpnToastView.m */,
 				581781AF20F2FC02003E74F2 /* VpnToastView.xib */,
+				73FF64A420F3365C00E29B3B /* ChooseCountryView.h */,
+				73FF64A520F3365C00E29B3B /* ChooseCountryView.m */,
+				73FF64A720F3366900E29B3B /* ChooseCountryView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2818,6 +2829,7 @@
 				73FF63F420EDCC4500E29B3B /* GuideClickWalletView.xib in Resources */,
 				5860AD6F20CFB5A700EEB6CE /* NewWalletViewController.xib in Resources */,
 				5860ADBC20CFB61900EEB6CE /* ChatTipView.xib in Resources */,
+				73FF64A820F3366900E29B3B /* ChooseCountryView.xib in Resources */,
 				5860AD4C20CFB57300EEB6CE /* SendFundsView.xib in Resources */,
 				73A05A1D2081A02200974483 /* icon_map_refresh.png in Resources */,
 				5860ACB920CFB45700EEB6CE /* VPNRegisterView2.xib in Resources */,
@@ -2842,6 +2854,7 @@
 				5860AD3E20CFB55D00EEB6CE /* WalletMenuView.xib in Resources */,
 				5860AD8B20CFB5D200EEB6CE /* WalletImportKeyViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
+				73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */,
 				581781A420F2FA50003E74F2 /* VPN2ViewController.xib in Resources */,
 				5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */,
 				5860AD8420CFB5C800EEB6CE /* WalletDetailViewController.xib in Resources */,
@@ -2907,6 +2920,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/BGFMDB/BGFMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -2914,12 +2928,14 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/OLImageView/OLImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BGFMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -2927,6 +2943,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OLImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3165,6 +3182,7 @@
 				5812DDA020A1A7890043A8A8 /* ChatFace.m in Sources */,
 				73B1AEBF20BE57C600947749 /* WebViewController.m in Sources */,
 				58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */,
+				73FF64A620F3365C00E29B3B /* ChooseCountryView.m in Sources */,
 				58CDB5DD2085DB6600B74962 /* ProfileLoader.swift in Sources */,
 				73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */,
 				73C200C2209A9D460043E889 /* NotifactionView.m in Sources */,

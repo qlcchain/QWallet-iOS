@@ -117,6 +117,10 @@
         [self addNewGuideVpnListConnect];
     }
     [self addNewGuideClickWallet];
+    
+    [self.view showVPNToastAlertViewWithTopImageName:@"icon_even" content:@"Just const 3 QLC\nConnect NOW!" block:^{
+        
+    }];
 }
 
 #pragma mark - Operation

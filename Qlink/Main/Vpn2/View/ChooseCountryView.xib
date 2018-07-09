@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChooseCountryView">
+            <rect key="frame" x="0.0" y="0.0" width="421" height="392"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLI-Ks-Mcu">
+                    <rect key="frame" x="0.0" y="0.0" width="421" height="392"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XK7-Ft-k9n">
+                    <rect key="frame" x="38" y="0.0" width="345" height="331"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xS1-G4-lec">
+                            <rect key="frame" x="0.0" y="0.0" width="345" height="55"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VPN Server Location *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBN-Z6-h9U">
+                                    <rect key="frame" x="8" y="10" width="99" height="12"/>
+                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
+                                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whp-oT-arQ">
+                                    <rect key="frame" x="8" y="32" width="118.5" height="18"/>
+                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray_max" translatesAutoresizingMaskIntoConstraints="NO" id="eY6-Ym-WcW">
+                                    <rect key="frame" x="328" y="38" width="9" height="6"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.28235294119999998" green="0.0" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="hBN-Z6-h9U" firstAttribute="top" secondItem="xS1-G4-lec" secondAttribute="top" constant="10" id="0w7-Yv-gif"/>
+                                <constraint firstAttribute="trailing" secondItem="eY6-Ym-WcW" secondAttribute="trailing" constant="8" id="EN2-0c-nmY"/>
+                                <constraint firstItem="eY6-Ym-WcW" firstAttribute="centerY" secondItem="whp-oT-arQ" secondAttribute="centerY" id="Piv-bd-ixk"/>
+                                <constraint firstItem="whp-oT-arQ" firstAttribute="top" secondItem="hBN-Z6-h9U" secondAttribute="bottom" constant="10" id="bF2-f4-Nnn"/>
+                                <constraint firstItem="whp-oT-arQ" firstAttribute="leading" secondItem="xS1-G4-lec" secondAttribute="leading" constant="8" id="hXB-82-5Z0"/>
+                                <constraint firstItem="hBN-Z6-h9U" firstAttribute="leading" secondItem="xS1-G4-lec" secondAttribute="leading" constant="8" id="ofx-ej-PKp"/>
+                                <constraint firstAttribute="height" constant="55" id="xno-eF-blS"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="331" id="HRp-j3-3Oh"/>
+                        <constraint firstAttribute="trailing" secondItem="xS1-G4-lec" secondAttribute="trailing" id="Sfb-Ck-8ys"/>
+                        <constraint firstItem="xS1-G4-lec" firstAttribute="leading" secondItem="XK7-Ft-k9n" secondAttribute="leading" id="an0-1L-q8q"/>
+                        <constraint firstItem="xS1-G4-lec" firstAttribute="top" secondItem="XK7-Ft-k9n" secondAttribute="top" id="suH-VQ-63p"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SLI-Ks-Mcu" secondAttribute="bottom" id="1NA-QV-LXx"/>
+                <constraint firstItem="SLI-Ks-Mcu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="7Hu-iA-2fp"/>
+                <constraint firstItem="XK7-Ft-k9n" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="38" id="7Tm-7z-tVz"/>
+                <constraint firstItem="SLI-Ks-Mcu" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="F8x-yV-ks1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SLI-Ks-Mcu" secondAttribute="trailing" id="NPt-Wq-oKe"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XK7-Ft-k9n" secondAttribute="trailing" constant="38" id="XXd-52-2nH"/>
+                <constraint firstItem="XK7-Ft-k9n" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ppN-M6-rYY"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="21.5" y="-205"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_gray_max" width="9" height="6"/>
+    </resources>
+</document>

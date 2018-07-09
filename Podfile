@@ -16,5 +16,6 @@ target "Qlink" do
     pod 'CocoaLumberjack/Swift'
     pod 'Bugly'
     pod 'OLImageView'
+    pod 'Firebase/Core'
 
 end
