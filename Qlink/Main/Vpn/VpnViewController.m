@@ -187,7 +187,7 @@
 //    [self.vpnqueryLock lock];
     NSDictionary *params = @{@"country":self.selectCountryM.country};
 
-    [RequestService requestWithUrl:vpnqueryVpnV2_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl:queryVpnV2_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 
         [weakSelf.mainTable.slimeView endRefresh];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
