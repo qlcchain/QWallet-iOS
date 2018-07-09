@@ -104,6 +104,10 @@
 		5812DDBF20A1A7D20043A8A8 /* NSString+TL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812DDBA20A1A7D10043A8A8 /* NSString+TL.m */; };
 		581781A320F2FA50003E74F2 /* VPN2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781A120F2FA50003E74F2 /* VPN2ViewController.m */; };
 		581781A420F2FA50003E74F2 /* VPN2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581781A220F2FA50003E74F2 /* VPN2ViewController.xib */; };
+		581781AA20F2FBCD003E74F2 /* VpnListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781A820F2FBCD003E74F2 /* VpnListCell.m */; };
+		581781AB20F2FBCD003E74F2 /* VpnListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581781A920F2FBCD003E74F2 /* VpnListCell.xib */; };
+		581781AE20F2FBF5003E74F2 /* VpnToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781AD20F2FBF5003E74F2 /* VpnToastView.m */; };
+		581781B020F2FC02003E74F2 /* VpnToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581781AF20F2FC02003E74F2 /* VpnToastView.xib */; };
 		58270FB92071C98100C08784 /* VPNRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FB72071C98000C08784 /* VPNRegisterViewController.m */; };
 		58270FBE2071FE3100C08784 /* UnlockWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FBC2071FE3100C08784 /* UnlockWalletViewController.m */; };
 		58270FC22072019400C08784 /* WalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC12072019400C08784 /* WalletUtil.m */; };
@@ -591,6 +595,12 @@
 		581781A020F2FA50003E74F2 /* VPN2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPN2ViewController.h; sourceTree = "<group>"; };
 		581781A120F2FA50003E74F2 /* VPN2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPN2ViewController.m; sourceTree = "<group>"; };
 		581781A220F2FA50003E74F2 /* VPN2ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VPN2ViewController.xib; sourceTree = "<group>"; };
+		581781A720F2FBCD003E74F2 /* VpnListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VpnListCell.h; sourceTree = "<group>"; };
+		581781A820F2FBCD003E74F2 /* VpnListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VpnListCell.m; sourceTree = "<group>"; };
+		581781A920F2FBCD003E74F2 /* VpnListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VpnListCell.xib; sourceTree = "<group>"; };
+		581781AC20F2FBF5003E74F2 /* VpnToastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VpnToastView.h; sourceTree = "<group>"; };
+		581781AD20F2FBF5003E74F2 /* VpnToastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VpnToastView.m; sourceTree = "<group>"; };
+		581781AF20F2FC02003E74F2 /* VpnToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VpnToastView.xib; sourceTree = "<group>"; };
 		58270FB62071C98000C08784 /* VPNRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNRegisterViewController.h; sourceTree = "<group>"; };
 		58270FB72071C98000C08784 /* VPNRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNRegisterViewController.m; sourceTree = "<group>"; };
 		58270FBB2071FE3100C08784 /* UnlockWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlockWalletViewController.h; sourceTree = "<group>"; };
@@ -2001,6 +2011,9 @@
 		581781A520F2FA5C003E74F2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				581781AC20F2FBF5003E74F2 /* VpnToastView.h */,
+				581781AD20F2FBF5003E74F2 /* VpnToastView.m */,
+				581781AF20F2FC02003E74F2 /* VpnToastView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2008,6 +2021,9 @@
 		581781A620F2FA64003E74F2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				581781A720F2FBCD003E74F2 /* VpnListCell.h */,
+				581781A820F2FBCD003E74F2 /* VpnListCell.m */,
+				581781A920F2FBCD003E74F2 /* VpnListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2856,6 +2872,7 @@
 				5860ACCE20CFB47400EEB6CE /* VpnTabCell.xib in Resources */,
 				737F909D20E3960A008BC9C2 /* GuidePageView1.xib in Resources */,
 				5860AD3020CFB53000EEB6CE /* SettingCell.xib in Resources */,
+				581781AB20F2FBCD003E74F2 /* VpnListCell.xib in Resources */,
 				5860AD5A20CFB58800EEB6CE /* MyAssetsView.xib in Resources */,
 				73FF640E20EDCC6600E29B3B /* GuideVpnListView.xib in Resources */,
 				5860AD5320CFB57E00EEB6CE /* WalletAddressView.xib in Resources */,
@@ -2873,6 +2890,7 @@
 				73B6F4E420AEC08E004B7219 /* strip-frameworks.sh in Resources */,
 				5860ACD520CFB48100EEB6CE /* ChooseCountryCell.xib in Resources */,
 				5860ACFF20CFB4E000EEB6CE /* VPNConnectViewController.xib in Resources */,
+				581781B020F2FC02003E74F2 /* VpnToastView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3000,6 +3018,7 @@
 				58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */,
 				580D916520625A4400B12506 /* NSString+RegexCategory.m in Sources */,
 				5812DDA220A1A7890043A8A8 /* ChatFaceHeleper.m in Sources */,
+				581781AE20F2FBF5003E74F2 /* VpnToastView.m in Sources */,
 				73B6F4CF20AEC08E004B7219 /* ScriptBuilder.swift in Sources */,
 				730DA8FA20886AC700CE1909 /* StatuImageView.m in Sources */,
 				73A05A352081D91600974483 /* UIView+HYBImageCliped.m in Sources */,
@@ -3013,6 +3032,7 @@
 				580D915720625A4400B12506 /* UIView+Shake.m in Sources */,
 				73B6F4CE20AEC08E004B7219 /* OpCodes.swift in Sources */,
 				586F37032079F97000E12F95 /* VPNRegisterView2.m in Sources */,
+				581781AA20F2FBCD003E74F2 /* VpnListCell.m in Sources */,
 				73B1AEC420BE7D3800947749 /* MyAssetsViewController.m in Sources */,
 				73B6F4DC20AEC08E004B7219 /* Transaction.swift in Sources */,
 				737F909120DB9FC4008BC9C2 /* GuidePageView3.m in Sources */,
