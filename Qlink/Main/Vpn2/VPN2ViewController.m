@@ -21,7 +21,7 @@
 #import "WalletUtil.h"
 #import "UIImage+RoundedCorner.h"
 //#import "UIButton+UserHead.h"
-#import "SelectCountryModel.h"
+#import "ContinentModel.h"
 #import "ChooseCountryUtil.h"
 #import "DebugLogViewController.h"
 #import <SDWebImage/UIButton+WebCache.h>
@@ -44,6 +44,7 @@
 #import "GuideVpnCountryView.h"
 #import "GuideVpnListView.h"
 #import "GuideVpnListConnectView.h"
+#import "ChooseCountryView.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -61,11 +62,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sectionBackHeight;
 @property (strong, nonatomic) IBOutlet UIView *sectionTitleView;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
-@property (nonatomic, strong) SelectCountryModel *selectCountryM;
+@property (nonatomic, strong) CountryModel *selectCountryM;
 @property (nonatomic, strong) VPNInfo *selectVPNInfo;
 @property (nonatomic) BOOL isConnectVPN;
 @property (nonatomic) BOOL joinGroupFlag;
-
+@property (nonatomic , strong) ChooseCountryView *countryView;
 @end
 
 @implementation VPN2ViewController
@@ -158,16 +159,18 @@
     }];
 }
 
-- (void)refreshCountry:(SelectCountryModel *)selectM {
-    _selectCountryM = selectM;
-    _countryLab.text = _selectCountryM.country.uppercaseString;
+- (void)refreshCountry:(CountryModel *)selectM {
+    self.selectCountryM = selectM;
+    _countryLab.text = _selectCountryM.name.uppercaseString;
+    _countryIcon.image = [UIImage imageNamed:_selectCountryM.countryImage];
+    [self requestQueryVpn:NO];
 }
 
 // 根据国家获取vpn资产列表
 - (void)requestQueryVpn:(BOOL)isDefault {
     @weakify_self
     // 默认v2接口，选择国家用v3接口
-    NSDictionary *params = isDefault?@{@"country":@"Others"}:@{@"country":self.selectCountryM.country};
+    NSDictionary *params = isDefault?@{@"country":@"Others"}:@{@"country":self.selectCountryM.name};
     NSString *url = isDefault?queryVpnV2_Url:queryVpnV3_Url;
     
     [RequestService requestWithUrl:url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -373,11 +376,11 @@ static BOOL refreshAnimate = YES;
 }
 
 #pragma mark - Noti
-- (void)selectCountryNoti:(NSNotification *)noti {
-    SelectCountryModel *selectM = noti.object;
-    [self refreshCountry:selectM];
-    [self requestQueryVpn:NO];
-}
+//- (void)selectCountryNoti:(NSNotification *)noti {
+//    SelectCountryModel *selectM = noti.object;
+//    [self refreshCountry:selectM];
+//    [self requestQueryVpn:NO];
+//}
 
 - (void)checkProcessSuccessOfVPNAdd:(NSNotification *)noti {
     CGFloat delay = 0.0f;
@@ -679,7 +682,7 @@ static BOOL refreshAnimate = YES;
 }
 
 - (IBAction)countryAction:(id)sender {
-    [self jumpToChooseContinent];
+    [self selectCountry];
 }
 
 - (IBAction)debugLogAction:(id)sender {
@@ -687,6 +690,27 @@ static BOOL refreshAnimate = YES;
     [self jumpToDebugLog];
 #endif
 }
+
+#pragma mark -选择国家
+- (void) selectCountry {
+    // 显示
+    [self.countryView showChooseCountryView];
+    // 选择国家回调
+    @weakify_self
+    [self.countryView setSelectCountryBlock:^(id selectCountry) {
+          [weakSelf refreshCountry:selectCountry];
+    }];
+}
+
+- (ChooseCountryView *)countryView
+{
+    if (!_countryView) {
+        _countryView = [ChooseCountryView loadChooseCountryView];
+        _countryView.frame = CGRectMake(0,67+STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-67);
+    }
+    return _countryView;
+}
+
 
 #pragma mark - Transition
 
@@ -746,15 +770,15 @@ static BOOL refreshAnimate = YES;
     return _sourceArr;
 }
 
-- (SelectCountryModel *)selectCountryM {
-    if (!_selectCountryM) {
-        _selectCountryM = [[SelectCountryModel alloc] init];
-        _selectCountryM.continent = ASIA_CONTINENT;
-        _selectCountryM.country = [LocationMode getShareInstance].country;
-    }
-    
-    return _selectCountryM;
-}
+//- (SelectCountryModel *)selectCountryM {
+//    if (!_selectCountryM) {
+//        _selectCountryM = [[SelectCountryModel alloc] init];
+//        _selectCountryM.continent = ASIA_CONTINENT;
+//        _selectCountryM.country = [LocationMode getShareInstance].country;
+//    }
+//
+//    return _selectCountryM;
+//}
 
 - (RefreshTableView *)mainTable {
     if (!_mainTable) {

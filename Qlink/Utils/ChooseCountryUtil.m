@@ -70,6 +70,7 @@
         ContinentModel *continentM = [ContinentModel getObjectWithKeyValues:obj];
         [continentM.country enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             CountryModel *countryM = obj;
+            countryM.continent = continentM.continent;
             [countryArr addObject:countryM];
         }];
        
