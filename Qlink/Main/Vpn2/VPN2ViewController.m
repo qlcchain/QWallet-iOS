@@ -68,6 +68,8 @@
 @property (nonatomic) BOOL isConnectVPN;
 @property (nonatomic) BOOL joinGroupFlag;
 @property (nonatomic , strong) ChooseCountryView *countryView;
+@property (nonatomic, strong) NSString *currentConnectVPNName;
+
 @end
 
 @implementation VPN2ViewController
@@ -318,7 +320,7 @@
 }
 
 - (void)configSourceAndRefresh:(BOOL)refreshFriend {
-    [self handleSourceWithConnectVpn];
+    [self handleSourceWithConnectVpn]; // 添加已连接的vpn
     [self handleIsOnline:refreshFriend]; // 是否在线--不在线的加好友--资产总额
     [self handleIsConnect]; // 是否连接
     [self refreshTable];
@@ -403,15 +405,13 @@ static BOOL refreshAnimate = YES;
     
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
-//        _selectVPNInfo.connectStatus = VpnConnectStatusNone;
-        
     }];
 }
 
 // 显示连接另一个提示
 - (void)showConnectOtherAlert:(VPNInfo *)vpnInfo {
     NSString *content = @"Want to connect another VPN?";
-    NSString *image = @"icon_tips";
+    NSString *image = @"icon_tips1";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
@@ -422,6 +422,16 @@ static BOOL refreshAnimate = YES;
 - (void)goConnectVpn:(VPNInfo *)vpnInfo {
     VpnConnectUtil *connectUtil = [[VpnConnectUtil alloc] initWithVpn:vpnInfo];
     [connectUtil checkConnect];
+}
+
+- (void)refreshDisconnectStatus {
+    @weakify_self
+    [self.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        VPNInfo *vpnInfo = obj;
+        if ([vpnInfo.vpnName isEqualToString:weakSelf.currentConnectVPNName]) {
+            vpnInfo.connectStatus = VpnConnectStatusNone;
+        }
+    }];
 }
 
 #pragma mark - Noti
@@ -503,9 +513,7 @@ static BOOL refreshAnimate = YES;
             NSInteger operationStatus = [VPNUtil.shareInstance getOperationStatus];
             if (operationStatus != 1) { // 连接操作中不进行下面操作
                 //                [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN]; // 删除当前连接的vpn对象
-                if (_selectVPNInfo) {
-                    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
-                }
+                [self refreshDisconnectStatus];
                 [self refreshVPNConnect];
                 // 删除vpn本地配置
                 [VPNUtil.shareInstance removeFromPreferences];
@@ -517,6 +525,7 @@ static BOOL refreshAnimate = YES;
         case NEVPNStatusConnected:
         {
             [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
+            _currentConnectVPNName = _selectVPNInfo.vpnName;
             [self refreshVPNConnect];
             // vpn连接记录写入数据库
             if (![self selectVpnIsMine]) {
