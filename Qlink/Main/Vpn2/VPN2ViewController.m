@@ -343,6 +343,35 @@ static BOOL refreshAnimate = YES;
     }
 }
 
+// 显示连接提示
+- (void)showConnectAlert:(VPNInfo *)vpnInfo {
+    NSString *content = [NSString stringWithFormat:@"Just const %@ QLC\nConnect NOW!",vpnInfo.cost];
+    NSString *image = @"icon_even";
+    [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        
+    }];
+}
+
+// 显示断开连接提示
+- (void)showDisconnectAlert {
+    NSString *content = @"Want to disconnect?";
+    NSString *image = @"icon_disconnect";
+    
+    [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        
+    }];
+}
+
+// 显示连接另一个提示
+- (void)showConnectOtherAlert:(VPNInfo *)vpnInfo {
+    NSString *content = @"Want to connect another VPN?";
+    NSString *image = @"icon_tips";
+    @weakify_self
+    [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        [weakSelf showConnectAlert:vpnInfo];
+    }];
+}
+
 #pragma mark - Noti
 - (void)selectCountryNoti:(NSNotification *)noti {
     SelectCountryModel *selectM = noti.object;
@@ -597,7 +626,7 @@ static BOOL refreshAnimate = YES;
     
     @weakify_self
     [cell setConnectClickB:^{
-        // 弹出连接提示框
+        
     }];
     
 //    [cell setSeizeBlock:^(NSInteger row) {
@@ -621,14 +650,13 @@ static BOOL refreshAnimate = YES;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    VPNInfo *vpnInfo = _sourceArr[indexPath.row];
-    
-    if (vpnInfo.online <= 0) { // offline 不能点击
-        [AppD.window showHint:NSStringLocalizable(@"friend_unline_p2p")];
-        return;
-    }
-    _selectVPNInfo = vpnInfo;
-    [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_LIST];
+//    VPNInfo *vpnInfo = _sourceArr[indexPath.row];
+//    if (vpnInfo.online <= 0) { // offline 不能点击
+//        [AppD.window showHint:NSStringLocalizable(@"friend_unline_p2p")];
+//        return;
+//    }
+//    _selectVPNInfo = vpnInfo;
+//    [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_LIST];
 }
 
 #pragma mark - Action

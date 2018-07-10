@@ -403,7 +403,7 @@ NSString * const CSToastPositionBottom          = @"bottom";
     };
 }
 // vpn操作alertview
-- (void) showVPNToastAlertViewWithTopImageName:(NSString *) imageName content:(NSString *) content block:(void (^)(void))clickYesBlock
++ (void) showVPNToastAlertViewWithTopImageName:(NSString *) imageName content:(NSString *) content block:(void (^)(void))clickYesBlock
 {
     VpnToastView *alertView = [VpnToastView loadVPN2ToastView];
     alertView.topImageView.image = [UIImage imageNamed:imageName];
