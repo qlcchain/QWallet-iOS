@@ -385,7 +385,7 @@ static BOOL refreshAnimate = YES;
 
 // 显示连接提示
 - (void)showConnectAlert:(VPNInfo *)vpnInfo {
-    NSString *content = [NSString stringWithFormat:@"Just const %@ QLC\nConnect NOW!",vpnInfo.cost];
+    NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),vpnInfo.cost];
     NSString *image = @"icon_even";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
@@ -398,7 +398,7 @@ static BOOL refreshAnimate = YES;
 
 // 显示断开连接提示
 - (void)showDisconnectAlert {
-    NSString *content = @"Want to disconnect?";
+    NSString *content = NSStringLocalizable(@"want_disconnect");
     NSString *image = @"icon_disconnect";
     
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
@@ -410,7 +410,7 @@ static BOOL refreshAnimate = YES;
 
 // 显示连接另一个提示
 - (void)showConnectOtherAlert:(VPNInfo *)vpnInfo {
-    NSString *content = @"Want to connect another VPN?";
+    NSString *content = NSStringLocalizable(@"want_connect");
     NSString *image = @"icon_tips";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
