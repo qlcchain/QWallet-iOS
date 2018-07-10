@@ -16,7 +16,7 @@ typedef void(^SelectCountryBlock)(id selectCountry);
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topContraintH;
 
 @property (nonatomic , copy) SelectCountryBlock selectCountryBlock;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabContraintTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgContraintTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabContraintH;
 
 + (instancetype) loadChooseCountryView;

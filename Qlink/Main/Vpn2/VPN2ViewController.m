@@ -103,7 +103,20 @@
     [self addObserve];
     [self configData];
     [self startLocation];
-    [self requestQueryVpn:YES];
+    // 获取当前选择的国家--发送获取vpn列表请求
+    [self checkCurrentChooseCountry];
+    
+}
+
+#pragma mark - 获取当前选择的国家--发送获取vpn列表请求
+- (void) checkCurrentChooseCountry {
+   CountryModel *currentCountry =  [CountryModel mj_objectWithKeyValues:[HWUserdefault getObjectWithKey:CURRENT_SELECT_COUNTRY]];
+    if (currentCountry) {
+        [self refreshCountry:currentCountry];
+    } else {
+        [self requestQueryVpn:YES];
+    }
+   
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -731,7 +744,8 @@ static BOOL refreshAnimate = YES;
 {
     if (!_countryView) {
         _countryView = [ChooseCountryView loadChooseCountryView];
-        _countryView.frame = CGRectMake(0,67+STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-67);
+        _countryView.bgContraintTop.constant = 67;
+        _countryView.frame = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     return _countryView;
 }
