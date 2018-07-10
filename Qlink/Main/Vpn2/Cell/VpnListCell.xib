@@ -38,6 +38,13 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yJZ-CT-OL2">
                                         <rect key="frame" x="2" y="2" width="36" height="35"/>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_online" translatesAutoresizingMaskIntoConstraints="NO" id="yGq-B4-NXD">
+                                        <rect key="frame" x="29" y="29" width="11" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="11" id="cZU-FX-TOq"/>
+                                            <constraint firstAttribute="height" constant="11" id="uN9-4p-pRp"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -47,7 +54,9 @@
                                     <constraint firstAttribute="bottom" secondItem="yJZ-CT-OL2" secondAttribute="bottom" constant="3" id="InR-cZ-0so"/>
                                     <constraint firstAttribute="height" constant="40" id="JvH-hu-guk"/>
                                     <constraint firstItem="4F2-Uk-XOp" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="OR1-kg-lA1"/>
+                                    <constraint firstAttribute="trailing" secondItem="yGq-B4-NXD" secondAttribute="trailing" id="gCG-6Y-VYB"/>
                                     <constraint firstAttribute="trailing" secondItem="4F2-Uk-XOp" secondAttribute="trailing" id="hUP-Mp-JuI"/>
+                                    <constraint firstAttribute="bottom" secondItem="yGq-B4-NXD" secondAttribute="bottom" id="oli-y6-gOV"/>
                                     <constraint firstAttribute="width" constant="40" id="pnX-ki-qtV"/>
                                     <constraint firstItem="yJZ-CT-OL2" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" constant="2" id="ul4-ZN-BQQ"/>
                                     <constraint firstAttribute="bottom" secondItem="4F2-Uk-XOp" secondAttribute="bottom" id="xgs-kr-mTc"/>
@@ -155,6 +164,7 @@
                 <outlet property="ownerImageView" destination="yJZ-CT-OL2" id="vnz-sj-Fgf"/>
                 <outlet property="priceLab" destination="zA7-S3-nOg" id="lDn-vD-Azb"/>
                 <outlet property="priceUnitLab" destination="pQq-nX-4ur" id="mtD-4m-qSZ"/>
+                <outlet property="statusImageView" destination="yGq-B4-NXD" id="crX-Xs-dFd"/>
                 <outlet property="vpnNameLab" destination="nml-rT-FJ8" id="eFv-YC-e2X"/>
             </connections>
             <point key="canvasLocation" x="81" y="52"/>
@@ -162,6 +172,7 @@
     </objects>
     <resources>
         <image name="icon_not_connected" width="43" height="24"/>
+        <image name="icon_online" width="9" height="10"/>
         <image name="icon_person1" width="40" height="41"/>
     </resources>
 </document>
