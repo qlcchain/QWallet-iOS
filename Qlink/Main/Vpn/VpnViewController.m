@@ -46,7 +46,7 @@
 #import "GuideVpnListView.h"
 #import "GuideVpnListConnectView.h"
 
-#import "ChooseCountryView.h"
+
 
 @interface VpnViewController ()<UITableViewDelegate,UITableViewDataSource,SRRefreshDelegate> {
 }
@@ -70,8 +70,6 @@
 @property (nonatomic) BOOL isConnectVPN;
 @property (nonatomic) BOOL joinGroupFlag;
 
-
-@property (nonatomic , strong) ChooseCountryView *countryView;
 @end
 
 @implementation VpnViewController
@@ -118,31 +116,14 @@
         [self addNewGuideVpnListConnect];
     }
     [self addNewGuideClickWallet];
-     [self selectCountry];
+
     
 //    [self.view showVPNToastAlertViewWithTopImageName:@"icon_even" content:@"Just const 3 QLC\nConnect NOW!" block:^{
 //
 //    }];
 }
 
-#pragma mark -选择国家
-- (void) selectCountry {
-    // 显示
-    [self.countryView showChooseCountryView];
-    // 选择国家回调
-    [self.countryView setSelectCountryBlock:^(id selectCountry) {
-        
-    }];
-}
 
-- (ChooseCountryView *)countryView
-{
-    if (!_countryView) {
-        _countryView = [ChooseCountryView loadChooseCountryView];
-        _countryView.frame = CGRectMake(0,67+STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-67);
-    }
-    return _countryView;
-}
 
 #pragma mark - Operation
 - (BOOL)selectVpnIsMine {
