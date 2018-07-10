@@ -215,7 +215,14 @@ typedef enum : NSUInteger {
                 _assetIsValidate = YES;
 //                [weakSelf.registerV1 unableClaim];
             } else { // vpnname存在
-                _assetIsValidate = YES;
+//                _assetIsValidate = YES;
+                weakSelf.registerType = RegisterVPN;
+                _assetIsValidate = NO;
+                NSString *msg = NSStringLocalizable(@"repeat_vpn_name");
+                NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
+                [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"tip") msg:msgArrtrbuted isShowTwoBtn:NO block:nil];
+                return;
+                
 //                [weakSelf.registerV1 enableClaim];
                 weakSelf.registerType = SeizeVPNWhenRegister;
                 weakSelf.vpnName = weakSelf.registerV1.vpnName;
