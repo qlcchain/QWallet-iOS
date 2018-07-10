@@ -1676,6 +1676,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				58ADE69920F499D800C50306 /* VpnRegister */,
 				5817819F20F2FA13003E74F2 /* Vpn2 */,
 				58A4DB0C20EB11EF001C241D /* NewGuide */,
 				736053FE20DB8EB4004CD3C3 /* GuidePage */,
@@ -1703,9 +1704,6 @@
 			children = (
 				586F36FB2079F2A800E12F95 /* View */,
 				7351402D2063A615007BE4EC /* Cell */,
-				58270FB62071C98000C08784 /* VPNRegisterViewController.h */,
-				58270FB72071C98000C08784 /* VPNRegisterViewController.m */,
-				5860ACDE20CFB49800EEB6CE /* VPNRegisterViewController.xib */,
 				580D9184206260DE00B12506 /* VpnViewController.h */,
 				580D9185206260DE00B12506 /* VpnViewController.m */,
 				5860ACE520CFB4A500EEB6CE /* VpnViewController.xib */,
@@ -2172,18 +2170,6 @@
 		586F36FB2079F2A800E12F95 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				586F36FC2079F92C00E12F95 /* VPNRegisterView1.h */,
-				586F36FD2079F92C00E12F95 /* VPNRegisterView1.m */,
-				5860ACB420CFB44C00EEB6CE /* VPNRegisterView1.xib */,
-				586F37012079F97000E12F95 /* VPNRegisterView2.h */,
-				586F37022079F97000E12F95 /* VPNRegisterView2.m */,
-				5860ACBB20CFB45700EEB6CE /* VPNRegisterView2.xib */,
-				586F37062079F9A200E12F95 /* VPNRegisterView3.h */,
-				586F37072079F9A200E12F95 /* VPNRegisterView3.m */,
-				5860ACC220CFB46000EEB6CE /* VPNRegisterView3.xib */,
-				736B3E3C208D7AD500696C81 /* VPNFileInputView.h */,
-				736B3E3D208D7AD500696C81 /* VPNFileInputView.m */,
-				5860ACC920CFB46900EEB6CE /* VPNFileInputView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2307,6 +2293,36 @@
 				580D912B20625A4300B12506 /* Vender */,
 			);
 			path = Qlink;
+			sourceTree = "<group>";
+		};
+		58ADE69920F499D800C50306 /* VpnRegister */ = {
+			isa = PBXGroup;
+			children = (
+				58ADE69A20F49A7300C50306 /* View */,
+				58270FB62071C98000C08784 /* VPNRegisterViewController.h */,
+				58270FB72071C98000C08784 /* VPNRegisterViewController.m */,
+				5860ACDE20CFB49800EEB6CE /* VPNRegisterViewController.xib */,
+			);
+			path = VpnRegister;
+			sourceTree = "<group>";
+		};
+		58ADE69A20F49A7300C50306 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				586F36FC2079F92C00E12F95 /* VPNRegisterView1.h */,
+				586F36FD2079F92C00E12F95 /* VPNRegisterView1.m */,
+				5860ACB420CFB44C00EEB6CE /* VPNRegisterView1.xib */,
+				586F37012079F97000E12F95 /* VPNRegisterView2.h */,
+				586F37022079F97000E12F95 /* VPNRegisterView2.m */,
+				5860ACBB20CFB45700EEB6CE /* VPNRegisterView2.xib */,
+				586F37062079F9A200E12F95 /* VPNRegisterView3.h */,
+				586F37072079F9A200E12F95 /* VPNRegisterView3.m */,
+				5860ACC220CFB46000EEB6CE /* VPNRegisterView3.xib */,
+				736B3E3C208D7AD500696C81 /* VPNFileInputView.h */,
+				736B3E3D208D7AD500696C81 /* VPNFileInputView.m */,
+				5860ACC920CFB46900EEB6CE /* VPNFileInputView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		58AE1ADA2074D23C00CE983B /* WalletModels */ = {

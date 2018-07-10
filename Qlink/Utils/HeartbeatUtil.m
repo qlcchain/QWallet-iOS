@@ -27,7 +27,7 @@
         status = 0;
     }
     
-    NSDictionary *parmer = @{@"p2pId":[ToxManage getOwnP2PId],
+    NSDictionary *parmer = @{@"p2pId":[ToxManage getOwnP2PId]?:@"",
                              @"status":[NSNumber numberWithInt:status],
                              @"vpnName":[TransferUtil currentVPNName],
                              @"wifiName":@""
