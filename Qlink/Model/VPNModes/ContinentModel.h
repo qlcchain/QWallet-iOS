@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *countryImage;
 @property (nonatomic, strong) NSString *countryCode;
+@property (nonatomic, strong) NSString *continent;
 
 @end
 

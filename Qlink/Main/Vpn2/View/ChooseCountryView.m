@@ -102,7 +102,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     @weakify_self
     [UIView animateWithDuration:.4 animations:^{
        weakSelf.tabContraintH.constant = 0;
-        weakSelf.alpha = 0.0f;
+        weakSelf.alpha = 0.5f;
        [weakSelf layoutIfNeeded];
     } completion:^(BOOL finished) {
         [weakSelf removeFromSuperview];
@@ -111,12 +111,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void) showChooseCountryView
 {
     [AppD.window addSubview:self];
-    self.alpha = 0.0f;
+    self.alpha = 1.0f;
     self.tabContraintH.constant = 0;
     [self layoutIfNeeded];
     @weakify_self
     [UIView animateWithDuration:.4 animations:^{
-        weakSelf.alpha = 1.0f;
+        //weakSelf.alpha = 1.0f;
         weakSelf.tabContraintH.constant = 331;
          [self layoutIfNeeded];
     } completion:^(BOOL finished) {
