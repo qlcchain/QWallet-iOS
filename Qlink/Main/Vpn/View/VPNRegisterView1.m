@@ -9,7 +9,7 @@
 #import "VPNRegisterView1.h"
 #import "VPNRegisterViewController.h"
 #import "UnderlineView.h"
-#import "SelectCountryModel.h"
+
 
 #define ChooseCountry @"Choose a country"
 
@@ -115,10 +115,9 @@
 
 #pragma mark - Noti
 - (void)selectCountryNoti:(NSNotification *)noti {
-    SelectCountryModel *selelctM = noti.object;
-    _selectCountryM = selelctM;
-    _countryLab.text = _selectCountryM.country.uppercaseString;
-    _selectCountry = _selectCountryM.country;
+    self.selectCountryM = noti.object;
+    _countryLab.text = _selectCountryM.name.uppercaseString;
+    _selectCountry = _selectCountryM.name;
 }
 
 #pragma mark - UITextField delegate

@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNMode.h"
+#import "ContinentModel.h"
 
 @class VPNRegisterViewController,SelectCountryModel;
 
 @interface VPNRegisterView1 : UIView
 
 @property (nonatomic, weak) VPNRegisterViewController *registerVC;
-@property (nonatomic, strong) SelectCountryModel *selectCountryM;
+@property (nonatomic, strong) CountryModel *selectCountryM;
 @property (nonatomic, strong) NSString *vpnName;
 @property (nonatomic, readonly) NSString *deposit;
 @property (nonatomic, readonly) NSString *claim;

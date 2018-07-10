@@ -22,6 +22,7 @@
 #import "TransferUtil.h"
 #import "VPNOperationUtil.h"
 #import "Qlink-Swift.h"
+#import "ChooseCountryView.h"
 
 typedef enum : NSUInteger {
     RegisterStepOne,
@@ -43,6 +44,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) RegisterStep registerStep;
 @property (nonatomic) BOOL assetIsValidate;
 @property (nonatomic,copy) NSString *hex;
+@property (nonatomic , strong) ChooseCountryView *countryView;
 @end
 
 @implementation VPNRegisterViewController
@@ -500,17 +502,43 @@ typedef enum : NSUInteger {
 
 #pragma mark - Transition
 - (void)jumpToChooseContinent {
-    [ChooseCountryUtil shareInstance].entry = VPNRegister;
-    ChooseContinentViewController *vc = [[ChooseContinentViewController alloc] init];
-    if (_registerV1.selectCountry) {
-        vc.inputContinent = [ChooseCountryUtil getContinentOfCountry:_registerV1.selectCountry];
-    }
-    [self.navigationController pushViewController:vc animated:YES];
+    [self selectCountry];
+//    [ChooseCountryUtil shareInstance].entry = VPNRegister;
+//    ChooseContinentViewController *vc = [[ChooseContinentViewController alloc] init];
+//    if (_registerV1.selectCountry) {
+//        vc.inputContinent = [ChooseCountryUtil getContinentOfCountry:_registerV1.selectCountry];
+//    }
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToSeizeVPN {
     SeizeVPNViewController *vc = [[SeizeVPNViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark -选择国家
+- (void) selectCountry {
+    // 显示
+    [self.countryView showChooseCountryView];
+    // 选择国家回调
+    [self.countryView setSelectCountryBlock:^(id selectCountry) {
+         [[NSNotificationCenter defaultCenter] postNotificationName:SELECT_COUNTRY_NOTI_VPNREGISTER object:selectCountry];
+    }];
+}
+
+- (ChooseCountryView *)countryView
+{
+    if (!_countryView) {
+        _countryView = [ChooseCountryView loadChooseCountryView];
+        _countryView.isSave = NO;
+        CGRect v1Point = [_contentView.superview convertRect:_contentView.frame toView:AppD.window];
+        _countryView.bgContraintTop.constant =v1Point.origin.y-7 ;
+        if (!IS_iPhoneX) {
+            _countryView.bgContraintTop.constant =v1Point.origin.y + 37;
+        }
+        _countryView.frame = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    return _countryView;
 }
 
 #pragma mark - Lazy
