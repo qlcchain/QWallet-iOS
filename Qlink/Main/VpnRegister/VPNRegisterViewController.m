@@ -266,7 +266,7 @@ typedef enum : NSUInteger {
 {
     [AppD.window showHudInView:self.view hint:nil];
     if (self.registerType == SeizeVPN || self.registerType == SeizeVPNWhenRegister) {
-        [self getHexWithAddress:[NSStringUtil getNotNullValue:_vpnAddress]];
+        [self getHexWithAddress:[NSStringUtil getNotNullValue:_vpnAddress] qlc:[NSStringUtil getNotNullValue:_registerV1.deposit]];
     } else {
         // 获取主网地址地址
         @weakify_self
@@ -276,7 +276,7 @@ typedef enum : NSUInteger {
                 if (dataDic) {
                     NSString *toAddress = [dataDic objectForKey:@"address"];
                     weakSelf.vpnAddress = [NSStringUtil getNotNullValue:toAddress];
-                    [weakSelf getHexWithAddress:weakSelf.vpnAddress];
+                    [weakSelf getHexWithAddress:weakSelf.vpnAddress qlc:@"1"];
                 } else {
                     [AppD.window hideHud];
                 }
@@ -296,9 +296,8 @@ typedef enum : NSUInteger {
  获取hex
  @param toAddress 发送到地址
  */
-- (void) getHexWithAddress:(NSString *) toAddress  {
+- (void) getHexWithAddress:(NSString *) toAddress qlc:(NSString *) qlc  {
     @weakify_self
-    NSString *qlc = _registerV1.deposit;
     // 获取主测网的hash
     NSString *tokenHash = AESSET_TEST_HASH;
     if ([WalletUtil checkServerIsMian]) {
@@ -354,8 +353,10 @@ typedef enum : NSUInteger {
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
             // 移除抢注的vs
+            NSString *regQLC = @"1";
             if (weakSelf.registerType == SeizeVPN || weakSelf.registerType == SeizeVPNWhenRegister) {
                 if (weakSelf.registerType == SeizeVPN) {
+                    regQLC = _vpnInfo.cost;
                     [weakSelf moveNavgationBackOneViewController];
                 }
                 //TODO:转账成功之后发p2p消息告诉接收者
@@ -363,9 +364,9 @@ typedef enum : NSUInteger {
                 [[NSNotificationCenter defaultCenter] postNotificationName:SEIZE_VPN_SUCCESS_NOTI object:nil];
             }
             // 发送扣款通知
-            [TransferUtil sendLocalNotificationWithQLC:_vpnInfo.cost isIncome:NO];
+            [TransferUtil sendLocalNotificationWithQLC:regQLC isIncome:NO];
             // 保存交易记录
-            [WalletUtil saveTranQLCRecordWithQlc:_vpnInfo.cost txtid:[NSStringUtil getNotNullValue:responseObject[@"recordId"]] neo:@"0" recordType:5 assetName:_vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:_vpnInfo.p2pId] connectType:0 isReported:NO];
+            [WalletUtil saveTranQLCRecordWithQlc:regQLC txtid:[NSStringUtil getNotNullValue:responseObject[@"recordId"]] neo:@"0" recordType:5 assetName:_vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:_vpnInfo.p2pId] connectType:0 isReported:NO];
             // 本地保存注册的vpn资产
             [weakSelf storeRegisterVPN:params];
             // 发送心跳
