@@ -357,7 +357,7 @@ static BOOL refreshAnimate = YES;
     NSString *image = @"icon_disconnect";
     
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
-        
+        [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
     }];
 }
 
@@ -367,6 +367,7 @@ static BOOL refreshAnimate = YES;
     NSString *image = @"icon_tips";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
         [weakSelf showConnectAlert:vpnInfo];
     }];
 }
@@ -625,7 +626,17 @@ static BOOL refreshAnimate = YES;
     
     @weakify_self
     [cell setConnectClickB:^{
-        
+        if (vpnInfo.connectStatus == VpnConnectStatusNone) { // 选中cell未连接
+            if (_isConnectVPN) { // 当前app已连接vpn
+                [weakSelf showConnectOtherAlert:vpnInfo];
+            } else { // 当前app未连接vpn
+                [weakSelf showConnectAlert:vpnInfo];
+            }
+        } else if (vpnInfo.connectStatus == VpnConnectStatusConnecting) { // 选中cell正在连接中
+            
+        } else if (vpnInfo.connectStatus == VpnConnectStatusConnecting) { // 选中cell已连接
+            [weakSelf showDisconnectAlert];
+        }
     }];
     
 //    [cell setSeizeBlock:^(NSInteger row) {
