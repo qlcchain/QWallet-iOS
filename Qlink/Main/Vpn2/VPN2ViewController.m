@@ -231,6 +231,25 @@
     return arr;
 }
 
+// 查看源数据中是否有已连接的vpn，没有则添加（置顶）
+- (void)handleSourceWithConnectVpn {
+    if (!_isConnectVPN) { // 未连接vpn
+        return;
+    }
+    __block BOOL connectIsExist = NO;
+    [self.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        VPNInfo *vpnInfo = obj;
+        if ([vpnInfo.vpnName isEqualToString:[TransferUtil currentVPNName]]) {
+            connectIsExist = YES;
+        }
+    }];
+    
+    if (!connectIsExist) { // 没有则添加
+        VPNInfo *connectInfo = [TransferUtil currentConnectVPNInfo];
+        [self.sourceArr addObject:connectInfo];
+    }
+}
+
 // 是否在线
 - (void)handleIsOnline:(BOOL)refreshFriend {
     NSMutableArray *onlineArr = [NSMutableArray array];
@@ -299,6 +318,7 @@
 }
 
 - (void)configSourceAndRefresh:(BOOL)refreshFriend {
+    [self handleSourceWithConnectVpn];
     [self handleIsOnline:refreshFriend]; // 是否在线--不在线的加好友--资产总额
     [self handleIsConnect]; // 是否连接
     [self refreshTable];
@@ -666,13 +686,14 @@ static BOOL refreshAnimate = YES;
     
     @weakify_self
     [cell setConnectClickB:^{
-        if (vpnInfo.online <= 0) { // offline 不能点击
-            [AppD.window showHint:NSStringLocalizable(@"friend_unline_p2p")];
-            return;
-        }
         weakSelf.selectVPNInfo = vpnInfo;
         
         if (vpnInfo.connectStatus == VpnConnectStatusNone) { // 选中cell未连接
+            if (vpnInfo.online <= 0) { // offline 不能点击
+                [AppD.window showHint:NSStringLocalizable(@"friend_unline_p2p")];
+                return;
+            }
+            
             if (_isConnectVPN) { // 当前app已连接vpn
                 [weakSelf showConnectOtherAlert:vpnInfo];
             } else { // 当前app未连接vpn
