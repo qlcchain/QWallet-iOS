@@ -48,9 +48,9 @@
     }];
     _priceLab.text = _vpnInfo.cost;
     _connectNumLab.text = _vpnInfo.connsuccessNum;
-//    UIImage *offlineImg = [UIImage imageNamed:@"icon_offline"];
-//    UIImage *onlineImg = [UIImage imageNamed:@"icon_online"];
-//    _statusImageView.image = _vpnInfo.online>0?onlineImg:offlineImg;
+    UIImage *offlineImg = [UIImage imageNamed:@"icon_offline"];
+    UIImage *onlineImg = [UIImage imageNamed:@"icon_online"];
+    _statusImageView.image = _vpnInfo.online>0?onlineImg:offlineImg;
 //    ChatModel *chatM = [ChatUtil.shareInstance getChat:_vpnInfo.vpnName];
 //    _messageImageView.image = _vpnInfo.online>0?chatM.isUnread?[UIImage imageNamed:@"icon_message_online"]:[UIImage imageNamed:@"icon_message"]:[UIImage imageNamed:@"icon_message_offline"];
     UIColor *blackC = UIColorFromRGB(0x333333);
@@ -109,7 +109,7 @@
     [super prepareForReuse];
     
     _ownerImageView.image = nil;
-//    _statusImageView.image = nil;
+    _statusImageView.image = nil;
     _vpnNameLab.text = nil;
     _priceLab.text = nil;
     _connectNumLab.text = nil;

@@ -54,6 +54,7 @@
     [self hidde];
 }
 - (IBAction)clickYes:(id)sender {
+    [self hidde];
     if (_yesClickBlock) {
         _yesClickBlock();
     }

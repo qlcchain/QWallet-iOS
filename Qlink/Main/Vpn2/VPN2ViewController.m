@@ -45,6 +45,7 @@
 #import "GuideVpnListView.h"
 #import "GuideVpnListConnectView.h"
 #import "ChooseCountryView.h"
+#import "VpnConnectUtil.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -90,6 +91,7 @@
     // 服务器切换
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeServer:) name:CHANGE_SERVER_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(seizeVpnSuccess:) name:SEIZE_VPN_SUCCESS_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectVpnTimeout:) name:Connect_Vpn_Timeout_Noti object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -276,11 +278,14 @@
     [self.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *vpnInfo = obj;
         vpnInfo.isConnected = NO;
-        vpnInfo.connectStatus = VpnConnectStatusNone;
+//        vpnInfo.connectStatus = VpnConnectStatusNone;
         if (_isConnectVPN) {
             NSString *currentConnnectVPN = [TransferUtil currentVPNName];
             vpnInfo.isConnected = [currentConnnectVPN isEqualToString:vpnInfo.vpnName]?YES:NO;
-            vpnInfo.connectStatus = [currentConnnectVPN isEqualToString:vpnInfo.vpnName]?VpnConnectStatusConnected:VpnConnectStatusNone;
+            if ([currentConnnectVPN isEqualToString:vpnInfo.vpnName]) {
+                vpnInfo.connectStatus = VpnConnectStatusConnected;
+            }
+//            vpnInfo.connectStatus = [currentConnnectVPN isEqualToString:vpnInfo.vpnName]?VpnConnectStatusConnected:VpnConnectStatusNone;
             if (vpnInfo.isConnected) {
                 connectIndex = idx;
             } else {
@@ -362,8 +367,12 @@ static BOOL refreshAnimate = YES;
 - (void)showConnectAlert:(VPNInfo *)vpnInfo {
     NSString *content = [NSString stringWithFormat:@"Just const %@ QLC\nConnect NOW!",vpnInfo.cost];
     NSString *image = @"icon_even";
+    @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        vpnInfo.connectStatus = VpnConnectStatusConnecting;
+        [weakSelf refreshTable];
         
+        [weakSelf goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
     }];
 }
 
@@ -374,6 +383,8 @@ static BOOL refreshAnimate = YES;
     
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
+//        _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+        
     }];
 }
 
@@ -386,6 +397,11 @@ static BOOL refreshAnimate = YES;
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
         [weakSelf showConnectAlert:vpnInfo];
     }];
+}
+
+- (void)goConnectVpn:(VPNInfo *)vpnInfo {
+    VpnConnectUtil *connectUtil = [[VpnConnectUtil alloc] initWithVpn:vpnInfo];
+    [connectUtil checkConnect];
 }
 
 #pragma mark - Noti
@@ -467,6 +483,9 @@ static BOOL refreshAnimate = YES;
             NSInteger operationStatus = [VPNUtil.shareInstance getOperationStatus];
             if (operationStatus != 1) { // 连接操作中不进行下面操作
                 //                [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN]; // 删除当前连接的vpn对象
+                if (_selectVPNInfo) {
+                    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+                }
                 [self refreshVPNConnect];
                 // 删除vpn本地配置
                 [VPNUtil.shareInstance removeFromPreferences];
@@ -510,6 +529,11 @@ static BOOL refreshAnimate = YES;
 
 - (void)seizeVpnSuccess:(NSNotification *)noti {
     [self requestQueryVpn:NO];
+}
+
+- (void)connectVpnTimeout:(NSNotification *)noti {
+    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+    [self refreshTable];
 }
 
 #pragma mark - Config View
@@ -642,6 +666,12 @@ static BOOL refreshAnimate = YES;
     
     @weakify_self
     [cell setConnectClickB:^{
+        if (vpnInfo.online <= 0) { // offline 不能点击
+            [AppD.window showHint:NSStringLocalizable(@"friend_unline_p2p")];
+            return;
+        }
+        weakSelf.selectVPNInfo = vpnInfo;
+        
         if (vpnInfo.connectStatus == VpnConnectStatusNone) { // 选中cell未连接
             if (_isConnectVPN) { // 当前app已连接vpn
                 [weakSelf showConnectOtherAlert:vpnInfo];
@@ -650,7 +680,7 @@ static BOOL refreshAnimate = YES;
             }
         } else if (vpnInfo.connectStatus == VpnConnectStatusConnecting) { // 选中cell正在连接中
             
-        } else if (vpnInfo.connectStatus == VpnConnectStatusConnecting) { // 选中cell已连接
+        } else if (vpnInfo.connectStatus == VpnConnectStatusConnected) { // 选中cell已连接
             [weakSelf showDisconnectAlert];
         }
     }];
