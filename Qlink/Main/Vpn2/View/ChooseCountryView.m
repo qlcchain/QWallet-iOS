@@ -13,7 +13,7 @@
 @interface ChooseCountryView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic , strong) NSMutableArray *countryArray;
-
+@property (nonatomic , assign) NSInteger currentRow;
 @end
 
 
@@ -28,7 +28,7 @@
 - (void)awakeFromNib
 {
     _bgView.layer.cornerRadius = 5.0f;
-    _topContraintH.constant = 0;
+    _currentRow = -1;
     _myTabView.delegate = self;
     _myTabView.dataSource = self;
     [_myTabView registerNib:[UINib nibWithNibName:ChooseCountryCellReuse bundle:nil] forCellReuseIdentifier:ChooseCountryCellReuse];
@@ -61,13 +61,21 @@
     VPN2ChooseCountryCell *cell = [tableView dequeueReusableCellWithIdentifier:ChooseCountryCellReuse];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CountryModel *model = self.countryArray[indexPath.row];
-    
-    CountryModel *currentCountry =  [CountryModel mj_objectWithKeyValues:[HWUserdefault getObjectWithKey:CURRENT_SELECT_COUNTRY]];
-    BOOL isSelct = NO;
-    if (currentCountry && [currentCountry.countryCode isEqualToString:model.countryCode] ) {
-        isSelct = YES;
+    if (_isSave) {
+        CountryModel *currentCountry =  [CountryModel mj_objectWithKeyValues:[HWUserdefault getObjectWithKey:CURRENT_SELECT_COUNTRY]];
+        BOOL isSelct = NO;
+        if (currentCountry && [currentCountry.countryCode isEqualToString:model.countryCode] ) {
+            isSelct = YES;
+        }
+        [cell configCell:model isSelect:isSelct];
+    } else {
+        BOOL isSelct = NO;
+        if (indexPath.row == _currentRow ) {
+            isSelct = YES;
+        }
+        [cell configCell:model isSelect:isSelct];
     }
-    [cell configCell:model isSelect:isSelct];
+   
     return cell;
 }
 
@@ -82,7 +90,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     CountryModel *model = self.countryArray[indexPath.row];
-    [HWUserdefault insertObj:[model mj_keyValues] withkey:CURRENT_SELECT_COUNTRY];
+    if (_isSave) {
+         [HWUserdefault insertObj:[model mj_keyValues] withkey:CURRENT_SELECT_COUNTRY];
+    } else {
+        _currentRow = indexPath.row;
+    }
+    _lblCountry.text = model.name;
     [tableView reloadData];
     if (_selectCountryBlock) {
         _selectCountryBlock (model);

@@ -720,6 +720,11 @@ static BOOL refreshAnimate = YES;
     if (!_countryView) {
         _countryView = [ChooseCountryView loadChooseCountryView];
         _countryView.bgContraintTop.constant = 67;
+         _countryView.topContraintH.constant = 0;
+        _countryView.isSave = YES;
+        if (!IS_iPhoneX) {
+             _countryView.bgContraintTop.constant = 67+20;
+        }
         _countryView.frame = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     return _countryView;
