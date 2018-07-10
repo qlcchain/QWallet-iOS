@@ -67,6 +67,7 @@ typedef enum : NSUInteger {
 // vpn扣费时间
 @property (nonatomic, copy) NSString *tranTime;
 
+
 @property (nonatomic, copy) NSString *connsuccessNum;
 @property (nonatomic, copy) NSString *onlineTime;
 @property (nonatomic) VpnConnectStatus connectStatus;
