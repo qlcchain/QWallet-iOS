@@ -76,7 +76,7 @@
 }
 
 - (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCountryNoti:) name:SELECT_COUNTRY_NOTI_VPNLIST object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCountryNoti:) name:SELECT_COUNTRY_NOTI_VPNLIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessSuccessOfVPNAdd:) name:CHECK_PROCESS_SUCCESS_VPN_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessSuccessOfVPNList:) name:CHECK_PROCESS_SUCCESS_VPN_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessSuccessOfVPNSeize:) name:CHECK_PROCESS_SUCCESS_VPN_SEIZE object:nil];
@@ -101,7 +101,20 @@
     [self addObserve];
     [self configData];
     [self startLocation];
-    [self requestQueryVpn:YES];
+    // 获取当前选择的国家--发送获取vpn列表请求
+    [self checkCurrentChooseCountry];
+    
+}
+
+#pragma mark - 获取当前选择的国家--发送获取vpn列表请求
+- (void) checkCurrentChooseCountry {
+   CountryModel *currentCountry =  [CountryModel mj_objectWithKeyValues:[HWUserdefault getObjectWithKey:CURRENT_SELECT_COUNTRY]];
+    if (currentCountry) {
+        [self refreshCountry:currentCountry];
+    } else {
+        [self requestQueryVpn:YES];
+    }
+   
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -706,7 +719,8 @@ static BOOL refreshAnimate = YES;
 {
     if (!_countryView) {
         _countryView = [ChooseCountryView loadChooseCountryView];
-        _countryView.frame = CGRectMake(0,67+STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-67);
+        _countryView.bgContraintTop.constant = 67;
+        _countryView.frame = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     return _countryView;
 }
