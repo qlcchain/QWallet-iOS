@@ -20,4 +20,5 @@ typedef enum : NSUInteger {
 + (instancetype)shareInstance;
 + (NSString *)getContinentOfCountry:(NSString *)inputCountry;
 + (NSString *) getConutryNameWithCode:(NSString *) code;
++ (NSMutableArray *) getAllCountry;
 @end

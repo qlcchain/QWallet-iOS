@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChooseCountryView : UIView
+typedef void(^SelectCountryBlock)(id selectCountry);
 
+@interface ChooseCountryView : UIView
+@property (weak, nonatomic) IBOutlet UITableView *myTabView;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topContraintH;
+
+@property (nonatomic , copy) SelectCountryBlock selectCountryBlock;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabContraintTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabContraintH;
+
++ (instancetype) loadChooseCountryView;
+- (void) showChooseCountryView;
 @end

@@ -291,7 +291,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 #pragma mark - Lazy
-
 - (NSArray *)continentArr {
     if (!_continentArr) {
         NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ContinentAndCountryBean" ofType:@"json"]];
