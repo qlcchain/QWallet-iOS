@@ -383,6 +383,8 @@ static BOOL refreshAnimate = YES;
     
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
+//        _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+        
     }];
 }
 
@@ -481,6 +483,9 @@ static BOOL refreshAnimate = YES;
             NSInteger operationStatus = [VPNUtil.shareInstance getOperationStatus];
             if (operationStatus != 1) { // 连接操作中不进行下面操作
                 //                [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN]; // 删除当前连接的vpn对象
+                if (_selectVPNInfo) {
+                    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+                }
                 [self refreshVPNConnect];
                 // 删除vpn本地配置
                 [VPNUtil.shareInstance removeFromPreferences];
@@ -675,7 +680,7 @@ static BOOL refreshAnimate = YES;
             }
         } else if (vpnInfo.connectStatus == VpnConnectStatusConnecting) { // 选中cell正在连接中
             
-        } else if (vpnInfo.connectStatus == VpnConnectStatusConnecting) { // 选中cell已连接
+        } else if (vpnInfo.connectStatus == VpnConnectStatusConnected) { // 选中cell已连接
             [weakSelf showDisconnectAlert];
         }
     }];

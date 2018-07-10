@@ -110,6 +110,8 @@
         [self addSendCheckConnect];
     } else { // 连接自己的vpn
         checkConnnectOK = YES;
+        
+        [self connectAction];
     }
 }
 
