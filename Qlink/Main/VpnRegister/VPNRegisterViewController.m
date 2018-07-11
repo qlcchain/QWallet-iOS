@@ -45,6 +45,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) BOOL assetIsValidate;
 @property (nonatomic,copy) NSString *hex;
 @property (nonatomic , strong) ChooseCountryView *countryView;
+@property (nonatomic , assign) BOOL isFileNameSame;
 @end
 
 @implementation VPNRegisterViewController
@@ -405,7 +406,9 @@ typedef enum : NSUInteger {
     
     NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath};
     [RequestService requestWithUrl:ssIdupdateVpnInfoV3_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-         [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
+        if (!_isFileNameSame) {
+             [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
+        }
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
             // 修改本地数据库
@@ -486,8 +489,16 @@ typedef enum : NSUInteger {
         [self scrollToStepThree];
     } else if (_registerStep == RegisterStepThree) {
         
+        
         if (_registerType == UpdateVPN) {
-            [self.registerV2 verifyProfile];
+            if ([self.vpnInfo.profileLocalPath isEqualToString:self.registerV2.profileName]) {
+                _isFileNameSame = YES;
+                [self sendUpdateVPNRequest];
+            } else {
+                _isFileNameSame = NO;
+                [self.registerV2 verifyProfile];
+            }
+            
         } else {
             [self sendMainAddressRequst];
         }
