@@ -17,8 +17,8 @@ typedef NS_ENUM(NSUInteger, RegisterType) {
 };
 
 @interface VPNRegisterViewController : QBaseViewController
-@property (nonatomic , assign) RegisterType registerType;
 
+@property (nonatomic , assign) RegisterType registerType;
 @property (nonatomic ,strong) NSString *vpnName;
 @property (nonatomic ,strong) NSString *vpnAddress;
 @property (nonatomic ,strong) NSString *vpnP2pid;
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, RegisterType) {
 
 - (void)jumpToChooseContinent;
 - (void)validateAssetIsexist;
-- (void)scrollToStepThree;
+//- (void)scrollToStepThree;
 - (void)requestRegisterVpnByFeeV3;
 
 @end

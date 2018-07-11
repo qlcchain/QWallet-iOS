@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNMode.h"
+
 @class VPNRegisterViewController;
 
 @interface VPNRegisterView3 : UIView
