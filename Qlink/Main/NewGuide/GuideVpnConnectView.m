@@ -25,7 +25,7 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_CONNECT];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_CONNECT];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_CONNECT];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *bgView = [UIApplication sharedApplication].keyWindow;

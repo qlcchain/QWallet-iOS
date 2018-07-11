@@ -25,7 +25,7 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_ENTER_WALLET];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_ENTER_WALLET];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_ENTER_WALLET];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *keyWindow = [UIApplication sharedApplication].keyWindow;

@@ -26,7 +26,7 @@
 }
 
 - (void)showGuideToCircle1:(CGRect)circleFrame1 circle2:(CGRect)circleFrame2 tapBlock:(void (^)(void))tapB {
-    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_SETTING_MORE];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_SETTING_MORE];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_SETTING_MORE];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *keyWindow = [UIApplication sharedApplication].keyWindow;

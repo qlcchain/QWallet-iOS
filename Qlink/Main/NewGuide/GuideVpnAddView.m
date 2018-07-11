@@ -24,7 +24,7 @@
 }
 
 - (void)showGuideTo:(CGRect)hollowOutFrame tapBlock:(void (^)(void))tapB {
-    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_REGISTER];
+//    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_VPN_REGISTER];
     NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_REGISTER];
     if (!guideLocal || [guideLocal boolValue] == NO) {
         UIView *keyWindow = [UIApplication sharedApplication].keyWindow;
