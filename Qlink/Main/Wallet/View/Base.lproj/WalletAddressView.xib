@@ -80,10 +80,10 @@
                             <rect key="frame" x="153" y="130.5" width="14" height="16"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcv-mk-nwu">
-                            <rect key="frame" x="24" y="189" width="291" height="12"/>
+                            <rect key="frame" x="24" y="190" width="291" height="11"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive NEP-5 tokens, copy the address and share it with the sender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfa-Ob-tk9">
-                                    <rect key="frame" x="0.0" y="1" width="291" height="11"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To receive NEP-5 tokens, copy the address and share it with the sender" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfa-Ob-tk9">
+                                    <rect key="frame" x="0.0" y="0.0" width="291" height="11"/>
                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="9"/>
                                     <color key="textColor" red="0.6588235294" green="0.65098039220000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -91,10 +91,10 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Vfa-Ob-tk9" secondAttribute="bottom" id="EAJ-CO-7Kq"/>
-                                <constraint firstItem="Vfa-Ob-tk9" firstAttribute="leading" secondItem="mcv-mk-nwu" secondAttribute="leading" id="YiB-oH-7li"/>
-                                <constraint firstAttribute="trailing" secondItem="Vfa-Ob-tk9" secondAttribute="trailing" id="j6F-6q-itI"/>
-                                <constraint firstAttribute="height" constant="12" id="ydl-RL-MaT"/>
+                                <constraint firstAttribute="trailing" secondItem="Vfa-Ob-tk9" secondAttribute="trailing" id="1Sa-XZ-Yhl"/>
+                                <constraint firstAttribute="bottom" secondItem="Vfa-Ob-tk9" secondAttribute="bottom" id="EkI-l7-T4t"/>
+                                <constraint firstItem="Vfa-Ob-tk9" firstAttribute="leading" secondItem="mcv-mk-nwu" secondAttribute="leading" id="LNL-aN-0ii"/>
+                                <constraint firstItem="Vfa-Ob-tk9" firstAttribute="top" secondItem="mcv-mk-nwu" secondAttribute="top" id="OqL-j2-xsN"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaB-xn-AfF">
@@ -114,13 +114,13 @@
                         <constraint firstItem="mcv-mk-nwu" firstAttribute="leading" secondItem="wYn-uf-0Ij" secondAttribute="leading" constant="24" id="Mk1-8D-3Ym"/>
                         <constraint firstItem="eiV-ie-axg" firstAttribute="centerY" secondItem="vA7-tI-WtE" secondAttribute="centerY" id="OJs-BS-6Ve"/>
                         <constraint firstItem="JaB-xn-AfF" firstAttribute="top" secondItem="Er3-Vu-qyb" secondAttribute="top" id="PdI-51-Apk"/>
-                        <constraint firstItem="mcv-mk-nwu" firstAttribute="top" secondItem="vA7-tI-WtE" secondAttribute="bottom" constant="45" id="Pyx-zH-yB6"/>
                         <constraint firstItem="Ehb-BZ-KNf" firstAttribute="leading" secondItem="wYn-uf-0Ij" secondAttribute="leading" id="Q2d-ue-Zbh"/>
                         <constraint firstItem="zem-Eu-rF2" firstAttribute="leading" secondItem="eiV-ie-axg" secondAttribute="trailing" constant="7" id="Q5K-ju-0Ik"/>
                         <constraint firstItem="JaB-xn-AfF" firstAttribute="bottom" secondItem="Er3-Vu-qyb" secondAttribute="bottom" id="TQm-Lw-qSQ"/>
                         <constraint firstItem="v3i-gy-lw6" firstAttribute="leading" secondItem="wYn-uf-0Ij" secondAttribute="leading" constant="18" id="UTT-df-LqO"/>
                         <constraint firstAttribute="bottom" secondItem="Ehb-BZ-KNf" secondAttribute="bottom" id="aD1-fd-eHg"/>
                         <constraint firstItem="vA7-tI-WtE" firstAttribute="top" secondItem="v3i-gy-lw6" secondAttribute="bottom" constant="18" id="aOz-ha-6ng"/>
+                        <constraint firstAttribute="bottom" secondItem="mcv-mk-nwu" secondAttribute="bottom" constant="15" id="aVG-Sz-py8"/>
                         <constraint firstItem="uWU-A9-ST7" firstAttribute="leading" secondItem="wYn-uf-0Ij" secondAttribute="leading" constant="24" id="cdR-18-RCq"/>
                         <constraint firstItem="Er3-Vu-qyb" firstAttribute="leading" secondItem="v3i-gy-lw6" secondAttribute="trailing" constant="18" id="dc6-Pq-NX6"/>
                         <constraint firstItem="uWU-A9-ST7" firstAttribute="top" secondItem="wYn-uf-0Ij" secondAttribute="top" constant="24" id="gHe-Mx-88z"/>
@@ -184,7 +184,7 @@
     <resources>
         <image name="bg_continue" width="8" height="44"/>
         <image name="bg_gray_button" width="9" height="44"/>
-        <image name="bg_purple_button" width="5" height="42"/>
+        <image name="bg_purple_button" width="13" height="42"/>
         <image name="bg_shape_two" width="1" height="1"/>
         <image name="icon_neo_three" width="14" height="16"/>
         <image name="icon_neo_two" width="14" height="16"/>
