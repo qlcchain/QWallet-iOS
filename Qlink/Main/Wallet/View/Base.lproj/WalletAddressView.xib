@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,13 +71,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_neo_two" translatesAutoresizingMaskIntoConstraints="NO" id="eiV-ie-axg">
-                            <rect key="frame" x="109" y="130" width="14" height="17"/>
+                            <rect key="frame" x="109" y="130.5" width="14" height="16"/>
                         </imageView>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_qlc_two" translatesAutoresizingMaskIntoConstraints="NO" id="zem-Eu-rF2">
-                            <rect key="frame" x="130" y="132" width="14" height="14"/>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_qlc_two-1" translatesAutoresizingMaskIntoConstraints="NO" id="zem-Eu-rF2">
+                            <rect key="frame" x="130" y="131" width="16" height="16"/>
                         </imageView>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_neo_three" translatesAutoresizingMaskIntoConstraints="NO" id="icM-m2-dAW">
-                            <rect key="frame" x="151" y="130" width="14" height="17"/>
+                            <rect key="frame" x="153" y="130.5" width="14" height="16"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcv-mk-nwu">
                             <rect key="frame" x="24" y="189" width="291" height="12"/>
@@ -183,12 +182,12 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_continue" width="12" height="44"/>
+        <image name="bg_continue" width="8" height="44"/>
         <image name="bg_gray_button" width="9" height="44"/>
-        <image name="bg_purple_button" width="9" height="44"/>
+        <image name="bg_purple_button" width="5" height="42"/>
         <image name="bg_shape_two" width="1" height="1"/>
-        <image name="icon_neo_three" width="14" height="17"/>
-        <image name="icon_neo_two" width="14" height="17"/>
-        <image name="icon_qlc_two" width="14" height="14"/>
+        <image name="icon_neo_three" width="14" height="16"/>
+        <image name="icon_neo_two" width="14" height="16"/>
+        <image name="icon_qlc_two-1" width="16" height="16"/>
     </resources>
 </document>
