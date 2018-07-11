@@ -725,10 +725,10 @@ static BOOL refreshAnimate = YES;
 //    }];
     
     // 跳转聊天页
-//    cell.conversationB = ^{
-//        weakSelf.selectVPNInfo = vpnInfo;
-//        [weakSelf clickConversation:vpnInfo];
-//    };
+    cell.conversationB = ^{
+        weakSelf.selectVPNInfo = vpnInfo;
+        [weakSelf clickConversation:vpnInfo];
+    };
     
     return cell;
 }

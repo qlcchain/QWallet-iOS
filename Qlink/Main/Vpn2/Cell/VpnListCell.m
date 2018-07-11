@@ -51,8 +51,8 @@
     UIImage *offlineImg = [UIImage imageNamed:@"icon_offline"];
     UIImage *onlineImg = [UIImage imageNamed:@"icon_online"];
     _statusImageView.image = _vpnInfo.online>0?onlineImg:offlineImg;
-//    ChatModel *chatM = [ChatUtil.shareInstance getChat:_vpnInfo.vpnName];
-//    _messageImageView.image = _vpnInfo.online>0?chatM.isUnread?[UIImage imageNamed:@"icon_message_online"]:[UIImage imageNamed:@"icon_message"]:[UIImage imageNamed:@"icon_message_offline"];
+    ChatModel *chatM = [ChatUtil.shareInstance getChat:_vpnInfo.vpnName];
+    _messageImageView.image = _vpnInfo.online>0?chatM.isUnread?[UIImage imageNamed:@"icon_message_online"]:[UIImage imageNamed:@"icon_message"]:[UIImage imageNamed:@"icon_message_offline"];
     UIColor *blackC = UIColorFromRGB(0x333333);
     UIColor *grayC = UIColorFromRGB(0xa8a6ae);
     UIColor *whiteC = UIColorFromRGB(0xffffff);
@@ -95,14 +95,14 @@
 //    }
 //}
 
-//- (IBAction)userConversationAction:(id)sender {
-//    if (!_vpnInfo.online) { // 离线状态不能触发
-//        return;
-//    }
-//    if (_conversationB) {
-//        _conversationB();
-//    }
-//}
+- (IBAction)userConversationAction:(id)sender {
+    if (!_vpnInfo.online) { // 离线状态不能触发
+        return;
+    }
+    if (_conversationB) {
+        _conversationB();
+    }
+}
 
 
 - (void)prepareForReuse {
@@ -110,6 +110,7 @@
     
     _ownerImageView.image = nil;
     _statusImageView.image = nil;
+    _messageImageView.image = nil;
     _vpnNameLab.text = nil;
     _priceLab.text = nil;
     _connectNumLab.text = nil;
