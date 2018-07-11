@@ -126,11 +126,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [AppD.window addSubview:self];
     self.alpha = 1.0f;
     self.tabContraintH.constant = 0;
+    CGFloat tabH = 320;
+    if (_isSave) {
+        tabH = 265;
+    }
     [self layoutIfNeeded];
     @weakify_self
     [UIView animateWithDuration:.4 animations:^{
         //weakSelf.alpha = 1.0f;
-        weakSelf.tabContraintH.constant = 331;
+        weakSelf.tabContraintH.constant = tabH;
          [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         

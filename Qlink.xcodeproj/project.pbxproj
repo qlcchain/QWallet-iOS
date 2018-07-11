@@ -385,6 +385,7 @@
 		73FF64CA20F48DB200E29B3B /* VpnToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64CC20F48DB200E29B3B /* VpnToastView.xib */; };
 		73FF64D720F48DCA00E29B3B /* ChooseCountryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64D920F48DCA00E29B3B /* ChooseCountryView.xib */; };
 		73FF64E420F48DE800E29B3B /* VPN2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64E620F48DE800E29B3B /* VPN2ViewController.xib */; };
+		73FF64F220F599E700E29B3B /* CountryList.json in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64F120F599E600E29B3B /* CountryList.json */; };
 		7F4538A66F4431A83CB2C569 /* Pods_Qlink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA980B5D481A5FA6E3154F3 /* Pods_Qlink.framework */; };
 /* End PBXBuildFile section */
 
@@ -1365,6 +1366,7 @@
 		73FF64EC20F48DF000E29B3B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/VPN2ViewController.strings; sourceTree = "<group>"; };
 		73FF64EE20F48DF200E29B3B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/VPN2ViewController.strings; sourceTree = "<group>"; };
 		73FF64F020F48DF500E29B3B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/VPN2ViewController.strings"; sourceTree = "<group>"; };
+		73FF64F120F599E600E29B3B /* CountryList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryList.json; sourceTree = "<group>"; };
 		93185A7AFF490BBB8104B577 /* Pods-Qlink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.release.xcconfig"; sourceTree = "<group>"; };
 		C8C9F75488743A3ABC4DAD17 /* Pods-Qlink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.debug.xcconfig"; sourceTree = "<group>"; };
 		F1A3E51F89966A6974D528B9 /* Pods-Qlink.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qlink.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-Qlink/Pods-Qlink.adhoc.xcconfig"; sourceTree = "<group>"; };
@@ -1456,6 +1458,7 @@
 				58A4DEB4206234AC00E72F52 /* LaunchScreen.storyboard */,
 				58A4DEB7206234AC00E72F52 /* Info.plist */,
 				580C3E06207C55E5002C9969 /* Qlink.entitlements */,
+				73FF64F120F599E600E29B3B /* CountryList.json */,
 				586F371E207B049400E12F95 /* ContinentAndCountryBean.json */,
 				58CDB5DF20871DBE00B74962 /* tox.json */,
 				588A7023208DD2CC004B41D4 /* launchAnimate.gif */,
@@ -2890,6 +2893,7 @@
 				5860AD1420CFB50600EEB6CE /* HistoryRecordsCell.xib in Resources */,
 				73FF644F20EDCD7800E29B3B /* GuideBackupKeyView.xib in Resources */,
 				58CDB5D92085DB6600B74962 /* keyfile-encrypted.3des in Resources */,
+				73FF64F220F599E700E29B3B /* CountryList.json in Resources */,
 				580D91BA2063AE5300B12506 /* Roboto-Bold.ttf in Resources */,
 				5860ADA020CFB5EF00EEB6CE /* WalletViewController.xib in Resources */,
 				73FF644220EDCD6000E29B3B /* GuideSettingMoreView.xib in Resources */,

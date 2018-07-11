@@ -779,6 +779,7 @@ static BOOL refreshAnimate = YES;
 {
     if (!_countryView) {
         _countryView = [ChooseCountryView loadChooseCountryView];
+        _countryView.tabContraintH.constant = 265;
         _countryView.bgContraintTop.constant = 67;
          _countryView.topContraintH.constant = 0;
         _countryView.isSave = YES;
