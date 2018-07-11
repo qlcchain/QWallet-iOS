@@ -94,6 +94,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeServer:) name:CHANGE_SERVER_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(seizeVpnSuccess:) name:SEIZE_VPN_SUCCESS_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectVpnTimeout:) name:Connect_Vpn_Timeout_Noti object:nil];
+    // 修改本地资产成功通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVPNSuccess:) name:UPDATE_ASSETS_TZ object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -116,7 +118,7 @@
     if (currentCountry) {
         [self refreshCountry:currentCountry];
     } else {
-        [self requestQueryVpn:YES];
+        [self requestQueryVpn];
     }
    
 }
@@ -180,11 +182,17 @@
     self.selectCountryM = selectM;
     _countryLab.text = _selectCountryM.name.uppercaseString;
     _countryIcon.image = [UIImage imageNamed:_selectCountryM.countryImage];
-    [self requestQueryVpn:NO];
+    [self requestQueryVpn];
+   
 }
 
 // 根据国家获取vpn资产列表
-- (void)requestQueryVpn:(BOOL)isDefault {
+- (void)requestQueryVpn {
+    
+    BOOL isDefault = YES;
+    if (_selectCountryM && ![_selectCountryM.name isEqualToString:OTHERS]) {
+        isDefault = NO;
+    }
     @weakify_self
     // 默认v2接口，选择国家用v3接口
     NSDictionary *params = isDefault?@{@"country":@"Others"}:@{@"country":self.selectCountryM.name};
@@ -553,16 +561,21 @@ static BOOL refreshAnimate = YES;
     [self showRegisterVPN]; // 主网隐藏VPN注册
     [self.sourceArr removeAllObjects]; // 移除旧数据
     [self.mainTable reloadData];
-    [self requestQueryVpn:NO];
+    [self requestQueryVpn];
 }
 
 - (void)seizeVpnSuccess:(NSNotification *)noti {
-    [self requestQueryVpn:NO];
+    [self requestQueryVpn];
 }
 
 - (void)connectVpnTimeout:(NSNotification *)noti {
     _selectVPNInfo.connectStatus = VpnConnectStatusNone;
     [self refreshTable];
+}
+
+- (void) updateVPNSuccess:(NSNotification *) noti
+{
+    [self requestQueryVpn];
 }
 
 #pragma mark - Config View
@@ -666,11 +679,7 @@ static BOOL refreshAnimate = YES;
 
 #pragma mark - SRRefreshDelegate
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView {
-    if (_selectCountryM) {
-        [self requestQueryVpn:NO];
-    } else {
-        [self requestQueryVpn:YES];
-    }
+    [self requestQueryVpn];
 }
 
 #pragma mark - UITableView delegate

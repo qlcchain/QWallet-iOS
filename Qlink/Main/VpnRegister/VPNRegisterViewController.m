@@ -533,6 +533,8 @@
         }
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
+            NSString *country = responseObject[Server_Data][@"country"];
+            weakSelf.vpnInfo.country = country?:@"";
             // 修改本地数据库
             [weakSelf.vpnInfo bg_saveOrUpdateAsync:^(BOOL isSuccess) {
                 if (isSuccess) {

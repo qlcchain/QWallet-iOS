@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,13 +21,17 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwq-ra-FQz">
-                    <rect key="frame" x="18" y="50" width="166" height="112"/>
+                    <rect key="frame" x="18" y="25" width="166" height="112"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="6Ue-r9-a4E">
                             <rect key="frame" x="0.0" y="0.0" width="166" height="112"/>
                         </imageView>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_registered_assets" translatesAutoresizingMaskIntoConstraints="NO" id="Jh8-kE-d0W">
-                            <rect key="frame" x="61.5" y="27" width="43" height="31"/>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="icon_register_assets" translatesAutoresizingMaskIntoConstraints="NO" id="Jh8-kE-d0W">
+                            <rect key="frame" x="67.5" y="27" width="31" height="31"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="DUU-Io-DA8"/>
+                                <constraint firstAttribute="width" constant="31" id="boZ-Mm-jql"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTERED ASSETS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPd-P1-TCg">
                             <rect key="frame" x="24" y="75" width="118" height="16"/>
@@ -61,7 +64,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seo-fv-Me1">
-                    <rect key="frame" x="191" y="50" width="166" height="112"/>
+                    <rect key="frame" x="191" y="25" width="166" height="112"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="Xya-wX-xK9">
                             <rect key="frame" x="0.0" y="0.0" width="166" height="112"/>
@@ -100,7 +103,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cc-AZ-J2M">
-                    <rect key="frame" x="18" y="169" width="166" height="112"/>
+                    <rect key="frame" x="18" y="144" width="166" height="112"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="Z7c-ox-MTj">
                             <rect key="frame" x="0.0" y="0.0" width="166" height="112"/>
@@ -139,16 +142,16 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wi3-C0-QRY">
-                    <rect key="frame" x="191" y="169" width="166" height="112"/>
+                    <rect key="frame" x="191" y="144" width="166" height="112"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_continue" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-6p-K4r">
                             <rect key="frame" x="0.0" y="0.0" width="166" height="112"/>
                         </imageView>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_buy_qlc" translatesAutoresizingMaskIntoConstraints="NO" id="VU5-t6-Mf7">
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_recevie_fund" translatesAutoresizingMaskIntoConstraints="NO" id="VU5-t6-Mf7">
                             <rect key="frame" x="61.5" y="27" width="43" height="31"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY QLC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibn-gU-g8g">
-                            <rect key="frame" x="57" y="75" width="52.5" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECEIVE FUNDS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibn-gU-g8g">
+                            <rect key="frame" x="37" y="75" width="93" height="16"/>
                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -186,7 +189,7 @@
                 <constraint firstItem="7Cc-AZ-J2M" firstAttribute="height" secondItem="Nwq-ra-FQz" secondAttribute="height" id="HZm-Qn-w8z"/>
                 <constraint firstItem="wi3-C0-QRY" firstAttribute="height" secondItem="7Cc-AZ-J2M" secondAttribute="height" id="JhX-DK-B9N"/>
                 <constraint firstItem="7Cc-AZ-J2M" firstAttribute="width" secondItem="Nwq-ra-FQz" secondAttribute="width" id="Kq9-tt-LDK"/>
-                <constraint firstItem="Nwq-ra-FQz" firstAttribute="top" secondItem="Q4c-Xb-JCb" secondAttribute="top" constant="50" id="YTn-Iw-wva"/>
+                <constraint firstItem="Nwq-ra-FQz" firstAttribute="top" secondItem="Q4c-Xb-JCb" secondAttribute="top" constant="25" id="YTn-Iw-wva"/>
                 <constraint firstItem="7Cc-AZ-J2M" firstAttribute="leading" secondItem="Nwq-ra-FQz" secondAttribute="leading" id="Z9V-Gb-smv"/>
                 <constraint firstItem="Seo-fv-Me1" firstAttribute="width" secondItem="Nwq-ra-FQz" secondAttribute="width" id="dvC-dW-iTw"/>
                 <constraint firstItem="wi3-C0-QRY" firstAttribute="top" secondItem="7Cc-AZ-J2M" secondAttribute="top" id="hbJ-im-vNR"/>
@@ -203,8 +206,8 @@
     </objects>
     <resources>
         <image name="bg_continue" width="8" height="44"/>
-        <image name="icon_buy_qlc" width="43" height="31"/>
-        <image name="icon_registered_assets" width="43" height="31"/>
+        <image name="icon_recevie_fund" width="43" height="31"/>
+        <image name="icon_register_assets" width="33" height="33"/>
         <image name="icon_send_funds" width="43" height="31"/>
         <image name="icon_view_history" width="43" height="31"/>
     </resources>

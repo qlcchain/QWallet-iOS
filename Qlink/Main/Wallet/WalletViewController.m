@@ -203,11 +203,7 @@
  显示 registered assets view
  */
 - (void)showRegisteredAssets {
-//    WalletAddressView *view = [WalletAddressView getNibView];
-//    [view.codeBtn addTarget:self action:@selector(clcikCodeBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
-//    [_menuBack addSubview:view];
-//    [view zoomInAnimationDuration:.6];
+
     
     assetsView = [MyAssetsView getNibView];
     assetsView.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
@@ -334,47 +330,54 @@
  显示buy qlc view
  */
 - (void)showBuyQlc {
-    BuyQlcView *view = [BuyQlcView getNibView];
-    view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
-    view.lblNEOToQLC.text = _lblNeo.text;
-    [_menuBack addSubview:view];
-    [view zoomInAnimationDuration:.6];
     
-    __weak __typeof__(view) bView = view;
-    @weakify_self
-    [bView setBuyBlcok:^(BuyType type) {
-        switch (type) {
-            case BuyQLCType:
-                [self sendBuyQLCRequestWithNeo:bView.txtNEO.text];
-                break;
-            case BuyMaxType:
-                
-                if ([weakSelf.balanceInfo.neo floatValue] == 0.f) {
-                    bView.txtQLC.text = @"";
-                    bView.txtNEO.text = @"";
-                    break;
-                }
-                bView.txtNEO.text = weakSelf.balanceInfo.neo;
-                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
-                break;
-                
-            case BuyTxtChangeType:
-                
-                if ([bView.txtNEO.text floatValue] == 0.f) {
-                    bView.txtQLC.text = @"";
-                    bView.txtNEO.text = @"";
-                    break;
-                }
-                if ([bView.txtNEO.text floatValue] > [weakSelf.balanceInfo.neo floatValue]) {
-                    bView.txtNEO.text = weakSelf.balanceInfo.neo;
-                }
-                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
-                break;
-                
-            default:
-                break;
-        }
-    }];
+        WalletAddressView *view = [WalletAddressView getNibView];
+        [view.codeBtn addTarget:self action:@selector(clcikCodeBtn:) forControlEvents:UIControlEventTouchUpInside];
+        view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
+        [_menuBack addSubview:view];
+        [view zoomInAnimationDuration:.6];
+    
+//    BuyQlcView *view = [BuyQlcView getNibView];
+//    view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
+//    view.lblNEOToQLC.text = _lblNeo.text;
+//    [_menuBack addSubview:view];
+//    [view zoomInAnimationDuration:.6];
+//
+//    __weak __typeof__(view) bView = view;
+//    @weakify_self
+//    [bView setBuyBlcok:^(BuyType type) {
+//        switch (type) {
+//            case BuyQLCType:
+//                [self sendBuyQLCRequestWithNeo:bView.txtNEO.text];
+//                break;
+//            case BuyMaxType:
+//
+//                if ([weakSelf.balanceInfo.neo floatValue] == 0.f) {
+//                    bView.txtQLC.text = @"";
+//                    bView.txtNEO.text = @"";
+//                    break;
+//                }
+//                bView.txtNEO.text = weakSelf.balanceInfo.neo;
+//                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
+//                break;
+//
+//            case BuyTxtChangeType:
+//
+//                if ([bView.txtNEO.text floatValue] == 0.f) {
+//                    bView.txtQLC.text = @"";
+//                    bView.txtNEO.text = @"";
+//                    break;
+//                }
+//                if ([bView.txtNEO.text floatValue] > [weakSelf.balanceInfo.neo floatValue]) {
+//                    bView.txtNEO.text = weakSelf.balanceInfo.neo;
+//                }
+//                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
+//                break;
+//
+//            default:
+//                break;
+//        }
+//    }];
 }
 
 
