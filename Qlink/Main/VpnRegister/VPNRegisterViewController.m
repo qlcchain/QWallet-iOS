@@ -131,6 +131,7 @@
         _vpnNameTF.text = self.vpnName;
         _vpnNameTF.enabled = NO;
     } else if (_registerType == UpdateVPN) {
+        [_registerBtn setTitle:NSStringLocalizable(@"vpn_update") forState:UIControlStateNormal];
         _lblNavTitle.text = NSStringLocalizable(@"vpn_detail");
         [self configureVPNInfo];
     }
