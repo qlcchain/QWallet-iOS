@@ -1672,6 +1672,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				588A7E9220F5DFDF00D476EE /* FileInput */,
 				734F528F20B6BDCC002D45B7 /* MPUSH */,
 				73B6F48920AEC08E004B7219 /* NEO */,
 				5812DD6C20A1A7880043A8A8 /* ZXChat */,
@@ -2202,6 +2203,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		588A7E9220F5DFDF00D476EE /* FileInput */ = {
+			isa = PBXGroup;
+			children = (
+				736B3E3C208D7AD500696C81 /* VPNFileInputView.h */,
+				736B3E3D208D7AD500696C81 /* VPNFileInputView.m */,
+				5860ACC920CFB46900EEB6CE /* VPNFileInputView.xib */,
+			);
+			path = FileInput;
+			sourceTree = "<group>";
+		};
 		588BFCAF20EF211F00B1E860 /* Macros */ = {
 			isa = PBXGroup;
 			children = (
@@ -2346,9 +2357,6 @@
 				586F37062079F9A200E12F95 /* VPNRegisterView3.h */,
 				586F37072079F9A200E12F95 /* VPNRegisterView3.m */,
 				5860ACC220CFB46000EEB6CE /* VPNRegisterView3.xib */,
-				736B3E3C208D7AD500696C81 /* VPNFileInputView.h */,
-				736B3E3D208D7AD500696C81 /* VPNFileInputView.m */,
-				5860ACC920CFB46900EEB6CE /* VPNFileInputView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";

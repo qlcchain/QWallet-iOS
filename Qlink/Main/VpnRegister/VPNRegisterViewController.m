@@ -23,38 +23,78 @@
 #import "VPNOperationUtil.h"
 #import "Qlink-Swift.h"
 #import "ChooseCountryView.h"
+#import "UnderlineView.h"
+#import "VPNMode.h"
+#import "SkyRadiusView.h"
 
-typedef enum : NSUInteger {
-    RegisterStepOne,
-    RegisterStepTwo,
-    RegisterStepThree,
-} RegisterStep;
+//typedef enum : NSUInteger {
+//    RegisterStepOne,
+//    RegisterStepTwo,
+//    RegisterStepThree,
+//} RegisterStep;
 
-@interface VPNRegisterViewController ()
+#define FeeMin 0.1
+#define FeeMax 3
+#define ConnectionMin 1
+#define ConnectionMax 20
+#define CHOOSECOUNTRY @"Choose a country"
+
+@interface VPNRegisterViewController () {
+    BOOL connectVpnDone;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *lblNavTitle;
+
+@property (weak, nonatomic) IBOutlet UnderlineView *vpnNameUnderlineV;
+@property (weak, nonatomic) IBOutlet UILabel *countryLab;
+@property (weak, nonatomic) IBOutlet UITextField *vpnNameTF;
+@property (nonatomic, strong) NSString *vpnTFName;
+@property (nonatomic, strong) NSString *selectCountryStr;
+@property (nonatomic, strong) CountryModel *selectCountryM;
+
+@property (weak, nonatomic) IBOutlet UITextField *profileTF;
+@property (weak, nonatomic) IBOutlet UITextField *privateKeyTF;
+@property (weak, nonatomic) IBOutlet UITextField *userNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
+@property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
+@property (nonatomic, strong) NSString *selectName;
+@property (nonatomic, strong) NSString *profileName;
+
+@property (weak, nonatomic) IBOutlet SkyRadiusView *settingBack;
+@property (weak, nonatomic) IBOutlet UILabel *hourlyLab;
+@property (weak, nonatomic) IBOutlet UISlider *hourlyFeeSlider;
+@property (weak, nonatomic) IBOutlet UILabel *connectionLab;
+@property (weak, nonatomic) IBOutlet UISlider *connectionSlider;
+@property (nonatomic, strong) NSString *hourlyFee;
+@property (nonatomic, strong) NSString *connectNum;
+
 @property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (nonatomic, strong) VPNRegisterView1 *registerV1;
-@property (nonatomic, strong) VPNRegisterView2 *registerV2;
-@property (nonatomic, strong) VPNRegisterView3 *registerV3;
-@property (weak, nonatomic) IBOutlet UIImageView *stepOneV;
-@property (weak, nonatomic) IBOutlet UIImageView *stepTwoV;
-@property (weak, nonatomic) IBOutlet UIImageView *stepThreeV;
-@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
-@property (nonatomic) RegisterStep registerStep;
+//@property (nonatomic, strong) VPNRegisterView1 *registerV1;
+//@property (nonatomic, strong) VPNRegisterView2 *registerV2;
+//@property (nonatomic, strong) VPNRegisterView3 *registerV3;
+//@property (weak, nonatomic) IBOutlet UIImageView *stepOneV;
+//@property (weak, nonatomic) IBOutlet UIImageView *stepTwoV;
+//@property (weak, nonatomic) IBOutlet UIImageView *stepThreeV;
+//@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
+//@property (nonatomic) RegisterStep registerStep;
 @property (nonatomic) BOOL assetIsValidate;
 @property (nonatomic,copy) NSString *hex;
 @property (nonatomic , strong) ChooseCountryView *countryView;
 @property (nonatomic , assign) BOOL isFileNameSame;
+
 @end
 
 @implementation VPNRegisterViewController
 
-#pragma mark - Noti
+#pragma mark - Observe
 - (void)addObserve {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStatusChange:) name:VPN_STATUS_CHANGE_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCountryNoti:) name:SELECT_COUNTRY_NOTI_VPNREGISTER object:nil];
 }
 
+#pragma mark - Init
 - (instancetype) initWithRegisterType:(RegisterType) type
 {
     if (self = [super init]) {
@@ -82,11 +122,14 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _registerStep = RegisterStepOne;
+//    _registerStep = RegisterStepOne;
+    [self addObserve];
     [self dataInit];
     [self configView];
     if (_registerType == SeizeVPN) {
-        [self.registerV1 setVPNName:self.vpnName deposit:self.seizePrice oldPrice:self.oldPrice];
+//        [self.registerV1 setVPNName:self.vpnName deposit:self.seizePrice oldPrice:self.oldPrice];
+        _vpnNameTF.text = self.vpnName;
+        _vpnNameTF.enabled = NO;
     } else if (_registerType == UpdateVPN) {
         _lblNavTitle.text = NSStringLocalizable(@"vpn_detail");
         [self configureVPNInfo];
@@ -96,12 +139,13 @@ typedef enum : NSUInteger {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [_settingBack layoutIfNeeded];
 //    self.registerV1.frame = _contentView.bounds;
 //    self.registerV2.frame = _contentView.bounds;
 //    self.registerV3.frame = _contentView.bounds;
 }
 
-#pragma mark - Operation
+#pragma mark - Config
 - (void)dataInit {
     if (_registerType == SeizeVPN || _registerType == UpdateVPN) {
         _assetIsValidate = YES;
@@ -114,77 +158,101 @@ typedef enum : NSUInteger {
 - (void) configureVPNInfo
 {
     if (_registerType == UpdateVPN) {
-        [self.registerV1 setVPNInfo:self.vpnInfo];
-        [self.registerV2 setVPNInfo:self.vpnInfo];
-        [self.registerV3 setVPNInfo:self.vpnInfo];
+//        [self.registerV1 setVPNInfo:self.vpnInfo];
+        _vpnNameTF.text = self.vpnInfo.vpnName?:@"";
+        _vpnNameTF.enabled = NO;
+        _countryLab.text = self.vpnInfo.country?:@"";
+//        [self.registerV2 setVPNInfo:self.vpnInfo];
+        _profileTF.text = self.vpnInfo.profileLocalPath?:@"";
+        _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
+        _userNameTF.text = self.vpnInfo.username?:@"";
+        _passwordTF.text = self.vpnInfo.password?:@"";
+//        [self.registerV3 setVPNInfo:self.vpnInfo];
+        [_hourlyFeeSlider setValue:[self.vpnInfo.connectCost floatValue] animated:YES];
+        [_connectionSlider setValue:[self.vpnInfo.connectNum floatValue] animated:YES];
+        [self updateHourlyAndConnection];
     }
 }
 
 - (void)configView {
-    [_contentView addSubview:self.registerV1];
-    [self.registerV1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(_contentView).offset(0);
-    }];
-    [_contentView addSubview:self.registerV2];
-    [self.registerV2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(_contentView).offset(0);
-    }];
-    [_contentView addSubview:self.registerV3];
-    [self.registerV3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(_contentView).offset(0);
-    }];
+    _vpnNameUnderlineV.textField = _vpnNameTF;
+    [_vpnNameTF addTarget:self action:@selector(vpnNameEndEdit) forControlEvents:UIControlEventEditingDidEnd];
     
-    [_nextBtn setTitle:NSStringLocalizable(@"next") forState:UIControlStateNormal];
-    if (_registerStep == RegisterStepOne) {
-        [_contentView bringSubviewToFront:self.registerV1];
-        _stepOneV.image = [UIImage imageNamed:@"icon_step_one"];
-        _stepTwoV.image = [UIImage imageNamed:@"icon_step_two"];
-        _stepThreeV.image = [UIImage imageNamed:@"icon_step_three"];
-    } else if (_registerStep == RegisterStepTwo) {
-        [_contentView bringSubviewToFront:self.registerV2];
-        _stepOneV.image = [UIImage imageNamed:@"icon_step_one_completed"];
-        _stepTwoV.image = [UIImage imageNamed:@"icon_step_two_being"];
-        _stepThreeV.image = [UIImage imageNamed:@"icon_step_three"];
-    } else if (_registerStep == RegisterStepThree) {
-        [_contentView bringSubviewToFront:self.registerV3];
-        [_nextBtn setTitle:NSStringLocalizable(@"finsh") forState:UIControlStateNormal];
-        _stepOneV.image = [UIImage imageNamed:@"icon_step_one_completed"];
-        _stepTwoV.image = [UIImage imageNamed:@"icon_step_two_complete"];
-        _stepThreeV.image = [UIImage imageNamed:@"icon_step_three_being"];
-    }
+    _hourlyLab.adjustsFontSizeToFitWidth = YES;
+    UIImage *img = [UIImage imageNamed:@"icon_the_selected"];
+    [_hourlyFeeSlider setThumbImage:img forState:UIControlStateNormal];
+    [_connectionSlider setThumbImage:img forState:UIControlStateNormal];
+    [self updateHourlyAndConnection];
+    
+//    [_contentView addSubview:self.registerV1];
+//    [self.registerV1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.bottom.right.mas_equalTo(_contentView).offset(0);
+//    }];
+//    [_contentView addSubview:self.registerV2];
+//    [self.registerV2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.bottom.right.mas_equalTo(_contentView).offset(0);
+//    }];
+//    [_contentView addSubview:self.registerV3];
+//    [self.registerV3 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.bottom.right.mas_equalTo(_contentView).offset(0);
+//    }];
+    
+//    [_nextBtn setTitle:NSStringLocalizable(@"next") forState:UIControlStateNormal];
+//    if (_registerStep == RegisterStepOne) {
+//        [_contentView bringSubviewToFront:self.registerV1];
+//        _stepOneV.image = [UIImage imageNamed:@"icon_step_one"];
+//        _stepTwoV.image = [UIImage imageNamed:@"icon_step_two"];
+//        _stepThreeV.image = [UIImage imageNamed:@"icon_step_three"];
+//    } else if (_registerStep == RegisterStepTwo) {
+//        [_contentView bringSubviewToFront:self.registerV2];
+//        _stepOneV.image = [UIImage imageNamed:@"icon_step_one_completed"];
+//        _stepTwoV.image = [UIImage imageNamed:@"icon_step_two_being"];
+//        _stepThreeV.image = [UIImage imageNamed:@"icon_step_three"];
+//    } else if (_registerStep == RegisterStepThree) {
+//        [_contentView bringSubviewToFront:self.registerV3];
+//        [_nextBtn setTitle:NSStringLocalizable(@"finsh") forState:UIControlStateNormal];
+//        _stepOneV.image = [UIImage imageNamed:@"icon_step_one_completed"];
+//        _stepTwoV.image = [UIImage imageNamed:@"icon_step_two_complete"];
+//        _stepThreeV.image = [UIImage imageNamed:@"icon_step_three_being"];
+//    }
 }
 
-- (void)vpnStatusChange:(NSNotification *)noti {
-    if (_registerStep == RegisterStepTwo) {
-        NEVPNStatus status = (NEVPNStatus)[noti.object integerValue];
-        switch (status) {
-                case NEVPNStatusInvalid:
-                break;
-                case NEVPNStatusDisconnected:
-                break;
-                case NEVPNStatusConnecting:
-                break;
-                case NEVPNStatusConnected:
-            {
-            }
-                break;
-                case NEVPNStatusReasserting:
-                break;
-                case NEVPNStatusDisconnecting:
-            {
-            }
-                break;
-            default:
-                break;
-        }
-    }
+- (void)updateHourlyAndConnection {
+    [self updateHourlyLab];
+    [self updateConnectionLab];
 }
 
+- (void)updateHourlyLab {
+    CGFloat thumbWidth = 20;
+    CGFloat startX = _hourlyFeeSlider.left + thumbWidth/2.0;
+    CGFloat endX = _hourlyFeeSlider.right - thumbWidth/2.0;
+    CGFloat moveWidth = endX - startX;
+    CGFloat labWidth = 50;
+    CGFloat labHeight = 20;
+    _hourlyLab.text = [NSString stringWithFormat:@"%.1f",_hourlyFeeSlider.value];
+    CGFloat offsetX = moveWidth*((_hourlyFeeSlider.value - _hourlyFeeSlider.minimumValue)/(_hourlyFeeSlider.maximumValue - _hourlyFeeSlider.minimumValue));
+    _hourlyLab.frame = CGRectMake(startX - labWidth/2.0 + offsetX, _hourlyFeeSlider.top - labHeight, labWidth, labHeight);
+}
+
+- (void)updateConnectionLab {
+    CGFloat thumbWidth = 20;
+    CGFloat startX = _connectionSlider.left + thumbWidth/2.0;
+    CGFloat endX = _connectionSlider.right - thumbWidth/2.0;
+    CGFloat moveWidth = endX - startX;
+    CGFloat labWidth = 50;
+    CGFloat labHeight = 20;
+    _connectionLab.text = [NSString stringWithFormat:@"%.0f",_connectionSlider.value];
+    CGFloat offsetX = moveWidth*((_connectionSlider.value - _connectionSlider.minimumValue)/(_connectionSlider.maximumValue - _connectionSlider.minimumValue));
+    _connectionLab.frame = CGRectMake(startX - labWidth/2.0 + offsetX, _connectionSlider.top - labHeight, labWidth, labHeight);
+}
+
+#pragma mark - Operation
 - (void)validateAssetIsexist {
     if (_registerType == RegisterVPN) {
         [self requestValidateAssetIsexist];
     }
 }
+
 - (void)storeRegisterVPN:(NSDictionary *)dic {
     VPNInfo *localVpnInfo = [VPNInfo new];
     localVpnInfo.bg_tableName = VPNREGISTER_TABNAME;
@@ -205,10 +273,133 @@ typedef enum : NSUInteger {
     [VPNOperationUtil saveArrayToKeyChain];
 }
 
+//- (void)scrollToStepTwo {
+//    _registerStep = RegisterStepTwo;
+//    [self configView];
+//}
+
+//- (void)scrollToStepThree {
+//    _registerStep = RegisterStepThree;
+//    [self configView];
+//}
+
+- (BOOL)isEmptyOfCountry {
+    BOOL empty = NO;
+    if (self.selectCountryStr == nil || [self.selectCountryStr isEmptyString]) {
+        empty = YES;
+    }
+    return empty;
+}
+
+- (BOOL)isEmptyOfVPNName {
+    BOOL empty = NO;
+    if (self.vpnNameTF.text == nil || self.vpnNameTF.text.length <= 0) {
+        empty = YES;
+    }
+    return empty;
+}
+
+- (BOOL)isEmptyOfProfile {
+    BOOL empty = NO;
+    if (self.profileTF.text == nil || self.profileTF.text.length <= 0) {
+        empty = YES;
+    }
+    return empty;
+}
+
+- (void)vpnNameEndEdit {
+    _vpnName = _vpnNameTF.text;
+    [self validateAssetIsexist];
+}
+
+- (void)verifyProfile {
+    if (!self.selectName) {
+        return;
+    }
+    
+    // 验证VPN是否能连接
+    _isVerifyVPN = YES;
+    
+    NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:self.selectName];
+    NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
+    if (!vpnData) {
+        [AppD.window showHint:[NSString stringWithFormat:@"%@ %@",self.selectName,NSStringLocalizable(@"not_found")]];
+        return;
+    }
+    
+    [AppD.window showHudInView:self.view hint:NSStringLocalizable(@"check")];
+    
+    connectVpnDone = NO;
+    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+    // vpn连接操作
+    [VPNOperationUtil shareInstance].operationType = registerConnect;
+    [VPNUtil.shareInstance configVPNWithVpnData:vpnData];
+}
+
+- (void)connectVpnTimeout {
+    if (!connectVpnDone) {
+        [AppD.window hideHud];
+        [VPNUtil.shareInstance stopVPN];
+    }
+}
+
+#pragma mark - Noti
+- (void)vpnStatusChange:(NSNotification *)noti {
+//    if (_registerStep == RegisterStepTwo) {
+        NEVPNStatus status = (NEVPNStatus)[noti.object integerValue];
+        switch (status) {
+                case NEVPNStatusInvalid:
+                break;
+                case NEVPNStatusDisconnected:
+                break;
+                case NEVPNStatusConnecting:
+                break;
+                case NEVPNStatusConnected:
+            {
+                [AppD.window hideHud];
+                if (_isVerifyVPN) { // 如果是验证操作的话，断开连接
+                    _isVerifyVPN = NO;
+                    connectVpnDone = YES;
+                    [self performSelector:@selector(requestRegisterVpnByFeeV3) withObject:nil afterDelay:0.6];
+                    //                [VPNUtil.shareInstance stopVPN];
+                    //                [_registerVC scrollToStepThree];
+                    //                _profileTF.text = _selectName;
+                }
+            }
+                break;
+                case NEVPNStatusReasserting:
+                break;
+                case NEVPNStatusDisconnecting:
+            {
+                [AppD.window hideHud];
+                if (_isVerifyVPN) { // 如果是验证操作的话
+                    _isVerifyVPN = NO;
+                    connectVpnDone = YES;
+                    [self.view showHint:NSStringLocalizable(@"check_profile")];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+//    }
+}
+
+- (void)savePreferenceFail:(NSNotification *)noti {
+    [AppD.window hideHud];
+}
+
+- (void)selectCountryNoti:(NSNotification *)noti {
+    self.selectCountryM = noti.object;
+    _countryLab.text = _selectCountryM.name.uppercaseString;
+    _selectCountryStr = _selectCountryM.name;
+}
+
 #pragma mark - Request
 - (void)requestValidateAssetIsexist {
     @weakify_self
-    NSDictionary *params = @{@"vpnName":_registerV1.vpnName,@"type":@"3"};
+    NSDictionary *params = @{@"vpnName":self.vpnTFName,@"type":@"3"};
     [RequestService requestWithUrl:validateAssetIsexist_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
             if ([responseObject[Server_Data][@"isExist"] integerValue] == 0) { // vpnname不存在
@@ -222,15 +413,13 @@ typedef enum : NSUInteger {
                 NSString *msg = NSStringLocalizable(@"repeat_vpn_name");
                 NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
                 [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"tip") msg:msgArrtrbuted isShowTwoBtn:NO block:nil];
-                return;
                 
-//                [weakSelf.registerV1 enableClaim];
-                weakSelf.registerType = SeizeVPNWhenRegister;
-                weakSelf.vpnName = weakSelf.registerV1.vpnName;
-//                weakSelf.seizePrice = nil;
-                NSString *oldPrice = [NSString stringWithFormat:@"%@",@([responseObject[Server_Data][@"qlc"] floatValue])];
-                weakSelf.oldPrice = oldPrice;
-                [weakSelf.registerV1 setClaimText:oldPrice];
+//                return;
+//                weakSelf.registerType = SeizeVPNWhenRegister;
+//                weakSelf.vpnName = weakSelf.vpnName;
+//                NSString *oldPrice = [NSString stringWithFormat:@"%@",@([responseObject[Server_Data][@"qlc"] floatValue])];
+//                weakSelf.oldPrice = oldPrice;
+//                [weakSelf.registerV1 setClaimText:oldPrice];
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -243,13 +432,13 @@ typedef enum : NSUInteger {
 - (void)requestssIdquery {
     @weakify_self
     [AppD.window showHudInView:self.view hint:nil];
-    NSDictionary *params = @{@"ssId":_registerV1.vpnName};
+    NSDictionary *params = @{@"ssId":self.vpnTFName};
     [RequestService requestWithUrl:ssIdquery_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
             weakSelf.vpnP2pid = responseObject[Server_Data][@"p2pId"]?:@"";
             weakSelf.vpnAddress = responseObject[Server_Data][@"address"]?:@"";
-            [weakSelf scrollToStepTwo];
+            [weakSelf getRegisterOperation];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [AppD.window hideHud];
@@ -267,14 +456,12 @@ typedef enum : NSUInteger {
     }
 }
 
-
-
 //获取主网地址
 - (void) sendMainAddressRequst
 {
     [AppD.window showHudInView:self.view hint:nil];
     if (self.registerType == SeizeVPN || self.registerType == SeizeVPNWhenRegister) {
-        [self getHexWithAddress:[NSStringUtil getNotNullValue:_vpnAddress] qlc:[NSStringUtil getNotNullValue:_registerV1.deposit]];
+//        [self getHexWithAddress:[NSStringUtil getNotNullValue:_vpnAddress] qlc:[NSStringUtil getNotNullValue:_registerV1.deposit]];
     } else {
         // 获取主网地址地址
         @weakify_self
@@ -322,7 +509,7 @@ typedef enum : NSUInteger {
             // 检测vpn配置文件
             [AppD.window hideHud];
             weakSelf.hex = complete;
-            [weakSelf.registerV2 verifyProfile];
+            [weakSelf verifyProfile];
         }
     }];
 }
@@ -332,17 +519,18 @@ typedef enum : NSUInteger {
 {
     [AppD.window showHudInView:self.view hint:nil];
      @weakify_self
-    NSString *vpnName = _registerV1.vpnName?:@"";
-    NSString *country = _registerV1.selectCountry?:@"";
+    NSString *vpnName = self.vpnTFName?:@"";
+    NSString *country = self.selectCountryStr?:@"";
     NSString *p2pId = [ToxManage getOwnP2PId];
     NSString *address = [CurrentWalletInfo getShareInstance].address;
-    NSString *qlc = _registerV1.deposit;
-    NSString *connectCost = _registerV3.hourlyFee?:@"";
-    NSString *connectNum = _registerV3.connectNum?:@"";
+//    NSString *qlc = _registerV1.deposit;
+    NSString *qlc = @"1"; // 默认1
+    NSString *connectCost = self.hourlyFee?:@"";
+    NSString *connectNum = self.connectNum?:@"";
     NSString *ipV4Address = @"";
     NSString *bandWidth = @"";
     //    NSString *profileLocalPath = [VPNFileUtil getVPNPathWithFileName:_registerV2.profileName]?:@"";
-    NSString *profileLocalPath = _registerV2.profileName?:@"";
+    NSString *profileLocalPath = self.profileName?:@"";
     if (!weakSelf.vpnInfo) {
         _vpnInfo = [[VPNInfo alloc] init];
         _vpnInfo.vpnName = vpnName;
@@ -393,15 +581,16 @@ typedef enum : NSUInteger {
 - (void) sendUpdateVPNRequest
 {
     @weakify_self
-    self.vpnInfo.vpnName = _registerV1.vpnName?:@"";
-    self.vpnInfo.country = _registerV1.selectCountry?:@"";
+    self.vpnInfo.vpnName = self.vpnTFName?:@"";
+    self.vpnInfo.country = self.selectCountryStr?:@"";
     self.vpnInfo.p2pId = [ToxManage getOwnP2PId];
-    self.vpnInfo.qlc = _registerV1.deposit;
-    self.vpnInfo.connectCost = _registerV3.hourlyFee?:@"";
-    self.vpnInfo.connectNum = _registerV3.connectNum?:@"";
+//    self.vpnInfo.qlc = _registerV1.deposit;
+    self.vpnInfo.qlc = @"1";
+    self.vpnInfo.connectCost = self.hourlyFee?:@"";
+    self.vpnInfo.connectNum = self.connectNum?:@"";
     self.vpnInfo.ipV4Address = @"";
     self.vpnInfo.bandwidth = @"";
-    self.vpnInfo.profileLocalPath = _registerV2.profileName?:@"";
+    self.vpnInfo.profileLocalPath = self.profileName?:@"";
     [AppD.window showHudInView:self.view hint:nil];
     
     NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath};
@@ -446,84 +635,184 @@ typedef enum : NSUInteger {
     [self back];
 }
 
-- (IBAction)cancelAction:(id)sender {
-    [self back];
-}
-
-- (IBAction)nextBtnAction:(UIButton *)sender {
-    if (_registerStep == RegisterStepOne) {
-        if ([_registerV1 isEmptyOfCountry]) {
+- (IBAction)registerAction:(id)sender {
+//    if (_registerStep == RegisterStepOne) {
+        if ([self isEmptyOfCountry]) {
             [AppD.window showHint:NSStringLocalizable(@"choose_country")];
             return;
         }
-        if ([_registerV1 isEmptyOfDeposit]) {
-            [AppD.window showHint:NSStringLocalizable(@"depost_empty")];
-            return;
-        }
-//        if ([_registerV1 isEmptyOfClaim]) {
-//            [MBProgressHUD showTitleToView:self.view postion:NHHUDPostionCenten title:@"请填写claim"];
-//            return;
-//        }
-        if ([_registerV1 isEmptyOfVPNName]) {
+        if ([self isEmptyOfVPNName]) {
             [AppD.window showHint:NSStringLocalizable(@"vpnName_empty")];
             return;
         }
+//        if (_registerType == SeizeVPNWhenRegister) {
+//            if ([_registerV1.deposit floatValue] <= [_registerV1.claim floatValue]) {
+//                [AppD.window showHint:NSStringLocalizable(@"original_price")];
+//                return;
+//            }
+//        }
+    
+    if ([self isEmptyOfProfile]) {
+        [AppD.window showHint:NSStringLocalizable(@"choose_a_profile")];
+        return;
+    }
+    
+    if (_assetIsValidate) { // vpnname有效
         if (_registerType == SeizeVPNWhenRegister) {
-            if ([_registerV1.deposit floatValue] <= [_registerV1.claim floatValue]) {
-                [AppD.window showHint:NSStringLocalizable(@"original_price")];
-                return;
-            }
-        }
-        
-        if (_assetIsValidate) { // vpnname不存在
-            if (_registerType == SeizeVPNWhenRegister) {
-                [self requestssIdquery];
-            } else {
-                [self scrollToStepTwo];
-            }
-        }
-    } else if (_registerStep == RegisterStepTwo) {
-        if ([_registerV2 isEmptyOfProfile]) {
-            [AppD.window showHint:NSStringLocalizable(@"choose_a_profile")];
-            return;
-        }
-//        [self.registerV2 verifyProfile];
-        [self scrollToStepThree];
-    } else if (_registerStep == RegisterStepThree) {
-        
-        
-        if (_registerType == UpdateVPN) {
-            if ([self.vpnInfo.profileLocalPath isEqualToString:self.registerV2.profileName]) {
-                _isFileNameSame = YES;
-                [self sendUpdateVPNRequest];
-            } else {
-                _isFileNameSame = NO;
-                [self.registerV2 verifyProfile];
-            }
-            
+            [self requestssIdquery];
         } else {
-            [self sendMainAddressRequst];
+            [self getRegisterOperation];
         }
-        
-//        [self.registerV2 verifyProfile];
-//        [self requestRegisterVpnByFeeV3];
-//        [self back];
     }
 }
 
-- (void)scrollToStepTwo {
-    _registerStep = RegisterStepTwo;
-    [self configView];
+- (void)getRegisterOperation {
+    if (_registerType == UpdateVPN) {
+        if ([self.vpnInfo.profileLocalPath isEqualToString:self.profileName]) {
+            _isFileNameSame = YES;
+            [self sendUpdateVPNRequest];
+        } else {
+            _isFileNameSame = NO;
+            [self verifyProfile];
+        }
+    } else {
+        [self sendMainAddressRequst];
+    }
 }
 
-- (void)scrollToStepThree {
-    _registerStep = RegisterStepThree;
-    [self configView];
+//- (IBAction)nextBtnAction:(UIButton *)sender {
+//    if (_registerStep == RegisterStepOne) {
+//        if ([_registerV1 isEmptyOfCountry]) {
+//            [AppD.window showHint:NSStringLocalizable(@"choose_country")];
+//            return;
+//        }
+//        if ([_registerV1 isEmptyOfDeposit]) {
+//            [AppD.window showHint:NSStringLocalizable(@"depost_empty")];
+//            return;
+//        }
+////        if ([_registerV1 isEmptyOfClaim]) {
+////            [MBProgressHUD showTitleToView:self.view postion:NHHUDPostionCenten title:@"请填写claim"];
+////            return;
+////        }
+//        if ([_registerV1 isEmptyOfVPNName]) {
+//            [AppD.window showHint:NSStringLocalizable(@"vpnName_empty")];
+//            return;
+//        }
+//        if (_registerType == SeizeVPNWhenRegister) {
+//            if ([_registerV1.deposit floatValue] <= [_registerV1.claim floatValue]) {
+//                [AppD.window showHint:NSStringLocalizable(@"original_price")];
+//                return;
+//            }
+//        }
+//
+//        if (_assetIsValidate) { // vpnname不存在
+//            if (_registerType == SeizeVPNWhenRegister) {
+//                [self requestssIdquery];
+//            } else {
+//                [self scrollToStepTwo];
+//            }
+//        }
+//    } else if (_registerStep == RegisterStepTwo) {
+//        if ([_registerV2 isEmptyOfProfile]) {
+//            [AppD.window showHint:NSStringLocalizable(@"choose_a_profile")];
+//            return;
+//        }
+////        [self.registerV2 verifyProfile];
+//        [self scrollToStepThree];
+//    } else if (_registerStep == RegisterStepThree) {
+//
+//
+//        if (_registerType == UpdateVPN) {
+//            if ([self.vpnInfo.profileLocalPath isEqualToString:self.registerV2.profileName]) {
+//                _isFileNameSame = YES;
+//                [self sendUpdateVPNRequest];
+//            } else {
+//                _isFileNameSame = NO;
+//                [self.registerV2 verifyProfile];
+//            }
+//
+//        } else {
+//            [self sendMainAddressRequst];
+//        }
+//
+////        [self.registerV2 verifyProfile];
+////        [self requestRegisterVpnByFeeV3];
+////        [self back];
+//    }
+//}
+
+- (IBAction)chooseCountryAction:(id)sender {
+//    [self jumpToChooseContinent];
+    [self selectCountryAction];
+}
+
+- (IBAction)importProfileAction:(id)sender {
+    @weakify_self
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    NSArray *ovpnArr = [VPNFileUtil getAllVPNName]?:@[];
+    [ovpnArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIAlertAction *alert = [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            // 验证ovpn是否有效
+            weakSelf.selectName = obj;
+            weakSelf.profileTF.text = _selectName;
+            //            [weakSelf verifyProfile];
+        }];
+        [alertC addAction:alert];
+    }];
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:NSStringLocalizable(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertC addAction:alertCancel];
+    
+    [self presentViewController:alertC animated:YES completion:nil];
+}
+
+- (IBAction)praviteKeyEyeAction:(id)sender {
+    
+}
+
+- (IBAction)passwordEyeAction:(id)sender {
+    
+}
+
+- (IBAction)feeSubtractAction:(id)sender {
+    if (_hourlyFeeSlider.value > FeeMin) {
+        _hourlyFeeSlider.value -= 0.1;
+        [self updateHourlyLab];
+    }
+}
+
+- (IBAction)feeAddAction:(id)sender {
+    if (_hourlyFeeSlider.value < FeeMax) {
+        _hourlyFeeSlider.value += 0.1;
+        [self updateHourlyLab];
+    }
+}
+
+- (IBAction)connectSubtractAction:(id)sender {
+    if (_connectionSlider.value > ConnectionMin) {
+        _connectionSlider.value -= 1;
+        [self updateConnectionLab];
+    }
+}
+
+- (IBAction)connectAddAction:(id)sender {
+    if (_connectionSlider.value < ConnectionMax) {
+        _connectionSlider.value += 1;
+        [self updateConnectionLab];
+    }
+}
+
+- (IBAction)hourlySliderAction:(id)sender {
+    [self updateHourlyLab];
+}
+
+- (IBAction)connectionSliderAction:(id)sender {
+    [self updateConnectionLab];
 }
 
 #pragma mark - Transition
 - (void)jumpToChooseContinent {
-    [self selectCountry];
+    
 //    [ChooseCountryUtil shareInstance].entry = VPNRegister;
 //    ChooseContinentViewController *vc = [[ChooseContinentViewController alloc] init];
 //    if (_registerV1.selectCountry) {
@@ -538,7 +827,7 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark -选择国家
-- (void) selectCountry {
+- (void) selectCountryAction {
     // 显示
     [self.countryView showChooseCountryView];
     // 选择国家回调
@@ -563,31 +852,60 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Lazy
-- (VPNRegisterView1 *)registerV1 {
-    if (!_registerV1) {
-        _registerV1 = [VPNRegisterView1 getNibView];
-        _registerV1.registerVC = self;
-    }
-    
-    return _registerV1;
+//- (VPNRegisterView1 *)registerV1 {
+//    if (!_registerV1) {
+//        _registerV1 = [VPNRegisterView1 getNibView];
+//        _registerV1.registerVC = self;
+//    }
+//    
+//    return _registerV1;
+//}
+//
+//- (VPNRegisterView2 *)registerV2 {
+//    if (!_registerV2) {
+//        _registerV2 = [VPNRegisterView2 getNibView];
+//        _registerV2.registerVC = self;
+//    }
+//    
+//    return _registerV2;
+//}
+//
+//- (VPNRegisterView3 *)registerV3 {
+//    if (!_registerV3) {
+//        _registerV3 = [VPNRegisterView3 getNibView];
+//        _registerV3.registerVC = self;
+//    }
+//    
+//    return _registerV3;
+//}
+
+- (NSString *)vpnTFName {
+    _vpnTFName = _vpnNameTF.text?:@"";
+    return _vpnTFName;
 }
 
-- (VPNRegisterView2 *)registerV2 {
-    if (!_registerV2) {
-        _registerV2 = [VPNRegisterView2 getNibView];
-        _registerV2.registerVC = self;
+- (NSString *)selectCountryStr
+{
+    _selectCountryStr = _countryLab.text?:@"";
+    if ([_selectCountryStr isEqualToString:CHOOSECOUNTRY]) {
+        _selectCountryStr = @"";
     }
-    
-    return _registerV2;
+    return _selectCountryStr;
 }
 
-- (VPNRegisterView3 *)registerV3 {
-    if (!_registerV3) {
-        _registerV3 = [VPNRegisterView3 getNibView];
-        _registerV3.registerVC = self;
-    }
-    
-    return _registerV3;
+- (NSString *)profileName {
+    _profileName = _profileTF.text?:@"";
+    return _profileName;
+}
+
+- (NSString *)hourlyFee {
+    _hourlyFee = [NSString stringWithFormat:@"%.1f",_hourlyFeeSlider.value];
+    return _hourlyFee;
+}
+
+- (NSString *)connectNum {
+    _connectNum = [NSString stringWithFormat:@"%.0f",_connectionSlider.value];
+    return _connectNum;
 }
 
 - (void)didReceiveMemoryWarning {
