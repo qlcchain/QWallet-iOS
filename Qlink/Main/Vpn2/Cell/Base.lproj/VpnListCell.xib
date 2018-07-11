@@ -38,6 +38,13 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yJZ-CT-OL2">
                                         <rect key="frame" x="2" y="2" width="36" height="35"/>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_message_offline" translatesAutoresizingMaskIntoConstraints="NO" id="P3y-mn-Wtj">
+                                        <rect key="frame" x="28" y="0.0" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="Bmh-Gt-t2b"/>
+                                            <constraint firstAttribute="height" constant="18" id="zJF-5b-dsC"/>
+                                        </constraints>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_online" translatesAutoresizingMaskIntoConstraints="NO" id="yGq-B4-NXD">
                                         <rect key="frame" x="29" y="29" width="11" height="11"/>
                                         <constraints>
@@ -45,21 +52,33 @@
                                             <constraint firstAttribute="height" constant="11" id="uN9-4p-pRp"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERM-A5-V7V">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <connections>
+                                            <action selector="userConversationAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7Oh-Sl-ahe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="ERM-A5-V7V" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="25i-SZ-F09"/>
+                                    <constraint firstAttribute="trailing" secondItem="ERM-A5-V7V" secondAttribute="trailing" id="6Ng-Pg-0un"/>
+                                    <constraint firstAttribute="trailing" secondItem="P3y-mn-Wtj" secondAttribute="trailing" constant="-6" id="90I-II-VkC"/>
                                     <constraint firstAttribute="trailing" secondItem="yJZ-CT-OL2" secondAttribute="trailing" constant="2" id="AZG-6o-HOo"/>
                                     <constraint firstItem="4F2-Uk-XOp" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" id="ErR-rT-fWG"/>
                                     <constraint firstItem="yJZ-CT-OL2" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" constant="2" id="Gjg-ng-qzB"/>
                                     <constraint firstAttribute="bottom" secondItem="yJZ-CT-OL2" secondAttribute="bottom" constant="3" id="InR-cZ-0so"/>
                                     <constraint firstAttribute="height" constant="40" id="JvH-hu-guk"/>
                                     <constraint firstItem="4F2-Uk-XOp" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="OR1-kg-lA1"/>
+                                    <constraint firstItem="ERM-A5-V7V" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" id="XrS-AV-gvV"/>
                                     <constraint firstAttribute="trailing" secondItem="yGq-B4-NXD" secondAttribute="trailing" id="gCG-6Y-VYB"/>
                                     <constraint firstAttribute="trailing" secondItem="4F2-Uk-XOp" secondAttribute="trailing" id="hUP-Mp-JuI"/>
+                                    <constraint firstItem="P3y-mn-Wtj" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="juc-bp-lT2"/>
                                     <constraint firstAttribute="bottom" secondItem="yGq-B4-NXD" secondAttribute="bottom" id="oli-y6-gOV"/>
                                     <constraint firstAttribute="width" constant="40" id="pnX-ki-qtV"/>
                                     <constraint firstItem="yJZ-CT-OL2" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" constant="2" id="ul4-ZN-BQQ"/>
                                     <constraint firstAttribute="bottom" secondItem="4F2-Uk-XOp" secondAttribute="bottom" id="xgs-kr-mTc"/>
+                                    <constraint firstAttribute="bottom" secondItem="ERM-A5-V7V" secondAttribute="bottom" id="yhb-8Q-mhy"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="My VPN Asset" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nml-rT-FJ8">
@@ -161,6 +180,7 @@
                 <outlet property="connectBtn" destination="egb-N8-XB1" id="644-1j-cot"/>
                 <outlet property="connectNumLab" destination="5Ip-Rz-e1A" id="I52-pA-D0o"/>
                 <outlet property="connectNumUnitLab" destination="u02-Iu-qqJ" id="OP2-yi-6AJ"/>
+                <outlet property="messageImageView" destination="P3y-mn-Wtj" id="F7j-MW-D9A"/>
                 <outlet property="ownerImageView" destination="yJZ-CT-OL2" id="vnz-sj-Fgf"/>
                 <outlet property="priceLab" destination="zA7-S3-nOg" id="lDn-vD-Azb"/>
                 <outlet property="priceUnitLab" destination="pQq-nX-4ur" id="mtD-4m-qSZ"/>
@@ -171,6 +191,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_message_offline" width="18" height="18"/>
         <image name="icon_not_connected" width="43" height="24"/>
         <image name="icon_online" width="9" height="10"/>
         <image name="icon_person1" width="40" height="41"/>
