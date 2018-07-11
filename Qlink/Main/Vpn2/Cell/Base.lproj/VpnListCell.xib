@@ -39,7 +39,7 @@
                                         <rect key="frame" x="2" y="2" width="36" height="35"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_message_offline" translatesAutoresizingMaskIntoConstraints="NO" id="P3y-mn-Wtj">
-                                        <rect key="frame" x="28" y="0.0" width="18" height="18"/>
+                                        <rect key="frame" x="-6" y="0.0" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="Bmh-Gt-t2b"/>
                                             <constraint firstAttribute="height" constant="18" id="zJF-5b-dsC"/>
@@ -63,13 +63,13 @@
                                 <constraints>
                                     <constraint firstItem="ERM-A5-V7V" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="25i-SZ-F09"/>
                                     <constraint firstAttribute="trailing" secondItem="ERM-A5-V7V" secondAttribute="trailing" id="6Ng-Pg-0un"/>
-                                    <constraint firstAttribute="trailing" secondItem="P3y-mn-Wtj" secondAttribute="trailing" constant="-6" id="90I-II-VkC"/>
                                     <constraint firstAttribute="trailing" secondItem="yJZ-CT-OL2" secondAttribute="trailing" constant="2" id="AZG-6o-HOo"/>
                                     <constraint firstItem="4F2-Uk-XOp" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" id="ErR-rT-fWG"/>
                                     <constraint firstItem="yJZ-CT-OL2" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" constant="2" id="Gjg-ng-qzB"/>
                                     <constraint firstAttribute="bottom" secondItem="yJZ-CT-OL2" secondAttribute="bottom" constant="3" id="InR-cZ-0so"/>
                                     <constraint firstAttribute="height" constant="40" id="JvH-hu-guk"/>
                                     <constraint firstItem="4F2-Uk-XOp" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="OR1-kg-lA1"/>
+                                    <constraint firstItem="P3y-mn-Wtj" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" constant="-6" id="Owm-7S-eaK"/>
                                     <constraint firstItem="ERM-A5-V7V" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="leading" id="XrS-AV-gvV"/>
                                     <constraint firstAttribute="trailing" secondItem="yGq-B4-NXD" secondAttribute="trailing" id="gCG-6Y-VYB"/>
                                     <constraint firstAttribute="trailing" secondItem="4F2-Uk-XOp" secondAttribute="trailing" id="hUP-Mp-JuI"/>
