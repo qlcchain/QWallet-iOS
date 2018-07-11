@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -48,7 +48,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t65-2V-EW0">
-                                    <rect key="frame" x="144" y="23.5" width="87.5" height="21"/>
+                                    <rect key="frame" x="140.5" y="24" width="96" height="20"/>
                                     <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -162,7 +162,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFr-IL-Xv8">
                                                     <rect key="frame" x="125" y="0.0" width="125" height="150"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_qlc" translatesAutoresizingMaskIntoConstraints="NO" id="vvb-3n-Btg">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_qlc-1" translatesAutoresizingMaskIntoConstraints="NO" id="vvb-3n-Btg">
                                                             <rect key="frame" x="48.5" y="18" width="28" height="28"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="28" id="KYT-Mp-NUc"/>
@@ -173,7 +173,7 @@
                                                             <rect key="frame" x="48" y="55" width="30" height="18"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QLC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeV-E6-Klz">
-                                                                    <rect key="frame" x="6.5" y="3" width="18.5" height="12"/>
+                                                                    <rect key="frame" x="5.5" y="3" width="20.5" height="12"/>
                                                                     <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="10"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -224,7 +224,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8Q-Cg-EEe">
                                                     <rect key="frame" x="250" y="0.0" width="125" height="150"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gas" translatesAutoresizingMaskIntoConstraints="NO" id="cg3-2R-NkA">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bnb" translatesAutoresizingMaskIntoConstraints="NO" id="cg3-2R-NkA">
                                                             <rect key="frame" x="48.5" y="18" width="28" height="28"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="28" id="cBB-YT-lS9"/>
@@ -234,8 +234,8 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gK-Ro-hNp" customClass="SkyRadiusView">
                                                             <rect key="frame" x="47" y="55" width="30" height="18"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8s-Re-jss">
-                                                                    <rect key="frame" x="6" y="3" width="19" height="12"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BNB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8s-Re-jss">
+                                                                    <rect key="frame" x="5" y="3" width="21" height="12"/>
                                                                     <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="10"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -352,15 +352,15 @@
                 <constraint firstItem="6cD-dp-dTH" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="PRa-6N-9HN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-75.5" y="-289.5"/>
+            <point key="canvasLocation" x="-9" y="-321"/>
         </view>
     </objects>
     <resources>
-        <image name="icon_gas" width="27" height="26"/>
+        <image name="icon_bnb" width="26" height="25"/>
         <image name="icon_neo" width="27" height="26"/>
         <image name="icon_online" width="9" height="10"/>
         <image name="icon_owner" width="38" height="38"/>
-        <image name="icon_qlc" width="27" height="26"/>
+        <image name="icon_qlc-1" width="26" height="25"/>
         <image name="icon_setting" width="36" height="36"/>
     </resources>
 </document>
