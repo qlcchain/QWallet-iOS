@@ -637,10 +637,9 @@
  */
 - (void) updateRateLableValueWithRate:(RatesMode *) rate
 {
-    _lblNeo.text = [NSString stringWithFormat:@"1 NEO = %.8f QLC",[rate.neoInfo.qlc floatValue]];
+    _lblNeo.text = [NSString stringWithFormat:@"1 NEO = %.2f QLC",[rate.neoInfo.qlc floatValue]];
     _lblQlc.text = [NSString stringWithFormat:@"1 QLC = %.8f NEO",1.0/[rate.neoInfo.qlc floatValue]];
-    _lblGas.text = [NSString stringWithFormat:@"1 GAS = %.8f NEO",(1.0/[rate.neoInfo.qlc floatValue])*[rate.gasInfo.qlc floatValue]];
-    
+    _lblGas.text = [NSString stringWithFormat:@"1 BNB = %.2f QLC",[rate.bnbInfo.qlc floatValue]];
 }
 
 /**
@@ -672,12 +671,14 @@
                         _lblmyNEO.text = [NSString stringWithFormat:@"%.2f",[self.balanceInfo.neo floatValue]];
                     }
                     
-                    if ([self.balanceInfo.gas floatValue] == 0) {
-                        _lblmyGAS.text = @"0";
-                        self.balanceInfo.gas = @"0";
-                    } else {
-                        _lblmyGAS.text = [NSString stringWithFormat:@"%.2f",[self.balanceInfo.gas floatValue]];
-                    }
+                    _lblmyGAS.text = @"0";
+                    
+//                    if ([self.balanceInfo.gas floatValue] == 0) {
+//                        _lblmyGAS.text = @"0";
+//                        self.balanceInfo.gas = @"0";
+//                    } else {
+//                        _lblmyGAS.text = [NSString stringWithFormat:@"%.2f",[self.balanceInfo.gas floatValue]];
+//                    }
                 }
             }
         } else {

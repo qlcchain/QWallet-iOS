@@ -127,7 +127,7 @@
     if (_isConnectVPN) {
         [self addNewGuideVpnListConnect];
     }
-    [self addNewGuideClickWallet];
+   // [self addNewGuideClickWallet];
 }
 
 #pragma mark - Operation
