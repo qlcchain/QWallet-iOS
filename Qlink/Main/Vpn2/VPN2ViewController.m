@@ -757,8 +757,6 @@ static BOOL refreshAnimate = YES;
 
 #pragma mark - Action
 - (IBAction)clickAdd:(id)sender {
-    NSArray *ddd = @[];
-    ddd[1];
     [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_ADD];
 }
 
