@@ -32,7 +32,7 @@
 
 @import Firebase;
 
-@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
+@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate, BuglyDelegate> {
     UIBackgroundTaskIdentifier backTaskI;
 }
 
@@ -70,7 +70,7 @@
     // 配置Bugly
     [self configBugly];
     // 配置项目崩溃捕获
-    [self configExceptionHandler];
+//    [self configExceptionHandler];
     // 配置FMDB
     [self configureFMDB];
     // 删除手机VPN配置
@@ -117,8 +117,13 @@
 
 #pragma mark - 配置Bugly
 - (void)configBugly {
-    [Bugly startWithAppId:Bugly_AppID];
+    BuglyConfig * config = [[BuglyConfig alloc] init];
+    // 设置自定义日志上报的级别，默认不上报自定义日志
+//    config.reportLogLevel = BuglyLogLevelWarn;
+    config.delegate = self;
+    [Bugly startWithAppId:Bugly_AppID config:config];
 }
+
 #pragma mark - 配置手势 默认开启
 - (void) configTouch {
     NSString *touchStatu = [HWUserdefault getStringWithKey:TOUCH_SWITCH_KEY];
@@ -126,6 +131,7 @@
         [HWUserdefault insertString:@"1" withkey:TOUCH_SWITCH_KEY];
     }
 }
+
 #pragma mark -// 配置主网钱包 0-测试网。1- 主网
 - (void) configServerNetwork {
     NSString *serverNetwork = [HWUserdefault getStringWithKey:SERVER_NETWORK];
@@ -133,6 +139,7 @@
         [HWUserdefault insertString:@"0" withkey:SERVER_NETWORK];
     }
 }
+
 #pragma mark - 配置App语言
 - (void) configAppLanguage {
     NSString *languages = [[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES];
@@ -140,6 +147,7 @@
         [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
     }
 }
+
 #pragma mark - 配置DDLog
 - (void)configDDLog {
     //开启DDLog 颜色
@@ -185,11 +193,11 @@
     keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
 }
 
-#pragma mark - 配置项目崩溃捕获
-- (void) configExceptionHandler
-{
-    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-}
+//#pragma mark - 配置项目崩溃捕获
+//- (void) configExceptionHandler
+//{
+//    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+//}
 
 #pragma mark - 创建p2pid
 - (void) configToxP2PNetwork {
@@ -468,27 +476,33 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
         if (messageId!=nil) {
             [MiPushSDK openAppNotify:messageId];
         }
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"gg" message:[NSString stringWithFormat:@"%@", userInfo] preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *act = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//
-//        }];
-//        [alert addAction:act];
-//        [nav presentViewController:alert animated:YES completion:nil];
     }
 }
 
+#pragma mark - BuglyDelegate
 /**
- *  获取异常崩溃信息   上传data 到keychain
+ *  发生异常时回调
+ *
+ *  @param exception 异常信息
+ *
+ *  @return 返回需上报记录，随异常上报一起上报
  */
-void UncaughtExceptionHandler(NSException *exception) {
-    
+- (NSString *)attachmentForException:(NSException *)exception  {
     [SystemUtil configureAPPTerminate];
-    //    NSArray *callStack = [exception callStackSymbols];
-    //    NSString *reason = [exception reason];
-    //    NSString *name = [exception name];
-    //    NSString *content = [NSString stringWithFormat:@"========异常错误报告========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[callStack componentsJoinedByString:@"\n"]];
-    //    DDLogDebug(@"%@",content);
+    return nil;
 }
+
+///**
+// *  获取异常崩溃信息   上传data 到keychain
+// */
+//void UncaughtExceptionHandler(NSException *exception) {
+//    [SystemUtil configureAPPTerminate];
+//    //    NSArray *callStack = [exception callStackSymbols];
+//    //    NSString *reason = [exception reason];
+//    //    NSString *name = [exception name];
+//    //    NSString *content = [NSString stringWithFormat:@"========异常错误报告========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[callStack componentsJoinedByString:@"\n"]];
+//    //    DDLogDebug(@"%@",content);
+//}
 
 @end
 
