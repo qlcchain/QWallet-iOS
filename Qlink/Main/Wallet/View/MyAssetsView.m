@@ -92,7 +92,6 @@
         finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull order by %@ desc",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet"),bg_sqlKey(@"bg_createTime")]];
     }
     
- 
     //NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
     if (self.soureArray.count > 0) { // 更新keyChain
         [VPNOperationUtil saveArrayToKeyChain];

@@ -272,11 +272,11 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
 //    @weakify_self
-    backTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
-        // 程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作
-//        [SystemUtil configureAPPTerminate];
-//        [weakSelf endBackTask];
-    }];
+//    backTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
+//        // 程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作
+////        [SystemUtil configureAPPTerminate];
+////        [weakSelf endBackTask];
+//    }];
 }
 
 - (void)endBackTask {

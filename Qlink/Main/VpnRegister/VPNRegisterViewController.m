@@ -542,7 +542,8 @@
             // 修改本地数据库
             [weakSelf.vpnInfo bg_saveOrUpdateAsync:^(BOOL isSuccess) {
                 if (isSuccess) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_ASSETS_TZ object:nil];
+                    [weakSelf performSelector:@selector(sendUpdateVPNRequest) withObject:nil afterDelay:1.5];
+                   
                 }
             }];
             [weakSelf back];
@@ -554,6 +555,12 @@
         [AppD.window hideHud];
         [AppD.window showHint:error.domain];
     }];
+}
+
+#pragma mark - 发送更新VPN通知
+- (void) sendUpdateVPNListNoti
+{
+     [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_ASSETS_TZ object:nil];
 }
 
 #pragma mark - Aciton
