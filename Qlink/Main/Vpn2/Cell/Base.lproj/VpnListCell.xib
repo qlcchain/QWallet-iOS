@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,16 +111,10 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u02-Iu-qqJ">
-                                <rect key="frame" x="82" y="56" width="29.5" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Successful Connections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u02-Iu-qqJ">
+                                <rect key="frame" x="82" y="56" width="107.5" height="12"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total successful connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhe-eC-6IK">
-                                <rect key="frame" x="137" y="56" width="123" height="12"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
-                                <color key="textColor" red="0.6588235294" green="0.65098039220000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egb-N8-XB1">
@@ -151,7 +145,6 @@
                             <constraint firstItem="5Ip-Rz-e1A" firstAttribute="leading" secondItem="zA7-S3-nOg" secondAttribute="leading" id="D4l-rY-aSC"/>
                             <constraint firstItem="R8e-ZF-56e" firstAttribute="centerY" secondItem="pQq-nX-4ur" secondAttribute="centerY" id="Ixy-vS-Sra"/>
                             <constraint firstItem="egb-N8-XB1" firstAttribute="top" secondItem="WbY-Tk-ZZK" secondAttribute="top" constant="20" id="KPL-jE-n6P"/>
-                            <constraint firstItem="bhe-eC-6IK" firstAttribute="leading" secondItem="R8e-ZF-56e" secondAttribute="leading" id="KhY-8w-TkJ"/>
                             <constraint firstItem="Goq-95-bfL" firstAttribute="top" secondItem="WbY-Tk-ZZK" secondAttribute="top" constant="12" id="Xk9-xE-u8c"/>
                             <constraint firstItem="zA7-S3-nOg" firstAttribute="leading" secondItem="nml-rT-FJ8" secondAttribute="leading" id="cb5-e0-wwz"/>
                             <constraint firstAttribute="trailing" secondItem="egb-N8-XB1" secondAttribute="trailing" constant="18" id="dkb-Nu-fhg"/>
@@ -162,7 +155,6 @@
                             <constraint firstItem="pQq-nX-4ur" firstAttribute="leading" secondItem="zA7-S3-nOg" secondAttribute="trailing" constant="4" id="uJy-UL-LqQ"/>
                             <constraint firstAttribute="bottom" secondItem="tOk-gQ-s2S" secondAttribute="bottom" id="vLG-7J-hOI"/>
                             <constraint firstItem="u02-Iu-qqJ" firstAttribute="centerY" secondItem="5Ip-Rz-e1A" secondAttribute="centerY" id="vWt-Mw-lMe"/>
-                            <constraint firstItem="bhe-eC-6IK" firstAttribute="centerY" secondItem="u02-Iu-qqJ" secondAttribute="centerY" id="vm8-3g-t7d"/>
                             <constraint firstItem="zA7-S3-nOg" firstAttribute="top" secondItem="nml-rT-FJ8" secondAttribute="bottom" constant="10" id="z1t-Id-rGQ"/>
                             <constraint firstItem="nml-rT-FJ8" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="zPC-gJ-Lnp"/>
                         </constraints>
@@ -187,7 +179,7 @@
                 <outlet property="statusImageView" destination="yGq-B4-NXD" id="crX-Xs-dFd"/>
                 <outlet property="vpnNameLab" destination="nml-rT-FJ8" id="eFv-YC-e2X"/>
             </connections>
-            <point key="canvasLocation" x="81" y="52"/>
+            <point key="canvasLocation" x="-33" y="9"/>
         </tableViewCell>
     </objects>
     <resources>

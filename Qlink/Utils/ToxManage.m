@@ -152,7 +152,7 @@ static ToxManage *toxManage = nil;
             return @"";
         }
     }
-    return p2pid;
+    return p2pid?:@"";
     
 //    NSString *p2pid = @"";
 //    char p2pId[38*2+1];
