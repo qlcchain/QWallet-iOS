@@ -613,9 +613,16 @@
 }
 
 - (IBAction)importProfileAction:(id)sender {
+    NSArray *ovpnArr = [VPNFileUtil getAllVPNName]?:@[];
+    if (ovpnArr.count <= 0) {
+        NSString *msg = NSStringLocalizable(@"Import_File");
+        NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
+        [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"tip") msg:msgArrtrbuted isShowTwoBtn:NO block:nil];
+        return;
+    }
+    
     @weakify_self
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *ovpnArr = [VPNFileUtil getAllVPNName]?:@[];
     [ovpnArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIAlertAction *alert = [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             weakSelf.selectName = obj;
