@@ -139,6 +139,7 @@
     if (!checkConnnectOK) {
         [AppD.window hideHud];
         [AppD.window showHint:NSStringLocalizable(@"connect_timeout")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Check_Connect_Timeout_Noti object:nil];
     }
 }
 
