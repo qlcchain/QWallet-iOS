@@ -54,22 +54,12 @@
 }
 
 + (void)deleteVPNConfig {
-    if (![SystemUtil isSpecialDevice]) {
-        // 断开vpn连接
-        [VPNUtil.shareInstance stopVPN];
-        // 删除vpn本地配置
-        [VPNUtil.shareInstance removeFromPreferences];
-        // 删除当前VPNInfo
-        [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
-    }
-}
-
-+ (BOOL)isSpecialDevice {
-//    NSString *deviceName = [UIDevice currentDevice].name;
-//    NSArray *dadaArr = @[@"JellyFoo I7"];
-//    NSArray *dadaArr = @[];
-//    return [dadaArr containsObject:deviceName];
-    return NO;
+    // 断开vpn连接
+    [VPNUtil.shareInstance stopVPN];
+    // 删除vpn本地配置
+    [VPNUtil.shareInstance removeFromPreferences];
+    // 删除当前VPNInfo
+    [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
 }
 
 @end

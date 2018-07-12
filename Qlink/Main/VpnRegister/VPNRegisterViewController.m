@@ -345,8 +345,11 @@
                 weakSelf.registerType = RegisterVPN;
                 _assetIsValidate = NO;
                 NSString *msg = NSStringLocalizable(@"repeat_vpn_name");
-                NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
-                [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"tip") msg:msgArrtrbuted isShowTwoBtn:NO block:nil];
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *alertOK = [UIAlertAction actionWithTitle:NSStringLocalizable(@"ok") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                }];
+                [alertC addAction:alertOK];
+                [self presentViewController:alertC animated:YES completion:nil];
                 
 //                return;
 //                weakSelf.registerType = SeizeVPNWhenRegister;
@@ -616,8 +619,11 @@
     NSArray *ovpnArr = [VPNFileUtil getAllVPNName]?:@[];
     if (ovpnArr.count <= 0) {
         NSString *msg = NSStringLocalizable(@"Import_File");
-        NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
-        [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"tip") msg:msgArrtrbuted isShowTwoBtn:NO block:nil];
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertOK = [UIAlertAction actionWithTitle:NSStringLocalizable(@"ok") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alertC addAction:alertOK];
+        [self presentViewController:alertC animated:YES completion:nil];
         return;
     }
     
