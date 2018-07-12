@@ -47,6 +47,7 @@
 //        }
     }];
     _priceLab.text = _vpnInfo.cost;
+    _countryLab.text = _vpnInfo.country;
     _connectNumLab.text = _vpnInfo.connsuccessNum;
     UIImage *offlineImg = [UIImage imageNamed:@"icon_offline"];
     UIImage *onlineImg = [UIImage imageNamed:@"icon_online"];

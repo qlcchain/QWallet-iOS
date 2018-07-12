@@ -23,6 +23,7 @@ typedef void(^ConversationBlock)(void);
 @property (weak, nonatomic) IBOutlet UILabel *vpnNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
 @property (weak, nonatomic) IBOutlet UILabel *priceUnitLab;
+@property (weak, nonatomic) IBOutlet UILabel *countryLab;
 @property (weak, nonatomic) IBOutlet UILabel *connectNumLab;
 @property (weak, nonatomic) IBOutlet UILabel *connectNumUnitLab;
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
