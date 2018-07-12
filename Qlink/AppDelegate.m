@@ -270,7 +270,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    @weakify_self
+    
+//    @weakify_self
     backTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
         // 程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作
 //        [SystemUtil configureAPPTerminate];
@@ -423,23 +424,6 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 #else
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options
 {
-//    NSString *fileURL = url.absoluteString;
-//    NSArray *array = [fileURL componentsSeparatedByString:@"."];
-//    NSString *fileName = [array lastObject];
-//    if(array && [fileName isEqualToString:@"ovpn"]) {
-//        array = [fileURL componentsSeparatedByString:@"/"];
-//        NSString *vpnFileName = [array lastObject];
-//
-//        [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:4.0];
-//
-//        VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
-//        fileView.lblMsg.text =@"Save as the current file name ?";
-//        fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
-//        fileView.vpnURL = url;
-//       // UIWindow *win = [UIApplication sharedApplication].keyWindow;
-//        [fileView showVPNFileInputView:_window];
-//    }
-    
     if ([_window.rootViewController isKindOfClass:[QlinkTabbarViewController class]]) {
         [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:.5f];
     } else {
@@ -450,8 +434,8 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     return YES;
 }
 #endif
-- (void) showVPNFileView:(NSURL *) url
-{
+
+- (void) showVPNFileView:(NSURL *) url {
     NSString *fileURL = url.absoluteString;
     NSArray *array = [fileURL componentsSeparatedByString:@"."];
     NSString *fileName = [array lastObject];
