@@ -46,6 +46,8 @@
 #import "GuideVpnListConnectView.h"
 #import "ChooseCountryView.h"
 #import "VpnConnectUtil.h"
+#import "NSDate+Category.h"
+#import "NSDateFormatter+Category.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -398,15 +400,36 @@ static BOOL refreshAnimate = YES;
 
 // 显示连接提示
 - (void)showConnectAlert:(VPNInfo *)vpnInfo {
-    NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),vpnInfo.cost];
-    NSString *image = @"icon_even";
-    @weakify_self
-    [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+    
+    BOOL isShowAlert = YES;
+    // 获取vpn上次连接时间
+    NSString *connectTime = [HWUserdefault getStringWithKey:vpnInfo.vpnName];
+    if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
+        // 判断上次连接时间 超过一时间扣费
+        NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+        NSDate *backDate = [dateFormatrer dateFromString:connectTime];
+        // 判断日期相隔时间
+        NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
+        //超过一时间扣费
+        if (labs(hours) < 1) {
+            isShowAlert = NO;
+        }
+    }
+    if (isShowAlert) {
+        NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),vpnInfo.cost];
+        NSString *image = @"icon_even";
+        @weakify_self
+        [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+            vpnInfo.connectStatus = VpnConnectStatusConnecting;
+            [weakSelf refreshTable];
+            [weakSelf goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+        }];
+    } else {
         vpnInfo.connectStatus = VpnConnectStatusConnecting;
-        [weakSelf refreshTable];
-        
-        [weakSelf goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
-    }];
+        [self refreshTable];
+        [self goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+    }
+   
 }
 
 // 显示断开连接提示
