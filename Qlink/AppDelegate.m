@@ -53,6 +53,8 @@
     [self configAppLanguage];
     // 配置主网钱包 0-测试网。1- 主网
     [self configServerNetwork];
+    // 删除手机VPN配置
+    [SystemUtil deleteVPNConfig];
     // 开启VPN连接扣费
     [TransferUtil startVPNConnectTran];
     // 初始化当前钱包
@@ -73,8 +75,6 @@
 //    [self configExceptionHandler];
     // 配置FMDB
     [self configureFMDB];
-    // 删除手机VPN配置
-    [SystemUtil deleteVPNConfig];
     // 发送json请求
     [ToxManage sendReqeuestToxJson];
     // 创建p2pid
