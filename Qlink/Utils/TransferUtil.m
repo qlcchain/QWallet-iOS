@@ -22,6 +22,24 @@
 int requestCont = 0;
 dispatch_source_t _timer;
 
+//@interface BecomeTranferMode : BBaseModel
+//
+//@property (nonatomic ,strong) NSString *vpnName;
+//@property (nonatomic , strong) NSString *vpnConnectTime;
+//@property (nonatomic , strong) NSString *p2pId;
+//@property (nonatomic , strong) NSString *transferSuccessTime;
+//@property (nonatomic , strong) NSString *tranferAddress;
+//@property (nonatomic , strong) NSString *tranferCost;
+//@property (nonatomic ,strong) NSString *recordId;
+//@property (nonatomic , assign) BOOL isTranferSuccess;
+//@property (nonatomic , assign) BOOL isBecomeTranfer;
+//@property (nonatomic , assign) BOOL isCurrentConnect;
+//
+//@end
+//
+//@implementation BecomeTranferMode
+//
+//@end
 
 @implementation TransferUtil
 
@@ -105,6 +123,8 @@ dispatch_source_t _timer;
                 VPNTranferMode *tranVPNMode = (VPNTranferMode *)obj;
                 if ([tranVPNMode.vpnName isEqualToString:mode.vpnName]) {
                     tranVPNMode.isCurrentConnect = mode.isCurrentConnect;
+                    tranVPNMode.isTranferSuccess = mode.isTranferSuccess;
+                    tranVPNMode.vpnConnectTime = mode.vpnConnectTime;
                     isExit = YES;
                 }
             }];
@@ -123,14 +143,13 @@ dispatch_source_t _timer;
                     NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
                     NSDate *backDate = [dateFormatrer dateFromString:connectTime];
                     // 判断日期相隔时间
-                    NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
+                    NSInteger minu = [[NSDate date] minutesAfterDate:backDate];
                     // 小于1小时不扣费 并且 上次扣费要成功
-                    if (labs(hours) >= 1) {
+                    if (labs(minu) >= VPN_TRANFER_TIME) {
                          NSString *enterBackTime = [[NSDate date] formattedDateYearYueRi:@"yyyy-MM-dd HH:mm:ss"];
                         tranVPNMode.vpnConnectTime = enterBackTime;
                         tranVPNMode.isTranferSuccess = NO;
                         tranVPNMode.isBecomeTranfer = NO;
-                        
                         
                         NSArray *list = [HWUserdefault getObjectWithKey:VPN_CONNECT_LIST];
                         NSMutableArray *array = [NSMutableArray arrayWithArray:list];
@@ -240,21 +259,32 @@ dispatch_source_t _timer;
     NSString *vpnCost = @"";
     NSString *recordId = @"";
     NSString *p2pId = @"";
+    
+    NSDate *tranferDate = nil;
+    
     if ([vpnObject isKindOfClass:[VPNInfo class]]) {
         VPNInfo *vpnInfo = vpnObject;
         vpnName = vpnInfo.vpnName;
         vpnCost = vpnInfo.cost;
         recordId = vpnInfo.recordId;
         p2pId = vpnInfo.p2pId;
+        tranferDate = [NSDate date];
     } else {
         VPNTranferMode *vpnInfo = vpnObject;
         vpnName = vpnInfo.vpnName;
         vpnCost = vpnInfo.tranferCost;
         recordId = vpnInfo.recordId;
         p2pId = vpnInfo.p2pId;
+        NSString *connectTime = vpnInfo.vpnConnectTime;
+        if([connectTime isBlankString]) {
+            tranferDate = [NSDate date];
+        } else {
+            NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+            tranferDate = [dateFormatrer dateFromString:connectTime];
+        }
     }
     
-    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,@"p2pId":p2pid,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:[NSDate date]]],TX_ID:[NSStringUtil getNotNullValue:recordId]};
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,@"p2pId":p2pid,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId]};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
@@ -299,28 +329,46 @@ dispatch_source_t _timer;
 #pragma mark- 连接VPN成功后本地存在 修到VPN连接状态
 + (void)udpateTransferModel:(VPNInfo *) vpnInfo {
     
-    NSArray *list = [HWUserdefault getObjectWithKey:VPN_CONNECT_LIST];
+    NSMutableArray *list = [NSMutableArray arrayWithArray:[HWUserdefault getObjectWithKey:VPN_CONNECT_LIST]];
     if (!list || list.count == 0) {
         [TransferUtil saveVPNListToUserdefaultWithVPNInfo:vpnInfo vpnList:list];
     } else {
        __block BOOL isExit = NO;
+        __block NSMutableArray *vpnList = [NSMutableArray array];
         [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:obj];
             if ([tranferMode.vpnName isEqualToString:vpnInfo.vpnName]) {
+                
+                // 判断上次连接时间 超过一时间扣费
+                NSString *connectTime = tranferMode.vpnConnectTime;
+                NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+                NSDate *backDate = [dateFormatrer dateFromString:connectTime];
+                // 判断日期相隔时间
+                NSInteger minu = [[NSDate date] minutesAfterDate:backDate];
+                // 小于1小时不扣费 并且 上次扣费要成功
+                if (labs(minu) >= VPN_TRANFER_TIME) {
+                    NSString *enterBackTime = [[NSDate date] formattedDateYearYueRi:@"yyyy-MM-dd HH:mm:ss"];
+                    tranferMode.vpnConnectTime = enterBackTime;
+                    tranferMode.isTranferSuccess = NO;
+                    tranferMode.isBecomeTranfer = NO;
+                }
                 tranferMode.isCurrentConnect = YES;
                 isExit = YES;
-                *stop = YES;
             } else {
                 tranferMode.isCurrentConnect = NO;
             }
+            [vpnList addObject:[tranferMode mj_keyValues]];
         }];
+       
         if (!isExit) {
             [TransferUtil saveVPNListToUserdefaultWithVPNInfo:vpnInfo vpnList:list];
+        } else {
+             [HWUserdefault insertObj:vpnList withkey:VPN_CONNECT_LIST];
         }
     }
 }
 #pragma mark- 连接VPN成功后本地不存在 保存到VPNList
-+ (void) saveVPNListToUserdefaultWithVPNInfo:(VPNInfo *)vpnInfo vpnList:(NSArray *) list
++ (void) saveVPNListToUserdefaultWithVPNInfo:(VPNInfo *)vpnInfo vpnList:(NSMutableArray *) list
 {
     VPNTranferMode *tranferMode = [[VPNTranferMode alloc] init];
     tranferMode.vpnName = vpnInfo.vpnName?:@"";
@@ -330,14 +378,12 @@ dispatch_source_t _timer;
     tranferMode.p2pId = vpnInfo.p2pId ?:@"";
     NSString *enterBackTime = [[NSDate date] formattedDateYearYueRi:@"yyyy-MM-dd HH:mm:ss"];
     tranferMode.vpnConnectTime = enterBackTime;
-    NSMutableArray *listArray = nil;
     if (list) {
-        listArray = [NSMutableArray arrayWithArray:list];
-        [listArray addObject:[tranferMode mj_keyValues]];
+        [list addObject:[tranferMode mj_keyValues]];
     } else {
-        listArray = [NSMutableArray arrayWithObjects:[tranferMode mj_keyValues], nil];
+        list = [NSMutableArray arrayWithObjects:[tranferMode mj_keyValues], nil];
     }
-    [HWUserdefault insertObj:listArray withkey:VPN_CONNECT_LIST];
+    [HWUserdefault insertObj:list withkey:VPN_CONNECT_LIST];
 }
 
 #pragma mark - 发送转帐QLC请求方法
@@ -365,7 +411,6 @@ dispatch_source_t _timer;
         } else {
             
             // NSLog(@"%@ txid = %@",vpnInfo.vpnName,complete);
-            
             // 发送交易请求
             NSNumber *typeNum = @(3);
             NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":[CurrentWalletInfo getShareInstance].address ,@"tx":complete,@"qlc":vpnInfo.tranferCost,@"fromP2pId":[NSStringUtil getNotNullValue:[ToxManage getOwnP2PId]],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.tranferAddress],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
@@ -425,6 +470,7 @@ dispatch_source_t _timer;
         VPNTranferMode *mode = (VPNTranferMode *)obj;
         if ([mode.vpnName isEqualToString:vpnName]) {
             mode.isTranferSuccess = YES;
+            mode.isBecomeTranfer = NO;
         }
     }];
     
