@@ -103,8 +103,7 @@
 }
 
 // 是否需要显示引导页
-- (void) checkGuidenPage
-{
+- (void)checkGuidenPage {
     NSString *version = [HWUserdefault getStringWithKey:VERSION_KEY];
     if (![[NSStringUtil getNotNullValue:version] isEqualToString:APP_Version]) {
         [HWUserdefault insertString:APP_Version withkey:VERSION_KEY];
@@ -237,8 +236,7 @@
 }
 
 #pragma mark - 配置FMDB
-- (void) configureFMDB
-{
+- (void) configureFMDB {
     /**
      想测试更多功能,打开注释掉的代码即可.
      */
@@ -320,12 +318,12 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
         //iOS 10 使用以下方法注册，才能得到授权
         [userCenter requestAuthorizationWithOptions:options
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
-                                  if (granted) { // 用户允许
-                                      
-                                  } else {  // 用户不允许
-                                      
-                                  }
-                              }];
+              if (granted) { // 用户允许
+                  
+              } else {  // 用户不允许
+                  
+              }
+          }];
 
 //    } else {
 //        // Fallback on earlier versions
@@ -356,8 +354,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 /**
  前台显示通知
  */
-- (void) showNotificationAlertViewWtihDic:(NSDictionary *) userInfo
-{
+- (void) showNotificationAlertViewWtihDic:(NSDictionary *) userInfo {
     NotifactionView *notiView = [NotifactionView loadNotifactionView];
    
     notiView.lblTtile.text = [userInfo objectForKey:@"title"];
