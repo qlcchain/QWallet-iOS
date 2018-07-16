@@ -257,7 +257,9 @@
     
     if (!connectIsExist) { // 没有则添加
         VPNInfo *connectInfo = [TransferUtil currentConnectVPNInfo];
-        [self.sourceArr addObject:connectInfo];
+        if (connectInfo) {
+            [self.sourceArr addObject:connectInfo];
+        }
     }
 }
 
