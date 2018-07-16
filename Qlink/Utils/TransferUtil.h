@@ -11,6 +11,10 @@
 
 @interface TransferUtil : NSObject
 
+@property (nonatomic , strong) NSMutableArray *vpnList;
+
++ (instancetype) getShareObject;
+
 + (void) sendFundsRequestWithType:(int)type withVPNInfo:(VPNInfo *) vpnInfo;
 + (void) sendLocalNotificationWithQLC:(NSString *) qlc isIncome:(BOOL) isIncome;
 
@@ -22,4 +26,6 @@
 + (VPNInfo *) currentConnectVPNInfo;
 + (NSString *) currentVPNName;
 + (void) sendVPNConnectSuccessMessageWithVPNInfo:(VPNInfo *) vpnInfo withType:(NSInteger) type;
++ (void)udpateTransferModel:(VPNInfo *) vpnInfo;
+
 @end

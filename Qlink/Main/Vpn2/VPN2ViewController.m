@@ -48,6 +48,8 @@
 #import "VpnConnectUtil.h"
 #import "NSDate+Category.h"
 #import "NSDateFormatter+Category.h"
+#import "TransferUtil.h"
+#import "VPNTranferMode.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -112,7 +114,6 @@
     [self startLocation];
     // 获取当前选择的国家--发送获取vpn列表请求
     [self checkCurrentChooseCountry];
-    
 }
 
 #pragma mark - 获取当前选择的国家--发送获取vpn列表请求
@@ -401,18 +402,25 @@ static BOOL refreshAnimate = YES;
     
     BOOL isShowAlert = YES;
     // 获取vpn上次连接时间
-    NSString *connectTime = [HWUserdefault getStringWithKey:vpnInfo.vpnName];
-    if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
-        // 判断上次连接时间 超过一时间扣费
-        NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
-        NSDate *backDate = [dateFormatrer dateFromString:connectTime];
-        // 判断日期相隔时间
-        NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
-        //超过一时间扣费
-        if (labs(hours) < 1) {
-            isShowAlert = NO;
+    NSDictionary *modeDic = [HWUserdefault getObjectWithKey:vpnInfo.vpnName];
+    VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:modeDic];
+    if (tranferMode) {
+        NSString *connectTime = tranferMode.vpnConnectTime;
+        if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
+            // 判断上次连接时间 超过一时间扣费
+            NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+            NSDate *backDate = [dateFormatrer dateFromString:connectTime];
+            // 判断日期相隔时间
+            NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
+            //超过一时间扣费
+            if (labs(hours) < 1) {
+                if (tranferMode.isTranferSuccess) {
+                    isShowAlert = NO;
+                }
+            }
         }
     }
+    
     if (isShowAlert) {
         NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),vpnInfo.cost];
         NSString *image = @"icon_even";
@@ -556,7 +564,13 @@ static BOOL refreshAnimate = YES;
             break;
         case NEVPNStatusConnected:
         {
-            [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
+            
+            if (![[CurrentWalletInfo getShareInstance].address isEqualToString:_selectVPNInfo.address]) {
+                
+                [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
+                [TransferUtil udpateTransferModel:_selectVPNInfo];
+                
+            }
             _currentConnectVPNName = _selectVPNInfo.vpnName;
             [self refreshVPNConnect];
             // vpn连接记录写入数据库
