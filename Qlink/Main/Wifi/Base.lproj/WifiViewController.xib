@@ -42,6 +42,16 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgF-mk-f8M">
+                                    <rect key="frame" x="166" y="11.5" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="cMi-qj-avt"/>
+                                        <constraint firstAttribute="width" constant="44" id="eMj-Fw-QmX"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="debugLogAction:" destination="-1" eventType="touchUpInside" id="tJ2-6w-Fz6"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rds-19-XQv" customClass="UserHeadBtn">
                                     <rect key="frame" x="20" y="14" width="38" height="38"/>
                                     <constraints>
@@ -59,7 +69,9 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="67" id="3ih-EM-GPb"/>
+                                <constraint firstItem="ZgF-mk-f8M" firstAttribute="centerX" secondItem="11l-pt-Ge9" secondAttribute="centerX" id="GNn-VP-mrp"/>
                                 <constraint firstItem="11l-pt-Ge9" firstAttribute="centerX" secondItem="Ye0-rf-J8Q" secondAttribute="centerX" id="HYG-7p-ByK"/>
+                                <constraint firstItem="ZgF-mk-f8M" firstAttribute="centerY" secondItem="11l-pt-Ge9" secondAttribute="centerY" id="NK4-U3-ooY"/>
                                 <constraint firstItem="Rds-19-XQv" firstAttribute="leading" secondItem="Ye0-rf-J8Q" secondAttribute="leading" constant="20" id="Poz-hi-jHr"/>
                                 <constraint firstItem="HhU-on-ZDl" firstAttribute="leading" secondItem="Rds-19-XQv" secondAttribute="trailing" constant="-10" id="Ya1-M1-pbP"/>
                                 <constraint firstItem="11l-pt-Ge9" firstAttribute="centerY" secondItem="Ye0-rf-J8Q" secondAttribute="centerY" id="ZTA-z0-yvT"/>
@@ -167,7 +179,7 @@
                 <constraint firstItem="AW2-3S-HfK" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="miB-K6-fQP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-273" y="-1908"/>
+            <point key="canvasLocation" x="-273.5" y="-1908.5"/>
         </view>
     </objects>
     <resources>
