@@ -116,27 +116,25 @@
     [self checkCurrentChooseCountry];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self refreshVPNConnect];
+    
+    [self addNewGuideClickWallet];
+}
+
+#pragma mark - Operation
 #pragma mark - 获取当前选择的国家--发送获取vpn列表请求
 - (void) checkCurrentChooseCountry {
-   CountryModel *currentCountry =  [CountryModel mj_objectWithKeyValues:[HWUserdefault getObjectWithKey:CURRENT_SELECT_COUNTRY]];
+    CountryModel *currentCountry =  [CountryModel mj_objectWithKeyValues:[HWUserdefault getObjectWithKey:CURRENT_SELECT_COUNTRY]];
     if (currentCountry) {
         [self refreshCountry:currentCountry];
     } else {
         [self requestQueryVpn];
     }
-   
+    
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self refreshVPNConnect];
-    if (_isConnectVPN) {
-        [self addNewGuideVpnListConnect];
-    }
-    [self addNewGuideClickWallet];
-}
-
-#pragma mark - Operation
 - (BOOL)selectVpnIsMine {
     NSString *myP2pId = [ToxManage getOwnP2PId];
     return [_selectVPNInfo.p2pId isEqualToString:myP2pId]?YES:NO;
@@ -540,7 +538,6 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)vpnStatusChange:(NSNotification *)noti {
-    
     VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
     if (operationType == registerConnect) { // 注册连接vpn不用管
         return;
@@ -566,15 +563,15 @@ static BOOL refreshAnimate = YES;
             break;
         case NEVPNStatusConnected:
         {
-            
             if (![[CurrentWalletInfo getShareInstance].address isEqualToString:_selectVPNInfo.address]) {
-                
                 [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
                 [TransferUtil udpateTransferModel:_selectVPNInfo];
-                
             }
             _currentConnectVPNName = _selectVPNInfo.vpnName;
             [self refreshVPNConnect];
+            if (_isConnectVPN) {
+                [self addNewGuideVpnListConnect];
+            }
             // vpn连接记录写入数据库
             if (![self selectVpnIsMine]) {
                 // vpn连接成功进行转账

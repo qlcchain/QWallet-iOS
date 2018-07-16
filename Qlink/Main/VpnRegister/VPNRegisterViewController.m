@@ -50,7 +50,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *privateKeyTF;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
-@property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
 @property (nonatomic, strong) NSString *selectName;
 @property (nonatomic, strong) NSString *profileName;
 
@@ -254,7 +253,7 @@
     }
     
     // 验证VPN是否能连接
-    _isVerifyVPN = YES;
+    [VPNOperationUtil shareInstance].isVerifyVPN = YES;
     
     NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:self.selectName];
     NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
@@ -293,8 +292,8 @@
             case NEVPNStatusConnected:
         {
             [AppD.window hideHud];
-            if (_isVerifyVPN) { // 如果是验证操作的话，断开连接
-                _isVerifyVPN = NO;
+            if ([VPNOperationUtil shareInstance].isVerifyVPN) { // 如果是验证操作的话，断开连接
+                [VPNOperationUtil shareInstance].isVerifyVPN = NO;
                 connectVpnDone = YES;
                 [self performSelector:@selector(requestRegisterVpnByFeeV3) withObject:nil afterDelay:0.6];
                 //                [VPNUtil.shareInstance stopVPN];
@@ -308,8 +307,8 @@
             case NEVPNStatusDisconnecting:
         {
             [AppD.window hideHud];
-            if (_isVerifyVPN) { // 如果是验证操作的话
-                _isVerifyVPN = NO;
+            if ([VPNOperationUtil shareInstance].isVerifyVPN) { // 如果是验证操作的话
+                [VPNOperationUtil shareInstance].isVerifyVPN = NO;
                 connectVpnDone = YES;
                 [self.view showHint:NSStringLocalizable(@"check_profile")];
             }
