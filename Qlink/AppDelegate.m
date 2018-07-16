@@ -55,6 +55,8 @@
     [self configServerNetwork];
     // 删除手机VPN配置
     [SystemUtil deleteVPNConfig];
+    // 将连接状态置为NO
+    [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     // 开启VPN连接扣费
     [TransferUtil startVPNConnectTran];
     // 初始化当前钱包

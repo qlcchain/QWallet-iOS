@@ -62,8 +62,7 @@
     [VPNUtil.shareInstance removeFromPreferences];
     // 删除当前VPNInfo
     [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
-    // 将连接状态置为NO
-    [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
+    
 }
 
 @end
