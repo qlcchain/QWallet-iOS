@@ -17,10 +17,10 @@
     [user synchronize];
 }
 
-+ (NSString *)getObjectWithKey:(NSString *)key
++ (id)getObjectWithKey:(NSString *)key
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *object = [user objectForKey:key];
+    id object = [user objectForKey:key];
     return object;
 }
 
