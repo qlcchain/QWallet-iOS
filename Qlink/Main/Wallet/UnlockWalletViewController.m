@@ -90,7 +90,6 @@
         [AppD.window showHint:NSStringLocalizable(@"pass_format")];
         return;
     }
-   
     NSString *passStr = [WalletUtil getKeyValue:WALLET_PASS_KEY];
     if ([passStr isEqualToString:_pwTF.text.trim]) {
         

@@ -557,6 +557,7 @@ static BOOL refreshAnimate = YES;
                 [self refreshVPNConnect];
                 // 删除vpn本地配置
                 [VPNUtil.shareInstance removeFromPreferences];
+                [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
             }
         }
             break;

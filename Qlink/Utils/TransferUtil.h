@@ -15,9 +15,8 @@
 
 + (instancetype) getShareObject;
 
-+ (void) sendFundsRequestWithType:(int)type withVPNInfo:(VPNInfo *) vpnInfo;
+//+ (void) sendFundsRequestWithType:(int)type withVPNInfo:(VPNInfo *) vpnInfo;
 + (void) sendLocalNotificationWithQLC:(NSString *) qlc isIncome:(BOOL) isIncome;
-
 + (void) sendGetBalanceRequest;
 + (void) startVPNConnectTran;
 // 检查钱包 gas qlc 是否允许连接资产
@@ -27,5 +26,7 @@
 + (NSString *) currentVPNName;
 + (void) sendVPNConnectSuccessMessageWithVPNInfo:(VPNInfo *) vpnInfo withType:(NSInteger) type;
 + (void)udpateTransferModel:(VPNInfo *) vpnInfo;
+//将本地及当前VPNList中的连接VPN状态置为NO
++ (void) updateUserDefaultVPNListCurrentVPNConnectStatus;
 
 @end
