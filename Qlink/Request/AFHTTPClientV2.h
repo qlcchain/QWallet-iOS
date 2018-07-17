@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 //#import "AFNetworking.h"
 #import <AFNetworking/AFNetworking.h>
-#define TimeOut_Request 40
+#define TimeOut_Request 30
 
 typedef enum HttpMethod {
     HttpMethodGet      = 0,

@@ -17,7 +17,7 @@
 #import "VPNTranferMode.h"
 
 
-#define TIMER_SEC  30
+#define TIMER_SEC  35
 
 int requestCont = 0;
 dispatch_source_t _timer;
@@ -180,6 +180,7 @@ dispatch_source_t _timer;
             // 需要扣费的
             if (!tranVPNMode.isTranferSuccess) {
                 if (!tranVPNMode.isBecomeTranfer) {
+                    
                     [TransferUtil tranferVPNConnestCostWithVPNInfo:tranVPNMode];
                 }
             }
@@ -203,6 +204,47 @@ dispatch_source_t _timer;
         });
 }
 
+#pragma mark - 是不是可以免费连接VPN
++ (void) sendFreeToConnectVPNCountWithVPNTranferMode:(VPNTranferMode *) vpnInfo
+{
+    [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":[ToxManage getOwnP2PId]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+            NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
+            if (dataDic) {
+               NSString *freeNum = [dataDic objectForKey:@"freeNum"];
+                if ([freeNum integerValue] > 0) { // 可以免费连接
+                    //  调用免费
+                    [TransferUtil sendFreeConnectVPNRequestWithVPNInfo:vpnInfo];
+                } else {
+                    // 调用扣费
+                    [TransferUtil tranferVPNConnestCostWithVPNInfo:vpnInfo];
+                }
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        
+    }];
+}
+
+#pragma mark -发送免费连接VPN请求
++ (void) sendFreeConnectVPNRequestWithVPNInfo:(VPNTranferMode *) vpnInfo
+{
+    // 更新VPNInfo正在交易的状态
+    [TransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName status:YES];
+    NSDictionary *parames = @{@"assetName":vpnInfo.vpnName,@"fromP2pId":[ToxManage getOwnP2PId],@"toP2pId":vpnInfo.p2pId?:@"",@"addressTo":vpnInfo.tranferAddress?:@""};
+    [RequestService requestWithUrl:freeConnection_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+            // 更新VPNInfo支付的状态
+            [TransferUtil updateVPNListTranferStatusWithVPNName:vpnInfo.vpnName];
+        } else {
+            // 更新VPNInfo正在交易的状态
+            [TransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName status:NO];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        // 更新VPNInfo正在交易的状态
+        [TransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName status:NO];
+    }];
+}
 /**
  是否可以连接资产
  
@@ -267,14 +309,14 @@ dispatch_source_t _timer;
         vpnName = vpnInfo.vpnName;
         vpnCost = vpnInfo.cost;
         recordId = vpnInfo.recordId;
-        p2pId = vpnInfo.p2pId;
+       // p2pId = vpnInfo.p2pId;
         tranferDate = [NSDate date];
     } else {
         VPNTranferMode *vpnInfo = vpnObject;
         vpnName = vpnInfo.vpnName;
         vpnCost = vpnInfo.tranferCost;
         recordId = vpnInfo.recordId;
-        p2pId = vpnInfo.p2pId;
+      //  p2pId = vpnInfo.p2pId;
         NSString *connectTime = vpnInfo.vpnConnectTime;
         if([connectTime isBlankString]) {
             tranferDate = [NSDate date];
@@ -283,6 +325,8 @@ dispatch_source_t _timer;
             tranferDate = [dateFormatrer dateFromString:connectTime];
         }
     }
+    
+    p2pId = [ToxManage getOwnP2PId];
     
     NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,@"p2pId":p2pid,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId]};
     model.data = dataDic.mj_JSONString;
@@ -390,7 +434,7 @@ dispatch_source_t _timer;
 + (void ) vpnConnectTranReqeustWithVpnTranferInfo:(VPNTranferMode *) vpnInfo {
     
      // 更新VPNInfo正在交易的状态
-    [TransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName];
+    [TransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName status:YES];
     
     //@weakify_self
     NSString *tokenHash = AESSET_TEST_HASH;
@@ -498,13 +542,13 @@ dispatch_source_t _timer;
 }
 
 #pragma mark -更新VPNList正在支付的状态
-+ (void) updateVPNListDidTranferStatusWithVPNName:(NSString *) vpnName
++ (void) updateVPNListDidTranferStatusWithVPNName:(NSString *) vpnName status:(BOOL) isBecomeTranfer
 {
     TransferUtil *tranferUtil = [TransferUtil getShareObject];
     [tranferUtil.vpnList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNTranferMode *mode = (VPNTranferMode *)obj;
         if ([mode.vpnName isEqualToString:vpnName]) {
-            mode.isBecomeTranfer = YES;
+            mode.isBecomeTranfer = isBecomeTranfer;
         }
     }];
 }

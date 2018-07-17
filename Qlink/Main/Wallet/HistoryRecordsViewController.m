@@ -106,6 +106,14 @@
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HistoryRecrdInfo *model = _sourceArr[(_sourceArr.count -1) - indexPath.row];
+    if (DEBUG) {
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"p2pid" message:model.toP2pId preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alertVC addAction:okAction];
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }
 
 }
 
