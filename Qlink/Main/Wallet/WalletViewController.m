@@ -458,7 +458,7 @@
                             if (result) { // 兑换成功
                                 [weakSelf.view showWalletAlertViewWithTitle:NSStringLocalizable(@"purchase_successful") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"withdrawal_soon")] isShowTwoBtn:NO block:nil];
                                 [weakSelf performSelector:@selector(reSendReqeuest) withObject:self afterDelay:WAIL_TIME];
-                                [WalletUtil saveTranQLCRecordWithQlc:@"0" txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"recordId"]] neo:neo recordType:1 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO];
+                                [WalletUtil saveTranQLCRecordWithQlc:@"0" txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"recordId"]] neo:neo recordType:1 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO isRegister:YES];
                             } else {
                                 [AppD.window showHint:NSStringLocalizable(@"buy_qlc")]; // 兑换失败
                             }
@@ -543,7 +543,7 @@
                         if (result) { // 交易成功
                             [weakSelf.view showWalletAlertViewWithTitle:NSStringLocalizable(@"purchase_successful") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"transfer_processed")] isShowTwoBtn:NO block:nil];
                             [weakSelf performSelector:@selector(reSendReqeuest) withObject:self afterDelay:WAIL_TIME];
-                            [WalletUtil saveTranQLCRecordWithQlc:qlc txtid:recorid neo:@"0" recordType:2 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO];
+                            [WalletUtil saveTranQLCRecordWithQlc:qlc txtid:recorid neo:@"0" recordType:2 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO isRegister:YES];
                         } else {
                             [AppD.window showHint:NSStringLocalizable(@"send_qlc")];
                         }

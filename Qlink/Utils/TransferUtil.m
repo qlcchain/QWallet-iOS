@@ -431,7 +431,7 @@ dispatch_source_t _timer;
                             [TransferUtil sendGetBalanceRequest];
                             // 发送扣款通知
                             [TransferUtil sendLocalNotificationWithQLC:vpnInfo.tranferCost isIncome:NO];
-                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.tranferCost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:3 assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO];
+                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.tranferCost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:3 assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isRegister:YES];
                         } else {
                             DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -691,7 +691,7 @@ dispatch_source_t _timer;
                             [TransferUtil sendGetBalanceRequest];
                             // 发送扣款通知
                             [TransferUtil sendLocalNotificationWithQLC:vpnInfo.cost isIncome:NO];
-                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO];
+                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isRegister:YES];
                         } else {
                             DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
