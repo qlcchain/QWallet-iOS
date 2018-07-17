@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
 + (NSArray *) getVPNAllName;
 
 // 保存交易记录
-+ (void) saveTranQLCRecordWithQlc:(NSString *) qlc txtid:(NSString *) txtid  neo:(NSString *) neo recordType:(int) type assetName:(NSString *) assetName friendNum:(int) friendNum p2pID:(NSString *) p2pID connectType:(int) connectType isReported:(BOOL) isReported;
++ (void) saveTranQLCRecordWithQlc:(NSString *) qlc txtid:(NSString *) txtid  neo:(NSString *) neo recordType:(int) type assetName:(NSString *) assetName friendNum:(int) friendNum p2pID:(NSString *) p2pID connectType:(int) connectType isReported:(BOOL) isReported isRegister:(BOOL) isRegister;
 // 钱包创建成功 后调用。获取默认的qlc gas
 + (void) sendWalletDefaultReqeustWithAddress:(NSString *) address;
 

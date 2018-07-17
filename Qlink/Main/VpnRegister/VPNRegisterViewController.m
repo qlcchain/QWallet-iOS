@@ -498,7 +498,7 @@
             // 发送扣款通知
             [TransferUtil sendLocalNotificationWithQLC:regQLC isIncome:NO];
             // 保存交易记录
-            [WalletUtil saveTranQLCRecordWithQlc:regQLC txtid:[NSStringUtil getNotNullValue:responseObject[@"recordId"]] neo:@"0" recordType:5 assetName:_vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:_vpnInfo.p2pId] connectType:0 isReported:NO];
+            [WalletUtil saveTranQLCRecordWithQlc:regQLC txtid:[NSStringUtil getNotNullValue:responseObject[@"recordId"]] neo:@"0" recordType:5 assetName:_vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:_vpnInfo.p2pId] connectType:0 isReported:NO isRegister:YES];
             // 本地保存注册的vpn资产
             [weakSelf storeRegisterVPN:params];
             // 发送心跳

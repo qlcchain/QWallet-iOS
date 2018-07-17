@@ -80,9 +80,8 @@
 //         NSDictionary *dataDic = @{@"appVersion":APP_Build,@"assetName":vpnInfo.vpnName,@"qlcCount ":vpnInfo.cost,@"p2pId":p2pid,@"transactiomType":[NSString stringWithFormat:@"%ld",(long)type],@"exChangeId":[WalletUtil getExChangeId],@"timestamp":[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:[NSDate date]]]};
         
         if ([[NSStringUtil getNotNullValue:recordType] integerValue] == 3 || [[NSStringUtil getNotNullValue:recordType] integerValue] == 5) { // VPN
-            [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:ASSETS_NAME]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:[dataDic objectForKey:P2P_ID]] connectType:1 isReported:NO];
+            [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:ASSETS_NAME]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:[dataDic objectForKey:P2P_ID]] connectType:1 isReported:NO isRegister:NO];
             // 发送本地通知
-           
             [TransferUtil sendLocalNotificationWithQLC:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] isIncome:YES];
         }
     } else if ([type isEqualToString:joinGroupChatReq]) { // 申请加入群聊的请求
