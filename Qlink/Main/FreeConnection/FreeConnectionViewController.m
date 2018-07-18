@@ -41,8 +41,8 @@
 }
 
 - (void)configView {
-    [_availableBack shadowWithColor:UIColorFromRGB(0x555555) offset:CGSizeMake(3, 3) opacity:0.5 radius:4];
-    [_tableBack shadowWithColor:UIColorFromRGB(0x555555) offset:CGSizeMake(3, 3) opacity:0.5 radius:4];
+    [_availableBack shadowWithColor:UIColorFromRGB(0xaaaaaa) offset:CGSizeMake(2, 2) opacity:0.2 radius:4];
+    [_tableBack shadowWithColor:UIColorFromRGB(0xaaaaaa) offset:CGSizeMake(2, 2) opacity:0.2 radius:4];
 }
 
 #pragma mark -UITableViewDataSource

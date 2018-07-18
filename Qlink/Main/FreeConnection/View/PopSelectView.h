@@ -10,4 +10,6 @@
 
 @interface PopSelectView : UIView
 
++ (instancetype)getInstance;
+
 @end
