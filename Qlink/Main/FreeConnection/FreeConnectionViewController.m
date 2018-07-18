@@ -15,6 +15,8 @@
 
 @interface FreeConnectionViewController () <UITableViewDelegate, UITableViewDataSource>
 
+
+@property (nonatomic , assign) NSInteger currentRow;
 @property (weak, nonatomic) IBOutlet SkyRadiusView *availableBack;
 @property (weak, nonatomic) IBOutlet SkyRadiusView *tableBack;
 @property (weak, nonatomic) IBOutlet UIButton *typeBtn;
@@ -33,6 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
     _availableNumLab.text = freeCount?:@"0";
+    _currentRow = 0;
     [self configData];
     [self configView];
 }
@@ -59,9 +62,13 @@
         }
         _selectView.frame = CGRectMake(SCREEN_WIDTH-12-90,selectH-15, 90, 124);
         @weakify_self
-        [_selectView setClickCellBlock:^(NSString *cellValue) {
+        [_selectView setClickCellBlock:^(NSString *cellValue,NSInteger row) {
             [weakSelf hideSelectView];
-            [weakSelf.typeBtn setTitle:cellValue forState:UIControlStateNormal];
+            if (row >=0) {
+                [weakSelf.typeBtn setTitle:cellValue forState:UIControlStateNormal];
+                [weakSelf sendQueryFreeRecords:[NSString stringWithFormat:@"%zd",row]];
+            }
+           
         }];
     }
     return _selectView;
