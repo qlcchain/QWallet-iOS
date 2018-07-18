@@ -65,7 +65,7 @@
     [ToxManage readKeychainToLibary];
     // 初始化vpn文件
     [VPNFileUtil keychainVPNFileToLibray];
-    // 初始化手势默认为开启·
+    // 初始化手势默认为开启
     [self configTouch];
     // 配置状态栏
     [self configStatusBar];

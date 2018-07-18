@@ -16,6 +16,7 @@
 #import "ChatUtil.h"
 #import "GroupChatMessageModel.h"
 #import "SystemUtil.h"
+#import "TransferUtil.h"
 
 @interface ToxManage ()
 
@@ -371,6 +372,11 @@ int friendStatusChange (char *publickey,uint32_t status)
 int selfStatusChange (uint32_t status)
 {
 //    NSString *p2pid = [ToxManage getOwnP2PId];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [TransferUtil checkFreeConnectCount];
+    });
     dispatch_async(dispatch_get_main_queue(), ^{
         if (status > 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:P2P_ONLINE_NOTI object:nil];

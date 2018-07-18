@@ -28,5 +28,7 @@
 + (void)udpateTransferModel:(VPNInfo *) vpnInfo;
 //将本地及当前VPNList中的连接VPN状态置为NO
 + (void) updateUserDefaultVPNListCurrentVPNConnectStatus;
+//pragma mark - 获取免费连接次数
++ (void) checkFreeConnectCount;
 
 @end

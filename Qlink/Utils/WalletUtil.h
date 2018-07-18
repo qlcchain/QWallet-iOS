@@ -14,7 +14,8 @@ typedef enum : NSUInteger {
     CheckProcess_VPN_ADD,
     CheckProcess_VPN_LIST,
     CheckProcess_WALLET_TABBAR,
-    CheckProcess_VPN_SEIZE
+    CheckProcess_VPN_SEIZE,
+    CheckProcess_VPN_CONNECT,
 } CheckProcessFrom;
 
 @interface WalletUtil : NSObject

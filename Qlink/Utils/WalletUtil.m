@@ -416,6 +416,10 @@
         {
         }
             break;
+        case CheckProcess_VPN_CONNECT:
+        {
+        }
+            break;
             
         default:
             break;
@@ -448,6 +452,12 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_PROCESS_SUCCESS_VPN_SEIZE object:nil];
             
         break;
+            
+        case CheckProcess_VPN_CONNECT:
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_PROCESS_SUCCESS_VPN_CONNECT object:nil];
+            
+            break;
             
         default:
             break;

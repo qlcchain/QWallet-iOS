@@ -181,7 +181,9 @@ dispatch_source_t _timer;
             if (!tranVPNMode.isTranferSuccess) {
                 if (!tranVPNMode.isBecomeTranfer) {
                     
-                    [TransferUtil tranferVPNConnestCostWithVPNInfo:tranVPNMode];
+                    [TransferUtil sendFreeToConnectVPNCountWithVPNTranferMode:tranVPNMode];
+                    
+                   // [TransferUtil tranferVPNConnestCostWithVPNInfo:tranVPNMode];
                 }
             }
             
@@ -207,18 +209,42 @@ dispatch_source_t _timer;
 #pragma mark - 是不是可以免费连接VPN
 + (void) sendFreeToConnectVPNCountWithVPNTranferMode:(VPNTranferMode *) vpnInfo
 {
+    if ([[NSStringUtil getNotNullValue:[HWUserdefault getObjectWithKey:VPN_FREE_COUNT]] isEqualToString:@"0"]) {
+        // 调用扣费
+        [TransferUtil tranferVPNConnestCostWithVPNInfo:vpnInfo];
+    }  else {
+        
+        [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":[ToxManage getOwnP2PId]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+            if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+                NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
+                if (dataDic) {
+                    NSString *freeNum = [dataDic objectForKey:@"freeNum"];
+                    [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
+                    if ([freeNum integerValue] > 0) { // 可以免费连接
+                        //  调用免费
+                        [TransferUtil sendFreeConnectVPNRequestWithVPNInfo:vpnInfo];
+                    } else {
+                        // 调用扣费
+                        [TransferUtil tranferVPNConnestCostWithVPNInfo:vpnInfo];
+                    }
+                }
+            }
+        } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+            
+        }];
+    }
+    
+    
+}
+#pragma mark - 获取免费连接次数
++ (void) checkFreeConnectCount
+{
     [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":[ToxManage getOwnP2PId]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
             if (dataDic) {
-               NSString *freeNum = [dataDic objectForKey:@"freeNum"];
-                if ([freeNum integerValue] > 0) { // 可以免费连接
-                    //  调用免费
-                    [TransferUtil sendFreeConnectVPNRequestWithVPNInfo:vpnInfo];
-                } else {
-                    // 调用扣费
-                    [TransferUtil tranferVPNConnestCostWithVPNInfo:vpnInfo];
-                }
+                NSString *freeNum = [dataDic objectForKey:@"freeNum"];
+                [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

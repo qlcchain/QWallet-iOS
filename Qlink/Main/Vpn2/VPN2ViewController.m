@@ -101,6 +101,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectTimeout:) name:Check_Connect_Timeout_Noti object:nil];
     // 修改本地资产成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVPNSuccess:) name:UPDATE_ASSETS_TZ object:nil];
+    // VPN连接时创建钱包跳转通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessVPNConnect:) name:CHECK_PROCESS_SUCCESS_VPN_CONNECT object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -400,42 +402,53 @@ static BOOL refreshAnimate = YES;
 // 显示连接提示
 - (void)showConnectAlert:(VPNInfo *)vpnInfo {
     
-    BOOL isShowAlert = YES;
-    // 获取vpn上次连接时间
-    NSDictionary *modeDic = [HWUserdefault getObjectWithKey:vpnInfo.vpnName];
-    VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:modeDic];
-    if (tranferMode) {
-        NSString *connectTime = tranferMode.vpnConnectTime;
-        if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
-            // 判断上次连接时间 超过一时间扣费
-            NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
-            NSDate *backDate = [dateFormatrer dateFromString:connectTime];
-            // 判断日期相隔时间
-            NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
-            //超过一时间扣费
-            if (labs(hours) < 1) {
-                if (tranferMode.isTranferSuccess) {
-                    isShowAlert = NO;
+   NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    // 判断免费连接次数
+    if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
+        if (![WalletUtil isExistWalletPrivateKey]) {
+            [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+        } else {
+            BOOL isShowAlert = YES;
+            // 获取vpn上次连接时间
+            NSDictionary *modeDic = [HWUserdefault getObjectWithKey:vpnInfo.vpnName];
+            VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:modeDic];
+            if (tranferMode) {
+                NSString *connectTime = tranferMode.vpnConnectTime;
+                if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
+                    // 判断上次连接时间 超过一时间扣费
+                    NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+                    NSDate *backDate = [dateFormatrer dateFromString:connectTime];
+                    // 判断日期相隔时间
+                    NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
+                    //超过一时间扣费
+                    if (labs(hours) < 1) {
+                        if (tranferMode.isTranferSuccess) {
+                            isShowAlert = NO;
+                        }
+                    }
                 }
             }
+            
+            if (isShowAlert) {
+                NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),vpnInfo.cost];
+                NSString *image = @"icon_even";
+                @weakify_self
+                [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+                    vpnInfo.connectStatus = VpnConnectStatusConnecting;
+                    [weakSelf refreshTable];
+                    [weakSelf goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+                }];
+            } else {
+                vpnInfo.connectStatus = VpnConnectStatusConnecting;
+                [self refreshTable];
+                [self goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+            }
         }
-    }
-    
-    if (isShowAlert) {
-        NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),vpnInfo.cost];
-        NSString *image = @"icon_even";
-        @weakify_self
-        [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
-            vpnInfo.connectStatus = VpnConnectStatusConnecting;
-            [weakSelf refreshTable];
-            [weakSelf goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
-        }];
-    } else {
+    } else { // 免费连接
         vpnInfo.connectStatus = VpnConnectStatusConnecting;
         [self refreshTable];
         [self goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
     }
-   
 }
 
 // 显示断开连接提示
@@ -511,6 +524,11 @@ static BOOL refreshAnimate = YES;
         delay = 0.6f;
     }
     [self performSelector:@selector(jumpToSeizeVPN) withObject:self afterDelay:delay];
+}
+
+- (void) checkProcessVPNConnect:(NSNotification *) noti
+{
+    
 }
 
 - (void)p2pOnline:(NSNotification *)noti {
