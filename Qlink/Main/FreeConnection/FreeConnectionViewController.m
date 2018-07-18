@@ -20,7 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *availableNumLab;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
-
+@property (nonatomic , strong) PopSelectView *selectView;
+@property (nonatomic , strong) UIButton *backBtn;
 @end
 
 @implementation FreeConnectionViewController
@@ -29,7 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    _availableNumLab.text = freeCount?:@"0";
     [self configData];
     [self configView];
 }
@@ -43,6 +45,34 @@
 - (void)configView {
     [_availableBack shadowWithColor:UIColorFromRGB(0xaaaaaa) offset:CGSizeMake(2, 2) opacity:0.2 radius:4];
     [_tableBack shadowWithColor:UIColorFromRGB(0xaaaaaa) offset:CGSizeMake(2, 2) opacity:0.2 radius:4];
+}
+
+- (PopSelectView *)selectView
+{
+    if (!_selectView) {
+        _selectView = [PopSelectView getInstance];
+        CGFloat selectH = CGRectGetMaxY(_typeBtn.frame)+67;
+        if (IS_iPhoneX) {
+            selectH += STATUS_BAR_HEIGHT;
+        }
+        _selectView.frame = CGRectMake(SCREEN_WIDTH-12-90,selectH-15, 90, 124);
+        @weakify_self
+        [_selectView setClickCellBlock:^(NSString *cellValue) {
+            [weakSelf hideSelectView];
+            [weakSelf.typeBtn setTitle:cellValue forState:UIControlStateNormal];
+        }];
+    }
+    return _selectView;
+}
+- (UIButton *)backBtn
+{
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        _backBtn.backgroundColor = [UIColor clearColor];
+        [_backBtn addTarget:self action:@selector(hideSelectView) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
 }
 
 #pragma mark -UITableViewDataSource
@@ -81,9 +111,17 @@
     [self back];
 }
 
-- (IBAction)typeAction:(id)sender {
+- (IBAction)typeAction:(UIButton *)sender {
+    
+    [AppD.window addSubview:self.backBtn];
+    [AppD.window addSubview:self.selectView];
+    [self.selectView showSelectView];
 }
-
+- (void) hideSelectView
+{
+    [self.selectView hideSelectView];
+    [self.backBtn removeFromSuperview];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

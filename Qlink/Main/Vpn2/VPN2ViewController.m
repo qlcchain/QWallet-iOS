@@ -106,6 +106,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVPNSuccess:) name:UPDATE_ASSETS_TZ object:nil];
     // VPN连接时创建钱包跳转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessVPNConnect:) name:CHECK_PROCESS_SUCCESS_VPN_CONNECT object:nil];
+    // vpn免费次数成功通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFreeCount:) name:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -533,7 +535,11 @@ static BOOL refreshAnimate = YES;
 {
     
 }
-
+- (void) updateFreeCount:(NSNotification *) noti
+{
+    NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    _freeConnectionLab.text = [NSString stringWithFormat:@"FREE:%@",freeCount?:@"0"];
+}
 - (void)p2pOnline:(NSNotification *)noti {
     // 发送心跳
     [[HeartbeatUtil shareInstance] sendTimedHeartbeat];

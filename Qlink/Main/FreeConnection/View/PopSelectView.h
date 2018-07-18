@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ClickTabCellBlock)(NSString *cellValue);
+
 @interface PopSelectView : UIView
+@property (nonatomic , copy) ClickTabCellBlock clickCellBlock;
 
 + (instancetype)getInstance;
-
+- (void) showSelectView;
+- (void) hideSelectView;
 @end

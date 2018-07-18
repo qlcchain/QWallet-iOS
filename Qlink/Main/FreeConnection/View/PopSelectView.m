@@ -56,8 +56,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
+    if (self.clickCellBlock) {
+        self.clickCellBlock(_sourceArr[indexPath.row]);
+    }
 }
 
+- (void) showSelectView
+{
+    self.alpha = 0.0f;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.alpha = 1.0f;
+    }];
+}
+
+- (void) hideSelectView
+{
+   
+    [UIView animateWithDuration:0.4 animations:^{
+        self.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
 @end
