@@ -11,6 +11,7 @@
 #import "SkyRadiusView.h"
 #import "PopSelectView.h"
 #import "UIView+Visuals.h"
+#import "FreeRecordMode.h"
 
 @interface FreeConnectionViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -40,6 +41,7 @@
 - (void)configData {
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:FreeConnectionCellReuse bundle:nil] forCellReuseIdentifier:FreeConnectionCellReuse];
+    [self sendQueryFreeRecords:@"0"];
 }
 
 - (void)configView {
@@ -87,7 +89,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FreeConnectionCell *cell = [tableView dequeueReusableCellWithIdentifier:FreeConnectionCellReuse];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    FreeRecordMode *mode = [_sourceArr objectAtIndex:indexPath.row];
+    [cell setCellMode:mode];
     return cell;
 }
 
@@ -122,6 +125,34 @@
     [self.selectView hideSelectView];
     [self.backBtn removeFromSuperview];
 }
+
+
+
+#pragma mark - 发送请求
+- (void) sendQueryFreeRecords:(NSString *) type
+{
+    [self.view showHudInView:self.view hint:@"" userInteractionEnabled:YES hideTime:0];
+    NSDictionary *parames = @{@"p2pId":[ToxManage getOwnP2PId],@"type":type?:@"0"};
+    [RequestService requestWithUrl:queryFreeRecords_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [self.view hideHud];
+        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+            NSArray *dataArray = [responseObject objectForKey:Server_Data];
+            if (dataArray) {
+                if (_sourceArr.count > 0) {
+                    [_sourceArr removeAllObjects];
+                }
+               [_sourceArr addObjectsFromArray:[FreeRecordMode mj_objectArrayWithKeyValuesArray:dataArray]];
+                [_mainTable reloadData];
+            }
+        } else {
+            [AppD.window showHint:[responseObject objectForKey:@"msg"]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [AppD.window showHint:NSStringLocalizable(@"request_error")];
+        [self.view hideHud];
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

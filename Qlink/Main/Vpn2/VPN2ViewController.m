@@ -407,6 +407,13 @@ static BOOL refreshAnimate = YES;
 // 显示连接提示
 - (void)showConnectAlert:(VPNInfo *)vpnInfo {
     
+    // 连接自己的VPN时
+    if ([vpnInfo.address isEqualToString:[CurrentWalletInfo getShareInstance].address?:@""]) {
+        vpnInfo.connectStatus = VpnConnectStatusConnecting;
+        [self refreshTable];
+        [self goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+        return;
+    }
    NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {

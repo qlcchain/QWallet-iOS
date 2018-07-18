@@ -23,6 +23,8 @@
     return view;
 }
 
+
+
 - (void)config {
     _sourceArr = @[@"ALL",@"Gain",@"Used"];
     _mainTable.delegate = self;
@@ -43,6 +45,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse];
+        cell.textLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15.0];
+        cell.textLabel.textColor = RGB(51, 51, 51);
     }
     cell.textLabel.text = _sourceArr[indexPath.row];
     
