@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="WQs-uR-PR8" customClass="PopSelectView">
+            <rect key="frame" x="0.0" y="0.0" width="90" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="screen" translatesAutoresizingMaskIntoConstraints="NO" id="Hyb-8f-wky">
+                    <rect key="frame" x="0.0" y="0.0" width="90" height="124"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZsJ-zP-kTn">
+                    <rect key="frame" x="5" y="8" width="80" height="111"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Hyb-8f-wky" firstAttribute="leading" secondItem="WQs-uR-PR8" secondAttribute="leading" id="CrG-9V-tkK"/>
+                <constraint firstAttribute="bottom" secondItem="Hyb-8f-wky" secondAttribute="bottom" id="Rrc-22-dNu"/>
+                <constraint firstAttribute="trailing" secondItem="Hyb-8f-wky" secondAttribute="trailing" id="ZBU-Lt-P60"/>
+                <constraint firstItem="ZsJ-zP-kTn" firstAttribute="leading" secondItem="WQs-uR-PR8" secondAttribute="leading" constant="5" id="dCK-Z7-g90"/>
+                <constraint firstAttribute="trailing" secondItem="ZsJ-zP-kTn" secondAttribute="trailing" constant="5" id="fvv-4i-XxX"/>
+                <constraint firstAttribute="bottom" secondItem="ZsJ-zP-kTn" secondAttribute="bottom" constant="5" id="guI-CG-Woq"/>
+                <constraint firstItem="ZsJ-zP-kTn" firstAttribute="top" secondItem="WQs-uR-PR8" secondAttribute="top" constant="8" id="n30-Nu-cXN"/>
+                <constraint firstItem="Hyb-8f-wky" firstAttribute="top" secondItem="WQs-uR-PR8" secondAttribute="top" id="snD-Go-ayN"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="16" y="-401"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="screen" width="90" height="124"/>
+    </resources>
+</document>

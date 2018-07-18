@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,6 +21,7 @@
             <connections>
                 <outlet property="countryIcon" destination="Kag-lS-2o5" id="5Mg-uh-5xx"/>
                 <outlet property="countryLab" destination="x8r-gO-fgY" id="jnu-En-3GW"/>
+                <outlet property="freeConnectionLab" destination="ldH-GY-90k" id="XWG-0A-Dem"/>
                 <outlet property="registerVPNBtn" destination="p2O-4V-xHC" id="mbt-Sh-A2m"/>
                 <outlet property="sectionBack" destination="IQN-4J-zEN" id="dhz-HE-PBa"/>
                 <outlet property="sectionBackHeight" destination="kO3-lU-Cw2" id="QIJ-wA-eTH"/>
@@ -101,14 +102,53 @@
                                         <constraint firstItem="Kag-lS-2o5" firstAttribute="leading" secondItem="xel-Yn-qz8" secondAttribute="leading" id="x7k-xJ-YIT"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gx-Vk-4tr">
+                                    <rect key="frame" x="316" y="11.5" width="44" height="44"/>
+                                    <subviews>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_free" translatesAutoresizingMaskIntoConstraints="NO" id="CqP-Kv-FVC">
+                                            <rect key="frame" x="5.5" y="5.5" width="33" height="33"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="33" id="3Ti-0M-353"/>
+                                                <constraint firstAttribute="width" constant="33" id="K4Z-Dx-zgE"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE:3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldH-GY-90k">
+                                            <rect key="frame" x="9" y="20" width="26" height="12"/>
+                                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="9"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6n-nk-3g2">
+                                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                            <connections>
+                                                <action selector="freeConnectionAction:" destination="-1" eventType="touchUpInside" id="yz3-Cd-iaC"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="G6n-nk-3g2" firstAttribute="leading" secondItem="5Gx-Vk-4tr" secondAttribute="leading" id="B10-Je-Emd"/>
+                                        <constraint firstItem="ldH-GY-90k" firstAttribute="bottom" secondItem="CqP-Kv-FVC" secondAttribute="bottom" constant="-6.5" id="G2n-sq-uaK"/>
+                                        <constraint firstAttribute="width" constant="44" id="Lfu-X3-80y"/>
+                                        <constraint firstItem="ldH-GY-90k" firstAttribute="centerX" secondItem="CqP-Kv-FVC" secondAttribute="centerX" id="Nhs-xi-RlP"/>
+                                        <constraint firstAttribute="trailing" secondItem="G6n-nk-3g2" secondAttribute="trailing" id="RsM-CI-dLp"/>
+                                        <constraint firstAttribute="height" constant="44" id="WnA-kI-hU6"/>
+                                        <constraint firstItem="CqP-Kv-FVC" firstAttribute="centerX" secondItem="5Gx-Vk-4tr" secondAttribute="centerX" id="e1I-iW-aPV"/>
+                                        <constraint firstItem="CqP-Kv-FVC" firstAttribute="centerY" secondItem="5Gx-Vk-4tr" secondAttribute="centerY" id="oqr-KQ-17X"/>
+                                        <constraint firstItem="G6n-nk-3g2" firstAttribute="top" secondItem="5Gx-Vk-4tr" secondAttribute="top" id="wDE-dD-B6h"/>
+                                        <constraint firstAttribute="bottom" secondItem="G6n-nk-3g2" secondAttribute="bottom" id="yj4-I0-vUC"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="6nY-Mx-1Xa" firstAttribute="leading" secondItem="SAM-Nt-eMK" secondAttribute="trailing" constant="-10" id="0tC-J8-0h8"/>
                                 <constraint firstItem="xel-Yn-qz8" firstAttribute="centerY" secondItem="ZBP-np-quw" secondAttribute="centerY" id="3yo-uX-Buw"/>
+                                <constraint firstItem="5Gx-Vk-4tr" firstAttribute="centerY" secondItem="ZBP-np-quw" secondAttribute="centerY" id="Hrp-kC-2vb"/>
                                 <constraint firstItem="xel-Yn-qz8" firstAttribute="centerX" secondItem="ZBP-np-quw" secondAttribute="centerX" id="Ic2-SQ-NRq"/>
                                 <constraint firstAttribute="height" constant="67" id="VCE-rC-iMF"/>
                                 <constraint firstItem="SAM-Nt-eMK" firstAttribute="top" secondItem="ZBP-np-quw" secondAttribute="top" constant="14" id="ZmL-Sq-KdH"/>
+                                <constraint firstAttribute="trailing" secondItem="5Gx-Vk-4tr" secondAttribute="trailing" constant="15" id="aQ8-2K-0uo"/>
                                 <constraint firstItem="SAM-Nt-eMK" firstAttribute="leading" secondItem="ZBP-np-quw" secondAttribute="leading" constant="20" id="ar9-AP-ZTd"/>
                                 <constraint firstAttribute="bottom" secondItem="6nY-Mx-1Xa" secondAttribute="bottom" constant="15" id="wBU-7Z-bxn"/>
                             </constraints>
@@ -160,6 +200,7 @@
                 <constraint firstItem="VgX-6n-yqa" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="ljz-a0-k9n"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlb-pF-jcr">
             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -210,6 +251,7 @@
         <image name="icon_choice" width="8" height="13"/>
         <image name="icon_choose_a_vpn" width="13" height="16"/>
         <image name="icon_choose_location" width="31" height="31"/>
+        <image name="icon_free" width="33" height="33"/>
         <image name="icon_offline" width="10" height="10"/>
         <image name="icon_owner" width="38" height="38"/>
     </resources>
