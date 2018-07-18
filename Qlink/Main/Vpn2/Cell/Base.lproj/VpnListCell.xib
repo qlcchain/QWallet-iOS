@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -128,6 +128,12 @@
                                     <action selector="connectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hfx-OV-ydZ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-Gx-ixN" customClass="OLImageView">
+                                <rect key="frame" x="259" y="20" width="43" height="24"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-kk-lEc" customClass="OLImageView">
+                                <rect key="frame" x="259" y="20" width="43" height="24"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOk-gQ-s2S">
                                 <rect key="frame" x="14" y="87.5" width="292" height="0.5"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -143,18 +149,26 @@
                             <constraint firstItem="R8e-ZF-56e" firstAttribute="leading" secondItem="nml-rT-FJ8" secondAttribute="leading" constant="76" id="63Y-EG-Bqs"/>
                             <constraint firstItem="5Ip-Rz-e1A" firstAttribute="top" secondItem="zA7-S3-nOg" secondAttribute="bottom" constant="4" id="ABe-YX-b6t"/>
                             <constraint firstItem="5Ip-Rz-e1A" firstAttribute="leading" secondItem="zA7-S3-nOg" secondAttribute="leading" id="D4l-rY-aSC"/>
+                            <constraint firstItem="nv6-kk-lEc" firstAttribute="leading" secondItem="egb-N8-XB1" secondAttribute="leading" id="Ht0-DZ-13F"/>
                             <constraint firstItem="R8e-ZF-56e" firstAttribute="centerY" secondItem="pQq-nX-4ur" secondAttribute="centerY" id="Ixy-vS-Sra"/>
+                            <constraint firstItem="nv6-kk-lEc" firstAttribute="bottom" secondItem="egb-N8-XB1" secondAttribute="bottom" id="JrG-6V-17P"/>
                             <constraint firstItem="egb-N8-XB1" firstAttribute="top" secondItem="WbY-Tk-ZZK" secondAttribute="top" constant="20" id="KPL-jE-n6P"/>
                             <constraint firstItem="Goq-95-bfL" firstAttribute="top" secondItem="WbY-Tk-ZZK" secondAttribute="top" constant="12" id="Xk9-xE-u8c"/>
+                            <constraint firstItem="KnW-Gx-ixN" firstAttribute="trailing" secondItem="egb-N8-XB1" secondAttribute="trailing" id="Yig-fl-Zdc"/>
                             <constraint firstItem="zA7-S3-nOg" firstAttribute="leading" secondItem="nml-rT-FJ8" secondAttribute="leading" id="cb5-e0-wwz"/>
+                            <constraint firstItem="KnW-Gx-ixN" firstAttribute="top" secondItem="egb-N8-XB1" secondAttribute="top" id="ci5-uf-CQ5"/>
                             <constraint firstAttribute="trailing" secondItem="egb-N8-XB1" secondAttribute="trailing" constant="18" id="dkb-Nu-fhg"/>
+                            <constraint firstItem="KnW-Gx-ixN" firstAttribute="bottom" secondItem="egb-N8-XB1" secondAttribute="bottom" id="gaq-xB-Cq8"/>
                             <constraint firstItem="nml-rT-FJ8" firstAttribute="leading" secondItem="Goq-95-bfL" secondAttribute="trailing" constant="7" id="hNA-tj-q2Y"/>
+                            <constraint firstItem="KnW-Gx-ixN" firstAttribute="leading" secondItem="egb-N8-XB1" secondAttribute="leading" id="jEJ-rZ-L28"/>
                             <constraint firstItem="pQq-nX-4ur" firstAttribute="centerY" secondItem="zA7-S3-nOg" secondAttribute="centerY" id="mwl-tb-Za5"/>
+                            <constraint firstItem="nv6-kk-lEc" firstAttribute="trailing" secondItem="egb-N8-XB1" secondAttribute="trailing" id="oG4-Ip-ZyY"/>
                             <constraint firstAttribute="trailing" secondItem="tOk-gQ-s2S" secondAttribute="trailing" constant="14" id="qJ6-6J-R8D"/>
                             <constraint firstItem="tOk-gQ-s2S" firstAttribute="leading" secondItem="WbY-Tk-ZZK" secondAttribute="leading" constant="14" id="rZo-uv-gXr"/>
                             <constraint firstItem="pQq-nX-4ur" firstAttribute="leading" secondItem="zA7-S3-nOg" secondAttribute="trailing" constant="4" id="uJy-UL-LqQ"/>
                             <constraint firstAttribute="bottom" secondItem="tOk-gQ-s2S" secondAttribute="bottom" id="vLG-7J-hOI"/>
                             <constraint firstItem="u02-Iu-qqJ" firstAttribute="centerY" secondItem="5Ip-Rz-e1A" secondAttribute="centerY" id="vWt-Mw-lMe"/>
+                            <constraint firstItem="nv6-kk-lEc" firstAttribute="top" secondItem="egb-N8-XB1" secondAttribute="top" id="vcv-ww-S7p"/>
                             <constraint firstItem="zA7-S3-nOg" firstAttribute="top" secondItem="nml-rT-FJ8" secondAttribute="bottom" constant="10" id="z1t-Id-rGQ"/>
                             <constraint firstItem="nml-rT-FJ8" firstAttribute="top" secondItem="Goq-95-bfL" secondAttribute="top" id="zPC-gJ-Lnp"/>
                         </constraints>
@@ -178,6 +192,8 @@
                 <outlet property="priceLab" destination="zA7-S3-nOg" id="lDn-vD-Azb"/>
                 <outlet property="priceUnitLab" destination="pQq-nX-4ur" id="mtD-4m-qSZ"/>
                 <outlet property="statusImageView" destination="yGq-B4-NXD" id="crX-Xs-dFd"/>
+                <outlet property="switchedImageV" destination="nv6-kk-lEc" id="Frd-bO-evN"/>
+                <outlet property="switchingImageV" destination="KnW-Gx-ixN" id="SyA-Pg-mfF"/>
                 <outlet property="vpnNameLab" destination="nml-rT-FJ8" id="eFv-YC-e2X"/>
             </connections>
             <point key="canvasLocation" x="-33" y="9"/>

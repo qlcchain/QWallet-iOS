@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "VPNMode.h"
+#import <OLImageView/OLImageView.h>
+#import <OLImageView/OLImage.h>
 
 static NSString *VpnListCellReuse = @"VpnListCell";
 #define VpnListCell_Height 88
@@ -27,6 +29,8 @@ typedef void(^ConversationBlock)(void);
 @property (weak, nonatomic) IBOutlet UILabel *connectNumLab;
 @property (weak, nonatomic) IBOutlet UILabel *connectNumUnitLab;
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
+@property (weak, nonatomic) IBOutlet OLImageView *switchingImageV;
+@property (weak, nonatomic) IBOutlet OLImageView *switchedImageV;
 @property (nonatomic, copy) ConnectClickBlock connectClickB;
 @property (nonatomic , copy) ConversationBlock conversationB;
 

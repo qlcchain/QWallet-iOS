@@ -13,7 +13,7 @@
 #import "ChatModel.h"
 #import "WalletUtil.h"
 
-@interface VpnListCell ()
+@interface VpnListCell () <OLImageViewDelegate>
 
 @property (nonatomic, strong) VPNInfo *vpnInfo;
 
@@ -21,12 +21,22 @@
 
 @implementation VpnListCell
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.switchingImageV.delegate = self;
+        self.switchedImageV.delegate = self;
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
     
     _ownerImageView.layer.cornerRadius = _ownerImageView.width/2.0;
     _ownerImageView.layer.masksToBounds = YES;
+    _switchingImageV.runLoopMode = NSRunLoopCommonModes;
+    _switchedImageV.runLoopMode = NSRunLoopCommonModes;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -56,7 +66,7 @@
     _messageImageView.image = _vpnInfo.online>0?chatM.isUnread?[UIImage imageNamed:@"icon_message_online"]:[UIImage imageNamed:@"icon_message"]:[UIImage imageNamed:@"icon_message_offline"];
     UIColor *blackC = UIColorFromRGB(0x333333);
     UIColor *grayC = UIColorFromRGB(0xa8a6ae);
-    UIColor *whiteC = UIColorFromRGB(0xffffff);
+//    UIColor *whiteC = UIColorFromRGB(0xffffff);
     _vpnNameLab.textColor = _vpnInfo.online>0?blackC:grayC;
     _priceLab.textColor = _vpnInfo.online>0?blackC:grayC;
     _connectNumLab.textColor = _vpnInfo.online>0?blackC:grayC;
@@ -81,6 +91,34 @@
     UIImage *notConnectImage = [UIImage imageNamed:@"icon_not_connected"];
     UIImage *connectedImage = [UIImage imageNamed:@"icon_complete"];
     [_connectBtn setImage:_vpnInfo.connectStatus==VpnConnectStatusNone?notConnectImage:_vpnInfo.connectStatus==VpnConnectStatusConnecting?connectingImage:connectedImage forState:UIControlStateNormal];
+    if (_vpnInfo.connectStatus == VpnConnectStatusNone) {
+        _switchingImageV.hidden = YES;
+        _switchedImageV.hidden = YES;
+        _switchingImageV.image = nil;
+        _switchedImageV.image = nil;
+    } else if (_vpnInfo.connectStatus == VpnConnectStatusConnecting) {
+        _switchingImageV.hidden = NO;
+        _switchedImageV.hidden = YES;
+        _switchingImageV.image = [VpnListCell switchingImage];
+        _switchedImageV.image = nil;
+    } else if (_vpnInfo.connectStatus == VpnConnectStatusConnected) {
+        _switchingImageV.hidden = YES;
+        _switchedImageV.hidden = NO;
+        _switchingImageV.image = nil;
+        _switchedImageV.image = [VpnListCell switchedImage];
+    }
+}
+
++ (OLImage *)switchingImage {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"switching" ofType:@"gif"];
+    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
+    return img;
+}
+
++ (OLImage *)switchedImage {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"switched" ofType:@"gif"];
+    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
+    return img;
 }
 
 - (IBAction)connectAction:(UIButton *)sender {
@@ -105,7 +143,6 @@
     }
 }
 
-
 - (void)prepareForReuse {
     [super prepareForReuse];
     
@@ -116,6 +153,16 @@
     _priceLab.text = nil;
     _connectNumLab.text = nil;
     [_connectBtn setImage:nil forState:UIControlStateNormal];
+}
+
+#pragma mark -OLImageViewDelegate
+- (void)imageViewDidLoop:(OLImageView *)imageView {
+    if (imageView == _switchedImageV) {
+        _switchedImageV.hidden = YES;
+    }
+    if (imageView == _switchingImageV) {
+        
+    }
 }
 
 @end
