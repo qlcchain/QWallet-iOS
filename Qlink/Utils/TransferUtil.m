@@ -218,7 +218,7 @@ dispatch_source_t _timer;
             if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
                 NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
                 if (dataDic) {
-                    NSString *freeNum = [dataDic objectForKey:@"freeNum"];
+                    NSString *freeNum = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"freeNum"]];
                     [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
                     if ([freeNum integerValue] > 0) { // 可以免费连接
                         //  调用免费
@@ -243,7 +243,7 @@ dispatch_source_t _timer;
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
             if (dataDic) {
-                NSString *freeNum = [dataDic objectForKey:@"freeNum"];
+                NSString *freeNum = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"freeNum"]];
                 [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
             }
         }
