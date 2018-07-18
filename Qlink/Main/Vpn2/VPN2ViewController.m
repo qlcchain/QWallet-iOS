@@ -149,7 +149,14 @@
 }
 
 - (void)configData {
+    [self refreshFreeConnection];
     [self addSectionTitle];
+}
+
+- (void)refreshFreeConnection {
+    NSString *freeStr = @"FREE:";
+    NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    _freeConnectionLab.text = [freeStr stringByAppendingString:freeCount?:@"0"];
 }
 
 // 刷新vpn连接状态
@@ -485,7 +492,8 @@ static BOOL refreshAnimate = YES;
         [weakSelf refreshVpnNormalStatus];
         [weakSelf refreshTable];
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
-        [weakSelf showConnectAlert:vpnInfo];
+        [weakSelf performSelector:@selector(showConnectAlert:) withObject:vpnInfo afterDelay:.8];
+//        [weakSelf showConnectAlert:vpnInfo];
     }];
 }
 
@@ -550,15 +558,14 @@ static BOOL refreshAnimate = YES;
     [self performSelector:@selector(jumpToSeizeVPN) withObject:self afterDelay:delay];
 }
 
-- (void) checkProcessVPNConnect:(NSNotification *) noti
-{
+- (void) checkProcessVPNConnect:(NSNotification *) noti{
     
 }
-- (void) updateFreeCount:(NSNotification *) noti
-{
-    NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
-    _freeConnectionLab.text = [NSString stringWithFormat:@"FREE:%@",freeCount?:@"0"];
+
+- (void) updateFreeCount:(NSNotification *) noti {
+    [self refreshFreeConnection];
 }
+
 - (void)p2pOnline:(NSNotification *)noti {
     // 发送心跳
     [[HeartbeatUtil shareInstance] sendTimedHeartbeat];
