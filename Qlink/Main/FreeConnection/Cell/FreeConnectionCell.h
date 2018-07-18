@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class FreeRecordMode;
 static NSString *FreeConnectionCellReuse = @"FreeConnectionCell";
 #define FreeConnectionCell_Height 65
 
@@ -17,5 +17,6 @@ static NSString *FreeConnectionCellReuse = @"FreeConnectionCell";
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *numLab;
 
+- (void) setCellMode:(FreeRecordMode *) mode;
 
 @end

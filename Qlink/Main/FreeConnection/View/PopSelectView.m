@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSArray *sourceArr;
-
+@property (nonatomic , assign) NSInteger currentRow;
 @end
 
 @implementation PopSelectView
@@ -23,8 +23,11 @@
     return view;
 }
 
+
+
 - (void)config {
     _sourceArr = @[@"ALL",@"Gain",@"Used"];
+    _currentRow = 0;
     _mainTable.delegate = self;
     _mainTable.dataSource = self;
 }
@@ -43,7 +46,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse];
+        cell.textLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15.0];
+        cell.textLabel.textColor = RGB(51, 51, 51);
     }
+    
     cell.textLabel.text = _sourceArr[indexPath.row];
     
     return cell;
@@ -56,8 +62,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
+    if (_currentRow == indexPath.row) {
+        if (self.clickCellBlock) {
+            self.clickCellBlock(_sourceArr[indexPath.row],-1);
+        }
+        return;
+    }
+    _currentRow = indexPath.row;
+    if (self.clickCellBlock) {
+        self.clickCellBlock(_sourceArr[indexPath.row],indexPath.row);
+    }
 }
 
+- (void) showSelectView
+{
+    self.alpha = 0.0f;
+    [UIView animateWithDuration:0.4 animations:^{
+        self.alpha = 1.0f;
+    }];
+}
+
+- (void) hideSelectView
+{
+   
+    [UIView animateWithDuration:0.4 animations:^{
+        self.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
 @end

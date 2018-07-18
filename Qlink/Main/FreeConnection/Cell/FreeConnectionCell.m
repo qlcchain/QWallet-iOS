@@ -7,6 +7,7 @@
 //
 
 #import "FreeConnectionCell.h"
+#import "FreeRecordMode.h"
 
 @implementation FreeConnectionCell
 
@@ -21,6 +22,13 @@
     _nameLab.text = nil;
     _timeLab.text = nil;
     _numLab.text = nil;
+}
+
+- (void)setCellMode:(FreeRecordMode *) mode
+{
+    _nameLab.text = mode.assetName?:@"";
+    _timeLab.text = mode.time?:@"";
+    _numLab.text = mode.num?:@"";
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

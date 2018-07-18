@@ -220,6 +220,7 @@ dispatch_source_t _timer;
                 if (dataDic) {
                     NSString *freeNum = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"freeNum"]];
                     [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
                     if ([freeNum integerValue] > 0) { // 可以免费连接
                         //  调用免费
                         [TransferUtil sendFreeConnectVPNRequestWithVPNInfo:vpnInfo];
@@ -245,6 +246,7 @@ dispatch_source_t _timer;
             if (dataDic) {
                 NSString *freeNum = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"freeNum"]];
                 [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
