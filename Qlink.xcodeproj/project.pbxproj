@@ -241,6 +241,12 @@
 		58CF1032207CBFDF0026F28E /* UnderlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF1031207CBFDF0026F28E /* UnderlineView.m */; };
 		58DC64F9206B6748002CF682 /* ConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DC64F8206B6748002CF682 /* ConfigUtil.m */; };
 		58DC655D206BA4A9002CF682 /* WalletPublicAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DC655B206BA4A9002CF682 /* WalletPublicAddressViewController.m */; };
+		58DE900B20FEE69200325B38 /* FreeConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE900920FEE69200325B38 /* FreeConnectionViewController.m */; };
+		58DE900C20FEE69200325B38 /* FreeConnectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE900A20FEE69200325B38 /* FreeConnectionViewController.xib */; };
+		58DE901120FEF05400325B38 /* FreeConnectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE900F20FEF05400325B38 /* FreeConnectionCell.m */; };
+		58DE901220FEF05400325B38 /* FreeConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901020FEF05400325B38 /* FreeConnectionCell.xib */; };
+		58DE901620FEF38000325B38 /* PopSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE901520FEF38000325B38 /* PopSelectView.m */; };
+		58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901720FEF38E00325B38 /* PopSelectView.xib */; };
 		58DF8C57209B0638000B0A2F /* ChatUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8C56209B0638000B0A2F /* ChatUtil.m */; };
 		58DF8E5D206E26AC00ACFC65 /* SendFundsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E54206E26AA00ACFC65 /* SendFundsView.m */; };
 		58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E56206E26AB00ACFC65 /* BuyQlcView.m */; };
@@ -860,6 +866,15 @@
 		58DC64F8206B6748002CF682 /* ConfigUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigUtil.m; sourceTree = "<group>"; };
 		58DC655A206BA4A9002CF682 /* WalletPublicAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletPublicAddressViewController.h; sourceTree = "<group>"; };
 		58DC655B206BA4A9002CF682 /* WalletPublicAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletPublicAddressViewController.m; sourceTree = "<group>"; };
+		58DE900820FEE69200325B38 /* FreeConnectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeConnectionViewController.h; sourceTree = "<group>"; };
+		58DE900920FEE69200325B38 /* FreeConnectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeConnectionViewController.m; sourceTree = "<group>"; };
+		58DE900A20FEE69200325B38 /* FreeConnectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeConnectionViewController.xib; sourceTree = "<group>"; };
+		58DE900E20FEF05400325B38 /* FreeConnectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeConnectionCell.h; sourceTree = "<group>"; };
+		58DE900F20FEF05400325B38 /* FreeConnectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeConnectionCell.m; sourceTree = "<group>"; };
+		58DE901020FEF05400325B38 /* FreeConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeConnectionCell.xib; sourceTree = "<group>"; };
+		58DE901420FEF38000325B38 /* PopSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopSelectView.h; sourceTree = "<group>"; };
+		58DE901520FEF38000325B38 /* PopSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopSelectView.m; sourceTree = "<group>"; };
+		58DE901720FEF38E00325B38 /* PopSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopSelectView.xib; sourceTree = "<group>"; };
 		58DF8C55209B0638000B0A2F /* ChatUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUtil.h; sourceTree = "<group>"; };
 		58DF8C56209B0638000B0A2F /* ChatUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatUtil.m; sourceTree = "<group>"; };
 		58DF8E54206E26AA00ACFC65 /* SendFundsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendFundsView.m; sourceTree = "<group>"; };
@@ -1452,7 +1467,6 @@
 		580D90C42062594C00B12506 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				73FF64A920F342D700E29B3B /* GoogleService-Info.plist */,
 				58A4DEA9206234AC00E72F52 /* AppDelegate.h */,
 				58A4DEAA206234AC00E72F52 /* AppDelegate.m */,
 				58A4DEAC206234AC00E72F52 /* LaunchViewController.h */,
@@ -1461,6 +1475,7 @@
 				58A4DEB4206234AC00E72F52 /* LaunchScreen.storyboard */,
 				58A4DEB7206234AC00E72F52 /* Info.plist */,
 				580C3E06207C55E5002C9969 /* Qlink.entitlements */,
+				73FF64A920F342D700E29B3B /* GoogleService-Info.plist */,
 				73FF64F120F599E600E29B3B /* CountryList.json */,
 				586F371E207B049400E12F95 /* ContinentAndCountryBean.json */,
 				58CDB5DF20871DBE00B74962 /* tox.json */,
@@ -1708,6 +1723,8 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				58DE900720FEE66B00325B38 /* FreeConnection */,
+				5849BD3820FD9F2100F972AF /* Log */,
 				58ADE69920F499D800C50306 /* VpnRegister */,
 				5817819F20F2FA13003E74F2 /* Vpn2 */,
 				58A4DB0C20EB11EF001C241D /* NewGuide */,
@@ -1754,9 +1771,6 @@
 				5834CC58207E1573009168F8 /* VPNConnectedViewController.h */,
 				5834CC59207E1573009168F8 /* VPNConnectedViewController.m */,
 				5860AD0820CFB4EA00EEB6CE /* VPNConnectedViewController.xib */,
-				583910FA2084971F00A19E7E /* DebugLogViewController.h */,
-				583910FB2084971F00A19E7E /* DebugLogViewController.m */,
-				5860AD0F20CFB4FB00EEB6CE /* DebugLogViewController.xib */,
 			);
 			path = Vpn;
 			sourceTree = "<group>";
@@ -2155,6 +2169,16 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		5849BD3820FD9F2100F972AF /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				583910FA2084971F00A19E7E /* DebugLogViewController.h */,
+				583910FB2084971F00A19E7E /* DebugLogViewController.m */,
+				5860AD0F20CFB4FB00EEB6CE /* DebugLogViewController.xib */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
 		5860ADD820CFC67C00EEB6CE /* PacketTunnel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2429,6 +2453,38 @@
 				58CF1031207CBFDF0026F28E /* UnderlineView.m */,
 			);
 			path = UnderlineView;
+			sourceTree = "<group>";
+		};
+		58DE900720FEE66B00325B38 /* FreeConnection */ = {
+			isa = PBXGroup;
+			children = (
+				58DE901320FEF31600325B38 /* View */,
+				58DE900D20FEF03B00325B38 /* Cell */,
+				58DE900820FEE69200325B38 /* FreeConnectionViewController.h */,
+				58DE900920FEE69200325B38 /* FreeConnectionViewController.m */,
+				58DE900A20FEE69200325B38 /* FreeConnectionViewController.xib */,
+			);
+			path = FreeConnection;
+			sourceTree = "<group>";
+		};
+		58DE900D20FEF03B00325B38 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58DE900E20FEF05400325B38 /* FreeConnectionCell.h */,
+				58DE900F20FEF05400325B38 /* FreeConnectionCell.m */,
+				58DE901020FEF05400325B38 /* FreeConnectionCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		58DE901320FEF31600325B38 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				58DE901420FEF38000325B38 /* PopSelectView.h */,
+				58DE901520FEF38000325B38 /* PopSelectView.m */,
+				58DE901720FEF38E00325B38 /* PopSelectView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		730DA8F720886A7800CE1909 /* CustomViews */ = {
@@ -2893,6 +2949,7 @@
 				5860ACDC20CFB49800EEB6CE /* VPNRegisterViewController.xib in Resources */,
 				73FF647620EDCDA800E29B3B /* GuidenSettingView.xib in Resources */,
 				5860ACF120CFB4C900EEB6CE /* ChooseContinentViewController.xib in Resources */,
+				58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */,
 				737F90B720E3965D008BC9C2 /* GuidePageView3.xib in Resources */,
 				73C1BA13207E184F0080C59F /* HMScanner.bundle in Resources */,
 				73B6F4E720AEC08E004B7219 /* nodes.json in Resources */,
@@ -2913,8 +2970,10 @@
 				73FF640120EDCC5500E29B3B /* GuideVpnCountryView.xib in Resources */,
 				58CDB5DA2085DB6600B74962 /* test-ca.crt in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
+				58DE900C20FEE69200325B38 /* FreeConnectionViewController.xib in Resources */,
 				5860ACEA20CFB4BD00EEB6CE /* SeizeVPNViewController.xib in Resources */,
 				5860AD9920CFB5E600EEB6CE /* WalletQRViewController.xib in Resources */,
+				58DE901220FEF05400325B38 /* FreeConnectionCell.xib in Resources */,
 				73FF641B20EDCC7800E29B3B /* GuideVpnConnectView.xib in Resources */,
 				5860AD6120CFB59300EEB6CE /* CreateNewWalletViewController.xib in Resources */,
 				586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */,
@@ -3125,6 +3184,7 @@
 				73B1AEC420BE7D3800947749 /* MyAssetsViewController.m in Sources */,
 				73B6F4DC20AEC08E004B7219 /* Transaction.swift in Sources */,
 				737F909120DB9FC4008BC9C2 /* GuidePageView3.m in Sources */,
+				58DE900B20FEE69200325B38 /* FreeConnectionViewController.m in Sources */,
 				580D916020625A4400B12506 /* UITextView+PinchZoom.m in Sources */,
 				73B6F4E320AEC08E004B7219 /* ShamirSecret.swift in Sources */,
 				5834CC5B207E1573009168F8 /* VPNConnectedViewController.m in Sources */,
@@ -3206,6 +3266,7 @@
 				7360540820DB9D67004CD3C3 /* GuidePageView2.m in Sources */,
 				580D916220625A4400B12506 /* UINavigationBar+Awesome.m in Sources */,
 				580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */,
+				58DE901620FEF38000325B38 /* PopSelectView.m in Sources */,
 				58270FB92071C98100C08784 /* VPNRegisterViewController.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
@@ -3300,6 +3361,7 @@
 				5812DDAE20A1A7890043A8A8 /* ZXSystemMessageCell.m in Sources */,
 				58441B8F20BD5B7300904DC8 /* SettingViewController.m in Sources */,
 				73B6F4E820AEC08E004B7219 /* AssetIdConstants.swift in Sources */,
+				58DE901120FEF05400325B38 /* FreeConnectionCell.m in Sources */,
 				5812DDA520A1A7890043A8A8 /* ZXChatMessageController.m in Sources */,
 				73B6F4C520AEC08E004B7219 /* PBKDF2.swift in Sources */,
 				73C200B720996B430043E889 /* MyAssetsView.m in Sources */,

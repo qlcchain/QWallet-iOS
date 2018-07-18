@@ -86,7 +86,6 @@
     [self addNewGuideEnterWallet];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

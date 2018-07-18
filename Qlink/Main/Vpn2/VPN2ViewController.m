@@ -50,6 +50,7 @@
 #import "NSDateFormatter+Category.h"
 #import "TransferUtil.h"
 #import "VPNTranferMode.h"
+#import "FreeConnectionViewController.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -57,15 +58,17 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *userHeadBtn;
-@property (nonatomic ,strong) VPNMode *vpnMode;
+@property (weak, nonatomic) IBOutlet UILabel *freeConnectionLab;
 @property (weak, nonatomic) IBOutlet UIButton *registerVPNBtn;
-@property (strong, nonatomic) RefreshTableView *mainTable;
 @property (weak, nonatomic) IBOutlet UIView *tableBack;
 @property (weak, nonatomic) IBOutlet UILabel *countryLab;
 @property (weak, nonatomic) IBOutlet UIImageView *countryIcon;
 @property (weak, nonatomic) IBOutlet UIView *sectionBack;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sectionBackHeight;
 @property (strong, nonatomic) IBOutlet UIView *sectionTitleView;
+
+@property (nonatomic ,strong) VPNMode *vpnMode;
+@property (strong, nonatomic) RefreshTableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) CountryModel *selectCountryM;
 @property (nonatomic, strong) VPNInfo *selectVPNInfo;
@@ -835,6 +838,10 @@ static BOOL refreshAnimate = YES;
 #endif
 }
 
+- (IBAction)freeConnectionAction:(id)sender {
+    [self jumpToFreeConnection];
+}
+
 #pragma mark -选择国家
 - (void) selectCountry {
     // 显示
@@ -861,7 +868,6 @@ static BOOL refreshAnimate = YES;
     }
     return _countryView;
 }
-
 
 #pragma mark - Transition
 
@@ -909,6 +915,11 @@ static BOOL refreshAnimate = YES;
 - (void)jumpToChat:(ChatModel *)chatM {
     ZXChatViewController *vc = [[ZXChatViewController alloc] init];
     ChatUtil.shareInstance.currentChatM = chatM;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToFreeConnection {
+    FreeConnectionViewController *vc = [[FreeConnectionViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

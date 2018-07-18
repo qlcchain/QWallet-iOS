@@ -442,7 +442,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
         array = [fileURL componentsSeparatedByString:@"/"];
         NSString *vpnFileName = [[array lastObject] stringByReplacingOccurrencesOfString:@"-" withString:@""];
         VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
-        fileView.lblMsg.text =@"Save as the current file name ?";
+        fileView.lblMsg.text = NSStringLocalizable(@"save_ovpn");
         fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
         fileView.vpnURL = url;
          UIWindow *win = [UIApplication sharedApplication].keyWindow;
