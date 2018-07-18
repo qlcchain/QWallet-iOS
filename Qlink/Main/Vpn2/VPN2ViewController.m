@@ -106,6 +106,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVPNSuccess:) name:UPDATE_ASSETS_TZ object:nil];
     // VPN连接时创建钱包跳转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessVPNConnect:) name:CHECK_PROCESS_SUCCESS_VPN_CONNECT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -458,8 +459,10 @@ static BOOL refreshAnimate = YES;
 - (void)showDisconnectAlert {
     NSString *content = NSStringLocalizable(@"want_disconnect");
     NSString *image = @"icon_disconnect";
-    
+    @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        [weakSelf refreshVpnNormalStatus];
+        [weakSelf refreshTable];
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
     }];
 }
@@ -470,6 +473,8 @@ static BOOL refreshAnimate = YES;
     NSString *image = @"icon_tips1";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+        [weakSelf refreshVpnNormalStatus];
+        [weakSelf refreshTable];
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
         [weakSelf showConnectAlert:vpnInfo];
     }];
@@ -487,6 +492,13 @@ static BOOL refreshAnimate = YES;
         if ([vpnInfo.vpnName isEqualToString:weakSelf.currentConnectVPNName]) {
             vpnInfo.connectStatus = VpnConnectStatusNone;
         }
+    }];
+}
+
+- (void)refreshVpnNormalStatus {
+    [self.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        VPNInfo *vpnInfo = obj;
+        vpnInfo.connectStatus = VpnConnectStatusNone;
     }];
 }
 
@@ -586,9 +598,9 @@ static BOOL refreshAnimate = YES;
         case NEVPNStatusConnected:
         {
             if (![[CurrentWalletInfo getShareInstance].address isEqualToString:_selectVPNInfo.address]) {
-                [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
                 [TransferUtil udpateTransferModel:_selectVPNInfo];
             }
+            [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
             _currentConnectVPNName = _selectVPNInfo.vpnName;
             [self refreshVPNConnect];
             if (_isConnectVPN) {
@@ -637,9 +649,13 @@ static BOOL refreshAnimate = YES;
     [self refreshTable];
 }
 
-- (void) updateVPNSuccess:(NSNotification *) noti
-{
+- (void) updateVPNSuccess:(NSNotification *) noti {
     [self requestQueryVpn];
+}
+
+- (void)savePreferenceFail:(NSNotification *)noti {
+    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+    [self refreshTable];
 }
 
 #pragma mark - Config View
