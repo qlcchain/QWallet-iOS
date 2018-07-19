@@ -264,6 +264,13 @@ dispatch_source_t _timer;
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             // 更新VPNInfo支付的状态
             [TransferUtil updateVPNListTranferStatusWithVPNName:vpnInfo.vpnName];
+            NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
+            if (dataDic) {
+                NSString *freeNum = [NSString stringWithFormat:@"%@",[dataDic objectForKey:@"freeNum"]];
+                [HWUserdefault insertObj:freeNum withkey:VPN_FREE_COUNT];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
+            }
+           
         } else {
             // 更新VPNInfo正在交易的状态
             [TransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName status:NO];
