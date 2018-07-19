@@ -47,7 +47,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE CONNECTION DETAILS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEU-P4-KlY">
-                            <rect key="frame" x="72.5" y="23.5" width="230" height="20"/>
+                            <rect key="frame" x="81" y="23" width="213" height="21"/>
                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -68,26 +68,37 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nS5-4s-3NS" customClass="SkyRadiusView">
                             <rect key="frame" x="19" y="14" width="337" height="144"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7c-pr-jkJ">
-                                    <rect key="frame" x="154" y="43" width="28" height="58.5"/>
-                                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="50"/>
-                                    <color key="textColor" red="0.2156862745" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="od2-jd-4B7">
-                                    <rect key="frame" x="127.5" y="101.5" width="82.5" height="19"/>
-                                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="16"/>
-                                    <color key="textColor" red="0.2156862745" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ixC-Ks-yvY">
+                                    <rect key="frame" x="130.5" y="36.5" width="76.5" height="72"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vB3-Qd-I8y">
+                                            <rect key="frame" x="0.0" y="0.0" width="76.5" height="72"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7c-pr-jkJ">
+                                                    <rect key="frame" x="29.5" y="0.0" width="18" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Hy1-Uf-Sb2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="50"/>
+                                                    <color key="textColor" red="0.2156862745" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="od2-jd-4B7">
+                                                    <rect key="frame" x="0.0" y="52" width="76.5" height="20"/>
+                                                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="16"/>
+                                                    <color key="textColor" red="0.2156862745" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="od2-jd-4B7" firstAttribute="top" secondItem="z7c-pr-jkJ" secondAttribute="bottom" id="9k6-7g-l58"/>
-                                <constraint firstItem="od2-jd-4B7" firstAttribute="centerX" secondItem="z7c-pr-jkJ" secondAttribute="centerX" id="U2A-1Z-z6M"/>
-                                <constraint firstItem="z7c-pr-jkJ" firstAttribute="centerY" secondItem="nS5-4s-3NS" secondAttribute="centerY" id="c9x-Jz-BKF"/>
+                                <constraint firstItem="ixC-Ks-yvY" firstAttribute="centerY" secondItem="nS5-4s-3NS" secondAttribute="centerY" id="L96-f9-NEe"/>
                                 <constraint firstAttribute="height" constant="144" id="jVb-Tk-3KN"/>
-                                <constraint firstItem="z7c-pr-jkJ" firstAttribute="centerX" secondItem="nS5-4s-3NS" secondAttribute="centerX" id="vEv-Tp-x6I"/>
+                                <constraint firstItem="ixC-Ks-yvY" firstAttribute="centerX" secondItem="nS5-4s-3NS" secondAttribute="centerX" id="kww-dY-iHO"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="topRightRadius" value="YES"/>
@@ -100,7 +111,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HISTORY RECORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcP-yU-gLG">
-                            <rect key="frame" x="33" y="197" width="96" height="13"/>
+                            <rect key="frame" x="33" y="197" width="89" height="13"/>
                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -124,8 +135,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jE1-Ge-kn5" customClass="SkyRadiusView">
                             <rect key="frame" x="19" y="225" width="337" height="355"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U0m-4O-0N8">
-                                    <rect key="frame" x="13" y="0.0" width="311" height="355"/>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U0m-4O-0N8">
+                                    <rect key="frame" x="13" y="0.0" width="311" height="342"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="HTl-ql-d9z"/>
@@ -138,7 +149,7 @@
                                 <constraint firstItem="U0m-4O-0N8" firstAttribute="top" secondItem="jE1-Ge-kn5" secondAttribute="top" id="DPE-Mt-dCv"/>
                                 <constraint firstAttribute="trailing" secondItem="U0m-4O-0N8" secondAttribute="trailing" constant="13" id="MZE-m6-P6K"/>
                                 <constraint firstItem="U0m-4O-0N8" firstAttribute="leading" secondItem="jE1-Ge-kn5" secondAttribute="leading" constant="13" id="UNQ-uw-wly"/>
-                                <constraint firstAttribute="bottom" secondItem="U0m-4O-0N8" secondAttribute="bottom" id="rxD-dA-M7I"/>
+                                <constraint firstAttribute="bottom" secondItem="U0m-4O-0N8" secondAttribute="bottom" constant="13" id="rxD-dA-M7I"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="topRightRadius" value="YES"/>

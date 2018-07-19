@@ -107,15 +107,15 @@
     // VPN连接时创建钱包跳转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessVPNConnect:) name:CHECK_PROCESS_SUCCESS_VPN_CONNECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
+    // vpn连接时没有足够资产或其它原因取消连接
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:VPN_CONNECT_CANCEL_LOADING object:nil];
     // vpn免费次数成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFreeCount:) name:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
 }
 
 #pragma mark - Life Cycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self showRegisterVPN];
     [self addObserve];
     [self configData];
@@ -489,7 +489,7 @@ static BOOL refreshAnimate = YES;
         [weakSelf refreshVpnNormalStatus];
         [weakSelf refreshTable];
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
-        [weakSelf performSelector:@selector(showConnectAlert:) withObject:vpnInfo afterDelay:.8];
+        [weakSelf performSelector:@selector(showConnectJudge:) withObject:vpnInfo afterDelay:.8];
 //        [weakSelf showConnectAlert:vpnInfo];
     }];
 }
