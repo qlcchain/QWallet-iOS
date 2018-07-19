@@ -420,7 +420,15 @@ static BOOL refreshAnimate = YES;
     NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
-        [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+        if (![WalletUtil isExistWalletPrivateKey]) {
+            NSString *content = NSStringLocalizable(@"create_wallet_to_contiue");
+            NSString *image = @"icon_tips1";
+            [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+                [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+            }];
+        } else {
+            [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+        }
     } else { // 免费连接
         [self showConnectAlert:vpnInfo isFree:YES];
     }
