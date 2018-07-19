@@ -23,7 +23,6 @@
 //#import "UIButton+UserHead.h"
 #import "ContinentModel.h"
 #import "ChooseCountryUtil.h"
-#import "DebugLogViewController.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "FriendStatusModel.h"
 #import "ToxRequestModel.h"
@@ -865,12 +864,6 @@ static BOOL refreshAnimate = YES;
     [self selectCountry];
 }
 
-- (IBAction)debugLogAction:(id)sender {
-#ifdef DEBUG
-    [self jumpToDebugLog];
-#endif
-}
-
 - (IBAction)freeConnectionAction:(id)sender {
     [self jumpToFreeConnection];
 }
@@ -935,11 +928,6 @@ static BOOL refreshAnimate = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToDebugLog {
-    DebugLogViewController *vc = [[DebugLogViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void) jumpToSeizeVPN {
     SeizeVPNViewController *vc = [[SeizeVPNViewController alloc] initWithVPNInfo:_selectVPNInfo];
     [self.navigationController pushViewController:vc animated:YES];
@@ -964,16 +952,6 @@ static BOOL refreshAnimate = YES;
     
     return _sourceArr;
 }
-
-//- (SelectCountryModel *)selectCountryM {
-//    if (!_selectCountryM) {
-//        _selectCountryM = [[SelectCountryModel alloc] init];
-//        _selectCountryM.continent = ASIA_CONTINENT;
-//        _selectCountryM.country = [LocationMode getShareInstance].country;
-//    }
-//
-//    return _selectCountryM;
-//}
 
 - (RefreshTableView *)mainTable {
     if (!_mainTable) {
