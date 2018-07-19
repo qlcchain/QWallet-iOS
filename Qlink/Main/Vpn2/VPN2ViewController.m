@@ -412,9 +412,9 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)showConnectJudge:(VPNInfo *)vpnInfo {
-    // 连接自己的VPN时
-    if ([vpnInfo.address isEqualToString:[CurrentWalletInfo getShareInstance].address?:@""]) {
-        [self showConnectAlert:vpnInfo cost:@"0"];
+    
+    if ([vpnInfo.address isEqualToString:[CurrentWalletInfo getShareInstance].address?:@""]) { // 连接自己钱包的VPN
+        [self goConnectAndRefresh:vpnInfo];
         return;
     }
     NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
@@ -422,20 +422,34 @@ static BOOL refreshAnimate = YES;
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
        
         [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+        if (![WalletUtil isExistWalletPrivateKey]) {
+            NSString *content = NSStringLocalizable(@"create_wallet_to_contiue");
+            NSString *image = @"icon_tips1";
+            [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
+                [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+            }];
+        } else {
+            [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
+        }
     } else { // 免费连接
-        [self showConnectAlert:vpnInfo cost:@"0"];
+        [self showConnectAlert:vpnInfo isFree:YES];
     }
 }
 
+- (void)goConnectAndRefresh:(VPNInfo *)vpnInfo {
+    vpnInfo.connectStatus = VpnConnectStatusConnecting;
+    [self refreshTable];
+    [self goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+}
+
 // 显示连接提示
-- (void)showConnectAlert:(VPNInfo *)vpnInfo cost:(NSString *)cost {
-    NSString *content = [NSString stringWithFormat:NSStringLocalizable(@"just_const"),cost];
+- (void)showConnectAlert:(VPNInfo *)vpnInfo isFree:(BOOL)isFree {
+    NSString *cost = isFree?@"0":vpnInfo.cost;
+    NSString *content = isFree?NSStringLocalizable(@"free_conncetions"):[NSString stringWithFormat:NSStringLocalizable(@"just_const"),cost];
     NSString *image = @"icon_even";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
-        vpnInfo.connectStatus = VpnConnectStatusConnecting;
-        [weakSelf refreshTable];
-        [weakSelf goConnectVpn:vpnInfo]; // 检查连通性---连接vpn
+        [weakSelf goConnectAndRefresh:vpnInfo];
     }];
 }
 
@@ -557,9 +571,9 @@ static BOOL refreshAnimate = YES;
         }
     }
     if (isCharge) {
-        [self showConnectAlert:_selectVPNInfo cost:_selectVPNInfo.cost];
+        [self showConnectAlert:_selectVPNInfo isFree:NO];
     } else {
-        [self showConnectAlert:_selectVPNInfo cost:@"0"];
+        [self showConnectAlert:_selectVPNInfo isFree:YES];
     }
 }
 
