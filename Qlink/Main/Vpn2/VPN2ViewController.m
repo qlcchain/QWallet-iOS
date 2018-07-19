@@ -421,7 +421,6 @@ static BOOL refreshAnimate = YES;
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
        
-        [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
         if (![WalletUtil isExistWalletPrivateKey]) {
             NSString *content = NSStringLocalizable(@"create_wallet_to_contiue");
             NSString *image = @"icon_tips1";
