@@ -489,7 +489,7 @@ static BOOL refreshAnimate = YES;
         [weakSelf refreshVpnNormalStatus];
         [weakSelf refreshTable];
         [[VPNUtil shareInstance] stopVPN]; // 关掉vpn连接
-        [weakSelf performSelector:@selector(showConnectAlert:) withObject:vpnInfo afterDelay:.8];
+        [weakSelf performSelector:@selector(showConnectJudge:) withObject:vpnInfo afterDelay:.8];
 //        [weakSelf showConnectAlert:vpnInfo];
     }];
 }
