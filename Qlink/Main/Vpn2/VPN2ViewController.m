@@ -420,6 +420,7 @@ static BOOL refreshAnimate = YES;
     NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
+       
         [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
     } else { // 免费连接
         [self showConnectAlert:vpnInfo cost:@"0"];
