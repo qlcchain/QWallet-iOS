@@ -105,6 +105,7 @@
 		581781A320F2FA50003E74F2 /* VPN2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781A120F2FA50003E74F2 /* VPN2ViewController.m */; };
 		581781AA20F2FBCD003E74F2 /* VpnListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781A820F2FBCD003E74F2 /* VpnListCell.m */; };
 		581781AE20F2FBF5003E74F2 /* VpnToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781AD20F2FBF5003E74F2 /* VpnToastView.m */; };
+		5818D641210035B800651EED /* switch_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5818D640210035B800651EED /* switch_load.gif */; };
 		58270FB92071C98100C08784 /* VPNRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FB72071C98000C08784 /* VPNRegisterViewController.m */; };
 		58270FBE2071FE3100C08784 /* UnlockWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FBC2071FE3100C08784 /* UnlockWalletViewController.m */; };
 		58270FC22072019400C08784 /* WalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC12072019400C08784 /* WalletUtil.m */; };
@@ -247,7 +248,6 @@
 		58DE901220FEF05400325B38 /* FreeConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901020FEF05400325B38 /* FreeConnectionCell.xib */; };
 		58DE901620FEF38000325B38 /* PopSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE901520FEF38000325B38 /* PopSelectView.m */; };
 		58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901720FEF38E00325B38 /* PopSelectView.xib */; };
-		58DE901D20FF356500325B38 /* switch_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901C20FF356400325B38 /* switch_load.gif */; };
 		58DF8C57209B0638000B0A2F /* ChatUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8C56209B0638000B0A2F /* ChatUtil.m */; };
 		58DF8E5D206E26AC00ACFC65 /* SendFundsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E54206E26AA00ACFC65 /* SendFundsView.m */; };
 		58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E56206E26AB00ACFC65 /* BuyQlcView.m */; };
@@ -614,6 +614,7 @@
 		581781A820F2FBCD003E74F2 /* VpnListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VpnListCell.m; sourceTree = "<group>"; };
 		581781AC20F2FBF5003E74F2 /* VpnToastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VpnToastView.h; sourceTree = "<group>"; };
 		581781AD20F2FBF5003E74F2 /* VpnToastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VpnToastView.m; sourceTree = "<group>"; };
+		5818D640210035B800651EED /* switch_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = switch_load.gif; sourceTree = "<group>"; };
 		58270FB62071C98000C08784 /* VPNRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNRegisterViewController.h; sourceTree = "<group>"; };
 		58270FB72071C98000C08784 /* VPNRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNRegisterViewController.m; sourceTree = "<group>"; };
 		58270FBB2071FE3100C08784 /* UnlockWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlockWalletViewController.h; sourceTree = "<group>"; };
@@ -877,7 +878,6 @@
 		58DE901420FEF38000325B38 /* PopSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopSelectView.h; sourceTree = "<group>"; };
 		58DE901520FEF38000325B38 /* PopSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopSelectView.m; sourceTree = "<group>"; };
 		58DE901720FEF38E00325B38 /* PopSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopSelectView.xib; sourceTree = "<group>"; };
-		58DE901C20FF356400325B38 /* switch_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = switch_load.gif; sourceTree = "<group>"; };
 		58DF8C55209B0638000B0A2F /* ChatUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUtil.h; sourceTree = "<group>"; };
 		58DF8C56209B0638000B0A2F /* ChatUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatUtil.m; sourceTree = "<group>"; };
 		58DF8E54206E26AA00ACFC65 /* SendFundsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendFundsView.m; sourceTree = "<group>"; };
@@ -2496,7 +2496,7 @@
 		58DE901920FF20CF00325B38 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				58DE901C20FF356400325B38 /* switch_load.gif */,
+				5818D640210035B800651EED /* switch_load.gif */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2985,7 +2985,6 @@
 				73FF644220EDCD6000E29B3B /* GuideSettingMoreView.xib in Resources */,
 				73FF640120EDCC5500E29B3B /* GuideVpnCountryView.xib in Resources */,
 				58CDB5DA2085DB6600B74962 /* test-ca.crt in Resources */,
-				58DE901D20FF356500325B38 /* switch_load.gif in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
 				58DE900C20FEE69200325B38 /* FreeConnectionViewController.xib in Resources */,
 				5860ACEA20CFB4BD00EEB6CE /* SeizeVPNViewController.xib in Resources */,
@@ -3006,6 +3005,7 @@
 				5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */,
 				5860AD8420CFB5C800EEB6CE /* WalletDetailViewController.xib in Resources */,
 				5860AD7620CFB5B200EEB6CE /* UnlockWalletViewController.xib in Resources */,
+				5818D641210035B800651EED /* switch_load.gif in Resources */,
 				5860AD7D20CFB5BC00EEB6CE /* WalletCreateSuccessViewController.xib in Resources */,
 				5860AD0D20CFB4FB00EEB6CE /* DebugLogViewController.xib in Resources */,
 				580D91B62063AE5300B12506 /* Roboto-ThinItalic.ttf in Resources */,
