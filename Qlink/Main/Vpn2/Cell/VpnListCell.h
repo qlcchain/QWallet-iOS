@@ -30,7 +30,6 @@ typedef void(^ConversationBlock)(void);
 @property (weak, nonatomic) IBOutlet UILabel *connectNumUnitLab;
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
 @property (weak, nonatomic) IBOutlet OLImageView *switchingImageV;
-@property (weak, nonatomic) IBOutlet OLImageView *switchedImageV;
 @property (nonatomic, copy) ConnectClickBlock connectClickB;
 @property (nonatomic , copy) ConversationBlock conversationB;
 

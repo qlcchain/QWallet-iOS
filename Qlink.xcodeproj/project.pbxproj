@@ -247,7 +247,7 @@
 		58DE901220FEF05400325B38 /* FreeConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901020FEF05400325B38 /* FreeConnectionCell.xib */; };
 		58DE901620FEF38000325B38 /* PopSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE901520FEF38000325B38 /* PopSelectView.m */; };
 		58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901720FEF38E00325B38 /* PopSelectView.xib */; };
-		58DE901B20FF20E200325B38 /* switching.gif in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901A20FF20E200325B38 /* switching.gif */; };
+		58DE901D20FF356500325B38 /* switch_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901C20FF356400325B38 /* switch_load.gif */; };
 		58DF8C57209B0638000B0A2F /* ChatUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8C56209B0638000B0A2F /* ChatUtil.m */; };
 		58DF8E5D206E26AC00ACFC65 /* SendFundsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E54206E26AA00ACFC65 /* SendFundsView.m */; };
 		58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E56206E26AB00ACFC65 /* BuyQlcView.m */; };
@@ -877,7 +877,7 @@
 		58DE901420FEF38000325B38 /* PopSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopSelectView.h; sourceTree = "<group>"; };
 		58DE901520FEF38000325B38 /* PopSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopSelectView.m; sourceTree = "<group>"; };
 		58DE901720FEF38E00325B38 /* PopSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopSelectView.xib; sourceTree = "<group>"; };
-		58DE901A20FF20E200325B38 /* switching.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = switching.gif; sourceTree = "<group>"; };
+		58DE901C20FF356400325B38 /* switch_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = switch_load.gif; sourceTree = "<group>"; };
 		58DF8C55209B0638000B0A2F /* ChatUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUtil.h; sourceTree = "<group>"; };
 		58DF8C56209B0638000B0A2F /* ChatUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatUtil.m; sourceTree = "<group>"; };
 		58DF8E54206E26AA00ACFC65 /* SendFundsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendFundsView.m; sourceTree = "<group>"; };
@@ -2496,7 +2496,7 @@
 		58DE901920FF20CF00325B38 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				58DE901A20FF20E200325B38 /* switching.gif */,
+				58DE901C20FF356400325B38 /* switch_load.gif */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2985,6 +2985,7 @@
 				73FF644220EDCD6000E29B3B /* GuideSettingMoreView.xib in Resources */,
 				73FF640120EDCC5500E29B3B /* GuideVpnCountryView.xib in Resources */,
 				58CDB5DA2085DB6600B74962 /* test-ca.crt in Resources */,
+				58DE901D20FF356500325B38 /* switch_load.gif in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
 				58DE900C20FEE69200325B38 /* FreeConnectionViewController.xib in Resources */,
 				5860ACEA20CFB4BD00EEB6CE /* SeizeVPNViewController.xib in Resources */,
@@ -3037,7 +3038,6 @@
 				5860AD5320CFB57E00EEB6CE /* WalletAddressView.xib in Resources */,
 				580D91C02063B27300B12506 /* VAGRounded-Bold.ttf in Resources */,
 				5860AD6820CFB59C00EEB6CE /* HistoryRecordsViewController.xib in Resources */,
-				58DE901B20FF20E200325B38 /* switching.gif in Resources */,
 				73FF646920EDCD9700E29B3B /* GuideNewWalletView.xib in Resources */,
 				588BFCB920EF211F00B1E860 /* ConfigurationDebug.plist in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,

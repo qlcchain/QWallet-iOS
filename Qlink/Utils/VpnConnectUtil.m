@@ -20,6 +20,7 @@
 @interface VpnConnectUtil () {
     BOOL checkConnnectOK;
     BOOL connectVpnOK;
+    BOOL connectVpnCancel;
 }
 
 @property (nonatomic, strong) VPNInfo *vpnInfo;
@@ -66,6 +67,7 @@
         case NEVPNStatusConnected:
         {
             connectVpnOK = YES;
+            connectVpnCancel = NO;
             [AppD.window hideHud];
 //            [self jumpToVPNConnected];
         }
@@ -95,6 +97,7 @@
 - (void)savePreferenceFail:(NSNotification *)noti {
     [AppD.window hideHud];
     [AppD.window showHint:NSStringLocalizable(@"save_failed")];
+    connectVpnCancel = YES;
 }
 
 - (void)checkConnectRsp:(NSNotification *)noti {
@@ -144,12 +147,16 @@
 }
 
 - (void)connectVpnTimeout {
-    if (!connectVpnOK) {
-        [VPNUtil.shareInstance stopVPN];
-        [AppD.window hideHud];
-        [KEYWINDOW showHint:NSStringLocalizable(@"vpn_timeout")];
-        [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
+    if (connectVpnOK) { // 连接成功
+        return;
     }
+    if (connectVpnCancel) { // 用户取消
+        return;
+    }
+    [VPNUtil.shareInstance stopVPN];
+    [AppD.window hideHud];
+    [KEYWINDOW showHint:NSStringLocalizable(@"vpn_timeout")];
+    [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
 }
 
 #pragma mark - Action
@@ -170,6 +177,7 @@
     }
     
     connectVpnOK = NO;
+    connectVpnCancel = NO;
     
     NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
     [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];

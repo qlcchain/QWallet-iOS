@@ -34,13 +34,13 @@
 }
 
 + (NSTimeInterval)getGifDuration {
-    NSTimeInterval timeI = [LaunchViewController gifImage].totalDuration;
+    NSTimeInterval timeI = ((OLImage *)[LaunchViewController gifImage]).totalDuration;
     return timeI;
 }
 
-+ (OLImage *)gifImage {
++ (UIImage *)gifImage {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"launchAnimate" ofType:@"gif"];
-    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
+    UIImage *img = [OLImage imageWithData:[NSData dataWithContentsOfFile:path]];
     return img;
 }
 

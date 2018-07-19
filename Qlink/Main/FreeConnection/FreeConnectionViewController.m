@@ -57,9 +57,9 @@
     if (!_selectView) {
         _selectView = [PopSelectView getInstance];
         CGFloat selectH = CGRectGetMaxY(_typeBtn.frame)+67;
-        if (IS_iPhoneX) {
+//        if (IS_iPhoneX) {
             selectH += STATUS_BAR_HEIGHT;
-        }
+//        }
         _selectView.frame = CGRectMake(SCREEN_WIDTH-12-90,selectH-15, 90, 124);
         @weakify_self
         [_selectView setClickCellBlock:^(NSString *cellValue,NSInteger row) {

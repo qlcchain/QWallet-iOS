@@ -13,21 +13,13 @@
 #import "ChatModel.h"
 #import "WalletUtil.h"
 
-@interface VpnListCell () <OLImageViewDelegate>
+@interface VpnListCell ()
 
 @property (nonatomic, strong) VPNInfo *vpnInfo;
 
 @end
 
 @implementation VpnListCell
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        self.switchingImageV.delegate = self;
-        self.switchedImageV.delegate = self;
-    }
-    return self;
-}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -36,7 +28,6 @@
     _ownerImageView.layer.cornerRadius = _ownerImageView.width/2.0;
     _ownerImageView.layer.masksToBounds = YES;
     _switchingImageV.runLoopMode = NSRunLoopCommonModes;
-    _switchedImageV.runLoopMode = NSRunLoopCommonModes;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -93,31 +84,21 @@
     [_connectBtn setImage:_vpnInfo.connectStatus==VpnConnectStatusNone?notConnectImage:_vpnInfo.connectStatus==VpnConnectStatusConnecting?connectingImage:connectedImage forState:UIControlStateNormal];
     if (_vpnInfo.connectStatus == VpnConnectStatusNone) {
         _switchingImageV.hidden = YES;
-        _switchedImageV.hidden = YES;
         _switchingImageV.image = nil;
-        _switchedImageV.image = nil;
     } else if (_vpnInfo.connectStatus == VpnConnectStatusConnecting) {
         _switchingImageV.hidden = NO;
-        _switchedImageV.hidden = YES;
         _switchingImageV.image = [VpnListCell switchingImage];
-        _switchedImageV.image = nil;
     } else if (_vpnInfo.connectStatus == VpnConnectStatusConnected) {
         _switchingImageV.hidden = YES;
-        _switchedImageV.hidden = NO;
         _switchingImageV.image = nil;
-        _switchedImageV.image = [VpnListCell switchedImage];
     }
+    
 }
 
-+ (OLImage *)switchingImage {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"switching" ofType:@"gif"];
-    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
-    return img;
-}
-
-+ (OLImage *)switchedImage {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"switched" ofType:@"gif"];
-    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
++ (UIImage *)switchingImage {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"switch_load" ofType:@"gif"];
+//    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
+    UIImage *img = [OLImage imageWithData:[NSData dataWithContentsOfFile:path]];
     return img;
 }
 
@@ -153,16 +134,6 @@
     _priceLab.text = nil;
     _connectNumLab.text = nil;
     [_connectBtn setImage:nil forState:UIControlStateNormal];
-}
-
-#pragma mark -OLImageViewDelegate
-- (void)imageViewDidLoop:(OLImageView *)imageView {
-    if (imageView == _switchedImageV) {
-        _switchedImageV.hidden = YES;
-    }
-    if (imageView == _switchingImageV) {
-        
-    }
 }
 
 @end
