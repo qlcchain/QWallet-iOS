@@ -153,7 +153,7 @@
 }
 
 - (void)refreshFreeConnection {
-    NSString *freeStr = @"FREE:";
+    NSString *freeStr = NSStringLocalizable(@"free");
     NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
     _freeConnectionLab.text = [freeStr stringByAppendingString:freeCount?:@"0"];
 }
@@ -420,36 +420,7 @@ static BOOL refreshAnimate = YES;
     NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
-        if (![WalletUtil isExistWalletPrivateKey]) {
-            [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
-        } else {
-            BOOL isCharge = YES;
-            // 获取vpn上次连接时间
-            NSDictionary *modeDic = [HWUserdefault getObjectWithKey:vpnInfo.vpnName];
-            VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:modeDic];
-            if (tranferMode) {
-                NSString *connectTime = tranferMode.vpnConnectTime;
-                if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
-                    // 判断上次连接时间 超过一时间扣费
-                    NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
-                    NSDate *backDate = [dateFormatrer dateFromString:connectTime];
-                    // 判断日期相隔时间
-                    NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
-                    //超过一时间扣费
-                    if (labs(hours) < 1) {
-                        if (tranferMode.isTranferSuccess) {
-                            isCharge = NO;
-                        }
-                    }
-                }
-            }
-            
-            if (isCharge) {
-                [self showConnectAlert:vpnInfo cost:vpnInfo.cost];
-            } else {
-                [self showConnectAlert:vpnInfo cost:@"0"];
-            }
-        }
+        [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
     } else { // 免费连接
         [self showConnectAlert:vpnInfo cost:@"0"];
     }
@@ -556,6 +527,39 @@ static BOOL refreshAnimate = YES;
 
 - (void) checkProcessVPNConnect:(NSNotification *) noti{
     
+    CGFloat delay = 0.0f;
+    if ([WalletUtil shareInstance].isDelay) {
+        delay = 0.6f;
+    }
+    [self performSelector:@selector(checkVPNConnect) withObject:self afterDelay:delay];
+}
+#pragma mark - 检查vpn连接
+- (void) checkVPNConnect {
+    BOOL isCharge = YES;
+    // 获取vpn上次连接时间
+    NSDictionary *modeDic = [HWUserdefault getObjectWithKey:_selectVPNInfo.vpnName];
+    VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:modeDic];
+    if (tranferMode) {
+        NSString *connectTime = tranferMode.vpnConnectTime;
+        if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
+            // 判断上次连接时间 超过一时间扣费
+            NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+            NSDate *backDate = [dateFormatrer dateFromString:connectTime];
+            // 判断日期相隔时间
+            NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
+            //超过一时间扣费
+            if (labs(hours) < 1) {
+                if (tranferMode.isTranferSuccess) {
+                    isCharge = NO;
+                }
+            }
+        }
+    }
+    if (isCharge) {
+        [self showConnectAlert:_selectVPNInfo cost:_selectVPNInfo.cost];
+    } else {
+        [self showConnectAlert:_selectVPNInfo cost:@"0"];
+    }
 }
 
 - (void) updateFreeCount:(NSNotification *) noti {
