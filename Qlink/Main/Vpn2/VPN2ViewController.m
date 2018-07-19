@@ -154,9 +154,9 @@
 }
 
 - (void)refreshFreeConnection {
-    NSString *freeStr = @"FREE:";
+    NSString *freeStr = NSStringLocalizable(@"free");
     NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
-    _freeConnectionLab.text = [freeStr stringByAppendingString:freeCount?:@"0"];
+    _freeConnectionLab.text = @"FREE:99"; // [freeStr stringByAppendingString:freeCount?:@"0"];
 }
 
 // 刷新vpn连接状态

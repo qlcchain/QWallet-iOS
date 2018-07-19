@@ -26,7 +26,7 @@
 
 
 - (void)config {
-    _sourceArr = @[@"ALL",@"Gain",@"Used"];
+    _sourceArr = @[NSStringLocalizable(@"all"),NSStringLocalizable(@"gain"),NSStringLocalizable(@"used")];
     _currentRow = 0;
     _mainTable.delegate = self;
     _mainTable.dataSource = self;
