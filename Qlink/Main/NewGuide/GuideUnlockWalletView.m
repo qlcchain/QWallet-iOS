@@ -29,9 +29,8 @@
         UIView *bgView = [UIApplication sharedApplication].keyWindow;
        
         UIView *guideBgView = [GuideUnlockWalletView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
-        //        UIView *guideBgView = [GuideVpnCountryView showNewGuideCircleWithArcCenter:center radius:radius];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_VPN_SERVER_LOCATION];
+            [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_UNLOCK_WALLET];
             UIView *tapView = gestureRecoginzer.view;
             [tapView removeFromSuperview];
             [tapView removeGestureRecognizer:gestureRecoginzer];
