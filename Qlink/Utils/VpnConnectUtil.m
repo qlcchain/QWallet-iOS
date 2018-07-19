@@ -164,15 +164,18 @@
     if (_vpnInfo.profileLocalPath.length <= 0) {
         [AppD.window showHint:NSStringLocalizable(@"profile_empty")];
         DDLogDebug(@"没有profileLocalPath,无法连接vpn");
+        [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
         return;
     }
     
     if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
         [AppD.window showView:KEYWINDOW hint:NSStringLocalizable(@"insufficient_assets")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
         return;
     }
     
     if (!checkConnnectOK) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
         return;
     }
     
