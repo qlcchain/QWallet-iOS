@@ -254,7 +254,7 @@ dispatch_source_t _timer;
     }];
 }
 
-#pragma mark -发送免费连接VPN请求
+#pragma mark - 发送免费连接VPN请求
 + (void) sendFreeConnectVPNRequestWithVPNInfo:(VPNTranferMode *) vpnInfo
 {
     // 更新VPNInfo正在交易的状态
@@ -541,7 +541,7 @@ dispatch_source_t _timer;
     }];
 }
 
-#pragma mark -更改VPNList支付状态
+#pragma mark - 更改VPNList支付状态
 + (void) updateVPNListTranferStatusWithVPNName:(NSString *) vpnName
 {
     TransferUtil *tranferUtil = [TransferUtil getShareObject];
@@ -576,7 +576,7 @@ dispatch_source_t _timer;
     }
 }
 
-#pragma mark -更新VPNList正在支付的状态
+#pragma mark - 更新VPNList正在支付的状态
 + (void) updateVPNListDidTranferStatusWithVPNName:(NSString *) vpnName status:(BOOL) isBecomeTranfer
 {
     TransferUtil *tranferUtil = [TransferUtil getShareObject];
@@ -588,7 +588,7 @@ dispatch_source_t _timer;
     }];
 }
 
-#pragma mark -将本地及当前VPNList中的连接VPN状态置为NO
+#pragma mark - 将本地及当前VPNList中的连接VPN状态置为NO
 + (void) updateUserDefaultVPNListCurrentVPNConnectStatus
 {
     TransferUtil *tranferUtil = [TransferUtil getShareObject];

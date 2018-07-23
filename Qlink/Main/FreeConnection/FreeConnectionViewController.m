@@ -15,7 +15,6 @@
 
 @interface FreeConnectionViewController () <UITableViewDelegate, UITableViewDataSource>
 
-
 @property (nonatomic , assign) NSInteger currentRow;
 @property (weak, nonatomic) IBOutlet SkyRadiusView *availableBack;
 @property (weak, nonatomic) IBOutlet SkyRadiusView *tableBack;
@@ -24,12 +23,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic , strong) PopSelectView *selectView;
-@property (nonatomic , strong) UIButton *backBtn;
+@property (nonatomic , strong) UIButton *popBackBtn;
+
 @end
 
 @implementation FreeConnectionViewController
 
-#pragma mark -Life Cycle
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -40,7 +40,7 @@
     [self configView];
 }
 
-#pragma mark -Config
+#pragma mark - Config
 - (void)configData {
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:FreeConnectionCellReuse bundle:nil] forCellReuseIdentifier:FreeConnectionCellReuse];
@@ -52,39 +52,7 @@
     [_tableBack shadowWithColor:UIColorFromRGB(0xaaaaaa) offset:CGSizeMake(2, 2) opacity:0.2 radius:4];
 }
 
-- (PopSelectView *)selectView
-{
-    if (!_selectView) {
-        _selectView = [PopSelectView getInstance];
-        CGFloat selectH = CGRectGetMaxY(_typeBtn.frame)+67;
-//        if (IS_iPhoneX) {
-            selectH += STATUS_BAR_HEIGHT;
-//        }
-        _selectView.frame = CGRectMake(SCREEN_WIDTH-12-90,selectH-15, 90, 124);
-        @weakify_self
-        [_selectView setClickCellBlock:^(NSString *cellValue,NSInteger row) {
-            [weakSelf hideSelectView];
-            if (row >=0) {
-                [weakSelf.typeBtn setTitle:cellValue forState:UIControlStateNormal];
-                [weakSelf sendQueryFreeRecords:[NSString stringWithFormat:@"%zd",row]];
-            }
-           
-        }];
-    }
-    return _selectView;
-}
-- (UIButton *)backBtn
-{
-    if (!_backBtn) {
-        _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        _backBtn.backgroundColor = [UIColor clearColor];
-        [_backBtn addTarget:self action:@selector(hideSelectView) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _backBtn;
-}
-
-#pragma mark -UITableViewDataSource
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -101,43 +69,38 @@
     return cell;
 }
 
-#pragma mark -UITableViewDelegate
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return FreeConnectionCell_Height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
 
-#pragma mark -Operation
+#pragma mark - Operation
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark -Action
+#pragma mark - Action
 - (IBAction)backAciton:(id)sender {
     [self back];
 }
 
 - (IBAction)typeAction:(UIButton *)sender {
-    
-    [AppD.window addSubview:self.backBtn];
+    [AppD.window addSubview:self.popBackBtn];
     [AppD.window addSubview:self.selectView];
     [self.selectView showSelectView];
 }
-- (void) hideSelectView
-{
+
+- (void) hideSelectView {
     [self.selectView hideSelectView];
-    [self.backBtn removeFromSuperview];
+    [self.popBackBtn removeFromSuperview];
 }
 
-
-
-#pragma mark - 发送请求
-- (void) sendQueryFreeRecords:(NSString *) type
-{
+#pragma mark - Request
+- (void) sendQueryFreeRecords:(NSString *) type {
     [self.view showHudInView:self.view hint:@"" userInteractionEnabled:YES hideTime:0];
     NSDictionary *parames = @{@"p2pId":[ToxManage getOwnP2PId],@"type":type?:@"0"};
     [RequestService requestWithUrl:queryFreeRecords_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -159,6 +122,36 @@
         [self.view hideHud];
     }];
 }
+
+#pragma mark - Lazy
+- (PopSelectView *)selectView {
+    if (!_selectView) {
+        _selectView = [PopSelectView getInstance];
+        CGFloat selectH = CGRectGetMaxY(_typeBtn.frame)+67;
+        selectH += STATUS_BAR_HEIGHT;
+        _selectView.frame = CGRectMake(SCREEN_WIDTH-12-90,selectH-15, 90, 124);
+        @weakify_self
+        [_selectView setClickCellBlock:^(NSString *cellValue,NSInteger row) {
+            [weakSelf hideSelectView];
+            if (row >=0) {
+                [weakSelf.typeBtn setTitle:cellValue forState:UIControlStateNormal];
+                [weakSelf sendQueryFreeRecords:[NSString stringWithFormat:@"%zd",row]];
+            }
+        }];
+    }
+    return _selectView;
+}
+
+- (UIButton *)popBackBtn {
+    if (!_popBackBtn) {
+        _popBackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _popBackBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        _popBackBtn.backgroundColor = [UIColor clearColor];
+        [_popBackBtn addTarget:self action:@selector(hideSelectView) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _popBackBtn;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

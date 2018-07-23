@@ -412,7 +412,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 }
 
 
-#pragma mark -第三方app传输文件回调
+#pragma mark - 第三方app传输文件回调
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_9_0
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
 {

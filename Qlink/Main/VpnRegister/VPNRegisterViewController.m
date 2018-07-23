@@ -708,7 +708,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark -选择国家
+#pragma mark - 选择国家
 - (void) selectCountryAction {
     // 显示
     [self.countryView showChooseCountryView];

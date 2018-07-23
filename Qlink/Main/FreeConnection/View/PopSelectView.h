@@ -11,7 +11,7 @@
 typedef void(^ClickTabCellBlock)(NSString *cellValue,NSInteger row);
 
 @interface PopSelectView : UIView
-@property (nonatomic , copy) ClickTabCellBlock clickCellBlock;
+@property (nonatomic, copy) ClickTabCellBlock clickCellBlock;
 
 + (instancetype)getInstance;
 - (void) showSelectView;

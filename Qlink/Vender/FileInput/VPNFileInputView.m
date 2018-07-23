@@ -27,7 +27,7 @@
     [fileNameView registerNotification];
     return fileNameView;
 }
-#pragma mark -注册通知
+#pragma mark - 注册通知
 - (void) registerNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBordShow:) name:UIKeyboardWillShowNotification object:nil];

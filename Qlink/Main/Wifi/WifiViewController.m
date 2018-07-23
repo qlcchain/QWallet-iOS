@@ -135,7 +135,7 @@
    
 }
 
-#pragma mark -Action
+#pragma mark - Action
 
 - (IBAction)setBtnAction:(id)sender {
     
@@ -152,7 +152,7 @@
 #endif
 }
 
-#pragma mark -Transition
+#pragma mark - Transition
 - (void)jumpToDebugLog {
     DebugLogViewController *vc = [[DebugLogViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
