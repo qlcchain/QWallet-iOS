@@ -108,7 +108,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessVPNConnect:) name:CHECK_PROCESS_SUCCESS_VPN_CONNECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
     // vpn连接时没有足够资产或其它原因取消连接
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:VPN_CONNECT_CANCEL_LOADING object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLoading:) name:VPN_CONNECT_CANCEL_LOADING object:nil];
     // vpn免费次数成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFreeCount:) name:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
 }
@@ -693,6 +693,11 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)savePreferenceFail:(NSNotification *)noti {
+    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+    [self refreshTable];
+}
+
+- (void)cancelLoading:(NSNotification *)noti {
     _selectVPNInfo.connectStatus = VpnConnectStatusNone;
     [self refreshTable];
 }
