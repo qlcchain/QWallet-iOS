@@ -29,6 +29,7 @@
 #import "NSBundle+Language.h"
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
+#import "LocationTracker.h"
 
 @import Firebase;
 
@@ -36,12 +37,16 @@
     UIBackgroundTaskIdentifier backTaskI;
 }
 
+@property (nonatomic, strong) LocationTracker * locationTracker;
+@property (nonatomic, strong) NSTimer* locationUpdateTimer;
+
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    // [WalletUtil removeAllKey];
@@ -93,6 +98,8 @@
 //    [self setTabbarRoot];
     // 是否需要显示引导页
     [self checkGuidenPage];
+    // 后台定位常驻
+    [self getBackgroudLocation];
 
     [self.window makeKeyAndVisible];
     
@@ -242,7 +249,7 @@
     /**
      想测试更多功能,打开注释掉的代码即可.
      */
-    bg_setDebug(YES);//打开调试模式,打印输出调试信息.
+    bg_setDebug(NO);//打开调试模式,打印输出调试信息.
     
     /**
      如果频繁操作数据库时,建议进行此设置(即在操作过程不关闭数据库);
@@ -266,7 +273,6 @@
     
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -277,6 +283,8 @@
 ////        [SystemUtil configureAPPTerminate];
 ////        [weakSelf endBackTask];
 //    }];
+    NSLog(@"backgroundTimeRemaining=%@",@(application.backgroundTimeRemaining));
+    NSLog(@"applicationState=%@",@(application.applicationState));
 }
 
 - (void)endBackTask {
@@ -295,6 +303,27 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [SystemUtil configureAPPTerminate];
+}
+
+#pragma mark - Backgroud Location
+- (void)getBackgroudLocation {
+    if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
+        DDLogDebug(@"UIBackgroundRefreshStatusDenied");
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted){
+        DDLogDebug(@"UIBackgroundRefreshStatusRestricted");
+    } else{
+        _locationTracker = [[LocationTracker alloc] init];
+        [_locationTracker startLocationTracking];
+        
+        //Send the best location to server every 60 seconds
+        //You may adjust the time interval depends on the need of your app.
+        NSTimeInterval time = 60.0;
+        __weak typeof(_locationTracker) weakLocationTracker = _locationTracker;
+        _locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:time repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"updateLocation");
+            [weakLocationTracker updateLocationToServer];
+        }];
+    }
 }
 
 #pragma mark - UIApplicationDelegate

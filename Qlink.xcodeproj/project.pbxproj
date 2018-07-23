@@ -126,6 +126,9 @@
 		583A0F6D20844DC400EF9ABD /* SelectCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A0F6C20844DC400EF9ABD /* SelectCountryModel.m */; };
 		58441B8F20BD5B7300904DC8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58441B8C20BD5B7300904DC8 /* SettingViewController.m */; };
 		58456DC3207C521A008DF589 /* OpenVPNAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */; };
+		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
+		5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117C2105AEF4005232A2 /* LocationTracker.m */; };
+		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC7A20CFB39F00EEB6CE /* NounView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7C20CFB39F00EEB6CE /* NounView.xib */; };
 		5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9820CFB40F00EEB6CE /* SettingViewController.xib */; };
@@ -654,6 +657,12 @@
 		58441B8C20BD5B7300904DC8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		58441B8D20BD5B7300904DC8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenVPNAdapter.framework; path = Carthage/Build/iOS/OpenVPNAdapter.framework; sourceTree = "<group>"; };
+		584911782105AEF4005232A2 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
+		584911792105AEF4005232A2 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		5849117A2105AEF4005232A2 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		5849117B2105AEF4005232A2 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		5849117C2105AEF4005232A2 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
+		5849117D2105AEF4005232A2 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC7B20CFB39F00EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NounView.xib; sourceTree = "<group>"; };
 		5860AC7E20CFB3A100EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NounView.strings; sourceTree = "<group>"; };
@@ -1700,6 +1709,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				584911772105AEF4005232A2 /* BackgroudLocation */,
 				588A7E9220F5DFDF00D476EE /* FileInput */,
 				734F528F20B6BDCC002D45B7 /* MPUSH */,
 				73B6F48920AEC08E004B7219 /* NEO */,
@@ -2178,6 +2188,19 @@
 				5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		584911772105AEF4005232A2 /* BackgroudLocation */ = {
+			isa = PBXGroup;
+			children = (
+				5849117B2105AEF4005232A2 /* BackgroundTaskManager.h */,
+				584911782105AEF4005232A2 /* BackgroundTaskManager.m */,
+				5849117A2105AEF4005232A2 /* LocationShareModel.h */,
+				5849117D2105AEF4005232A2 /* LocationShareModel.m */,
+				584911792105AEF4005232A2 /* LocationTracker.h */,
+				5849117C2105AEF4005232A2 /* LocationTracker.m */,
+			);
+			path = BackgroudLocation;
 			sourceTree = "<group>";
 		};
 		5849BD3820FD9F2100F972AF /* Log */ = {
@@ -3282,6 +3305,7 @@
 				581781A320F2FA50003E74F2 /* VPN2ViewController.m in Sources */,
 				5812DDB220A1A7890043A8A8 /* ZXImageMessageCell.m in Sources */,
 				7377D18B206CC3820072E628 /* NSString+Localizable.m in Sources */,
+				5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */,
 				736B3E3E208D7AD500696C81 /* VPNFileInputView.m in Sources */,
 				73B6F4C320AEC08E004B7219 /* scrypt.swift in Sources */,
 				5812DDA120A1A7890043A8A8 /* TLUserHelper.m in Sources */,
@@ -3328,6 +3352,7 @@
 				58A4DB0F20EB13C8001C241D /* GuideVpnAddView.m in Sources */,
 				580D915320625A4400B12506 /* UIView+ViewController.m in Sources */,
 				580D914320625A4400B12506 /* UIImage+Rotate.m in Sources */,
+				5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */,
 				73B6F4E020AEC08E004B7219 /* Peer.swift in Sources */,
 				580D915A20625A4400B12506 /* UIView+Find.m in Sources */,
 				58AE1AD92074D22F00CE983B /* KeyChainUitl.swift in Sources */,
@@ -3354,6 +3379,7 @@
 				737F909420DBA0C0008BC9C2 /* GuidePageViewController.m in Sources */,
 				73B6F4C820AEC08E004B7219 /* Array+Util.swift in Sources */,
 				7377D173206B84620072E628 /* LocationManage.m in Sources */,
+				584911802105AEF4005232A2 /* LocationShareModel.m in Sources */,
 				73E52BD12062978200063ED6 /* QlinkTabbarViewController.m in Sources */,
 				580D915920625A4400B12506 /* UIView+Visuals.m in Sources */,
 				5812DDBC20A1A7D20043A8A8 /* UIImage+TL.m in Sources */,

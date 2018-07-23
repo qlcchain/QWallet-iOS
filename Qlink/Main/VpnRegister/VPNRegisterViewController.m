@@ -723,8 +723,7 @@
     }];
 }
 
-- (ChooseCountryView *)countryView
-{
+- (ChooseCountryView *)countryView {
     if (!_countryView) {
         _countryView = [ChooseCountryView loadChooseCountryView];
         _countryView.isSave = NO;
@@ -744,8 +743,7 @@
     return _vpnTFName;
 }
 
-- (NSString *)selectCountryStr
-{
+- (NSString *)selectCountryStr {
     _selectCountryStr = _countryLab.text?:@"";
     if ([_selectCountryStr isEqualToString:CHOOSECOUNTRY]) {
         _selectCountryStr = @"";
