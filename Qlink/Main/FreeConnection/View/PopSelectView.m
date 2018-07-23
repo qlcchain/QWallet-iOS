@@ -32,7 +32,7 @@
     _mainTable.dataSource = self;
 }
 
-#pragma mark -UITableViewDataSource
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -55,7 +55,7 @@
     return cell;
 }
 
-#pragma mark -UITableViewDelegate
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 38;
 }

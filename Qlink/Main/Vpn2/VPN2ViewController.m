@@ -424,7 +424,6 @@ static BOOL refreshAnimate = YES;
     NSString *countStr = [HWUserdefault getObjectWithKey:freeKey];
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
-       
         if (![WalletUtil isExistWalletPrivateKey]) {
             NSString *content = NSStringLocalizable(@"create_wallet_to_contiue");
             NSString *image = @"icon_tips1";
@@ -892,7 +891,7 @@ static BOOL refreshAnimate = YES;
     [self jumpToFreeConnection];
 }
 
-#pragma mark -选择国家
+#pragma mark - 选择国家
 - (void) selectCountry {
     // 显示
     [self.countryView showChooseCountryView];
