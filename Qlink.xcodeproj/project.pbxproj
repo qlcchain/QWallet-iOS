@@ -243,7 +243,6 @@
 		58DC64F9206B6748002CF682 /* ConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DC64F8206B6748002CF682 /* ConfigUtil.m */; };
 		58DC655D206BA4A9002CF682 /* WalletPublicAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DC655B206BA4A9002CF682 /* WalletPublicAddressViewController.m */; };
 		58DE900B20FEE69200325B38 /* FreeConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE900920FEE69200325B38 /* FreeConnectionViewController.m */; };
-		58DE900C20FEE69200325B38 /* FreeConnectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE900A20FEE69200325B38 /* FreeConnectionViewController.xib */; };
 		58DE901120FEF05400325B38 /* FreeConnectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE900F20FEF05400325B38 /* FreeConnectionCell.m */; };
 		58DE901220FEF05400325B38 /* FreeConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58DE901020FEF05400325B38 /* FreeConnectionCell.xib */; };
 		58DE901620FEF38000325B38 /* PopSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE901520FEF38000325B38 /* PopSelectView.m */; };
@@ -371,6 +370,7 @@
 		73EA1B20207B3EF600B4F71D /* WalletSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EA1B1E207B3EF600B4F71D /* WalletSelectCell.m */; };
 		73F1C8FE2089E699001F1A0F /* VPNFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F1C8FD2089E699001F1A0F /* VPNFileUtil.m */; };
 		73F9557720FF33E400A3E0F5 /* FreeRecordMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */; };
+		73F955782101E70500A3E0F5 /* FreeConnectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F9557A2101E70500A3E0F5 /* FreeConnectionViewController.xib */; };
 		73FF63D820EC6D9100E29B3B /* GuideUnlockWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF63D720EC6D9100E29B3B /* GuideUnlockWalletView.m */; };
 		73FF63DF20EC9F5500E29B3B /* GuideNewWalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF63DE20EC9F5500E29B3B /* GuideNewWalletView.m */; };
 		73FF63E420ECA90500E29B3B /* GuidenSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF63E320ECA90500E29B3B /* GuidenSettingView.m */; };
@@ -871,7 +871,6 @@
 		58DC655B206BA4A9002CF682 /* WalletPublicAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletPublicAddressViewController.m; sourceTree = "<group>"; };
 		58DE900820FEE69200325B38 /* FreeConnectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeConnectionViewController.h; sourceTree = "<group>"; };
 		58DE900920FEE69200325B38 /* FreeConnectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeConnectionViewController.m; sourceTree = "<group>"; };
-		58DE900A20FEE69200325B38 /* FreeConnectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeConnectionViewController.xib; sourceTree = "<group>"; };
 		58DE900E20FEF05400325B38 /* FreeConnectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeConnectionCell.h; sourceTree = "<group>"; };
 		58DE900F20FEF05400325B38 /* FreeConnectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeConnectionCell.m; sourceTree = "<group>"; };
 		58DE901020FEF05400325B38 /* FreeConnectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeConnectionCell.xib; sourceTree = "<group>"; };
@@ -1271,6 +1270,12 @@
 		73F1C8FD2089E699001F1A0F /* VPNFileUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNFileUtil.m; sourceTree = "<group>"; };
 		73F9557520FF33E400A3E0F5 /* FreeRecordMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeRecordMode.h; sourceTree = "<group>"; };
 		73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeRecordMode.m; sourceTree = "<group>"; };
+		73F955792101E70500A3E0F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FreeConnectionViewController.xib; sourceTree = "<group>"; };
+		73F9557C2101E70900A3E0F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FreeConnectionViewController.strings; sourceTree = "<group>"; };
+		73F9557E2101E70E00A3E0F5 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FreeConnectionViewController.strings; sourceTree = "<group>"; };
+		73F955802101E71100A3E0F5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FreeConnectionViewController.strings; sourceTree = "<group>"; };
+		73F955822101E71400A3E0F5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FreeConnectionViewController.strings; sourceTree = "<group>"; };
+		73F955842101E71700A3E0F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FreeConnectionViewController.strings"; sourceTree = "<group>"; };
 		73FF63D620EC6D9100E29B3B /* GuideUnlockWalletView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideUnlockWalletView.h; sourceTree = "<group>"; };
 		73FF63D720EC6D9100E29B3B /* GuideUnlockWalletView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideUnlockWalletView.m; sourceTree = "<group>"; };
 		73FF63DD20EC9F5500E29B3B /* GuideNewWalletView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideNewWalletView.h; sourceTree = "<group>"; };
@@ -2468,7 +2473,7 @@
 				58DE900D20FEF03B00325B38 /* Cell */,
 				58DE900820FEE69200325B38 /* FreeConnectionViewController.h */,
 				58DE900920FEE69200325B38 /* FreeConnectionViewController.m */,
-				58DE900A20FEE69200325B38 /* FreeConnectionViewController.xib */,
+				73F9557A2101E70500A3E0F5 /* FreeConnectionViewController.xib */,
 			);
 			path = FreeConnection;
 			sourceTree = "<group>";
@@ -2986,7 +2991,7 @@
 				73FF640120EDCC5500E29B3B /* GuideVpnCountryView.xib in Resources */,
 				58CDB5DA2085DB6600B74962 /* test-ca.crt in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
-				58DE900C20FEE69200325B38 /* FreeConnectionViewController.xib in Resources */,
+				73F955782101E70500A3E0F5 /* FreeConnectionViewController.xib in Resources */,
 				5860ACEA20CFB4BD00EEB6CE /* SeizeVPNViewController.xib in Resources */,
 				5860AD9920CFB5E600EEB6CE /* WalletQRViewController.xib in Resources */,
 				58DE901220FEF05400325B38 /* FreeConnectionCell.xib in Resources */,
@@ -4111,6 +4116,19 @@
 				737F90C320E39668008BC9C2 /* zh-Hans */,
 			);
 			name = GuidePageView3.xib;
+			sourceTree = "<group>";
+		};
+		73F9557A2101E70500A3E0F5 /* FreeConnectionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73F955792101E70500A3E0F5 /* Base */,
+				73F9557C2101E70900A3E0F5 /* en */,
+				73F9557E2101E70E00A3E0F5 /* tr */,
+				73F955802101E71100A3E0F5 /* ko */,
+				73F955822101E71400A3E0F5 /* ru */,
+				73F955842101E71700A3E0F5 /* zh-Hans */,
+			);
+			name = FreeConnectionViewController.xib;
 			sourceTree = "<group>";
 		};
 		73FF63E920EDCC2A00E29B3B /* GuideVpnAddView.xib */ = {

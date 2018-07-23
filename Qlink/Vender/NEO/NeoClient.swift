@@ -479,7 +479,6 @@ public class NeoClient {
                             } else {
                                 valueStr = amountFormatter.string(from: NSNumber(value:dd))!
                             }
-                            
                         }
                         let neos:[String : Any] = ["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":indexValue,"txid":assetDic["txid"] as! String,"value":valueStr,"createdAtBlock":0]
                         endDatas.append(neos)

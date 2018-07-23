@@ -15,7 +15,6 @@
 
 @interface FreeConnectionViewController () <UITableViewDelegate, UITableViewDataSource>
 
-
 @property (nonatomic , assign) NSInteger currentRow;
 @property (weak, nonatomic) IBOutlet SkyRadiusView *availableBack;
 @property (weak, nonatomic) IBOutlet SkyRadiusView *tableBack;

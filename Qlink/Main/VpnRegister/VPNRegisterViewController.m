@@ -645,16 +645,21 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:NSStringLocalizable(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
-    
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
-- (IBAction)praviteKeyEyeAction:(id)sender {
-    
+- (IBAction)praviteKeyEyeAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    NSString *imgName = sender.selected ? @"icon_see" : @"icon_look";
+    [sender setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    _privateKeyTF.secureTextEntry = !sender.selected;
 }
 
-- (IBAction)passwordEyeAction:(id)sender {
-    
+- (IBAction)passwordEyeAction:(UIButton *)sender {
+     sender.selected = !sender.selected;
+    NSString *imgName = sender.selected ? @"icon_see" : @"icon_look";
+    [sender setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    _passwordTF.secureTextEntry = !sender.selected;
 }
 
 - (IBAction)feeSubtractAction:(id)sender {
