@@ -19,6 +19,7 @@
 #import "Qlink-Swift.h"
 #import "QlinkTabbarViewController.h"
 #import "GuidenSettingView.h"
+#import "TransferUtil.h"
 
 // 标题部分
 //#define WALLET_DETAIL   NSStringLocalizable(@"wallet_details")// 钱包详情
@@ -286,18 +287,12 @@
             if (idx == 0) {
                 if (![WalletUtil checkServerIsMian]) {
                     // 重新初始化 Account->将Account设为当前钱包->重新设置网络
-                    [HWUserdefault insertString:@"1" withkey:SERVER_NETWORK];
-                    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_SERVER_NOTI object:nil];
-                    [UserManage fetchUserInfo];
+                    [self changeNetWorkWithTag:@"1"];
                 }
                
             } else {
                 if ([WalletUtil checkServerIsMian]) {
-                    [HWUserdefault insertString:@"0" withkey:SERVER_NETWORK];
-                    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_SERVER_NOTI object:nil];
-                    [UserManage fetchUserInfo];
+                    [self changeNetWorkWithTag:@"0"];
                 }
                 
             }
@@ -310,6 +305,17 @@
     }];
     [alertC addAction:alertCancel];
     [self presentViewController:alertC animated:YES completion:nil];
+}
+
+#pragma mark - 网络切换时需要处理方法
+- (void) changeNetWorkWithTag:(NSString *) tag
+{
+    // 重新初始化 Account->将Account设为当前钱包->重新设置网络
+    [HWUserdefault insertString:tag withkey:SERVER_NETWORK];
+    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_SERVER_NOTI object:nil];
+    [TransferUtil checkFreeConnectCount];
+    [UserManage fetchUserInfo];
 }
 
 - (void) clickTouchSwitch

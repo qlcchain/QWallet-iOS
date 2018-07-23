@@ -51,6 +51,7 @@
 #import "VPNTranferMode.h"
 #import "FreeConnectionViewController.h"
 
+
 #define CELL_CONNECT_BTN_TAG 5788
 
 @interface VPN2ViewController ()<UITableViewDelegate,UITableViewDataSource,SRRefreshDelegate> {
@@ -121,6 +122,7 @@
     [self startLocation];
     // 获取当前选择的国家--发送获取vpn列表请求
     [self checkCurrentChooseCountry];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -154,7 +156,8 @@
 
 - (void)refreshFreeConnection {
     NSString *freeStr = NSStringLocalizable(@"free");
-    NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+    NSString *freeCount = [HWUserdefault getObjectWithKey:freeKey];
     _freeConnectionLab.text = [freeStr stringByAppendingString:freeCount?:@"0"];
 }
 
@@ -417,7 +420,8 @@ static BOOL refreshAnimate = YES;
         [self goConnectAndRefresh:vpnInfo];
         return;
     }
-    NSString *countStr = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+    NSString *countStr = [HWUserdefault getObjectWithKey:freeKey];
     // 判断免费连接次数
     if ([[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"]) {
        
@@ -632,6 +636,7 @@ static BOOL refreshAnimate = YES;
         case NEVPNStatusConnected:
         {
             if (![[CurrentWalletInfo getShareInstance].address isEqualToString:_selectVPNInfo.address]) {
+                _selectVPNInfo.isMainNet = [WalletUtil checkServerIsMian];
                 [TransferUtil udpateTransferModel:_selectVPNInfo];
             }
             [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
@@ -665,6 +670,7 @@ static BOOL refreshAnimate = YES;
 - (void)changeServer:(NSNotification *)noti {
     [self showRegisterVPN]; // 主网隐藏VPN注册
     [self.sourceArr removeAllObjects]; // 移除旧数据
+    [self refreshFreeConnection]; //免费次数更新
     [self.mainTable reloadData];
     [self requestQueryVpn];
 }

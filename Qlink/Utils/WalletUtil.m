@@ -495,6 +495,7 @@
  */
 + (void) saveTranQLCRecordWithQlc:(NSString *) qlc txtid:(NSString *) txtid  neo:(NSString *) neo recordType:(int) type assetName:(NSString *) assetName friendNum:(int) friendNum p2pID:(NSString *) p2pID connectType:(int) connectType isReported:(BOOL) isReported isRegister:(BOOL) isRegister
 {
+    
     HistoryRecrdInfo *recrdInfo = [[HistoryRecrdInfo alloc] init];
     recrdInfo.bg_tableName = HISTORYRECRD_TABNAME;
     recrdInfo.recordType = type;

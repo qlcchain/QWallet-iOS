@@ -12,6 +12,7 @@
 #import "PopSelectView.h"
 #import "UIView+Visuals.h"
 #import "FreeRecordMode.h"
+#import "WalletUtil.h"
 
 @interface FreeConnectionViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -32,7 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSString *freeCount = [HWUserdefault getObjectWithKey:VPN_FREE_COUNT];
+    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+    NSString *freeCount = [HWUserdefault getObjectWithKey:freeKey];
     _availableNumLab.text = freeCount?:@"0";
     _currentRow = 0;
     [self configData];

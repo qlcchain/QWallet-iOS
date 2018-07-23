@@ -20,5 +20,5 @@
 @property (nonatomic , assign) BOOL isTranferSuccess;
 @property (nonatomic , assign) BOOL isBecomeTranfer;
 @property (nonatomic , assign) BOOL isCurrentConnect;
-
+@property (nonatomic , assign) BOOL isMain;
 @end

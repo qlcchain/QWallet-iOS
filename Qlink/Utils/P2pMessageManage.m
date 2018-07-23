@@ -14,6 +14,7 @@
 #import "ChatUtil.h"
 #import "ChatModel.h"
 
+
 @implementation P2pMessageManage
 
 + (void)handleWithMessage:(NSString *)message publickey:(NSString *)publickey {
@@ -75,12 +76,26 @@
     } else if ([type isEqualToString:vpnUserAndPasswordReq]) { // vpn账号和密码的请求
         
     } else if ([type isEqualToString:recordSaveReq]) { // vpn或者wifi连接成功后，告诉提供端做连接记录的请求
+        // 通知提供端收到记录
+        ToxRequestModel *model = [[ToxRequestModel alloc] init];
+        model.type = recordSaveRsp;
+        NSDictionary *rspDicc = @{TX_ID:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]],SUCCESS:@"1"};
+        model.data = rspDicc.mj_JSONString;
+        NSString *str = model.mj_JSONString;
+        [ToxManage sendMessageWithMessage:str withP2pid:publickey];
+        
         NSString *recordType = [dataDic objectForKey:@"transactiomType"];
-        
-//         NSDictionary *dataDic = @{@"appVersion":APP_Build,@"assetName":vpnInfo.vpnName,@"qlcCount ":vpnInfo.cost,@"p2pId":p2pid,@"transactiomType":[NSString stringWithFormat:@"%ld",(long)type],@"exChangeId":[WalletUtil getExChangeId],@"timestamp":[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:[NSDate date]]]};
-        
         if ([[NSStringUtil getNotNullValue:recordType] integerValue] == 3 || [[NSStringUtil getNotNullValue:recordType] integerValue] == 5) { // VPN
-            [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:ASSETS_NAME]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:[dataDic objectForKey:P2P_ID]] connectType:1 isReported:NO isRegister:NO];
+            
+            /**
+             同步查询所有数据.  去重复
+             */
+            NSArray* finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"txid"),bg_sqlValue([NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]])]];
+            if (finfAlls && finfAlls.count > 0) {
+                return;
+            }
+            
+            [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:ASSETS_NAME]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:publickey] connectType:1 isReported:NO isRegister:NO];
             // 发送本地通知
             [TransferUtil sendLocalNotificationWithQLC:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] isIncome:YES];
         }

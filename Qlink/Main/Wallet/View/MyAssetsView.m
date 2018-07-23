@@ -87,9 +87,9 @@
   
     NSArray* finfAlls = nil;
     if ([WalletUtil checkServerIsMian]) {
-        finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d order by %@ desc",bg_sqlKey(@"isMainNet"),1,bg_sqlKey(@"bg_createTime")]];
+        finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d order by %@ desc",bg_sqlKey(@"isMainNet"),1,bg_sqlKey(@"bg_id")]];
     } else {
-        finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull order by %@ desc",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet"),bg_sqlKey(@"bg_createTime")]];
+        finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull order by %@ desc",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet"),bg_sqlKey(@"bg_id")]];
     }
     
     //NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
