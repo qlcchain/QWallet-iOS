@@ -338,8 +338,6 @@ dispatch_source_t _timer;
     // 发送获取配置文件消息
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = recordSaveReq;
-    NSString *p2pid = [ToxManage getOwnP2PId];
-    
     NSString *vpnName = @"";
     NSString *vpnCost = @"";
     NSString *recordId = @"";
@@ -352,14 +350,14 @@ dispatch_source_t _timer;
         vpnName = vpnInfo.vpnName;
         vpnCost = vpnInfo.cost;
         recordId = vpnInfo.recordId;
-       // p2pId = vpnInfo.p2pId;
+        p2pId = vpnInfo.p2pId;
         tranferDate = [NSDate date];
     } else {
         VPNTranferMode *vpnInfo = vpnObject;
         vpnName = vpnInfo.vpnName;
         vpnCost = vpnInfo.tranferCost;
         recordId = vpnInfo.recordId;
-      //  p2pId = vpnInfo.p2pId;
+        p2pId = vpnInfo.p2pId;
         NSString *connectTime = vpnInfo.vpnConnectTime;
         if([connectTime isBlankString]) {
             tranferDate = [NSDate date];
@@ -369,9 +367,7 @@ dispatch_source_t _timer;
         }
     }
     
-    p2pId = [ToxManage getOwnP2PId];
-    
-    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,@"p2pId":p2pid,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId]};
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId]};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
