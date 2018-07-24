@@ -554,8 +554,17 @@ static BOOL refreshAnimate = YES;
 - (void) checkVPNConnect {
     BOOL isCharge = YES;
     // 获取vpn上次连接时间
-    NSDictionary *modeDic = [HWUserdefault getObjectWithKey:_selectVPNInfo.vpnName];
-    VPNTranferMode *tranferMode = [VPNTranferMode getObjectWithKeyValues:modeDic];
+    __block  VPNTranferMode *tranferMode = nil;
+    NSArray *listArray = [HWUserdefault getObjectWithKey:VPN_CONNECT_LIST];
+    if (listArray && listArray.count > 0) {
+        [listArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            VPNTranferMode *mode = [VPNTranferMode getObjectWithKeyValues:obj];
+            if ([_selectVPNInfo.vpnName isEqualToString:mode.vpnName]) {
+                tranferMode = mode;
+                *stop = YES;
+            }
+        }];
+    }
     if (tranferMode) {
         NSString *connectTime = tranferMode.vpnConnectTime;
         if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
@@ -563,9 +572,9 @@ static BOOL refreshAnimate = YES;
             NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
             NSDate *backDate = [dateFormatrer dateFromString:connectTime];
             // 判断日期相隔时间
-            NSInteger hours = [[NSDate date] hoursAfterDate:backDate];
-            //超过一时间扣费
-            if (labs(hours) < 1) {
+            NSInteger minu = [[NSDate date] minutesAfterDate:backDate];
+            // 小于1小时不扣费 并且 上次扣费要成功
+            if (labs(minu) < VPN_TRANFER_TIME) {
                 if (tranferMode.isTranferSuccess) {
                     isCharge = NO;
                 }
