@@ -14,7 +14,6 @@
 #import "ChatUtil.h"
 #import "ChatModel.h"
 
-
 @implementation P2pMessageManage
 
 + (void)handleWithMessage:(NSString *)message publickey:(NSString *)publickey {
