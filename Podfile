@@ -12,7 +12,7 @@ target "Qlink" do
 #    pod 'MJRefresh'
     pod 'Hero'
 #    pod 'FMDB'
-    pod 'BGFMDB', '~> 2.0.6'
+    pod 'BGFMDB'
     pod 'CocoaLumberjack/Swift'
     pod 'Bugly'
     pod 'OLImageView'

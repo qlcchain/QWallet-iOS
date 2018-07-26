@@ -69,7 +69,7 @@
     } else if ([type isEqualToString:sendFileRequest]) { // 发送文件的请求，这个可以不要回应
     } else if ([type isEqualToString:sendVpnFileRequest]) { // 发送vpn配置文件的请求
         NSString *filePath = dataDic[@"filePath"];
-        NSString *p2pid = dataDic[@"p2pId"];
+        NSString *p2pid = dataDic[P2P_ID];
         if (p2pid == nil || [p2pid isEmptyString]) {
             p2pid = publickey;
         }
@@ -82,8 +82,9 @@
     } else if ([type isEqualToString:allVpnBasicInfoReq]) { // 所有vpn资产信息的请求
         
     } else if ([type isEqualToString:vpnPrivateKeyReq]) { // vpn私钥的请求而
-        NSString *vpnName = dataDic[@"vpnName"]?:@"";
-        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName];
+        NSString *vpnName = dataDic[VPN_NAME]?:@"";
+        NSString *isMainNet = dataDic[IS_MAINNET]?:@"0";
+        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName isMainNet:isMainNet];
         if (!vpnInfo) {
             return;
         }
@@ -91,13 +92,14 @@
         
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = vpnPrivateKeyRsp;
-        NSDictionary *tempDic = @{@"vpnName":vpnName, @"privateKey":privateKey};
+        NSDictionary *tempDic = @{VPN_NAME:vpnName, @"privateKey":privateKey};
         model.data = tempDic.mj_JSONString;
         NSString *str = model.mj_JSONString;
         [ToxManage sendMessageWithMessage:str withP2pid:publickey];
     } else if ([type isEqualToString:vpnUserAndPasswordReq]) { // vpn账号和密码的请求
-        NSString *vpnName = dataDic[@"vpnName"]?:@"";
-        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName];
+        NSString *vpnName = dataDic[VPN_NAME]?:@"";
+        NSString *isMainNet = dataDic[IS_MAINNET]?:@"0";
+        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName isMainNet:isMainNet];
         if (!vpnInfo) {
             return;
         }
@@ -106,7 +108,7 @@
         
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = vpnUserAndPasswordRsp;
-        NSDictionary *tempDic = @{@"vpnName":vpnName, @"userName":userName, @"password":password};
+        NSDictionary *tempDic = @{VPN_NAME:vpnName, @"userName":userName, @"password":password};
         model.data = tempDic.mj_JSONString;
         NSString *str = model.mj_JSONString;
         [ToxManage sendMessageWithMessage:str withP2pid:publickey];
