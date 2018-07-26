@@ -69,7 +69,8 @@
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = registerConnect;
-    [VPNUtil.shareInstance configVPNWithVpnData:vpnData];
+    VPNUtil.shareInstance.connectData = vpnData;
+    [VPNUtil.shareInstance configVPN];
 }
 
 - (void)connectVpnTimeout {

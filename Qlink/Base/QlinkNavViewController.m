@@ -95,16 +95,6 @@
     return UIStatusBarStyleLightContent;
 }
 
-// 返回按钮设置
-//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-//{
-//
-//    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backBarButtonItemAction)];
-//
-//    viewController.navigationItem.backBarButtonItem = backBarButtonItem;
-//
-//}
-
 - (void)backBarButtonItemAction
 {
     [self popViewControllerAnimated:YES];

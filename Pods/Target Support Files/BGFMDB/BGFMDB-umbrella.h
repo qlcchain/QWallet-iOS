@@ -14,7 +14,6 @@
 #import "BGDB.h"
 #import "BGFMDB.h"
 #import "BGFMDBConfig.h"
-#import "BGModelInfo.h"
 #import "BGTool.h"
 #import "NSCache+BGCache.h"
 #import "NSObject+BGModel.h"

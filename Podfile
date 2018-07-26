@@ -17,5 +17,6 @@ target "Qlink" do
     pod 'Bugly'
     pod 'OLImageView'
     pod 'Firebase/Core'
+#    pod 'MMWormhole'
 
 end

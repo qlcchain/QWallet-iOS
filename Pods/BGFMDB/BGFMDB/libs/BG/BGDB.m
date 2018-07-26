@@ -7,7 +7,6 @@
 //
 
 #import "BGDB.h"
-#import "BGModelInfo.h"
 #import "BGTool.h"
 #import "NSCache+BGCache.h"
 
@@ -15,15 +14,6 @@
  默认数据库名称
  */
 #define SQLITE_NAME @"BGFMDB.db"
-
-/**
- 日志输出
- */
-#ifdef DEBUG
-#define bg_log(...) NSLog(__VA_ARGS__)
-#else
-#define bg_log(...)
-#endif
 
 #define bg_debug(param) do{\
 if(self.debug){bg_log(@"调试输出: %@",param);}\
@@ -127,7 +117,7 @@ static BGDB* BGdb = nil;
         name = SQLITE_NAME;
     }
     NSString *filename = CachePath(name);
-  //  NSLog(@"数据库路径 = %@",filename);
+    //NSLog(@"数据库路径 = %@",filename);
     _queue = [FMDatabaseQueue databaseQueueWithPath:filename];
     return _queue;
 }
@@ -166,7 +156,7 @@ static BGDB* BGdb = nil;
 }
 //事务操作
 -(void)inTransaction:(BOOL (^_Nonnull)())block{
-    //NSAssert(block, @"block is nil!");
+    NSAssert(block, @"block is nil!");
     if([NSThread currentThread].isMainThread){//主线程直接执行
         [self executeTransation:block];
     }else{//子线程则延迟执行

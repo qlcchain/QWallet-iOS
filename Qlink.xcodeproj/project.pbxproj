@@ -112,6 +112,7 @@
 		58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC42072055800C08784 /* HistoryRecordsViewController.m */; };
 		58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FCA2072089800C08784 /* HistoryRecordsCell.m */; };
 		58270FD820720D3600C08784 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FD620720D3600C08784 /* ProfileViewController.m */; };
+		582A40872107190900C12820 /* PacketTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 582A40802107190900C12820 /* PacketTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833AD0B206C8427002C6909 /* WalletMenuView.m */; };
 		5834CC5B207E1573009168F8 /* VPNConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5834CC59207E1573009168F8 /* VPNConnectedViewController.m */; };
 		583910F9208495F200A19E7E /* DDLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910F8208495F200A19E7E /* DDLogUtil.m */; };
@@ -129,6 +130,15 @@
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
 		5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117C2105AEF4005232A2 /* LocationTracker.m */; };
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
+		584B4660210719680022EE27 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58CF1012207C61CD0026F28E /* KeychainAccess.framework */; };
+		584B4661210719680022EE27 /* OpenVPNAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */; };
+		584B4662210719B00022EE27 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C003EF207C57E2007B0D2A /* NetworkExtension.framework */; };
+		584B466A21071A0F0022EE27 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B466521071A0F0022EE27 /* PacketTunnelProvider.swift */; };
+		584B466B21071A0F0022EE27 /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B466721071A0F0022EE27 /* Then.swift */; };
+		584B466C21071A0F0022EE27 /* NEPacketTunnelFlow+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B466821071A0F0022EE27 /* NEPacketTunnelFlow+OpenVPN.swift */; };
+		584B466D21071A0F0022EE27 /* KeychainAccess+Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B466921071A0F0022EE27 /* KeychainAccess+Reference.swift */; };
+		584B467921085CB00022EE27 /* MMWormhole.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584B467821085CB00022EE27 /* MMWormhole.framework */; };
+		584B4680210959D30022EE27 /* QLCChain.ovpn in Resources */ = {isa = PBXBuildFile; fileRef = 584B467F210959D30022EE27 /* QLCChain.ovpn */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC7A20CFB39F00EEB6CE /* NounView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7C20CFB39F00EEB6CE /* NounView.xib */; };
 		5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9820CFB40F00EEB6CE /* SettingViewController.xib */; };
@@ -175,14 +185,6 @@
 		5860ADB520CFB61000EEB6CE /* ChatHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ADB720CFB61000EEB6CE /* ChatHeadView.xib */; };
 		5860ADBC20CFB61900EEB6CE /* ChatTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ADBE20CFB61900EEB6CE /* ChatTipView.xib */; };
 		5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ADC520CFB62200EEB6CE /* NotifactionView.xib */; };
-		5860ADDE20CFC67C00EEB6CE /* PacketTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5860ADD720CFC67C00EEB6CE /* PacketTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5860ADE920CFC6B800EEB6CE /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860ADE420CFC6B700EEB6CE /* Then.swift */; };
-		5860ADEA20CFC6B800EEB6CE /* NEPacketTunnelFlow+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860ADE520CFC6B700EEB6CE /* NEPacketTunnelFlow+OpenVPN.swift */; };
-		5860ADEB20CFC6B800EEB6CE /* KeychainAccess+Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860ADE620CFC6B700EEB6CE /* KeychainAccess+Reference.swift */; };
-		5860ADEC20CFC6B800EEB6CE /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860ADE820CFC6B700EEB6CE /* PacketTunnelProvider.swift */; };
-		5860ADEE20CFC6D600EEB6CE /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C003EF207C57E2007B0D2A /* NetworkExtension.framework */; };
-		5860ADEF20CFC70E00EEB6CE /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58CF1012207C61CD0026F28E /* KeychainAccess.framework */; };
-		5860ADF020CFC70E00EEB6CE /* OpenVPNAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */; };
 		5860FD2120B7B0F1005AA1DA /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5860FD2020B7B0F1005AA1DA /* NotificationService.m */; };
 		5860FD2520B7B0F1005AA1DA /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
@@ -402,11 +404,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5860ADDC20CFC67C00EEB6CE /* PBXContainerItemProxy */ = {
+		582A40852107190900C12820 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 58A4DE9E206234AC00E72F52 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5860ADD620CFC67C00EEB6CE;
+			remoteGlobalIDString = 582A407F2107190900C12820;
 			remoteInfo = PacketTunnel;
 		};
 		5860FD2320B7B0F1005AA1DA /* PBXContainerItemProxy */ = {
@@ -425,7 +427,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5860ADDE20CFC67C00EEB6CE /* PacketTunnel.appex in Embed App Extensions */,
+				582A40872107190900C12820 /* PacketTunnel.appex in Embed App Extensions */,
 				5860FD2520B7B0F1005AA1DA /* NotificationService.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -630,6 +632,8 @@
 		58270FCA2072089800C08784 /* HistoryRecordsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecordsCell.m; sourceTree = "<group>"; };
 		58270FD520720D3600C08784 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		58270FD620720D3600C08784 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		582A40802107190900C12820 /* PacketTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PacketTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		582A40842107190900C12820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5833AD0A206C8427002C6909 /* WalletMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletMenuView.h; sourceTree = "<group>"; };
 		5833AD0B206C8427002C6909 /* WalletMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletMenuView.m; sourceTree = "<group>"; };
 		5834CC58207E1573009168F8 /* VPNConnectedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNConnectedViewController.h; sourceTree = "<group>"; };
@@ -663,6 +667,14 @@
 		5849117B2105AEF4005232A2 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
 		5849117C2105AEF4005232A2 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		5849117D2105AEF4005232A2 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		584B4663210719D40022EE27 /* PacketTunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PacketTunnel.entitlements; sourceTree = "<group>"; };
+		584B466421071A0D0022EE27 /* PacketTunnel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PacketTunnel-Bridging-Header.h"; sourceTree = "<group>"; };
+		584B466521071A0F0022EE27 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		584B466721071A0F0022EE27 /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
+		584B466821071A0F0022EE27 /* NEPacketTunnelFlow+OpenVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NEPacketTunnelFlow+OpenVPN.swift"; sourceTree = "<group>"; };
+		584B466921071A0F0022EE27 /* KeychainAccess+Reference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeychainAccess+Reference.swift"; sourceTree = "<group>"; };
+		584B467821085CB00022EE27 /* MMWormhole.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMWormhole.framework; path = Carthage/Build/iOS/MMWormhole.framework; sourceTree = "<group>"; };
+		584B467F210959D30022EE27 /* QLCChain.ovpn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QLCChain.ovpn; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC7B20CFB39F00EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NounView.xib; sourceTree = "<group>"; };
 		5860AC7E20CFB3A100EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NounView.strings; sourceTree = "<group>"; };
@@ -753,14 +765,6 @@
 		5860ADC020CFB61C00EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ChatTipView.strings; sourceTree = "<group>"; };
 		5860ADC420CFB62200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NotifactionView.xib; sourceTree = "<group>"; };
 		5860ADC720CFB62500EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NotifactionView.strings; sourceTree = "<group>"; };
-		5860ADD720CFC67C00EEB6CE /* PacketTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PacketTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		5860ADDB20CFC67C00EEB6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5860ADE220CFC6B500EEB6CE /* PacketTunnel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PacketTunnel-Bridging-Header.h"; sourceTree = "<group>"; };
-		5860ADE420CFC6B700EEB6CE /* Then.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
-		5860ADE520CFC6B700EEB6CE /* NEPacketTunnelFlow+OpenVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NEPacketTunnelFlow+OpenVPN.swift"; sourceTree = "<group>"; };
-		5860ADE620CFC6B700EEB6CE /* KeychainAccess+Reference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeychainAccess+Reference.swift"; sourceTree = "<group>"; };
-		5860ADE820CFC6B700EEB6CE /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
-		5860ADED20CFC6CA00EEB6CE /* PacketTunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PacketTunnel.entitlements; sourceTree = "<group>"; };
 		5860ADF120CFC8A700EEB6CE /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5860FD1F20B7B0F1005AA1DA /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
@@ -1410,13 +1414,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5860ADD420CFC67C00EEB6CE /* Frameworks */ = {
+		582A407D2107190900C12820 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5860ADEF20CFC70E00EEB6CE /* KeychainAccess.framework in Frameworks */,
-				5860ADF020CFC70E00EEB6CE /* OpenVPNAdapter.framework in Frameworks */,
-				5860ADEE20CFC6D600EEB6CE /* NetworkExtension.framework in Frameworks */,
+				584B467921085CB00022EE27 /* MMWormhole.framework in Frameworks */,
+				584B4662210719B00022EE27 /* NetworkExtension.framework in Frameworks */,
+				584B4660210719680022EE27 /* KeychainAccess.framework in Frameworks */,
+				584B4661210719680022EE27 /* OpenVPNAdapter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2149,6 +2154,18 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		582A40812107190900C12820 /* PacketTunnel */ = {
+			isa = PBXGroup;
+			children = (
+				584B4663210719D40022EE27 /* PacketTunnel.entitlements */,
+				584B466621071A0F0022EE27 /* Extensions */,
+				584B466521071A0F0022EE27 /* PacketTunnelProvider.swift */,
+				582A40842107190900C12820 /* Info.plist */,
+				584B466421071A0D0022EE27 /* PacketTunnel-Bridging-Header.h */,
+			);
+			path = PacketTunnel;
+			sourceTree = "<group>";
+		};
 		5833AD09206C8387002C6909 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2213,24 +2230,12 @@
 			path = Log;
 			sourceTree = "<group>";
 		};
-		5860ADD820CFC67C00EEB6CE /* PacketTunnel */ = {
+		584B466621071A0F0022EE27 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				5860ADED20CFC6CA00EEB6CE /* PacketTunnel.entitlements */,
-				5860ADE320CFC6B700EEB6CE /* Extensions */,
-				5860ADE820CFC6B700EEB6CE /* PacketTunnelProvider.swift */,
-				5860ADDB20CFC67C00EEB6CE /* Info.plist */,
-				5860ADE220CFC6B500EEB6CE /* PacketTunnel-Bridging-Header.h */,
-			);
-			path = PacketTunnel;
-			sourceTree = "<group>";
-		};
-		5860ADE320CFC6B700EEB6CE /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				5860ADE420CFC6B700EEB6CE /* Then.swift */,
-				5860ADE520CFC6B700EEB6CE /* NEPacketTunnelFlow+OpenVPN.swift */,
-				5860ADE620CFC6B700EEB6CE /* KeychainAccess+Reference.swift */,
+				584B466721071A0F0022EE27 /* Then.swift */,
+				584B466821071A0F0022EE27 /* NEPacketTunnelFlow+OpenVPN.swift */,
+				584B466921071A0F0022EE27 /* KeychainAccess+Reference.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2359,7 +2364,7 @@
 			children = (
 				58A4DEA8206234AC00E72F52 /* Qlink */,
 				5860FD1E20B7B0F1005AA1DA /* NotificationService */,
-				5860ADD820CFC67C00EEB6CE /* PacketTunnel */,
+				582A40812107190900C12820 /* PacketTunnel */,
 				58A4DEA7206234AC00E72F52 /* Products */,
 				0C63C502D1596F285ED385D6 /* Pods */,
 				F2B7452EF089D21E85A1F2EF /* Frameworks */,
@@ -2371,7 +2376,7 @@
 			children = (
 				58A4DEA6206234AC00E72F52 /* Qlink.app */,
 				5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */,
-				5860ADD720CFC67C00EEB6CE /* PacketTunnel.appex */,
+				582A40802107190900C12820 /* PacketTunnel.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2379,6 +2384,7 @@
 		58A4DEA8206234AC00E72F52 /* Qlink */ = {
 			isa = PBXGroup;
 			children = (
+				584B467F210959D30022EE27 /* QLCChain.ovpn */,
 				588BFCB320EF211F00B1E860 /* Config */,
 				588BFCAF20EF211F00B1E860 /* Macros */,
 				730DA8F720886A7800CE1909 /* CustomViews */,
@@ -2790,6 +2796,7 @@
 		F2B7452EF089D21E85A1F2EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				584B467821085CB00022EE27 /* MMWormhole.framework */,
 				58A2495820D0F60C00781549 /* WebKit.framework */,
 				734F52A120B6BF90002D45B7 /* CoreTelephony.framework */,
 				734F529F20B6BF81002D45B7 /* CFNetwork.framework */,
@@ -2811,13 +2818,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5860ADD620CFC67C00EEB6CE /* PacketTunnel */ = {
+		582A407F2107190900C12820 /* PacketTunnel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5860ADDF20CFC67D00EEB6CE /* Build configuration list for PBXNativeTarget "PacketTunnel" */;
+			buildConfigurationList = 582A40882107190900C12820 /* Build configuration list for PBXNativeTarget "PacketTunnel" */;
 			buildPhases = (
-				5860ADD320CFC67C00EEB6CE /* Sources */,
-				5860ADD420CFC67C00EEB6CE /* Frameworks */,
-				5860ADD520CFC67C00EEB6CE /* Resources */,
+				582A407C2107190900C12820 /* Sources */,
+				582A407D2107190900C12820 /* Frameworks */,
+				582A407E2107190900C12820 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -2825,7 +2832,7 @@
 			);
 			name = PacketTunnel;
 			productName = PacketTunnel;
-			productReference = 5860ADD720CFC67C00EEB6CE /* PacketTunnel.appex */;
+			productReference = 582A40802107190900C12820 /* PacketTunnel.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		5860FD1C20B7B0F1005AA1DA /* NotificationService */ = {
@@ -2862,7 +2869,7 @@
 			);
 			dependencies = (
 				5860FD2420B7B0F1005AA1DA /* PBXTargetDependency */,
-				5860ADDD20CFC67C00EEB6CE /* PBXTargetDependency */,
+				582A40862107190900C12820 /* PBXTargetDependency */,
 			);
 			name = Qlink;
 			productName = Qlink;
@@ -2879,8 +2886,8 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = pan;
 				TargetAttributes = {
-					5860ADD620CFC67C00EEB6CE = {
-						CreatedOnToolsVersion = 9.4;
+					582A407F2107190900C12820 = {
+						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -2953,13 +2960,13 @@
 			targets = (
 				58A4DEA5206234AC00E72F52 /* Qlink */,
 				5860FD1C20B7B0F1005AA1DA /* NotificationService */,
-				5860ADD620CFC67C00EEB6CE /* PacketTunnel */,
+				582A407F2107190900C12820 /* PacketTunnel */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5860ADD520CFC67C00EEB6CE /* Resources */ = {
+		582A407E2107190900C12820 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3042,6 +3049,7 @@
 				580D91B32063AE5300B12506 /* Roboto-BoldItalic.ttf in Resources */,
 				5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */,
 				5860ACC720CFB46900EEB6CE /* VPNFileInputView.xib in Resources */,
+				584B4680210959D30022EE27 /* QLCChain.ovpn in Resources */,
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
 				5860ACAB20CFB43E00EEB6CE /* WifiViewController.xib in Resources */,
 				5860AD4520CFB56700EEB6CE /* BuyQlcView.xib in Resources */,
@@ -3134,6 +3142,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/OpenVPNAdapter.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MMWormhole.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -3177,14 +3186,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5860ADD320CFC67C00EEB6CE /* Sources */ = {
+		582A407C2107190900C12820 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5860ADEA20CFC6B800EEB6CE /* NEPacketTunnelFlow+OpenVPN.swift in Sources */,
-				5860ADEB20CFC6B800EEB6CE /* KeychainAccess+Reference.swift in Sources */,
-				5860ADEC20CFC6B800EEB6CE /* PacketTunnelProvider.swift in Sources */,
-				5860ADE920CFC6B800EEB6CE /* Then.swift in Sources */,
+				584B466C21071A0F0022EE27 /* NEPacketTunnelFlow+OpenVPN.swift in Sources */,
+				584B466D21071A0F0022EE27 /* KeychainAccess+Reference.swift in Sources */,
+				584B466B21071A0F0022EE27 /* Then.swift in Sources */,
+				584B466A21071A0F0022EE27 /* PacketTunnelProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3469,10 +3478,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5860ADDD20CFC67C00EEB6CE /* PBXTargetDependency */ = {
+		582A40862107190900C12820 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5860ADD620CFC67C00EEB6CE /* PacketTunnel */;
-			targetProxy = 5860ADDC20CFC67C00EEB6CE /* PBXContainerItemProxy */;
+			target = 582A407F2107190900C12820 /* PacketTunnel */;
+			targetProxy = 582A40852107190900C12820 /* PBXContainerItemProxy */;
 		};
 		5860FD2420B7B0F1005AA1DA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4381,7 +4390,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5860ADE020CFC67D00EEB6CE /* Debug */ = {
+		582A40892107190900C12820 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -4410,7 +4419,7 @@
 			};
 			name = Debug;
 		};
-		5860ADE120CFC67D00EEB6CE /* Release */ = {
+		582A408A2107190900C12820 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -4448,7 +4457,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlink.winq.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4467,7 +4476,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlink.winq.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4668,11 +4677,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5860ADDF20CFC67D00EEB6CE /* Build configuration list for PBXNativeTarget "PacketTunnel" */ = {
+		582A40882107190900C12820 /* Build configuration list for PBXNativeTarget "PacketTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5860ADE020CFC67D00EEB6CE /* Debug */,
-				5860ADE120CFC67D00EEB6CE /* Release */,
+				582A40892107190900C12820 /* Debug */,
+				582A408A2107190900C12820 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -13,6 +13,8 @@
 #import "TransferUtil.h"
 #import "ChatUtil.h"
 #import "ChatModel.h"
+#import "DBManageUtil.h"
+#import "Qlink-Swift.h"
 
 @implementation P2pMessageManage
 
@@ -35,9 +37,18 @@
     } else if ([type isEqualToString:allVpnBasicInfoRsp]) { // 所有vpn资产信息的返回
         
     } else if ([type isEqualToString:vpnPrivateKeyRsp]) { // vpn私钥的返回
-        
+        NSString *privateKey = dataDic[@"privateKey"];
+        VPNUtil.shareInstance.vpnPrivateKey = privateKey;
+//        [VPNUtil.shareInstance configVPN];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Receive_PrivateKey_Noti object:nil];
     } else if ([type isEqualToString:vpnUserAndPasswordRsp]) { // vpn账号和密码的返回
-        
+//        NSString *vpnName = dataDic[@"vpnName"];
+        NSString *userName = dataDic[@"userName"];
+        NSString *password = dataDic[@"password"];
+        VPNUtil.shareInstance.vpnUserName = userName;
+        VPNUtil.shareInstance.vpnPassword = password;
+//        [VPNUtil.shareInstance configVPN];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Receive_UserPass_Noti object:nil];
     } else if ([type isEqualToString:recordSaveRsp]) { // vpn或者wifi连接成功后，告诉提供端做连接记录的返回
        
     } else if ([type isEqualToString:joinGroupChatRsp]) { // 申请加入群聊的回复
@@ -71,9 +82,34 @@
     } else if ([type isEqualToString:allVpnBasicInfoReq]) { // 所有vpn资产信息的请求
         
     } else if ([type isEqualToString:vpnPrivateKeyReq]) { // vpn私钥的请求而
+        NSString *vpnName = dataDic[@"vpnName"]?:@"";
+        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName];
+        if (!vpnInfo) {
+            return;
+        }
+        NSString *privateKey = vpnInfo.privateKeyPassword?:@"";
         
+        ToxRequestModel *model = [[ToxRequestModel alloc] init];
+        model.type = vpnPrivateKeyRsp;
+        NSDictionary *tempDic = @{@"vpnName":vpnName, @"privateKey":privateKey};
+        model.data = tempDic.mj_JSONString;
+        NSString *str = model.mj_JSONString;
+        [ToxManage sendMessageWithMessage:str withP2pid:publickey];
     } else if ([type isEqualToString:vpnUserAndPasswordReq]) { // vpn账号和密码的请求
+        NSString *vpnName = dataDic[@"vpnName"]?:@"";
+        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName];
+        if (!vpnInfo) {
+            return;
+        }
+        NSString *userName = vpnInfo.username?:@"";
+        NSString *password = vpnInfo.password?:@"";
         
+        ToxRequestModel *model = [[ToxRequestModel alloc] init];
+        model.type = vpnUserAndPasswordRsp;
+        NSDictionary *tempDic = @{@"vpnName":vpnName, @"userName":userName, @"password":password};
+        model.data = tempDic.mj_JSONString;
+        NSString *str = model.mj_JSONString;
+        [ToxManage sendMessageWithMessage:str withP2pid:publickey];
     } else if ([type isEqualToString:recordSaveReq]) { // vpn或者wifi连接成功后，告诉提供端做连接记录的请求
         // 通知提供端收到记录
         ToxRequestModel *model = [[ToxRequestModel alloc] init];

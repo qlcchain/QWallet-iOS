@@ -36,7 +36,16 @@
             [HistoryRecrdInfo bg_update:HISTORYRECRD_TABNAME version:version];
         }
     }
-   
-    
 }
+
++ (VPNInfo *)getVpnInfo:(NSString *)vpnName {
+    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"bg_vpnName"),bg_sqlValue(vpnName)]];
+    VPNInfo *vpnInfo = nil;
+    if (finfAlls && finfAlls.count > 0) {
+        vpnInfo = finfAlls.firstObject;
+    }
+    
+    return vpnInfo;
+}
+
 @end

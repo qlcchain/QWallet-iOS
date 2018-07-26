@@ -218,6 +218,30 @@
     [VPNOperationUtil saveArrayToKeyChain];
 }
 
+- (BOOL)isEmptyOfUsername {
+    BOOL empty = NO;
+    if (self.userNameTF.text == nil || self.userNameTF.text.length <= 0) {
+        empty = YES;
+    }
+    return empty;
+}
+
+- (BOOL)isEmptyOfPassword {
+    BOOL empty = NO;
+    if (self.passwordTF.text == nil || self.passwordTF.text.length <= 0) {
+        empty = YES;
+    }
+    return empty;
+}
+
+- (BOOL)isEmptyOfPrivateKey {
+    BOOL empty = NO;
+    if (self.privateKeyTF.text == nil || self.privateKeyTF.text.length <= 0) {
+        empty = YES;
+    }
+    return empty;
+}
+
 - (BOOL)isEmptyOfCountry {
     BOOL empty = NO;
     if (self.selectCountryStr == nil || [self.selectCountryStr isEmptyString]) {
@@ -252,8 +276,7 @@
         return;
     }
     
-    // 验证VPN是否能连接
-    [VPNOperationUtil shareInstance].isVerifyVPN = YES;
+    
     
     NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:self.selectName];
     NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
@@ -262,14 +285,46 @@
         return;
     }
     
+    VPNUtil.shareInstance.connectData = vpnData;
+    @weakify_self
+    [VPNUtil.shareInstance applyConfigurationWithVpnData:vpnData completionHandler:^(NSInteger type) {
+        if (type == 0) { // 自动
+            [weakSelf goConnect];
+        } else if (type == 1) { // 私钥
+            if ([weakSelf isEmptyOfPrivateKey]) {
+                [AppD.window showHint:NSStringLocalizable(@"Fill_PrivateKey")];
+                return;
+            }
+            VPNUtil.shareInstance.vpnPrivateKey = weakSelf.privateKeyTF.text;
+            [weakSelf goConnect];
+        } else if (type == 2) { // 用户名密码
+            if ([weakSelf isEmptyOfUsername]) {
+                [AppD.window showHint:NSStringLocalizable(@"Fill_Username")];
+                return;
+            }
+            if ([weakSelf isEmptyOfPassword]) {
+                [AppD.window showHint:NSStringLocalizable(@"Fill_Password")];
+                return;
+            }
+            VPNUtil.shareInstance.vpnUserName = weakSelf.userNameTF.text;
+            VPNUtil.shareInstance.vpnPassword = weakSelf.passwordTF.text;
+            [weakSelf goConnect];
+        }
+    }];
+}
+
+- (void)goConnect {
     [AppD.window showHudInView:self.view hint:NSStringLocalizable(@"check")];
+    // 验证VPN是否能连接
+    [VPNOperationUtil shareInstance].isVerifyVPN = YES;
     
     connectVpnDone = NO;
     NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = registerConnect;
-    [VPNUtil.shareInstance configVPNWithVpnData:vpnData];
+    
+    [VPNUtil.shareInstance configVPN];
 }
 
 - (void)connectVpnTimeout {
@@ -296,9 +351,6 @@
                 [VPNOperationUtil shareInstance].isVerifyVPN = NO;
                 connectVpnDone = YES;
                 [self performSelector:@selector(requestRegisterVpnByFeeV3) withObject:nil afterDelay:0.6];
-                //                [VPNUtil.shareInstance stopVPN];
-                //                [_registerVC scrollToStepThree];
-                //                _profileTF.text = _selectName;
             }
         }
             break;

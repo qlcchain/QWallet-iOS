@@ -50,7 +50,7 @@
 #import "TransferUtil.h"
 #import "VPNTranferMode.h"
 #import "FreeConnectionViewController.h"
-
+#import <MMWormhole/MMWormhole.h>
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -76,6 +76,7 @@
 @property (nonatomic) BOOL joinGroupFlag;
 @property (nonatomic , strong) ChooseCountryView *countryView;
 @property (nonatomic, strong) NSString *currentConnectVPNName;
+@property (nonatomic, strong) MMWormhole *wormhole;
 
 @end
 
@@ -111,6 +112,8 @@
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLoading:) name:VPN_CONNECT_CANCEL_LOADING object:nil];
     // vpn免费次数成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFreeCount:) name:CHEKC_VPN_FREE_COUNT_SUCCESS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getVpnPassTimeout:) name:Get_Vpn_Pass_Timeout_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getVpnKeyTimeout:) name:Get_Vpn_Key_Timeout_Noti object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -118,6 +121,7 @@
     [super viewDidLoad];
     [self showRegisterVPN];
     [self addObserve];
+    [self wormholeInit];
     [self configData];
     [self startLocation];
     // 获取当前选择的国家--发送获取vpn列表请求
@@ -152,6 +156,103 @@
 - (void)configData {
     [self refreshFreeConnection];
     [self addSectionTitle];
+}
+
+- (void)wormholeInit {
+    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
+                                                         optionalDirectory:DIRECTORY_WORMHOLE];
+    [self.wormhole listenForMessageWithIdentifier:VPN_EVENT_IDENTIFIER
+                                         listener:^(id messageObject) {
+                                             NSNumber *eventNum = messageObject;
+                                             switch ([eventNum integerValue]) {
+                                             case OpenVPNAdapterEventDisconnected:
+                                             {
+                                                 NSLog(@"vpnevent---------------disconnected");
+                                             }
+                                                 break;
+                                             case OpenVPNAdapterEventConnected:
+                                             {
+                                                 NSLog(@"vpnevent---------------connected");
+                                             }
+                                                 break;
+                                             case OpenVPNAdapterEventReconnecting:
+                                                 {
+                                                     NSLog(@"vpnevent---------------reconnecting");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventResolve:
+                                                 {
+                                                     NSLog(@"vpnevent---------------resolve");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventWait:
+                                                 {
+                                                     NSLog(@"vpnevent---------------wait");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventWaitProxy:
+                                                 {
+                                                     NSLog(@"vpnevent---------------waitProxy");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventConnecting:
+                                                 {
+                                                     NSLog(@"vpnevent---------------connecting");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventGetConfig:
+                                                 {
+                                                     NSLog(@"vpnevent---------------getConfig");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventAssignIP:
+                                                 {
+                                                     NSLog(@"vpnevent---------------assignIP");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventAddRoutes:
+                                                 {
+                                                     NSLog(@"vpnevent---------------addRoutes");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventEcho:
+                                                 {
+                                                     NSLog(@"vpnevent---------------echo");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventInfo:
+                                                 {
+                                                     NSLog(@"vpnevent---------------info");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventPause:
+                                                 {
+                                                     NSLog(@"vpnevent---------------pause");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventResume:
+                                                 {
+                                                     NSLog(@"vpnevent---------------resume");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventRelay:
+                                                 {
+                                                     NSLog(@"vpnevent---------------relay");
+                                                 }
+                                                     break;
+                                             case OpenVPNAdapterEventUnknown:
+                                                 {
+                                                     NSLog(@"vpnevent---------------unknown");
+                                                 }
+                                                     break;
+                                             default:
+                                                     break;
+                                             }
+                                         }];
+    [self.wormhole listenForMessageWithIdentifier:VPN_MESSAGE_IDENTIFIER
+                                         listener:^(id messageObject) {
+                                             NSLog(@"vpnmessage---------------%@",messageObject);
+                                         }];
 }
 
 - (void)refreshFreeConnection {
@@ -503,6 +604,44 @@ static BOOL refreshAnimate = YES;
     }];
 }
 
+#pragma mark - 检查vpn连接
+- (void) checkVPNConnect {
+    BOOL isCharge = YES;
+    // 获取vpn上次连接时间
+    __block  VPNTranferMode *tranferMode = nil;
+    NSArray *listArray = [HWUserdefault getObjectWithKey:VPN_CONNECT_LIST];
+    if (listArray && listArray.count > 0) {
+        [listArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            VPNTranferMode *mode = [VPNTranferMode getObjectWithKeyValues:obj];
+            if ([_selectVPNInfo.vpnName isEqualToString:mode.vpnName]) {
+                tranferMode = mode;
+                *stop = YES;
+            }
+        }];
+    }
+    if (tranferMode) {
+        NSString *connectTime = tranferMode.vpnConnectTime;
+        if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
+            // 判断上次连接时间 超过一时间扣费
+            NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
+            NSDate *backDate = [dateFormatrer dateFromString:connectTime];
+            // 判断日期相隔时间
+            NSInteger minu = [[NSDate date] minutesAfterDate:backDate];
+            // 小于1小时不扣费 并且 上次扣费要成功
+            if (labs(minu) < VPN_TRANFER_TIME) {
+                if (tranferMode.isTranferSuccess) {
+                    isCharge = NO;
+                }
+            }
+        }
+    }
+    if (isCharge) {
+        [self showConnectAlert:_selectVPNInfo isFree:NO];
+    } else {
+        [self showConnectAlert:_selectVPNInfo isFree:YES];
+    }
+}
+
 #pragma mark - Noti
 //- (void)selectCountryNoti:(NSNotification *)noti {
 //    SelectCountryModel *selectM = noti.object;
@@ -549,43 +688,6 @@ static BOOL refreshAnimate = YES;
         delay = 0.6f;
     }
     [self performSelector:@selector(checkVPNConnect) withObject:self afterDelay:delay];
-}
-#pragma mark - 检查vpn连接
-- (void) checkVPNConnect {
-    BOOL isCharge = YES;
-    // 获取vpn上次连接时间
-    __block  VPNTranferMode *tranferMode = nil;
-    NSArray *listArray = [HWUserdefault getObjectWithKey:VPN_CONNECT_LIST];
-    if (listArray && listArray.count > 0) {
-        [listArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            VPNTranferMode *mode = [VPNTranferMode getObjectWithKeyValues:obj];
-            if ([_selectVPNInfo.vpnName isEqualToString:mode.vpnName]) {
-                tranferMode = mode;
-                *stop = YES;
-            }
-        }];
-    }
-    if (tranferMode) {
-        NSString *connectTime = tranferMode.vpnConnectTime;
-        if (![[NSStringUtil getNotNullValue:connectTime] isEmptyString]) {
-            // 判断上次连接时间 超过一时间扣费
-            NSDateFormatter *dateFormatrer = [NSDateFormatter defaultDateFormatter];
-            NSDate *backDate = [dateFormatrer dateFromString:connectTime];
-            // 判断日期相隔时间
-            NSInteger minu = [[NSDate date] minutesAfterDate:backDate];
-            // 小于1小时不扣费 并且 上次扣费要成功
-            if (labs(minu) < VPN_TRANFER_TIME) {
-                if (tranferMode.isTranferSuccess) {
-                    isCharge = NO;
-                }
-            }
-        }
-    }
-    if (isCharge) {
-        [self showConnectAlert:_selectVPNInfo isFree:NO];
-    } else {
-        [self showConnectAlert:_selectVPNInfo isFree:YES];
-    }
 }
 
 - (void) updateFreeCount:(NSNotification *) noti {
@@ -693,6 +795,16 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)checkConnectTimeout:(NSNotification *)noti {
+    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+    [self refreshTable];
+}
+
+- (void)getVpnPassTimeout:(NSNotification *)noti {
+    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+    [self refreshTable];
+}
+
+- (void)getVpnKeyTimeout:(NSNotification *)noti {
     _selectVPNInfo.connectStatus = VpnConnectStatusNone;
     [self refreshTable];
 }

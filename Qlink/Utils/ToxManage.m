@@ -421,7 +421,7 @@ int fileProcess (char *filename, int filesize,char * publickey)
         NSString *vpnPath = ToxManage.shareMange.vpnLocalPathName;
         NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
         // 连接本地vpn
-//        NSURL *vpnURL = [[NSBundle mainBundle] URLForResource:@"winqvpn" withExtension:@"ovpn"];
+//        NSURL *vpnURL = [[NSBundle mainBundle] URLForResource:@"QLCChain" withExtension:@"ovpn"];
 //        NSData *vpnData = [NSData dataWithContentsOfURL:vpnURL];
         if (vpnData && vpnData.length > 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:RECEIVE_VPN_FILE_NOTI object:vpnData];

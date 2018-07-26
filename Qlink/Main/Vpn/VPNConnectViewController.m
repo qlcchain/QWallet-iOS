@@ -150,7 +150,8 @@
 - (void)startConnectVPN {
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = normalConnect;
-    [VPNUtil.shareInstance configVPNWithVpnData:_vpnData];
+    VPNUtil.shareInstance.connectData = _vpnData;
+    [VPNUtil.shareInstance configVPN];
 }
 
 - (void)savePreferenceFail:(NSNotification *)noti {

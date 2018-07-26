@@ -42,6 +42,7 @@
     if (!url)
         return;
     
+    __weak typeof(self) weakSelf = self;
     [[[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!error) {
             NSString *tempDict = NSTemporaryDirectory();
@@ -56,7 +57,7 @@
                 if (!attachment) {
                     NSLog(@"Create attachment error: %@", error);
                 } else {
-                    _bestAttemptContent.attachments = [_bestAttemptContent.attachments arrayByAddingObject:attachment];
+                    weakSelf.bestAttemptContent.attachments = [weakSelf.bestAttemptContent.attachments arrayByAddingObject:attachment];
                 }
             } else {
                 NSLog(@"Move file error: %@", error);
