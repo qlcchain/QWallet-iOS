@@ -160,13 +160,15 @@
     [self.soureArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *mode = (VPNInfo *) obj;
         // 服务器的
-        __block BOOL isExit = NO;
+        __block BOOL isExit = YES;
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNInfo *info = (VPNInfo *) obj;
             if ([mode.vpnName isEqualToString:info.ssId] && mode.isMainNet == info.isMainNet) {
                 mode.qlc = info.qlc;
                 mode.registerQlc = info.registerQlc;
-                isExit = YES;
+                if ([[NSStringUtil getNotNullValue:info.address] isBlankString]) {
+                     isExit = NO;
+                }
                 *stop = YES;
             }
         }];

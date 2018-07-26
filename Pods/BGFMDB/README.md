@@ -25,13 +25,14 @@ LKDBHelper好一点,但也要复写不少的函数,而且LKDBHelper的使用demo
 ## 综合上述原因后,我决定写一款适合国内初中级开发者使用的存储封装库(BGFMDB),不管是从使用步骤还是支持的存储类型上,都比JRDB,LKDB简单好用和全面.    
 ## 本库几乎支持存储ios所有基本的自带数据类型.    
 ## 使用介绍(喜欢的话别忘了给本库一个Star😊).   
+## 想加密数据库的,请借鉴此demo:![SQLCipherDemo](https://github.com/huangzhibiao/SQLCipherDemo)     
 ## CocoaPods的方式.
 ### Podfile
 ```Podfile
 platform :ios, '8.0'
 
 target '工程名称' do
-pod 'BGFMDB', '~> 2.0.7'
+pod 'BGFMDB', '~> 2.0.9'
 end
 ```
 ## 直接下载库代码使用方式.
@@ -201,16 +202,18 @@ NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"name"),b
 */
 NSInteger version = [People bg_version:bg_tablename];
 ```
-### 类数据库版本手动升级('唯一约束'发生改变时调用)
+### 类数据库版本手动升级(当'唯一约束','联合主键','属性类型改变',发生改变时需要手动调用升级,其他情况库自动检测升级)
 ```Objective-C
 //注: 版本号从1开始,依次往后递增,本次更新版本号不得 低于或等于 上次的版本号,否则不会更新.
 /**
- 如果类'唯一约束'发生改变,则调用此API刷新该类数据库,不需要新旧映射的情况下使用此API.
+ 如果类'唯一约束','联合主键','属性类型'发生改变.
+ 则调用此API刷新该类数据库,不需要新旧映射的情况下使用此API.
 */
 [People bg_update:bg_tablename version:version];
 
 /**
-如果类'唯一约束'发生改变,则调用此API刷新该类数据库.data2是新变量名,data是旧变量名,即将旧的值映射到新的变量名,其他不变的变量名会自动复制,只管写出变化的对应映射即可.
+如果类'唯一约束','联合主键','属性类型'发生改变.
+则调用此API刷新该类数据库.data2是新变量名,data是旧变量名,即将旧的值映射到新的变量名,其他不变的变量名会自动复制,只管写出变化的对应映射即可.
 */
 [People bg_update:bg_tablename version:version keyDict:@{@"data2":@"data"}];
 ```
