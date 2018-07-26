@@ -100,6 +100,15 @@ void bg_setDisableCloseDB(BOOL disableCloseDB){
     }
 }
 /**
+ 手动关闭数据库.
+ */
+void bg_closeDB(){
+    BOOL closeFlag = [BGDB shareManager].disableCloseDB;
+    [BGDB shareManager].disableCloseDB = NO;
+    [[BGDB shareManager] closeDB];
+    [BGDB shareManager].disableCloseDB = closeFlag;
+}
+/**
  设置调试模式
  @debug YES:打印调试信息, NO:不打印调试信息.
  */
@@ -320,7 +329,7 @@ void bg_cleanCache(){
             
             if(keypaths.count<=2){
                 if([value isKindOfClass:[NSString class]]){
-                    [keyPathParam appendString:@"\"%"];
+                    [keyPathParam appendString:@"\\%"];
                 }else{
                     [keyPathParam appendString:@",%"];
                     likeOr = YES;
