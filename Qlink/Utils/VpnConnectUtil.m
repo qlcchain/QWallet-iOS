@@ -14,6 +14,7 @@
 #import "P2pMessageManage.h"
 #import "VPNFileUtil.h"
 #import "VPNMode.h"
+#import "WalletUtil.h"
 
 #define KEYWINDOW [UIApplication sharedApplication].keyWindow
 
@@ -163,7 +164,8 @@
     getPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnPrivateKeyReq;
-    NSDictionary *dataDic = @{@"vpnName":_vpnInfo.vpnName?:@""};
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSDictionary *dataDic = @{VPN_NAME:_vpnInfo.vpnName?:@"",IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
@@ -184,7 +186,8 @@
     getUserPassOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserAndPasswordReq;
-    NSDictionary *dataDic = @{@"vpnName":_vpnInfo.vpnName?:@""};
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSDictionary *dataDic = @{VPN_NAME:_vpnInfo.vpnName?:@"", IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     NSString *p2pId = _vpnInfo.p2pId;
@@ -208,7 +211,7 @@
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = checkConnectReq;
     NSString *p2pid = [ToxManage getOwnP2PId];
-    NSDictionary *dataDic = @{@"appVersion":APP_Build,@"p2pId":p2pid};
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
@@ -270,16 +273,21 @@
     if (_vpnData) { // 如果配置文件data已存在
         [self startConnectVPN];
     } else {
-        // 发送获取配置文件消息
-        ToxRequestModel *model = [[ToxRequestModel alloc] init];
-        model.type = sendVpnFileRequest;
-        NSString *p2pid = [ToxManage getOwnP2PId];
-        NSDictionary *dataDic = @{@"appVersion":APP_Build,@"vpnName":_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,@"p2pId":p2pid};
-        model.data = dataDic.mj_JSONString;
-        NSString *str = model.mj_JSONString;
-        
-        [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
+        [self sendGetProfile];
     }
+}
+
+#pragma mark - 发送获取配置文件消息
+- (void)sendGetProfile {
+    ToxRequestModel *model = [[ToxRequestModel alloc] init];
+    model.type = sendVpnFileRequest;
+    NSString *p2pid = [ToxManage getOwnP2PId];
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
+    model.data = dataDic.mj_JSONString;
+    NSString *str = model.mj_JSONString;
+    
+    [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
 }
 
 @end

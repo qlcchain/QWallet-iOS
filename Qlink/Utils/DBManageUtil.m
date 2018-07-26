@@ -39,8 +39,8 @@
     }
 }
 
-+ (VPNInfo *)getVpnInfo:(NSString *)vpnName {
-    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"bg_vpnName"),bg_sqlValue(vpnName),bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian]))]];
++ (VPNInfo *)getVpnInfo:(NSString *)vpnName isMainNet:(NSString *)isMainNet {
+    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"bg_vpnName"),bg_sqlValue(vpnName),bg_sqlKey(@"isMainNet"),bg_sqlValue(@([isMainNet boolValue]))]];
     VPNInfo *vpnInfo = nil;
     if (finfAlls && finfAlls.count > 0) {
         vpnInfo = finfAlls.firstObject;

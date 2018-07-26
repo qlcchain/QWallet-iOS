@@ -13,6 +13,6 @@
 @interface DBManageUtil : NSObject
 
 + (void) updateDBversion;
-+ (VPNInfo *)getVpnInfo:(NSString *)vpnName;
++ (VPNInfo *)getVpnInfo:(NSString *)vpnName isMainNet:(NSString *)isMainNet;
 
 @end
