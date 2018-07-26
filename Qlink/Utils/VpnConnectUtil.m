@@ -23,6 +23,7 @@
     BOOL connectVpnCancel;
     BOOL getUserPassOK;
     BOOL getPrivateKeyOK;
+    BOOL getUserPassAndPrivateKeyOK;
 }
 
 @property (nonatomic, strong) VPNInfo *vpnInfo;
@@ -54,6 +55,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectRsp:) name:CHECK_CONNECT_RSP_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivePrivateKey:) name:Receive_PrivateKey_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPass:) name:Receive_UserPass_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPassAndPrivateKey:) name:Receive_UserPass_PrivateKey_Noti object:nil];
 }
 
 #pragma mark - Config
@@ -228,6 +230,12 @@
     [self goConnect];
 }
 
+- (void)receiveUserPassAndPrivateKey:(NSNotification *)noti {
+    getUserPassAndPrivateKeyOK = YES;
+    [AppD.window hideHud];
+    [self goConnect];
+}
+
 #pragma mark - Operation
 - (void)startConnectVPN {
     // vpn连接操作
@@ -243,6 +251,9 @@
         } else if (type == 2) { // 用户名密码
             getPrivateKeyOK = YES;
             [weakSelf getVpnUserAndPassword];
+        } else if (type == 3) { // 私钥和用户名密码
+            getUserPassAndPrivateKeyOK = YES;
+            [weakSelf getVpnUserPassAndPrivateKey];
         }
     }];
 }
@@ -314,6 +325,29 @@
     if (!getUserPassOK) {
         [AppD.window hideHud];
         [AppD.window showHint:NSStringLocalizable(@"Fail_Get_UserPass")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Pass_Timeout_Noti object:nil];
+    }
+}
+
+- (void)getVpnUserPassAndPrivateKey {
+    NSTimeInterval timeout = 15;
+    [AppD.window showHudInView:KEYWINDOW hint:@""];
+    getUserPassAndPrivateKeyOK = NO;
+    ToxRequestModel *model = [[ToxRequestModel alloc] init];
+    model.type = vpnUserPassAndPrivateKeyReq;
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSDictionary *dataDic = @{VPN_NAME:_vpnInfo.vpnName?:@"", IS_MAINNET:isMainNet};
+    model.data = dataDic.mj_JSONString;
+    NSString *str = model.mj_JSONString;
+    NSString *p2pId = _vpnInfo.p2pId;
+    [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
+    [self performSelector:@selector(getUserPassAndPrivateKeyTimeout) withObject:nil afterDelay:timeout];
+}
+
+- (void)getUserPassAndPrivateKeyTimeout {
+    if (!getUserPassAndPrivateKeyOK) {
+        [AppD.window hideHud];
+        [AppD.window showHint:NSStringLocalizable(@"Fail_Get_UserPass_PrivateKey")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Pass_Timeout_Noti object:nil];
     }
 }

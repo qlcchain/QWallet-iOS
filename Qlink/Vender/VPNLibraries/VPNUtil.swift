@@ -32,7 +32,7 @@ class VPNUtil: NSObject {
     open var vpnUserName : String?
     open var vpnPassword : String?
     open var vpnPrivateKey : String?
-    var currentConnectType : Int = 0 // 0:自动  1:私钥  2:用户名密码
+    var currentConnectType : Int = 0 // 0:自动  1:私钥  2:用户名密码  3:私钥和用户名密码
     
     override init() {
         super.init()
@@ -128,6 +128,8 @@ class VPNUtil: NSObject {
                 tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "privateKey" : self.vpnPrivateKey!]
             } else if self.currentConnectType == 2 {
                 tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName!, "password" : self.vpnPassword!]
+            } else if self.currentConnectType == 3 {
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName!, "password" : self.vpnPassword!, "privateKey" : self.vpnPrivateKey!]
             }
             
             // Provide user credentials if needed. It is highly recommended to use
@@ -292,8 +294,12 @@ class VPNUtil: NSObject {
         let result: OpenVPNProperties
         do {
             result = try adapter.apply(configuration: configuration)
-            if result.isPrivateKeyPasswordRequired { // 1 私钥
-                currentConnectType = 1
+            if result.isPrivateKeyPasswordRequired {
+                if result.autologin { // 1 私钥
+                    currentConnectType = 1
+                } else { // 3 私钥和用户名密码
+                    currentConnectType = 3
+                }
             } else {
                 if result.autologin { // 0 自动登录
                     currentConnectType = 0

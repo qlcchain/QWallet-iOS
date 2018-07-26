@@ -16,7 +16,7 @@ let DIRECTORY_WORMHOLE : String = "wormhole"
 let VPN_EVENT_IDENTIFIER : String = "vpn_event"
 let VPN_MESSAGE_IDENTIFIER : String = "vpn_message"
 let VPN_ERROR_REASON_IDENTIFIER : String = "vpn_error_reason"
-let CONNECT_VPN_TIMEOUT = 30
+let CONNECT_VPN_TIMEOUT = 20
 
 enum PacketTunnelProviderError: Error {
     case fatalError(message: String)
@@ -81,8 +81,23 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             return
         }
         
-        // Provide PrivateKeyPassword if needed
+        var connectType : Int = 0
         if properties.isPrivateKeyPasswordRequired {
+            if properties.autologin { // 1 私钥
+                connectType = 1
+            } else { // 3 私钥和用户名密码
+                connectType = 3
+            }
+        } else {
+            if properties.autologin { // 0 自动登录
+                connectType = 0
+            } else { // 2 用户名密码
+                connectType = 2
+            }
+        }
+        
+        if connectType == 0 { // 0 自动登录
+        } else if connectType == 1 { // 1 私钥
             guard let privateKeyPassword: String = providerConfiguration["privateKey"] as? String else {
                 fatalError()
             }
@@ -94,52 +109,52 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 completionHandler(error)
                 return
             }
-        } else {
-            if !properties.autologin {
-                // If your VPN configuration requires user credentials you can provide them by
-                // `protocolConfiguration.username` and `protocolConfiguration.passwordReference`
-                // properties. It is recommended to use persistent keychain reference to a keychain
-                // item containing the password.
-            } else {
-//                guard let username: String = protocolConfiguration.username else {
-//                    fatalError()
-//                }
-                guard let username: String = providerConfiguration["userName"] as? String else {
-                    fatalError()
-                }
-                
-                guard let password: String = providerConfiguration["password"] as? String else {
-                    fatalError()
-                }
-                
-//                // Retrieve a password from the keychain
-//                var tempPW : String?
-//                if let reference = protocolConfiguration.passwordReference {
-//                    do{
-//                        guard let password = try keychain.get(ref: reference) else {
-//                            throw PacketTunnelProviderError.fatalError(message: "无法从钥匙串中检索密码")
-//                        }
-//                        tempPW = password
-//
-//                    }catch {
-//                        completionHandler(error)
-//                        return
-//                    }
-//                }
-//                guard let password: String = tempPW else {
-//                    fatalError()
-//                }
-                
-                let credentials = OpenVPNCredentials()
-                credentials.username = username
-                credentials.password = password
-                
-                do {
-                    try vpnAdapter.provide(credentials: credentials)
-                } catch {
-                    completionHandler(error)
-                    return
-                }
+        } else if connectType == 2 { // 2 用户名密码
+            guard let username: String = providerConfiguration["userName"] as? String else {
+                fatalError()
+            }
+            guard let password: String = providerConfiguration["password"] as? String else {
+                fatalError()
+            }
+            let credentials = OpenVPNCredentials()
+            credentials.username = username
+            credentials.password = password
+            
+            do {
+                try vpnAdapter.provide(credentials: credentials)
+            } catch {
+                completionHandler(error)
+                return
+            }
+        } else if connectType == 3 { // 3 私钥和用户名密码
+            // 私钥
+            guard let privateKeyPassword: String = providerConfiguration["privateKey"] as? String else {
+                fatalError()
+            }
+            configuration.privateKeyPassword = privateKeyPassword
+            do {
+                try vpnAdapter.apply(configuration: configuration)
+            } catch {
+                completionHandler(error)
+                return
+            }
+            
+            // 用户名密码
+            guard let username: String = providerConfiguration["userName"] as? String else {
+                fatalError()
+            }
+            guard let password: String = providerConfiguration["password"] as? String else {
+                fatalError()
+            }
+            let credentials = OpenVPNCredentials()
+            credentials.username = username
+            credentials.password = password
+            
+            do {
+                try vpnAdapter.provide(credentials: credentials)
+            } catch {
+                completionHandler(error)
+                return
             }
         }
         
@@ -220,6 +235,7 @@ extension PacketTunnelProvider: OpenVPNAdapterDelegate {
     func openVPNAdapter(_ openVPNAdapter: OpenVPNAdapter, handleError error: Error) {
         // Handle only fatal errors
         guard let fatal = (error as NSError).userInfo[OpenVPNAdapterErrorFatalKey] as? Bool, fatal == true else {
+            wormhole.passMessageObject("no fatal error" as NSCoding, identifier: VPN_ERROR_REASON_IDENTIFIER)
             return
         }
         
@@ -234,7 +250,7 @@ extension PacketTunnelProvider: OpenVPNAdapterDelegate {
             cancelTunnelWithError(error)
         }
         
-        // 拿到错误原因给后台
+        // 传递错误原因
         let localizedFailureReason = (error as NSError).userInfo["NSLocalizedFailureReason"] ?? error.localizedDescription
         wormhole.passMessageObject(localizedFailureReason as? NSCoding, identifier: VPN_ERROR_REASON_IDENTIFIER)
     }

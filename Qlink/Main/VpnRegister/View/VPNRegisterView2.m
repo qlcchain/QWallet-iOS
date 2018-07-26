@@ -65,7 +65,7 @@
     [AppD.window showHudInView:_registerVC.view hint:NSStringLocalizable(@"check")];
     
     connectVpnDone = NO;
-    NSTimeInterval timeout = 30;//CONNECT_VPN_TIMEOUT;
+    NSTimeInterval timeout = 20;//CONNECT_VPN_TIMEOUT;
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = registerConnect;

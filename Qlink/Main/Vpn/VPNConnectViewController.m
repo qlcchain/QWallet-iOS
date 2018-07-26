@@ -227,7 +227,7 @@
     
     connectVpnOK = NO;
 
-    NSTimeInterval timeout = 30;//CONNECT_VPN_TIMEOUT;
+    NSTimeInterval timeout = 20;//CONNECT_VPN_TIMEOUT;
     [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];
 
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];

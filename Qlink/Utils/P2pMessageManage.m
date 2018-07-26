@@ -39,7 +39,6 @@
     } else if ([type isEqualToString:vpnPrivateKeyRsp]) { // vpn私钥的返回
         NSString *privateKey = dataDic[@"privateKey"];
         VPNUtil.shareInstance.vpnPrivateKey = privateKey;
-//        [VPNUtil.shareInstance configVPN];
         [[NSNotificationCenter defaultCenter] postNotificationName:Receive_PrivateKey_Noti object:nil];
     } else if ([type isEqualToString:vpnUserAndPasswordRsp]) { // vpn账号和密码的返回
 //        NSString *vpnName = dataDic[@"vpnName"];
@@ -47,8 +46,16 @@
         NSString *password = dataDic[@"password"];
         VPNUtil.shareInstance.vpnUserName = userName;
         VPNUtil.shareInstance.vpnPassword = password;
-//        [VPNUtil.shareInstance configVPN];
         [[NSNotificationCenter defaultCenter] postNotificationName:Receive_UserPass_Noti object:nil];
+    } else if ([type isEqualToString:vpnUserPassAndPrivateKeyRsp]) { // vpn账号和密码和私钥的返回
+        //        NSString *vpnName = dataDic[@"vpnName"];
+        NSString *userName = dataDic[@"userName"];
+        NSString *password = dataDic[@"password"];
+        NSString *privateKey = dataDic[@"privateKey"];
+        VPNUtil.shareInstance.vpnUserName = userName;
+        VPNUtil.shareInstance.vpnPassword = password;
+        VPNUtil.shareInstance.vpnPrivateKey = privateKey;
+        [[NSNotificationCenter defaultCenter] postNotificationName:Receive_UserPass_PrivateKey_Noti object:nil];
     } else if ([type isEqualToString:recordSaveRsp]) { // vpn或者wifi连接成功后，告诉提供端做连接记录的返回
        
     } else if ([type isEqualToString:joinGroupChatRsp]) { // 申请加入群聊的回复
@@ -109,6 +116,23 @@
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = vpnUserAndPasswordRsp;
         NSDictionary *tempDic = @{VPN_NAME:vpnName, @"userName":userName, @"password":password};
+        model.data = tempDic.mj_JSONString;
+        NSString *str = model.mj_JSONString;
+        [ToxManage sendMessageWithMessage:str withP2pid:publickey];
+    } else if ([type isEqualToString:vpnUserPassAndPrivateKeyReq]) { // vpn账号和密码和私钥的请求
+        NSString *vpnName = dataDic[VPN_NAME]?:@"";
+        NSString *isMainNet = dataDic[IS_MAINNET]?:@"0";
+        VPNInfo *vpnInfo = [DBManageUtil getVpnInfo:vpnName isMainNet:isMainNet];
+        if (!vpnInfo) {
+            return;
+        }
+        NSString *userName = vpnInfo.username?:@"";
+        NSString *password = vpnInfo.password?:@"";
+        NSString *privateKey = vpnInfo.privateKeyPassword?:@"";
+        
+        ToxRequestModel *model = [[ToxRequestModel alloc] init];
+        model.type = vpnUserPassAndPrivateKeyRsp;
+        NSDictionary *tempDic = @{VPN_NAME:vpnName, @"userName":userName, @"password":password, @"privateKey":privateKey};
         model.data = tempDic.mj_JSONString;
         NSString *str = model.mj_JSONString;
         [ToxManage sendMessageWithMessage:str withP2pid:publickey];

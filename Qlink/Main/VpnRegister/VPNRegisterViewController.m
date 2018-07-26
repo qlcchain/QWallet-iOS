@@ -301,8 +301,6 @@
         return;
     }
     
-    
-    
     NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:self.selectName];
     NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
     if (!vpnData) {
@@ -331,6 +329,23 @@
                 [AppD.window showHint:NSStringLocalizable(@"Fill_Password")];
                 return;
             }
+            VPNUtil.shareInstance.vpnUserName = weakSelf.userNameTF.text;
+            VPNUtil.shareInstance.vpnPassword = weakSelf.passwordTF.text;
+            [weakSelf goConnect];
+        } else if (type == 3) { // 私钥和用户名密码
+            if ([weakSelf isEmptyOfUsername]) {
+                [AppD.window showHint:NSStringLocalizable(@"Fill_Username")];
+                return;
+            }
+            if ([weakSelf isEmptyOfPassword]) {
+                [AppD.window showHint:NSStringLocalizable(@"Fill_Password")];
+                return;
+            }
+            if ([weakSelf isEmptyOfPrivateKey]) {
+                [AppD.window showHint:NSStringLocalizable(@"Fill_PrivateKey")];
+                return;
+            }
+            VPNUtil.shareInstance.vpnPrivateKey = weakSelf.privateKeyTF.text;
             VPNUtil.shareInstance.vpnUserName = weakSelf.userNameTF.text;
             VPNUtil.shareInstance.vpnPassword = weakSelf.passwordTF.text;
             [weakSelf goConnect];
