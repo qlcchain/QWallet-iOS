@@ -68,6 +68,8 @@
 @property (nonatomic , strong) ChooseCountryView *countryView;
 @property (nonatomic , assign) BOOL isFileNameSame;
 
+@property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
+
 @end
 
 @implementation VPNRegisterViewController
@@ -320,9 +322,8 @@
 
 - (void)goConnect {
     [AppD.window showHudInView:self.view hint:NSStringLocalizable(@"check")];
-    // 验证VPN是否能连接
-    [VPNOperationUtil shareInstance].isVerifyVPN = YES;
     
+    _isVerifyVPN = YES;
     connectVpnDone = NO;
     NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
@@ -352,8 +353,8 @@
             case NEVPNStatusConnected:
         {
             [AppD.window hideHud];
-            if ([VPNOperationUtil shareInstance].isVerifyVPN) { // 如果是验证操作的话，断开连接
-                [VPNOperationUtil shareInstance].isVerifyVPN = NO;
+            if (_isVerifyVPN) { // 如果是验证操作的话，断开连接
+                _isVerifyVPN = NO;
                 connectVpnDone = YES;
                 [self performSelector:@selector(requestRegisterVpnByFeeV3) withObject:nil afterDelay:0.6];
             }
@@ -364,8 +365,8 @@
             case NEVPNStatusDisconnecting:
         {
             [AppD.window hideHud];
-            if ([VPNOperationUtil shareInstance].isVerifyVPN) { // 如果是验证操作的话
-                [VPNOperationUtil shareInstance].isVerifyVPN = NO;
+            if (_isVerifyVPN) { // 如果是验证操作的话
+                _isVerifyVPN = NO;
                 connectVpnDone = YES;
                 [self.view showHint:NSStringLocalizable(@"check_profile")];
             }

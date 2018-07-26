@@ -292,11 +292,11 @@ class VPNUtil: NSObject {
         let result: OpenVPNProperties
         do {
             result = try adapter.apply(configuration: configuration)
-            if result.autologin { // 0 自动登录
-                currentConnectType = 0
+            if result.isPrivateKeyPasswordRequired { // 1 私钥
+                currentConnectType = 1
             } else {
-                if result.isPrivateKeyPasswordRequired { // 1 私钥
-                    currentConnectType = 1
+                if result.autologin { // 0 自动登录
+                    currentConnectType = 0
                 } else { // 2 用户名密码
                     currentConnectType = 2
                 }

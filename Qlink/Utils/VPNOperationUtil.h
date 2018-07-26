@@ -17,7 +17,7 @@ typedef enum : NSUInteger {
 @interface VPNOperationUtil : NSObject
 
 @property (nonatomic) VPNConnectOperationType operationType;
-@property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
+//@property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
 
 + (instancetype) shareInstance;
 

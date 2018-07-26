@@ -50,7 +50,6 @@
 #import "TransferUtil.h"
 #import "VPNTranferMode.h"
 #import "FreeConnectionViewController.h"
-#import <MMWormhole/MMWormhole.h>
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -76,7 +75,6 @@
 @property (nonatomic) BOOL joinGroupFlag;
 @property (nonatomic , strong) ChooseCountryView *countryView;
 @property (nonatomic, strong) NSString *currentConnectVPNName;
-@property (nonatomic, strong) MMWormhole *wormhole;
 
 @end
 
@@ -121,7 +119,6 @@
     [super viewDidLoad];
     [self showRegisterVPN];
     [self addObserve];
-    [self wormholeInit];
     [self configData];
     [self startLocation];
     // 获取当前选择的国家--发送获取vpn列表请求
@@ -156,103 +153,6 @@
 - (void)configData {
     [self refreshFreeConnection];
     [self addSectionTitle];
-}
-
-- (void)wormholeInit {
-    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
-                                                         optionalDirectory:DIRECTORY_WORMHOLE];
-    [self.wormhole listenForMessageWithIdentifier:VPN_EVENT_IDENTIFIER
-                                         listener:^(id messageObject) {
-                                             NSNumber *eventNum = messageObject;
-                                             switch ([eventNum integerValue]) {
-                                             case OpenVPNAdapterEventDisconnected:
-                                             {
-                                                 NSLog(@"vpnevent---------------disconnected");
-                                             }
-                                                 break;
-                                             case OpenVPNAdapterEventConnected:
-                                             {
-                                                 NSLog(@"vpnevent---------------connected");
-                                             }
-                                                 break;
-                                             case OpenVPNAdapterEventReconnecting:
-                                                 {
-                                                     NSLog(@"vpnevent---------------reconnecting");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventResolve:
-                                                 {
-                                                     NSLog(@"vpnevent---------------resolve");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventWait:
-                                                 {
-                                                     NSLog(@"vpnevent---------------wait");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventWaitProxy:
-                                                 {
-                                                     NSLog(@"vpnevent---------------waitProxy");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventConnecting:
-                                                 {
-                                                     NSLog(@"vpnevent---------------connecting");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventGetConfig:
-                                                 {
-                                                     NSLog(@"vpnevent---------------getConfig");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventAssignIP:
-                                                 {
-                                                     NSLog(@"vpnevent---------------assignIP");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventAddRoutes:
-                                                 {
-                                                     NSLog(@"vpnevent---------------addRoutes");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventEcho:
-                                                 {
-                                                     NSLog(@"vpnevent---------------echo");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventInfo:
-                                                 {
-                                                     NSLog(@"vpnevent---------------info");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventPause:
-                                                 {
-                                                     NSLog(@"vpnevent---------------pause");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventResume:
-                                                 {
-                                                     NSLog(@"vpnevent---------------resume");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventRelay:
-                                                 {
-                                                     NSLog(@"vpnevent---------------relay");
-                                                 }
-                                                     break;
-                                             case OpenVPNAdapterEventUnknown:
-                                                 {
-                                                     NSLog(@"vpnevent---------------unknown");
-                                                 }
-                                                     break;
-                                             default:
-                                                     break;
-                                             }
-                                         }];
-    [self.wormhole listenForMessageWithIdentifier:VPN_MESSAGE_IDENTIFIER
-                                         listener:^(id messageObject) {
-                                             NSLog(@"vpnmessage---------------%@",messageObject);
-                                         }];
 }
 
 - (void)refreshFreeConnection {

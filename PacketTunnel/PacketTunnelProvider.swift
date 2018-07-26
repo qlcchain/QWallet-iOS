@@ -15,6 +15,8 @@ let GROUP_WORMHOLE : String = "group.qlink.winq"
 let DIRECTORY_WORMHOLE : String = "wormhole"
 let VPN_EVENT_IDENTIFIER : String = "vpn_event"
 let VPN_MESSAGE_IDENTIFIER : String = "vpn_message"
+let VPN_ERROR_REASON_IDENTIFIER : String = "vpn_error_reason"
+let CONNECT_VPN_TIMEOUT = 30
 
 enum PacketTunnelProviderError: Error {
     case fatalError(message: String)
@@ -61,6 +63,11 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         let configuration = OpenVPNConfiguration()
         configuration.fileContent = ovpnFileContent
+        configuration.connectionTimeout = CONNECT_VPN_TIMEOUT // 连接超时时间
+//        let privateKey : String? = providerConfiguration["privateKey"] as? String
+//        if privateKey != nil { //
+//            configuration.privateKeyPassword = privateKey!
+//        }
         //        configuration.settings = [
         //            // Additional parameters as key:value pairs may be provided here
         //        ]
@@ -74,25 +81,25 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             return
         }
         
-        // Provide credentials if needed
-        if !properties.autologin {
-            // If your VPN configuration requires user credentials you can provide them by
-            // `protocolConfiguration.username` and `protocolConfiguration.passwordReference`
-            // properties. It is recommended to use persistent keychain reference to a keychain
-            // item containing the password.
+        // Provide PrivateKeyPassword if needed
+        if properties.isPrivateKeyPasswordRequired {
+            guard let privateKeyPassword: String = providerConfiguration["privateKey"] as? String else {
+                fatalError()
+            }
             
-            if properties.isPrivateKeyPasswordRequired {
-                guard let privateKeyPassword: String = providerConfiguration["priveteKey"] as? String else {
-                    fatalError()
-                }
-                
-                configuration.privateKeyPassword = privateKeyPassword
-                do {
-                    try vpnAdapter.apply(configuration: configuration)
-                } catch {
-                    completionHandler(error)
-                    return
-                }
+            configuration.privateKeyPassword = privateKeyPassword
+            do {
+                try vpnAdapter.apply(configuration: configuration)
+            } catch {
+                completionHandler(error)
+                return
+            }
+        } else {
+            if !properties.autologin {
+                // If your VPN configuration requires user credentials you can provide them by
+                // `protocolConfiguration.username` and `protocolConfiguration.passwordReference`
+                // properties. It is recommended to use persistent keychain reference to a keychain
+                // item containing the password.
             } else {
 //                guard let username: String = protocolConfiguration.username else {
 //                    fatalError()
@@ -226,6 +233,10 @@ extension PacketTunnelProvider: OpenVPNAdapterDelegate {
         } else {
             cancelTunnelWithError(error)
         }
+        
+        // 拿到错误原因给后台
+        let localizedFailureReason = (error as NSError).userInfo["NSLocalizedFailureReason"] ?? error.localizedDescription
+        wormhole.passMessageObject(localizedFailureReason as? NSCoding, identifier: VPN_ERROR_REASON_IDENTIFIER)
     }
     
     // Use this method to process any log message returned by OpenVPN library.

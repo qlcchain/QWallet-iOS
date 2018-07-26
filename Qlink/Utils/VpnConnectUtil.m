@@ -15,6 +15,7 @@
 #import "VPNFileUtil.h"
 #import "VPNMode.h"
 #import "WalletUtil.h"
+#import <MMWormhole/MMWormhole.h>
 
 #define KEYWINDOW [UIApplication sharedApplication].keyWindow
 
@@ -28,6 +29,7 @@
 
 @property (nonatomic, strong) VPNInfo *vpnInfo;
 @property (nonatomic, strong) NSData *vpnData;
+@property (nonatomic, strong) MMWormhole *wormhole;
 
 @end
 
@@ -37,6 +39,7 @@
     if (self = [super init]) {
         _vpnInfo = vpnInfo;
         [self addObserve];
+        [self wormholeInit];
     }
     return self;
 }
@@ -53,6 +56,112 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectRsp:) name:CHECK_CONNECT_RSP_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivePrivateKey:) name:Receive_PrivateKey_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPass:) name:Receive_UserPass_Noti object:nil];
+}
+
+#pragma mark - Config
+- (void)wormholeInit {
+    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
+                                                         optionalDirectory:DIRECTORY_WORMHOLE];
+    [self.wormhole listenForMessageWithIdentifier:VPN_EVENT_IDENTIFIER
+                                         listener:^(id messageObject) {
+                                             NSNumber *eventNum = messageObject;
+                                             switch ([eventNum integerValue]) {
+                                                 case OpenVPNAdapterEventDisconnected:
+                                                 {
+                                                     NSLog(@"vpnevent---------------disconnected");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventConnected:
+                                                 {
+                                                     NSLog(@"vpnevent---------------connected");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventReconnecting:
+                                                 {
+                                                     NSLog(@"vpnevent---------------reconnecting");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventResolve:
+                                                 {
+                                                     NSLog(@"vpnevent---------------resolve");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventWait:
+                                                 {
+                                                     NSLog(@"vpnevent---------------wait");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventWaitProxy:
+                                                 {
+                                                     NSLog(@"vpnevent---------------waitProxy");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventConnecting:
+                                                 {
+                                                     NSLog(@"vpnevent---------------connecting");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventGetConfig:
+                                                 {
+                                                     NSLog(@"vpnevent---------------getConfig");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventAssignIP:
+                                                 {
+                                                     NSLog(@"vpnevent---------------assignIP");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventAddRoutes:
+                                                 {
+                                                     NSLog(@"vpnevent---------------addRoutes");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventEcho:
+                                                 {
+                                                     NSLog(@"vpnevent---------------echo");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventInfo:
+                                                 {
+                                                     NSLog(@"vpnevent---------------info");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventPause:
+                                                 {
+                                                     NSLog(@"vpnevent---------------pause");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventResume:
+                                                 {
+                                                     NSLog(@"vpnevent---------------resume");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventRelay:
+                                                 {
+                                                     NSLog(@"vpnevent---------------relay");
+                                                 }
+                                                     break;
+                                                 case OpenVPNAdapterEventUnknown:
+                                                 {
+                                                     NSLog(@"vpnevent---------------unknown");
+                                                 }
+                                                     break;
+                                                 default:
+                                                     break;
+                                             }
+                                         }];
+    [self.wormhole listenForMessageWithIdentifier:VPN_MESSAGE_IDENTIFIER
+                                         listener:^(id messageObject) {
+                                             NSLog(@"vpnmessage---------------%@",messageObject);
+                                         }];
+    [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
+                                         listener:^(id messageObject) {
+                                             NSLog(@"vpn_error_reason---------------%@",messageObject);
+                                             VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
+                                             if (operationType == normalConnect) { // 正常连接vpn
+                                                 
+                                             }
+                                         }];
 }
 
 #pragma mark - Noti
@@ -106,10 +215,14 @@
 }
 
 - (void)receivePrivateKey:(NSNotification *)noti {
+    getPrivateKeyOK = YES;
+    [AppD.window hideHud];
     [self goConnect];
 }
 
 - (void)receiveUserPass:(NSNotification *)noti {
+    getUserPassOK = YES;
+    [AppD.window hideHud];
     [self goConnect];
 }
 
@@ -133,12 +246,12 @@
 }
 
 - (void)goConnect {
+    [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];
+    
     connectVpnOK = NO;
     connectVpnCancel = NO;
     
     NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-    [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];
-    
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     
     [VPNUtil.shareInstance configVPN];
@@ -237,6 +350,19 @@
     [AppD.window hideHud];
     [KEYWINDOW showHint:NSStringLocalizable(@"vpn_timeout")];
     [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
+}
+
+#pragma mark - Request
+- (void)requestReportVpnInfo:(NSString *)mark {
+    @weakify_self
+    NSInteger status = 1;
+    NSDictionary *params = @{@"vpnName":_vpnInfo.vpnName?:@"", @"status":@(status), @"mark":mark};
+    [RequestService requestWithUrl:reportVpnInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+            
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
 }
 
 #pragma mark - Action
