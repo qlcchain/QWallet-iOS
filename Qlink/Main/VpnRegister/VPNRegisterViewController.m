@@ -143,7 +143,7 @@
 - (void)wormholeInit {
     self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
                                                          optionalDirectory:DIRECTORY_WORMHOLE];
-//    @weakify_self 
+//    @weakify_self
     [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
                                          listener:^(id messageObject) {
                                              NSLog(@"vpn_error_reason---------------%@",messageObject);
@@ -385,7 +385,7 @@
             if (_isVerifyVPN) { // 如果是验证操作的话
                 _isVerifyVPN = NO;
                 connectVpnDone = YES;
-                [self.view showHint:NSStringLocalizable(@"check_profile")];
+//                [self.view showHint:NSStringLocalizable(@"check_profile")];
             }
         }
             break;
