@@ -26,6 +26,7 @@
 #import "UnderlineView.h"
 #import "VPNMode.h"
 #import "SkyRadiusView.h"
+#import <MMWormhole/MMWormhole.h>
 
 #define FeeMin 0.1
 #define FeeMax 3
@@ -69,6 +70,7 @@
 @property (nonatomic , assign) BOOL isFileNameSame;
 
 @property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
+@property (nonatomic, strong) MMWormhole *wormhole;
 
 @end
 
@@ -111,6 +113,7 @@
     
     [self addObserve];
     [self dataInit];
+    [self wormholeInit];
     [self configView];
     if (_registerType == SeizeVPN) {
         _vpnNameTF.text = self.vpnName;
@@ -135,6 +138,21 @@
     } else {
          _assetIsValidate = NO;
     }
+}
+
+- (void)wormholeInit {
+    self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
+                                                         optionalDirectory:DIRECTORY_WORMHOLE];
+//    @weakify_self 
+    [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
+                                         listener:^(id messageObject) {
+                                             NSLog(@"vpn_error_reason---------------%@",messageObject);
+                                             VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
+                                             if (operationType == registerConnect) { // 注册连接vpn
+                                                 [AppD.window hideHud];
+                                                 [KEYWINDOW showHint:messageObject];
+                                             }
+                                         }];
 }
 
 #pragma -mark UPDATE_VPN初始化
@@ -325,11 +343,10 @@
     
     _isVerifyVPN = YES;
     connectVpnDone = NO;
-    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = registerConnect;
-    
     [VPNUtil.shareInstance configVPN];
 }
 

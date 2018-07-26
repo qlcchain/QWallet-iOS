@@ -17,8 +17,6 @@
 #import "WalletUtil.h"
 #import <MMWormhole/MMWormhole.h>
 
-#define KEYWINDOW [UIApplication sharedApplication].keyWindow
-
 @interface VpnConnectUtil () {
     BOOL checkConnnectOK;
     BOOL connectVpnOK;
@@ -62,6 +60,7 @@
 - (void)wormholeInit {
     self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
                                                          optionalDirectory:DIRECTORY_WORMHOLE];
+    @weakify_self
     [self.wormhole listenForMessageWithIdentifier:VPN_EVENT_IDENTIFIER
                                          listener:^(id messageObject) {
                                              NSNumber *eventNum = messageObject;
@@ -159,7 +158,10 @@
                                              NSLog(@"vpn_error_reason---------------%@",messageObject);
                                              VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
                                              if (operationType == normalConnect) { // 正常连接vpn
-                                                 
+                                                 [AppD.window hideHud];
+                                                 [KEYWINDOW showHint:messageObject];
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
+                                                 [weakSelf requestReportVpnInfo:messageObject status:0]; // 上报vpn连接问题
                                              }
                                          }];
 }
@@ -182,7 +184,7 @@
             connectVpnOK = YES;
             connectVpnCancel = NO;
             [AppD.window hideHud];
-//            [self jumpToVPNConnected];
+            [self requestReportVpnInfo:@"connect success" status:1]; // 上报vpn连接成功
         }
             break;
         case NEVPNStatusReasserting:
@@ -251,8 +253,8 @@
     connectVpnOK = NO;
     connectVpnCancel = NO;
     
-    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     
     [VPNUtil.shareInstance configVPN];
 }
@@ -353,15 +355,15 @@
 }
 
 #pragma mark - Request
-- (void)requestReportVpnInfo:(NSString *)mark {
-    @weakify_self
-    NSInteger status = 1;
+- (void)requestReportVpnInfo:(NSString *)mark status:(NSInteger)status {
+//    @weakify_self
     NSDictionary *params = @{@"vpnName":_vpnInfo.vpnName?:@"", @"status":@(status), @"mark":mark};
     [RequestService requestWithUrl:reportVpnInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        
     }];
 }
 
