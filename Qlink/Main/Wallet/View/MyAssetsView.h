@@ -16,6 +16,7 @@
 @property (nonatomic , copy) ClickSettingBlock setBlock;
 //@property (nonatomic , copy) ClickCancelBlock cancelBlock;
 @property (nonatomic ,strong) NSMutableArray *soureArray;
+@property (nonatomic ,strong) NSMutableArray *removeArray;
 + (MyAssetsView *)getNibView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintH;

@@ -213,6 +213,11 @@
     localVpnInfo.bandwidth = dic[@"bandWidth"];
     localVpnInfo.profileLocalPath = dic[@"profileLocalPath"];
     localVpnInfo.isMainNet = [WalletUtil checkServerIsMian];
+    localVpnInfo.password = _passwordTF.text.trim?: @"";
+    localVpnInfo.privateKeyPassword = _privateKeyTF.text.trim?: @"";
+    localVpnInfo.username = _privateKeyTF.text.trim?: @"";
+    localVpnInfo.password = _userNameTF.text.trim?: @"";
+    
     [localVpnInfo bg_saveOrUpdate];
     // 更新keyChain
     [VPNOperationUtil saveArrayToKeyChain];
