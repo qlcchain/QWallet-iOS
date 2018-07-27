@@ -218,6 +218,9 @@
 }
 
 - (void)checkConnectRsp:(NSNotification *)noti {
+    if (checkConnnectOK) {
+        return;
+    }
     checkConnnectOK = YES;
     [AppD.window hideHud];
     
@@ -478,12 +481,12 @@
     // 给c层传文件名
     ToxManage.shareMange.vpnSourceName = _vpnInfo.profileLocalPath;
     // 开始连接vpn
-    if (_vpnData) { // 如果配置文件data已存在
-        [self startConnectVPNOfOther];
-    } else {
+//    if (_vpnData) { // 如果配置文件data已存在
+//        [self startConnectVPNOfOther];
+//    } else {
         getProfileOK = YES;
         [self sendGetProfile];
-    }
+//    }
 }
 
 #pragma mark - 发送获取配置文件消息
