@@ -243,6 +243,7 @@
 - (void)configVPNError:(NSNotification *)noti {
     NSString *errorDes = noti.object;
     DDLogDebug(@"Config VPN Error:%@",errorDes);
+    [AppD.window hideHud];
     [AppD.window showHint:NSStringLocalizable(@"configuration_faield")];
     [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
 }
