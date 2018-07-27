@@ -342,7 +342,7 @@ dispatch_source_t _timer;
     NSString *vpnCost = @"";
     NSString *recordId = @"";
     NSString *p2pId = @"";
-    
+    BOOL isMianNet = YES;
     NSDate *tranferDate = nil;
     
     if ([vpnObject isKindOfClass:[VPNInfo class]]) {
@@ -351,6 +351,7 @@ dispatch_source_t _timer;
         vpnCost = vpnInfo.cost;
         recordId = vpnInfo.recordId;
         p2pId = vpnInfo.p2pId;
+        isMianNet = vpnInfo.isMainNet;
         tranferDate = [NSDate date];
     } else {
         VPNTranferMode *vpnInfo = vpnObject;
@@ -358,6 +359,7 @@ dispatch_source_t _timer;
         vpnCost = vpnInfo.tranferCost;
         recordId = vpnInfo.recordId;
         p2pId = vpnInfo.p2pId;
+        isMianNet = vpnInfo.isMain;
         NSString *connectTime = vpnInfo.vpnConnectTime;
         if([connectTime isBlankString]) {
             tranferDate = [NSDate date];
@@ -367,7 +369,7 @@ dispatch_source_t _timer;
         }
     }
     
-    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId]};
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId],IS_MAINNET:isMianNet?@"1":@"0"};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
@@ -512,7 +514,7 @@ dispatch_source_t _timer;
                             [TransferUtil sendGetBalanceRequest];
                             // 发送扣款通知
                             [TransferUtil sendLocalNotificationWithQLC:vpnInfo.tranferCost isIncome:NO];
-                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.tranferCost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:3 assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isRegister:YES];
+                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.tranferCost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:3 assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isMianNet:vpnInfo.isMain];
                         } else {
                             [TransferUtil tranferFaieldReTranferWithVPNInfo:vpnInfo];
                         }
@@ -772,7 +774,7 @@ dispatch_source_t _timer;
                             [TransferUtil sendGetBalanceRequest];
                             // 发送扣款通知
                             [TransferUtil sendLocalNotificationWithQLC:vpnInfo.cost isIncome:NO];
-                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isRegister:YES];
+                            [WalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isMianNet:vpnInfo.isMainNet];
                         } else {
                             DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
