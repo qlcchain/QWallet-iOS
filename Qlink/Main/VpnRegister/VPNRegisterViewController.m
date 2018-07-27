@@ -164,8 +164,11 @@
         _countryLab.text = self.vpnInfo.country?:@"";
         _profileTF.text = self.vpnInfo.profileLocalPath?:@"";
         _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
+        _privateKeyTF.enabled = NO;
         _userNameTF.text = self.vpnInfo.username?:@"";
+        _userNameTF.enabled = NO;
         _passwordTF.text = self.vpnInfo.password?:@"";
+        _passwordTF.enabled = NO;
         [_hourlyFeeSlider setValue:[self.vpnInfo.connectCost floatValue] animated:YES];
         [_connectionSlider setValue:[self.vpnInfo.connectNum floatValue] animated:YES];
         [self updateHourlyAndConnection];
@@ -615,6 +618,7 @@
     self.vpnInfo.ipV4Address = @"";
     self.vpnInfo.bandwidth = @"";
     self.vpnInfo.profileLocalPath = self.profileName?:@"";
+    
     [AppD.window showHudInView:self.view hint:nil];
     
     NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath};
@@ -727,6 +731,24 @@
         UIAlertAction *alert = [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             weakSelf.selectName = obj;
             weakSelf.profileTF.text = _selectName;
+            //  是修改 判断配置文件有没有改变
+            if(weakSelf.registerType == UpdateVPN) {
+                 if ([self.vpnInfo.profileLocalPath isEqualToString:self.profileName]) {
+                     _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
+                     _privateKeyTF.enabled = NO;
+                     _userNameTF.text = self.vpnInfo.username?:@"";
+                     _userNameTF.enabled = NO;
+                     _passwordTF.text = self.vpnInfo.password?:@"";
+                     _passwordTF.enabled = NO;
+                 } else {
+                     _privateKeyTF.text = @"";
+                     _privateKeyTF.enabled = YES;
+                     _userNameTF.text = @"";
+                     _userNameTF.enabled = YES;
+                     _passwordTF.text = @"";
+                     _passwordTF.enabled = YES;
+                 }
+            }
         }];
         [alertC addAction:alert];
     }];
