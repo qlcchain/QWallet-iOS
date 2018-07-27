@@ -16,7 +16,7 @@ let DIRECTORY_WORMHOLE : String = "wormhole"
 let VPN_EVENT_IDENTIFIER : String = "vpn_event"
 let VPN_MESSAGE_IDENTIFIER : String = "vpn_message"
 let VPN_ERROR_REASON_IDENTIFIER : String = "vpn_error_reason"
-let CONNECT_VPN_TIMEOUT = 20
+//let CONNECT_VPN_TIMEOUT = 20
 
 enum PacketTunnelProviderError: Error {
     case fatalError(message: String)
@@ -63,7 +63,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         
         let configuration = OpenVPNConfiguration()
         configuration.fileContent = ovpnFileContent
-        configuration.connectionTimeout = CONNECT_VPN_TIMEOUT // 连接超时时间
+//        configuration.connectionTimeout = CONNECT_VPN_TIMEOUT // 连接超时时间
 //        let privateKey : String? = providerConfiguration["privateKey"] as? String
 //        if privateKey != nil { //
 //            configuration.privateKeyPassword = privateKey!

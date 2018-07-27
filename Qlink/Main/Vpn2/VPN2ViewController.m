@@ -649,8 +649,6 @@ static BOOL refreshAnimate = YES;
                 //                [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN]; // 删除当前连接的vpn对象
                 [self refreshDisconnectStatus];
                 [self refreshVPNConnect];
-                // 删除vpn本地配置
-                [VPNUtil.shareInstance removeFromPreferences];
                 [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
             }
         }

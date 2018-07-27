@@ -182,6 +182,7 @@
         case NEVPNStatusDisconnected:
         {
             [AppD.window hideHud];
+            [VPNUtil.shareInstance removeFromPreferences]; // 移除配置文件
         }
             break;
         case NEVPNStatusConnecting:
@@ -310,8 +311,8 @@
     connectVpnOK = NO;
     connectVpnCancel = NO;
     
-//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     
     [VPNUtil.shareInstance configVPN];
 }
