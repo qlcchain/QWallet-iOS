@@ -102,6 +102,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(seizeVpnSuccess:) name:SEIZE_VPN_SUCCESS_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectVpnTimeout:) name:Connect_Vpn_Timeout_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectTimeout:) name:Check_Connect_Timeout_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getProfileTimeout:) name:Get_Profile_Timeout_Noti object:nil];
     // 修改本地资产成功通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVPNSuccess:) name:UPDATE_ASSETS_TZ object:nil];
     // VPN连接时创建钱包跳转通知
@@ -701,6 +702,11 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)checkConnectTimeout:(NSNotification *)noti {
+    _selectVPNInfo.connectStatus = VpnConnectStatusNone;
+    [self refreshTable];
+}
+
+- (void)getProfileTimeout:(NSNotification *)noti {
     _selectVPNInfo.connectStatus = VpnConnectStatusNone;
     [self refreshTable];
 }

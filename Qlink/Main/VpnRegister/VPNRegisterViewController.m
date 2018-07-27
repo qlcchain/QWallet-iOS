@@ -361,8 +361,8 @@
     
     _isVerifyVPN = YES;
     connectVpnDone = NO;
-    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = registerConnect;
     [VPNUtil.shareInstance configVPN];

@@ -25,6 +25,7 @@
     BOOL getUserPassOK;
     BOOL getPrivateKeyOK;
     BOOL getUserPassAndPrivateKeyOK;
+    BOOL getProfileOK;
 }
 
 //@property (nonatomic, strong) VPNInfo *vpnInfo;
@@ -205,6 +206,8 @@
 }
 
 - (void)receiveVPNFile:(NSNotification *)noti {
+    getProfileOK = YES;
+    [AppD.window hideHud];
     _vpnData = noti.object;
     [self startConnectVPNOfOther];
 }
@@ -306,8 +309,8 @@
     connectVpnOK = NO;
     connectVpnCancel = NO;
     
-    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     
     [VPNUtil.shareInstance configVPN];
 }
@@ -478,12 +481,16 @@
     if (_vpnData) { // 如果配置文件data已存在
         [self startConnectVPNOfOther];
     } else {
+        getProfileOK = YES;
         [self sendGetProfile];
     }
 }
 
 #pragma mark - 发送获取配置文件消息
 - (void)sendGetProfile {
+    NSTimeInterval timeout = 15;
+    [AppD.window showHudInView:KEYWINDOW hint:@""];
+    getProfileOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = sendVpnFileRequest;
     NSString *p2pid = [ToxManage getOwnP2PId];
@@ -491,8 +498,16 @@
     NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
-    
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
+    [self performSelector:@selector(getProfileTimeout) withObject:nil afterDelay:timeout];
+}
+
+- (void)getProfileTimeout {
+    if (!getProfileOK) {
+        [AppD.window hideHud];
+        [AppD.window showHint:NSStringLocalizable(@"get_profile_timeout")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Get_Profile_Timeout_Noti object:nil];
+    }
 }
 
 @end

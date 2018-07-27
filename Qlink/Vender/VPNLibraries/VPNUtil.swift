@@ -125,11 +125,11 @@ class VPNUtil: NSObject {
             if self.currentConnectType == 0 {
                 tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent]
             } else if self.currentConnectType == 1 {
-                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "privateKey" : self.vpnPrivateKey!]
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "privateKey" : self.vpnPrivateKey ?? ""]
             } else if self.currentConnectType == 2 {
-                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName!, "password" : self.vpnPassword!]
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName ?? "", "password" : self.vpnPassword ?? ""]
             } else if self.currentConnectType == 3 {
-                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName!, "password" : self.vpnPassword!, "privateKey" : self.vpnPrivateKey!]
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName ?? "", "password" : self.vpnPassword ?? "", "privateKey" : self.vpnPrivateKey ?? ""]
             }
             
             // Provide user credentials if needed. It is highly recommended to use
