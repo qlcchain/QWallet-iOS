@@ -146,7 +146,7 @@
 //    @weakify_self
     [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
                                          listener:^(id messageObject) {
-                                             NSLog(@"vpn_error_reason---------------%@",messageObject);
+                                             DDLogDebug(@"vpn_error_reason---------------%@",messageObject);
                                              VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
                                              if (operationType == registerConnect) { // 注册连接vpn
                                                  [AppD.window hideHud];
@@ -358,8 +358,8 @@
     
     _isVerifyVPN = YES;
     connectVpnDone = NO;
-//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = registerConnect;
     [VPNUtil.shareInstance configVPN];

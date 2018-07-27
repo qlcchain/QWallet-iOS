@@ -16,6 +16,7 @@
 #import "VPNMode.h"
 #import "WalletUtil.h"
 #import <MMWormhole/MMWormhole.h>
+#import "DBManageUtil.h"
 
 @interface VpnConnectUtil () {
     BOOL checkConnnectOK;
@@ -157,7 +158,7 @@
                                          }];
     [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
                                          listener:^(id messageObject) {
-                                             NSLog(@"vpn_error_reason---------------%@",messageObject);
+                                             DDLogDebug(@"vpn_error_reason---------------%@",messageObject);
                                              VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
                                              if (operationType == normalConnect) { // 正常连接vpn
                                                  [AppD.window hideHud];
@@ -186,7 +187,7 @@
             connectVpnOK = YES;
             connectVpnCancel = NO;
             [AppD.window hideHud];
-            [self requestReportVpnInfo:@"connect success" status:1]; // 上报vpn连接成功
+            [self performSelector:@selector(reportConnectSuccess) withObject:nil afterDelay:.8];
         }
             break;
         case NEVPNStatusReasserting:
@@ -202,7 +203,7 @@
 
 - (void)receiveVPNFile:(NSNotification *)noti {
     _vpnData = noti.object;
-    [self startConnectVPN];
+    [self startConnectVPNOfOther];
 }
 
 - (void)savePreferenceFail:(NSNotification *)noti {
@@ -237,7 +238,37 @@
 }
 
 #pragma mark - Operation
-- (void)startConnectVPN {
+- (void)reportConnectSuccess {
+    [self requestReportVpnInfo:@"connect success" status:1]; // 上报vpn连接成功
+}
+
+- (void)startConnectVPNOfMine {
+    // vpn连接操作
+    [VPNOperationUtil shareInstance].operationType = normalConnect;
+    VPNUtil.shareInstance.connectData = _vpnData;
+    @weakify_self
+    [VPNUtil.shareInstance applyConfigurationWithVpnData:_vpnData completionHandler:^(NSInteger type) {
+        NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+        VPNInfo *tempInfo = [DBManageUtil getVpnInfo:weakSelf.vpnInfo.vpnName isMainNet:isMainNet];
+        if (!tempInfo) {
+            return;
+        }
+        if (type == 0) { // 自动
+        } else if (type == 1) { // 私钥
+            VPNUtil.shareInstance.vpnPrivateKey = tempInfo.privateKeyPassword;
+        } else if (type == 2) { // 用户名密码
+            VPNUtil.shareInstance.vpnUserName = tempInfo.username;
+            VPNUtil.shareInstance.vpnPassword = tempInfo.password;
+        } else if (type == 3) { // 私钥和用户名密码
+            VPNUtil.shareInstance.vpnPrivateKey = tempInfo.privateKeyPassword;
+            VPNUtil.shareInstance.vpnUserName = tempInfo.username;
+            VPNUtil.shareInstance.vpnPassword = tempInfo.password;
+        }
+        [weakSelf goConnect];
+    }];
+}
+
+- (void)startConnectVPNOfOther {
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = normalConnect;
     VPNUtil.shareInstance.connectData = _vpnData;
@@ -264,8 +295,8 @@
     connectVpnOK = NO;
     connectVpnCancel = NO;
     
-//    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
-//    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
+    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+    [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];
     
     [VPNUtil.shareInstance configVPN];
 }
@@ -386,6 +417,7 @@
     [AppD.window hideHud];
     [KEYWINDOW showHint:NSStringLocalizable(@"vpn_timeout")];
     [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
+    [self requestReportVpnInfo:@"connect timeout" status:0]; // 上报vpn连接问题
 }
 
 #pragma mark - Request
@@ -425,7 +457,7 @@
         NSString *fileName = [[_vpnInfo.profileLocalPath componentsSeparatedByString:@"/"] lastObject];
         NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:fileName];
         _vpnData = [NSData dataWithContentsOfFile:vpnPath];
-        [self startConnectVPN];
+        [self startConnectVPNOfMine];
         return;
     }
     
@@ -433,7 +465,7 @@
     ToxManage.shareMange.vpnSourceName = _vpnInfo.profileLocalPath;
     // 开始连接vpn
     if (_vpnData) { // 如果配置文件data已存在
-        [self startConnectVPN];
+        [self startConnectVPNOfOther];
     } else {
         [self sendGetProfile];
     }
