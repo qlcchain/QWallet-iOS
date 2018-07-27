@@ -12,7 +12,9 @@
 
 @interface VpnConnectUtil : NSObject
 
-- (instancetype)initWithVpn:(VPNInfo *)vpnInfo;
+@property (nonatomic, strong) VPNInfo *vpnInfo;
+
++ (instancetype)shareInstance;
 - (void)checkConnect;
 //- (void)connectAction;
 

@@ -309,7 +309,8 @@ class VPNUtil: NSObject {
             }
             completionHandler(currentConnectType)
         } catch {
-            print("###########Failed to configure OpenVPN adapted due to error: \(error)")
+            print("###########********Failed to configure OpenVPN adapted due to error: \(error)")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: CONFIG_VPN_ERROR_NOTI), object: error.localizedDescription)
             return
         }
     }

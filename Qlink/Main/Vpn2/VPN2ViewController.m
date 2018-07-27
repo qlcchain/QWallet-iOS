@@ -75,6 +75,7 @@
 @property (nonatomic) BOOL joinGroupFlag;
 @property (nonatomic , strong) ChooseCountryView *countryView;
 @property (nonatomic, strong) NSString *currentConnectVPNName;
+@property (nonatomic, strong) VpnConnectUtil *connectUtil;
 
 @end
 
@@ -151,8 +152,13 @@
 }
 
 - (void)configData {
+    [self getConnectUtil];
     [self refreshFreeConnection];
     [self addSectionTitle];
+}
+
+- (void)getConnectUtil {
+    _connectUtil = [VpnConnectUtil shareInstance];
 }
 
 - (void)refreshFreeConnection {
@@ -483,8 +489,8 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)goConnectVpn:(VPNInfo *)vpnInfo {
-    VpnConnectUtil *connectUtil = [[VpnConnectUtil alloc] initWithVpn:vpnInfo];
-    [connectUtil checkConnect];
+    _connectUtil.vpnInfo = vpnInfo;
+    [_connectUtil checkConnect];
 }
 
 - (void)refreshDisconnectStatus {

@@ -27,7 +27,7 @@
     BOOL getUserPassAndPrivateKeyOK;
 }
 
-@property (nonatomic, strong) VPNInfo *vpnInfo;
+//@property (nonatomic, strong) VPNInfo *vpnInfo;
 @property (nonatomic, strong) NSData *vpnData;
 @property (nonatomic, strong) MMWormhole *wormhole;
 
@@ -35,13 +35,15 @@
 
 @implementation VpnConnectUtil
 
-- (instancetype)initWithVpn:(VPNInfo *)vpnInfo {
-    if (self = [super init]) {
-        _vpnInfo = vpnInfo;
-        [self addObserve];
-        [self wormholeInit];
-    }
-    return self;
++ (instancetype)shareInstance {
+    static id shareObject = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareObject = [[self alloc] init];
+        [shareObject addObserve];
+        [shareObject wormholeInit];
+    });
+    return shareObject;
 }
 
 - (void)dealloc {
@@ -57,6 +59,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivePrivateKey:) name:Receive_PrivateKey_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPass:) name:Receive_UserPass_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPassAndPrivateKey:) name:Receive_UserPass_PrivateKey_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configVPNError:) name:CONFIG_VPN_ERROR_NOTI object:nil];
 }
 
 #pragma mark - Config
@@ -235,6 +238,13 @@
     getUserPassAndPrivateKeyOK = YES;
     [AppD.window hideHud];
     [self goConnect];
+}
+
+- (void)configVPNError:(NSNotification *)noti {
+    NSString *errorDes = noti.object;
+    DDLogDebug(@"Config VPN Error:%@",errorDes);
+    [AppD.window showHint:NSStringLocalizable(@"configuration_faield")];
+    [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
 }
 
 #pragma mark - Operation

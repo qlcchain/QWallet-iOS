@@ -81,6 +81,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStatusChange:) name:VPN_STATUS_CHANGE_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCountryNoti:) name:SELECT_COUNTRY_NOTI_VPNREGISTER object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configVPNError:) name:CONFIG_VPN_ERROR_NOTI object:nil];
 }
 
 #pragma mark - Init
@@ -410,12 +411,20 @@
 
 - (void)savePreferenceFail:(NSNotification *)noti {
     [AppD.window hideHud];
+    [AppD.window showHint:NSStringLocalizable(@"save_failed")];
 }
 
 - (void)selectCountryNoti:(NSNotification *)noti {
     self.selectCountryM = noti.object;
-    _countryLab.text = _selectCountryM.name.uppercaseString;
+    _countryLab.text = _selectCountryM.name;
     _selectCountryStr = _selectCountryM.name;
+}
+
+- (void)configVPNError:(NSNotification *)noti {
+    NSString *errorDes = noti.object;
+    DDLogDebug(@"Config VPN Error:%@",errorDes);
+    [AppD.window hideHud];
+    [AppD.window showHint:NSStringLocalizable(@"configuration_faield")];
 }
 
 #pragma mark - Request
