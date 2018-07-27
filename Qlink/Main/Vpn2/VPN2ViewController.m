@@ -448,8 +448,8 @@ static BOOL refreshAnimate = YES;
         } else {
             [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_CONNECT];
         }
-    } else { // 免费连接
-        [self showConnectAlert:vpnInfo isFree:YES];
+    } else { // 有免费次数，免费连接
+        [self showConnectAlert:vpnInfo haveFreeCount:YES isCharge:NO];
     }
 }
 
@@ -460,9 +460,9 @@ static BOOL refreshAnimate = YES;
 }
 
 // 显示连接提示
-- (void)showConnectAlert:(VPNInfo *)vpnInfo isFree:(BOOL)isFree {
-    NSString *cost = isFree?@"0":vpnInfo.cost;
-    NSString *content = isFree?NSStringLocalizable(@"free_conncetions"):[NSString stringWithFormat:NSStringLocalizable(@"just_const"),cost];
+- (void)showConnectAlert:(VPNInfo *)vpnInfo haveFreeCount:(BOOL)haveFreeCount isCharge:(BOOL)isCharge {
+    NSString *cost = isCharge?vpnInfo.cost:@"0";
+    NSString *content = haveFreeCount?NSStringLocalizable(@"free_conncetions"):[NSString stringWithFormat:NSStringLocalizable(@"just_const"),cost];
     NSString *image = @"icon_even";
     @weakify_self
     [UIView showVPNToastAlertViewWithTopImageName:image content:content block:^{
@@ -552,9 +552,9 @@ static BOOL refreshAnimate = YES;
         }
     }
     if (isCharge) {
-        [self showConnectAlert:_selectVPNInfo isFree:NO];
+        [self showConnectAlert:_selectVPNInfo haveFreeCount:NO isCharge:YES];
     } else {
-        [self showConnectAlert:_selectVPNInfo isFree:YES];
+        [self showConnectAlert:_selectVPNInfo haveFreeCount:NO isCharge:NO];
     }
 }
 

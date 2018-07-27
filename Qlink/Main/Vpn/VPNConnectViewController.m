@@ -217,7 +217,7 @@
     }
     
     if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
-        [self.view showView:self.view hint:NSStringLocalizable(@"insufficient_assets")];
+        [self.view showHudInView:self.view hint:NSStringLocalizable(@"insufficient_assets")];
         return;
     }
     

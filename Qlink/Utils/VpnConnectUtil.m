@@ -571,7 +571,7 @@ typedef enum : NSUInteger {
     }
     
     if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
-        [AppD.window showView:KEYWINDOW hint:NSStringLocalizable(@"insufficient_assets")];
+        [AppD.window showHint:NSStringLocalizable(@"insufficient_assets")];
         [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
         return;
     }
