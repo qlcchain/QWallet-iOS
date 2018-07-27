@@ -191,6 +191,7 @@
             connectVpnOK = YES;
             connectVpnCancel = NO;
             [AppD.window hideHud];
+            [AppD.window showHint:NSStringLocalizable(@"connect_success")];
             [self performSelector:@selector(reportConnectSuccess) withObject:nil afterDelay:.8];
         }
             break;
@@ -331,7 +332,7 @@
 
 - (void)getVpnPriveteKey {
     NSTimeInterval timeout = 15;
-    [AppD.window showHudInView:KEYWINDOW hint:@""];
+    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_PrivateKey")];
     getPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnPrivateKeyReq;
@@ -353,7 +354,7 @@
 
 - (void)getVpnUserAndPassword {
     NSTimeInterval timeout = 15;
-    [AppD.window showHudInView:KEYWINDOW hint:@""];
+    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_UserPass")];
     getUserPassOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserAndPasswordReq;
@@ -376,7 +377,7 @@
 
 - (void)getVpnUserPassAndPrivateKey {
     NSTimeInterval timeout = 15;
-    [AppD.window showHudInView:KEYWINDOW hint:@""];
+    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_UserPass_PrivateKey")];
     getUserPassAndPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserPassAndPrivateKeyReq;
@@ -489,7 +490,7 @@
 #pragma mark - 发送获取配置文件消息
 - (void)sendGetProfile {
     NSTimeInterval timeout = 15;
-    [AppD.window showHudInView:KEYWINDOW hint:@""];
+    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"get_profile")];
     getProfileOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = sendVpnFileRequest;
