@@ -493,7 +493,7 @@
  @param connectType 记录连接类型，0代表是使用端的连接记录，1代表是提供端的记录
  @param isReported 记录是否上报给wifi或者vpn资产的提供端 现在只有两种记录需要上报，wifi使用和vpn使用,并且是在connectType == 0的时候才要上报
  */
-+ (void) saveTranQLCRecordWithQlc:(NSString *) qlc txtid:(NSString *) txtid  neo:(NSString *) neo recordType:(int) type assetName:(NSString *) assetName friendNum:(int) friendNum p2pID:(NSString *) p2pID connectType:(int) connectType isReported:(BOOL) isReported isRegister:(BOOL) isRegister
++ (void) saveTranQLCRecordWithQlc:(NSString *) qlc txtid:(NSString *) txtid  neo:(NSString *) neo recordType:(int) type assetName:(NSString *) assetName friendNum:(int) friendNum p2pID:(NSString *) p2pID connectType:(int) connectType isReported:(BOOL) isReported isMianNet:(BOOL)isMain
 {
     
     HistoryRecrdInfo *recrdInfo = [[HistoryRecrdInfo alloc] init];
@@ -507,17 +507,7 @@
     recrdInfo.assetName = assetName;
     recrdInfo.friendNum = friendNum;
     recrdInfo.toP2pId = p2pID;
-    if (isRegister) {
-        recrdInfo.isMainNet = [WalletUtil checkServerIsMian];
-    } else { // 查询当前资产所在网络
-       NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"vpnName:"),assetName?:@""]];
-        if (finfAlls && finfAlls.count > 0) {
-            VPNInfo *vpnInfo = finfAlls[0];
-            recrdInfo.isMainNet = vpnInfo.isMainNet;
-        } else {
-            recrdInfo.isMainNet = NO;
-        }
-    }
+    recrdInfo.isMainNet =  isMain;
     recrdInfo.timestamp = [NSString stringWithFormat:@"%ld",[NSDate getTimestampFromDate:[NSDate date]]];
     [recrdInfo bg_saveOrUpdateAsync:nil];
 }

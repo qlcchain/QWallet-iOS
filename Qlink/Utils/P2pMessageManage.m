@@ -148,15 +148,16 @@
         NSString *recordType = [dataDic objectForKey:@"transactiomType"];
         if ([[NSStringUtil getNotNullValue:recordType] integerValue] == 3 || [[NSStringUtil getNotNullValue:recordType] integerValue] == 5) { // VPN
             
+             NSString *netStr = [dataDic objectForKey:IS_MAINNET]?:@"0";
             /**
              同步查询所有数据.  去重复
              */
-            NSArray* finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"txid"),bg_sqlValue([NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]])]];
+            NSArray* finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"txid"),bg_sqlValue([NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]]),bg_sqlKey(@"isMainNet"),bg_sqlValue(@([netStr boolValue]))]];
             if (finfAlls && finfAlls.count > 0) {
                 return;
             }
-            
-            [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:ASSETS_NAME]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:publickey] connectType:1 isReported:NO isRegister:NO];
+            BOOL isMain = [netStr boolValue];
+            [WalletUtil saveTranQLCRecordWithQlc:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:TX_ID]] neo:@"0" recordType:[recordType intValue]  assetName:[NSStringUtil getNotNullValue:[dataDic objectForKey:ASSETS_NAME]] friendNum:0 p2pID:[NSStringUtil getNotNullValue:publickey] connectType:1 isReported:NO isMianNet:isMain];
             // 发送本地通知
             [TransferUtil sendLocalNotificationWithQLC:[NSStringUtil getNotNullValue:[dataDic objectForKey:QLC_COUNT]] isIncome:YES];
         }
