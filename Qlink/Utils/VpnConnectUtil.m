@@ -18,6 +18,18 @@
 #import <MMWormhole/MMWormhole.h>
 #import "DBManageUtil.h"
 
+#define P2P_Message_Timeout 15
+
+typedef enum : NSUInteger {
+    ConnectStepNone,
+    ConnectStepCheckConnect,
+    ConnectStepGetProfile,
+    ConnectStepGetPrivateKey,
+    ConnectStepGetUserPass,
+    ConnectStepGetUserPassAndPrivateKey,
+    ConnectStepGetConnecting,
+} ConnectStep;
+
 @interface VpnConnectUtil () {
     BOOL checkConnnectOK;
     BOOL connectVpnOK;
@@ -31,6 +43,7 @@
 //@property (nonatomic, strong) VPNInfo *vpnInfo;
 @property (nonatomic, strong) NSData *vpnData;
 @property (nonatomic, strong) MMWormhole *wormhole;
+@property (nonatomic) ConnectStep connectStep;
 
 @end
 
@@ -42,6 +55,7 @@
     dispatch_once(&onceToken, ^{
         shareObject = [[self alloc] init];
         [shareObject addObserve];
+        [shareObject dataInit];
     });
     return shareObject;
 }
@@ -71,6 +85,11 @@
 }
 
 #pragma mark - Config
+- (void)dataInit {
+    [self wormholeInit];
+    _connectStep = ConnectStepNone;
+}
+
 - (void)wormholeInit {
     self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
                                                          optionalDirectory:DIRECTORY_WORMHOLE];
@@ -170,10 +189,18 @@
     [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
                                          listener:^(id messageObject) {
                                              DDLogDebug(@"vpn_error_reason---------------%@",messageObject);
+                                             if (weakSelf.connectStep != ConnectStepGetConnecting) {
+                                                 return;
+                                             }
                                              VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
                                              if (operationType == normalConnect) { // 正常连接vpn
+                                                 [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
                                                  [AppD.window hideHud];
-                                                 [KEYWINDOW showHint:messageObject];
+                                                 NSString *message = messageObject;
+                                                 if ([message isEqualToString:@"Unknown error."]) {
+                                                     message = @"Connect fail.";
+                                                 }
+                                                 [KEYWINDOW showHint:message];
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
                                                  [weakSelf requestReportVpnInfo:messageObject status:0]; // 上报vpn连接问题
                                              }
@@ -188,7 +215,9 @@
             break;
         case NEVPNStatusDisconnected:
         {
-            [AppD.window hideHud];
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
+//            [AppD.window hideHud];
+            _connectStep = ConnectStepNone;
             [VPNUtil.shareInstance removeFromPreferences]; // 移除配置文件
         }
             break;
@@ -196,6 +225,8 @@
             break;
         case NEVPNStatusConnected:
         {
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
+            _connectStep = ConnectStepNone;
             connectVpnOK = YES;
             connectVpnCancel = NO;
             [AppD.window hideHud];
@@ -215,9 +246,13 @@
 }
 
 - (void)receiveVPNFile:(NSNotification *)noti {
+    if (_connectStep != ConnectStepGetProfile) {
+        return;
+    }
     if (getProfileOK) {
         return;
     }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getProfileTimeout) object:nil];
     getProfileOK = YES;
     [AppD.window hideHud];
     _vpnData = noti.object;
@@ -225,15 +260,20 @@
 }
 
 - (void)savePreferenceFail:(NSNotification *)noti {
+    _connectStep = ConnectStepNone;
     [AppD.window hideHud];
     [AppD.window showHint:NSStringLocalizable(@"save_failed")];
     connectVpnCancel = YES;
 }
 
 - (void)checkConnectRsp:(NSNotification *)noti {
+    if (_connectStep != ConnectStepCheckConnect) {
+        return;
+    }
     if (checkConnnectOK) {
         return;
     }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkConnectTimeout) object:nil];
     checkConnnectOK = YES;
     [AppD.window hideHud];
     
@@ -241,33 +281,46 @@
 }
 
 - (void)receivePrivateKey:(NSNotification *)noti {
+    if (_connectStep != ConnectStepGetPrivateKey) {
+        return;
+    }
     if (getPrivateKeyOK) {
         return;
     }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getPrivateKeyTimeout) object:nil];
     getPrivateKeyOK = YES;
     [AppD.window hideHud];
     [self goConnect];
 }
 
 - (void)receiveUserPass:(NSNotification *)noti {
+    if (_connectStep != ConnectStepGetUserPass) {
+        return;
+    }
     if (getUserPassOK) {
         return;
     }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getUserPassTimeout) object:nil];
     getUserPassOK = YES;
     [AppD.window hideHud];
     [self goConnect];
 }
 
 - (void)receiveUserPassAndPrivateKey:(NSNotification *)noti {
+    if (_connectStep != ConnectStepGetUserPassAndPrivateKey) {
+        return;
+    }
     if (getUserPassAndPrivateKeyOK) {
         return;
     }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getUserPassAndPrivateKeyTimeout) object:nil];
     getUserPassAndPrivateKeyOK = YES;
     [AppD.window hideHud];
     [self goConnect];
 }
 
 - (void)configVPNError:(NSNotification *)noti {
+    _connectStep = ConnectStepNone;
     NSString *errorDes = noti.object;
     DDLogDebug(@"Config VPN Error:%@",errorDes);
     [AppD.window hideHud];
@@ -331,6 +384,7 @@
 - (void)goConnect {
     [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];
     
+    _connectStep = ConnectStepGetConnecting;
     connectVpnOK = NO;
     connectVpnCancel = NO;
     
@@ -355,8 +409,9 @@
 }
 
 - (void)getVpnPriveteKey {
-    NSTimeInterval timeout = 15;
     [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_PrivateKey")];
+    DDLogDebug(@"==============================Getting Private Key Password");
+    _connectStep = ConnectStepGetPrivateKey;
     getPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnPrivateKeyReq;
@@ -365,11 +420,12 @@
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
-    [self performSelector:@selector(getPrivateKeyTimeout) withObject:nil afterDelay:timeout];
+    [self performSelector:@selector(getPrivateKeyTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
 }
 
 - (void)getPrivateKeyTimeout {
     if (!getPrivateKeyOK) {
+        _connectStep = ConnectStepNone;
         [AppD.window hideHud];
         [AppD.window showHint:NSStringLocalizable(@"Fail_Get_PrivateKey")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Key_Timeout_Noti object:nil];
@@ -377,8 +433,9 @@
 }
 
 - (void)getVpnUserAndPassword {
-    NSTimeInterval timeout = 15;
     [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_UserPass")];
+    DDLogDebug(@"==============================Getting Username and Password");
+    _connectStep = ConnectStepGetUserPass;
     getUserPassOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserAndPasswordReq;
@@ -388,11 +445,12 @@
     NSString *str = model.mj_JSONString;
     NSString *p2pId = _vpnInfo.p2pId;
     [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
-    [self performSelector:@selector(getUserPassTimeout) withObject:nil afterDelay:timeout];
+    [self performSelector:@selector(getUserPassTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
 }
 
 - (void)getUserPassTimeout {
     if (!getUserPassOK) {
+        _connectStep = ConnectStepNone;
         [AppD.window hideHud];
         [AppD.window showHint:NSStringLocalizable(@"Fail_Get_UserPass")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Pass_Timeout_Noti object:nil];
@@ -400,8 +458,9 @@
 }
 
 - (void)getVpnUserPassAndPrivateKey {
-    NSTimeInterval timeout = 15;
     [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_UserPass_PrivateKey")];
+    DDLogDebug(@"==============================Getting Username and Password and Private Key Password");
+    _connectStep = ConnectStepGetUserPassAndPrivateKey;
     getUserPassAndPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserPassAndPrivateKeyReq;
@@ -411,11 +470,12 @@
     NSString *str = model.mj_JSONString;
     NSString *p2pId = _vpnInfo.p2pId;
     [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
-    [self performSelector:@selector(getUserPassAndPrivateKeyTimeout) withObject:nil afterDelay:timeout];
+    [self performSelector:@selector(getUserPassAndPrivateKeyTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
 }
 
 - (void)getUserPassAndPrivateKeyTimeout {
     if (!getUserPassAndPrivateKeyOK) {
+        _connectStep = ConnectStepNone;
         [AppD.window hideHud];
         [AppD.window showHint:NSStringLocalizable(@"Fail_Get_UserPass_PrivateKey")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Pass_Timeout_Noti object:nil];
@@ -423,8 +483,8 @@
 }
 
 - (void)addSendCheckConnect {
-    NSTimeInterval timeout = 15;
     [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"checking")];
+    _connectStep = ConnectStepCheckConnect;
     checkConnnectOK = NO;
     // 发送获取配置文件消息
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
@@ -434,11 +494,12 @@
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
-    [self performSelector:@selector(checkConnectTimeout) withObject:nil afterDelay:timeout];
+    [self performSelector:@selector(checkConnectTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
 }
 
 - (void)checkConnectTimeout {
     if (!checkConnnectOK) {
+        _connectStep = ConnectStepNone;
         [AppD.window hideHud];
         [AppD.window showHint:NSStringLocalizable(@"connect_timeout")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Check_Connect_Timeout_Noti object:nil];
@@ -446,6 +507,9 @@
 }
 
 - (void)connectVpnTimeout {
+    if (_connectStep != ConnectStepGetConnecting) {
+        return;
+    }
     if (connectVpnOK) { // 连接成功
         return;
     }
@@ -457,6 +521,31 @@
     [KEYWINDOW showHint:NSStringLocalizable(@"vpn_timeout")];
     [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
     [self requestReportVpnInfo:@"connect timeout" status:0]; // 上报vpn连接问题
+}
+
+#pragma mark - 发送获取配置文件消息
+- (void)sendGetProfile {
+    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"get_profile")];
+    _connectStep = ConnectStepGetProfile;
+    getProfileOK = NO;
+    ToxRequestModel *model = [[ToxRequestModel alloc] init];
+    model.type = sendVpnFileRequest;
+    NSString *p2pid = [ToxManage getOwnP2PId];
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
+    model.data = dataDic.mj_JSONString;
+    NSString *str = model.mj_JSONString;
+    [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
+    [self performSelector:@selector(getProfileTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
+}
+
+- (void)getProfileTimeout {
+    if (!getProfileOK) {
+        _connectStep = ConnectStepNone;
+        [AppD.window hideHud];
+        [AppD.window showHint:NSStringLocalizable(@"get_profile_timeout")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Get_Profile_Timeout_Noti object:nil];
+    }
 }
 
 #pragma mark - Request
@@ -511,28 +600,6 @@
 //    }
 }
 
-#pragma mark - 发送获取配置文件消息
-- (void)sendGetProfile {
-    NSTimeInterval timeout = 15;
-    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"get_profile")];
-    getProfileOK = NO;
-    ToxRequestModel *model = [[ToxRequestModel alloc] init];
-    model.type = sendVpnFileRequest;
-    NSString *p2pid = [ToxManage getOwnP2PId];
-    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
-    NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
-    model.data = dataDic.mj_JSONString;
-    NSString *str = model.mj_JSONString;
-    [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
-    [self performSelector:@selector(getProfileTimeout) withObject:nil afterDelay:timeout];
-}
 
-- (void)getProfileTimeout {
-    if (!getProfileOK) {
-        [AppD.window hideHud];
-        [AppD.window showHint:NSStringLocalizable(@"get_profile_timeout")];
-        [[NSNotificationCenter defaultCenter] postNotificationName:Get_Profile_Timeout_Noti object:nil];
-    }
-}
 
 @end
