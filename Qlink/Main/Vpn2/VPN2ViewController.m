@@ -273,6 +273,10 @@
     if (!_isConnectVPN) { // 未连接vpn
         return;
     }
+    VPNInfo *connectInfo = [TransferUtil currentConnectVPNInfo];
+    if (connectInfo && (connectInfo.isMainNet != [WalletUtil checkServerIsMian])) {
+        return;
+    }
     __block BOOL connectIsExist = NO;
     [self.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *vpnInfo = obj;
@@ -352,7 +356,10 @@
     }];
     
     if (_isConnectVPN) {
-        [self.sourceArr exchangeObjectAtIndex:0 withObjectAtIndex:connectIndex];
+        if (connectIndex >0) {
+             [self.sourceArr exchangeObjectAtIndex:0 withObjectAtIndex:connectIndex];
+        }
+       
     }
 }
 
