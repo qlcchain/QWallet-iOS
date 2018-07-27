@@ -432,6 +432,9 @@
 
 #pragma mark - Request
 - (void)requestValidateAssetIsexist {
+    if (self.vpnTFName.length <= 0) {
+        return;
+    }
     @weakify_self
     NSDictionary *params = @{@"vpnName":self.vpnTFName,@"type":@"3"};
     [RequestService requestWithUrl:validateAssetIsexist_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
