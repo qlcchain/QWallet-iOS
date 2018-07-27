@@ -28,7 +28,7 @@
     BOOL getProfileOK;
 }
 
-//@property (nonatomic, strong) VPNInfo *vpnInfo;
+@property (nonatomic, strong) VPNInfo *vpnInfo;
 @property (nonatomic, strong) NSData *vpnData;
 @property (nonatomic, strong) MMWormhole *wormhole;
 
@@ -36,15 +36,12 @@
 
 @implementation VpnConnectUtil
 
-+ (instancetype)shareInstance {
-    static id shareObject = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        shareObject = [[self alloc] init];
-        [shareObject addObserve];
-        [shareObject wormholeInit];
-    });
-    return shareObject;
+- (instancetype)initWithVpn:(VPNInfo *)vpnInfo {
+    if (self = [super init]) {
+        _vpnInfo = vpnInfo;
+        [self addObserve];
+    }
+    return self;
 }
 
 - (void)dealloc {
@@ -270,6 +267,7 @@
             return;
         }
         if (type == 0) { // 自动
+            
         } else if (type == 1) { // 私钥
             VPNUtil.shareInstance.vpnPrivateKey = tempInfo.privateKeyPassword;
         } else if (type == 2) { // 用户名密码
