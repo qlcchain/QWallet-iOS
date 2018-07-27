@@ -28,7 +28,7 @@
     BOOL getProfileOK;
 }
 
-@property (nonatomic, strong) VPNInfo *vpnInfo;
+//@property (nonatomic, strong) VPNInfo *vpnInfo;
 @property (nonatomic, strong) NSData *vpnData;
 @property (nonatomic, strong) MMWormhole *wormhole;
 
@@ -36,13 +36,23 @@
 
 @implementation VpnConnectUtil
 
-- (instancetype)initWithVpn:(VPNInfo *)vpnInfo {
-    if (self = [super init]) {
-        _vpnInfo = vpnInfo;
-        [self addObserve];
-    }
-    return self;
++ (instancetype)shareInstance {
+    static id shareObject = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareObject = [[self alloc] init];
+        [shareObject addObserve];
+    });
+    return shareObject;
 }
+
+//- (instancetype)initWithVpn:(VPNInfo *)vpnInfo {
+//    if (self = [super init]) {
+//        _vpnInfo = vpnInfo;
+//        [self addObserve];
+//    }
+//    return self;
+//}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -205,6 +215,9 @@
 }
 
 - (void)receiveVPNFile:(NSNotification *)noti {
+    if (getProfileOK) {
+        return;
+    }
     getProfileOK = YES;
     [AppD.window hideHud];
     _vpnData = noti.object;
@@ -228,18 +241,27 @@
 }
 
 - (void)receivePrivateKey:(NSNotification *)noti {
+    if (getPrivateKeyOK) {
+        return;
+    }
     getPrivateKeyOK = YES;
     [AppD.window hideHud];
     [self goConnect];
 }
 
 - (void)receiveUserPass:(NSNotification *)noti {
+    if (getUserPassOK) {
+        return;
+    }
     getUserPassOK = YES;
     [AppD.window hideHud];
     [self goConnect];
 }
 
 - (void)receiveUserPassAndPrivateKey:(NSNotification *)noti {
+    if (getUserPassAndPrivateKeyOK) {
+        return;
+    }
     getUserPassAndPrivateKeyOK = YES;
     [AppD.window hideHud];
     [self goConnect];
