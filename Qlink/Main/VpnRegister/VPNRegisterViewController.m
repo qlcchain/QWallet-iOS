@@ -634,6 +634,10 @@
     self.vpnInfo.bandwidth = @"";
     self.vpnInfo.profileLocalPath = self.profileName?:@"";
     
+    self.vpnInfo.password = _passwordTF.text?:@"";
+    self.vpnInfo.privateKeyPassword = _privateKeyTF.text?:@"";
+    self.vpnInfo.username = _userNameTF.text?:@"";
+    
     [AppD.window showHudInView:self.view hint:nil];
     
     NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath};
