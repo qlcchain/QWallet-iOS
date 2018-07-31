@@ -15,8 +15,6 @@
 @property (nonatomic, strong) VPNInfo *vpnInfo;
 
 + (instancetype)shareInstance;
-//- (instancetype)initWithVpn:(VPNInfo *)vpnInfo;
 - (void)checkConnect;
-//- (void)connectAction;
 
 @end

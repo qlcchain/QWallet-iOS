@@ -40,7 +40,6 @@ typedef enum : NSUInteger {
     BOOL getProfileOK;
 }
 
-//@property (nonatomic, strong) VPNInfo *vpnInfo;
 @property (nonatomic, strong) NSData *vpnData;
 @property (nonatomic, strong) MMWormhole *wormhole;
 @property (nonatomic) ConnectStep connectStep;
@@ -59,14 +58,6 @@ typedef enum : NSUInteger {
     });
     return shareObject;
 }
-
-//- (instancetype)initWithVpn:(VPNInfo *)vpnInfo {
-//    if (self = [super init]) {
-//        _vpnInfo = vpnInfo;
-//        [self addObserve];
-//    }
-//    return self;
-//}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

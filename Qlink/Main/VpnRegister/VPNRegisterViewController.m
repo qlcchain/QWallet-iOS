@@ -394,6 +394,7 @@
             if (_isVerifyVPN) { // 如果是验证操作的话，断开连接
                 _isVerifyVPN = NO;
                 connectVpnDone = YES;
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
                 [self performSelector:@selector(requestRegisterVpnByFeeV3) withObject:nil afterDelay:0.6];
             }
         }
@@ -406,6 +407,7 @@
             if (_isVerifyVPN) { // 如果是验证操作的话
                 _isVerifyVPN = NO;
                 connectVpnDone = YES;
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
 //                [self.view showHint:NSStringLocalizable(@"check_profile")];
             }
         }
