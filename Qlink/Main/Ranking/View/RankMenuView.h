@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestView1 : UIView
+@interface RankMenuView : UIView
 
 @end

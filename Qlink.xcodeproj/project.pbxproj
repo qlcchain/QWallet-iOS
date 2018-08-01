@@ -285,8 +285,12 @@
 		735310CE211147B300537372 /* RankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310C1211147A500537372 /* RankingViewController.xib */; };
 		735310CF211147B300537372 /* RankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C3211147A500537372 /* RankingCell.m */; };
 		735310D0211147B300537372 /* RankingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310C5211147A500537372 /* RankingCell.xib */; };
-		735310D1211147B300537372 /* TestView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C9211147A500537372 /* TestView1.m */; };
+		735310D1211147B300537372 /* RankMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C9211147A500537372 /* RankMenuView.m */; };
 		735310D2211147B300537372 /* RankingRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310CA211147A500537372 /* RankingRuleViewController.xib */; };
+		735310D521114DBA00537372 /* VPNRightMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D421114DBA00537372 /* VPNRightMenuView.m */; };
+		735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310D621114DC600537372 /* VPNRightMenuView.xib */; };
+		735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D92111508C00537372 /* NewPagedFlowView.m */; };
+		735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310DC2111509900537372 /* PGIndexBannerSubiew.m */; };
 		7360540120DB905B004CD3C3 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540020DB905B004CD3C3 /* GuidePageView1.m */; };
 		7360540820DB9D67004CD3C3 /* GuidePageView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540720DB9D67004CD3C3 /* GuidePageView2.m */; };
 		73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625EC0208F3A710027C62A /* HistoryWifiCell.m */; };
@@ -950,10 +954,17 @@
 		735310C4211147A500537372 /* RankingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingCell.h; sourceTree = "<group>"; };
 		735310C5211147A500537372 /* RankingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingCell.xib; sourceTree = "<group>"; };
 		735310C6211147A500537372 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
-		735310C8211147A500537372 /* TestView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestView1.h; sourceTree = "<group>"; };
-		735310C9211147A500537372 /* TestView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView1.m; sourceTree = "<group>"; };
+		735310C8211147A500537372 /* RankMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankMenuView.h; sourceTree = "<group>"; };
+		735310C9211147A500537372 /* RankMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankMenuView.m; sourceTree = "<group>"; };
 		735310CA211147A500537372 /* RankingRuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingRuleViewController.xib; sourceTree = "<group>"; };
 		735310CB211147A500537372 /* RankingRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingRuleViewController.h; sourceTree = "<group>"; };
+		735310D321114DBA00537372 /* VPNRightMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNRightMenuView.h; sourceTree = "<group>"; };
+		735310D421114DBA00537372 /* VPNRightMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNRightMenuView.m; sourceTree = "<group>"; };
+		735310D621114DC600537372 /* VPNRightMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VPNRightMenuView.xib; sourceTree = "<group>"; };
+		735310D92111508C00537372 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
+		735310DA2111508C00537372 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
+		735310DC2111509900537372 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
+		735310DD2111509900537372 /* PGIndexBannerSubiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGIndexBannerSubiew.h; sourceTree = "<group>"; };
 		736053FF20DB905B004CD3C3 /* GuidePageView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		7360540020DB905B004CD3C3 /* GuidePageView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuidePageView1.m; sourceTree = "<group>"; };
 		7360540620DB9D67004CD3C3 /* GuidePageView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView2.h; sourceTree = "<group>"; };
@@ -1730,6 +1741,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				735310D82111508C00537372 /* NewPagedFlowView */,
 				584911772105AEF4005232A2 /* BackgroudLocation */,
 				588A7E9220F5DFDF00D476EE /* FileInput */,
 				734F528F20B6BDCC002D45B7 /* MPUSH */,
@@ -2119,6 +2131,9 @@
 				73FF64A420F3365C00E29B3B /* ChooseCountryView.h */,
 				73FF64A520F3365C00E29B3B /* ChooseCountryView.m */,
 				73FF64D920F48DCA00E29B3B /* ChooseCountryView.xib */,
+				735310D321114DBA00537372 /* VPNRightMenuView.h */,
+				735310D421114DBA00537372 /* VPNRightMenuView.m */,
+				735310D621114DC600537372 /* VPNRightMenuView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2624,10 +2639,21 @@
 		735310C7211147A500537372 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				735310C8211147A500537372 /* TestView1.h */,
-				735310C9211147A500537372 /* TestView1.m */,
+				735310C8211147A500537372 /* RankMenuView.h */,
+				735310C9211147A500537372 /* RankMenuView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		735310D82111508C00537372 /* NewPagedFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				735310DD2111509900537372 /* PGIndexBannerSubiew.h */,
+				735310DC2111509900537372 /* PGIndexBannerSubiew.m */,
+				735310D92111508C00537372 /* NewPagedFlowView.m */,
+				735310DA2111508C00537372 /* NewPagedFlowView.h */,
+			);
+			path = NewPagedFlowView;
 			sourceTree = "<group>";
 		};
 		736053FE20DB8EB4004CD3C3 /* GuidePage */ = {
@@ -3082,6 +3108,7 @@
 				7377D18E206CC6FB0072E628 /* Localizable.strings in Resources */,
 				73A05A1E2081A02200974483 /* icon_map_refresh@2x.png in Resources */,
 				5860ACB220CFB44C00EEB6CE /* VPNRegisterView1.xib in Resources */,
+				735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */,
 				588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */,
 				5860AD3E20CFB55D00EEB6CE /* WalletMenuView.xib in Resources */,
 				5860AD8B20CFB5D200EEB6CE /* WalletImportKeyViewController.xib in Resources */,
@@ -3272,7 +3299,7 @@
 				58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */,
 				580D916520625A4400B12506 /* NSString+RegexCategory.m in Sources */,
 				5812DDA220A1A7890043A8A8 /* ChatFaceHeleper.m in Sources */,
-				735310D1211147B300537372 /* TestView1.m in Sources */,
+				735310D1211147B300537372 /* RankMenuView.m in Sources */,
 				581781AE20F2FBF5003E74F2 /* VpnToastView.m in Sources */,
 				73B6F4CF20AEC08E004B7219 /* ScriptBuilder.swift in Sources */,
 				730DA8FA20886AC700CE1909 /* StatuImageView.m in Sources */,
@@ -3383,6 +3410,7 @@
 				5812DDAA20A1A7890043A8A8 /* ZXChatFaceItemView.m in Sources */,
 				58A4DB3520EB724E001C241D /* GuideSettingMoreView.m in Sources */,
 				580D914720625A4400B12506 /* UIImage+Capture.m in Sources */,
+				735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */,
 				580D914220625A4300B12506 /* UIImage+Vector.m in Sources */,
 				73048F102079E1C500A4EFEE /* CurrentWalletInfo.m in Sources */,
 				58A2495C20D207AB00781549 /* VersionManager.m in Sources */,
@@ -3488,6 +3516,8 @@
 				586F3717207AFD3300E12F95 /* ChooseCountryViewController.m in Sources */,
 				58DF8C57209B0638000B0A2F /* ChatUtil.m in Sources */,
 				580D917420625FDB00B12506 /* Language.m in Sources */,
+				735310D521114DBA00537372 /* VPNRightMenuView.m in Sources */,
+				735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */,
 				586F36FE2079F92C00E12F95 /* VPNRegisterView1.m in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,
 				58CDB5D72085DB6600B74962 /* VPNUtil.swift in Sources */,
