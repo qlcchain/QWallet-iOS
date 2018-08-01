@@ -6,9 +6,9 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import "TestView1.h"
+#import "RankMenuView.h"
 
-@implementation TestView1
+@implementation RankMenuView
 
 /*
 // Only override drawRect: if you perform custom drawing.

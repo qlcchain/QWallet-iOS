@@ -291,6 +291,9 @@
 		735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310D621114DC600537372 /* VPNRightMenuView.xib */; };
 		735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D92111508C00537372 /* NewPagedFlowView.m */; };
 		735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310DC2111509900537372 /* PGIndexBannerSubiew.m */; };
+		735310E22111A00800537372 /* RankingSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310E02111A00800537372 /* RankingSubCell.m */; };
+		735310E32111A00800537372 /* RankingSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310E12111A00800537372 /* RankingSubCell.xib */; };
+		735310E62111A78700537372 /* RankingMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310E52111A78700537372 /* RankingMode.m */; };
 		7360540120DB905B004CD3C3 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540020DB905B004CD3C3 /* GuidePageView1.m */; };
 		7360540820DB9D67004CD3C3 /* GuidePageView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540720DB9D67004CD3C3 /* GuidePageView2.m */; };
 		73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625EC0208F3A710027C62A /* HistoryWifiCell.m */; };
@@ -965,6 +968,11 @@
 		735310DA2111508C00537372 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
 		735310DC2111509900537372 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
 		735310DD2111509900537372 /* PGIndexBannerSubiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGIndexBannerSubiew.h; sourceTree = "<group>"; };
+		735310DF2111A00800537372 /* RankingSubCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingSubCell.h; sourceTree = "<group>"; };
+		735310E02111A00800537372 /* RankingSubCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingSubCell.m; sourceTree = "<group>"; };
+		735310E12111A00800537372 /* RankingSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankingSubCell.xib; sourceTree = "<group>"; };
+		735310E42111A78700537372 /* RankingMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingMode.h; sourceTree = "<group>"; };
+		735310E52111A78700537372 /* RankingMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingMode.m; sourceTree = "<group>"; };
 		736053FF20DB905B004CD3C3 /* GuidePageView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		7360540020DB905B004CD3C3 /* GuidePageView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuidePageView1.m; sourceTree = "<group>"; };
 		7360540620DB9D67004CD3C3 /* GuidePageView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView2.h; sourceTree = "<group>"; };
@@ -2629,6 +2637,9 @@
 		735310C2211147A500537372 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				735310DF2111A00800537372 /* RankingSubCell.h */,
+				735310E02111A00800537372 /* RankingSubCell.m */,
+				735310E12111A00800537372 /* RankingSubCell.xib */,
 				735310C3211147A500537372 /* RankingCell.m */,
 				735310C4211147A500537372 /* RankingCell.h */,
 				735310C5211147A500537372 /* RankingCell.xib */,
@@ -2687,6 +2698,8 @@
 				73D048A120F87AC100382BD5 /* VPNTranferMode.m */,
 				73F9557520FF33E400A3E0F5 /* FreeRecordMode.h */,
 				73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */,
+				735310E42111A78700537372 /* RankingMode.h */,
+				735310E52111A78700537372 /* RankingMode.m */,
 			);
 			path = VPNModes;
 			sourceTree = "<group>";
@@ -3075,6 +3088,7 @@
 				5860ADB520CFB61000EEB6CE /* ChatHeadView.xib in Resources */,
 				5860AD9220CFB5DD00EEB6CE /* WalletPublicAddressViewController.xib in Resources */,
 				5860ACDC20CFB49800EEB6CE /* VPNRegisterViewController.xib in Resources */,
+				735310E32111A00800537372 /* RankingSubCell.xib in Resources */,
 				73FF647620EDCDA800E29B3B /* GuidenSettingView.xib in Resources */,
 				5860ACF120CFB4C900EEB6CE /* ChooseContinentViewController.xib in Resources */,
 				58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */,
@@ -3311,6 +3325,7 @@
 				58A4DB1C20EB4F1D001C241D /* GuideVpnCountryView.m in Sources */,
 				73B6F4D320AEC08E004B7219 /* Claims.swift in Sources */,
 				586F37082079F9A200E12F95 /* VPNRegisterView3.m in Sources */,
+				735310E62111A78700537372 /* RankingMode.m in Sources */,
 				580D915720625A4400B12506 /* UIView+Shake.m in Sources */,
 				73B6F4CE20AEC08E004B7219 /* OpCodes.swift in Sources */,
 				586F37032079F97000E12F95 /* VPNRegisterView2.m in Sources */,
@@ -3557,6 +3572,7 @@
 				73B6F4E120AEC08E004B7219 /* ContractResult.swift in Sources */,
 				58A4DB2B20EB6770001C241D /* GuideVpnListConnectView.m in Sources */,
 				7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */,
+				735310E22111A00800537372 /* RankingSubCell.m in Sources */,
 				58CDB5E9208734D600B74962 /* UserManage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
