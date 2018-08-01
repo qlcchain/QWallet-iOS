@@ -57,7 +57,6 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *userHeadBtn;
-@property (weak, nonatomic) IBOutlet UILabel *freeConnectionLab;
 @property (weak, nonatomic) IBOutlet UIButton *registerVPNBtn;
 @property (weak, nonatomic) IBOutlet UIView *tableBack;
 @property (weak, nonatomic) IBOutlet UILabel *countryLab;
@@ -163,10 +162,10 @@
 }
 
 - (void)refreshFreeConnection {
-    NSString *freeStr = NSStringLocalizable(@"free");
-    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
-    NSString *freeCount = [HWUserdefault getObjectWithKey:freeKey];
-    _freeConnectionLab.text = [freeStr stringByAppendingString:freeCount?:@"0"];
+//    NSString *freeStr = NSStringLocalizable(@"free");
+//    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+//    NSString *freeCount = [HWUserdefault getObjectWithKey:freeKey];
+//    _freeConnectionLab.text = [freeStr stringByAppendingString:freeCount?:@"0"];
 }
 
 // 刷新vpn连接状态
