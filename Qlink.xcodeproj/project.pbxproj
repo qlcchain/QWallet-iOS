@@ -286,7 +286,6 @@
 		735310CF211147B300537372 /* RankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C3211147A500537372 /* RankingCell.m */; };
 		735310D0211147B300537372 /* RankingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310C5211147A500537372 /* RankingCell.xib */; };
 		735310D1211147B300537372 /* RankMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C9211147A500537372 /* RankMenuView.m */; };
-		735310D2211147B300537372 /* RankingRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310CA211147A500537372 /* RankingRuleViewController.xib */; };
 		735310D521114DBA00537372 /* VPNRightMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D421114DBA00537372 /* VPNRightMenuView.m */; };
 		735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310D621114DC600537372 /* VPNRightMenuView.xib */; };
 		735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D92111508C00537372 /* NewPagedFlowView.m */; };
@@ -294,6 +293,7 @@
 		735310E22111A00800537372 /* RankingSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310E02111A00800537372 /* RankingSubCell.m */; };
 		735310E32111A00800537372 /* RankingSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310E12111A00800537372 /* RankingSubCell.xib */; };
 		735310E62111A78700537372 /* RankingMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310E52111A78700537372 /* RankingMode.m */; };
+		735310E82111AAD300537372 /* RankingRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310E72111AAD200537372 /* RankingRuleViewController.xib */; };
 		7360540120DB905B004CD3C3 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540020DB905B004CD3C3 /* GuidePageView1.m */; };
 		7360540820DB9D67004CD3C3 /* GuidePageView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540720DB9D67004CD3C3 /* GuidePageView2.m */; };
 		73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625EC0208F3A710027C62A /* HistoryWifiCell.m */; };
@@ -959,7 +959,6 @@
 		735310C6211147A500537372 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
 		735310C8211147A500537372 /* RankMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankMenuView.h; sourceTree = "<group>"; };
 		735310C9211147A500537372 /* RankMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankMenuView.m; sourceTree = "<group>"; };
-		735310CA211147A500537372 /* RankingRuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingRuleViewController.xib; sourceTree = "<group>"; };
 		735310CB211147A500537372 /* RankingRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingRuleViewController.h; sourceTree = "<group>"; };
 		735310D321114DBA00537372 /* VPNRightMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNRightMenuView.h; sourceTree = "<group>"; };
 		735310D421114DBA00537372 /* VPNRightMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNRightMenuView.m; sourceTree = "<group>"; };
@@ -973,6 +972,7 @@
 		735310E12111A00800537372 /* RankingSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankingSubCell.xib; sourceTree = "<group>"; };
 		735310E42111A78700537372 /* RankingMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingMode.h; sourceTree = "<group>"; };
 		735310E52111A78700537372 /* RankingMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingMode.m; sourceTree = "<group>"; };
+		735310E72111AAD200537372 /* RankingRuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingRuleViewController.xib; sourceTree = "<group>"; };
 		736053FF20DB905B004CD3C3 /* GuidePageView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		7360540020DB905B004CD3C3 /* GuidePageView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuidePageView1.m; sourceTree = "<group>"; };
 		7360540620DB9D67004CD3C3 /* GuidePageView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView2.h; sourceTree = "<group>"; };
@@ -1888,9 +1888,6 @@
 				73E52BCA20628D5300063ED6 /* QlinkNavViewController.m */,
 				73E52BCF2062978200063ED6 /* QlinkTabbarViewController.h */,
 				73E52BD02062978200063ED6 /* QlinkTabbarViewController.m */,
-				735140332064A40D007BE4EC /* NounView.h */,
-				735140342064A40D007BE4EC /* NounView.m */,
-				5860AC7C20CFB39F00EEB6CE /* NounView.xib */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2585,6 +2582,9 @@
 				58CDB5EE20888E7600B74962 /* WhiteCiycleImageView.m */,
 				58CDB5F020889FA600B74962 /* QShadowView.h */,
 				58CDB5F120889FA600B74962 /* QShadowView.m */,
+				735140332064A40D007BE4EC /* NounView.h */,
+				735140342064A40D007BE4EC /* NounView.m */,
+				5860AC7C20CFB39F00EEB6CE /* NounView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -2622,14 +2622,14 @@
 		735310BE211147A400537372 /* Ranking */ = {
 			isa = PBXGroup;
 			children = (
+				735310C7211147A500537372 /* View */,
 				735310C2211147A500537372 /* Cell */,
 				735310CB211147A500537372 /* RankingRuleViewController.h */,
 				735310C0211147A500537372 /* RankingRuleViewController.m */,
-				735310CA211147A500537372 /* RankingRuleViewController.xib */,
+				735310E72111AAD200537372 /* RankingRuleViewController.xib */,
 				735310C6211147A500537372 /* RankingViewController.h */,
 				735310BF211147A500537372 /* RankingViewController.m */,
 				735310C1211147A500537372 /* RankingViewController.xib */,
-				735310C7211147A500537372 /* View */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -3078,7 +3078,6 @@
 				5860AD2220CFB51D00EEB6CE /* HistoryWifiCell.xib in Resources */,
 				5860ADA720CFB5F900EEB6CE /* WalletChangeWalletViewController.xib in Resources */,
 				580D91BD2063AE5300B12506 /* Roboto-Italic.ttf in Resources */,
-				735310D2211147B300537372 /* RankingRuleViewController.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				73FF643520EDCD4400E29B3B /* GuideEnterWalletView.xib in Resources */,
 				5860AC7A20CFB39F00EEB6CE /* NounView.xib in Resources */,
@@ -3125,6 +3124,7 @@
 				735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */,
 				588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */,
 				5860AD3E20CFB55D00EEB6CE /* WalletMenuView.xib in Resources */,
+				735310E82111AAD300537372 /* RankingRuleViewController.xib in Resources */,
 				5860AD8B20CFB5D200EEB6CE /* WalletImportKeyViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
 				73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */,

@@ -8,19 +8,191 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RankingRuleViewController">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view" destination="R9m-xJ-sQG" id="gov-gz-jQM"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="R9m-xJ-sQG">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="37" y="-9"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZX5-Uc-03d">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whD-C7-TOK">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7R-43-iGk">
+                                    <rect key="frame" x="15" y="10" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="lFn-d6-97M"/>
+                                        <constraint firstAttribute="height" constant="40" id="ncg-sI-ejl"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_back"/>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动规则" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkm-pt-P58">
+                                    <rect key="frame" x="153.5" y="19.5" width="68" height="21"/>
+                                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="HYf-Y2-hsD"/>
+                                <constraint firstItem="e7R-43-iGk" firstAttribute="centerY" secondItem="whD-C7-TOK" secondAttribute="centerY" id="XP0-iL-vpK"/>
+                                <constraint firstItem="e7R-43-iGk" firstAttribute="leading" secondItem="whD-C7-TOK" secondAttribute="leading" constant="15" id="dM5-v4-jIz"/>
+                                <constraint firstItem="gkm-pt-P58" firstAttribute="centerX" secondItem="whD-C7-TOK" secondAttribute="centerX" id="n2k-uh-g3X"/>
+                                <constraint firstItem="gkm-pt-P58" firstAttribute="centerY" secondItem="whD-C7-TOK" secondAttribute="centerY" id="zEo-kf-YG7"/>
+                            </constraints>
+                        </view>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCf-pi-4Nf">
+                            <rect key="frame" x="0.0" y="60" width="375" height="587"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTx-gH-pND">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="530.5"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cjr-dO-HWb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数万奖池正在瓜分中，你来不来？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9tE-jo-bPS">
+                                                    <rect key="frame" x="18" y="15" width="339" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.2156862745" green="0.0" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="9tE-jo-bPS" firstAttribute="leading" secondItem="Cjr-dO-HWb" secondAttribute="leading" constant="18" id="8hM-Oc-t9i"/>
+                                                <constraint firstItem="9tE-jo-bPS" firstAttribute="top" secondItem="Cjr-dO-HWb" secondAttribute="top" constant="15" id="DUI-8Z-sPJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="9tE-jo-bPS" secondAttribute="bottom" constant="15" id="JVa-94-2qe"/>
+                                                <constraint firstAttribute="trailing" secondItem="9tE-jo-bPS" secondAttribute="trailing" constant="18" id="ZLZ-vj-FvG"/>
+                                            </constraints>
+                                        </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="QV7-Ar-ll9">
+                                            <rect key="frame" x="18" y="50.5" width="339" height="7"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="7" id="TEc-No-WM6"/>
+                                            </constraints>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7a-AD-lb5">
+                                            <rect key="frame" x="0.0" y="57.5" width="375" height="91"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac2-aV-qsc">
+                                                    <rect key="frame" x="18" y="15" width="339" height="61"/>
+                                                    <string key="text">活动时间：
+在WinQ内共享资产，按照连接总数按比例瓜分大奖</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ac2-aV-qsc" secondAttribute="trailing" constant="18" id="4dH-SC-9kg"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ac2-aV-qsc" secondAttribute="bottom" constant="15" id="64c-3p-Rie"/>
+                                                <constraint firstItem="Ac2-aV-qsc" firstAttribute="top" secondItem="v7a-AD-lb5" secondAttribute="top" constant="15" id="97I-sm-pXU"/>
+                                                <constraint firstItem="Ac2-aV-qsc" firstAttribute="leading" secondItem="v7a-AD-lb5" secondAttribute="leading" constant="18" id="ecn-Ur-k7w"/>
+                                            </constraints>
+                                        </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_purple_box" translatesAutoresizingMaskIntoConstraints="NO" id="sIE-hv-hsZ">
+                                            <rect key="frame" x="18" y="148.5" width="339" height="7"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="7" id="jBv-nj-Afs"/>
+                                            </constraints>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8t-xo-XiC">
+                                            <rect key="frame" x="0.0" y="155.5" width="375" height="375"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIg-wT-tK7">
+                                                    <rect key="frame" x="18" y="15" width="339" height="345"/>
+                                                    <string key="text">活动规则：
+1,活动开始后，对所有已经注册的VPN资产进行连接数量排名
+2,活动的连接总数（VPN连接）=每次成功连接次数-每次失败连接次数
+例如：用户连接某VPN资产名（XXX），连接3次后成功连接（两次失败，一次成功），则连接总数=-2+1=-1
+3,排行榜仅展示连接次数为正数的VPN资产，即（连接成功次数&gt;连接失败次数）
+4,活动采取倒计时方式进行（7*24小时）
+5,倒计时结束，按照连接总数瓜分大礼，其中第一名获得50%的奖池，其余9名按连接总数平分40%的奖池，10%随机抽取一个资产获得幸运大奖
+6,本活动由WinQ团队支持赞助，如有任何问题可联系工作人员（Telegram，Facebook）</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="VIg-wT-tK7" secondAttribute="trailing" constant="18" id="1n4-kY-AdG"/>
+                                                <constraint firstAttribute="bottom" secondItem="VIg-wT-tK7" secondAttribute="bottom" constant="15" id="UpT-GH-E9V"/>
+                                                <constraint firstItem="VIg-wT-tK7" firstAttribute="top" secondItem="p8t-xo-XiC" secondAttribute="top" constant="15" id="WWy-96-iAE"/>
+                                                <constraint firstItem="VIg-wT-tK7" firstAttribute="leading" secondItem="p8t-xo-XiC" secondAttribute="leading" constant="18" id="d7p-PZ-idz"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="v7a-AD-lb5" firstAttribute="top" secondItem="QV7-Ar-ll9" secondAttribute="bottom" id="2tR-px-Xbh"/>
+                                        <constraint firstItem="p8t-xo-XiC" firstAttribute="top" secondItem="sIE-hv-hsZ" secondAttribute="bottom" id="5Xv-qa-4tv"/>
+                                        <constraint firstItem="v7a-AD-lb5" firstAttribute="leading" secondItem="GTx-gH-pND" secondAttribute="leading" id="7Kn-5g-2Ja"/>
+                                        <constraint firstItem="sIE-hv-hsZ" firstAttribute="top" secondItem="v7a-AD-lb5" secondAttribute="bottom" id="7MH-Ig-SDG"/>
+                                        <constraint firstAttribute="trailing" secondItem="p8t-xo-XiC" secondAttribute="trailing" id="7qu-hd-z6L"/>
+                                        <constraint firstItem="Cjr-dO-HWb" firstAttribute="top" secondItem="GTx-gH-pND" secondAttribute="top" id="9xk-c4-kuv"/>
+                                        <constraint firstAttribute="trailing" secondItem="QV7-Ar-ll9" secondAttribute="trailing" constant="18" id="AHu-ov-8Bj"/>
+                                        <constraint firstItem="p8t-xo-XiC" firstAttribute="leading" secondItem="GTx-gH-pND" secondAttribute="leading" id="HhE-vo-85v"/>
+                                        <constraint firstAttribute="trailing" secondItem="sIE-hv-hsZ" secondAttribute="trailing" constant="18" id="R2q-pl-JF7"/>
+                                        <constraint firstItem="QV7-Ar-ll9" firstAttribute="leading" secondItem="GTx-gH-pND" secondAttribute="leading" constant="18" id="Zi7-tH-kia"/>
+                                        <constraint firstItem="QV7-Ar-ll9" firstAttribute="top" secondItem="Cjr-dO-HWb" secondAttribute="bottom" id="bFX-2E-hUO"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cjr-dO-HWb" secondAttribute="trailing" id="co0-Ix-g2K"/>
+                                        <constraint firstAttribute="trailing" secondItem="v7a-AD-lb5" secondAttribute="trailing" id="kcn-3e-ySq"/>
+                                        <constraint firstItem="Cjr-dO-HWb" firstAttribute="leading" secondItem="GTx-gH-pND" secondAttribute="leading" id="rCr-Jc-lb5"/>
+                                        <constraint firstAttribute="bottom" secondItem="p8t-xo-XiC" secondAttribute="bottom" id="wad-TW-eCD"/>
+                                        <constraint firstItem="sIE-hv-hsZ" firstAttribute="leading" secondItem="GTx-gH-pND" secondAttribute="leading" constant="18" id="yvd-4T-YL0"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="GTx-gH-pND" secondAttribute="bottom" id="5wa-RV-2ue"/>
+                                <constraint firstItem="GTx-gH-pND" firstAttribute="centerX" secondItem="fCf-pi-4Nf" secondAttribute="centerX" id="gky-Pq-0f8"/>
+                                <constraint firstItem="GTx-gH-pND" firstAttribute="top" secondItem="fCf-pi-4Nf" secondAttribute="top" id="hSP-b6-KWY"/>
+                                <constraint firstItem="GTx-gH-pND" firstAttribute="leading" secondItem="fCf-pi-4Nf" secondAttribute="leading" id="nax-Is-1P7"/>
+                                <constraint firstAttribute="trailing" secondItem="GTx-gH-pND" secondAttribute="trailing" id="sEO-zO-zB4"/>
+                            </constraints>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="fCf-pi-4Nf" firstAttribute="leading" secondItem="ZX5-Uc-03d" secondAttribute="leading" id="4oK-VO-7Xl"/>
+                        <constraint firstItem="whD-C7-TOK" firstAttribute="leading" secondItem="ZX5-Uc-03d" secondAttribute="leading" id="GAQ-77-VsY"/>
+                        <constraint firstAttribute="trailing" secondItem="whD-C7-TOK" secondAttribute="trailing" id="PzO-3x-ilA"/>
+                        <constraint firstAttribute="bottom" secondItem="fCf-pi-4Nf" secondAttribute="bottom" id="Xzw-dn-VA6"/>
+                        <constraint firstItem="whD-C7-TOK" firstAttribute="top" secondItem="ZX5-Uc-03d" secondAttribute="top" id="ZZF-ak-Okp"/>
+                        <constraint firstItem="fCf-pi-4Nf" firstAttribute="top" secondItem="whD-C7-TOK" secondAttribute="bottom" id="tId-f0-M4D"/>
+                        <constraint firstAttribute="trailing" secondItem="fCf-pi-4Nf" secondAttribute="trailing" id="yfp-m2-VwU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ZX5-Uc-03d" firstAttribute="top" secondItem="4gd-iF-U9q" secondAttribute="top" id="Aj0-m9-pbg"/>
+                <constraint firstItem="ZX5-Uc-03d" firstAttribute="trailing" secondItem="4gd-iF-U9q" secondAttribute="trailing" id="IqQ-bL-XXt"/>
+                <constraint firstItem="ZX5-Uc-03d" firstAttribute="leading" secondItem="4gd-iF-U9q" secondAttribute="leading" id="UWX-n3-9DL"/>
+                <constraint firstItem="ZX5-Uc-03d" firstAttribute="bottom" secondItem="4gd-iF-U9q" secondAttribute="bottom" id="lRj-N9-RXD"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="4gd-iF-U9q"/>
+            <point key="canvasLocation" x="-296" y="-388"/>
         </view>
     </objects>
+    <resources>
+        <image name="bg_purple_box" width="339" height="7"/>
+        <image name="icon_back" width="38" height="38"/>
+    </resources>
 </document>
