@@ -178,13 +178,16 @@
     } else if ([type isEqualToString:checkConnectReq]) { // 检查是否连接正常的请求，即发一个空消息过去，看对方是否会回消息
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = checkConnectRsp;
-        model.data = data;
-        NSString *p2pid = dataDic[@"p2pId"];
-        if (p2pid == nil || [p2pid isEmptyString]) {
-            p2pid = publickey;
+        NSString *fromP2pid = [ToxManage getOwnP2PId];
+        NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:fromP2pid};
+        model.data = dataDic.mj_JSONString;
+//        model.data = data;
+        NSString *toP2pid = dataDic[@"p2pId"];
+        if (toP2pid == nil || [toP2pid isEmptyString]) {
+            toP2pid = publickey;
         }
         NSString *str = model.mj_JSONString;
-        [ToxManage sendMessageWithMessage:str withP2pid:p2pid];
+        [ToxManage sendMessageWithMessage:str withP2pid:toP2pid];
     }
 }
 

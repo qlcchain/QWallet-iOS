@@ -113,6 +113,13 @@
 		58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FCA2072089800C08784 /* HistoryRecordsCell.m */; };
 		58270FD820720D3600C08784 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FD620720D3600C08784 /* ProfileViewController.m */; };
 		582A40872107190900C12820 /* PacketTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 582A40802107190900C12820 /* PacketTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		582BA0E6211145E90071CC35 /* RankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582BA0E4211145E90071CC35 /* RankingCell.m */; };
+		582BA0E7211145E90071CC35 /* RankingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582BA0E5211145E90071CC35 /* RankingCell.xib */; };
+		582BA0EA211146110071CC35 /* TestView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 582BA0E9211146110071CC35 /* TestView1.m */; };
+		582BA0EE211146370071CC35 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582BA0EC211146370071CC35 /* RankingViewController.m */; };
+		582BA0EF211146370071CC35 /* RankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582BA0ED211146370071CC35 /* RankingViewController.xib */; };
+		582BA0F3211146490071CC35 /* RankingRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582BA0F1211146490071CC35 /* RankingRuleViewController.m */; };
+		582BA0F4211146490071CC35 /* RankingRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582BA0F2211146490071CC35 /* RankingRuleViewController.xib */; };
 		5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833AD0B206C8427002C6909 /* WalletMenuView.m */; };
 		5834CC5B207E1573009168F8 /* VPNConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5834CC59207E1573009168F8 /* VPNConnectedViewController.m */; };
 		583910F9208495F200A19E7E /* DDLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910F8208495F200A19E7E /* DDLogUtil.m */; };
@@ -633,6 +640,17 @@
 		58270FD620720D3600C08784 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		582A40802107190900C12820 /* PacketTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PacketTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		582A40842107190900C12820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		582BA0E3211145E90071CC35 /* RankingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingCell.h; sourceTree = "<group>"; };
+		582BA0E4211145E90071CC35 /* RankingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingCell.m; sourceTree = "<group>"; };
+		582BA0E5211145E90071CC35 /* RankingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankingCell.xib; sourceTree = "<group>"; };
+		582BA0E8211146110071CC35 /* TestView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestView1.h; sourceTree = "<group>"; };
+		582BA0E9211146110071CC35 /* TestView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestView1.m; sourceTree = "<group>"; };
+		582BA0EB211146370071CC35 /* RankingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
+		582BA0EC211146370071CC35 /* RankingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
+		582BA0ED211146370071CC35 /* RankingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankingViewController.xib; sourceTree = "<group>"; };
+		582BA0F0211146490071CC35 /* RankingRuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingRuleViewController.h; sourceTree = "<group>"; };
+		582BA0F1211146490071CC35 /* RankingRuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingRuleViewController.m; sourceTree = "<group>"; };
+		582BA0F2211146490071CC35 /* RankingRuleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankingRuleViewController.xib; sourceTree = "<group>"; };
 		5833AD0A206C8427002C6909 /* WalletMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletMenuView.h; sourceTree = "<group>"; };
 		5833AD0B206C8427002C6909 /* WalletMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletMenuView.m; sourceTree = "<group>"; };
 		5834CC58207E1573009168F8 /* VPNConnectedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNConnectedViewController.h; sourceTree = "<group>"; };
@@ -1746,6 +1764,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				582BA0E0211145990071CC35 /* Ranking */,
 				58DE900720FEE66B00325B38 /* FreeConnection */,
 				5849BD3820FD9F2100F972AF /* Log */,
 				58ADE69920F499D800C50306 /* VpnRegister */,
@@ -2162,6 +2181,40 @@
 				584B466421071A0D0022EE27 /* PacketTunnel-Bridging-Header.h */,
 			);
 			path = PacketTunnel;
+			sourceTree = "<group>";
+		};
+		582BA0E0211145990071CC35 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				582BA0E2211145B70071CC35 /* Cell */,
+				582BA0E1211145B10071CC35 /* View */,
+				582BA0EB211146370071CC35 /* RankingViewController.h */,
+				582BA0EC211146370071CC35 /* RankingViewController.m */,
+				582BA0ED211146370071CC35 /* RankingViewController.xib */,
+				582BA0F0211146490071CC35 /* RankingRuleViewController.h */,
+				582BA0F1211146490071CC35 /* RankingRuleViewController.m */,
+				582BA0F2211146490071CC35 /* RankingRuleViewController.xib */,
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
+		582BA0E1211145B10071CC35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				582BA0E8211146110071CC35 /* TestView1.h */,
+				582BA0E9211146110071CC35 /* TestView1.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		582BA0E2211145B70071CC35 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				582BA0E3211145E90071CC35 /* RankingCell.h */,
+				582BA0E4211145E90071CC35 /* RankingCell.m */,
+				582BA0E5211145E90071CC35 /* RankingCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5833AD09206C8387002C6909 /* View */ = {
@@ -2986,6 +3039,7 @@
 				5860AD2220CFB51D00EEB6CE /* HistoryWifiCell.xib in Resources */,
 				5860ADA720CFB5F900EEB6CE /* WalletChangeWalletViewController.xib in Resources */,
 				580D91BD2063AE5300B12506 /* Roboto-Italic.ttf in Resources */,
+				582BA0F4211146490071CC35 /* RankingRuleViewController.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				73FF643520EDCD4400E29B3B /* GuideEnterWalletView.xib in Resources */,
 				5860AC7A20CFB39F00EEB6CE /* NounView.xib in Resources */,
@@ -3015,6 +3069,7 @@
 				580D91BA2063AE5300B12506 /* Roboto-Bold.ttf in Resources */,
 				5860ADA020CFB5EF00EEB6CE /* WalletViewController.xib in Resources */,
 				73FF644220EDCD6000E29B3B /* GuideSettingMoreView.xib in Resources */,
+				582BA0E7211145E90071CC35 /* RankingCell.xib in Resources */,
 				73FF640120EDCC5500E29B3B /* GuideVpnCountryView.xib in Resources */,
 				58CDB5DA2085DB6600B74962 /* test-ca.crt in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
@@ -3047,6 +3102,7 @@
 				5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */,
 				5860ACC720CFB46900EEB6CE /* VPNFileInputView.xib in Resources */,
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
+				582BA0EF211146370071CC35 /* RankingViewController.xib in Resources */,
 				5860ACAB20CFB43E00EEB6CE /* WifiViewController.xib in Resources */,
 				5860AD4520CFB56700EEB6CE /* BuyQlcView.xib in Resources */,
 				5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */,
@@ -3208,6 +3264,7 @@
 				73EA1B20207B3EF600B4F71D /* WalletSelectCell.m in Sources */,
 				5812DD9F20A1A7890043A8A8 /* ZXMessageModel.m in Sources */,
 				7310AA0C20D0C71400F2261A /* NSBundle+Language.m in Sources */,
+				582BA0EE211146370071CC35 /* RankingViewController.m in Sources */,
 				580D915D20625A4400B12506 /* UIView+Toast.m in Sources */,
 				580D915020625A4400B12506 /* UIAlertView+Block.m in Sources */,
 				73B1914A209C5C5C0023D9AA /* VPNOperationUtil.m in Sources */,
@@ -3242,6 +3299,7 @@
 				73A05A332081D91600974483 /* HYBImageClipedManager.m in Sources */,
 				58A4DB1420EB1F38001C241D /* GuideBaseView.m in Sources */,
 				73B6F4CB20AEC08E004B7219 /* Data+Util.swift in Sources */,
+				582BA0EA211146110071CC35 /* TestView1.m in Sources */,
 				73B6F4D020AEC08E004B7219 /* NEP5Token.swift in Sources */,
 				5812DDA920A1A7890043A8A8 /* ZXChatBoxItemView.m in Sources */,
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
@@ -3288,6 +3346,7 @@
 				583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */,
 				580D914020625A4300B12506 /* UIImage+Orientation.m in Sources */,
 				7362EB0C20A2D1B100F554FE /* WalletManage.swift in Sources */,
+				582BA0F3211146490071CC35 /* RankingRuleViewController.m in Sources */,
 				58DC655D206BA4A9002CF682 /* WalletPublicAddressViewController.m in Sources */,
 				580D916920625A4400B12506 /* UIViewController+BarItem.m in Sources */,
 				73B6F4C720AEC08E004B7219 /* NeoScan.swift in Sources */,
@@ -3431,6 +3490,7 @@
 				586F36FE2079F92C00E12F95 /* VPNRegisterView1.m in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,
 				58CDB5D72085DB6600B74962 /* VPNUtil.swift in Sources */,
+				582BA0E6211145E90071CC35 /* RankingCell.m in Sources */,
 				58270FC22072019400C08784 /* WalletUtil.m in Sources */,
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
 				58270FD820720D3600C08784 /* ProfileViewController.m in Sources */,
