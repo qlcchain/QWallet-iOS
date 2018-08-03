@@ -50,6 +50,7 @@
 #import "TransferUtil.h"
 #import "VPNTranferMode.h"
 #import "FreeConnectionViewController.h"
+#import "RankingViewController.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -934,6 +935,9 @@ static BOOL refreshAnimate = YES;
 - (IBAction)freeConnectionAction:(id)sender {
     [self jumpToFreeConnection];
 }
+- (IBAction)rightAction:(id)sender {
+    [self jumpToRanking];
+}
 
 #pragma mark - 选择国家
 - (void) selectCountry {
@@ -1008,6 +1012,11 @@ static BOOL refreshAnimate = YES;
 
 - (void)jumpToFreeConnection {
     FreeConnectionViewController *vc = [[FreeConnectionViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void) jumpToRanking {
+    RankingViewController *vc = [[RankingViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

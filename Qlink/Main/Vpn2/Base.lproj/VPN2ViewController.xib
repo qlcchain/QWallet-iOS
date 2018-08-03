@@ -104,6 +104,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KzM-aF-B4L">
                                     <rect key="frame" x="319" y="15" width="36" height="36"/>
                                     <state key="normal" image="icon_setting"/>
+                                    <connections>
+                                        <action selector="rightAction:" destination="-1" eventType="touchUpInside" id="Hhj-n6-UOT"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
