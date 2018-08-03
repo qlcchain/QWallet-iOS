@@ -9,6 +9,8 @@
 #import "RankingRuleViewController.h"
 
 @interface RankingRuleViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *contentImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *linkImgView;
 
 @end
 
@@ -30,7 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    _contentImgView.image = [UIImage imageNamed:NSStringLocalizable(@"img_activities")];
+    _linkImgView.image = [UIImage imageNamed:NSStringLocalizable(@"img_link")];
 }
 
 - (void)didReceiveMemoryWarning {

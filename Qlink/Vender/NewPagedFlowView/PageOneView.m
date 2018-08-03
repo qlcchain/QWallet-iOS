@@ -69,9 +69,9 @@
     _subSecons += 1.0f;//毫秒数从0-9，所以每次过去100毫秒
     
     //天数
-    NSString *days = [NSString stringWithFormat:@"%ld", (NSInteger)((_timeSecons-_subSecons)/60/60/24)%60];
+    NSString *days = [NSString stringWithFormat:@"%ld", (NSInteger)((_timeSecons-_subSecons)/(24*3600))];
     //小时数
-    NSString *hours = [NSString stringWithFormat:@"%ld", (NSInteger)((_timeSecons-_subSecons)/60/60)%60];
+    NSString *hours = [NSString stringWithFormat:@"%ld", (NSInteger)((_timeSecons-_subSecons)/60/60)%24];
     //分钟数
     NSString *minute = [NSString stringWithFormat:@"%ld", (NSInteger)((_timeSecons-_subSecons)/60)%60];
     //秒数
