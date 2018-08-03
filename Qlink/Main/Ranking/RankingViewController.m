@@ -180,7 +180,7 @@
             threeView.layer.masksToBounds = YES;
             threeView.backgroundColor = MAIN_PURPLE_COLOR;
         }
-        threeView.lblCountDesc.text = [NSString stringWithFormat:NSStringLocalizable(@"qlc_pool"),rankMode.actAmount?:@"0"];
+        threeView.lblCountDesc.text = [NSString stringWithFormat:@"%@ %@",rankMode.actAmount?:@"0",NSStringLocalizable(@"qlc_pool")];
         return threeView;
     } else if ([rankMode.actStatus isEqualToString:@"START"]){
         PageOneView *oneView = (PageOneView *)[flowView dequeueReusableCell];
