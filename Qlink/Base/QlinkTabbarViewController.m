@@ -13,7 +13,7 @@
 #import "VPN2ViewController.h"
 #import "QlinkNavViewController.h"
 #import "UIView+Gradient.h"
-#import "NounView.h"
+//#import "NounView.h"
 #import <Masonry/Masonry.h>
 #import "WalletUtil.h"
 
@@ -22,7 +22,7 @@
 
 @interface QlinkTabbarViewController ()<UITabBarControllerDelegate>
 
-@property (nonatomic , strong) NounView *nounView;
+//@property (nonatomic , strong) NounView *nounView;
 
 @end
 

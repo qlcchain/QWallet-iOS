@@ -139,7 +139,6 @@
 		584B466D21071A0F0022EE27 /* KeychainAccess+Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584B466921071A0F0022EE27 /* KeychainAccess+Reference.swift */; };
 		584B467921085CB00022EE27 /* MMWormhole.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584B467821085CB00022EE27 /* MMWormhole.framework */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
-		5860AC7A20CFB39F00EEB6CE /* NounView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7C20CFB39F00EEB6CE /* NounView.xib */; };
 		5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9820CFB40F00EEB6CE /* SettingViewController.xib */; };
 		5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9F20CFB42000EEB6CE /* WebViewController.xib */; };
 		5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */; };
@@ -278,7 +277,6 @@
 		734F52A020B6BF81002D45B7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F529F20B6BF81002D45B7 /* CFNetwork.framework */; };
 		734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F52A120B6BF90002D45B7 /* CoreTelephony.framework */; };
 		735140312063A653007BE4EC /* VpnTabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7351402F2063A653007BE4EC /* VpnTabCell.m */; };
-		735140352064A40D007BE4EC /* NounView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735140342064A40D007BE4EC /* NounView.m */; };
 		7351508D20D3B71300194711 /* DBManageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7351508C20D3B71300194711 /* DBManageUtil.m */; };
 		735310CC211147B300537372 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310BF211147A500537372 /* RankingViewController.m */; };
 		735310CD211147B300537372 /* RankingRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C0211147A500537372 /* RankingRuleViewController.m */; };
@@ -685,8 +683,6 @@
 		584B466921071A0F0022EE27 /* KeychainAccess+Reference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeychainAccess+Reference.swift"; sourceTree = "<group>"; };
 		584B467821085CB00022EE27 /* MMWormhole.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMWormhole.framework; path = Carthage/Build/iOS/MMWormhole.framework; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
-		5860AC7B20CFB39F00EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NounView.xib; sourceTree = "<group>"; };
-		5860AC7E20CFB3A100EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NounView.strings; sourceTree = "<group>"; };
 		5860AC9720CFB40F00EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingViewController.xib; sourceTree = "<group>"; };
 		5860AC9A20CFB41100EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingViewController.strings; sourceTree = "<group>"; };
 		5860AC9E20CFB42000EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebViewController.xib; sourceTree = "<group>"; };
@@ -943,8 +939,6 @@
 		734F52A120B6BF90002D45B7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		7351402E2063A653007BE4EC /* VpnTabCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VpnTabCell.h; sourceTree = "<group>"; };
 		7351402F2063A653007BE4EC /* VpnTabCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VpnTabCell.m; sourceTree = "<group>"; };
-		735140332064A40D007BE4EC /* NounView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NounView.h; sourceTree = "<group>"; };
-		735140342064A40D007BE4EC /* NounView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NounView.m; sourceTree = "<group>"; };
 		7351508B20D3B71300194711 /* DBManageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBManageUtil.h; sourceTree = "<group>"; };
 		7351508C20D3B71300194711 /* DBManageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBManageUtil.m; sourceTree = "<group>"; };
 		735310BF211147A500537372 /* RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
@@ -979,7 +973,6 @@
 		7362EB2820AAC17900F554FE /* UIView+HUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+HUD.m"; sourceTree = "<group>"; };
 		736B3E3C208D7AD500696C81 /* VPNFileInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNFileInputView.h; sourceTree = "<group>"; };
 		736B3E3D208D7AD500696C81 /* VPNFileInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNFileInputView.m; sourceTree = "<group>"; };
-		7372850420CFBAB400D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/NounView.strings; sourceTree = "<group>"; };
 		7372850820CFBAB600D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/SettingViewController.strings; sourceTree = "<group>"; };
 		7372850920CFBAB700D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/WebViewController.strings; sourceTree = "<group>"; };
 		7372850A20CFBAB700D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MyAssetsViewController.strings; sourceTree = "<group>"; };
@@ -1026,7 +1019,6 @@
 		7372853420CFBAC800D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ChatTipView.strings; sourceTree = "<group>"; };
 		7372853520CFBAC800D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/NotifactionView.strings; sourceTree = "<group>"; };
 		7372853620CFBAC800D6DE77 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7372853720CFBAD900D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NounView.strings; sourceTree = "<group>"; };
 		7372853B20CFBADB00D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SettingViewController.strings; sourceTree = "<group>"; };
 		7372853C20CFBADC00D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/WebViewController.strings; sourceTree = "<group>"; };
 		7372853D20CFBADC00D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MyAssetsViewController.strings; sourceTree = "<group>"; };
@@ -1072,7 +1064,6 @@
 		7372856620CFBAED00D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ChatHeadView.strings; sourceTree = "<group>"; };
 		7372856720CFBAEE00D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ChatTipView.strings; sourceTree = "<group>"; };
 		7372856820CFBAEE00D6DE77 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NotifactionView.strings; sourceTree = "<group>"; };
-		7372856920CFBB4C00D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NounView.strings; sourceTree = "<group>"; };
 		7372856D20CFBB4E00D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SettingViewController.strings; sourceTree = "<group>"; };
 		7372856E20CFBB4E00D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/WebViewController.strings; sourceTree = "<group>"; };
 		7372856F20CFBB4F00D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MyAssetsViewController.strings; sourceTree = "<group>"; };
@@ -1119,7 +1110,6 @@
 		7372859920CFBB5F00D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ChatTipView.strings; sourceTree = "<group>"; };
 		7372859A20CFBB5F00D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NotifactionView.strings; sourceTree = "<group>"; };
 		7372859B20CFBB6000D6DE77 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7372859C20CFBB9700D6DE77 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NounView.strings"; sourceTree = "<group>"; };
 		737285A020CFBB9900D6DE77 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SettingViewController.strings"; sourceTree = "<group>"; };
 		737285A120CFBB9900D6DE77 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WebViewController.strings"; sourceTree = "<group>"; };
 		737285A220CFBB9900D6DE77 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MyAssetsViewController.strings"; sourceTree = "<group>"; };
@@ -2574,9 +2564,6 @@
 				58CDB5EE20888E7600B74962 /* WhiteCiycleImageView.m */,
 				58CDB5F020889FA600B74962 /* QShadowView.h */,
 				58CDB5F120889FA600B74962 /* QShadowView.m */,
-				735140332064A40D007BE4EC /* NounView.h */,
-				735140342064A40D007BE4EC /* NounView.m */,
-				5860AC7C20CFB39F00EEB6CE /* NounView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -3068,7 +3055,6 @@
 				735310D2211147B300537372 /* RankingRuleViewController.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				73FF643520EDCD4400E29B3B /* GuideEnterWalletView.xib in Resources */,
-				5860AC7A20CFB39F00EEB6CE /* NounView.xib in Resources */,
 				588BFCB820EF211F00B1E860 /* ConfigurationRelease.plist in Resources */,
 				58CDB5DB2085DB6600B74962 /* keyfile-decrypted.3des in Resources */,
 				5860ADAE20CFB60500EEB6CE /* LaunchViewController.xib in Resources */,
@@ -3417,7 +3403,6 @@
 				58A6E95F206CD58E004535E4 /* NewWalletViewController.m in Sources */,
 				580D915B20625A4400B12506 /* UIView+Constraints.m in Sources */,
 				586F3712207AFD1D00E12F95 /* ChooseContinentViewController.m in Sources */,
-				735140352064A40D007BE4EC /* NounView.m in Sources */,
 				5812DDBF20A1A7D20043A8A8 /* NSString+TL.m in Sources */,
 				73EA1B1B207B07AA00B4F71D /* WalletChangeWalletViewController.m in Sources */,
 				5812DDA420A1A7890043A8A8 /* ZXUser.m in Sources */,
@@ -3588,19 +3573,6 @@
 				737F90C420E39DD0008BC9C2 /* en */,
 			);
 			name = ProfileViewController.xib;
-			sourceTree = "<group>";
-		};
-		5860AC7C20CFB39F00EEB6CE /* NounView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5860AC7B20CFB39F00EEB6CE /* Base */,
-				5860AC7E20CFB3A100EEB6CE /* en */,
-				7372850420CFBAB400D6DE77 /* tr */,
-				7372853720CFBAD900D6DE77 /* ko */,
-				7372856920CFBB4C00D6DE77 /* ru */,
-				7372859C20CFBB9700D6DE77 /* zh-Hans */,
-			);
-			name = NounView.xib;
 			sourceTree = "<group>";
 		};
 		5860AC9820CFB40F00EEB6CE /* SettingViewController.xib */ = {
