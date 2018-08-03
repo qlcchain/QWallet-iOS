@@ -76,12 +76,12 @@
     } else if ([type isEqualToString:sendFileRequest]) { // 发送文件的请求，这个可以不要回应
     } else if ([type isEqualToString:sendVpnFileRequest]) { // 发送vpn配置文件的请求
         NSString *filePath = dataDic[@"filePath"];
-        NSString *p2pid = dataDic[P2P_ID];
-        if (p2pid == nil || [p2pid isEmptyString]) {
-            p2pid = publickey;
-        }
+//        NSString *p2pid = dataDic[P2P_ID];
+//        if (p2pid == nil || [p2pid isEmptyString]) {
+//            p2pid = publickey;
+//        }
         filePath = [VPNFileUtil getVPNPathWithFileName:filePath];
-        [ToxManage sendFileWithFileName:[filePath trim] withP2pid:p2pid];
+        [ToxManage sendFileWithFileName:[filePath trim] withP2pid:publickey];
     } else if ([type isEqualToString:heartBetSend]) { // 发送心跳，可以不需要回应
         
     } else if ([type isEqualToString:vpnBasicInfoReq]) { // vpn基础信息的请求
