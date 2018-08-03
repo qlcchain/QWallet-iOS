@@ -106,6 +106,9 @@
 		581781AA20F2FBCD003E74F2 /* VpnListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781A820F2FBCD003E74F2 /* VpnListCell.m */; };
 		581781AE20F2FBF5003E74F2 /* VpnToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 581781AD20F2FBF5003E74F2 /* VpnToastView.m */; };
 		5818D641210035B800651EED /* switch_load.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5818D640210035B800651EED /* switch_load.gif */; };
+		581925832114363E009AE406 /* PageThreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5819257D2114363E009AE406 /* PageThreeView.xib */; };
+		581925842114363E009AE406 /* PageOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5819257F2114363E009AE406 /* PageOneView.xib */; };
+		581925852114363E009AE406 /* NewRankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581925812114363E009AE406 /* NewRankView.xib */; };
 		58270FB92071C98100C08784 /* VPNRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FB72071C98000C08784 /* VPNRegisterViewController.m */; };
 		58270FBE2071FE3100C08784 /* UnlockWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FBC2071FE3100C08784 /* UnlockWalletViewController.m */; };
 		58270FC22072019400C08784 /* WalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC12072019400C08784 /* WalletUtil.m */; };
@@ -636,6 +639,24 @@
 		581781AC20F2FBF5003E74F2 /* VpnToastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VpnToastView.h; sourceTree = "<group>"; };
 		581781AD20F2FBF5003E74F2 /* VpnToastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VpnToastView.m; sourceTree = "<group>"; };
 		5818D640210035B800651EED /* switch_load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = switch_load.gif; sourceTree = "<group>"; };
+		5819257E2114363E009AE406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PageThreeView.xib; sourceTree = "<group>"; };
+		581925802114363E009AE406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PageOneView.xib; sourceTree = "<group>"; };
+		581925822114363E009AE406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NewRankView.xib; sourceTree = "<group>"; };
+		581925862114364D009AE406 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PageThreeView.strings; sourceTree = "<group>"; };
+		581925872114364F009AE406 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PageThreeView.strings; sourceTree = "<group>"; };
+		5819258821143651009AE406 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PageThreeView.strings; sourceTree = "<group>"; };
+		5819258921143652009AE406 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PageThreeView.strings; sourceTree = "<group>"; };
+		5819258A21143655009AE406 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PageThreeView.strings"; sourceTree = "<group>"; };
+		5819258B21143659009AE406 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PageOneView.strings; sourceTree = "<group>"; };
+		5819258C2114365B009AE406 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PageOneView.strings; sourceTree = "<group>"; };
+		5819258D2114365D009AE406 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PageOneView.strings; sourceTree = "<group>"; };
+		5819258E2114365E009AE406 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PageOneView.strings; sourceTree = "<group>"; };
+		5819258F21143660009AE406 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PageOneView.strings"; sourceTree = "<group>"; };
+		5819259021143663009AE406 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewRankView.strings; sourceTree = "<group>"; };
+		5819259121143666009AE406 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/NewRankView.strings; sourceTree = "<group>"; };
+		5819259221143667009AE406 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NewRankView.strings; sourceTree = "<group>"; };
+		5819259321143669009AE406 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NewRankView.strings; sourceTree = "<group>"; };
+		581925942114366B009AE406 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NewRankView.strings"; sourceTree = "<group>"; };
 		58270FB62071C98000C08784 /* VPNRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPNRegisterViewController.h; sourceTree = "<group>"; };
 		58270FB72071C98000C08784 /* VPNRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPNRegisterViewController.m; sourceTree = "<group>"; };
 		58270FBB2071FE3100C08784 /* UnlockWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlockWalletViewController.h; sourceTree = "<group>"; };
@@ -2680,10 +2701,13 @@
 				583D953F211430D90057A90C /* GlowLable.m */,
 				583D953C211430D90057A90C /* NewRankView.h */,
 				583D953E211430D90057A90C /* NewRankView.m */,
+				581925812114363E009AE406 /* NewRankView.xib */,
 				583D9538211430D60057A90C /* PageOneView.h */,
 				583D9539211430D80057A90C /* PageOneView.m */,
+				5819257F2114363E009AE406 /* PageOneView.xib */,
 				583D953B211430D80057A90C /* PageThreeView.h */,
 				583D953A211430D80057A90C /* PageThreeView.m */,
+				5819257D2114363E009AE406 /* PageThreeView.xib */,
 				735310DD2111509900537372 /* PGIndexBannerSubiew.h */,
 				735310DC2111509900537372 /* PGIndexBannerSubiew.m */,
 				735310D92111508C00537372 /* NewPagedFlowView.m */,
@@ -3114,6 +3138,7 @@
 				5860AD9220CFB5DD00EEB6CE /* WalletPublicAddressViewController.xib in Resources */,
 				5860ACDC20CFB49800EEB6CE /* VPNRegisterViewController.xib in Resources */,
 				73FF647620EDCDA800E29B3B /* GuidenSettingView.xib in Resources */,
+				581925842114363E009AE406 /* PageOneView.xib in Resources */,
 				5860ACF120CFB4C900EEB6CE /* ChooseContinentViewController.xib in Resources */,
 				583D959A211432110057A90C /* RankingSubCell.xib in Resources */,
 				58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */,
@@ -3150,6 +3175,7 @@
 				5860ACB220CFB44C00EEB6CE /* VPNRegisterView1.xib in Resources */,
 				588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */,
 				5860AD3E20CFB55D00EEB6CE /* WalletMenuView.xib in Resources */,
+				581925832114363E009AE406 /* PageThreeView.xib in Resources */,
 				5860AD8B20CFB5D200EEB6CE /* WalletImportKeyViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
 				73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */,
@@ -3197,6 +3223,7 @@
 				588BFCB920EF211F00B1E860 /* ConfigurationDebug.plist in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
+				581925852114363E009AE406 /* NewRankView.xib in Resources */,
 				5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */,
 				5860AD2920CFB52600EEB6CE /* MyAssetsCell.xib in Resources */,
 				5860ACE320CFB4A500EEB6CE /* VpnViewController.xib in Resources */,
@@ -3623,6 +3650,45 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5819257D2114363E009AE406 /* PageThreeView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5819257E2114363E009AE406 /* Base */,
+				581925862114364D009AE406 /* en */,
+				581925872114364F009AE406 /* tr */,
+				5819258821143651009AE406 /* ko */,
+				5819258921143652009AE406 /* ru */,
+				5819258A21143655009AE406 /* zh-Hans */,
+			);
+			name = PageThreeView.xib;
+			sourceTree = "<group>";
+		};
+		5819257F2114363E009AE406 /* PageOneView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				581925802114363E009AE406 /* Base */,
+				5819258B21143659009AE406 /* en */,
+				5819258C2114365B009AE406 /* tr */,
+				5819258D2114365D009AE406 /* ko */,
+				5819258E2114365E009AE406 /* ru */,
+				5819258F21143660009AE406 /* zh-Hans */,
+			);
+			name = PageOneView.xib;
+			sourceTree = "<group>";
+		};
+		581925812114363E009AE406 /* NewRankView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				581925822114363E009AE406 /* Base */,
+				5819259021143663009AE406 /* en */,
+				5819259121143666009AE406 /* tr */,
+				5819259221143667009AE406 /* ko */,
+				5819259321143669009AE406 /* ru */,
+				581925942114366B009AE406 /* zh-Hans */,
+			);
+			name = NewRankView.xib;
+			sourceTree = "<group>";
+		};
 		583D957F211432110057A90C /* RankingViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
