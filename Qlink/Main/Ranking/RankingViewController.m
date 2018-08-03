@@ -20,6 +20,7 @@
 #import "VPNRankMode.h"
 #import "NSDate+Category.h"
 #import "NSDateFormatter+Category.h"
+#import "SkyRadiusView.h"
 
 #define PAGE_PADDING 86
 #define PAGE_HEIGHT 150//(SCREEN_WIDTH - PAGE_PADDING) * 9 / 16
@@ -31,7 +32,8 @@
 @property (weak, nonatomic) IBOutlet UIView *flowBackView;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) NSMutableArray *sourceArray;
-@property (weak, nonatomic) IBOutlet RefreshTableView *myTabV;
+@property (weak, nonatomic) IBOutlet SkyRadiusView *tabBackView;
+@property (strong, nonatomic) RefreshTableView *myTabV;
 //@property (strong, nonatomic) RefreshTableView *mainTable;
 @property (nonatomic ,strong) NSString *currentTime;
 @property (nonatomic ,strong) RankingMode *currentRank;
@@ -44,12 +46,7 @@
     [super viewDidLoad];
     // 获取活动列表接口
     [self sendQueryActsRequest];
-    _myTabV.delegate = self;
-    _myTabV.dataSource = self;
-    _myTabV.slimeView.delegate = self;
-    [_myTabV registerNib:[UINib nibWithNibName:RankingCellReuse bundle:nil] forCellReuseIdentifier:RankingCellReuse];
-    [_myTabV registerNib:[UINib nibWithNibName:RankingSubCellReuse bundle:nil] forCellReuseIdentifier:RankingSubCellReuse];
-
+    
 }
 
 #pragma mark -init pageview
@@ -222,7 +219,7 @@
     self.currentRank = self.dataArray[pageNumber];
     if (self.sourceArray.count > 0) {
         [self.sourceArray removeAllObjects];
-        [_myTabV reloadData];
+        [self.myTabV reloadData];
     }
     [self sendQueryVpnRankingsRequestWithActId:self.currentRank.actId];
 }
@@ -242,15 +239,15 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (_myTabV.slimeView) {
-        [_myTabV.slimeView scrollViewDidScroll];
+    if (self.myTabV.slimeView) {
+        [self.myTabV.slimeView scrollViewDidScroll];
     }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (_myTabV.slimeView) {
-        [_myTabV.slimeView scrollViewDidEndDraging];
+    if (self.myTabV.slimeView) {
+        [self.myTabV.slimeView scrollViewDidEndDraging];
     }
 }
 
@@ -291,24 +288,45 @@
 
 - (void) sendQueryVpnRankingsRequestWithActId:(NSString *) actId {
     [RequestService requestWithUrl:queryVpnRankings_Url params:@{@"actId":actId} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [_myTabV.slimeView endRefresh];
+        [self.myTabV.slimeView endRefresh];
          if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
               NSArray *array = [[responseObject objectForKey:Server_Data] objectForKey:@"vpnRanking"];
              if (self.sourceArray.count > 0) {
                  [self.sourceArray removeAllObjects];
              }
              [self.sourceArray addObjectsFromArray:[VPNRankMode mj_objectArrayWithKeyValuesArray:array]];
-             [_myTabV reloadData];
+             [self.myTabV reloadData];
          } else {
               [AppD.window showHint:[responseObject objectForKey:@"msg"]];
          }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-         [_myTabV.slimeView endRefresh];
+         [self.myTabV.slimeView endRefresh];
         [AppD.window showHint:NSStringLocalizable(@"request_error")];
     }];
 }
 
-
+- (RefreshTableView *) myTabV {
+    if (!_myTabV) {
+        _myTabV = [[RefreshTableView alloc] initWithFrame:CGRectMake(0, 0, _tabBackView.width-20,_tabBackView.height) style:UITableViewStylePlain];
+        _myTabV.delegate = self;
+        _myTabV.dataSource = self;
+        _myTabV.slimeView.delegate = self;
+        _myTabV.showsVerticalScrollIndicator = NO;
+        _myTabV.showsHorizontalScrollIndicator = NO;
+        _myTabV.backgroundColor = [UIColor clearColor];
+        _myTabV.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _myTabV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        [_tabBackView addSubview:_myTabV];
+        [_myTabV registerNib:[UINib nibWithNibName:RankingCellReuse bundle:nil] forCellReuseIdentifier:RankingCellReuse];
+        [_myTabV registerNib:[UINib nibWithNibName:RankingSubCellReuse bundle:nil] forCellReuseIdentifier:RankingSubCellReuse];
+        [_myTabV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_tabBackView).offset(10);
+            make.right.mas_equalTo(_tabBackView).offset(-10);
+            make.top.bottom.mas_equalTo(_tabBackView).offset(0);
+        }];
+    }
+    return _myTabV;
+}
 
 
 

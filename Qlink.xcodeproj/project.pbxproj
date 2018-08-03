@@ -332,6 +332,7 @@
 		73A05A332081D91600974483 /* HYBImageClipedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A05A2B2081D91500974483 /* HYBImageClipedManager.m */; };
 		73A05A342081D91600974483 /* UIImage+HYBImageCliped.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A05A2D2081D91500974483 /* UIImage+HYBImageCliped.m */; };
 		73A05A352081D91600974483 /* UIView+HYBImageCliped.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A05A2F2081D91600974483 /* UIView+HYBImageCliped.m */; };
+		73AD7D80211445D600E467D6 /* GlowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AD7D7F211445D600E467D6 /* GlowImageView.m */; };
 		73B1914A209C5C5C0023D9AA /* VPNOperationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B19149209C5C5C0023D9AA /* VPNOperationUtil.m */; };
 		73B1AEBF20BE57C600947749 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B1AEBD20BE57C600947749 /* WebViewController.m */; };
 		73B1AEC420BE7D3800947749 /* MyAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B1AEC220BE7D3800947749 /* MyAssetsViewController.m */; };
@@ -1276,6 +1277,8 @@
 		73A05A2E2081D91600974483 /* UIView+HYBImageCliped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HYBImageCliped.h"; sourceTree = "<group>"; };
 		73A05A2F2081D91600974483 /* UIView+HYBImageCliped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HYBImageCliped.m"; sourceTree = "<group>"; };
 		73A05A302081D91600974483 /* HYBImageClipedManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBImageClipedManager.h; sourceTree = "<group>"; };
+		73AD7D7E211445D600E467D6 /* GlowImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlowImageView.h; sourceTree = "<group>"; };
+		73AD7D7F211445D600E467D6 /* GlowImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlowImageView.m; sourceTree = "<group>"; };
 		73B19148209C5C5C0023D9AA /* VPNOperationUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNOperationUtil.h; sourceTree = "<group>"; };
 		73B19149209C5C5C0023D9AA /* VPNOperationUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNOperationUtil.m; sourceTree = "<group>"; };
 		73B1AEBC20BE57C600947749 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -2712,6 +2715,8 @@
 				735310DC2111509900537372 /* PGIndexBannerSubiew.m */,
 				735310D92111508C00537372 /* NewPagedFlowView.m */,
 				735310DA2111508C00537372 /* NewPagedFlowView.h */,
+				73AD7D7E211445D600E467D6 /* GlowImageView.h */,
+				73AD7D7F211445D600E467D6 /* GlowImageView.m */,
 			);
 			path = NewPagedFlowView;
 			sourceTree = "<group>";
@@ -3398,6 +3403,7 @@
 				5812DDA920A1A7890043A8A8 /* ZXChatBoxItemView.m in Sources */,
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
 				73B6F4E920AEC08E004B7219 /* NeoClient.swift in Sources */,
+				73AD7D80211445D600E467D6 /* GlowImageView.m in Sources */,
 				73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */,
 				73A05A242081D52200974483 /* UIImage+RoundedCorner.m in Sources */,
 				5812DDA620A1A7890043A8A8 /* ZXChatBoxController.m in Sources */,

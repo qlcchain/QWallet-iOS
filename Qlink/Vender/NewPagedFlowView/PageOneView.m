@@ -15,6 +15,17 @@
     [_timer invalidate];
     _timer = nil;
 }
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        //发光
+        _winQImgView.layer.shadowRadius = 6;
+        _winQImgView.layer.shadowColor = [UIColor whiteColor].CGColor;
+        _winQImgView.layer.shadowOffset = CGSizeMake(0, 0);
+        _winQImgView.layer.shadowOpacity = 0.9f;
+    }
+    return self;
+}
 - (void)setSubviewsWithSuperViewBounds:(CGRect)superViewBounds {
     
     if (CGRectEqualToRect(self.mainImageView.frame, superViewBounds)) {
