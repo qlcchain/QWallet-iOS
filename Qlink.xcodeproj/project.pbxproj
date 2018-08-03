@@ -125,6 +125,8 @@
 		5839F52B2069EB21004C4A54 /* DigestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839F52A2069EB21004C4A54 /* DigestUtils.m */; };
 		583A0F6A20844D8A00EF9ABD /* ContinentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A0F6820844D8A00EF9ABD /* ContinentModel.m */; };
 		583A0F6D20844DC400EF9ABD /* SelectCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A0F6C20844DC400EF9ABD /* SelectCountryModel.m */; };
+		583D953621142D520057A90C /* RankingSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583D953321142D4C0057A90C /* RankingSubCell.m */; };
+		583D953721142D520057A90C /* RankingSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 583D953421142D510057A90C /* RankingSubCell.xib */; };
 		58441B8F20BD5B7300904DC8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58441B8C20BD5B7300904DC8 /* SettingViewController.m */; };
 		58456DC3207C521A008DF589 /* OpenVPNAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */; };
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
@@ -284,14 +286,11 @@
 		735310CF211147B300537372 /* RankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C3211147A500537372 /* RankingCell.m */; };
 		735310D0211147B300537372 /* RankingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310C5211147A500537372 /* RankingCell.xib */; };
 		735310D1211147B300537372 /* RankMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310C9211147A500537372 /* RankMenuView.m */; };
+		735310D2211147B300537372 /* RankingRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310CA211147A500537372 /* RankingRuleViewController.xib */; };
 		735310D521114DBA00537372 /* VPNRightMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D421114DBA00537372 /* VPNRightMenuView.m */; };
 		735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310D621114DC600537372 /* VPNRightMenuView.xib */; };
 		735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D92111508C00537372 /* NewPagedFlowView.m */; };
 		735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310DC2111509900537372 /* PGIndexBannerSubiew.m */; };
-		735310E22111A00800537372 /* RankingSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310E02111A00800537372 /* RankingSubCell.m */; };
-		735310E32111A00800537372 /* RankingSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310E12111A00800537372 /* RankingSubCell.xib */; };
-		735310E62111A78700537372 /* RankingMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310E52111A78700537372 /* RankingMode.m */; };
-		735310E82111AAD300537372 /* RankingRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310E72111AAD200537372 /* RankingRuleViewController.xib */; };
 		7360540120DB905B004CD3C3 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540020DB905B004CD3C3 /* GuidePageView1.m */; };
 		7360540820DB9D67004CD3C3 /* GuidePageView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540720DB9D67004CD3C3 /* GuidePageView2.m */; };
 		73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625EC0208F3A710027C62A /* HistoryWifiCell.m */; };
@@ -669,6 +668,9 @@
 		583A0F6920844D8A00EF9ABD /* ContinentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinentModel.h; sourceTree = "<group>"; };
 		583A0F6B20844DC400EF9ABD /* SelectCountryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCountryModel.h; sourceTree = "<group>"; };
 		583A0F6C20844DC400EF9ABD /* SelectCountryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCountryModel.m; sourceTree = "<group>"; };
+		583D953321142D4C0057A90C /* RankingSubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingSubCell.m; sourceTree = "<group>"; };
+		583D953421142D510057A90C /* RankingSubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingSubCell.xib; sourceTree = "<group>"; };
+		583D953521142D510057A90C /* RankingSubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingSubCell.h; sourceTree = "<group>"; };
 		58441B8C20BD5B7300904DC8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		58441B8D20BD5B7300904DC8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenVPNAdapter.framework; path = Carthage/Build/iOS/OpenVPNAdapter.framework; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 		735310C6211147A500537372 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
 		735310C8211147A500537372 /* RankMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankMenuView.h; sourceTree = "<group>"; };
 		735310C9211147A500537372 /* RankMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankMenuView.m; sourceTree = "<group>"; };
+		735310CA211147A500537372 /* RankingRuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingRuleViewController.xib; sourceTree = "<group>"; };
 		735310CB211147A500537372 /* RankingRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingRuleViewController.h; sourceTree = "<group>"; };
 		735310D321114DBA00537372 /* VPNRightMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNRightMenuView.h; sourceTree = "<group>"; };
 		735310D421114DBA00537372 /* VPNRightMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNRightMenuView.m; sourceTree = "<group>"; };
@@ -961,12 +964,6 @@
 		735310DA2111508C00537372 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
 		735310DC2111509900537372 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
 		735310DD2111509900537372 /* PGIndexBannerSubiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGIndexBannerSubiew.h; sourceTree = "<group>"; };
-		735310DF2111A00800537372 /* RankingSubCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingSubCell.h; sourceTree = "<group>"; };
-		735310E02111A00800537372 /* RankingSubCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingSubCell.m; sourceTree = "<group>"; };
-		735310E12111A00800537372 /* RankingSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankingSubCell.xib; sourceTree = "<group>"; };
-		735310E42111A78700537372 /* RankingMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingMode.h; sourceTree = "<group>"; };
-		735310E52111A78700537372 /* RankingMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingMode.m; sourceTree = "<group>"; };
-		735310E72111AAD200537372 /* RankingRuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingRuleViewController.xib; sourceTree = "<group>"; };
 		736053FF20DB905B004CD3C3 /* GuidePageView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		7360540020DB905B004CD3C3 /* GuidePageView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuidePageView1.m; sourceTree = "<group>"; };
 		7360540620DB9D67004CD3C3 /* GuidePageView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView2.h; sourceTree = "<group>"; };
@@ -2613,7 +2610,7 @@
 				735310C2211147A500537372 /* Cell */,
 				735310CB211147A500537372 /* RankingRuleViewController.h */,
 				735310C0211147A500537372 /* RankingRuleViewController.m */,
-				735310E72111AAD200537372 /* RankingRuleViewController.xib */,
+				735310CA211147A500537372 /* RankingRuleViewController.xib */,
 				735310C6211147A500537372 /* RankingViewController.h */,
 				735310BF211147A500537372 /* RankingViewController.m */,
 				735310C1211147A500537372 /* RankingViewController.xib */,
@@ -2624,9 +2621,9 @@
 		735310C2211147A500537372 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				735310DF2111A00800537372 /* RankingSubCell.h */,
-				735310E02111A00800537372 /* RankingSubCell.m */,
-				735310E12111A00800537372 /* RankingSubCell.xib */,
+				583D953521142D510057A90C /* RankingSubCell.h */,
+				583D953321142D4C0057A90C /* RankingSubCell.m */,
+				583D953421142D510057A90C /* RankingSubCell.xib */,
 				735310C3211147A500537372 /* RankingCell.m */,
 				735310C4211147A500537372 /* RankingCell.h */,
 				735310C5211147A500537372 /* RankingCell.xib */,
@@ -2685,8 +2682,6 @@
 				73D048A120F87AC100382BD5 /* VPNTranferMode.m */,
 				73F9557520FF33E400A3E0F5 /* FreeRecordMode.h */,
 				73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */,
-				735310E42111A78700537372 /* RankingMode.h */,
-				735310E52111A78700537372 /* RankingMode.m */,
 			);
 			path = VPNModes;
 			sourceTree = "<group>";
@@ -3065,6 +3060,7 @@
 				5860AD2220CFB51D00EEB6CE /* HistoryWifiCell.xib in Resources */,
 				5860ADA720CFB5F900EEB6CE /* WalletChangeWalletViewController.xib in Resources */,
 				580D91BD2063AE5300B12506 /* Roboto-Italic.ttf in Resources */,
+				735310D2211147B300537372 /* RankingRuleViewController.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				73FF643520EDCD4400E29B3B /* GuideEnterWalletView.xib in Resources */,
 				588BFCB820EF211F00B1E860 /* ConfigurationRelease.plist in Resources */,
@@ -3073,7 +3069,6 @@
 				5860ADB520CFB61000EEB6CE /* ChatHeadView.xib in Resources */,
 				5860AD9220CFB5DD00EEB6CE /* WalletPublicAddressViewController.xib in Resources */,
 				5860ACDC20CFB49800EEB6CE /* VPNRegisterViewController.xib in Resources */,
-				735310E32111A00800537372 /* RankingSubCell.xib in Resources */,
 				73FF647620EDCDA800E29B3B /* GuidenSettingView.xib in Resources */,
 				5860ACF120CFB4C900EEB6CE /* ChooseContinentViewController.xib in Resources */,
 				58DE901820FEF38E00325B38 /* PopSelectView.xib in Resources */,
@@ -3110,7 +3105,6 @@
 				735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */,
 				588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */,
 				5860AD3E20CFB55D00EEB6CE /* WalletMenuView.xib in Resources */,
-				735310E82111AAD300537372 /* RankingRuleViewController.xib in Resources */,
 				5860AD8B20CFB5D200EEB6CE /* WalletImportKeyViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
 				73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */,
@@ -3143,6 +3137,7 @@
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
 				580D91BB2063AE5300B12506 /* Roboto-MediumItalic.ttf in Resources */,
 				5812DD9D20A1A7890043A8A8 /* ChatViewImages.xcassets in Resources */,
+				583D953721142D520057A90C /* RankingSubCell.xib in Resources */,
 				5860ACCE20CFB47400EEB6CE /* VpnTabCell.xib in Resources */,
 				737F909D20E3960A008BC9C2 /* GuidePageView1.xib in Resources */,
 				5860AD3020CFB53000EEB6CE /* SettingCell.xib in Resources */,
@@ -3311,7 +3306,6 @@
 				58A4DB1C20EB4F1D001C241D /* GuideVpnCountryView.m in Sources */,
 				73B6F4D320AEC08E004B7219 /* Claims.swift in Sources */,
 				586F37082079F9A200E12F95 /* VPNRegisterView3.m in Sources */,
-				735310E62111A78700537372 /* RankingMode.m in Sources */,
 				580D915720625A4400B12506 /* UIView+Shake.m in Sources */,
 				73B6F4CE20AEC08E004B7219 /* OpCodes.swift in Sources */,
 				586F37032079F97000E12F95 /* VPNRegisterView2.m in Sources */,
@@ -3430,6 +3424,7 @@
 				5839F5282068FC70004C4A54 /* MD5Util.m in Sources */,
 				58A4DB1720EB4316001C241D /* GuideClickWalletView.m in Sources */,
 				580D915520625A4400B12506 /* UIView+BlockGesture.m in Sources */,
+				583D953621142D520057A90C /* RankingSubCell.m in Sources */,
 				580D914820625A4400B12506 /* UIImage+FX.m in Sources */,
 				73B6F4D220AEC08E004B7219 /* AccountState.swift in Sources */,
 				58CDB5EC208742CA00B74962 /* UserHeadBtn.m in Sources */,
@@ -3557,7 +3552,6 @@
 				73B6F4E120AEC08E004B7219 /* ContractResult.swift in Sources */,
 				58A4DB2B20EB6770001C241D /* GuideVpnListConnectView.m in Sources */,
 				7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */,
-				735310E22111A00800537372 /* RankingSubCell.m in Sources */,
 				58CDB5E9208734D600B74962 /* UserManage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
