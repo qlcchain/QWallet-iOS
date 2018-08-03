@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblHour;
 @property (weak, nonatomic) IBOutlet UILabel *lblMin;
 @property (weak, nonatomic) IBOutlet UILabel *lblSecon;
+@property (weak, nonatomic) IBOutlet UIImageView *winQImgView;
 
 @property(nonatomic, strong)NSTimer *timer ; //定时器
 @property(nonatomic, assign)double timeSecons;

@@ -20,8 +20,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RankingViewController">
             <connections>
                 <outlet property="flowBackView" destination="0jV-Rh-DyX" id="Hgt-u8-5aB"/>
-                <outlet property="myTabV" destination="4cR-Yr-Abe" id="QWp-MF-D0l"/>
                 <outlet property="pageFlowContraintH" destination="MzN-Wv-sMM" id="i4c-Bb-tOV"/>
+                <outlet property="tabBackView" destination="0bc-hJ-ABZ" id="Lp7-xZ-FK7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -82,19 +82,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-hJ-ABZ" customClass="SkyRadiusView">
                             <rect key="frame" x="18" y="25" width="339" height="369"/>
-                            <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4cR-Yr-Abe" customClass="RefreshTableView">
-                                    <rect key="frame" x="10" y="0.0" width="319" height="369"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </tableView>
-                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="4cR-Yr-Abe" secondAttribute="trailing" constant="10" id="Uak-8p-pvX"/>
-                                <constraint firstItem="4cR-Yr-Abe" firstAttribute="leading" secondItem="0bc-hJ-ABZ" secondAttribute="leading" constant="10" id="YRQ-Am-7Pa"/>
-                                <constraint firstItem="4cR-Yr-Abe" firstAttribute="top" secondItem="0bc-hJ-ABZ" secondAttribute="top" id="nMV-YM-Vr1"/>
-                                <constraint firstAttribute="bottom" secondItem="4cR-Yr-Abe" secondAttribute="bottom" id="xdj-Do-EjJ"/>
-                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="5"/>
