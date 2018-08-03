@@ -182,12 +182,12 @@
         NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:fromP2pid};
         model.data = dataDic.mj_JSONString;
 //        model.data = data;
-        NSString *toP2pid = dataDic[@"p2pId"];
-        if (toP2pid == nil || [toP2pid isEmptyString]) {
-            toP2pid = publickey;
-        }
+//        NSString *toP2pid = dataDic[@"p2pId"];
+//        if (toP2pid == nil || [toP2pid isEmptyString]) {
+//            toP2pid = publickey;
+//        }
         NSString *str = model.mj_JSONString;
-        [ToxManage sendMessageWithMessage:str withP2pid:toP2pid];
+        [ToxManage sendMessageWithMessage:str withP2pid:publickey];
     }
 }
 
