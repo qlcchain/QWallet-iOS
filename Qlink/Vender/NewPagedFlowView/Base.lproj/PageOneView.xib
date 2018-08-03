@@ -35,28 +35,15 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_winq" translatesAutoresizingMaskIntoConstraints="NO" id="cek-Xq-37m">
                             <rect key="frame" x="26" y="0.0" width="30" height="43"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifv-iS-Qbd" customClass="GlowLable">
-                            <rect key="frame" x="26" y="0.0" width="30" height="43"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="1pb-1C-F64"/>
-                                <constraint firstAttribute="height" constant="43" id="cPe-Mb-39D"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="35"/>
-                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="T4z-nR-SiW" firstAttribute="leading" secondItem="9jl-37-dQ2" secondAttribute="leading" id="928-vi-Zb2"/>
                         <constraint firstItem="cek-Xq-37m" firstAttribute="leading" secondItem="T4z-nR-SiW" secondAttribute="trailing" constant="3" id="LPo-eB-84W"/>
                         <constraint firstAttribute="trailing" secondItem="cek-Xq-37m" secondAttribute="trailing" id="PVp-uk-Ars"/>
-                        <constraint firstItem="Ifv-iS-Qbd" firstAttribute="top" secondItem="9jl-37-dQ2" secondAttribute="top" id="SWr-uq-2JH"/>
                         <constraint firstItem="T4z-nR-SiW" firstAttribute="top" secondItem="9jl-37-dQ2" secondAttribute="top" id="V7Z-mt-tva"/>
                         <constraint firstItem="cek-Xq-37m" firstAttribute="top" secondItem="T4z-nR-SiW" secondAttribute="top" id="b93-aP-Isv"/>
                         <constraint firstItem="cek-Xq-37m" firstAttribute="bottom" secondItem="T4z-nR-SiW" secondAttribute="bottom" id="rmM-bO-Kd4"/>
-                        <constraint firstAttribute="trailing" secondItem="Ifv-iS-Qbd" secondAttribute="trailing" id="tUz-EL-lJV"/>
-                        <constraint firstAttribute="bottom" secondItem="Ifv-iS-Qbd" secondAttribute="bottom" id="v1o-zS-NkP"/>
                         <constraint firstAttribute="bottom" secondItem="T4z-nR-SiW" secondAttribute="bottom" id="wjN-ss-2dp"/>
                     </constraints>
                 </view>
