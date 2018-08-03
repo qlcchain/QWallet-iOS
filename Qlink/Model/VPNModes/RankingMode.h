@@ -10,4 +10,11 @@
 
 @interface RankingMode : BBaseModel
 
+@property (nonatomic , strong) NSString *actEndDate;
+@property (nonatomic , strong) NSString *actStatus;
+@property (nonatomic , strong) NSString *actStartDate;
+@property (nonatomic , strong) NSString *actId;
+@property (nonatomic , strong) NSString *actName;
+@property (nonatomic , strong) NSString *actAmount;
+
 @end

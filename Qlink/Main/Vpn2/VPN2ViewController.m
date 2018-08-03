@@ -51,6 +51,7 @@
 #import "VPNTranferMode.h"
 #import "FreeConnectionViewController.h"
 #import "RankingViewController.h"
+#import "VPNRightMenuView.h"
 
 #define CELL_CONNECT_BTN_TAG 5788
 
@@ -66,6 +67,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sectionBackHeight;
 @property (strong, nonatomic) IBOutlet UIView *sectionTitleView;
 
+@property (nonatomic ,strong) VPNRightMenuView *menuView;
 @property (nonatomic ,strong) VPNMode *vpnMode;
 @property (strong, nonatomic) RefreshTableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
@@ -76,7 +78,7 @@
 @property (nonatomic , strong) ChooseCountryView *countryView;
 @property (nonatomic, strong) NSString *currentConnectVPNName;
 @property (nonatomic, strong) VpnConnectUtil *connectUtil;
-
+@property (nonatomic , assign) BOOL isShowRanking;
 @end
 
 @implementation VPN2ViewController
@@ -122,10 +124,10 @@
     [self showRegisterVPN];
     [self addObserve];
     [self configData];
+    [self checkShowRanding];
     [self startLocation];
     // 获取当前选择的国家--发送获取vpn列表请求
     [self checkCurrentChooseCountry];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,6 +213,20 @@
     _countryIcon.image = [UIImage imageNamed:_selectCountryM.countryImage];
     [self requestQueryVpn];
    
+}
+
+#pragma mark -检测是否显示活动
+- (void) checkShowRanding
+{
+    [RequestService requestWithUrl:isShowRanking_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+             NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
+             _isShowRanking = [[dataDic objectForKey:@"isShow"] boolValue];
+         }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        DDLogDebug(@"检测是否显示活动失败");
+        [self checkShowRanding];
+    }];
 }
 
 // 根据国家获取vpn资产列表
@@ -692,6 +708,8 @@ static BOOL refreshAnimate = YES;
 }
 
 - (void)changeServer:(NSNotification *)noti {
+    _isShowRanking = NO;
+    [self checkShowRanding];
     [self showRegisterVPN]; // 主网隐藏VPN注册
     [self.sourceArr removeAllObjects]; // 移除旧数据
     [self refreshFreeConnection]; //免费次数更新
@@ -936,7 +954,18 @@ static BOOL refreshAnimate = YES;
     [self jumpToFreeConnection];
 }
 - (IBAction)rightAction:(id)sender {
-    [self jumpToRanking];
+    if (!_menuView ) {
+        _menuView = [VPNRightMenuView loadVPNRightMenuView];
+        @weakify_self
+        [_menuView setMenuBlock:^(NSInteger selectIndex) {
+            if (selectIndex == 1) {
+                [weakSelf jumpToFreeConnection];
+            } else {
+                [weakSelf jumpToRanking];
+            }
+        }];
+    }
+    [_menuView showVPNRightMenuViewWithRanging:_isShowRanking];
 }
 
 #pragma mark - 选择国家

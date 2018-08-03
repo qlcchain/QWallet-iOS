@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VPNRightMenuView : UIView
+typedef void(^ClickMenuBlock)(NSInteger selectIndex);
 
+@interface VPNRightMenuView : UIView
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankContraintH;
+@property (weak, nonatomic) IBOutlet UIView *menuBackView;
+@property (weak, nonatomic) IBOutlet UIImageView *menuImageView;
+@property (nonatomic , copy) ClickMenuBlock menuBlock;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuContraintV;
++ (instancetype) loadVPNRightMenuView;
+- (void) showVPNRightMenuViewWithRanging:(BOOL) isShow;
 @end

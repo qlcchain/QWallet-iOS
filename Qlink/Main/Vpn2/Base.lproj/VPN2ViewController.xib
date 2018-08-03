@@ -102,8 +102,12 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KzM-aF-B4L">
-                                    <rect key="frame" x="319" y="15" width="36" height="36"/>
-                                    <state key="normal" image="icon_setting"/>
+                                    <rect key="frame" x="327" y="15" width="36" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="36" id="3BH-PX-lC6"/>
+                                        <constraint firstAttribute="height" constant="36" id="wlp-v0-DbQ"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_open"/>
                                     <connections>
                                         <action selector="rightAction:" destination="-1" eventType="touchUpInside" id="Hhj-n6-UOT"/>
                                     </connections>
@@ -114,7 +118,7 @@
                                 <constraint firstItem="6nY-Mx-1Xa" firstAttribute="leading" secondItem="SAM-Nt-eMK" secondAttribute="trailing" constant="-10" id="0tC-J8-0h8"/>
                                 <constraint firstItem="xel-Yn-qz8" firstAttribute="centerY" secondItem="ZBP-np-quw" secondAttribute="centerY" id="3yo-uX-Buw"/>
                                 <constraint firstItem="xel-Yn-qz8" firstAttribute="centerX" secondItem="ZBP-np-quw" secondAttribute="centerX" id="Ic2-SQ-NRq"/>
-                                <constraint firstAttribute="trailing" secondItem="KzM-aF-B4L" secondAttribute="trailing" constant="20" id="P3p-xd-OOX"/>
+                                <constraint firstAttribute="trailing" secondItem="KzM-aF-B4L" secondAttribute="trailing" constant="12" id="P3p-xd-OOX"/>
                                 <constraint firstAttribute="height" constant="67" id="VCE-rC-iMF"/>
                                 <constraint firstItem="KzM-aF-B4L" firstAttribute="centerY" secondItem="ZBP-np-quw" secondAttribute="centerY" id="WQm-qI-lDA"/>
                                 <constraint firstItem="SAM-Nt-eMK" firstAttribute="top" secondItem="ZBP-np-quw" secondAttribute="top" constant="14" id="ZmL-Sq-KdH"/>
@@ -221,7 +225,7 @@
         <image name="icon_choose_a_vpn" width="13" height="16"/>
         <image name="icon_choose_location" width="31" height="31"/>
         <image name="icon_offline" width="10" height="10"/>
+        <image name="icon_open" width="17" height="12"/>
         <image name="icon_owner" width="38" height="38"/>
-        <image name="icon_setting" width="36" height="36"/>
     </resources>
 </document>

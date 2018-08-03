@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PageThreeView">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="158"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocz-g1-elg" customClass="GlowLable">
+                    <rect key="frame" x="141" y="67.5" width="66" height="23"/>
+                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vw-W6-Vq0" customClass="GlowLable">
+                    <rect key="frame" x="127.5" y="32.5" width="93" height="23"/>
+                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 QLC Prize Pool" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWM-fY-knr" customClass="GlowLable">
+                    <rect key="frame" x="105" y="102.5" width="139.5" height="23"/>
+                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.29389026499999998" green="0.1402571047" blue="0.65811389590000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Ocz-g1-elg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="4yQ-t9-b3P"/>
+                <constraint firstItem="uWM-fY-knr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5xb-xF-VZd"/>
+                <constraint firstItem="6Vw-W6-Vq0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XOa-cI-Scc"/>
+                <constraint firstItem="Ocz-g1-elg" firstAttribute="top" secondItem="6Vw-W6-Vq0" secondAttribute="bottom" constant="12" id="Z7Y-ie-6fW"/>
+                <constraint firstItem="uWM-fY-knr" firstAttribute="top" secondItem="Ocz-g1-elg" secondAttribute="bottom" constant="12" id="eTM-lw-bAV"/>
+                <constraint firstItem="Ocz-g1-elg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yA9-Lw-7TJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="lblCountDesc" destination="uWM-fY-knr" id="jwF-gg-EW6"/>
+            </connections>
+            <point key="canvasLocation" x="32" y="-117"/>
+        </view>
+    </objects>
+</document>
