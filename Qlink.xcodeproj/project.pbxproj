@@ -140,6 +140,7 @@
 		583D959B211432110057A90C /* RankingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 583D9588211432110057A90C /* RankingCell.xib */; };
 		583D959C211432110057A90C /* RankingSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583D9589211432110057A90C /* RankingSubCell.m */; };
 		583D959D211432110057A90C /* RankMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 583D9590211432110057A90C /* RankMenuView.m */; };
+		583D95AA2114356A0057A90C /* VPNRightMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 583D95A82114356A0057A90C /* VPNRightMenuView.xib */; };
 		58441B8F20BD5B7300904DC8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58441B8C20BD5B7300904DC8 /* SettingViewController.m */; };
 		58456DC3207C521A008DF589 /* OpenVPNAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */; };
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
@@ -294,7 +295,6 @@
 		735140312063A653007BE4EC /* VpnTabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7351402F2063A653007BE4EC /* VpnTabCell.m */; };
 		7351508D20D3B71300194711 /* DBManageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7351508C20D3B71300194711 /* DBManageUtil.m */; };
 		735310D521114DBA00537372 /* VPNRightMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D421114DBA00537372 /* VPNRightMenuView.m */; };
-		735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735310D621114DC600537372 /* VPNRightMenuView.xib */; };
 		735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310D92111508C00537372 /* NewPagedFlowView.m */; };
 		735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 735310DC2111509900537372 /* PGIndexBannerSubiew.m */; };
 		7360540120DB905B004CD3C3 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540020DB905B004CD3C3 /* GuidePageView1.m */; };
@@ -710,6 +710,12 @@
 		583D95A5211432D00057A90C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/RankingViewController.strings; sourceTree = "<group>"; };
 		583D95A6211432D20057A90C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/RankingViewController.strings; sourceTree = "<group>"; };
 		583D95A7211432D40057A90C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RankingViewController.strings"; sourceTree = "<group>"; };
+		583D95A92114356A0057A90C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/VPNRightMenuView.xib; sourceTree = "<group>"; };
+		583D95AB2114357E0057A90C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/VPNRightMenuView.strings; sourceTree = "<group>"; };
+		583D95AC211435810057A90C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/VPNRightMenuView.strings; sourceTree = "<group>"; };
+		583D95AD211435830057A90C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/VPNRightMenuView.strings; sourceTree = "<group>"; };
+		583D95AE211435850057A90C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/VPNRightMenuView.strings; sourceTree = "<group>"; };
+		583D95AF211435880057A90C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/VPNRightMenuView.strings"; sourceTree = "<group>"; };
 		58441B8C20BD5B7300904DC8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		58441B8D20BD5B7300904DC8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		58456DC2207C521A008DF589 /* OpenVPNAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenVPNAdapter.framework; path = Carthage/Build/iOS/OpenVPNAdapter.framework; sourceTree = "<group>"; };
@@ -987,7 +993,6 @@
 		7351508C20D3B71300194711 /* DBManageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBManageUtil.m; sourceTree = "<group>"; };
 		735310D321114DBA00537372 /* VPNRightMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNRightMenuView.h; sourceTree = "<group>"; };
 		735310D421114DBA00537372 /* VPNRightMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNRightMenuView.m; sourceTree = "<group>"; };
-		735310D621114DC600537372 /* VPNRightMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VPNRightMenuView.xib; sourceTree = "<group>"; };
 		735310D92111508C00537372 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
 		735310DA2111508C00537372 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
 		735310DC2111509900537372 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
@@ -2156,7 +2161,7 @@
 				73FF64D920F48DCA00E29B3B /* ChooseCountryView.xib */,
 				735310D321114DBA00537372 /* VPNRightMenuView.h */,
 				735310D421114DBA00537372 /* VPNRightMenuView.m */,
-				735310D621114DC600537372 /* VPNRightMenuView.xib */,
+				583D95A82114356A0057A90C /* VPNRightMenuView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3143,7 +3148,6 @@
 				7377D18E206CC6FB0072E628 /* Localizable.strings in Resources */,
 				73A05A1E2081A02200974483 /* icon_map_refresh@2x.png in Resources */,
 				5860ACB220CFB44C00EEB6CE /* VPNRegisterView1.xib in Resources */,
-				735310D721114DC600537372 /* VPNRightMenuView.xib in Resources */,
 				588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */,
 				5860AD3E20CFB55D00EEB6CE /* WalletMenuView.xib in Resources */,
 				5860AD8B20CFB5D200EEB6CE /* WalletImportKeyViewController.xib in Resources */,
@@ -3162,6 +3166,7 @@
 				580D91BE2063AE5300B12506 /* Roboto-BlackItalic.ttf in Resources */,
 				580D91B32063AE5300B12506 /* Roboto-BoldItalic.ttf in Resources */,
 				5860AC9620CFB40F00EEB6CE /* SettingViewController.xib in Resources */,
+				583D95AA2114356A0057A90C /* VPNRightMenuView.xib in Resources */,
 				583D9598211432110057A90C /* RankingRuleViewController.xib in Resources */,
 				5860ACC720CFB46900EEB6CE /* VPNFileInputView.xib in Resources */,
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
@@ -3642,6 +3647,19 @@
 				583D95A2211432C00057A90C /* zh-Hans */,
 			);
 			name = RankingRuleViewController.xib;
+			sourceTree = "<group>";
+		};
+		583D95A82114356A0057A90C /* VPNRightMenuView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				583D95A92114356A0057A90C /* Base */,
+				583D95AB2114357E0057A90C /* en */,
+				583D95AC211435810057A90C /* tr */,
+				583D95AD211435830057A90C /* ko */,
+				583D95AE211435850057A90C /* ru */,
+				583D95AF211435880057A90C /* zh-Hans */,
+			);
+			name = VPNRightMenuView.xib;
 			sourceTree = "<group>";
 		};
 		5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */ = {
