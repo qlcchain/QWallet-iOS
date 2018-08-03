@@ -13,6 +13,19 @@
 @end
 
 @implementation RankingRuleViewController
+- (IBAction)backAction:(id)sender {
+    [self leftNavBarItemPressedWithPop:YES];
+}
+- (IBAction)jumpLink:(id)sender {
+    // iOS 10打开url方式
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://t.me/winqdapp"] options:@{UIApplicationOpenURLOptionsOpenInPlaceKey:@"1"} completionHandler:^(BOOL success) {// 回调
+        
+        if (!success) {
+            
+        }
+        
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
