@@ -654,8 +654,9 @@
             // 修改本地数据库
             [weakSelf.vpnInfo bg_saveOrUpdateAsync:^(BOOL isSuccess) {
                 if (isSuccess) {
+                    // 更新keyChain
+                    [VPNOperationUtil saveArrayToKeyChain];
                     [weakSelf performSelector:@selector(sendUpdateVPNRequest) withObject:nil afterDelay:1.5];
-                   
                 }
             }];
             [weakSelf back];

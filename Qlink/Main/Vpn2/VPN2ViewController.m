@@ -683,6 +683,10 @@ static BOOL refreshAnimate = YES;
             _currentConnectVPNName = _selectVPNInfo.vpnName;
             [self refreshVPNConnect];
             if (_isConnectVPN) {
+                NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_VPN_LIST_CONNECT];
+                if (!guideLocal || [guideLocal boolValue] == NO)  {
+                    [_mainTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                }
                 [self addNewGuideVpnListConnect];
             }
             // vpn连接记录写入数据库

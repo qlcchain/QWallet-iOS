@@ -20,5 +20,5 @@ static NSString *RankingCellReuse = @"RankingCell";
 @property (weak, nonatomic) IBOutlet UILabel *lblSub2;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameContraintV;
 
-- (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type;
+- (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type withEnd:(BOOL) isEnd;
 @end

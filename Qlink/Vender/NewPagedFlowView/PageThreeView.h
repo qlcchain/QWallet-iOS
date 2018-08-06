@@ -12,5 +12,6 @@
 
 @interface PageThreeView : PGIndexBannerSubiew
 @property (weak, nonatomic) IBOutlet GlowLable *lblCountDesc;
+@property (weak, nonatomic) IBOutlet GlowLable *lblRound;
 
 @end

@@ -112,7 +112,7 @@
             myCell.lblNumber.hidden = NO;
             myCell.trophyImgView.hidden = YES;
         }
-        [myCell setVPNRankMode:self.sourceArray[indexPath.row] withType:self.currentRank.actStatus];
+        [myCell setVPNRankMode:self.sourceArray[indexPath.row] withType:self.currentRank.actStatus withEnd:indexPath.row == (self.sourceArray.count-1) ? YES:NO];
         myCell.lblNumber.text = [NSString stringWithFormat:@"%ld",indexPath.row+1];
         return myCell;
     } else if ([self.currentRank.actStatus isEqualToString:@"START"]){
@@ -122,7 +122,7 @@
                 myCell.lblNumber.hidden = YES;
                 myCell.trophyImgView.hidden = NO;
             }
-            [myCell setVPNRankMode:self.sourceArray[indexPath.row] withType:self.currentRank.actStatus];
+            [myCell setVPNRankMode:self.sourceArray[indexPath.row] withType:self.currentRank.actStatus withEnd:NO];
              return myCell;
         } else {
             RankingSubCell *myCell = [tableView dequeueReusableCellWithIdentifier:RankingSubCellReuse];
@@ -178,6 +178,7 @@
             threeView.backgroundColor = MAIN_PURPLE_COLOR;
         }
         threeView.lblCountDesc.text = [NSString stringWithFormat:@"%@ %@",rankMode.actAmount?:@"0",NSStringLocalizable(@"qlc_pool")];
+        threeView.lblRound.text = rankMode.actName?:@"";
         return threeView;
     } else if ([rankMode.actStatus isEqualToString:@"START"]){
         PageOneView *oneView = (PageOneView *)[flowView dequeueReusableCell];

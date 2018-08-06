@@ -22,10 +22,23 @@
     _headImageView.layer.masksToBounds = YES;
 }
 
-- (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type
+- (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type withEnd:(BOOL)isEnd
 {
+    _lblSub1.textColor = RGB(51, 51, 51);
+    _lblSub2.textColor = RGB(168, 166, 174);
+    _lblconnet.textColor = RGB(51, 51, 51);
+    _lblCount.textColor = RGB(51, 51, 51);
+    _lblNumber.textColor = RGB(51, 51, 51);
+    
     if ([type isEqualToString:@"END"] || [type isEqualToString:@"PRIZED"]) {
-        _lblSub1.text = [NSString stringWithFormat:@"%f QLC",mode.rewardTotal];
+        if (isEnd) {
+            _lblSub1.textColor = MAIN_PURPLE_COLOR;
+            _lblSub2.textColor = MAIN_PURPLE_COLOR;
+            _lblconnet.textColor = MAIN_PURPLE_COLOR;
+            _lblconnet.textColor = MAIN_PURPLE_COLOR;
+            _lblNumber.textColor = MAIN_PURPLE_COLOR;
+        }
+        _lblSub1.text = [NSString stringWithFormat:@"%.2f QLC",mode.rewardTotal];
         _lblSub2.text = NSStringLocalizable(@"rewards");
     } else {
         _lblSub1.text = @"50%";
