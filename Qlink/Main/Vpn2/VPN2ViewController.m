@@ -680,6 +680,7 @@ static BOOL refreshAnimate = YES;
                 [TransferUtil udpateTransferModel:_selectVPNInfo];
             }
             [HWUserdefault insertObj:[_selectVPNInfo mj_keyValues] withkey:Current_Connenct_VPN]; // 保存当前连接的vpn对象
+            // cuurnet connect vpn name
             _currentConnectVPNName = _selectVPNInfo.vpnName;
             [self refreshVPNConnect];
             if (_isConnectVPN) {
