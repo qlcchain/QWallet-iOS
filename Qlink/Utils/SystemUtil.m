@@ -8,6 +8,7 @@
 
 #import "SystemUtil.h"
 #import "Qlink-Swift.h"
+#import "TransferUtil.h"
 
 @implementation SystemUtil
 
@@ -44,18 +45,9 @@
  app退出时。配置
  */
 + (void) configureAPPTerminate {
-    
 //    NSLog(@"applicationState = %ld",(long)[UIApplication sharedApplication].applicationState);
-    
-    if (![SystemUtil isSpecialDevice]) {
-        // 断开vpn连接
-        [VPNUtil.shareInstance stopVPN];
-        // 删除vpn本地配置
-        [VPNUtil.shareInstance removeFromPreferences];
-        // 删除当前VPNInfo
-        [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
-    }
-    
+    [SystemUtil deleteVPNConfig];
+    [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     [ToxManage readDataToKeychain];
     // 结束p2p连接
    // if ([ToxManage getP2PConnectionStatus]) {
@@ -63,12 +55,14 @@
    // }
 }
 
-+ (BOOL)isSpecialDevice {
-//    NSString *deviceName = [UIDevice currentDevice].name;
-//    NSArray *dadaArr = @[@"JellyFoo I7"];
-//    NSArray *dadaArr = @[];
-//    return [dadaArr containsObject:deviceName];
-    return NO;
++ (void)deleteVPNConfig {
+    // 断开vpn连接
+    [VPNUtil.shareInstance stopVPN];
+    // 删除vpn本地配置
+    [VPNUtil.shareInstance removeFromPreferences];
+    // 删除当前VPNInfo
+    [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
+    
 }
 
 @end

@@ -16,6 +16,7 @@
 #import "ChatUtil.h"
 #import "GroupChatMessageModel.h"
 #import "SystemUtil.h"
+#import "TransferUtil.h"
 
 @interface ToxManage ()
 
@@ -152,7 +153,7 @@ static ToxManage *toxManage = nil;
             return @"";
         }
     }
-    return p2pid;
+    return p2pid?:@"";
     
 //    NSString *p2pid = @"";
 //    char p2pId[38*2+1];
@@ -371,6 +372,11 @@ int friendStatusChange (char *publickey,uint32_t status)
 int selfStatusChange (uint32_t status)
 {
 //    NSString *p2pid = [ToxManage getOwnP2PId];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [TransferUtil checkFreeConnectCount];
+    });
     dispatch_async(dispatch_get_main_queue(), ^{
         if (status > 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:P2P_ONLINE_NOTI object:nil];
@@ -415,7 +421,7 @@ int fileProcess (char *filename, int filesize,char * publickey)
         NSString *vpnPath = ToxManage.shareMange.vpnLocalPathName;
         NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
         // 连接本地vpn
-//        NSURL *vpnURL = [[NSBundle mainBundle] URLForResource:@"winqvpn" withExtension:@"ovpn"];
+//        NSURL *vpnURL = [[NSBundle mainBundle] URLForResource:@"QLCChain" withExtension:@"ovpn"];
 //        NSData *vpnData = [NSData dataWithContentsOfURL:vpnURL];
         if (vpnData && vpnData.length > 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:RECEIVE_VPN_FILE_NOTI object:vpnData];

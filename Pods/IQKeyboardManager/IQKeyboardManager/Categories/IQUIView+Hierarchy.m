@@ -52,7 +52,7 @@
         if ([nextResponder isKindOfClass:[UIViewController class]])
             return (UIViewController*)nextResponder;
 
-    } while (nextResponder != nil);
+    } while (nextResponder);
 
     return nil;
 }
@@ -76,13 +76,13 @@
     
     UIViewController *matchController = [self viewContainingController];
     
-    while (matchController != nil && [controllersHierarchy containsObject:matchController] == NO)
+    while (matchController && [controllersHierarchy containsObject:matchController] == NO)
     {
         do
         {
             matchController = (UIViewController*)[matchController nextResponder];
             
-        } while (matchController != nil && [matchController isKindOfClass:[UIViewController class]] == NO);
+        } while (matchController && [matchController isKindOfClass:[UIViewController class]] == NO);
     }
     
     return matchController;
@@ -91,6 +91,8 @@
 -(UIViewController *)parentContainerViewController
 {
     UIViewController *matchController = [self viewContainingController];
+    
+    UIViewController *parentContainerViewController = nil;
     
     if (matchController.navigationController)
     {
@@ -104,50 +106,54 @@
         
         UIViewController *parentParentController = parentController.parentViewController;
         
-        while (parentController != nil &&
-               parentParentController &&
+        while (parentParentController &&
                ([parentParentController isKindOfClass:[UINavigationController class]] == NO &&
                 [parentParentController isKindOfClass:[UITabBarController class]] == NO &&
                 [parentParentController isKindOfClass:[UISplitViewController class]] == NO))
         {
             parentController = parentParentController;
+            parentParentController = parentController.parentViewController;
         }
 
         if (navController == parentController)
         {
-            return navController.topViewController;
+            parentContainerViewController = navController.topViewController;
         }
         else
         {
-            return parentController;
+            parentContainerViewController = parentController;
         }
     }
     else if (matchController.tabBarController)
     {
         if ([matchController.tabBarController.selectedViewController isKindOfClass:[UINavigationController class]])
         {
-            return [(UINavigationController*)matchController.tabBarController.selectedViewController topViewController];
+            parentContainerViewController = [(UINavigationController*)matchController.tabBarController.selectedViewController topViewController];
         }
         else
         {
-            return matchController.tabBarController.selectedViewController;
+            parentContainerViewController = matchController.tabBarController.selectedViewController;
         }
     }
     else
     {
         UIViewController *matchParentController = matchController.parentViewController;
 
-        while (matchController != nil &&
-               matchParentController &&
+        while (matchParentController &&
                ([matchParentController isKindOfClass:[UINavigationController class]] == NO &&
                 [matchParentController isKindOfClass:[UITabBarController class]] == NO &&
                 [matchParentController isKindOfClass:[UISplitViewController class]] == NO))
         {
             matchController = matchParentController;
+            matchParentController = matchController.parentViewController;
         }
         
-        return matchController;
+        parentContainerViewController = matchController;
     }
+    
+    UIViewController *finalController = [parentContainerViewController parentIQContainerViewController] ?: parentContainerViewController;
+    
+    return finalController;
 }
 
 -(UIView*)superviewOfClassType:(Class)classType
@@ -206,10 +212,10 @@
     return _IQcanBecomeFirstResponder;
 }
 
-- (NSArray*)responderSiblings
+- (NSArray<UIView*>*)responderSiblings
 {
     //	Getting all siblings
-    NSArray *siblings = self.superview.subviews;
+    NSArray<UIView*> *siblings = self.superview.subviews;
     
     //Array of (UITextField/UITextView's).
     NSMutableArray<UIView*> *tempTextFields = [[NSMutableArray alloc] init];
@@ -221,7 +227,7 @@
     return tempTextFields;
 }
 
-- (NSArray*)deepResponderViews
+- (NSArray<UIView*>*)deepResponderViews
 {
     NSMutableArray<UIView*> *textFields = [[NSMutableArray alloc] init];
     
@@ -412,6 +418,14 @@
 
 @end
 
+@implementation UIViewController (IQ_UIView_Hierarchy)
+
+-(nullable UIViewController*)parentIQContainerViewController
+{
+    return self;
+}
+
+@end
 
 @implementation NSObject (IQ_Logging)
 

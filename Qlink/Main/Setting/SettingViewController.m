@@ -18,6 +18,8 @@
 #import "UserManage.h"
 #import "Qlink-Swift.h"
 #import "QlinkTabbarViewController.h"
+#import "GuidenSettingView.h"
+#import "TransferUtil.h"
 
 // 标题部分
 //#define WALLET_DETAIL   NSStringLocalizable(@"wallet_details")// 钱包详情
@@ -87,33 +89,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-//    [self addNewGuide];
+    [self addNewSettingGuide];
 }
 
 #pragma mark - Config View
-//- (void)addNewGuide {
-////    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_WALLET_DETAIL];
-//    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_WALLET_DETAIL];
-//    if (!guideLocal || [guideLocal boolValue] == NO) {
-//        UIView *guideBV = [NewGuideUtil showNewGuideWithKey:NEW_GUIDE_WALLET_DETAIL TapBlock:nil];
-//        UIImage *guideImg = [UIImage imageNamed:@"img_floating_layer_settings"];
-//        UIImageView *guideImgV = [[UIImageView alloc] init];
-//        guideImgV.frame = CGRectZero;
-//        if (IS_iPhone_5) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 98, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone_6) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 98, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone6_Plus) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 98, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhoneX) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 122, guideImg.size.width, guideImg.size.height);
-//        }
-//
-//        guideImgV.image = guideImg;
-//        [guideBV addSubview:guideImgV];
-//    }
-//}
+- (void)addNewSettingGuide {
+
+    CGRect hollowOutFrame = CGRectMake(18, 82+STATUS_BAR_HEIGHT, SCREEN_WIDTH-36, 50);
+    @weakify_self
+    [[GuidenSettingView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
+        
+    }];
+}
 
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -300,18 +287,12 @@
             if (idx == 0) {
                 if (![WalletUtil checkServerIsMian]) {
                     // 重新初始化 Account->将Account设为当前钱包->重新设置网络
-                    [HWUserdefault insertString:@"1" withkey:SERVER_NETWORK];
-                    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_SERVER_NOTI object:nil];
-                    [UserManage fetchUserInfo];
+                    [self changeNetWorkWithTag:@"1"];
                 }
                
             } else {
                 if ([WalletUtil checkServerIsMian]) {
-                    [HWUserdefault insertString:@"0" withkey:SERVER_NETWORK];
-                    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_SERVER_NOTI object:nil];
-                    [UserManage fetchUserInfo];
+                    [self changeNetWorkWithTag:@"0"];
                 }
                 
             }
@@ -324,6 +305,17 @@
     }];
     [alertC addAction:alertCancel];
     [self presentViewController:alertC animated:YES completion:nil];
+}
+
+#pragma mark - 网络切换时需要处理方法
+- (void) changeNetWorkWithTag:(NSString *) tag
+{
+    // 重新初始化 Account->将Account设为当前钱包->重新设置网络
+    [HWUserdefault insertString:tag withkey:SERVER_NETWORK];
+    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHANGE_SERVER_NOTI object:nil];
+    [TransferUtil checkFreeConnectCount];
+    [UserManage fetchUserInfo];
 }
 
 - (void) clickTouchSwitch

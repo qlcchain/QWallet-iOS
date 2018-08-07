@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GuideNewWalletView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_floating_layer_new_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="GMU-zu-2Mh">
+                    <rect key="frame" x="68.5" y="206.5" width="250" height="97"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 QLC will be in your wallet" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP4-JU-eRB">
+                    <rect key="frame" x="63" y="313.5" width="249.5" height="22.5"/>
+                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cP4-JU-eRB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8RE-gw-fCS"/>
+                <constraint firstItem="GMU-zu-2Mh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="206.5" id="8RF-mF-9Yi"/>
+                <constraint firstItem="GMU-zu-2Mh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="6" id="9S2-rM-fTf"/>
+                <constraint firstItem="cP4-JU-eRB" firstAttribute="top" secondItem="GMU-zu-2Mh" secondAttribute="bottom" constant="10" id="cRb-Pt-oBb"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="topOffset" destination="8RF-mF-9Yi" id="FWK-OH-Dmi"/>
+            </connections>
+            <point key="canvasLocation" x="419" y="13"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_floating_layer_new_wallet" width="250" height="97"/>
+    </resources>
+</document>

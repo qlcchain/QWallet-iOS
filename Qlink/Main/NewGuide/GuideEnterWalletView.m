@@ -45,10 +45,10 @@
         
         if (IS_iPhone_5) {
             _topOffset.constant = 27;
-            _rightOffset.constant = 14;
+            _rightOffset.constant = 12;
         } else if (IS_iPhone_6) {
             _topOffset.constant = 27;
-            _rightOffset.constant = 14;
+            _rightOffset.constant = 12;
         } else if (IS_iPhone6_Plus) {
             _topOffset.constant = 27;
             _rightOffset.constant = 14;

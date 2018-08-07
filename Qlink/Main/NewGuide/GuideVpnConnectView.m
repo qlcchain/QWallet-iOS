@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomOffset;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerOffset;
+@property (weak, nonatomic) IBOutlet UIImageView *dottedBoxView;
 
 @end
 
@@ -41,14 +42,16 @@
         }];
         
         if (IS_iPhone_5) {
-            _bottomOffset.constant = SCREEN_HEIGHT - (hollowOutFrame.origin.y+hollowOutFrame.size.height) - 5;
-            _centerOffset.constant = 86;
+            _bottomOffset.constant = SCREEN_HEIGHT - (hollowOutFrame.origin.y+hollowOutFrame.size.height) - 1;
+            _centerOffset.constant = 72;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_vpn_connect_5"];
         } else if (IS_iPhone_6) {
             _bottomOffset.constant = SCREEN_HEIGHT - (hollowOutFrame.origin.y+hollowOutFrame.size.height) - 5;
             _centerOffset.constant = 86;
         } else if (IS_iPhone6_Plus) {
-            _bottomOffset.constant = SCREEN_HEIGHT - (hollowOutFrame.origin.y+hollowOutFrame.size.height) - 5;
-            _centerOffset.constant = 86;
+            _bottomOffset.constant = SCREEN_HEIGHT - (hollowOutFrame.origin.y+hollowOutFrame.size.height) - 7;
+            _centerOffset.constant = 86 + 10;
+            _dottedBoxView.image = [UIImage imageNamed:@"img_floating_layer_vpn_connect_6p"];
         } else if (IS_iPhoneX) {
             _bottomOffset.constant = SCREEN_HEIGHT - (hollowOutFrame.origin.y+hollowOutFrame.size.height) - 5;
             _centerOffset.constant = 86;

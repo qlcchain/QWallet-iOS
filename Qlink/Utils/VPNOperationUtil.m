@@ -9,9 +9,7 @@
 #import "VPNOperationUtil.h"
 #import "WalletUtil.h"
 
-
 @implementation VPNOperationUtil
-
 
 + (instancetype) shareInstance  {
     static VPNOperationUtil *vpnUtil = nil;
@@ -23,6 +21,7 @@
     });
     return vpnUtil;
 }
+
 // 将vpn资产表存入keychain
 + (void) saveArrayToKeyChain
 {
@@ -34,6 +33,7 @@
     });
    
 }
+
 // 将keychain中的资产导入资产表中
 + (void) keyChainDataToDB
 {

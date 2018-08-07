@@ -13,6 +13,7 @@
 #import "WalletPublicAddressViewController.h"
 #import <Hero/Hero-Swift.h>
 #import "HMScanner.h"
+#import "GuideBackupKeyView.h"
 
 @interface WalletDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *lblPrivateKey;
 @property (weak, nonatomic) IBOutlet UIButton *copeBtn;
+@property (weak, nonatomic) IBOutlet UIView *detailBackView;
 
 @end
 
@@ -56,32 +58,16 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-//    [self addNewGuide];
+    [self addNewGuide];
 }
 
 #pragma mark - Config View
-//- (void)addNewGuide {
-////    [HWUserdefault insertObj:@(NO) withkey:NEW_GUIDE_BACKUP_KEY];
-//    NSNumber *guideLocal = [HWUserdefault getObjectWithKey:NEW_GUIDE_BACKUP_KEY];
-//    if (!guideLocal || [guideLocal boolValue] == NO) {
-//        UIView *guideBV = [NewGuideUtil showNewGuideWithKey:NEW_GUIDE_BACKUP_KEY TapBlock:nil];
-//        UIImage *guideImg = [UIImage imageNamed:@"img_floating_layer_wallet_detail"];
-//        UIImageView *guideImgV = [[UIImageView alloc] init];
-//        guideImgV.frame = CGRectZero;
-//        if (IS_iPhone_5) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 150, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone_6) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 150, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhone6_Plus) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 150, guideImg.size.width, guideImg.size.height);
-//        } else if (IS_iPhoneX) {
-//            guideImgV.frame = CGRectMake((SCREEN_WIDTH-guideImg.size.width)/2.0, 180, guideImg.size.width, guideImg.size.height);
-//        }
-//        
-//        guideImgV.image = guideImg;
-//        [guideBV addSubview:guideImgV];
-//    }
-//}
+- (void)addNewGuide {
+    CGRect hollowOutFrame = [_detailBackView.superview convertRect:_detailBackView.frame toView:[UIApplication sharedApplication].keyWindow];
+    [[GuideBackupKeyView getNibView] showGuideTo:hollowOutFrame tapBlock:^{
+        
+    }];
+}
 
 - (IBAction)clickWIF:(id)sender {
     

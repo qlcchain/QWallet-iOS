@@ -29,10 +29,16 @@
 #import "NSBundle+Language.h"
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
+#import "LocationTracker.h"
 
-@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
+@import Firebase;
+
+@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate, BuglyDelegate> {
     UIBackgroundTaskIdentifier backTaskI;
 }
+
+@property (nonatomic, strong) LocationTracker * locationTracker;
+@property (nonatomic, strong) NSTimer* locationUpdateTimer;
 
 @end
 
@@ -40,16 +46,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    // [WalletUtil removeAllKey];
-
+   // 配置Firebase
+    [FIRApp configure];
     // 配置DDLog
     [self configDDLog];
     // 配置app语言
     [self configAppLanguage];
     // 配置主网钱包 0-测试网。1- 主网
     [self configServerNetwork];
+    // 删除手机VPN配置
+    [SystemUtil deleteVPNConfig];
+    // 将连接状态置为NO
+    [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     // 开启VPN连接扣费
     [TransferUtil startVPNConnectTran];
     // 初始化当前钱包
@@ -58,7 +70,7 @@
     [ToxManage readKeychainToLibary];
     // 初始化vpn文件
     [VPNFileUtil keychainVPNFileToLibray];
-    // 初始化手势默认为开启·
+    // 初始化手势默认为开启
     [self configTouch];
     // 配置状态栏
     [self configStatusBar];
@@ -67,7 +79,7 @@
     // 配置Bugly
     [self configBugly];
     // 配置项目崩溃捕获
-    [self configExceptionHandler];
+//    [self configExceptionHandler];
     // 配置FMDB
     [self configureFMDB];
     // 发送json请求
@@ -86,6 +98,8 @@
 //    [self setTabbarRoot];
     // 是否需要显示引导页
     [self checkGuidenPage];
+    // 后台定位常驻
+    [self getBackgroudLocation];
 
     [self.window makeKeyAndVisible];
     
@@ -98,8 +112,7 @@
 }
 
 // 是否需要显示引导页
-- (void) checkGuidenPage
-{
+- (void)checkGuidenPage {
     NSString *version = [HWUserdefault getStringWithKey:VERSION_KEY];
     if (![[NSStringUtil getNotNullValue:version] isEqualToString:APP_Version]) {
         [HWUserdefault insertString:APP_Version withkey:VERSION_KEY];
@@ -112,8 +125,13 @@
 
 #pragma mark - 配置Bugly
 - (void)configBugly {
-    [Bugly startWithAppId:Bugly_AppID];
+    BuglyConfig * config = [[BuglyConfig alloc] init];
+    // 设置自定义日志上报的级别，默认不上报自定义日志
+//    config.reportLogLevel = BuglyLogLevelWarn;
+    config.delegate = self;
+    [Bugly startWithAppId:Bugly_AppID config:config];
 }
+
 #pragma mark - 配置手势 默认开启
 - (void) configTouch {
     NSString *touchStatu = [HWUserdefault getStringWithKey:TOUCH_SWITCH_KEY];
@@ -121,6 +139,7 @@
         [HWUserdefault insertString:@"1" withkey:TOUCH_SWITCH_KEY];
     }
 }
+
 #pragma mark -// 配置主网钱包 0-测试网。1- 主网
 - (void) configServerNetwork {
     NSString *serverNetwork = [HWUserdefault getStringWithKey:SERVER_NETWORK];
@@ -128,6 +147,7 @@
         [HWUserdefault insertString:@"0" withkey:SERVER_NETWORK];
     }
 }
+
 #pragma mark - 配置App语言
 - (void) configAppLanguage {
     NSString *languages = [[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES];
@@ -135,6 +155,7 @@
         [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
     }
 }
+
 #pragma mark - 配置DDLog
 - (void)configDDLog {
     //开启DDLog 颜色
@@ -180,11 +201,11 @@
     keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
 }
 
-#pragma mark - 配置项目崩溃捕获
-- (void) configExceptionHandler
-{
-    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-}
+//#pragma mark - 配置项目崩溃捕获
+//- (void) configExceptionHandler
+//{
+//    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+//}
 
 #pragma mark - 创建p2pid
 - (void) configToxP2PNetwork {
@@ -224,12 +245,11 @@
 }
 
 #pragma mark - 配置FMDB
-- (void) configureFMDB
-{
+- (void) configureFMDB {
     /**
      想测试更多功能,打开注释掉的代码即可.
      */
-    bg_setDebug(YES);//打开调试模式,打印输出调试信息.
+    bg_setDebug(NO);//打开调试模式,打印输出调试信息.
     
     /**
      如果频繁操作数据库时,建议进行此设置(即在操作过程不关闭数据库);
@@ -253,16 +273,18 @@
     
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    @weakify_self
-    backTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
-        // 程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作
-//        [SystemUtil configureAPPTerminate];
-//        [weakSelf endBackTask];
-    }];
+    
+//    @weakify_self
+//    backTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
+//        // 程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作
+////        [SystemUtil configureAPPTerminate];
+////        [weakSelf endBackTask];
+//    }];
+    NSLog(@"backgroundTimeRemaining=%@",@(application.backgroundTimeRemaining));
+    NSLog(@"applicationState=%@",@(application.applicationState));
 }
 
 - (void)endBackTask {
@@ -281,6 +303,27 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [SystemUtil configureAPPTerminate];
+}
+
+#pragma mark - Backgroud Location
+- (void)getBackgroudLocation {
+    if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
+        DDLogDebug(@"UIBackgroundRefreshStatusDenied");
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted){
+        DDLogDebug(@"UIBackgroundRefreshStatusRestricted");
+    } else{
+        _locationTracker = [[LocationTracker alloc] init];
+        [_locationTracker startLocationTracking];
+        
+        //Send the best location to server every 60 seconds
+        //You may adjust the time interval depends on the need of your app.
+        NSTimeInterval time = 60.0;
+        __weak typeof(_locationTracker) weakLocationTracker = _locationTracker;
+        _locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:time repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"updateLocation");
+            [weakLocationTracker updateLocationToServer];
+        }];
+    }
 }
 
 #pragma mark - UIApplicationDelegate
@@ -306,12 +349,12 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
         //iOS 10 使用以下方法注册，才能得到授权
         [userCenter requestAuthorizationWithOptions:options
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
-                                  if (granted) { // 用户允许
-                                      
-                                  } else {  // 用户不允许
-                                      
-                                  }
-                              }];
+              if (granted) { // 用户允许
+                  
+              } else {  // 用户不允许
+                  
+              }
+          }];
 
 //    } else {
 //        // Fallback on earlier versions
@@ -342,8 +385,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 /**
  前台显示通知
  */
-- (void) showNotificationAlertViewWtihDic:(NSDictionary *) userInfo
-{
+- (void) showNotificationAlertViewWtihDic:(NSDictionary *) userInfo {
     NotifactionView *notiView = [NotifactionView loadNotifactionView];
    
     notiView.lblTtile.text = [userInfo objectForKey:@"title"];
@@ -399,7 +441,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 }
 
 
-#pragma mark -第三方app传输文件回调
+#pragma mark - 第三方app传输文件回调
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_9_0
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
 {
@@ -410,23 +452,6 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 #else
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options
 {
-//    NSString *fileURL = url.absoluteString;
-//    NSArray *array = [fileURL componentsSeparatedByString:@"."];
-//    NSString *fileName = [array lastObject];
-//    if(array && [fileName isEqualToString:@"ovpn"]) {
-//        array = [fileURL componentsSeparatedByString:@"/"];
-//        NSString *vpnFileName = [array lastObject];
-//
-//        [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:4.0];
-//
-//        VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
-//        fileView.lblMsg.text =@"Save as the current file name ?";
-//        fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
-//        fileView.vpnURL = url;
-//       // UIWindow *win = [UIApplication sharedApplication].keyWindow;
-//        [fileView showVPNFileInputView:_window];
-//    }
-    
     if ([_window.rootViewController isKindOfClass:[QlinkTabbarViewController class]]) {
         [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:.5f];
     } else {
@@ -437,8 +462,8 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     return YES;
 }
 #endif
-- (void) showVPNFileView:(NSURL *) url
-{
+
+- (void) showVPNFileView:(NSURL *) url {
     NSString *fileURL = url.absoluteString;
     NSArray *array = [fileURL componentsSeparatedByString:@"."];
     NSString *fileName = [array lastObject];
@@ -446,7 +471,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
         array = [fileURL componentsSeparatedByString:@"/"];
         NSString *vpnFileName = [[array lastObject] stringByReplacingOccurrencesOfString:@"-" withString:@""];
         VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
-        fileView.lblMsg.text =@"Save as the current file name ?";
+        fileView.lblMsg.text = NSStringLocalizable(@"save_ovpn");
         fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
         fileView.vpnURL = url;
          UIWindow *win = [UIApplication sharedApplication].keyWindow;
@@ -463,27 +488,33 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
         if (messageId!=nil) {
             [MiPushSDK openAppNotify:messageId];
         }
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"gg" message:[NSString stringWithFormat:@"%@", userInfo] preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *act = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//
-//        }];
-//        [alert addAction:act];
-//        [nav presentViewController:alert animated:YES completion:nil];
     }
 }
 
+#pragma mark - BuglyDelegate
 /**
- *  获取异常崩溃信息   上传data 到keychain
+ *  发生异常时回调
+ *
+ *  @param exception 异常信息
+ *
+ *  @return 返回需上报记录，随异常上报一起上报
  */
-void UncaughtExceptionHandler(NSException *exception) {
-    
+- (NSString *)attachmentForException:(NSException *)exception  {
     [SystemUtil configureAPPTerminate];
-    //    NSArray *callStack = [exception callStackSymbols];
-    //    NSString *reason = [exception reason];
-    //    NSString *name = [exception name];
-    //    NSString *content = [NSString stringWithFormat:@"========异常错误报告========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[callStack componentsJoinedByString:@"\n"]];
-    //    DDLogDebug(@"%@",content);
+    return nil;
 }
+
+///**
+// *  获取异常崩溃信息   上传data 到keychain
+// */
+//void UncaughtExceptionHandler(NSException *exception) {
+//    [SystemUtil configureAPPTerminate];
+//    //    NSArray *callStack = [exception callStackSymbols];
+//    //    NSString *reason = [exception reason];
+//    //    NSString *name = [exception name];
+//    //    NSString *content = [NSString stringWithFormat:@"========异常错误报告========\nname:%@\nreason:\n%@\ncallStackSymbols:\n%@",name,reason,[callStack componentsJoinedByString:@"\n"]];
+//    //    DDLogDebug(@"%@",content);
+//}
 
 @end
 

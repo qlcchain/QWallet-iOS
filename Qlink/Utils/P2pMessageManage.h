@@ -81,6 +81,14 @@ static NSString *vpnUserAndPasswordReq = @"vpnUserAndPasswordReq";
  */
 static NSString *vpnUserAndPasswordRsp = @"vpnUserAndPasswordRsp";
 /**
+ * vpn账号和密码和私钥的请求
+ */
+static NSString *vpnUserPassAndPrivateKeyReq = @"vpnUserPassAndPrivateKeyReq";
+/**
+ * vpn账号和密码和私钥的返回
+ */
+static NSString *vpnUserPassAndPrivateKeyRsp = @"vpnUserPassAndPrivateKeyRsp";
+/**
  * vpn或者wifi连接成功后，告诉提供端做连接记录的请求
  */
 static NSString *recordSaveReq = @"recordSaveReq";

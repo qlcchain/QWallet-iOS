@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "BGTool.h"
 #import "BGDB.h"
-#import "BGModelInfo.h"
 #import "NSCache+BGCache.h"
 
 #define SqlText @"text" //数据库的字符类型
@@ -26,6 +25,13 @@
 #define BGModel @"BGModel"
 #define BGMapTable @"BGMapTable"
 #define BGHashTable @"BGHashTable"
+
+#define bg_typeHead_NS @"@\"NS"
+#define bg_typeHead__NS @"@\"__NS"
+
+#define bg_typeHead_UI @"@\"UI"
+#define bg_typeHead__UI @"@\"__UI"
+
 
 //100M大小限制.
 #define MaxData @(838860800)
@@ -49,18 +55,19 @@ NSString* bg_sqlKey(NSString* key){
  */
 NSString* bg_sqlValue(id value){
     
-    if ([value isKindOfClass:[NSNumber class]]) {
+    if([value isKindOfClass:[NSNumber class]]) {
         return value;
-    }
-    
-    NSString* type = [NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([value class])];
-    value = [BGTool getSqlValue:value type:type encode:YES];
-    if ([value isKindOfClass:[NSString class]]) {
+    }else if([value isKindOfClass:[NSString class]]){
         return [NSString stringWithFormat:@"'%@'",value];
     }else{
-        return value;
+        NSString* type = [NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([value class])];
+        value = [BGTool getSqlValue:value type:type encode:YES];
+        if ([value isKindOfClass:[NSString class]]) {
+            return [NSString stringWithFormat:@"'%@'",value];
+        }else{
+            return value;
+        }
     }
-    
 }
 
 /**
@@ -75,7 +82,6 @@ NSString* bg_keyPathValues(NSArray* keyPathValues){
 void bg_setSqliteName(NSString*_Nonnull sqliteName){
     if (![sqliteName isEqualToString:[BGDB shareManager].sqliteName]) {
         [BGDB shareManager].sqliteName = sqliteName;
-        
     }
 }
 /**
@@ -92,6 +98,15 @@ void bg_setDisableCloseDB(BOOL disableCloseDB){
     if ([BGDB shareManager].disableCloseDB != disableCloseDB){//防止重复设置.
         [BGDB shareManager].disableCloseDB = disableCloseDB;
     }
+}
+/**
+ 手动关闭数据库.
+ */
+void bg_closeDB(){
+    BOOL closeFlag = [BGDB shareManager].disableCloseDB;
+    [BGDB shareManager].disableCloseDB = NO;
+    [[BGDB shareManager] closeDB];
+    [BGDB shareManager].disableCloseDB = closeFlag;
 }
 /**
  设置调试模式
@@ -314,7 +329,7 @@ void bg_cleanCache(){
             
             if(keypaths.count<=2){
                 if([value isKindOfClass:[NSString class]]){
-                    [keyPathParam appendString:@"\"%"];
+                    [keyPathParam appendString:@"\\%"];
                 }else{
                     [keyPathParam appendString:@",%"];
                     likeOr = YES;
@@ -393,10 +408,15 @@ void bg_cleanCache(){
 +(NSString *)jsonStringWithObject:(id)object{
     NSMutableDictionary* keyValueDict = [NSMutableDictionary dictionary];
     NSArray* keyAndTypes = [BGTool getClassIvarList:[object class] Object:object onlyKey:NO];
+    //忽略属性
+    NSArray* ignoreKeys = [BGTool executeSelector:bg_ignoreKeysSelector forClass:[object class]];
     for(NSString* keyAndType in keyAndTypes){
         NSArray* arr = [keyAndType componentsSeparatedByString:@"*"];
         NSString* propertyName = arr[0];
         NSString* propertyType = arr[1];
+        
+        if([ignoreKeys containsObject:propertyName])continue;
+        
         if(![propertyName isEqualToString:bg_primaryKey]){
             id propertyValue = [object valueForKey:propertyName];
             if (propertyValue){
@@ -507,49 +527,49 @@ void bg_cleanCache(){
 //NSDate转字符串,格式: yyyy-MM-dd HH:mm:ss
 +(NSString*)stringWithDate:(NSDate*)date{
     NSDateFormatter* formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
     return [formatter stringFromDate:date];
 }
 //跟value和数据类型type 和编解码标志 返回编码插入数据库的值,或解码数据库的值.
 +(id)getSqlValue:(id)value type:(NSString*)type encode:(BOOL)encode{
     if(!value || [value isKindOfClass:[NSNull class]])return nil;
     
-    if([type containsString:@"String"]){
+    if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"String"]){
         if([type containsString:@"AttributedString"]){//处理富文本.
             if(encode) {
-                return [[NSKeyedArchiver archivedDataWithRootObject:value] base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                return [[NSKeyedArchiver archivedDataWithRootObject:value] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             }else{
-               NSData* data = [[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                NSData* data = [[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
                 return [NSKeyedUnarchiver unarchiveObjectWithData:data];
             }
         }else{
             return value;
         }
-    }else if([type containsString:@"Number"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"Number"]){
         if(encode) {
             return [NSString stringWithFormat:@"%@",value];
         }else{
             return [[NSNumberFormatter new] numberFromString:value];
         }
-    }else if([type containsString:@"Array"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"Array"]){
         if(encode){
             return [self jsonStringWithArray:value];
         }else{
             return [self arrayFromJsonString:value];
         }
-    }else if([type containsString:@"Dictionary"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"Dictionary"]){
         if(encode){
             return [self jsonStringWithDictionary:value];
         }else{
             return [self dictionaryFromJsonString:value];
         }
-    }else if([type containsString:@"Set"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"Set"]){
         if(encode){
             return [self jsonStringWithArray:value];
         }else{
             return [self arrayFromJsonString:value];
         }
-    }else if([type containsString:@"Data"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"Data"]){
         if(encode){
             NSData* data = value;
             NSNumber* maxLength = MaxData;
@@ -558,31 +578,31 @@ void bg_cleanCache(){
         }else{
             return [[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
         }
-    }else if([type containsString:@"NSMapTable"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"MapTable"]){
         if(encode){
             return [self jsonStringWithMapTable:value];
         }else{
             return [self mapTableFromJsonString:value];
         }
-    }else if ([type containsString:@"NSHashTable"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"HashTable"]){
         if(encode){
             return [self jsonStringWithNSHashTable:value];
         }else{
             return [self hashTableFromJsonString:value];
         }
-    }else if ([type containsString:@"NSDate"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"Date"]){
         if(encode){
             return [self stringWithDate:value];
         }else{
             return [self dateFromString:value];
         }
-    }else if ([type containsString:@"NSURL"]){
+    }else if(([type hasPrefix:bg_typeHead_NS]||[type hasPrefix:bg_typeHead__NS])&&[type containsString:@"URL"]){
         if(encode){
             return [value absoluteString];
         }else{
             return [NSURL URLWithString:value];
         }
-    }else if ([type containsString:@"UIImage"]){
+    }else if(([type hasPrefix:bg_typeHead_UI]||[type hasPrefix:bg_typeHead__UI])&&[type containsString:@"Image"]){
         if(encode){
             NSData* data = UIImageJPEGRepresentation(value, 1);
             NSNumber* maxLength = MaxData;
@@ -591,7 +611,7 @@ void bg_cleanCache(){
         }else{
             return [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters]];
         }
-    }else if ([type containsString:@"UIColor"]){
+    }else if(([type hasPrefix:bg_typeHead_UI]||[type hasPrefix:bg_typeHead__UI])&&[type containsString:@"Color"]){
         if(encode){
             CGFloat r, g, b, a;
             [value getRed:&r green:&g blue:&b alpha:&a];
@@ -635,45 +655,23 @@ void bg_cleanCache(){
              [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
         return value;
     }else{
+        
         if(encode){
-            return [self jsonStringWithArray:@[value]];
+            NSBundle *bundle = [NSBundle bundleForClass:[value class]];
+            if(bundle == [NSBundle mainBundle]){//自定义的类
+                return [self jsonStringWithArray:@[value]];
+            }else{//特殊类型
+                return [[NSKeyedArchiver archivedDataWithRootObject:value] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            }
         }else{
-            return [self arrayFromJsonString:value].firstObject;
+            if([value containsString:BGModel]){//自定义的类
+                return [self arrayFromJsonString:value].firstObject;
+            }else{//特殊类型
+                NSData* data = [[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            }
         }
-    }
-}
-/**
- 判断系统类型与否
- */
-+(BOOL)isKindOfSystemType:(NSString*)type{
-    
-    if([type containsString:@"String"]||
-       [type containsString:@"Number"]||
-       [type containsString:@"Array"]||
-       [type containsString:@"Dictionary"]||
-       [type containsString:@"Set"]||
-       [type containsString:@"Data"]||
-       [type containsString:@"NSMapTable"]||
-       [type containsString:@"NSHashTable"]||
-       [type containsString:@"NSDate"]||
-       [type containsString:@"NSURL"]||
-       [type containsString:@"UIImage"]||
-       [type containsString:@"UIColor"]||
-       [type containsString:@"NSRange"]||
-       ([type containsString:@"CGRect"]&&[type containsString:@"CGPoint"]&&[type containsString:@"CGSize"])||
-       (![type containsString:@"CGRect"]&&[type containsString:@"CGPoint"]&&![type containsString:@"CGSize"])||
-       (![type containsString:@"CGRect"]&&![type containsString:@"CGPoint"]&&[type containsString:@"CGSize"])||
-       [type isEqualToString:@"i"]||[type isEqualToString:@"I"]||
-       [type isEqualToString:@"s"]||[type isEqualToString:@"S"]||
-       [type isEqualToString:@"q"]||[type isEqualToString:@"Q"]||
-       [type isEqualToString:@"b"]||[type isEqualToString:@"B"]||
-       [type isEqualToString:@"c"]||[type isEqualToString:@"C"]||
-       [type isEqualToString:@"l"]||[type isEqualToString:@"L"]||
-       [type isEqualToString:@"f"]||[type isEqualToString:@"F"]||
-       [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
-       return YES;
-    }else{
-       return NO;
+        
     }
 }
 
@@ -707,7 +705,7 @@ void bg_cleanCache(){
             NSString* type = [arrKT lastObject];
             
             if ([tempSqlKey isEqualToString:key]){
-                NSString* tempValue = valueDict[sqlKey];
+                id tempValue = valueDict[sqlKey];
                 id ivarValue = [self getSqlValue:tempValue type:type encode:NO];
                 !ivarValue?:[object setValue:ivarValue forKey:key];
                 [keyAndTypes removeObject:keyAndType];
@@ -958,7 +956,7 @@ void bg_cleanCache(){
     if(!jsonString || [jsonString isKindOfClass:[NSNull class]])return nil;
     
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
     NSDate *date = [formatter dateFromString:jsonString];
     return date;
 }
@@ -1003,22 +1001,51 @@ void bg_cleanCache(){
     return obj;
 }
 /**
+ 获取存储数据
+ */
++(NSMutableDictionary*)getDictWithObject:(id)object ignoredKeys:(NSArray* const)ignoredKeys{
+    NSMutableDictionary* modelInfoDictM = [NSMutableDictionary dictionary];
+    NSArray* keyAndTypes = [BGTool getClassIvarList:[object class] Object:object onlyKey:NO];
+    for(NSString* keyAndType in keyAndTypes){
+        NSArray* keyTypes = [keyAndType componentsSeparatedByString:@"*"];
+        NSString* propertyName = keyTypes[0];
+        NSString* propertyType = keyTypes[1];
+        
+        if(![ignoredKeys containsObject:propertyName]){
+            
+            //数据库表列名(BG_ + 属性名),加BG_是为了防止和数据库关键字发生冲突.
+            NSString* sqlColumnName = [NSString stringWithFormat:@"%@%@",BG,propertyName];
+            
+            id propertyValue;
+            id sqlValue;
+            //crateTime和updateTime两个额外字段单独处理.
+            if([propertyName isEqualToString:bg_createTimeKey] ||
+               [propertyName isEqualToString:bg_updateTimeKey]){
+                propertyValue = [BGTool stringWithDate:[NSDate new]];
+            }else{
+                propertyValue = [object valueForKey:propertyName];
+            }
+            
+            if(propertyValue){
+                //列值
+                sqlValue = [BGTool getSqlValue:propertyValue type:propertyType encode:YES];
+                modelInfoDictM[sqlColumnName] = sqlValue;
+            }
+            
+        }
+        
+    }
+    NSAssert(modelInfoDictM.allKeys.count,@"对象变量数据为空,不能存储!");
+    return modelInfoDictM;
+    
+}
+/**
  根据对象获取要更新或插入的字典.
  */
 +(NSDictionary* _Nonnull)getDictWithObject:(id _Nonnull)object ignoredKeys:(NSArray* const _Nullable)ignoredKeys filtModelInfoType:(bg_getModelInfoType)filtModelInfoType{
-    NSArray<BGModelInfo*>* infos = [BGModelInfo modelInfoWithObject:object];
-    NSMutableDictionary* valueDict = [NSMutableDictionary dictionary];
-    if (ignoredKeys) {
-        for(BGModelInfo* info in infos){
-            if(![ignoredKeys containsObject:info.propertyName]){
-                valueDict[info.sqlColumnName] = info.sqlColumnValue;
-            }
-        }
-    }else{
-        for(BGModelInfo* info in infos){
-            valueDict[info.sqlColumnName] = info.sqlColumnValue;
-        }
-    }
+    
+    //获取存到数据库的数据.
+    NSMutableDictionary* valueDict = [self getDictWithObject:object ignoredKeys:ignoredKeys];
     
     if (filtModelInfoType == bg_ModelInfoSingleUpdate){//单条更新操作时,移除 创建时间和主键 字段不做更新
         [valueDict removeObjectForKey:bg_sqlKey(bg_createTimeKey)];

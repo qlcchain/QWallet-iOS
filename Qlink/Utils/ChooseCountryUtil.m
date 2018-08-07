@@ -61,4 +61,17 @@
     return countryName?:@"China";
 }
 
++ (NSMutableArray *) getAllCountry
+{
+    __block NSMutableArray *countryArr = [NSMutableArray array];
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CountryList" ofType:@"json"]];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    [dic[@"country"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+         CountryModel *countryM = [CountryModel getObjectWithKeyValues:obj];
+         [countryArr addObject:countryM];
+       
+    }];
+    return countryArr;
+}
+
 @end

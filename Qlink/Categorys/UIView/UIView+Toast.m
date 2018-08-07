@@ -381,6 +381,7 @@ NSString * const CSToastPositionBottom          = @"bottom";
     return wrapperView;
 }
 
+// 钱包操作alertview
 - (void) showWalletAlertViewWithTitle:(NSString *) alertTitle msg:(NSMutableAttributedString *) msgArrtrbuted isShowTwoBtn:(BOOL) isTwo block:(void (^)(void))calculateBlock;
 {
     WalletAlertView *alertView = [WalletAlertView loadWalletAlertView];
@@ -401,5 +402,17 @@ NSString * const CSToastPositionBottom          = @"bottom";
         
     };
 }
-
+// vpn操作alertview
++ (void) showVPNToastAlertViewWithTopImageName:(NSString *) imageName content:(NSString *) content block:(void (^)(void))clickYesBlock
+{
+    VpnToastView *alertView = [VpnToastView loadVPN2ToastView];
+    alertView.topImageView.image = [UIImage imageNamed:imageName];
+    alertView.lblContent.text = content;
+    [alertView showToastView];
+    alertView.yesClickBlock = ^{
+        if (clickYesBlock) {
+            clickYesBlock();
+        }
+    };
+}
 @end

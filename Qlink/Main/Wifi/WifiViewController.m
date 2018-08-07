@@ -15,6 +15,7 @@
 //#import "UIButton+UserHead.h"
 #import "WalletUtil.h"
 #import <SDWebImage/UIButton+WebCache.h>
+#import "DebugLogViewController.h"
 
 @interface WifiViewController ()<UITableViewDelegate,UITableViewDataSource,SRRefreshDelegate>
 
@@ -134,6 +135,8 @@
    
 }
 
+#pragma mark - Action
+
 - (IBAction)setBtnAction:(id)sender {
     
     ProfileViewController *profileVC = [[ProfileViewController alloc] init];
@@ -141,6 +144,18 @@
 }
 
 - (IBAction)messageBtnAction:(id)sender {
+}
+
+- (IBAction)debugLogAction:(id)sender {
+#ifdef DEBUG
+    [self jumpToDebugLog];
+#endif
+}
+
+#pragma mark - Transition
+- (void)jumpToDebugLog {
+    DebugLogViewController *vc = [[DebugLogViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Lazy

@@ -198,6 +198,7 @@ NSMutableData,UIImage,NSDate,NSURL,NSRange,CGRect,CGSize,CGPoint,自定义对象
  2017-07-19 16 即查询2017年7月19日16时的数据
  2017-07-19 16:17 即查询2017年7月19日16时17分的数据
  2017-07-19 16:17:53 即查询2017年7月19日16时17分53秒的数据
+ 2017-07-19 16:17:53.350 即查询2017年7月19日16时17分53秒350毫秒的数据
  */
 +(NSArray* _Nullable)bg_find:(NSString* _Nullable)tablename type:(bg_dataTimeType)type dateTime:(NSString* _Nonnull)dateTime;
 
@@ -316,7 +317,7 @@ NSMutableData,UIImage,NSDate,NSURL,NSRange,CGRect,CGSize,CGPoint,自定义对象
  */
 +(NSInteger)bg_version:(NSString* _Nullable)tablename;
 /**
- 刷新,当类"唯一约束"改变时,调用此接口刷新一下.
+ 刷新,当类'唯一约束','联合主键','属性类型'发生改变时,调用此接口刷新一下.
  同步刷新.
  @tablename 当此参数为nil时,操作以此类名为表名的数据表，非nil时，操作以此参数为表名的数据表.
  @version 版本号,从1开始,依次往后递增.
@@ -328,7 +329,7 @@ NSMutableData,UIImage,NSDate,NSURL,NSRange,CGRect,CGSize,CGPoint,自定义对象
  */
 +(void)bg_updateAsync:(NSString* _Nullable)tablename version:(NSInteger)version complete:(bg_complete_I)complete;
 /**
- 刷新,当类"唯一约束"改变时,调用此接口刷新一下.
+ 刷新,当类'唯一约束','联合主键','属性类型'发生改变时,调用此接口刷新一下.
  同步刷新.
  @tablename 当此参数为nil时,操作以此类名为表名的数据表，非nil时，操作以此参数为表名的数据表.
  @version 版本号,从1开始,依次往后递增.
@@ -547,5 +548,4 @@ NSMutableData,UIImage,NSDate,NSURL,NSRange,CGRect,CGSize,CGPoint,自定义对象
  清空字典.
  */
 +(BOOL)bg_clearDictionary;
-
 @end

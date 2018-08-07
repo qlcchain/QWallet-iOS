@@ -70,10 +70,13 @@
 
 - (IBAction)continueAction:(id)sender {
     
-     [self.view endEditing:YES];
+    [self.view endEditing:YES];
     
     if ([_txtPass1.text.trim isBlankString] || [_txtPass2.text.trim isBlankString]) {
         [AppD.window showHint:NSStringLocalizable(@"pass_input")];
+        return;
+    } else if (_txtPass1.text.trim.length <6) {
+        [AppD.window showHint:NSStringLocalizable(@"pass_format")];
         return;
     } else if (![_txtPass1.text.trim isEqualToString:_txtPass2.text.trim]){
         [AppD.window showHint:NSStringLocalizable(@"pass_same")];

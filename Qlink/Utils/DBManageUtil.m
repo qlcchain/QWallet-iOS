@@ -11,6 +11,7 @@
 #import <BGFMDB/BGDB.h>
 #import "HistoryRecrdInfo.h"
 #import "VPNMode.h"
+#import "WalletUtil.h"
 
 @implementation DBManageUtil
 
@@ -36,7 +37,16 @@
             [HistoryRecrdInfo bg_update:HISTORYRECRD_TABNAME version:version];
         }
     }
-   
-    
 }
+
++ (VPNInfo *)getVpnInfo:(NSString *)vpnName isMainNet:(NSString *)isMainNet {
+    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"vpnName"),bg_sqlValue(vpnName),bg_sqlKey(@"isMainNet"),bg_sqlValue(@([isMainNet boolValue]))]];
+    VPNInfo *vpnInfo = nil;
+    if (finfAlls && finfAlls.count > 0) {
+        vpnInfo = finfAlls.firstObject;
+    }
+    
+    return vpnInfo;
+}
+
 @end

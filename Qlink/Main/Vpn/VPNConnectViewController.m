@@ -51,22 +51,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)addNewGuide {
-    if (IS_iPhone_5) {
-        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-        [self.scrollView setContentOffset:bottomOffset animated:NO];
-    }
-    CGRect hollowOutFrame = [_connectBtn.superview convertRect:_connectBtn.frame toView:[UIApplication sharedApplication].keyWindow];
-    [[GuideVpnConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:nil];
-}
-
 #pragma mark - Noti
 
 - (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStatusChange:) name:VPN_STATUS_CHANGE_NOTI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveVPNFile:) name:RECEIVE_VPN_FILE_NOTI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectRsp:) name:CHECK_CONNECT_RSP_NOTI object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStatusChange:) name:VPN_STATUS_CHANGE_NOTI object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveVPNFile:) name:RECEIVE_VPN_FILE_NOTI object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectRsp:) name:CHECK_CONNECT_RSP_NOTI object:nil];
     
 }
 
@@ -98,6 +89,15 @@
 }
 
 #pragma mark - ConfigView
+- (void)addNewGuide {
+    if (IS_iPhone_5) {
+        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+        [self.scrollView setContentOffset:bottomOffset animated:NO];
+    }
+    CGRect hollowOutFrame = [_connectBtn.superview convertRect:_connectBtn.frame toView:[UIApplication sharedApplication].keyWindow];
+    [[GuideVpnConnectView getNibView] showGuideTo:hollowOutFrame tapBlock:nil];
+}
+
 - (void)updateVpnUserBtn {
     __weak typeof(_vpnUserBtn) weakVpnUserBtn = _vpnUserBtn;
     NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],_vpnInfo.imgUrl];
@@ -142,13 +142,6 @@
     }
 }
 
-
-#pragma mark - Operation
-- (BOOL)vpnIsMine {
-    NSString *myP2pId = [ToxManage getOwnP2PId];
-    return [_vpnInfo.p2pId isEqualToString:myP2pId]?YES:NO;
-}
-
 - (void)receiveVPNFile:(NSNotification *)noti {
     _vpnData = noti.object;
     [self startConnectVPN];
@@ -157,12 +150,19 @@
 - (void)startConnectVPN {
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = normalConnect;
-    [VPNUtil.shareInstance configVPNWithVpnData:_vpnData];
+    VPNUtil.shareInstance.connectData = _vpnData;
+    [VPNUtil.shareInstance configVPN];
 }
 
 - (void)savePreferenceFail:(NSNotification *)noti {
     [AppD.window hideHud];
     [AppD.window showHint:NSStringLocalizable(@"save_failed")];
+}
+
+#pragma mark - Operation
+- (BOOL)vpnIsMine {
+    NSString *myP2pId = [ToxManage getOwnP2PId];
+    return [_vpnInfo.p2pId isEqualToString:myP2pId]?YES:NO;
 }
 
 - (void)addSendCheckConnect {
@@ -217,7 +217,7 @@
     }
     
     if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
-        [self.view showView:self.view hint:NSStringLocalizable(@"insufficient_assets")];
+        [self.view showHudInView:self.view hint:NSStringLocalizable(@"insufficient_assets")];
         return;
     }
     
@@ -227,7 +227,7 @@
     
     connectVpnOK = NO;
 
-    NSTimeInterval timeout = CONNECT_VPN_TIMEOUT;
+    NSTimeInterval timeout = 20;//CONNECT_VPN_TIMEOUT;
     [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];
 
     [self performSelector:@selector(connectVpnTimeout) withObject:nil afterDelay:timeout];

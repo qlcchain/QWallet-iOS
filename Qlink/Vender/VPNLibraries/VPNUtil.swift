@@ -27,8 +27,12 @@ class VPNUtil: NSObject {
     
     private let customFlow = CustomFlow()
     var providerManager : NETunnelProviderManager?
-    private var currentData : Data?
+    open var connectData : Data?
     var operationStatus : VPNOperationStatus = .none
+    open var vpnUserName : String?
+    open var vpnPassword : String?
+    open var vpnPrivateKey : String?
+    var currentConnectType : Int = 0 // 0:自动  1:私钥  2:用户名密码  3:私钥和用户名密码
     
     override init() {
         super.init()
@@ -55,9 +59,8 @@ class VPNUtil: NSObject {
         return status
     }
     
-    func configVPN(vpnData:Data?) {
-        guard let data = vpnData else { return }
-        currentData = data
+    func configVPN() {
+        guard connectData != nil else { return }
         self.removeFromPreferences()
         operationStatus = .none
         self.getProviderManager(connect: true)
@@ -68,7 +71,7 @@ class VPNUtil: NSObject {
         self.stopTunnel()
     }
     
-    func vpnConnectStatus() -> NEVPNStatus {
+    func getVpnConnectStatus() -> NEVPNStatus {
 //        self.getProviderManager(connect: false)
         guard let manager = self.providerManager else { return NEVPNStatus.invalid }
         return manager.connection.status;
@@ -99,7 +102,7 @@ class VPNUtil: NSObject {
             
             // Assuming the app bundle contains a configuration file named 'client.ovpn' lets get its
             // Data representation
-            let configurationFileContent = self.currentData!
+            let configurationFileContent = self.connectData!
 //            guard
 //                let configurationFileURL = Bundle.main.url(forResource: "winqvpn", withExtension: "ovpn"),
 //                let configurationFileContent = try? Data(contentsOf: configurationFileURL)
@@ -119,7 +122,15 @@ class VPNUtil: NSObject {
             tunnelProtocol.providerBundleIdentifier = PacketTunnelBundleID
             
             // Use `providerConfiguration` to save content of the ovpn file.
-            tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent]
+            if self.currentConnectType == 0 {
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent]
+            } else if self.currentConnectType == 1 {
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "privateKey" : self.vpnPrivateKey ?? ""]
+            } else if self.currentConnectType == 2 {
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName ?? "", "password" : self.vpnPassword ?? ""]
+            } else if self.currentConnectType == 3 {
+                tunnelProtocol.providerConfiguration = ["ovpn": configurationFileContent, "userName" : self.vpnUserName ?? "", "password" : self.vpnPassword ?? "", "privateKey" : self.vpnPrivateKey ?? ""]
+            }
             
             // Provide user credentials if needed. It is highly recommended to use
             // keychain to store a password.
@@ -167,12 +178,29 @@ class VPNUtil: NSObject {
     
     func removeFromPreferences() {
         print("调用removeFromPreferences 移除手机vpn配置")
-        self.providerManager?.removeFromPreferences(completionHandler: { (error) in
-            guard error == nil else {
-                // Handle an occured error
-                return
+        if let _ = self.providerManager {
+            self.providerManager?.removeFromPreferences(completionHandler: { (error) in
+                guard error == nil else {
+                    // Handle an occured error
+                    return
+                }
+            })
+        } else {
+            NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
+                guard error == nil else {
+                    // Handle an occured error
+                    return
+                }
+                self.providerManager = managers?.first ?? NETunnelProviderManager()
+                self.providerManager?.removeFromPreferences(completionHandler: { (error) in
+                    guard error == nil else {
+                        // Handle an occured error
+                        return
+                    }
+                
+                })
             }
-        })
+        }
     }
     
     @objc func vpnchange() {
@@ -242,7 +270,49 @@ class VPNUtil: NSObject {
     }
     
     private func stopTunnel() {
-        self.providerManager?.connection.stopVPNTunnel()
+        if let _ = self.providerManager {
+            self.providerManager?.connection.stopVPNTunnel()
+        } else {
+            NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
+                guard error == nil else {
+                    // Handle an occured error
+                    return
+                }
+                self.providerManager = managers?.first ?? NETunnelProviderManager()
+                self.providerManager?.connection.stopVPNTunnel()
+            }
+        }
+    }
+    
+    func applyConfiguration(vpnData:Data?, completionHandler: @escaping (Int) -> Void) {
+        guard let data = vpnData else { return }
+        let adapter = OpenVPNAdapter()
+        
+        let configuration = OpenVPNConfiguration()
+        configuration.fileContent = data
+//        configuration.settings = ["auth-user-pass": ""]
+        let result: OpenVPNProperties
+        do {
+            result = try adapter.apply(configuration: configuration)
+            if result.isPrivateKeyPasswordRequired {
+                if result.autologin { // 1 私钥
+                    currentConnectType = 1
+                } else { // 3 私钥和用户名密码
+                    currentConnectType = 3
+                }
+            } else {
+                if result.autologin { // 0 自动登录
+                    currentConnectType = 0
+                } else { // 2 用户名密码
+                    currentConnectType = 2
+                }
+            }
+            completionHandler(currentConnectType)
+        } catch {
+            print("###########********Failed to configure OpenVPN adapted due to error: \(error)")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: CONFIG_VPN_ERROR_NOTI), object: error.localizedDescription)
+            return
+        }
     }
     
 }

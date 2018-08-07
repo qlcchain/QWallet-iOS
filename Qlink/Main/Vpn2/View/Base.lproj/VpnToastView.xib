@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="VAGRounded-Bold.ttf">
+            <string>VAGRoundedBT-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="qj5-9j-qbW" customClass="VpnToastView">
+            <rect key="frame" x="0.0" y="0.0" width="511" height="576"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" alpha="0.40000000596046448" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgT-oj-YWq">
+                    <rect key="frame" x="0.0" y="0.0" width="511" height="576"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbG-tY-LGn">
+                    <rect key="frame" x="38" y="91.5" width="435" height="393"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHs-Zf-il2">
+                            <rect key="frame" x="15" y="324" width="197.5" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="fQo-QP-plo"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="15"/>
+                            <state key="normal" title="NO" backgroundImage="bg_gray_button"/>
+                            <connections>
+                                <action selector="clickNo:" destination="qj5-9j-qbW" eventType="touchUpInside" id="CyH-fi-2XI"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oK6-S2-OGW">
+                            <rect key="frame" x="222.5" y="324" width="197.5" height="44"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="15"/>
+                            <state key="normal" title="YES" backgroundImage="bg_purple_button"/>
+                            <connections>
+                                <action selector="clickYes:" destination="qj5-9j-qbW" eventType="touchUpInside" id="iUT-e8-BCV"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_even" translatesAutoresizingMaskIntoConstraints="NO" id="iWW-in-DuU">
+                            <rect key="frame" x="187" y="30" width="61" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="61" id="oLz-Gz-09h"/>
+                                <constraint firstAttribute="height" constant="49" id="tJC-Wb-zvJ"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just cost 3 QLC Connect NOW!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0le-N1-Per">
+                            <rect key="frame" x="40" y="84" width="355" height="225"/>
+                            <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="17"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="WHs-Zf-il2" secondAttribute="bottom" constant="25" id="5Pu-wf-TRp"/>
+                        <constraint firstItem="0le-N1-Per" firstAttribute="top" secondItem="iWW-in-DuU" secondAttribute="bottom" constant="5" id="E5r-Y1-gRt"/>
+                        <constraint firstItem="oK6-S2-OGW" firstAttribute="width" secondItem="WHs-Zf-il2" secondAttribute="width" id="E7F-E3-Muj"/>
+                        <constraint firstAttribute="trailing" secondItem="oK6-S2-OGW" secondAttribute="trailing" constant="15" id="H7U-Kx-csj"/>
+                        <constraint firstAttribute="width" secondItem="RbG-tY-LGn" secondAttribute="height" multiplier="825:745" id="K3P-wB-yEG"/>
+                        <constraint firstItem="oK6-S2-OGW" firstAttribute="leading" secondItem="WHs-Zf-il2" secondAttribute="trailing" constant="10" id="OL9-V9-Kvv"/>
+                        <constraint firstItem="iWW-in-DuU" firstAttribute="top" secondItem="RbG-tY-LGn" secondAttribute="top" constant="30" id="fWc-37-2M9"/>
+                        <constraint firstItem="WHs-Zf-il2" firstAttribute="top" secondItem="0le-N1-Per" secondAttribute="bottom" constant="15" id="iJf-p1-Wx6"/>
+                        <constraint firstAttribute="trailing" secondItem="0le-N1-Per" secondAttribute="trailing" constant="40" id="lf2-7H-aVI"/>
+                        <constraint firstItem="iWW-in-DuU" firstAttribute="centerX" secondItem="RbG-tY-LGn" secondAttribute="centerX" id="qWm-Bw-cLv"/>
+                        <constraint firstItem="oK6-S2-OGW" firstAttribute="bottom" secondItem="WHs-Zf-il2" secondAttribute="bottom" id="sDR-9J-GXw"/>
+                        <constraint firstItem="WHs-Zf-il2" firstAttribute="leading" secondItem="RbG-tY-LGn" secondAttribute="leading" constant="15" id="vj8-tT-oX6"/>
+                        <constraint firstItem="oK6-S2-OGW" firstAttribute="height" secondItem="WHs-Zf-il2" secondAttribute="height" id="vxg-90-IUq"/>
+                        <constraint firstItem="0le-N1-Per" firstAttribute="leading" secondItem="RbG-tY-LGn" secondAttribute="leading" constant="40" id="wZO-wv-zl5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="pgT-oj-YWq" firstAttribute="leading" secondItem="7vs-Ie-jZg" secondAttribute="leading" id="8PU-zn-h89"/>
+                <constraint firstItem="RbG-tY-LGn" firstAttribute="leading" secondItem="7vs-Ie-jZg" secondAttribute="leading" constant="38" id="8Qr-5e-7ly"/>
+                <constraint firstItem="RbG-tY-LGn" firstAttribute="width" secondItem="RbG-tY-LGn" secondAttribute="height" multiplier="825:745" id="Dcx-Xc-d2s"/>
+                <constraint firstItem="RbG-tY-LGn" firstAttribute="centerY" secondItem="qj5-9j-qbW" secondAttribute="centerY" id="E8j-rI-bom"/>
+                <constraint firstItem="pgT-oj-YWq" firstAttribute="trailing" secondItem="7vs-Ie-jZg" secondAttribute="trailing" id="RLX-9c-M6l"/>
+                <constraint firstAttribute="bottom" secondItem="pgT-oj-YWq" secondAttribute="bottom" id="UFb-aS-Az5"/>
+                <constraint firstItem="pgT-oj-YWq" firstAttribute="top" secondItem="qj5-9j-qbW" secondAttribute="top" id="ZtY-7o-m41"/>
+                <constraint firstItem="RbG-tY-LGn" firstAttribute="centerX" secondItem="qj5-9j-qbW" secondAttribute="centerX" id="rIq-JO-klh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="7vs-Ie-jZg"/>
+            <connections>
+                <outlet property="backView" destination="RbG-tY-LGn" id="dDz-q7-zgm"/>
+                <outlet property="lblContent" destination="0le-N1-Per" id="WKX-hC-NJ3"/>
+                <outlet property="topImageView" destination="iWW-in-DuU" id="1VP-EX-H2X"/>
+            </connections>
+            <point key="canvasLocation" x="-151" y="-527"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_gray_button" width="9" height="44"/>
+        <image name="bg_purple_button" width="5" height="42"/>
+        <image name="icon_even" width="61" height="49"/>
+    </resources>
+</document>

@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class VPNInfo;
+
 @interface DBManageUtil : NSObject
+
 + (void) updateDBversion;
++ (VPNInfo *)getVpnInfo:(NSString *)vpnName isMainNet:(NSString *)isMainNet;
+
 @end

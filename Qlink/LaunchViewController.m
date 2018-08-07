@@ -26,9 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"launchAnimate" ofType:@"gif"];
-    UIImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
-    _gifImgV.image = img;
+    _gifImgV.image = [LaunchViewController gifImage];
 }
 
 + (void)showLog {
@@ -36,10 +34,14 @@
 }
 
 + (NSTimeInterval)getGifDuration {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"launchAnimate" ofType:@"gif"];
-    OLImage *img = [OLImage imageWithIncrementalData:[NSData dataWithContentsOfFile:path]];
-    NSTimeInterval timeI = img.totalDuration;
+    NSTimeInterval timeI = ((OLImage *)[LaunchViewController gifImage]).totalDuration;
     return timeI;
+}
+
++ (UIImage *)gifImage {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"launchAnimate" ofType:@"gif"];
+    UIImage *img = [OLImage imageWithData:[NSData dataWithContentsOfFile:path]];
+    return img;
 }
 
 - (void)didReceiveMemoryWarning {

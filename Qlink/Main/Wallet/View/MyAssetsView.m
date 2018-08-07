@@ -83,16 +83,9 @@
  */
 - (void) checkData
 {
-   //NSArray* finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME limit:0 orderBy:@"bg_createTime" desc:YES];
-  
-    NSArray* finfAlls = nil;
-    if ([WalletUtil checkServerIsMian]) {
-        finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d order by %@ desc",bg_sqlKey(@"isMainNet"),1,bg_sqlKey(@"bg_createTime")]];
-    } else {
-        finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull order by %@ desc",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet"),bg_sqlKey(@"bg_createTime")]];
-    }
+
+    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ order by %@ desc",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian])),bg_sqlKey(@"bg_id")]];
     
- 
     //NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
     if (self.soureArray.count > 0) { // 更新keyChain
         [VPNOperationUtil saveArrayToKeyChain];
@@ -116,6 +109,13 @@
         _soureArray = [NSMutableArray array];
     }
     return _soureArray;
+}
+- (NSMutableArray *)removeArray
+{
+    if (!_removeArray) {
+        _removeArray = [NSMutableArray array];
+    }
+    return _removeArray;
 }
 
 - (void)dismiss {
@@ -156,16 +156,52 @@
 
 - (void) loadSuccessWithArray:(NSArray *) array
 {
-    @weakify_self
-    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    // 本地的
+    [self.soureArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *mode = (VPNInfo *) obj;
-        [weakSelf changeVPNQlcWithVPNInfo:mode];
+        // 服务器的
+        __block BOOL isExit = YES;
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            VPNInfo *info = (VPNInfo *) obj;
+            if ([mode.vpnName isEqualToString:info.ssId] && mode.isMainNet == info.isMainNet) {
+                mode.qlc = info.qlc;
+                mode.registerQlc = info.registerQlc;
+                if ([[NSStringUtil getNotNullValue:info.address] isBlankString]) {
+                     isExit = NO;
+                }
+                *stop = YES;
+            }
+        }];
+        // 如果服务器不存在 删除本地
+        if (!isExit) {
+            [self.removeArray addObject:mode];
+        }
+
     }];
-    [_tableV reloadData];
+
+    [self.removeArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        VPNInfo *info = (VPNInfo *) obj;
+        // 删除本地数据库
+        NSString *where = [NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"vpnName"),bg_sqlValue(info.vpnName),bg_sqlKey(@"isMainNet"),bg_sqlValue(@(info.isMainNet))];
+        [VPNInfo bg_delete:VPNREGISTER_TABNAME where:where];
+        // 删除本地
+        [self.soureArray removeObject:info];
+    }];
+    
+     [_tableV reloadData];
+    
+//    @weakify_self
+//    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        VPNInfo *mode = (VPNInfo *) obj;
+//        [weakSelf changeVPNQlcWithVPNInfo:mode];
+//    }];
+//
+//    [_tableV reloadData];
 }
 
 - (void) changeVPNQlcWithVPNInfo:(VPNInfo *) info
 {
+   
     [self.soureArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *mode = (VPNInfo *) obj;
         if ([mode.vpnName isEqualToString:info.ssId]) {
@@ -174,6 +210,7 @@
             *stop = YES;
         }
     }];
+  
 }
 
 - (NSArray *) getVPNNames

@@ -86,7 +86,6 @@
     [self addNewGuideEnterWallet];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -121,7 +120,21 @@
 
 - (void)addNewGuideSettingMore {
     CGRect circleFrame1 = [_settingBtn.superview convertRect:_settingBtn.frame toView:[UIApplication sharedApplication].keyWindow];
-    CGRect circleFrame2 = CGRectMake((3.0*(0.0+1.0)-2.0)*SCREEN_WIDTH/(3.0*3.0), SCREEN_HEIGHT - 49, 49, 49);
+    CGFloat circle2x = 0;
+    CGFloat circle2width = 49;
+    CGFloat circle2height = 49;
+    CGFloat circle2y = SCREEN_HEIGHT - circle2height;
+    if (IS_iPhone_5) {
+        circle2x = 30;
+    } else if (IS_iPhone_6) {
+        circle2x = 38;
+    } else if (IS_iPhone6_Plus) {
+        circle2x = 45;
+    } else if (IS_iPhoneX) {
+        circle2x = 38;
+        circle2y = circle2y - 34;
+    }
+    CGRect circleFrame2 = CGRectMake(circle2x, circle2y, circle2width, circle2height);
     [[GuideSettingMoreView getNibView] showGuideToCircle1:circleFrame1 circle2:circleFrame2 tapBlock:^{
         
     }];
@@ -189,11 +202,7 @@
  显示 registered assets view
  */
 - (void)showRegisteredAssets {
-//    WalletAddressView *view = [WalletAddressView getNibView];
-//    [view.codeBtn addTarget:self action:@selector(clcikCodeBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
-//    [_menuBack addSubview:view];
-//    [view zoomInAnimationDuration:.6];
+
     
     assetsView = [MyAssetsView getNibView];
     assetsView.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
@@ -253,8 +262,19 @@
                 [weakSelf jumpQRVCWithAddressView:bView.lblAddress];
                 break;
             case SendNowType:
+                
+//                if (1) {
+//                    // 确认是否交易
+//                    NSString *msg = [NSString stringWithFormat:@"%@ %@ %@%@?",NSStringLocalizable(@"want_send"),bView.txtMoney.text,NSStringLocalizable(@"qlc_to"),bView.lblAddress.text];
+//                    NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
+//                    [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:bView.txtMoney.text]];
+//                    @weakify_self
+//                    [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
+//                        [weakSelf sendFundsRequestWithAddressTo:bView.lblAddress.text.trim qlc:bView.txtMoney.text.trim];
+//                    }];
+//                }
                 // gas 检查
-                if ([self.balanceInfo.gas floatValue] <= 0.00000001) {
+                if (!([self.balanceInfo.gas floatValue] <= 0.00000001)) {
                     [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
                 } else {
                  // 确认是否交易
@@ -263,10 +283,10 @@
                         [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:bView.txtMoney.text]];
                     @weakify_self
                         [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
-                            
+
                              [weakSelf sendFundsRequestWithAddressTo:bView.lblAddress.text.trim qlc:bView.txtMoney.text.trim];
                         }];
-                    
+
                 }
                
                 break;
@@ -309,47 +329,54 @@
  显示buy qlc view
  */
 - (void)showBuyQlc {
-    BuyQlcView *view = [BuyQlcView getNibView];
-    view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
-    view.lblNEOToQLC.text = _lblNeo.text;
-    [_menuBack addSubview:view];
-    [view zoomInAnimationDuration:.6];
     
-    __weak __typeof__(view) bView = view;
-    @weakify_self
-    [bView setBuyBlcok:^(BuyType type) {
-        switch (type) {
-            case BuyQLCType:
-                [self sendBuyQLCRequestWithNeo:bView.txtNEO.text];
-                break;
-            case BuyMaxType:
-                
-                if ([weakSelf.balanceInfo.neo floatValue] == 0.f) {
-                    bView.txtQLC.text = @"";
-                    bView.txtNEO.text = @"";
-                    break;
-                }
-                bView.txtNEO.text = weakSelf.balanceInfo.neo;
-                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
-                break;
-                
-            case BuyTxtChangeType:
-                
-                if ([bView.txtNEO.text floatValue] == 0.f) {
-                    bView.txtQLC.text = @"";
-                    bView.txtNEO.text = @"";
-                    break;
-                }
-                if ([bView.txtNEO.text floatValue] > [weakSelf.balanceInfo.neo floatValue]) {
-                    bView.txtNEO.text = weakSelf.balanceInfo.neo;
-                }
-                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
-                break;
-                
-            default:
-                break;
-        }
-    }];
+        WalletAddressView *view = [WalletAddressView getNibView];
+        [view.codeBtn addTarget:self action:@selector(clcikCodeBtn:) forControlEvents:UIControlEventTouchUpInside];
+        view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
+        [_menuBack addSubview:view];
+        [view zoomInAnimationDuration:.6];
+    
+//    BuyQlcView *view = [BuyQlcView getNibView];
+//    view.frame = CGRectMake(0, 0, _menuBack.width, _menuBack.height);
+//    view.lblNEOToQLC.text = _lblNeo.text;
+//    [_menuBack addSubview:view];
+//    [view zoomInAnimationDuration:.6];
+//
+//    __weak __typeof__(view) bView = view;
+//    @weakify_self
+//    [bView setBuyBlcok:^(BuyType type) {
+//        switch (type) {
+//            case BuyQLCType:
+//                [self sendBuyQLCRequestWithNeo:bView.txtNEO.text];
+//                break;
+//            case BuyMaxType:
+//
+//                if ([weakSelf.balanceInfo.neo floatValue] == 0.f) {
+//                    bView.txtQLC.text = @"";
+//                    bView.txtNEO.text = @"";
+//                    break;
+//                }
+//                bView.txtNEO.text = weakSelf.balanceInfo.neo;
+//                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
+//                break;
+//
+//            case BuyTxtChangeType:
+//
+//                if ([bView.txtNEO.text floatValue] == 0.f) {
+//                    bView.txtQLC.text = @"";
+//                    bView.txtNEO.text = @"";
+//                    break;
+//                }
+//                if ([bView.txtNEO.text floatValue] > [weakSelf.balanceInfo.neo floatValue]) {
+//                    bView.txtNEO.text = weakSelf.balanceInfo.neo;
+//                }
+//                bView.txtQLC.text = [NSString stringWithFormat:@"%.2f",[bView.txtNEO.text floatValue]*[weakSelf.ratesInfo.neoInfo.qlc floatValue]];
+//                break;
+//
+//            default:
+//                break;
+//        }
+//    }];
 }
 
 
@@ -430,7 +457,7 @@
                             if (result) { // 兑换成功
                                 [weakSelf.view showWalletAlertViewWithTitle:NSStringLocalizable(@"purchase_successful") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"withdrawal_soon")] isShowTwoBtn:NO block:nil];
                                 [weakSelf performSelector:@selector(reSendReqeuest) withObject:self afterDelay:WAIL_TIME];
-                                [WalletUtil saveTranQLCRecordWithQlc:@"0" txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"recordId"]] neo:neo recordType:1 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO];
+                                [WalletUtil saveTranQLCRecordWithQlc:@"0" txtid:[NSStringUtil getNotNullValue:[dataDic objectForKey:@"recordId"]] neo:neo recordType:1 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO isMianNet:[WalletUtil checkServerIsMian]];
                             } else {
                                 [AppD.window showHint:NSStringLocalizable(@"buy_qlc")]; // 兑换失败
                             }
@@ -515,7 +542,7 @@
                         if (result) { // 交易成功
                             [weakSelf.view showWalletAlertViewWithTitle:NSStringLocalizable(@"purchase_successful") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"transfer_processed")] isShowTwoBtn:NO block:nil];
                             [weakSelf performSelector:@selector(reSendReqeuest) withObject:self afterDelay:WAIL_TIME];
-                            [WalletUtil saveTranQLCRecordWithQlc:qlc txtid:recorid neo:@"0" recordType:2 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO];
+                            [WalletUtil saveTranQLCRecordWithQlc:qlc txtid:recorid neo:@"0" recordType:2 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO isMianNet:[WalletUtil checkServerIsMian]];
                         } else {
                             [AppD.window showHint:NSStringLocalizable(@"send_qlc")];
                         }
@@ -612,10 +639,9 @@
  */
 - (void) updateRateLableValueWithRate:(RatesMode *) rate
 {
-    _lblNeo.text = [NSString stringWithFormat:@"1 NEO = %.8f QLC",[rate.neoInfo.qlc floatValue]];
+    _lblNeo.text = [NSString stringWithFormat:@"1 NEO = %.2f QLC",[rate.neoInfo.qlc floatValue]];
     _lblQlc.text = [NSString stringWithFormat:@"1 QLC = %.8f NEO",1.0/[rate.neoInfo.qlc floatValue]];
-    _lblGas.text = [NSString stringWithFormat:@"1 GAS = %.8f NEO",(1.0/[rate.neoInfo.qlc floatValue])*[rate.gasInfo.qlc floatValue]];
-    
+    _lblGas.text = [NSString stringWithFormat:@"1 BNB = %.2f QLC",[rate.bnbInfo.qlc floatValue]];
 }
 
 /**
@@ -647,12 +673,14 @@
                         _lblmyNEO.text = [NSString stringWithFormat:@"%.2f",[self.balanceInfo.neo floatValue]];
                     }
                     
-                    if ([self.balanceInfo.gas floatValue] == 0) {
-                        _lblmyGAS.text = @"0";
-                        self.balanceInfo.gas = @"0";
-                    } else {
-                        _lblmyGAS.text = [NSString stringWithFormat:@"%.2f",[self.balanceInfo.gas floatValue]];
-                    }
+                    _lblmyGAS.text = @"0";
+                    
+//                    if ([self.balanceInfo.gas floatValue] == 0) {
+//                        _lblmyGAS.text = @"0";
+//                        self.balanceInfo.gas = @"0";
+//                    } else {
+//                        _lblmyGAS.text = [NSString stringWithFormat:@"%.2f",[self.balanceInfo.gas floatValue]];
+//                    }
                 }
             }
         } else {

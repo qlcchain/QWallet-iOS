@@ -75,8 +75,7 @@ class WalletManage: NSObject {
     
     
     func sendQLCWithAddress(isQLC:Bool, address:String, tokeHash:String, qlc:String , completeBlock:@escaping fucBlock) -> () {
-        print(account?.wif as Any);
-        
+        //print(account?.wif as Any);
         var decimal = 0
         if isQLC {
             decimal = 8
@@ -87,10 +86,14 @@ class WalletManage: NSObject {
         amountFormatter.maximumFractionDigits = decimal
         amountFormatter.numberStyle = .decimal
         
-        let amount = amountFormatter.number(from:(qlc))
-        
+        var amount = amountFormatter.number(from:(qlc))
+        if (amount == nil) {
+            amount = NSNumber.init(value: 0);
+        }
+        let amountDouble: Double = (amount?.doubleValue)!
+        let assetName = "Qlink Token"
         if isQLC {
-            self.sendNEP5Token(tokenHash: tokeHash, assetName: "Qlink Token", amount: amount!.doubleValue, toAddress: address,completeBlock: completeBlock)
+            self.sendNEP5Token(tokenHash: tokeHash, assetName:assetName,amount:amountDouble, toAddress: address,completeBlock: completeBlock)
         }
     }
     

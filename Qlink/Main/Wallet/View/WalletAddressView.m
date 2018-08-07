@@ -30,7 +30,6 @@
 
 - (IBAction)backAction:(id)sender {
     
-    
     [self zoomOutAnimationDuration:.6 target:self callback:@selector(dismiss)];
 }
 - (IBAction)clickCopy:(id)sender {
@@ -39,7 +38,6 @@
     if (_lblAddress.text) {
         pBoard.string = _lblAddress.text;
         [AppD.window showHint:NSStringLocalizable(@"copy_successs")];
-        //[self showHint:NSStringLocalizable(@"copy_successs")];
     }
 }
 

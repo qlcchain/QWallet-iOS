@@ -9,10 +9,11 @@
 #import "QlinkTabbarViewController.h"
 #import "WifiViewController.h"
 #import "WalletViewController.h"
-#import "VpnViewController.h"
+//#import "VpnViewController.h"
+#import "VPN2ViewController.h"
 #import "QlinkNavViewController.h"
 #import "UIView+Gradient.h"
-#import "NounView.h"
+//#import "NounView.h"
 #import <Masonry/Masonry.h>
 #import "WalletUtil.h"
 
@@ -21,7 +22,7 @@
 
 @interface QlinkTabbarViewController ()<UITabBarControllerDelegate>
 
-@property (nonatomic , strong) NounView *nounView;
+//@property (nonatomic , strong) NounView *nounView;
 
 @end
 
@@ -44,10 +45,9 @@
 //    [self.tabBar addQGradient];
     self.delegate = self;
     
-    [self addChildViewController:[[VpnViewController alloc] init] text:NSStringLocalizable(@"vpn") imageName:@"tab_vpn"];
+    [self addChildViewController:[[VPN2ViewController alloc] init] text:NSStringLocalizable(@"vpn") imageName:@"tab_vpn"];
     [self addChildViewController:[[WifiViewController alloc] init] text:NSStringLocalizable(@"wifi") imageName:@"tab_wifi"];
     [self addChildViewController:[[WalletViewController alloc] init] text:NSStringLocalizable(@"wallet") imageName:@"tab_wallet"];
-    
 }
 
 - (void) addChildViewController:(UIViewController *) childController text:(NSString *) text imageName:(NSString *) imageName {
