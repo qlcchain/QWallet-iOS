@@ -20,6 +20,8 @@
 {
     if (!isShow) {
         _rankContraintH.constant = 0;
+    } else {
+        _rankContraintH.constant = 44;
     }
     if (!IS_iPhoneX) {
         _menuContraintV.constant = 67 + STATUS_BAR_HEIGHT;

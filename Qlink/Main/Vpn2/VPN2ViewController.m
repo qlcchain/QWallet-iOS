@@ -221,7 +221,9 @@
     [RequestService requestWithUrl:isShowRanking_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
          if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
              NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
-             _isShowRanking = [[dataDic objectForKey:@"isShow"] boolValue];
+             if (dataDic) {
+                 _isShowRanking = [[dataDic objectForKey:@"isShow"] boolValue];
+             }
          }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         DDLogDebug(@"检测是否显示活动失败");
