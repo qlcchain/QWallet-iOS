@@ -20,6 +20,7 @@
 #import "ChooseCountryUtil.h"
 #import "WalletUtil.h"
 #import "UIImage+RoundedCorner.h"
+//#import "UIButton+UserHead.h"
 #import "ContinentModel.h"
 #import "ChooseCountryUtil.h"
 #import <SDWebImage/UIButton+WebCache.h>
@@ -87,6 +88,7 @@
 }
 
 - (void)addObserve {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCountryNoti:) name:SELECT_COUNTRY_NOTI_VPNLIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessSuccessOfVPNAdd:) name:CHECK_PROCESS_SUCCESS_VPN_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessSuccessOfVPNList:) name:CHECK_PROCESS_SUCCESS_VPN_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkProcessSuccessOfVPNSeize:) name:CHECK_PROCESS_SUCCESS_VPN_SEIZE object:nil];
