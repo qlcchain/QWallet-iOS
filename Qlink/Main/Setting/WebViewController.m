@@ -9,7 +9,6 @@
 #import "WebViewController.h"
 #import <WebKit/WebKit.h>
 
-
 #define TELEGRAM_URL @"https://t.me/winqdapp"
 #define FB_URL       @"https://www.facebook.com/dAppWINQ"
 
@@ -26,23 +25,20 @@
     [self leftNavBarItemPressedWithPop:YES];
 }
 
-- (instancetype)initWithType:(NSInteger)urlType
-{
-    if (self = [super init]) {
-        self.type = urlType;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _myWebView.navigationDelegate = self;
     NSString *urlString = TELEGRAM_URL;
-    _lblTitle.text = @"TELEGRAM";
-    if (self.type == 20) {
+    if (_fromType == WebFromTypeTelegram) {
+        urlString = TELEGRAM_URL;
+        _lblTitle.text = @"TELEGRAM";
+    } else if (_fromType == WebFromTypeFacebook) {
         _lblTitle.text = @"FACEBOOK";
         urlString = FB_URL;
+    } else if (_fromType == WebFromTypeWinq) {
+        _lblTitle.text = @"WEBSITE";
+        urlString = WINQ_WEBSITE;
     }
     
     [_progressView setTrackTintColor:[UIColor colorWithRed:240.0/255
