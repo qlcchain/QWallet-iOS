@@ -38,6 +38,7 @@
 #define LANGUAGE_ICON  @"icon_language" // 语言
 #define VERSON_ICON  @"icon_version" // 版本
 #define DISCLAIMER_ICON  @"icon_disclaimer" // 免责声明
+#define WEBSITE_ICON  @"icon_website" // 网站
 
 
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -60,13 +61,18 @@
     [self leftNavBarItemPressedWithPop:YES];
 }
 - (IBAction)clickBottom:(UIButton *)sender {
-    WebViewController *vc = [[WebViewController alloc] initWithType:sender.tag];
+    WebViewController *vc = [[WebViewController alloc] init];
+    if (sender.tag == 10) {
+        vc.fromType = WebFromTypeTelegram;
+    } else {
+        vc.fromType = WebFromTypeFacebook;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _titleArray = @[NSStringLocalizable(@"wallet_details"),NSStringLocalizable(@"swith_wallets"),NSStringLocalizable(@"my_register_assets"),NSStringLocalizable(@"fingeprint_unlock"),NSStringLocalizable(@"language"),NSStringLocalizable(@"switch_server"),NSStringLocalizable(@"version"),NSStringLocalizable(@"disclaimer")];
+    _titleArray = @[NSStringLocalizable(@"wallet_details"),NSStringLocalizable(@"swith_wallets"),NSStringLocalizable(@"my_register_assets"),NSStringLocalizable(@"fingeprint_unlock"),NSStringLocalizable(@"language"),NSStringLocalizable(@"switch_server"),NSStringLocalizable(@"version"),NSStringLocalizable(@"website")];
    // _languageArray = @[@"English",@"Chinese",@"Korean",@"Russain",@"Turkish"];
      _languageArray = @[@"English",@"Turkish"];
      NSString *languages = [[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES];
@@ -75,7 +81,7 @@
         languageIndex = 1;
      }
     
-    _imgArray = @[WALLET_DETAIL_ICON,SWITCH_WALLETS_ICON,MY_ASSETS_ICON,FINGERPRINT_TOUCH_ICON,LANGUAGE_ICON,SWITCH_WALLETS_ICON,VERSON_ICON,DISCLAIMER_ICON];
+    _imgArray = @[WALLET_DETAIL_ICON,SWITCH_WALLETS_ICON,MY_ASSETS_ICON,FINGERPRINT_TOUCH_ICON,LANGUAGE_ICON,SWITCH_WALLETS_ICON,VERSON_ICON,WEBSITE_ICON];
     _bottomView1.layer.cornerRadius = 5.0f;
     _bottomView2.layer.cornerRadius = 5.0f;
     if (IS_iPhoneX) {
@@ -105,7 +111,7 @@
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _titleArray.count-1;
+    return _titleArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -121,7 +127,6 @@
     myCell.rightContraintTopV.constant = 13;
     myCell.rightBtn.enabled = NO;
     myCell.rightBtn.hidden = NO;
-    
     
     NSString *titleMsg = _titleArray[indexPath.row];
     if ([titleMsg isEqualToString:NSStringLocalizable(@"wallet_details")]) {
@@ -171,6 +176,8 @@
     } else if ([titleMsg isEqualToString:NSStringLocalizable(@"disclaimer")]) {
         myCell.lblDetail.text = NSStringLocalizable(@"government");
         myCell.rightBtn.hidden = YES;
+    } else if ([titleMsg isEqualToString:NSStringLocalizable(@"website")]) {
+        myCell.lblDetail.text = WINQ_WEBSITE;
     }
     
     return myCell;
@@ -192,6 +199,8 @@
         [self languageChange];
     } else if ([_titleArray[indexPath.row] isEqualToString:NSStringLocalizable(@"switch_server")]) {
         [self walletServerChange];
+    } else if ([_titleArray[indexPath.row] isEqualToString:NSStringLocalizable(@"website")]) {
+        [self jumpToWebsite];
     }
 }
 #pragma mark - 语言切换
@@ -327,6 +336,13 @@
         [HWUserdefault insertString:@"1" withkey:TOUCH_SWITCH_KEY];
     }
     [_myTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+#pragma mark - Transition
+- (void)jumpToWebsite {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.fromType = WebFromTypeWinq;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
