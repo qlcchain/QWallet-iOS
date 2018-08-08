@@ -96,6 +96,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(joinGroupSuccess:) name:P2P_JOINGROUP_SUCCESS_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addGroupChatMessage:) name:ADD_GROUP_CHAT_MESSAGE_COMPLETE_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStatusChange:) name:VPN_STATUS_CHANGE_NOTI object:nil];
+    // APP 进入前台
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     // 服务器切换
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeServer:) name:CHANGE_SERVER_NOTI object:nil];
