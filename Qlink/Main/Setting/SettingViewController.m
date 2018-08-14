@@ -167,11 +167,10 @@
         } else {
             myCell.lblDetail.text = NSStringLocalizable(@"test_server");
         }
-        
     }else if ([titleMsg isEqualToString:NSStringLocalizable(@"language")]) {
          myCell.lblDetail.text = _languageArray[languageIndex];
     } else if ([titleMsg isEqualToString:NSStringLocalizable(@"version")]) {
-        myCell.lblDetail.text = [NSString stringWithFormat:@"%@ %@",NSStringLocalizable(@"version"),APP_Version];
+        myCell.lblDetail.text = [NSString stringWithFormat:@"%@ %@(%@)",NSStringLocalizable(@"version"),APP_Version,APP_Build];
         myCell.rightBtn.hidden = YES;
     } else if ([titleMsg isEqualToString:NSStringLocalizable(@"disclaimer")]) {
         myCell.lblDetail.text = NSStringLocalizable(@"government");

@@ -27,6 +27,7 @@
 #import "VPNMode.h"
 #import "SkyRadiusView.h"
 #import <MMWormhole/MMWormhole.h>
+#import "MD5Util.h"
 
 #define FeeMin 0.1
 #define FeeMax 3
@@ -586,9 +587,11 @@
             _vpnInfo.p2pId = [NSStringUtil getNotNullValue:_vpnP2pid];
         }
     }
+    NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
+    NSString *hash = [MD5Util md5WithPath:hashFilePath];
     
-    NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath};
-    [RequestService requestWithUrl:ssIdregisterVpnByFeeV4_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath,@"hash":hash};
+    [RequestService requestWithUrl:ssIdRegisterVpnByFeeV5_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
@@ -642,8 +645,14 @@
     
     [AppD.window showHudInView:self.view hint:nil];
     
-    NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath};
-    [RequestService requestWithUrl:ssIdupdateVpnInfoV3_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSString *hash = @"";
+    if (!_isFileNameSame) {
+        NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
+        hash = [MD5Util md5WithPath:hashFilePath];
+    }
+    NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath,@"hash":hash};
+    
+    [RequestService requestWithUrl:ssIdUpdateVpnInfoV4_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (!_isFileNameSame) {
              [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
         }
