@@ -369,6 +369,10 @@
                 connectIndex = idx;
             } else {
             }
+        } else {
+            if (vpnInfo.connectStatus == VpnConnectStatusConnected) { // 将当前连接的vpn状态去掉
+                vpnInfo.connectStatus = VpnConnectStatusNone;
+            }
         }
     }];
     

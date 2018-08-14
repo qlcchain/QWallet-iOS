@@ -16,6 +16,7 @@ class VPNUtil: NSObject {
         case none
         case connect
         case disconnect
+        case connected
     }
     
     static var shareInstance : VPNUtil {
@@ -55,6 +56,8 @@ class VPNUtil: NSObject {
             status = 1
         } else if self.operationStatus == .disconnect {
             status = 2
+        } else if self.operationStatus == .connected {
+            status = 3
         }
         return status
     }
@@ -221,10 +224,11 @@ class VPNUtil: NSObject {
         case .disconnected:
             DDLogDebug("********************disconnected******************")
             statusStr = "1"
-            if operationStatus == .disconnect { // 如果是进行 断开vpn  操作
+            if operationStatus == .disconnect { // 如果是 主动断开vpn  操作
                 statusIsValid = true
             }
-            if operationStatus == .connect { // 如果是  连接 操作
+            if operationStatus == .connected { // 如果是  被动断开vpn  操作
+                statusIsValid = true
             }
             operationStatus = .none
             UserDefaults.standard.removeObject(forKey: Current_Connenct_VPN) // 删除当前连接的vpn对象
@@ -238,7 +242,7 @@ class VPNUtil: NSObject {
         case .connected:
             DDLogDebug("********************connected******************")
             statusStr = "3"
-            operationStatus = .none
+            operationStatus = .connected
             statusIsValid = true
             break
         case .reasserting:
