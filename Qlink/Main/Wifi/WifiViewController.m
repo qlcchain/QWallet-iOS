@@ -16,6 +16,7 @@
 #import "WalletUtil.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "DebugLogViewController.h"
+#import "Qlink-Swift.h"
 
 @interface WifiViewController ()<UITableViewDelegate,UITableViewDataSource,SRRefreshDelegate>
 
@@ -25,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *userHeadBtn;
 @property (strong, nonatomic) RefreshTableView *mainTable;
 @property (weak, nonatomic) IBOutlet UIView *tableBack;
-
+@property (nonatomic ,strong) ConnectUtil *connectUtil;
 @end
 
 @implementation WifiViewController
@@ -38,6 +39,9 @@
 - (IBAction)clickHead:(id)sender {
     ProfileViewController* profileVC = [[ProfileViewController alloc] init];
     [self.navigationController pushViewController:profileVC animated:YES];
+}
+- (IBAction)clickShadowSockConnect:(id)sender {
+    [_connectUtil switchVPN];
 }
 
 - (void)viewDidLoad {
@@ -52,6 +56,10 @@
     
     // 服务器切换
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshContent) name:CHANGE_SERVER_NOTI object:nil];
+    // 配置shadow代理
+    [ConnectUtil managerInit];
+    _connectUtil = [[ConnectUtil alloc] init];
+    [_connectUtil configSS];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

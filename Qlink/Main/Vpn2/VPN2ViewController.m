@@ -127,6 +127,7 @@
     [self startLocation];
     // 获取当前选择的国家--发送获取vpn列表请求
     [self checkCurrentChooseCountry];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {

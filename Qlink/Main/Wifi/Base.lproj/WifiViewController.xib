@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -65,18 +65,30 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_offline" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-on-ZDl" customClass="StatuImageView">
                                     <rect key="frame" x="48" y="42" width="10" height="10"/>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRa-2H-bEQ">
+                                    <rect key="frame" x="317" y="14" width="38" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="6ZJ-Ib-Y7q"/>
+                                        <constraint firstAttribute="width" constant="38" id="hif-e7-8wO"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="clickShadowSockConnect:" destination="-1" eventType="touchUpInside" id="Eyb-qa-Soi"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="67" id="3ih-EM-GPb"/>
                                 <constraint firstItem="ZgF-mk-f8M" firstAttribute="centerX" secondItem="11l-pt-Ge9" secondAttribute="centerX" id="GNn-VP-mrp"/>
                                 <constraint firstItem="11l-pt-Ge9" firstAttribute="centerX" secondItem="Ye0-rf-J8Q" secondAttribute="centerX" id="HYG-7p-ByK"/>
+                                <constraint firstItem="MRa-2H-bEQ" firstAttribute="centerY" secondItem="Ye0-rf-J8Q" secondAttribute="centerY" id="J7a-O4-Pvx"/>
                                 <constraint firstItem="ZgF-mk-f8M" firstAttribute="centerY" secondItem="11l-pt-Ge9" secondAttribute="centerY" id="NK4-U3-ooY"/>
                                 <constraint firstItem="Rds-19-XQv" firstAttribute="leading" secondItem="Ye0-rf-J8Q" secondAttribute="leading" constant="20" id="Poz-hi-jHr"/>
                                 <constraint firstItem="HhU-on-ZDl" firstAttribute="leading" secondItem="Rds-19-XQv" secondAttribute="trailing" constant="-10" id="Ya1-M1-pbP"/>
                                 <constraint firstItem="11l-pt-Ge9" firstAttribute="centerY" secondItem="Ye0-rf-J8Q" secondAttribute="centerY" id="ZTA-z0-yvT"/>
                                 <constraint firstItem="Rds-19-XQv" firstAttribute="top" secondItem="Ye0-rf-J8Q" secondAttribute="top" constant="14" id="ZZm-op-TMn"/>
                                 <constraint firstAttribute="bottom" secondItem="HhU-on-ZDl" secondAttribute="bottom" constant="15" id="bTi-Wp-kpI"/>
+                                <constraint firstAttribute="trailing" secondItem="MRa-2H-bEQ" secondAttribute="trailing" constant="20" id="zmW-lj-cu7"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVQ-DX-klr">
@@ -179,7 +191,7 @@
                 <constraint firstItem="AW2-3S-HfK" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="miB-K6-fQP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-273.5" y="-1908.5"/>
+            <point key="canvasLocation" x="-288" y="-1986"/>
         </view>
     </objects>
     <resources>
