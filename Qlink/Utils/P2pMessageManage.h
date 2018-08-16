@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 /**
  *
  */
@@ -44,6 +45,10 @@ static NSString *sendFileRequest = @"sendFileRequest";
  * 发送vpn配置文件的请求
  */
 static NSString *sendVpnFileRequest = @"sendVpnFileRequest";
+/**
+ * 发送vpn配置文件的响应
+ */
+static NSString *sendVpnFileRsp = @"sendVpnFileRsp";
 /**
  * 发送心跳，可以不需要回应
  */

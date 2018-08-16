@@ -414,6 +414,7 @@
 		735BAF312123CB13000A1B32 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 735BAF2F2123CB13000A1B32 /* libssl.a */; };
 		735BAF362123D099000A1B32 /* ConnectUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735BAF322123D099000A1B32 /* ConnectUtil.swift */; };
 		735BAF382123D099000A1B32 /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735BAF352123D099000A1B32 /* VPN.swift */; };
+		735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BAF3A212550DB000A1B32 /* VPNDataUtil.m */; };
 		7360540120DB905B004CD3C3 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540020DB905B004CD3C3 /* GuidePageView1.m */; };
 		7360540820DB9D67004CD3C3 /* GuidePageView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7360540720DB9D67004CD3C3 /* GuidePageView2.m */; };
 		73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625EC0208F3A710027C62A /* HistoryWifiCell.m */; };
@@ -1675,6 +1676,8 @@
 		735BAF2F2123CB13000A1B32 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = Library/ShadowPath/ShadowPath/libopenssl/lib/libssl.a; sourceTree = "<group>"; };
 		735BAF322123D099000A1B32 /* ConnectUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUtil.swift; sourceTree = "<group>"; };
 		735BAF352123D099000A1B32 /* VPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPN.swift; sourceTree = "<group>"; };
+		735BAF39212550DB000A1B32 /* VPNDataUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNDataUtil.h; sourceTree = "<group>"; };
+		735BAF3A212550DB000A1B32 /* VPNDataUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNDataUtil.m; sourceTree = "<group>"; };
 		736053FF20DB905B004CD3C3 /* GuidePageView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		7360540020DB905B004CD3C3 /* GuidePageView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuidePageView1.m; sourceTree = "<group>"; };
 		7360540620DB9D67004CD3C3 /* GuidePageView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuidePageView2.h; sourceTree = "<group>"; };
@@ -2724,6 +2727,8 @@
 				7351508C20D3B71300194711 /* DBManageUtil.m */,
 				58ADE69620F4536800C50306 /* VpnConnectUtil.h */,
 				58ADE69720F4536800C50306 /* VpnConnectUtil.m */,
+				735BAF39212550DB000A1B32 /* VPNDataUtil.h */,
+				735BAF3A212550DB000A1B32 /* VPNDataUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -5430,6 +5435,7 @@
 				580D916720625A4400B12506 /* NSString+Base64Image.m in Sources */,
 				580D915C20625A4400B12506 /* UIView+Screenshot.m in Sources */,
 				5839F5192068CFA8004C4A54 /* RequestService.m in Sources */,
+				735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */,
 				580D916B20625A4400B12506 /* BBaseModel.m in Sources */,
 				58A074242092FD8400470E37 /* TransferUtil.m in Sources */,
 				73B6F4CD20AEC08E004B7219 /* NEP9.swift in Sources */,
