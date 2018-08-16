@@ -15,3 +15,7 @@
 #import <MJExtension/MJExtension.h>
 #import "WalletUtil.h"
 #import "CurrentWalletInfo.h"
+
+@import ShadowsockLibrary;
+@import ShadowsockModel;
+@import ShadowsockBase;
