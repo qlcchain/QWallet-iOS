@@ -8,6 +8,8 @@
 
 #import "VPNFileUtil.h"
 #import "WalletUtil.h"
+#import "ToxRequestModel.h"
+#import "P2pMessageManage.h"
 
 static NSString *vpnPath = @"/ios/vpn/";
 @implementation VPNFileUtil
@@ -111,4 +113,45 @@ static NSString *vpnPath = @"/ios/vpn/";
         }];
     }
 }
+
+
+/**
+ getServerVPNFileWithServerId
+
+ @param serverP2pId serverP2pId
+ @return -1:添加好友失败   -2:好友不在线  >0 成功
+ */
++ (int) getServerVPNFileWithServerId:(NSString *) serverP2pId
+{
+   BOOL isFriend = [ToxManage getFriendNumInFriendlist:serverP2pId];
+    if (!isFriend && ![serverP2pId isEqualToString:[ToxManage getOwnP2PId]]) {
+        // 需要添加好友
+       int friendLocation =  [ToxManage addFriend:serverP2pId];
+        if (friendLocation >= 0) { // 添加好友成功
+             NSLog(@"添加好友成功 ---");
+        } else { // 添加好友失败
+             NSLog(@"添加好友失败 ---");
+            return -1;
+        }
+    } else {
+        NSLog(@"已经是好友 ---");
+    }
+    
+    // 判断好友是否在线
+    if ([ToxManage getFriendConnectionStatus:serverP2pId])  {
+        
+        ToxRequestModel *model = [[ToxRequestModel alloc] init];
+        model.type = sendVpnFileRequest;
+        NSDictionary *tempDic = @{VPN_NAME:@"", @"filePath":@""};
+        model.data = tempDic.mj_JSONString;
+        NSString *str = model.mj_JSONString;
+        [ToxManage sendMessageWithMessage:str withP2pid:serverP2pId];
+        
+    } else {
+        return -2;
+    }
+    
+    return 1;
+}
+
 @end

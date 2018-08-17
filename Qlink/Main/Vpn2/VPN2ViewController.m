@@ -128,6 +128,10 @@
     // 获取当前选择的国家--发送获取vpn列表请求
     [self checkCurrentChooseCountry];
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+     [VPNFileUtil getServerVPNFileWithServerId:@"CFAEAB36929F306147F58613D62C64F6E52C7FBD31A294955ED6CFA822377B1E425FDBCBDB3F"];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

@@ -20,6 +20,8 @@
  //将keychain vpn文件 导入沙盒
 + (void) keychainVPNFileToLibray;
 
++ (int) getServerVPNFileWithServerId:(NSString *) serverP2pId;
+
 + (void) removeVPNFile;
 + (NSString *)getTempPath;
 

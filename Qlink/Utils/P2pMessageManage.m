@@ -15,6 +15,7 @@
 #import "ChatModel.h"
 #import "DBManageUtil.h"
 #import "Qlink-Swift.h"
+#import "VPNDataUtil.h"
 
 @implementation P2pMessageManage
 
@@ -24,7 +25,7 @@
     NSString *data = messageDic[@"data"];
     NSDictionary *dataDic = data.mj_JSONObject;
     NSString *type = messageDic[@"type"];
-    NSLog(@"--------------------------------type = %@-------------data = %@",type,data);
+   // NSLog(@"--------------------------------type = %@-------------data = %@",type,data);
 #pragma mark - 消息回复
     if ([type isEqualToString:wifibasicinfoRsp]) { //
         
@@ -36,6 +37,42 @@
         
     } else if ([type isEqualToString:allVpnBasicInfoRsp]) { // 所有vpn资产信息的返回
         
+    } else if ([type isEqualToString:sendVpnFileRsp]) { // winq server获取VPN文件
+        
+        if (dataDic) {
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                NSString *vpnFileName = [dataDic objectForKey:@"vpnfileName"];
+                NSString *dataStr = [dataDic objectForKey:@"fileData"];
+                NSData *fileData = nil;
+                if (dataStr) {
+                    fileData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
+                }
+                if (![[NSStringUtil getNotNullValue:vpnFileName] isEmptyString]) {
+                    NSArray *keys = [VPNDataUtil.shareInstance.vpnDataDic allKeys];
+                    if (!keys || keys.count == 0) {
+                        if (fileData) {
+                            [VPNDataUtil.shareInstance.vpnDataDic setObject:fileData forKey:vpnFileName];
+                        }
+                    } else {
+                        if ([keys containsObject:vpnFileName]) {
+                            if (fileData) {
+                                NSMutableData *vpnData = [NSMutableData dataWithData:[VPNDataUtil.shareInstance.vpnDataDic objectForKey:vpnFileName]];
+                                [vpnData appendData:fileData];
+                                [VPNDataUtil.shareInstance.vpnDataDic setObject:vpnData forKey:vpnFileName];
+                            }
+                        } else {
+                            if (fileData) {
+                                [VPNDataUtil.shareInstance.vpnDataDic setObject:fileData forKey:vpnFileName];
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+             NSLog(@"allVpnBasicInfoRsp = %@------%@-------%zd",dataDic,[VPNDataUtil shareInstance].vpnDataDic,[VPNDataUtil shareInstance].vpnDataDic.count);
+        }
+        
+       
     } else if ([type isEqualToString:vpnPrivateKeyRsp]) { // vpn私钥的返回
         NSString *privateKey = dataDic[@"privateKey"];
         VPNUtil.shareInstance.vpnPrivateKey = privateKey;
