@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, RegisterType) {
     UpdateVPN
 };
 
-@interface VPNRegisterViewController : QBaseViewController
+@interface VpnOldAssetUpdateViewController : QBaseViewController
 
 @property (nonatomic , assign) RegisterType registerType;
 @property (nonatomic ,strong) NSString *vpnName;

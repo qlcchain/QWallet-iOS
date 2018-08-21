@@ -6,8 +6,10 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import "VPNRegisterView2.h"
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
 #import "VPNFileUtil.h"
 #import "Qlink-Swift.h"
 #import <NetworkExtension/NetworkExtension.h>

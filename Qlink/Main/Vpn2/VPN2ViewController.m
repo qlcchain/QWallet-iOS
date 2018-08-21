@@ -13,7 +13,8 @@
 #import "LocationMode.h"
 #import "VPNMode.h"
 #import "RefreshTableView.h"
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
+#import "VpnRegisterServerViewController.h"
 #import "ProfileViewController.h"
 #import "ChooseContinentViewController.h"
 #import "VPNConnectViewController.h"
@@ -1012,8 +1013,8 @@ static BOOL refreshAnimate = YES;
 #pragma mark - Transition
 
 - (void)jumpToVPNRegister {
-    VPNRegisterViewController *addVC = [[VPNRegisterViewController alloc] initWithRegisterType:RegisterVPN];
-    [self.navigationController pushViewController:addVC animated:YES];
+    VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:RegisterServerVPN];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToProfile {

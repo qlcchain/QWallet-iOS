@@ -6,8 +6,10 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import "VPNRegisterView3.h"
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
 
 #define FeeMin 0.1
 #define FeeMax 3

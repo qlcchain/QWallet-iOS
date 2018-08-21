@@ -6,15 +6,18 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import <UIKit/UIKit.h>
 #import "VPNMode.h"
 #import "ContinentModel.h"
 
-@class VPNRegisterViewController,SelectCountryModel;
+@class VpnOldAssetUpdateViewController,SelectCountryModel;
 
 @interface VPNRegisterView1 : UIView
 
-@property (nonatomic, weak) VPNRegisterViewController *registerVC;
+@property (nonatomic, weak) VpnOldAssetUpdateViewController *registerVC;
 @property (nonatomic, strong) CountryModel *selectCountryM;
 @property (nonatomic, strong) NSString *vpnName;
 @property (nonatomic, readonly) NSString *deposit;
