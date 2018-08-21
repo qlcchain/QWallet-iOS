@@ -25,6 +25,7 @@
 #import "MD5Util.h"
 #import "ContinentModel.h"
 #import "ChooseConfigurationCell.h"
+#import "WalletQRViewController.h"
 
 #define FeeMin 0.1
 #define FeeMax 3
@@ -35,6 +36,7 @@
 @interface VpnRegisterServerViewController () {
     BOOL connectVpnDone;
 }
+@property (weak, nonatomic) IBOutlet UITextView *serverP2pIdTF;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblNavTitle;
 
@@ -51,6 +53,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 @property (nonatomic, strong) NSString *selectName;
 @property (nonatomic, strong) NSString *profileName;
+@property (nonatomic, strong) NSString *serverP2Pid;
 
 @property (weak, nonatomic) IBOutlet UIView *settingBack;
 @property (weak, nonatomic) IBOutlet UILabel *hourlyLab;
@@ -72,7 +75,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *configurationTable;
 @property (nonatomic, strong) NSMutableArray *configurationSource;
-
+@property (nonatomic, strong) NSMutableDictionary *vpnDataDic;
 @end
 
 @implementation VpnRegisterServerViewController
@@ -83,6 +86,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCountryNoti:) name:SELECT_COUNTRY_NOTI_VPNREGISTER object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configVPNError:) name:CONFIG_VPN_ERROR_NOTI object:nil];
+    // vpn 文件发送完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnSendSuccessNoti:) name:FILE_SEND_SUCCESS_NOTI object:nil];
 }
 
 #pragma mark - Init
@@ -435,6 +440,18 @@
     [AppD.window showHint:NSStringLocalizable(@"configuration_faield")];
 }
 
+- (void) vpnSendSuccessNoti:(NSNotification *) noti {
+    [AppD.window hideHud];
+    NSDictionary *vpnDic = (NSDictionary *)noti.object;
+    if (vpnDic) {
+        if (self.vpnDataDic.count > 0) {
+            [self.vpnDataDic removeAllObjects];
+        }
+        [self.vpnDataDic addEntriesFromDictionary:vpnDic];
+        [_configurationTable reloadData];
+    }
+}
+
 #pragma mark - Request
 - (void)requestValidateAssetIsexist {
     if (self.vpnTFName.length <= 0) {
@@ -674,9 +691,35 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)clickPastBtn:(id)sender {
+    UIPasteboard *generalPasteboard = [UIPasteboard generalPasteboard];
+    NSMutableArray *types = [[NSMutableArray alloc] init];
+    [types addObjectsFromArray:UIPasteboardTypeListString];
+    @weakify_self
+    if ([generalPasteboard containsPasteboardTypes:types]) {
+        weakSelf.serverP2pIdTF.text = generalPasteboard.string;
+    }
+}
+- (IBAction)clickQRBtn:(id)sender {
+    [self jumpQRVCWithAddressVC];
+}
 
 - (IBAction)backAction:(id)sender {
     [self back];
+}
+- (IBAction)clickReloadBtn:(id)sender {
+    if ([[NSStringUtil getNotNullValue:self.serverP2Pid] isEmptyString]) {
+        [AppD.window showHint:NSStringLocalizable(@"p2pid_empty")];
+    } else {
+        // @"CFAEAB36929F306147F58613D62C64F6E52C7FBD31A294955ED6CFA822377B1E425FDBCBDB3F"
+        // -1:添加好友失败   -2:好友不在线  >0 成功
+       int result = [VPNFileUtil getServerVPNFileWithServerId:self.serverP2Pid];
+        if (result > 0) {
+            [AppD.window showHudInView:AppD.window hint:@"" userInteractionEnabled:NO hideTime:30];
+        } else {
+            [AppD.window showHint:NSStringLocalizable(@"get_files_faield")];
+        }
+    }
 }
 
 - (IBAction)registerAction:(id)sender {
@@ -789,6 +832,15 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void) jumpQRVCWithAddressVC
+{
+    @weakify_self
+    WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
+        weakSelf.serverP2pIdTF.text = codeValue;
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - 选择国家
 - (void) selectCountryAction {
     // 显示
@@ -841,9 +893,21 @@
 }
 
 #pragma mark - Lazy
+
+- (NSMutableDictionary *)vpnDataDic
+{
+    if (!_vpnDataDic) {
+        _vpnDataDic = [[NSMutableDictionary alloc] init];
+    }
+    return _vpnDataDic;
+}
 - (NSString *)vpnTFName {
     _vpnTFName = _vpnNameTF.text?:@"";
     return _vpnTFName;
+}
+- (NSString *)serverP2Pid {
+    _serverP2Pid = _serverP2pIdTF.text?:@"";
+    return _serverP2Pid;
 }
 
 - (NSString *)selectCountryStr {
