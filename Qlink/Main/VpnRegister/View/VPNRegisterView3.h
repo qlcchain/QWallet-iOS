@@ -6,14 +6,16 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import <UIKit/UIKit.h>
 #import "VPNMode.h"
 
-@class VPNRegisterViewController;
+@class VpnOldAssetUpdateViewController;
 
 @interface VPNRegisterView3 : UIView
 
-@property (nonatomic, weak) VPNRegisterViewController *registerVC;
+@property (nonatomic, weak) VpnOldAssetUpdateViewController *registerVC;
 @property (nonatomic, strong) NSString *hourlyFee;
 @property (nonatomic, strong) NSString *connectNum;
 

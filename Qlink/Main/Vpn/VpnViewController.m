@@ -6,6 +6,8 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import "VpnViewController.h"
 #import "VpnTabCell.h"
 #import "UIView+Gradient.h"
@@ -14,7 +16,7 @@
 #import "VPNMode.h"
 #import "VpnTabCell.h"
 #import "RefreshTableView.h"
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
 #import "ProfileViewController.h"
 #import "ChooseContinentViewController.h"
 #import "VPNConnectViewController.h"
@@ -661,7 +663,6 @@ static BOOL refreshAnimate = YES;
 
 #pragma mark - Action
 - (IBAction)clickAdd:(id)sender {
-    
     [WalletUtil checkWalletPassAndPrivateKey:self TransitionFrom:CheckProcess_VPN_ADD];
 }
 
@@ -682,7 +683,7 @@ static BOOL refreshAnimate = YES;
 #pragma mark - Transition
 
 - (void)jumpToVPNRegister {
-    VPNRegisterViewController *addVC = [[VPNRegisterViewController alloc] initWithRegisterType:RegisterVPN];
+    VpnOldAssetUpdateViewController *addVC = [[VpnOldAssetUpdateViewController alloc] initWithRegisterType:RegisterVPN];
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

@@ -6,6 +6,8 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import "QBaseViewController.h"
 
 @interface VpnViewController : QBaseViewController

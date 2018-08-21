@@ -1,15 +1,12 @@
 //
-//  VPNAddViewController.m
+//  VpnRegisterServerViewController.m
 //  Qlink
 //
-//  Created by 旷自辉 on 2018/3/30.
+//  Created by 胡智鹏 on 2018/8/21.
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import "VPNRegisterViewController.h"
-#import "VPNRegisterView1.h"
-#import "VPNRegisterView2.h"
-#import "VPNRegisterView3.h"
+#import "VpnRegisterServerViewController.h"
 #import "ChooseContinentViewController.h"
 #import "ChooseCountryUtil.h"
 #import "SeizeVPNViewController.h"
@@ -23,11 +20,11 @@
 #import "VPNOperationUtil.h"
 #import "Qlink-Swift.h"
 #import "ChooseCountryView.h"
-#import "UnderlineView.h"
 #import "VPNMode.h"
-#import "SkyRadiusView.h"
 #import <MMWormhole/MMWormhole.h>
 #import "MD5Util.h"
+#import "ContinentModel.h"
+#import "ChooseConfigurationCell.h"
 
 #define FeeMin 0.1
 #define FeeMax 3
@@ -35,13 +32,13 @@
 #define ConnectionMax 20
 #define CHOOSECOUNTRY @"Choose a country"
 
-@interface VPNRegisterViewController () {
+@interface VpnRegisterServerViewController () {
     BOOL connectVpnDone;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *lblNavTitle;
 
-@property (weak, nonatomic) IBOutlet UnderlineView *vpnNameUnderlineV;
+//@property (weak, nonatomic) IBOutlet UIView *vpnNameUnderlineV;
 @property (weak, nonatomic) IBOutlet UILabel *countryLab;
 @property (weak, nonatomic) IBOutlet UITextField *vpnNameTF;
 @property (nonatomic, strong) NSString *vpnTFName;
@@ -55,7 +52,7 @@
 @property (nonatomic, strong) NSString *selectName;
 @property (nonatomic, strong) NSString *profileName;
 
-@property (weak, nonatomic) IBOutlet SkyRadiusView *settingBack;
+@property (weak, nonatomic) IBOutlet UIView *settingBack;
 @property (weak, nonatomic) IBOutlet UILabel *hourlyLab;
 @property (weak, nonatomic) IBOutlet UISlider *hourlyFeeSlider;
 @property (weak, nonatomic) IBOutlet UILabel *connectionLab;
@@ -73,9 +70,12 @@
 @property (nonatomic) BOOL isVerifyVPN; // 是否验证VPN操作中
 @property (nonatomic, strong) MMWormhole *wormhole;
 
+@property (weak, nonatomic) IBOutlet UITableView *configurationTable;
+@property (nonatomic, strong) NSMutableArray *configurationSource;
+
 @end
 
-@implementation VPNRegisterViewController
+@implementation VpnRegisterServerViewController
 
 #pragma mark - Observe
 - (void)addObserve {
@@ -86,7 +86,7 @@
 }
 
 #pragma mark - Init
-- (instancetype) initWithRegisterType:(RegisterType) type
+- (instancetype) initWithRegisterType:(RegisterServerType) type
 {
     if (self = [super init]) {
         _registerType = type;
@@ -94,7 +94,7 @@
     return self;
 }
 
-- (instancetype) initWithRegisterType:(RegisterType) type withVPNName:(NSString *) name withSeizePrice:(NSString *) seize_price withOldPrice:(NSString *) old_price vpnAddress:(NSString *)address vpnP2pid:(NSString *) toP2pid
+- (instancetype) initWithRegisterType:(RegisterServerType) type withVPNName:(NSString *) name withSeizePrice:(NSString *) seize_price withOldPrice:(NSString *) old_price vpnAddress:(NSString *)address vpnP2pid:(NSString *) toP2pid
 {
     if (self = [super init]) {
         _registerType = type;
@@ -117,10 +117,7 @@
     [self dataInit];
     [self wormholeInit];
     [self configView];
-    if (_registerType == SeizeVPN) {
-        _vpnNameTF.text = self.vpnName;
-        _vpnNameTF.enabled = NO;
-    } else if (_registerType == UpdateVPN) {
+    if (_registerType == UpdateServerVPN) {
         [_registerBtn setTitle:NSStringLocalizable(@"vpn_update") forState:UIControlStateNormal];
         _lblNavTitle.text = NSStringLocalizable(@"vpn_detail");
         [self configureVPNInfo];
@@ -135,17 +132,19 @@
 
 #pragma mark - Config
 - (void)dataInit {
-    if (_registerType == SeizeVPN || _registerType == UpdateVPN) {
+    _configurationSource = [NSMutableArray array];
+    [_configurationTable registerNib:[UINib nibWithNibName:ChooseConfigurationCellReuse bundle:nil] forCellReuseIdentifier:ChooseConfigurationCellReuse];
+    if (_registerType == UpdateServerVPN) {
         _assetIsValidate = YES;
     } else {
-         _assetIsValidate = NO;
+        _assetIsValidate = NO;
     }
 }
 
 - (void)wormholeInit {
     self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
                                                          optionalDirectory:DIRECTORY_WORMHOLE];
-//    @weakify_self
+    //    @weakify_self
     [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
                                          listener:^(id messageObject) {
                                              DDLogDebug(@"vpn_error_reason---------------%@",messageObject);
@@ -160,7 +159,7 @@
 #pragma -mark UPDATE_VPN初始化
 - (void) configureVPNInfo
 {
-    if (_registerType == UpdateVPN) {
+    if (_registerType == UpdateServerVPN) {
         _vpnNameTF.text = self.vpnInfo.vpnName?:@"";
         _vpnNameTF.enabled = NO;
         _countryLab.text = self.vpnInfo.country?:@"";
@@ -178,7 +177,7 @@
 }
 
 - (void)configView {
-    _vpnNameUnderlineV.textField = _vpnNameTF;
+//    _vpnNameUnderlineV.textField = _vpnNameTF;
     [_vpnNameTF addTarget:self action:@selector(vpnNameEndEdit) forControlEvents:UIControlEventEditingDidEnd];
     
     _hourlyLab.adjustsFontSizeToFitWidth = YES;
@@ -218,7 +217,7 @@
 
 #pragma mark - Operation
 - (void)validateAssetIsexist {
-    if (_registerType == RegisterVPN) {
+    if (_registerType == RegisterServerVPN) {
         [self requestValidateAssetIsexist];
     }
 }
@@ -380,16 +379,16 @@
 - (void)vpnStatusChange:(NSNotification *)noti {
     NEVPNStatus status = (NEVPNStatus)[noti.object integerValue];
     switch (status) {
-            case NEVPNStatusInvalid:
+        case NEVPNStatusInvalid:
             break;
-            case NEVPNStatusDisconnected:
+        case NEVPNStatusDisconnected:
         {
             
         }
             break;
-            case NEVPNStatusConnecting:
+        case NEVPNStatusConnecting:
             break;
-            case NEVPNStatusConnected:
+        case NEVPNStatusConnected:
         {
             [AppD.window hideHud];
             if (_isVerifyVPN) { // 如果是验证操作的话，断开连接
@@ -400,16 +399,16 @@
             }
         }
             break;
-            case NEVPNStatusReasserting:
+        case NEVPNStatusReasserting:
             break;
-            case NEVPNStatusDisconnecting:
+        case NEVPNStatusDisconnecting:
         {
             [AppD.window hideHud];
             if (_isVerifyVPN) { // 如果是验证操作的话
                 _isVerifyVPN = NO;
                 connectVpnDone = YES;
                 [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
-//                [self.view showHint:NSStringLocalizable(@"check_profile")];
+                //                [self.view showHint:NSStringLocalizable(@"check_profile")];
             }
         }
             break;
@@ -446,12 +445,12 @@
     [RequestService requestWithUrl:validateAssetIsexist_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
             if ([responseObject[Server_Data][@"isExist"] integerValue] == 0) { // vpnname不存在
-                weakSelf.registerType = RegisterVPN;
+                weakSelf.registerType = RegisterServerVPN;
                 _assetIsValidate = YES;
-//                [weakSelf.registerV1 unableClaim];
+                //                [weakSelf.registerV1 unableClaim];
             } else { // vpnname存在
-//                _assetIsValidate = YES;
-                weakSelf.registerType = RegisterVPN;
+                //                _assetIsValidate = YES;
+                weakSelf.registerType = RegisterServerVPN;
                 _assetIsValidate = NO;
                 NSString *msg = NSStringLocalizable(@"repeat_vpn_name");
                 UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
@@ -460,12 +459,12 @@
                 [alertC addAction:alertOK];
                 [self presentViewController:alertC animated:YES completion:nil];
                 
-//                return;
-//                weakSelf.registerType = SeizeVPNWhenRegister;
-//                weakSelf.vpnName = weakSelf.vpnName;
-//                NSString *oldPrice = [NSString stringWithFormat:@"%@",@([responseObject[Server_Data][@"qlc"] floatValue])];
-//                weakSelf.oldPrice = oldPrice;
-//                [weakSelf.registerV1 setClaimText:oldPrice];
+                //                return;
+                //                weakSelf.registerType = SeizeVPNWhenRegister;
+                //                weakSelf.vpnName = weakSelf.vpnName;
+                //                NSString *oldPrice = [NSString stringWithFormat:@"%@",@([responseObject[Server_Data][@"qlc"] floatValue])];
+                //                weakSelf.oldPrice = oldPrice;
+                //                [weakSelf.registerV1 setClaimText:oldPrice];
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -495,7 +494,7 @@
 
 // vpn验证成功后调用
 - (void)requestRegisterVpnByFeeV3 {
-    if (_registerType == UpdateVPN) {
+    if (_registerType == UpdateServerVPN) {
         [self sendUpdateVPNRequest];
     } else {
         [self registerVPNAndTranQLC];
@@ -506,31 +505,29 @@
 - (void) sendMainAddressRequst
 {
     [AppD.window showHudInView:self.view hint:nil];
-    if (self.registerType == SeizeVPN || self.registerType == SeizeVPNWhenRegister) {
-//        [self getHexWithAddress:[NSStringUtil getNotNullValue:_vpnAddress] qlc:[NSStringUtil getNotNullValue:_registerV1.deposit]];
-    } else {
-        // 获取主网地址地址
-        @weakify_self
-        [RequestService requestWithUrl:mainAddress_Url params:@[] httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-            if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
-                NSDictionary *dataDic = [responseObject objectForKey:@"data"];
-                if (dataDic) {
-                    NSString *toAddress = [dataDic objectForKey:@"address"];
-                    weakSelf.vpnAddress = [NSStringUtil getNotNullValue:toAddress];
-                    [weakSelf getHexWithAddress:weakSelf.vpnAddress qlc:@"1"];
-                } else {
-                    [AppD.window hideHud];
-                }
+
+    // 获取主网地址地址
+    @weakify_self
+    [RequestService requestWithUrl:mainAddress_Url params:@[] httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
+            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (dataDic) {
+                NSString *toAddress = [dataDic objectForKey:@"address"];
+                weakSelf.vpnAddress = [NSStringUtil getNotNullValue:toAddress];
+                [weakSelf getHexWithAddress:weakSelf.vpnAddress qlc:@"1"];
             } else {
                 [AppD.window hideHud];
-                [weakSelf.view showHint:responseObject[Server_Msg]];
             }
-            
-        } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        } else {
             [AppD.window hideHud];
-            [AppD.window showHint:NSStringLocalizable(@"request_error")];
-        }];
-    }
+            [weakSelf.view showHint:responseObject[Server_Msg]];
+        }
+        
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [AppD.window hideHud];
+        [AppD.window showHint:NSStringLocalizable(@"request_error")];
+    }];
+    
 }
 
 /**
@@ -564,12 +561,12 @@
 - (void) registerVPNAndTranQLC
 {
     [AppD.window showHudInView:self.view hint:nil];
-     @weakify_self
+    @weakify_self
     NSString *vpnName = self.vpnTFName?:@"";
     NSString *country = self.selectCountryStr?:@"";
     NSString *p2pId = [ToxManage getOwnP2PId];
     NSString *address = [CurrentWalletInfo getShareInstance].address;
-//    NSString *qlc = _registerV1.deposit;
+    //    NSString *qlc = _registerV1.deposit;
     NSString *qlc = @"1"; // 默认1
     NSString *connectCost = self.hourlyFee?:@"";
     NSString *connectNum = self.connectNum?:@"";
@@ -582,10 +579,6 @@
         _vpnInfo.vpnName = vpnName;
         _vpnInfo.cost = qlc;
         _vpnInfo.address = address;
-        if (weakSelf.registerType == SeizeVPN || weakSelf.registerType == SeizeVPNWhenRegister) {
-            _vpnInfo.address = [NSStringUtil getNotNullValue:_vpnAddress];
-            _vpnInfo.p2pId = [NSStringUtil getNotNullValue:_vpnP2pid];
-        }
     }
     NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
     NSString *hash = [MD5Util md5WithPath:hashFilePath];
@@ -597,15 +590,6 @@
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
             // 移除抢注的vs
             NSString *regQLC = @"1";
-            if (weakSelf.registerType == SeizeVPN || weakSelf.registerType == SeizeVPNWhenRegister) {
-                if (weakSelf.registerType == SeizeVPN) {
-                    regQLC = _vpnInfo.cost;
-                    [weakSelf moveNavgationBackOneViewController];
-                }
-                //TODO:转账成功之后发p2p消息告诉接收者
-                [TransferUtil sendVPNConnectSuccessMessageWithVPNInfo:_vpnInfo withType:5];
-                [[NSNotificationCenter defaultCenter] postNotificationName:SEIZE_VPN_SUCCESS_NOTI object:nil];
-            }
             // 发送扣款通知
             [TransferUtil sendLocalNotificationWithQLC:regQLC isIncome:NO];
             // 保存交易记录
@@ -631,7 +615,7 @@
     self.vpnInfo.vpnName = self.vpnTFName?:@"";
     self.vpnInfo.country = self.selectCountryStr?:@"";
     self.vpnInfo.p2pId = [ToxManage getOwnP2PId];
-//    self.vpnInfo.qlc = _registerV1.deposit;
+    //    self.vpnInfo.qlc = _registerV1.deposit;
     self.vpnInfo.qlc = @"1";
     self.vpnInfo.connectCost = self.hourlyFee?:@"";
     self.vpnInfo.connectNum = self.connectNum?:@"";
@@ -654,7 +638,7 @@
     
     [RequestService requestWithUrl:ssIdUpdateVpnInfoV4_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (!_isFileNameSame) {
-             [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
+            [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
         }
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
@@ -673,7 +657,7 @@
             [AppD.window showHint:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-         [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
+        [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
         [AppD.window hideHud];
         [AppD.window showHint:error.domain];
     }];
@@ -682,7 +666,7 @@
 #pragma mark - 发送更新VPN通知
 - (void) sendUpdateVPNListNoti
 {
-     [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_ASSETS_TZ object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_ASSETS_TZ object:nil];
 }
 
 #pragma mark - Aciton
@@ -696,21 +680,21 @@
 }
 
 - (IBAction)registerAction:(id)sender {
-//    if (_registerStep == RegisterStepOne) {
-        if ([self isEmptyOfCountry]) {
-            [AppD.window showHint:NSStringLocalizable(@"choose_country")];
-            return;
-        }
-        if ([self isEmptyOfVPNName]) {
-            [AppD.window showHint:NSStringLocalizable(@"vpnName_empty")];
-            return;
-        }
-//        if (_registerType == SeizeVPNWhenRegister) {
-//            if ([_registerV1.deposit floatValue] <= [_registerV1.claim floatValue]) {
-//                [AppD.window showHint:NSStringLocalizable(@"original_price")];
-//                return;
-//            }
-//        }
+    //    if (_registerStep == RegisterStepOne) {
+    if ([self isEmptyOfCountry]) {
+        [AppD.window showHint:NSStringLocalizable(@"choose_country")];
+        return;
+    }
+    if ([self isEmptyOfVPNName]) {
+        [AppD.window showHint:NSStringLocalizable(@"vpnName_empty")];
+        return;
+    }
+    //        if (_registerType == SeizeVPNWhenRegister) {
+    //            if ([_registerV1.deposit floatValue] <= [_registerV1.claim floatValue]) {
+    //                [AppD.window showHint:NSStringLocalizable(@"original_price")];
+    //                return;
+    //            }
+    //        }
     
     if ([self isEmptyOfProfile]) {
         [AppD.window showHint:NSStringLocalizable(@"choose_a_profile")];
@@ -718,16 +702,12 @@
     }
     
     if (_assetIsValidate) { // vpnname有效
-        if (_registerType == SeizeVPNWhenRegister) {
-            [self requestssIdquery];
-        } else {
-            [self getRegisterOperation];
-        }
+        [self getRegisterOperation];
     }
 }
 
 - (void)getRegisterOperation {
-    if (_registerType == UpdateVPN) {
+    if (_registerType == UpdateServerVPN) {
         if ([self.vpnInfo.profileLocalPath isEqualToString:self.profileName]) {
             _isFileNameSame = YES;
             [self sendUpdateVPNRequest];
@@ -744,51 +724,6 @@
     [self selectCountryAction];
 }
 
-- (IBAction)importProfileAction:(id)sender {
-    NSArray *ovpnArr = [VPNFileUtil getAllVPNName]?:@[];
-    if (ovpnArr.count <= 0) {
-        NSString *msg = NSStringLocalizable(@"Import_File");
-        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *alertOK = [UIAlertAction actionWithTitle:NSStringLocalizable(@"ok") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        [alertC addAction:alertOK];
-        [self presentViewController:alertC animated:YES completion:nil];
-        return;
-    }
-    
-    @weakify_self
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [ovpnArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIAlertAction *alert = [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            weakSelf.selectName = obj;
-            weakSelf.profileTF.text = _selectName;
-            //  是修改 判断配置文件有没有改变
-            if(weakSelf.registerType == UpdateVPN) {
-                 if ([self.vpnInfo.profileLocalPath isEqualToString:self.profileName]) {
-                     _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
-                     _privateKeyTF.enabled = NO;
-                     _userNameTF.text = self.vpnInfo.username?:@"";
-                     _userNameTF.enabled = NO;
-                     _passwordTF.text = self.vpnInfo.password?:@"";
-                     _passwordTF.enabled = NO;
-                 } else {
-                     _privateKeyTF.text = @"";
-                     _privateKeyTF.enabled = YES;
-                     _userNameTF.text = @"";
-                     _userNameTF.enabled = YES;
-                     _passwordTF.text = @"";
-                     _passwordTF.enabled = YES;
-                 }
-            }
-        }];
-        [alertC addAction:alert];
-    }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:NSStringLocalizable(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertC addAction:alertCancel];
-    [self presentViewController:alertC animated:YES completion:nil];
-}
-
 - (IBAction)praviteKeyEyeAction:(UIButton *)sender {
     sender.selected = !sender.selected;
     NSString *imgName = sender.selected ? @"icon_see" : @"icon_look";
@@ -797,7 +732,7 @@
 }
 
 - (IBAction)passwordEyeAction:(UIButton *)sender {
-     sender.selected = !sender.selected;
+    sender.selected = !sender.selected;
     NSString *imgName = sender.selected ? @"icon_see" : @"icon_look";
     [sender setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     _passwordTF.secureTextEntry = !sender.selected;
@@ -841,12 +776,12 @@
 
 #pragma mark - Transition
 - (void)jumpToChooseContinent {
-//    [ChooseCountryUtil shareInstance].entry = VPNRegister;
-//    ChooseContinentViewController *vc = [[ChooseContinentViewController alloc] init];
-//    if (_registerV1.selectCountry) {
-//        vc.inputContinent = [ChooseCountryUtil getContinentOfCountry:_registerV1.selectCountry];
-//    }
-//    [self.navigationController pushViewController:vc animated:YES];
+    //    [ChooseCountryUtil shareInstance].entry = VPNRegister;
+    //    ChooseContinentViewController *vc = [[ChooseContinentViewController alloc] init];
+    //    if (_registerV1.selectCountry) {
+    //        vc.inputContinent = [ChooseCountryUtil getContinentOfCountry:_registerV1.selectCountry];
+    //    }
+    //    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToSeizeVPN {
@@ -860,7 +795,7 @@
     [self.countryView showChooseCountryView];
     // 选择国家回调
     [self.countryView setSelectCountryBlock:^(id selectCountry) {
-         [[NSNotificationCenter defaultCenter] postNotificationName:SELECT_COUNTRY_NOTI_VPNREGISTER object:selectCountry];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SELECT_COUNTRY_NOTI_VPNREGISTER object:selectCountry];
     }];
 }
 
@@ -876,6 +811,33 @@
         _countryView.frame = CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     return _countryView;
+}
+
+#pragma mark -UITabelView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _configurationSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return ChooseConfigurationCell_Height;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ChooseConfigurationCell *cell = [tableView dequeueReusableCellWithIdentifier:ChooseConfigurationCellReuse];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.connectBtn.tag = CELL_CONNECT_BTN_TAG + indexPath.row;
+//    VPNInfo *vpnInfo = _sourceArr[indexPath.row];
+//    [cell configCellWithModel:vpnInfo];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Lazy
