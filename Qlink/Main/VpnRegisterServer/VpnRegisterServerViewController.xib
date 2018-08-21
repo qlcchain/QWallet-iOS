@@ -33,6 +33,7 @@
                 <outlet property="passwordTF" destination="Tez-BX-74V" id="fpb-Sd-Daf"/>
                 <outlet property="privateKeyTF" destination="A20-R8-IPG" id="vaB-En-GPL"/>
                 <outlet property="registerBtn" destination="P2h-AI-iUT" id="FNx-2g-5rN"/>
+                <outlet property="serverP2pIdTF" destination="vcn-mP-oNK" id="K5w-gF-X4K"/>
                 <outlet property="settingBack" destination="GbD-6f-FRG" id="Zv2-M2-VPP"/>
                 <outlet property="userNameTF" destination="ueW-jY-Aec" id="3wH-Ge-kn9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -356,6 +357,9 @@
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwe-uY-AcL">
                                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="34"/>
+                                                                            <connections>
+                                                                                <action selector="clickPastBtn:" destination="-1" eventType="touchUpInside" id="7ax-i7-QXO"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -385,6 +389,9 @@
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNY-oc-d6J">
                                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="34"/>
+                                                                            <connections>
+                                                                                <action selector="clickQRBtn:" destination="-1" eventType="touchUpInside" id="o5F-Xa-9X2"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -458,6 +465,9 @@
                                                                     <state key="normal" title="RELOAD" image="icon_refresh">
                                                                         <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="clickReloadBtn:" destination="-1" eventType="touchUpInside" id="6gW-rf-Apg"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
