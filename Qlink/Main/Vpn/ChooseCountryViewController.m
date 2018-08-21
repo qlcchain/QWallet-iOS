@@ -6,12 +6,14 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import "ChooseCountryViewController.h"
 #import "ChooseCountryCell.h"
 #import "ContinentModel.h"
 #import "VpnViewController.h"
 #import "ChooseCountryUtil.h"
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
 //#import "UIButton+UserHead.h"
 #import "SelectCountryModel.h"
 
@@ -228,7 +230,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             entryClass = [VpnViewController class];
             break;
         case VPNRegister:
-            entryClass = [VPNRegisterViewController class];
+            entryClass = [VpnOldAssetUpdateViewController class];
             break;
             
         default:

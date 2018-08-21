@@ -6,10 +6,12 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
+#pragma mark - DEPRECATED(已废弃)***************
+
 #import "SeizeVPNViewController.h"
 #import "UnderlineView.h"
 #import "BalanceInfo.h"
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
 
 @interface SeizeVPNViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textQLC;
@@ -58,7 +60,7 @@
 
 #pragma mark - 跳转vpn注册
 - (void)jumpToVPNRegister {
-    VPNRegisterViewController *addVC = [[VPNRegisterViewController alloc] initWithRegisterType:SeizeVPN withVPNName:self.vpnInfo.vpnName withSeizePrice:_textQLC.text.trim withOldPrice:self.vpnInfo.qlc vpnAddress:self.vpnInfo.address vpnP2pid:self.vpnInfo.p2pId];
+    VpnOldAssetUpdateViewController *addVC = [[VpnOldAssetUpdateViewController alloc] initWithRegisterType:SeizeVPN withVPNName:self.vpnInfo.vpnName withSeizePrice:_textQLC.text.trim withOldPrice:self.vpnInfo.qlc vpnAddress:self.vpnInfo.address vpnP2pid:self.vpnInfo.p2pId];
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

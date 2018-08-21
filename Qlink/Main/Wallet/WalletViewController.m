@@ -28,7 +28,8 @@
 //#import "UIButton+UserHead.h"
 #import "NSDate+Category.h"
 #import <SDWebImage/UIButton+WebCache.h>
-#import "VPNRegisterViewController.h"
+#import "VpnOldAssetUpdateViewController.h"
+#import "VpnRegisterServerViewController.h"
 #import "Qlink-Swift.h"
 #import "SettingViewController.h"
 #import "GuideEnterWalletView.h"
@@ -307,9 +308,17 @@
 }
 - (void) jumpRegisterVPNWithMode:(VPNInfo *) mode
 {
-    VPNRegisterViewController *vc = [[VPNRegisterViewController alloc] initWithRegisterType:UpdateVPN];
-    vc.vpnInfo = mode;
-    [self.navigationController pushViewController:vc animated:YES];
+    //TODO:判断新旧vpn asset
+    BOOL isOldAsset = NO;
+    if (!isOldAsset) {
+        VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:UpdateServerVPN];
+        vc.vpnInfo = mode;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        VpnOldAssetUpdateViewController *vc = [[VpnOldAssetUpdateViewController alloc] initWithRegisterType:UpdateVPN];
+        vc.vpnInfo = mode;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 /**
