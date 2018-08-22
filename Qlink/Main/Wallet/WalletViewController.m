@@ -310,6 +310,9 @@
 {
     //TODO:判断新旧vpn asset
     BOOL isOldAsset = NO;
+    if (mode.p2pId) {
+        isOldAsset = YES;
+    }
     if (!isOldAsset) {
         VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:UpdateServerVPN];
         vc.vpnInfo = mode;

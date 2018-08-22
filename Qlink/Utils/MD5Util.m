@@ -26,6 +26,20 @@
             result[12], result[13], result[14], result[15]
             ];
 }
+
+
++ (NSString *)md5WithData:(NSData *)data {
+    CC_MD5_CTX md5;
+    CC_MD5_Init(&md5);
+    CC_MD5_Update(&md5, data.bytes, (CC_LONG)data.length);
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5_Final(result, &md5);
+    NSMutableString *resultString = [NSMutableString string];
+    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
+        [resultString appendFormat:@"%02X", result[i]];
+    }
+    return resultString;
+}
     
 + (NSString *)md5WithPath:(NSString *)path {
     NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:path];

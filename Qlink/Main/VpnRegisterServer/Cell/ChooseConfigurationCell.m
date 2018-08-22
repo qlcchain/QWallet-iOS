@@ -21,10 +21,14 @@
     // Configure the view for the selected state
 }
 
+- (void)configCellWithName:(NSString *)name {
+    _nameLab.text = name;
+}
+
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    
+    _nameLab.text = nil;
 }
 
 
