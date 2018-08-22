@@ -32,6 +32,7 @@
 #define ConnectionMin 1
 #define ConnectionMax 20
 #define CHOOSECOUNTRY @"Choose a country"
+#define CELL_SELECT_BTN_TAG 8884
 
 @interface VpnRegisterServerViewController () {
     BOOL connectVpnDone;
@@ -51,7 +52,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *privateKeyTF;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
-@property (nonatomic, strong) NSString *selectName;
+//@property (nonatomic, strong) NSString *selectName;
 @property (nonatomic, strong) NSString *profileName;
 @property (nonatomic, strong) NSString *serverP2Pid;
 
@@ -74,12 +75,11 @@
 @property (nonatomic, strong) MMWormhole *wormhole;
 
 @property (weak, nonatomic) IBOutlet UITableView *configurationTable;
-@property (nonatomic, strong) NSMutableArray *configurationSource;
-@property (nonatomic, strong) NSMutableDictionary *vpnDataDic;
+@property (nonatomic, strong) NSMutableArray *vpnDataArr;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *getFileFailHeight; // 44
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *getFileSuccessHeight; // table.height + 29
-
+@property (nonatomic) NSInteger selectFileIndex;
 
 @end
 
@@ -145,10 +145,10 @@
 #pragma mark - Config
 - (void)dataInit {
 //    _serverP2pIdTF.text = @"A06A5193F94A992A9E928AF9ECD793558A2EDF679F543B3B20FB0A1DB00C036D6B8E9F9366CC";
-    _configurationSource = [NSMutableArray array];
     [_configurationTable registerNib:[UINib nibWithNibName:ChooseConfigurationCellReuse bundle:nil] forCellReuseIdentifier:ChooseConfigurationCellReuse];
     _getFileFailHeight.constant = 0;
     _getFileSuccessHeight.constant = 0;
+    _selectFileIndex = 0;
     
     if (_registerType == UpdateServerVPN) {
         _assetIsValidate = YES;
@@ -180,6 +180,7 @@
         _vpnNameTF.enabled = NO;
         _countryLab.text = self.vpnInfo.country?:@"";
 //        _profileTF.text = self.vpnInfo.profileLocalPath?:@"";
+//        _serverP2pIdTF.text = self.vpnInfo.
         _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
         _privateKeyTF.enabled = NO;
         _userNameTF.text = self.vpnInfo.username?:@"";
@@ -304,11 +305,19 @@
     return empty;
 }
 
+- (BOOL)isEmptyOfP2PID {
+    BOOL empty = NO;
+    if (self.serverP2pIdTF.text == nil || self.serverP2pIdTF.text.length <= 0) {
+        empty = YES;
+    }
+    return empty;
+}
+
 - (BOOL)isEmptyOfProfile {
     BOOL empty = NO;
-//    if (self.profileTF.text == nil || self.profileTF.text.length <= 0) {
-//        empty = YES;
-//    }
+    if (_vpnDataArr.count <= 0) {
+        empty = YES;
+    }
     return empty;
 }
 
@@ -318,17 +327,16 @@
 }
 
 - (void)verifyProfile {
-    if (!self.selectName) {
-        return;
-    }
-    
-    NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:self.selectName];
-    NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
-    if (!vpnData) {
-        [AppD.window showHint:[NSString stringWithFormat:@"%@ %@",self.selectName,NSStringLocalizable(@"not_found")]];
-        return;
-    }
-    
+//    if (!self.selectName) {
+//        return;
+//    }
+//    NSString *vpnPath = [VPNFileUtil getVPNPathWithFileName:self.selectName];
+//    NSData *vpnData = [NSData dataWithContentsOfFile:vpnPath];
+//    if (!vpnData) {
+//        [AppD.window showHint:[NSString stringWithFormat:@"%@ %@",self.selectName,NSStringLocalizable(@"not_found")]];
+//        return;
+//    }
+    NSData *vpnData = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allValues.firstObject;
     VPNUtil.shareInstance.connectData = vpnData;
     @weakify_self
     [VPNUtil.shareInstance applyConfigurationWithVpnData:vpnData completionHandler:^(NSInteger type) {
@@ -477,10 +485,16 @@
         _getFileSuccessHeight.constant = 29 + vpnDic.count*38;
         _getFileFailHeight.constant = 0;
         
-        if (self.vpnDataDic.count > 0) {
-            [self.vpnDataDic removeAllObjects];
+       __block NSMutableArray *tempArr = [NSMutableArray array];
+        [vpnDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            NSDictionary *dic = @{key:obj};
+            [tempArr addObject:dic];
+        }];
+        
+        if (self.vpnDataArr.count > 0) {
+            [self.vpnDataArr removeAllObjects];
         }
-        [self.vpnDataDic addEntriesFromDictionary:vpnDic];
+        [self.vpnDataArr addObjectsFromArray:tempArr];
         [_configurationTable reloadData];
     } else {
         _getFileSuccessHeight.constant = 0;
@@ -619,7 +633,8 @@
     @weakify_self
     NSString *vpnName = self.vpnTFName?:@"";
     NSString *country = self.selectCountryStr?:@"";
-    NSString *p2pId = [ToxManage getOwnP2PId];
+//    NSString *p2pId = [ToxManage getOwnP2PId];
+    NSString *p2pId = self.serverP2Pid;
     NSString *address = [CurrentWalletInfo getShareInstance].address;
     //    NSString *qlc = _registerV1.deposit;
     NSString *qlc = @"1"; // 默认1
@@ -635,8 +650,10 @@
         _vpnInfo.cost = qlc;
         _vpnInfo.address = address;
     }
-    NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
-    NSString *hash = [MD5Util md5WithPath:hashFilePath];
+//    NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
+//    NSString *hash = [MD5Util md5WithPath:hashFilePath];
+    NSData *vpnData = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allValues.firstObject;
+    NSString *hash = [MD5Util md5WithData:vpnData];
     
     NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath,@"hash":hash};
     [RequestService requestWithUrl:ssIdRegisterVpnByFeeV5_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -651,6 +668,8 @@
             [WalletUtil saveTranQLCRecordWithQlc:regQLC txtid:[NSStringUtil getNotNullValue:responseObject[@"recordId"]] neo:@"0" recordType:5 assetName:_vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:_vpnInfo.p2pId] connectType:0 isReported:NO isMianNet:[WalletUtil checkServerIsMian]];
             // 本地保存注册的vpn资产
             [weakSelf storeRegisterVPN:params];
+//            // 告诉WINQ服务器注册成功
+//            [VPNFileUtil sendRegisterSuccessToServer:p2pId vpnName:vpnName vpnfileName:profileLocalPath userName:weakSelf.userNameTF.text.trim?:@"" password:weakSelf.passwordTF.text.trim?:@"" privateKey:weakSelf.privateKeyTF.text.trim?:@""];
             // 发送心跳
             [HeartbeatUtil sendHeartbeatRequest];
             [weakSelf back];
@@ -686,8 +705,10 @@
     
     NSString *hash = @"";
     if (!_isFileNameSame) {
-        NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
-        hash = [MD5Util md5WithPath:hashFilePath];
+//        NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
+//        hash = [MD5Util md5WithPath:hashFilePath];
+        NSData *vpnData = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allValues.firstObject;
+        hash = [MD5Util md5WithData:vpnData];
     }
     NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath,@"hash":hash};
     
@@ -761,12 +782,10 @@
         [AppD.window showHint:NSStringLocalizable(@"vpnName_empty")];
         return;
     }
-    //        if (_registerType == SeizeVPNWhenRegister) {
-    //            if ([_registerV1.deposit floatValue] <= [_registerV1.claim floatValue]) {
-    //                [AppD.window showHint:NSStringLocalizable(@"original_price")];
-    //                return;
-    //            }
-    //        }
+    if ([self isEmptyOfP2PID]) {
+        [AppD.window showHint:NSStringLocalizable(@"p2pid_empty")];
+        return;
+    }
     
     if ([self isEmptyOfProfile]) {
         [AppD.window showHint:NSStringLocalizable(@"choose_a_profile")];
@@ -846,6 +865,12 @@
     [self updateConnectionLab];
 }
 
+- (void)selectFileAction:(UIButton *)sender {
+    NSInteger index = sender.tag - CELL_SELECT_BTN_TAG;
+    _selectFileIndex = index;
+    [_configurationTable reloadData];
+}
+
 #pragma mark - Transition
 - (void)jumpToChooseContinent {
     //    [ChooseCountryUtil shareInstance].entry = VPNRegister;
@@ -900,7 +925,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.vpnDataDic.count;
+    return self.vpnDataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -910,9 +935,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChooseConfigurationCell *cell = [tableView dequeueReusableCellWithIdentifier:ChooseConfigurationCellReuse];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.connectBtn.tag = CELL_CONNECT_BTN_TAG + indexPath.row;
-//    VPNInfo *vpnInfo = _sourceArr[indexPath.row];
-//    [cell configCellWithModel:vpnInfo];
+    cell.selectBtn.tag = CELL_SELECT_BTN_TAG + indexPath.row;
+    [cell.selectBtn removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [cell.selectBtn addTarget:self action:@selector(selectFileAction:) forControlEvents:UIControlEventTouchUpInside];
+    NSDictionary *dic = _vpnDataArr[indexPath.row];
+    [cell configCellWithName:dic.allKeys.firstObject?:@""];
+    if (indexPath.row == _selectFileIndex) {
+        [cell.selectBtn setImage:[UIImage imageNamed:@"icon_the_selected"] forState:UIControlStateNormal];
+    } else {
+        [cell.selectBtn setImage:[UIImage imageNamed:@"icon_the_uncheck"] forState:UIControlStateNormal];
+    }
     
     return cell;
 }
@@ -923,12 +955,12 @@
 
 #pragma mark - Lazy
 
-- (NSMutableDictionary *)vpnDataDic
+- (NSMutableArray *)vpnDataArr
 {
-    if (!_vpnDataDic) {
-        _vpnDataDic = [[NSMutableDictionary alloc] init];
+    if (!_vpnDataArr) {
+        _vpnDataArr = [[NSMutableArray alloc] init];
     }
-    return _vpnDataDic;
+    return _vpnDataArr;
 }
 - (NSString *)vpnTFName {
     _vpnTFName = _vpnNameTF.text?:@"";
@@ -949,6 +981,7 @@
 
 - (NSString *)profileName {
 //    _profileName = _profileTF.text?:@"";
+    _profileName = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allKeys.firstObject?:@"";
     return _profileName;
 }
 

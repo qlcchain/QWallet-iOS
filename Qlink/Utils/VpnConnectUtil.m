@@ -541,6 +541,9 @@ typedef enum : NSUInteger {
 
 #pragma mark - Request
 - (void)requestReportVpnInfo:(NSString *)mark status:(NSInteger)status {
+    if ([VPNOperationUtil shareInstance].operationType == registerConnect) { // 注册暂不上报
+        return;
+    }
 //    @weakify_self
     NSDictionary *params = @{@"vpnName":_vpnInfo.vpnName?:@"", @"status":@(status), @"mark":mark};
     [RequestService requestWithUrl:reportVpnInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {

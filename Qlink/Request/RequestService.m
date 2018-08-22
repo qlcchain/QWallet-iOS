@@ -53,6 +53,7 @@
         NSString *recordStr = @"";
         if (params) {
             recordStr = ((NSDictionary *)params).mj_JSONString;
+            recordStr = [recordStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
 //            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
         }
         NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
@@ -65,6 +66,7 @@
         }
         
         NSString *jsonStr = ((NSDictionary *)jsonParam).mj_JSONString;
+        jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
 //        NSString *jsonStr = [JSONUtil jsonStrFromDicWithTrim:jsonParam];
         if ([K_Print_JsonStr boolValue]) {
             DDLogDebug(@"jsonStr = %@",jsonStr);

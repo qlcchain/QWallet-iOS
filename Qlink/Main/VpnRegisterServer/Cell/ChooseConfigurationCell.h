@@ -13,4 +13,9 @@ static NSString *ChooseConfigurationCellReuse = @"ChooseConfigurationCell";
 
 @interface ChooseConfigurationCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UIButton *selectBtn;
+
+- (void)configCellWithName:(NSString *)name;
+
 @end
