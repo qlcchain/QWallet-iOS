@@ -47,7 +47,7 @@
 @property (nonatomic, strong) NSString *selectCountryStr;
 @property (nonatomic, strong) CountryModel *selectCountryM;
 
-@property (weak, nonatomic) IBOutlet UITextField *profileTF;
+//@property (weak, nonatomic) IBOutlet UITextField *profileTF;
 @property (weak, nonatomic) IBOutlet UITextField *privateKeyTF;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
@@ -76,6 +76,11 @@
 @property (weak, nonatomic) IBOutlet UITableView *configurationTable;
 @property (nonatomic, strong) NSMutableArray *configurationSource;
 @property (nonatomic, strong) NSMutableDictionary *vpnDataDic;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *getFileFailHeight; // 44
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *getFileSuccessHeight; // table.height + 29
+
+
 @end
 
 @implementation VpnRegisterServerViewController
@@ -127,6 +132,8 @@
         _lblNavTitle.text = NSStringLocalizable(@"vpn_detail");
         [self configureVPNInfo];
     }
+    
+//    [self getConfigurationFile];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -137,8 +144,12 @@
 
 #pragma mark - Config
 - (void)dataInit {
+//    _serverP2pIdTF.text = @"A06A5193F94A992A9E928AF9ECD793558A2EDF679F543B3B20FB0A1DB00C036D6B8E9F9366CC";
     _configurationSource = [NSMutableArray array];
     [_configurationTable registerNib:[UINib nibWithNibName:ChooseConfigurationCellReuse bundle:nil] forCellReuseIdentifier:ChooseConfigurationCellReuse];
+    _getFileFailHeight.constant = 0;
+    _getFileSuccessHeight.constant = 0;
+    
     if (_registerType == UpdateServerVPN) {
         _assetIsValidate = YES;
     } else {
@@ -168,7 +179,7 @@
         _vpnNameTF.text = self.vpnInfo.vpnName?:@"";
         _vpnNameTF.enabled = NO;
         _countryLab.text = self.vpnInfo.country?:@"";
-        _profileTF.text = self.vpnInfo.profileLocalPath?:@"";
+//        _profileTF.text = self.vpnInfo.profileLocalPath?:@"";
         _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
         _privateKeyTF.enabled = NO;
         _userNameTF.text = self.vpnInfo.username?:@"";
@@ -293,9 +304,9 @@
 
 - (BOOL)isEmptyOfProfile {
     BOOL empty = NO;
-    if (self.profileTF.text == nil || self.profileTF.text.length <= 0) {
-        empty = YES;
-    }
+//    if (self.profileTF.text == nil || self.profileTF.text.length <= 0) {
+//        empty = YES;
+//    }
     return empty;
 }
 
@@ -380,6 +391,23 @@
     }
 }
 
+- (void)getConfigurationFile {
+    if ([[NSStringUtil getNotNullValue:self.serverP2Pid] isEmptyString]) {
+        [AppD.window showHint:NSStringLocalizable(@"p2pid_empty")];
+    } else {
+        // @"CFAEAB36929F306147F58613D62C64F6E52C7FBD31A294955ED6CFA822377B1E425FDBCBDB3F"
+        // -1:添加好友失败   -2:好友不在线  >0 成功
+        int result = [VPNFileUtil getServerVPNFileWithServerId:self.serverP2Pid];
+        if (result > 0) {
+            [AppD.window showHudInView:AppD.window hint:@"" userInteractionEnabled:NO hideTime:30];
+        } else {
+            [AppD.window showHint:NSStringLocalizable(@"get_files_faield")];
+            _getFileFailHeight.constant = 44;
+            _getFileSuccessHeight.constant = 0;
+        }
+    }
+}
+
 #pragma mark - Noti
 - (void)vpnStatusChange:(NSNotification *)noti {
     NEVPNStatus status = (NEVPNStatus)[noti.object integerValue];
@@ -444,12 +472,20 @@
     [AppD.window hideHud];
     NSDictionary *vpnDic = (NSDictionary *)noti.object;
     if (vpnDic) {
+        _getFileSuccessHeight.constant = 29 + vpnDic.count*38;
+        _getFileFailHeight.constant = 0;
+        
         if (self.vpnDataDic.count > 0) {
             [self.vpnDataDic removeAllObjects];
         }
         [self.vpnDataDic addEntriesFromDictionary:vpnDic];
         [_configurationTable reloadData];
+    } else {
+        _getFileSuccessHeight.constant = 0;
+        _getFileFailHeight.constant = 44;
     }
+    
+    
 }
 
 #pragma mark - Request
@@ -698,6 +734,7 @@
     @weakify_self
     if ([generalPasteboard containsPasteboardTypes:types]) {
         weakSelf.serverP2pIdTF.text = generalPasteboard.string;
+        [self getConfigurationFile];
     }
 }
 - (IBAction)clickQRBtn:(id)sender {
@@ -707,19 +744,9 @@
 - (IBAction)backAction:(id)sender {
     [self back];
 }
+
 - (IBAction)clickReloadBtn:(id)sender {
-    if ([[NSStringUtil getNotNullValue:self.serverP2Pid] isEmptyString]) {
-        [AppD.window showHint:NSStringLocalizable(@"p2pid_empty")];
-    } else {
-        // @"CFAEAB36929F306147F58613D62C64F6E52C7FBD31A294955ED6CFA822377B1E425FDBCBDB3F"
-        // -1:添加好友失败   -2:好友不在线  >0 成功
-       int result = [VPNFileUtil getServerVPNFileWithServerId:self.serverP2Pid];
-        if (result > 0) {
-            [AppD.window showHudInView:AppD.window hint:@"" userInteractionEnabled:NO hideTime:30];
-        } else {
-            [AppD.window showHint:NSStringLocalizable(@"get_files_faield")];
-        }
-    }
+    [self getConfigurationFile];
 }
 
 - (IBAction)registerAction:(id)sender {
@@ -919,7 +946,7 @@
 }
 
 - (NSString *)profileName {
-    _profileName = _profileTF.text?:@"";
+//    _profileName = _profileTF.text?:@"";
     return _profileName;
 }
 

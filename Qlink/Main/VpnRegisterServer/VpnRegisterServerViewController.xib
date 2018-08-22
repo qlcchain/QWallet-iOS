@@ -27,6 +27,8 @@
                 <outlet property="connectionSlider" destination="Qvo-Tr-Lpq" id="9S8-ZP-QVt"/>
                 <outlet property="contentView" destination="9nu-Ev-fVs" id="314-wl-hJC"/>
                 <outlet property="countryLab" destination="K0x-yG-v4F" id="163-19-sSM"/>
+                <outlet property="getFileFailHeight" destination="agv-v2-es4" id="dVe-tc-pkz"/>
+                <outlet property="getFileSuccessHeight" destination="MQh-lG-Qee" id="hJU-Ve-Ydt"/>
                 <outlet property="hourlyFeeSlider" destination="yfe-Xg-09n" id="AjS-u9-daj"/>
                 <outlet property="hourlyLab" destination="fMB-U5-baZ" id="fUC-bk-24j"/>
                 <outlet property="lblNavTitle" destination="msp-D0-jTP" id="f65-0V-yD8"/>
@@ -310,7 +312,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="285" height="58"/>
                                                                         </imageView>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vcn-mP-oNK">
-                                                                            <rect key="frame" x="8" y="8" width="269" height="42"/>
+                                                                            <rect key="frame" x="4" y="4" width="277" height="50"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="textColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
@@ -319,12 +321,12 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="vcn-mP-oNK" firstAttribute="leading" secondItem="3Yl-uh-lKd" secondAttribute="leading" constant="8" id="8Uh-4x-vil"/>
+                                                                        <constraint firstItem="vcn-mP-oNK" firstAttribute="leading" secondItem="3Yl-uh-lKd" secondAttribute="leading" constant="4" id="8Uh-4x-vil"/>
                                                                         <constraint firstAttribute="height" constant="58" id="DxW-su-fab"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="vcn-mP-oNK" secondAttribute="trailing" constant="8" id="SFh-16-x1T"/>
-                                                                        <constraint firstItem="vcn-mP-oNK" firstAttribute="top" secondItem="3Yl-uh-lKd" secondAttribute="top" constant="8" id="f7L-U6-b4H"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="vcn-mP-oNK" secondAttribute="trailing" constant="4" id="SFh-16-x1T"/>
+                                                                        <constraint firstItem="vcn-mP-oNK" firstAttribute="top" secondItem="3Yl-uh-lKd" secondAttribute="top" constant="4" id="f7L-U6-b4H"/>
                                                                         <constraint firstAttribute="trailing" secondItem="jx5-yq-Ekc" secondAttribute="trailing" id="iyE-CW-0nF"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="vcn-mP-oNK" secondAttribute="bottom" constant="8" id="jMz-Vy-W0U"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="vcn-mP-oNK" secondAttribute="bottom" constant="4" id="jMz-Vy-W0U"/>
                                                                         <constraint firstAttribute="bottom" secondItem="jx5-yq-Ekc" secondAttribute="bottom" id="kSh-51-y2e"/>
                                                                         <constraint firstItem="jx5-yq-Ekc" firstAttribute="leading" secondItem="3Yl-uh-lKd" secondAttribute="leading" id="raL-Wb-1Vu"/>
                                                                         <constraint firstItem="jx5-yq-Ekc" firstAttribute="top" secondItem="3Yl-uh-lKd" secondAttribute="top" id="wmW-on-VU6"/>
@@ -437,7 +439,7 @@
                                                                 <constraint firstItem="L7D-rD-gS2" firstAttribute="centerY" secondItem="Xa8-NF-1Td" secondAttribute="centerY" id="wRM-qk-RgO"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpz-WS-0bn">
+                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpz-WS-0bn">
                                                             <rect key="frame" x="18" y="137" width="301" height="44"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rD5-th-0i3">
@@ -482,7 +484,7 @@
                                                                 <constraint firstAttribute="height" constant="44" id="agv-v2-es4"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmy-e0-H9D">
+                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmy-e0-H9D">
                                                             <rect key="frame" x="18" y="181" width="301" height="129"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose One Configuration File" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yb-f5-hU1">
@@ -500,9 +502,6 @@
                                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nmA-7m-hSq">
                                                                     <rect key="frame" x="20" y="29" width="273" height="100"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="100" id="5Pq-kD-PA0"/>
-                                                                    </constraints>
                                                                     <connections>
                                                                         <outlet property="dataSource" destination="-1" id="PMF-89-253"/>
                                                                         <outlet property="delegate" destination="-1" id="ZkU-u5-IRz"/>
@@ -522,6 +521,7 @@
                                                                 <constraint firstItem="0Yb-f5-hU1" firstAttribute="top" secondItem="lmy-e0-H9D" secondAttribute="top" constant="12" id="2Nh-s2-Hnr"/>
                                                                 <constraint firstItem="0Yb-f5-hU1" firstAttribute="leading" secondItem="lmy-e0-H9D" secondAttribute="leading" constant="8" id="8ts-56-qFO"/>
                                                                 <constraint firstItem="nmA-7m-hSq" firstAttribute="leading" secondItem="lmy-e0-H9D" secondAttribute="leading" constant="20" id="HqP-9R-D5t"/>
+                                                                <constraint firstAttribute="height" constant="129" id="MQh-lG-Qee"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fvH-9T-z3D" secondAttribute="trailing" id="hDa-0Y-mhY"/>
                                                                 <constraint firstAttribute="trailing" secondItem="nmA-7m-hSq" secondAttribute="trailing" constant="8" id="nZc-lr-6rS"/>
                                                                 <constraint firstAttribute="bottom" secondItem="nmA-7m-hSq" secondAttribute="bottom" id="ngU-0X-urj"/>
