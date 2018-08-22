@@ -183,6 +183,8 @@
 
 - (void)configView {
 //    _vpnNameUnderlineV.textField = _vpnNameTF;
+    _contentView.layer.cornerRadius = 3.0f;
+    _contentView.layer.masksToBounds = YES;
     [_vpnNameTF addTarget:self action:@selector(vpnNameEndEdit) forControlEvents:UIControlEventEditingDidEnd];
     
     _hourlyLab.adjustsFontSizeToFitWidth = YES;
@@ -871,7 +873,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _configurationSource.count;
+    return self.vpnDataDic.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
