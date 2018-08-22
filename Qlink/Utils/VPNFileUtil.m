@@ -10,10 +10,12 @@
 #import "WalletUtil.h"
 #import "ToxRequestModel.h"
 #import "P2pMessageManage.h"
+#import "VPNMode.h"
 
 static NSString *vpnPath = @"/ios/vpn/";
 @implementation VPNFileUtil
 
+dispatch_source_t _serverTimer;
 
 // 获取vpn存储路径
 + (NSString *) getVPNDataPath
@@ -154,4 +156,57 @@ static NSString *vpnPath = @"/ios/vpn/";
     return 1;
 }
 
+
+/**
+ vpn上报服务器
+ */
++ (void) sendServerVPN
+{
+    [VPNInfo bg_findAsync:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian])),bg_sqlKey(@"isServerVPN"),bg_sqlValue(@(1))] complete:^(NSArray * _Nullable array) {
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            VPNInfo *vpnInfo = (VPNInfo *)obj;
+            if (!vpnInfo.isSendSuccess) {
+                // 发送获取配置文件消息
+                ToxRequestModel *model = [[ToxRequestModel alloc] init];
+                model.type = checkConnectReq;
+                NSString *p2pid = [ToxManage getOwnP2PId];
+                NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid};
+                model.data = dataDic.mj_JSONString;
+                NSString *str = model.mj_JSONString;
+                [ToxManage sendMessageWithMessage:str withP2pid:vpnInfo.p2pId];
+                *stop = YES;
+            }
+        }];
+    }];
+}
+/**
+ 开启vpn上报服务器定时器
+ */
++ (void) startVPNSendServerTimer
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    _serverTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    //dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC); // 开始时间
+    dispatch_source_set_timer(_serverTimer,dispatch_walltime(NULL, 0),60*2*NSEC_PER_SEC, 0); //每30秒执行
+    dispatch_source_set_event_handler(_serverTimer, ^{
+        
+        [VPNFileUtil sendServerVPN];
+    });
+    dispatch_resume(_serverTimer);
+}
+/**
+ 改变VPN上报的状态
+  */
++ (void) sendAndChangeVPNSendStatus
+{
+    [VPNInfo bg_findAsync:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian])),bg_sqlKey(@"isServerVPN"),bg_sqlValue(@(1))] complete:^(NSArray * _Nullable array) {
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            VPNInfo *vpnInfo = (VPNInfo *)obj;
+            if (!vpnInfo.isSendSuccess) {
+                // 发送VPN给服务器
+                
+            }
+        }];
+    }];
+}
 @end

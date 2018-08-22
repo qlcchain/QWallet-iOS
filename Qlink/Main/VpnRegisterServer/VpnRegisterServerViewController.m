@@ -235,6 +235,7 @@
     localVpnInfo.vpnName = dic[@"vpnName"];
     localVpnInfo.country = dic[@"country"];
     localVpnInfo.p2pId = dic[@"p2pId"];
+    localVpnInfo.isServerVPN = YES;
     localVpnInfo.address = dic[@"address"];
     localVpnInfo.qlc = dic[@"qlc"];
     localVpnInfo.registerQlc = dic[@"qlc"];
@@ -633,7 +634,7 @@
     @weakify_self
     self.vpnInfo.vpnName = self.vpnTFName?:@"";
     self.vpnInfo.country = self.selectCountryStr?:@"";
-    self.vpnInfo.p2pId = [ToxManage getOwnP2PId];
+    self.vpnInfo.p2pId = self.serverP2Pid;
     //    self.vpnInfo.qlc = _registerV1.deposit;
     self.vpnInfo.qlc = @"1";
     self.vpnInfo.connectCost = self.hourlyFee?:@"";
