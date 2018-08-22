@@ -40,7 +40,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *ipV4Address;
 @property (nonatomic, copy) NSString *profileLocalPath;
 @property (nonatomic) BOOL isMainNet;
-
+// 新注册
+@property (nonatomic) BOOL isServerVPN;
+@property (nonatomic) BOOL isSendSuccess;
 // 新增字段
 //userId
 @property (nonatomic, copy) NSString *password;
