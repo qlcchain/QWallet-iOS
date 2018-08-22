@@ -221,6 +221,8 @@
             DDLogDebug(@"未找到群聊 未邀请加入群聊");
         }
     } else if ([type isEqualToString:checkConnectReq]) { // 检查是否连接正常的请求，即发一个空消息过去，看对方是否会回消息
+        // 上报服务器
+        [VPNFileUtil sendAndChangeVPNSendStatus];
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = checkConnectRsp;
         NSString *fromP2pid = [ToxManage getOwnP2PId];
