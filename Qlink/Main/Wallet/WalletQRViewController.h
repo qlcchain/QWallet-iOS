@@ -12,7 +12,7 @@ typedef void (^CodeQRComplete)(NSString *codeValue);
 
 @interface WalletQRViewController : QBaseViewController
 @property (nonatomic ,copy) CodeQRComplete completeBlcok;
-
+//@property (nonatomic ,assign) BOOL isServerP2Pid;
 - (instancetype) initWithCodeQRCompleteBlock:(void (^)(NSString *codeValue)) completion;
 
 @end
