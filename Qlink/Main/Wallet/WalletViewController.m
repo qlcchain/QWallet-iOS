@@ -306,20 +306,15 @@
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (void) jumpRegisterVPNWithMode:(VPNInfo *) mode
+- (void) jumpRegisterVPNWithMode:(VPNInfo *)vpnInfo
 {
-    //TODO:判断新旧vpn asset
-    BOOL isOldAsset = NO;
-    if (mode.p2pId) {
-        isOldAsset = YES;
-    }
-    if (!isOldAsset) {
+    if (vpnInfo.isServerVPN) {
         VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:UpdateServerVPN];
-        vc.vpnInfo = mode;
+        vc.vpnInfo = vpnInfo;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         VpnOldAssetUpdateViewController *vc = [[VpnOldAssetUpdateViewController alloc] initWithRegisterType:UpdateVPN];
-        vc.vpnInfo = mode;
+        vc.vpnInfo = vpnInfo;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
