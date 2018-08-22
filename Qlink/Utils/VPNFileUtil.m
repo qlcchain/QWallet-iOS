@@ -11,6 +11,7 @@
 #import "ToxRequestModel.h"
 #import "P2pMessageManage.h"
 #import "VPNMode.h"
+#import "VPNOperationUtil.h"
 
 static NSString *vpnPath = @"/ios/vpn/";
 @implementation VPNFileUtil
@@ -204,7 +205,12 @@ dispatch_source_t _serverTimer;
             VPNInfo *vpnInfo = (VPNInfo *)obj;
             if (!vpnInfo.isSendSuccess) {
                 // 发送VPN给服务器
-                
+                [VPNFileUtil sendRegisterSuccessToServer:vpnInfo.p2pId vpnName:vpnInfo.vpnName vpnfileName:vpnInfo.profileLocalPath userName:vpnInfo.username password:vpnInfo.password privateKey:vpnInfo.privateKeyPassword];
+                vpnInfo.isSendSuccess = YES;
+                [vpnInfo bg_saveAsync:^(BOOL isSuccess) {
+                    // 更新keyChain
+                    [VPNOperationUtil saveArrayToKeyChain];
+                }];
             }
         }];
     }];

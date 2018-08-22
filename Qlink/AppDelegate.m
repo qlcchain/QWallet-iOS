@@ -64,6 +64,8 @@
     [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     // 开启VPN连接扣费
     [TransferUtil startVPNConnectTran];
+    // 开启VPN上传服务器
+    [VPNFileUtil startVPNSendServerTimer];
     // 初始化当前钱包
     [WalletUtil getCurrentWalletInfo];
     // 初始化data文件
