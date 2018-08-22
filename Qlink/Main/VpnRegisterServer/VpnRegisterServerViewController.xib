@@ -80,13 +80,13 @@
                                 <constraint firstItem="msp-D0-jTP" firstAttribute="centerY" secondItem="7Jb-h5-94W" secondAttribute="centerY" id="xdI-pf-Uy6"/>
                             </constraints>
                         </view>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVk-Tb-u11">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVk-Tb-u11">
                             <rect key="frame" x="0.0" y="68" width="375" height="1112"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxy-Ra-jjY">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxy-Ra-jjY">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="1020"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-Ev-fVs">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-Ev-fVs">
                                             <rect key="frame" x="19" y="15" width="337" height="921"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6nf-5g-VVd">
@@ -963,7 +963,7 @@
             <constraints>
                 <constraint firstItem="cCn-3c-5YS" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="5R1-vb-Xvf"/>
                 <constraint firstItem="cCn-3c-5YS" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="FD5-zg-lIu"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="cCn-3c-5YS" secondAttribute="bottom" id="V6r-SP-bzY"/>
+                <constraint firstAttribute="bottom" secondItem="cCn-3c-5YS" secondAttribute="bottom" id="V6r-SP-bzY"/>
                 <constraint firstItem="cCn-3c-5YS" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="ZKG-Ao-gpA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
