@@ -26,13 +26,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIe-dp-l0U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="37.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxu-1d-WZC">
-                                <rect key="frame" x="0.0" y="37" width="320" height="0.5"/>
-                                <color key="backgroundColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="D6K-hE-NXA"/>
-                                </constraints>
-                            </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_vpn" translatesAutoresizingMaskIntoConstraints="NO" id="hxP-pe-LMc">
                                 <rect key="frame" x="0.0" y="8" width="19" height="22"/>
                                 <constraints>
@@ -47,12 +40,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcS-zM-Uz7">
-                                <rect key="frame" x="276" y="0.0" width="44" height="37"/>
+                                <rect key="frame" x="276" y="0.0" width="44" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="M43-cz-vbQ"/>
                                 </constraints>
                                 <state key="normal" image="icon_the_selected"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxu-1d-WZC">
+                                <rect key="frame" x="0.0" y="37" width="320" height="0.5"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="D6K-hE-NXA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -64,7 +64,8 @@
                             <constraint firstItem="hxP-pe-LMc" firstAttribute="leading" secondItem="ZIe-dp-l0U" secondAttribute="leading" id="R98-Rg-Upm"/>
                             <constraint firstAttribute="trailing" secondItem="YcS-zM-Uz7" secondAttribute="trailing" id="g9c-HV-VTY"/>
                             <constraint firstItem="YcS-zM-Uz7" firstAttribute="top" secondItem="ZIe-dp-l0U" secondAttribute="top" id="ny8-Ak-Ysx"/>
-                            <constraint firstItem="Vxu-1d-WZC" firstAttribute="top" secondItem="YcS-zM-Uz7" secondAttribute="bottom" id="ra7-XW-oaV"/>
+                            <constraint firstItem="YcS-zM-Uz7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PoY-g2-rea" secondAttribute="trailing" id="pCL-j0-dgc"/>
+                            <constraint firstAttribute="bottom" secondItem="YcS-zM-Uz7" secondAttribute="bottom" id="sdM-6r-LO8"/>
                             <constraint firstItem="hxP-pe-LMc" firstAttribute="centerY" secondItem="ZIe-dp-l0U" secondAttribute="centerY" id="x0B-cb-tQn"/>
                             <constraint firstItem="Vxu-1d-WZC" firstAttribute="leading" secondItem="ZIe-dp-l0U" secondAttribute="leading" id="xXA-pA-X2y"/>
                         </constraints>
@@ -78,6 +79,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="nameLab" destination="PoY-g2-rea" id="K9j-N0-tV3"/>
+                <outlet property="selectBtn" destination="YcS-zM-Uz7" id="god-6g-Mun"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

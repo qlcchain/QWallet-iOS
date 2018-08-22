@@ -11,6 +11,7 @@
 @interface MD5Util : NSObject
 
 + (NSString *)md5:(NSString *)str;
++ (NSString *)md5WithData:(NSData *)data;
 + (NSString *)md5WithPath:(NSString *)path;
 
 @end
