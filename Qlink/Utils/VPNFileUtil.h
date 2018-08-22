@@ -25,5 +25,6 @@
 + (void) removeVPNFile;
 + (NSString *)getTempPath;
 
++ (void)sendRegisterSuccessToServer:(NSString *)toP2pId vpnName:(NSString *)vpnName vpnfileName:(NSString *)vpnfileName userName:(NSString *)userName password:(NSString *)password privateKey:(NSString *)privateKey;
 
 @end

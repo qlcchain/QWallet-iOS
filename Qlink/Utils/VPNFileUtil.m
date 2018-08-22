@@ -154,4 +154,14 @@ static NSString *vpnPath = @"/ios/vpn/";
     return 1;
 }
 
++ (void)sendRegisterSuccessToServer:(NSString *)toP2pId vpnName:(NSString *)vpnName vpnfileName:(NSString *)vpnfileName userName:(NSString *)userName password:(NSString *)password privateKey:(NSString *)privateKey {
+    // 告诉WINQ服务器注册成功的消息
+    ToxRequestModel *model = [[ToxRequestModel alloc] init];
+    model.type = vpnUserPassAndPrivateKeyRsp;
+    NSDictionary *dataDic = @{@"vpnName":vpnName,@"vpnfileName":vpnfileName,@"userName":userName,@"password":password,@"privateKey":privateKey};
+    model.data = dataDic.mj_JSONString;
+    NSString *str = model.mj_JSONString;
+    [ToxManage sendMessageWithMessage:str withP2pid:toP2pId];
+}
+
 @end
