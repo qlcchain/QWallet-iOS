@@ -26,5 +26,12 @@
 + (NSString *)getTempPath;
 
 + (void)sendRegisterSuccessToServer:(NSString *)toP2pId vpnName:(NSString *)vpnName vpnfileName:(NSString *)vpnfileName userName:(NSString *)userName password:(NSString *)password privateKey:(NSString *)privateKey;
-
+/**
+ 改变VPN上报的状态
+ */
++ (void) sendAndChangeVPNSendStatus;
+/**
+ 开启vpn上报服务器定时器
+ */
++ (void) startVPNSendServerTimer;
 @end
