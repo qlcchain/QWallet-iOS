@@ -26,6 +26,7 @@
 #import "ContinentModel.h"
 #import "ChooseConfigurationCell.h"
 #import "WalletQRViewController.h"
+#import "VPNDataUtil.h"
 
 #define FeeMin 0.1
 #define FeeMax 3
@@ -403,6 +404,14 @@
 }
 
 - (void)getConfigurationFile {
+    
+    [self.vpnDataArr removeAllObjects];
+    [[VPNDataUtil shareInstance].vpnDataDic removeAllObjects];
+    [_configurationTable reloadData];
+    _getFileFailHeight.constant = 0;
+    _getFileSuccessHeight.constant = 0;
+    
+    
     if ([[NSStringUtil getNotNullValue:self.serverP2Pid] isEmptyString]) {
         [AppD.window showHint:NSStringLocalizable(@"p2pid_empty")];
     } else {
