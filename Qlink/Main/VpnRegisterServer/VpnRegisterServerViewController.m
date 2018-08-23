@@ -180,7 +180,7 @@
         _vpnNameTF.enabled = NO;
         _countryLab.text = self.vpnInfo.country?:@"";
 //        _profileTF.text = self.vpnInfo.profileLocalPath?:@"";
-//        _serverP2pIdTF.text = self.vpnInfo.
+        _serverP2pIdTF.text = self.vpnInfo.p2pId;
         _privateKeyTF.text = self.vpnInfo.privateKeyPassword?:@"";
         _privateKeyTF.enabled = NO;
         _userNameTF.text = self.vpnInfo.username?:@"";
@@ -190,6 +190,8 @@
         [_hourlyFeeSlider setValue:[self.vpnInfo.connectCost floatValue] animated:YES];
         [_connectionSlider setValue:[self.vpnInfo.connectNum floatValue] animated:YES];
         [self updateHourlyAndConnection];
+        
+        [self getConfigurationFile]; // 更新vpn需要调用获取vpn file list
     }
 }
 
@@ -491,6 +493,18 @@
             NSDictionary *dic = @{key:obj};
             [tempArr addObject:dic];
         }];
+        
+        if (_registerType == UpdateServerVPN) { // 更新vpn需要找到之前的vpn显示出来
+            __block NSInteger tempSelectIndex = 0;
+            [tempArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDictionary *dic = obj;
+                NSString *vpnPath = dic.allKeys.firstObject;
+                if ([_vpnInfo.profileLocalPath isEqualToString:vpnPath]) {
+                    tempSelectIndex = idx;
+                }
+            }];
+            _selectFileIndex = tempSelectIndex;
+        }
         
         if (self.vpnDataArr.count > 0) {
             [self.vpnDataArr removeAllObjects];
