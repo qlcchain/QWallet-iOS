@@ -71,7 +71,7 @@
         } else {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                NSLog(@"allVpnBasicInfoRsp = %@------%@-------%zd",dataDic,[VPNDataUtil shareInstance].vpnDataDic,[VPNDataUtil shareInstance].vpnDataDic.count);
+                NSLog(@"sendVpnFileRsp = %@------%@-------%zd",dataDic,[VPNDataUtil shareInstance].vpnDataDic,[VPNDataUtil shareInstance].vpnDataDic.count);
                 NSMutableDictionary *vpnDic = [[VPNDataUtil shareInstance].vpnDataDic mutableCopy];
                 [[VPNDataUtil shareInstance].vpnDataDic removeAllObjects];
                 NSLog(@"vpndatadiccount------%zd,vpndiccount = %zd",[VPNDataUtil shareInstance].vpnDataDic.count,vpnDic.count);
