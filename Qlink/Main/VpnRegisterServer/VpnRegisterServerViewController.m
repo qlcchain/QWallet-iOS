@@ -963,7 +963,8 @@
     [cell.selectBtn removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [cell.selectBtn addTarget:self action:@selector(selectFileAction:) forControlEvents:UIControlEventTouchUpInside];
     NSDictionary *dic = _vpnDataArr[indexPath.row];
-    [cell configCellWithName:dic.allKeys.firstObject?:@""];
+    NSString *showVpn = dic.allKeys.firstObject?((NSString *)dic.allKeys.firstObject).pathExtension:@"";
+    [cell configCellWithName:showVpn];
     if (indexPath.row == _selectFileIndex) {
         [cell.selectBtn setImage:[UIImage imageNamed:@"icon_the_selected"] forState:UIControlStateNormal];
     } else {
