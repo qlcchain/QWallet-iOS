@@ -719,6 +719,7 @@
     self.vpnInfo.connectNum = self.connectNum?:@"";
     self.vpnInfo.ipV4Address = @"";
     self.vpnInfo.bandwidth = @"";
+    
     self.vpnInfo.profileLocalPath = self.profileName?:@"";
     
     self.vpnInfo.password = _passwordTF.text?:@"";
@@ -733,6 +734,7 @@
 //        hash = [MD5Util md5WithPath:hashFilePath];
         NSData *vpnData = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allValues.firstObject;
         hash = [MD5Util md5WithData:vpnData];
+        self.vpnInfo.isSendSuccess = NO;
     }
     NSDictionary *params = @{@"vpnName":self.vpnInfo.vpnName,@"country":self.vpnInfo.country,@"p2pId":self.vpnInfo.p2pId,@"qlc":self.vpnInfo.qlc,@"connectCost":self.vpnInfo.connectCost,@"connectNum":self.vpnInfo.connectNum,@"ipV4Address":self.vpnInfo.ipV4Address,@"bandWidth":self.vpnInfo.bandwidth,@"profileLocalPath":self.vpnInfo.profileLocalPath,@"hash":hash};
     
@@ -963,7 +965,8 @@
     [cell.selectBtn removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [cell.selectBtn addTarget:self action:@selector(selectFileAction:) forControlEvents:UIControlEventTouchUpInside];
     NSDictionary *dic = _vpnDataArr[indexPath.row];
-    [cell configCellWithName:dic.allKeys.firstObject?:@""];
+    NSString *showVpn = dic.allKeys.firstObject?((NSString *)dic.allKeys.firstObject).lastPathComponent:@"";
+    [cell configCellWithName:showVpn];
     if (indexPath.row == _selectFileIndex) {
         [cell.selectBtn setImage:[UIImage imageNamed:@"icon_the_selected"] forState:UIControlStateNormal];
     } else {

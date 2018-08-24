@@ -167,11 +167,11 @@ dispatch_source_t _serverTimer;
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNInfo *vpnInfo = (VPNInfo *)obj;
             if (!vpnInfo.isSendSuccess) {
-                // 发送获取配置文件消息
+                // 发送空消息看对方在不在线
                 ToxRequestModel *model = [[ToxRequestModel alloc] init];
                 model.type = checkConnectReq;
                 NSString *p2pid = [ToxManage getOwnP2PId];
-                NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid};
+                NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid,@"vpnServer":@"1"};
                 model.data = dataDic.mj_JSONString;
                 NSString *str = model.mj_JSONString;
                 [ToxManage sendMessageWithMessage:str withP2pid:vpnInfo.p2pId];
@@ -181,14 +181,14 @@ dispatch_source_t _serverTimer;
     }];
 }
 /**
- 开启vpn上报服务器定时器
+ 开启vpn上报服务器定时器--1分钟执行一次
  */
 + (void) startVPNSendServerTimer
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     _serverTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
     //dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC); // 开始时间
-    dispatch_source_set_timer(_serverTimer,dispatch_walltime(NULL, 0),60*2*NSEC_PER_SEC, 0); //每30秒执行
+    dispatch_source_set_timer(_serverTimer,dispatch_walltime(NULL, 0),60*1*NSEC_PER_SEC, 0); //每30秒执行
     dispatch_source_set_event_handler(_serverTimer, ^{
         
         [VPNFileUtil sendServerVPN];
@@ -205,10 +205,9 @@ dispatch_source_t _serverTimer;
             VPNInfo *vpnInfo = (VPNInfo *)obj;
             if (!vpnInfo.isSendSuccess) {
                 // 发送VPN给服务器
-                [VPNFileUtil sendRegisterSuccessToServer:vpnInfo.p2pId vpnName:vpnInfo.vpnName vpnfileName:vpnInfo.profileLocalPath userName:vpnInfo.username password:vpnInfo.password privateKey:vpnInfo.privateKeyPassword];
+                [VPNFileUtil sendRegisterSuccessToServer:vpnInfo.p2pId vpnName:vpnInfo.vpnName vpnfileName:vpnInfo.profileLocalPath.lastPathComponent userName:vpnInfo.username password:vpnInfo.password privateKey:vpnInfo.privateKeyPassword];
                 vpnInfo.isSendSuccess = YES;
-                [vpnInfo bg_saveAsync:^(BOOL isSuccess) {
-                    // 更新keyChain
+                [vpnInfo bg_saveOrUpdateAsync:^(BOOL isSuccess) {
                     [VPNOperationUtil saveArrayToKeyChain];
                 }];
             }
@@ -222,6 +221,7 @@ dispatch_source_t _serverTimer;
     NSDictionary *dataDic = @{@"vpnName":vpnName,@"vpnfileName":vpnfileName,@"userName":userName,@"password":password,@"privateKey":privateKey};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
+    str = [str stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
     [ToxManage sendMessageWithMessage:str withP2pid:toP2pId];
 }
 
