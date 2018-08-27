@@ -106,7 +106,13 @@
     } else if ([type isEqualToString:joinGroupChatRsp]) { // 申请加入群聊的回复
         
     } else if ([type isEqualToString:checkConnectRsp]) { // 检查是否连接正常的回复
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:CHECK_CONNECT_RSP_NOTI object:nil];
+        // 上报服务器
+        if ([dataDic objectForKey:@"vpnServer"]) {
+             [VPNFileUtil sendAndChangeVPNSendStatus];
+        }
+       
     } else if ([type isEqualToString:defaultRsp]) { // 默认的返回，就是因为版本更新，当前版本没有定义这个类型，就把这个type作为内容原路返回回去
         
     }
@@ -221,8 +227,6 @@
             DDLogDebug(@"未找到群聊 未邀请加入群聊");
         }
     } else if ([type isEqualToString:checkConnectReq]) { // 检查是否连接正常的请求，即发一个空消息过去，看对方是否会回消息
-        // 上报服务器
-        [VPNFileUtil sendAndChangeVPNSendStatus];
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = checkConnectRsp;
         NSString *fromP2pid = [ToxManage getOwnP2PId];

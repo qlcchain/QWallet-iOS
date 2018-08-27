@@ -526,6 +526,7 @@ typedef enum : NSUInteger {
     NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
+    str = [str stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
     [self performSelector:@selector(getProfileTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
 }
