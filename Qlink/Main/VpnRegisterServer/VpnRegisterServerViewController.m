@@ -250,6 +250,7 @@
     localVpnInfo.vpnName = dic[@"vpnName"];
     localVpnInfo.country = dic[@"country"];
     localVpnInfo.p2pId = dic[@"p2pId"];
+    localVpnInfo.ownerP2pId = dic[@"ownerP2pId"];
     localVpnInfo.isServerVPN = YES;
     localVpnInfo.address = dic[@"address"];
     localVpnInfo.qlc = dic[@"qlc"];
@@ -657,7 +658,7 @@
     @weakify_self
     NSString *vpnName = self.vpnTFName?:@"";
     NSString *country = self.selectCountryStr?:@"";
-//    NSString *p2pId = [ToxManage getOwnP2PId];
+    NSString *ownerp2pId = [ToxManage getOwnP2PId]?:@"";
     NSString *p2pId = self.serverP2Pid;
     NSString *address = [CurrentWalletInfo getShareInstance].address;
     //    NSString *qlc = _registerV1.deposit;
@@ -679,8 +680,8 @@
     NSData *vpnData = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allValues.firstObject;
     NSString *hash = [MD5Util md5WithData:vpnData];
     
-    NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath,@"hash":hash};
-    [RequestService requestWithUrl:ssIdRegisterVpnByFeeV5_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"ownerP2pId":ownerp2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath,@"hash":hash};
+    [RequestService requestWithUrl:ssIdRegisterVpnByFeeV6_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [VPNUtil.shareInstance stopVPN]; // 关掉vpn连接
         [AppD.window hideHud];
         if ([responseObject[Server_Code] integerValue] == Server_Code_Success) {
@@ -775,6 +776,9 @@
 - (void)back {
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)clickTourilBtn:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/qlcchain/WinQ-Server/blob/master/README.md"] options:@{} completionHandler:nil];
 }
 - (IBAction)clickPastBtn:(id)sender {
     UIPasteboard *generalPasteboard = [UIPasteboard generalPasteboard];
@@ -917,6 +921,7 @@
     @weakify_self
     WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
         weakSelf.serverP2pIdTF.text = codeValue;
+        [weakSelf getConfigurationFile];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }
