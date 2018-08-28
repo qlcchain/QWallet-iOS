@@ -126,8 +126,8 @@ dispatch_source_t _serverTimer;
  */
 + (int) getServerVPNFileWithServerId:(NSString *) serverP2pId
 {
-   BOOL isFriend = [ToxManage getFriendNumInFriendlist:serverP2pId];
-    if (!isFriend && ![serverP2pId isEqualToString:[ToxManage getOwnP2PId]]) {
+   int result = [ToxManage getFriendNumInFriendlist:serverP2pId];
+    if (result < 0 && ![serverP2pId isEqualToString:[ToxManage getOwnP2PId]]) {
         // 需要添加好友
        int friendLocation =  [ToxManage addFriend:serverP2pId];
         if (friendLocation >= 0) { // 添加好友成功
@@ -142,7 +142,6 @@ dispatch_source_t _serverTimer;
     
     // 判断好友是否在线
     if ([ToxManage getFriendConnectionStatus:serverP2pId])  {
-        
         ToxRequestModel *model = [[ToxRequestModel alloc] init];
         model.type = sendVpnFileRequest;
         NSDictionary *tempDic = @{VPN_NAME:@"", @"filePath":@""};

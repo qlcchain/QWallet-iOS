@@ -28,6 +28,7 @@ typedef enum : NSUInteger {
 @property (nonatomic , copy) NSString *address;
 @property (nonatomic , copy) NSString *country;
 @property (nonatomic , copy) NSString *p2pId;
+@property (nonatomic , copy) NSString *ownerP2pId;
 @property (nonatomic , copy) NSString *type;
 @property (nonatomic , copy) NSString *vpnName;
 @property (nonatomic , copy) NSString *qlc;
