@@ -29,7 +29,7 @@
         
         UIView *guideBgView = [GuideNewWalletView showNewGuideRectWithRoundedRect:hollowOutFrame cornerRadius:4];
         [self addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_VPN_SERVER_LOCATION];
+            [HWUserdefault insertObj:@(YES) withkey:NEW_GUIDE_CREATE_NEW_WALLET];
             UIView *tapView = gestureRecoginzer.view;
             [tapView removeFromSuperview];
             [tapView removeGestureRecognizer:gestureRecoginzer];

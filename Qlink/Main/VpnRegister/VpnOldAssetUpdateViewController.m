@@ -588,7 +588,7 @@
         }
     }
     NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
-    NSString *hash = [MD5Util md5WithPath:hashFilePath];
+    NSString *hash = [MD5Util md5WithPath:hashFilePath]?:@"";
     
     NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath,@"hash":hash};
     [RequestService requestWithUrl:ssIdRegisterVpnByFeeV5_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
