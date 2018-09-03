@@ -2,7 +2,7 @@
 //  VpnRegisterServerViewController.m
 //  Qlink
 //
-//  Created by 胡智鹏 on 2018/8/21.
+//  Created by Jelly Foo on 2018/8/21.
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
@@ -407,13 +407,11 @@
 }
 
 - (void)getConfigurationFile {
-    
     [self.vpnDataArr removeAllObjects];
     [[VPNDataUtil shareInstance].vpnDataDic removeAllObjects];
     [_configurationTable reloadData];
     _getFileFailHeight.constant = 0;
     _getFileSuccessHeight.constant = 0;
-    
     
     if ([[NSStringUtil getNotNullValue:self.serverP2Pid] isEmptyString]) {
         [AppD.window showHint:NSStringLocalizable(@"p2pid_empty")];
@@ -678,7 +676,7 @@
 //    NSString *hashFilePath = [VPNFileUtil getVPNPathWithFileName:self.profileName];
 //    NSString *hash = [MD5Util md5WithPath:hashFilePath];
     NSData *vpnData = ((NSDictionary *)_vpnDataArr[_selectFileIndex]).allValues.firstObject;
-    NSString *hash = [MD5Util md5WithData:vpnData];
+    NSString *hash = [MD5Util md5WithData:vpnData]?:@"";
     
     NSDictionary *params = @{@"vpnName":vpnName,@"country":country,@"p2pId":p2pId,@"ownerP2pId":ownerp2pId,@"address":address,@"tx":weakSelf.hex,@"qlc":qlc,@"connectCost":connectCost,@"connectNum":connectNum,@"ipV4Address":ipV4Address,@"bandWidth":bandWidth,@"profileLocalPath":profileLocalPath,@"hash":hash};
     [RequestService requestWithUrl:ssIdRegisterVpnByFeeV6_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -767,19 +765,18 @@
 }
 
 #pragma mark - 发送更新VPN通知
-- (void) sendUpdateVPNListNoti
-{
+- (void) sendUpdateVPNListNoti {
     [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_ASSETS_TZ object:nil];
 }
 
 #pragma mark - Aciton
 - (void)back {
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)clickTourilBtn:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/qlcchain/WinQ-Server/blob/master/README.md"] options:@{} completionHandler:nil];
 }
+
 - (IBAction)clickPastBtn:(id)sender {
     UIPasteboard *generalPasteboard = [UIPasteboard generalPasteboard];
     NSMutableArray *types = [[NSMutableArray alloc] init];
@@ -790,6 +787,7 @@
         [self getConfigurationFile];
     }
 }
+
 - (IBAction)clickQRBtn:(id)sender {
     [self jumpQRVCWithAddressVC];
 }
