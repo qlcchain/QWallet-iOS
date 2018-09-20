@@ -10,7 +10,6 @@
 
 static NSString *RankingCellReuse = @"RankingCell";
 #define RankingCell_Height 75
-#define RankingCell_EARN_Height (75+37)
 
 @class VPNRankMode;
 

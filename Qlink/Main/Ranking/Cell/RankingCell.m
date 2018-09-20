@@ -40,7 +40,6 @@
         }
         _lblSub1.text = [NSString stringWithFormat:@"%.2f QLC",mode.rewardTotal];
         _lblSub2.text = NSStringLocalizable(@"rewards");
-//    } else if ([type isEqualToString:@"START"]) {
     } else {
         _lblSub1.text = @"50%";
         _lblSub2.text = NSStringLocalizable(@"price_pool");
