@@ -21,10 +21,14 @@
 #import "NSDate+Category.h"
 #import "NSDateFormatter+Category.h"
 #import "SkyRadiusView.h"
+#import "RankingStartCell.h"
 
 #define PAGE_PADDING 86
 #define PAGE_HEIGHT 150//(SCREEN_WIDTH - PAGE_PADDING) * 9 / 16
 
+#define START_STR @"START"
+#define END_STR @"END"
+#define PRIZED_STR @"PRIZED"
 
 @interface RankingViewController ()<NewPagedFlowViewDelegate,NewPagedFlowViewDataSource,UITableViewDelegate,UITableViewDataSource,SRRefreshDelegate>
 
@@ -109,7 +113,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.currentRank.actStatus isEqualToString:@"END"] || [self.currentRank.actStatus isEqualToString:@"PRIZED"]) {
+    if ([self.currentRank.actStatus isEqualToString:END_STR] || [self.currentRank.actStatus isEqualToString:PRIZED_STR]) {
         
         RankingCell *myCell = [tableView dequeueReusableCellWithIdentifier:RankingCellReuse];
         if (indexPath.row == 0) {
@@ -122,21 +126,11 @@
         [myCell setVPNRankMode:self.sourceArray[indexPath.row] withType:self.currentRank.actStatus withEnd:indexPath.row == (self.sourceArray.count-1) ? YES:NO];
         myCell.lblNumber.text = [NSString stringWithFormat:@"%ld",indexPath.row+1];
         return myCell;
-    } else if ([self.currentRank.actStatus isEqualToString:@"START"]){
-        if (indexPath.row == 0) {
-            RankingCell *myCell = [tableView dequeueReusableCellWithIdentifier:RankingCellReuse];
-            if (indexPath.row == 0) {
-                myCell.lblNumber.hidden = YES;
-                myCell.trophyImgView.hidden = NO;
-            }
-            [myCell setVPNRankMode:self.sourceArray[indexPath.row] withType:self.currentRank.actStatus withEnd:NO];
-             return myCell;
-        } else {
-            RankingSubCell *myCell = [tableView dequeueReusableCellWithIdentifier:RankingSubCellReuse];
-             myCell.lblNumber.text = [NSString stringWithFormat:@"%ld",indexPath.row+1];
-            [myCell setVPNRankMode:self.sourceArray[indexPath.row]];
-            return myCell;
-        }
+    } else if ([self.currentRank.actStatus isEqualToString:START_STR]){
+        RankingStartCell *myCell = [tableView dequeueReusableCellWithIdentifier:RankingStartCellReuse];
+        [myCell setVPNRankMode:self.sourceArray[indexPath.row] withRow:indexPath.row];
+        
+        return myCell;
     } else {
         
     }
@@ -147,12 +141,12 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     VPNRankMode *model = self.sourceArray[indexPath.row];
-    if ([self.currentRank.actStatus isEqualToString:@"START"] && model.isEarn50) {
-        return RankingSubCell_EARN_Height;
+    if ([self.currentRank.actStatus isEqualToString:START_STR] && model.isEarn50) {
+        return RankingStartCell_EARN_Height;
     } else {
-         return RankingSubCell_Height;
+         return RankingCell_Height;
     }
-    return RankingSubCell_Height;
+    return RankingCell_Height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -178,7 +172,7 @@
 - (PGIndexBannerSubiew *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
     
     RankingMode *rankMode = [self.dataArray objectAtIndex:index];
-    if ([rankMode.actStatus isEqualToString:@"END"] || [rankMode.actStatus isEqualToString:@"PRIZED"]) {
+    if ([rankMode.actStatus isEqualToString:END_STR] || [rankMode.actStatus isEqualToString:PRIZED_STR]) {
         PageThreeView *threeView = (PageThreeView *)[flowView dequeueReusableCell];
         if (!threeView) {
             threeView = [[[NSBundle mainBundle] loadNibNamed:@"PageThreeView" owner:self options:nil] lastObject];
@@ -190,7 +184,7 @@
         threeView.lblCountDesc.text = [NSString stringWithFormat:@"%@ %@",rankMode.actAmount?:@"0",NSStringLocalizable(@"qlc_pool")];
         threeView.lblRound.text = rankMode.actName?:@"";
         return threeView;
-    } else if ([rankMode.actStatus isEqualToString:@"START"]){
+    } else if ([rankMode.actStatus isEqualToString:START_STR]){
         PageOneView *oneView = (PageOneView *)[flowView dequeueReusableCell];
         if (!oneView) {
             oneView = [[[NSBundle mainBundle] loadNibNamed:@"PageOneView" owner:self options:nil] lastObject];
@@ -325,17 +319,20 @@
 
 #pragma mark - Operation
 - (void)handleAndReload {
-    [self.sourceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        VPNRankMode *model = obj;
-        model.isEarn50 = NO;
-    }];
-    [self.sourceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        VPNRankMode *model = obj;
-        if (model.totalQlc < 50) {
-            model.isEarn50 = YES;
-            *stop = YES;
-        }
-    }];
+    if ([self.currentRank.actStatus isEqualToString:START_STR]) { // 标记处需要显示tip的model
+        __block BOOL isMark = NO;
+        [self.sourceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            VPNRankMode *model = obj;
+            if (isMark) {
+                model.isEarn50 = NO;
+            } else {
+                if (model.totalQlc < 50) {
+                    model.isEarn50 = YES;
+                    isMark = YES;
+                }
+            }
+        }];
+    }
     [self.myTabV reloadData];
 }
 
@@ -353,6 +350,7 @@
         [_tabBackView addSubview:_myTabV];
         [_myTabV registerNib:[UINib nibWithNibName:RankingCellReuse bundle:nil] forCellReuseIdentifier:RankingCellReuse];
         [_myTabV registerNib:[UINib nibWithNibName:RankingSubCellReuse bundle:nil] forCellReuseIdentifier:RankingSubCellReuse];
+        [_myTabV registerNib:[UINib nibWithNibName:RankingStartCellReuse bundle:nil] forCellReuseIdentifier:RankingStartCellReuse];
         [_myTabV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_tabBackView).offset(10);
             make.right.mas_equalTo(_tabBackView).offset(-10);

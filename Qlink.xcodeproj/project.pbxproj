@@ -117,6 +117,8 @@
 		58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FCA2072089800C08784 /* HistoryRecordsCell.m */; };
 		58270FD820720D3600C08784 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FD620720D3600C08784 /* ProfileViewController.m */; };
 		582A40872107190900C12820 /* PacketTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 582A40802107190900C12820 /* PacketTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		582F87BE2153338F0008331D /* RankingStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F87BA2153338E0008331D /* RankingStartCell.xib */; };
+		582F87BF2153338F0008331D /* RankingStartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F87BD2153338E0008331D /* RankingStartCell.m */; };
 		5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833AD0B206C8427002C6909 /* WalletMenuView.m */; };
 		5834CC5B207E1573009168F8 /* VPNConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5834CC59207E1573009168F8 /* VPNConnectedViewController.m */; };
 		583910F9208495F200A19E7E /* DDLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910F8208495F200A19E7E /* DDLogUtil.m */; };
@@ -876,6 +878,9 @@
 		58270FD620720D3600C08784 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		582A40802107190900C12820 /* PacketTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PacketTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		582A40842107190900C12820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		582F87BA2153338E0008331D /* RankingStartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingStartCell.xib; sourceTree = "<group>"; };
+		582F87BC2153338E0008331D /* RankingStartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingStartCell.h; sourceTree = "<group>"; };
+		582F87BD2153338E0008331D /* RankingStartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingStartCell.m; sourceTree = "<group>"; };
 		5833AD0A206C8427002C6909 /* WalletMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletMenuView.h; sourceTree = "<group>"; };
 		5833AD0B206C8427002C6909 /* WalletMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletMenuView.m; sourceTree = "<group>"; };
 		5834CC58207E1573009168F8 /* VPNConnectedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNConnectedViewController.h; sourceTree = "<group>"; };
@@ -3041,6 +3046,9 @@
 		583D9583211432110057A90C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				582F87BC2153338E0008331D /* RankingStartCell.h */,
+				582F87BD2153338E0008331D /* RankingStartCell.m */,
+				582F87BA2153338E0008331D /* RankingStartCell.xib */,
 				583D9586211432110057A90C /* RankingCell.h */,
 				583D9584211432110057A90C /* RankingCell.m */,
 				583D9588211432110057A90C /* RankingCell.xib */,
@@ -4214,24 +4222,6 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		736053FE20DB8EB4004CD3C3 /* GuidePage */ = {
-			isa = PBXGroup;
-			children = (
-				736053FF20DB905B004CD3C3 /* GuidePageView1.h */,
-				7360540020DB905B004CD3C3 /* GuidePageView1.m */,
-				737F909F20E3960A008BC9C2 /* GuidePageView1.xib */,
-				7360540620DB9D67004CD3C3 /* GuidePageView2.h */,
-				7360540720DB9D67004CD3C3 /* GuidePageView2.m */,
-				737F90AC20E39641008BC9C2 /* GuidePageView2.xib */,
-				737F908F20DB9FC4008BC9C2 /* GuidePageView3.h */,
-				737F909020DB9FC4008BC9C2 /* GuidePageView3.m */,
-				737F90B920E3965D008BC9C2 /* GuidePageView3.xib */,
-				737F909220DBA0C0008BC9C2 /* GuidePageViewController.h */,
-				737F909320DBA0C0008BC9C2 /* GuidePageViewController.m */,
-			);
-			path = GuidePage;
-			sourceTree = "<group>";
-		};
 		7377D17A206B9FDC0072E628 /* VPNModes */ = {
 			isa = PBXGroup;
 			children = (
@@ -4896,6 +4886,7 @@
 				5860AD2220CFB51D00EEB6CE /* HistoryWifiCell.xib in Resources */,
 				5860ADA720CFB5F900EEB6CE /* WalletChangeWalletViewController.xib in Resources */,
 				580D91BD2063AE5300B12506 /* Roboto-Italic.ttf in Resources */,
+				582F87BE2153338F0008331D /* RankingStartCell.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				73FF643520EDCD4400E29B3B /* GuideEnterWalletView.xib in Resources */,
 				58CDB5DB2085DB6600B74962 /* keyfile-decrypted.3des in Resources */,
@@ -5433,6 +5424,7 @@
 				58CDB5DD2085DB6600B74962 /* ProfileLoader.swift in Sources */,
 				73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */,
 				73C200C2209A9D460043E889 /* NotifactionView.m in Sources */,
+				582F87BF2153338F0008331D /* RankingStartCell.m in Sources */,
 				5839F5252068F9FA004C4A54 /* NSString+HexStr.m in Sources */,
 				7348C938206E0604009ACA5C /* WalletAlertView.m in Sources */,
 				580D914C20625A4400B12506 /* UILabel+Block.m in Sources */,

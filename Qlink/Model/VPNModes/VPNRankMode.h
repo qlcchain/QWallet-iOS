@@ -15,4 +15,5 @@
 @property (nonatomic , strong) NSString *imgUrl;
 @property (nonatomic , assign) NSInteger totalQlc;
 @property (nonatomic) BOOL isEarn50;
+
 @end
