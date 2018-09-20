@@ -8,22 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-static NSString *RankingCellReuse = @"RankingCell";
-#define RankingCell_Height 75
+static NSString *RankingStartCellReuse = @"RankingStartCell";
+#define RankingStartCell_Height 68
+#define RankingStartCell_EARN_Height (68+37)
 
 @class VPNRankMode;
 
-@interface RankingCell : UITableViewCell
+@interface RankingStartCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *trophyImgView;
 @property (weak, nonatomic) IBOutlet UILabel *lblconnet;
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblCount;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumber;
-@property (weak, nonatomic) IBOutlet UILabel *lblSub1;
-@property (weak, nonatomic) IBOutlet UILabel *lblSub2;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameContraintV;
 
-- (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type withEnd:(BOOL) isEnd;
+- (void) setVPNRankMode:(VPNRankMode *) mode withRow:(NSInteger)row;
 
 @end

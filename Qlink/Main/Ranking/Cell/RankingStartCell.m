@@ -6,12 +6,12 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import "RankingCell.h"
+#import "RankingStartCell.h"
 #import "VPNRankMode.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 //#import "RequestService.h"
 
-@implementation RankingCell
+@implementation RankingStartCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -22,30 +22,25 @@
     _headImageView.layer.masksToBounds = YES;
 }
 
-- (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type withEnd:(BOOL)isEnd
-{
-    _lblSub1.textColor = RGB(51, 51, 51);
-    _lblSub2.textColor = RGB(168, 166, 174);
+- (void) setVPNRankMode:(VPNRankMode *) mode withRow:(NSInteger)row {
     _lblconnet.textColor = RGB(51, 51, 51);
     _lblCount.textColor = RGB(51, 51, 51);
     _lblNumber.textColor = RGB(51, 51, 51);
     
-    if ([type isEqualToString:@"END"] || [type isEqualToString:@"PRIZED"]) {
-        if (isEnd) {
-            _lblSub1.textColor = MAIN_PURPLE_COLOR;
-            _lblSub2.textColor = MAIN_PURPLE_COLOR;
-            _lblconnet.textColor = MAIN_PURPLE_COLOR;
-            _lblconnet.textColor = MAIN_PURPLE_COLOR;
-            _lblNumber.textColor = MAIN_PURPLE_COLOR;
-        }
-        _lblSub1.text = [NSString stringWithFormat:@"%.2f QLC",mode.rewardTotal];
-        _lblSub2.text = NSStringLocalizable(@"rewards");
+    if (row == 0) {
+        _trophyImgView.hidden = mode.totalQlc < 50?YES:NO;
+        _lblNumber.hidden = YES;
     } else {
-        _lblSub1.text = @"50%";
-        _lblSub2.text = NSStringLocalizable(@"price_pool");
+        _trophyImgView.hidden = YES;
+        if (mode.totalQlc < 50) {
+            _lblNumber.hidden = YES;
+        } else {
+            _lblNumber.hidden = NO;
+            _lblNumber.text = [NSString stringWithFormat:@"%ld",row+1];
+        }
     }
     _lblconnet.text = mode.assetName?:@"";
-    _lblCount.text = [NSString stringWithFormat:@"%zd",mode.connectSuccessNum] ?:@"";
+    _lblCount.text = [NSString stringWithFormat:@"%zd",mode.totalQlc] ?:@"";
     [_headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],mode.imgUrl?:@""]] placeholderImage:User_PlaceholderImage1 completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
 }
