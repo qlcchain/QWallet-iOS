@@ -11,11 +11,17 @@
 
 static NSString *RankingSubCellReuse = @"RankingSubCell";
 #define RankingSubCell_Height 75
+#define RankingSubCell_EARN_Height (75+37)
+
 @class VPNRankMode;
+
 @interface RankingSubCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *lblconnet;
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumber;
 @property (weak, nonatomic) IBOutlet UILabel *lblCount;
+
 - (void) setVPNRankMode:(VPNRankMode *) mode;
+
 @end

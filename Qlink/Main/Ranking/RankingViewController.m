@@ -27,6 +27,7 @@
 
 
 @interface RankingViewController ()<NewPagedFlowViewDelegate,NewPagedFlowViewDataSource,UITableViewDelegate,UITableViewDataSource,SRRefreshDelegate>
+
 @property (nonatomic ,strong) NewPagedFlowView *pageFlowView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pageFlowContraintH;
 @property (weak, nonatomic) IBOutlet UIView *flowBackView;
@@ -41,7 +42,13 @@
 @end
 
 @implementation RankingViewController
-
+- (void)dealloc
+{
+    _pageFlowView.delegate = nil;
+    _pageFlowView.dataSource = nil;
+    _pageFlowView.cells = nil;
+    _pageFlowView = nil;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 获取活动列表接口
@@ -139,15 +146,18 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return RankingSubCell_Height;
-    
+    VPNRankMode *model = self.sourceArray[indexPath.row];
+    if ([self.currentRank.actStatus isEqualToString:@"START"] && model.isEarn50) {
+        return RankingSubCell_EARN_Height;
+    } else {
+         return RankingSubCell_Height;
+    }
+    return RankingSubCell_Height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-
 
 #pragma mark NewPagedFlowView Delegate
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView{
@@ -196,7 +206,13 @@
             NSInteger endDateSceons = [NSDate getTimestampFromDate:endDate];
             [oneView statrtTimeCountdownWithSecons:endDateSceons-currentDateSceons];
         }
-        oneView.lblNumber.text = rankMode.actAmount?:@"0";
+        
+        NSString *actAmount = rankMode.actAmount?:@"0";
+        NSString *msg = [NSString stringWithFormat:@"Up to %@ QLC",actAmount];
+        NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
+        [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"VAGRoundedBT-Regular" size:16.0] range:NSMakeRange(0, msg.length)];
+        [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"VAGRoundedBT-Regular" size:20.0] range:[msg rangeOfString:actAmount]];
+        oneView.lblNumber.attributedText = msgArrtrbuted;
         return oneView;
     } else {
         NewRankView *rankView = (NewRankView *)[flowView dequeueReusableCell];
@@ -296,7 +312,8 @@
                  [self.sourceArray removeAllObjects];
              }
              [self.sourceArray addObjectsFromArray:[VPNRankMode mj_objectArrayWithKeyValuesArray:array]];
-             [self.myTabV reloadData];
+             [self handleAndReload];
+//             [self.myTabV reloadData];
          } else {
               [AppD.window showHint:[responseObject objectForKey:@"msg"]];
          }
@@ -304,6 +321,22 @@
          [self.myTabV.slimeView endRefresh];
         [AppD.window showHint:NSStringLocalizable(@"request_error")];
     }];
+}
+
+#pragma mark - Operation
+- (void)handleAndReload {
+    [self.sourceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        VPNRankMode *model = obj;
+        model.isEarn50 = NO;
+    }];
+    [self.sourceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        VPNRankMode *model = obj;
+        if (model.totalQlc < 50) {
+            model.isEarn50 = YES;
+            *stop = YES;
+        }
+    }];
+    [self.myTabV reloadData];
 }
 
 - (RefreshTableView *) myTabV {
@@ -328,21 +361,5 @@
     }
     return _myTabV;
 }
-
-
-
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
