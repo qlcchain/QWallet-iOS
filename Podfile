@@ -38,10 +38,8 @@ target "Qlink" do
     pod 'CocoaLumberjack/Swift'
     pod 'Bugly'
     pod 'OLImageView'
-    pod 'Firebase/Core'
+    pod 'Firebase/Core', '~> 5.4.1'
 #    pod 'MMWormhole'
-
-
 
 #  shadowsock
     pod 'SwiftColor'

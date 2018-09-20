@@ -50,7 +50,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
-  - Hero (1.2.0)
+  - Hero (1.3.1)
   - IQKeyboardManager (6.1.1)
   - KeychainAccess (3.1.1)
   - KissXML (5.2.3)
@@ -68,11 +68,11 @@ PODS:
   - OLImageView (1.5.1):
     - OLImageView/Core (= 1.5.1)
   - OLImageView/Core (1.5.1)
-  - Realm (3.7.5):
-    - Realm/Headers (= 3.7.5)
-  - Realm/Headers (3.7.5)
-  - RealmSwift (3.7.5):
-    - Realm (= 3.7.5)
+  - Realm (3.9.0):
+    - Realm/Headers (= 3.9.0)
+  - Realm/Headers (3.9.0)
+  - RealmSwift (3.9.0):
+    - Realm (= 3.9.0)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
@@ -86,7 +86,7 @@ DEPENDENCIES:
   - Bugly
   - CocoaAsyncSocket (~> 7.4.3)
   - CocoaLumberjack/Swift
-  - Firebase/Core
+  - Firebase/Core (~> 5.4.1)
   - Hero
   - IQKeyboardManager
   - KeychainAccess
@@ -101,7 +101,7 @@ DEPENDENCIES:
   - SwiftColor
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - Appirater
     - AsyncSwift
@@ -142,7 +142,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 4c28e3b9708ba48a765e76515f913a71596eb5dd
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
+  Hero: 1c3c625ba05856f305d29f5c270f8766c5ff2df7
   IQKeyboardManager: 79c57795f5c2408d259d37b9da2ed07efcbb5225
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   KissXML: 09f88ff8161fd058d67b70740b8b516687b52823
@@ -152,11 +152,11 @@ SPEC CHECKSUMS:
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   OLImageView: e03cd533ce6b1a155acb9f708ab9b2e71ea070d5
-  Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
-  RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
+  Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
+  RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SwiftColor: aad338783abbcdd78df9031a38a7a96aae3d9122
 
-PODFILE CHECKSUM: 6495e3d265c8975bd8d84aecc6a16ec8949488df
+PODFILE CHECKSUM: af2dff4666070a8f97384f0e5bc7246869931cca
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
