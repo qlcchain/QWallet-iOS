@@ -9,12 +9,12 @@
 #import "PageOneView.h"
 
 @implementation PageOneView
-
 - (void) dealloc
 {
     [_timer invalidate];
     _timer = nil;
 }
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -38,12 +38,16 @@
 }
 - (void) statrtTimeCountdownWithSecons:(double) secons
 {
-    _timeSecons = secons;
+    _timeSecons = fabs(secons);
     if (secons!=0)
     {
         _subSecons = 0;
         //时间间隔是100毫秒，也就是0.1秒
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+//        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+       @weakify_self
+        _timer =[NSTimer scheduledTimerWithTimeInterval:1.0f repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [weakSelf timerAction];
+        }];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }
 }
