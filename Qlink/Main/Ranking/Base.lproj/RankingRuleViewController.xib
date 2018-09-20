@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,16 +64,16 @@
                             <rect key="frame" x="0.0" y="60" width="375" height="1420"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTx-gH-pND">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="721"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="924"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_activities" translatesAutoresizingMaskIntoConstraints="NO" id="0HV-yu-Nqk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="642"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="845"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="0HV-yu-Nqk" secondAttribute="height" multiplier="125:214" id="P6D-dj-eEz"/>
+                                                <constraint firstAttribute="width" secondItem="0HV-yu-Nqk" secondAttribute="height" multiplier="75:169" id="NJN-wB-2hx"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb6-pi-0Zn">
-                                            <rect key="frame" x="0.0" y="642" width="375" height="69"/>
+                                            <rect key="frame" x="0.0" y="845" width="375" height="69"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_link" translatesAutoresizingMaskIntoConstraints="NO" id="6Xc-Uh-fE8">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
@@ -151,7 +151,7 @@
     </objects>
     <resources>
         <image name="icon_back" width="38" height="38"/>
-        <image name="img_activities" width="375" height="642"/>
+        <image name="img_activities" width="375" height="845"/>
         <image name="img_link" width="360" height="69"/>
     </resources>
 </document>

@@ -10,10 +10,8 @@
 #import "RequestService.h"
 
 @interface UserManage ()
-
 @property (nonatomic, strong) NSString *headUrl;
 @property (nonatomic) NSInteger randomNameIndex;
-
 @end
 
 @implementation UserManage

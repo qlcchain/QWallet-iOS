@@ -389,7 +389,6 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
  */
 - (void) showNotificationAlertViewWtihDic:(NSDictionary *) userInfo {
     NotifactionView *notiView = [NotifactionView loadNotifactionView];
-   
     notiView.lblTtile.text = [userInfo objectForKey:@"title"];
     notiView.lblSubTitle.text =[userInfo objectForKey:@"body"];
     [notiView show];
