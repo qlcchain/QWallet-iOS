@@ -13,7 +13,7 @@
 @property (nonatomic , assign) NSInteger connectSuccessNum;
 @property (nonatomic , assign) CGFloat rewardTotal;
 @property (nonatomic , strong) NSString *imgUrl;
-@property (nonatomic , assign) NSInteger totalQlc;
+@property (nonatomic , assign) CGFloat totalQlc;
 @property (nonatomic) BOOL isEarn50;
 
 @end
