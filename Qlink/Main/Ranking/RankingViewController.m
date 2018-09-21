@@ -42,6 +42,7 @@
 //@property (strong, nonatomic) RefreshTableView *mainTable;
 @property (nonatomic ,strong) NSString *currentTime;
 @property (nonatomic ,strong) RankingMode *currentRank;
+@property (weak, nonatomic) IBOutlet UILabel *lblTopTitle;
 
 @end
 
@@ -61,9 +62,8 @@
 }
 
 #pragma mark -init pageview
-- (void) loadPageView {
+- (void) loadPageViewWithCurrentPage:(NSInteger) index {
     _pageFlowContraintH.constant = PAGE_HEIGHT + 28;
-    
     _pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0,14, SCREEN_WIDTH, PAGE_HEIGHT)];
     _pageFlowView.delegate = self;
     _pageFlowView.dataSource = self;
@@ -71,17 +71,9 @@
     _pageFlowView.isCarousel = NO;
     _pageFlowView.orientation = NewPagedFlowViewOrientationHorizontal;
     _pageFlowView.isOpenAutoScroll = YES;
-    
     [_pageFlowView reloadData];
-    
+    [_pageFlowView scrollToPage:index];
     [_flowBackView addSubview:_pageFlowView];
-    
-//    UIScrollView *bottomScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,14, SCREEN_WIDTH, PAGE_HEIGHT)];
-//    bottomScrollView.backgroundColor = [UIColor clearColor];
-//    [bottomScrollView addSubview:_pageFlowView];
-//
-//    [_pageFlowView reloadData];
-//    [_flowBackView addSubview:bottomScrollView];
 }
 
 #pragma mark- layz
@@ -223,11 +215,14 @@
     //  if ([rankMode.actStatus isEqualToString:@"NEW"])
 }
 
-
-
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
     
     self.currentRank = self.dataArray[pageNumber];
+    if ([self.currentRank.actStatus isEqualToString:START_STR]) {
+        _lblTopTitle.text = NSStringLocalizable(@"rank_top_title2");
+    } else {
+        _lblTopTitle.text = NSStringLocalizable(@"rank_top_title1");
+    }
     if (self.sourceArray.count > 0) {
         [self.sourceArray removeAllObjects];
         [self.myTabV reloadData];
@@ -283,9 +278,17 @@
             }
             if (array.count > 0) {
                 [self.dataArray addObjectsFromArray:[RankingMode mj_objectArrayWithKeyValuesArray:array]];
-                self.currentRank = self.dataArray[0];
+                __block NSUInteger currentIndex = 0;
+                [self.dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    RankingMode *rankMode = (RankingMode *)obj;
+                    if ( [rankMode.actStatus isEqualToString:START_STR]) {
+                        currentIndex = idx;
+                        *stop = YES;
+                    }
+                }];
+                self.currentRank = self.dataArray[currentIndex];
                 [self sendQueryVpnRankingsRequestWithActId:self.currentRank.actId];
-                [self loadPageView];
+                [self loadPageViewWithCurrentPage:currentIndex];
             }
             
         } else {

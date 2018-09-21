@@ -40,7 +40,7 @@
         }
     }
     _lblconnet.text = mode.assetName?:@"";
-    _lblCount.text = [NSString stringWithFormat:@"%zd",mode.totalQlc] ?:@"";
+    _lblCount.text = [NSString stringWithFormat:@"%@",@(mode.totalQlc)] ?:@"";
     [_headImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],mode.imgUrl?:@""]] placeholderImage:User_PlaceholderImage1 completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
 }
