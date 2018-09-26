@@ -565,11 +565,18 @@ typedef enum : NSUInteger {
         return;
     }
     
-    if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
-        [AppD.window showHint:NSStringLocalizable(@"insufficient_assets")];
-        [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
-        return;
+    // 判断免费连接次数
+    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+    NSString *countStr = [HWUserdefault getObjectWithKey:freeKey];
+    if ((![self vpnIsMine] && [[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"])) {
+        
+        if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
+            [AppD.window showHint:NSStringLocalizable(@"insufficient_assets")];
+            [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
+            return;
+        }
     }
+    
     
     if (!checkConnnectOK) {
         [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
