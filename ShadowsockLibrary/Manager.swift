@@ -32,13 +32,12 @@ public let kDefaultGroupIdentifier = "defaultGroup"
 public let kDefaultGroupName = "defaultGroupName"
 private let statusIdentifier = "status"
 public let kProxyServiceVPNStatusNotification = "kProxyServiceVPNStatusNotification"
-private let ShadowsockTunnelBundleID = "com.qlink.winq.ShadowsockTunnel"
+private let ShadowsockTunnelBundleID = "com.qlink.winq.ShadowsockTunnel" // Bundle.main.bundleIdentifier!+".ShadowsockTunnel"//
 private let SHADOWSOCK_VPN = "SHADOWSOCK-VPN"
 
 open class Manager {
     
     open static let sharedManager = Manager()
-    
     open fileprivate(set) var vpnStatus = VPNStatus.off {
         didSet {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: kProxyServiceVPNStatusNotification), object: nil)
@@ -46,7 +45,7 @@ open class Manager {
     }
     
     open let wormhole = MMWormhole(applicationGroupIdentifier: Potatso.sharedGroupIdentifier(), optionalDirectory: "wormhole")
-
+    
     var observerAdded: Bool = false
     
     open var defaultConfigGroup: ConfigurationGroup {
@@ -63,6 +62,7 @@ open class Manager {
     }
     
     func addVPNStatusObserver() {
+       
         guard !observerAdded else{
             return
         }
