@@ -180,8 +180,8 @@ class WalletManage: NSObject {
     }
     
     // 初始化当前Account 信息   网络切换配置
-    func configureAccount(mainNet:Bool) -> () {
-        account?.configureWalletInfo(isMain: mainNet)
+    func configureAccount(mainNet:Bool) -> Bool {
+        return (account?.configureWalletInfo(isMain: mainNet))!
     }
     
 

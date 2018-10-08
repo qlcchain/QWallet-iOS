@@ -122,20 +122,27 @@ public class Account {
         }
     }
     // 初始化当前钱包的信息
-    func configureWalletInfo(isMain:Bool) -> () {
-        if (CurrentWalletInfo.getShareInstance().address != nil) {
-             self.address = CurrentWalletInfo.getShareInstance().address;
-        }
-        if (CurrentWalletInfo.getShareInstance().privateKey != nil) {
-            self.privateKey = CurrentWalletInfo.getShareInstance().privateKey.dataWithHexString();
-        }
-        if (CurrentWalletInfo.getShareInstance().publicKey != nil) {
-            self.publicKey = CurrentWalletInfo.getShareInstance().publicKey.dataWithHexString();
-        }
+    func configureWalletInfo(isMain:Bool) -> Bool {
+        
+//        if (CurrentWalletInfo.getShareInstance().address != nil) {
+//             self.address = CurrentWalletInfo.getShareInstance().address;
+//        }
+//        if (CurrentWalletInfo.getShareInstance().privateKey != nil) {
+//            self.privateKey = CurrentWalletInfo.getShareInstance().privateKey.dataWithHexString();
+//        }
+//        if (CurrentWalletInfo.getShareInstance().publicKey != nil) {
+//            self.publicKey = CurrentWalletInfo.getShareInstance().publicKey.dataWithHexString();
+//        }
         if (CurrentWalletInfo.getShareInstance().wif != nil) {
-             self.wif = CurrentWalletInfo.getShareInstance().wif;
+           let result = WalletManage.shareInstance3.getWalletWithPrivateWif(wif: CurrentWalletInfo.getShareInstance().wif)
+            if result {
+                self.configureWalletNetwork(mianNet: isMain)
+            }
+            return result
+           //  self.wif = CurrentWalletInfo.getShareInstance().wif;
         }
-        self.configureWalletNetwork(mianNet: isMain)
+        return false
+        
     }
     
     // 更改主网或者测试网
@@ -221,7 +228,6 @@ public class Account {
             let reversedBytes = data.bytes.reversed()
             inputData = inputData + reversedBytes + toByteArray(UInt16(neededForTransaction[x].index))
         }
-        
         return (runningAmount, Data(bytes: inputData), nil)
     }
     
@@ -253,6 +259,8 @@ public class Account {
             
             //reciever addressHash
             payload = payload + toAddress.hashFromAddress().dataWithHexString()
+            print("toAddress = \(toAddress)")
+            print("toAddress = \(toAddress.hashFromAddress())")
             
             //Transaction To Sender
             payload = payload + asset.rawValue.dataWithHexString().bytes.reversed()
@@ -394,10 +402,15 @@ public class Account {
        // print("script = ", script + "address = " + contractAddress + "assets =" , assets)
         print("AssetId.gasAssetId =" , AssetId.gasAssetId)
         let payloadPrefix = [0xd1, 0x00] + script.dataWithHexString().bytes
-        let rawTransaction = packRawTransactionBytes(payloadPrefix: payloadPrefix,
+       /* let rawTransaction = packRawTransactionBytes(payloadPrefix: payloadPrefix,
                                                      asset: AssetId.gasAssetId, with: inputData.payload!,
                                                      runningAmount: inputData.totalAmount!,
+                                                     toSendAmount: 0.00000001, toAddress: self.address, attributes: [])*/
+        let rawTransaction = packRawTransactionBytes(payloadPrefix: payloadPrefix,
+                                                     asset: AssetId.gasAssetId, with: inputData.payload!,
+                                                     runningAmount:inputData.totalAmount!,
                                                      toSendAmount: 0.00000001, toAddress: self.address, attributes: [])
+        print("self.address = \(self.address)")
         let signatureData = NeoutilsSign(rawTransaction, privateKey.fullHexString, &error)
         let finalPayload = concatenatePayloadData(txData: rawTransaction, signatureData: signatureData!)
         return finalPayload
@@ -427,6 +440,7 @@ public class Account {
                 print("scriptBytes =",scriptBytes)
                 var payload = self.generateInvokeTransactionPayload(assets: assets, script: scriptBytes.fullHexString,
                                                                     contractAddress: tokenContractHash)
+                
                 payload = payload + tokenContractHash.dataWithHexString().bytes
                 
                 completion(payload.fullHexString,nil)
