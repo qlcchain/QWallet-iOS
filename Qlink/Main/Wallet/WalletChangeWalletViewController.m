@@ -47,11 +47,12 @@ static NSString *celldef = @"walletselectcell";
     
     [WalletUtil getCurrentWalletInfo];
     // 重新初始化 Account->将Account设为当前钱包
-    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_CHANGE_TZ object:nil];
-    [self leftNavBarItemPressedWithPop:YES];
-    
+    BOOL result = [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
+    if (result) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_CHANGE_TZ object:nil];
+        [self leftNavBarItemPressedWithPop:YES];
+    }
 }
 
 - (void)viewDidLoad {

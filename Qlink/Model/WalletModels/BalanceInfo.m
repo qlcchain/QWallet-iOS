@@ -18,5 +18,15 @@
              };
 }
 
-
+- (void)setGas:(NSString *)gas
+{
+    NSNumberFormatter *amountFormatter = [[NSNumberFormatter alloc] init];
+    amountFormatter.minimumFractionDigits = 0;
+    amountFormatter.maximumFractionDigits = 8;
+    amountFormatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    NSNumber *nubmer  = [amountFormatter numberFromString:gas];
+    _gas = [amountFormatter stringFromNumber:nubmer];
+   // _gas = amountFormatter.string(from:strTemp as! NSNumber)!
+    
+}
 @end

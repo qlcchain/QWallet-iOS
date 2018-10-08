@@ -443,20 +443,6 @@ public class NeoClient {
                             }
                             print("valuestr = \(str)")
                             
-//                            print("value = \(String(describing: assetDic["value"]))")
-//                            let assetValue = assetDic["value"];
-//
-//                            if !(assetValue is String) {
-//                                valueStr = "0.00000001";
-//                            } else {
-//                                let dd: Double = Double(assetValue as! String)!
-//                                if (dd <= 0) {
-//                                    valueStr = "0.00000001"
-//                                } else {
-//                                    valueStr = amountFormatter.string(from: NSNumber(value:dd))!
-//                                }
-//                            }
-                            
                             let gass:[String : Any] = ["asset":"0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7","index":indexValue,"txid":assetDic["txid"] as! String,"value":str,"createdAtBlock":0]
                             
                             endDatas.append(gass)
@@ -485,19 +471,6 @@ public class NeoClient {
                             str = amountFormatter.string(from:strTemp as! NSNumber)!
                         }
                         print("valuestr = \(str)")
-                        
-//                        var valueStr :String = "";
-//                        let assetValue = assetDic["value"];
-//                        if !(assetValue is String) {
-//                            valueStr = "0.00000001";
-//                        } else {
-//                            let dd: Double = Double(assetValue as! String)!
-//                            if (dd <= 0) {
-//                                valueStr = "0.00000001"
-//                            } else {
-//                                valueStr = amountFormatter.string(from: NSNumber(value:dd))!
-//                            }
-//                        }
                         
                         let neos:[String : Any] = ["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":indexValue,"txid":assetDic["txid"] as! String,"value":str,"createdAtBlock":0]
                         endDatas.append(neos)
