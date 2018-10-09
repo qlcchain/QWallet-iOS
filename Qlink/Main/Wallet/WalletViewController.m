@@ -278,7 +278,7 @@
                 
                
                 // gas 检查
-                if (([self.balanceInfo.gas floatValue] <= 0.00000001)) {
+                if (([self.balanceInfo.gas doubleValue] < 0.00000001)) {
                     [AppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
                 } else {
                  // 确认是否交易

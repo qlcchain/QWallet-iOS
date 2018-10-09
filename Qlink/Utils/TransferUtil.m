@@ -297,7 +297,7 @@ dispatch_source_t _timer;
     BOOL isConnect = NO;
     if (AppD.balanceInfo) {
         
-        if ([AppD.balanceInfo.gas floatValue] > 0.00000001 && [AppD.balanceInfo.qlc floatValue] >= [cost floatValue]) {
+        if ([AppD.balanceInfo.gas doubleValue] >= 0.00000001 && [AppD.balanceInfo.qlc floatValue] >= [cost floatValue]) {
             isConnect = YES;
         }
         

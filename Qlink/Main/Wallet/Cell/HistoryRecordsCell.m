@@ -45,7 +45,7 @@
         _lblTitle.text = model.assetName;
         _lblType.text = @"QLC";
     } else { // 转帐
-         _headImgView.image = [UIImage imageNamed:@"icon_registered_assets"];
+         _headImgView.image = [UIImage imageNamed:@"icon_register_assets"];
         _lblCount.text = [NSString stringWithFormat:@"-%.2f",model.qlcCount];
         _lblTitle.text = NSStringLocalizable(@"transfer");
         _lblType.text = @"QLC";

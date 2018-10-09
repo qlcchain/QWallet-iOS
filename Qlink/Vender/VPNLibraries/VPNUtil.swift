@@ -122,7 +122,7 @@ class VPNUtil: NSObject {
             
             // The most important field which MUST be the bundle ID of our custom network
             // extension target.
-            tunnelProtocol.providerBundleIdentifier = PacketTunnelBundleID
+            tunnelProtocol.providerBundleIdentifier = Bundle.main.bundleIdentifier!+".PacketTunnel"   //PacketTunnelBundleID
             
             // Use `providerConfiguration` to save content of the ovpn file.
             if self.currentConnectType == 0 {

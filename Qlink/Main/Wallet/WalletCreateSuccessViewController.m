@@ -95,6 +95,9 @@
     if (![WalletUtil isExistWalletPrivateKey]) {
         [WalletUtil setKeyValue:CURRENT_WALLET_KEY value:@"0"];
         isFirstWallet = YES;
+    } else {
+        // 重新初始化 Account->将Account设为当前钱包
+        [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
     }
     
     // 已经存在返回NO
@@ -106,8 +109,6 @@
     [WalletUtil setWalletkeyWithKey:WALLET_ADDRESS_KEY withWalletValue:walletInfo.address];
     [WalletUtil setWalletkeyWithKey:WALLET_WIF_KEY withWalletValue:walletInfo.wif];
     
-    // 重新初始化 Account->将Account设为当前钱包
-    [WalletManage.shareInstance3 configureAccountWithMainNet:[WalletUtil checkServerIsMian]];
     // 是第一个钱包 
     if (isFirstWallet) {
         [WalletUtil getCurrentWalletInfo];

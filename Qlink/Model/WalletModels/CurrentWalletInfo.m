@@ -29,9 +29,6 @@
         _address = walletInfo.address;
         _scriptHash = walletInfo.scriptHash;
         _wif = walletInfo.wif;
-        
-     
-        
     }
 }
 
