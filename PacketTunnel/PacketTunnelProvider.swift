@@ -234,7 +234,8 @@ extension PacketTunnelProvider: OpenVPNAdapterDelegate {
     // Handle errors thrown by the OpenVPN library
     func openVPNAdapter(_ openVPNAdapter: OpenVPNAdapter, handleError error: Error) {
         // 传递错误原因
-        let localizedFailureReason = (error as NSError).userInfo["NSLocalizedFailureReason"] ?? error.localizedDescription
+        let localizedFailureReason = error.localizedDescription ?? (error as NSError).userInfo["NSLocalizedFailureReason"]
+//        let localizedFailureReason = (error as NSError).userInfo["NSLocalizedFailureReason"] ?? error.localizedDescription
         wormhole.passMessageObject(localizedFailureReason as? NSCoding, identifier: VPN_ERROR_REASON_IDENTIFIER)
         
         // Handle only fatal errors
