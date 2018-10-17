@@ -165,7 +165,8 @@
     
     RankingMode *rankMode = [self.dataArray objectAtIndex:index];
     if ([rankMode.actStatus isEqualToString:END_STR] || [rankMode.actStatus isEqualToString:PRIZED_STR]) {
-        PageThreeView *threeView = (PageThreeView *)[flowView dequeueReusableCell];
+//        PageThreeView *threeView = (PageThreeView *)[flowView dequeueReusableCell];
+        PageThreeView *threeView = nil;
         if (!threeView) {
             threeView = [[[NSBundle mainBundle] loadNibNamed:@"PageThreeView" owner:self options:nil] lastObject];
             threeView.frame = CGRectMake(0,0, SCREEN_WIDTH - PAGE_PADDING, PAGE_HEIGHT);
@@ -177,7 +178,8 @@
         threeView.lblRound.text = rankMode.actName?:@"";
         return threeView;
     } else if ([rankMode.actStatus isEqualToString:START_STR]){
-        PageOneView *oneView = (PageOneView *)[flowView dequeueReusableCell];
+//        PageOneView *oneView = (PageOneView *)[flowView dequeueReusableCell];
+        PageOneView *oneView = nil;
         if (!oneView) {
             oneView = [[[NSBundle mainBundle] loadNibNamed:@"PageOneView" owner:self options:nil] lastObject];
             oneView.frame = CGRectMake(0,0, SCREEN_WIDTH - PAGE_PADDING, PAGE_HEIGHT);
@@ -201,7 +203,8 @@
         oneView.lblNumber.attributedText = msgArrtrbuted;
         return oneView;
     } else {
-        NewRankView *rankView = (NewRankView *)[flowView dequeueReusableCell];
+//        NewRankView *rankView = (NewRankView *)[flowView dequeueReusableCell];
+        NewRankView *rankView = nil;
         if (!rankView) {
             rankView = [[[NSBundle mainBundle] loadNibNamed:@"NewRankView" owner:self options:nil] lastObject];
             rankView.frame = CGRectMake(0,0, SCREEN_WIDTH - PAGE_PADDING, PAGE_HEIGHT);
