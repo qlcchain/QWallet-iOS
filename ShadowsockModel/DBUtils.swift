@@ -171,23 +171,24 @@ extension DBUtils {
         let groups = mRealm.objects(ConfigurationGroup.self).filter(filter).map({ $0 })
         var objects: [BaseModel] = []
         
-        var iterator1: LazyMapIterator<RLMIterator<Proxy>, Proxy>? = nil
-        iterator1 = proxies.makeIterator()
-        iterator1?.forEach({ (tObj) in
-            objects.append(tObj as BaseModel)
-        })
-        
-        var iterator2: LazyMapIterator<RLMIterator<RuleSet>, RuleSet>? = nil
-        iterator2 = rulesets.makeIterator()
-        iterator2?.forEach({ (tObj) in
-            objects.append(tObj as BaseModel)
-        })
-        
-        var iterator3: LazyMapIterator<RLMIterator<ConfigurationGroup>, ConfigurationGroup>? = nil
-        iterator3 = groups.makeIterator()
-        iterator3?.forEach({ (tObj) in
-            objects.append(tObj as BaseModel)
-        })
+        //TODO:这里不注释
+//        var iterator1: LazyMapIterator<RLMIterator<Proxy>, Proxy>? = nil
+//        iterator1 = proxies.makeIterator()
+//        iterator1?.forEach({ (tObj) in
+//            objects.append(tObj as BaseModel)
+//        })
+//
+//        var iterator2: LazyMapIterator<RLMIterator<RuleSet>, RuleSet>? = nil
+//        iterator2 = rulesets.makeIterator()
+//        iterator2?.forEach({ (tObj) in
+//            objects.append(tObj as BaseModel)
+//        })
+//
+//        var iterator3: LazyMapIterator<RLMIterator<ConfigurationGroup>, ConfigurationGroup>? = nil
+//        iterator3 = groups.makeIterator()
+//        iterator3?.forEach({ (tObj) in
+//            objects.append(tObj as BaseModel)
+//        })
         return objects
     }
 
@@ -199,23 +200,24 @@ extension DBUtils {
         let groups = mRealm.objects(ConfigurationGroup.self).filter(filter).map({ $0 })
         var objects: [BaseModel] = []
         
-        var iterator1: LazyMapIterator<RLMIterator<Proxy>, Proxy>? = nil
-        iterator1 = proxies.makeIterator()
-        iterator1?.forEach({ (tObj) in
-            objects.append(tObj as BaseModel)
-        })
-    
-        var iterator2: LazyMapIterator<RLMIterator<RuleSet>, RuleSet>? = nil
-        iterator2 = rulesets.makeIterator()
-        iterator2?.forEach({ (tObj) in
-            objects.append(tObj as BaseModel)
-        })
-        
-        var iterator3: LazyMapIterator<RLMIterator<ConfigurationGroup>, ConfigurationGroup>? = nil
-        iterator3 = groups.makeIterator()
-        iterator3?.forEach({ (tObj) in
-            objects.append(tObj as BaseModel)
-        })
+        //TODO:这里不注释
+//        var iterator1: LazyMapIterator<RLMIterator<Proxy>, Proxy>? = nil
+//        iterator1 = proxies.makeIterator()
+//        iterator1?.forEach({ (tObj) in
+//            objects.append(tObj as BaseModel)
+//        })
+//
+//        var iterator2: LazyMapIterator<RLMIterator<RuleSet>, RuleSet>? = nil
+//        iterator2 = rulesets.makeIterator()
+//        iterator2?.forEach({ (tObj) in
+//            objects.append(tObj as BaseModel)
+//        })
+//
+//        var iterator3: LazyMapIterator<RLMIterator<ConfigurationGroup>, ConfigurationGroup>? = nil
+//        iterator3 = groups.makeIterator()
+//        iterator3?.forEach({ (tObj) in
+//            objects.append(tObj as BaseModel)
+//        })
         return objects
     }
 }

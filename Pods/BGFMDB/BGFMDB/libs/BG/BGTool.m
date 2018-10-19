@@ -36,6 +36,13 @@
 //100M大小限制.
 #define MaxData @(838860800)
 
+//模型深层嵌套的时候使用
+#define DEPTH_MODEL 1
+//模型非深层嵌套的时候使用(默认)
+#define SHALLOW_MODEL 2
+
+#define MODEL_LEVEL SHALLOW_MODEL
+
 /**
  *  遍历所有类的block（父类）
  */
@@ -968,7 +975,22 @@ void bg_cleanCache(){
     }
     
     NSMutableArray* arrM = [NSMutableArray array];
-    for(NSDictionary* dict in array){
+    for(NSMutableDictionary* dict in array){
+        
+//#warning 压缩深层嵌套模型数据量使用
+//        NSString* depth_model_conditions = @"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\";
+//        [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//            if([obj isKindOfClass:[NSString class]] && ([obj containsString:@"+&"]||
+//               [obj containsString:@"~-"]||[obj containsString:@"$#"]||[obj containsString:@"^*"])){
+//                if ([obj containsString:BGModel]) {
+//                    obj = [obj stringByReplacingOccurrencesOfString:@"+&" withString:@"~-~-~-"];
+//                    obj = [obj stringByReplacingOccurrencesOfString:@"~-" withString:@"$#$#$#$#$#"];
+//                    obj = [obj stringByReplacingOccurrencesOfString:@"$#" withString:@"^*^*^*^*^*^*^*^*^*^*"];
+//                    dict[key] = [obj stringByReplacingOccurrencesOfString:@"^*" withString:depth_model_conditions];
+//                }
+//            }
+//        }];
+        
         id object = [BGTool objectFromJsonStringWithTableName:tableName class:cla valueDict:dict];
         [arrM addObject:object];
     }
@@ -1077,6 +1099,19 @@ void bg_cleanCache(){
     }else if(filtModelInfoType == bg_ModelInfoArrayUpdate){//批量更新操作时,移除 创建时间 字段不做更新
         [valueDict removeObjectForKey:bg_sqlKey(bg_createTimeKey)];
     }else;
+    
+//#warning 压缩深层嵌套模型数据量使用
+//    NSString* depth_model_conditions = @"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\";
+//    [valueDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//        if([obj isKindOfClass:[NSString class]] && [obj containsString:depth_model_conditions]){
+//            if ([obj containsString:BGModel]) {
+//                obj = [obj stringByReplacingOccurrencesOfString:depth_model_conditions withString:@"^*"];
+//                obj = [obj stringByReplacingOccurrencesOfString:@"^*^*^*^*^*^*^*^*^*^*" withString:@"$#"];
+//                obj = [obj stringByReplacingOccurrencesOfString:@"$#$#$#$#$#" withString:@"~-"];
+//                valueDict[key] = [obj stringByReplacingOccurrencesOfString:@"~-~-~-" withString:@"+&"];
+//            }
+//        }
+//    }];
     
     return valueDict;
 }
