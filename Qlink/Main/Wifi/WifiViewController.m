@@ -26,7 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *userHeadBtn;
 @property (strong, nonatomic) RefreshTableView *mainTable;
 @property (weak, nonatomic) IBOutlet UIView *tableBack;
-//@property (nonatomic ,strong) ConnectUtil *connectUtil;
+@property (nonatomic ,strong) ConnectUtil *connectUtil;
+
 @end
 
 @implementation WifiViewController
@@ -40,8 +41,16 @@
     ProfileViewController* profileVC = [[ProfileViewController alloc] init];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
+
 - (IBAction)clickShadowSockConnect:(id)sender {
-   // [_connectUtil switchVPN];
+    [_connectUtil switchVPN];
+}
+
+- (void)configShadowsock {
+    // 配置shadow代理
+    [ConnectUtil managerInit];
+    _connectUtil = [[ConnectUtil alloc] init];
+    [_connectUtil configSS];
 }
 
 - (void)viewDidLoad {
@@ -56,10 +65,8 @@
     
     // 服务器切换
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshContent) name:CHANGE_SERVER_NOTI object:nil];
-//    // 配置shadow代理
-//    [ConnectUtil managerInit];
-//    _connectUtil = [[ConnectUtil alloc] init];
-//    [_connectUtil configSS];
+    
+    [self configShadowsock];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
