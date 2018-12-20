@@ -224,15 +224,10 @@ inline constexpr uint_least32_t operator~(Privilege p)
 }
 
 struct PermissionsCache {
-    /// Each element is the index of a row in the `class___Roles` table.
-    using RoleList = std::vector<std::size_t>;
-
     PermissionsCache(const Group& g, StringData user_identity, bool is_admin = false);
 
-    bool is_admin() const noexcept;
 
-    /// Leaves out any role that has no permission objects linking to it.
-    RoleList get_users_list_of_roles();
+    bool is_admin() const noexcept;
 
     /// Get Realm-level privileges for the current user.
     ///

@@ -7,7 +7,8 @@
 //
 
 #import "QBaseViewController.h"
-#import "QlinkNavViewController.h"
+//#import "QlinkNavViewController.h"
+#import "QNavigationController.h"
 
 @interface QBaseViewController ()
 
@@ -19,6 +20,11 @@
     [super viewWillAppear:animated];
     
 //    self.navigationController.navigationBarHidden = YES;
+    if ([self.view.backgroundColor isEqual:MAIN_WHITE_COLOR]) {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    } else {
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    }
 }
     
 - (void)viewWillDisappear:(BOOL)animated {
@@ -93,7 +99,8 @@
 
 - (void)presentModalVC:(UIViewController *)VC animated:(BOOL)animated
 {
-    QlinkNavViewController *navController = [[QlinkNavViewController alloc] initWithRootViewController:VC] ;
+//    QlinkNavViewController *navController = [[QlinkNavViewController alloc] initWithRootViewController:VC] ;
+    QNavigationController *navController = [[QNavigationController alloc] initWithRootViewController:VC];
     if([self respondsToSelector:@selector(presentViewController:animated:completion:)]){
         [self presentViewController:navController animated:animated completion:nil];
     }
@@ -138,7 +145,7 @@
  */
 - (void) showUserConnectStatus
 {
-    [AppD.window showHint:NSStringLocalizable(@"p2p_connect_status")];
+    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"p2p_connect_status")];
 }
 
 #pragma mark - 子类继承刷新子view

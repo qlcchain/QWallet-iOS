@@ -33,6 +33,9 @@
 + (UInt64)getMillisecondTimestampFromDate:(NSDate *)date;
 + (NSString *)getTimeWithTimestamp:(NSString *)timestamp format:(NSString *)format isMil:(BOOL)isMil;
 
++ (NSString *)getUTCStrFormateLocalStr:(NSString *)localStr;
++ (NSString *)getLocalDateFormateUTCDate:(NSString *)utcStr;
+
 - (NSString *)timeIntervalDescription;//距离当前的时间间隔描述
 - (NSString *)minuteDescription;/*精确到分钟的日期描述*/
 - (NSString *)formattedTime;

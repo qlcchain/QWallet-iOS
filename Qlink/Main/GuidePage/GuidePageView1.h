@@ -10,6 +10,9 @@
 
 @interface GuidePageView1 : UIView
 
+@property (weak, nonatomic) IBOutlet UIButton *startBtn;
+
 + (instancetype) loadGuidePageView1;
+
 
 @end

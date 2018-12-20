@@ -10,10 +10,10 @@
 
 @interface BalanceInfo : BBaseModel
 
-@property (nonatomic ,strong) NSString *qlc;
-@property (nonatomic ,strong) NSString *neo;
-@property (nonatomic ,strong) NSString *gas;
+@property (nonatomic ,strong) NSNumber *qlc;
+@property (nonatomic ,strong) NSNumber *neo;
+@property (nonatomic ,strong) NSNumber *gas;
 
-
+- (NSString *)getWinqGas;
 
 @end

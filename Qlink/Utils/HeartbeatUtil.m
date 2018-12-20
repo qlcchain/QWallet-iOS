@@ -7,7 +7,7 @@
 //
 
 #import "HeartbeatUtil.h"
-#import "TransferUtil.h"
+#import "NeoTransferUtil.h"
 
 @implementation HeartbeatUtil
 
@@ -29,7 +29,7 @@
     
     NSDictionary *parmer = @{@"p2pId":[ToxManage getOwnP2PId]?:@"",
                              @"status":[NSNumber numberWithInt:status],
-                             @"vpnName":[TransferUtil currentVPNName]?:@"",
+                             @"vpnName":[NeoTransferUtil currentVPNName]?:@"",
                              @"wifiName":@""
                              };
     [RequestService requestWithUrl:heartbeatV3_Url params:parmer httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {

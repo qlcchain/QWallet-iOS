@@ -13,10 +13,11 @@
 #import <Masonry/Masonry.h>
 //#import "UIButton+UserHead.h"
 #import "WalletAlertView.h"
-#import "WalletCreateSuccessViewController.h"
+//#import "WalletCreateSuccessViewController.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "UIImage+Resize.h"
 #import "Qlink-Swift.h"
+//#import <NEOFramework/NEOFramework.h>
 
 @interface WalletQRViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -25,13 +26,16 @@
 @property (nonatomic ,strong) HMScannerBorder *scannerBorder;
 @property (nonatomic ,strong) HMScannerMaskView *maskView;
 @property (weak, nonatomic) IBOutlet UIButton *userHeadBtn;
+@property (nonatomic) BOOL needPop;
 
 @end
 
 @implementation WalletQRViewController
+
 - (IBAction)clickBack:(id)sender {
     [self leftNavBarItemPressedWithPop:YES];
 }
+
 - (IBAction)clickHead:(id)sender {
     [self clickAlbumButton];
 }
@@ -57,9 +61,9 @@
     [_scanner stopScan];
 }
 
-- (instancetype) initWithCodeQRCompleteBlock:(void (^)(NSString *codeValue)) completion
-{
+- (instancetype) initWithCodeQRCompleteBlock:(void (^)(NSString *codeValue)) completion needPop:(BOOL)needPop {
     if (self = [super init]) {
+        self.needPop = needPop;
         self.completeBlcok = completion;
     }
     return self;
@@ -67,23 +71,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _parentView.frame = CGRectMake(0, 110, SCREEN_WIDTH, SCREEN_HEIGHT-110);
-    [self prepareScanerBorder];
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
+    _parentView.frame = CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT-44);
+    [self prepareScanerBorder];
 }
+
 #pragma mark - lazy
 - (HMScanner *)scanner {
     if (!_scanner) {
         // 实例化扫描器
-        @weakify_self
+        kWeakSelf(self);
         _scanner = [HMScanner scanerWithView:_parentView scanFrame:_scannerBorder.frame completion:^(NSString *stringValue) {
             DDLogDebug(@"codeValue = %@",stringValue);
-            if (weakSelf.completeBlcok) {
-                weakSelf.completeBlcok(stringValue);
-                [weakSelf leftNavBarItemPressedWithPop:YES];
+            if (weakself.completeBlcok) {
+                weakself.completeBlcok(stringValue);
+                if (_needPop) {
+                    [weakself leftNavBarItemPressedWithPop:YES];
+                }
             } else {
                 // 完成回调
-                [weakSelf checkPrivatekeyFormat:stringValue];
+                [weakself checkPrivatekeyFormat:stringValue];
             }
            
         }];
@@ -130,25 +139,24 @@
         if (stringValue.length == 52 || stringValue.length == 64) {
             [self showAlertViewWithMsg:stringValue];
         } else {
-            [AppD.window showHint:NSStringLocalizable(@"privateKey_format")];
+            [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"privateKey_format")];
             [_scanner startScan];
         }
     }
 }
 
-- (void) showAlertViewWithMsg:(NSString *) msg
-{
+- (void) showAlertViewWithMsg:(NSString *) msg {
     WalletAlertView *alertView = [WalletAlertView loadWalletAlertView];
     alertView.lblMsg.text = msg;
     alertView.lblTitle.text = NSStringLocalizable(@"private_key");
     [alertView showIsTwoBtn:YES];
     
-     @weakify_self
+     kWeakSelf(self);
     [alertView setYesClickBlock:^{
-        [weakSelf sendImportWalletRequest:msg];
+        [weakself sendImportWalletRequest:msg];
     }];
     [alertView setCancelClickBlock:^{
-        [weakSelf.scanner startScan];
+        [weakself.scanner startScan];
     }];
 }
 
@@ -157,7 +165,7 @@
 - (void) clickAlbumButton {
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [AppD.window showHint:NSStringLocalizable(@"unable_photo")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"unable_photo")];
         return;
     }
     
@@ -175,6 +183,7 @@
     //使用模态呈现相册
     [self.navigationController presentViewController:pickerController animated:YES completion:nil];
 }
+
 #pragma UIImagePickerController delegate
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
@@ -186,20 +195,20 @@
     if (resultImage) {
         resultImage = [resultImage resizeImage:resultImage];
         // 扫描图像
-        @weakify_self
+        kWeakSelf(self);
         [HMScanner scaneImage:resultImage completion:^(NSArray *values) {
-            if (weakSelf.completeBlcok) {
+            if (weakself.completeBlcok) {
                 if (values.count > 0) {
-                    weakSelf.completeBlcok(values.firstObject);
+                    weakself.completeBlcok(values.firstObject);
                 } else {
-                    [AppD.window showHint:NSStringLocalizable(@"no_code")];
+                    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"no_code")];
                 }
             } else {
                 // 完成回调
                 if (values.count > 0) {
-                    [weakSelf checkPrivatekeyFormat:values.firstObject];
+                    [weakself checkPrivatekeyFormat:values.firstObject];
                 } else {
-                    [AppD.window showHint:NSStringLocalizable(@"no_code")];
+                    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"no_code")];
                 }
             }
             
@@ -215,36 +224,36 @@
 - (void) sendImportWalletRequest:(NSString *) privateKey
 {
     
-    [AppD.window showHudInView:self.view hint:NSStringLocalizable(@"Loading")];
+    [kAppD.window makeToastInView:self.view text:NSStringLocalizable(@"Loading")];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        BOOL isScueess = [WalletManage.shareInstance3 getWalletWithPrivatekeyWithPrivatekey:privateKey];
+        BOOL isScueess = [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:privateKey];
         if (isScueess) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [AppD.window hideHud];
-                WalletInfo *walletInfo = [[WalletInfo alloc] init];
-                walletInfo.address = [WalletManage.shareInstance3 getWalletAddress];
-                walletInfo.wif = [WalletManage.shareInstance3 getWalletWif];
-                walletInfo.privateKey = [WalletManage.shareInstance3 getWalletPrivateKey];
-                walletInfo.publicKey = [WalletManage.shareInstance3 getWalletPublicKey];
-                WalletCreateSuccessViewController *vc = [[WalletCreateSuccessViewController alloc] initWtihWalletInfo:walletInfo];
-                [self.navigationController pushViewController:vc animated:YES];
+                [kAppD.window hideToast];
+                NEOWalletInfo *walletInfo = [[NEOWalletInfo alloc] init];
+                walletInfo.address = [NEOWalletManage.sharedInstance getWalletAddress];
+                walletInfo.wif = [NEOWalletManage.sharedInstance getWalletWif];
+                walletInfo.privateKey = [NEOWalletManage.sharedInstance getWalletPrivateKey];
+                walletInfo.publicKey = [NEOWalletManage.sharedInstance getWalletPublicKey];
+//                WalletCreateSuccessViewController *vc = [[WalletCreateSuccessViewController alloc] initWtihWalletInfo:walletInfo];
+//                [self.navigationController pushViewController:vc animated:YES];
                 // 移除前二个vs
                 [self moveNavgationBackViewController];
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [AppD.window hideHud];
+                [kAppD.window hideToast];
                 [_scanner startScan];
-                [AppD.window showHint:NSStringLocalizable(@"wallet_import")];
+                [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"wallet_import")];
             });
         }
     });
     
     /*
-    [AppD.window showHudInView:self.view hint:@"Loading.."];
+    [kAppD.window showHudInView:self.view hint:@"Loading.."];
     NSDictionary *params = @{@"key":privateKey};
     [RequestService requestWithUrl:exportKey_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [AppD.window hideHud];
+        [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
             if(dataDic)  {
@@ -260,14 +269,14 @@
                 }
             }
         } else {
-            [AppD.window showHint:[responseObject objectForKey:@"msg"]];
+            [kAppD.window showHint:[responseObject objectForKey:@"msg"]];
              [_scanner startScan];
         }
         
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [AppD.window hideHud];
+        [kAppD.window hideToast];
         [_scanner startScan];
-        [AppD.window showHint:NSStringLocalizable(@"request_error")];
+        [kAppD.window showHint:NSStringLocalizable(@"request_error")];
     }];*/
     
 }

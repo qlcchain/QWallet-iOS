@@ -16,7 +16,7 @@
 //        self.layer.masksToBounds = YES;
 //        self.layer.borderColor = [UIColor whiteColor].CGColor;
 //        self.layer.borderWidth = Photo_White_Circle_Length;
-        self.layer.shadowColor = SHADOW_COLOR.CGColor;
+        self.layer.shadowColor = UIColorFromRGB(0xdddddd).CGColor;
         self.layer.shadowOffset = CGSizeMake(0, 0.2);
         self.layer.shadowOpacity = 0.25;
 //        self.layer.shadowRadius = self.width/2.0;

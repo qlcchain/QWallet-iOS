@@ -196,7 +196,7 @@
         }
         
         NSString *actAmount = rankMode.actAmount?:@"0";
-        NSString *msg = [NSString stringWithFormat:@"Up to %@ QLC",actAmount];
+        NSString *msg = [NSString stringWithFormat:@"Up to %@ WINQ GAS",actAmount];
         NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
         [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"VAGRoundedBT-Regular" size:16.0] range:NSMakeRange(0, msg.length)];
         [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"VAGRoundedBT-Regular" size:20.0] range:[msg rangeOfString:actAmount]];
@@ -270,9 +270,9 @@
 #pragma mark - 请求数据方法
 // 获取活动列表接口
 - (void) sendQueryActsRequest {
-    [self.view showHudInView:self.view hint:@"" userInteractionEnabled:YES hideTime:0];
+    [self.view makeToastInView:self.view userInteractionEnabled:YES hideTime:0];
     [RequestService requestWithUrl:queryActs_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-         [self.view hideHud];
+         [self.view hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
            _currentTime = [[responseObject objectForKey:Server_Data] objectForKey:@"currentDate"];
             NSArray *array = [[responseObject objectForKey:Server_Data] objectForKey:@"acts"];
@@ -295,11 +295,11 @@
             }
             
         } else {
-             [AppD.window showHint:[responseObject objectForKey:@"msg"]];
+             [kAppD.window makeToastDisappearWithText:[responseObject objectForKey:@"msg"]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [AppD.window showHint:NSStringLocalizable(@"request_error")];
-        [self.view hideHud];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"request_error")];
+        [self.view hideToast];
     }];
 }
 
@@ -315,11 +315,11 @@
              [self handleAndReload];
 //             [self.myTabV reloadData];
          } else {
-              [AppD.window showHint:[responseObject objectForKey:@"msg"]];
+              [kAppD.window makeToastDisappearWithText:[responseObject objectForKey:@"msg"]];
          }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
          [self.myTabV.slimeView endRefresh];
-        [AppD.window showHint:NSStringLocalizable(@"request_error")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"request_error")];
     }];
 }
 

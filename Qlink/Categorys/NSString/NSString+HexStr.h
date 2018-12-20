@@ -23,6 +23,9 @@
 //将16进制的字符串转换成NSData
 + (NSMutableData *)convertHexStrToData:(NSString *)str;
 + (NSString *)convertDataToHexStr:(NSData *)data;
+
 +(NSString *) parseByteArray2HexString:(Byte[]) bytes;
+
++ (NSNumber *)numberHexString:(NSString *)aHexString;
 
 @end

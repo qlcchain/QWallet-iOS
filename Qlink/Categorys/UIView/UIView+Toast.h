@@ -1,60 +1,24 @@
-/***************************************************************************
- 
-UIView+Toast.h
-Toast
-
-Copyright (c) 2014 Charles Scalesse.
- 
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
- 
-The above copyright notice and this permission notice shall be included
-in all copies or substantial portions of the Software.
- 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
-***************************************************************************/
+//
+//  UIView+HUD.h
+//  Qlink
+//
+//  Created by 旷自辉 on 2018/5/15.
+//  Copyright © 2018年 pan. All rights reserved.
+//
 
 #import <UIKit/UIKit.h>
-#import "WalletAlertView.h"
-#import "VpnToastView.h"
-
-extern NSString * const CSToastPositionTop;
-extern NSString * const CSToastPositionCenter;
-extern NSString * const CSToastPositionBottom;
 
 @interface UIView (Toast)
 
-// each makeToast method creates a view and displays it as toast
-- (void)makeToast:(NSString *)message;
-- (void)makeToast:(NSString *)message duration:(NSTimeInterval)interval position:(id)position;
-- (void)makeToast:(NSString *)message duration:(NSTimeInterval)interval position:(id)position image:(UIImage *)image;
-- (void)makeToast:(NSString *)message duration:(NSTimeInterval)interval position:(id)position title:(NSString *)title;
-- (void)makeToast:(NSString *)message duration:(NSTimeInterval)interval position:(id)position title:(NSString *)title image:(UIImage *)image;
+- (void)makeToastInView:(UIView *)view;
+- (void)makeToastInView:(UIView *)view userInteractionEnabled: (BOOL)isEnabled hideTime:(CGFloat)time;
+- (void)makeToastInView:(UIView *)view text:(NSString *)text;
+- (void)makeToastInView:(UIView *)view text:(NSString *)text userInteractionEnabled: (BOOL)isEnabled hideTime:(CGFloat)time;
+- (void)hideToast;
 
-// displays toast with an activity spinner
-- (void)makeToastActivity;
-- (void)makeToastActivity:(id)position;
-- (void)hideToastActivity;
+- (void)makeToastDisappearInView:(UIView *)view text:(NSString *)text;
+- (void)makeToastDisappearWithText:(NSString *)text;
+// 从默认(showHint:)显示的位置再往上(下)yOffset
+- (void)makeToastDisappearWithText:(NSString *)text yOffset:(float)yOffset;
 
-// the showToast methods display any view as toast
-- (void)showToast:(UIView *)toast;
-- (void)showToast:(UIView *)toast duration:(NSTimeInterval)interval position:(id)point;
-- (void)showToast:(UIView *)toast duration:(NSTimeInterval)interval position:(id)point
-      tapCallback:(void(^)(void))tapCallback;
-
-- (void) showWalletAlertViewWithTitle:(NSString *) alertTitle msg:(NSMutableAttributedString *) msgArrtrbuted isShowTwoBtn:(BOOL) isTwo block:(void (^)(void))calculateBlock;
-
-+ (void) showVPNToastAlertViewWithTopImageName:(NSString *) imageName content:(NSString *) content block:(void (^)(void))clickYesBlock;;
 @end

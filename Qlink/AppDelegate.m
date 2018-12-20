@@ -11,33 +11,35 @@
 #import "Qlink-Swift.h"
 #import "LaunchViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
-#import "WalletUtil.h"
-#import "DDLogUtil.h"
-#import <Bugly/Bugly.h>
+#import "NEOWalletUtil.h"
 #import <BGFMDB/BGFMDB.h>
 #import "VPNFileInputView.h"
-#import "QlinkNavViewController.h"
+#import "QNavigationController.h"
 #import "VPNFileUtil.h"
 #import "OLImage.h"
 #import "NotifactionView.h"
-#import "ChatUtil.h"
 #import "VPNOperationUtil.h"
-#import <BGFMDB/BGDB.h>
 #import "SystemUtil.h"
-#import "TransferUtil.h"
+#import "NeoTransferUtil.h"
 #import "MiPushSDK.h"
-#import "NSBundle+Language.h"
-#import "DBManageUtil.h"
-#import "GuidePageViewController.h"
-#import "LocationTracker.h"
+#import "LoginSetPWViewController.h"
+#import "LoginInputPWViewController.h"
+#import "WalletCommonModel.h"
+#import "RunInBackground.h"
+
+#import "AppDelegate+AppService.h"
+#import "NSString+HexStr.h"
+#import "CryptoUtilOC.h"
+#import "ReportUtil.h"
+#import <ETHFramework/ETHFramework.h>
 
 @import Firebase;
 
-@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate, BuglyDelegate> {
-    UIBackgroundTaskIdentifier backTaskI;
+@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
+    BOOL isBackendRun;
 }
 
-@property (nonatomic, strong) LocationTracker * locationTracker;
+//@property (nonatomic, strong) LocationTracker * locationTracker;
 @property (nonatomic, strong) NSTimer* locationUpdateTimer;
 
 @end
@@ -47,27 +49,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+//    [NEOWalletUtil deleteAllWallet];
+//    [LoginPWModel deleteLoginPW];
+//    [WalletCommonModel deleteAllWallet];
+    
+    [KeychainUtil resetKeyService]; // 先重置keyservice  以后注释掉
+    
     _checkPassLock = YES; // 处理tabbar连续点击的bug
+    _allowPresentLogin = YES; // 打开app允许弹出输入密码
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-   // [WalletUtil removeAllKey];
+    
    // 配置Firebase
     [FIRApp configure];
     // 配置DDLog
     [self configDDLog];
     // 配置app语言
     [self configAppLanguage];
-    // 配置主网钱包 0-测试网。1- 主网
-    [self configServerNetwork];
     // 删除手机VPN配置
     [SystemUtil deleteVPNConfig];
     // 将连接状态置为NO
-    [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
+    [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     // 开启VPN连接扣费
-    [TransferUtil startVPNConnectTran];
+    [NeoTransferUtil startVPNConnectTran];
     // 开启VPN上传服务器
     [VPNFileUtil startVPNSendServerTimer];
-    // 初始化当前钱包
-    [WalletUtil getCurrentWalletInfo];
+//    // 初始化当前钱包
+//    [NEOWalletUtil getCurrentWalletInfo];
     // 初始化data文件
     [ToxManage readKeychainToLibary];
     // 初始化vpn文件
@@ -80,8 +87,6 @@
     [self keyboardManagerConfig];
     // 配置Bugly
     [self configBugly];
-    // 配置项目崩溃捕获
-//    [self configExceptionHandler];
     // 配置FMDB
     [self configureFMDB];
     // 发送json请求
@@ -101,7 +106,7 @@
     // 是否需要显示引导页
     [self checkGuidenPage];
     // 后台定位常驻
-    [self getBackgroudLocation];
+//    [self getBackgroudLocation];
 
     [self.window makeKeyAndVisible];
     
@@ -113,160 +118,53 @@
     return YES;
 }
 
-// 是否需要显示引导页
-- (void)checkGuidenPage {
-    NSString *version = [HWUserdefault getStringWithKey:VERSION_KEY];
-    if (![[NSStringUtil getNotNullValue:version] isEqualToString:APP_Version]) {
-        [HWUserdefault insertString:APP_Version withkey:VERSION_KEY];
-        GuidePageViewController *pageVC = [[GuidePageViewController alloc] init];
-        self.window.rootViewController = pageVC;
-    } else {
-        [self addLaunchAnimation];
-    }
-}
-
-#pragma mark - 配置Bugly
-- (void)configBugly {
-    BuglyConfig * config = [[BuglyConfig alloc] init];
-    // 设置自定义日志上报的级别，默认不上报自定义日志
-//    config.reportLogLevel = BuglyLogLevelWarn;
-    config.delegate = self;
-    [Bugly startWithAppId:Bugly_AppID config:config];
-}
-
-#pragma mark - 配置手势 默认开启
-- (void) configTouch {
-    NSString *touchStatu = [HWUserdefault getStringWithKey:TOUCH_SWITCH_KEY];
-    if ([[NSStringUtil getNotNullValue:touchStatu] isEmptyString]) {
-        [HWUserdefault insertString:@"1" withkey:TOUCH_SWITCH_KEY];
-    }
-}
-
-#pragma mark -// 配置主网钱包 0-测试网。1- 主网
-- (void) configServerNetwork {
-    NSString *serverNetwork = [HWUserdefault getStringWithKey:SERVER_NETWORK];
-    if ([[NSStringUtil getNotNullValue:serverNetwork] isEmptyString]) {
-        [HWUserdefault insertString:@"0" withkey:SERVER_NETWORK];
-    }
-}
-
-#pragma mark - 配置App语言
-- (void) configAppLanguage {
-    NSString *languages = [[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES];
-    if (languages && ![languages isEqualToString:@""]) {
-        [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
-    }
-}
-
-#pragma mark - 配置DDLog
-- (void)configDDLog {
-    //开启DDLog 颜色
-//    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-//    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor blueColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
-    
-    //配置DDLog
-    [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
-//    [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
-    
-    DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
-    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 7; // 7
-    [DDLog addLogger:fileLogger];
-    
-    //针对单个文件配置DDLog打印级别，尚未测试
-    //    [DDLog setLevel:DDLogLevelAll forClass:nil];
-    
-//    DDLogVerbose(@"Verbose");
-//    DDLogDebug(@"Debug");
-//    DDLogInfo(@"Info");
-//    DDLogWarn(@"Warn");
-//    DDLogError(@"Error");
-    
-    [DDLogUtil getDDLog];
-}
-
-#pragma mark - 获取用户信息
-- (void)fetchUserInfo {
-    [UserManage fetchUserInfo];
-}
-
-#pragma mark - 设置IQKeyboardManager
-- (void) keyboardManagerConfig {
-    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
-    keyboardManager.enable = YES; // 控制整个功能是否启用
-    keyboardManager.shouldResignOnTouchOutside = YES; // 控制点击背景是否收起键盘
-    keyboardManager.shouldToolbarUsesTextFieldTintColor = YES; // 控制键盘上的工具条文字颜色是否用户自定义
-    keyboardManager.toolbarManageBehaviour = IQAutoToolbarBySubviews; // 有多个输入框时，可以通过点击Toolbar 上的“前一个”“后一个”按钮来实现移动到不同的输入框
-    keyboardManager.enableAutoToolbar = YES; // 控制是否显示键盘上的工具条
-    keyboardManager.shouldShowToolbarPlaceholder = YES; // 是否显示占位文字
-    keyboardManager.placeholderFont = [UIFont boldSystemFontOfSize:15]; // 设置占位文字的字体
-    keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
-}
-
-//#pragma mark - 配置项目崩溃捕获
-//- (void) configExceptionHandler
-//{
-//    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-//}
-
-#pragma mark - 创建p2pid
-- (void) configToxP2PNetwork {
-    // 初始化实列。并创建c回调
-    [ToxManage shareMange];
-    // 创建p2p连接网络
-    [ToxManage createdP2PNetwork];
-}
-
 #pragma mark - 添加启动页动画
-- (void)addLaunchAnimation {
+- (void)addLaunchAnimation {    
     LaunchViewController *vc = [[LaunchViewController alloc] init];
     self.window.rootViewController = vc;
     NSTimeInterval timeI = [LaunchViewController getGifDuration];
-    [self performSelector:@selector(setTabbarRoot) withObject:nil afterDelay:timeI];
+    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
 }
 
 #pragma mark - 初始化Tabbar
-- (void)setTabbarRoot {
+- (void)setRootTabbar {
+    [WalletCommonModel walletInit]; // 钱包初始化
+    
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
 }
 
-#pragma mark - 配置状态栏
-- (void)configStatusBar {
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+#pragma mark - Login
+- (void)setRootLogin {
+    BOOL isExist = [LoginPWModel isExistLoginPW];
+    UIViewController *vc = nil;
+    if (isExist) {
+        vc = [[LoginInputPWViewController alloc] init];
+    } else {
+        vc = [[LoginSetPWViewController alloc] init];
+    }
+//    QlinkNavViewController *nav = [[QlinkNavViewController alloc] initWithRootViewController:vc];
+    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nav;
 }
 
-#pragma mark - 配置群聊
-- (void)configChat {
-    [ChatUtil shareInstance];
+- (void)presentLogin:(LoginPWCompleteBlock)completeBlock {
+    BOOL isExist = [LoginPWModel isExistLoginPW];
+    UIViewController *vc = nil;
+    if (isExist) {
+        vc = [[LoginInputPWViewController alloc] init];
+        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
+    } else {
+        vc = [[LoginSetPWViewController alloc] init];
+        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
+    }
+    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
 }
 
 #pragma mark - 配置小米推送
 - (void)configPush {
     [MiPushSDK registerMiPush:self];
-}
-
-#pragma mark - 配置FMDB
-- (void) configureFMDB {
-    /**
-     想测试更多功能,打开注释掉的代码即可.
-     */
-    bg_setDebug(NO);//打开调试模式,打印输出调试信息.
-    
-    /**
-     如果频繁操作数据库时,建议进行此设置(即在操作过程不关闭数据库);
-     */
-    bg_setDisableCloseDB(YES);
-    
-    /**
-     自定义数据库名称，否则默认为BGFMDB
-     */
-    bg_setSqliteName(@"Qlink_DataBase");
-    // 判断表名是否存在
-    if (![[BGDB shareManager] bg_isExistWithTableName:VPNREGISTER_TABNAME]) {
-         [VPNOperationUtil keyChainDataToDB];
-    }
-    [DBManageUtil updateDBversion];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -279,19 +177,13 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-//    @weakify_self
-//    backTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){
-//        // 程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作
-////        [SystemUtil configureAPPTerminate];
-////        [weakSelf endBackTask];
-//    }];
+//    _allowPresentLogin = YES; // 打开app允许弹出输入密码
+    
     NSLog(@"backgroundTimeRemaining=%@",@(application.backgroundTimeRemaining));
     NSLog(@"applicationState=%@",@(application.applicationState));
-}
-
-- (void)endBackTask {
-    [[UIApplication sharedApplication] endBackgroundTask:backTaskI];
-    backTaskI = UIBackgroundTaskInvalid;
+    
+    isBackendRun = YES;
+    [[RunInBackground sharedBg] startRunInbackGround];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -301,6 +193,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    if (isBackendRun){
+        [[RunInBackground sharedBg] stopAudioPlay];
+        isBackendRun = NO;
+    }
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -308,25 +206,25 @@
 }
 
 #pragma mark - Backgroud Location
-- (void)getBackgroudLocation {
-    if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
-        DDLogDebug(@"UIBackgroundRefreshStatusDenied");
-    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted){
-        DDLogDebug(@"UIBackgroundRefreshStatusRestricted");
-    } else{
-        _locationTracker = [[LocationTracker alloc] init];
-        [_locationTracker startLocationTracking];
-        
-        //Send the best location to server every 60 seconds
-        //You may adjust the time interval depends on the need of your app.
-        NSTimeInterval time = 60.0;
-        __weak typeof(_locationTracker) weakLocationTracker = _locationTracker;
-        _locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:time repeats:YES block:^(NSTimer * _Nonnull timer) {
-            NSLog(@"updateLocation");
-            [weakLocationTracker updateLocationToServer];
-        }];
-    }
-}
+//- (void)getBackgroudLocation {
+//    if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
+//        DDLogDebug(@"UIBackgroundRefreshStatusDenied");
+//    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted){
+//        DDLogDebug(@"UIBackgroundRefreshStatusRestricted");
+//    } else{
+//        _locationTracker = [[LocationTracker alloc] init];
+//        [_locationTracker startLocationTracking];
+//
+//        //Send the best location to server every 60 seconds
+//        //You may adjust the time interval depends on the need of your app.
+//        NSTimeInterval time = 60.0;
+//        __weak typeof(_locationTracker) weakLocationTracker = _locationTracker;
+//        _locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:time repeats:YES block:^(NSTimer * _Nonnull timer) {
+//            NSLog(@"updateLocation");
+//            [weakLocationTracker updateLocationToServer];
+//        }];
+//    }
+//}
 
 #pragma mark - UIApplicationDelegate
 - (void)application:(UIApplication *)app
@@ -490,19 +388,6 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
             [MiPushSDK openAppNotify:messageId];
         }
     }
-}
-
-#pragma mark - BuglyDelegate
-/**
- *  发生异常时回调
- *
- *  @param exception 异常信息
- *
- *  @return 返回需上报记录，随异常上报一起上报
- */
-- (NSString *)attachmentForException:(NSException *)exception  {
-    [SystemUtil configureAPPTerminate];
-    return nil;
 }
 
 ///**

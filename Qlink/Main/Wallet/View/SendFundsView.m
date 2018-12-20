@@ -42,9 +42,9 @@
     UIPasteboard *generalPasteboard = [UIPasteboard generalPasteboard];
     NSMutableArray *types = [[NSMutableArray alloc] init];
     [types addObjectsFromArray:UIPasteboardTypeListString];
-    @weakify_self
+    kWeakSelf(self);
     if ([generalPasteboard containsPasteboardTypes:types]) {
-        weakSelf.lblAddress.text = generalPasteboard.string;
+        weakself.lblAddress.text = generalPasteboard.string;
     }
 }
 
@@ -58,7 +58,7 @@
     }
     if (![_lblAddress.text.trim isWalletAddress]) {
         [self endEditing:YES];
-        [AppD.window showHint:NSStringLocalizable(@"address_format")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"address_format")];
         return;
     }
     
@@ -70,7 +70,7 @@
 //    [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:_txtMoney.text]];
 //
 //    [self showWalletAlertViewWithTitle:@"CONFIRM WITHDRAWAL" msg:msgArrtrbuted isShowTwoBtn:YES block:^{
-//         @weakify_self
+//         kWeakSelf(self);
 //        if (weakSelf.sendBlock) {
 //                weakSelf.sendBlock(SendNowType);
 //        }

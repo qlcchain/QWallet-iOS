@@ -9,7 +9,7 @@
 #import "ProfileViewController.h"
 #import "UIImage+Resize.h"
 //#import "UIImageView+UserHead.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 //#import "HYBImageCliped.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSDate+Category.h"
@@ -60,8 +60,8 @@
         return;
     }
     NSDictionary *params = @{@"p2pId":p2pId};
-    @weakify_self
-    [AppD.window showHudInView:self.view hint:nil];
+    kWeakSelf(self);
+    [kAppD.window makeToastInView:self.view text:nil];
     [RequestService postImage:uploadHeadView_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName = [NSString stringWithFormat:@"%ld",[NSDate getTimestampFromDate:[NSDate date]]];
         NSData *data = UIImagePNGRepresentation(img);
@@ -77,16 +77,16 @@
             [formData appendPartWithFileData:data name:@"head" fileName:name mimeType:@"image/png"];
         }
     } success:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [AppD.window hideHud];
+        [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
 //            NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],responseObject[@"head"]];
             NSString *head = responseObject[@"head"];
             [UserManage setHeadUrl:head];
-            [weakSelf leftNavBarItemPressedWithPop:YES];
+            [weakself leftNavBarItemPressedWithPop:YES];
         }
     } failure:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [AppD.window hideHud];
-//        [AppD.window showHint:error.description];
+        [kAppD.window hideToast];
+//        [kAppD.window showHint:error.description];
     }];
 }
 

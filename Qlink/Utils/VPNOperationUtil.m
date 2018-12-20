@@ -7,7 +7,7 @@
 //
 
 #import "VPNOperationUtil.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 
 @implementation VPNOperationUtil
 
@@ -29,7 +29,7 @@
         NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
         NSMutableArray *dataArray = [VPNInfo mj_keyValuesArrayWithObjectArray:finfAlls];
         NSData *data = [dataArray mj_JSONData];
-        [WalletUtil setDataKey:VPN_ASSETS_KEY Datavalue:data];
+        [NEOWalletUtil setDataKey:VPN_ASSETS_KEY Datavalue:data];
     });
    
 }
@@ -38,7 +38,7 @@
 + (void) keyChainDataToDB
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSData *data = [WalletUtil getKeyDataValue:VPN_ASSETS_KEY];
+        NSData *data = [NEOWalletUtil getKeyDataValue:VPN_ASSETS_KEY];
         if (data) {
             NSArray *array =  [data mj_JSONObject];
             NSMutableArray *modeArr = [VPNInfo mj_objectArrayWithKeyValuesArray:array];

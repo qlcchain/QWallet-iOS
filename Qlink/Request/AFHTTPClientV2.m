@@ -333,9 +333,9 @@
     if (response) {
         
         NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-//        if ([K_Print_JsonStr boolValue]) {
-//            NSLog(@"response JSON = %@",jsonStr);
-//        }
+        if ([K_Print_JsonStr boolValue]) {
+            NSLog(@"response JSON = %@",jsonStr);
+        }
         NSData *jsonData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
         
         //结果（字符串）
@@ -348,6 +348,7 @@
         
         NSString *responseObjectDesc = [result description];
         if (!response || [response isKindOfClass:[NSNull class]]) {
+            //TODO:这里打印出json来造model
             if ([K_Print_JsonStr boolValue]) {
                 DDLogDebug(@"method = %@ result = %@",method,result);
             }

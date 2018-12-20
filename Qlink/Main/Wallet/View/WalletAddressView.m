@@ -8,23 +8,23 @@
 
 #import "WalletAddressView.h"
 #import "UIView+Animation.h"
-
+#import "WalletCommonModel.h"
 #import "HMScanner.h"
 
 @implementation WalletAddressView
 
 + (WalletAddressView *)getNibView {
     WalletAddressView *nibView = [[[NSBundle mainBundle] loadNibNamed:@"WalletAddressView" owner:self options:nil] firstObject];
-    nibView.lblAddress.text = [CurrentWalletInfo getShareInstance].address;
+    nibView.lblAddress.text = [WalletCommonModel getCurrentSelectWallet].address;
     [nibView centerCodeImage];
     return nibView;
 }
 
 - (void) centerCodeImage
 {
-    @weakify_self
-    [HMScanner qrImageWithString:[CurrentWalletInfo getShareInstance].address avatar:nil completion:^(UIImage *image) {
-        weakSelf.codeImageView.image = image;
+    kWeakSelf(self);
+    [HMScanner qrImageWithString:[WalletCommonModel getCurrentSelectWallet].address avatar:nil completion:^(UIImage *image) {
+        weakself.codeImageView.image = image;
     }];
 }
 
@@ -37,7 +37,7 @@
     UIPasteboard *pBoard = [UIPasteboard generalPasteboard];
     if (_lblAddress.text) {
         pBoard.string = _lblAddress.text;
-        [AppD.window showHint:NSStringLocalizable(@"copy_successs")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"copy_successs")];
     }
 }
 

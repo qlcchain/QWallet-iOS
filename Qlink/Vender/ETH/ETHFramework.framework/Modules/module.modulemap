@@ -1,0 +1,11 @@
+framework module ETHFramework {
+  umbrella header "ETHFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module ETHFramework.Swift {
+    header "ETHFramework-Swift.h"
+    requires objc
+}

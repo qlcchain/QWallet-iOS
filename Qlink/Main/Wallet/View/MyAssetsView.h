@@ -12,14 +12,17 @@
 //typedef void(^ClickCancelBlock)(void);
 
 @interface MyAssetsView : UIView<UITableViewDelegate,UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableV;
 @property (nonatomic , copy) ClickSettingBlock setBlock;
 //@property (nonatomic , copy) ClickCancelBlock cancelBlock;
 @property (nonatomic ,strong) NSMutableArray *soureArray;
 @property (nonatomic ,strong) NSMutableArray *removeArray;
+
 + (MyAssetsView *)getNibView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintTop;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintH;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintBottom;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintTop;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintH;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelContraintBottom;
 - (void)dismiss;
+
 @end

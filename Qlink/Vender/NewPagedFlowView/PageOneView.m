@@ -44,9 +44,9 @@
         _subSecons = 0;
         //时间间隔是100毫秒，也就是0.1秒
 //        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-       @weakify_self
+       kWeakSelf(self);
         _timer =[NSTimer scheduledTimerWithTimeInterval:1.0f repeats:YES block:^(NSTimer * _Nonnull timer) {
-            [weakSelf timerAction];
+            [weakself timerAction];
         }];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }

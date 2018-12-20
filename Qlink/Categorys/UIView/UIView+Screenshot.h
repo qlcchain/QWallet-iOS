@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Screenshot)
+
 - (UIImage *)screenshot;
+
+- (UIImage *)snapshotImage;
+
+- (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)afterUpdates;
+
+- (NSData *)snapshotPDF;
+
 @end

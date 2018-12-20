@@ -7,7 +7,7 @@
 //
 
 #import "BBaseModel.h"
-#import "WalletInfo.h"
+#import "NEOWalletInfo.h"
 
 @interface CurrentWalletInfo : BBaseModel
 
@@ -17,10 +17,7 @@
 @property (nonatomic ,strong) NSString *address;
 @property (nonatomic ,strong) NSString *wif;
 
-
-
 + (instancetype) getShareInstance;
-
-- (void) setAttributValueWithWalletInfo:(WalletInfo *) walletInfo;
+- (void) setAttributValueWithWalletInfo:(NEOWalletInfo *) walletInfo;
 
 @end

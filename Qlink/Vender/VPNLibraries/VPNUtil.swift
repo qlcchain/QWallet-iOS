@@ -19,20 +19,26 @@ class VPNUtil: NSObject {
         case connected
     }
     
-    static var shareInstance : VPNUtil {
-        struct MyStatic{
-            static var instance :VPNUtil = VPNUtil()
-        }
-        return MyStatic.instance;
+//    static var shareInstance : VPNUtil {
+//        struct MyStatic{
+//            static var instance :VPNUtil = VPNUtil()
+//        }
+//        return MyStatic.instance;
+//    }
+    static let swiftShareInstance = VPNUtil()
+    //在oc中这样写才能被调用
+    @objc open class func shareInstance() -> VPNUtil
+    {
+        return VPNUtil.swiftShareInstance
     }
     
     private let customFlow = CustomFlow()
     var providerManager : NETunnelProviderManager?
-    open var connectData : Data?
+    @objc open var connectData : Data?
     var operationStatus : VPNOperationStatus = .none
-    open var vpnUserName : String?
-    open var vpnPassword : String?
-    open var vpnPrivateKey : String?
+    @objc open var vpnUserName : String?
+    @objc open var vpnPassword : String?
+    @objc open var vpnPrivateKey : String?
     var currentConnectType : Int = 0 // 0:自动  1:私钥  2:用户名密码  3:私钥和用户名密码
     
     override init() {
@@ -48,7 +54,7 @@ class VPNUtil: NSObject {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.NEVPNStatusDidChange, object: nil)
     }
     
-    func getOperationStatus() -> Int {
+    @objc open func getOperationStatus() -> Int {
         var status = 0
         if self.operationStatus == .none {
             status = 0
@@ -62,19 +68,19 @@ class VPNUtil: NSObject {
         return status
     }
     
-    func configVPN() {
+    @objc open func configVPN() {
         guard connectData != nil else { return }
         self.removeFromPreferences()
         operationStatus = .none
         self.getProviderManager(connect: true)
     }
     
-    func stopVPN() {
+    @objc open func stopVPN() {
         operationStatus = .disconnect
         self.stopTunnel()
     }
     
-    func getVpnConnectStatus() -> NEVPNStatus {
+    @objc open func getVpnConnectStatus() -> NEVPNStatus {
 //        self.getProviderManager(connect: false)
         guard let manager = self.providerManager else { return NEVPNStatus.invalid }
         return manager.connection.status;
@@ -179,7 +185,7 @@ class VPNUtil: NSObject {
         })
     }
     
-    func removeFromPreferences() {
+    @objc open func removeFromPreferences() {
         print("调用removeFromPreferences 移除手机vpn配置")
         if let _ = self.providerManager {
             self.providerManager?.removeFromPreferences(completionHandler: { (error) in
@@ -206,7 +212,7 @@ class VPNUtil: NSObject {
         }
     }
     
-    @objc func vpnchange() {
+    @objc open func vpnchange() {
         if self.providerManager == nil {
             print("vpn providerManager未初始化")
             return
@@ -288,7 +294,7 @@ class VPNUtil: NSObject {
         }
     }
     
-    func applyConfiguration(vpnData:Data?, completionHandler: @escaping (Int) -> Void) {
+    @objc open func applyConfiguration(vpnData:Data?, completionHandler: @escaping (Int) -> Void) {
         guard let data = vpnData else { return }
         let adapter = OpenVPNAdapter()
         

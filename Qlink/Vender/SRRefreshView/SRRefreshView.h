@@ -26,6 +26,7 @@ typedef void (^SRRefreshBlock)(SRRefreshView* sender);
 
 //set the state loading or not.
 @property (nonatomic, assign)   BOOL    loading;
+
 - (void)setLoadingWithexpansion;
 
 //set the slime's style by this property.

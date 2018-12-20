@@ -12,9 +12,10 @@
 static NSString *MyAssetsCellReuse = @"MyAssetsCell";
 #define MyAssetsCell_Height 71
 
-typedef void(^ClickSettingBlock)(id mode);
+typedef void(^ClickSettingBlock)(VPNInfo *vpnInfo);
 
 @interface MyAssetsCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *headImgV;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
@@ -24,5 +25,6 @@ typedef void(^ClickSettingBlock)(id mode);
 @property (nonatomic ,strong) VPNInfo *vpnInfo;
 @property (nonatomic , copy) ClickSettingBlock setBlock;
 
-- (void) setMode:(id) mode;
+- (void) setMode:(VPNInfo *)vpnInfo;
+
 @end

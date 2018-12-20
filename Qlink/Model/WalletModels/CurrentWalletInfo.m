@@ -21,13 +21,13 @@
     return shareObject;
 }
 
-- (void) setAttributValueWithWalletInfo:(WalletInfo *) walletInfo
+- (void) setAttributValueWithWalletInfo:(NEOWalletInfo *) walletInfo
 {
     if (walletInfo) {
         _publicKey = walletInfo.publicKey;
         _privateKey = walletInfo.privateKey;
         _address = walletInfo.address;
-        _scriptHash = walletInfo.scriptHash;
+//        _scriptHash = walletInfo.scriptHash;
         _wif = walletInfo.wif;
     }
 }

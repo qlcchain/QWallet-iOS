@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
     CheckProcess_VPN_CONNECT,
 } CheckProcessFrom;
 
-@interface WalletUtil : NSObject
+@interface NEOWalletUtil : NSObject
 
 + (instancetype)shareInstance;
 

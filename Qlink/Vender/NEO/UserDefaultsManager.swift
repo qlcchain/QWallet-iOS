@@ -22,7 +22,7 @@ class UserDefaultsManager {
             return Network(rawValue: "main")!
         }
         set {
-            WalletManage.shareInstance3.account?.neoClient = NeoClient(network: network, seedURL: UserDefaultsManager.seed)
+            NEOWalletManage.sharedInstance().account?.neoClient = NeoClient(network: network, seedURL: UserDefaultsManager.seed)
             UserDefaults.standard.set(newValue.rawValue, forKey: networkKey)
            // NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
         }
@@ -62,7 +62,7 @@ class UserDefaultsManager {
         }
         set {
             Neo.client.seed = newValue
-            WalletManage.shareInstance3.account?.neoClient = NeoClient(network: UserDefaultsManager.network, seedURL: newValue)
+            NEOWalletManage.sharedInstance().account?.neoClient = NeoClient(network: UserDefaultsManager.network, seedURL: newValue)
             UserDefaults.standard.set(newValue, forKey: seedKey)
             UserDefaults.standard.synchronize()
            // NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)

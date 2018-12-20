@@ -9,15 +9,15 @@
 #import "MyAssetsView.h"
 #import "UIView+Animation.h"
 #import "VPNMode.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 #import "VPNOperationUtil.h"
 
 @implementation MyAssetsView
 
-- (IBAction)clickCancel:(id)sender {
-   
-    [self zoomOutAnimationDuration:.6 target:self callback:@selector(dismiss)];
-}
+//- (IBAction)clickCancel:(id)sender {
+//
+//    [self zoomOutAnimationDuration:.6 target:self callback:@selector(dismiss)];
+//}
 
 #pragma uitableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -36,21 +36,19 @@
     myCell.settingBtn.tag = indexPath.row;
     id mode = [self.soureArray objectAtIndex:indexPath.row];
     [myCell setMode:mode];
-    @weakify_self
+    kWeakSelf(self);
     [myCell setSetBlock:^(id mode) {
-        [weakSelf jumpAssetsWithMode:mode];
+        [weakself jumpAssetsWithMode:mode];
     }];
     return myCell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
  
 }
 
 #pragma - mark jump vc
-- (void) jumpAssetsWithMode:(id) mode
-{
+- (void)jumpAssetsWithMode:(id) mode {
     if (self.setBlock) {
         self.setBlock(mode);
     }
@@ -62,10 +60,7 @@
     return nibView;
 }
 
-
-
-- (void) setTableView
-{
+- (void)setTableView {
     _tableV.delegate = self;
     _tableV.dataSource = self;
     //_mainTable.slimeView.delegate = self;
@@ -81,10 +76,9 @@
 /**
  同步查询所有数据.
  */
-- (void) checkData
-{
-
-    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ order by %@ desc",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian])),bg_sqlKey(@"bg_id")]];
+- (void)checkData {
+    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"order by %@ desc",bg_sqlKey(@"bg_id")]];
+//    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ order by %@ desc",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([ConfigUtil isMainNetOfServerNetwork])),bg_sqlKey(@"bg_id")]];
     
     //NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
     if (self.soureArray.count > 0) { // 更新keyChain
@@ -98,7 +92,7 @@
         [_tableV reloadData];
         [self sendGetAssetsRequest];
     } else {
-        [AppD.window showHint:NSStringLocalizable(@"no_assets")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"no_assets")];
     }
 }
 
@@ -122,19 +116,14 @@
     [self removeFromSuperview];
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
 
 /**
  获取资产信息
  */
-- (void) sendGetAssetsRequest
-{
-    
+- (void) sendGetAssetsRequest {
     [RequestService requestWithUrl:ssIdquerys_Url params:@{@"ssIds":[self getVPNNames]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         //[self hideHud];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
@@ -144,18 +133,17 @@
                 [self loadSuccessWithArray:dataArray];
             }
         } else {
-            [AppD.window showHint:[responseObject objectForKey:@"msg"]];
+            [kAppD.window makeToastDisappearWithText:[responseObject objectForKey:@"msg"]];
         }
         
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         //[self hideHud];
       
-        [AppD.window showHint:NSStringLocalizable(@"request_error")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"request_error")];
     }];
 }
 
-- (void) loadSuccessWithArray:(NSArray *) array
-{
+- (void)loadSuccessWithArray:(NSArray *) array {
     // 本地的
     [self.soureArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *mode = (VPNInfo *) obj;
@@ -163,7 +151,8 @@
         __block BOOL isExit = YES;
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNInfo *info = (VPNInfo *) obj;
-            if ([mode.vpnName isEqualToString:info.ssId] && mode.isMainNet == info.isMainNet) {
+//            if ([mode.vpnName isEqualToString:info.ssId] && mode.isMainNet == info.isMainNet) {
+            if ([mode.vpnName isEqualToString:info.ssId]) {
                 mode.qlc = info.qlc;
                 mode.registerQlc = info.registerQlc;
                 if ([[NSStringUtil getNotNullValue:info.address] isBlankString]) {
@@ -176,13 +165,13 @@
         if (!isExit) {
             [self.removeArray addObject:mode];
         }
-
     }];
 
     [self.removeArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *info = (VPNInfo *) obj;
         // 删除本地数据库
-        NSString *where = [NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"vpnName"),bg_sqlValue(info.vpnName),bg_sqlKey(@"isMainNet"),bg_sqlValue(@(info.isMainNet))];
+        NSString *where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"vpnName"),bg_sqlValue(info.vpnName)];
+//        NSString *where = [NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"vpnName"),bg_sqlValue(info.vpnName),bg_sqlKey(@"isMainNet"),bg_sqlValue(@(info.isMainNet))];
         [VPNInfo bg_delete:VPNREGISTER_TABNAME where:where];
         // 删除本地
         [self.soureArray removeObject:info];
@@ -190,10 +179,10 @@
     
      [_tableV reloadData];
     
-//    @weakify_self
+//    kWeakSelf(self);
 //    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 //        VPNInfo *mode = (VPNInfo *) obj;
-//        [weakSelf changeVPNQlcWithVPNInfo:mode];
+//        [weakself changeVPNQlcWithVPNInfo:mode];
 //    }];
 //
 //    [_tableV reloadData];
@@ -216,11 +205,11 @@
 - (NSArray *) getVPNNames
 {
     __block NSString *vpnNames = @"";
-    @weakify_self
+    kWeakSelf(self);
     [self.soureArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         VPNInfo *mode = (VPNInfo *) obj;
         vpnNames = [vpnNames stringByAppendingString:mode.vpnName];
-        if (idx != weakSelf.soureArray.count-1) {
+        if (idx != weakself.soureArray.count-1) {
             vpnNames = [vpnNames stringByAppendingString:@","];
         }
     }];

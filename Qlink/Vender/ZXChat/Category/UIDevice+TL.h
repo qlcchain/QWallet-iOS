@@ -11,8 +11,9 @@
 #define WIDTH_SCREEN        [UIScreen mainScreen].bounds.size.width
 #define HEIGHT_SCREEN       [UIScreen mainScreen].bounds.size.height
 //#define HEIGHT_STATUSBAR    20 // 状态栏
-#define HEIGHT_STATUSBAR (IS_iPhoneX ? 44.f : 20.f)
-#define HEIGHT_BOTTOM (IS_iPhoneX ? 34.f : 0.f)
+//#define HEIGHT_STATUSBAR (IS_iPhoneX ? 44.f : 20.f)
+#define HEIGHT_BOTTOM ((IS_iPhone_X==YES || IS_iPhone_Xr ==YES || IS_iPhone_Xs== YES || IS_iPhone_Xs_Max== YES) ? 34.f : 0.f)
+//#define HEIGHT_BOTTOM (IS_iPhoneX ? 34.f : 0.f)
 #define HEIGHT_TABBAR       49 // 标签
 #define HEIGHT_NAVBAR       44 // 导航
 #define HEIGHT_CHATBOXVIEW  215// 更多 view
