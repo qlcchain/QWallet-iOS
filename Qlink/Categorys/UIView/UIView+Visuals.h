@@ -11,12 +11,21 @@
 
 @interface UIView (Visuals)
 
+- (void)addShadowWithOpacity:(float)shadowOpacity
+                 shadowColor:(UIColor *)shadowColor
+                shadowOffset:(CGSize)shadowOffset
+                shadowRadius:(CGFloat)shadowRadius
+             andCornerRadius:(CGFloat)cornerRadius;
+
 /*
  *  Sets a corners with radius, given stroke size & color
  */
 -(void)cornerRadius: (CGFloat)radius 
          strokeSize: (CGFloat)size 
               color: (UIColor *)color;
+
+-(void)cornerRadius: (CGFloat)radius;
+
 /*
  *  Sets a corners
  */

@@ -20,7 +20,6 @@ typedef enum : NSUInteger {
 @property (nonatomic , copy) NSString *country;
 @property (nonatomic , strong) NSArray *vpnList;
 
-
 @end
 
 @interface VPNInfo : BBaseModel

@@ -9,23 +9,24 @@
 import Foundation
 import KeychainAccess
 
-
 class KeychainUtil: NSObject {
     
     // 获取和存储密码
     private static let WalletPassKey : String = "walletPassKey"
-    private static let KeyService : String = "network.o3.neo.wallet"
-   static func isExistWalletPass() -> Bool {
+    private static let OldKeyService : String = "network.o3.neo.wallet"
+    private static let KeyService : String = "com.qlink.winq.keyservice"
+    
+   @objc public static func isExistWalletPass() -> Bool {
         return isExistKey(keyName: KeychainUtil.WalletPassKey)
     }
     
-   static func saveWalletPass(keyValue value:String) -> Bool {
+   @objc public static func saveWalletPass(keyValue value:String) -> Bool {
     
         return saveValueToKey(keyName: value, keyValue: KeychainUtil.WalletPassKey)
     }
     
     // 清除指定key
-   static func removeKey(keyName key:String) -> Bool {
+    @objc public static func removeKey(keyName key:String) -> Bool {
         let keychain = Keychain(service:KeychainUtil.KeyService)
         do {
             //save pirivate key to keychain
@@ -39,7 +40,7 @@ class KeychainUtil: NSObject {
     }
     
     // 清除所有key
-   static func removeAllKey() -> Bool {
+   @objc public static func removeAllKey() -> Bool {
         let keychain = Keychain(service:KeychainUtil.KeyService)
         do {
             //save pirivate key to keychain
@@ -53,7 +54,7 @@ class KeychainUtil: NSObject {
     }
     
     
-   static func isExistKey(keyName key:String) -> Bool {
+   @objc public static func isExistKey(keyName key:String) -> Bool {
         
         let keychain = Keychain(service:KeychainUtil.KeyService)
         do {
@@ -71,13 +72,13 @@ class KeychainUtil: NSObject {
         
     }
     
-    static func getKeyValue(keyName key:String) -> String {
+    @objc public static func getKeyValue(keyName key:String) -> String {
         
         let keychain = Keychain(service:KeychainUtil.KeyService)
         do {
             //save pirivate key to keychain
             let keyValue  = try keychain
-                .get(key)
+                .getString(key)
             if keyValue == nil {
                 return ""
             }
@@ -87,7 +88,7 @@ class KeychainUtil: NSObject {
         }
     }
     
-    static func getKeyDataValue(keyName key:String) -> Data? {
+    @objc public static func getKeyDataValue(keyName key:String) -> Data? {
         
         let keychain = Keychain(service:KeychainUtil.KeyService)
         do {
@@ -100,13 +101,13 @@ class KeychainUtil: NSObject {
         }
     }
     
-   static func saveValueToKey(keyName key:String, keyValue value:String) -> Bool {
+   @objc public static func saveValueToKey(keyName key:String, keyValue value:String) -> Bool {
         
         let keychain = Keychain(service: KeychainUtil.KeyService)
         do {
             //save pirivate key to keychain
             try keychain
-                .accessibility(.whenPasscodeSetThisDeviceOnly)
+                .accessibility(.whenUnlockedThisDeviceOnly)
                 .set(value, key: key)
         } catch _ {
             return false
@@ -115,13 +116,13 @@ class KeychainUtil: NSObject {
         return true
     }
     
-    static func saveDataKeyAndData(keyName key:String, keyValue value:Data) -> Bool {
+    @objc public static func saveDataKeyAndData(keyName key:String, keyValue value:Data) -> Bool {
         
         let keychain = Keychain(service: KeychainUtil.KeyService)
         do {
             //save pirivate key to keychain
             try keychain
-                .accessibility(.whenPasscodeSetThisDeviceOnly)
+                .accessibility(.whenUnlockedThisDeviceOnly)
                 .set(value, key: key)
         } catch _ {
             return false
@@ -139,4 +140,59 @@ class KeychainUtil: NSObject {
         return saveValueToKey(keyName: value, keyValue: KeychainUtil.WalletPrivateKey)
     }
     
+    // 将旧的KeyService替换掉
+    @objc static public func resetKeyService() {
+        let oldKeychain = Keychain(service:KeychainUtil.OldKeyService)
+        for (_, oldKey) in oldKeychain.allKeys().enumerated() {
+            do {
+                print("keychain: key=",oldKey)
+                let keyValueString = try oldKeychain
+                    .getString(oldKey)
+                if keyValueString != nil {
+                    print("keychain: 存在字符串 Value=",keyValueString!)
+                    let success = self.saveValueToKey(keyName: oldKey, keyValue: keyValueString!)
+                    if success {
+                        print("保存string成功")
+                    } else {
+                        print("保存string失败")
+                    }
+                }
+            } catch _ {
+                do {
+                    let keyValueData = try oldKeychain.getData(oldKey)
+                    if keyValueData != nil {
+                        print("keychain: 存在Data Value=",keyValueData!)
+                        let success = self.saveDataKeyAndData(keyName: oldKey, keyValue: keyValueData!)
+                        if success {
+                            print("保存data成功")
+                        } else {
+                            print("保存data失败")
+                        }
+                    }
+                } catch _ {
+                }
+            }
+        }
+        
+        // 移除所有old
+        do {
+            try oldKeychain.removeAll()
+        } catch _ {
+        }
+    }
+    
+    @objc static public func showKeyChain(keyservice:String) {
+        let keychain = Keychain(service:keyservice)
+        for (_, key) in keychain.allKeys().enumerated() {
+            do {
+                print("keychain: key=",key)
+                let keyValueString = try keychain
+                    .getString(key)
+                if keyValueString != nil {
+                    print("keychain: 存在字符串 Value=",keyValueString!)
+                }
+            } catch _ {
+            }
+        }
+    }
 }

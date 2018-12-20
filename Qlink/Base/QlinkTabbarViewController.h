@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    TabbarIndexVPN,
+//    TabbarIndexMarkets,
+    TabbarIndexWallet,
+    TabbarIndexSettings,
+} TabbarIndex;
+
+@class WalletsViewController;
+
 @interface QlinkTabbarViewController : UITabBarController
+
+@property (nonatomic, strong) WalletsViewController *walletsVC;
 
 @end

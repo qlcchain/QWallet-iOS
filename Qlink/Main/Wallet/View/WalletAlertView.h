@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WalletAlertView : UIView
+
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblMsg;
 @property (weak, nonatomic) IBOutlet UIButton *yesBtn;

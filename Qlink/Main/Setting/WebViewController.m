@@ -18,9 +18,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 //设置加载进度条
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+
 @end
 
 @implementation WebViewController
+
 - (IBAction)clickBack:(id)sender {
     [self leftNavBarItemPressedWithPop:YES];
 }
@@ -28,18 +30,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
     _myWebView.navigationDelegate = self;
-    NSString *urlString = TELEGRAM_URL;
-    if (_fromType == WebFromTypeTelegram) {
-        urlString = TELEGRAM_URL;
-        _lblTitle.text = @"TELEGRAM";
-    } else if (_fromType == WebFromTypeFacebook) {
-        _lblTitle.text = @"FACEBOOK";
-        urlString = FB_URL;
-    } else if (_fromType == WebFromTypeWinq) {
-        _lblTitle.text = @"WEBSITE";
-        urlString = WINQ_WEBSITE;
-    }
+    _lblTitle.text = _inputTitle;
+//    NSString *urlString = TELEGRAM_URL;
+//    if (_fromType == WebFromTypeTelegram) {
+//        urlString = TELEGRAM_URL;
+//        _lblTitle.text = @"TELEGRAM";
+//    } else if (_fromType == WebFromTypeFacebook) {
+//        _lblTitle.text = @"FACEBOOK";
+//        urlString = FB_URL;
+//    } else if (_fromType == WebFromTypeWinq) {
+//        _lblTitle.text = @"WEBSITE";
+//        urlString = WINQ_WEBSITE;
+//    }
     
     [_progressView setTrackTintColor:[UIColor colorWithRed:240.0/255
                                                      green:240.0/255
@@ -52,11 +57,15 @@
                     options:0
                     context:nil];
 
-    [_myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
- 
-    
+    NSString *httpsStr = @"https://";
+    NSMutableString *url = [NSMutableString string];
+    if (![_inputUrl containsString:httpsStr]) {
+        [url appendString:httpsStr];
+    }
+    [url appendString:_inputUrl?:@""];
+//    NSString *url = [NSString stringWithFormat:@"https://%@",_inputUrl?:@""];
+    [_myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
-
 
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
@@ -64,27 +73,32 @@
     //开始加载的时候，让进度条显示
     self.progressView.hidden = NO;
 }
+
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
     
 }
+
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
   
 }
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
-{
+
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     // NSStringLocalizable(@"request_error")
-    [AppD.window showHint:error.domain];
+//    [kAppD.window showHint:error.domain];
 }
+
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
-    [AppD.window showHint:NSStringLocalizable(@"request_error")];
+    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"request_error")];
 }
+
 // 接收到服务器跳转请求之后调用
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
     
 }
+
 //kvo 监听进度
 -(void)observeValueForKeyPath:(NSString *)keyPath
                      ofObject:(id)object
@@ -126,15 +140,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

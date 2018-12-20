@@ -42,6 +42,16 @@
     return string;
 }
 
+// 16进制转10进制
++ (NSNumber *)numberHexString:(NSString *)aHexString {
+    NSScanner * scanner = [NSScanner scannerWithString:aHexString];
+     unsigned long long longlongValue;
+     [scanner scanHexLongLong:&longlongValue];
+     //将整数转换为NSNumber,存储到数组中,并返回.
+     NSNumber * hexNumber = [NSNumber numberWithLongLong:longlongValue];
+     return hexNumber;
+}
+
 //普通字符串转换为十六进制的。
 + (NSString *)hexStringFromString:(NSString *)string {
     NSData *myD = [string dataUsingEncoding:NSUTF8StringEncoding];

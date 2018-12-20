@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="48" id="KGk-i7-Jjw" customClass="ChooseCurrencyCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHn-dK-6Mx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF4-qM-11E">
+                                <rect key="frame" x="31" y="14" width="33" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currency_select" translatesAutoresizingMaskIntoConstraints="NO" id="Tze-Yw-4mq">
+                                <rect key="frame" x="278" y="12" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="i8E-Fh-8lN"/>
+                                    <constraint firstAttribute="height" constant="24" id="z3L-eL-Gza"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QQD-6j-6Xm">
+                                <rect key="frame" x="16" y="46.5" width="304" height="1"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="kHL-80-1Bl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QQD-6j-6Xm" secondAttribute="trailing" id="2yW-mb-rgF"/>
+                            <constraint firstAttribute="trailing" secondItem="Tze-Yw-4mq" secondAttribute="trailing" constant="18" id="Deb-ua-wlp"/>
+                            <constraint firstAttribute="bottom" secondItem="QQD-6j-6Xm" secondAttribute="bottom" id="J5d-Jh-bpR"/>
+                            <constraint firstItem="QQD-6j-6Xm" firstAttribute="leading" secondItem="vHn-dK-6Mx" secondAttribute="leading" constant="16" id="Lt0-ys-8eV"/>
+                            <constraint firstItem="oF4-qM-11E" firstAttribute="leading" secondItem="vHn-dK-6Mx" secondAttribute="leading" constant="31" id="dab-TN-2QC"/>
+                            <constraint firstItem="oF4-qM-11E" firstAttribute="centerY" secondItem="vHn-dK-6Mx" secondAttribute="centerY" id="fnm-kp-Eo3"/>
+                            <constraint firstItem="Tze-Yw-4mq" firstAttribute="centerY" secondItem="vHn-dK-6Mx" secondAttribute="centerY" id="zDe-yn-0YP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="vHn-dK-6Mx" secondAttribute="trailing" id="4G7-Jb-nE3"/>
+                    <constraint firstAttribute="bottom" secondItem="vHn-dK-6Mx" secondAttribute="bottom" id="t1S-0d-uJN"/>
+                    <constraint firstItem="vHn-dK-6Mx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="t9x-xm-HMw"/>
+                    <constraint firstItem="vHn-dK-6Mx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yqo-bD-MK1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="currentcyLab" destination="oF4-qM-11E" id="rfi-gz-QQk"/>
+                <outlet property="selectIcon" destination="Tze-Yw-4mq" id="cBf-xA-yp2"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="currency_select" width="24" height="24"/>
+    </resources>
+</document>

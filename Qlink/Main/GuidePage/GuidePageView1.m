@@ -8,17 +8,21 @@
 
 #import "GuidePageView1.h"
 
+@interface GuidePageView1 ()
+
+@property (weak, nonatomic) IBOutlet UIView *bottomBack;
+
+@end
+
 @implementation GuidePageView1
-+ (instancetype) loadGuidePageView1
-{
-    return [[[NSBundle mainBundle] loadNibNamed:@"GuidePageView1" owner:self options:nil] lastObject];
+
++ (instancetype)loadGuidePageView1 {
+    GuidePageView1 *view = [[[NSBundle mainBundle] loadNibNamed:@"GuidePageView1" owner:self options:nil] lastObject];
+    UIColor *shadowColor = [UIColorFromRGB(0x34547A) colorWithAlphaComponent:0.1];
+    [view.bottomBack addShadowWithOpacity:1 shadowColor:shadowColor shadowOffset:CGSizeMake(0,-1) shadowRadius:10 andCornerRadius:0];
+
+    return view;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

@@ -43,9 +43,7 @@
     return self;
 }
 
-- (instancetype)initWithHeight:(CGFloat)height width:(CGFloat)width
-{
-//    CGRect frame = CGRectMake(0, 0, 320, height);
+- (instancetype)initWithHeight:(CGFloat)height width:(CGFloat)width {
     CGRect frame = CGRectMake(0, 0, width, height);
     self = [super initWithFrame:frame];
     if (self) {

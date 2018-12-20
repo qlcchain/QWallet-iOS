@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VPNMode.h"
 
-@interface TransferUtil : NSObject
+@interface NeoTransferUtil : NSObject
 
 @property (nonatomic , strong) NSMutableArray *vpnList;
 

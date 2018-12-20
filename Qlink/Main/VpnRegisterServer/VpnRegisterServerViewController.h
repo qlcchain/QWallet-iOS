@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, RegisterServerType) {
 - (instancetype) initWithRegisterType:(RegisterServerType) type;
 - (instancetype) initWithRegisterType:(RegisterServerType) type withVPNName:(NSString *) name withSeizePrice:(NSString *) seize_price withOldPrice:(NSString *) old_price vpnAddress:(NSString *) address vpnP2pid:(NSString *) toP2pid;
 
-- (void)jumpToChooseContinent;
+//- (void)jumpToChooseContinent;
 - (void)validateAssetIsexist;
 - (void)requestRegisterVpnByFeeV3;
 

@@ -6,9 +6,9 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import "WalletInfo.h"
+#import "NEOWalletInfo.h"
 
-@implementation WalletInfo
+@implementation NEOWalletInfo
 
 
 @end

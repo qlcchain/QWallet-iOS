@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,7 +59,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4R-7a-XR9">
-                                    <rect key="frame" x="15" y="14.5" width="40" height="40"/>
+                                    <rect key="frame" x="15" y="14" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="2i3-5w-HSx"/>
                                         <constraint firstAttribute="height" constant="40" id="CFg-Pm-q2l"/>
@@ -91,7 +92,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="37"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VPN INFOMATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcl-2Y-ddq">
-                                                            <rect key="frame" x="131" y="13" width="83" height="12"/>
+                                                            <rect key="frame" x="131" y="12.5" width="83" height="12"/>
                                                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="10"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -179,8 +180,8 @@
                                                                 <constraint firstAttribute="bottom" secondItem="pRe-uc-Agy" secondAttribute="bottom" id="v7B-nt-K8l"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit 1 QLC for asset registration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUZ-Xe-qY6">
-                                                            <rect key="frame" x="167" y="148" width="158" height="12"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit 1 WINQ GAS for asset registration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUZ-Xe-qY6">
+                                                            <rect key="frame" x="138" y="148" width="187" height="12"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                                                             <color key="textColor" red="0.6588235294" green="0.65098039220000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -203,7 +204,7 @@
                                                     <rect key="frame" x="0.0" y="213" width="345" height="37"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VPN CONFIGURATION PROFILE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sii-is-tBW">
-                                                            <rect key="frame" x="102" y="13" width="141" height="12"/>
+                                                            <rect key="frame" x="102" y="12.5" width="141" height="12"/>
                                                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="10"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -428,7 +429,7 @@
                                                     <rect key="frame" x="0.0" y="558" width="345" height="37"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRICE &amp; CONNECTION SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0Y-ds-3nQ">
-                                                            <rect key="frame" x="99" y="13" width="148.5" height="12"/>
+                                                            <rect key="frame" x="98.5" y="12.5" width="148.5" height="12"/>
                                                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="10"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -454,8 +455,8 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hhr-9Q-fWo">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="85"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hourly Fee (QLC)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMy-fr-thS">
-                                                                    <rect key="frame" x="28" y="20" width="75.5" height="12"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hourly Fee (WINQ GAS)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMy-fr-thS">
+                                                                    <rect key="frame" x="28" y="20" width="104.5" height="12"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -688,13 +689,13 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_purple_button" width="13" height="42"/>
-        <image name="icon_back" width="38" height="38"/>
-        <image name="icon_down" width="6" height="4"/>
+        <image name="bg_purple_button" width="13" height="42.5"/>
+        <image name="icon_back" width="38" height="38.5"/>
+        <image name="icon_down" width="6" height="4.5"/>
         <image name="icon_folder" width="16" height="13"/>
         <image name="icon_increase" width="19" height="19"/>
         <image name="icon_look" width="18" height="11"/>
         <image name="icon_reduce" width="19" height="19"/>
-        <image name="icon_see" width="17" height="10"/>
+        <image name="icon_see" width="17" height="10.5"/>
     </resources>
 </document>

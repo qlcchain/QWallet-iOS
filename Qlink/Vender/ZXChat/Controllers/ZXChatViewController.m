@@ -56,7 +56,7 @@
     
     // 主屏幕的高度减去导航的高度，减去状态栏的高度。在PCH头文件
 //    viewHeight = HEIGHT_SCREEN - HEIGHT_NAVBAR - HEIGHT_STATUSBAR;
-    viewHeight = HEIGHT_SCREEN - ChatHeadViewHeight - HEIGHT_STATUSBAR - HEIGHT_BOTTOM;
+    viewHeight = HEIGHT_SCREEN - ChatHeadViewHeight - Height_StatusBar - HEIGHT_BOTTOM;
 
     [self.view addSubview:self.chatMessageVC.view];
     [self addChildViewController:self.chatMessageVC];
@@ -87,34 +87,34 @@
 #pragma mark - Config
 
 - (void)addHeadView {
-    @weakify_self
+    kWeakSelf(self);
     ChatHeadView *chatHeadV = [ChatHeadView getNibView];
 //    chatHeadV.backgroundColor = [UIColor clearColor];
     chatHeadV.backgroundColor = MAIN_PURPLE_COLOR;
     chatHeadV.title = ChatUtil.shareInstance.currentChatM.groupName.uppercaseString;
     chatHeadV.backB = ^{
-        [weakSelf back];
+        [weakself back];
     };
     [self.view addSubview:chatHeadV];
     [chatHeadV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(weakSelf.view).offset(0);
-        make.top.mas_equalTo(weakSelf.view).offset(HEIGHT_STATUSBAR);
+        make.left.right.mas_equalTo(weakself.view).offset(0);
+        make.top.mas_equalTo(weakself.view).offset(Height_StatusBar);
         make.height.mas_equalTo(ChatHeadViewHeight);
     }];
 }
 
 - (void)showTipView {
-    CGRect startFrame = CGRectMake(0, HEIGHT_STATUSBAR + ChatHeadViewHeight - ChatTipView_Height, SCREEN_WIDTH, ChatTipView_Height);
-    CGRect endFrame = CGRectMake(0, HEIGHT_STATUSBAR + ChatHeadViewHeight, SCREEN_WIDTH, ChatTipView_Height);
+    CGRect startFrame = CGRectMake(0, Height_StatusBar + ChatHeadViewHeight - ChatTipView_Height, SCREEN_WIDTH, ChatTipView_Height);
+    CGRect endFrame = CGRectMake(0, Height_StatusBar + ChatHeadViewHeight, SCREEN_WIDTH, ChatTipView_Height);
     ChatTipView *tipV = [ChatTipView getNibView];
     tipV.frame = startFrame;
     [self.view addSubview:tipV];
-    @weakify_self
+    kWeakSelf(self);
     __weak typeof(tipV) weakTipV = tipV;
     [UIView animateWithDuration:.6 delay:1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         weakTipV.frame = endFrame;
     } completion:^(BOOL finished) {
-        [weakSelf hideTipView:weakTipV frame:startFrame];
+        [weakself hideTipView:weakTipV frame:startFrame];
     }];
 }
 
@@ -216,7 +216,7 @@
 -(ZXChatMessageController *)chatMessageVC {
     if (_chatMessageVC == nil) {
         _chatMessageVC = [[ZXChatMessageController  alloc] init];
-        [_chatMessageVC.view setFrame:CGRectMake(0, ChatHeadViewHeight + HEIGHT_STATUSBAR, WIDTH_SCREEN, viewHeight - HEIGHT_CHATBOX)];// 0  状态 + 导航 宽 viweH - tabbarH
+        [_chatMessageVC.view setFrame:CGRectMake(0, ChatHeadViewHeight + Height_StatusBar, WIDTH_SCREEN, viewHeight - HEIGHT_CHATBOX)];// 0  状态 + 导航 宽 viweH - tabbarH
 //        [_chatMessageVC.view setFrame:CGRectMake(0, HEIGHT_STATUSBAR + HEIGHT_NAVBAR, WIDTH_SCREEN, viewHeight - HEIGHT_CHATBOX)];// 0  状态 + 导航 宽 viweH - tabbarH
         [_chatMessageVC setDelegate:self];// 代理
     }

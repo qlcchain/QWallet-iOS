@@ -8,7 +8,7 @@
 
 #import "SystemUtil.h"
 #import "Qlink-Swift.h"
-#import "TransferUtil.h"
+#import "NeoTransferUtil.h"
 
 @implementation SystemUtil
 
@@ -47,7 +47,7 @@
 + (void) configureAPPTerminate {
 //    NSLog(@"applicationState = %ld",(long)[UIApplication sharedApplication].applicationState);
     [SystemUtil deleteVPNConfig];
-    [TransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
+    [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     [ToxManage readDataToKeychain];
     // 结束p2p连接
    // if ([ToxManage getP2PConnectionStatus]) {

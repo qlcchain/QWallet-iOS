@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dvE-16-k6S" customClass="ResetPWSuccessView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIF-Kx-dLe">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="547-hX-5fk">
+                            <rect key="frame" x="59.5" y="253" width="256" height="161"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nE2-fj-FXz">
+                                    <rect key="frame" x="91.5" y="20" width="73.5" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="set_pw_success" translatesAutoresizingMaskIntoConstraints="NO" id="cPO-Zu-jKI">
+                                    <rect key="frame" x="99" y="65" width="58" height="58"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="58" id="7lb-ms-I1N"/>
+                                        <constraint firstAttribute="width" constant="58" id="xXD-Mg-JGm"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="256" id="0dB-Ox-bhb"/>
+                                <constraint firstItem="cPO-Zu-jKI" firstAttribute="centerX" secondItem="547-hX-5fk" secondAttribute="centerX" id="GQJ-oH-puh"/>
+                                <constraint firstItem="cPO-Zu-jKI" firstAttribute="top" secondItem="nE2-fj-FXz" secondAttribute="bottom" constant="24" id="Kmz-yx-mem"/>
+                                <constraint firstItem="nE2-fj-FXz" firstAttribute="top" secondItem="547-hX-5fk" secondAttribute="top" constant="20" id="Xrc-nc-OcX"/>
+                                <constraint firstItem="nE2-fj-FXz" firstAttribute="centerX" secondItem="547-hX-5fk" secondAttribute="centerX" id="okJ-J6-mXi"/>
+                                <constraint firstAttribute="height" constant="161" id="qxl-Xi-lEU"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="0.65000000000000002" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstItem="547-hX-5fk" firstAttribute="centerX" secondItem="gIF-Kx-dLe" secondAttribute="centerX" id="4v2-66-ZSX"/>
+                        <constraint firstItem="547-hX-5fk" firstAttribute="centerY" secondItem="gIF-Kx-dLe" secondAttribute="centerY" id="vHL-09-6S7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="CHQ-od-wVu" firstAttribute="bottom" secondItem="gIF-Kx-dLe" secondAttribute="bottom" id="Ag8-e8-Xhg"/>
+                <constraint firstItem="gIF-Kx-dLe" firstAttribute="leading" secondItem="CHQ-od-wVu" secondAttribute="leading" id="G7W-Af-yaH"/>
+                <constraint firstItem="gIF-Kx-dLe" firstAttribute="top" secondItem="dvE-16-k6S" secondAttribute="top" id="iAe-AA-Dzc"/>
+                <constraint firstItem="CHQ-od-wVu" firstAttribute="trailing" secondItem="gIF-Kx-dLe" secondAttribute="trailing" id="xHW-Dk-YGu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="CHQ-od-wVu"/>
+            <connections>
+                <outlet property="tipBack" destination="547-hX-5fk" id="UCx-EV-Hpf"/>
+            </connections>
+            <point key="canvasLocation" x="189.59999999999999" y="133.5832083958021"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="set_pw_success" width="58" height="58"/>
+    </resources>
+</document>

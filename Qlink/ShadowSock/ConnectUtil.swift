@@ -67,6 +67,11 @@ class ConnectUtil: NSObject {
             self.upstreamProxy = Proxy()
             upstreamProxy!.type = .Shadowsocks
             upstreamProxy!.name = "香港"
+//            upstreamProxy!.host = "47.90.57.160"
+//            upstreamProxy!.port = 18899
+//            upstreamProxy!.authscheme = "aes-256-cfb"
+//            upstreamProxy!.user = nil
+//            upstreamProxy!.password = "Yx20152016"
             upstreamProxy!.host = "13.230.53.97"
             upstreamProxy!.port = 8866
             upstreamProxy!.authscheme = "aes-256-cfb"

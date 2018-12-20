@@ -25,10 +25,10 @@
 }
 
 - (void)refreshLog {
-    @weakify_self
+    kWeakSelf(self);
     [DDLogUtil getDDLogStr:^(NSString *text) {
-        weakSelf.mainTextV.text = text;
-        [weakSelf scrollToBottom];
+        weakself.mainTextV.text = text;
+        [weakself scrollToBottom];
     }];
 }
 

@@ -12,7 +12,7 @@
 #import "PopSelectView.h"
 #import "UIView+Visuals.h"
 #import "FreeRecordMode.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 
 @interface FreeConnectionViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+    NSString *freeKey = [ConfigUtil isMainNetOfServerNetwork] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
     NSString *freeCount = [HWUserdefault getObjectWithKey:freeKey];
     _availableNumLab.text = freeCount?:@"0";
     _currentRow = 0;
@@ -91,8 +91,8 @@
 }
 
 - (IBAction)typeAction:(UIButton *)sender {
-    [AppD.window addSubview:self.popBackBtn];
-    [AppD.window addSubview:self.selectView];
+    [kAppD.window addSubview:self.popBackBtn];
+    [kAppD.window addSubview:self.selectView];
     [self.selectView showSelectView];
 }
 
@@ -103,10 +103,10 @@
 
 #pragma mark - Request
 - (void) sendQueryFreeRecords:(NSString *) type {
-    [self.view showHudInView:self.view hint:@"" userInteractionEnabled:YES hideTime:0];
+    [self.view makeToastInView:self.view userInteractionEnabled:YES hideTime:0];
     NSDictionary *parames = @{@"p2pId":[ToxManage getOwnP2PId],@"type":type?:@"0"};
     [RequestService requestWithUrl:queryFreeRecords_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [self.view hideHud];
+        [self.view hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSArray *dataArray = [responseObject objectForKey:Server_Data];
             if (dataArray) {
@@ -117,11 +117,11 @@
                 [_mainTable reloadData];
             }
         } else {
-            [AppD.window showHint:[responseObject objectForKey:@"msg"]];
+            [kAppD.window makeToastDisappearWithText:[responseObject objectForKey:@"msg"]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [AppD.window showHint:NSStringLocalizable(@"request_error")];
-        [self.view hideHud];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"request_error")];
+        [self.view hideToast];
     }];
 }
 
@@ -130,14 +130,14 @@
     if (!_selectView) {
         _selectView = [PopSelectView getInstance];
         CGFloat selectH = CGRectGetMaxY(_typeBtn.frame)+67;
-        selectH += STATUS_BAR_HEIGHT;
+        selectH += Height_StatusBar;
         _selectView.frame = CGRectMake(SCREEN_WIDTH-12-90,selectH-15, 90, 124);
-        @weakify_self
+        kWeakSelf(self);
         [_selectView setClickCellBlock:^(NSString *cellValue,NSInteger row) {
-            [weakSelf hideSelectView];
+            [weakself hideSelectView];
             if (row >=0) {
-                [weakSelf.typeBtn setTitle:cellValue forState:UIControlStateNormal];
-                [weakSelf sendQueryFreeRecords:[NSString stringWithFormat:@"%zd",row]];
+                [weakself.typeBtn setTitle:cellValue forState:UIControlStateNormal];
+                [weakself sendQueryFreeRecords:[NSString stringWithFormat:@"%zd",row]];
             }
         }];
     }

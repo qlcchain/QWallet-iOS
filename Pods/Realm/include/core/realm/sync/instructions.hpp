@@ -118,12 +118,6 @@ struct Instruction {
     {
         return const_cast<Instruction*>(this)->template get_as<T>();
     }
-
-    bool operator==(const Instruction& other) const noexcept;
-    bool operator!=(const Instruction& other) const noexcept
-    {
-        return !(*this == other);
-    }
 };
 
 // 0x3f is the largest value that fits in a single byte in the variable-length
@@ -137,6 +131,9 @@ static constexpr uint8_t InstrTypeMultiInstruction = 0xff;
 
 struct StringBufferRange {
     uint32_t offset, size;
+
+    bool operator==(const StringBufferRange&) = delete;
+    bool operator!=(const StringBufferRange&) = delete;
 };
 
 struct InternString {
@@ -145,7 +142,9 @@ struct InternString {
 
     uint32_t value;
 
-    bool operator==(const InternString& other) const noexcept { return value == other.value; }
+    // Disabling comparison for safety, because it is usually not what you want.
+    bool operator==(const InternString&) = delete;
+    bool operator!=(const InternString&) = delete;
 };
 
 struct Instruction::Payload {
@@ -202,6 +201,7 @@ struct Instruction::FieldInstructionBase
 struct Instruction::PayloadInstructionBase {
     Payload payload;
 };
+
 
 
 struct Instruction::SelectTable {
@@ -382,23 +382,6 @@ auto Instruction::visit(F&& lambda)
 #undef REALM_VISIT_INSTRUCTION
     }
     REALM_UNREACHABLE();
-}
-
-inline bool Instruction::operator==(const Instruction& other) const noexcept
-{
-    if (type != other.type)
-        return false;
-    size_t valid_size;
-    switch (type) {
-#define REALM_COMPARE_INSTRUCTION(X) \
-        case Type::X: valid_size = sizeof(Instruction::X); break;
-        REALM_FOR_EACH_INSTRUCTION_TYPE(REALM_COMPARE_INSTRUCTION)
-#undef REALM_COMPARE_INSTRUCTION
-        default: REALM_UNREACHABLE();
-    }
-
-    // This relies on all instruction types being PODs to work.
-    return std::memcmp(&m_storage, &other.m_storage, valid_size) == 0;
 }
 
 template <class F>

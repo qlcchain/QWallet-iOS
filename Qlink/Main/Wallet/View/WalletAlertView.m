@@ -38,11 +38,11 @@
         _yesBtn.hidden = YES;
         _cancelBtn.hidden = YES;
     }
-    [AppD.window addSubview:self];
+    [kAppD.window addSubview:self];
     self.alpha = 0.f;
-    @weakify_self
+    kWeakSelf(self);
     [UIView animateWithDuration:.3 animations:^{
-        weakSelf.alpha = 1.0f;
+        weakself.alpha = 1.0f;
     } completion:^(BOOL finished) {
         
     }];
@@ -53,11 +53,11 @@
  */
 - (void) hidde
 {
-     @weakify_self
+     kWeakSelf(self);
     [UIView animateWithDuration:.3 animations:^{
-        weakSelf.alpha = 0.f;
+        weakself.alpha = 0.f;
     } completion:^(BOOL finished) {
-        [weakSelf removeFromSuperview];
+        [weakself removeFromSuperview];
     }];
     
 }

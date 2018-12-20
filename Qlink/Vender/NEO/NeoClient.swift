@@ -401,15 +401,20 @@ public class NeoClient {
         }
     }
     
-    public func getAssets(for address: String, params: [Any]?, completion: @escaping(NeoClientResult<Assets>) -> ()) {
+    public func getAssets(for address: String, mainNet: Bool, params: [Any]?, completion: @escaping(NeoClientResult<Assets>) -> ()) {
         // 交易的地址
         let dict = ["address" : address]
         // 获取所有未花费的交易输出
-        RequestService.request(withUrl: "/api/neo/allUnpspentAsset.json", params: dict, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
-            
+        
+        var url = "/api/neo/mainNet/allUnpspentAsset.json" // 正式接口（neo及其token转账）
+        if mainNet == false { // 注册和连接vpn用测试接口
+            url = "/api/neo/allUnpspentAsset.json"
+        }
+        RequestService.request(withUrl: url, params: dict, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
+        
             var endDatas = Array<Any>()
             let responser = responseObject as! Dictionary<String,AnyObject>
-            if (responser == nil && responser.count == 0){
+            if (responser == nil && responser.count == 0) {
                 completion(.failure(.invalidData))
                 return
             }
@@ -439,7 +444,12 @@ public class NeoClient {
                             let valueStr = assetDic["value"]
                             var str:String = "0.00000001";
                             if let strTemp = valueStr {
-                               str = amountFormatter.string(from:strTemp as! NSNumber)!
+                                if strTemp is String {
+                                    let num = NSDecimalNumber(string: (strTemp as! String))
+                                    str = num.stringValue
+                                } else if strTemp is NSNumber {
+                                    str = amountFormatter.string(from:strTemp as! NSNumber)!
+                                }
                             }
                             print("valuestr = \(str)")
                             
@@ -468,7 +478,12 @@ public class NeoClient {
                         let valueStr = assetDic["value"]
                         var str:String = "0.00000001";
                         if let strTemp = valueStr {
-                            str = amountFormatter.string(from:strTemp as! NSNumber)!
+                            if strTemp is String {
+                                let num = NSDecimalNumber(string: (strTemp as! String))
+                                str = num.stringValue
+                            } else if strTemp is NSNumber {
+                                str = amountFormatter.string(from:strTemp as! NSNumber)!
+                            }
                         }
                         print("valuestr = \(str)")
                         
@@ -523,24 +538,97 @@ public class NeoClient {
     }
     
     public func getClaims(address: String, completion: @escaping(NeoClientResult<Claimable>) -> ()) {
-        let url = fullNodeAPI + address + "/" + apiURL.getClaims.rawValue
-        sendFullNodeRequest(url, params: nil) { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let response):
-                let decoder = JSONDecoder()
-                
-                guard let data = try? JSONSerialization.data(withJSONObject: (response["result"] as? JSONDictionary)!["data"], options: .prettyPrinted),
-                    let claims = try? decoder.decode(Claimable.self, from: data) else {
-                        completion(.failure(.invalidData))
-                        return
-                }
-                
-                let result = NeoClientResult.success(claims)
-                completion(result)
+        // 交易的地址
+        let dict = ["address" : address]
+//        let dict = ["address" : "AZRSCc47KuUae93AFowfdBTHr77KZGSnqp"]
+        
+        RequestService.request(withUrl: "/api/neo/getClaims.json", params: dict, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
+            
+            var responser: Dictionary<String,AnyObject>? = nil
+            if responseObject is NSDictionary {
+                responser = responseObject as? Dictionary<String,AnyObject>
+            } else {
+                return
             }
+            
+            var claimsArr = Array<Any>()
+            var gas : String = "0"
+            let codeInt: Int = Int(responser!["code"] as! String)!
+            if codeInt != 0 {
+//                let msg : String = responser!["msg"] as! String? ?? ""
+                completion(.failure(NeoClientError.invalidBodyRequest))
+                return
+            }
+            let dataDic = responser!["data"] as! Dictionary<String,AnyObject>
+            if dataDic.count > 0 {
+                let dataArr = dataDic["claims"] as! Array<AnyObject>
+                if dataArr.count > 0 {
+//                    for (idx,tempDic) in dataArr.enumerated() {
+                    for tempDic in dataArr {
+                    
+                        let claimsDic = NSMutableDictionary(dictionary: tempDic as! Dictionary<String , AnyObject>)
+                        
+                        let num = NSDecimalNumber(string: claimsDic["claim"] as? String)
+                        let gasNum = NSDecimalNumber(string: gas)
+                        let allGasNum = (gasNum.decimalValue + num.decimalValue)
+                        gas = NSDecimalNumber(decimal: allGasNum).stringValue
+                        
+                        var indexValue:Int = 0
+                        if let indexTemp = claimsDic["index"] {
+                            indexValue = (indexTemp as! NSNumber).intValue
+                        }
+                        
+                        var valueStr:String = "0.00000001";
+                        if let strTemp = claimsDic["value"] {
+                            let num = NSDecimalNumber(string: (strTemp as! NSNumber).stringValue)
+                            valueStr = num.stringValue
+                        }
+                        
+                        let createdAtBlock: Int = Int(claimsDic["end"] as! String) ?? 0
+                        
+                        let txid = "0x" + (claimsDic["txid"] as! String)
+                        
+                        let claim:[String : Any] = ["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":indexValue,"txid":txid,"value":valueStr,"createdAtBlock":createdAtBlock]
+                        
+                        claimsArr.append(claim)
+                        
+                    }
+                }
+            }
+            
+            let jsonObject:[String:Any] = ["gas":gas,"claims":claimsArr]
+            let decoder = JSONDecoder()
+            guard let data = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted),
+                let claims = try? decoder.decode(Claimable.self, from: data) else {
+                    completion(.failure(.invalidData))
+                    return
+            }
+            
+            let result = NeoClientResult.success(claims)
+            completion(result)
+
+        }) { (request, error) in
+            completion(.failure(NeoClientError.noInternet))
         }
+
+//        let url = fullNodeAPI + address + "/" + apiURL.getClaims.rawValue
+//        sendFullNodeRequest(url, params: nil) { result in
+//            switch result {
+//            case .failure(let error):
+//                completion(.failure(error))
+//            case .success(let response):
+//                let decoder = JSONDecoder()
+//
+//                guard let data = try? JSONSerialization.data(withJSONObject: (response["result"] as? JSONDictionary)!["data"], options: .prettyPrinted),
+//                    let claims = try? decoder.decode(Claimable.self, from: data) else {
+//                        completion(.failure(.invalidData))
+//                        return
+//                }
+//
+//                let result = NeoClientResult.success(claims)
+//                completion(result)
+//            }
+//        }
     }
     
     public func getTransactionHistory(for address: String, completion: @escaping (NeoClientResult<TransactionHistory>) -> ()) {
@@ -565,7 +653,7 @@ public class NeoClient {
     
     public func sendRawTransaction(with data: Data,amount:Double,address:String, completion: @escaping(NeoClientResult<Bool>) -> ()) {
         
-        let exchangeID = WalletUtil.getExChangeId;
+        let exchangeID = NEOWalletUtil.getExChangeId;
         let parames = ["exchangeId":exchangeID,"address":address,"neo":amount,"tx":data.fullHexString] as [String : Any];
         RequestService .request(withUrl:"/api/neo/neoExchangeQlcV2.json", params: parames, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
             

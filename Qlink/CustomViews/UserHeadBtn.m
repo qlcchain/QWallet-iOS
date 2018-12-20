@@ -28,13 +28,13 @@
     NSURL *headUrl = [NSURL URLWithString:headUrlStr];
    // [self sd_setImageWithURL:headUrl forState:UIControlStateNormal placeholderImage:User_PlaceholderImage];
     
-    @weakify_self
+    kWeakSelf(self);
     [self sd_setImageWithURL:headUrl forState:UIControlStateNormal placeholderImage:User_PlaceholderImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (image) {
-            weakSelf.imageView.layer.cornerRadius = weakSelf.imageView.frame.size.width/2;
-            weakSelf.imageView.layer.masksToBounds = YES;
-            weakSelf.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-            weakSelf.imageView.layer.borderWidth = Photo_White_Circle_Length;
+            weakself.imageView.layer.cornerRadius = weakself.imageView.frame.size.width/2;
+            weakself.imageView.layer.masksToBounds = YES;
+            weakself.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+            weakself.imageView.layer.borderWidth = Photo_White_Circle_Length;
         }
     }];
 }

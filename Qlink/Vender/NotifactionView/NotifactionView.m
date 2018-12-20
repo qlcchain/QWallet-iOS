@@ -26,21 +26,21 @@
 
 - (void) show
 {
-    if (!IS_iPhoneX) {
-        _contraintTop.constant = STATUS_BAR_HEIGHT;
+    if (!IS_X_LiuHai) {
+        _contraintTop.constant = Height_StatusBar;
     }
     [self performSelector:@selector(hide) withObject:self afterDelay:3.0f];
-    self.frame = CGRectMake(0,-(80+STATUS_BAR_HEIGHT), SCREEN_WIDTH,80+STATUS_BAR_HEIGHT);
-    [AppD.window addSubview:self];
+    self.frame = CGRectMake(0,-(80+Height_StatusBar), SCREEN_WIDTH,80+Height_StatusBar);
+    [kAppD.window addSubview:self];
     [UIView animateWithDuration:.3 animations:^{
-        self.frame = CGRectMake(0,0, SCREEN_WIDTH,80+STATUS_BAR_HEIGHT);
+        self.frame = CGRectMake(0,0, SCREEN_WIDTH,80+Height_StatusBar);
     }];
 }
 
 - (void) hide
 {
     [UIView animateWithDuration:.3f animations:^{
-        self.frame = CGRectMake(0,-(80+STATUS_BAR_HEIGHT), SCREEN_WIDTH,80+STATUS_BAR_HEIGHT);
+        self.frame = CGRectMake(0,-(80+Height_StatusBar), SCREEN_WIDTH,80+Height_StatusBar);
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];

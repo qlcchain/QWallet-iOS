@@ -45,6 +45,36 @@
     return dateString;
 }
 
+/**
+ 将本地日期字符串转为UTC日期字符串
+ eg: 2017-10-25 02:07:39 -> 2017-10-24 18:07:39
+ */
++ (NSString *)getUTCStrFormateLocalStr:(NSString *)localStr {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    format.timeZone = [NSTimeZone localTimeZone];
+    NSDate *dateFormatted = [format dateFromString:localStr];
+    format.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    format.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    NSString *dateString = [format stringFromDate:dateFormatted];
+    return dateString;
+}
+/**
+ 将UTC日期字符串转为本地时间字符串
+ eg: 2017-10-25 02:07:39  -> 2017-10-25 10:07:39
+ */
++ (NSString *)getLocalDateFormateUTCDate:(NSString *)utcStr {
+    NSString *utcZ = [utcStr stringByAppendingString:@"Z"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    format.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSDate *utcDate = [format dateFromString:utcZ];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    format.timeZone = [NSTimeZone localTimeZone];
+    NSString *dateString = [format stringFromDate:utcDate];
+    return dateString;
+}
+
 /*距离当前的时间间隔描述*/
 - (NSString *)timeIntervalDescription
 {

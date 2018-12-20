@@ -8,8 +8,6 @@
 
 #import "GuidePageViewController.h"
 #import "GuidePageView1.h"
-#import "GuidePageView2.h"
-#import "GuidePageView3.h"
 
 @interface GuidePageViewController ()
 
@@ -27,7 +25,7 @@
     _mainScrollView.showsVerticalScrollIndicator = NO;
     _mainScrollView.pagingEnabled = YES;
     _mainScrollView.backgroundColor = [UIColor clearColor];
-    _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*3, SCREEN_HEIGHT);
+    _mainScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
     [self.view addSubview:_mainScrollView];
     
     [self addGuidePageView];
@@ -37,37 +35,19 @@
 - (void) addGuidePageView {
     GuidePageView1 *page1 = [GuidePageView1 loadGuidePageView1];
     page1.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    GuidePageView2 *page2 = [GuidePageView2 loadGuidePageView2];
-    page2.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    GuidePageView3 *page3 = [GuidePageView3 loadGuidePageView3];
-    page3.frame = CGRectMake(SCREEN_WIDTH*2, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [page3.gotBtn addTarget:self action:@selector(clickGotit:) forControlEvents:UIControlEventTouchUpInside];
+    [page1.startBtn addTarget:self action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [_mainScrollView addSubview:page1];
-    [_mainScrollView addSubview:page2];
-    [_mainScrollView addSubview:page3];
 }
+
 // 开始
-- (void) clickGotit:(UIButton *) sender
-{
-    [AppD addLaunchAnimation];
+- (void)startAction:(UIButton *)sender {
+    [kAppD addLaunchAnimation];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

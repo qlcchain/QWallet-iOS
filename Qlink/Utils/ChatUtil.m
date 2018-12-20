@@ -42,7 +42,7 @@
 #pragma mark - Operation
 static BOOL createGroupOnce = YES;
 - (void)createGroup {
-    @weakify_self
+    kWeakSelf(self);
     if (createGroupOnce) {
         createGroupOnce = NO;
         
@@ -59,7 +59,7 @@ static BOOL createGroupOnce = YES;
             chatM.inGroup = YES;
             chatM.assetName = vpnInfo.vpnName;
             chatM.groupName = vpnInfo.vpnName;
-            [weakSelf.chatArr addObject:chatM];
+            [weakself.chatArr addObject:chatM];
         }];
     }
 }

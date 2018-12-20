@@ -38,7 +38,7 @@
             _lblconnet.textColor = MAIN_PURPLE_COLOR;
             _lblNumber.textColor = MAIN_PURPLE_COLOR;
         }
-        _lblSub1.text = [NSString stringWithFormat:@"%.2f QLC",mode.rewardTotal];
+        _lblSub1.text = [NSString stringWithFormat:@"%.2f WINQ GAS",mode.rewardTotal];
         _lblSub2.text = NSStringLocalizable(@"rewards");
     } else {
         _lblSub1.text = @"50%";

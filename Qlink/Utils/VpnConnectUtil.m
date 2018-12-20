@@ -9,14 +9,16 @@
 #import "VpnConnectUtil.h"
 #import "VPNOperationUtil.h"
 #import "Qlink-Swift.h"
-#import "TransferUtil.h"
+#import "NeoTransferUtil.h"
 #import "ToxRequestModel.h"
 #import "P2pMessageManage.h"
 #import "VPNFileUtil.h"
 #import "VPNMode.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 #import <MMWormhole/MMWormhole.h>
 #import "DBManageUtil.h"
+#import "ToxRequestModel1.h"
+#import "VPNDataUtil.h"
 
 #define P2P_Message_Timeout 15
 
@@ -43,6 +45,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSData *vpnData;
 @property (nonatomic, strong) MMWormhole *wormhole;
 @property (nonatomic) ConnectStep connectStep;
+@property (nonatomic, strong) NSNumber *serverVersion;
 
 @end
 
@@ -68,11 +71,12 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStatusChange:) name:VPN_STATUS_CHANGE_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveVPNFile:) name:RECEIVE_VPN_FILE_NOTI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(savePreferenceFail:) name:SAVE_VPN_PREFERENCE_FAIL_NOTI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectRsp:) name:CHECK_CONNECT_RSP_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkConnectRsp:) name:CheckConnectRsp_Connect_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivePrivateKey:) name:Receive_PrivateKey_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPass:) name:Receive_UserPass_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveUserPassAndPrivateKey:) name:Receive_UserPass_PrivateKey_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configVPNError:) name:CONFIG_VPN_ERROR_NOTI object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendVpnFileNewRspSuccessNoti:) name:SendVpnFileNewRspOfConnect_Success_Noti object:nil];
 }
 
 #pragma mark - Config
@@ -84,7 +88,7 @@ typedef enum : NSUInteger {
 - (void)wormholeInit {
     self.wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_WORMHOLE
                                                          optionalDirectory:DIRECTORY_WORMHOLE];
-    @weakify_self
+    kWeakSelf(self);
     [self.wormhole listenForMessageWithIdentifier:VPN_EVENT_IDENTIFIER
                                          listener:^(id messageObject) {
                                              NSNumber *eventNum = messageObject;
@@ -180,20 +184,20 @@ typedef enum : NSUInteger {
     [self.wormhole listenForMessageWithIdentifier:VPN_ERROR_REASON_IDENTIFIER
                                          listener:^(id messageObject) {
                                              DDLogDebug(@"vpn_error_reason---------------%@",messageObject);
-                                             if (weakSelf.connectStep != ConnectStepGetConnecting) {
+                                             if (weakself.connectStep != ConnectStepGetConnecting) {
                                                  return;
                                              }
                                              VPNConnectOperationType operationType = [VPNOperationUtil shareInstance].operationType;
                                              if (operationType == normalConnect) { // 正常连接vpn
                                                  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
-                                                 [AppD.window hideHud];
+                                                 [kAppD.window hideToast];
                                                  NSString *message = messageObject;
                                                  if ([message isEqualToString:@"Unknown error."]) {
                                                      message = @"Connect fail.";
                                                  }
-                                                 [KEYWINDOW showHint:message];
+                                                 [KEYWINDOW makeToastDisappearWithText:message];
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
-                                                 [weakSelf requestReportVpnInfo:messageObject status:0]; // 上报vpn连接问题
+                                                 [weakself requestReportVpnInfo:messageObject status:0]; // 上报vpn连接问题
                                              }
                                          }];
 }
@@ -207,7 +211,7 @@ typedef enum : NSUInteger {
         case NEVPNStatusDisconnected:
         {
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectVpnTimeout) object:nil];
-//            [AppD.window hideHud];
+//            [kAppD.window hideHud];
             _connectStep = ConnectStepNone;
             [VPNUtil.shareInstance removeFromPreferences]; // 移除配置文件
         }
@@ -220,8 +224,8 @@ typedef enum : NSUInteger {
             _connectStep = ConnectStepNone;
             connectVpnOK = YES;
             connectVpnCancel = NO;
-            [AppD.window hideHud];
-            [AppD.window showHint:NSStringLocalizable(@"connect_success")];
+            [kAppD.window hideToast];
+            [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"connect_success")];
             [self performSelector:@selector(reportConnectSuccess) withObject:nil afterDelay:.8];
         }
             break;
@@ -245,15 +249,30 @@ typedef enum : NSUInteger {
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getProfileTimeout) object:nil];
     getProfileOK = YES;
-    [AppD.window hideHud];
+    [kAppD.window hideToast];
     _vpnData = noti.object;
+    [self startConnectVPNOfOther];
+}
+
+- (void)sendVpnFileNewRspSuccessNoti:(NSNotification *)noti {
+    if (_connectStep != ConnectStepGetProfile) {
+        return;
+    }
+    if (getProfileOK) {
+        return;
+    }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getProfileTimeout) object:nil];
+    getProfileOK = YES;
+    [kAppD.window hideToast];
+    _vpnData = [(NSString *)noti.object dataUsingEncoding:NSUTF8StringEncoding];
+//    _vpnData = noti.object;
     [self startConnectVPNOfOther];
 }
 
 - (void)savePreferenceFail:(NSNotification *)noti {
     _connectStep = ConnectStepNone;
-    [AppD.window hideHud];
-    [AppD.window showHint:NSStringLocalizable(@"save_failed")];
+    [kAppD.window hideToast];
+    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"save_failed")];
     connectVpnCancel = YES;
 }
 
@@ -264,9 +283,10 @@ typedef enum : NSUInteger {
     if (checkConnnectOK) {
         return;
     }
+    _serverVersion = noti.object;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkConnectTimeout) object:nil];
     checkConnnectOK = YES;
-    [AppD.window hideHud];
+    [kAppD.window hideToast];
     
     [self connectAction];
 }
@@ -280,7 +300,7 @@ typedef enum : NSUInteger {
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getPrivateKeyTimeout) object:nil];
     getPrivateKeyOK = YES;
-    [AppD.window hideHud];
+    [kAppD.window hideToast];
     [self goConnect];
 }
 
@@ -293,7 +313,7 @@ typedef enum : NSUInteger {
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getUserPassTimeout) object:nil];
     getUserPassOK = YES;
-    [AppD.window hideHud];
+    [kAppD.window hideToast];
     [self goConnect];
 }
 
@@ -306,7 +326,7 @@ typedef enum : NSUInteger {
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getUserPassAndPrivateKeyTimeout) object:nil];
     getUserPassAndPrivateKeyOK = YES;
-    [AppD.window hideHud];
+    [kAppD.window hideToast];
     [self goConnect];
 }
 
@@ -314,8 +334,8 @@ typedef enum : NSUInteger {
     _connectStep = ConnectStepNone;
     NSString *errorDes = noti.object;
     DDLogDebug(@"Config VPN Error:%@",errorDes);
-    [AppD.window hideHud];
-    [AppD.window showHint:NSStringLocalizable(@"configuration_faield")];
+    [kAppD.window hideToast];
+    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"configuration_faield")];
     [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
 }
 
@@ -328,10 +348,10 @@ typedef enum : NSUInteger {
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = normalConnect;
     VPNUtil.shareInstance.connectData = _vpnData;
-    @weakify_self
+    kWeakSelf(self);
     [VPNUtil.shareInstance applyConfigurationWithVpnData:_vpnData completionHandler:^(NSInteger type) {
-        NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
-        VPNInfo *tempInfo = [DBManageUtil getVpnInfo:weakSelf.vpnInfo.vpnName isMainNet:isMainNet];
+        NSString *isMainNet = [NSString stringWithFormat:@"%@",@([ConfigUtil isMainNetOfServerNetwork])];
+        VPNInfo *tempInfo = [DBManageUtil getVpnInfo:weakself.vpnInfo.vpnName isMainNet:isMainNet];
         if (!tempInfo) {
             return;
         }
@@ -347,7 +367,7 @@ typedef enum : NSUInteger {
             VPNUtil.shareInstance.vpnUserName = tempInfo.username;
             VPNUtil.shareInstance.vpnPassword = tempInfo.password;
         }
-        [weakSelf goConnect];
+        [weakself goConnect];
     }];
 }
 
@@ -355,25 +375,25 @@ typedef enum : NSUInteger {
     // vpn连接操作
     [VPNOperationUtil shareInstance].operationType = normalConnect;
     VPNUtil.shareInstance.connectData = _vpnData;
-    @weakify_self
+    kWeakSelf(self);
     [VPNUtil.shareInstance applyConfigurationWithVpnData:_vpnData completionHandler:^(NSInteger type) {
         if (type == 0) { // 自动
-            [weakSelf goConnect];
+            [weakself goConnect];
         } else if (type == 1) { // 私钥
             getUserPassOK = YES;
-            [weakSelf getVpnPriveteKey];
+            [weakself getVpnPriveteKey];
         } else if (type == 2) { // 用户名密码
             getPrivateKeyOK = YES;
-            [weakSelf getVpnUserAndPassword];
+            [weakself getVpnUserAndPassword];
         } else if (type == 3) { // 私钥和用户名密码
             getUserPassAndPrivateKeyOK = YES;
-            [weakSelf getVpnUserPassAndPrivateKey];
+            [weakself getVpnUserPassAndPrivateKey];
         }
     }];
 }
 
 - (void)goConnect {
-    [AppD.window showHudInView:AppD.window hint:NSStringLocalizable(@"connecting")];
+    [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"connecting")];
     
     _connectStep = ConnectStepGetConnecting;
     connectVpnOK = NO;
@@ -400,13 +420,13 @@ typedef enum : NSUInteger {
 }
 
 - (void)getVpnPriveteKey {
-    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_PrivateKey")];
+    [kAppD.window makeToastInView:KEYWINDOW text:NSStringLocalizable(@"Get_PrivateKey")];
     DDLogDebug(@"==============================Getting Private Key Password");
     _connectStep = ConnectStepGetPrivateKey;
     getPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnPrivateKeyReq;
-    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([ConfigUtil isMainNetOfServerNetwork])];
     NSDictionary *dataDic = @{VPN_NAME:_vpnInfo.vpnName?:@"",IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
@@ -417,20 +437,20 @@ typedef enum : NSUInteger {
 - (void)getPrivateKeyTimeout {
     if (!getPrivateKeyOK) {
         _connectStep = ConnectStepNone;
-        [AppD.window hideHud];
-        [AppD.window showHint:NSStringLocalizable(@"Fail_Get_PrivateKey")];
+        [kAppD.window hideToast];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"Fail_Get_PrivateKey")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Key_Timeout_Noti object:nil];
     }
 }
 
 - (void)getVpnUserAndPassword {
-    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_UserPass")];
+    [kAppD.window makeToastInView:KEYWINDOW text:NSStringLocalizable(@"Get_UserPass")];
     DDLogDebug(@"==============================Getting Username and Password");
     _connectStep = ConnectStepGetUserPass;
     getUserPassOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserAndPasswordReq;
-    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([ConfigUtil isMainNetOfServerNetwork])];
     NSDictionary *dataDic = @{VPN_NAME:_vpnInfo.vpnName?:@"", IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
@@ -442,20 +462,20 @@ typedef enum : NSUInteger {
 - (void)getUserPassTimeout {
     if (!getUserPassOK) {
         _connectStep = ConnectStepNone;
-        [AppD.window hideHud];
-        [AppD.window showHint:NSStringLocalizable(@"Fail_Get_UserPass")];
+        [kAppD.window hideToast];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"Fail_Get_UserPass")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Pass_Timeout_Noti object:nil];
     }
 }
 
 - (void)getVpnUserPassAndPrivateKey {
-    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"Get_UserPass_PrivateKey")];
+    [kAppD.window makeToastInView:KEYWINDOW text:NSStringLocalizable(@"Get_UserPass_PrivateKey")];
     DDLogDebug(@"==============================Getting Username and Password and Private Key Password");
     _connectStep = ConnectStepGetUserPassAndPrivateKey;
     getUserPassAndPrivateKeyOK = NO;
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = vpnUserPassAndPrivateKeyReq;
-    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
+    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([ConfigUtil isMainNetOfServerNetwork])];
     NSDictionary *dataDic = @{VPN_NAME:_vpnInfo.vpnName?:@"", IS_MAINNET:isMainNet};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
@@ -467,21 +487,22 @@ typedef enum : NSUInteger {
 - (void)getUserPassAndPrivateKeyTimeout {
     if (!getUserPassAndPrivateKeyOK) {
         _connectStep = ConnectStepNone;
-        [AppD.window hideHud];
-        [AppD.window showHint:NSStringLocalizable(@"Fail_Get_UserPass_PrivateKey")];
+        [kAppD.window hideToast];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"Fail_Get_UserPass_PrivateKey")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Vpn_Pass_Timeout_Noti object:nil];
     }
 }
 
 - (void)addSendCheckConnect {
-    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"checking")];
+    [kAppD.window makeToastInView:KEYWINDOW text:NSStringLocalizable(@"checking")];
     _connectStep = ConnectStepCheckConnect;
     checkConnnectOK = NO;
+    _serverVersion = nil;
     // 发送获取配置文件消息
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
     model.type = checkConnectReq;
     NSString *p2pid = [ToxManage getOwnP2PId];
-    NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid};
+    NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid,@"type":@(1)}; // type:0-注册  1-连接 2-vpn上报服务器
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
     [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
@@ -491,8 +512,8 @@ typedef enum : NSUInteger {
 - (void)checkConnectTimeout {
     if (!checkConnnectOK) {
         _connectStep = ConnectStepNone;
-        [AppD.window hideHud];
-        [AppD.window showHint:NSStringLocalizable(@"connect_timeout")];
+        [kAppD.window hideToast];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"connect_timeout")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Check_Connect_Timeout_Noti object:nil];
     }
 }
@@ -508,34 +529,48 @@ typedef enum : NSUInteger {
         return;
     }
     [VPNUtil.shareInstance stopVPN];
-    [AppD.window hideHud];
-    [KEYWINDOW showHint:NSStringLocalizable(@"vpn_timeout")];
+    [kAppD.window hideToast];
+    [KEYWINDOW makeToastDisappearWithText:NSStringLocalizable(@"vpn_timeout")];
     [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
     [self requestReportVpnInfo:@"connect timeout" status:0]; // 上报vpn连接问题
 }
 
 #pragma mark - 发送获取配置文件消息
 - (void)sendGetProfile {
-    [AppD.window showHudInView:KEYWINDOW hint:NSStringLocalizable(@"get_profile")];
+    [kAppD.window makeToastInView:KEYWINDOW text:NSStringLocalizable(@"get_profile")];
     _connectStep = ConnectStepGetProfile;
     getProfileOK = NO;
-    ToxRequestModel *model = [[ToxRequestModel alloc] init];
-    model.type = sendVpnFileRequest;
-    NSString *p2pid = [ToxManage getOwnP2PId];
-    NSString *isMainNet = [NSString stringWithFormat:@"%@",@([WalletUtil checkServerIsMian])];
-    NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
-    model.data = dataDic.mj_JSONString;
-    NSString *str = model.mj_JSONString;
-    str = [str stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
-    [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
+    
+    if (!_serverVersion || [_serverVersion integerValue] < 1) { // 旧server
+        ToxRequestModel *model = [[ToxRequestModel alloc] init];
+        model.type = sendVpnFileRequest;
+        NSString *p2pid = [ToxManage getOwnP2PId];
+        NSString *isMainNet = [NSString stringWithFormat:@"%@",@([ConfigUtil isMainNetOfServerNetwork])];
+        NSDictionary *dataDic = @{APPVERSION:APP_Build,VPN_NAME:_vpnInfo.vpnName,@"filePath":_vpnInfo.profileLocalPath,P2P_ID:p2pid, IS_MAINNET:isMainNet};
+        model.data = dataDic.mj_JSONString;
+        NSString *str = model.mj_JSONString;
+        str = [str stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
+        [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
+    } else { // 新server
+        ToxRequestModel1 *model = [[ToxRequestModel1 alloc] init];
+        model.type = sendVpnFileNewReq;
+        NSDictionary *tempDic = @{@"vpnName":_vpnInfo.vpnName, APPVERSION:APP_Build, @"register":@(0)};
+        model.data = tempDic;
+        NSString *str = model.mj_JSONString;
+        [VPNDataUtil shareInstance].sendVpnFileNewRspMsgid = nil;
+        [[VPNDataUtil shareInstance].sendVpnFileNewRspArr removeAllObjects];
+        [VPNDataUtil shareInstance].sendVpnFileNewRspMsg = nil;
+        [ToxManage sendMessageWithMessage:str withP2pid:_vpnInfo.p2pId];
+    }
+
     [self performSelector:@selector(getProfileTimeout) withObject:nil afterDelay:P2P_Message_Timeout];
 }
 
 - (void)getProfileTimeout {
     if (!getProfileOK) {
         _connectStep = ConnectStepNone;
-        [AppD.window hideHud];
-        [AppD.window showHint:NSStringLocalizable(@"get_profile_timeout")];
+        [kAppD.window hideToast];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"get_profile_timeout")];
         [[NSNotificationCenter defaultCenter] postNotificationName:Get_Profile_Timeout_Noti object:nil];
     }
 }
@@ -545,7 +580,7 @@ typedef enum : NSUInteger {
     if ([VPNOperationUtil shareInstance].operationType == registerConnect) { // 注册暂不上报
         return;
     }
-//    @weakify_self
+//    kWeakSelf(self);
     NSDictionary *params = @{@"vpnName":_vpnInfo.vpnName?:@"", @"status":@(status), @"mark":mark};
     [RequestService requestWithUrl:reportVpnInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
@@ -559,19 +594,19 @@ typedef enum : NSUInteger {
 #pragma mark - Action
 - (void)connectAction {
     if (_vpnInfo.profileLocalPath.length <= 0) {
-        [AppD.window showHint:NSStringLocalizable(@"profile_empty")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"profile_empty")];
         DDLogDebug(@"没有profileLocalPath,无法连接vpn");
         [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
         return;
     }
     
     // 判断免费连接次数
-    NSString *freeKey = [WalletUtil checkServerIsMian] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
+    NSString *freeKey = [ConfigUtil isMainNetOfServerNetwork] ? VPN_FREE_MAIN_COUNT : VPN_FREE_COUNT;
     NSString *countStr = [HWUserdefault getObjectWithKey:freeKey];
     if ((![self vpnIsMine] && [[NSStringUtil getNotNullValue:countStr] isEqualToString:@"0"])) {
         
-        if (![TransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
-            [AppD.window showHint:NSStringLocalizable(@"insufficient_assets")];
+        if (![NeoTransferUtil isConnectionAssetsAllowedWithCost:_vpnInfo.cost]) {
+            [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"insufficient_assets")];
             [[NSNotificationCenter defaultCenter] postNotificationName:VPN_CONNECT_CANCEL_LOADING object:nil];
             return;
         }

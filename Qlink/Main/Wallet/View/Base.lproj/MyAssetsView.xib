@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
-        </array>
-        <array key="VAGRounded-Bold.ttf">
-            <string>VAGRoundedBT-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -62,47 +60,29 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jvi-Fr-PXu">
-                    <rect key="frame" x="0.0" y="35" width="367" height="202"/>
+                    <rect key="frame" x="0.0" y="35" width="367" height="266"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxM-NE-vQJ">
-                    <rect key="frame" x="108.5" y="247" width="150" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="150" id="RQh-3c-0pT"/>
-                        <constraint firstAttribute="height" constant="44" id="WFD-ys-ReR"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
-                    <state key="normal" title="CANCEL" backgroundImage="bg_gray_button"/>
-                    <connections>
-                        <action selector="clickCancel:" destination="iN0-l3-epB" eventType="touchUpInside" id="ROB-2A-qDp"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="qxM-NE-vQJ" firstAttribute="top" secondItem="Jvi-Fr-PXu" secondAttribute="bottom" constant="10" id="49B-NK-cgm"/>
                 <constraint firstItem="Jvi-Fr-PXu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="KW5-ql-593"/>
                 <constraint firstItem="hhu-G5-VmH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="SG4-X1-saK"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hhu-G5-VmH" secondAttribute="trailing" id="ZPz-W6-5cp"/>
                 <constraint firstItem="Jvi-Fr-PXu" firstAttribute="top" secondItem="hhu-G5-VmH" secondAttribute="bottom" id="bAP-q7-RM6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Jvi-Fr-PXu" secondAttribute="bottom" id="ewy-2r-hDu"/>
                 <constraint firstItem="hhu-G5-VmH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="gBR-sG-DGC"/>
-                <constraint firstItem="qxM-NE-vQJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tqe-Ab-vrh"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="qxM-NE-vQJ" secondAttribute="bottom" constant="10" id="uBW-nY-IWY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Jvi-Fr-PXu" secondAttribute="trailing" id="wXq-Vp-pUR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="cancelContraintBottom" destination="uBW-nY-IWY" id="aR1-ym-Ojh"/>
-                <outlet property="cancelContraintH" destination="WFD-ys-ReR" id="k2C-oX-m3d"/>
-                <outlet property="cancelContraintTop" destination="49B-NK-cgm" id="QeM-ft-X0S"/>
                 <outlet property="tableV" destination="Jvi-Fr-PXu" id="AHd-dz-3lQ"/>
             </connections>
             <point key="canvasLocation" x="84" y="-178"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_gray_button" width="9" height="44"/>
         <image name="icon_qlc_two-1" width="16" height="16"/>
     </resources>
 </document>

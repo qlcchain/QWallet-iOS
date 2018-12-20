@@ -31,13 +31,13 @@ namespace sync {
 
 using InternStrings = std::vector<StringBufferRange>;
 
-struct BadChangesetError : ExceptionWithBacktrace<std::exception> {
-    const char* m_message;
+struct BadChangesetError : std::exception {
+    const char* message;
     BadChangesetError() : BadChangesetError("Bad changeset") {}
-    BadChangesetError(const char* msg) : m_message(msg) {}
-    const char* message() const noexcept override
+    BadChangesetError(const char* msg) : message(msg) {}
+    const char* what() const noexcept override
     {
-        return m_message;
+        return message;
     }
 };
 
@@ -394,9 +394,7 @@ struct Changeset::Printer : Changeset::Reflector::Tracer {
 
 private:
     std::ostream& m_out;
-    bool m_first = true;
     void pad_or_ellipsis(StringData, int width) const;
-    void print_field(StringData name, std::string value);
 };
 #endif // REALM_DEBUG
 

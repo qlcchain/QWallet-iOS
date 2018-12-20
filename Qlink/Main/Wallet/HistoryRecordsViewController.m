@@ -13,7 +13,7 @@
 #import <MJExtension/MJExtension.h>
 #import "HistoryRecrdInfo.h"
 #import <SDWebImage/UIButton+WebCache.h>
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 #import "HistoryRecrdInfo.h"
 
 @interface HistoryRecordsViewController () <UITableViewDelegate, UITableViewDataSource,SRRefreshDelegate>
@@ -40,7 +40,8 @@
      同步查询所有数据.
      */
     NSArray* finfAlls = nil;
-    if ([WalletUtil checkServerIsMian]) {
+//    [HistoryRecrdInfo bg_findAll:HISTORYRECRD_TABNAME];
+    if ([ConfigUtil isMainNetOfServerNetwork]) {
         finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%d",bg_sqlKey(@"isMainNet"),1]];
     } else {
         finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet")]];
@@ -48,7 +49,7 @@
     if (finfAlls && finfAlls.count > 0) {
         [self.sourceArr addObjectsFromArray:finfAlls];
     } else {
-        [AppD.window showHint:NSStringLocalizable(@"no_records")];
+        [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"no_records")];
     }
     
     [_tabBackView addSubview:self.mainTable];

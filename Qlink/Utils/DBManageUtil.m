@@ -11,7 +11,7 @@
 #import <BGFMDB/BGDB.h>
 #import "HistoryRecrdInfo.h"
 #import "VPNMode.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 
 @implementation DBManageUtil
 

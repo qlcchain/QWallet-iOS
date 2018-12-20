@@ -8,14 +8,16 @@
 
 #import "QBaseViewController.h"
 
-typedef enum : NSUInteger {
-    WebFromTypeTelegram,
-    WebFromTypeFacebook,
-    WebFromTypeWinq,
-} WebFromType;
+//typedef enum : NSUInteger {
+//    WebFromTypeTelegram,
+//    WebFromTypeFacebook,
+//    WebFromTypeWinq,
+//} WebFromType;
 
 @interface WebViewController : QBaseViewController
 
-@property (nonatomic) WebFromType fromType;
+//@property (nonatomic) WebFromType fromType;
+@property (nonatomic, strong) NSString *inputTitle;
+@property (nonatomic, strong) NSString *inputUrl;
 
 @end

@@ -36,9 +36,9 @@
     [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:_txtQLC.text]];
     [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:_txtNEO.text]];
     [self showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
-        @weakify_self
-        if (weakSelf.buyBlcok) {
-            weakSelf.buyBlcok(BuyQLCType);
+        kWeakSelf(self);
+        if (weakself.buyBlcok) {
+            weakself.buyBlcok(BuyQLCType);
         }
     }];
 }

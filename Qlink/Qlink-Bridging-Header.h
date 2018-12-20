@@ -13,7 +13,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "RequestService.h"
 #import <MJExtension/MJExtension.h>
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 #import "CurrentWalletInfo.h"
 #import "AppDelegate.h"
 

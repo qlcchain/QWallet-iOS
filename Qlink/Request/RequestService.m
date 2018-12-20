@@ -48,11 +48,15 @@
     
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",[RequestService getInstance].prefix_Url,url];
 
-    id inputParams = params;
+    NSMutableDictionary *tempParams = [NSMutableDictionary dictionaryWithDictionary:@{@"system":[RequestService getSystemInfo]}];
+    [tempParams addEntriesFromDictionary:params];
+    id inputParams = tempParams;
+//    id inputParams = params;
+    
     if (isSign) {
         NSString *recordStr = @"";
-        if (params) {
-            recordStr = ((NSDictionary *)params).mj_JSONString;
+        if (inputParams) {
+            recordStr = ((NSDictionary *)inputParams).mj_JSONString;
             recordStr = [recordStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
 //            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
         }
@@ -61,8 +65,8 @@
         // 升序、拼接、加密
         NSString *signStr = [DigestUtils getSignature:jsonParam];
         [jsonParam setObject:signStr forKey:@"sign"];
-        if (params) {
-            [jsonParam setObject:params forKey:@"params"];
+        if (inputParams) {
+            [jsonParam setObject:inputParams forKey:@"params"];
         }
         
         NSString *jsonStr = ((NSDictionary *)jsonParam).mj_JSONString;
@@ -105,6 +109,22 @@
 {
     NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:url params:params httpMethod:httpMethod successBlock:successReqBlock failedBlock:failedReqBlock];
     return dataTask;
+}
+
++ (NSString *)getSystemInfo {
+    NSMutableString *info = [NSMutableString string];
+//    NSString *deviceName = [[UIDevice currentDevice] name];  //获取设备名称 例如：梓辰的手机
+//    NSString *systemName = [[UIDevice currentDevice] systemName]; //获取系统名称 例如：iPhone OS
+    NSString *systemVersion = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
+//    NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; //获取设备唯一标识符 例如：FBF2306E-A0D8-4F4B-BDED-9333B627D3E6
+    NSString *deviceModel = [[UIDevice currentDevice] model]; //获取设备的型号 例如：iPhone
+    [info appendString:deviceModel];
+    [info appendString:@":"];
+    [info appendString:systemVersion];
+    [info appendString:@" "];
+    [info appendFormat:@"version:%@",APP_Build];
+    
+    return info;
 }
 
 @end

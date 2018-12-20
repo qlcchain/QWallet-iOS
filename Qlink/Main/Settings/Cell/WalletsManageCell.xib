@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="WalletsManageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="119.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otB-LT-N8X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="119.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4p-Qi-7Xw">
+                                <rect key="frame" x="6" y="5" width="308" height="109.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eth_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="WSm-EW-Sn3">
+                                        <rect key="frame" x="6" y="11" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="jKy-H7-GyS"/>
+                                            <constraint firstAttribute="width" constant="48" id="rAR-VP-fKy"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH-Wallet 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2AY-1w-GcK">
+                                        <rect key="frame" x="65" y="12" width="103" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x3b5cao…43439442" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eql-tT-YjA">
+                                        <rect key="frame" x="65" y="32.5" width="163.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 184,470.89" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC5-pg-9Is">
+                                        <rect key="frame" x="153" y="72" width="134" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjS-iB-8Ge">
+                                        <rect key="frame" x="264" y="4" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="U8R-R4-yBS"/>
+                                            <constraint firstAttribute="width" constant="44" id="dPE-os-VRB"/>
+                                        </constraints>
+                                        <state key="normal" image="wallet_more"/>
+                                        <connections>
+                                            <action selector="moreAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4Hr-KI-lwd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Eql-tT-YjA" firstAttribute="top" secondItem="2AY-1w-GcK" secondAttribute="bottom" constant="1" id="1PA-N8-kmm"/>
+                                    <constraint firstItem="2AY-1w-GcK" firstAttribute="leading" secondItem="WSm-EW-Sn3" secondAttribute="trailing" constant="11" id="7Oc-wf-8Oe"/>
+                                    <constraint firstItem="Eql-tT-YjA" firstAttribute="leading" secondItem="2AY-1w-GcK" secondAttribute="leading" id="8kP-Ux-QQQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="cC5-pg-9Is" secondAttribute="bottom" constant="11" id="I9L-ls-8iw"/>
+                                    <constraint firstAttribute="trailing" secondItem="cC5-pg-9Is" secondAttribute="trailing" constant="21" id="IKj-7W-4WQ"/>
+                                    <constraint firstItem="RjS-iB-8Ge" firstAttribute="top" secondItem="m4p-Qi-7Xw" secondAttribute="top" constant="4" id="SfL-Px-Rhf"/>
+                                    <constraint firstItem="WSm-EW-Sn3" firstAttribute="leading" secondItem="m4p-Qi-7Xw" secondAttribute="leading" constant="6" id="XaS-7v-htp"/>
+                                    <constraint firstItem="WSm-EW-Sn3" firstAttribute="top" secondItem="m4p-Qi-7Xw" secondAttribute="top" constant="11" id="Y71-AH-Ggy"/>
+                                    <constraint firstAttribute="trailing" secondItem="RjS-iB-8Ge" secondAttribute="trailing" id="cQb-X6-Vpk"/>
+                                    <constraint firstItem="2AY-1w-GcK" firstAttribute="top" secondItem="m4p-Qi-7Xw" secondAttribute="top" constant="12" id="hf6-1y-9S4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="m4p-Qi-7Xw" secondAttribute="trailing" constant="6" id="PsR-r3-sB0"/>
+                            <constraint firstItem="m4p-Qi-7Xw" firstAttribute="top" secondItem="otB-LT-N8X" secondAttribute="top" constant="5" id="cWe-TU-zQH"/>
+                            <constraint firstItem="m4p-Qi-7Xw" firstAttribute="leading" secondItem="otB-LT-N8X" secondAttribute="leading" constant="6" id="oYM-cv-Q9Z"/>
+                            <constraint firstAttribute="bottom" secondItem="m4p-Qi-7Xw" secondAttribute="bottom" constant="5" id="xnd-jf-XTb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="otB-LT-N8X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="2vl-DM-yjh"/>
+                    <constraint firstAttribute="bottom" secondItem="otB-LT-N8X" secondAttribute="bottom" id="7eF-qB-6RZ"/>
+                    <constraint firstItem="otB-LT-N8X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IUq-gx-LzV"/>
+                    <constraint firstAttribute="trailing" secondItem="otB-LT-N8X" secondAttribute="trailing" id="cDe-4a-UfX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="addressLab" destination="Eql-tT-YjA" id="Wqn-VN-mQ0"/>
+                <outlet property="icon" destination="WSm-EW-Sn3" id="Dxn-O5-Ctp"/>
+                <outlet property="nameLab" destination="2AY-1w-GcK" id="QY7-ns-qj8"/>
+                <outlet property="priceLab" destination="cC5-pg-9Is" id="xZ9-MC-WTZ"/>
+                <outlet property="shadowBack" destination="m4p-Qi-7Xw" id="nF9-XC-FhU"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="eth_wallet" width="46" height="46"/>
+        <image name="wallet_more" width="16" height="4"/>
+    </resources>
+</document>

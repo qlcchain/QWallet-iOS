@@ -7,11 +7,13 @@
 //
 
 #import "VPNFileUtil.h"
-#import "WalletUtil.h"
+#import "NEOWalletUtil.h"
 #import "ToxRequestModel.h"
 #import "P2pMessageManage.h"
 #import "VPNMode.h"
 #import "VPNOperationUtil.h"
+#import "ToxRequestModel1.h"
+#import "VPNDataUtil.h"
 
 static NSString *vpnPath = @"/ios/vpn/";
 @implementation VPNFileUtil
@@ -37,7 +39,7 @@ dispatch_source_t _serverTimer;
  */
 + (NSArray *) getAllVPNName
 {
-    return  [WalletUtil getVPNAllName];
+    return  [NEOWalletUtil getVPNAllName];
 }
 
 /**
@@ -48,7 +50,7 @@ dispatch_source_t _serverTimer;
  */
 + (BOOL) vpnNameIsExitWithName:(NSString *) fileName
 {
-    NSArray *vpnNames = [WalletUtil getVPNAllName];
+    NSArray *vpnNames = [NEOWalletUtil getVPNAllName];
     if (vpnNames) {
         if ([vpnNames containsObject:fileName]){
             return YES;
@@ -74,8 +76,8 @@ dispatch_source_t _serverTimer;
     }
     
     [data writeToFile:[dataPath stringByAppendingString:fileName] atomically:YES];
-    [WalletUtil setDataKey:fileName Datavalue:data];
-    [WalletUtil setWalletkeyWithKey:VPN_FILE_KEY withWalletValue:fileName];
+    [NEOWalletUtil setDataKey:fileName Datavalue:data];
+    [NEOWalletUtil setWalletkeyWithKey:VPN_FILE_KEY withWalletValue:fileName];
     
 }
 
@@ -85,13 +87,13 @@ dispatch_source_t _serverTimer;
 + (void) keychainVPNFileToLibray
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSArray *vpnNames = [WalletUtil getVPNAllName];
+        NSArray *vpnNames = [NEOWalletUtil getVPNAllName];
         if (vpnNames && vpnNames.count > 0) {
             NSString *dataPath = [VPNFileUtil getVPNDataPath];
             NSData *data = [NSData dataWithContentsOfFile:[dataPath stringByAppendingString:vpnNames[0]]];
             if (!data){
                 for (int i = 0; i<vpnNames.count; i++){
-                    NSData *vpnData = [WalletUtil getKeyDataValue:vpnNames[i]];
+                    NSData *vpnData = [NEOWalletUtil getKeyDataValue:vpnNames[i]];
                     [VPNFileUtil saveVPNDataToLibrayPath:vpnData withFileName:vpnNames[i]];
                 }
             }
@@ -109,10 +111,10 @@ dispatch_source_t _serverTimer;
 
 + (void) removeVPNFile
 {
-    NSArray *vpnNames = [WalletUtil getVPNAllName];
+    NSArray *vpnNames = [NEOWalletUtil getVPNAllName];
     if (vpnNames) {
         [vpnNames enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [WalletUtil removeChainKey:obj];
+            [NEOWalletUtil removeChainKey:obj];
         }];
     }
 }
@@ -126,7 +128,7 @@ dispatch_source_t _serverTimer;
  */
 + (int) getServerVPNFileWithServerId:(NSString *) serverP2pId
 {
-   int result = [ToxManage getFriendNumInFriendlist:serverP2pId];
+    int result = [ToxManage getFriendNumInFriendlist:serverP2pId];
     if (result < 0 && ![serverP2pId isEqualToString:[ToxManage getOwnP2PId]]) {
         // 需要添加好友
        int friendLocation =  [ToxManage addFriend:serverP2pId];
@@ -142,27 +144,20 @@ dispatch_source_t _serverTimer;
     
     // 判断好友是否在线
     if ([ToxManage getFriendConnectionStatus:serverP2pId])  {
-        ToxRequestModel *model = [[ToxRequestModel alloc] init];
-        model.type = sendVpnFileRequest;
-        NSDictionary *tempDic = @{VPN_NAME:@"", @"filePath":@""};
-        model.data = tempDic.mj_JSONString;
-        NSString *str = model.mj_JSONString;
-        [ToxManage sendMessageWithMessage:str withP2pid:serverP2pId];
-        
+        return 1;
     } else {
+        DDLogDebug(@"好友不在线，拿不了vpnName");
         return -2;
     }
     
     return 1;
 }
 
-
 /**
  vpn上报服务器
  */
-+ (void) sendServerVPN
-{
-    [VPNInfo bg_findAsync:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian])),bg_sqlKey(@"isServerVPN"),bg_sqlValue(@(1))] complete:^(NSArray * _Nullable array) {
++ (void) sendServerVPN {
+    [VPNInfo bg_findAsync:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([ConfigUtil isMainNetOfServerNetwork])),bg_sqlKey(@"isServerVPN"),bg_sqlValue(@(1))] complete:^(NSArray * _Nullable array) {
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNInfo *vpnInfo = (VPNInfo *)obj;
             if (!vpnInfo.isSendSuccess) {
@@ -170,7 +165,7 @@ dispatch_source_t _serverTimer;
                 ToxRequestModel *model = [[ToxRequestModel alloc] init];
                 model.type = checkConnectReq;
                 NSString *p2pid = [ToxManage getOwnP2PId];
-                NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid,@"vpnServer":@"1"};
+                NSDictionary *dataDic = @{APPVERSION:APP_Build,P2P_ID:p2pid,@"vpnServer":@"1",@"type":@(2)}; // type:0-注册  1-连接 2-vpn上报服务器
                 model.data = dataDic.mj_JSONString;
                 NSString *str = model.mj_JSONString;
                 [ToxManage sendMessageWithMessage:str withP2pid:vpnInfo.p2pId];
@@ -197,9 +192,8 @@ dispatch_source_t _serverTimer;
 /**
  改变VPN上报的状态
   */
-+ (void) sendAndChangeVPNSendStatus
-{
-    [VPNInfo bg_findAsync:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([WalletUtil checkServerIsMian])),bg_sqlKey(@"isServerVPN"),bg_sqlValue(@(1))] complete:^(NSArray * _Nullable array) {
++ (void) sendAndChangeVPNSendStatus {
+    [VPNInfo bg_findAsync:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ and %@=%@",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([ConfigUtil isMainNetOfServerNetwork])),bg_sqlKey(@"isServerVPN"),bg_sqlValue(@(1))] complete:^(NSArray * _Nullable array) {
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNInfo *vpnInfo = (VPNInfo *)obj;
             if (!vpnInfo.isSendSuccess) {
