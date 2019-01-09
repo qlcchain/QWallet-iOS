@@ -19,6 +19,7 @@
 #import "WalletCommonModel.h"
 
 #define TIMER_SEC  35
+#define Time_ReTransfer 60
 
 int requestCont = 0;
 dispatch_source_t _timer;
@@ -515,14 +516,14 @@ dispatch_source_t _timer;
             NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":addressFrom,@"tx":txHex,@"qlc":vpnInfo.tranferCost,@"fromP2pId":[NSStringUtil getNotNullValue:[ToxManage getOwnP2PId]],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.tranferAddress],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
             
             [RequestService requestWithUrl:transTypeOperate_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-                [kAppD.window hideToast];
+//                [kAppD.window hideToast];
                 if ([[responseObject objectForKey:Server_Code] integerValue] == 0){
                     NSDictionary *dataDic = [responseObject objectForKey:@"data"];
                     if (dataDic) {
                         BOOL result = [[dataDic objectForKey:@"operationResult"] boolValue];
                         if (result) { // 交易成功
                            
-                            //TODO:转账成功之后发p2p消息告诉接收者
+                            // 转账成功之后发p2p消息告诉接收者
                             [NeoTransferUtil sendVPNConnectSuccessMessageWithVPNInfo:(id)vpnInfo withType:3];
                             // 更新VPN连接转帐成功
                             [NeoTransferUtil updateVPNListTranferStatusWithVPNName:vpnInfo.vpnName];
@@ -713,7 +714,7 @@ dispatch_source_t _timer;
                 tranferMode.isBecomeTranfer = YES;
                 [HWUserdefault insertObj:[tranferMode mj_keyValues] withkey:vpnInfo.vpnName];
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Time_ReTransfer * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:type];
                 });
             } else {
@@ -749,7 +750,7 @@ dispatch_source_t _timer;
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Time_ReTransfer * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
                 });
             });
@@ -766,7 +767,7 @@ dispatch_source_t _timer;
             }
             
             [RequestService requestWithUrl:transTypeOperate_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-                [kAppD.window hideToast];
+//                [kAppD.window hideToast];
                 if ([[responseObject objectForKey:Server_Code] integerValue] == 0){
                     NSDictionary *dataDic = [responseObject objectForKey:@"data"];
                     if (dataDic) {
@@ -794,26 +795,26 @@ dispatch_source_t _timer;
                             [NEOWalletUtil saveTranQLCRecordWithQlc:vpnInfo.cost txtid:[NSStringUtil getNotNullValue:vpnInfo.recordId] neo:@"0" recordType:tranType assetName:vpnInfo.vpnName friendNum:0 p2pID:[NSStringUtil getNotNullValue:vpnInfo.p2pId] connectType:0 isReported:NO isMianNet:vpnInfo.isMainNet];
                         } else {
                             DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Time_ReTransfer * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                 [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
                             });
                         }
                     } else {
                         DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Time_ReTransfer * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                             [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
                         });
                     }
                 } else {
                     DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Time_ReTransfer * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
                     });
                 }
                 
             } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
                 DDLogDebug(@"转账失败：%@",NSStringLocalizable(@"send_qlc"));
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Time_ReTransfer * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:vpnInfo tranType:tranType];
                 });
             }];
