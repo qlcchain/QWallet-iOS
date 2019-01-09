@@ -16,6 +16,9 @@
 - (void)makeToastInView:(UIView *)view text:(NSString *)text userInteractionEnabled: (BOOL)isEnabled hideTime:(CGFloat)time;
 - (void)hideToast;
 
+//- (void)makeToastInView:(UIView *)view text:(NSString *)text mark:(NSString *)mark;
+//- (void)hideToast:(NSString *)mark;
+
 - (void)makeToastDisappearInView:(UIView *)view text:(NSString *)text;
 - (void)makeToastDisappearWithText:(NSString *)text;
 // 从默认(showHint:)显示的位置再往上(下)yOffset

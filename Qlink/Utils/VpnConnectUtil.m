@@ -21,6 +21,7 @@
 #import "VPNDataUtil.h"
 
 #define P2P_Message_Timeout 15
+#define VPN_Connect_Toast_Mark @"vpn_connecting"
 
 typedef enum : NSUInteger {
     ConnectStepNone,
@@ -393,6 +394,7 @@ typedef enum : NSUInteger {
 }
 
 - (void)goConnect {
+//    [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"connecting")];
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"connecting")];
     
     _connectStep = ConnectStepGetConnecting;
@@ -528,8 +530,9 @@ typedef enum : NSUInteger {
     if (connectVpnCancel) { // 用户取消
         return;
     }
-    [VPNUtil.shareInstance stopVPN];
+    
     [kAppD.window hideToast];
+    [VPNUtil.shareInstance stopVPN];
     [KEYWINDOW makeToastDisappearWithText:NSStringLocalizable(@"vpn_timeout")];
     [[NSNotificationCenter defaultCenter] postNotificationName:Connect_Vpn_Timeout_Noti object:nil];
     [self requestReportVpnInfo:@"connect timeout" status:0]; // 上报vpn连接问题

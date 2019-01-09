@@ -156,7 +156,7 @@
         [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
     } else {
         vc = [[LoginSetPWViewController alloc] init];
-        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
+        [((LoginSetPWViewController *)vc) configCompleteBlock:completeBlock];
     }
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];

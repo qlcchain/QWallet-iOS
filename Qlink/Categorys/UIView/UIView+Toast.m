@@ -11,8 +11,42 @@
 #import <objc/runtime.h>
 
 static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
+//static const void *HttpRequestHUDMarkKey = &HttpRequestHUDMarkKey;
+//static const void *HttpRequestMark = &HttpRequestMark;
+//static const void *HttpRequestHUDMarkState = &HttpRequestHUDMarkState;
 
 @implementation UIView (Toast)
+
+//- (NSNumber *)getHUDMarkState {
+//    return objc_getAssociatedObject(self, HttpRequestHUDMarkState);
+//}
+//
+//- (void)setHUDMarkState:(NSNumber *)state {
+//    objc_setAssociatedObject(self, HttpRequestHUDMarkState, state, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
+//
+//- (NSString *)getCurrentMark {
+//    return objc_getAssociatedObject(self, HttpRequestMark);
+//}
+//
+//- (void)setCurrentMark:(NSString *)mark {
+//    objc_setAssociatedObject(self, HttpRequestMark, mark, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
+//
+//- (MBProgressHUD *)HUDMark {
+//    return objc_getAssociatedObject(self, HttpRequestHUDMarkKey);
+//}
+//
+//- (void)setHUDMark:(MBProgressHUD *)HUDMark {
+//    //修改样式，否则等待框背景色将为半透明
+//    HUDMark.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+//    HUDMark.bezelView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5];
+//    //设置菊花框为白色
+//    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[[MBProgressHUD class]]].color = [UIColor whiteColor];
+//    HUDMark.label.textColor = [UIColor whiteColor];
+//
+//    objc_setAssociatedObject(self, HttpRequestHUDMarkKey, HUDMark, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
 
 - (MBProgressHUD *)HUD{
     return objc_getAssociatedObject(self, HttpRequestHUDKey);
@@ -156,5 +190,35 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     MBProgressHUD *HUD = [self HUD];
     [HUD hideAnimated:YES];
 }
+
+//- (void)makeToastInView:(UIView *)view text:(NSString *)text mark:(NSString *)mark {
+//    MBProgressHUD *HUDMark = [self HUDMark];
+//    NSNumber *HUDMarkState = [self getHUDMarkState];
+//    if (HUDMark && HUDMarkState && [HUDMarkState boolValue] == YES) {
+//        return;
+////        [self hideToast:mark];
+//    }
+//
+//    [self setCurrentMark:mark];
+//    [self setHUDMarkState:@(YES)];
+//
+//    HUDMark = [[MBProgressHUD alloc] initWithView:view];
+//    HUDMark.label.text = text;
+//    HUDMark.label.numberOfLines = 0;
+//    [self setHUDMark:HUDMark];
+//    [view addSubview:HUDMark];
+//    [HUDMark showAnimated:YES];
+//}
+//
+//- (void)hideToast:(NSString *)mark {
+//    NSString *currentMark = [self getCurrentMark];
+//    if (![mark isEqualToString:currentMark]) {
+//        return;
+//    }
+//
+//    [self setHUDMarkState:@(NO)];
+//    MBProgressHUD *HUDMark = [self HUDMark];
+//    [HUDMark hideAnimated:YES];
+//}
 
 @end
