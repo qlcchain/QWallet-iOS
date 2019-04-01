@@ -64,7 +64,15 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         }
         set
         {
-            _cubicIntensity = newValue.clamped(to: 0.05...1)
+            _cubicIntensity = newValue
+            if _cubicIntensity > 1.0
+            {
+                _cubicIntensity = 1.0
+            }
+            if _cubicIntensity < 0.05
+            {
+                _cubicIntensity = 0.05
+            }
         }
     }
         

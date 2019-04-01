@@ -320,7 +320,14 @@ public class Account {
 //    }
     
     
-    public func sendAssetTransaction(asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
+    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
+        
+        var customAttributes: [TransactionAttritbute] = []
+        customAttributes.append(TransactionAttritbute(script: self.address.hashFromAddress()))
+        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+        customAttributes.append(TransactionAttritbute(remark: remark))
+        customAttributes.append(TransactionAttritbute(descriptionHex: assetHash))
+        
         neoClient.getAssets(for: self.address, mainNet:mainNet, params: []) { result in
             switch result {
             case .failure(let error):
@@ -328,7 +335,8 @@ public class Account {
             case .success(let assets):
 //                print("assets = ",assets)
 //                print("AssetId = ",asset)
-                let payload = self.generateSendTransactionPayload(asset: asset, amount: amount, toAddress: toAddress, assets: assets, attributes: attributes)
+//                let payload = self.generateSendTransactionPayload(asset: asset, amount: amount, toAddress: toAddress, assets: assets, attributes: attributes)
+                let payload = self.generateSendTransactionPayload(asset: asset, amount: amount, toAddress: toAddress, assets: assets, attributes: customAttributes)
                 let txHex = payload.fullHexString
                 completion(txHex,nil)
 
@@ -406,7 +414,7 @@ public class Account {
         }
     }
     
-    private func generateInvokeTransactionPayload(assets: Assets, script: String, contractAddress: String) -> Data {
+    private func generateInvokeTransactionPayload(assets: Assets, script: String, contractAddress: String, attributes: [TransactionAttritbute]? = nil) -> Data {
         var error: NSError?
         
         let inputData = getInputsNecessaryToSendAsset(asset: AssetId.gasAssetId, amount: 0.00000001, assets: assets)
@@ -421,7 +429,7 @@ public class Account {
         let rawTransaction = packRawTransactionBytes(payloadPrefix: payloadPrefix,
                                                      asset: AssetId.gasAssetId, with: inputData.payload!,
                                                      runningAmount:inputData.totalAmount!,
-                                                     toSendAmount: 0.00000001, toAddress: self.address, attributes: [])
+                                                     toSendAmount: 0.00000001, toAddress: self.address, attributes: attributes)
         print("self.address = \(self.address)")
         let signatureData = NeoutilsSign(rawTransaction, privateKey.fullHexString, &error)
         let finalPayload = concatenatePayloadData(txData: rawTransaction, signatureData: signatureData!)
@@ -443,6 +451,13 @@ public class Account {
     
     public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
         print("sendNep5Token action")
+        
+        var customAttributes: [TransactionAttritbute] = []
+        customAttributes.append(TransactionAttritbute(script: self.address.hashFromAddress()))
+        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+        customAttributes.append(TransactionAttritbute(remark: remark))
+        customAttributes.append(TransactionAttritbute(descriptionHex: tokenContractHash))
+        
         neoClient.getAssets(for: self.address, mainNet: mainNet, params: []) { result in
             switch result {
             case .failure(let error):
@@ -454,7 +469,7 @@ public class Account {
                 print("scriptBytes =",scriptBytes)
                 
                 var payload = self.generateInvokeTransactionPayload(assets: assets, script: scriptBytes.fullHexString,
-                                                                    contractAddress: tokenContractHash)
+                                                                    contractAddress: tokenContractHash, attributes: customAttributes)
                 
                 var payloadHex = payload + tokenContractHash.dataWithHexString().bytes
                 
@@ -469,6 +484,12 @@ public class Account {
     
     public func invokeContractFunction(assets: Assets, contractHash: String, method: String, args: [Any], completion: @escaping(Bool?, Error?) -> Void) {
         
+        var customAttributes: [TransactionAttritbute] = []
+        customAttributes.append(TransactionAttritbute(script: self.address.hashFromAddress()))
+        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+        customAttributes.append(TransactionAttritbute(remark: remark))
+        customAttributes.append(TransactionAttritbute(descriptionHex: contractHash))
+        
         let scriptBuilder = ScriptBuilder()
         scriptBuilder.pushContractInvoke(scriptHash: contractHash, operation: method,
                                          args: args)
@@ -476,7 +497,7 @@ public class Account {
         
         let scriptBytes =  [UInt8(script.count)] + script
         var payload = self.generateInvokeTransactionPayload(assets: assets, script: scriptBytes.fullHexString,
-                                                            contractAddress: contractHash)
+                                                            contractAddress: contractHash, attributes: customAttributes)
 //        payload = payload + contractHash.dataWithHexString().bytes
 //        self.neoClient.sendRawTransaction(with: payload) { (result) in
         let payloadHex = payload + contractHash.dataWithHexString().bytes

@@ -504,6 +504,9 @@
 		58DF8E61206E26AC00ACFC65 /* WalletAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E5B206E26AC00ACFC65 /* WalletAddressView.m */; };
 		58E032B121883F500061C72D /* ETHTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E032AF21883F500061C72D /* ETHTransferViewController.m */; };
 		58E032B221883F500061C72D /* ETHTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E032B021883F500061C72D /* ETHTransferViewController.xib */; };
+		58E2E55E224DF73300CBFD54 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2E55A224DF73200CBFD54 /* CloseButton.swift */; };
+		58E2E55F224DF73300CBFD54 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2E55B224DF73200CBFD54 /* TagView.swift */; };
+		58E2E560224DF73300CBFD54 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2E55C224DF73200CBFD54 /* TagListView.swift */; };
 		58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E41C4B2181CA36004C87AA /* WalletHomeSwitchCell.m */; };
 		58E41C4E2181CA36004C87AA /* WalletHomeSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E41C4C2181CA36004C87AA /* WalletHomeSwitchCell.xib */; };
 		58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E41C512182C1D6004C87AA /* ETHWalletDetailViewController.m */; };
@@ -1717,6 +1720,9 @@
 		58E032AE21883F500061C72D /* ETHTransferViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETHTransferViewController.h; sourceTree = "<group>"; };
 		58E032AF21883F500061C72D /* ETHTransferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETHTransferViewController.m; sourceTree = "<group>"; };
 		58E032B021883F500061C72D /* ETHTransferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETHTransferViewController.xib; sourceTree = "<group>"; };
+		58E2E55A224DF73200CBFD54 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		58E2E55B224DF73200CBFD54 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		58E2E55C224DF73200CBFD54 /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		58E41C4A2181CA36004C87AA /* WalletHomeSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletHomeSwitchCell.h; sourceTree = "<group>"; };
 		58E41C4B2181CA36004C87AA /* WalletHomeSwitchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletHomeSwitchCell.m; sourceTree = "<group>"; };
 		58E41C4C2181CA36004C87AA /* WalletHomeSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHomeSwitchCell.xib; sourceTree = "<group>"; };
@@ -2862,6 +2868,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				58E2E559224DF73200CBFD54 /* TagListView */,
 				582F238621BF99A400A000D1 /* ODRefreshControl */,
 				587ABCA921B8F8F700C3D81A /* EOS */,
 				581AC36E21AFD84400ACA80B /* XYTransition */,
@@ -4555,6 +4562,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		58E2E559224DF73200CBFD54 /* TagListView */ = {
+			isa = PBXGroup;
+			children = (
+				58E2E55A224DF73200CBFD54 /* CloseButton.swift */,
+				58E2E55B224DF73200CBFD54 /* TagView.swift */,
+				58E2E55C224DF73200CBFD54 /* TagListView.swift */,
+			);
+			path = TagListView;
+			sourceTree = "<group>";
+		};
 		730DA8F720886A7800CE1909 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -6130,7 +6147,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TrustWeb3Provider/TrustWeb3Provider.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -6139,7 +6156,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		383B60FE31FA4ADA12F97A78 /* [CP] Check Pods Manifest.lock */ = {
@@ -6166,7 +6183,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/APIKit/APIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -6183,7 +6200,6 @@
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -6200,7 +6216,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftColor/SwiftColor.framework",
-				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/TrezorCrypto/TrezorCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustCore/TrustCore.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustKeystore/TrustKeystore.framework",
@@ -6225,7 +6240,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -6242,7 +6256,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftColor.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrezorCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKeystore.framework",
@@ -6251,7 +6264,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		581D509B217890B30064F60C /* TODO */ = {
@@ -6275,8 +6288,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/OpenVPNAdapter.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MMWormhole.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -6290,13 +6303,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6308,13 +6317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6326,13 +6331,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6344,13 +6345,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6362,13 +6359,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6380,13 +6373,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6398,13 +6387,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6416,13 +6401,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = BuildNum;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6694,6 +6675,7 @@
 				587ABD4B21B8F8F800C3D81A /* Abi_bin_to_json.m in Sources */,
 				935F3283212BAEDF00B03341 /* VpnRegisterServerViewController.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
+				58E2E55F224DF73300CBFD54 /* TagView.swift in Sources */,
 				581D32E4219C158B001F88C3 /* NEP9.swift in Sources */,
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
@@ -6892,6 +6874,7 @@
 				582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */,
 				581D32C1219C158B001F88C3 /* Global.swift in Sources */,
 				580D916B20625A4400B12506 /* BBaseModel.m in Sources */,
+				58E2E55E224DF73300CBFD54 /* CloseButton.swift in Sources */,
 				58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */,
 				5806C11321C3DB59000E693B /* CreateAccountPushTransactionRequest.m in Sources */,
 				581D32D6219C158B001F88C3 /* Transaction.swift in Sources */,
@@ -6923,6 +6906,7 @@
 				58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */,
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,
 				581D32DB219C158B001F88C3 /* ContractResult.swift in Sources */,
+				58E2E560224DF73300CBFD54 /* TagListView.swift in Sources */,
 				5812DDB020A1A7890043A8A8 /* ZXVoiceMessageCell.m in Sources */,
 				73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */,
 				58CDB5F220889FA600B74962 /* QShadowView.m in Sources */,
@@ -7835,8 +7819,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Qlink/Vender/Tox/ToxFramework/Sodium/libs",
-					"$(PROJECT_DIR)/Qlink/Vender/Tox/Sodium/libs",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/ShadowPath/ShadowPath/libopenssl/lib",
 				);
@@ -7880,8 +7862,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Qlink/Vender/Tox/ToxFramework/Sodium/libs",
-					"$(PROJECT_DIR)/Qlink/Vender/Tox/Sodium/libs",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)/ShadowPath/ShadowPath/libopenssl/lib",
 				);

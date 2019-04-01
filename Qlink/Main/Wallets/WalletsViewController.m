@@ -908,13 +908,22 @@
     if (scrollView == _refreshScroll) {
         if (_refreshScroll.contentOffset.y < 0) {
             _refreshScroll.backgroundColor = MAIN_PURPLE_COLOR;
-        } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - _refreshScroll.visibleSize.height) {
+//        } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - _refreshScroll.visibleSize.height) {
+        } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - [self scrollViewVisibleSize:_refreshScroll].height) {
             _refreshScroll.backgroundColor = MAIN_WHITE_COLOR;
         }
         if (_slimeView) {
             [_slimeView scrollViewDidScroll];
         }
     }
+}
+    
+- (CGSize) scrollViewVisibleSize:(UIScrollView *)scrollView {
+    UIEdgeInsets contentInset = scrollView.contentInset;
+    CGSize scrollViewSize = CGRectStandardize(scrollView.bounds).size;
+    CGFloat width = scrollViewSize.width - contentInset.left - contentInset.right;
+    CGFloat height = scrollViewSize.height - contentInset.top - contentInset.bottom;
+    return CGSizeMake(width, height);
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

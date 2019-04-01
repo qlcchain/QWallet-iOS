@@ -64,7 +64,7 @@ public struct CellProvider<Cell: BaseCell> where Cell: CellType {
 
      - returns: the cell
      */
-    func makeCell(style: UITableViewCell.CellStyle) -> Cell {
+    func makeCell(style: UITableViewCellStyle) -> Cell {
         if let nibName = self.nibName {
             return bundle.loadNibNamed(nibName, owner: nil, options: nil)!.first as! Cell
         }
@@ -299,12 +299,10 @@ extension Condition : ExpressibleByStringLiteral {
 /**
 Errors thrown by Eureka
 
- - duplicatedTag: When a section or row is inserted whose tag dows already exist
- - rowNotInSection: When a row was expected to be in a Section, but is not.
+- DuplicatedTag: When a section or row is inserted whose tag dows already exist
 */
 public enum EurekaError: Error {
     case duplicatedTag(tag: String)
-    case rowNotInSection(row: BaseRow)
 }
 
 //Mark: FormViewController
@@ -318,12 +316,12 @@ public protocol FormViewControllerProtocol {
     func beginEditing<T>(of: Cell<T>)
     func endEditing<T>(of: Cell<T>)
 
-    func insertAnimation(forRows rows: [BaseRow]) -> UITableView.RowAnimation
-    func deleteAnimation(forRows rows: [BaseRow]) -> UITableView.RowAnimation
-    func reloadAnimation(oldRows: [BaseRow], newRows: [BaseRow]) -> UITableView.RowAnimation
-    func insertAnimation(forSections sections: [Section]) -> UITableView.RowAnimation
-    func deleteAnimation(forSections sections: [Section]) -> UITableView.RowAnimation
-    func reloadAnimation(oldSections: [Section], newSections: [Section]) -> UITableView.RowAnimation
+    func insertAnimation(forRows rows: [BaseRow]) -> UITableViewRowAnimation
+    func deleteAnimation(forRows rows: [BaseRow]) -> UITableViewRowAnimation
+    func reloadAnimation(oldRows: [BaseRow], newRows: [BaseRow]) -> UITableViewRowAnimation
+    func insertAnimation(forSections sections: [Section]) -> UITableViewRowAnimation
+    func deleteAnimation(forSections sections: [Section]) -> UITableViewRowAnimation
+    func reloadAnimation(oldSections: [Section], newSections: [Section]) -> UITableViewRowAnimation
 }
 
 /**
@@ -427,9 +425,9 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
 
     /// Defines the behaviour of the navigation between rows
     public var navigationOptions: RowNavigationOptions?
-    private var tableViewStyle: UITableView.Style = .grouped
+    private var tableViewStyle: UITableViewStyle = .grouped
 
-    public init(style: UITableView.Style) {
+    public init(style: UITableViewStyle) {
         super.init(nibName: nil, bundle: nil)
         tableViewStyle = style
     }
@@ -449,7 +447,7 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
 
         if tableView == nil {
             tableView = UITableView(frame: view.bounds, style: tableViewStyle)
-            tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            tableView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
             if #available(iOS 9.0, *) {
                 tableView.cellLayoutMarginsFollowReadableWidth = false
             }
@@ -463,7 +461,7 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
         if tableView.dataSource == nil {
             tableView.dataSource = self
         }
-        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = BaseRow.estimatedRowHeight
         tableView.allowsSelectionDuringEditing = true
     }
@@ -501,18 +499,18 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
             }
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(FormViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(FormViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FormViewController.keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FormViewController.keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
 
-        if form.containsMultivaluedSection && (isBeingPresented || isMovingToParent) {
+        if form.containsMultivaluedSection && (isBeingPresented || isMovingToParentViewController) {
             tableView.setEditing(true, animated: false)
         }
     }
 
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
     open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -576,42 +574,42 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
     /**
      Returns the animation for the insertion of the given rows.
      */
-    open func insertAnimation(forRows rows: [BaseRow]) -> UITableView.RowAnimation {
+    open func insertAnimation(forRows rows: [BaseRow]) -> UITableViewRowAnimation {
         return .fade
     }
 
     /**
      Returns the animation for the deletion of the given rows.
      */
-    open func deleteAnimation(forRows rows: [BaseRow]) -> UITableView.RowAnimation {
+    open func deleteAnimation(forRows rows: [BaseRow]) -> UITableViewRowAnimation {
         return .fade
     }
 
     /**
      Returns the animation for the reloading of the given rows.
      */
-    open func reloadAnimation(oldRows: [BaseRow], newRows: [BaseRow]) -> UITableView.RowAnimation {
+    open func reloadAnimation(oldRows: [BaseRow], newRows: [BaseRow]) -> UITableViewRowAnimation {
         return .automatic
     }
 
     /**
      Returns the animation for the insertion of the given sections.
      */
-    open func insertAnimation(forSections sections: [Section]) -> UITableView.RowAnimation {
+    open func insertAnimation(forSections sections: [Section]) -> UITableViewRowAnimation {
         return .automatic
     }
 
     /**
      Returns the animation for the deletion of the given sections.
      */
-    open func deleteAnimation(forSections sections: [Section]) -> UITableView.RowAnimation {
+    open func deleteAnimation(forSections sections: [Section]) -> UITableViewRowAnimation {
         return .automatic
     }
 
     /**
      Returns the animation for the reloading of the given sections.
      */
-    open func reloadAnimation(oldSections: [Section], newSections: [Section]) -> UITableView.RowAnimation {
+    open func reloadAnimation(oldSections: [Section], newSections: [Section]) -> UITableViewRowAnimation {
         return .automatic
     }
 
@@ -738,7 +736,7 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
             let height = sectionView.bounds.height
 
             if height == 0 {
-                return UITableView.automaticDimension
+                return UITableViewAutomaticDimension
             }
 
             return height
@@ -746,18 +744,18 @@ open class FormViewController: UIViewController, FormViewControllerProtocol, For
 
         if let sectionTitle = sectionTitle,
             sectionTitle != "" {
-            return UITableView.automaticDimension
+            return UITableViewAutomaticDimension
         }
 
         // Fix for iOS 11+. By returning 0, we ensure that no section header or
         // footer is shown when self-sizing is enabled (i.e. when
         // tableView.estimatedSectionHeaderHeight or tableView.estimatedSectionFooterHeight
-        // == UITableView.automaticDimension).
+        // == UITableViewAutomaticDimension).
         if tableView.style == .plain {
             return 0
         }
 
-        return UITableView.automaticDimension
+        return UITableViewAutomaticDimension
     }
 }
 
@@ -826,7 +824,7 @@ extension FormViewController : UITableViewDelegate {
         return true
     }
 
-    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let row = form[indexPath]
             let section = row.section!
@@ -844,7 +842,7 @@ extension FormViewController : UITableViewDelegate {
                 fatalError("Multivalued section multivaluedRowToInsertAt property must be set up")
             }
             let newRow = multivaluedRowToInsertAt(max(0, section.count - 1))
-            section.insert(newRow, at: max(0, section.count - 1))
+            section.insert(newRow, at: section.count - 1)
             DispatchQueue.main.async {
                 tableView.isEditing = !tableView.isEditing
                 tableView.isEditing = !tableView.isEditing
@@ -907,7 +905,7 @@ extension FormViewController : UITableViewDelegate {
         }
     }
 
-    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         guard let section = form[indexPath.section] as? MultivaluedSection else {
 			if form[indexPath].trailingSwipe.actions.count > 0 {
 				return .delete
@@ -929,17 +927,11 @@ extension FormViewController : UITableViewDelegate {
 
 	@available(iOS 11,*)
 	open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard !form[indexPath].leadingSwipe.actions.isEmpty else {
-            return nil
-        }
 		return form[indexPath].leadingSwipe.contextualConfiguration
 	}
 
 	@available(iOS 11,*)
 	open func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard !form[indexPath].trailingSwipe.actions.isEmpty else {
-            return nil
-        }
 		return form[indexPath].trailingSwipe.contextualConfiguration
 	}
 
@@ -1007,7 +999,7 @@ extension FormViewController {
     @objc open func keyboardWillShow(_ notification: Notification) {
         guard let table = tableView, let cell = table.findFirstResponder()?.formCell() else { return }
         let keyBoardInfo = notification.userInfo!
-        let endFrame = keyBoardInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        let endFrame = keyBoardInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
 
         let keyBoardFrame = table.window!.convert(endFrame.cgRectValue, to: table.superview)
         let newBottomInset = table.frame.origin.y + table.frame.size.height - keyBoardFrame.origin.y + rowKeyboardSpacing
@@ -1018,8 +1010,8 @@ extension FormViewController {
             tableInsets.bottom = newBottomInset
             scrollIndicatorInsets.bottom = tableInsets.bottom
             UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationDuration((keyBoardInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double))
-            UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: (keyBoardInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int))!)
+            UIView.setAnimationDuration((keyBoardInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double))
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: (keyBoardInfo[UIKeyboardAnimationCurveUserInfoKey] as! Int))!)
             table.contentInset = tableInsets
             table.scrollIndicatorInsets = scrollIndicatorInsets
             if let selectedRow = table.indexPath(for: cell) {
@@ -1041,8 +1033,8 @@ extension FormViewController {
         scrollIndicatorInsets.bottom = tableInsets.bottom
         oldBottomInset = nil
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationDuration((keyBoardInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double))
-        UIView.setAnimationCurve(UIView.AnimationCurve(rawValue: (keyBoardInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int))!)
+        UIView.setAnimationDuration((keyBoardInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double))
+        UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: (keyBoardInfo[UIKeyboardAnimationCurveUserInfoKey] as! Int))!)
         table.contentInset = tableInsets
         table.scrollIndicatorInsets = scrollIndicatorInsets
         UIView.commitAnimations()
@@ -1095,7 +1087,7 @@ extension FormViewControllerProtocol {
 
     // MARK: Helpers
 
-    func makeRowVisible(_ row: BaseRow, destinationScrollPosition: UITableView.ScrollPosition) {
+    func makeRowVisible(_ row: BaseRow, destinationScrollPosition: UITableViewScrollPosition) {
         guard let cell = row.baseCell, let indexPath = row.indexPath, let tableView = tableView else { return }
         if cell.window == nil || (tableView.contentOffset.y + tableView.frame.size.height <= cell.frame.origin.y + cell.frame.size.height) {
             tableView.scrollToRow(at: indexPath, at: destinationScrollPosition, animated: true)

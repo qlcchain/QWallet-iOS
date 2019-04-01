@@ -52,21 +52,12 @@ open class LegendRenderer: Renderer
                 {
                     let bds = dataSet as! IBarChartDataSet
                     var sLabels = bds.stackLabels
-                    let minEntries = min(clrs.count, bds.stackSize)
-
-                    for j in 0..<minEntries
+                    
+                    for j in 0..<min(clrs.count, bds.stackSize)
                     {
-                        let label: String?
-                        if (sLabels.count > 0 && minEntries > 0) {
-                            let labelIndex = j % minEntries
-                            label = sLabels.indices.contains(labelIndex) ? sLabels[labelIndex] : nil
-                        } else {
-                            label = nil
-                        }
-
                         entries.append(
                             LegendEntry(
-                                label: label,
+                                label: sLabels[j % sLabels.count],
                                 form: dataSet.form,
                                 formSize: dataSet.formSize,
                                 formLineWidth: dataSet.formLineWidth,
@@ -471,7 +462,7 @@ open class LegendRenderer: Renderer
                     
                     if direction == .rightToLeft
                     {
-                        posX -= (e.label! as NSString).size(withAttributes: [.font: labelFont]).width
+                        posX -= (e.label as NSString!).size(withAttributes: [NSAttributedStringKey.font: labelFont]).width
                     }
                     
                     if !wasStacked
@@ -574,6 +565,6 @@ open class LegendRenderer: Renderer
     /// Draws the provided label at the given position.
     @objc open func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor)
     {
-        ChartUtils.drawText(context: context, text: label, point: CGPoint(x: x, y: y), align: .left, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor])
+        ChartUtils.drawText(context: context, text: label, point: CGPoint(x: x, y: y), align: .left, attributes: [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: textColor])
     }
 }

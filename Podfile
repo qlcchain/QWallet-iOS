@@ -19,7 +19,7 @@ def library
     pod 'KissXML', '~> 5.2.2'
     #pod 'ICSMainFramework', :path => "./Library/ICSMainFramework/"
     pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainAccess'
+#    pod 'KeychainAccess'
 end
 
 def tunnel
@@ -32,14 +32,16 @@ def eth
     pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
     pod 'PromiseKit', '~> 6.0'
     pod 'APIKit'
-    pod 'Eureka'
+#    pod 'Eureka'
+    pod 'Eureka', '4.2.0'
     pod 'KeychainSwift'
     pod 'Moya', '~> 10.0.1'
     pod 'TrustCore', :git=>'https://github.com/TrustWallet/trust-core', :branch=>'master'
     pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master'
-    pod 'TrezorCrypto'
+#    pod 'TrezorCrypto'
     pod 'TrustWeb3Provider', :git=>'https://github.com/TrustWallet/trust-web3-provider', :commit=>'f4e0ebb1b8fa4812637babe85ef975d116543dfd'
     pod 'TrustWalletSDK', :git=>'https://github.com/TrustWallet/TrustSDK-iOS', :branch=>'master'
+#    pod 'Result', '~> 3.0'
 end
 
 target "Qlink" do
@@ -59,8 +61,8 @@ target "Qlink" do
     pod 'OLImageView'
     pod 'Firebase/Core', '~> 5.4.1'
 #    pod 'MMWormhole'
-    pod 'TagListView', '1.2.0'
-    pod 'Charts'
+#    pod 'TagListView', '1.2.0'
+    pod 'Charts', '3.1.0'
 
 #  shadowsock
     pod 'SwiftColor'

@@ -53,7 +53,7 @@ public protocol BaseRowType: Taggable {
     var section: Section? { get }
 
     /// Parameter used when creating the cell for this row.
-    var cellStyle: UITableViewCell.CellStyle { get set }
+    var cellStyle: UITableViewCellStyle { get set }
 
     /// The title will be displayed in the textLabel of the row.
     var title: String? { get set }

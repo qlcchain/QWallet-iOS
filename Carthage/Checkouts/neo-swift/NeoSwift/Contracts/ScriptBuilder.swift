@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class ScriptBuilder {
+@objc public class ScriptBuilder: NSObject {
     private(set) public var rawBytes = [UInt8]()
     var rawHexString: String {
-        return rawBytes.fullHexString
+        return rawBytes.hexString
     }
     
-    public init() {
+    public override init() {
         rawBytes = []
     }
     
@@ -37,12 +37,16 @@ public class ScriptBuilder {
             rawBytes.append(rawValue)
         default:
             let intBytes = toByteArrayWithoutTrailingZeros(intValue)
-            pushHexString(intBytes.fullHexString)
+            pushHexString(intBytes.hexString)
         }
     }
     
     private func pushHexString(_ stringValue: String) {
         let stringBytes = stringValue.dataWithHexString().bytes
+        pushBytes(stringBytes)
+    }
+    
+    private func pushBytes(_ stringBytes: [UInt8]) {
         let size = stringBytes.count
         if stringBytes.count <= OpCode.PUSHBYTES75.rawValue {
             rawBytes = rawBytes + size.toHexString().dataWithHexString().bytes
@@ -72,11 +76,49 @@ public class ScriptBuilder {
         pushOPCode(.PACK)
     }
     
-    public func resetScript() {
+    private func pushParam(_ data: ContractParam) {
+        switch data.type {
+        case .String:
+            if let stringValue = data.value as? String {
+                pushHexString(stringValue)
+            }
+            break
+        case .Boolean:
+            if let boolValue = data.value as? Bool {
+                pushBool(boolValue)
+            }
+            break
+        case .Integer:
+            if let intValue = data.value as? Int {
+                pushInt(intValue)
+            }
+            break
+        case .ByteArray:
+            if let stringValue = data.value as? String {
+                pushHexString(stringValue)
+            }
+            break
+        case .Array:
+            if let arrayValue = data.value as? [Any?] {
+                pushArray(arrayValue)
+            }
+            break
+        case .Hash160:
+            if let stringValue = data.value as? String {
+                pushBytes(stringValue.dataWithHexString().bytes.reversed())
+            }
+            break
+        default:
+            fatalError("Unsupported Data Type Pushed on stack")
+            break
+        }
+    }
+    
+    @objc public func resetScript() {
         rawBytes.removeAll()
     }
     
-    public func pushData(_ data: Any?) {
+    @objc public func pushData(_ data: Any?) {
         if let boolValue = data as? Bool {
             pushBool(boolValue)
         } else if let intValue = data as? Int {
@@ -89,16 +131,18 @@ public class ScriptBuilder {
             pushBool(false)
         } else if let opcodeValue = data as? OpCode {
             pushOPCode(opcodeValue)
+        } else if let mapValue = data as? [String:Any], let contractParam = ContractParam.likeContractParam(mapValue) {
+            pushParam(contractParam)
         } else {
             fatalError("Unsupported Data Type Pushed on stack")
         }
     }
     
-    public func pushContractInvoke(scriptHash: String, operation: String? = nil, args: Any? = nil, useTailCall: Bool = false) {
+    @objc public func pushContractInvoke(scriptHash: String, operation: String? = nil, args: Any? = nil, useTailCall: Bool = false) {
         pushData(args)
         
         if let operation = operation {
-            let hex = operation.unicodeScalars.filter { $0.isASCII }.map { String(format: "%X", $0.value) }.joined()
+            let hex = operation.hexString()
             pushData(hex)
         }
         if scriptHash.count != 40 {

@@ -566,7 +566,7 @@
 
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
 //    kWeakSelf(self);
-    [NEOWalletManage.sharedInstance sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
+    [NEOWalletManage.sharedInstance sendNEOWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
 //    [NEOWalletManage.sharedInstance sendQLCWithAddressWithIsQLC:true address:address tokeHash:tokenHash qlc:qlc completeBlock:^(NSString* complete) {
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{

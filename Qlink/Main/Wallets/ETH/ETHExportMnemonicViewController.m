@@ -7,7 +7,8 @@
 //
 
 #import "ETHExportMnemonicViewController.h"
-#import <TagListView/TagListView-Swift.h>
+#import "Qlink-Swift.h"
+//#import <TagListView/TagListView-Swift.h>
 #import "MnemonicTipView.h"
 #import "WalletCommonModel.h"
 #import <ETHFramework/ETHFramework.h>
@@ -40,6 +41,14 @@
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     kWeakSelf(self);
     [TrustWalletManage.sharedInstance exportMnemonicWithAddress:currentWalletM.address?:@"" :^(NSArray<NSString *> * arr) {
+//        // 暂时去重 以后再修改TrustWalletManage
+//        NSMutableArray *resultArray = [NSMutableArray array];
+//        for (NSString *item in arr) {
+//            if (![resultArray containsObject:item]) {
+//                [resultArray addObject:item];
+//            }
+//        }
+        [weakself.tagListView removeAllTags];
         [weakself.tagListView addTags:arr?:@[]];
     }];
 //    _tagListView.alignment = .Center // possible values are .Left, .Center, and .Right

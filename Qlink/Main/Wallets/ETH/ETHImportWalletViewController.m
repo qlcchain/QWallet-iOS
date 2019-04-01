@@ -243,7 +243,8 @@ typedef enum : NSUInteger {
     }
     
     kWeakSelf(self);
-    NSString *pw = [LoginPWModel getLoginPW];
+//    NSString *pw = [LoginPWModel getLoginPW];
+    NSString *pw = @"";
     NSString *mnemonic = _mnemonicTV.text;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:nil privateKeyInput:nil addressInput:nil mnemonicInput:mnemonic password:pw :^(BOOL success, NSString *address) {
@@ -346,6 +347,8 @@ typedef enum : NSUInteger {
             [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }

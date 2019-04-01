@@ -50,11 +50,6 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// When enabled, the values will be clipped to contentRect, otherwise they can bleed outside the content rect.
     @objc open var clipValuesToContentEnabled: Bool = false
 
-    /// When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-    /// be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-    /// that there is unwanted clipping.
-    @objc open var clipDataToContentEnabled: Bool = true
-
     /// Sets the minimum offset (padding) around the chart, defaults to 10
     @objc open var minOffset = CGFloat(10.0)
     
@@ -223,11 +218,9 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             rightYAxisRenderer.renderLimitLines(context: context)
         }
         
-        context.saveGState()
         // make sure the data cannot be drawn outside the content-rect
-        if clipDataToContentEnabled {
-            context.clip(to: _viewPortHandler.contentRect)
-        }
+        context.saveGState()
+        context.clip(to: _viewPortHandler.contentRect)
         renderer.drawData(context: context)
         
         // if highlighting is enabled
@@ -775,7 +768,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     _decelerationVelocity = recognizer.velocity(in: self)
                     
                     _decelerationDisplayLink = NSUIDisplayLink(target: self, selector: #selector(BarLineChartViewBase.decelerationLoop))
-                    _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.common)
+                    _decelerationDisplayLink.add(to: RunLoop.main, forMode: RunLoopMode.commonModes)
                 }
                 
                 _isDragging = false
@@ -832,7 +825,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     {
         if _decelerationDisplayLink !== nil
         {
-            _decelerationDisplayLink.remove(from: RunLoop.main, forMode: RunLoop.Mode.common)
+            _decelerationDisplayLink.remove(from: RunLoop.main, forMode: RunLoopMode.commonModes)
             _decelerationDisplayLink = nil
         }
     }
@@ -877,8 +870,8 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             let velocity = _panGestureRecognizer.velocity(in: self)
             if _data === nil || !isDragEnabled ||
                 (self.hasNoDragOffset && self.isFullyZoomedOut && !self.isHighlightPerDragEnabled) ||
-                (!_dragYEnabled && abs(velocity.y) > abs(velocity.x)) ||
-                (!_dragXEnabled && abs(velocity.y) < abs(velocity.x))
+                (!_dragYEnabled && fabs(velocity.y) > fabs(velocity.x)) ||
+                (!_dragXEnabled && fabs(velocity.y) < fabs(velocity.x))
             {
                 return false
             }
@@ -1537,7 +1530,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// is dragging on the X axis enabled?
-    @objc open var dragXEnabled: Bool
+    open var dragXEnabled: Bool 
     {
         get
         {
@@ -1550,7 +1543,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// is dragging on the Y axis enabled?
-    @objc open var dragYEnabled: Bool
+    open var dragYEnabled: Bool
     {
         get
         {
@@ -1691,12 +1684,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// - returns: The DataSet object displayed at the touched position of the chart
-    @objc open func getDataSetByTouchPoint(point pt: CGPoint) -> IBarLineScatterCandleBubbleChartDataSet?
+    @objc open func getDataSetByTouchPoint(point pt: CGPoint) -> IBarLineScatterCandleBubbleChartDataSet!
     {
         let h = getHighlightByTouchPoint(pt)
         if h !== nil
         {
-            return _data?.getDataSetByIndex(h!.dataSetIndex) as? IBarLineScatterCandleBubbleChartDataSet
+            return _data?.getDataSetByIndex(h!.dataSetIndex) as! IBarLineScatterCandleBubbleChartDataSet!
         }
         return nil
     }
