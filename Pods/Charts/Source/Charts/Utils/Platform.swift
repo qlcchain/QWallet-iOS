@@ -13,7 +13,7 @@ types are aliased to either their UI* implementation (on iOS) or their NS* imple
 	public typealias NSUIImage = UIImage
 	public typealias NSUIScrollView = UIScrollView
 	public typealias NSUIGestureRecognizer = UIGestureRecognizer
-public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
+	public typealias NSUIGestureRecognizerState = UIGestureRecognizerState
 	public typealias NSUIGestureRecognizerDelegate = UIGestureRecognizerDelegate
 	public typealias NSUITapGestureRecognizer = UITapGestureRecognizer
 	public typealias NSUIPanGestureRecognizer = UIPanGestureRecognizer
@@ -191,12 +191,12 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
 
 	func NSUIImagePNGRepresentation(_ image: NSUIImage) -> Data?
     {
-        return image.pngData()
+		return UIImagePNGRepresentation(image)
 	}
 
 	func NSUIImageJPEGRepresentation(_ image: NSUIImage, _ quality: CGFloat = 0.8) -> Data?
     {
-		return image.jpegData(compressionQuality: quality)
+		return UIImageJPEGRepresentation(image, quality)
 	}
 
 	func NSUIMainScreen() -> NSUIScreen?
@@ -274,7 +274,7 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
             stop()
         }
 
-        open func add(to runloop: RunLoop, forMode mode: RunLoop.Mode)
+		open func add(to runloop: RunLoop, forMode mode: RunLoopMode)
         {
             if displayLink != nil
             {
@@ -286,7 +286,7 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
             }
 		}
 
-        open func remove(from: RunLoop, forMode: RunLoop.Mode)
+		open func remove(from: RunLoop, forMode: RunLoopMode)
         {
             stop()
 		}
@@ -394,23 +394,6 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
     
 	open class NSUIView: NSView
     {
-        /// A private constant to set the accessibility role during initialization.
-        /// It ensures parity with the iOS element ordering as well as numbered counts of chart components.
-        /// (See Platform+Accessibility for details)
-        private let role: NSAccessibility.Role = .list
-
-        public override init(frame frameRect: NSRect)
-        {
-            super.init(frame: frameRect)
-            setAccessibilityRole(role)
-        }
-
-        required public init?(coder decoder: NSCoder)
-        {
-            super.init(coder: decoder)
-            setAccessibilityRole(role)
-        }
-
 		public final override var isFlipped: Bool
         {
 			return true
@@ -420,6 +403,7 @@ public typealias NSUIGestureRecognizerState = UIGestureRecognizer.State
         {
 			self.setNeedsDisplay(self.bounds)
 		}
+
         
 		public final override func touchesBegan(with event: NSEvent)
         {

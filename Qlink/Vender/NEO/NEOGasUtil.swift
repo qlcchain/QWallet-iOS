@@ -165,8 +165,9 @@ class NEOGasUtil: NSObject {
             return
         }
         let mainNet = true
+        let assetHash = ""
         //to be able to claim. we need to send the entire NEO to ourself.
-        NEOWalletManage.sharedInstance().account?.sendAssetTransaction(asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (NEOWalletManage.sharedInstance().account?.address)!, mainNet: mainNet) { (txHex, error) in
+        NEOWalletManage.sharedInstance().account?.sendAssetTransaction(assetHash: assetHash, asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (NEOWalletManage.sharedInstance().account?.address)!, mainNet: mainNet) { (txHex, error) in
             if error == nil {
 //                HUD.hide()
                 //HUD or something

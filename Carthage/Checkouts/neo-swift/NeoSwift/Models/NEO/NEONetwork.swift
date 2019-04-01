@@ -8,35 +8,30 @@
 
 import Foundation
 
-public class NEONode: Codable {
-    public var URL: String
-    public var blockCount: UInt
-    public var peerCount: UInt
+@objc public class NEONode: BlockHeight {
+    @objc public var URL: String
     
     enum CodingKeys: String, CodingKey {
         case URL = "url"
-        case blockCount = "blockcount"
-        case peerCount = "peercount"
     }
     
     public required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let heightContainer = try decoder.container(keyedBy: BlockHeightCodingKeys.self)
         let url: String = try container.decode(String.self, forKey: .URL)
-        let blockcount: UInt = try container.decode(UInt.self, forKey: .blockCount)
-        let peercount: UInt = try container.decode(UInt.self, forKey: .peerCount)
-        self.init(url: url, blockCount: blockcount, peerCount: peercount)
+        let height: UInt = try heightContainer.decode(UInt.self, forKey: .height)
+        self.init(url: url, height: height)
     }
     
-    public init(url: String, blockCount: UInt, peerCount: UInt) {
+    public init(url: String, height: UInt) {
         self.URL = url
-        self.blockCount = blockCount
-        self.peerCount = peerCount
+        super.init(height: height)
     }
 }
 
-public class NEONodes: Codable {
+@objc public class NEONodes: NSObject, Codable {
     
-    public var nodes: [NEONode]
+    @objc public var nodes: [NEONode]
     
     enum CodingKeys: String, CodingKey {
         case nodes = "nodes"
@@ -53,10 +48,10 @@ public class NEONodes: Codable {
     }
 }
 
-public struct NEONetwork: Codable {
+@objc public class NEONetwork: NSObject, Codable {
     
-    public var mainNet: NEONodes
-    public var testNet: NEONodes
+    @objc public var mainNet: NEONodes
+    @objc public var testNet: NEONodes
     
     enum CodingKeys: String, CodingKey {
         case mainNet = "main"
@@ -68,7 +63,7 @@ public struct NEONetwork: Codable {
         self.testNet = testNodes
     }
     
-    public init(from decoder: Decoder) throws {
+    public required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let mainNodes: NEONodes = try container.decode(NEONodes.self, forKey: .mainNet)
         let testNodes: NEONodes = try container.decode(NEONodes.self, forKey: .testNet)

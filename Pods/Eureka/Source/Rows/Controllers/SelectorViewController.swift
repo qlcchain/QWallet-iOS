@@ -133,7 +133,7 @@ open class _SelectorViewController<Row: SelectableRowType, OptionsRow: OptionsPr
         return row as! OptionsRow
     }
 
-    override public init(style: UITableView.Style) {
+    override public init(style: UITableViewStyle) {
         super.init(style: style)
     }
 

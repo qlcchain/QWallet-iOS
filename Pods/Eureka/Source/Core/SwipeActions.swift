@@ -32,7 +32,7 @@ public class SwipeAction: ContextualAction {
                 strongSelf.handler(strongSelf, forRow, completion)
             }
         } else {
-            action = UITableViewRowAction(style: style.contextualStyle as! UITableViewRowAction.Style,title: title){ [weak self] (action, indexPath) -> Void in
+            action = UITableViewRowAction(style: style.contextualStyle as! UITableViewRowActionStyle,title: title){ [weak self] (action, indexPath) -> Void in
                 guard let strongSelf = self else{ return }
 				strongSelf.handler(strongSelf, forRow) { _ in
 					DispatchQueue.main.async {
@@ -69,9 +69,9 @@ public class SwipeAction: ContextualAction {
             } else {
                 switch self{
                 case .normal:
-                    return UITableViewRowAction.Style.normal
+                    return UITableViewRowActionStyle.normal
                 case .destructive:
-                    return UITableViewRowAction.Style.destructive
+                    return UITableViewRowActionStyle.destructive
                 }
             }
         }
@@ -109,13 +109,6 @@ protocol ContextualAction {
     var title: String? { get set }
 }
 
-extension ContextualAction {
-    var backgroundColor: UIColor? {
-        get { return nil }
-        set { }
-    }
-}
-
 extension UITableViewRowAction: ContextualAction {
     public var image: UIImage? {
         get { return nil }
@@ -127,7 +120,7 @@ extension UITableViewRowAction: ContextualAction {
 extension UIContextualAction: ContextualAction {}
 
 public protocol ContextualStyle{}
-extension UITableViewRowAction.Style: ContextualStyle {}
+extension UITableViewRowActionStyle: ContextualStyle {}
 
 @available(iOS 11.0, *)
 extension UIContextualAction.Style: ContextualStyle {}

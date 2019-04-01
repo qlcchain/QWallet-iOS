@@ -60,7 +60,13 @@
 }
 
 #pragma mark - Action
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)joinAction:(id)sender {
+    [self.view endEditing:YES];
     NSString *localPW = [LoginPWModel getLoginPW];
     if (![localPW isEqualToString:_pwTF.text]) {
         [kAppD.window makeToastDisappearWithText:@"Password Wrong"];
@@ -71,6 +77,7 @@
 }
 
 - (IBAction)fingerprintLoginAction:(id)sender {
+    [self.view endEditing:YES];
     kWeakSelf(self);
     [FingetprintVerificationUtil show:^(BOOL success) {
         if (success) {
@@ -78,6 +85,8 @@
         }
     }];
 }
+
+
 
 #pragma mark - Transition
 - (void)jumpToETHExportMnemonic {

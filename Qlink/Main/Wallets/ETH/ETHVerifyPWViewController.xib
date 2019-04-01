@@ -97,11 +97,24 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZ8-7N-bJn">
+                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="KlA-IY-LpQ"/>
+                                        <constraint firstAttribute="height" constant="44" id="mqs-dg-qsT"/>
+                                    </constraints>
+                                    <state key="normal" image="eth_gray_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="I5D-kS-cdB"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="ixN-Vi-Nbs" firstAttribute="centerX" secondItem="udv-58-HRD" secondAttribute="centerX" id="EXJ-6S-zeS"/>
+                                <constraint firstItem="zZ8-7N-bJn" firstAttribute="centerY" secondItem="udv-58-HRD" secondAttribute="centerY" id="Erl-ci-36X"/>
                                 <constraint firstItem="ixN-Vi-Nbs" firstAttribute="centerY" secondItem="udv-58-HRD" secondAttribute="centerY" id="Nce-vO-I46"/>
+                                <constraint firstItem="zZ8-7N-bJn" firstAttribute="leading" secondItem="udv-58-HRD" secondAttribute="leading" constant="8" id="YvO-Yi-Ipk"/>
                                 <constraint firstAttribute="height" constant="44" id="pgt-Ek-Z7X"/>
                             </constraints>
                         </view>
@@ -137,4 +150,7 @@
             <point key="canvasLocation" x="138.40000000000001" y="152.47376311844079"/>
         </view>
     </objects>
+    <resources>
+        <image name="eth_gray_back" width="24" height="24"/>
+    </resources>
 </document>

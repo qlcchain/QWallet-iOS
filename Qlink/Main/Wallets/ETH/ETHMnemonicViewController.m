@@ -7,7 +7,8 @@
 //
 
 #import "ETHMnemonicViewController.h"
-#import <TagListView/TagListView-Swift.h>
+#import "Qlink-Swift.h"
+//#import <TagListView/TagListView-Swift.h>
 #import "MnemonicTipView.h"
 #import "ETHMnemonicConfirmViewController.h"
 

@@ -29,7 +29,8 @@
 #include "ripemd160.h"
 #include "memzero.h"
 
-static const int8_t b58digits_map[] = {
+const char b58digits_ordered[] = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const int8_t b58digits_map[] = {
 	-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 	-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 	-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
@@ -43,6 +44,11 @@ static const int8_t b58digits_map[] = {
 bool b58tobin(void *bin, size_t *binszp, const char *b58)
 {
 	size_t binsz = *binszp;
+
+	if (binsz == 0) {
+		return false;
+	}
+
 	const unsigned char *b58u = (const unsigned char*)b58;
 	unsigned char *binu = bin;
 	size_t outisz = (binsz + 3) / 4;
@@ -147,8 +153,6 @@ int b58check(const void *bin, size_t binsz, HasherType hasher_type, const char *
 
 	return binc[0];
 }
-
-static const char b58digits_ordered[] = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 bool b58enc(char *b58, size_t *b58sz, const void *data, size_t binsz)
 {
