@@ -160,9 +160,8 @@
                                          }];
 }
 
-#pragma -mark UPDATE_VPN初始化
-- (void) configureVPNInfo
-{
+#pragma mark - UPDATE_VPN初始化
+- (void)configureVPNInfo {
     if (_registerType == UpdateVPN) {
         _vpnNameTF.text = self.vpnInfo.vpnName?:@"";
         _vpnNameTF.enabled = NO;
