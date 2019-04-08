@@ -67,7 +67,7 @@
     
     // 设置标题的属性
     [childController.tabBarItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:UIColorFromRGB(0x676767)} forState:UIControlStateNormal]; //[UIFont fontWithName:@"VAGRoundedBT-Regular" size:12]
-    [childController.tabBarItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:MAIN_PURPLE_COLOR} forState:UIControlStateSelected];
+    [childController.tabBarItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:MAIN_BLUE_COLOR} forState:UIControlStateSelected];
     
     // 设置item的标题
     childController.tabBarItem.title = text;

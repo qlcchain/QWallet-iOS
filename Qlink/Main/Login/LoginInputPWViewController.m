@@ -55,7 +55,7 @@
 
 - (void)textFieldDidEnd {
     if (_pwTF.text && _pwTF.text.length > 0) {
-        [_joinBtn setBackgroundColor:MAIN_PURPLE_COLOR];
+        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _joinBtn.userInteractionEnabled = YES;
     } else {
         [_joinBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];

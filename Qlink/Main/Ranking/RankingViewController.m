@@ -172,7 +172,7 @@
             threeView.frame = CGRectMake(0,0, SCREEN_WIDTH - PAGE_PADDING, PAGE_HEIGHT);
             threeView.layer.cornerRadius = 5;
             threeView.layer.masksToBounds = YES;
-            threeView.backgroundColor = MAIN_PURPLE_COLOR;
+            threeView.backgroundColor = MAIN_BLUE_COLOR;
         }
         threeView.lblCountDesc.text = [NSString stringWithFormat:@"%@ %@",rankMode.actAmount?:@"0",NSStringLocalizable(@"qlc_pool")];
         threeView.lblRound.text = rankMode.actName?:@"";
@@ -185,7 +185,7 @@
             oneView.frame = CGRectMake(0,0, SCREEN_WIDTH - PAGE_PADDING, PAGE_HEIGHT);
             oneView.layer.cornerRadius = 5;
             oneView.layer.masksToBounds = YES;
-            oneView.backgroundColor = MAIN_PURPLE_COLOR;
+            oneView.backgroundColor = MAIN_BLUE_COLOR;
            NSDateFormatter *formatter = [NSDateFormatter defaultDateFormatter];
            NSDate *currentDate = [formatter dateFromString:_currentTime];
             NSDate *endDate = [formatter dateFromString:rankMode.actEndDate];
@@ -210,7 +210,7 @@
             rankView.frame = CGRectMake(0,0, SCREEN_WIDTH - PAGE_PADDING, PAGE_HEIGHT);
             rankView.layer.cornerRadius = 5;
             rankView.layer.masksToBounds = YES;
-            rankView.backgroundColor = MAIN_PURPLE_COLOR;
+            rankView.backgroundColor = MAIN_BLUE_COLOR;
         }
         return rankView;
     }

@@ -909,7 +909,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == _refreshScroll) {
         if (_refreshScroll.contentOffset.y < 0) {
-            _refreshScroll.backgroundColor = MAIN_PURPLE_COLOR;
+            _refreshScroll.backgroundColor = MAIN_BLUE_COLOR;
 //        } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - _refreshScroll.visibleSize.height) {
         } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - [self scrollViewVisibleSize:_refreshScroll].height) {
             _refreshScroll.backgroundColor = MAIN_WHITE_COLOR;
@@ -1183,7 +1183,7 @@
 //        _slimeView.slime.skinColor = [UIColor whiteColor];
         //      _slimeView.slime.lineWith = 1;
         //      _slimeView.slime.shadowBlur = 4;
-        //      _slimeView.slime.shadowColor = MAIN_PURPLE_COLOR;
+        //      _slimeView.slime.shadowColor = MAIN_BLUE_COLOR;
     }
     
     return _slimeView;

@@ -32,11 +32,11 @@
     
     if ([type isEqualToString:@"END"] || [type isEqualToString:@"PRIZED"]) {
         if (isEnd) {
-            _lblSub1.textColor = MAIN_PURPLE_COLOR;
-            _lblSub2.textColor = MAIN_PURPLE_COLOR;
-            _lblconnet.textColor = MAIN_PURPLE_COLOR;
-            _lblconnet.textColor = MAIN_PURPLE_COLOR;
-            _lblNumber.textColor = MAIN_PURPLE_COLOR;
+            _lblSub1.textColor = MAIN_BLUE_COLOR;
+            _lblSub2.textColor = MAIN_BLUE_COLOR;
+            _lblconnet.textColor = MAIN_BLUE_COLOR;
+            _lblconnet.textColor = MAIN_BLUE_COLOR;
+            _lblNumber.textColor = MAIN_BLUE_COLOR;
         }
         _lblSub1.text = [NSString stringWithFormat:@"%.2f WINQ GAS",mode.rewardTotal];
         _lblSub2.text = NSStringLocalizable(@"rewards");

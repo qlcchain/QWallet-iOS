@@ -20,18 +20,19 @@
         titleLeft = 0;
     } else if (sortType == MarketSortBtnTypeNormal) {
         image = [UIImage imageNamed:@"icon_sort_normal"];
-        textColor = MAIN_PURPLE_COLOR;
+        textColor = MAIN_BLUE_COLOR;
     } else if (sortType == MarketSortBtnTypeDown) {
         image = [UIImage imageNamed:@"icon_sort_down"];
-        textColor = MAIN_PURPLE_COLOR;
+        textColor = MAIN_BLUE_COLOR;
     } else if (sortType == MarketSortBtnTypeUp) {
         image = [UIImage imageNamed:@"icon_sort_up"];
-        textColor = MAIN_PURPLE_COLOR;
+        textColor = MAIN_BLUE_COLOR;
     } else {
         titleLeft = 0;
     }
     self.titleEdgeInsets = UIEdgeInsetsMake(0, titleLeft, 0, 0);
     [self setImage:image forState:UIControlStateNormal];
+//    self.titleLabel.theme_textColor = globalBackgroundColorPicker;
     [self setTitleColor:textColor forState:UIControlStateNormal];
 }
 

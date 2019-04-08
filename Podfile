@@ -68,6 +68,7 @@ target "Qlink" do
     pod 'SwiftColor'
     pod 'AsyncSwift'
     pod 'Appirater'
+    pod 'SwiftTheme', '0.4.1'
 
     tunnel
     library

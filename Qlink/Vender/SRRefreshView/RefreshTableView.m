@@ -37,7 +37,7 @@
         _slimeView.slime.skinColor =  SRREFRESH_BACK_COLOR;
         _slimeView.slime.lineWith = 1;
        // _slimeView.slime.shadowBlur = 4;
-       // _slimeView.slime.shadowColor = MAIN_PURPLE_COLOR;
+       // _slimeView.slime.shadowColor = MAIN_BLUE_COLOR;
     }
     
     return _slimeView;

@@ -112,7 +112,7 @@
     
     _scannerBorder = [[HMScannerBorder alloc] initWithFrame:CGRectMake(45,75, width, width)];
    // _scannerBorder.center = self.view.center;
-    _scannerBorder.tintColor = MAIN_PURPLE_COLOR;
+    _scannerBorder.tintColor = MAIN_BLUE_COLOR;
     [_parentView addSubview:_scannerBorder];
     
     
@@ -176,7 +176,7 @@
     attrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     [pickerController.navigationBar setTitleTextAttributes:attrs];
     pickerController.navigationBar.translucent = NO;
-    pickerController.navigationBar.barTintColor = MAIN_PURPLE_COLOR;
+    pickerController.navigationBar.barTintColor = MAIN_BLUE_COLOR;
     //设置相册呈现的样式
     pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
     pickerController.delegate = self;

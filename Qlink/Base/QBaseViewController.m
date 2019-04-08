@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
 //    self.view.backgroundColor = [UIColor RandomColor];
-    self.view.backgroundColor = MAIN_PURPLE_COLOR;
+    self.view.backgroundColor = MAIN_BLUE_COLOR;
     self.navigationController.navigationBarHidden = !showRightNavBarItem;
     
     // 设置右边按钮

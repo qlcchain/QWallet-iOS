@@ -141,8 +141,8 @@
         set1.highlightLineDashLengths = @[@5.f, @2.5f];
 //        [set1 setColor:UIColor.blackColor];
 //        [set1 setCircleColor:UIColor.blackColor];
-        [set1 setColor:MAIN_PURPLE_COLOR];
-        [set1 setCircleColor:MAIN_PURPLE_COLOR];
+        [set1 setColor:MAIN_BLUE_COLOR];
+        [set1 setCircleColor:MAIN_BLUE_COLOR];
         set1.lineWidth = 1.0;
         set1.circleRadius = 3.0;
         set1.drawCircleHoleEnabled = NO;

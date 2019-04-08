@@ -404,6 +404,7 @@
 		58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B7121951EA00036FF4F /* NSString+RemoveZero.m */; };
 		589D4711225B327500A4A4E3 /* FinanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589D470F225B327500A4A4E3 /* FinanceViewController.m */; };
 		589D4712225B327500A4A4E3 /* FinanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589D4710225B327500A4A4E3 /* FinanceViewController.xib */; };
+		589D4716225B502300A4A4E3 /* MyThemes.m in Sources */ = {isa = PBXBuildFile; fileRef = 589D4715225B502200A4A4E3 /* MyThemes.m */; };
 		58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A074232092FD8400470E37 /* NeoTransferUtil.m */; };
 		58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A2495820D0F60C00781549 /* WebKit.framework */; };
 		58A2495C20D207AB00781549 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A2495B20D207AB00781549 /* VersionManager.m */; };
@@ -1291,6 +1292,9 @@
 		589D470E225B327500A4A4E3 /* FinanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceViewController.h; sourceTree = "<group>"; };
 		589D470F225B327500A4A4E3 /* FinanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceViewController.m; sourceTree = "<group>"; };
 		589D4710225B327500A4A4E3 /* FinanceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceViewController.xib; sourceTree = "<group>"; };
+		589D4713225B4F3100A4A4E3 /* ThemeMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemeMacro.h; sourceTree = "<group>"; };
+		589D4714225B502200A4A4E3 /* MyThemes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThemes.h; sourceTree = "<group>"; };
+		589D4715225B502200A4A4E3 /* MyThemes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyThemes.m; sourceTree = "<group>"; };
 		58A074222092FD8400470E37 /* NeoTransferUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeoTransferUtil.h; sourceTree = "<group>"; };
 		58A074232092FD8400470E37 /* NeoTransferUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NeoTransferUtil.m; sourceTree = "<group>"; };
 		58A2495820D0F60C00781549 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -2081,6 +2085,8 @@
 		580D913A20625A4300B12506 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				589D4714225B502200A4A4E3 /* MyThemes.h */,
+				589D4715225B502200A4A4E3 /* MyThemes.m */,
 				581B678A219178BA0061BEDB /* FingetprintVerificationUtil.h */,
 				581B678B219178BB0061BEDB /* FingetprintVerificationUtil.m */,
 				58CF1029207CA4640026F28E /* ChooseCountryUtil.h */,
@@ -3318,6 +3324,7 @@
 				935F3285212BB4D600B03341 /* GlobalMacro.h */,
 				935F3286212BB4D600B03341 /* ServerMacro.h */,
 				935F3287212BB4D700B03341 /* WAMacroUtil.h */,
+				589D4713225B4F3100A4A4E3 /* ThemeMacro.h */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -4024,6 +4031,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftColor/SwiftColor.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftTheme/SwiftTheme.framework",
 				"${BUILT_PRODUCTS_DIR}/TrezorCrypto/TrezorCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustCore/TrustCore.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustKeystore/TrustKeystore.framework",
@@ -4065,6 +4073,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftColor.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTheme.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrezorCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKeystore.framework",
@@ -4378,6 +4387,7 @@
 				581D32D0219C158B001F88C3 /* ValueOut.swift in Sources */,
 				580D91C72064A27100B12506 /* QGradientView.m in Sources */,
 				58CF40C3219980BD0000C3DA /* NEOTransactionRecordViewController.m in Sources */,
+				589D4716225B502300A4A4E3 /* MyThemes.m in Sources */,
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
 				581D32C5219C158B001F88C3 /* SHA256.swift in Sources */,
 				587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */,
