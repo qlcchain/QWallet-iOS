@@ -564,8 +564,7 @@
 }
 
 // 注册并转帐
-- (void) registerVPNAndTranQLC
-{
+- (void) registerVPNAndTranQLC {
     [kAppD.window makeToastInView:self.view text:nil];
      kWeakSelf(self);
     NSString *vpnName = self.vpnTFName?:@"";
