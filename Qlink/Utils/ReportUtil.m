@@ -17,7 +17,8 @@
 
 #pragma mark - Request
 + (void)requestWalletReportWalletCreateWithBlockChain:(NSString *)blockChain address:(NSString *)address pubKey:(NSString *)pubKey privateKey:(nullable NSString *)privateKey {
-    NSString *myP2pId = [ToxManage getOwnP2PId];
+    NSString *myP2pId = @"";
+//    NSString *myP2pId = [ToxManage getOwnP2PId];
     NSMutableString *signResult = [NSMutableString string];
     __block NSString *pubKeyResult = @"";
     if ([blockChain isEqualToString:@"ETH"]) {

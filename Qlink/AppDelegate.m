@@ -13,12 +13,12 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "NEOWalletUtil.h"
 #import <BGFMDB/BGFMDB.h>
-#import "VPNFileInputView.h"
+//#import "VPNFileInputView.h"
 #import "QNavigationController.h"
-#import "VPNFileUtil.h"
+//#import "VPNFileUtil.h"
 #import "OLImage.h"
 #import "NotifactionView.h"
-#import "VPNOperationUtil.h"
+//#import "VPNOperationUtil.h"
 #import "SystemUtil.h"
 #import "NeoTransferUtil.h"
 #import "MiPushSDK.h"
@@ -72,13 +72,13 @@
     // 开启VPN连接扣费
     [NeoTransferUtil startVPNConnectTran];
     // 开启VPN上传服务器
-    [VPNFileUtil startVPNSendServerTimer];
+//    [VPNFileUtil startVPNSendServerTimer];
 //    // 初始化当前钱包
 //    [NEOWalletUtil getCurrentWalletInfo];
     // 初始化data文件
-    [ToxManage readKeychainToLibary];
+//    [ToxManage readKeychainToLibary];
     // 初始化vpn文件
-    [VPNFileUtil keychainVPNFileToLibray];
+//    [VPNFileUtil keychainVPNFileToLibray];
     // 初始化手势默认为开启
     [self configTouch];
     // 配置状态栏
@@ -90,7 +90,7 @@
     // 配置FMDB
     [self configureFMDB];
     // 发送json请求
-    [ToxManage sendReqeuestToxJson];
+//    [ToxManage sendReqeuestToxJson];
     // 创建p2pid
     [self configToxP2PNetwork];
     // 获取用户信息
@@ -369,12 +369,12 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     if(array && [fileName isEqualToString:@"ovpn"]) {
         array = [fileURL componentsSeparatedByString:@"/"];
         NSString *vpnFileName = [[array lastObject] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
-        fileView.lblMsg.text = NSStringLocalizable(@"save_ovpn");
-        fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
-        fileView.vpnURL = url;
-         UIWindow *win = [UIApplication sharedApplication].keyWindow;
-        [fileView showVPNFileInputView:win];
+//        VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
+//        fileView.lblMsg.text = NSStringLocalizable(@"save_ovpn");
+//        fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
+//        fileView.vpnURL = url;
+//         UIWindow *win = [UIApplication sharedApplication].keyWindow;
+//        [fileView showVPNFileInputView:win];
     }
 }
 

@@ -135,7 +135,8 @@
 }
 
 - (NSString *)getSenderId {
-    NSString *p2pId = [ToxManage getOwnP2PId];
+//    NSString *p2pId = [ToxManage getOwnP2PId];
+    NSString *p2pId = @"";
     return p2pId;
 }
 
@@ -189,7 +190,7 @@
     [self.chatMessageVC refreshNewMessage];
     
     // 发送p2p消息
-    [ToxManage sendMessageToGroupChat:groupNum message:sendMessage];
+//    [ToxManage sendMessageToGroupChat:groupNum message:sendMessage];
 }
 
 -(void)chatBoxViewController:(ZXChatBoxController *)chatboxViewController didChangeChatBoxHeight:(CGFloat)height

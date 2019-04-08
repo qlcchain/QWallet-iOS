@@ -8,7 +8,7 @@
 
 #import "UIView+ToastAlert.h"
 #import "WalletAlertView.h"
-#import "VpnToastView.h"
+//#import "VpnToastView.h"
 
 @implementation UIView (ToastAlert)
 
@@ -36,15 +36,15 @@
 // vpn操作alertview
 + (void) showVPNToastAlertViewWithTopImageName:(NSString *) imageName content:(NSString *) content block:(void (^)(void))clickYesBlock
 {
-    VpnToastView *alertView = [VpnToastView loadVPN2ToastView];
-    alertView.topImageView.image = [UIImage imageNamed:imageName];
-    alertView.lblContent.text = content;
-    [alertView showToastView];
-    alertView.yesClickBlock = ^{
-        if (clickYesBlock) {
-            clickYesBlock();
-        }
-    };
+//    VpnToastView *alertView = [VpnToastView loadVPN2ToastView];
+//    alertView.topImageView.image = [UIImage imageNamed:imageName];
+//    alertView.lblContent.text = content;
+//    [alertView showToastView];
+//    alertView.yesClickBlock = ^{
+//        if (clickYesBlock) {
+//            clickYesBlock();
+//        }
+//    };
 }
 
 @end

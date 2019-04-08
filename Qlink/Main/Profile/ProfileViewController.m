@@ -55,7 +55,8 @@
 
 #pragma mark - 上传头像
 - (void)uploadImg:(UIImage *)img {
-    NSString *p2pId = [ToxManage getOwnP2PId]?:@"";
+    NSString *p2pId = @"";
+//    NSString *p2pId = [ToxManage getOwnP2PId]?:@"";
     if (p2pId.length <= 0) {
         return;
     }

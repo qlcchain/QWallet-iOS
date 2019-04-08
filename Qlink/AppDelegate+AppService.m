@@ -17,11 +17,11 @@
 #import <BGFMDB/BGFMDB.h>
 //#import "VPNFileInputView.h"
 //#import "QlinkNavViewController.h"
-#import "VPNFileUtil.h"
+//#import "VPNFileUtil.h"
 //#import "OLImage.h"
 #import "NotifactionView.h"
 #import "ChatUtil.h"
-#import "VPNOperationUtil.h"
+//#import "VPNOperationUtil.h"
 #import <BGFMDB/BGDB.h>
 #import "SystemUtil.h"
 #import "NeoTransferUtil.h"
@@ -129,7 +129,7 @@
     bg_setSqliteName(@"Qlink_DataBase");
     // 判断表名是否存在
     if (![[BGDB shareManager] bg_isExistWithTableName:VPNREGISTER_TABNAME]) {
-        [VPNOperationUtil keyChainDataToDB];
+//        [VPNOperationUtil keyChainDataToDB];
     }
     [DBManageUtil updateDBversion];
 }
@@ -137,9 +137,9 @@
 #pragma mark - 创建p2pid
 - (void)configToxP2PNetwork {
     // 初始化实列。并创建c回调
-    [ToxManage shareMange];
+//    [ToxManage shareMange];
     // 创建p2p连接网络
-    [ToxManage createdP2PNetwork];
+//    [ToxManage createdP2PNetwork];
 }
 
 #pragma mark - 获取用户信息

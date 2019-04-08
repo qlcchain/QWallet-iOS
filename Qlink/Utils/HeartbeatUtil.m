@@ -20,23 +20,23 @@
     return sharedObj;
 }
 
-+ (void) sendHeartbeatRequest
-{
-    int status = 1;
-    if (![ToxManage getP2PConnectionStatus]) {
-        status = 0;
-    }
-    
-    NSDictionary *parmer = @{@"p2pId":[ToxManage getOwnP2PId]?:@"",
-                             @"status":[NSNumber numberWithInt:status],
-                             @"vpnName":[NeoTransferUtil currentVPNName]?:@"",
-                             @"wifiName":@""
-                             };
-    [RequestService requestWithUrl:heartbeatV3_Url params:parmer httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        DDLogDebug(@"heartbeatt send failed");
-    }];
++ (void) sendHeartbeatRequest {
+    return;
+//    int status = 1;
+//    if (![ToxManage getP2PConnectionStatus]) {
+//        status = 0;
+//    }
+//
+//    NSDictionary *parmer = @{@"p2pId":[ToxManage getOwnP2PId]?:@"",
+//                             @"status":[NSNumber numberWithInt:status],
+//                             @"vpnName":[NeoTransferUtil currentVPNName]?:@"",
+//                             @"wifiName":@""
+//                             };
+//    [RequestService requestWithUrl:heartbeatV3_Url params:parmer httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//        DDLogDebug(@"heartbeatt send failed");
+//    }];
 }
 
 - (void) sendTimedHeartbeat {

@@ -9,10 +9,10 @@
 #import "MyAssetsViewController.h"
 #import "MyAssetsView.h"
 #import "NEOWalletUtil.h"
-#import "VpnRegisterServerViewController.h"
+//#import "VpnRegisterServerViewController.h"
 #import "NeoQueryWGasModel.h"
 #import "WalletCommonModel.h"
-#import "VpnOldAssetUpdateViewController.h"
+//#import "VpnOldAssetUpdateViewController.h"
 #import "Qlink-Swift.h"
 
 @interface MyAssetsViewController ()
@@ -78,20 +78,20 @@
 #pragma mark - Transition
 
 - (void)jumpToVPNRegister {
-    VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:RegisterServerVPN];
-    [self.navigationController pushViewController:vc animated:YES];
+//    VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:RegisterServerVPN];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void) jumpRegisterVPNWithMode:(VPNInfo *)vpnInfo {
-    if (vpnInfo.isServerVPN) {
-        VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:UpdateServerVPN];
-        vc.vpnInfo = vpnInfo;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        VpnOldAssetUpdateViewController *vc = [[VpnOldAssetUpdateViewController alloc] initWithRegisterType:UpdateVPN];
-        vc.vpnInfo = vpnInfo;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    if (vpnInfo.isServerVPN) {
+//        VpnRegisterServerViewController *vc = [[VpnRegisterServerViewController alloc] initWithRegisterType:UpdateServerVPN];
+//        vc.vpnInfo = vpnInfo;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    } else {
+//        VpnOldAssetUpdateViewController *vc = [[VpnOldAssetUpdateViewController alloc] initWithRegisterType:UpdateVPN];
+//        vc.vpnInfo = vpnInfo;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 #pragma mark - Noti

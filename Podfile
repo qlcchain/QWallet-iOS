@@ -19,7 +19,7 @@ def library
     pod 'KissXML', '~> 5.2.2'
     #pod 'ICSMainFramework', :path => "./Library/ICSMainFramework/"
     pod 'MMWormhole', '~> 2.0.0'
-#    pod 'KeychainAccess'
+    pod 'KeychainAccess'
 end
 
 def tunnel
@@ -76,27 +76,6 @@ target "Qlink" do
     model
     eth
 
-end
-
-
-target "ShadowsockLibrary" do
-    library
-    model
-    # YAML-Framework 0.0.3 is not available in cocoapods so we install it from local using git submodule
-    # pod 'YAML-Framework', :path => "./Library/YAML-Framework"
-end
-
-target "ShadowsockModel" do
-    model
-end
-
-target "ShadowsockTunnel" do
-    tunnel
-    socket
-end
-
-target "ShadowsockProcessor" do
-    socket
 end
 
 
