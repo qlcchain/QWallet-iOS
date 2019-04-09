@@ -52,7 +52,8 @@
     
     // Do any additional setup after loading the view.
 //    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    self.view.backgroundColor = MAIN_BLUE_COLOR;
+//    self.view.backgroundColor = MAIN_BLUE_COLOR;
+    self.view.theme_backgroundColor = globalBackgroundColorPicker;
     
     // 主屏幕的高度减去导航的高度，减去状态栏的高度。在PCH头文件
 //    viewHeight = HEIGHT_SCREEN - HEIGHT_NAVBAR - HEIGHT_STATUSBAR;
@@ -90,7 +91,8 @@
     kWeakSelf(self);
     ChatHeadView *chatHeadV = [ChatHeadView getNibView];
 //    chatHeadV.backgroundColor = [UIColor clearColor];
-    chatHeadV.backgroundColor = MAIN_BLUE_COLOR;
+//    chatHeadV.backgroundColor = MAIN_BLUE_COLOR;
+    chatHeadV.theme_backgroundColor = globalBackgroundColorPicker;
     chatHeadV.title = ChatUtil.shareInstance.currentChatM.groupName.uppercaseString;
     chatHeadV.backB = ^{
         [weakself back];

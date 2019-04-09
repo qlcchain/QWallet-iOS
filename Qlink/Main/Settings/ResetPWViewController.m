@@ -70,7 +70,8 @@
 
 - (void)textFieldDidEnd {
     if (_currentPWTF.text && _currentPWTF.text.length > 0 && _setPWTF.text && _setPWTF.text.length > 0 && _repeatPWTF.text && _repeatPWTF.text.length > 0) {
-        [_storeBtn setBackgroundColor:MAIN_BLUE_COLOR];
+//        [_storeBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _storeBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _storeBtn.userInteractionEnabled = YES;
     } else {
         [_storeBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];

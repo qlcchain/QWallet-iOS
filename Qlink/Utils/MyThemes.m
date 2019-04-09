@@ -19,19 +19,19 @@
 
 + (void)switchToNext {
     int next = (int)ThemeManager.currentThemeIndex + 1;
-    if (next > 3) { // cycle and without Night
+    if (next > 1) { // cycle and without Night
         next = 0;
     }
     [self switchTo:next];
 }
 
-+ (void)switchNight:(BOOL)isToNight {
-    [self switchTo:isToNight ? MyThemesTypeNight : MyThemesTypeBlue];
-}
-
-+ (BOOL)isNight {
-    return (int)ThemeManager.currentThemeIndex == MyThemesTypeNight;
-}
+//+ (void)switchNight:(BOOL)isToNight {
+//    [self switchTo:isToNight ? MyThemesTypeNight : MyThemesTypeBlue];
+//}
+//
+//+ (BOOL)isNight {
+//    return (int)ThemeManager.currentThemeIndex == MyThemesTypeNight;
+//}
 
 + (void)restoreLastTheme {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

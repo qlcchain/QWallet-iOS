@@ -11,17 +11,14 @@
 typedef enum {
     MyThemesTypeBlue = 0,
     MyThemesTypePurple,
-    MyThemesTypeSss,
-    MyThemesTypeNight
 } MyThemesType;
 
 @interface MyThemes : NSObject
 
 + (void)switchTo:(MyThemesType)type;
 + (void)switchToNext;
-+ (void)switchNight:(BOOL)isToNight;
-
-+ (BOOL)isNight;
+//+ (void)switchNight:(BOOL)isToNight;
+//+ (BOOL)isNight;
 
 + (void)restoreLastTheme;
 + (void)saveLastTheme;

@@ -57,7 +57,8 @@
 
 - (void)textFieldDidEnd {
     if (_pwTF.text && _pwTF.text.length > 0 && _repeatTF.text && _repeatTF.text.length > 0) {
-        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
+//        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _joinBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _joinBtn.userInteractionEnabled = YES;
     } else {
         [_joinBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];

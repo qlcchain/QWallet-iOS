@@ -909,7 +909,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == _refreshScroll) {
         if (_refreshScroll.contentOffset.y < 0) {
-            _refreshScroll.backgroundColor = MAIN_BLUE_COLOR;
+//            _refreshScroll.backgroundColor = MAIN_BLUE_COLOR;
+            _refreshScroll.theme_backgroundColor = globalBackgroundColorPicker;
 //        } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - _refreshScroll.visibleSize.height) {
         } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - [self scrollViewVisibleSize:_refreshScroll].height) {
             _refreshScroll.backgroundColor = MAIN_WHITE_COLOR;

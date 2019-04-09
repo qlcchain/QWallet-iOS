@@ -12,7 +12,8 @@
 
 - (void)setSortType:(MarketSortBtnType)sortType {
     _sortType = sortType;
-    UIColor *textColor = UIColorFromRGB(0xAAAAAB);
+//    UIColor *textColor = UIColorFromRGB(0xAAAAAB);
+    ThemeColorPicker *colorPicker = [ThemeColorPicker pickerWithColors:@[@"#AAAAAB", @"#AAAAAB"]];
     UIImage *image = nil;
     CGFloat titleLeft = -40;
 //    CGFloat imageLeft = -40;
@@ -20,20 +21,20 @@
         titleLeft = 0;
     } else if (sortType == MarketSortBtnTypeNormal) {
         image = [UIImage imageNamed:@"icon_sort_normal"];
-        textColor = MAIN_BLUE_COLOR;
+        colorPicker = globalBackgroundColorPicker;
     } else if (sortType == MarketSortBtnTypeDown) {
         image = [UIImage imageNamed:@"icon_sort_down"];
-        textColor = MAIN_BLUE_COLOR;
+        colorPicker = globalBackgroundColorPicker;
     } else if (sortType == MarketSortBtnTypeUp) {
         image = [UIImage imageNamed:@"icon_sort_up"];
-        textColor = MAIN_BLUE_COLOR;
+        colorPicker = globalBackgroundColorPicker;
     } else {
         titleLeft = 0;
     }
     self.titleEdgeInsets = UIEdgeInsetsMake(0, titleLeft, 0, 0);
     [self setImage:image forState:UIControlStateNormal];
-//    self.titleLabel.theme_textColor = globalBackgroundColorPicker;
-    [self setTitleColor:textColor forState:UIControlStateNormal];
+    self.titleLabel.theme_textColor = colorPicker;
+//    [self setTitleColor:textColor forState:UIControlStateNormal];
 }
 
 @end

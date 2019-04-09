@@ -100,7 +100,8 @@
     attrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     [pickerController.navigationBar setTitleTextAttributes:attrs];
     pickerController.navigationBar.translucent = NO;
-    pickerController.navigationBar.barTintColor = MAIN_BLUE_COLOR;
+//    pickerController.navigationBar.barTintColor = MAIN_BLUE_COLOR;
+    pickerController.navigationBar.theme_barTintColor = globalBackgroundColorPicker;
     //设置选取的照片是否可编辑
     pickerController.allowsEditing = YES;
     //设置相册呈现的样式
