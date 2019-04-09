@@ -13,6 +13,7 @@
 
 @interface LaunchViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *contentBack;
 @property (weak, nonatomic) IBOutlet OLImageView *gifImgV;
 
 @end
@@ -26,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    _contentBack.theme_backgroundColor = globalBackgroundColorPicker;
     _gifImgV.image = [LaunchViewController gifImage];
 }
 

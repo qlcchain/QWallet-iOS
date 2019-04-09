@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Random)
+
 + (UIColor *)RandomColor;
++ (UIColor *)colorWithHexString:(NSString *)hexString;
++ (UIColor *)mainColor;
+
 @end

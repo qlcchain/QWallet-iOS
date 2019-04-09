@@ -32,6 +32,7 @@
 #import "CryptoUtilOC.h"
 #import "ReportUtil.h"
 #import <ETHFramework/ETHFramework.h>
+#import "LoginViewController.h"
 
 @import Firebase;
 
@@ -123,7 +124,8 @@
     LaunchViewController *vc = [[LaunchViewController alloc] init];
     self.window.rootViewController = vc;
     NSTimeInterval timeI = [LaunchViewController getGifDuration];
-    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
+//    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
+    [self performSelector:@selector(setRootLoginNew) withObject:nil afterDelay:timeI];
 }
 
 #pragma mark - 初始化Tabbar
@@ -135,6 +137,12 @@
 }
 
 #pragma mark - Login
+- (void)setRootLoginNew {
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nav;
+}
+
 - (void)setRootLogin {
     BOOL isExist = [LoginPWModel isExistLoginPW];
     UIViewController *vc = nil;

@@ -302,6 +302,14 @@
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
 		585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C9A1C2181A16B00DD12DB /* WalletsViewController.m */; };
 		585C9A1F2181A16B00DD12DB /* WalletsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585C9A1D2181A16B00DD12DB /* WalletsViewController.xib */; };
+		585CDC12225C785500199FE1 /* ForgetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585CDC10225C785500199FE1 /* ForgetPWViewController.m */; };
+		585CDC13225C785500199FE1 /* ForgetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585CDC11225C785500199FE1 /* ForgetPWViewController.xib */; };
+		585CDC17225C89DC00199FE1 /* ChooseAreaCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585CDC15225C89DC00199FE1 /* ChooseAreaCodeViewController.m */; };
+		585CDC18225C89DC00199FE1 /* ChooseAreaCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585CDC16225C89DC00199FE1 /* ChooseAreaCodeViewController.xib */; };
+		585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585CDC1B225C8FCE00199FE1 /* ChooseAreaCodeCell.m */; };
+		585CDC1E225C8FCE00199FE1 /* ChooseAreaCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585CDC1C225C8FCE00199FE1 /* ChooseAreaCodeCell.xib */; };
+		585CDC20225C99EE00199FE1 /* CountryCode.json in Resources */ = {isa = PBXBuildFile; fileRef = 585CDC1F225C99EE00199FE1 /* CountryCode.json */; };
+		585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 585CDC22225C9B9700199FE1 /* AreaCodeModel.m */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9F20CFB42000EEB6CE /* WebViewController.xib */; };
 		5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */; };
@@ -479,6 +487,8 @@
 		58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B947E92064D145007F52F6 /* SkyRadiusView.m */; };
 		58E7C5DE20A3E62B00EDDD09 /* ChatTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E7C5DD20A3E62B00EDDD09 /* ChatTipView.m */; };
 		58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E7C5E120A3F62F00EDDD09 /* UITextView+ZWPlaceHolder.m */; };
+		58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2BCA2225C42410091DD53 /* LoginViewController.m */; };
+		58F2BCA5225C42410091DD53 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F2BCA3225C42410091DD53 /* LoginViewController.xib */; };
 		73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */; };
 		73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */; };
 		73048F102079E1C500A4EFEE /* CurrentWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0F2079E1C500A4EFEE /* CurrentWalletInfo.m */; };
@@ -1098,6 +1108,18 @@
 		585C9A1B2181A16B00DD12DB /* WalletsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletsViewController.h; sourceTree = "<group>"; };
 		585C9A1C2181A16B00DD12DB /* WalletsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletsViewController.m; sourceTree = "<group>"; };
 		585C9A1D2181A16B00DD12DB /* WalletsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletsViewController.xib; sourceTree = "<group>"; };
+		585CDC0F225C785500199FE1 /* ForgetPWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgetPWViewController.h; sourceTree = "<group>"; };
+		585CDC10225C785500199FE1 /* ForgetPWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgetPWViewController.m; sourceTree = "<group>"; };
+		585CDC11225C785500199FE1 /* ForgetPWViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPWViewController.xib; sourceTree = "<group>"; };
+		585CDC14225C89DC00199FE1 /* ChooseAreaCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAreaCodeViewController.h; sourceTree = "<group>"; };
+		585CDC15225C89DC00199FE1 /* ChooseAreaCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAreaCodeViewController.m; sourceTree = "<group>"; };
+		585CDC16225C89DC00199FE1 /* ChooseAreaCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseAreaCodeViewController.xib; sourceTree = "<group>"; };
+		585CDC1A225C8FCE00199FE1 /* ChooseAreaCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseAreaCodeCell.h; sourceTree = "<group>"; };
+		585CDC1B225C8FCE00199FE1 /* ChooseAreaCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseAreaCodeCell.m; sourceTree = "<group>"; };
+		585CDC1C225C8FCE00199FE1 /* ChooseAreaCodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseAreaCodeCell.xib; sourceTree = "<group>"; };
+		585CDC1F225C99EE00199FE1 /* CountryCode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCode.json; sourceTree = "<group>"; };
+		585CDC21225C9B9700199FE1 /* AreaCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaCodeModel.h; sourceTree = "<group>"; };
+		585CDC22225C9B9700199FE1 /* AreaCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaCodeModel.m; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC9E20CFB42000EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		5860ACA120CFB42300EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WebViewController.strings; sourceTree = "<group>"; };
@@ -1418,6 +1440,9 @@
 		58E7C5DD20A3E62B00EDDD09 /* ChatTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatTipView.m; sourceTree = "<group>"; };
 		58E7C5E120A3F62F00EDDD09 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
 		58E7C5E220A3F63000EDDD09 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
+		58F2BCA2225C42410091DD53 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		58F2BCA3225C42410091DD53 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		58F2BCA6225C425F0091DD53 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		73007F9A207C98D100F11341 /* HistoryRecrdInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecrdInfo.h; sourceTree = "<group>"; };
 		73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecrdInfo.m; sourceTree = "<group>"; };
 		73048F0B2079B5BB00A4EFEE /* UILabel+Copy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Copy.h"; sourceTree = "<group>"; };
@@ -2078,6 +2103,8 @@
 				7377D175206B8D560072E628 /* LocationMode.m */,
 				580CAFBD218C29D1004C0E06 /* LoginPWModel.h */,
 				580CAFBE218C29D1004C0E06 /* LoginPWModel.m */,
+				585CDC21225C9B9700199FE1 /* AreaCodeModel.h */,
+				585CDC22225C9B9700199FE1 /* AreaCodeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2506,12 +2533,23 @@
 		581D7AF42179C77B00AFD0DE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				585CDC19225C8FB700199FE1 /* Cell */,
 				581D7AF52179C7AF00AFD0DE /* LoginSetPWViewController.h */,
 				581D7AF62179C7AF00AFD0DE /* LoginSetPWViewController.m */,
 				581D7AF72179C7AF00AFD0DE /* LoginSetPWViewController.xib */,
 				582843F721885EEA00AD65C8 /* LoginInputPWViewController.h */,
 				582843F821885EEA00AD65C8 /* LoginInputPWViewController.m */,
 				582843F921885EEA00AD65C8 /* LoginInputPWViewController.xib */,
+				58F2BCA6225C425F0091DD53 /* LoginViewController.h */,
+				58F2BCA2225C42410091DD53 /* LoginViewController.m */,
+				58F2BCA3225C42410091DD53 /* LoginViewController.xib */,
+				585CDC0F225C785500199FE1 /* ForgetPWViewController.h */,
+				585CDC10225C785500199FE1 /* ForgetPWViewController.m */,
+				585CDC11225C785500199FE1 /* ForgetPWViewController.xib */,
+				585CDC14225C89DC00199FE1 /* ChooseAreaCodeViewController.h */,
+				585CDC15225C89DC00199FE1 /* ChooseAreaCodeViewController.m */,
+				585CDC16225C89DC00199FE1 /* ChooseAreaCodeViewController.xib */,
+				585CDC1F225C99EE00199FE1 /* CountryCode.json */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2833,6 +2871,16 @@
 				58D2D8892192F41B00C5B4C9 /* WalletsSwitchCell.h */,
 				58D2D88A2192F41B00C5B4C9 /* WalletsSwitchCell.m */,
 				58D2D88B2192F41B00C5B4C9 /* WalletsSwitchCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		585CDC19225C8FB700199FE1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				585CDC1A225C8FCE00199FE1 /* ChooseAreaCodeCell.h */,
+				585CDC1B225C8FCE00199FE1 /* ChooseAreaCodeCell.m */,
+				585CDC1C225C8FCE00199FE1 /* ChooseAreaCodeCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3857,7 +3905,9 @@
 				581D7AFF217D9E4000AFD0DE /* ChooseWalletViewController.xib in Resources */,
 				581925842114363E009AE406 /* PageOneView.xib in Resources */,
 				58A6500521BE196600E52FFF /* PaymentDetailsView.xib in Resources */,
+				585CDC1E225C8FCE00199FE1 /* ChooseAreaCodeCell.xib in Resources */,
 				5827BC22219EBAF800B7730E /* ETHVerifyPWViewController.xib in Resources */,
+				58F2BCA5225C42410091DD53 /* LoginViewController.xib in Resources */,
 				583D959A211432110057A90C /* RankingSubCell.xib in Resources */,
 				581F5FE6219E68E800604352 /* JoinCommunityViewController.xib in Resources */,
 				73C1BA13207E184F0080C59F /* HMScanner.bundle in Resources */,
@@ -3935,15 +3985,18 @@
 				580D91B42063AE5300B12506 /* Roboto-LightItalic.ttf in Resources */,
 				581D511C217981E50064F60C /* SettingsViewController.xib in Resources */,
 				588A7024208DD2CC004B41D4 /* launchAnimate.gif in Resources */,
+				585CDC20225C99EE00199FE1 /* CountryCode.json in Resources */,
 				581C226C21A6B7160009888B /* DeleteWalletConfirmView.xib in Resources */,
 				585C9A1F2181A16B00DD12DB /* WalletsViewController.xib in Resources */,
 				58E41C5E2182E52D004C87AA /* ETHTransactionRecordViewController.xib in Resources */,
+				585CDC18225C89DC00199FE1 /* ChooseAreaCodeViewController.xib in Resources */,
 				580D91B72063AE5300B12506 /* Roboto-Medium.ttf in Resources */,
 				935F3291212BB4F500B03341 /* ConfigurationRelease.plist in Resources */,
 				5821CD39217DB5A400F81F8B /* ETHCreateWalletViewController.xib in Resources */,
 				581AFC4C21B7D28B001A37E1 /* EOSRAMViewController.xib in Resources */,
 				5860AD1B20CFB51200EEB6CE /* WalletSelectCell.xib in Resources */,
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
+				585CDC13225C785500199FE1 /* ForgetPWViewController.xib in Resources */,
 				58E41C4E2181CA36004C87AA /* WalletHomeSwitchCell.xib in Resources */,
 				58CF40CE21998D340000C3DA /* NEOTransferConfirmView.xib in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
@@ -4198,6 +4251,7 @@
 				73A05A352081D91600974483 /* UIView+HYBImageCliped.m in Sources */,
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				581D32E1219C158B001F88C3 /* NEP2.swift in Sources */,
+				58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */,
 				581AC36D21AFD6E600ACA80B /* QNavigationController.m in Sources */,
 				58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */,
 				58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */,
@@ -4205,6 +4259,7 @@
 				73B1AEC420BE7D3800947749 /* MyAssetsViewController.m in Sources */,
 				581AF7B421B665DB001A37E1 /* EOSWalletInfo.m in Sources */,
 				587ABD8921BA3BCA00C3D81A /* EOSAccountInfoModel.m in Sources */,
+				585CDC12225C785500199FE1 /* ForgetPWViewController.m in Sources */,
 				580D916020625A4400B12506 /* UITextView+PinchZoom.m in Sources */,
 				5806C10121C3C377000E693B /* GetInfoRequest.m in Sources */,
 				587ABD4521B8F8F800C3D81A /* Abi_json_to_binRequest.m in Sources */,
@@ -4282,6 +4337,7 @@
 				582844012189407B00AD65C8 /* SettingsCell.m in Sources */,
 				587ABD5B21B8F8F800C3D81A /* EOS_AccountResult.m in Sources */,
 				5821CD38217DB5A400F81F8B /* ETHCreateWalletViewController.m in Sources */,
+				585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */,
 				58957019218957F200DB7497 /* ChooseCurrencyViewController.m in Sources */,
 				58A4DEAE206234AC00E72F52 /* LaunchViewController.m in Sources */,
 				583D959D211432110057A90C /* RankMenuView.m in Sources */,
@@ -4329,6 +4385,7 @@
 				580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */,
 				581AF7BB21B66827001A37E1 /* EOSTraceModel.m in Sources */,
 				5821CD44217DCBA700F81F8B /* ETHMnemonicViewController.m in Sources */,
+				585CDC17225C89DC00199FE1 /* ChooseAreaCodeViewController.m in Sources */,
 				581C228021AD1B2D0009888B /* UIView+ToastAlert.m in Sources */,
 				587ABD4B21B8F8F800C3D81A /* Abi_bin_to_json.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
@@ -4361,6 +4418,7 @@
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
 				581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
+				585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */,
 				581F5FD6219D6C6000604352 /* PasswordManagementViewController.m in Sources */,
 				58D2D8952193E26100C5B4C9 /* UIView+DottedBox.m in Sources */,
 				58D2D88C2192F41B00C5B4C9 /* WalletsSwitchCell.m in Sources */,

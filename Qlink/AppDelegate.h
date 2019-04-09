@@ -25,6 +25,7 @@
 - (void)addLaunchAnimation;
 //- (void)setRootLogin;
 - (void)setRootTabbar;
+- (void)setRootLoginNew;
 - (void)presentLogin:(LoginPWCompleteBlock)completeBlock;
 
 @end
