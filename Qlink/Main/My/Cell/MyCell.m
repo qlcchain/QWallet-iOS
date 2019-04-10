@@ -1,32 +1,34 @@
 //
-//  ChooseAreaCodeCell.m
+//  MyCell.m
 //  Qlink
 //
-//  Created by Jelly Foo on 2019/4/9.
+//  Created by Jelly Foo on 2019/4/10.
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import "ChooseAreaCodeCell.h"
-#import "AreaCodeModel.h"
+#import "MyCell.h"
 
-@implementation ChooseAreaCodeCell
+@implementation MyShowModel
+
+@end
+
+@implementation MyCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    _nameLab.text = nil;
-    _codeLab.text = nil;
+    _titleLab.text = nil;
+    _icon.image = nil;
 }
 
-- (void)configCell:(AreaCodeModel *)model {
-    _nameLab.text = model.en;
-    _codeLab.text = [NSString stringWithFormat:@"+%@",@(model.code)];
+- (void)configCellWithModel:(MyShowModel *)model {
+    _titleLab.text = model.title;
+    _icon.image = [UIImage imageNamed:model.icon];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

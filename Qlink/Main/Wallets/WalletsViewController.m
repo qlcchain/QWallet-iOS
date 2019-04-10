@@ -47,6 +47,7 @@
 #import "EOSWalletDetailViewController.h"
 #import "EOSActivateAccountViewController.h"
 #import "EOSTransferViewController.h"
+#import "UserModel.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate,SRRefreshDelegate,UIScrollViewDelegate>
 
@@ -669,8 +670,7 @@
     }
     NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
     
-    NSString *myP2pId = @"";
-//    NSString *myP2pId = [ToxManage getOwnP2PId];
+    NSString *myP2pId = [UserModel getOwnP2PId];
     NSDictionary *params = @{@"p2pId":myP2pId,@"address":address};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl:neoGotWGas_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -687,8 +687,7 @@
 
 - (void)requestNeoQueryWGas {
     kWeakSelf(self);
-    NSString *myP2pId = @"";
-//    NSString *myP2pId = [ToxManage getOwnP2PId];
+    NSString *myP2pId = [UserModel getOwnP2PId];
     NSDictionary *params = @{@"p2pId":myP2pId};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl:neoQueryWGas_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {

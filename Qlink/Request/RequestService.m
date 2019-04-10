@@ -45,6 +45,11 @@
 }
 
 + (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:isSign timestamp:nil successBlock:successReqBlock failedBlock:failedReqBlock];
+    return dataTask;
+}
+
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",[RequestService getInstance].prefix_Url,url];
 
@@ -60,8 +65,11 @@
             recordStr = [recordStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
 //            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
         }
-        NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
-        NSMutableDictionary *jsonParam = [NSMutableDictionary dictionaryWithDictionary: @{@"appid":[ConfigUtil getChannel],@"timestamp":timestamp,@"params":recordStr}];
+        NSString *tempTimestamp = timestamp;
+        if (!tempTimestamp) {
+            tempTimestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+        }
+        NSMutableDictionary *jsonParam = [NSMutableDictionary dictionaryWithDictionary: @{@"appid":[ConfigUtil getChannel],@"timestamp":tempTimestamp,@"params":recordStr}];
         // 升序、拼接、加密
         NSString *signStr = [DigestUtils getSignature:jsonParam];
         [jsonParam setObject:signStr forKey:@"sign"];
@@ -85,9 +93,16 @@
     return dataTask;
 }
 
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params timestamp:(nullable NSString *)timestamp httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES timestamp:timestamp successBlock:successReqBlock failedBlock:failedReqBlock];
+    
+    return dataTask;
+}
+
 + (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
-    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES successBlock:successReqBlock failedBlock:failedReqBlock];
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES timestamp:nil successBlock:successReqBlock failedBlock:failedReqBlock];
     
     return dataTask;
 }

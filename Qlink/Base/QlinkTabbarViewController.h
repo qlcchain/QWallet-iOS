@@ -12,7 +12,7 @@ typedef enum : NSUInteger {
     TabbarIndexVPN,
 //    TabbarIndexMarkets,
     TabbarIndexWallet,
-    TabbarIndexSettings,
+    TabbarIndexMy,
 } TabbarIndex;
 
 @class WalletsViewController;

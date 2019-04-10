@@ -8,6 +8,7 @@
 
 
 #import "RequestService.h"
+#import "UserModel.h"
 
 @interface UserManage ()
 @property (nonatomic, strong) NSString *headUrl;
@@ -69,8 +70,7 @@
 }
 
 + (void)requestGetHeadView {
-    NSString *p2pId = @"";
-//    NSString *p2pId = [ToxManage getOwnP2PId]?:@"";
+    NSString *p2pId = [UserModel getOwnP2PId]?:@"";
     if (p2pId.length <= 0) {
         return;
     }

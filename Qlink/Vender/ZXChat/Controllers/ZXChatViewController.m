@@ -20,6 +20,7 @@
 #import "ChatUtil.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "ChatTipView.h"
+#import "UserModel.h"
 
 #define SenderName @"Jim"
 
@@ -137,8 +138,7 @@
 }
 
 - (NSString *)getSenderId {
-//    NSString *p2pId = [ToxManage getOwnP2PId];
-    NSString *p2pId = @"";
+    NSString *p2pId = [UserModel getOwnP2PId];
     return p2pId;
 }
 

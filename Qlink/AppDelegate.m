@@ -33,6 +33,7 @@
 #import "ReportUtil.h"
 #import <ETHFramework/ETHFramework.h>
 #import "LoginViewController.h"
+#import "UserModel.h"
 
 @import Firebase;
 
@@ -53,8 +54,9 @@
 //    [NEOWalletUtil deleteAllWallet];
 //    [LoginPWModel deleteLoginPW];
 //    [WalletCommonModel deleteAllWallet];
+//    [UserModel cleanAllUser];
     
-    [KeychainUtil resetKeyService]; // 先重置keyservice  以后注释掉
+    [KeychainUtil resetKeyService]; // 先重置keyservice  以后1掉
     
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     _allowPresentLogin = YES; // 打开app允许弹出输入密码
@@ -124,8 +126,8 @@
     LaunchViewController *vc = [[LaunchViewController alloc] init];
     self.window.rootViewController = vc;
     NSTimeInterval timeI = [LaunchViewController getGifDuration];
-//    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
-    [self performSelector:@selector(setRootLoginNew) withObject:nil afterDelay:timeI];
+    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
+//    [self performSelector:@selector(setRootLoginNew) withObject:nil afterDelay:timeI];
 }
 
 #pragma mark - 初始化Tabbar
@@ -137,10 +139,20 @@
 }
 
 #pragma mark - Login
-- (void)setRootLoginNew {
+//- (void)setRootLoginNew {
+//    LoginViewController *vc = [[LoginViewController alloc] init];
+//    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+//    self.window.rootViewController = nav;
+//}
+
+- (void)presentLoginNew {
     LoginViewController *vc = [[LoginViewController alloc] init];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nav;
+    __weak typeof(vc) weakvc = vc;
+    [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
+        [weakvc switchToLogin];
+    }];
+//    self.window.rootViewController = nav;
 }
 
 - (void)setRootLogin {

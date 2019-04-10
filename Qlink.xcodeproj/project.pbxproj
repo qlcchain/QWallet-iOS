@@ -310,6 +310,12 @@
 		585CDC1E225C8FCE00199FE1 /* ChooseAreaCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585CDC1C225C8FCE00199FE1 /* ChooseAreaCodeCell.xib */; };
 		585CDC20225C99EE00199FE1 /* CountryCode.json in Resources */ = {isa = PBXBuildFile; fileRef = 585CDC1F225C99EE00199FE1 /* CountryCode.json */; };
 		585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 585CDC22225C9B9700199FE1 /* AreaCodeModel.m */; };
+		585D1EEB225D8E5E00468C4A /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1EEA225D8E5E00468C4A /* UserModel.m */; };
+		585D1EF0225D9F4600468C4A /* RSAUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1EEF225D9F4600468C4A /* RSAUtil.m */; };
+		585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1EF3225DEAB100468C4A /* MyViewController.m */; };
+		585D1EF6225DEAB100468C4A /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1EF4225DEAB100468C4A /* MyViewController.xib */; };
+		585D1EFB225DEEE000468C4A /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1EF9225DEEE000468C4A /* MyCell.m */; };
+		585D1EFC225DEEE000468C4A /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1EFA225DEEE000468C4A /* MyCell.xib */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9F20CFB42000EEB6CE /* WebViewController.xib */; };
 		5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */; };
@@ -1120,6 +1126,16 @@
 		585CDC1F225C99EE00199FE1 /* CountryCode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCode.json; sourceTree = "<group>"; };
 		585CDC21225C9B9700199FE1 /* AreaCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AreaCodeModel.h; sourceTree = "<group>"; };
 		585CDC22225C9B9700199FE1 /* AreaCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AreaCodeModel.m; sourceTree = "<group>"; };
+		585D1EE9225D8E5E00468C4A /* UserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		585D1EEA225D8E5E00468C4A /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		585D1EEE225D9F4500468C4A /* RSAUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAUtil.h; sourceTree = "<group>"; };
+		585D1EEF225D9F4600468C4A /* RSAUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAUtil.m; sourceTree = "<group>"; };
+		585D1EF2225DEAB100468C4A /* MyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		585D1EF3225DEAB100468C4A /* MyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		585D1EF4225DEAB100468C4A /* MyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		585D1EF8225DEEE000468C4A /* MyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		585D1EF9225DEEE000468C4A /* MyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		585D1EFA225DEEE000468C4A /* MyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC9E20CFB42000EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		5860ACA120CFB42300EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WebViewController.strings; sourceTree = "<group>"; };
@@ -2043,6 +2059,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				585D1EF1225DEA9A00468C4A /* My */,
 				589D470D225B325200A4A4E3 /* Finance */,
 				581D7AFA217D9E1A00AFD0DE /* Wallets */,
 				581D7AF42179C77B00AFD0DE /* Login */,
@@ -2089,6 +2106,7 @@
 		580D913520625A4300B12506 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				585D1EE8225D8E0100468C4A /* UserModel */,
 				581AF7B521B6676D001A37E1 /* EOSModel */,
 				5827BC19219EA85600B7730E /* MarketsModel */,
 				58CF40BB21995D2F0000C3DA /* NEOModel */,
@@ -2131,6 +2149,8 @@
 				58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */,
 				5839F5272068FC70004C4A54 /* MD5Util.h */,
 				5839F5262068FC70004C4A54 /* MD5Util.m */,
+				585D1EEE225D9F4500468C4A /* RSAUtil.h */,
+				585D1EEF225D9F4600468C4A /* RSAUtil.m */,
 				7377D17B206C81E90072E628 /* NSStringUtil.h */,
 				7377D17C206C81E90072E628 /* NSStringUtil.m */,
 				73C1BA03207DB2290080C59F /* SystemUtil.h */,
@@ -2881,6 +2901,36 @@
 				585CDC1A225C8FCE00199FE1 /* ChooseAreaCodeCell.h */,
 				585CDC1B225C8FCE00199FE1 /* ChooseAreaCodeCell.m */,
 				585CDC1C225C8FCE00199FE1 /* ChooseAreaCodeCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		585D1EE8225D8E0100468C4A /* UserModel */ = {
+			isa = PBXGroup;
+			children = (
+				585D1EE9225D8E5E00468C4A /* UserModel.h */,
+				585D1EEA225D8E5E00468C4A /* UserModel.m */,
+			);
+			path = UserModel;
+			sourceTree = "<group>";
+		};
+		585D1EF1225DEA9A00468C4A /* My */ = {
+			isa = PBXGroup;
+			children = (
+				585D1EF7225DEE5400468C4A /* Cell */,
+				585D1EF2225DEAB100468C4A /* MyViewController.h */,
+				585D1EF3225DEAB100468C4A /* MyViewController.m */,
+				585D1EF4225DEAB100468C4A /* MyViewController.xib */,
+			);
+			path = My;
+			sourceTree = "<group>";
+		};
+		585D1EF7225DEE5400468C4A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				585D1EF8225DEEE000468C4A /* MyCell.h */,
+				585D1EF9225DEEE000468C4A /* MyCell.m */,
+				585D1EFA225DEEE000468C4A /* MyCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3919,6 +3969,7 @@
 				58DF7F772189917600228718 /* NEOWalletDetailViewController.xib in Resources */,
 				581B679421919D280061BEDB /* SuccessTipView.xib in Resources */,
 				935F3290212BB4F500B03341 /* ConfigurationDebug.plist in Resources */,
+				585D1EF6225DEAB100468C4A /* MyViewController.xib in Resources */,
 				581D31C9219BC5AE001F88C3 /* MarketsCell.xib in Resources */,
 				58957025218980DD00DB7497 /* ResetPWViewController.xib in Resources */,
 				73FF64F220F599E700E29B3B /* CountryList.json in Resources */,
@@ -3957,6 +4008,7 @@
 				583D959B211432110057A90C /* RankingCell.xib in Resources */,
 				58CF40C2219980BD0000C3DA /* NEOTransactionRecordViewController.xib in Resources */,
 				73899C9C2152003100962B14 /* GuidePageView1.xib in Resources */,
+				585D1EFC225DEEE000468C4A /* MyCell.xib in Resources */,
 				58A6500121BE16BD00E52FFF /* TipOKView.xib in Resources */,
 				581D32F6219D13DD001F88C3 /* NeoQueryWGasView.xib in Resources */,
 				581C227021A6B9180009888B /* NeoClaimGasTipView.xib in Resources */,
@@ -4415,6 +4467,7 @@
 				583A0F6A20844D8A00EF9ABD /* ContinentModel.m in Sources */,
 				5839F5282068FC70004C4A54 /* MD5Util.m in Sources */,
 				580D915520625A4400B12506 /* UIView+BlockGesture.m in Sources */,
+				585D1EFB225DEEE000468C4A /* MyCell.m in Sources */,
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
 				581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
@@ -4447,6 +4500,7 @@
 				58CF40C3219980BD0000C3DA /* NEOTransactionRecordViewController.m in Sources */,
 				589D4716225B502300A4A4E3 /* MyThemes.m in Sources */,
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
+				585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */,
 				581D32C5219C158B001F88C3 /* SHA256.swift in Sources */,
 				587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */,
 				580D915320625A4400B12506 /* UIView+ViewController.m in Sources */,
@@ -4505,6 +4559,7 @@
 				581B678C219178BB0061BEDB /* FingetprintVerificationUtil.m in Sources */,
 				5806C10421C3C3AC000E693B /* GetBlockRequest.m in Sources */,
 				7377D179206B9E730072E628 /* VPNMode.m in Sources */,
+				585D1EEB225D8E5E00468C4A /* UserModel.m in Sources */,
 				587ABD4D21B8F8F800C3D81A /* EOS_BlockChainInfo.m in Sources */,
 				58E41C5D2182E52D004C87AA /* ETHTransactionRecordViewController.m in Sources */,
 				581A347A21AE653400623685 /* AddMarketsViewController.m in Sources */,
@@ -4561,6 +4616,7 @@
 				5809033D209B07370085FD70 /* ChatModel.m in Sources */,
 				58DF8C57209B0638000B0A2F /* ChatUtil.m in Sources */,
 				580D917420625FDB00B12506 /* Language.m in Sources */,
+				585D1EF0225D9F4600468C4A /* RSAUtil.m in Sources */,
 				581D32EE219D107F001F88C3 /* NeoGotWGasModel.m in Sources */,
 				735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */,
 				581AC35A21AFC63B00ACA80B /* AppDelegate+AppService.m in Sources */,

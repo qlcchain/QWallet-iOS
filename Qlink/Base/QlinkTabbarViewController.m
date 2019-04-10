@@ -9,7 +9,8 @@
 #import "QlinkTabbarViewController.h"
 //#import "WifiViewController.h"
 #import "MarketsViewController.h"
-#import "SettingsViewController.h"
+//#import "SettingsViewController.h"
+#import "MyViewController.h"
 //#import "WalletViewController.h"
 #import "WalletsViewController.h"
 //#import "VpnViewController.h"
@@ -57,7 +58,7 @@
     [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"vpn"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:@"Wallet" imageName:@"wallet"];
-    [self addChildViewController:[[SettingsViewController alloc] init] text:@"Settings" imageName:@"settings"];
+    [self addChildViewController:[[MyViewController alloc] init] text:@"My" imageName:@"settings"];
 }
 
 - (void) addChildViewController:(UIViewController *) childController text:(NSString *) text imageName:(NSString *) imageName {
@@ -90,10 +91,10 @@
             }];
             return NO;
         }
-    } else if ([topVC isKindOfClass:[SettingsViewController class]]){
+    } else if ([topVC isKindOfClass:[MyViewController class]]){
         if (kAppD.allowPresentLogin) {
             [kAppD presentLogin:^{
-                kAppD.tabbarC.selectedIndex = TabbarIndexSettings;
+                kAppD.tabbarC.selectedIndex = TabbarIndexMy;
             }];
             return NO;
         }

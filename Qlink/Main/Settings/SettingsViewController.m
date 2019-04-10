@@ -14,6 +14,7 @@
 #import "WalletsManageViewController.h"
 #import "JoinCommunityViewController.h"
 #import "WebViewController.h"
+#import "UserModel.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -31,6 +32,7 @@ NSString *title3 = @"Service Agreement";
 NSString *title4 = @"Help and Feedback";
 NSString *title5 = @"Join the Community";
 NSString *title6 = @"About WINQ";
+NSString *title7 = @"Log out";
 
 #pragma mark - Observe
 - (void)addObserve {
@@ -58,7 +60,7 @@ NSString *title6 = @"About WINQ";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSArray *titleArr = @[title0,title1,title2,title3,title4,title5,title6];
+    NSArray *titleArr = @[title0,title1,title2,title3,title4,title5,title6,title7];
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         SettingsShowModel *model = [[SettingsShowModel alloc] init];
@@ -82,6 +84,22 @@ NSString *title6 = @"About WINQ";
     [_mainTable reloadData];
 }
 
+- (void)logout {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    userM.isLogin = @(NO);
+    [UserModel storeUser:userM];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Noti object:nil];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - Action
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return SettingsCell_Height;
@@ -102,6 +120,8 @@ NSString *title6 = @"About WINQ";
         [self jumpToWeb:url title:title3];
     } else if ([model.title isEqualToString:title5]) {
         [self jumpToJoinCommunity];
+    } else if ([model.title isEqualToString:title7]) {
+        [self logout];
     }
 }
 
@@ -122,25 +142,21 @@ NSString *title6 = @"About WINQ";
 #pragma mark - Transition
 - (void)jumpToChooseCurrency {
     ChooseCurrencyViewController *vc = [[ChooseCurrencyViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToPWManagement {
     PasswordManagementViewController *vc = [[PasswordManagementViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToWalletsManage {
     WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToJoinCommunity {
     JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -148,7 +164,6 @@ NSString *title6 = @"About WINQ";
     WebViewController *vc = [[WebViewController alloc] init];
     vc.inputUrl = url;
     vc.inputTitle = title;
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
