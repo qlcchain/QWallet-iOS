@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *ID; // = ;
 @property (nonatomic, copy) NSString *phone; // = "";
 @property (nonatomic, copy) NSString *account;
+@property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *md5PW;
 @property (nonatomic, copy) NSString *rsaPublicKey;
 @property (nonatomic, copy) NSNumber *isLogin;

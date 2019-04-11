@@ -27,10 +27,10 @@
 
 NSString *title0 = @"Password Management";
 NSString *title1 = @"Currency Unit";
-NSString *title2 = @"My Wallet";
+//NSString *title2 = @"My Wallet";
 NSString *title3 = @"Service Agreement";
 NSString *title4 = @"Help and Feedback";
-NSString *title5 = @"Join the Community";
+//NSString *title5 = @"Join the Community";
 NSString *title6 = @"About WINQ";
 NSString *title7 = @"Log out";
 
@@ -60,7 +60,7 @@ NSString *title7 = @"Log out";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSArray *titleArr = @[title0,title1,title2,title3,title4,title5,title6,title7];
+    NSArray *titleArr = @[title0,title1,title3,title4,title6,title7];
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         SettingsShowModel *model = [[SettingsShowModel alloc] init];
@@ -89,7 +89,7 @@ NSString *title7 = @"Log out";
     userM.isLogin = @(NO);
     [UserModel storeUser:userM];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -113,13 +113,9 @@ NSString *title7 = @"Log out";
         [self jumpToPWManagement];
     } else if ([model.title isEqualToString:title1]) {
         [self jumpToChooseCurrency];
-    } else if ([model.title isEqualToString:title2]) {
-        [self jumpToWalletsManage];
     } else if ([model.title isEqualToString:title3]) {
         NSString *url = @"https://winq.net/disclaimer.html";
         [self jumpToWeb:url title:title3];
-    } else if ([model.title isEqualToString:title5]) {
-        [self jumpToJoinCommunity];
     } else if ([model.title isEqualToString:title7]) {
         [self logout];
     }
@@ -150,15 +146,15 @@ NSString *title7 = @"Log out";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToWalletsManage {
-    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToWalletsManage {
+//    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
-- (void)jumpToJoinCommunity {
-    JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToJoinCommunity {
+//    JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)jumpToWeb:(NSString *)url title:(NSString *)title {
     WebViewController *vc = [[WebViewController alloc] init];

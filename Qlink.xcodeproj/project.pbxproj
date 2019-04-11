@@ -316,6 +316,11 @@
 		585D1EF6225DEAB100468C4A /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1EF4225DEAB100468C4A /* MyViewController.xib */; };
 		585D1EFB225DEEE000468C4A /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1EF9225DEEE000468C4A /* MyCell.m */; };
 		585D1EFC225DEEE000468C4A /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1EFA225DEEE000468C4A /* MyCell.xib */; };
+		585D1EFF225ED9A700468C4A /* NSString+PinYin.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1EFE225ED9A600468C4A /* NSString+PinYin.m */; };
+		585D1F03225EE18500468C4A /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1F01225EE18500468C4A /* PersonalInfoViewController.m */; };
+		585D1F04225EE18500468C4A /* PersonalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1F02225EE18500468C4A /* PersonalInfoViewController.xib */; };
+		585D1F08225EE38D00468C4A /* PersonalInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1F06225EE38D00468C4A /* PersonalInfoCell.m */; };
+		585D1F09225EE38D00468C4A /* PersonalInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1F07225EE38D00468C4A /* PersonalInfoCell.xib */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9F20CFB42000EEB6CE /* WebViewController.xib */; };
 		5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */; };
@@ -422,6 +427,9 @@
 		58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A074232092FD8400470E37 /* NeoTransferUtil.m */; };
 		58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A2495820D0F60C00781549 /* WebKit.framework */; };
 		58A2495C20D207AB00781549 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A2495B20D207AB00781549 /* VersionManager.m */; };
+		58A3D4F5225EEBED00ABABD9 /* EditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A3D4F2225EEBEB00ABABD9 /* EditTextViewController.m */; };
+		58A3D4F6225EEBED00ABABD9 /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A3D4F4225EEBED00ABABD9 /* EditTextViewController.xib */; };
+		58A3D4F9225EEC7700ABABD9 /* NSString+Trim.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A3D4F8225EEC7700ABABD9 /* NSString+Trim.m */; };
 		58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DEAA206234AC00E72F52 /* AppDelegate.m */; };
 		58A4DEAE206234AC00E72F52 /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4DEAD206234AC00E72F52 /* LaunchViewController.m */; };
 		58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A4DEB4206234AC00E72F52 /* LaunchScreen.storyboard */; };
@@ -1136,6 +1144,14 @@
 		585D1EF8225DEEE000468C4A /* MyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		585D1EF9225DEEE000468C4A /* MyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		585D1EFA225DEEE000468C4A /* MyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
+		585D1EFD225ED9A600468C4A /* NSString+PinYin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PinYin.h"; sourceTree = "<group>"; };
+		585D1EFE225ED9A600468C4A /* NSString+PinYin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PinYin.m"; sourceTree = "<group>"; };
+		585D1F00225EE18500468C4A /* PersonalInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
+		585D1F01225EE18500468C4A /* PersonalInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
+		585D1F02225EE18500468C4A /* PersonalInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalInfoViewController.xib; sourceTree = "<group>"; };
+		585D1F05225EE38D00468C4A /* PersonalInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalInfoCell.h; sourceTree = "<group>"; };
+		585D1F06225EE38D00468C4A /* PersonalInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoCell.m; sourceTree = "<group>"; };
+		585D1F07225EE38D00468C4A /* PersonalInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalInfoCell.xib; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC9E20CFB42000EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		5860ACA120CFB42300EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WebViewController.strings; sourceTree = "<group>"; };
@@ -1338,6 +1354,11 @@
 		58A2495820D0F60C00781549 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		58A2495A20D207AB00781549 /* VersionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionManager.h; sourceTree = "<group>"; };
 		58A2495B20D207AB00781549 /* VersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionManager.m; sourceTree = "<group>"; };
+		58A3D4F2225EEBEB00ABABD9 /* EditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextViewController.m; sourceTree = "<group>"; };
+		58A3D4F3225EEBEC00ABABD9 /* EditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextViewController.h; sourceTree = "<group>"; };
+		58A3D4F4225EEBED00ABABD9 /* EditTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
+		58A3D4F7225EEC7600ABABD9 /* NSString+Trim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Trim.h"; sourceTree = "<group>"; };
+		58A3D4F8225EEC7700ABABD9 /* NSString+Trim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Trim.m"; sourceTree = "<group>"; };
 		58A4DEA6206234AC00E72F52 /* Qlink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qlink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A4DEA9206234AC00E72F52 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		58A4DEAA206234AC00E72F52 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1983,6 +2004,8 @@
 		580D911B20625A4300B12506 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
+				585D1EFD225ED9A600468C4A /* NSString+PinYin.h */,
+				585D1EFE225ED9A600468C4A /* NSString+PinYin.m */,
 				5839F5212068F8E0004C4A54 /* NSString+UrlEncode.h */,
 				5839F5202068F8E0004C4A54 /* NSString+UrlEncode.m */,
 				580D912420625A4300B12506 /* NSString+Base64.h */,
@@ -2003,6 +2026,8 @@
 				58990B7121951EA00036FF4F /* NSString+RemoveZero.m */,
 				581F5FEC219E92B300604352 /* NSString+Valid.h */,
 				581F5FED219E92B300604352 /* NSString+Valid.m */,
+				58A3D4F7225EEC7600ABABD9 /* NSString+Trim.h */,
+				58A3D4F8225EEC7700ABABD9 /* NSString+Trim.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -2921,6 +2946,12 @@
 				585D1EF2225DEAB100468C4A /* MyViewController.h */,
 				585D1EF3225DEAB100468C4A /* MyViewController.m */,
 				585D1EF4225DEAB100468C4A /* MyViewController.xib */,
+				585D1F00225EE18500468C4A /* PersonalInfoViewController.h */,
+				585D1F01225EE18500468C4A /* PersonalInfoViewController.m */,
+				585D1F02225EE18500468C4A /* PersonalInfoViewController.xib */,
+				58A3D4F3225EEBEC00ABABD9 /* EditTextViewController.h */,
+				58A3D4F2225EEBEB00ABABD9 /* EditTextViewController.m */,
+				58A3D4F4225EEBED00ABABD9 /* EditTextViewController.xib */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -2931,6 +2962,9 @@
 				585D1EF8225DEEE000468C4A /* MyCell.h */,
 				585D1EF9225DEEE000468C4A /* MyCell.m */,
 				585D1EFA225DEEE000468C4A /* MyCell.xib */,
+				585D1F05225EE38D00468C4A /* PersonalInfoCell.h */,
+				585D1F06225EE38D00468C4A /* PersonalInfoCell.m */,
+				585D1F07225EE38D00468C4A /* PersonalInfoCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -4052,7 +4086,9 @@
 				58E41C4E2181CA36004C87AA /* WalletHomeSwitchCell.xib in Resources */,
 				58CF40CE21998D340000C3DA /* NEOTransferConfirmView.xib in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
+				58A3D4F6225EEBED00ABABD9 /* EditTextViewController.xib in Resources */,
 				580D91BB2063AE5300B12506 /* Roboto-MediumItalic.ttf in Resources */,
+				585D1F09225EE38D00468C4A /* PersonalInfoCell.xib in Resources */,
 				5812DD9D20A1A7890043A8A8 /* ChatViewImages.xcassets in Resources */,
 				581AF7A821B6646E001A37E1 /* EOSWalletDetailViewController.xib in Resources */,
 				5860AD3020CFB53000EEB6CE /* SettingCell.xib in Resources */,
@@ -4071,6 +4107,7 @@
 				5894EC4C217EC798007F5D39 /* ETHMnemonicConfirmViewController.xib in Resources */,
 				5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */,
 				5860AD2920CFB52600EEB6CE /* MyAssetsCell.xib in Resources */,
+				585D1F04225EE18500468C4A /* PersonalInfoViewController.xib in Resources */,
 				58D2D88D2192F41B00C5B4C9 /* WalletsSwitchCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4287,6 +4324,7 @@
 				7310AA0C20D0C71400F2261A /* NSBundle+Language.m in Sources */,
 				580D915020625A4400B12506 /* UIAlertView+Block.m in Sources */,
 				587ABD4F21B8F8F800C3D81A /* GetRateRequest.m in Sources */,
+				585D1F03225EE18500468C4A /* PersonalInfoViewController.m in Sources */,
 				589D4711225B327500A4A4E3 /* FinanceViewController.m in Sources */,
 				580D914120625A4300B12506 /* UIImage+BetterFace.m in Sources */,
 				73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */,
@@ -4440,6 +4478,7 @@
 				585CDC17225C89DC00199FE1 /* ChooseAreaCodeViewController.m in Sources */,
 				581C228021AD1B2D0009888B /* UIView+ToastAlert.m in Sources */,
 				587ABD4B21B8F8F800C3D81A /* Abi_bin_to_json.m in Sources */,
+				58A3D4F5225EEBED00ABABD9 /* EditTextViewController.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
 				58E2E55F224DF73300CBFD54 /* TagView.swift in Sources */,
 				581D32E4219C158B001F88C3 /* NEP9.swift in Sources */,
@@ -4498,6 +4537,7 @@
 				581D32D0219C158B001F88C3 /* ValueOut.swift in Sources */,
 				580D91C72064A27100B12506 /* QGradientView.m in Sources */,
 				58CF40C3219980BD0000C3DA /* NEOTransactionRecordViewController.m in Sources */,
+				58A3D4F9225EEC7700ABABD9 /* NSString+Trim.m in Sources */,
 				589D4716225B502300A4A4E3 /* MyThemes.m in Sources */,
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
 				585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */,
@@ -4587,6 +4627,7 @@
 				583D9595211432110057A90C /* RankingViewController.m in Sources */,
 				581AC35D21AFCEDB00ACA80B /* SandBoxHelper.m in Sources */,
 				58CF40C9219984AB0000C3DA /* NEOWalletAddressViewController.m in Sources */,
+				585D1F08225EE38D00468C4A /* PersonalInfoCell.m in Sources */,
 				5807D649208061A20049565D /* ShadowImageView.m in Sources */,
 				585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */,
 				581D32CB219C158B001F88C3 /* WIF.swift in Sources */,
@@ -4653,6 +4694,7 @@
 				581D32CC219C158B001F88C3 /* AccountState.swift in Sources */,
 				580D914E20625A4400B12506 /* UIButton+Block.m in Sources */,
 				581D32E2219C158B001F88C3 /* Data+Util.swift in Sources */,
+				585D1EFF225ED9A700468C4A /* NSString+PinYin.m in Sources */,
 				581AF7AC21B6646E001A37E1 /* EOSAccountQRViewController.m in Sources */,
 				581AFC4B21B7D28B001A37E1 /* EOSRAMViewController.m in Sources */,
 				58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */,

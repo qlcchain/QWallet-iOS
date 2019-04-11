@@ -13,6 +13,7 @@
 #import "SettingsViewController.h"
 #import "UserModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "PersonalInfoViewController.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -33,7 +34,8 @@ NSString *my_title4 = @"Settings";
 
 #pragma mark - Observe
 - (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNoti:) name:User_Logout_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccessNoti:) name:User_Logout_Success_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
 }
 
 - (void)dealloc {
@@ -46,16 +48,22 @@ NSString *my_title4 = @"Settings";
     
     [self addObserve];
     
+    _userIcon.layer.cornerRadius = _userIcon.width/2.0;
+    _userIcon.layer.masksToBounds = YES;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyCellReuse bundle:nil] forCellReuseIdentifier:MyCellReuse];
     
     [self configInit];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self refreshUserInfoView];
+}
+
 #pragma mark - Operation
 - (void)configInit {
-    [self refreshUserInfoView];
-    
     NSArray *titleArr = @[my_title0,my_title1,my_title2,my_title3,my_title4];
     NSArray *iconArr = @[@"icon_my_wallet",@"icon_my_share",@"icon_my_community",@"icon_my_contact",@"icon_my_settings"];
     kWeakSelf(self);
@@ -69,14 +77,13 @@ NSString *my_title4 = @"Settings";
 }
 
 - (void)refreshUserInfoView {
-    UIImage *userDefaultImg = [UIImage imageNamed:@""];
     if ([UserModel haveLoginAccount]) {
         UserModel *userM = [UserModel fetchUserOfLogin];
-        [_userIcon sd_setImageWithURL:[NSURL URLWithString:userM.head] placeholderImage:userDefaultImg completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.head]] placeholderImage:User_PlaceholderImage1 completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
-        _userNameLab.text = userM.account;
+        _userNameLab.text = userM.nickname?:@"未设置昵称";
     } else {
-        _userIcon.image = userDefaultImg;
+        _userIcon.image = User_PlaceholderImage1;
         _userNameLab.text = @"登录/注册";
     }
 }
@@ -85,7 +92,7 @@ NSString *my_title4 = @"Settings";
 
 - (IBAction)clickUserAction:(id)sender {
     if ([UserModel haveLoginAccount]) {
-        
+        [self jumpToPersonalInfo];
     } else {
         [kAppD presentLoginNew];
     }
@@ -146,8 +153,18 @@ NSString *my_title4 = @"Settings";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToPersonalInfo {
+    PersonalInfoViewController *vc = [[PersonalInfoViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Noti
-- (void)logoutNoti:(NSNotification *)noti {
+- (void)logoutSuccessNoti:(NSNotification *)noti {
+    [self refreshUserInfoView];
+}
+
+- (void)loginSuccessNoti:(NSNotification *)noti {
     [self refreshUserInfoView];
 }
 

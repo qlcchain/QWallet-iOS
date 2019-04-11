@@ -157,6 +157,10 @@
 }
 
 #pragma mark - Action
+- (IBAction)backAction:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    }];
+}
 
 - (IBAction)switchToRegisterAction:(UIButton *)sender {
     [self scrollSliderBlock:sender];
@@ -264,7 +268,7 @@
 - (void)requestSign_in {
     NSString *account = _loginAccountTF.text?:@"";
     UserModel *userM = [UserModel fetchUser:account];
-//    kWeakSelf(self);
+    kWeakSelf(self);
     NSString *md5PW = [MD5Util md5:_loginPWTF.text?:@""];
     NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
@@ -280,7 +284,8 @@
             userM.isLogin = @(YES);
             [UserModel storeUser:userM];
             
-            [kAppD setRootTabbar];
+            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -302,7 +307,7 @@
 
 // 验证码登录
 - (void)requestUser_signin_code {
-    //    kWeakSelf(self);
+    kWeakSelf(self);
     NSString *account = _loginAccountTF.text?:@"";
     NSString *code = _loginPWTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"code":code};
@@ -316,7 +321,8 @@
             model.isLogin = @(YES);
             [UserModel storeUser:model];
             
-            [kAppD setRootTabbar];
+            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

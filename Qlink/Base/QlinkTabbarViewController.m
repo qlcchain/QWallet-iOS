@@ -91,14 +91,15 @@
             }];
             return NO;
         }
-    } else if ([topVC isKindOfClass:[MyViewController class]]){
-        if (kAppD.allowPresentLogin) {
-            [kAppD presentLogin:^{
-                kAppD.tabbarC.selectedIndex = TabbarIndexMy;
-            }];
-            return NO;
-        }
     }
+//    if ([topVC isKindOfClass:[MyViewController class]]){
+//        if (kAppD.allowPresentLogin) {
+//            [kAppD presentLogin:^{
+//                kAppD.tabbarC.selectedIndex = TabbarIndexMy;
+//            }];
+//            return NO;
+//        }
+//    }
     
     return YES;
 }

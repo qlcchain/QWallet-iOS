@@ -504,12 +504,25 @@
                                 <constraint firstAttribute="bottom" secondItem="oxO-wd-ekj" secondAttribute="bottom" id="mzU-7w-U53"/>
                             </constraints>
                         </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lP3-bJ-qRD">
+                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="O3K-nI-04C"/>
+                                <constraint firstAttribute="width" constant="44" id="zkM-z3-vR2"/>
+                            </constraints>
+                            <state key="normal" image="eth_gray_back"/>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="irF-zw-QTH"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="XrW-D9-aOg" firstAttribute="top" secondItem="AYp-pl-M5K" secondAttribute="top" id="DX9-wk-VVu"/>
                         <constraint firstAttribute="trailing" secondItem="XrW-D9-aOg" secondAttribute="trailing" id="I5y-5U-sxv"/>
                         <constraint firstItem="XrW-D9-aOg" firstAttribute="leading" secondItem="AYp-pl-M5K" secondAttribute="leading" id="R6B-yP-Mv4"/>
+                        <constraint firstItem="lP3-bJ-qRD" firstAttribute="leading" secondItem="AYp-pl-M5K" secondAttribute="leading" id="oTJ-ai-gWO"/>
+                        <constraint firstItem="lP3-bJ-qRD" firstAttribute="top" secondItem="AYp-pl-M5K" secondAttribute="top" id="sQm-yv-sbb"/>
                         <constraint firstAttribute="bottom" secondItem="XrW-D9-aOg" secondAttribute="bottom" id="smd-Ks-Dog"/>
                     </constraints>
                 </view>
@@ -526,4 +539,7 @@
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="eth_gray_back" width="24" height="24"/>
+    </resources>
 </document>
