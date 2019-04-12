@@ -405,6 +405,18 @@
 		588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 588A7021208DD29B004B41D4 /* Assets.xcassets */; };
 		588A7024208DD2CC004B41D4 /* launchAnimate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 588A7023208DD2CC004B41D4 /* launchAnimate.gif */; };
 		588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 588A7026208DE67F004B41D4 /* ToxRequestModel.m */; };
+		5894A709225F3105008B0854 /* FinanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A707225F3105008B0854 /* FinanceCell.m */; };
+		5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A708225F3105008B0854 /* FinanceCell.xib */; };
+		5894A70E225F451F008B0854 /* FinanceProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A70D225F451F008B0854 /* FinanceProductModel.m */; };
+		5894A712225F4E18008B0854 /* FinanceProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A710225F4E18008B0854 /* FinanceProductDetailViewController.m */; };
+		5894A713225F4E18008B0854 /* FinanceProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A711225F4E18008B0854 /* FinanceProductDetailViewController.xib */; };
+		5894A71722603983008B0854 /* MyPortfolioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A71522603983008B0854 /* MyPortfolioViewController.m */; };
+		5894A71822603983008B0854 /* MyPortfolioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A71622603983008B0854 /* MyPortfolioViewController.xib */; };
+		5894A71C226040FA008B0854 /* MyPortfolioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A71A226040FA008B0854 /* MyPortfolioCell.m */; };
+		5894A71D226040FA008B0854 /* MyPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A71B226040FA008B0854 /* MyPortfolioCell.xib */; };
+		5894A7222260628B008B0854 /* FinanceRedeemConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A7202260628A008B0854 /* FinanceRedeemConfirmView.xib */; };
+		5894A7232260628B008B0854 /* FinanceRedeemConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A7212260628B008B0854 /* FinanceRedeemConfirmView.m */; };
+		5894A728226093D3008B0854 /* FinanceOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A727226093D3008B0854 /* FinanceOrderListModel.m */; };
 		5894EC45217EB93A007F5D39 /* MnemonicTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894EC44217EB93A007F5D39 /* MnemonicTipView.m */; };
 		5894EC47217EB948007F5D39 /* MnemonicTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894EC46217EB948007F5D39 /* MnemonicTipView.xib */; };
 		5894EC4B217EC798007F5D39 /* ETHMnemonicConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894EC49217EC798007F5D39 /* ETHMnemonicConfirmViewController.m */; };
@@ -1318,6 +1330,25 @@
 		588A7023208DD2CC004B41D4 /* launchAnimate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchAnimate.gif; sourceTree = "<group>"; };
 		588A7025208DE67F004B41D4 /* ToxRequestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToxRequestModel.h; sourceTree = "<group>"; };
 		588A7026208DE67F004B41D4 /* ToxRequestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToxRequestModel.m; sourceTree = "<group>"; };
+		5894A706225F3105008B0854 /* FinanceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceCell.h; sourceTree = "<group>"; };
+		5894A707225F3105008B0854 /* FinanceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceCell.m; sourceTree = "<group>"; };
+		5894A708225F3105008B0854 /* FinanceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceCell.xib; sourceTree = "<group>"; };
+		5894A70C225F451F008B0854 /* FinanceProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceProductModel.h; sourceTree = "<group>"; };
+		5894A70D225F451F008B0854 /* FinanceProductModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceProductModel.m; sourceTree = "<group>"; };
+		5894A70F225F4E18008B0854 /* FinanceProductDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceProductDetailViewController.h; sourceTree = "<group>"; };
+		5894A710225F4E18008B0854 /* FinanceProductDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceProductDetailViewController.m; sourceTree = "<group>"; };
+		5894A711225F4E18008B0854 /* FinanceProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceProductDetailViewController.xib; sourceTree = "<group>"; };
+		5894A71422603983008B0854 /* MyPortfolioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPortfolioViewController.h; sourceTree = "<group>"; };
+		5894A71522603983008B0854 /* MyPortfolioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPortfolioViewController.m; sourceTree = "<group>"; };
+		5894A71622603983008B0854 /* MyPortfolioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPortfolioViewController.xib; sourceTree = "<group>"; };
+		5894A719226040FA008B0854 /* MyPortfolioCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPortfolioCell.h; sourceTree = "<group>"; };
+		5894A71A226040FA008B0854 /* MyPortfolioCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPortfolioCell.m; sourceTree = "<group>"; };
+		5894A71B226040FA008B0854 /* MyPortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPortfolioCell.xib; sourceTree = "<group>"; };
+		5894A71F2260628A008B0854 /* FinanceRedeemConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinanceRedeemConfirmView.h; sourceTree = "<group>"; };
+		5894A7202260628A008B0854 /* FinanceRedeemConfirmView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinanceRedeemConfirmView.xib; sourceTree = "<group>"; };
+		5894A7212260628B008B0854 /* FinanceRedeemConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinanceRedeemConfirmView.m; sourceTree = "<group>"; };
+		5894A726226093D3008B0854 /* FinanceOrderListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceOrderListModel.h; sourceTree = "<group>"; };
+		5894A727226093D3008B0854 /* FinanceOrderListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceOrderListModel.m; sourceTree = "<group>"; };
 		5894EC43217EB93A007F5D39 /* MnemonicTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MnemonicTipView.h; sourceTree = "<group>"; };
 		5894EC44217EB93A007F5D39 /* MnemonicTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MnemonicTipView.m; sourceTree = "<group>"; };
 		5894EC46217EB948007F5D39 /* MnemonicTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicTipView.xib; sourceTree = "<group>"; };
@@ -2131,6 +2162,7 @@
 		580D913520625A4300B12506 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5894A70B225F44B7008B0854 /* FinanceModel */,
 				585D1EE8225D8E0100468C4A /* UserModel */,
 				581AF7B521B6676D001A37E1 /* EOSModel */,
 				5827BC19219EA85600B7730E /* MarketsModel */,
@@ -3470,6 +3502,40 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		5894A705225F30F0008B0854 /* Cel */ = {
+			isa = PBXGroup;
+			children = (
+				5894A706225F3105008B0854 /* FinanceCell.h */,
+				5894A707225F3105008B0854 /* FinanceCell.m */,
+				5894A708225F3105008B0854 /* FinanceCell.xib */,
+				5894A719226040FA008B0854 /* MyPortfolioCell.h */,
+				5894A71A226040FA008B0854 /* MyPortfolioCell.m */,
+				5894A71B226040FA008B0854 /* MyPortfolioCell.xib */,
+			);
+			path = Cel;
+			sourceTree = "<group>";
+		};
+		5894A70B225F44B7008B0854 /* FinanceModel */ = {
+			isa = PBXGroup;
+			children = (
+				5894A70C225F451F008B0854 /* FinanceProductModel.h */,
+				5894A70D225F451F008B0854 /* FinanceProductModel.m */,
+				5894A726226093D3008B0854 /* FinanceOrderListModel.h */,
+				5894A727226093D3008B0854 /* FinanceOrderListModel.m */,
+			);
+			path = FinanceModel;
+			sourceTree = "<group>";
+		};
+		5894A71E22606273008B0854 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5894A71F2260628A008B0854 /* FinanceRedeemConfirmView.h */,
+				5894A7212260628B008B0854 /* FinanceRedeemConfirmView.m */,
+				5894A7202260628A008B0854 /* FinanceRedeemConfirmView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5894EC41217EB911007F5D39 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3519,9 +3585,17 @@
 		589D470D225B325200A4A4E3 /* Finance */ = {
 			isa = PBXGroup;
 			children = (
+				5894A71E22606273008B0854 /* View */,
+				5894A705225F30F0008B0854 /* Cel */,
 				589D470E225B327500A4A4E3 /* FinanceViewController.h */,
 				589D470F225B327500A4A4E3 /* FinanceViewController.m */,
 				589D4710225B327500A4A4E3 /* FinanceViewController.xib */,
+				5894A70F225F4E18008B0854 /* FinanceProductDetailViewController.h */,
+				5894A710225F4E18008B0854 /* FinanceProductDetailViewController.m */,
+				5894A711225F4E18008B0854 /* FinanceProductDetailViewController.xib */,
+				5894A71422603983008B0854 /* MyPortfolioViewController.h */,
+				5894A71522603983008B0854 /* MyPortfolioViewController.m */,
+				5894A71622603983008B0854 /* MyPortfolioViewController.xib */,
 			);
 			path = Finance;
 			sourceTree = "<group>";
@@ -3983,6 +4057,7 @@
 				581AF7BF21B66B9B001A37E1 /* EOSTransferConfirmView.xib in Resources */,
 				5860ADAE20CFB60500EEB6CE /* LaunchViewController.xib in Resources */,
 				58CF40CA219984AB0000C3DA /* NEOWalletAddressViewController.xib in Resources */,
+				5894A7222260628B008B0854 /* FinanceRedeemConfirmView.xib in Resources */,
 				58DF7F72218986C700228718 /* ResetPWSuccessView.xib in Resources */,
 				581A348021AE694900623685 /* AddMarketsCell.xib in Resources */,
 				5860ADB520CFB61000EEB6CE /* ChatHeadView.xib in Resources */,
@@ -4011,6 +4086,7 @@
 				5895701A218957F200DB7497 /* ChooseCurrencyViewController.xib in Resources */,
 				581A348721AEA07700623685 /* ExportPrivateKeyQRView.xib in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
+				5894A71822603983008B0854 /* MyPortfolioViewController.xib in Resources */,
 				583D9597211432110057A90C /* RankingViewController.xib in Resources */,
 				581AFC4221B7AEE8001A37E1 /* EOSResourcesViewController.xib in Resources */,
 				581D32C3219C158B001F88C3 /* strip-frameworks.sh in Resources */,
@@ -4033,6 +4109,7 @@
 				581A347B21AE653400623685 /* AddMarketsViewController.xib in Resources */,
 				581D32C9219C158B001F88C3 /* nodes.json in Resources */,
 				5821CD3E217DBCB500F81F8B /* NEOCreateWalletViewController.xib in Resources */,
+				5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */,
 				581925832114363E009AE406 /* PageThreeView.xib in Resources */,
 				581F5FD7219D6C6000604352 /* PasswordManagementViewController.xib in Resources */,
 				58E41C542182C1D6004C87AA /* ETHWalletDetailViewController.xib in Resources */,
@@ -4055,7 +4132,9 @@
 				58105D3F21882A1A00B8B701 /* ETHWalletAddressViewController.xib in Resources */,
 				58E41C592182C36B004C87AA /* ETHWalletDetailCell.xib in Resources */,
 				5827BC27219EBDBD00B7730E /* ETHExportMnemonicViewController.xib in Resources */,
+				5894A71D226040FA008B0854 /* MyPortfolioCell.xib in Resources */,
 				580D91B32063AE5300B12506 /* Roboto-BoldItalic.ttf in Resources */,
+				5894A713225F4E18008B0854 /* FinanceProductDetailViewController.xib in Resources */,
 				58CF40B8219925990000C3DA /* NEOImportViewController.xib in Resources */,
 				581AFC4721B7BFFD001A37E1 /* EOSCPUNETViewController.xib in Resources */,
 				583D9598211432110057A90C /* RankingRuleViewController.xib in Resources */,
@@ -4371,6 +4450,7 @@
 				58DC64F9206B6748002CF682 /* ConfigUtil.m in Sources */,
 				5812DDAF20A1A7890043A8A8 /* ZXMessageCell.m in Sources */,
 				581D32EB219D0AFB001F88C3 /* ETHAddressTransactionsModel.m in Sources */,
+				5894A7232260628B008B0854 /* FinanceRedeemConfirmView.m in Sources */,
 				587ABD6B21B8F8F800C3D81A /* RichListRequest.m in Sources */,
 				587ABD6721B8F8F800C3D81A /* EOS_BaseResult.m in Sources */,
 				587ABD4121B8F8F700C3D81A /* GetBlockChainInfoRequest.m in Sources */,
@@ -4389,6 +4469,7 @@
 				580D914B20625A4400B12506 /* UIImage+Resize.m in Sources */,
 				5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */,
 				581AF7AA21B6646E001A37E1 /* EOSTransactionRecordViewController.m in Sources */,
+				5894A71C226040FA008B0854 /* MyPortfolioCell.m in Sources */,
 				73A05A342081D91600974483 /* UIImage+HYBImageCliped.m in Sources */,
 				580D915620625A4400B12506 /* UIView+Animation.m in Sources */,
 				581F5FEE219E92B300604352 /* NSString+Valid.m in Sources */,
@@ -4525,6 +4606,7 @@
 				581F5FDB219E5AB300604352 /* WalletsManageViewController.m in Sources */,
 				581D32E8219C16A8001F88C3 /* NEOWalletManage.swift in Sources */,
 				583D959C211432110057A90C /* RankingSubCell.m in Sources */,
+				5894A728226093D3008B0854 /* FinanceOrderListModel.m in Sources */,
 				58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */,
 				58990B6A219431880036FF4F /* ETHTransferConfirmView.m in Sources */,
 				5806C0FE21C3BB1A000E693B /* Create_account_abi_json_to_bin_request.m in Sources */,
@@ -4613,6 +4695,7 @@
 				580D915E20625A4400B12506 /* NSData+Base64.m in Sources */,
 				58957024218980DD00DB7497 /* ResetPWViewController.m in Sources */,
 				583D9542211430D90057A90C /* NewRankView.m in Sources */,
+				5894A71722603983008B0854 /* MyPortfolioViewController.m in Sources */,
 				5812DDA720A1A7890043A8A8 /* ZXChatViewController.m in Sources */,
 				581AC37A21AFE57200ACA80B /* NEOGasClaimUtil.m in Sources */,
 				5827BC26219EBDBD00B7730E /* ETHExportMnemonicViewController.m in Sources */,
@@ -4664,6 +4747,7 @@
 				581D32D1219C158B001F88C3 /* TransactionHistory.swift in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,
 				587ABD6121B8F8F800C3D81A /* BackupEosAccountRequest.m in Sources */,
+				5894A712225F4E18008B0854 /* FinanceProductDetailViewController.m in Sources */,
 				58270FC22072019400C08784 /* NEOWalletUtil.m in Sources */,
 				587ABD5A21B8F8F800C3D81A /* Buy_ram_abi_json_to_bin_request.m in Sources */,
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
@@ -4672,6 +4756,7 @@
 				580D916720625A4400B12506 /* NSString+Base64Image.m in Sources */,
 				587ABD6621B8F8F800C3D81A /* BaseHttpsNetworkRequest.m in Sources */,
 				581A347F21AE694900623685 /* AddMarketsCell.m in Sources */,
+				5894A70E225F451F008B0854 /* FinanceProductModel.m in Sources */,
 				580D915C20625A4400B12506 /* UIView+Screenshot.m in Sources */,
 				5839F5192068CFA8004C4A54 /* RequestService.m in Sources */,
 				735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */,
@@ -4686,6 +4771,7 @@
 				73A05A322081D91600974483 /* UIImageView+HYBImageCliped.m in Sources */,
 				580D91772062600A00B12506 /* AFHTTPClientV2.m in Sources */,
 				581D32F5219D13DD001F88C3 /* NeoQueryWGasView.m in Sources */,
+				5894A709225F3105008B0854 /* FinanceCell.m in Sources */,
 				5812DDA320A1A7890043A8A8 /* ZXChatHelper.m in Sources */,
 				587ABD6221B8F8F800C3D81A /* CreateAccountRequest.m in Sources */,
 				73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */,
@@ -5270,7 +5356,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CustomAppBundleld = com.qlink.winq;
-				CustomProductName = WINQ;
+				CustomProductName = WinCash;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				ENABLE_BITCODE = NO;
@@ -5313,7 +5399,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CustomAppBundleld = com.qlink.winq;
-				CustomProductName = WINQ;
+				CustomProductName = WinCash;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

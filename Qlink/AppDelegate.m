@@ -126,8 +126,13 @@
     LaunchViewController *vc = [[LaunchViewController alloc] init];
     self.window.rootViewController = vc;
     NSTimeInterval timeI = [LaunchViewController getGifDuration];
-    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
-//    [self performSelector:@selector(setRootLoginNew) withObject:nil afterDelay:timeI];
+    [self performSelector:@selector(configRootAndBackground) withObject:nil afterDelay:timeI];
+}
+
+- (void)configRootAndBackground {
+    [self setRootTabbar];
+    // 获取NEO主地址
+    [NeoTransferUtil requestNEOMainAddress];
 }
 
 #pragma mark - 初始化Tabbar

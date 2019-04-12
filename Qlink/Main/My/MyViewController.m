@@ -79,11 +79,11 @@ NSString *my_title4 = @"Settings";
 - (void)refreshUserInfoView {
     if ([UserModel haveLoginAccount]) {
         UserModel *userM = [UserModel fetchUserOfLogin];
-        [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.head]] placeholderImage:User_PlaceholderImage1 completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.head]] placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
         _userNameLab.text = userM.nickname?:@"未设置昵称";
     } else {
-        _userIcon.image = User_PlaceholderImage1;
+        _userIcon.image = User_DefaultImage;
         _userNameLab.text = @"登录/注册";
     }
 }

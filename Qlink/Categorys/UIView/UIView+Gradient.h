@@ -11,5 +11,6 @@
 @interface UIView (Gradient)
 
 - (void)addQGradient;
+- (void)addQGradientWithStart:(UIColor *)startColor end:(UIColor *)endColor;
 
 @end

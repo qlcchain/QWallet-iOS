@@ -879,4 +879,15 @@ dispatch_source_t _timer;
     }];
 }
 
++ (void)requestNEOMainAddress {
+    // 获取NEO交换地址
+    [RequestService requestWithUrl:mainAddress_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            [NeoTransferUtil getShareObject].neoMainAddress = responseObject[Server_Data][@"address"];
+            NSLog(@"NEO主地址:%@",[NeoTransferUtil getShareObject].neoMainAddress);
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
 @end

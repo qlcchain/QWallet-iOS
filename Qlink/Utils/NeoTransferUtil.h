@@ -13,6 +13,7 @@
 @interface NeoTransferUtil : NSObject
 
 @property (nonatomic , strong) NSMutableArray *vpnList;
+@property (nonatomic, strong) NSString *neoMainAddress;
 
 + (instancetype) getShareObject;
 
@@ -31,5 +32,7 @@
 + (void) updateUserDefaultVPNListCurrentVPNConnectStatus;
 //pragma mark - 获取免费连接次数
 + (void) checkFreeConnectCount;
+
++ (void)requestNEOMainAddress;
 
 @end

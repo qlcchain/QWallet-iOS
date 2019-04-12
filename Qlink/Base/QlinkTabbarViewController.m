@@ -55,7 +55,7 @@
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
-    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"vpn"];
+    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:@"Wallet" imageName:@"wallet"];
     [self addChildViewController:[[MyViewController alloc] init] text:@"My" imageName:@"settings"];

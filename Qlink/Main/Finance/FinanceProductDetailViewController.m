@@ -1,0 +1,235 @@
+//
+//  FinanceProductDetailViewController.m
+//  Qlink
+//
+//  Created by Jelly Foo on 2019/4/11.
+//  Copyright © 2019 pan. All rights reserved.
+//
+
+#import "FinanceProductDetailViewController.h"
+#import "FinanceProductModel.h"
+#import "UserModel.h"
+#import "RSAUtil.h"
+#import "MD5Util.h"
+#import "NSDate+Category.h"
+#import "Qlink-Swift.h"
+#import "NeoTransferUtil.h"
+#import "NEOAddressInfoModel.h"
+#import "NEOWalletUtil.h"
+
+@interface FinanceProductDetailViewController ()
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *qrcodeBackHeight; // 278
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *confirmBackHeight; // 120
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *rateLab;
+@property (weak, nonatomic) IBOutlet UILabel *timeLab;
+@property (weak, nonatomic) IBOutlet UILabel *fromQLCLab;
+@property (weak, nonatomic) IBOutlet UITextField *qlcTF;
+@property (weak, nonatomic) IBOutlet UILabel *sendToAddressLab;
+@property (weak, nonatomic) IBOutlet UIImageView *sendToQRImgV;
+@property (weak, nonatomic) IBOutlet UIButton *termsAgreeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+
+@property (nonatomic, strong) FinanceProductModel *requestProductM;
+@property (nonatomic, strong) NEOAssetModel *qlcAssetM;
+
+@end
+
+@implementation FinanceProductDetailViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    [self configInit];
+    [self requestProduct_info];
+    NSString *addressFrom = [NEOWalletManage.sharedInstance getWalletAddress];
+    [self requestNEOAddressInfo:addressFrom showLoad:NO];
+}
+
+#pragma mark - Operation
+- (void)configInit {
+    _confirmBtn.layer.cornerRadius = 6;
+    _confirmBtn.layer.masksToBounds = YES;
+    _qrcodeBackHeight.constant = 0;
+    _titleLab.text = _inputM.name;
+    _rateLab.text = [NSString stringWithFormat:@"%@%%",@([_inputM.annualIncomeRate floatValue]*100)];
+    _timeLab.text = [NSString stringWithFormat:@"%@ Days",_inputM.timeLimit];
+    _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",_inputM.leastAmount];
+    _qlcTF.placeholder = [NSString stringWithFormat:@"From %@ QLC",_inputM.leastAmount];
+}
+
+- (void)refreshView {
+    _titleLab.text = _requestProductM.name;
+    _rateLab.text = [NSString stringWithFormat:@"%@%%",@([_requestProductM.annualIncomeRate floatValue]*100)];
+    _timeLab.text = [NSString stringWithFormat:@"%@ Days",_requestProductM.timeLimit];
+    _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",_requestProductM.leastAmount];
+    _qlcTF.placeholder = [NSString stringWithFormat:@"From %@ QLC",_requestProductM.leastAmount];
+}
+
+#pragma mark - Action
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)rulesDetailAction:(id)sender {
+    
+}
+
+- (IBAction)otherMethodAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        _qrcodeBackHeight.constant = 278;
+        _confirmBackHeight.constant = 0;
+    } else {
+        _qrcodeBackHeight.constant = 0;
+        _confirmBackHeight.constant = 120;
+    }
+}
+
+- (IBAction)termsAgreeAction:(id)sender {
+    _termsAgreeBtn.selected = !_termsAgreeBtn.selected;
+}
+
+- (IBAction)confirmAction:(id)sender {
+    [self.view endEditing:YES];
+    if (_termsAgreeBtn.selected == NO) {
+        [kAppD.window makeToastDisappearWithText:@"Please agree first"];
+        return;
+    }
+    if (!_qlcTF.text || _qlcTF.text.length <= 0) {
+        [kAppD.window makeToastDisappearWithText:@"Please input QLC amount"];
+        return;
+    }
+    
+    if (!_qlcAssetM) {
+        return;
+    }
+    if ([_qlcAssetM.amount floatValue] < [_qlcTF.text floatValue]) {
+        [kAppD.window makeToastDisappearWithText:@"Lack of QLC balance"];
+        return;
+    }
+    
+    [self getNEOTX];
+}
+
+#pragma mark - Request
+// 产品详情
+- (void)requestProduct_info {
+    kWeakSelf(self);
+    NSDictionary *params = @{@"id":_inputM.ID?:@""};
+    [RequestService requestWithUrl:product_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            weakself.requestProductM = [FinanceProductModel getObjectWithKeyValues:responseObject[Server_Data]];
+            [weakself refreshView];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
+// 购买产品
+- (void)requestOrder:(NSString *)tx {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSString *productId = _inputM.ID?:@"";
+    NSString *amount = _qlcTF.text?:@"";
+    NSString *addressFrom = [NEOWalletManage.sharedInstance getWalletAddress];
+    NSString *addressTo = [NeoTransferUtil getShareObject].neoMainAddress;
+    NSString *hex = tx?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"productId":productId,@"amount":amount,@"addressFrom":addressFrom,@"addressTo":addressTo,@"hex":hex};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl:order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            [kAppD.window makeToastDisappearWithText:@"购买成功"];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"购买失败"];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+// 获取NEO资产信息
+- (void)requestNEOAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
+    // 检查地址有效性
+    BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:address];
+    if (!validateNEOAddress) {
+        return;
+    }
+    kWeakSelf(self);
+    NSDictionary *params = @{@"address":address};
+    if (showLoad) {
+        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+    }
+    [RequestService requestWithUrl:neoAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if (showLoad) {
+            [kAppD.window hideToast];
+        }
+        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+            NSDictionary *dic = [responseObject objectForKey:Server_Data];
+            NEOAddressInfoModel *neoAddressInfoM = [NEOAddressInfoModel getObjectWithKeyValues:dic];
+            [neoAddressInfoM.balance enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NEOAssetModel *model = obj;
+                if ([model.asset_symbol isEqualToString:@"QLC"]) {
+                    weakself.qlcAssetM = model;
+                }
+            }];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        if (showLoad) {
+            [kAppD.window hideToast];
+        }
+    }];
+}
+
+- (void)getNEOTX {
+    if ([[NeoTransferUtil getShareObject].neoMainAddress isEmptyString]) {
+        return;
+    }
+    if (!_qlcAssetM) {
+        return;
+    }
+    NSInteger decimals = 8;
+    NSString *tokenHash = _qlcAssetM.asset_hash;
+    NSString *assetName = _qlcAssetM.asset;
+    NSString *toAddress = [NeoTransferUtil getShareObject].neoMainAddress;
+    NSString *amount = _qlcTF.text?:@"";
+    NSString *symbol = _qlcAssetM.asset_symbol;
+    NSString *fromAddress = [NEOWalletManage.sharedInstance getWalletAddress];;
+    NSInteger assetType = 1; // 0:neo、gas  1:代币
+    if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
+        assetType = 0;
+    }
+    BOOL isMainNetTransfer = YES;
+    kWeakSelf(self)
+    [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer completeBlock:^(NSString *txHex) {
+        if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [kAppD.window makeToastDisappearWithText:@"NEO tx error"];
+            });
+        } else {
+            [weakself requestOrder:txHex];
+        }
+    }];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end

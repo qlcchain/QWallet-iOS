@@ -296,7 +296,7 @@ class NEOWalletManage : NSObject {
             #endif
             
             self.account?.sendNep5Token(tokenContractHash: assetHash, amount: amount, toAddress: toAddress, mainNet: mainNet, completion: { (txHex, error) in
-                print("neo转账结果:" + "\(String(describing: error))")
+                print("--------neo tx error:" + "\(String(describing: error))")
                 if txHex != nil {
                     print(txHex!)
                 }
@@ -319,7 +319,7 @@ class NEOWalletManage : NSObject {
             #endif
             
             self.account?.sendAssetTransaction(assetHash: assetHash, asset: assetId, amount: amount, toAddress: toAddress, mainNet: mainNet, completion: { (txHex, error) in
-                print("neo转账结果:" + "\(String(describing: error))")
+                print("--------neo tx error:" + "\(String(describing: error))")
                 if txHex != nil {
                     print(txHex!)
                 }

@@ -121,26 +121,6 @@
     }
     BOOL isMainNetTransfer = YES;
     [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer];
-//    [NEOWalletUtil sendNEOWithCount:_amountTF.text address:_sendtoAddressTV.text];
-//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-//    NSString *fromAddress = currentWalletM.address;
-//    NSString *contractAddress = _inputToken.tokenInfo.address;
-//    NSString *toAddress = _sendtoAddressTV.text;
-//    NSString *name = _inputToken.tokenInfo.name;
-//    NSString *symbol = _inputToken.tokenInfo.symbol;
-//    NSString *amount = _amountTF.text;
-//    NSInteger decimals = [_inputToken.tokenInfo.decimals integerValue];
-//    NSString *value = @"";
-//    BOOL isCoin = [_inputToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
-//    kWeakSelf(self);
-//    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success) {
-//        if (success) {
-//            [kAppD.window makeToast:@"发送成功" duration:1.5 position:CSToastPositionCenter];
-//            [weakself backToRoot];
-//        } else {
-//            [kAppD.window makeToast:@"发送失败" duration:1.5 position:CSToastPositionCenter];
-//        }
-//    }];
 }
 
 - (void)backToRoot {

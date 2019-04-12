@@ -544,16 +544,7 @@
     if (([kAppD.balanceInfo.gas doubleValue] < GAS_Control)) {
         [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
     } else {
-        // 确认是否交易
-//        NSString *msg = [NSString stringWithFormat:@"%@ %@ %@%@?",NSStringLocalizable(@"want_send"),count,NSStringLocalizable(@"qlc_to"),address];
-//        NSMutableAttributedString *msgArrtrbuted = [[NSMutableAttributedString alloc] initWithString:msg];
-//        [msgArrtrbuted addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Roboto-Bold" size:16.0] range:[msg rangeOfString:count]];
-//        kWeakSelf(self);
-//        [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"withdrawal") msg:msgArrtrbuted isShowTwoBtn:YES block:^{
-//            [NEOWalletUtil sendFundsRequestWithAddressTo:address.trim qlc:count.trim];
         [NEOWalletUtil sendFundsRequestWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:mainNet];
-//        }];
-        
     }
 }
 
@@ -567,14 +558,12 @@
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
 //    kWeakSelf(self);
     [NEOWalletManage.sharedInstance sendNEOWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
-//    [NEOWalletManage.sharedInstance sendQLCWithAddressWithIsQLC:true address:address tokeHash:tokenHash qlc:qlc completeBlock:^(NSString* complete) {
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [kAppD.window hideToast];
                 [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"send_qlc")];
             });
         } else {
-//            if ([assetName isEqualToString:@"Qlink Token"]) {
             // 发送交易请求
             NSString *recorid = [NEOWalletUtil getExChangeId];
             NSDictionary *parames = @{@"addressFrom":fromAddress ,@"tx":txHex,@"addressTo":toAddress,@"blockChain":assetName,@"symbol":symbol,@"amount":amount}; // [CurrentWalletInfo getShareInstance].address
@@ -612,6 +601,14 @@
 
 + (void)sendGetBalanceRequest {
     [NeoTransferUtil sendGetBalanceRequest];
+}
+
++ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet completeBlock:(void(^)(NSString *txHex))completeBlock {
+    [NEOWalletManage.sharedInstance sendNEOWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
+        if (completeBlock) {
+            completeBlock(txHex);
+        }
+    }];
 }
 
 @end
