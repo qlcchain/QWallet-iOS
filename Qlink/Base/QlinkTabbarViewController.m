@@ -86,7 +86,7 @@
     UIViewController *topVC = ((QNavigationController *)viewController).topViewController;
     if ([topVC isKindOfClass:[WalletsViewController class]]){
         if (kAppD.allowPresentLogin) {
-            [kAppD presentLogin:^{
+            [kAppD presentFingerprintVerify:^{
                 kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
             }];
             return NO;

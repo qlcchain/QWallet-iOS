@@ -418,6 +418,10 @@ public class NeoClient {
                 completion(.failure(.invalidData))
                 return
             }
+            if (responser["data"] == nil) {
+                completion(.failure(.invalidData))
+                return
+            }
             
             let amountFormatter = NumberFormatter()
             amountFormatter.minimumFractionDigits = 0
@@ -439,7 +443,6 @@ public class NeoClient {
                             if let indexTemp = assetDic["index"] {
                                 indexValue = Int(indexTemp as! String) ?? 0
                             }
-                            
                       
                             let valueStr = assetDic["value"]
                             var str:String = "0.00000001";

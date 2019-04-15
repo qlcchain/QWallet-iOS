@@ -154,7 +154,7 @@
 		581AFC5021B7D5A5001A37E1 /* EOSRegisterAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581AFC4E21B7D5A5001A37E1 /* EOSRegisterAccountViewController.m */; };
 		581AFC5121B7D5A5001A37E1 /* EOSRegisterAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581AFC4F21B7D5A5001A37E1 /* EOSRegisterAccountViewController.xib */; };
 		581B678921916D790061BEDB /* AppConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B678821916D790061BEDB /* AppConfigUtil.m */; };
-		581B678C219178BB0061BEDB /* FingetprintVerificationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B678B219178BB0061BEDB /* FingetprintVerificationUtil.m */; };
+		581B678C219178BB0061BEDB /* FingerprintVerificationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B678B219178BB0061BEDB /* FingerprintVerificationUtil.m */; };
 		581B679421919D280061BEDB /* SuccessTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581B679021919D270061BEDB /* SuccessTipView.xib */; };
 		581B679521919D280061BEDB /* SuccessTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B679321919D280061BEDB /* SuccessTipView.m */; };
 		581B67992192DE4D0061BEDB /* ETHAddressInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B67982192DE4D0061BEDB /* ETHAddressInfoModel.m */; };
@@ -346,6 +346,8 @@
 		5860FD2520B7B0F1005AA1DA /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
 		586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */ = {isa = PBXBuildFile; fileRef = 586F371E207B049400E12F95 /* ContinentAndCountryBean.json */; };
+		58779A9822642976008590EE /* ETHExportKeystorePWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58779A9522642975008590EE /* ETHExportKeystorePWViewController.xib */; };
+		58779A9922642976008590EE /* ETHExportKeystorePWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58779A9722642976008590EE /* ETHExportKeystorePWViewController.m */; };
 		587ABD3D21B8F8F700C3D81A /* eosFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587ABCAB21B8F8F700C3D81A /* eosFramework.framework */; };
 		587ABD3E21B8F8F700C3D81A /* EOSWalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABCAC21B8F8F700C3D81A /* EOSWalletUtil.m */; };
 		587ABD3F21B8F8F700C3D81A /* Approve_Abi_json_to_bin_request.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABCB321B8F8F700C3D81A /* Approve_Abi_json_to_bin_request.m */; };
@@ -896,8 +898,8 @@
 		581AFC4F21B7D5A5001A37E1 /* EOSRegisterAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EOSRegisterAccountViewController.xib; sourceTree = "<group>"; };
 		581B678721916D790061BEDB /* AppConfigUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfigUtil.h; sourceTree = "<group>"; };
 		581B678821916D790061BEDB /* AppConfigUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfigUtil.m; sourceTree = "<group>"; };
-		581B678A219178BA0061BEDB /* FingetprintVerificationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingetprintVerificationUtil.h; sourceTree = "<group>"; };
-		581B678B219178BB0061BEDB /* FingetprintVerificationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FingetprintVerificationUtil.m; sourceTree = "<group>"; };
+		581B678A219178BA0061BEDB /* FingerprintVerificationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerprintVerificationUtil.h; sourceTree = "<group>"; };
+		581B678B219178BB0061BEDB /* FingerprintVerificationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FingerprintVerificationUtil.m; sourceTree = "<group>"; };
 		581B679021919D270061BEDB /* SuccessTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessTipView.xib; sourceTree = "<group>"; };
 		581B679221919D280061BEDB /* SuccessTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessTipView.h; sourceTree = "<group>"; };
 		581B679321919D280061BEDB /* SuccessTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessTipView.m; sourceTree = "<group>"; };
@@ -1214,6 +1216,9 @@
 		586EE0962089951D009EAF40 /* FriendStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendStatusModel.h; sourceTree = "<group>"; };
 		586EE0972089951D009EAF40 /* FriendStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendStatusModel.m; sourceTree = "<group>"; };
 		586F371E207B049400E12F95 /* ContinentAndCountryBean.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContinentAndCountryBean.json; sourceTree = "<group>"; };
+		58779A9522642975008590EE /* ETHExportKeystorePWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETHExportKeystorePWViewController.xib; sourceTree = "<group>"; };
+		58779A9622642976008590EE /* ETHExportKeystorePWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHExportKeystorePWViewController.h; sourceTree = "<group>"; };
+		58779A9722642976008590EE /* ETHExportKeystorePWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETHExportKeystorePWViewController.m; sourceTree = "<group>"; };
 		587ABCAB21B8F8F700C3D81A /* eosFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = eosFramework.framework; sourceTree = "<group>"; };
 		587ABCAC21B8F8F700C3D81A /* EOSWalletUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EOSWalletUtil.m; sourceTree = "<group>"; };
 		587ABCAD21B8F8F700C3D81A /* EOSWalletUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EOSWalletUtil.h; sourceTree = "<group>"; };
@@ -2189,8 +2194,8 @@
 			children = (
 				589D4714225B502200A4A4E3 /* MyThemes.h */,
 				589D4715225B502200A4A4E3 /* MyThemes.m */,
-				581B678A219178BA0061BEDB /* FingetprintVerificationUtil.h */,
-				581B678B219178BB0061BEDB /* FingetprintVerificationUtil.m */,
+				581B678A219178BA0061BEDB /* FingerprintVerificationUtil.h */,
+				581B678B219178BB0061BEDB /* FingerprintVerificationUtil.m */,
 				58CF1029207CA4640026F28E /* ChooseCountryUtil.h */,
 				58CF102A207CA4640026F28E /* ChooseCountryUtil.m */,
 				58DC64F7206B6748002CF682 /* ConfigUtil.h */,
@@ -2688,6 +2693,9 @@
 				58D2D89E21940CB800C5B4C9 /* ETHExportKeystoreViewController.h */,
 				58D2D89F21940CB800C5B4C9 /* ETHExportKeystoreViewController.m */,
 				58D2D8A021940CB800C5B4C9 /* ETHExportKeystoreViewController.xib */,
+				58779A9622642976008590EE /* ETHExportKeystorePWViewController.h */,
+				58779A9722642976008590EE /* ETHExportKeystorePWViewController.m */,
+				58779A9522642975008590EE /* ETHExportKeystorePWViewController.xib */,
 			);
 			path = ETH;
 			sourceTree = "<group>";
@@ -4158,6 +4166,7 @@
 				580D91B72063AE5300B12506 /* Roboto-Medium.ttf in Resources */,
 				935F3291212BB4F500B03341 /* ConfigurationRelease.plist in Resources */,
 				5821CD39217DB5A400F81F8B /* ETHCreateWalletViewController.xib in Resources */,
+				58779A9822642976008590EE /* ETHExportKeystorePWViewController.xib in Resources */,
 				581AFC4C21B7D28B001A37E1 /* EOSRAMViewController.xib in Resources */,
 				5860AD1B20CFB51200EEB6CE /* WalletSelectCell.xib in Resources */,
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
@@ -4556,6 +4565,7 @@
 				580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */,
 				581AF7BB21B66827001A37E1 /* EOSTraceModel.m in Sources */,
 				5821CD44217DCBA700F81F8B /* ETHMnemonicViewController.m in Sources */,
+				58779A9922642976008590EE /* ETHExportKeystorePWViewController.m in Sources */,
 				585CDC17225C89DC00199FE1 /* ChooseAreaCodeViewController.m in Sources */,
 				581C228021AD1B2D0009888B /* UIView+ToastAlert.m in Sources */,
 				587ABD4B21B8F8F800C3D81A /* Abi_bin_to_json.m in Sources */,
@@ -4678,7 +4688,7 @@
 				58CF1032207CBFDF0026F28E /* UnderlineView.m in Sources */,
 				587ABD6D21B8F8F800C3D81A /* EOS_RichListResult.m in Sources */,
 				58CF40CF21998D340000C3DA /* NEOTransferConfirmView.m in Sources */,
-				581B678C219178BB0061BEDB /* FingetprintVerificationUtil.m in Sources */,
+				581B678C219178BB0061BEDB /* FingerprintVerificationUtil.m in Sources */,
 				5806C10421C3C3AC000E693B /* GetBlockRequest.m in Sources */,
 				7377D179206B9E730072E628 /* VPNMode.m in Sources */,
 				585D1EEB225D8E5E00468C4A /* UserModel.m in Sources */,

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ETHExportKeystoreViewController : QBaseViewController
 
+@property (nonatomic, copy) NSString *inputPW;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -52,6 +52,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIView *officialTVBack;
 @property (weak, nonatomic) IBOutlet UITextView *officialTV;
 @property (weak, nonatomic) IBOutlet UIButton *officialStartImportBtn;
+@property (weak, nonatomic) IBOutlet UITextField *officialPWTF;
 
 #pragma mark - PrivateKey
 @property (weak, nonatomic) IBOutlet UIView *privateTVBack;
@@ -286,7 +287,8 @@ typedef enum : NSUInteger {
     }
     
     kWeakSelf(self);
-    NSString *pw = [LoginPWModel getLoginPW];
+//    NSString *pw = [LoginPWModel getLoginPW];
+    NSString *pw = _officialPWTF.text?:@"";
     NSString *keystore = _officialTV.text;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:keystore privateKeyInput:nil addressInput:nil mnemonicInput:nil password:pw :^(BOOL success, NSString *address) {

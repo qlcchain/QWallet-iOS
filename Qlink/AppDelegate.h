@@ -26,7 +26,7 @@
 //- (void)setRootLogin;
 - (void)setRootTabbar;
 - (void)presentLoginNew;
-- (void)presentLogin:(LoginPWCompleteBlock)completeBlock;
+- (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock;
 
 @end
 

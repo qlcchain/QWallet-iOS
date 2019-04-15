@@ -6,10 +6,10 @@
 //  Copyright © 2018年 旷自辉. All rights reserved.
 //
 
-#import "FingetprintVerificationUtil.h"
+#import "FingerprintVerificationUtil.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 
-@implementation FingetprintVerificationUtil
+@implementation FingerprintVerificationUtil
 
 
 //+ (void)show {
@@ -143,7 +143,7 @@
 + (void)showNotSupport {
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:@"当前设备不支持TouchID" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertConfirm = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [FingetprintVerificationUtil exitAPP];
+        [FingerprintVerificationUtil exitAPP];
     }];
     [alertC addAction:alertConfirm];
     [kAppD.window.rootViewController presentViewController:alertC animated:YES completion:nil];

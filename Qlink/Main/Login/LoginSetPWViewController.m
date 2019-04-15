@@ -10,7 +10,7 @@
 #import "UIView+Visuals.h"
 #import "LoginPWModel.h"
 #import "QlinkTabbarViewController.h"
-#import "FingetprintVerificationUtil.h"
+#import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 
 @interface LoginSetPWViewController ()
@@ -102,7 +102,7 @@
 
 - (IBAction)fingerprintLoginAction:(id)sender {
     kWeakSelf(self);
-    [FingetprintVerificationUtil show:^(BOOL success) {
+    [FingerprintVerificationUtil show:^(BOOL success) {
         if (success) {
 //            [weakself jumpToTabbar];
             kAppD.allowPresentLogin = NO; // 设置已经输入过密码

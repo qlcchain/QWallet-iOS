@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,6 +17,7 @@
                 <outlet property="mnemonicTV" destination="2Fn-BP-R1N" id="qj8-WP-q9q"/>
                 <outlet property="mnemonicTVBack" destination="0yu-V1-Db0" id="twO-eu-5ko"/>
                 <outlet property="officialBtn" destination="POe-gf-LS3" id="VqL-ZA-W3O"/>
+                <outlet property="officialPWTF" destination="r5q-5j-ZmG" id="gXn-vP-AjR"/>
                 <outlet property="officialStartImportBtn" destination="MfC-ey-8uW" id="awk-Xq-Idh"/>
                 <outlet property="officialTV" destination="YZn-SW-C5D" id="gcp-22-wlp"/>
                 <outlet property="officialTVBack" destination="H2o-Qi-FAa" id="BAc-7o-CMM"/>
@@ -474,7 +474,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hR7-XQ-fkU">
-                                    <rect key="frame" x="24" y="255" width="284" height="44"/>
+                                    <rect key="frame" x="24" y="307" width="284" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-6u-kMd">
                                             <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
@@ -515,7 +515,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfC-ey-8uW">
-                                    <rect key="frame" x="23" y="329" width="311" height="49"/>
+                                    <rect key="frame" x="23" y="381" width="311" height="49"/>
                                     <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="49" id="Z32-Fn-amx"/>
@@ -528,6 +528,25 @@
                                         <action selector="officialImportAction:" destination="-1" eventType="touchUpInside" id="Q7K-oT-WCX"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2g3-GE-ZzX">
+                                    <rect key="frame" x="24" y="255" width="309" height="44"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Input Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r5q-5j-ZmG">
+                                            <rect key="frame" x="15" y="0.0" width="279" height="44"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="r5q-5j-ZmG" firstAttribute="top" secondItem="2g3-GE-ZzX" secondAttribute="top" id="K4R-6V-uEp"/>
+                                        <constraint firstAttribute="bottom" secondItem="r5q-5j-ZmG" secondAttribute="bottom" id="Pnv-nH-Qg7"/>
+                                        <constraint firstAttribute="trailing" secondItem="r5q-5j-ZmG" secondAttribute="trailing" constant="15" id="cIt-a3-asU"/>
+                                        <constraint firstItem="r5q-5j-ZmG" firstAttribute="leading" secondItem="2g3-GE-ZzX" secondAttribute="leading" constant="15" id="lP1-Us-cUV"/>
+                                        <constraint firstAttribute="height" constant="44" id="pNX-x5-gaa"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -535,13 +554,16 @@
                                 <constraint firstItem="uxa-uT-ebM" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="23" id="70A-DS-yDH"/>
                                 <constraint firstItem="MfC-ey-8uW" firstAttribute="top" secondItem="hR7-XQ-fkU" secondAttribute="bottom" constant="30" id="EJX-3L-8rt"/>
                                 <constraint firstAttribute="trailing" secondItem="H2o-Qi-FAa" secondAttribute="trailing" constant="24" id="RaF-uJ-gew"/>
+                                <constraint firstItem="2g3-GE-ZzX" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="24" id="Twe-Qf-VLu"/>
+                                <constraint firstItem="2g3-GE-ZzX" firstAttribute="top" secondItem="H2o-Qi-FAa" secondAttribute="bottom" constant="8" id="WmM-Ad-LDl"/>
                                 <constraint firstItem="H2o-Qi-FAa" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="24" id="a6b-j6-zBc"/>
                                 <constraint firstAttribute="trailing" secondItem="MfC-ey-8uW" secondAttribute="trailing" constant="23" id="bB9-h1-0nc"/>
                                 <constraint firstItem="MfC-ey-8uW" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="23" id="lUS-U9-xMs"/>
                                 <constraint firstItem="H2o-Qi-FAa" firstAttribute="top" secondItem="uxa-uT-ebM" secondAttribute="bottom" constant="16" id="mSM-3a-oxK"/>
                                 <constraint firstItem="uxa-uT-ebM" firstAttribute="top" secondItem="lZH-II-zCG" secondAttribute="top" constant="20" id="qoU-Ov-wCg"/>
                                 <constraint firstAttribute="trailing" secondItem="uxa-uT-ebM" secondAttribute="trailing" constant="23" id="r7t-Nd-QKk"/>
-                                <constraint firstItem="hR7-XQ-fkU" firstAttribute="top" secondItem="H2o-Qi-FAa" secondAttribute="bottom" constant="8" id="u94-EV-PHY"/>
+                                <constraint firstItem="hR7-XQ-fkU" firstAttribute="top" secondItem="2g3-GE-ZzX" secondAttribute="bottom" constant="8" id="xyD-jc-UzO"/>
+                                <constraint firstAttribute="trailing" secondItem="2g3-GE-ZzX" secondAttribute="trailing" constant="24" id="yQk-S9-8r6"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoP-2s-4nw">
@@ -803,7 +825,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="5nj-ej-tOP"/>
-            <point key="canvasLocation" x="1692.8" y="77.361319340329842"/>
+            <point key="canvasLocation" x="1692" y="77"/>
         </scrollView>
     </objects>
     <resources>

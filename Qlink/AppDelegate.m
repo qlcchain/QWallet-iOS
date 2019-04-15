@@ -34,6 +34,7 @@
 #import <ETHFramework/ETHFramework.h>
 #import "LoginViewController.h"
 #import "UserModel.h"
+#import "FingerprintVerificationUtil.h"
 
 @import Firebase;
 
@@ -160,31 +161,46 @@
 //    self.window.rootViewController = nav;
 }
 
-- (void)setRootLogin {
-    BOOL isExist = [LoginPWModel isExistLoginPW];
-    UIViewController *vc = nil;
-    if (isExist) {
-        vc = [[LoginInputPWViewController alloc] init];
-    } else {
-        vc = [[LoginSetPWViewController alloc] init];
-    }
-//    QlinkNavViewController *nav = [[QlinkNavViewController alloc] initWithRootViewController:vc];
-    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nav;
-}
+//- (void)setRootLogin {
+//    BOOL isExist = [LoginPWModel isExistLoginPW];
+//    UIViewController *vc = nil;
+//    if (isExist) {
+//        vc = [[LoginInputPWViewController alloc] init];
+//    } else {
+//        vc = [[LoginSetPWViewController alloc] init];
+//    }
+//    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+//    self.window.rootViewController = nav;
+//}
 
-- (void)presentLogin:(LoginPWCompleteBlock)completeBlock {
-    BOOL isExist = [LoginPWModel isExistLoginPW];
-    UIViewController *vc = nil;
-    if (isExist) {
-        vc = [[LoginInputPWViewController alloc] init];
-        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
+- (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock {
+//    kWeakSelf(self);
+    if ([ConfigUtil getLocalTouch]) {
+        [FingerprintVerificationUtil show:^(BOOL success) {
+            if (success) {
+                kAppD.allowPresentLogin = NO; // 设置已经输入过密码
+                if (completeBlock) {
+                    completeBlock();
+                }
+            }
+        }];
     } else {
-        vc = [[LoginSetPWViewController alloc] init];
-        [((LoginSetPWViewController *)vc) configCompleteBlock:completeBlock];
+        if (completeBlock) {
+            completeBlock();
+        }
     }
-    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
-    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
+    
+//    BOOL isExist = [LoginPWModel isExistLoginPW];
+//    UIViewController *vc = nil;
+//    if (isExist) {
+//        vc = [[LoginInputPWViewController alloc] init];
+//        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
+//    } else {
+//        vc = [[LoginSetPWViewController alloc] init];
+//        [((LoginSetPWViewController *)vc) configCompleteBlock:completeBlock];
+//    }
+//    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+//    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
 }
 
 #pragma mark - 配置小米推送

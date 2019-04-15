@@ -9,7 +9,7 @@
 #import "ETHVerifyPWViewController.h"
 #import "LoginPWModel.h"
 #import "QlinkTabbarViewController.h"
-#import "FingetprintVerificationUtil.h"
+#import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import "ETHExportMnemonicViewController.h"
 
@@ -67,27 +67,25 @@
 }
 
 - (IBAction)joinAction:(id)sender {
-    [self.view endEditing:YES];
-    NSString *localPW = [LoginPWModel getLoginPW];
-    if (![localPW isEqualToString:_pwTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"Password Wrong"];
-        return;
-    }
-    
+//    [self.view endEditing:YES];
+//    NSString *localPW = [LoginPWModel getLoginPW];
+//    if (![localPW isEqualToString:_pwTF.text]) {
+//        [kAppD.window makeToastDisappearWithText:@"Password Wrong"];
+//        return;
+//    }
+//
 //    [self jumpToTabbar];
 }
 
 - (IBAction)fingerprintLoginAction:(id)sender {
     [self.view endEditing:YES];
     kWeakSelf(self);
-    [FingetprintVerificationUtil show:^(BOOL success) {
+    [FingerprintVerificationUtil show:^(BOOL success) {
         if (success) {
             [weakself jumpToETHExportMnemonic];
         }
     }];
 }
-
-
 
 #pragma mark - Transition
 - (void)jumpToETHExportMnemonic {

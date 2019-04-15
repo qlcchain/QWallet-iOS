@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FingetprintVerificationUtil : NSObject
+@interface FingerprintVerificationUtil : NSObject
 
 + (void)show:(void (^)(BOOL success))block;
 
