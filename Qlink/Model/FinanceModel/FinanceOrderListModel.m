@@ -20,7 +20,7 @@
 
 @implementation FinanceOrderListModel
 
-+(NSDictionary *)mj_objectClassInArray{
++ (NSDictionary *)mj_objectClassInArray{
     return @{@"orderList" : @"FinanceOrderModel"};
 }
 

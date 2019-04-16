@@ -553,11 +553,11 @@
  @param address 交易地址
  @param qlc qlc
  */
-+ (void) sendFundsRequestWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet {
++ (void)sendFundsRequestWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet {
 
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
 //    kWeakSelf(self);
-    [NEOWalletManage.sharedInstance sendNEOWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
+    [NEOWalletManage.sharedInstance getNEOTXWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [kAppD.window hideToast];
@@ -604,7 +604,7 @@
 }
 
 + (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet completeBlock:(void(^)(NSString *txHex))completeBlock {
-    [NEOWalletManage.sharedInstance sendNEOWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
+    [NEOWalletManage.sharedInstance getNEOTXWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet completeBlock:^(NSString * txHex) {
         if (completeBlock) {
             completeBlock(txHex);
         }

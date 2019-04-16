@@ -13,7 +13,7 @@
 static NSString *MyPortfolioCellReuse = @"MyPortfolioCell";
 #define MyPortfolioCell_Height 112
 
-typedef void(^RedeemBlock)(NSString *orderId);
+typedef void(^RedeemBlock)(NSInteger row);
 
 @interface MyPortfolioCell : UITableViewCell
 
@@ -27,6 +27,7 @@ typedef void(^RedeemBlock)(NSString *orderId);
 @property (weak, nonatomic) IBOutlet UIButton *redeemBtn;
 
 @property (nonatomic, copy) RedeemBlock redeemB;
+@property (nonatomic) NSInteger row;
 
 - (void)configCell:(FinanceOrderModel *)model;
 

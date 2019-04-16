@@ -9,14 +9,17 @@
 #import "FinanceRedeemConfirmView.h"
 #import "UIView+Visuals.h"
 #import "WalletCommonModel.h"
+#import "Qlink-Swift.h"
 
 @interface FinanceRedeemConfirmView ()
 
 @property (weak, nonatomic) IBOutlet UIView *tipBack;
 @property (weak, nonatomic) IBOutlet UILabel *walletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *walletAddressLab;
-@property (weak, nonatomic) IBOutlet UILabel *sendtoLab;
-@property (weak, nonatomic) IBOutlet UILabel *amountLab;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *principalLab;
+@property (weak, nonatomic) IBOutlet UILabel *earningsLab;
+
 
 @end
 
@@ -30,14 +33,15 @@
 }
 
 - (void)configInit {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getWalletWithAddress:address];
     _walletNameLab.text = currentWalletM.name;
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
 }
 
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount {
-    _sendtoLab.text = sendto;
-    _amountLab.text = amount;
+- (void)configWithPrincipal:(NSString *)principal earnings:(NSString *)earnings {
+    _principalLab.text = [NSString stringWithFormat:@"%@ QLC",principal];
+    _earningsLab.text = [NSString stringWithFormat:@"%@ QLC",earnings];
 }
 
 - (void)show {

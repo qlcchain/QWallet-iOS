@@ -63,12 +63,14 @@ target "Qlink" do
 #    pod 'MMWormhole'
 #    pod 'TagListView', '1.2.0'
     pod 'Charts', '3.1.0'
+    pod 'SwiftTheme', '0.4.1'
+    pod 'TYCyclePagerView'
+    pod 'MJRefresh'
 
 #  shadowsock
     pod 'SwiftColor'
     pod 'AsyncSwift'
     pod 'Appirater'
-    pod 'SwiftTheme', '0.4.1'
 
     tunnel
     library

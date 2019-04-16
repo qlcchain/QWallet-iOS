@@ -13,11 +13,23 @@
 #import "MyPortfolioViewController.h"
 #import "FinanceProductDetailViewController.h"
 #import "Qlink-Swift.h"
+#import "EarningsRankingViewController.h"
+#import "InviteRankingViewController.h"
+#import "UIView+Gradient.h"
+#import "ShareFriendsViewController.h"
 
 @interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *topGradientBack;
+@property (weak, nonatomic) IBOutlet UIView *dailyBack;
+@property (weak, nonatomic) IBOutlet UIButton *joinNowBtn;
+@property (weak, nonatomic) IBOutlet UILabel *dailyRateLab;
+@property (weak, nonatomic) IBOutlet UILabel *dailyFromQLCLab;
+@property (weak, nonatomic) IBOutlet UIButton *inviteFriendBtn;
+
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *productArr;
+@property (nonatomic, strong) FinanceProductModel *dailyM;
 
 @end
 
@@ -28,17 +40,36 @@
     // Do any additional setup after loading the view from its nib.
     
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
-
-    _productArr = [NSMutableArray array];
-    [_mainTable registerNib:[UINib nibWithNibName:FinanceCellReuse bundle:nil] forCellReuseIdentifier:FinanceCellReuse];
     
     [self configInit];
     [self requestProduct_list];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9)];
+}
+
 #pragma mark - Operation
 - (void)configInit {
+    _productArr = [NSMutableArray array];
+    [_mainTable registerNib:[UINib nibWithNibName:FinanceCellReuse bundle:nil] forCellReuseIdentifier:FinanceCellReuse];
     
+    _dailyBack.layer.cornerRadius = 6;
+//    _dailyBack.layer.masksToBounds = YES;
+    UIColor *navShadowColor = [UIColorFromRGB(0x000000) colorWithAlphaComponent:0.08];
+    [_dailyBack shadowWithColor:navShadowColor offset:CGSizeMake(0, 2) opacity:1 radius:8];
+    
+    _joinNowBtn.layer.cornerRadius = 4;
+    _joinNowBtn.layer.masksToBounds = YES;
+    _inviteFriendBtn.layer.cornerRadius = 2;
+    _inviteFriendBtn.layer.masksToBounds = YES;
+}
+
+- (void)refreshDailyView {
+    _dailyRateLab.text = [NSString stringWithFormat:@"%@%%",@([_dailyM.annualIncomeRate?:@(0) floatValue]*100)];
+    _dailyFromQLCLab.text = [NSString stringWithFormat:@"Flexible From %@ QLC",_dailyM.leastAmount?:@(0)];
 }
 
 #pragma mark - Request
@@ -54,6 +85,15 @@
             [weakself.productArr removeAllObjects];
             [weakself.productArr addObjectsFromArray:arr];
             [weakself.mainTable reloadData];
+            
+            [weakself.productArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                FinanceProductModel *model = obj;
+                if ([model.enName isEqualToString:@"QLC Daily Gain Program"]) {
+                    weakself.dailyM = model;
+                    *stop = YES;
+                }
+            }];
+            [weakself refreshDailyView];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -66,6 +106,16 @@
 //}
 - (IBAction)myPortfolioAction:(id)sender {
     [self jumpToMyPortfolio];
+}
+
+- (IBAction)joinNowAction:(id)sender {
+    if (_dailyM) {
+        [self jumpToProductDetail:_dailyM];
+    }
+}
+
+- (IBAction)inviteFriendAction:(id)sender {
+    [self jumpToShareFriends];
 }
 
 #pragma mark - UITableViewDelegate
@@ -119,6 +169,20 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)jumpToEarningsRanking {
+    EarningsRankingViewController *vc = [EarningsRankingViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToShareFriends {
+    ShareFriendsViewController *vc = [ShareFriendsViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

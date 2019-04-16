@@ -328,7 +328,7 @@ class NEOWalletManage : NSObject {
         }
     }
     
-    @objc open func sendNEO(assetHash: String, decimals: Int, assetName: String, amount: String, toAddress: String, assetType: Int, mainNet: Bool, completeBlock:@escaping fucBlock) {
+    @objc open func getNEOTX(assetHash: String, decimals: Int, assetName: String, amount: String, toAddress: String, assetType: Int, mainNet: Bool, completeBlock:@escaping fucBlock) {
         
 //        let assetId: String! = self.selectedAsset!.assetID!
 //        let assetName: String! = self.selectedAsset?.name!

@@ -43,6 +43,7 @@ typedef enum : NSUInteger {
 + (NSArray *)getAllWalletModel;
 + (void)setCurrentSelectWallet:(WalletCommonModel *)model;
 + (WalletCommonModel *)getCurrentSelectWallet;
++ (WalletCommonModel *)getWalletWithAddress:(NSString *)address;
 
 + (void)refreshCurrentWallet;
 + (void)setDefaulNEOWallet:(NSString *)address;

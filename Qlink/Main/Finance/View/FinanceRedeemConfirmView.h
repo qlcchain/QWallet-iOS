@@ -10,14 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^NEOTransferConfirmBlock)(void);
+typedef void(^FinanceRedeemConfirmBlock)(void);
 
 @interface FinanceRedeemConfirmView : UIView
 
-@property (nonatomic, copy) NEOTransferConfirmBlock confirmBlock;
+@property (nonatomic, copy) FinanceRedeemConfirmBlock confirmBlock;
 
 + (instancetype)getInstance;
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount;
+- (void)configWithPrincipal:(NSString *)principal earnings:(NSString *)earnings;
 - (void)show;
 
 @end

@@ -215,10 +215,19 @@
         }
     }];
     return result;
-    
-//    NSDictionary *walletDic = [HWUserdefault getObjectWithKey:Current_Select_Wallet];
-//    WalletCommonModel *model = [WalletCommonModel getObjectWithKeyValues:walletDic];
-//    return model;
+}
+
++ (WalletCommonModel *)getWalletWithAddress:(NSString *)address {
+    __block WalletCommonModel *result = nil;
+    NSArray *localArr = [HWUserdefault getObjectWithKey:Local_All_Wallet];
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WalletCommonModel *tempM = [WalletCommonModel getObjectWithKeyValues:obj];
+        if ([tempM.address isEqualToString:address]) {
+            result = tempM;
+            *stop = YES;
+        }
+    }];
+    return result;
 }
 
 #pragma mark - ETH

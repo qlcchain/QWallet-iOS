@@ -11,8 +11,6 @@
 
 @interface MyPortfolioCell ()
 
-@property (nonatomic, strong) FinanceOrderModel *orderM;
-
 @end
 
 @implementation MyPortfolioCell
@@ -37,7 +35,6 @@
 }
 
 - (void)configCell:(FinanceOrderModel *)model {
-    _orderM = model;
     _cumulativeEarnKeyLab.hidden = NO;
     _cumulativeEarnValLab.hidden = NO;
     _maturityDateKeyLab.hidden = NO;
@@ -54,12 +51,12 @@
     _nameLab.text = model.productName;
     _principalValLab.text = [NSString stringWithFormat:@"%@",model.amount];
     _cumulativeEarnValLab.text = [NSString stringWithFormat:@"%@",model.addRevenue];
-    _maturityDateValLab.text = [NSString stringWithFormat:@"%@",model.dueDays];
+    _maturityDateValLab.text = [NSString stringWithFormat:@"%@",model.maturityTime];
 }
 
 - (IBAction)redeemAction:(id)sender {
     if (_redeemB) {
-        _redeemB(_orderM.ID);
+        _redeemB(_row);
     }
 }
 

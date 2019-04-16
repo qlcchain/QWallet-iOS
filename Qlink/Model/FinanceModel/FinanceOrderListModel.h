@@ -16,6 +16,9 @@
 @property (nonatomic, strong) NSNumber *dueDays; // = 31;
 @property (nonatomic, strong) NSString *productName; // = "QLC锁仓30天";
 @property (nonatomic, strong) NSString *status; // = PAY;
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *orderTime;
+@property (nonatomic, strong) NSString *maturityTime;
 
 @end
 

@@ -15,6 +15,8 @@
 #import "RSAUtil.h"
 #import "Qlink-Swift.h"
 #import "FinanceOrderListModel.h"
+#import "FinanceRedeemConfirmView.h"
+#import "FinanceHistoryViewController.h"
 
 @interface MyPortfolioViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -22,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLab;
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayEarnLab;
 @property (weak, nonatomic) IBOutlet UILabel *cumulativeEarnLab;
+
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 
@@ -36,9 +39,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _sourceArr = [NSMutableArray array];
-    [_mainTable registerNib:[UINib nibWithNibName:MyPortfolioCellReuse bundle:nil] forCellReuseIdentifier:MyPortfolioCellReuse];
-    
     [self configInit];
     [self requestOrder_list];
 }
@@ -51,13 +51,26 @@
 
 #pragma mark - Operation
 - (void)configInit {
-    
+    _sourceArr = [NSMutableArray array];
+    [_mainTable registerNib:[UINib nibWithNibName:MyPortfolioCellReuse bundle:nil] forCellReuseIdentifier:MyPortfolioCellReuse];
 }
 
 - (void)refreshView {
     [_mainTable reloadData];
     _totalLab.text = _orderListM.balance?:@"0";
     _yesterdayEarnLab.text = [NSString stringWithFormat:@"+%@",_orderListM.yesterdayRevenue];
+}
+
+- (void)showRedeemConfirmView:(FinanceOrderModel *)model {
+    FinanceRedeemConfirmView *view = [FinanceRedeemConfirmView getInstance];
+    NSString *principal = [NSString stringWithFormat:@"%@",model.amount];
+    NSString *earnings = [NSString stringWithFormat:@"%@",model.addRevenue];
+    kWeakSelf(self)
+    view.confirmBlock = ^{
+        [weakself requestRedeem:model.ID];
+    };
+    [view configWithPrincipal:principal earnings:earnings];
+    [view show];
 }
 
 #pragma mark - Action
@@ -67,7 +80,7 @@
 }
 
 - (IBAction)menuAction:(id)sender {
-    
+    [self jumpToFinanceHistory];
 }
 
 #pragma mark - Request
@@ -148,13 +161,21 @@
     MyPortfolioCell *cell = [tableView dequeueReusableCellWithIdentifier:MyPortfolioCellReuse];
     
     FinanceOrderModel *model = _sourceArr[indexPath.row];
+    cell.row = indexPath.row;
     [cell configCell:model];
     kWeakSelf(self)
-    cell.redeemB = ^(NSString *orderId) {
-//        [weakself requestRedeem:orderId];
+    cell.redeemB = ^(NSInteger row) {
+        FinanceOrderModel *tempM = weakself.sourceArr[row];
+        [weakself showRedeemConfirmView:tempM];
     };
     
     return cell;
+}
+
+#pragma mark - Transition
+- (void)jumpToFinanceHistory {
+    FinanceHistoryViewController *vc = [FinanceHistoryViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
