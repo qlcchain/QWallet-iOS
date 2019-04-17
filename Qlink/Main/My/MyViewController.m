@@ -14,6 +14,7 @@
 #import "UserModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PersonalInfoViewController.h"
+#import "ShareFriendsViewController.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -110,7 +111,7 @@ NSString *my_title4 = @"Settings";
     if ([model.title isEqualToString:my_title0]) {
         [self jumpToWalletsManage];
     } else if ([model.title isEqualToString:my_title1]) {
-        
+        [self jumpToShareFriends];
     } else if ([model.title isEqualToString:my_title2]) {
         [self jumpToJoinCommunity];
     } else if ([model.title isEqualToString:my_title3]) {
@@ -155,6 +156,12 @@ NSString *my_title4 = @"Settings";
 
 - (void)jumpToPersonalInfo {
     PersonalInfoViewController *vc = [[PersonalInfoViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToShareFriends {
+    ShareFriendsViewController *vc = [ShareFriendsViewController new];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

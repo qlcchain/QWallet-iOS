@@ -124,10 +124,12 @@
 
 #pragma mark - 添加启动页动画
 - (void)addLaunchAnimation {    
-    LaunchViewController *vc = [[LaunchViewController alloc] init];
-    self.window.rootViewController = vc;
-    NSTimeInterval timeI = [LaunchViewController getGifDuration];
-    [self performSelector:@selector(configRootAndBackground) withObject:nil afterDelay:timeI];
+//    LaunchViewController *vc = [[LaunchViewController alloc] init];
+//    self.window.rootViewController = vc;
+//    NSTimeInterval timeI = [LaunchViewController getGifDuration];
+//    [self performSelector:@selector(configRootAndBackground) withObject:nil afterDelay:timeI];
+    
+    [self configRootAndBackground];
 }
 
 - (void)configRootAndBackground {

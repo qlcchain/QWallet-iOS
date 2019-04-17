@@ -64,7 +64,7 @@
     _loginBtn.layer.cornerRadius = 6;
     _loginBtn.layer.masksToBounds = YES;
     _aroundScrollWidth.constant = 2*SCREEN_WIDTH;
-    _slideBlockView.frame = CGRectMake(0, 66, 44, 4);
+    _slideBlockView.frame = CGRectMake(0, 66, 80, 4);
     _slideBlockView.centerX = (SCREEN_WIDTH-20-20-20)/2.0/2.0+20;
     _loginVerifyBtnWidth.constant = 0;
     
