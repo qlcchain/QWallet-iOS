@@ -122,11 +122,11 @@
         UserModel *userM = [UserModel fetchUser:tf.text?:@""];
         if (!userM) { // 本地没有rsaPublicKey 验证码登录
             _loginVerifyBtnWidth.constant = 100;
-            _loginPWTF.placeholder = @"验证码";
+            _loginPWTF.placeholder = @"Verification Code";
             _loginPWTF.secureTextEntry = NO;
         } else { // 密码登录
             _loginVerifyBtnWidth.constant = 0;
-            _loginPWTF.placeholder = @"密码";
+            _loginPWTF.placeholder = @"Password";
             _loginPWTF.secureTextEntry = YES;
         }
         
@@ -159,11 +159,13 @@
 
 #pragma mark - Action
 - (IBAction)backAction:(id)sender {
+    [self.view endEditing:YES];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     }];
 }
 
 - (IBAction)switchToRegisterAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     [self scrollSliderBlock:sender];
     [_aroundScroll scrollRectToVisible:CGRectMake(0, 0, SCREEN_WIDTH, _aroundScroll.height) animated:YES];
     [_switchToRegisterBtn setTitleColor:[UIColor mainColor] forState:UIControlStateNormal];
@@ -171,6 +173,7 @@
 }
 
 - (IBAction)switchToLoginAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     [self scrollSliderBlock:sender];
     [_aroundScroll scrollRectToVisible:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, _aroundScroll.height) animated:YES];
     [_switchToRegisterBtn setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
@@ -178,19 +181,22 @@
 }
 
 - (IBAction)registerAction:(id)sender {
+    [self.view endEditing:YES];
     if (![_regPWTF.text isEqualToString:_regRepeatPWTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"两次输入的密码不同"];
+        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
         return;
     }
     [self requestSign_up];
 }
 
 - (IBAction)loginVerifyCodeAction:(id)sender {
+    [self.view endEditing:YES];
     [self requestVcode_signin_code];
 }
 
 
 - (IBAction)loginAction:(id)sender {
+    [self.view endEditing:YES];
     UserModel *userM = [UserModel fetchUser:_loginAccountTF.text?:@""];
     if (!userM) { // 本地没有rsaPublicKey 验证码登录
         [self requestUser_signin_code];
@@ -201,28 +207,32 @@
 }
 
 - (IBAction)mailRegisterAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     sender.selected = !sender.selected;
     if (sender.selected) {
         _phoneAreaCodeWidth.constant = 0;
-        _regPhoneTF.placeholder = @"邮箱";
-        [sender setTitle:@"手机注册" forState:UIControlStateNormal];
+        _regPhoneTF.placeholder = @"Email";
+        [sender setTitle:@"By Phone" forState:UIControlStateNormal];
     } else {
         _phoneAreaCodeWidth.constant = 58;
-        _regPhoneTF.placeholder = @"手机号";
-        [sender setTitle:@"邮箱注册" forState:UIControlStateNormal];
+        _regPhoneTF.placeholder = @"Phone";
+        [sender setTitle:@"By Email" forState:UIControlStateNormal];
     }
 }
 
 - (IBAction)forgetPWAction:(id)sender {
+    [self.view endEditing:YES];
     [self jumpToForgetPW];
 }
 
 // 获取注册验证码
 - (IBAction)regVerifyCodeAction:(id)sender {
+    [self.view endEditing:YES];
     [self requestSignup_code];
 }
 
 - (IBAction)areaCodeAction:(id)sender {
+    [self.view endEditing:YES];
     [self jumpToChooseAreaCode];
 }
 
@@ -233,9 +243,9 @@
     NSDictionary *params = @{@"account":_regPhoneTF.text?:@""};
     [RequestService requestWithUrl:signup_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码成功"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码失败"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -304,9 +314,9 @@
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
     [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码成功"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码失败"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

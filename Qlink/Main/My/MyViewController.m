@@ -82,10 +82,10 @@ NSString *my_title4 = @"Settings";
         UserModel *userM = [UserModel fetchUserOfLogin];
         [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.head]] placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
-        _userNameLab.text = userM.nickname?:@"未设置昵称";
+        _userNameLab.text = [userM.nickname isEmptyString]?userM.ID:userM.nickname;
     } else {
         _userIcon.image = User_DefaultImage;
-        _userNameLab.text = @"登录/注册";
+        _userNameLab.text = @"Log In/Sign Up";
     }
 }
 
@@ -161,6 +161,12 @@ NSString *my_title4 = @"Settings";
 }
 
 - (void)jumpToShareFriends {
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        return;
+    }
+    
     ShareFriendsViewController *vc = [ShareFriendsViewController new];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

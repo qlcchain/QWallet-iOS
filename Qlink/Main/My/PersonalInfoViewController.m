@@ -89,17 +89,17 @@ NSString *person_title4 = @"Mobile";
 - (void)handleCopy:(NSString *)str {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:str];
-    [kAppD.window makeToastDisappearWithText:@"已复制"];
+    [kAppD.window makeToastDisappearWithText:@"Copied"];
 }
 
 - (void)showPhotoAlert {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     kWeakSelf(self)
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"Photo Album" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakself selectImage:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     [alertVC addAction:action1];
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakself selectImage:UIImagePickerControllerSourceTypeCamera];
     }];
     [alertVC addAction:action2];

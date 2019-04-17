@@ -86,35 +86,40 @@
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
+    [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)confirmAction:(id)sender {
+    [self.view endEditing:YES];
     if (![_pwNewTF.text isEqualToString:_pwRepeatTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"两次输入的密码不同"];
+        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
         return;
     }
     [self requestUser_change_password];
 }
 
 - (IBAction)verifyCodeAction:(id)sender {
+    [self.view endEditing:YES];
     [self requestVcode_change_password_code];
 }
 
 - (IBAction)mailFindAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     sender.selected = !sender.selected;
     if (sender.selected) {
         _phoneAreaCodeWidth.constant = 0;
-        _phoneTF.placeholder = @"邮箱";
-        [sender setTitle:@"手机找回" forState:UIControlStateNormal];
+        _phoneTF.placeholder = @"Email";
+        [sender setTitle:@"By Phone" forState:UIControlStateNormal];
     } else {
         _phoneAreaCodeWidth.constant = 58;
-        _phoneTF.placeholder = @"手机号";
-        [sender setTitle:@"邮箱找回" forState:UIControlStateNormal];
+        _phoneTF.placeholder = @"Phone";
+        [sender setTitle:@"By Email" forState:UIControlStateNormal];
     }
 }
 
 - (IBAction)areaCodeAction:(id)sender {
+    [self.view endEditing:YES];
     [self jumpToChooseAreaCode];
 }
 
@@ -124,9 +129,9 @@
     NSDictionary *params = @{@"account":_phoneTF.text?:@""};
     [RequestService requestWithUrl:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码成功"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码失败"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -150,7 +155,7 @@
             userM.md5PW = md5PW;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"修改密码成功"];
+            [kAppD.window makeToastDisappearWithText:@"Successful"];
             [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

@@ -201,10 +201,10 @@
             userM.nickname = nickname;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"修改成功"];
+            [kAppD.window makeToastDisappearWithText:@"Successful"];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"修改失败"];
+            [kAppD.window makeToastDisappearWithText:@"Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -219,9 +219,9 @@
     NSDictionary *params = @{@"account":account,@"email":email};
     [RequestService requestWithUrl:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码成功"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码失败"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -247,10 +247,10 @@
             userM.email = email;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"修改成功"];
+            [kAppD.window makeToastDisappearWithText:@"Successful"];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"修改失败"];
+            [kAppD.window makeToastDisappearWithText:@"Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -265,9 +265,9 @@
     NSDictionary *params = @{@"account":account,@"phone":phone};
     [RequestService requestWithUrl:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码成功"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"获取验证码失败"];
+            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -293,10 +293,10 @@
             userM.phone = phone;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"修改成功"];
+            [kAppD.window makeToastDisappearWithText:@"Successful"];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"修改失败"];
+            [kAppD.window makeToastDisappearWithText:@"Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

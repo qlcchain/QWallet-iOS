@@ -167,9 +167,9 @@
     [RequestService requestWithUrl:order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"购买成功"];
+            [kAppD.window makeToastDisappearWithText:@"Purchase Successful"];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"购买失败"];
+            [kAppD.window makeToastDisappearWithText:@"Purchase Failed"];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

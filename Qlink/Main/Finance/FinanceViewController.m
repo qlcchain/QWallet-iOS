@@ -17,6 +17,7 @@
 #import "InviteRankingViewController.h"
 #import "UIView+Gradient.h"
 #import "ShareFriendsViewController.h"
+#import "UserModel.h"
 
 @interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -160,6 +161,11 @@
         [kAppD.window makeToastDisappearWithText:@"Please choose a NEO wallet first"];
         return;
     }
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        return;
+    }
     
     MyPortfolioViewController *vc = [MyPortfolioViewController new];
     vc.hidesBottomBarWhenPushed = YES;
@@ -170,6 +176,11 @@
     BOOL haveDefaultNEOWallet = [NEOWalletManage.sharedInstance haveDefaultWallet];
     if (!haveDefaultNEOWallet) {
         [kAppD.window makeToastDisappearWithText:@"Please choose a NEO wallet first"];
+        return;
+    }
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
         return;
     }
     
@@ -186,6 +197,12 @@
 }
 
 - (void)jumpToShareFriends {
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        return;
+    }
+    
     ShareFriendsViewController *vc = [ShareFriendsViewController new];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

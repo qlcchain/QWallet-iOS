@@ -410,8 +410,8 @@
                                                         <constraint firstAttribute="width" constant="44" id="ev8-sL-fKl"/>
                                                         <constraint firstAttribute="height" constant="44" id="fOZ-kh-uCr"/>
                                                     </constraints>
-                                                    <state key="normal" image="icon_unchecked"/>
-                                                    <state key="selected" image="icon_selected"/>
+                                                    <state key="normal" image="icon_the_uncheck"/>
+                                                    <state key="selected" image="icon_the_selected"/>
                                                     <connections>
                                                         <action selector="termsAgreeAction:" destination="-1" eventType="touchUpInside" id="HxI-Id-YWi"/>
                                                     </connections>
@@ -599,7 +599,7 @@
     <resources>
         <image name="eth_detail_arrow" width="24" height="24"/>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="icon_selected" width="20" height="20"/>
-        <image name="icon_unchecked" width="20" height="20"/>
+        <image name="icon_the_selected" width="24" height="24"/>
+        <image name="icon_the_uncheck" width="24" height="24"/>
     </resources>
 </document>
