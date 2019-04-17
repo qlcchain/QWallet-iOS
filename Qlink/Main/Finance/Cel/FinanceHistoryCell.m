@@ -41,6 +41,10 @@
         _toLab.hidden = NO;
         WalletCommonModel *currentWalletM = [WalletCommonModel getWalletWithAddress:model.address];
         _toLab.text = [NSString stringWithFormat:@"TO：%@",currentWalletM.name];
+    } else if ([model.status isEqualToString:@"CANCEL"]) {
+        
+    } else if ([model.status isEqualToString:@"BUY"]) {
+        
     }
     _nameLab.text = model.productName;
     _qlcLab.text = [NSString stringWithFormat:@"+%@ QLC",model.addRevenue];

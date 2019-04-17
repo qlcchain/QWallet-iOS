@@ -19,6 +19,8 @@ static NSString *FinanceCellReuse = @"FinanceCell";
 @property (weak, nonatomic) IBOutlet UILabel *rateValLab;
 @property (weak, nonatomic) IBOutlet UILabel *dayLab;
 @property (weak, nonatomic) IBOutlet UILabel *fromQLCLab;
+@property (weak, nonatomic) IBOutlet UIImageView *arrow;
+@property (weak, nonatomic) IBOutlet UILabel *statusLab;
 
 - (void)configCell:(FinanceProductModel *)model;
 

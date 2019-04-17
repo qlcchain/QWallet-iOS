@@ -127,6 +127,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     FinanceProductModel *model = _productArr[indexPath.row];
+    if ([model.status isEqualToString:@"ON_SALE"]) {
+        
+    } else if ([model.status isEqualToString:@"NEW"]) {
+        
+    } else if ([model.status isEqualToString:@"SELL_OUT"]) {
+        return;
+    } else if ([model.status isEqualToString:@"END"]) {
+        return;
+    }
     [self jumpToProductDetail:model];
 }
 

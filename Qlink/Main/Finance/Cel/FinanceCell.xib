@@ -82,6 +82,12 @@
                                     <constraint firstAttribute="height" constant="0.5" id="8aq-Dn-Y3U"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOLD OUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0g-2d-mKw">
+                                <rect key="frame" x="155" y="17.5" width="62" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.21176470588235294" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -93,6 +99,7 @@
                             <constraint firstItem="do0-ap-FCw" firstAttribute="leading" secondItem="fbX-tT-R1S" secondAttribute="leading" constant="16" id="NqT-NH-ZeQ"/>
                             <constraint firstAttribute="trailing" secondItem="do0-ap-FCw" secondAttribute="trailing" id="TNi-Md-LDh"/>
                             <constraint firstItem="SaH-DH-SN0" firstAttribute="top" secondItem="fbX-tT-R1S" secondAttribute="top" constant="51" id="XKr-yO-hl0"/>
+                            <constraint firstItem="Z0g-2d-mKw" firstAttribute="centerY" secondItem="uJU-E1-hgk" secondAttribute="centerY" id="ZCT-oS-Gwf"/>
                             <constraint firstItem="Mnc-dN-agM" firstAttribute="leading" secondItem="fbX-tT-R1S" secondAttribute="leading" constant="16" id="ZwH-n9-FVZ"/>
                             <constraint firstItem="vYp-pB-6b2" firstAttribute="top" secondItem="Mnc-dN-agM" secondAttribute="bottom" constant="13" id="ccf-2E-Ueh"/>
                             <constraint firstItem="SaH-DH-SN0" firstAttribute="leading" secondItem="tPI-2R-Cm8" secondAttribute="trailing" constant="24" id="dH3-aX-VmW"/>
@@ -101,6 +108,7 @@
                             <constraint firstItem="6Ui-Nm-O6T" firstAttribute="top" secondItem="SaH-DH-SN0" secondAttribute="bottom" constant="8" id="g1A-Hx-yAY"/>
                             <constraint firstItem="vYp-pB-6b2" firstAttribute="leading" secondItem="fbX-tT-R1S" secondAttribute="leading" constant="16" id="iU5-Wt-Rts"/>
                             <constraint firstItem="Mnc-dN-agM" firstAttribute="top" secondItem="fbX-tT-R1S" secondAttribute="top" constant="14" id="n27-HG-ItN"/>
+                            <constraint firstItem="Z0g-2d-mKw" firstAttribute="leading" secondItem="uJU-E1-hgk" secondAttribute="trailing" constant="8" id="pvz-NZ-tCE"/>
                             <constraint firstItem="tPI-2R-Cm8" firstAttribute="bottom" secondItem="c4r-k4-GpJ" secondAttribute="bottom" id="q1W-KE-cTq"/>
                             <constraint firstItem="uJU-E1-hgk" firstAttribute="leading" secondItem="Mnc-dN-agM" secondAttribute="trailing" constant="8" id="sR2-vt-CKI"/>
                             <constraint firstAttribute="bottom" secondItem="X7Z-0l-WpN" secondAttribute="bottom" constant="26" id="soL-xK-SWL"/>
@@ -117,10 +125,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="arrow" destination="X7Z-0l-WpN" id="hWs-As-1gT"/>
                 <outlet property="dayLab" destination="SaH-DH-SN0" id="0XD-6H-sGd"/>
                 <outlet property="fromQLCLab" destination="6Ui-Nm-O6T" id="TYX-lI-ItR"/>
                 <outlet property="nameLab" destination="uJU-E1-hgk" id="CWZ-69-NNx"/>
                 <outlet property="rateValLab" destination="vYp-pB-6b2" id="vPS-z0-g0o"/>
+                <outlet property="statusLab" destination="Z0g-2d-mKw" id="yQe-Kh-Pgz"/>
             </connections>
         </tableViewCell>
     </objects>

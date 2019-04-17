@@ -57,6 +57,10 @@
         _maturityDateKeyLab.hidden = NO;
         _maturityDateValLab.hidden = YES;
         _maturityDateKeyLab.text = @"Redeemed";
+    } else if ([model.status isEqualToString:@"CANCEL"]) {
+        
+    } else if ([model.status isEqualToString:@"BUY"]) {
+        
     }
     
     _nameLab.text = model.productName;
