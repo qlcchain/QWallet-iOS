@@ -40,7 +40,7 @@
 // 登录
 @property (weak, nonatomic) IBOutlet UITextField *loginAccountTF;
 @property (weak, nonatomic) IBOutlet UITextField *loginPWTF;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginVerifyBtnWidth; // 82
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginVerifyBtnWidth; // 100
 @property (weak, nonatomic) IBOutlet UIButton *loginVerifyCodeBtn;
 
 
@@ -121,7 +121,7 @@
         
         UserModel *userM = [UserModel fetchUser:tf.text?:@""];
         if (!userM) { // 本地没有rsaPublicKey 验证码登录
-            _loginVerifyBtnWidth.constant = 82;
+            _loginVerifyBtnWidth.constant = 100;
             _loginPWTF.placeholder = @"验证码";
             _loginPWTF.secureTextEntry = NO;
         } else { // 密码登录
@@ -154,6 +154,7 @@
 
 - (void)switchToLogin {
     [self switchToLoginAction:_switchToLoginBtn];
+    [self loginTFChange:_loginAccountTF];
 }
 
 #pragma mark - Action
@@ -246,7 +247,9 @@
     NSString *account = _regPhoneTF.text?:@"";
     NSString *md5PW = [MD5Util md5:_regPWTF.text?:@""];
     NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":_regVerifyCodeTF.text?:@"",@"number":_regInviteCodeTF.text?:@"",@"p2pId":[UserModel getOwnP2PId]};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl:sign_up_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
             UserModel *model = [UserModel getObjectWithKeyValues:responseObject];
@@ -261,6 +264,7 @@
             weakself.loginAccountTF.text = model.account;
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 
@@ -274,7 +278,9 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl:sign_in_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
 //            UserModel *model = [UserModel getObjectWithKeyValues:responseObject];
@@ -288,6 +294,7 @@
             [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

@@ -72,7 +72,7 @@
         NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if ([tempM.account isEqualToString:account]) {
+            if ([tempM.account isEqualToString:account] || [tempM.email isEqualToString:account] || [tempM.phone isEqualToString:account]) {
                 model = tempM;
                 *stop = YES;
             }
