@@ -18,6 +18,32 @@
 
 @implementation NSDate (Category)
 
++ (NSString *)getTimeWithFromDate:(NSDate *)fromDate day:(NSInteger)day {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//    NSDate *fromDate = [format dateFromString:fromTime];
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:fromDate];
+    components.day += day;
+    NSDate *date = [CURRENT_CALENDAR dateFromComponents:components];
+    NSString *time = [format stringFromDate:date];
+    
+    return time;
+}
+
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime day:(NSInteger)day {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:fromDate];
+    components.day += day;
+    NSDate *date = [CURRENT_CALENDAR dateFromComponents:components];
+    NSString *time = [format stringFromDate:date];
+    
+    return time;
+}
+
 + (NSInteger)getTimestampFromDate:(NSDate *)date {
     return (long)[date timeIntervalSince1970];
 }

@@ -84,7 +84,9 @@
 }
 
 - (IBAction)copyAction:(id)sender {
-    
+    UIPasteboard *pab = [UIPasteboard generalPasteboard];
+    [pab setString:_myInfoM.ID?:@""];
+    [kAppD.window makeToastDisappearWithText:@"已复制"];
 }
 
 #pragma mark - Request

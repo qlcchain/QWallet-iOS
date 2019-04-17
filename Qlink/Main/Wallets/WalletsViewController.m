@@ -110,6 +110,7 @@
     
     [self addObserve];
     
+    self.view.theme_backgroundColor = globalBackgroundColorPicker;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:WalletsCellReuse bundle:nil] forCellReuseIdentifier:WalletsCellReuse];
     [self renderView];

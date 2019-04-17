@@ -31,8 +31,14 @@
     _toLab.hidden = YES;
     _toLab.text = nil;
     _statusLab.text = model.status;
+    _statusLab.textColor = UIColorFromRGB(0x01B5AB);
     if ([model.status isEqualToString:@"PAY"]) {
+        
     } else if ([model.status isEqualToString:@"END"]) {
+        
+    } else if ([model.status isEqualToString:@"REDEEM"]) {
+        _statusLab.textColor = UIColorFromRGB(0xFF3669);
+        _toLab.hidden = NO;
         WalletCommonModel *currentWalletM = [WalletCommonModel getWalletWithAddress:model.address];
         _toLab.text = [NSString stringWithFormat:@"TO：%@",currentWalletM.name];
     }

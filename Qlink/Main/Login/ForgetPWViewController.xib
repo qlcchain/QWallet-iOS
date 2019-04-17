@@ -43,8 +43,8 @@
                                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Srf-GT-Wqk"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-kt-jl1">
-                                    <rect key="frame" x="151.5" y="11.5" width="73.5" height="21.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Passwrod" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-kt-jl1">
+                                    <rect key="frame" x="119.5" y="11.5" width="136" height="21.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
@@ -100,7 +100,7 @@
                                                 <constraint firstItem="JH0-8d-0pA" firstAttribute="top" secondItem="JM8-LL-9ge" secondAttribute="top" id="s0y-HA-Cne"/>
                                             </constraints>
                                         </view>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bg3-wN-vRW">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bg3-wN-vRW">
                                             <rect key="frame" x="58" y="0.0" width="269" height="48"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -132,16 +132,19 @@
                                                 <constraint firstAttribute="height" constant="1" id="vOu-Sp-Xk9"/>
                                             </constraints>
                                         </view>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SSn-7A-Kwa">
-                                            <rect key="frame" x="0.0" y="0.0" width="245" height="48"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Verification Code " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SSn-7A-Kwa">
+                                            <rect key="frame" x="0.0" y="0.0" width="227" height="48"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SkW-Di-J2B">
-                                            <rect key="frame" x="245" y="0.0" width="82" height="48"/>
+                                            <rect key="frame" x="227" y="0.0" width="100" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="Ojp-Dn-1Ri"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <state key="normal" title="获取验证码">
+                                            <state key="normal" title="Get the Code">
                                                 <color key="titleColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                             <connections>
@@ -155,7 +158,6 @@
                                         <constraint firstAttribute="trailing" secondItem="SkW-Di-J2B" secondAttribute="trailing" id="5m0-f2-SDI"/>
                                         <constraint firstAttribute="bottom" secondItem="k4n-Oi-7iZ" secondAttribute="bottom" id="86t-8F-lce"/>
                                         <constraint firstItem="SkW-Di-J2B" firstAttribute="top" secondItem="IMo-4V-5qG" secondAttribute="top" id="8b5-2L-GwD"/>
-                                        <constraint firstAttribute="trailing" secondItem="SSn-7A-Kwa" secondAttribute="trailing" constant="82" id="AQj-Bi-2Pz"/>
                                         <constraint firstItem="k4n-Oi-7iZ" firstAttribute="top" secondItem="SSn-7A-Kwa" secondAttribute="bottom" id="Ood-0k-iKe"/>
                                         <constraint firstItem="SSn-7A-Kwa" firstAttribute="top" secondItem="IMo-4V-5qG" secondAttribute="top" id="Qr7-KK-Bgr"/>
                                         <constraint firstItem="SSn-7A-Kwa" firstAttribute="leading" secondItem="IMo-4V-5qG" secondAttribute="leading" id="bGS-ri-7dL"/>
@@ -175,7 +177,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="Au7-IH-iBh"/>
                                             </constraints>
                                         </view>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设定新密码（6位或以上）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpS-JH-fIs">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password (at least 6 chars)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpS-JH-fIs">
                                             <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -204,7 +206,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="jtU-vZ-qw9"/>
                                             </constraints>
                                         </view>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="重复密码（6位或以上）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czZ-Yd-A9W">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat the Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czZ-Yd-A9W">
                                             <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -230,7 +232,7 @@
                                         <constraint firstAttribute="height" constant="22" id="QVU-hE-aoK"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="邮箱找回">
+                                    <state key="normal" title="By Email">
                                         <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     </state>
                                     <connections>
@@ -244,7 +246,7 @@
                                         <constraint firstAttribute="height" constant="49" id="bhP-kM-Y97"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                    <state key="normal" title="确定"/>
+                                    <state key="normal" title="Confirm"/>
                                     <connections>
                                         <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="FWX-qx-QCk"/>
                                     </connections>

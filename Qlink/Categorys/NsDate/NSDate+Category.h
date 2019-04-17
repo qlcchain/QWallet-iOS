@@ -23,6 +23,8 @@
 
 @interface NSDate (Category)
 
++ (NSString *)getTimeWithFromDate:(NSDate *)fromDate day:(NSInteger)day;
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime day:(NSInteger)day;
 /**
  *  秒时间戳
  */

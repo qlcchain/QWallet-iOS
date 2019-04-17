@@ -43,15 +43,26 @@
     
     if ([model.status isEqualToString:@"PAY"]) {
         _redeemBtn.hidden = YES;
+        if ([model.maturityTime isEmptyString] && [model.addRevenue floatValue] > 0) {
+            _redeemBtn.hidden = NO;
+            _maturityDateKeyLab.hidden = YES;
+            _maturityDateValLab.hidden = YES;
+        }
     } else if ([model.status isEqualToString:@"END"]) {
+        _redeemBtn.hidden = YES;
         _maturityDateKeyLab.hidden = YES;
         _maturityDateValLab.hidden = YES;
+    } else if ([model.status isEqualToString:@"REDEEM"]) {
+        _redeemBtn.hidden = YES;
+        _maturityDateKeyLab.hidden = NO;
+        _maturityDateValLab.hidden = YES;
+        _maturityDateKeyLab.text = @"Redeemed";
     }
     
     _nameLab.text = model.productName;
     _principalValLab.text = [NSString stringWithFormat:@"%@",model.amount];
     _cumulativeEarnValLab.text = [NSString stringWithFormat:@"%@",model.addRevenue];
-    _maturityDateValLab.text = [NSString stringWithFormat:@"%@",model.maturityTime];
+    _maturityDateValLab.text = [NSString stringWithFormat:@"%@",model.maturityTime.length>10?[model.maturityTime substringToIndex:10]:model.maturityTime];
 }
 
 - (IBAction)redeemAction:(id)sender {

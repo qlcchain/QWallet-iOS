@@ -10,6 +10,7 @@
 #import "UIView+Visuals.h"
 #import "WalletCommonModel.h"
 #import "Qlink-Swift.h"
+#import "FinanceOrderListModel.h"
 
 @interface FinanceRedeemConfirmView ()
 
@@ -28,20 +29,21 @@
 + (instancetype)getInstance {
     FinanceRedeemConfirmView *view = [[[NSBundle mainBundle] loadNibNamed:@"FinanceRedeemConfirmView" owner:self options:nil] lastObject];
     [view.tipBack cornerRadius:8];
-    [view configInit];
     return view;
 }
 
-- (void)configInit {
-    NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
+- (void)configWithModel:(FinanceOrderModel *)model {
+    NSString *principal = [NSString stringWithFormat:@"%@",model.amount];
+    NSString *earnings = [NSString stringWithFormat:@"%@",model.addRevenue];
+    _principalLab.text = [NSString stringWithFormat:@"%@ QLC",principal];
+    _earningsLab.text = [NSString stringWithFormat:@"%@ QLC",earnings];
+    _nameLab.text = model.productName;
+    
+//    NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
+    NSString *address = model.address;
     WalletCommonModel *currentWalletM = [WalletCommonModel getWalletWithAddress:address];
     _walletNameLab.text = currentWalletM.name;
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
-}
-
-- (void)configWithPrincipal:(NSString *)principal earnings:(NSString *)earnings {
-    _principalLab.text = [NSString stringWithFormat:@"%@ QLC",principal];
-    _earningsLab.text = [NSString stringWithFormat:@"%@ QLC",earnings];
 }
 
 - (void)show {

@@ -14,6 +14,8 @@
                 <outlet property="confirmBackHeight" destination="obY-gg-wJQ" id="njB-HB-X67"/>
                 <outlet property="confirmBtn" destination="YU9-JO-fr1" id="eIj-4q-j0F"/>
                 <outlet property="fromQLCLab" destination="2a3-En-i6m" id="ffk-M5-ccb"/>
+                <outlet property="maturityDateLab" destination="lB2-db-5ll" id="wwS-kV-kbq"/>
+                <outlet property="purchaseDateLab" destination="cqa-pJ-3Ta" id="GmQ-Fj-E7F"/>
                 <outlet property="qlcTF" destination="HMR-OD-gUA" id="Cw9-su-8go"/>
                 <outlet property="qrcodeBackHeight" destination="Y9F-L3-zS9" id="NFu-e4-LNk"/>
                 <outlet property="rateLab" destination="alb-9P-Ts8" id="xgm-N6-rW9"/>
@@ -22,6 +24,7 @@
                 <outlet property="termsAgreeBtn" destination="K3h-xs-gBp" id="REA-bC-FZZ"/>
                 <outlet property="timeLab" destination="Qhn-AB-Dgo" id="ezH-d2-bfV"/>
                 <outlet property="titleLab" destination="Wj5-Uf-wcc" id="1Nd-Ih-tqd"/>
+                <outlet property="valueDateLab" destination="U7g-nA-fKG" id="e4e-qk-Aql"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -248,7 +251,7 @@
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYZ-6E-BbY">
                                                             <rect key="frame" x="16" y="51.5" width="343" height="2"/>
-                                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="tAV-Ky-8nH"/>
                                                             </constraints>
@@ -307,7 +310,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIx-g7-RZL">
                                                             <rect key="frame" x="342.5" y="15.5" width="16.5" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
+                                                            <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -421,7 +424,7 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YU9-JO-fr1">
                                                     <rect key="frame" x="24" y="63" width="327" height="49"/>
-                                                    <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="49" id="8mf-nw-4OW"/>
                                                     </constraints>
@@ -463,7 +466,7 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="Copy">
-                                                                <color key="titleColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
+                                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             </state>
                                                         </button>
                                                     </subviews>

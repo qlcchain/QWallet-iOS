@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class FinanceOrderModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^FinanceRedeemConfirmBlock)(void);
@@ -17,7 +19,7 @@ typedef void(^FinanceRedeemConfirmBlock)(void);
 @property (nonatomic, copy) FinanceRedeemConfirmBlock confirmBlock;
 
 + (instancetype)getInstance;
-- (void)configWithPrincipal:(NSString *)principal earnings:(NSString *)earnings;
+- (void)configWithModel:(FinanceOrderModel *)model;
 - (void)show;
 
 @end

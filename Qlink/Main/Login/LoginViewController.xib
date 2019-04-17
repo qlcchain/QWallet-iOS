@@ -54,7 +54,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="eEj-nu-WX9"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="注册">
+                                            <state key="normal" title="Sign Up">
                                                 <color key="titleColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                             <connections>
@@ -67,7 +67,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="Mct-eA-dxp"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="登录">
+                                            <state key="normal" title="Log In">
                                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                             <connections>
@@ -125,7 +125,7 @@
                                                                                 <constraint firstItem="UM9-64-bNg" firstAttribute="leading" secondItem="63E-qk-grN" secondAttribute="leading" id="xhF-nt-4Up"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vQx-B0-ku4">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vQx-B0-ku4">
                                                                             <rect key="frame" x="58" y="0.0" width="269" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -157,16 +157,19 @@
                                                                                 <constraint firstAttribute="height" constant="1" id="9vj-lr-IqB"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bTj-Bk-M09">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="245" height="48"/>
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Verification Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bTj-Bk-M09">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="227" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <textInputTraits key="textInputTraits"/>
                                                                         </textField>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vn-IH-PCR">
-                                                                            <rect key="frame" x="245" y="0.0" width="82" height="48"/>
+                                                                            <rect key="frame" x="227" y="0.0" width="100" height="48"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="100" id="T5T-gE-Rej"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <state key="normal" title="获取验证码">
+                                                                            <state key="normal" title="Get the Code">
                                                                                 <color key="titleColor" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="deviceRGB"/>
                                                                             </state>
                                                                             <connections>
@@ -176,7 +179,6 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="bTj-Bk-M09" secondAttribute="trailing" constant="82" id="2o2-kl-eZr"/>
                                                                         <constraint firstItem="0vn-IH-PCR" firstAttribute="top" secondItem="RpB-rD-pc3" secondAttribute="top" id="4Tz-ZK-jWb"/>
                                                                         <constraint firstItem="bTj-Bk-M09" firstAttribute="leading" secondItem="RpB-rD-pc3" secondAttribute="leading" id="7Qh-pS-FTQ"/>
                                                                         <constraint firstItem="U7K-3w-deH" firstAttribute="top" secondItem="0vn-IH-PCR" secondAttribute="bottom" id="8Nt-XV-wJB"/>
@@ -200,7 +202,7 @@
                                                                                 <constraint firstAttribute="height" constant="1" id="oWK-7F-P84"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码（6位或以上）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKp-04-dYd">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password (at least 6 chars)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKp-04-dYd">
                                                                             <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -229,7 +231,7 @@
                                                                                 <constraint firstAttribute="height" constant="1" id="xFZ-JQ-rjl"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="重复密码（6位或以上）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jo-Bq-9ZD">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat the Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jo-Bq-9ZD">
                                                                             <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -258,7 +260,7 @@
                                                                                 <constraint firstAttribute="height" constant="1" id="4am-YI-cf7"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邀请码（选填）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVs-uA-cxs">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Invitation Code (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVs-uA-cxs">
                                                                             <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -284,7 +286,7 @@
                                                                         <constraint firstAttribute="width" constant="66" id="JrG-d8-Uqm"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                    <state key="normal" title="邮箱注册">
+                                                                    <state key="normal" title="By Email">
                                                                         <color key="titleColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                                                                     </state>
                                                                     <connections>
@@ -298,7 +300,7 @@
                                                                         <constraint firstAttribute="height" constant="49" id="feR-CC-m7c"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                                    <state key="normal" title="注册"/>
+                                                                    <state key="normal" title="Sign Up"/>
                                                                     <connections>
                                                                         <action selector="registerAction:" destination="-1" eventType="touchUpInside" id="qdL-9D-W7p"/>
                                                                     </connections>
@@ -350,7 +352,7 @@
                                                                                 <constraint firstAttribute="height" constant="1" id="dD7-SP-vHJ"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号/邮箱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VXQ-CL-CrA">
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Mobile/Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VXQ-CL-CrA">
                                                                             <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -379,19 +381,19 @@
                                                                                 <constraint firstAttribute="height" constant="1" id="cH6-o0-Xzv"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQU-K8-dYh">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="245" height="48"/>
+                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SQU-K8-dYh">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="227" height="48"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                         </textField>
                                                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PoN-k6-ALz">
-                                                                            <rect key="frame" x="245" y="0.0" width="82" height="48"/>
+                                                                            <rect key="frame" x="227" y="0.0" width="100" height="48"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="82" id="UDb-R6-obC"/>
+                                                                                <constraint firstAttribute="width" constant="100" id="UDb-R6-obC"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <state key="normal" title="获取验证码">
+                                                                            <state key="normal" title="Get the Code">
                                                                                 <color key="titleColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="deviceRGB"/>
                                                                             </state>
                                                                             <connections>
@@ -421,19 +423,19 @@
                                                                         <constraint firstAttribute="height" constant="49" id="TOs-X0-huT"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                                    <state key="normal" title="登录"/>
+                                                                    <state key="normal" title="Log In"/>
                                                                     <connections>
                                                                         <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="Mfk-gD-alK"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5Z-sp-ezU">
-                                                                    <rect key="frame" x="154" y="211" width="66" height="22"/>
+                                                                    <rect key="frame" x="97" y="211" width="180" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22" id="6cf-os-vym"/>
-                                                                        <constraint firstAttribute="width" constant="66" id="dK9-f1-oYQ"/>
+                                                                        <constraint firstAttribute="width" constant="180" id="dK9-f1-oYQ"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                    <state key="normal" title="忘记密码">
+                                                                    <state key="normal" title="Forget Passwrod">
                                                                         <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                                     </state>
                                                                     <connections>

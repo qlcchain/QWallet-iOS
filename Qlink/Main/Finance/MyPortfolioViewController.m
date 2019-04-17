@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayEarnLab;
 @property (weak, nonatomic) IBOutlet UILabel *cumulativeEarnLab;
 
-
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
@@ -63,13 +62,12 @@
 
 - (void)showRedeemConfirmView:(FinanceOrderModel *)model {
     FinanceRedeemConfirmView *view = [FinanceRedeemConfirmView getInstance];
-    NSString *principal = [NSString stringWithFormat:@"%@",model.amount];
-    NSString *earnings = [NSString stringWithFormat:@"%@",model.addRevenue];
+    
     kWeakSelf(self)
     view.confirmBlock = ^{
         [weakself requestRedeem:model.ID];
     };
-    [view configWithPrincipal:principal earnings:earnings];
+    [view configWithModel:model];
     [view show];
 }
 
@@ -100,9 +98,9 @@
     NSString *page = @"1";
     NSString *size = @"20";
     NSDictionary *params = @{@"account":account,@"token":token,@"address":address,@"page":page,@"size":size};
-    [kAppD.window makeToastInView:kAppD.window];
+//    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl:order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.orderListM = [FinanceOrderListModel getObjectWithKeyValues:responseObject];
             [weakself.sourceArr removeAllObjects];
@@ -110,7 +108,7 @@
             [weakself refreshView];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
     }];
 }
 

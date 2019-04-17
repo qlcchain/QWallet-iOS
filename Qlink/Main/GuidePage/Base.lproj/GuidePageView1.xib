@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,22 +18,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDV-CI-tY0">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to use WINQ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fg-KD-gUj">
-                            <rect key="frame" x="36" y="63" width="303" height="31"/>
-                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
-                            <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multi-chain wallets in one WINQ, Deposit tokens and enjoy VPN services with WINQ GAS." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFk-6d-2x8">
-                            <rect key="frame" x="30" y="104" width="315" height="39.5"/>
-                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                            <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FGr-MW-eVX">
                             <rect key="frame" x="0.0" y="557" width="375" height="90"/>
                             <subviews>
-                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_arrow_guide_purple" translatesAutoresizingMaskIntoConstraints="NO" id="Qit-kV-3Wl">
+                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_arrow_guide" translatesAutoresizingMaskIntoConstraints="NO" id="Qit-kV-3Wl">
                                     <rect key="frame" x="337" y="37" width="14" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="Ycp-C8-hFg"/>
@@ -44,7 +31,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's start using it！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v7-pu-sqi">
                                     <rect key="frame" x="162.5" y="32.5" width="170.5" height="25.5"/>
                                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
-                                    <color key="textColor" red="0.29019607843137252" green="0.0" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qg1-kR-LqT">
@@ -65,25 +52,30 @@
                             </constraints>
                         </view>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="icon_boot_guide" translatesAutoresizingMaskIntoConstraints="NO" id="fdf-Jd-opL">
-                            <rect key="frame" x="0.0" y="229" width="375" height="293"/>
+                            <rect key="frame" x="0.0" y="159" width="375" height="398"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="293" id="BlZ-YE-y6b"/>
+                                <constraint firstAttribute="height" constant="398" id="BlZ-YE-y6b"/>
                                 <constraint firstAttribute="width" constant="375" id="Tka-fm-gTD"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fg-KD-gUj">
+                            <rect key="frame" x="36" y="56" width="303" height="43"/>
+                            <string key="text">Welcome to QLC Ecosystem!
+Grow your wealth by holding QLC!</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="FGr-MW-eVX" firstAttribute="leading" secondItem="fDV-CI-tY0" secondAttribute="leading" id="4DI-zI-6v7"/>
-                        <constraint firstItem="sFk-6d-2x8" firstAttribute="top" secondItem="9Fg-KD-gUj" secondAttribute="bottom" constant="10" id="BE3-H4-a7b"/>
-                        <constraint firstItem="sFk-6d-2x8" firstAttribute="leading" secondItem="fDV-CI-tY0" secondAttribute="leading" constant="30" id="TUL-Y5-cgZ"/>
                         <constraint firstAttribute="bottom" secondItem="FGr-MW-eVX" secondAttribute="bottom" id="Ug4-kc-RYS"/>
-                        <constraint firstAttribute="trailing" secondItem="sFk-6d-2x8" secondAttribute="trailing" constant="30" id="Zjz-K1-aJF"/>
                         <constraint firstAttribute="trailing" secondItem="9Fg-KD-gUj" secondAttribute="trailing" constant="36" id="jD0-bq-XxA"/>
                         <constraint firstAttribute="trailing" secondItem="FGr-MW-eVX" secondAttribute="trailing" id="jP5-H1-hL4"/>
-                        <constraint firstItem="FGr-MW-eVX" firstAttribute="top" secondItem="fdf-Jd-opL" secondAttribute="bottom" constant="35" id="kIn-ZH-tPx"/>
+                        <constraint firstItem="FGr-MW-eVX" firstAttribute="top" secondItem="fdf-Jd-opL" secondAttribute="bottom" id="kIn-ZH-tPx"/>
                         <constraint firstItem="9Fg-KD-gUj" firstAttribute="leading" secondItem="fDV-CI-tY0" secondAttribute="leading" constant="36" id="tVQ-P0-l3q"/>
-                        <constraint firstItem="9Fg-KD-gUj" firstAttribute="top" secondItem="fDV-CI-tY0" secondAttribute="top" constant="63" id="vSL-dg-xCT"/>
+                        <constraint firstItem="9Fg-KD-gUj" firstAttribute="top" secondItem="fDV-CI-tY0" secondAttribute="top" constant="56" id="vSL-dg-xCT"/>
                         <constraint firstItem="fdf-Jd-opL" firstAttribute="centerX" secondItem="fDV-CI-tY0" secondAttribute="centerX" id="ygy-aC-DHb"/>
                     </constraints>
                 </view>
@@ -104,7 +96,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_arrow_guide_purple" width="14" height="16"/>
-        <image name="icon_boot_guide" width="375" height="293"/>
+        <image name="icon_arrow_guide" width="14" height="16"/>
+        <image name="icon_boot_guide" width="375" height="398"/>
     </resources>
 </document>

@@ -16,6 +16,7 @@
 #import "NeoTransferUtil.h"
 #import "NEOAddressInfoModel.h"
 #import "NEOWalletUtil.h"
+#import "HMScanner.h"
 
 @interface FinanceProductDetailViewController ()
 
@@ -31,6 +32,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *sendToQRImgV;
 @property (weak, nonatomic) IBOutlet UIButton *termsAgreeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UILabel *purchaseDateLab;
+@property (weak, nonatomic) IBOutlet UILabel *valueDateLab;
+@property (weak, nonatomic) IBOutlet UILabel *maturityDateLab;
 
 @property (nonatomic, strong) FinanceProductModel *requestProductM;
 @property (nonatomic, strong) NEOAssetModel *qlcAssetM;
@@ -59,6 +63,16 @@
     _timeLab.text = [NSString stringWithFormat:@"%@ Days",_inputM.timeLimit];
     _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",_inputM.leastAmount];
     _qlcTF.placeholder = [NSString stringWithFormat:@"From %@ QLC",_inputM.leastAmount];
+    _purchaseDateLab.text = @"Today";
+    _valueDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] day:1] substringToIndex:10];
+    _maturityDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] day:[_inputM.timeLimit integerValue]+1] substringToIndex:10];
+    
+    NSString *mainAddress = [NeoTransferUtil getShareObject].neoMainAddress;
+    _sendToAddressLab.text = mainAddress;
+    kWeakSelf(self);
+    [HMScanner qrImageWithString:mainAddress?:@"" avatar:nil completion:^(UIImage *image) {
+        weakself.sendToQRImgV.image = image;
+    }];
 }
 
 - (void)refreshView {
