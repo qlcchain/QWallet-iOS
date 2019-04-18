@@ -18,6 +18,7 @@
 #import "UIView+Gradient.h"
 #import "ShareFriendsViewController.h"
 #import "UserModel.h"
+#import "RefreshHelper.h"
 
 @interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -28,9 +29,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *dailyFromQLCLab;
 @property (weak, nonatomic) IBOutlet UIButton *inviteFriendBtn;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *productArr;
 @property (nonatomic, strong) FinanceProductModel *dailyM;
+@property (nonatomic) NSInteger currentPage;
 
 @end
 
@@ -43,17 +46,14 @@
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     
     [self configInit];
+    _currentPage = 1;
     [self requestProduct_list];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9)];
 }
 
 #pragma mark - Operation
 - (void)configInit {
+    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+    
     _productArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:FinanceCellReuse bundle:nil] forCellReuseIdentifier:FinanceCellReuse];
     
@@ -66,6 +66,15 @@
     _joinNowBtn.layer.masksToBounds = YES;
     _inviteFriendBtn.layer.cornerRadius = 2;
     _inviteFriendBtn.layer.masksToBounds = YES;
+    
+    kWeakSelf(self)
+    _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+        weakself.currentPage = 1;
+        [weakself requestProduct_list];
+    }];
+    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+        [weakself requestProduct_list];
+    }];
 }
 
 - (void)refreshDailyView {
@@ -77,13 +86,20 @@
 // 产品列表
 - (void)requestProduct_list {
     kWeakSelf(self);
-    NSString *page = @"1";
+//    NSString *page = @"1";
+    NSString *page = [NSString stringWithFormat:@"%li",(long)_currentPage];
     NSString *size = @"20";
     NSDictionary *params = @{@"page":page,@"size":size};
     [RequestService requestWithUrl:product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [weakself.mainScroll.mj_header endRefreshing];
+        [weakself.mainTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [FinanceProductModel mj_objectArrayWithKeyValuesArray:responseObject[Server_Data]];
-            [weakself.productArr removeAllObjects];
+            if (weakself.currentPage == 1) {
+                [weakself.productArr removeAllObjects];
+            }
+            weakself.currentPage += 1;
+//            [weakself.productArr removeAllObjects];
             [weakself.productArr addObjectsFromArray:arr];
             [weakself.mainTable reloadData];
             
@@ -97,6 +113,8 @@
             [weakself refreshDailyView];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [weakself.mainScroll.mj_header endRefreshing];
+        [weakself.mainTable.mj_footer endRefreshing];
     }];
 }
 
@@ -163,7 +181,14 @@
     }
     BOOL haveLogin = [UserModel haveLoginAccount];
     if (!haveLogin) {
-        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        [kAppD presentLoginNew];
+        return;
+    }
+    kWeakSelf(self)
+    if (kAppD.needFingerprintVerification) {
+        [kAppD presentFingerprintVerify:^{
+            [weakself performSelector:@selector(jumpToMyPortfolio) withObject:nil afterDelay:0.5];
+        }];
         return;
     }
     
@@ -180,7 +205,14 @@
     }
     BOOL haveLogin = [UserModel haveLoginAccount];
     if (!haveLogin) {
-        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        [kAppD presentLoginNew];
+        return;
+    }
+    kWeakSelf(self)
+    if (kAppD.needFingerprintVerification) {
+        [kAppD presentFingerprintVerify:^{
+            [weakself performSelector:@selector(jumpToProductDetail:) withObject:model afterDelay:0.5];
+        }];
         return;
     }
     
@@ -199,7 +231,7 @@
 - (void)jumpToShareFriends {
     BOOL haveLogin = [UserModel haveLoginAccount];
     if (!haveLogin) {
-        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        [kAppD presentLoginNew];
         return;
     }
     

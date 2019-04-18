@@ -18,7 +18,7 @@
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
 #import "WalletCommonModel.h"
-#import "SRRefreshView.h"
+//#import "SRRefreshView.h"
 #import "ETHWalletAddressViewController.h"
 #import "TokenPriceModel.h"
 #import "NSString+RemoveZero.h"
@@ -48,8 +48,9 @@
 #import "EOSActivateAccountViewController.h"
 #import "EOSTransferViewController.h"
 #import "UserModel.h"
+#import "RefreshHelper.h"
 
-@interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate,SRRefreshDelegate,UIScrollViewDelegate>
+@interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *refreshScroll;
@@ -83,7 +84,7 @@
 
 @property (nonatomic, strong) ETHAddressInfoModel *ethAddressInfoM;
 @property (nonatomic, strong) NEOAddressInfoModel *neoAddressInfoM;
-@property (nonatomic, strong) SRRefreshView *slimeView;
+//@property (nonatomic, strong) SRRefreshView *slimeView;
 
 @end
 
@@ -121,9 +122,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (!_slimeView) {
-        [_refreshScroll addSubview:self.slimeView];
-    }
+//    if (!_slimeView) {
+//        [_refreshScroll addSubview:self.slimeView];
+//    }
     
 }
 
@@ -142,6 +143,11 @@
     
     _gasBackHeight.constant = 0;
     _contentHeight.constant = SCREEN_HEIGHT-Height_NavBar-Height_TabBar+_totalBackheight.constant;
+    
+    kWeakSelf(self)
+    _refreshScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+        [weakself pullToRefresh];
+    }];
     
     [self refreshClaimGas:nil];
     [self judgeWallet];
@@ -915,9 +921,9 @@
         } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - [self scrollViewVisibleSize:_refreshScroll].height) {
             _refreshScroll.backgroundColor = MAIN_WHITE_COLOR;
         }
-        if (_slimeView) {
-            [_slimeView scrollViewDidScroll];
-        }
+//        if (_slimeView) {
+//            [_slimeView scrollViewDidScroll];
+//        }
     }
 }
     
@@ -931,14 +937,18 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView == _refreshScroll) {
-        if (_slimeView) {
-            [_slimeView scrollViewDidEndDraging];
-        }
+//        if (_slimeView) {
+//            [_slimeView scrollViewDidEndDraging];
+//        }
     }
 }
 
 #pragma mark - slimeRefresh delegate
-- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView {
+//- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView {
+//    [self pullToRefresh];
+//}
+
+- (void)pullToRefresh {
     [self neoGasStatusInit]; // neo gas 状态初始化
     
     [self refreshTokenList]; // 请求token列表
@@ -953,9 +963,10 @@
 }
 
 - (void)endRefresh {
-    if (_slimeView) {
-        [_slimeView endRefresh];
-    }
+    [_refreshScroll.mj_header endRefreshing];
+//    if (_slimeView) {
+//        [_slimeView endRefresh];
+//    }
 }
 
 #pragma mark - Transition
@@ -1172,22 +1183,17 @@
 }
 
 #pragma mark - Lazy
-- (SRRefreshView *)slimeView {
-    if (_slimeView == nil) {
-        _slimeView = [[SRRefreshView alloc] initWithHeight:SRHeight width:_refreshScroll.width];
-        _slimeView.upInset = 0;
-        _slimeView.delegate = self;
-        _slimeView.slimeMissWhenGoingBack = YES;
-        _slimeView.slime.bodyColor = SRREFRESH_BACK_COLOR;
-        _slimeView.slime.skinColor = SRREFRESH_BACK_COLOR;
-//        _slimeView.slime.bodyColor = [UIColor whiteColor];
-//        _slimeView.slime.skinColor = [UIColor whiteColor];
-        //      _slimeView.slime.lineWith = 1;
-        //      _slimeView.slime.shadowBlur = 4;
-        //      _slimeView.slime.shadowColor = MAIN_BLUE_COLOR;
-    }
-    
-    return _slimeView;
-}
+//- (SRRefreshView *)slimeView {
+//    if (_slimeView == nil) {
+//        _slimeView = [[SRRefreshView alloc] initWithHeight:SRHeight width:_refreshScroll.width];
+//        _slimeView.upInset = 0;
+//        _slimeView.delegate = self;
+//        _slimeView.slimeMissWhenGoingBack = YES;
+//        _slimeView.slime.bodyColor = SRREFRESH_BACK_COLOR;
+//        _slimeView.slime.skinColor = SRREFRESH_BACK_COLOR;
+//    }
+//
+//    return _slimeView;
+//}
 
 @end

@@ -33,6 +33,7 @@
 //pragma mark - 获取免费连接次数
 + (void) checkFreeConnectCount;
 
-+ (void)requestNEOMainAddress;
+- (void)startFetchNEOMainAddress;
+//+ (void)requestNEOMainAddress;
 
 @end

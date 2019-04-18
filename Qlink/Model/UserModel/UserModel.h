@@ -30,6 +30,7 @@
 + (void)cleanUser:(NSString *)account;
 + (void)cleanAllUser;
 + (BOOL)haveLoginAccount;
-+ (BOOL)inLogin:(NSString *)account;
+//+ (BOOL)inLogin:(NSString *)account;
++ (BOOL)haveAccountInLocal;
 
 @end

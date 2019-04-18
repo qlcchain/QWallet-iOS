@@ -24,6 +24,7 @@
 
 int requestCont = 0;
 dispatch_source_t _timer;
+dispatch_source_t _neoMainAddressTimer;
 
 //@interface BecomeTranferMode : BBaseModel
 //
@@ -46,8 +47,7 @@ dispatch_source_t _timer;
 
 @implementation NeoTransferUtil
 
-+ (instancetype) getShareObject
-{
++ (instancetype) getShareObject {
     static dispatch_once_t pred = 0;
     __strong static NeoTransferUtil *sharedObj  = nil;
     dispatch_once(&pred, ^{
@@ -879,6 +879,21 @@ dispatch_source_t _timer;
     }];
 }
 
+#pragma mark - 获取NEO主网钱包地址
+- (void)startFetchNEOMainAddress {
+    CGFloat walltime = 30;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    _neoMainAddressTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_neoMainAddressTimer,dispatch_walltime(NULL, 0),walltime*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_neoMainAddressTimer, ^{
+        NSString *neoMainAddress = [NeoTransferUtil getShareObject].neoMainAddress;
+        if (!neoMainAddress || neoMainAddress.length <= 0) {
+            [NeoTransferUtil requestNEOMainAddress];
+        }
+    });
+    dispatch_resume(_neoMainAddressTimer);
+}
+
 + (void)requestNEOMainAddress {
     // 获取NEO交换地址
     [RequestService requestWithUrl:mainAddress_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -887,6 +902,7 @@ dispatch_source_t _timer;
             NSLog(@"NEO主地址:%@",[NeoTransferUtil getShareObject].neoMainAddress);
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [NeoTransferUtil requestNEOMainAddress];
     }];
 }
 

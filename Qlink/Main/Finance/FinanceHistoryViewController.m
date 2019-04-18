@@ -7,7 +7,7 @@
 //
 
 #import "FinanceHistoryViewController.h"
-#import "FinanceOrderListModel.h"
+#import "FinanceHistoryModel.h"
 #import "UserModel.h"
 #import "FinanceHistoryCell.h"
 #import "NSDate+Category.h"
@@ -19,7 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
-@property (nonatomic, strong) FinanceOrderListModel *orderListM;
 @property (nonatomic) NSInteger currentPage;
 
 @end
@@ -31,7 +30,7 @@
     // Do any additional setup after loading the view from its nib.
 
     [self configInit];
-    [self requestOrder_list];
+    [self requestHistory_record];
 }
 
 #pragma mark - Operation
@@ -42,10 +41,10 @@
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
-        [weakself requestOrder_list];
+        [weakself requestHistory_record];
     }];
-    _mainTable.mj_footer = [RefreshHelper footerWithRefreshingBlock:^{
-        [weakself requestOrder_list];
+    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+        [weakself requestHistory_record];
     }];
 }
 
@@ -58,7 +57,7 @@
 
 #pragma mark - Request
 // 订单列表
-- (void)requestOrder_list {
+- (void)requestHistory_record {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -74,16 +73,16 @@
     NSString *size = @"20";
     NSDictionary *params = @{@"account":account,@"token":token,@"address":address,@"page":page,@"size":size};
 //    [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl:history_record_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
 //        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            weakself.orderListM = [FinanceOrderListModel getObjectWithKeyValues:responseObject];
+            NSArray *tempArr = [FinanceHistoryModel mj_objectArrayWithKeyValuesArray:responseObject[@"transactionList"]];
             if (weakself.currentPage == 1) {
                 [weakself.sourceArr removeAllObjects];
             }
-            [weakself.sourceArr addObjectsFromArray:weakself.orderListM.orderList];
+            [weakself.sourceArr addObjectsFromArray:tempArr];
             [weakself.mainTable reloadData];
             weakself.currentPage += 1;
         }
@@ -112,7 +111,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FinanceHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:FinanceHistoryCellReuse];
     
-    FinanceOrderModel *model = _sourceArr[indexPath.row];
+    FinanceHistoryModel *model = _sourceArr[indexPath.row];
 //    cell.row = indexPath.row;
     [cell configCell:model];
     

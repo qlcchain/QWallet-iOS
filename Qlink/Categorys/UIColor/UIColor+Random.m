@@ -67,4 +67,8 @@
     return [UIColor colorWithHexString:MAIN_COLOR_ARR[ThemeManager.currentThemeIndex]];
 }
 
++ (UIColor *)mainColorOfHalf {
+    return [[UIColor colorWithHexString:MAIN_COLOR_ARR[ThemeManager.currentThemeIndex]] colorWithAlphaComponent:0.5];
+}
+
 @end

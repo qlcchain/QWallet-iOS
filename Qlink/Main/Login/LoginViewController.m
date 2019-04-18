@@ -39,8 +39,10 @@
 
 // 登录
 @property (weak, nonatomic) IBOutlet UITextField *loginAccountTF;
+@property (weak, nonatomic) IBOutlet UITextField *loginVerifyCodeTF;
 @property (weak, nonatomic) IBOutlet UITextField *loginPWTF;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginVerifyBtnWidth; // 100
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginVerifyBtnWidth; // 100
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginVerifyCodeHeight; // 49
 @property (weak, nonatomic) IBOutlet UIButton *loginVerifyCodeBtn;
 
 
@@ -66,17 +68,20 @@
     _aroundScrollWidth.constant = 2*SCREEN_WIDTH;
     _slideBlockView.frame = CGRectMake(0, 66, 80, 4);
     _slideBlockView.centerX = (SCREEN_WIDTH-20-20-20)/2.0/2.0+20;
-    _loginVerifyBtnWidth.constant = 0;
+//    _loginVerifyBtnWidth.constant = 0;
     
     _regVerifyCodeBtn.enabled = NO;
     _registerBtn.enabled = NO;
+    _registerBtn.backgroundColor = [UIColor mainColorOfHalf];
     _loginBtn.enabled = NO;
+    _loginBtn.backgroundColor = [UIColor mainColorOfHalf];
     
     [_regPhoneTF  addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
     [_regVerifyCodeTF addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
     [_regPWTF addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
     [_regRepeatPWTF addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
     [_loginAccountTF addTarget:self action:@selector(loginTFChange:) forControlEvents:UIControlEventEditingChanged];
+    [_loginVerifyCodeTF addTarget:self action:@selector(loginTFChange:) forControlEvents:UIControlEventEditingChanged];
     [_loginPWTF addTarget:self action:@selector(loginTFChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
@@ -121,17 +126,15 @@
         
         UserModel *userM = [UserModel fetchUser:tf.text?:@""];
         if (!userM) { // 本地没有rsaPublicKey 验证码登录
-            _loginVerifyBtnWidth.constant = 100;
-            _loginPWTF.placeholder = @"Verification Code";
-            _loginPWTF.secureTextEntry = NO;
+            _loginVerifyCodeHeight.constant = 49;
         } else { // 密码登录
-            _loginVerifyBtnWidth.constant = 0;
-            _loginPWTF.placeholder = @"Password";
-            _loginPWTF.secureTextEntry = YES;
+            _loginVerifyCodeHeight.constant = 0;
         }
         
         [self changeLoginBtnState];
     } else if (tf == _loginPWTF) {
+        [self changeLoginBtnState];
+    } else if (tf == _loginVerifyCodeTF) {
         [self changeLoginBtnState];
     }
 }
@@ -139,22 +142,64 @@
 - (void)changeRegisterBtnState {
     if (_regPhoneTF.text && _regPhoneTF.text.length > 0 && _regVerifyCodeTF.text && _regVerifyCodeTF.text.length > 0 && _regPWTF.text && _regPWTF.text.length >= 6 && _regRepeatPWTF.text && _regRepeatPWTF.text.length >= 6) {
         _registerBtn.enabled = YES;
+        _registerBtn.backgroundColor = [UIColor mainColor];
     } else {
         _registerBtn.enabled = NO;
+        _registerBtn.backgroundColor = [UIColor mainColorOfHalf];
     }
 }
 
 - (void)changeLoginBtnState {
     if (_loginPWTF.text && _loginPWTF.text.length >= 6 && _loginAccountTF.text && _loginAccountTF.text.length > 0) {
-        _loginBtn.enabled = YES;
+        if (_loginVerifyCodeHeight.constant > 0) {
+            if (_loginVerifyCodeTF.text && _loginVerifyCodeTF.text.length > 0) {
+                _loginBtn.enabled = YES;
+                _loginBtn.backgroundColor = [UIColor mainColor];
+            } else {
+                _loginBtn.enabled = NO;
+                _loginBtn.backgroundColor = [UIColor mainColorOfHalf];
+            }
+        } else {
+            _loginBtn.enabled = YES;
+            _loginBtn.backgroundColor = [UIColor mainColor];
+        }
     } else {
         _loginBtn.enabled = NO;
+        _loginBtn.backgroundColor = [UIColor mainColorOfHalf];
     }
 }
 
 - (void)switchToLogin {
     [self switchToLoginAction:_switchToLoginBtn];
     [self loginTFChange:_loginAccountTF];
+}
+
+// 开启倒计时效果
+- (void)openCountdown:(UIButton *)btn {
+    NSString *btnTitle = btn.currentTitle;
+    __block NSInteger time = 59;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        if(time <= 0){
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [btn setTitle:btnTitle forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor mainColor] forState:UIControlStateNormal];
+                btn.userInteractionEnabled = YES;
+            });
+        }else{
+            int seconds = time % 60;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [btn setTitle:[NSString stringWithFormat:@"%.2d", seconds] forState:UIControlStateNormal];
+                [btn setTitleColor:UIColorFromRGB(0x979797) forState:UIControlStateNormal];
+                btn.userInteractionEnabled = NO;
+            });
+            time--;
+        }
+    });
+    dispatch_resume(_timer);
 }
 
 #pragma mark - Action
@@ -239,13 +284,15 @@
 #pragma mark - Request
 // 获取注册验证码
 - (void)requestSignup_code {
-//    kWeakSelf(self);
+    kWeakSelf(self);
     NSDictionary *params = @{@"account":_regPhoneTF.text?:@""};
     [RequestService requestWithUrl:signup_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [weakself openCountdown:weakself.regVerifyCodeBtn];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -266,12 +313,15 @@
 //            model.account = account;
             model.md5PW = md5PW;
 //            model.rsaPublicKey = rsaPublicKey;
-            model.isLogin = @(NO);
+            model.isLogin = @(YES);
             [UserModel storeUser:model];
             
-            // 滑动到登录页
-            [weakself switchToLogin];
-            weakself.loginAccountTF.text = model.account;
+            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            [weakself backAction:nil];
+            
+//            //  滑动到登录页
+//            [weakself switchToLogin];
+//            weakself.loginAccountTF.text = model.account;
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -310,13 +360,15 @@
 
 // 获取登录验证码
 - (void)requestVcode_signin_code {
-    //    kWeakSelf(self);
+    kWeakSelf(self);
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
     [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [weakself openCountdown:weakself.loginVerifyCodeBtn];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -326,7 +378,7 @@
 - (void)requestUser_signin_code {
     kWeakSelf(self);
     NSString *account = _loginAccountTF.text?:@"";
-    NSString *code = _loginPWTF.text?:@"";
+    NSString *code = _loginVerifyCodeTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"code":code};
     [RequestService requestWithUrl:user_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
@@ -335,11 +387,13 @@
 //            model.account = account;
 //            model.md5PW = md5PW;
 //            model.rsaPublicKey = rsaPublicKey;
-            model.isLogin = @(YES);
+            model.isLogin = @(NO);
             [UserModel storeUser:model];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
-            [weakself backAction:nil];
+            [weakself requestSign_in];
+            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+//            [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

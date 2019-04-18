@@ -24,8 +24,10 @@
 
 @interface FinanceOrderListModel : BBaseModel
 
-@property (nonatomic, strong) NSString *balance; // = "105.9";
+//@property (nonatomic, strong) NSString *balance; // = "105.9";
 @property (nonatomic, strong) NSArray *orderList; // =     (
 @property (nonatomic, strong) NSNumber *yesterdayRevenue; // = 0;
+@property (nonatomic, strong) NSNumber *totalQlc; // = 2;
+@property (nonatomic, strong) NSNumber *totalRevenue; // = 0;
 
 @end

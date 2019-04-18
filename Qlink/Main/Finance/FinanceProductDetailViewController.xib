@@ -14,7 +14,9 @@
                 <outlet property="confirmBackHeight" destination="obY-gg-wJQ" id="njB-HB-X67"/>
                 <outlet property="confirmBtn" destination="YU9-JO-fr1" id="eIj-4q-j0F"/>
                 <outlet property="fromQLCLab" destination="2a3-En-i6m" id="ffk-M5-ccb"/>
+                <outlet property="mainScroll" destination="0N1-u5-BuD" id="0Z7-00-XPi"/>
                 <outlet property="maturityDateLab" destination="lB2-db-5ll" id="wwS-kV-kbq"/>
+                <outlet property="otherMethodHeight" destination="mTv-8Q-9v8" id="GYE-LZ-MvA"/>
                 <outlet property="purchaseDateLab" destination="cqa-pJ-3Ta" id="GmQ-Fj-E7F"/>
                 <outlet property="qlcTF" destination="HMR-OD-gUA" id="Cw9-su-8go"/>
                 <outlet property="qrcodeBackHeight" destination="Y9F-L3-zS9" id="NFu-e4-LNk"/>
@@ -40,7 +42,7 @@
                             <rect key="frame" x="0.0" y="44" width="375" height="988"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DrB-aE-fDc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="911"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KhV-E4-I7K">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
@@ -374,7 +376,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="KWy-rN-t03" secondAttribute="trailing" id="xZI-E9-edo"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYj-wD-PKu">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYj-wD-PKu">
                                             <rect key="frame" x="0.0" y="433" width="375" height="60"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By other methods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bse-8n-aVf">
@@ -402,7 +404,7 @@
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtv-0q-ttE">
-                                            <rect key="frame" x="0.0" y="771" width="375" height="120"/>
+                                            <rect key="frame" x="0.0" y="771" width="375" height="140"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-xs-gBp">
                                                     <rect key="frame" x="8" y="8" width="44" height="44"/>
@@ -423,7 +425,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YU9-JO-fr1">
-                                                    <rect key="frame" x="24" y="63" width="327" height="49"/>
+                                                    <rect key="frame" x="24" y="71" width="327" height="49"/>
                                                     <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="49" id="8mf-nw-4OW"/>
@@ -443,8 +445,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="C1S-yc-nog" secondAttribute="trailing" constant="8" id="O0C-AY-WJA"/>
                                                 <constraint firstItem="K3h-xs-gBp" firstAttribute="top" secondItem="dtv-0q-ttE" secondAttribute="top" constant="8" id="ga1-fw-kTz"/>
                                                 <constraint firstItem="K3h-xs-gBp" firstAttribute="leading" secondItem="dtv-0q-ttE" secondAttribute="leading" constant="8" id="hNA-Ty-Tjn"/>
-                                                <constraint firstAttribute="height" constant="120" id="obY-gg-wJQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="YU9-JO-fr1" secondAttribute="bottom" constant="8" id="rdG-12-3hA"/>
+                                                <constraint firstAttribute="height" constant="140" id="obY-gg-wJQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="YU9-JO-fr1" secondAttribute="bottom" constant="20" id="rdG-12-3hA"/>
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kac-CR-REA">
@@ -521,7 +523,7 @@
                                         <constraint firstItem="MYj-wD-PKu" firstAttribute="leading" secondItem="DrB-aE-fDc" secondAttribute="leading" id="YsE-U4-VmO"/>
                                         <constraint firstItem="KhV-E4-I7K" firstAttribute="top" secondItem="DrB-aE-fDc" secondAttribute="top" id="cr6-2V-a2h"/>
                                         <constraint firstItem="gBj-Ec-Nvd" firstAttribute="top" secondItem="jMD-Ab-cNP" secondAttribute="bottom" constant="10" id="cw8-k0-2qx"/>
-                                        <constraint firstAttribute="bottom" secondItem="dtv-0q-ttE" secondAttribute="bottom" constant="9" id="dat-6b-QIv"/>
+                                        <constraint firstAttribute="bottom" secondItem="dtv-0q-ttE" secondAttribute="bottom" id="dat-6b-QIv"/>
                                         <constraint firstItem="KhV-E4-I7K" firstAttribute="leading" secondItem="DrB-aE-fDc" secondAttribute="leading" id="jSG-tu-I5r"/>
                                         <constraint firstItem="kac-CR-REA" firstAttribute="top" secondItem="MYj-wD-PKu" secondAttribute="bottom" id="m1v-py-ZXl"/>
                                         <constraint firstAttribute="trailing" secondItem="dtv-0q-ttE" secondAttribute="trailing" id="nQg-PH-Bhc"/>

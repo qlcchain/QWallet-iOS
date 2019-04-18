@@ -92,7 +92,7 @@
         return;
     }
     
-    kAppD.allowPresentLogin = NO; // 设置已经输入过密码
+    kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
     [self dismissWithComplete:YES];
 //    [self jumpToTabbar];
 }
@@ -102,7 +102,7 @@
     [FingerprintVerificationUtil show:^(BOOL success) {
         if (success) {
 //            [weakself jumpToTabbar];
-            kAppD.allowPresentLogin = NO; // 设置已经输入过密码
+            kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
             [weakself dismissWithComplete:YES];
         }
     }];

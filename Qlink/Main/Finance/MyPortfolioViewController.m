@@ -17,6 +17,7 @@
 #import "FinanceOrderListModel.h"
 #import "FinanceRedeemConfirmView.h"
 #import "FinanceHistoryViewController.h"
+#import "RefreshHelper.h"
 
 @interface MyPortfolioViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,6 +30,7 @@
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) FinanceOrderListModel *orderListM;
+@property (nonatomic) NSInteger currentPage;
 
 @end
 
@@ -40,25 +42,33 @@
     
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     [self configInit];
+    _currentPage = 1;
     [self requestOrder_list];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9)];
 }
 
 #pragma mark - Operation
 - (void)configInit {
+    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+    
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyPortfolioCellReuse bundle:nil] forCellReuseIdentifier:MyPortfolioCellReuse];
+    
+    kWeakSelf(self)
+    _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+        weakself.currentPage = 1;
+        [weakself requestOrder_list];
+    }];
+    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+        [weakself requestOrder_list];
+    }];
 }
 
 - (void)refreshView {
     [_mainTable reloadData];
-    _totalLab.text = _orderListM.balance?:@"0";
+    
+    _totalLab.text = _orderListM.totalQlc?[NSString stringWithFormat:@"%@",_orderListM.totalQlc]:@"0";
     _yesterdayEarnLab.text = [NSString stringWithFormat:@"+%@",_orderListM.yesterdayRevenue];
+    _cumulativeEarnLab.text = [NSString stringWithFormat:@"+%@",_orderListM.totalRevenue];
 }
 
 - (void)showRedeemConfirmView:(FinanceOrderModel *)model {
@@ -96,19 +106,28 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
-    NSString *page = @"1";
+//    NSString *page = @"1";
+    NSString *page = [NSString stringWithFormat:@"%li",(long)_currentPage];
     NSString *size = @"20";
     NSDictionary *params = @{@"account":account,@"token":token,@"address":address,@"page":page,@"size":size};
 //    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl:order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [weakself.mainTable.mj_header endRefreshing];
+        [weakself.mainTable.mj_footer endRefreshing];
 //        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.orderListM = [FinanceOrderListModel getObjectWithKeyValues:responseObject];
-            [weakself.sourceArr removeAllObjects];
+            if (weakself.currentPage == 1) {
+                [weakself.sourceArr removeAllObjects];
+            }
+            weakself.currentPage += 1;
+//            [weakself.sourceArr removeAllObjects];
             [weakself.sourceArr addObjectsFromArray:weakself.orderListM.orderList];
             [weakself refreshView];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [weakself.mainTable.mj_header endRefreshing];
+        [weakself.mainTable.mj_footer endRefreshing];
 //        [kAppD.window hideToast];
     }];
 }
@@ -130,7 +149,7 @@
     [RequestService requestWithUrl:redeem_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Redeem Successful."];
+            [kAppD.window makeToastDisappearWithText:@"Redeem Success."];
             [weakself requestOrder_list];
         } else {
             [kAppD.window makeToastDisappearWithText:@"Redeem Fail."];

@@ -12,5 +12,6 @@
 
 - (void)addQGradient;
 - (void)addQGradientWithStart:(UIColor *)startColor end:(UIColor *)endColor;
+- (void)addQGradientWithStart:(UIColor *)startColor end:(UIColor *)endColor frame:(CGRect)frame;
 
 @end

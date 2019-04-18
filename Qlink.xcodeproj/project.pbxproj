@@ -452,6 +452,7 @@
 		58A6500121BE16BD00E52FFF /* TipOKView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A6500021BE16BD00E52FFF /* TipOKView.xib */; };
 		58A6500521BE196600E52FFF /* PaymentDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A6500321BE196600E52FFF /* PaymentDetailsView.xib */; };
 		58A6500621BE196600E52FFF /* PaymentDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A6500421BE196600E52FFF /* PaymentDetailsView.m */; };
+		58A801C62268692B00640BBC /* FinanceHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801C52268692B00640BBC /* FinanceHistoryModel.m */; };
 		58AE1AD92074D22F00CE983B /* KeyChainUitl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */; };
 		58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */; };
 		58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AE22074D28700CE983B /* WalletQRViewController.m */; };
@@ -1434,6 +1435,8 @@
 		58A6500321BE196600E52FFF /* PaymentDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentDetailsView.xib; sourceTree = "<group>"; };
 		58A6500421BE196600E52FFF /* PaymentDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentDetailsView.m; sourceTree = "<group>"; };
 		58A6E962206CD5F5004535E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		58A801C42268692B00640BBC /* FinanceHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceHistoryModel.h; sourceTree = "<group>"; };
+		58A801C52268692B00640BBC /* FinanceHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceHistoryModel.m; sourceTree = "<group>"; };
 		58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainUitl.swift; sourceTree = "<group>"; };
 		58AE1ADB2074D23C00CE983B /* NEOWalletInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEOWalletInfo.h; sourceTree = "<group>"; };
 		58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEOWalletInfo.m; sourceTree = "<group>"; };
@@ -3612,6 +3615,8 @@
 				58FB8D6F22645C9C0075698E /* InviteRankingModel.m */,
 				58FB8D7622657FC10075698E /* ShareFriendsModel.h */,
 				58FB8D7722657FC10075698E /* ShareFriendsModel.m */,
+				58A801C42268692B00640BBC /* FinanceHistoryModel.h */,
+				58A801C52268692B00640BBC /* FinanceHistoryModel.m */,
 			);
 			path = FinanceModel;
 			sourceTree = "<group>";
@@ -4887,6 +4892,7 @@
 				587ABD6121B8F8F800C3D81A /* BackupEosAccountRequest.m in Sources */,
 				5894A712225F4E18008B0854 /* FinanceProductDetailViewController.m in Sources */,
 				58270FC22072019400C08784 /* NEOWalletUtil.m in Sources */,
+				58A801C62268692B00640BBC /* FinanceHistoryModel.m in Sources */,
 				587ABD5A21B8F8F800C3D81A /* Buy_ram_abi_json_to_bin_request.m in Sources */,
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
 				5827BC1D219EA87300B7730E /* BinaTpcsModel.m in Sources */,

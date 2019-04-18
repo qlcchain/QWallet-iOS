@@ -49,7 +49,7 @@
         __block NSInteger existIndex = 0;
         [muArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if ([tempM.account isEqualToString:model.account]) {
+            if ([tempM.ID isEqualToString:model.ID]) {
                 isExist = YES;
                 existIndex = idx;
                 *stop = YES;
@@ -144,21 +144,21 @@
     }
 }
 
-+ (BOOL)inLogin:(NSString *)account {
-    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
-    __block BOOL isLogin = NO;
-    if (data) {
-        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UserModel *tempM = obj;
-            if ([tempM.account isEqualToString:account]) {
-                isLogin = [tempM.isLogin boolValue];
-                *stop = YES;
-            }
-        }];
-    }
-    return isLogin;
-}
+//+ (BOOL)inLogin:(NSString *)account {
+//    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+//    __block BOOL isLogin = NO;
+//    if (data) {
+//        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            UserModel *tempM = obj;
+//            if ([tempM.account isEqualToString:account]) {
+//                isLogin = [tempM.isLogin boolValue];
+//                *stop = YES;
+//            }
+//        }];
+//    }
+//    return isLogin;
+//}
 
 + (BOOL)haveLoginAccount {
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
@@ -174,6 +174,18 @@
         }];
     }
     return isLogin;
+}
+
++ (BOOL)haveAccountInLocal {
+    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+    __block BOOL haveAccount = NO;
+    if (data) {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (arr.count > 0) {
+            haveAccount = YES;
+        }
+    }
+    return haveAccount;
 }
 
 @end

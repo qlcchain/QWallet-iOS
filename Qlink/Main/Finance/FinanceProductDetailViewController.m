@@ -17,12 +17,15 @@
 #import "NEOAddressInfoModel.h"
 #import "NEOWalletUtil.h"
 #import "HMScanner.h"
+#import "RefreshHelper.h"
 
 @interface FinanceProductDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *qrcodeBackHeight; // 278
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *confirmBackHeight; // 120
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherMethodHeight; // 60
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *rateLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
@@ -55,6 +58,8 @@
 
 #pragma mark - Operation
 - (void)configInit {
+    
+    _otherMethodHeight.constant = 0;
     _confirmBtn.layer.cornerRadius = 6;
     _confirmBtn.layer.masksToBounds = YES;
     _qrcodeBackHeight.constant = 0;
@@ -67,9 +72,14 @@
     _valueDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] day:1] substringToIndex:10];
     _maturityDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] day:[_inputM.timeLimit integerValue]+1] substringToIndex:10];
     
+    kWeakSelf(self)
+    _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+        NSString *addressFrom = [NEOWalletManage.sharedInstance getWalletAddress];
+        [weakself requestNEOAddressInfo:addressFrom showLoad:NO];
+    }];
+    
     NSString *mainAddress = [NeoTransferUtil getShareObject].neoMainAddress;
     _sendToAddressLab.text = mainAddress;
-    kWeakSelf(self);
     [HMScanner qrImageWithString:mainAddress?:@"" avatar:nil completion:^(UIImage *image) {
         weakself.sendToQRImgV.image = image;
     }];
@@ -120,6 +130,7 @@
     }
     
     if (!_qlcAssetM) {
+        [kAppD.window makeToastDisappearWithText:@"Please scroll down to refresh Or switch wallet."];
         return;
     }
     if ([_qlcAssetM.amount floatValue] < [_qlcTF.text floatValue]) {
@@ -168,6 +179,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Purchase Successful"];
+            [weakself backAction:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:@"Purchase Failed"];
         }
@@ -189,6 +201,7 @@
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
     [RequestService requestWithUrl:neoAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [weakself.mainScroll.mj_header endRefreshing];
         if (showLoad) {
             [kAppD.window hideToast];
         }
@@ -203,6 +216,7 @@
             }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [weakself.mainScroll.mj_header endRefreshing];
         if (showLoad) {
             [kAppD.window hideToast];
         }
@@ -213,9 +227,7 @@
     if ([[NeoTransferUtil getShareObject].neoMainAddress isEmptyString]) {
         return;
     }
-    if (!_qlcAssetM) {
-        return;
-    }
+
     NSInteger decimals = 8;
     NSString *tokenHash = _qlcAssetM.asset_hash;
     NSString *assetName = _qlcAssetM.asset;
@@ -229,9 +241,11 @@
     }
     BOOL isMainNetTransfer = YES;
     kWeakSelf(self)
+    [kAppD.window makeToastInView:kAppD.window];
     [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer completeBlock:^(NSString *txHex) {
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [kAppD.window hideToast];
                 [kAppD.window makeToastDisappearWithText:@"NEO tx error"];
             });
         } else {

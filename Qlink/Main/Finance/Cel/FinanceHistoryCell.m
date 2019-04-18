@@ -7,7 +7,7 @@
 //
 
 #import "FinanceHistoryCell.h"
-#import "FinanceOrderListModel.h"
+#import "FinanceHistoryModel.h"
 #import "WalletCommonModel.h"
 
 @implementation FinanceHistoryCell
@@ -27,29 +27,22 @@
     _toLab.text = nil;
 }
 
-- (void)configCell:(FinanceOrderModel *)model {
+- (void)configCell:(FinanceHistoryModel *)model {
     _toLab.hidden = YES;
     _toLab.text = nil;
-    _statusLab.text = model.status;
+    _statusLab.text = model.type;
     _statusLab.textColor = UIColorFromRGB(0x01B5AB);
-    if ([model.status isEqualToString:@"PAY"]) {
-        
-    } else if ([model.status isEqualToString:@"END"]) {
-        
-    } else if ([model.status isEqualToString:@"REDEEM"]) {
+    if ([model.type isEqualToString:@"BUY"]) {
+        _qlcLab.text = [NSString stringWithFormat:@"+%@ QLC",model.amount];
+    } else if ([model.type isEqualToString:@"REDEEM"]) {
         _statusLab.textColor = UIColorFromRGB(0xFF3669);
         _toLab.hidden = NO;
         WalletCommonModel *currentWalletM = [WalletCommonModel getWalletWithAddress:model.address];
         _toLab.text = [NSString stringWithFormat:@"TO：%@",currentWalletM.name];
-    } else if ([model.status isEqualToString:@"CANCEL"]) {
-        
-    } else if ([model.status isEqualToString:@"BUY"]) {
-        
+        _qlcLab.text = [NSString stringWithFormat:@"-%@ QLC",model.amount];
     }
     _nameLab.text = model.productName;
-    _qlcLab.text = [NSString stringWithFormat:@"+%@ QLC",model.addRevenue];
-    _timeLab.text = model.orderTime;
-    
+    _timeLab.text = model.createTime;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

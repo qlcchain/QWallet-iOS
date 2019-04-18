@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class FinanceOrderModel;
+@class FinanceHistoryModel;
 
 static NSString *FinanceHistoryCellReuse = @"FinanceHistoryCell";
 #define FinanceHistoryCell_Height 95
@@ -21,7 +21,7 @@ static NSString *FinanceHistoryCellReuse = @"FinanceHistoryCell";
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *toLab;
 
-- (void)configCell:(FinanceOrderModel *)model;
+- (void)configCell:(FinanceHistoryModel *)model;
 
 
 @end

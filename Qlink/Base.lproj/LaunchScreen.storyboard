@@ -19,7 +19,19 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8D-Ce-ACR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_start_icon" translatesAutoresizingMaskIntoConstraints="NO" id="C84-7z-dse">
+                                        <rect key="frame" x="113.5" y="259.5" width="148" height="148"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="148" id="1MZ-dk-piH"/>
+                                            <constraint firstAttribute="width" constant="148" id="95K-1n-XC7"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="C84-7z-dse" firstAttribute="centerY" secondItem="a8D-Ce-ACR" secondAttribute="centerY" id="hQ7-0D-BB5"/>
+                                    <constraint firstItem="C84-7z-dse" firstAttribute="centerX" secondItem="a8D-Ce-ACR" secondAttribute="centerX" id="tBp-He-xJ7"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -37,4 +49,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_start_icon" width="148" height="148"/>
+    </resources>
 </document>

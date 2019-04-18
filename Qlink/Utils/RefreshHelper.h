@@ -13,5 +13,6 @@
 
 + (MJRefreshNormalHeader *)headerWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)block;
 + (MJRefreshAutoNormalFooter *)footerWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)block;
++ (MJRefreshBackNormalFooter *)footerBackNormalWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)block;
 
 @end

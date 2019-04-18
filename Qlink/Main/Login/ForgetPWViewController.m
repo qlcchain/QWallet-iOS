@@ -155,7 +155,7 @@
             userM.md5PW = md5PW;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

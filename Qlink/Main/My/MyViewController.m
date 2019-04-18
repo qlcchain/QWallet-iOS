@@ -109,7 +109,8 @@ NSString *my_title4 = @"Settings";
     
     MyShowModel *model = _sourceArr[indexPath.row];
     if ([model.title isEqualToString:my_title0]) {
-        [self jumpToWalletsManage];
+        [kAppD jumpToWallet];
+//        [self jumpToWalletsManage];
     } else if ([model.title isEqualToString:my_title1]) {
         [self jumpToShareFriends];
     } else if ([model.title isEqualToString:my_title2]) {
@@ -163,7 +164,7 @@ NSString *my_title4 = @"Settings";
 - (void)jumpToShareFriends {
     BOOL haveLogin = [UserModel haveLoginAccount];
     if (!haveLogin) {
-        [kAppD.window makeToastDisappearWithText:@"Please Login First"];
+        [kAppD presentLoginNew];
         return;
     }
     

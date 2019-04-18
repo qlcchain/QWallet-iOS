@@ -60,7 +60,7 @@
     [KeychainUtil resetKeyService]; // 先重置keyservice  以后1掉
     
     _checkPassLock = YES; // 处理tabbar连续点击的bug
-    _allowPresentLogin = YES; // 打开app允许弹出输入密码
+    _needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
    // 配置Firebase
@@ -135,7 +135,7 @@
 - (void)configRootAndBackground {
     [self setRootTabbar];
     // 获取NEO主地址
-    [NeoTransferUtil requestNEOMainAddress];
+    [[NeoTransferUtil getShareObject] startFetchNEOMainAddress];
 }
 
 #pragma mark - 初始化Tabbar
@@ -144,6 +144,16 @@
     
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
+}
+
+- (void)jumpToWallet {
+    if (kAppD.needFingerprintVerification) {
+        [kAppD presentFingerprintVerify:^{
+            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+        }];
+    } else {
+        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+    }
 }
 
 #pragma mark - Login
@@ -158,7 +168,9 @@
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     __weak typeof(vc) weakvc = vc;
     [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
-        [weakvc switchToLogin];
+        if ([UserModel haveAccountInLocal]) {
+            [weakvc switchToLogin];
+        }
     }];
 //    self.window.rootViewController = nav;
 }
@@ -180,7 +192,7 @@
     if ([ConfigUtil getLocalTouch]) {
         [FingerprintVerificationUtil show:^(BOOL success) {
             if (success) {
-                kAppD.allowPresentLogin = NO; // 设置已经输入过密码
+                kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
                 if (completeBlock) {
                     completeBlock();
                 }

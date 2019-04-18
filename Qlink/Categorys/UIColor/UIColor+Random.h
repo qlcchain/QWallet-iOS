@@ -13,5 +13,6 @@
 + (UIColor *)RandomColor;
 + (UIColor *)colorWithHexString:(NSString *)hexString;
 + (UIColor *)mainColor;
++ (UIColor *)mainColorOfHalf;
 
 @end

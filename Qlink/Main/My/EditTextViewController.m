@@ -201,10 +201,10 @@
             userM.nickname = nickname;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed"];
+            [kAppD.window makeToastDisappearWithText:@"Failed."];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -247,10 +247,10 @@
             userM.email = email;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed"];
+            [kAppD.window makeToastDisappearWithText:@"Failed."];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -293,10 +293,10 @@
             userM.phone = phone;
             [UserModel storeUser:userM];
             
-            [kAppD.window makeToastDisappearWithText:@"Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed"];
+            [kAppD.window makeToastDisappearWithText:@"Failed."];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
