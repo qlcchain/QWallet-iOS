@@ -64,13 +64,13 @@
     _confirmBtn.layer.masksToBounds = YES;
     _qrcodeBackHeight.constant = 0;
     _titleLab.text = _inputM.name;
-    _rateLab.text = [NSString stringWithFormat:@"%@%%",@([_inputM.annualIncomeRate floatValue]*100)];
+    _rateLab.text = [NSString stringWithFormat:@"%.2f%%",[_inputM.annualIncomeRate floatValue]*100];
     _timeLab.text = [NSString stringWithFormat:@"%@ Days",_inputM.timeLimit];
     _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",_inputM.leastAmount];
     _qlcTF.placeholder = [NSString stringWithFormat:@"From %@ QLC",_inputM.leastAmount];
     _purchaseDateLab.text = @"Today";
-    _valueDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] day:1] substringToIndex:10];
-    _maturityDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] day:[_inputM.timeLimit integerValue]+1] substringToIndex:10];
+    _valueDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] addDay:1] substringToIndex:10];
+    _maturityDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] addDay:[_inputM.timeLimit integerValue]+1] substringToIndex:10];
     
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
@@ -87,7 +87,7 @@
 
 - (void)refreshView {
     _titleLab.text = _requestProductM.name;
-    _rateLab.text = [NSString stringWithFormat:@"%@%%",@([_requestProductM.annualIncomeRate floatValue]*100)];
+    _rateLab.text = [NSString stringWithFormat:@"%.2f%%",[_requestProductM.annualIncomeRate floatValue]*100];
     _timeLab.text = [NSString stringWithFormat:@"%@ Days",_requestProductM.timeLimit];
     _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",_requestProductM.leastAmount];
     _qlcTF.placeholder = [NSString stringWithFormat:@"From %@ QLC",_requestProductM.leastAmount];
@@ -234,7 +234,8 @@
     NSString *toAddress = [NeoTransferUtil getShareObject].neoMainAddress;
     NSString *amount = _qlcTF.text?:@"";
     NSString *symbol = _qlcAssetM.asset_symbol;
-    NSString *fromAddress = [NEOWalletManage.sharedInstance getWalletAddress];;
+    NSString *fromAddress = [NEOWalletManage.sharedInstance getWalletAddress];
+    NSString *remarkStr = nil;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
         assetType = 0;
@@ -242,7 +243,7 @@
     BOOL isMainNetTransfer = YES;
     kWeakSelf(self)
     [kAppD.window makeToastInView:kAppD.window];
-    [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer completeBlock:^(NSString *txHex) {
+    [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [kAppD.window hideToast];

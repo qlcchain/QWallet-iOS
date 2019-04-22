@@ -58,7 +58,7 @@
     [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:@"Wallet" imageName:@"wallet"];
-    [self addChildViewController:[[MyViewController alloc] init] text:@"My" imageName:@"settings"];
+    [self addChildViewController:[[MyViewController alloc] init] text:@"Me" imageName:@"settings"];
 }
 
 - (void) addChildViewController:(UIViewController *) childController text:(NSString *) text imageName:(NSString *) imageName {

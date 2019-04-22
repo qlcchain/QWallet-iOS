@@ -150,7 +150,17 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Redeem Success."];
-            [weakself requestOrder_list];
+            // 刷新UI
+            [weakself.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                FinanceOrderModel *model = obj;
+                if ([model.ID isEqualToString:orderId]) {
+                    model.status = @"REDEEM";
+                    *stop = YES;
+                }
+            }];
+            [weakself.mainTable reloadData];
+            
+//            [weakself requestOrder_list];
         } else {
             [kAppD.window makeToastDisappearWithText:@"Redeem Fail."];
         }

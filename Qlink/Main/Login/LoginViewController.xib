@@ -21,6 +21,7 @@
                 <outlet property="loginVerifyCodeHeight" destination="OD2-cX-pZd" id="kmc-3F-Ho4"/>
                 <outlet property="loginVerifyCodeTF" destination="SQU-K8-dYh" id="C4R-sQ-zYr"/>
                 <outlet property="phoneAreaCodeWidth" destination="ck2-zA-gaq" id="cng-Bc-4Wr"/>
+                <outlet property="regByFindBtn" destination="lra-O2-bWl" id="NLF-ZC-Gdk"/>
                 <outlet property="regInviteCodeTF" destination="JVs-uA-cxs" id="EAI-q6-eS4"/>
                 <outlet property="regPWTF" destination="lKp-04-dYd" id="Dx8-dA-p8a"/>
                 <outlet property="regPhoneTF" destination="vQx-B0-ku4" id="f8Y-ZN-OAc"/>
@@ -291,7 +292,7 @@
                                                                         <color key="titleColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                                                                     </state>
                                                                     <connections>
-                                                                        <action selector="mailRegisterAction:" destination="-1" eventType="touchUpInside" id="rqc-hR-BiB"/>
+                                                                        <action selector="regByFindAction:" destination="-1" eventType="touchUpInside" id="3bh-C3-kbL"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9w-DG-0nG">

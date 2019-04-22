@@ -23,8 +23,9 @@
 
 @interface NSDate (Category)
 
-+ (NSString *)getTimeWithFromDate:(NSDate *)fromDate day:(NSInteger)day;
-+ (NSString *)getTimeWithFromTime:(NSString *)fromTime day:(NSInteger)day;
++ (NSString *)getTimeWithFromDate:(NSDate *)fromDate addDay:(NSInteger)addDay;
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime addDay:(NSInteger)addDay;
++ (NSDate *)dateFromTime:(NSString *)fromTime;
 /**
  *  秒时间戳
  */
@@ -96,6 +97,7 @@
 - (NSString *)formattedSystemNewsDateDescription;
 
 // Retrieving intervals
+- (NSTimeInterval)secondsAfterDate: (NSDate *) aDate;
 - (NSInteger) minutesAfterDate: (NSDate *) aDate;
 - (NSInteger) minutesBeforeDate: (NSDate *) aDate;
 - (NSInteger) hoursAfterDate: (NSDate *) aDate;

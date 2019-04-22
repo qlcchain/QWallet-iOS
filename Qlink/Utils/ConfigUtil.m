@@ -78,6 +78,9 @@
 }
 
 + (BOOL)getLocalTouch {
+    
+    return YES;
+    
     NSNumber *localTouch = [HWUserdefault getObjectWithKey:Local_Show_Touch]?:@(YES);
     if (![localTouch isKindOfClass:[NSNumber class]]) {
         localTouch = @(YES);

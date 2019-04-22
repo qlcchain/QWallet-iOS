@@ -62,8 +62,8 @@ typedef enum : NSUInteger {
 
 #pragma mark - neo钱包新接口
 #pragma mark - neo转账send
-+ (void)sendNEOWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet;
++ (void)sendNEOWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr;
 
-+ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet completeBlock:(void(^)(NSString *txHex))completeBlock;
++ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr completeBlock:(void(^)(NSString *txHex))completeBlock;
 
 @end

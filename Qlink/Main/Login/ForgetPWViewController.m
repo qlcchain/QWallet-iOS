@@ -13,6 +13,7 @@
 #import "RSAUtil.h"
 #import "UserModel.h"
 #import "NSDate+Category.h"
+#import "NSString+RegexCategory.h"
 
 @interface ForgetPWViewController ()
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwNewTF;
 @property (weak, nonatomic) IBOutlet UITextField *pwRepeatTF;
 @property (weak, nonatomic) IBOutlet UILabel *areaCodeLab;
+@property (weak, nonatomic) IBOutlet UIButton *byFindBtn;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneAreaCodeWidth; // 58
 
@@ -92,6 +94,17 @@
 
 - (IBAction)confirmAction:(id)sender {
     [self.view endEditing:YES];
+    if (_byFindBtn.selected) { // Email
+        if (![_phoneTF.text isEmailAddress]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+            return;
+        }
+    } else { // Phone
+        if (![_phoneTF.text isMobileNumber]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid phone number."];
+            return;
+        }
+    }
     if (![_pwNewTF.text isEqualToString:_pwRepeatTF.text]) {
         [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
         return;
@@ -101,6 +114,17 @@
 
 - (IBAction)verifyCodeAction:(id)sender {
     [self.view endEditing:YES];
+    if (_byFindBtn.selected) { // Email
+        if (![_phoneTF.text isEmailAddress]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+            return;
+        }
+    } else { // Phone
+        if (![_phoneTF.text isMobileNumber]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid phone number."];
+            return;
+        }
+    }
     [self requestVcode_change_password_code];
 }
 
@@ -129,9 +153,10 @@
     NSDictionary *params = @{@"account":_phoneTF.text?:@""};
     [RequestService requestWithUrl:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -164,6 +189,7 @@
 
 #pragma mark - Transition
 - (void)jumpToChooseAreaCode {
+    return;
     ChooseAreaCodeViewController *vc = [ChooseAreaCodeViewController new];
     kWeakSelf(self)
     vc.chooseB = ^(AreaCodeModel *model) {

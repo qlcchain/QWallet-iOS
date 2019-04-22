@@ -115,12 +115,13 @@
     NSString *amount = _amountTF.text;
     NSString *symbol = _selectAsset.asset_symbol;
     NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
+    NSString *remarkStr = _memoTF.text;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
         assetType = 0;
     }
     BOOL isMainNetTransfer = YES;
-    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer];
+    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr];
 }
 
 - (void)backToRoot {

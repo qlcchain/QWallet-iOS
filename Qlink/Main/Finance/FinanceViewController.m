@@ -78,7 +78,7 @@
 }
 
 - (void)refreshDailyView {
-    _dailyRateLab.text = [NSString stringWithFormat:@"%@%%",@([_dailyM.annualIncomeRate?:@(0) floatValue]*100)];
+    _dailyRateLab.text = [NSString stringWithFormat:@"%.2f%%",[_dailyM.annualIncomeRate?:@(0) floatValue]*100];
     _dailyFromQLCLab.text = [NSString stringWithFormat:@"Flexible From %@ QLC",_dailyM.leastAmount?:@(0)];
 }
 

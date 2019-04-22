@@ -8,6 +8,7 @@
 
 #import "MyPortfolioCell.h"
 #import "FinanceOrderListModel.h"
+#import "NSDate+Category.h"
 
 @interface MyPortfolioCell ()
 
@@ -43,11 +44,24 @@
     
     if ([model.status isEqualToString:@"PAY"]) {
         _redeemBtn.hidden = YES;
-        if ([model.maturityTime isEmptyString] && [model.addRevenue floatValue] > 0) {
-            _redeemBtn.hidden = NO;
-            _maturityDateKeyLab.hidden = YES;
-            _maturityDateValLab.hidden = YES;
+        if ([model.maturityTime isEmptyString]) { // 日日盈
+            NSDate *redeemDate = [NSDate dateFromTime:[NSDate getTimeWithFromTime:model.orderTime addDay:[model.dueDays integerValue]+1]];
+            NSTimeInterval seconds = [redeemDate secondsAfterDate:[NSDate date]];
+            if (seconds < 0) {
+                _redeemBtn.hidden = NO;
+                _maturityDateKeyLab.hidden = YES;
+                _maturityDateValLab.hidden = YES;
+            }
+        } else { // 其他
+            NSDate *redeemDate = [NSDate dateFromTime:[NSDate getTimeWithFromTime:model.maturityTime addDay:1]];
+            NSInteger day = [redeemDate daysAfterDate:[NSDate date]];
+            if (day < 0) {
+                _redeemBtn.hidden = NO;
+                _maturityDateKeyLab.hidden = YES;
+                _maturityDateValLab.hidden = YES;
+            }
         }
+        
     } else if ([model.status isEqualToString:@"END"]) {
         _redeemBtn.hidden = YES;
         _maturityDateKeyLab.hidden = YES;

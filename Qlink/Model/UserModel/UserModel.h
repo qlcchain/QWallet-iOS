@@ -9,6 +9,7 @@
 #import "BBaseModel.h"
 
 #define UserModel_Local @"UserModel_Local"
+#define UserModel_LastLoginAccount @"UserModel_LastLoginAccount"
 
 @interface UserModel : BBaseModel
 
@@ -32,5 +33,7 @@
 + (BOOL)haveLoginAccount;
 //+ (BOOL)inLogin:(NSString *)account;
 + (BOOL)haveAccountInLocal;
++ (void)storeLastLoginAccount:(NSString *)account; // 刷新最后一次登录的账号
++ (NSString *)getLastLoginAccount; // 获取最后一次登录的账号
 
 @end

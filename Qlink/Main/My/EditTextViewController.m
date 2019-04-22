@@ -219,9 +219,10 @@
     NSDictionary *params = @{@"account":account,@"email":email};
     [RequestService requestWithUrl:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -265,9 +266,10 @@
     NSDictionary *params = @{@"account":account,@"phone":phone};
     [RequestService requestWithUrl:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
+//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

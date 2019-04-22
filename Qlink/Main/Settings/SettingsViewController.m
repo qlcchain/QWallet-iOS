@@ -25,7 +25,7 @@
 
 @implementation SettingsViewController
 
-NSString *title0 = @"Password Management";
+//NSString *title0 = @"Password Management";
 NSString *title1 = @"Currency Unit";
 //NSString *title2 = @"My Wallet";
 NSString *title3 = @"Service Agreement";
@@ -60,7 +60,10 @@ NSString *title7 = @"Log out";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSArray *titleArr = @[title0,title1,title3,title4,title6,title7];
+    NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[title1,title3,title4,title6]];
+    if ([UserModel haveLoginAccount]) {
+        [titleArr addObject:title7];
+    }
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         SettingsShowModel *model = [[SettingsShowModel alloc] init];
@@ -85,6 +88,9 @@ NSString *title7 = @"Log out";
 }
 
 - (void)logout {
+    if (![UserModel haveLoginAccount]) {
+        return;
+    }
     UserModel *userM = [UserModel fetchUserOfLogin];
     userM.isLogin = @(NO);
     [UserModel storeUser:userM];
@@ -109,9 +115,10 @@ NSString *title7 = @"Log out";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     SettingsShowModel *model = _sourceArr[indexPath.row];
-    if ([model.title isEqualToString:title0]) {
-        [self jumpToPWManagement];
-    } else if ([model.title isEqualToString:title1]) {
+//    if ([model.title isEqualToString:title0]) {
+//        [self jumpToPWManagement];
+//    } else
+    if ([model.title isEqualToString:title1]) {
         [self jumpToChooseCurrency];
     } else if ([model.title isEqualToString:title3]) {
         NSString *url = @"https://winq.net/disclaimer.html";

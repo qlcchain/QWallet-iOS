@@ -188,4 +188,12 @@
     return haveAccount;
 }
 
++ (void)storeLastLoginAccount:(NSString *)account {
+    [HWUserdefault insertObj:account withkey:UserModel_LastLoginAccount];
+}
+
++ (NSString *)getLastLoginAccount {
+    return [HWUserdefault getObjectWithKey:UserModel_LastLoginAccount]?:@"";
+}
+
 @end

@@ -320,11 +320,12 @@ public class Account {
 //    }
     
     
-    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
+    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
         
         var customAttributes: [TransactionAttritbute] = []
         customAttributes.append(TransactionAttritbute(script: self.address.hashFromAddress()))
-        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+//        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+        let remark = remarkStr ?? NEO_Transfer_Remark
         customAttributes.append(TransactionAttritbute(remark: remark))
         customAttributes.append(TransactionAttritbute(descriptionHex: assetHash))
         
@@ -449,12 +450,13 @@ public class Account {
         return [UInt8(script.count)] + script
     }
     
-    public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
+    public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, attributes: [TransactionAttritbute]? = nil, completion: @escaping(String?, Error?) -> Void) {
         print("sendNep5Token action")
         
         var customAttributes: [TransactionAttritbute] = []
         customAttributes.append(TransactionAttritbute(script: self.address.hashFromAddress()))
-        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+//        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+        let remark = remarkStr ?? NEO_Transfer_Remark
         customAttributes.append(TransactionAttritbute(remark: remark))
         customAttributes.append(TransactionAttritbute(descriptionHex: tokenContractHash))
         
@@ -482,11 +484,12 @@ public class Account {
         }
     }
     
-    public func invokeContractFunction(assets: Assets, contractHash: String, method: String, args: [Any], completion: @escaping(Bool?, Error?) -> Void) {
+    public func invokeContractFunction(assets: Assets, contractHash: String, method: String, remarkStr: String?, args: [Any], completion: @escaping(Bool?, Error?) -> Void) {
         
         var customAttributes: [TransactionAttritbute] = []
         customAttributes.append(TransactionAttritbute(script: self.address.hashFromAddress()))
-        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+//        let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+        let remark = remarkStr ?? NEO_Transfer_Remark
         customAttributes.append(TransactionAttritbute(remark: remark))
         customAttributes.append(TransactionAttritbute(descriptionHex: contractHash))
         

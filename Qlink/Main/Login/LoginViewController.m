@@ -14,6 +14,7 @@
 #import "UserModel.h"
 #import "NSDate+Category.h"
 #import "RSAUtil.h"
+#import "NSString+RegexCategory.h"
 
 @interface LoginViewController ()
 
@@ -36,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *regRepeatPWTF;
 @property (weak, nonatomic) IBOutlet UITextField *regInviteCodeTF;
 @property (weak, nonatomic) IBOutlet UILabel *regTermLab;
+@property (weak, nonatomic) IBOutlet UIButton *regByFindBtn;
 
 // 登录
 @property (weak, nonatomic) IBOutlet UITextField *loginAccountTF;
@@ -171,6 +173,9 @@
 
 - (void)switchToLogin {
     [self switchToLoginAction:_switchToLoginBtn];
+    if ([UserModel haveAccountInLocal]) { // 显示最后一次登录的账号
+        _loginAccountTF.text = [UserModel getLastLoginAccount];
+    }
     [self loginTFChange:_loginAccountTF];
 }
 
@@ -227,6 +232,17 @@
 
 - (IBAction)registerAction:(id)sender {
     [self.view endEditing:YES];
+    if (_regByFindBtn.selected) { // Email
+        if (![_regPhoneTF.text isEmailAddress]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+            return;
+        }
+    } else { // Phone
+        if (![_regPhoneTF.text isMobileNumber]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid phone number."];
+            return;
+        }
+    }
     if (![_regPWTF.text isEqualToString:_regRepeatPWTF.text]) {
         [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
         return;
@@ -236,12 +252,21 @@
 
 - (IBAction)loginVerifyCodeAction:(id)sender {
     [self.view endEditing:YES];
+    if (![_loginAccountTF.text isEmailAddress] && ![_loginAccountTF.text isMobileNumber]) {
+        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address or phone number."];
+        return;
+    }
     [self requestVcode_signin_code];
 }
 
 
 - (IBAction)loginAction:(id)sender {
     [self.view endEditing:YES];
+    if (![_loginAccountTF.text isEmailAddress] && ![_loginAccountTF.text isMobileNumber]) {
+        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address or phone number."];
+        return;
+    }
+    
     UserModel *userM = [UserModel fetchUser:_loginAccountTF.text?:@""];
     if (!userM) { // 本地没有rsaPublicKey 验证码登录
         [self requestUser_signin_code];
@@ -251,7 +276,7 @@
     
 }
 
-- (IBAction)mailRegisterAction:(UIButton *)sender {
+- (IBAction)regByFindAction:(UIButton *)sender {
     [self.view endEditing:YES];
     sender.selected = !sender.selected;
     if (sender.selected) {
@@ -273,6 +298,17 @@
 // 获取注册验证码
 - (IBAction)regVerifyCodeAction:(id)sender {
     [self.view endEditing:YES];
+    if (_regByFindBtn.selected) { // Email
+        if (![_regPhoneTF.text isEmailAddress]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+            return;
+        }
+    } else { // Phone
+        if (![_regPhoneTF.text isMobileNumber]) {
+            [kAppD.window makeToastDisappearWithText:@"Please enter a valid phone number."];
+            return;
+        }
+    }
     [self requestSignup_code];
 }
 
@@ -288,7 +324,7 @@
     NSDictionary *params = @{@"account":_regPhoneTF.text?:@""};
     [RequestService requestWithUrl:signup_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
             [weakself openCountdown:weakself.regVerifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
@@ -315,13 +351,12 @@
 //            model.rsaPublicKey = rsaPublicKey;
             model.isLogin = @(YES);
             [UserModel storeUser:model];
+            [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
             [weakself backAction:nil];
-            
-//            //  滑动到登录页
-//            [weakself switchToLogin];
-//            weakself.loginAccountTF.text = model.account;
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -349,9 +384,12 @@
 //            userM.rsaPublicKey = rsaPublicKey;
             userM.isLogin = @(YES);
             [UserModel storeUser:userM];
+            [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
             [weakself backAction:nil];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -364,7 +402,7 @@
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
     [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Get Code Successful"];
+            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
@@ -394,6 +432,8 @@
             
 //            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
 //            [weakself backAction:nil];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -406,6 +446,7 @@
 }
 
 - (void)jumpToChooseAreaCode {
+    return;
     ChooseAreaCodeViewController *vc = [ChooseAreaCodeViewController new];
     kWeakSelf(self)
     vc.chooseB = ^(AreaCodeModel *model) {
