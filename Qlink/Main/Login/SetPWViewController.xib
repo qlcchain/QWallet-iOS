@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetPWViewController">
             <connections>
+                <outlet property="confirmBtn" destination="ZTb-jr-hMA" id="uhL-BT-Cen"/>
+                <outlet property="pwNewTF" destination="bnP-6C-qef" id="9Ao-Ti-QHQ"/>
+                <outlet property="pwRepeatTF" destination="cAR-uU-xHq" id="RJA-xb-LDf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,6 +34,9 @@
                                         <constraint firstAttribute="width" constant="44" id="ZnZ-qu-HbZ"/>
                                     </constraints>
                                     <state key="normal" image="eth_gray_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="AiL-8M-uLL"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,6 +122,9 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <state key="normal" title="Confirm"/>
+                                    <connections>
+                                        <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="b8d-qG-Uxd"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

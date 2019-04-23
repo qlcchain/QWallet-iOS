@@ -116,6 +116,8 @@
 		581925832114363E009AE406 /* PageThreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5819257D2114363E009AE406 /* PageThreeView.xib */; };
 		581925842114363E009AE406 /* PageOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5819257F2114363E009AE406 /* PageOneView.xib */; };
 		581925852114363E009AE406 /* NewRankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581925812114363E009AE406 /* NewRankView.xib */; };
+		58193AB4226EC0FA0034E4B9 /* QToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58193AB3226EC0FA0034E4B9 /* QToastView.m */; };
+		58193AB6226EC1070034E4B9 /* QToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58193AB5226EC1070034E4B9 /* QToastView.xib */; };
 		581A347421AE39C200623685 /* MarketSortBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 581A347321AE39C200623685 /* MarketSortBtn.m */; };
 		581A347A21AE653400623685 /* AddMarketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581A347821AE653400623685 /* AddMarketsViewController.m */; };
 		581A347B21AE653400623685 /* AddMarketsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581A347921AE653400623685 /* AddMarketsViewController.xib */; };
@@ -866,6 +868,9 @@
 		5819259221143667009AE406 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NewRankView.strings; sourceTree = "<group>"; };
 		5819259321143669009AE406 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NewRankView.strings; sourceTree = "<group>"; };
 		581925942114366B009AE406 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NewRankView.strings"; sourceTree = "<group>"; };
+		58193AB2226EC0FA0034E4B9 /* QToastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QToastView.h; sourceTree = "<group>"; };
+		58193AB3226EC0FA0034E4B9 /* QToastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QToastView.m; sourceTree = "<group>"; };
+		58193AB5226EC1070034E4B9 /* QToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QToastView.xib; sourceTree = "<group>"; };
 		581A347221AE39C200623685 /* MarketSortBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarketSortBtn.h; sourceTree = "<group>"; };
 		581A347321AE39C200623685 /* MarketSortBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarketSortBtn.m; sourceTree = "<group>"; };
 		581A347721AE653400623685 /* AddMarketsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddMarketsViewController.h; sourceTree = "<group>"; };
@@ -2480,6 +2485,16 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		58193AB1226EC0D00034E4B9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				58193AB2226EC0FA0034E4B9 /* QToastView.h */,
+				58193AB3226EC0FA0034E4B9 /* QToastView.m */,
+				58193AB5226EC1070034E4B9 /* QToastView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		581AC35621AFC3B400ACA80B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2697,6 +2712,7 @@
 		581D7AF42179C77B00AFD0DE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				58193AB1226EC0D00034E4B9 /* View */,
 				585CDC19225C8FB700199FE1 /* Cell */,
 				581D7AF52179C7AF00AFD0DE /* LoginSetPWViewController.h */,
 				581D7AF62179C7AF00AFD0DE /* LoginSetPWViewController.m */,
@@ -4330,6 +4346,7 @@
 				5860AD6820CFB59C00EEB6CE /* HistoryRecordsViewController.xib in Resources */,
 				581AF7AF21B6646E001A37E1 /* EOSCreateWalletViewController.xib in Resources */,
 				5821CD45217DCBA700F81F8B /* ETHMnemonicViewController.xib in Resources */,
+				58193AB6226EC1070034E4B9 /* QToastView.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
 				581925852114363E009AE406 /* NewRankView.xib in Resources */,
@@ -4575,6 +4592,7 @@
 				5894EC51217ED2BC007F5D39 /* ETHImportWalletViewController.m in Sources */,
 				583D9599211432110057A90C /* RankingCell.m in Sources */,
 				587ABD5821B8F8F800C3D81A /* Get_account_permission_service.m in Sources */,
+				58193AB4226EC0FA0034E4B9 /* QToastView.m in Sources */,
 				73A05A352081D91600974483 /* UIView+HYBImageCliped.m in Sources */,
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				581D32E1219C158B001F88C3 /* NEP2.swift in Sources */,

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginViewController : QBaseViewController
 
-- (void)switchToLogin;
+- (void)showLastLoginAccount;
 
 @end
 

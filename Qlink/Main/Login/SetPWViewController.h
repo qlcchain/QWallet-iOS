@@ -10,4 +10,7 @@
 
 @interface SetPWViewController : QBaseViewController
 
+@property (nonatomic, copy) NSString *inputVerifyCode;
+@property (nonatomic, copy) NSString *inputAccount;
+
 @end

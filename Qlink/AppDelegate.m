@@ -169,7 +169,7 @@
     __weak typeof(vc) weakvc = vc;
     [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
         if ([UserModel haveAccountInLocal]) {
-            [weakvc switchToLogin];
+            [weakvc showLastLoginAccount];
         }
     }];
 //    self.window.rootViewController = nav;

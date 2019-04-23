@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterMailViewController">
             <connections>
+                <outlet property="emailTF" destination="cyK-DU-82g" id="T6v-sH-5u0"/>
+                <outlet property="nextBtn" destination="2Q5-4f-Nye" id="9Ev-Kg-qrX"/>
+                <outlet property="verifyCodeBtn" destination="yQH-dr-3Br" id="gHp-lQ-Q6Y"/>
+                <outlet property="verifyCodeTF" destination="HMr-x3-zyz" id="Ycm-w8-xhN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,6 +35,9 @@
                                         <constraint firstAttribute="width" constant="44" id="VKY-80-Tia"/>
                                     </constraints>
                                     <state key="normal" image="eth_gray_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="eoP-tj-xyj"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,6 +111,9 @@
                                             <state key="normal" title="Get the Code">
                                                 <color key="titleColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="regVerifyCodeAction:" destination="-1" eventType="touchUpInside" id="ssA-W0-iMC"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,6 +139,9 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <state key="normal" title="Next"/>
+                                    <connections>
+                                        <action selector="nextAction:" destination="-1" eventType="touchUpInside" id="Nhe-WN-7IW"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read and agree on Terms of Service and Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLA-aq-slU">
                                     <rect key="frame" x="24" y="290" width="327" height="14.5"/>

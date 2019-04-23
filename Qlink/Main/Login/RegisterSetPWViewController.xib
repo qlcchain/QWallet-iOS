@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterSetPWViewController">
             <connections>
+                <outlet property="inviteCodeTF" destination="8F2-VK-3Uq" id="LvJ-3N-Xby"/>
+                <outlet property="pwRepeatTF" destination="ANV-p5-5OO" id="MMT-B9-ZWC"/>
+                <outlet property="pwTF" destination="T24-Hd-qd6" id="8Xt-Td-QC3"/>
+                <outlet property="registerBtn" destination="gS7-xB-F0h" id="W6g-wz-Nj5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,6 +35,9 @@
                                         <constraint firstAttribute="width" constant="44" id="DvY-RU-20o"/>
                                     </constraints>
                                     <state key="normal" image="eth_gray_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Mhq-uY-hbF"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -145,6 +152,9 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <state key="normal" title="Sign Up"/>
+                                    <connections>
+                                        <action selector="registerAction:" destination="-1" eventType="touchUpInside" id="rWV-ct-fIh"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

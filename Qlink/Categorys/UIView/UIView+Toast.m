@@ -146,6 +146,10 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 }
 
 - (void)makeToastDisappearWithText:(NSString *)text {
+    
+    [QToastView showWithTitle:text];
+    return;
+    
     if ([self HUD]) {
         [self hideToast];
     }

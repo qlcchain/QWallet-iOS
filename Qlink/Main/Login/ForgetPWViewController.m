@@ -14,20 +14,14 @@
 #import "UserModel.h"
 #import "NSDate+Category.h"
 #import "NSString+RegexCategory.h"
+#import "SetPWViewController.h"
 
 @interface ForgetPWViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *verifyCodeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UITextField *emailTF;
 @property (weak, nonatomic) IBOutlet UITextField *verifyCodeTF;
-@property (weak, nonatomic) IBOutlet UITextField *pwNewTF;
-@property (weak, nonatomic) IBOutlet UITextField *pwRepeatTF;
-@property (weak, nonatomic) IBOutlet UILabel *areaCodeLab;
-@property (weak, nonatomic) IBOutlet UIButton *byFindBtn;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneAreaCodeWidth; // 58
-
 
 @end
 
@@ -43,22 +37,21 @@
 
 #pragma mark - Operation
 - (void)viewInit {
-    _confirmBtn.layer.cornerRadius = 6;
-    _confirmBtn.layer.masksToBounds = YES;
+    _nextBtn.layer.cornerRadius = 6;
+    _nextBtn.layer.masksToBounds = YES;
 }
 
 - (void)dataInit {
     _verifyCodeBtn.enabled = NO;
-    _confirmBtn.enabled = NO;
+    _nextBtn.enabled = NO;
+    _nextBtn.backgroundColor = [UIColor mainColorOfHalf];
     
-    [_phoneTF  addTarget:self action:@selector(tfChange:) forControlEvents:UIControlEventEditingChanged];
+    [_emailTF  addTarget:self action:@selector(tfChange:) forControlEvents:UIControlEventEditingChanged];
     [_verifyCodeTF addTarget:self action:@selector(tfChange:) forControlEvents:UIControlEventEditingChanged];
-    [_pwNewTF addTarget:self action:@selector(tfChange:) forControlEvents:UIControlEventEditingChanged];
-    [_pwRepeatTF addTarget:self action:@selector(tfChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)tfChange:(UITextField *)tf {
-    if (tf == _phoneTF) {
+    if (tf == _emailTF) {
         // 更改获取验证码按钮状态
         if (tf.text && tf.text.length > 0) {
             _verifyCodeBtn.enabled = YES;
@@ -70,20 +63,47 @@
         [self changeConfirmBtnState];
     } else if (tf == _verifyCodeTF) {
         [self changeConfirmBtnState];
-    } else if (tf == _pwNewTF) {
-        [self changeConfirmBtnState];
-    } else if (tf == _pwRepeatTF) {
-        [self changeConfirmBtnState];
     }
 }
 
 - (void)changeConfirmBtnState {
-    if (_phoneTF.text && _phoneTF.text.length > 0 && _verifyCodeTF.text && _verifyCodeTF.text.length > 0 && _pwNewTF.text && _pwNewTF.text.length >= 6 && _pwRepeatTF.text && _pwRepeatTF.text.length >= 6) {
-        _confirmBtn.enabled = YES;
+    if (_emailTF.text && _emailTF.text.length > 0 && _verifyCodeTF.text && _verifyCodeTF.text.length > 0) {
+        _nextBtn.enabled = YES;
+        _nextBtn.backgroundColor = [UIColor mainColor];
     } else {
-        _confirmBtn.enabled = NO;
+        _nextBtn.enabled = NO;
+        _nextBtn.backgroundColor = [UIColor mainColorOfHalf];
     }
 }
+
+// 开启倒计时效果
+- (void)openCountdown:(UIButton *)btn {
+    NSString *btnTitle = btn.currentTitle;
+    __block NSInteger time = 59;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        if(time <= 0){
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [btn setTitle:btnTitle forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor mainColor] forState:UIControlStateNormal];
+                btn.userInteractionEnabled = YES;
+            });
+        }else{
+            int seconds = time % 60;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [btn setTitle:[NSString stringWithFormat:@"%.2d", seconds] forState:UIControlStateNormal];
+                [btn setTitleColor:UIColorFromRGB(0x979797) forState:UIControlStateNormal];
+                btn.userInteractionEnabled = NO;
+            });
+            time--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
 
 #pragma mark - Action
 
@@ -92,96 +112,40 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)confirmAction:(id)sender {
+- (IBAction)nextAction:(id)sender {
     [self.view endEditing:YES];
-    if (_byFindBtn.selected) { // Email
-        if (![_phoneTF.text isEmailAddress]) {
-            [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
-            return;
-        }
-    } else { // Phone
-        if (![_phoneTF.text isMobileNumber]) {
-            [kAppD.window makeToastDisappearWithText:@"Please enter a valid phone number."];
-            return;
-        }
-    }
-    if (![_pwNewTF.text isEqualToString:_pwRepeatTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
+    
+    if (![_emailTF.text isEmailAddress]) {
+        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
         return;
     }
-    [self requestUser_change_password];
+    
+    [self jumpToSetPW];
 }
 
 - (IBAction)verifyCodeAction:(id)sender {
     [self.view endEditing:YES];
-    if (_byFindBtn.selected) { // Email
-        if (![_phoneTF.text isEmailAddress]) {
-            [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
-            return;
-        }
-    } else { // Phone
-        if (![_phoneTF.text isMobileNumber]) {
-            [kAppD.window makeToastDisappearWithText:@"Please enter a valid phone number."];
-            return;
-        }
+    
+    if (![_emailTF.text isEmailAddress]) {
+        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+        return;
     }
+    
     [self requestVcode_change_password_code];
 }
 
-- (IBAction)mailFindAction:(UIButton *)sender {
-    [self.view endEditing:YES];
-    sender.selected = !sender.selected;
-    if (sender.selected) {
-        _phoneAreaCodeWidth.constant = 0;
-        _phoneTF.placeholder = @"Email";
-        [sender setTitle:@"By Phone" forState:UIControlStateNormal];
-    } else {
-        _phoneAreaCodeWidth.constant = 58;
-        _phoneTF.placeholder = @"Phone";
-        [sender setTitle:@"By Email" forState:UIControlStateNormal];
-    }
-}
-
-- (IBAction)areaCodeAction:(id)sender {
-    [self.view endEditing:YES];
-    [self jumpToChooseAreaCode];
-}
 
 #pragma mark - Request
 - (void)requestVcode_change_password_code {
-//    kWeakSelf(self);
-    NSDictionary *params = @{@"account":_phoneTF.text?:@""};
+    kWeakSelf(self);
+    NSDictionary *params = @{@"account":_emailTF.text?:@""};
     [RequestService requestWithUrl:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
+            [weakself openCountdown:weakself.verifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-    }];
-}
-
-- (void)requestUser_change_password {
-    NSString *account = _phoneTF.text?:@"";
-    UserModel *userM = [UserModel fetchUser:account];
-    if (!userM) {
-        return;
-    }
-    kWeakSelf(self);
-    NSString *md5PW = [MD5Util md5:_pwNewTF.text?:@""];
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
-    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
-    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *code = _verifyCodeTF.text?:@"";
-    NSDictionary *params = @{@"account":account,@"token":token,@"password":md5PW,@"code":code};
-    [RequestService requestWithUrl:user_change_password_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            userM.md5PW = md5PW;
-            [UserModel storeUser:userM];
-            
-            [kAppD.window makeToastDisappearWithText:@"Success."];
-            [weakself backAction:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -193,11 +157,17 @@
     ChooseAreaCodeViewController *vc = [ChooseAreaCodeViewController new];
     kWeakSelf(self)
     vc.chooseB = ^(AreaCodeModel *model) {
-        weakself.areaCodeLab.text = [NSString stringWithFormat:@"+%@",@(model.code)];
+//        weakself.areaCodeLab.text = [NSString stringWithFormat:@"+%@",@(model.code)];
     };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToSetPW {
+    SetPWViewController *vc = [SetPWViewController new];
+    vc.inputVerifyCode = _verifyCodeTF.text?:@"";
+    vc.inputAccount = _emailTF.text?:@"";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
