@@ -505,8 +505,12 @@ dispatch_source_t _neoMainAddressTimer;
     }
     vpnInfo.recordId = [NEOWalletUtil getExChangeId];
     NSString *remarkStr = nil;
+    NSString *addressTo = [NSStringUtil getNotNullValue:vpnInfo.tranferAddress];
+    if ([addressTo isEmptyString]) {
+        return;
+    }
 
-    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:[NSStringUtil getNotNullValue:vpnInfo.tranferAddress] tokeHash:tokenHash qlc:vpnInfo.tranferCost mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
+    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.tranferCost mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
         
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -749,9 +753,13 @@ dispatch_source_t _neoMainAddressTimer;
     
     vpnInfo.recordId = [NEOWalletUtil getExChangeId];
     NSString *remarkStr = nil;
+    NSString *addressTo = [NSStringUtil getNotNullValue:vpnInfo.address];
+    if ([addressTo isEmptyString]) {
+        return;
+    }
     
     __block int tranType = type;
-    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:[NSStringUtil getNotNullValue:vpnInfo.address] tokeHash:tokenHash qlc:vpnInfo.cost mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
+    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.cost mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
         
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{

@@ -63,9 +63,10 @@
     }
 }
 
-- (void)backToRoot {
+- (void)backTwice {
     [self.view endEditing:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self moveNavgationBackOneViewController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Action
@@ -87,25 +88,25 @@
 
 #pragma mark - Request
 - (void)requestUser_change_password {
+    kWeakSelf(self)
     NSString *account = _inputAccount;
-    UserModel *userM = [UserModel fetchUser:account];
-    if (!userM) {
-        return;
-    }
-    kWeakSelf(self);
     NSString *md5PW = [MD5Util md5:_pwNewTF.text?:@""];
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
-    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
-    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+//    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+//    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+//    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *code = _inputVerifyCode;
-    NSDictionary *params = @{@"account":account,@"token":token,@"password":md5PW,@"code":code};
-    [RequestService requestWithUrl:user_change_password_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":code};
+    [RequestService requestWithUrl:user_change_password_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
+            UserModel *userM = [UserModel fetchUser:account];
+            if (!userM) { // 本地不存在则新增
+                userM = [UserModel getObjectWithKeyValues:responseObject];
+            }
             userM.md5PW = md5PW;
             [UserModel storeUser:userM];
             
             [kAppD.window makeToastDisappearWithText:@"Success."];
-            [weakself backToRoot];
+            [weakself backTwice];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

@@ -54,7 +54,7 @@
     //pageControl.numberOfPages = _datas.count;
     pageControl.currentPageIndicatorSize = CGSizeMake(6, 6);
     pageControl.pageIndicatorSize = CGSizeMake(12, 6);
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor mainColor];
     pageControl.pageIndicatorTintColor = [UIColor grayColor];
     //    pageControl.pageIndicatorImage = [UIImage imageNamed:@"Dot"];
     //    pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"DotSelected"];

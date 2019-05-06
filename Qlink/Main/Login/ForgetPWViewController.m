@@ -18,6 +18,7 @@
 
 @interface ForgetPWViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIButton *verifyCodeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;
@@ -42,6 +43,7 @@
 }
 
 - (void)dataInit {
+    _titleLab.text = _inputTitle?:@"Forget Password";
     _verifyCodeBtn.enabled = NO;
     _nextBtn.enabled = NO;
     _nextBtn.backgroundColor = [UIColor mainColorOfHalf];
@@ -133,7 +135,6 @@
     
     [self requestVcode_change_password_code];
 }
-
 
 #pragma mark - Request
 - (void)requestVcode_change_password_code {

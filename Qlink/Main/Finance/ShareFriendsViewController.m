@@ -15,6 +15,7 @@
 #import "InviteRankingModel.h"
 #import "InviteRankingViewController.h"
 #import "GuangGaoView.h"
+#import "InviteFriendNowViewController.h"
 
 @interface ShareFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -80,7 +81,7 @@
 }
 
 - (IBAction)inviteNowAction:(id)sender {
-    
+    [self jumpToInviteFriendNow];
 }
 
 - (IBAction)copyAction:(id)sender {
@@ -160,6 +161,11 @@
 #pragma mark - Transition
 - (void)jumpToInviteRanking {
     InviteRankingViewController *vc = [InviteRankingViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToInviteFriendNow {
+    InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

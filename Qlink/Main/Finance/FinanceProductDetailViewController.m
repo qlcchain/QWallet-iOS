@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *purchaseDateLab;
 @property (weak, nonatomic) IBOutlet UILabel *valueDateLab;
 @property (weak, nonatomic) IBOutlet UILabel *maturityDateLab;
+@property (weak, nonatomic) IBOutlet UILabel *aprLab; // 收益
 
 @property (nonatomic, strong) FinanceProductModel *requestProductM;
 @property (nonatomic, strong) NEOAssetModel *qlcAssetM;
@@ -71,6 +72,7 @@
     _purchaseDateLab.text = @"Today";
     _valueDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] addDay:1] substringToIndex:10];
     _maturityDateLab.text = [[NSDate getTimeWithFromDate:[NSDate date] addDay:[_inputM.timeLimit integerValue]+1] substringToIndex:10];
+    _aprLab.text = @"";
     
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
@@ -91,6 +93,7 @@
     _timeLab.text = [NSString stringWithFormat:@"%@ Days",_requestProductM.timeLimit];
     _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",_requestProductM.leastAmount];
     _qlcTF.placeholder = [NSString stringWithFormat:@"From %@ QLC",_requestProductM.leastAmount];
+    _aprLab.text = _requestProductM.pointEn?:@"";
 }
 
 #pragma mark - Action
@@ -137,7 +140,6 @@
         [kAppD.window makeToastDisappearWithText:@"Lack of QLC balance"];
         return;
     }
-    
     [self getNEOTX];
 }
 
@@ -227,6 +229,15 @@
     if ([[NeoTransferUtil getShareObject].neoMainAddress isEmptyString]) {
         return;
     }
+    if (kAppD.balanceInfo == nil) {
+        [kAppD.window makeToastDisappearWithText:@"Please refresh wallet and try again"];
+        return;
+    }
+    // gas 检查
+    if (([kAppD.balanceInfo.gas doubleValue] < GAS_Control)) {
+        [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
+        return;
+    }
 
     NSInteger decimals = 8;
     NSString *tokenHash = _qlcAssetM.asset_hash;
@@ -241,18 +252,23 @@
         assetType = 0;
     }
     BOOL isMainNetTransfer = YES;
+    
     kWeakSelf(self)
-    [kAppD.window makeToastInView:kAppD.window];
-    [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
-        if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [kAppD.window makeToastInView:kAppD.window];
+    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [kAppD.window hideToast];
-                [kAppD.window makeToastDisappearWithText:@"NEO tx error"];
+                if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
+                        [kAppD.window hideToast];
+                        [kAppD.window makeToastDisappearWithText:@"NEO tx error"];
+                } else {
+                    [weakself requestOrder:txHex];
+                }
             });
-        } else {
-            [weakself requestOrder:txHex];
-        }
-    }];
+        }];
+    });
 }
 
 

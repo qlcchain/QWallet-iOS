@@ -196,11 +196,12 @@
     [RequestService requestWithUrl:sign_in_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-//            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
-//            UserModel *model = [UserModel getObjectWithKeyValues:responseObject];
-//            userM.account = account;
+            UserModel *tempM = [UserModel getObjectWithKeyValues:responseObject];
             userM.md5PW = md5PW;
-//            userM.rsaPublicKey = rsaPublicKey;
+            userM.email = tempM.email;
+            userM.head = tempM.head;
+            userM.phone = tempM.phone;
+            userM.nickname = tempM.nickname;
             userM.isLogin = @(YES);
             [UserModel storeUser:userM];
             [UserModel storeLastLoginAccount:account];

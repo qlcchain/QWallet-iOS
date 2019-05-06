@@ -10,4 +10,6 @@
 
 @interface ForgetPWViewController : QBaseViewController
 
+@property (nonatomic, copy) NSString *inputTitle;
+
 @end

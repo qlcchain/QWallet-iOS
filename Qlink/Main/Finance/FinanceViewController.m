@@ -20,17 +20,23 @@
 #import "UserModel.h"
 #import "RefreshHelper.h"
 
-@interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topGradientBack;
 @property (weak, nonatomic) IBOutlet UIView *dailyBack;
 @property (weak, nonatomic) IBOutlet UIButton *joinNowBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dailyRateLab;
 @property (weak, nonatomic) IBOutlet UILabel *dailyFromQLCLab;
+@property (weak, nonatomic) IBOutlet UILabel *dailyNameLab;
 @property (weak, nonatomic) IBOutlet UIButton *inviteFriendBtn;
+@property (weak, nonatomic) IBOutlet UIButton *earningsRankingBtn;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerScrollWidth;
+@property (weak, nonatomic) IBOutlet UIPageControl *centerPageControl;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainTableHeight; // 388
+
 @property (nonatomic, strong) NSMutableArray *productArr;
 @property (nonatomic, strong) FinanceProductModel *dailyM;
 @property (nonatomic) NSInteger currentPage;
@@ -54,6 +60,7 @@
 - (void)configInit {
     [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
     
+    _centerScrollWidth.constant = SCREEN_WIDTH*2;
     _productArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:FinanceCellReuse bundle:nil] forCellReuseIdentifier:FinanceCellReuse];
     
@@ -66,20 +73,40 @@
     _joinNowBtn.layer.masksToBounds = YES;
     _inviteFriendBtn.layer.cornerRadius = 2;
     _inviteFriendBtn.layer.masksToBounds = YES;
+    _earningsRankingBtn.layer.cornerRadius = 2;
+    _earningsRankingBtn.layer.masksToBounds = YES;
     
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestProduct_list];
     }];
-    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestProduct_list];
     }];
 }
 
 - (void)refreshDailyView {
+    _dailyNameLab.text = _dailyM.nameEn?:@"";
     _dailyRateLab.text = [NSString stringWithFormat:@"%.2f%%",[_dailyM.annualIncomeRate?:@(0) floatValue]*100];
     _dailyFromQLCLab.text = [NSString stringWithFormat:@"Flexible From %@ QLC",_dailyM.leastAmount?:@(0)];
+    if ([_dailyM.status isEqualToString:@"ON_SALE"]) {
+        _joinNowBtn.backgroundColor = [UIColor mainColor];
+        _joinNowBtn.enabled = YES;
+    } else if ([_dailyM.status isEqualToString:@"NEW"]) {
+        _joinNowBtn.backgroundColor = [UIColor mainColor];
+        _joinNowBtn.enabled = YES;
+    } else if ([_dailyM.status isEqualToString:@"SELL_OUT"]) {
+        _joinNowBtn.backgroundColor = [UIColor mainColorOfHalf];
+        _joinNowBtn.enabled = NO;
+    } else if ([_dailyM.status isEqualToString:@"END"]) {
+        _joinNowBtn.backgroundColor = [UIColor mainColorOfHalf];
+        _joinNowBtn.enabled = NO;
+    }
+}
+
+- (void)refreshTableHeight {
+    _mainTableHeight.constant = _productArr.count*FinanceCell_Height;
 }
 
 #pragma mark - Request
@@ -92,29 +119,30 @@
     NSDictionary *params = @{@"page":page,@"size":size};
     [RequestService requestWithUrl:product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainScroll.mj_header endRefreshing];
-        [weakself.mainTable.mj_footer endRefreshing];
+        [weakself.mainScroll.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [FinanceProductModel mj_objectArrayWithKeyValuesArray:responseObject[Server_Data]];
             if (weakself.currentPage == 1) {
                 [weakself.productArr removeAllObjects];
+                
+                if (arr.count > 0) {
+                    // 选第一个显示在头部
+                    weakself.dailyM = arr.firstObject;
+                    [weakself refreshDailyView];
+                    
+                    [weakself.productArr addObjectsFromArray:[arr subarrayWithRange:NSMakeRange(1, arr.count - 1)] ];
+                }
+            } else {
+                [weakself.productArr addObjectsFromArray:arr];
             }
             weakself.currentPage += 1;
-//            [weakself.productArr removeAllObjects];
-            [weakself.productArr addObjectsFromArray:arr];
             [weakself.mainTable reloadData];
-            
-            [weakself.productArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                FinanceProductModel *model = obj;
-                if ([model.enName isEqualToString:@"QLC Daily Gain Program"]) {
-                    weakself.dailyM = model;
-                    *stop = YES;
-                }
-            }];
-            [weakself refreshDailyView];
         }
+        [weakself refreshTableHeight];
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.mainScroll.mj_header endRefreshing];
-        [weakself.mainTable.mj_footer endRefreshing];
+        [weakself.mainScroll.mj_footer endRefreshing];
+        [weakself refreshTableHeight];
     }];
 }
 
@@ -137,6 +165,10 @@
     [self jumpToShareFriends];
 }
 
+- (IBAction)earningsRankingAction:(id)sender {
+    [self jumpToEarningsRanking];
+}
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return FinanceCell_Height;
@@ -156,6 +188,12 @@
         return;
     }
     [self jumpToProductDetail:model];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    int page = scrollView.contentOffset.x/SCREEN_WIDTH;
+    _centerPageControl.currentPage = page;
 }
 
 #pragma mark - UITableViewDataSource

@@ -11,6 +11,7 @@
 #import "NSString+UrlEncode.h"
 #import "NSDate+Category.h"
 #import "AFHTTPClientV2.h"
+#import "UserModel.h"
 
 @interface RequestService ()
 
@@ -88,7 +89,47 @@
         inputParams = encodeStr;
     }
     
-    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:requestUrl params:inputParams httpMethod:httpMethod successBlock:successReqBlock failedBlock:failedReqBlock];
+    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:requestUrl params:inputParams httpMethod:httpMethod successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if (successReqBlock) {
+            successReqBlock(dataTask, responseObject);
+        }
+        
+        NSInteger code = [responseObject[Server_Code] integerValue];
+        switch (code) {
+            case 20001: // Account not found
+            {
+                
+            }
+                break;
+            case 20002: // Token invalid
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [kAppD logout];
+                });
+            }
+                break;
+            case 20003: // Decryption failed
+            {
+                
+            }
+                break;
+            case 20004: // Incorrent password
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [kAppD logout];
+                });
+            }
+                break;
+            case 20005: // Token parsing error
+            {
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    } failedBlock:failedReqBlock];
     
     return dataTask;
 }

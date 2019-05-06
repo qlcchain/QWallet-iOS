@@ -302,6 +302,8 @@
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
 		5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117C2105AEF4005232A2 /* LocationTracker.m */; };
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
+		5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */; };
+		5855EB8E22758E9A00243703 /* InviteFriendNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5855EB8C22758E9A00243703 /* InviteFriendNowViewController.xib */; };
 		585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C9A1C2181A16B00DD12DB /* WalletsViewController.m */; };
 		585C9A1F2181A16B00DD12DB /* WalletsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585C9A1D2181A16B00DD12DB /* WalletsViewController.xib */; };
 		585CDC12225C785500199FE1 /* ForgetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585CDC10225C785500199FE1 /* ForgetPWViewController.m */; };
@@ -1169,6 +1171,9 @@
 		5849117B2105AEF4005232A2 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
 		5849117C2105AEF4005232A2 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		5849117D2105AEF4005232A2 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteFriendNowViewController.h; sourceTree = "<group>"; };
+		5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteFriendNowViewController.m; sourceTree = "<group>"; };
+		5855EB8C22758E9A00243703 /* InviteFriendNowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteFriendNowViewController.xib; sourceTree = "<group>"; };
 		585C9A1B2181A16B00DD12DB /* WalletsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletsViewController.h; sourceTree = "<group>"; };
 		585C9A1C2181A16B00DD12DB /* WalletsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletsViewController.m; sourceTree = "<group>"; };
 		585C9A1D2181A16B00DD12DB /* WalletsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletsViewController.xib; sourceTree = "<group>"; };
@@ -3749,6 +3754,9 @@
 				58FB8D79226587620075698E /* FinanceHistoryViewController.h */,
 				58FB8D7A226587620075698E /* FinanceHistoryViewController.m */,
 				58FB8D7B226587620075698E /* FinanceHistoryViewController.xib */,
+				5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */,
+				5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */,
+				5855EB8C22758E9A00243703 /* InviteFriendNowViewController.xib */,
 			);
 			path = Finance;
 			sourceTree = "<group>";
@@ -4307,6 +4315,7 @@
 				581D5121217981F40064F60C /* MarketsViewController.xib in Resources */,
 				58FB8D912265B6C10075698E /* FinanceHistoryCell.xib in Resources */,
 				581AF7AB21B6646E001A37E1 /* EOSTransactionRecordViewController.xib in Resources */,
+				5855EB8E22758E9A00243703 /* InviteFriendNowViewController.xib in Resources */,
 				5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */,
 				580D91B42063AE5300B12506 /* Roboto-LightItalic.ttf in Resources */,
 				581D511C217981E50064F60C /* SettingsViewController.xib in Resources */,
@@ -4795,6 +4804,7 @@
 				5806C0FE21C3BB1A000E693B /* Create_account_abi_json_to_bin_request.m in Sources */,
 				581D32BD219C158B001F88C3 /* NEP5Token.swift in Sources */,
 				587ABD5C21B8F8F800C3D81A /* EOSResourceCellModel.m in Sources */,
+				5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */,
 				580CAFBF218C29D1004C0E06 /* LoginPWModel.m in Sources */,
 				587ABD3F21B8F8F700C3D81A /* Approve_Abi_json_to_bin_request.m in Sources */,
 				580D916120625A4400B12506 /* UITextView+Select.m in Sources */,

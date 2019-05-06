@@ -26,7 +26,7 @@
 }
 
 - (void)configCell:(FinanceProductModel *)model {
-    _nameLab.text = model.name;
+    _nameLab.text = model.nameEn;
     _rateValLab.text = [NSString stringWithFormat:@"%.2f%%",[model.annualIncomeRate floatValue]*100];
     _dayLab.text = [NSString stringWithFormat:@"%@ Days",model.timeLimit];
     _fromQLCLab.text = [NSString stringWithFormat:@"From %@ QLC",model.leastAmount];

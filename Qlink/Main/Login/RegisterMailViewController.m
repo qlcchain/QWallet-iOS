@@ -7,15 +7,19 @@
 //
 
 #import "RegisterMailViewController.h"
-#import "RegisterSetPWViewController.h"
 #import "NSString+RegexCategory.h"
+#import "MD5Util.h"
+#import "UserModel.h"
 
 @interface RegisterMailViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;
 @property (weak, nonatomic) IBOutlet UITextField *verifyCodeTF;
 @property (weak, nonatomic) IBOutlet UIButton *verifyCodeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UITextField *pwTF;
+@property (weak, nonatomic) IBOutlet UITextField *pwRepeatTF;
+@property (weak, nonatomic) IBOutlet UITextField *inviteCodeTF;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 
 
 @end
@@ -31,15 +35,17 @@
 
 #pragma mark - Operation
 - (void)viewInit {
-    _nextBtn.layer.cornerRadius = 6;
-    _nextBtn.layer.masksToBounds = YES;
+    _registerBtn.layer.cornerRadius = 6;
+    _registerBtn.layer.masksToBounds = YES;
     
     _verifyCodeBtn.enabled = NO;
-    _nextBtn.enabled = NO;
-    _nextBtn.backgroundColor = [UIColor mainColorOfHalf];
+    _registerBtn.enabled = NO;
+    _registerBtn.backgroundColor = [UIColor mainColorOfHalf];
     
     [_emailTF  addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
     [_verifyCodeTF addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
+    [_pwTF addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
+    [_pwRepeatTF addTarget:self action:@selector(regTFChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)regTFChange:(UITextField *)tf {
@@ -55,16 +61,20 @@
         [self changeRegisterBtnState];
     } else if (tf == _verifyCodeTF) {
         [self changeRegisterBtnState];
+    } else if (tf == _pwTF) {
+        [self changeRegisterBtnState];
+    } else if (tf == _pwRepeatTF) {
+        [self changeRegisterBtnState];
     }
 }
 
 - (void)changeRegisterBtnState {
-    if (_emailTF.text && _emailTF.text.length > 0 && _verifyCodeTF.text && _verifyCodeTF.text.length > 0) {
-        _nextBtn.enabled = YES;
-        _nextBtn.backgroundColor = [UIColor mainColor];
+    if (_emailTF.text && _emailTF.text.length > 0 && _verifyCodeTF.text && _verifyCodeTF.text.length > 0 && _pwTF.text && _pwTF.text.length >= 6 && _pwRepeatTF.text && _pwRepeatTF.text.length >= 6) {
+        _registerBtn.enabled = YES;
+        _registerBtn.backgroundColor = [UIColor mainColor];
     } else {
-        _nextBtn.enabled = NO;
-        _nextBtn.backgroundColor = [UIColor mainColorOfHalf];
+        _registerBtn.enabled = NO;
+        _registerBtn.backgroundColor = [UIColor mainColorOfHalf];
     }
 }
 
@@ -96,6 +106,12 @@
     dispatch_resume(_timer);
 }
 
+- (void)dismiss {
+    [self.view endEditing:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 #pragma mark - Action
 - (IBAction)backAction:(id)sender {
     [self.view endEditing:YES];
@@ -112,14 +128,17 @@
     [self requestSignup_code];
 }
 
-- (IBAction)nextAction:(id)sender {
+- (IBAction)registerAction:(id)sender {
     [self.view endEditing:YES];
     if (![_emailTF.text isEmailAddress]) {
         [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
         return;
     }
-
-    [self jumpToRegisterSetPW];
+    if (![_pwTF.text isEqualToString:_pwRepeatTF.text]) {
+        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
+        return;
+    }
+    [self requestSign_up];
 }
 
 
@@ -140,12 +159,33 @@
     }];
 }
 
-#pragma mark - Transition
-- (void)jumpToRegisterSetPW {
-    RegisterSetPWViewController *vc = [RegisterSetPWViewController new];
-    vc.inputAccount = _emailTF.text?:@"";
-    vc.inputVerifyCode = _verifyCodeTF.text?:@"";
-    [self.navigationController pushViewController:vc animated:YES];
+// 注册
+- (void)requestSign_up {
+    kWeakSelf(self);
+    NSString *account = _emailTF.text?:@"";
+    NSString *md5PW = [MD5Util md5:_pwTF.text?:@""];
+    NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":_verifyCodeTF.text?:@"",@"number":_inviteCodeTF.text?:@"",@"p2pId":[UserModel getOwnP2PId]};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl:sign_up_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
+            UserModel *model = [UserModel getObjectWithKeyValues:responseObject];
+            //            model.account = account;
+            model.md5PW = md5PW;
+            //            model.rsaPublicKey = rsaPublicKey;
+            model.isLogin = @(YES);
+            [UserModel storeUser:model];
+            [UserModel storeLastLoginAccount:account];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            [weakself dismiss];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

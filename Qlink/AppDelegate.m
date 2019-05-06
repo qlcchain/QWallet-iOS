@@ -35,6 +35,7 @@
 #import "LoginViewController.h"
 #import "UserModel.h"
 #import "FingerprintVerificationUtil.h"
+#import "NSDate+Category.h"
 
 @import Firebase;
 
@@ -60,7 +61,7 @@
     [KeychainUtil resetKeyService]; // 先重置keyservice  以后1掉
     
     _checkPassLock = YES; // 处理tabbar连续点击的bug
-    _needFingerprintVerification = YES; // 打开app允许弹出指纹验证
+    kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
    // 配置Firebase
@@ -175,6 +176,17 @@
 //    self.window.rootViewController = nav;
 }
 
+- (void)logout {
+    if (![UserModel haveLoginAccount]) {
+        return;
+    }
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    userM.isLogin = @(NO);
+    [UserModel storeUser:userM];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
+}
+
 //- (void)setRootLogin {
 //    BOOL isExist = [LoginPWModel isExistLoginPW];
 //    UIViewController *vc = nil;
@@ -237,6 +249,9 @@
     NSLog(@"backgroundTimeRemaining=%@",@(application.backgroundTimeRemaining));
     NSLog(@"applicationState=%@",@(application.applicationState));
     
+    NSInteger seconds = [NSDate getTimestampFromDate:[NSDate date]] ;
+    [HWUserdefault insertObj:@(seconds) withkey:In_Background_Time];
+    
     isBackendRun = YES;
     [[RunInBackground sharedBg] startRunInbackGround];
 }
@@ -244,6 +259,18 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];//进入前台取消应用消息图标
+    
+    // 进入后台大于5分钟需要开启指纹验证
+    NSInteger seconds = [[HWUserdefault getObjectWithKey:In_Background_Time] integerValue];
+    if (seconds == 0) {
+        return;
+    }
+    NSDate *backDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+    NSInteger minues = [backDate minutesAfterDate:[NSDate date]];
+    if (labs(minues) >= 5) {
+        [HWUserdefault insertObj:@(0) withkey:In_Background_Time];
+        kAppD.needFingerprintVerification = YES;
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

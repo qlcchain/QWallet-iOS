@@ -9,6 +9,9 @@
 #import "EarningsRankingViewController.h"
 #import "EarningRankingCell.h"
 #import "EarningsRankingModel.h"
+#import "MyPortfolioViewController.h"
+#import "UserModel.h"
+#import "Qlink-Swift.h"
 
 @interface EarningsRankingViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -40,7 +43,7 @@
 }
 
 - (IBAction)viewMyEarningsAction:(id)sender {
-    
+    [self jumpToMyPortfolio];
 }
 
 #pragma mark - Request
@@ -86,6 +89,30 @@
     [cell configCell:model];
     
     return cell;
+}
+
+#pragma mark - Transition
+- (void)jumpToMyPortfolio {
+    BOOL haveDefaultNEOWallet = [NEOWalletManage.sharedInstance haveDefaultWallet];
+    if (!haveDefaultNEOWallet) {
+        [kAppD.window makeToastDisappearWithText:@"Please choose a NEO wallet first"];
+        return;
+    }
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    kWeakSelf(self)
+    if (kAppD.needFingerprintVerification) {
+        [kAppD presentFingerprintVerify:^{
+            [weakself performSelector:@selector(jumpToMyPortfolio) withObject:nil afterDelay:0.5];
+        }];
+        return;
+    }
+    
+    MyPortfolioViewController *vc = [MyPortfolioViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

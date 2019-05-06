@@ -13,6 +13,7 @@
 #import "NSDate+Category.h"
 #import "UIImage+Resize.h"
 #import "RSAUtil.h"
+#import "ForgetPWViewController.h"
 
 @interface PersonalInfoViewController () <UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -28,6 +29,7 @@ NSString *person_title1 = @"Username";
 NSString *person_title2 = @"My Invitation Code";
 NSString *person_title3 = @"Email";
 NSString *person_title4 = @"Mobile";
+NSString *person_title5 = @"Reset Password";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,6 +80,13 @@ NSString *person_title4 = @"Mobile";
     model = [PersonalInfoShowModel new];
     model.key = person_title4;
     model.val = userM.phone;
+    model.showCopy = NO;
+    model.showArrow = YES;
+    model.showHead = NO;
+    [_sourceArr addObject:model];
+    model = [PersonalInfoShowModel new];
+    model.key = person_title5;
+    model.val = person_title5;
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = NO;
@@ -134,6 +143,8 @@ NSString *person_title4 = @"Mobile";
         [self jumpToEditText:EditEmail];
     } else if ([model.key isEqualToString:person_title4]) {
         [self jumpToEditText:EditPhone];
+    } else if ([model.key isEqualToString:person_title5]) {
+        [self jumpToForgetPW];
     }
 }
 
@@ -154,6 +165,12 @@ NSString *person_title4 = @"Mobile";
 #pragma mark - Transition
 - (void)jumpToEditText:(EditType)type {
     EditTextViewController *vc = [[EditTextViewController alloc] initWithType:type];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToForgetPW {
+    ForgetPWViewController *vc = [ForgetPWViewController new];
+    vc.inputTitle = person_title5;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -217,7 +234,7 @@ NSString *person_title4 = @"Mobile";
     //设置选取的照片是否可编辑
     pickerController.allowsEditing = YES;
     //设置相册呈现的样式
-    pickerController.sourceType =  type; //UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
+    pickerController.sourceType = type; //UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
     //照片的选取样式还有以下两种
     // UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册
     //UIImagePickerControllerSourceTypeCamera//调取摄像头

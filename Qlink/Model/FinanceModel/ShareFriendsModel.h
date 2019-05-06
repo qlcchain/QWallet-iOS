@@ -13,6 +13,7 @@
 @interface GuanggaoListModel : BBaseModel
 
 @property (nonatomic, strong) NSString *imgPath;
+@property (nonatomic, strong) NSString *imgPathEn;
 @property (nonatomic, strong) NSString *url;
 
 @end

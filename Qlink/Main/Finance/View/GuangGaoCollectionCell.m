@@ -24,7 +24,7 @@
 }
 
 - (void)configCell:(GuanggaoListModel *)model {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.imgPath]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.imgPathEn]];
     [_imgV sd_setImageWithURL:url placeholderImage:[UIImage imageWithColor:[UIColor RandomColor]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
 }

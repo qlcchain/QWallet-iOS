@@ -88,14 +88,7 @@ NSString *title7 = @"Log out";
 }
 
 - (void)logout {
-    if (![UserModel haveLoginAccount]) {
-        return;
-    }
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    userM.isLogin = @(NO);
-    [UserModel storeUser:userM];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
+    [kAppD logout];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
