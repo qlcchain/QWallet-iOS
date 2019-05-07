@@ -6,6 +6,7 @@
 #import "LaunchViewController.h"
 //#import <OpenVPNAdapter/OpenVPNAdapter.h>
 #import "WAMacroUtil.h"
+#import "ServerMacro.h"
 #import <CocoaLumberjack/DDLogMacros.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
 

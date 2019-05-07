@@ -121,7 +121,8 @@
         assetType = 0;
     }
     BOOL isMainNetTransfer = YES;
-    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr];
+    double fee = NEO_fee;
+    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee];
 }
 
 - (void)backToRoot {

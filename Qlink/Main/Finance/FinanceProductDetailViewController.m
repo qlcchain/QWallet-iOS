@@ -252,13 +252,14 @@
         assetType = 0;
     }
     BOOL isMainNetTransfer = YES;
+    double fee = NEO_fee;
     
     kWeakSelf(self)
     dispatch_async(dispatch_get_main_queue(), ^{
         [kAppD.window makeToastInView:kAppD.window];
     });
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
+        [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txHex) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
                         [kAppD.window hideToast];

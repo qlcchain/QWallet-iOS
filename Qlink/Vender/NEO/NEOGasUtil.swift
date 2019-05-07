@@ -44,7 +44,10 @@ class NEOGasUtil: NSObject {
         //refresh the amount of claimable gas
 //        self.loadClaimableGAS { (amount) in
 //        }
-        NEOWalletManage.sharedInstance().account?.claimGas { _, error in
+        NEOWalletManage.sharedInstance().account?.claimGas(network: AppState.network, seedURL: AppState.bestSeedNodeURL, completion: { (_, error) in
+//            <#code#>
+//        })
+//        NEOWalletManage.sharedInstance().account?.claimGas { _, error in
             if error != nil {
                 //if error then try again in 10 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
@@ -76,7 +79,7 @@ class NEOGasUtil: NSObject {
                 })
                 
             }
-        }
+        })
     }
     
     func enableClaimButton(enable: Bool) {
@@ -87,9 +90,17 @@ class NEOGasUtil: NSObject {
         print("Claiming GAS, This might take a little while...")
         
         //select best node
-        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
-            UserDefaultsManager.seed = bestNode
+//        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+//            UserDefaultsManager.seed = bestNode
+//            UserDefaultsManager.useDefaultSeed = false
+//        }
+        let network = Network.main
+        var node = AppState.bestSeedNodeURL
+        if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
+            node = bestNode
+            UserDefaultsManager.seed = node
             UserDefaultsManager.useDefaultSeed = false
+            AppState.bestSeedNodeURL = bestNode
         }
         
         //we are able to claim gas only when there is data in the .claims array
@@ -97,7 +108,7 @@ class NEOGasUtil: NSObject {
             DispatchQueue.main.async {
                 let account1 = NEOWalletManage.sharedInstance().account
                 if (account1 != nil) {
-                    account1!.claimGas { _, error in
+                    account1!.claimGas(network: AppState.network, seedURL: AppState.bestSeedNodeURL, completion: { (_, error) in
                         if error != nil {
                             //if error then try again in 10 seconds
     //                        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
@@ -131,7 +142,7 @@ class NEOGasUtil: NSObject {
                                 complete(true)
                             }
                         }
-                    }
+                    })
                 } else {
                     complete(false)
                 }
@@ -152,9 +163,17 @@ class NEOGasUtil: NSObject {
         print("Claiming GAS, This might take a little while...")
         
         //select best node
-        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
-            UserDefaultsManager.seed = bestNode
+//        if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+//            UserDefaultsManager.seed = bestNode
+//            UserDefaultsManager.useDefaultSeed = false
+//        }
+        let network = Network.main
+        var node = AppState.bestSeedNodeURL
+        if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
+            node = bestNode
+            UserDefaultsManager.seed = node
             UserDefaultsManager.useDefaultSeed = false
+            AppState.bestSeedNodeURL = bestNode
         }
         
         //we are able to claim gas only when there is data in the .claims array
@@ -167,8 +186,9 @@ class NEOGasUtil: NSObject {
         let mainNet = true
         let assetHash = ""
         let remarkStr:String? = nil
+        let fee = NEO_fee
         //to be able to claim. we need to send the entire NEO to ourself.
-        NEOWalletManage.sharedInstance().account?.sendAssetTransaction(assetHash: assetHash, asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (NEOWalletManage.sharedInstance().account?.address)!, mainNet: mainNet, remarkStr: remarkStr) { (txHex, error) in
+        NEOWalletManage.sharedInstance().account?.sendAssetTransaction(assetHash: assetHash, asset: AssetId.neoAssetId, amount: Double(self.neoBalance!), toAddress: (NEOWalletManage.sharedInstance().account?.address)!, mainNet: mainNet, remarkStr: remarkStr, network: network, fee:fee) { (txHex, error) in
             if error == nil {
 //                HUD.hide()
                 //HUD or something
@@ -194,7 +214,8 @@ class NEOGasUtil: NSObject {
         if NEOWalletManage.sharedInstance().haveDefaultWallet() == false {
             return
         }
-        NeoClient.sharedMain.getClaims(address: (NEOWalletManage.sharedInstance().account?.address)!) { result in
+        let network = Network.main
+        O3APIClient(network: network).getClaims(address: (NEOWalletManage.sharedInstance().account?.address)!) { result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {

@@ -535,7 +535,7 @@
 
 #pragma mark - neo钱包新接口
 #pragma mark - neo转账send
-+ (void)sendNEOWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr {
++ (void)sendNEOWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee {
     if (kAppD.balanceInfo == nil) {
         [kAppD.window makeToastDisappearWithText:@"Please refresh wallet and try again"];
         return;
@@ -544,7 +544,7 @@
     if (([kAppD.balanceInfo.gas doubleValue] < GAS_Control)) {
         [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
     } else {
-        [NEOWalletUtil sendFundsRequestWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:mainNet remarkStr:remarkStr];
+        [NEOWalletUtil sendFundsRequestWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:mainNet remarkStr:remarkStr fee:fee];
     }
 }
 
@@ -553,11 +553,11 @@
  @param address 交易地址
  @param qlc qlc
  */
-+ (void)sendFundsRequestWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr {
++ (void)sendFundsRequestWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee {
 
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
 //    kWeakSelf(self);
-    [NEOWalletManage.sharedInstance getNEOTXWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet remarkStr:remarkStr completeBlock:^(NSString * txHex) {
+    [NEOWalletManage.sharedInstance getNEOTXWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet remarkStr:remarkStr fee:fee completeBlock:^(NSString * txHex) {
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [kAppD.window hideToast];
@@ -603,8 +603,8 @@
     [NeoTransferUtil sendGetBalanceRequest];
 }
 
-+ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr completeBlock:(void(^)(NSString *txHex))completeBlock {
-    [NEOWalletManage.sharedInstance getNEOTXWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet remarkStr:remarkStr completeBlock:^(NSString * txHex) {
++ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee completeBlock:(void(^)(NSString *txHex))completeBlock {
+    [NEOWalletManage.sharedInstance getNEOTXWithAssetHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress assetType:assetType mainNet:mainNet remarkStr:remarkStr fee:fee completeBlock:^(NSString * txHex) {
         if (completeBlock) {
             completeBlock(txHex);
         }

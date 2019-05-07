@@ -8,40 +8,37 @@
 
 import Foundation
 
-
 class UserDefaultsManager {
 
     private static let networkKey = "networkKey"
 
     static var network: Network {
-        get {
-           if let stringValue = UserDefaults.standard.string(forKey: networkKey)
-           {
-                return Network(rawValue: stringValue)!
-            }
-            return Network(rawValue: "main")!
-        }
-        set {
-            NEOWalletManage.sharedInstance().account?.neoClient = NeoClient(network: network, seedURL: UserDefaultsManager.seed)
-            UserDefaults.standard.set(newValue.rawValue, forKey: networkKey)
-           // NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
-        }
+        #if TESTNET
+            return .test
+        #endif
+        #if PRIVATENET
+            return .privateNet
+        #endif
+
+        return .main
     }
 
     private static let useDefaultSeedKey = "usedDefaultSeedKey"
     static var useDefaultSeed: Bool {
         get {
-           
-           let seedValue = UserDefaults.standard.bool(forKey: useDefaultSeedKey)
-            if seedValue {
-                return UserDefaults.standard.bool(forKey: useDefaultSeedKey)
-            }
-            return false
+            #if TESTNET
+                return false
+            #endif
+            #if PRIVATENET
+                return false
+            #endif
+            return UserDefaults.standard.bool(forKey: useDefaultSeedKey)
         }
         set {
             if newValue {
-                if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+                if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: AppState.network) {
                     UserDefaults.standard.set(newValue, forKey: useDefaultSeedKey)
+                    AppState.bestSeedNodeURL = bestNode
                     UserDefaultsManager.seed = bestNode
                 }
             } else {
@@ -54,18 +51,12 @@ class UserDefaultsManager {
     private static let seedKey = "seedKey"
     static var seed: String {
         get {
-            if UserDefaults.standard.string(forKey: seedKey) != nil
-            {
-                 return UserDefaults.standard.string(forKey: seedKey)!
-            }
-            return "http://seed2.neo.org:20332"
+            return UserDefaults.standard.string(forKey: seedKey)!
         }
         set {
-            Neo.client.seed = newValue
-            NEOWalletManage.sharedInstance().account?.neoClient = NeoClient(network: UserDefaultsManager.network, seedURL: newValue)
             UserDefaults.standard.set(newValue, forKey: seedKey)
             UserDefaults.standard.synchronize()
-           // NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("ChangedNetwork"), object: nil)
         }
     }
 
@@ -83,6 +74,10 @@ class UserDefaultsManager {
             UserDefaults.standard.synchronize()
         }
     }
+
+//    static var theme: Theme {
+//        return themeIndex == 0 ? Theme.light: Theme.dark
+//    }
 
     private static let launchedBeforeKey = "launchedBeforeKey"
     static var launchedBefore: Bool {
@@ -112,6 +107,9 @@ class UserDefaultsManager {
     static var referenceFiatCurrency: Currency {
         get {
             let stringValue = UserDefaults.standard.string(forKey: referenceFiatCurrencyKey)
+            if stringValue == nil {
+                return Currency.usd
+            }
             return Currency(rawValue: stringValue!)!
         }
         set {
@@ -121,28 +119,51 @@ class UserDefaultsManager {
         }
     }
 
-    private static let selectedNEP5TokensKey = "selectedNEP5TokensKey"
-    static var selectedNEP5Token: [String: NEP5Token]? {
+    private static let reviewClaimsKey = "reviewClaimsKey"
+    static var numClaims: Int {
         get {
-
-            if let data = UserDefaults.standard.value(forKey: selectedNEP5TokensKey) as? Data {
-                do {
-                    let tokens = try PropertyListDecoder().decode([String: NEP5Token].self, from: data)
-                    return tokens
-                } catch {
-                    return [:]
-                }
-            }
-            return [:]
+            let intValue = UserDefaults.standard.integer(forKey: reviewClaimsKey)
+            return intValue
         }
         set {
-            do {
-                let data = try PropertyListEncoder().encode(newValue)
-                UserDefaults.standard.set(data, forKey: selectedNEP5TokensKey)
-                UserDefaults.standard.synchronize()
-            } catch {
-                print("Save Failed")
-            }
+            UserDefaults.standard.set(newValue, forKey: reviewClaimsKey)
+            UserDefaults.standard.synchronize()
         }
     }
+    
+    private static let numOrdersKey = "numOrdersKey"
+    static var numOrders: Int {
+        get {
+            let intValue = UserDefaults.standard.integer(forKey: numOrdersKey)
+            return intValue
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: numOrdersKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    private static let hasAgreedDappDisclaimerKey = "hasAgreedDapps"
+    static var hasAgreedDapps: Bool {
+        get {
+            let boolValue = UserDefaults.standard.bool(forKey: hasAgreedDappDisclaimerKey)
+            return boolValue
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: hasAgreedDappDisclaimerKey)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    private static let hasAgreedAnalyticsDisclaimerKey = "hasAgreedAnalytics"
+    static var hasAgreedAnalytics: Bool {
+        get {
+            let boolValue = UserDefaults.standard.bool(forKey: hasAgreedAnalyticsDisclaimerKey)
+            return boolValue
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: hasAgreedAnalyticsDisclaimerKey)
+            UserDefaults.standard.synchronize()
+        }
+    }   
 }

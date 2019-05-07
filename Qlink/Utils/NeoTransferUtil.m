@@ -510,7 +510,9 @@ dispatch_source_t _neoMainAddressTimer;
         return;
     }
 
-    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.tranferCost mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
+    double fee = NEO_fee;
+    
+    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.tranferCost mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txHex) {
         
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -758,8 +760,10 @@ dispatch_source_t _neoMainAddressTimer;
         return;
     }
     
+    double fee = NEO_fee;
+    
     __block int tranType = type;
-    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.cost mainNet:isMainNetTransfer remarkStr:remarkStr completeBlock:^(NSString *txHex) {
+    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.cost mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txHex) {
         
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{

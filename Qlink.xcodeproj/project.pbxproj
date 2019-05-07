@@ -189,7 +189,6 @@
 		581D32C7219C158B001F88C3 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329A219C1584001F88C3 /* RIPEMD160.swift */; };
 		581D32C8219C158B001F88C3 /* PBKDF2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329B219C1584001F88C3 /* PBKDF2.swift */; };
 		581D32C9219C158B001F88C3 /* nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 581D329D219C1585001F88C3 /* nodes.json */; };
-		581D32CA219C158B001F88C3 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329E219C1586001F88C3 /* Account.swift */; };
 		581D32CB219C158B001F88C3 /* WIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329F219C1587001F88C3 /* WIF.swift */; };
 		581D32CC219C158B001F88C3 /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A1219C1588001F88C3 /* AccountState.swift */; };
 		581D32CD219C158B001F88C3 /* Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A2219C1588001F88C3 /* Claims.swift */; };
@@ -273,6 +272,11 @@
 		582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239A21C1FDD300A000D1 /* EOSResourcePriceModel.m */; };
 		582F87BE2153338F0008331D /* RankingStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F87BA2153338E0008331D /* RankingStartCell.xib */; };
 		582F87BF2153338F0008331D /* RankingStartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F87BD2153338E0008331D /* RankingStartCell.m */; };
+		5832CB2D22811E000011160D /* dAppProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB2C22811DFF0011160D /* dAppProtocol.swift */; };
+		5832CB2F22811E690011160D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB2E22811E690011160D /* AppState.swift */; };
+		5832CB352281245B0011160D /* ContractState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB342281245B0011160D /* ContractState.swift */; };
+		5832CB37228125040011160D /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB36228125030011160D /* Wallet.swift */; };
+		5832CB3A2281331A0011160D /* O3APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB39228133190011160D /* O3APIClient.swift */; };
 		5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833AD0B206C8427002C6909 /* WalletMenuView.m */; };
 		583910F9208495F200A19E7E /* DDLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910F8208495F200A19E7E /* DDLogUtil.m */; };
 		583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910FB2084971F00A19E7E /* DebugLogViewController.m */; };
@@ -984,7 +988,6 @@
 		581D329A219C1584001F88C3 /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		581D329B219C1584001F88C3 /* PBKDF2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PBKDF2.swift; sourceTree = "<group>"; };
 		581D329D219C1585001F88C3 /* nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nodes.json; sourceTree = "<group>"; };
-		581D329E219C1586001F88C3 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		581D329F219C1587001F88C3 /* WIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WIF.swift; sourceTree = "<group>"; };
 		581D32A1219C1588001F88C3 /* AccountState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountState.swift; sourceTree = "<group>"; };
 		581D32A2219C1588001F88C3 /* Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claims.swift; sourceTree = "<group>"; };
@@ -1107,6 +1110,11 @@
 		582F87BA2153338E0008331D /* RankingStartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingStartCell.xib; sourceTree = "<group>"; };
 		582F87BC2153338E0008331D /* RankingStartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingStartCell.h; sourceTree = "<group>"; };
 		582F87BD2153338E0008331D /* RankingStartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingStartCell.m; sourceTree = "<group>"; };
+		5832CB2C22811DFF0011160D /* dAppProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dAppProtocol.swift; sourceTree = "<group>"; };
+		5832CB2E22811E690011160D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		5832CB342281245B0011160D /* ContractState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractState.swift; sourceTree = "<group>"; };
+		5832CB36228125030011160D /* Wallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		5832CB39228133190011160D /* O3APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = O3APIClient.swift; sourceTree = "<group>"; };
 		5833AD0A206C8427002C6909 /* WalletMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletMenuView.h; sourceTree = "<group>"; };
 		5833AD0B206C8427002C6909 /* WalletMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletMenuView.m; sourceTree = "<group>"; };
 		583910F7208495F200A19E7E /* DDLogUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLogUtil.h; sourceTree = "<group>"; };
@@ -1899,8 +1907,11 @@
 		580CB147219047DC004C0E06 /* NEO */ = {
 			isa = PBXGroup;
 			children = (
-				581D32E5219C15CC001F88C3 /* neoutils.framework */,
-				581D329E219C1586001F88C3 /* Account.swift */,
+				5832CB39228133190011160D /* O3APIClient.swift */,
+				5832CB36228125030011160D /* Wallet.swift */,
+				5832CB342281245B0011160D /* ContractState.swift */,
+				5832CB2E22811E690011160D /* AppState.swift */,
+				5832CB2C22811DFF0011160D /* dAppProtocol.swift */,
 				581D32B2219C1589001F88C3 /* AssetIdConstants.swift */,
 				581D328D219C1581001F88C3 /* CommonCrypto */,
 				581D3287219C157E001F88C3 /* Contracts */,
@@ -1909,16 +1920,17 @@
 				581D3292219C1582001F88C3 /* Global.swift */,
 				581D32A0219C1588001F88C3 /* Models */,
 				581D328C219C1580001F88C3 /* NeoClient.swift */,
+				5827BC3C21A3FA6300B7730E /* NEOGasUtil.swift */,
 				581D3293219C1583001F88C3 /* NeoScan.swift */,
+				581D32E5219C15CC001F88C3 /* neoutils.framework */,
+				581D32E7219C16A7001F88C3 /* NEOWalletManage.swift */,
+				58270FC02072019400C08784 /* NEOWalletUtil.h */,
+				58270FC12072019400C08784 /* NEOWalletUtil.m */,
 				581D3294219C1584001F88C3 /* scripts */,
 				581D328B219C157F001F88C3 /* ShamirSecret.swift */,
 				581D32B3219C158A001F88C3 /* UserDefaultsManager.swift */,
 				581D32B4219C158B001F88C3 /* Util */,
 				581D329F219C1587001F88C3 /* WIF.swift */,
-				58270FC02072019400C08784 /* NEOWalletUtil.h */,
-				58270FC12072019400C08784 /* NEOWalletUtil.m */,
-				581D32E7219C16A7001F88C3 /* NEOWalletManage.swift */,
-				5827BC3C21A3FA6300B7730E /* NEOGasUtil.swift */,
 			);
 			path = NEO;
 			sourceTree = "<group>";
@@ -4591,11 +4603,13 @@
 				58E032B121883F500061C72D /* ETHTransferViewController.m in Sources */,
 				587ABD3E21B8F8F700C3D81A /* EOSWalletUtil.m in Sources */,
 				58A801CF226DC7B800640BBC /* RegisterSetPWViewController.m in Sources */,
+				5832CB3A2281331A0011160D /* O3APIClient.swift in Sources */,
 				58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */,
 				580D916520625A4400B12506 /* NSString+RegexCategory.m in Sources */,
 				5812DDA220A1A7890043A8A8 /* ChatFaceHeleper.m in Sources */,
 				5821CD3D217DBCB500F81F8B /* NEOCreateWalletViewController.m in Sources */,
 				58FB8D7C226587620075698E /* FinanceHistoryViewController.m in Sources */,
+				5832CB352281245B0011160D /* ContractState.swift in Sources */,
 				58FB8D5A226434C80075698E /* InviteRankingViewController.m in Sources */,
 				583D9596211432110057A90C /* RankingRuleViewController.m in Sources */,
 				5894EC51217ED2BC007F5D39 /* ETHImportWalletViewController.m in Sources */,
@@ -4758,8 +4772,8 @@
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
 				583910F9208495F200A19E7E /* DDLogUtil.m in Sources */,
 				5812DDAA20A1A7890043A8A8 /* ZXChatFaceItemView.m in Sources */,
-				581D32CA219C158B001F88C3 /* Account.swift in Sources */,
 				580D914720625A4400B12506 /* UIImage+Capture.m in Sources */,
+				5832CB2D22811E000011160D /* dAppProtocol.swift in Sources */,
 				735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */,
 				580D914220625A4300B12506 /* UIImage+Vector.m in Sources */,
 				73048F102079E1C500A4EFEE /* CurrentWalletInfo.m in Sources */,
@@ -4770,6 +4784,7 @@
 				580D915B20625A4400B12506 /* UIView+Constraints.m in Sources */,
 				5812DDBF20A1A7D20043A8A8 /* NSString+TL.m in Sources */,
 				5812DDA420A1A7890043A8A8 /* ZXUser.m in Sources */,
+				5832CB37228125040011160D /* Wallet.swift in Sources */,
 				58FB8D8B2265AB970075698E /* GuangGaoCollectionCell.m in Sources */,
 				7377D1A8206DCAB50072E628 /* RefreshTableView.m in Sources */,
 				581B679521919D280061BEDB /* SuccessTipView.m in Sources */,
@@ -4836,6 +4851,7 @@
 				5894EC45217EB93A007F5D39 /* MnemonicTipView.m in Sources */,
 				58FB8D6C22645AF10075698E /* InviteRankingCell.m in Sources */,
 				581D32D8219C158B001F88C3 /* Asset.swift in Sources */,
+				5832CB2F22811E690011160D /* AppState.swift in Sources */,
 				581C228621AD2BC10009888B /* RunInBackground.m in Sources */,
 				5812DDA020A1A7890043A8A8 /* ChatFace.m in Sources */,
 				587ABD7021B8F8F800C3D81A /* EOS_AccountInfo.m in Sources */,
