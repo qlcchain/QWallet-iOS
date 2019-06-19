@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class Token,NEOAssetModel,EOSSymbolModel;
+@class Token,NEOAssetModel,EOSSymbolModel,QLCTokenModel;
 
 static NSString *WalletsCellReuse = @"WalletsCell";
 #define WalletsCell_Height 64
@@ -25,6 +25,7 @@ static NSString *WalletsCellReuse = @"WalletsCell";
 - (void)configCellWithToken:(Token *)model tokenPriceArr:(NSArray *)tokenPriceArr;
 - (void)configCellWithAsset:(NEOAssetModel *)model tokenPriceArr:(NSArray *)tokenPriceArr;
 - (void)configCellWithSymbol:(EOSSymbolModel *)model tokenPriceArr:(NSArray *)tokenPriceArr;
+- (void)configCellWithQLCToken:(QLCTokenModel *)model tokenPriceArr:(NSArray *)tokenPriceArr;
 
 
 @end

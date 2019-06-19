@@ -14,6 +14,7 @@ typedef enum : NSUInteger {
     WalletTypeETH,
     WalletTypeEOS,
     WalletTypeNEO,
+    WalletTypeQLC,
 } WalletType;
 
 @interface WalletCommonModel : BBaseModel
@@ -56,6 +57,9 @@ typedef enum : NSUInteger {
 
 #pragma mark - EOS
 + (void)refreshEOSWallet;
+
+#pragma mark - QLC
++ (void)refreshQLCWallet;
 
 
 @end

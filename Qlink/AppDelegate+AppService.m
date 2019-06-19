@@ -29,6 +29,8 @@
 #import "NSBundle+Language.h"
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
+#import "QLCWalletManage.h"
+#import "WalletCommonModel.h"
 //#import "LocationTracker.h"
 //#import "LoginSetPWViewController.h"
 //#import "LoginInputPWViewController.h"
@@ -40,6 +42,15 @@
 @end
 
 @implementation AppDelegate (AppService)
+
+
+#pragma mark - 配置QLC钱包
+- (void)configQLCWallet {
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM) {
+        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address]; // QLC钱包接收sendblock
+    }
+}
 
 #pragma mark - 配置DDLog
 - (void)configDDLog {

@@ -284,7 +284,7 @@ class NEOWalletManage : NSObject {
     func sendNEP5Token(assetHash: String, decimals: Int, assetName: String, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, fee: Double, completeBlock:@escaping fucBlock) {
         
         DispatchQueue.main.async {
-            let network = Network.main
+            let network = NeoNetwork.main
             var node = AppState.bestSeedNodeURL
             if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
                 node = bestNode
@@ -315,7 +315,7 @@ class NEOWalletManage : NSObject {
     
     func sendNativeAsset(assetHash: String, assetId: AssetId, assetName: String, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, completeBlock:@escaping fucBlock) {
         DispatchQueue.main.async {
-            let network = Network.main
+            let network = NeoNetwork.main
             var node = AppState.bestSeedNodeURL
             if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
                 node = bestNode

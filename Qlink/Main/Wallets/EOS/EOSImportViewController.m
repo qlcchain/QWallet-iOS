@@ -121,7 +121,7 @@
     [[EOSWalletUtil shareInstance] importWithAccountName:accountName private_activeKey:private_activeKey private_ownerKey:private_ownerKey complete:^(BOOL success) {
         [kAppD.window hideToast];
         if (success) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:Add_NEO_Wallet_Noti object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Add_EOS_Wallet_Noti object:nil];
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
         }

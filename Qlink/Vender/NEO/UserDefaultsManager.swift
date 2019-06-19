@@ -12,7 +12,7 @@ class UserDefaultsManager {
 
     private static let networkKey = "networkKey"
 
-    static var network: Network {
+    static var network: NeoNetwork {
         #if TESTNET
             return .test
         #endif

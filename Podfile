@@ -29,7 +29,8 @@ end
 def eth
     pod 'BigInt', '~> 3.0'
     pod 'R.swift'
-    pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
+#    pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
+    pod 'JSONRPCKit', '3.0.0'
     pod 'PromiseKit', '~> 6.0'
     pod 'APIKit'
 #    pod 'Eureka'
@@ -61,7 +62,7 @@ target "Qlink" do
     pod 'OLImageView'
     pod 'Firebase/Core', '~> 5.4.1'
 #    pod 'MMWormhole'
-#    pod 'TagListView', '1.2.0'
+#    pod 'TagListView'
     pod 'Charts', '3.1.0'
     pod 'SwiftTheme', '0.4.1'
     pod 'TYCyclePagerView'
@@ -71,6 +72,10 @@ target "Qlink" do
     pod 'SwiftColor'
     pod 'AsyncSwift'
     pod 'Appirater'
+    pod 'HandyJSON'
+    
+    # qlc_sign
+#    pod 'TrezorCryptoEd25519WithBlake2b'
 
     tunnel
     library
@@ -84,11 +89,11 @@ end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
-        if ['JSONRPCKit'].include? target.name
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
-        end
+#        if ['JSONRPCKit'].include? target.name
+#            target.build_configurations.each do |config|
+#                config.build_settings['SWIFT_VERSION'] = '3.0'
+#            end
+#        end
         if ['TrustKeystore'].include? target.name
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'

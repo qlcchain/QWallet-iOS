@@ -10,7 +10,7 @@ import UIKit
 
 class AppState: NSObject {
 
-    static var network: Network {
+    static var network: NeoNetwork {
         #if TESTNET
         return .test
         #endif

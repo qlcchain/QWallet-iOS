@@ -114,16 +114,16 @@ open class TagListView: UIView {
         }
     }
     
-    @objc public enum Alignment: Int {
-        case left
-        case center
-        case right
-    }
-    @IBInspectable open var alignment: Alignment = .left {
-        didSet {
-            rearrangeViews()
-        }
-    }
+//    public enum Alignment: Int {
+//        case left
+//        case center
+//        case right
+//    }
+//    @IBInspectable open var alignment: Alignment = .left {
+//        didSet {
+//            rearrangeViews()
+//        }
+//    }
     @IBInspectable open dynamic var shadowColor: UIColor = UIColor.white {
         didSet {
             rearrangeViews()
@@ -257,14 +257,14 @@ open class TagListView: UIView {
             currentRowTagCount += 1
             currentRowWidth += tagView.frame.width + marginX
             
-            switch alignment {
-            case .left:
-                currentRowView.frame.origin.x = 0
-            case .center:
+//            switch alignment {
+//            case .left:
+//                currentRowView.frame.origin.x = 0
+//            case .center:
                 currentRowView.frame.origin.x = (frame.width - (currentRowWidth - marginX)) / 2
-            case .right:
-                currentRowView.frame.origin.x = frame.width - (currentRowWidth - marginX)
-            }
+//            case .right:
+//                currentRowView.frame.origin.x = frame.width - (currentRowWidth - marginX)
+//            }
             currentRowView.frame.size.width = currentRowWidth
             currentRowView.frame.size.height = max(tagViewHeight, currentRowView.frame.height)
         }

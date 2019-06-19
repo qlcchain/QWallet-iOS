@@ -53,6 +53,12 @@
         if (currentWalletM && [currentWalletM.account_name isEqualToString:model.account_name]) {
             _selectImg.hidden = NO;
         }
+    } else if (model.walletType == WalletTypeQLC) {
+        _icon.image = [UIImage imageNamed:@"qlc_wallet"];
+        _addressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
+        if (currentWalletM && [currentWalletM.address isEqualToString:model.address]) {
+            _selectImg.hidden = NO;
+        }
     }
     
     _nameLab.text = model.name;

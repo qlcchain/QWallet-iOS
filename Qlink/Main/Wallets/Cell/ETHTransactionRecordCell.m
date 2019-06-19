@@ -13,6 +13,7 @@
 #import "WalletCommonModel.h"
 #import "ETHAddressTransactionsModel.h"
 #import "EOSTraceModel.h"
+#import "QLCAddressHistoryModel.h"
 
 @interface ETHTransactionRecordCell ()
 
@@ -135,6 +136,26 @@
     
     _timeLab.text = [NSDate getLocalDateFormateUTCDate:model.timestamp];
     _priceLab.text = [NSString stringWithFormat:@"%@%@ %@",isSend?@"-":@"+",[model getTokenNum],model.symbol];
+}
+
+- (void)configCellWithQLCModel:(QLCAddressHistoryModel *)model {
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    BOOL isSend = [model.type isEqualToString:@"Send"]?YES:NO;
+    if (!isSend) {
+        _icon.image = [UIImage imageNamed:@"icons_eth_trade_confirm"];
+    } else {
+        _icon.image = [UIImage imageNamed:@"icons_eth_trade_fail"];
+    }
+    
+    _tokenHash = model.Hash;
+    NSString *addressText = model.Hash;
+    if (addressText.length > 8) {
+        addressText = [NSString stringWithFormat:@"%@...%@",[addressText substringToIndex:8],[addressText substringWithRange:NSMakeRange(addressText.length - 8, 8)]];
+    }
+    _addressLab.text = addressText;
+    _statusLab.text = nil;
+    _timeLab.text = [NSDate getTimeWithTimestamp:[NSString stringWithFormat:@"%@",model.timestamp] format:@"MM/dd HH:mm" isMil:NO];
+    _priceLab.text = [NSString stringWithFormat:@"%@%@ %@",isSend?@"-":@"+",[model getAmountNum],model.tokenName];
 }
 
 - (IBAction)copyAction:(id)sender {

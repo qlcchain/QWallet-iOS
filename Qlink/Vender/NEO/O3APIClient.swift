@@ -40,10 +40,10 @@ class O3APIClient: NSObject {
 
     public var apiBaseEndpoint = "https://platform.o3.network/api"
     public var apiWithCacheBaseEndpoint = "https://api.o3.network"
-    public var network: Network = .main
+    public var network: NeoNetwork = .main
 
     public var useCache: Bool = false
-    init(network: Network, useCache: Bool = false) {
+    init(network: NeoNetwork, useCache: Bool = false) {
         self.network = network
         self.useCache = useCache
     }
@@ -143,6 +143,11 @@ class O3APIClient: NSObject {
             amountFormatter.minimumFractionDigits = 0
             amountFormatter.maximumFractionDigits = 8
             amountFormatter.numberStyle = .decimal
+            
+            if responser["data"] == nil {
+                completion(.failure(.invalidData))
+                return
+            }
             
             let dataArr = responser["data"] as! Array<AnyObject>
             if dataArr != nil {

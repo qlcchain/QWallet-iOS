@@ -35,7 +35,7 @@ public enum NeoClientResult<T> {
     case failure(NeoClientError)
 }
 
-public enum Network: String {
+public enum NeoNetwork: String {
     case test
     case main
     case privateNet
@@ -45,7 +45,7 @@ public class NEONetworkMonitor {
     
     public static let sharedInstance = NEONetworkMonitor()
     
-    public static func autoSelectBestNode(network: Network) -> String? {
+    public static func autoSelectBestNode(network: NeoNetwork) -> String? {
         
         var bestNode = ""
         //load from https://platform.o3.network/api/v1/nodes instead

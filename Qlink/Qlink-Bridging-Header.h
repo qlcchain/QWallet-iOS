@@ -17,6 +17,7 @@
 #import "NEOWalletUtil.h"
 #import "CurrentWalletInfo.h"
 #import "AppDelegate.h"
+#import "QLCMnemonicBit.h"
 
 //@import ShadowsockLibrary;
 //@import ShadowsockModel;

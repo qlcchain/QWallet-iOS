@@ -72,7 +72,7 @@ public class dAppProtocol: NSObject {
         
         init(networks: [String]) {
             self.networks = networks
-            self.defaultNetwork = AppState.network == Network.main ? "MainNet" : "TestNet"
+            self.defaultNetwork = AppState.network == NeoNetwork.main ? "MainNet" : "TestNet"
         }
     }
     
@@ -290,7 +290,7 @@ public class dAppProtocol: NSObject {
 class O3DappAPI {
     
     func getStorage(request: dAppProtocol.GetStorageRequest) -> dAppProtocol.GetStorageResponse {
-        let network = request.network!.lowercased().contains("test") ? Network.test : Network.main
+        let network = request.network!.lowercased().contains("test") ? NeoNetwork.test : NeoNetwork.main
         var node = AppState.bestSeedNodeURL
         if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
             node = bestNode
@@ -315,7 +315,7 @@ class O3DappAPI {
     
     func invokeRead(request: dAppProtocol.InvokeReadRequest) -> dAppProtocol.InvokeReadResponse? {
         
-        let network = request.network.lowercased().contains("test") ? Network.test : Network.main
+        let network = request.network.lowercased().contains("test") ? NeoNetwork.test : NeoNetwork.main
         var node = AppState.bestSeedNodeURL
         if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
             node = bestNode

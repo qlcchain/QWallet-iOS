@@ -198,7 +198,6 @@ typedef enum : NSUInteger {
     watchAgree = sender.selected;
 }
 
-
 - (IBAction)mnemonicAction:(UIButton *)sender {
     [self refreshSelectImport:sender];
     [_mainScorll setContentOffset:CGPointMake(SCREEN_WIDTH*0, 0) animated:YES];

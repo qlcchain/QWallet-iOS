@@ -12,6 +12,7 @@
 #import "TokenPriceModel.h"
 #import "NEOAddressInfoModel.h"
 #import "EOSSymbolModel.h"
+#import "QLCAddressInfoModel.h"
 
 @implementation WalletsCell
 
@@ -67,6 +68,19 @@
     }
     _icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"eos_%@",model.symbol.lowercaseString]];
     _nameLab.text = model.symbol;
+    
+    NSString *num = [model getTokenNum];
+    NSString *price = [model getPrice:tokenPriceArr];
+    _balanceLab.text = [NSString stringWithFormat:@"%@",num];
+    _priceLab.text = [NSString stringWithFormat:@"%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
+}
+
+- (void)configCellWithQLCToken:(QLCTokenModel *)model tokenPriceArr:(NSArray *)tokenPriceArr {
+    if (![model isKindOfClass:[QLCTokenModel class]]) {
+        return;
+    }
+    _icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"neo_%@",model.tokenName.lowercaseString]];
+    _nameLab.text = model.tokenName;
     
     NSString *num = [model getTokenNum];
     NSString *price = [model getPrice:tokenPriceArr];

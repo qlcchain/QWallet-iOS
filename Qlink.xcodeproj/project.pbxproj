@@ -14,13 +14,14 @@
 		5806C11021C3D15A000E693B /* CreateAccountGetRequiredPublicKeyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806C10E21C3D15A000E693B /* CreateAccountGetRequiredPublicKeyRequest.m */; };
 		5806C11321C3DB59000E693B /* CreateAccountPushTransactionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11221C3DB59000E693B /* CreateAccountPushTransactionRequest.m */; };
 		5806C11621C3E4C8000E693B /* CreateAccountSignTransactionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11521C3E4C7000E693B /* CreateAccountSignTransactionRequest.m */; };
-		5806C11821C7A6E5000E693B /* CryptoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11721C7A6E3000E693B /* CryptoUtil.swift */; };
+		5806C11821C7A6E5000E693B /* NEOSignUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11721C7A6E3000E693B /* NEOSignUtil.swift */; };
 		5807D649208061A20049565D /* ShadowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5807D648208061A20049565D /* ShadowImageView.m */; };
 		5807D64A2080637F0049565D /* HMScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C1BA09207E18260080C59F /* HMScanner.m */; };
 		5809033D209B07370085FD70 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809033C209B07370085FD70 /* ChatModel.m */; };
 		58090343209C517B0085FD70 /* GroupChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58090342209C517B0085FD70 /* GroupChatMessageModel.m */; };
 		580CAFBF218C29D1004C0E06 /* LoginPWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 580CAFBE218C29D1004C0E06 /* LoginPWModel.m */; };
-		580CB7D721914075004C0E06 /* ETHFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 580CB7D621914074004C0E06 /* ETHFramework.framework */; };
+		580CF61E22A7C9AA00B0995C /* QLCImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580CF61C22A7C9AA00B0995C /* QLCImportWalletViewController.m */; };
+		580CF61F22A7C9AA00B0995C /* QLCImportWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 580CF61D22A7C9AA00B0995C /* QLCImportWalletViewController.xib */; };
 		580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 580D90C720625A4300B12506 /* UIImage+Blur.m */; };
 		580D913E20625A4300B12506 /* UIImage+FileName.m in Sources */ = {isa = PBXBuildFile; fileRef = 580D90CE20625A4300B12506 /* UIImage+FileName.m */; };
 		580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 580D90D120625A4300B12506 /* UIImage+GIF.m */; };
@@ -87,6 +88,15 @@
 		58105D3E21882A1A00B8B701 /* ETHWalletAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58105D3C21882A1A00B8B701 /* ETHWalletAddressViewController.m */; };
 		58105D3F21882A1A00B8B701 /* ETHWalletAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58105D3D21882A1A00B8B701 /* ETHWalletAddressViewController.xib */; };
 		58105D4221882E4200B8B701 /* NavWhiteShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58105D4121882E4200B8B701 /* NavWhiteShadowView.m */; };
+		5811B7432293D4B900F657B5 /* QLCWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B7422293D4B900F657B5 /* QLCWalletInfo.m */; };
+		5811B7552293D81500F657B5 /* QLCTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B7492293D80D00F657B5 /* QLCTransferViewController.m */; };
+		5811B7562293D81500F657B5 /* QLCTransactionRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5811B74B2293D80E00F657B5 /* QLCTransactionRecordViewController.xib */; };
+		5811B7572293D81500F657B5 /* QLCWalletAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5811B74C2293D80F00F657B5 /* QLCWalletAddressViewController.xib */; };
+		5811B7582293D81500F657B5 /* QLCTransactionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B74D2293D81000F657B5 /* QLCTransactionRecordViewController.m */; };
+		5811B7592293D81500F657B5 /* QLCWalletAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B74E2293D81100F657B5 /* QLCWalletAddressViewController.m */; };
+		5811B75A2293D81500F657B5 /* QLCWalletDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B74F2293D81100F657B5 /* QLCWalletDetailViewController.m */; };
+		5811B75B2293D81500F657B5 /* QLCTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5811B7512293D81300F657B5 /* QLCTransferViewController.xib */; };
+		5811B75C2293D81500F657B5 /* QLCWalletDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5811B7532293D81400F657B5 /* QLCWalletDetailViewController.xib */; };
 		5812DD9D20A1A7890043A8A8 /* ChatViewImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5812DD6E20A1A7880043A8A8 /* ChatViewImages.xcassets */; };
 		5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5812DD6F20A1A7880043A8A8 /* normal_face.plist */; };
 		5812DD9F20A1A7890043A8A8 /* ZXMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812DD7220A1A7880043A8A8 /* ZXMessageModel.m */; };
@@ -170,7 +180,7 @@
 		581C228021AD1B2D0009888B /* UIView+ToastAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 581C227F21AD1B2D0009888B /* UIView+ToastAlert.m */; };
 		581C228521AD2BC10009888B /* mysong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 581C228221AD2BC10009888B /* mysong.mp3 */; };
 		581C228621AD2BC10009888B /* RunInBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 581C228421AD2BC10009888B /* RunInBackground.m */; };
-		581CB39A21C8BF9F004DED10 /* CryptoUtilOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 581CB39921C8BF9F004DED10 /* CryptoUtilOC.m */; };
+		581CB39A21C8BF9F004DED10 /* EOSSignUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581CB39921C8BF9F004DED10 /* EOSSignUtil.m */; };
 		581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */ = {isa = PBXBuildFile; fileRef = 581CB3A921CA2650004DED10 /* NSNumber+RemoveZero.m */; };
 		581D31C8219BC5AE001F88C3 /* MarketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 581D31C6219BC5AE001F88C3 /* MarketsCell.m */; };
 		581D31C9219BC5AE001F88C3 /* MarketsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581D31C7219BC5AE001F88C3 /* MarketsCell.xib */; };
@@ -266,6 +276,21 @@
 		582843FB21885EEA00AD65C8 /* LoginInputPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582843F921885EEA00AD65C8 /* LoginInputPWViewController.xib */; };
 		582844012189407B00AD65C8 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582843FF2189407B00AD65C8 /* SettingsCell.m */; };
 		582844022189407B00AD65C8 /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582844002189407B00AD65C8 /* SettingsCell.xib */; };
+		582B116022952B7F005E2288 /* QlcClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B114E22952B7F005E2288 /* QlcClient.swift */; };
+		582B116122952B7F005E2288 /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115022952B7F005E2288 /* Ed25519.swift */; };
+		582B116222952B7F005E2288 /* Blake2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115122952B7F005E2288 /* Blake2.swift */; };
+		582B116322952B7F005E2288 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115222952B7F005E2288 /* Helper.swift */; };
+		582B116422952B7F005E2288 /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115322952B7F005E2288 /* Bytes.swift */; };
+		582B116522952B7F005E2288 /* AccountMng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115522952B7F005E2288 /* AccountMng.swift */; };
+		582B116622952B7F005E2288 /* SMSRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115722952B7F005E2288 /* SMSRpc.swift */; };
+		582B116722952B7F005E2288 /* AccountRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115822952B7F005E2288 /* AccountRpc.swift */; };
+		582B116822952B7F005E2288 /* MinitageRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115922952B7F005E2288 /* MinitageRpc.swift */; };
+		582B116922952B7F005E2288 /* WalletRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115A22952B7F005E2288 /* WalletRpc.swift */; };
+		582B116A22952B7F005E2288 /* PledgeRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115B22952B7F005E2288 /* PledgeRpc.swift */; };
+		582B116B22952B7F005E2288 /* UtilRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115C22952B7F005E2288 /* UtilRpc.swift */; };
+		582B116C22952B7F005E2288 /* P2PRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115D22952B7F005E2288 /* P2PRpc.swift */; };
+		582B116D22952B7F005E2288 /* TokenMateRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115E22952B7F005E2288 /* TokenMateRpc.swift */; };
+		582B116E22952B7F005E2288 /* LedgerRpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582B115F22952B7F005E2288 /* LedgerRpc.swift */; };
 		582F238A21BF99A500A000D1 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F238821BF99A400A000D1 /* ODRefreshControl.m */; };
 		582F239621C1126C00A000D1 /* EOSActivateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239421C1126C00A000D1 /* EOSActivateAccountViewController.m */; };
 		582F239721C1126C00A000D1 /* EOSActivateAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F239521C1126C00A000D1 /* EOSActivateAccountViewController.xib */; };
@@ -280,6 +305,7 @@
 		5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833AD0B206C8427002C6909 /* WalletMenuView.m */; };
 		583910F9208495F200A19E7E /* DDLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910F8208495F200A19E7E /* DDLogUtil.m */; };
 		583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910FB2084971F00A19E7E /* DebugLogViewController.m */; };
+		583944F8229BEFEA0068852A /* QLCAddressInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 583944F7229BEFEA0068852A /* QLCAddressInfoModel.m */; };
 		5839F5192068CFA8004C4A54 /* RequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839F5182068CFA8004C4A54 /* RequestService.m */; };
 		5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839F51E2068F60E004C4A54 /* JSONUtil.m */; };
 		5839F5222068F8E0004C4A54 /* NSString+UrlEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839F5202068F8E0004C4A54 /* NSString+UrlEncode.m */; };
@@ -306,6 +332,7 @@
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
 		5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117C2105AEF4005232A2 /* LocationTracker.m */; };
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
+		5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */; };
 		5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */; };
 		5855EB8E22758E9A00243703 /* InviteFriendNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5855EB8C22758E9A00243703 /* InviteFriendNowViewController.xib */; };
 		585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C9A1C2181A16B00DD12DB /* WalletsViewController.m */; };
@@ -329,6 +356,8 @@
 		585D1F04225EE18500468C4A /* PersonalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1F02225EE18500468C4A /* PersonalInfoViewController.xib */; };
 		585D1F08225EE38D00468C4A /* PersonalInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 585D1F06225EE38D00468C4A /* PersonalInfoCell.m */; };
 		585D1F09225EE38D00468C4A /* PersonalInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1F07225EE38D00468C4A /* PersonalInfoCell.xib */; };
+		585DD83D229CE0E7007944E9 /* QLCTransferConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585DD83A229CE0E6007944E9 /* QLCTransferConfirmView.xib */; };
+		585DD83E229CE0E7007944E9 /* QLCTransferConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585DD83B229CE0E6007944E9 /* QLCTransferConfirmView.m */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9F20CFB42000EEB6CE /* WebViewController.xib */; };
 		5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */; };
@@ -352,6 +381,14 @@
 		5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ADC520CFB62200EEB6CE /* NotifactionView.xib */; };
 		5860FD2120B7B0F1005AA1DA /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5860FD2020B7B0F1005AA1DA /* NotificationService.m */; };
 		5860FD2520B7B0F1005AA1DA /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5868497922A764BA00CF0F24 /* QLCAccountPendingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5868497822A764BA00CF0F24 /* QLCAccountPendingModel.m */; };
+		5868498622A7ABA100CF0F24 /* EnglishMnemonicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868497C22A7ABA000CF0F24 /* EnglishMnemonicList.swift */; };
+		5868498922A7ABA100CF0F24 /* SimplifiedChineseMnemonicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868497F22A7ABA000CF0F24 /* SimplifiedChineseMnemonicList.swift */; };
+		5868498A22A7ABA100CF0F24 /* Mnemonic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868498022A7ABA000CF0F24 /* Mnemonic.swift */; };
+		5868498B22A7ABA100CF0F24 /* MnemonicCodeBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868498122A7ABA000CF0F24 /* MnemonicCodeBook.swift */; };
+		5868498C22A7ABA100CF0F24 /* TraditionalChineseMnemonicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868498222A7ABA000CF0F24 /* TraditionalChineseMnemonicList.swift */; };
+		5868499922A7AF6300CF0F24 /* QLCMnemonicCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5868499722A7AF6300CF0F24 /* QLCMnemonicCrypto.swift */; };
+		5868499A22A7AF6300CF0F24 /* QLCMnemonicBit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5868499822A7AF6300CF0F24 /* QLCMnemonicBit.m */; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
 		586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */ = {isa = PBXBuildFile; fileRef = 586F371E207B049400E12F95 /* ContinentAndCountryBean.json */; };
 		58779A9822642976008590EE /* ETHExportKeystorePWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58779A9522642975008590EE /* ETHExportKeystorePWViewController.xib */; };
@@ -415,6 +452,7 @@
 		588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 588A7021208DD29B004B41D4 /* Assets.xcassets */; };
 		588A7024208DD2CC004B41D4 /* launchAnimate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 588A7023208DD2CC004B41D4 /* launchAnimate.gif */; };
 		588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 588A7026208DE67F004B41D4 /* ToxRequestModel.m */; };
+		5893721722A664A800BD5CB6 /* QLCTokenInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5893721622A664A800BD5CB6 /* QLCTokenInfoModel.m */; };
 		5894A709225F3105008B0854 /* FinanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A707225F3105008B0854 /* FinanceCell.m */; };
 		5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A708225F3105008B0854 /* FinanceCell.xib */; };
 		5894A70E225F451F008B0854 /* FinanceProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A70D225F451F008B0854 /* FinanceProductModel.m */; };
@@ -460,6 +498,20 @@
 		58A6500121BE16BD00E52FFF /* TipOKView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A6500021BE16BD00E52FFF /* TipOKView.xib */; };
 		58A6500521BE196600E52FFF /* PaymentDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A6500321BE196600E52FFF /* PaymentDetailsView.xib */; };
 		58A6500621BE196600E52FFF /* PaymentDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A6500421BE196600E52FFF /* PaymentDetailsView.m */; };
+		58A71E58229F6CC300C22D8C /* QLCTokenMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E57229F6CC300C22D8C /* QLCTokenMeta.swift */; };
+		58A71E5A229F6E1A00C22D8C /* QLCToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E59229F6E1A00C22D8C /* QLCToken.swift */; };
+		58A71E5C229F6F0100C22D8C /* QLCBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E5B229F6F0100C22D8C /* QLCBlock.swift */; };
+		58A71E5E229F71AA00C22D8C /* QLCStateBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E5D229F71AA00C22D8C /* QLCStateBlock.swift */; };
+		58A71E60229F752400C22D8C /* QLCAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E5F229F752400C22D8C /* QLCAddress.swift */; };
+		58A71E62229F75DF00C22D8C /* QLCAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E61229F75DF00C22D8C /* QLCAccount.swift */; };
+		58A71E64229F78ED00C22D8C /* QLCPending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E63229F78ED00C22D8C /* QLCPending.swift */; };
+		58A71E66229F79FD00C22D8C /* BlockMng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E65229F79FD00C22D8C /* BlockMng.swift */; };
+		58A71E68229F7B5F00C22D8C /* QLCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E67229F7B5F00C22D8C /* QLCConstants.swift */; };
+		58A71E6A229F88B200C22D8C /* TransactionMng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E69229F88B200C22D8C /* TransactionMng.swift */; };
+		58A71E6C229FB62300C22D8C /* TokenMetaMng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E6B229FB62300C22D8C /* TokenMetaMng.swift */; };
+		58A71E6E229FBD8700C22D8C /* LedgerMng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E6D229FBD8700C22D8C /* LedgerMng.swift */; };
+		58A71E70229FC91C00C22D8C /* WorkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A71E6F229FC91C00C22D8C /* WorkUtil.swift */; };
+		58A71E7222A00E6F00C22D8C /* ETHFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A71E7122A00E6F00C22D8C /* ETHFramework.framework */; };
 		58A801C62268692B00640BBC /* FinanceHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801C52268692B00640BBC /* FinanceHistoryModel.m */; };
 		58A801CA226DC7A200640BBC /* RegisterMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801C8226DC7A200640BBC /* RegisterMailViewController.m */; };
 		58A801CB226DC7A200640BBC /* RegisterMailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A801C9226DC7A200640BBC /* RegisterMailViewController.xib */; };
@@ -467,6 +519,11 @@
 		58A801D0226DC7B800640BBC /* RegisterSetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A801CE226DC7B800640BBC /* RegisterSetPWViewController.xib */; };
 		58A801D4226DC7DC00640BBC /* SetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801D2226DC7DC00640BBC /* SetPWViewController.m */; };
 		58A801D5226DC7DC00640BBC /* SetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A801D3226DC7DC00640BBC /* SetPWViewController.xib */; };
+		58A913132296314200A4E893 /* TrezorCrytoEd25519.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A913122296314200A4E893 /* TrezorCrytoEd25519.framework */; };
+		58A9131F22963B7500A4E893 /* QLCWalletManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A9131E22963B7500A4E893 /* QLCWalletManage.m */; };
+		58A913222296401800A4E893 /* QLCWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A913212296401800A4E893 /* QLCWallet.m */; };
+		58A9132A22966C9700A4E893 /* QLCUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A9132922966C9700A4E893 /* QLCUtil.swift */; };
+		58A9132C2297ECDD00A4E893 /* QLCStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A9132B2297ECDC00A4E893 /* QLCStringExtensions.swift */; };
 		58AE1AD92074D22F00CE983B /* KeyChainUitl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */; };
 		58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */; };
 		58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AE22074D28700CE983B /* WalletQRViewController.m */; };
@@ -496,6 +553,10 @@
 		58CF40CE21998D340000C3DA /* NEOTransferConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CF40CB21998D330000C3DA /* NEOTransferConfirmView.xib */; };
 		58CF40CF21998D340000C3DA /* NEOTransferConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF40CD21998D330000C3DA /* NEOTransferConfirmView.m */; };
 		58CF40D2219A64350000C3DA /* NEOAddressHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF40D1219A64350000C3DA /* NEOAddressHistoryModel.m */; };
+		58CFD9D62293D0A5006862E2 /* QLCCreateWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CFD9D42293D0A5006862E2 /* QLCCreateWalletViewController.m */; };
+		58CFD9D72293D0A5006862E2 /* QLCCreateWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CFD9D52293D0A5006862E2 /* QLCCreateWalletViewController.xib */; };
+		58CFD9DB2293D305006862E2 /* QLCBackupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CFD9D82293D304006862E2 /* QLCBackupDetailViewController.m */; };
+		58CFD9DC2293D305006862E2 /* QLCBackupDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CFD9D92293D304006862E2 /* QLCBackupDetailViewController.xib */; };
 		58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D2D8862192F38800C5B4C9 /* WalletCommonModel.m */; };
 		58D2D88C2192F41B00C5B4C9 /* WalletsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D2D88A2192F41B00C5B4C9 /* WalletsSwitchCell.m */; };
 		58D2D88D2192F41B00C5B4C9 /* WalletsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D2D88B2192F41B00C5B4C9 /* WalletsSwitchCell.xib */; };
@@ -516,9 +577,8 @@
 		58DF8E61206E26AC00ACFC65 /* WalletAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E5B206E26AC00ACFC65 /* WalletAddressView.m */; };
 		58E032B121883F500061C72D /* ETHTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E032AF21883F500061C72D /* ETHTransferViewController.m */; };
 		58E032B221883F500061C72D /* ETHTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E032B021883F500061C72D /* ETHTransferViewController.xib */; };
-		58E2E55E224DF73300CBFD54 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2E55A224DF73200CBFD54 /* CloseButton.swift */; };
-		58E2E55F224DF73300CBFD54 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2E55B224DF73200CBFD54 /* TagView.swift */; };
-		58E2E560224DF73300CBFD54 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2E55C224DF73200CBFD54 /* TagListView.swift */; };
+		58E3997422B376610029D105 /* VerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E3997222B376610029D105 /* VerificationViewController.m */; };
+		58E3997522B376610029D105 /* VerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E3997322B376610029D105 /* VerificationViewController.xib */; };
 		58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E41C4B2181CA36004C87AA /* WalletHomeSwitchCell.m */; };
 		58E41C4E2181CA36004C87AA /* WalletHomeSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E41C4C2181CA36004C87AA /* WalletHomeSwitchCell.xib */; };
 		58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E41C512182C1D6004C87AA /* ETHWalletDetailViewController.m */; };
@@ -530,6 +590,10 @@
 		58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B947E92064D145007F52F6 /* SkyRadiusView.m */; };
 		58E7C5DE20A3E62B00EDDD09 /* ChatTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E7C5DD20A3E62B00EDDD09 /* ChatTipView.m */; };
 		58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E7C5E120A3F62F00EDDD09 /* UITextView+ZWPlaceHolder.m */; };
+		58ED8C89229E7096000A5F54 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C86229E7096000A5F54 /* CloseButton.swift */; };
+		58ED8C8A229E7096000A5F54 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C87229E7096000A5F54 /* TagView.swift */; };
+		58ED8C8B229E7096000A5F54 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C88229E7096000A5F54 /* TagListView.swift */; };
+		58ED8C8D229E7796000A5F54 /* LedgerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C8C229E7796000A5F54 /* LedgerServices.swift */; };
 		58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2BCA2225C42410091DD53 /* LoginViewController.m */; };
 		58F2BCA5225C42410091DD53 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F2BCA3225C42410091DD53 /* LoginViewController.xib */; };
 		58FB8D55226434AF0075698E /* EarningsRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB8D53226434AF0075698E /* EarningsRankingViewController.m */; };
@@ -676,7 +740,7 @@
 		5806C11221C3DB59000E693B /* CreateAccountPushTransactionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountPushTransactionRequest.m; sourceTree = "<group>"; };
 		5806C11421C3E4C7000E693B /* CreateAccountSignTransactionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountSignTransactionRequest.h; sourceTree = "<group>"; };
 		5806C11521C3E4C7000E693B /* CreateAccountSignTransactionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountSignTransactionRequest.m; sourceTree = "<group>"; };
-		5806C11721C7A6E3000E693B /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
+		5806C11721C7A6E3000E693B /* NEOSignUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOSignUtil.swift; sourceTree = "<group>"; };
 		5807D647208061A20049565D /* ShadowImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowImageView.h; sourceTree = "<group>"; };
 		5807D648208061A20049565D /* ShadowImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowImageView.m; sourceTree = "<group>"; };
 		5809033B209B07370085FD70 /* ChatModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
@@ -686,7 +750,9 @@
 		580C3E06207C55E5002C9969 /* Qlink.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Qlink.entitlements; sourceTree = "<group>"; };
 		580CAFBD218C29D1004C0E06 /* LoginPWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPWModel.h; sourceTree = "<group>"; };
 		580CAFBE218C29D1004C0E06 /* LoginPWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginPWModel.m; sourceTree = "<group>"; };
-		580CB7D621914074004C0E06 /* ETHFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETHFramework.framework; sourceTree = "<group>"; };
+		580CF61B22A7C9A900B0995C /* QLCImportWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCImportWalletViewController.h; sourceTree = "<group>"; };
+		580CF61C22A7C9AA00B0995C /* QLCImportWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCImportWalletViewController.m; sourceTree = "<group>"; };
+		580CF61D22A7C9AA00B0995C /* QLCImportWalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCImportWalletViewController.xib; sourceTree = "<group>"; };
 		580D90C720625A4300B12506 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
 		580D90C820625A4300B12506 /* UIImage+Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Vector.h"; sourceTree = "<group>"; };
 		580D90C920625A4300B12506 /* UIImage+BetterFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BetterFace.h"; sourceTree = "<group>"; };
@@ -806,6 +872,20 @@
 		58105D3D21882A1A00B8B701 /* ETHWalletAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETHWalletAddressViewController.xib; sourceTree = "<group>"; };
 		58105D4021882E4200B8B701 /* NavWhiteShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavWhiteShadowView.h; sourceTree = "<group>"; };
 		58105D4121882E4200B8B701 /* NavWhiteShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavWhiteShadowView.m; sourceTree = "<group>"; };
+		5811B7412293D4B900F657B5 /* QLCWalletInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCWalletInfo.h; sourceTree = "<group>"; };
+		5811B7422293D4B900F657B5 /* QLCWalletInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCWalletInfo.m; sourceTree = "<group>"; };
+		5811B7492293D80D00F657B5 /* QLCTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCTransferViewController.m; sourceTree = "<group>"; };
+		5811B74A2293D80E00F657B5 /* QLCTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCTransferViewController.h; sourceTree = "<group>"; };
+		5811B74B2293D80E00F657B5 /* QLCTransactionRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCTransactionRecordViewController.xib; sourceTree = "<group>"; };
+		5811B74C2293D80F00F657B5 /* QLCWalletAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCWalletAddressViewController.xib; sourceTree = "<group>"; };
+		5811B74D2293D81000F657B5 /* QLCTransactionRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCTransactionRecordViewController.m; sourceTree = "<group>"; };
+		5811B74E2293D81100F657B5 /* QLCWalletAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCWalletAddressViewController.m; sourceTree = "<group>"; };
+		5811B74F2293D81100F657B5 /* QLCWalletDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCWalletDetailViewController.m; sourceTree = "<group>"; };
+		5811B7502293D81200F657B5 /* QLCWalletDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCWalletDetailViewController.h; sourceTree = "<group>"; };
+		5811B7512293D81300F657B5 /* QLCTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCTransferViewController.xib; sourceTree = "<group>"; };
+		5811B7522293D81300F657B5 /* QLCTransactionRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCTransactionRecordViewController.h; sourceTree = "<group>"; };
+		5811B7532293D81400F657B5 /* QLCWalletDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCWalletDetailViewController.xib; sourceTree = "<group>"; };
+		5811B7542293D81400F657B5 /* QLCWalletAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCWalletAddressViewController.h; sourceTree = "<group>"; };
 		5812DD6E20A1A7880043A8A8 /* ChatViewImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ChatViewImages.xcassets; sourceTree = "<group>"; };
 		5812DD6F20A1A7880043A8A8 /* normal_face.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = normal_face.plist; sourceTree = "<group>"; };
 		5812DD7120A1A7880043A8A8 /* ZXChatHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXChatHelper.h; sourceTree = "<group>"; };
@@ -963,8 +1043,8 @@
 		581C228221AD2BC10009888B /* mysong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mysong.mp3; sourceTree = "<group>"; };
 		581C228321AD2BC10009888B /* RunInBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunInBackground.h; sourceTree = "<group>"; };
 		581C228421AD2BC10009888B /* RunInBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunInBackground.m; sourceTree = "<group>"; };
-		581CB39821C8BF9F004DED10 /* CryptoUtilOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoUtilOC.h; sourceTree = "<group>"; };
-		581CB39921C8BF9F004DED10 /* CryptoUtilOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CryptoUtilOC.m; sourceTree = "<group>"; };
+		581CB39821C8BF9F004DED10 /* EOSSignUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOSSignUtil.h; sourceTree = "<group>"; };
+		581CB39921C8BF9F004DED10 /* EOSSignUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOSSignUtil.m; sourceTree = "<group>"; };
 		581CB3A821CA2650004DED10 /* NSNumber+RemoveZero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+RemoveZero.h"; sourceTree = "<group>"; };
 		581CB3A921CA2650004DED10 /* NSNumber+RemoveZero.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+RemoveZero.m"; sourceTree = "<group>"; };
 		581D31C5219BC5AE001F88C3 /* MarketsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarketsCell.h; sourceTree = "<group>"; };
@@ -1100,6 +1180,21 @@
 		582843FE2189407B00AD65C8 /* SettingsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsCell.h; sourceTree = "<group>"; };
 		582843FF2189407B00AD65C8 /* SettingsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsCell.m; sourceTree = "<group>"; };
 		582844002189407B00AD65C8 /* SettingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCell.xib; sourceTree = "<group>"; };
+		582B114E22952B7F005E2288 /* QlcClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QlcClient.swift; sourceTree = "<group>"; };
+		582B115022952B7F005E2288 /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
+		582B115122952B7F005E2288 /* Blake2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blake2.swift; sourceTree = "<group>"; };
+		582B115222952B7F005E2288 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		582B115322952B7F005E2288 /* Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
+		582B115522952B7F005E2288 /* AccountMng.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountMng.swift; sourceTree = "<group>"; };
+		582B115722952B7F005E2288 /* SMSRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSRpc.swift; sourceTree = "<group>"; };
+		582B115822952B7F005E2288 /* AccountRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountRpc.swift; sourceTree = "<group>"; };
+		582B115922952B7F005E2288 /* MinitageRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinitageRpc.swift; sourceTree = "<group>"; };
+		582B115A22952B7F005E2288 /* WalletRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletRpc.swift; sourceTree = "<group>"; };
+		582B115B22952B7F005E2288 /* PledgeRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PledgeRpc.swift; sourceTree = "<group>"; };
+		582B115C22952B7F005E2288 /* UtilRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilRpc.swift; sourceTree = "<group>"; };
+		582B115D22952B7F005E2288 /* P2PRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P2PRpc.swift; sourceTree = "<group>"; };
+		582B115E22952B7F005E2288 /* TokenMateRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenMateRpc.swift; sourceTree = "<group>"; };
+		582B115F22952B7F005E2288 /* LedgerRpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedgerRpc.swift; sourceTree = "<group>"; };
 		582F238721BF99A400A000D1 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		582F238821BF99A400A000D1 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		582F239321C1126C00A000D1 /* EOSActivateAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOSActivateAccountViewController.h; sourceTree = "<group>"; };
@@ -1121,6 +1216,8 @@
 		583910F8208495F200A19E7E /* DDLogUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLogUtil.m; sourceTree = "<group>"; };
 		583910FA2084971F00A19E7E /* DebugLogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugLogViewController.h; sourceTree = "<group>"; };
 		583910FB2084971F00A19E7E /* DebugLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugLogViewController.m; sourceTree = "<group>"; };
+		583944F6229BEFEA0068852A /* QLCAddressInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCAddressInfoModel.h; sourceTree = "<group>"; };
+		583944F7229BEFEA0068852A /* QLCAddressInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCAddressInfoModel.m; sourceTree = "<group>"; };
 		5839F5172068CFA8004C4A54 /* RequestService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestService.h; sourceTree = "<group>"; };
 		5839F5182068CFA8004C4A54 /* RequestService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestService.m; sourceTree = "<group>"; };
 		5839F51D2068F60E004C4A54 /* JSONUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONUtil.h; sourceTree = "<group>"; };
@@ -1179,6 +1276,8 @@
 		5849117B2105AEF4005232A2 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
 		5849117C2105AEF4005232A2 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		5849117D2105AEF4005232A2 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		5849BE99229E8940008B291E /* QLCAddressHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCAddressHistoryModel.h; sourceTree = "<group>"; };
+		5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCAddressHistoryModel.m; sourceTree = "<group>"; };
 		5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteFriendNowViewController.h; sourceTree = "<group>"; };
 		5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteFriendNowViewController.m; sourceTree = "<group>"; };
 		5855EB8C22758E9A00243703 /* InviteFriendNowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteFriendNowViewController.xib; sourceTree = "<group>"; };
@@ -1215,6 +1314,9 @@
 		585D1F05225EE38D00468C4A /* PersonalInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalInfoCell.h; sourceTree = "<group>"; };
 		585D1F06225EE38D00468C4A /* PersonalInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoCell.m; sourceTree = "<group>"; };
 		585D1F07225EE38D00468C4A /* PersonalInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalInfoCell.xib; sourceTree = "<group>"; };
+		585DD83A229CE0E6007944E9 /* QLCTransferConfirmView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCTransferConfirmView.xib; sourceTree = "<group>"; };
+		585DD83B229CE0E6007944E9 /* QLCTransferConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCTransferConfirmView.m; sourceTree = "<group>"; };
+		585DD83C229CE0E6007944E9 /* QLCTransferConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCTransferConfirmView.h; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC9E20CFB42000EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		5860ACA120CFB42300EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WebViewController.strings; sourceTree = "<group>"; };
@@ -1262,6 +1364,16 @@
 		5860FD2020B7B0F1005AA1DA /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		5860FD2220B7B0F1005AA1DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5860FD2920B7B0FA005AA1DA /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
+		5868497722A764BA00CF0F24 /* QLCAccountPendingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCAccountPendingModel.h; sourceTree = "<group>"; };
+		5868497822A764BA00CF0F24 /* QLCAccountPendingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCAccountPendingModel.m; sourceTree = "<group>"; };
+		5868497C22A7ABA000CF0F24 /* EnglishMnemonicList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnglishMnemonicList.swift; sourceTree = "<group>"; };
+		5868497F22A7ABA000CF0F24 /* SimplifiedChineseMnemonicList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplifiedChineseMnemonicList.swift; sourceTree = "<group>"; };
+		5868498022A7ABA000CF0F24 /* Mnemonic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mnemonic.swift; sourceTree = "<group>"; };
+		5868498122A7ABA000CF0F24 /* MnemonicCodeBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MnemonicCodeBook.swift; sourceTree = "<group>"; };
+		5868498222A7ABA000CF0F24 /* TraditionalChineseMnemonicList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraditionalChineseMnemonicList.swift; sourceTree = "<group>"; };
+		5868499622A7AF6300CF0F24 /* QLCMnemonicBit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCMnemonicBit.h; sourceTree = "<group>"; };
+		5868499722A7AF6300CF0F24 /* QLCMnemonicCrypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLCMnemonicCrypto.swift; sourceTree = "<group>"; };
+		5868499822A7AF6300CF0F24 /* QLCMnemonicBit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCMnemonicBit.m; sourceTree = "<group>"; };
 		586EE0962089951D009EAF40 /* FriendStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendStatusModel.h; sourceTree = "<group>"; };
 		586EE0972089951D009EAF40 /* FriendStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendStatusModel.m; sourceTree = "<group>"; };
 		586F371E207B049400E12F95 /* ContinentAndCountryBean.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContinentAndCountryBean.json; sourceTree = "<group>"; };
@@ -1384,6 +1496,8 @@
 		588A7023208DD2CC004B41D4 /* launchAnimate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchAnimate.gif; sourceTree = "<group>"; };
 		588A7025208DE67F004B41D4 /* ToxRequestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToxRequestModel.h; sourceTree = "<group>"; };
 		588A7026208DE67F004B41D4 /* ToxRequestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToxRequestModel.m; sourceTree = "<group>"; };
+		5893721522A664A800BD5CB6 /* QLCTokenInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCTokenInfoModel.h; sourceTree = "<group>"; };
+		5893721622A664A800BD5CB6 /* QLCTokenInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCTokenInfoModel.m; sourceTree = "<group>"; };
 		5894A706225F3105008B0854 /* FinanceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceCell.h; sourceTree = "<group>"; };
 		5894A707225F3105008B0854 /* FinanceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceCell.m; sourceTree = "<group>"; };
 		5894A708225F3105008B0854 /* FinanceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceCell.xib; sourceTree = "<group>"; };
@@ -1459,6 +1573,20 @@
 		58A6500321BE196600E52FFF /* PaymentDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentDetailsView.xib; sourceTree = "<group>"; };
 		58A6500421BE196600E52FFF /* PaymentDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentDetailsView.m; sourceTree = "<group>"; };
 		58A6E962206CD5F5004535E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		58A71E57229F6CC300C22D8C /* QLCTokenMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCTokenMeta.swift; sourceTree = "<group>"; };
+		58A71E59229F6E1A00C22D8C /* QLCToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCToken.swift; sourceTree = "<group>"; };
+		58A71E5B229F6F0100C22D8C /* QLCBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCBlock.swift; sourceTree = "<group>"; };
+		58A71E5D229F71AA00C22D8C /* QLCStateBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCStateBlock.swift; sourceTree = "<group>"; };
+		58A71E5F229F752400C22D8C /* QLCAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCAddress.swift; sourceTree = "<group>"; };
+		58A71E61229F75DF00C22D8C /* QLCAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCAccount.swift; sourceTree = "<group>"; };
+		58A71E63229F78ED00C22D8C /* QLCPending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCPending.swift; sourceTree = "<group>"; };
+		58A71E65229F79FD00C22D8C /* BlockMng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMng.swift; sourceTree = "<group>"; };
+		58A71E67229F7B5F00C22D8C /* QLCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLCConstants.swift; sourceTree = "<group>"; };
+		58A71E69229F88B200C22D8C /* TransactionMng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMng.swift; sourceTree = "<group>"; };
+		58A71E6B229FB62300C22D8C /* TokenMetaMng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMetaMng.swift; sourceTree = "<group>"; };
+		58A71E6D229FBD8700C22D8C /* LedgerMng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerMng.swift; sourceTree = "<group>"; };
+		58A71E6F229FC91C00C22D8C /* WorkUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkUtil.swift; sourceTree = "<group>"; };
+		58A71E7122A00E6F00C22D8C /* ETHFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETHFramework.framework; sourceTree = "<group>"; };
 		58A801C42268692B00640BBC /* FinanceHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceHistoryModel.h; sourceTree = "<group>"; };
 		58A801C52268692B00640BBC /* FinanceHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceHistoryModel.m; sourceTree = "<group>"; };
 		58A801C7226DC7A200640BBC /* RegisterMailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterMailViewController.h; sourceTree = "<group>"; };
@@ -1470,6 +1598,13 @@
 		58A801D1226DC7DC00640BBC /* SetPWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetPWViewController.h; sourceTree = "<group>"; };
 		58A801D2226DC7DC00640BBC /* SetPWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetPWViewController.m; sourceTree = "<group>"; };
 		58A801D3226DC7DC00640BBC /* SetPWViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetPWViewController.xib; sourceTree = "<group>"; };
+		58A913122296314200A4E893 /* TrezorCrytoEd25519.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TrezorCrytoEd25519.framework; sourceTree = "<group>"; };
+		58A9131D22963B7500A4E893 /* QLCWalletManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCWalletManage.h; sourceTree = "<group>"; };
+		58A9131E22963B7500A4E893 /* QLCWalletManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCWalletManage.m; sourceTree = "<group>"; };
+		58A913202296401800A4E893 /* QLCWallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCWallet.h; sourceTree = "<group>"; };
+		58A913212296401800A4E893 /* QLCWallet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCWallet.m; sourceTree = "<group>"; };
+		58A9132922966C9700A4E893 /* QLCUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLCUtil.swift; sourceTree = "<group>"; };
+		58A9132B2297ECDC00A4E893 /* QLCStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLCStringExtensions.swift; sourceTree = "<group>"; };
 		58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainUitl.swift; sourceTree = "<group>"; };
 		58AE1ADB2074D23C00CE983B /* NEOWalletInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEOWalletInfo.h; sourceTree = "<group>"; };
 		58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEOWalletInfo.m; sourceTree = "<group>"; };
@@ -1520,6 +1655,12 @@
 		58CF40CD21998D330000C3DA /* NEOTransferConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEOTransferConfirmView.m; sourceTree = "<group>"; };
 		58CF40D0219A64350000C3DA /* NEOAddressHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEOAddressHistoryModel.h; sourceTree = "<group>"; };
 		58CF40D1219A64350000C3DA /* NEOAddressHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NEOAddressHistoryModel.m; sourceTree = "<group>"; };
+		58CFD9D32293D0A5006862E2 /* QLCCreateWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCCreateWalletViewController.h; sourceTree = "<group>"; };
+		58CFD9D42293D0A5006862E2 /* QLCCreateWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCCreateWalletViewController.m; sourceTree = "<group>"; };
+		58CFD9D52293D0A5006862E2 /* QLCCreateWalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCCreateWalletViewController.xib; sourceTree = "<group>"; };
+		58CFD9D82293D304006862E2 /* QLCBackupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCBackupDetailViewController.m; sourceTree = "<group>"; };
+		58CFD9D92293D304006862E2 /* QLCBackupDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCBackupDetailViewController.xib; sourceTree = "<group>"; };
+		58CFD9DA2293D304006862E2 /* QLCBackupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCBackupDetailViewController.h; sourceTree = "<group>"; };
 		58D2D8852192F38800C5B4C9 /* WalletCommonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletCommonModel.h; sourceTree = "<group>"; };
 		58D2D8862192F38800C5B4C9 /* WalletCommonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletCommonModel.m; sourceTree = "<group>"; };
 		58D2D8892192F41B00C5B4C9 /* WalletsSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletsSwitchCell.h; sourceTree = "<group>"; };
@@ -1554,9 +1695,9 @@
 		58E032AE21883F500061C72D /* ETHTransferViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETHTransferViewController.h; sourceTree = "<group>"; };
 		58E032AF21883F500061C72D /* ETHTransferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETHTransferViewController.m; sourceTree = "<group>"; };
 		58E032B021883F500061C72D /* ETHTransferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETHTransferViewController.xib; sourceTree = "<group>"; };
-		58E2E55A224DF73200CBFD54 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
-		58E2E55B224DF73200CBFD54 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
-		58E2E55C224DF73200CBFD54 /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		58E3997122B376610029D105 /* VerificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerificationViewController.h; sourceTree = "<group>"; };
+		58E3997222B376610029D105 /* VerificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerificationViewController.m; sourceTree = "<group>"; };
+		58E3997322B376610029D105 /* VerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerificationViewController.xib; sourceTree = "<group>"; };
 		58E41C4A2181CA36004C87AA /* WalletHomeSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletHomeSwitchCell.h; sourceTree = "<group>"; };
 		58E41C4B2181CA36004C87AA /* WalletHomeSwitchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletHomeSwitchCell.m; sourceTree = "<group>"; };
 		58E41C4C2181CA36004C87AA /* WalletHomeSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHomeSwitchCell.xib; sourceTree = "<group>"; };
@@ -1573,6 +1714,10 @@
 		58E7C5DD20A3E62B00EDDD09 /* ChatTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatTipView.m; sourceTree = "<group>"; };
 		58E7C5E120A3F62F00EDDD09 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
 		58E7C5E220A3F63000EDDD09 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
+		58ED8C86229E7096000A5F54 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		58ED8C87229E7096000A5F54 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		58ED8C88229E7096000A5F54 /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		58ED8C8C229E7796000A5F54 /* LedgerServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedgerServices.swift; sourceTree = "<group>"; };
 		58F2BCA2225C42410091DD53 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		58F2BCA3225C42410091DD53 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		58F2BCA6225C425F0091DD53 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1846,6 +1991,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
+				58A71E7222A00E6F00C22D8C /* ETHFramework.framework in Frameworks */,
 				734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */,
 				734F52A020B6BF81002D45B7 /* CFNetwork.framework in Frameworks */,
 				734F529E20B6BF76002D45B7 /* MobileCoreServices.framework in Frameworks */,
@@ -1855,10 +2001,10 @@
 				587ABD3D21B8F8F700C3D81A /* eosFramework.framework in Frameworks */,
 				734F529620B6BF20002D45B7 /* libresolv.tbd in Frameworks */,
 				734F529420B6BEF7002D45B7 /* UserNotifications.framework in Frameworks */,
-				580CB7D721914075004C0E06 /* ETHFramework.framework in Frameworks */,
 				581D32E6219C15CD001F88C3 /* neoutils.framework in Frameworks */,
 				734F529220B6BDEE002D45B7 /* libMiPushSDK.a in Frameworks */,
 				58C003F0207C57E2007B0D2A /* NetworkExtension.framework in Frameworks */,
+				58A913132296314200A4E893 /* TrezorCrytoEd25519.framework in Frameworks */,
 				7F4538A66F4431A83CB2C569 /* Pods_Qlink.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1907,6 +2053,7 @@
 		580CB147219047DC004C0E06 /* NEO */ = {
 			isa = PBXGroup;
 			children = (
+				5806C11721C7A6E3000E693B /* NEOSignUtil.swift */,
 				5832CB39228133190011160D /* O3APIClient.swift */,
 				5832CB36228125030011160D /* Wallet.swift */,
 				5832CB342281245B0011160D /* ContractState.swift */,
@@ -1938,7 +2085,7 @@
 		580CB7C521913C9D004C0E06 /* ETH */ = {
 			isa = PBXGroup;
 			children = (
-				580CB7D621914074004C0E06 /* ETHFramework.framework */,
+				58A71E7122A00E6F00C22D8C /* ETHFramework.framework */,
 			);
 			path = ETH;
 			sourceTree = "<group>";
@@ -2184,7 +2331,8 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				58E2E559224DF73200CBFD54 /* TagListView */,
+				582B114A22952B3D005E2288 /* QLC */,
+				58ED8C85229E7096000A5F54 /* TagListView */,
 				582F238621BF99A400A000D1 /* ODRefreshControl */,
 				587ABCA921B8F8F700C3D81A /* EOS */,
 				581AC36E21AFD84400ACA80B /* XYTransition */,
@@ -2269,6 +2417,7 @@
 		580D913520625A4300B12506 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				583944F5229BEFBF0068852A /* QLCModel */,
 				5894A70B225F44B7008B0854 /* FinanceModel */,
 				585D1EE8225D8E0100468C4A /* UserModel */,
 				581AF7B521B6676D001A37E1 /* EOSModel */,
@@ -2337,9 +2486,6 @@
 				581F5FD0219D4FFF00604352 /* ReportUtil.m */,
 				581AC37821AFE57200ACA80B /* NEOGasClaimUtil.h */,
 				581AC37921AFE57200ACA80B /* NEOGasClaimUtil.m */,
-				5806C11721C7A6E3000E693B /* CryptoUtil.swift */,
-				581CB39821C8BF9F004DED10 /* CryptoUtilOC.h */,
-				581CB39921C8BF9F004DED10 /* CryptoUtilOC.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2765,6 +2911,7 @@
 			children = (
 				585C99A1218015A900DD12DB /* Cell */,
 				5894EC41217EB911007F5D39 /* View */,
+				58CFD9D22293D06A006862E2 /* QLC */,
 				5821CD34217DB57200F81F8B /* EOS */,
 				5821CD33217DB56500F81F8B /* NEO */,
 				5821CD31217DB55E00F81F8B /* ETH */,
@@ -2952,6 +3099,93 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		582B114A22952B3D005E2288 /* QLC */ = {
+			isa = PBXGroup;
+			children = (
+				582B114B22952B7F005E2288 /* qlc */,
+			);
+			path = QLC;
+			sourceTree = "<group>";
+		};
+		582B114B22952B7F005E2288 /* qlc */ = {
+			isa = PBXGroup;
+			children = (
+				58A91323229640A800A4E893 /* wallet */,
+				58A913112296313000A4E893 /* sign */,
+				582B114C22952B7F005E2288 /* bean */,
+				582B114D22952B7F005E2288 /* network */,
+				582B114F22952B7F005E2288 /* utils */,
+				582B115422952B7F005E2288 /* mng */,
+				582B115622952B7F005E2288 /* rpc */,
+				5868497A22A7ABA000CF0F24 /* mnemonic */,
+			);
+			path = qlc;
+			sourceTree = "<group>";
+		};
+		582B114C22952B7F005E2288 /* bean */ = {
+			isa = PBXGroup;
+			children = (
+				58A71E57229F6CC300C22D8C /* QLCTokenMeta.swift */,
+				58A71E59229F6E1A00C22D8C /* QLCToken.swift */,
+				58A71E5B229F6F0100C22D8C /* QLCBlock.swift */,
+				58A71E5D229F71AA00C22D8C /* QLCStateBlock.swift */,
+				58A71E5F229F752400C22D8C /* QLCAddress.swift */,
+				58A71E61229F75DF00C22D8C /* QLCAccount.swift */,
+				58A71E63229F78ED00C22D8C /* QLCPending.swift */,
+			);
+			path = bean;
+			sourceTree = "<group>";
+		};
+		582B114D22952B7F005E2288 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				58ED8C8C229E7796000A5F54 /* LedgerServices.swift */,
+				582B114E22952B7F005E2288 /* QlcClient.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		582B114F22952B7F005E2288 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				582B115022952B7F005E2288 /* Ed25519.swift */,
+				582B115122952B7F005E2288 /* Blake2.swift */,
+				582B115222952B7F005E2288 /* Helper.swift */,
+				582B115322952B7F005E2288 /* Bytes.swift */,
+				58A71E67229F7B5F00C22D8C /* QLCConstants.swift */,
+				58A71E6F229FC91C00C22D8C /* WorkUtil.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		582B115422952B7F005E2288 /* mng */ = {
+			isa = PBXGroup;
+			children = (
+				582B115522952B7F005E2288 /* AccountMng.swift */,
+				58A71E65229F79FD00C22D8C /* BlockMng.swift */,
+				58A71E69229F88B200C22D8C /* TransactionMng.swift */,
+				58A71E6B229FB62300C22D8C /* TokenMetaMng.swift */,
+				58A71E6D229FBD8700C22D8C /* LedgerMng.swift */,
+			);
+			path = mng;
+			sourceTree = "<group>";
+		};
+		582B115622952B7F005E2288 /* rpc */ = {
+			isa = PBXGroup;
+			children = (
+				582B115722952B7F005E2288 /* SMSRpc.swift */,
+				582B115822952B7F005E2288 /* AccountRpc.swift */,
+				582B115922952B7F005E2288 /* MinitageRpc.swift */,
+				582B115A22952B7F005E2288 /* WalletRpc.swift */,
+				582B115B22952B7F005E2288 /* PledgeRpc.swift */,
+				582B115C22952B7F005E2288 /* UtilRpc.swift */,
+				582B115D22952B7F005E2288 /* P2PRpc.swift */,
+				582B115E22952B7F005E2288 /* TokenMateRpc.swift */,
+				582B115F22952B7F005E2288 /* LedgerRpc.swift */,
+			);
+			path = rpc;
+			sourceTree = "<group>";
+		};
 		582F238621BF99A400A000D1 /* ODRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2984,6 +3218,19 @@
 				5860AD5C20CFB58800EEB6CE /* MyAssetsView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		583944F5229BEFBF0068852A /* QLCModel */ = {
+			isa = PBXGroup;
+			children = (
+				583944F6229BEFEA0068852A /* QLCAddressInfoModel.h */,
+				583944F7229BEFEA0068852A /* QLCAddressInfoModel.m */,
+				5849BE99229E8940008B291E /* QLCAddressHistoryModel.h */,
+				5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */,
+				5893721522A664A800BD5CB6 /* QLCTokenInfoModel.h */,
+				5893721622A664A800BD5CB6 /* QLCTokenInfoModel.m */,
+			);
+			path = QLCModel;
 			sourceTree = "<group>";
 		};
 		583D9574211432100057A90C /* Ranking */ = {
@@ -3116,6 +3363,9 @@
 				58A3D4F3225EEBEC00ABABD9 /* EditTextViewController.h */,
 				58A3D4F2225EEBEB00ABABD9 /* EditTextViewController.m */,
 				58A3D4F4225EEBED00ABABD9 /* EditTextViewController.xib */,
+				58E3997122B376610029D105 /* VerificationViewController.h */,
+				58E3997222B376610029D105 /* VerificationViewController.m */,
+				58E3997322B376610029D105 /* VerificationViewController.xib */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -3144,6 +3394,29 @@
 			path = NotificationService;
 			sourceTree = "<group>";
 		};
+		5868497A22A7ABA000CF0F24 /* mnemonic */ = {
+			isa = PBXGroup;
+			children = (
+				5868499522A7AF6300CF0F24 /* crypto */,
+				5868497C22A7ABA000CF0F24 /* EnglishMnemonicList.swift */,
+				5868497F22A7ABA000CF0F24 /* SimplifiedChineseMnemonicList.swift */,
+				5868498022A7ABA000CF0F24 /* Mnemonic.swift */,
+				5868498122A7ABA000CF0F24 /* MnemonicCodeBook.swift */,
+				5868498222A7ABA000CF0F24 /* TraditionalChineseMnemonicList.swift */,
+			);
+			path = mnemonic;
+			sourceTree = "<group>";
+		};
+		5868499522A7AF6300CF0F24 /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				5868499622A7AF6300CF0F24 /* QLCMnemonicBit.h */,
+				5868499822A7AF6300CF0F24 /* QLCMnemonicBit.m */,
+				5868499722A7AF6300CF0F24 /* QLCMnemonicCrypto.swift */,
+			);
+			path = crypto;
+			sourceTree = "<group>";
+		};
 		586EE0952089950A009EAF40 /* P2PModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3164,6 +3437,8 @@
 				587ABCAE21B8F8F700C3D81A /* EOSNetwork */,
 				587ABCAD21B8F8F700C3D81A /* EOSWalletUtil.h */,
 				587ABCAC21B8F8F700C3D81A /* EOSWalletUtil.m */,
+				581CB39821C8BF9F004DED10 /* EOSSignUtil.h */,
+				581CB39921C8BF9F004DED10 /* EOSSignUtil.m */,
 			);
 			path = EOS;
 			sourceTree = "<group>";
@@ -3697,6 +3972,9 @@
 		5894EC41217EB911007F5D39 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				585DD83C229CE0E6007944E9 /* QLCTransferConfirmView.h */,
+				585DD83B229CE0E6007944E9 /* QLCTransferConfirmView.m */,
+				585DD83A229CE0E6007944E9 /* QLCTransferConfirmView.xib */,
 				58A6500221BE196500E52FFF /* PaymentDetailsView.h */,
 				58A6500421BE196600E52FFF /* PaymentDetailsView.m */,
 				58A6500321BE196600E52FFF /* PaymentDetailsView.xib */,
@@ -3813,9 +4091,34 @@
 			path = Qlink;
 			sourceTree = "<group>";
 		};
+		58A913112296313000A4E893 /* sign */ = {
+			isa = PBXGroup;
+			children = (
+				58A9132B2297ECDC00A4E893 /* QLCStringExtensions.swift */,
+				58A9132922966C9700A4E893 /* QLCUtil.swift */,
+				58A913122296314200A4E893 /* TrezorCrytoEd25519.framework */,
+			);
+			path = sign;
+			sourceTree = "<group>";
+		};
+		58A91323229640A800A4E893 /* wallet */ = {
+			isa = PBXGroup;
+			children = (
+				58A9131D22963B7500A4E893 /* QLCWalletManage.h */,
+				58A9131E22963B7500A4E893 /* QLCWalletManage.m */,
+				58A913202296401800A4E893 /* QLCWallet.h */,
+				58A913212296401800A4E893 /* QLCWallet.m */,
+				5868497722A764BA00CF0F24 /* QLCAccountPendingModel.h */,
+				5868497822A764BA00CF0F24 /* QLCAccountPendingModel.m */,
+			);
+			path = wallet;
+			sourceTree = "<group>";
+		};
 		58AE1ADA2074D23C00CE983B /* WalletModels */ = {
 			isa = PBXGroup;
 			children = (
+				5811B7412293D4B900F657B5 /* QLCWalletInfo.h */,
+				5811B7422293D4B900F657B5 /* QLCWalletInfo.m */,
 				581AF7B221B665DB001A37E1 /* EOSWalletInfo.h */,
 				581AF7B321B665DB001A37E1 /* EOSWalletInfo.m */,
 				5827BC3921A3BB7500B7730E /* ETHWalletInfo.h */,
@@ -3881,6 +4184,34 @@
 			path = NEOModel;
 			sourceTree = "<group>";
 		};
+		58CFD9D22293D06A006862E2 /* QLC */ = {
+			isa = PBXGroup;
+			children = (
+				580CF61B22A7C9A900B0995C /* QLCImportWalletViewController.h */,
+				580CF61C22A7C9AA00B0995C /* QLCImportWalletViewController.m */,
+				580CF61D22A7C9AA00B0995C /* QLCImportWalletViewController.xib */,
+				5811B7522293D81300F657B5 /* QLCTransactionRecordViewController.h */,
+				5811B74D2293D81000F657B5 /* QLCTransactionRecordViewController.m */,
+				5811B74B2293D80E00F657B5 /* QLCTransactionRecordViewController.xib */,
+				5811B74A2293D80E00F657B5 /* QLCTransferViewController.h */,
+				5811B7492293D80D00F657B5 /* QLCTransferViewController.m */,
+				5811B7512293D81300F657B5 /* QLCTransferViewController.xib */,
+				5811B7542293D81400F657B5 /* QLCWalletAddressViewController.h */,
+				5811B74E2293D81100F657B5 /* QLCWalletAddressViewController.m */,
+				5811B74C2293D80F00F657B5 /* QLCWalletAddressViewController.xib */,
+				5811B7502293D81200F657B5 /* QLCWalletDetailViewController.h */,
+				5811B74F2293D81100F657B5 /* QLCWalletDetailViewController.m */,
+				5811B7532293D81400F657B5 /* QLCWalletDetailViewController.xib */,
+				58CFD9DA2293D304006862E2 /* QLCBackupDetailViewController.h */,
+				58CFD9D82293D304006862E2 /* QLCBackupDetailViewController.m */,
+				58CFD9D92293D304006862E2 /* QLCBackupDetailViewController.xib */,
+				58CFD9D32293D0A5006862E2 /* QLCCreateWalletViewController.h */,
+				58CFD9D42293D0A5006862E2 /* QLCCreateWalletViewController.m */,
+				58CFD9D52293D0A5006862E2 /* QLCCreateWalletViewController.xib */,
+			);
+			path = QLC;
+			sourceTree = "<group>";
+		};
 		58DF7F6C218982C100228718 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3891,12 +4222,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		58E2E559224DF73200CBFD54 /* TagListView */ = {
+		58ED8C85229E7096000A5F54 /* TagListView */ = {
 			isa = PBXGroup;
 			children = (
-				58E2E55A224DF73200CBFD54 /* CloseButton.swift */,
-				58E2E55B224DF73200CBFD54 /* TagView.swift */,
-				58E2E55C224DF73200CBFD54 /* TagListView.swift */,
+				58ED8C86229E7096000A5F54 /* CloseButton.swift */,
+				58ED8C87229E7096000A5F54 /* TagView.swift */,
+				58ED8C88229E7096000A5F54 /* TagListView.swift */,
 			);
 			path = TagListView;
 			sourceTree = "<group>";
@@ -4268,6 +4599,7 @@
 				583D9597211432110057A90C /* RankingViewController.xib in Resources */,
 				581AFC4221B7AEE8001A37E1 /* EOSResourcesViewController.xib in Resources */,
 				581D32C3219C158B001F88C3 /* strip-frameworks.sh in Resources */,
+				58CFD9D72293D0A5006862E2 /* QLCCreateWalletViewController.xib in Resources */,
 				58990B69219431880036FF4F /* ETHTransferConfirmView.xib in Resources */,
 				5860AD9920CFB5E600EEB6CE /* WalletQRViewController.xib in Resources */,
 				581F5FE1219E5BD400604352 /* WalletsManageCell.xib in Resources */,
@@ -4294,6 +4626,7 @@
 				58FB8D8C2265AB970075698E /* GuangGaoCollectionCell.xib in Resources */,
 				58E41C542182C1D6004C87AA /* ETHWalletDetailViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
+				585DD83D229CE0E7007944E9 /* QLCTransferConfirmView.xib in Resources */,
 				73FF64AA20F342D700E29B3B /* GoogleService-Info.plist in Resources */,
 				5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */,
 				583D959B211432110057A90C /* RankingCell.xib in Resources */,
@@ -4303,10 +4636,13 @@
 				58A6500121BE16BD00E52FFF /* TipOKView.xib in Resources */,
 				581D32F6219D13DD001F88C3 /* NeoQueryWGasView.xib in Resources */,
 				581C227021A6B9180009888B /* NeoClaimGasTipView.xib in Resources */,
+				58CFD9DC2293D305006862E2 /* QLCBackupDetailViewController.xib in Resources */,
 				5860AD0D20CFB4FB00EEB6CE /* DebugLogViewController.xib in Resources */,
+				5811B7572293D81500F657B5 /* QLCWalletAddressViewController.xib in Resources */,
 				580D91B62063AE5300B12506 /* Roboto-ThinItalic.ttf in Resources */,
 				581AF7A621B6646E001A37E1 /* EOSImportViewController.xib in Resources */,
 				580D91BE2063AE5300B12506 /* Roboto-BlackItalic.ttf in Resources */,
+				5811B75C2293D81500F657B5 /* QLCWalletDetailViewController.xib in Resources */,
 				9391A6A4212BB8F3001A1707 /* MyriadPro-Regular.otf in Resources */,
 				581AF7A921B6646E001A37E1 /* EOSTransferViewController.xib in Resources */,
 				58105D3F21882A1A00B8B701 /* ETHWalletAddressViewController.xib in Resources */,
@@ -4316,6 +4652,7 @@
 				580D91B32063AE5300B12506 /* Roboto-BoldItalic.ttf in Resources */,
 				5894A713225F4E18008B0854 /* FinanceProductDetailViewController.xib in Resources */,
 				58CF40B8219925990000C3DA /* NEOImportViewController.xib in Resources */,
+				58E3997522B376610029D105 /* VerificationViewController.xib in Resources */,
 				581AFC4721B7BFFD001A37E1 /* EOSCPUNETViewController.xib in Resources */,
 				583D9598211432110057A90C /* RankingRuleViewController.xib in Resources */,
 				581F5FEB219E6AF900604352 /* JoinCommunityCell.xib in Resources */,
@@ -4345,10 +4682,12 @@
 				58779A9822642976008590EE /* ETHExportKeystorePWViewController.xib in Resources */,
 				58A801CB226DC7A200640BBC /* RegisterMailViewController.xib in Resources */,
 				581AFC4C21B7D28B001A37E1 /* EOSRAMViewController.xib in Resources */,
+				580CF61F22A7C9AA00B0995C /* QLCImportWalletViewController.xib in Resources */,
 				5860AD1B20CFB51200EEB6CE /* WalletSelectCell.xib in Resources */,
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
 				585CDC13225C785500199FE1 /* ForgetPWViewController.xib in Resources */,
 				58E41C4E2181CA36004C87AA /* WalletHomeSwitchCell.xib in Resources */,
+				5811B75B2293D81500F657B5 /* QLCTransferViewController.xib in Resources */,
 				58CF40CE21998D340000C3DA /* NEOTransferConfirmView.xib in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
 				58A801D0226DC7B800640BBC /* RegisterSetPWViewController.xib in Resources */,
@@ -4363,6 +4702,7 @@
 				5860AD5A20CFB58800EEB6CE /* MyAssetsView.xib in Resources */,
 				582843FB21885EEA00AD65C8 /* LoginInputPWViewController.xib in Resources */,
 				5860AD5320CFB57E00EEB6CE /* WalletAddressView.xib in Resources */,
+				5811B7562293D81500F657B5 /* QLCTransactionRecordViewController.xib in Resources */,
 				580D91C02063B27300B12506 /* VAGRounded-Bold.ttf in Resources */,
 				5860AD6820CFB59C00EEB6CE /* HistoryRecordsViewController.xib in Resources */,
 				581AF7AF21B6646E001A37E1 /* EOSCreateWalletViewController.xib in Resources */,
@@ -4421,6 +4761,7 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
@@ -4465,6 +4806,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
@@ -4620,10 +4962,12 @@
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				581D32E1219C158B001F88C3 /* NEP2.swift in Sources */,
 				58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */,
+				58A71E66229F79FD00C22D8C /* BlockMng.swift in Sources */,
 				581AC36D21AFD6E600ACA80B /* QNavigationController.m in Sources */,
 				58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */,
 				58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */,
 				580D915720625A4400B12506 /* UIView+Shake.m in Sources */,
+				58A71E6E229FBD8700C22D8C /* LedgerMng.swift in Sources */,
 				73B1AEC420BE7D3800947749 /* MyAssetsViewController.m in Sources */,
 				581AF7B421B665DB001A37E1 /* EOSWalletInfo.m in Sources */,
 				587ABD8921BA3BCA00C3D81A /* EOSAccountInfoModel.m in Sources */,
@@ -4639,6 +4983,7 @@
 				581A348621AEA07700623685 /* ExportPrivateKeyQRView.m in Sources */,
 				58CF40B3219922A70000C3DA /* NEOTransferViewController.m in Sources */,
 				5812DDA920A1A7890043A8A8 /* ZXChatBoxItemView.m in Sources */,
+				5868498C22A7ABA100CF0F24 /* TraditionalChineseMnemonicList.swift in Sources */,
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
 				581AF7B121B6646E001A37E1 /* EOSCreateWalletViewController.m in Sources */,
 				73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */,
@@ -4659,12 +5004,14 @@
 				580D915120625A4400B12506 /* UIView+Debug.m in Sources */,
 				587ABD4821B8F8F800C3D81A /* EOS_TransactionResult.m in Sources */,
 				580D913E20625A4300B12506 /* UIImage+FileName.m in Sources */,
+				582B116322952B7F005E2288 /* Helper.swift in Sources */,
 				587ABD5921B8F8F800C3D81A /* Sell_ram_abi_json_to_bin_request.m in Sources */,
 				581D511B217981E50064F60C /* SettingsViewController.m in Sources */,
 				580D914420625A4400B12506 /* UIImage+PDF.m in Sources */,
 				5839F52B2069EB21004C4A54 /* DigestUtils.m in Sources */,
 				580D916820625A4400B12506 /* UIViewController+ShowSubViewAnimate.m in Sources */,
 				581C227121A6B9180009888B /* NeoClaimGasTipView.m in Sources */,
+				58A9131F22963B7500A4E893 /* QLCWalletManage.m in Sources */,
 				7362EB2920AAC17900F554FE /* UIView+Toast.m in Sources */,
 				580D914B20625A4400B12506 /* UIImage+Resize.m in Sources */,
 				5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */,
@@ -4687,6 +5034,8 @@
 				587ABD4921B8F8F800C3D81A /* Abi_json_to_bin_Result.m in Sources */,
 				5894EC4B217EC798007F5D39 /* ETHMnemonicConfirmViewController.m in Sources */,
 				58DF8E61206E26AC00ACFC65 /* WalletAddressView.m in Sources */,
+				582B116122952B7F005E2288 /* Ed25519.swift in Sources */,
+				5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */,
 				587ABD6321B8F8F800C3D81A /* CreateEOSAccountRequest.m in Sources */,
 				581D32C7219C158B001F88C3 /* RIPEMD160.swift in Sources */,
 				587ABD5D21B8F8F800C3D81A /* EOS_Account.m in Sources */,
@@ -4698,6 +5047,7 @@
 				587ABD4721B8F8F800C3D81A /* EOS_TransferModel.m in Sources */,
 				581F5FEA219E6AF900604352 /* JoinCommunityCell.m in Sources */,
 				587ABD5521B8F8F800C3D81A /* EOS_GetAccountResult.m in Sources */,
+				5868498622A7ABA100CF0F24 /* EnglishMnemonicList.swift in Sources */,
 				7377D176206B8D560072E628 /* LocationMode.m in Sources */,
 				583D9543211430D90057A90C /* GlowLable.m in Sources */,
 				581D32DC219C158B001F88C3 /* NeoScanBalance.swift in Sources */,
@@ -4709,6 +5059,7 @@
 				587ABD5B21B8F8F800C3D81A /* EOS_AccountResult.m in Sources */,
 				5821CD38217DB5A400F81F8B /* ETHCreateWalletViewController.m in Sources */,
 				585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */,
+				582B116B22952B7F005E2288 /* UtilRpc.swift in Sources */,
 				58957019218957F200DB7497 /* ChooseCurrencyViewController.m in Sources */,
 				58A4DEAE206234AC00E72F52 /* LaunchViewController.m in Sources */,
 				583D959D211432110057A90C /* RankMenuView.m in Sources */,
@@ -4716,12 +5067,15 @@
 				581AC37221AFD84500ACA80B /* XYTransition.m in Sources */,
 				583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */,
 				580D914020625A4300B12506 /* UIImage+Orientation.m in Sources */,
-				581CB39A21C8BF9F004DED10 /* CryptoUtilOC.m in Sources */,
+				581CB39A21C8BF9F004DED10 /* EOSSignUtil.m in Sources */,
+				58A71E58229F6CC300C22D8C /* QLCTokenMeta.swift in Sources */,
 				587ABD6921B8F8F800C3D81A /* BaseService.m in Sources */,
 				587ABD5621B8F8F800C3D81A /* EOS_GetRateResult.m in Sources */,
+				58CFD9D62293D0A5006862E2 /* QLCCreateWalletViewController.m in Sources */,
 				58CF40BE21995D470000C3DA /* NEOAddressInfoModel.m in Sources */,
 				581D32C4219C158B001F88C3 /* AES.swift in Sources */,
 				58FB8D7022645C9C0075698E /* InviteRankingModel.m in Sources */,
+				58A71E5A229F6E1A00C22D8C /* QLCToken.swift in Sources */,
 				58FB8D7822657FC10075698E /* ShareFriendsModel.m in Sources */,
 				580D916920625A4400B12506 /* UIViewController+BarItem.m in Sources */,
 				58090343209C517B0085FD70 /* GroupChatMessageModel.m in Sources */,
@@ -4740,12 +5094,16 @@
 				58A4DEB9206234AC00E72F52 /* main.m in Sources */,
 				587ABD6821B8F8F800C3D81A /* EOS_OptionModel.m in Sources */,
 				73C1BA10207E18270080C59F /* HMScannerBorder.m in Sources */,
+				58A71E6A229F88B200C22D8C /* TransactionMng.swift in Sources */,
 				581D32C0219C158B001F88C3 /* commoncry.m in Sources */,
 				58CF40B7219925990000C3DA /* NEOImportViewController.m in Sources */,
 				58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */,
 				583D9549211430FA0057A90C /* VPNRankMode.m in Sources */,
 				587ABD5421B8F8F800C3D81A /* EOS_Rate.m in Sources */,
 				5812DDB220A1A7890043A8A8 /* ZXImageMessageCell.m in Sources */,
+				58E3997422B376610029D105 /* VerificationViewController.m in Sources */,
+				583944F8229BEFEA0068852A /* QLCAddressInfoModel.m in Sources */,
+				585DD83E229CE0E7007944E9 /* QLCTransferConfirmView.m in Sources */,
 				7377D18B206CC3820072E628 /* NSString+Localizable.m in Sources */,
 				58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */,
 				581D32D2219C158B001F88C3 /* Block.swift in Sources */,
@@ -4754,9 +5112,12 @@
 				587ABD5321B8F8F800C3D81A /* EOS_TokenInfo.m in Sources */,
 				581D32E0219C158B001F88C3 /* validator.swift in Sources */,
 				5812DDA120A1A7890043A8A8 /* TLUserHelper.m in Sources */,
+				58A71E62229F75DF00C22D8C /* QLCAccount.swift in Sources */,
+				5811B7582293D81500F657B5 /* QLCTransactionRecordViewController.m in Sources */,
 				580D916220625A4400B12506 /* UINavigationBar+Awesome.m in Sources */,
 				58E41C582182C36B004C87AA /* ETHWalletDetailCell.m in Sources */,
 				587ABD5F21B8F8F800C3D81A /* EOSResource.m in Sources */,
+				58A71E68229F7B5F00C22D8C /* QLCConstants.swift in Sources */,
 				580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */,
 				581AF7BB21B66827001A37E1 /* EOSTraceModel.m in Sources */,
 				5821CD44217DCBA700F81F8B /* ETHMnemonicViewController.m in Sources */,
@@ -4766,7 +5127,6 @@
 				587ABD4B21B8F8F800C3D81A /* Abi_bin_to_json.m in Sources */,
 				58A3D4F5225EEBED00ABABD9 /* EditTextViewController.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
-				58E2E55F224DF73300CBFD54 /* TagView.swift in Sources */,
 				581D32E4219C158B001F88C3 /* NEP9.swift in Sources */,
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
@@ -4783,6 +5143,7 @@
 				581D7AFE217D9E4000AFD0DE /* ChooseWalletViewController.m in Sources */,
 				580D915B20625A4400B12506 /* UIView+Constraints.m in Sources */,
 				5812DDBF20A1A7D20043A8A8 /* NSString+TL.m in Sources */,
+				5811B7592293D81500F657B5 /* QLCWalletAddressViewController.m in Sources */,
 				5812DDA420A1A7890043A8A8 /* ZXUser.m in Sources */,
 				5832CB37228125040011160D /* Wallet.swift in Sources */,
 				58FB8D8B2265AB970075698E /* GuangGaoCollectionCell.m in Sources */,
@@ -4797,10 +5158,12 @@
 				585D1EFB225DEEE000468C4A /* MyCell.m in Sources */,
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
 				581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */,
+				582B116822952B7F005E2288 /* MinitageRpc.swift in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
 				585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */,
 				581F5FD6219D6C6000604352 /* PasswordManagementViewController.m in Sources */,
 				58D2D8952193E26100C5B4C9 /* UIView+DottedBox.m in Sources */,
+				582B116D22952B7F005E2288 /* TokenMateRpc.swift in Sources */,
 				58D2D88C2192F41B00C5B4C9 /* WalletsSwitchCell.m in Sources */,
 				587ABD4E21B8F8F800C3D81A /* TransferService.m in Sources */,
 				580D914820625A4400B12506 /* UIImage+FX.m in Sources */,
@@ -4811,12 +5174,16 @@
 				587ABD4A21B8F8F800C3D81A /* Abi_bin_to_json_Result.m in Sources */,
 				582843FA21885EEA00AD65C8 /* LoginInputPWViewController.m in Sources */,
 				581F5FDB219E5AB300604352 /* WalletsManageViewController.m in Sources */,
+				5868498B22A7ABA100CF0F24 /* MnemonicCodeBook.swift in Sources */,
 				581D32E8219C16A8001F88C3 /* NEOWalletManage.swift in Sources */,
+				58A71E5E229F71AA00C22D8C /* QLCStateBlock.swift in Sources */,
 				583D959C211432110057A90C /* RankingSubCell.m in Sources */,
 				5894A728226093D3008B0854 /* FinanceOrderListModel.m in Sources */,
 				58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */,
 				58990B6A219431880036FF4F /* ETHTransferConfirmView.m in Sources */,
 				5806C0FE21C3BB1A000E693B /* Create_account_abi_json_to_bin_request.m in Sources */,
+				58CFD9DB2293D305006862E2 /* QLCBackupDetailViewController.m in Sources */,
+				582B116A22952B7F005E2288 /* PledgeRpc.swift in Sources */,
 				581D32BD219C158B001F88C3 /* NEP5Token.swift in Sources */,
 				587ABD5C21B8F8F800C3D81A /* EOSResourceCellModel.m in Sources */,
 				5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */,
@@ -4828,6 +5195,7 @@
 				580D91C72064A27100B12506 /* QGradientView.m in Sources */,
 				58CF40C3219980BD0000C3DA /* NEOTransactionRecordViewController.m in Sources */,
 				58A3D4F9225EEC7700ABABD9 /* NSString+Trim.m in Sources */,
+				5868498922A7ABA100CF0F24 /* SimplifiedChineseMnemonicList.swift in Sources */,
 				589D4716225B502300A4A4E3 /* MyThemes.m in Sources */,
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
 				585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */,
@@ -4835,6 +5203,7 @@
 				587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */,
 				580D915320625A4400B12506 /* UIView+ViewController.m in Sources */,
 				580D914320625A4400B12506 /* UIImage+Rotate.m in Sources */,
+				582B116622952B7F005E2288 /* SMSRpc.swift in Sources */,
 				587ABD6021B8F8F800C3D81A /* EOSResourceService.m in Sources */,
 				5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */,
 				580D915A20625A4400B12506 /* UIView+Find.m in Sources */,
@@ -4857,6 +5226,7 @@
 				587ABD7021B8F8F800C3D81A /* EOS_AccountInfo.m in Sources */,
 				58FB8D64226436820075698E /* EarningRankingCell.m in Sources */,
 				73B1AEBF20BE57C600947749 /* WebViewController.m in Sources */,
+				582B116222952B7F005E2288 /* Blake2.swift in Sources */,
 				58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */,
 				58A6500621BE196600E52FFF /* PaymentDetailsView.m in Sources */,
 				73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */,
@@ -4864,10 +5234,12 @@
 				582F87BF2153338F0008331D /* RankingStartCell.m in Sources */,
 				5839F5252068F9FA004C4A54 /* NSString+HexStr.m in Sources */,
 				7348C938206E0604009ACA5C /* WalletAlertView.m in Sources */,
+				5868499A22A7AF6300CF0F24 /* QLCMnemonicBit.m in Sources */,
 				580D914C20625A4400B12506 /* UILabel+Block.m in Sources */,
 				580D916620625A4400B12506 /* NSString+EmptyUtil.m in Sources */,
 				5812DDB120A1A7890043A8A8 /* ZXTextMessageCell.m in Sources */,
 				58FB8D802265A8A40075698E /* GuangGaoView.m in Sources */,
+				5811B75A2293D81500F657B5 /* QLCWalletDetailViewController.m in Sources */,
 				581C227C21AD17F80009888B /* UIView+JKToast.m in Sources */,
 				581AF7C021B66B9B001A37E1 /* EOSTransferConfirmView.m in Sources */,
 				5827BC21219EBAF800B7730E /* ETHVerifyPWViewController.m in Sources */,
@@ -4875,31 +5247,41 @@
 				581D32CE219C158B001F88C3 /* ValueIn.swift in Sources */,
 				7377D173206B84620072E628 /* LocationManage.m in Sources */,
 				584911802105AEF4005232A2 /* LocationShareModel.m in Sources */,
+				58ED8C8A229E7096000A5F54 /* TagView.swift in Sources */,
 				73E52BD12062978200063ED6 /* QlinkTabbarViewController.m in Sources */,
 				580D915920625A4400B12506 /* UIView+Visuals.m in Sources */,
 				581D32C6219C158B001F88C3 /* scrypt.swift in Sources */,
 				58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */,
+				582B116022952B7F005E2288 /* QlcClient.swift in Sources */,
 				58C3181A2181B829000344D3 /* WalletsCell.m in Sources */,
 				5812DDBC20A1A7D20043A8A8 /* UIImage+TL.m in Sources */,
 				587ABD5721B8F8F800C3D81A /* EOS_Keys.m in Sources */,
 				73C1BA05207DB2290080C59F /* SystemUtil.m in Sources */,
 				7377D199206CFCD10072E628 /* SRSlimeView.m in Sources */,
+				582B116E22952B7F005E2288 /* LedgerRpc.swift in Sources */,
 				58A64FFE21BE16B100E52FFF /* TipOKView.m in Sources */,
 				5827BC3D21A3FA6300B7730E /* NEOGasUtil.swift in Sources */,
+				58A71E60229F752400C22D8C /* QLCAddress.swift in Sources */,
 				581D32CD219C158B001F88C3 /* Claims.swift in Sources */,
 				58CF1032207CBFDF0026F28E /* UnderlineView.m in Sources */,
 				587ABD6D21B8F8F800C3D81A /* EOS_RichListResult.m in Sources */,
 				58CF40CF21998D340000C3DA /* NEOTransferConfirmView.m in Sources */,
+				5868498A22A7ABA100CF0F24 /* Mnemonic.swift in Sources */,
 				581B678C219178BB0061BEDB /* FingerprintVerificationUtil.m in Sources */,
 				5806C10421C3C3AC000E693B /* GetBlockRequest.m in Sources */,
+				5811B7432293D4B900F657B5 /* QLCWalletInfo.m in Sources */,
 				7377D179206B9E730072E628 /* VPNMode.m in Sources */,
+				58ED8C8B229E7096000A5F54 /* TagListView.swift in Sources */,
+				582B116722952B7F005E2288 /* AccountRpc.swift in Sources */,
 				585D1EEB225D8E5E00468C4A /* UserModel.m in Sources */,
 				587ABD4D21B8F8F800C3D81A /* EOS_BlockChainInfo.m in Sources */,
 				58E41C5D2182E52D004C87AA /* ETHTransactionRecordViewController.m in Sources */,
 				581A347A21AE653400623685 /* AddMarketsViewController.m in Sources */,
 				581D32DF219C158B001F88C3 /* Array+Util.swift in Sources */,
 				581AFC5021B7D5A5001A37E1 /* EOSRegisterAccountViewController.m in Sources */,
+				582B116522952B7F005E2288 /* AccountMng.swift in Sources */,
 				587ABD5021B8F8F800C3D81A /* GetAccountRequest.m in Sources */,
+				58ED8C89229E7096000A5F54 /* CloseButton.swift in Sources */,
 				581C226B21A6B7160009888B /* DeleteWalletConfirmView.m in Sources */,
 				58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */,
 				588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */,
@@ -4912,6 +5294,7 @@
 				581AC37A21AFE57200ACA80B /* NEOGasClaimUtil.m in Sources */,
 				5827BC26219EBDBD00B7730E /* ETHExportMnemonicViewController.m in Sources */,
 				58DF7F702189860F00228718 /* ResetPWSuccessView.m in Sources */,
+				58A9132C2297ECDD00A4E893 /* QLCStringExtensions.swift in Sources */,
 				5827BC2F21A28B2400B7730E /* HistoryChartView.m in Sources */,
 				581D32F1219D10F9001F88C3 /* NeoQueryWGasModel.m in Sources */,
 				58D2D89B2193E9BB00C5B4C9 /* ExportPrivateKeyView.m in Sources */,
@@ -4922,7 +5305,9 @@
 				583D9595211432110057A90C /* RankingViewController.m in Sources */,
 				581AC35D21AFCEDB00ACA80B /* SandBoxHelper.m in Sources */,
 				58CF40C9219984AB0000C3DA /* NEOWalletAddressViewController.m in Sources */,
+				58A913222296401800A4E893 /* QLCWallet.m in Sources */,
 				585D1F08225EE38D00468C4A /* PersonalInfoCell.m in Sources */,
+				5893721722A664A800BD5CB6 /* QLCTokenInfoModel.m in Sources */,
 				5807D649208061A20049565D /* ShadowImageView.m in Sources */,
 				585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */,
 				581D32CB219C158B001F88C3 /* WIF.swift in Sources */,
@@ -4933,6 +5318,7 @@
 				5812DDAE20A1A7890043A8A8 /* ZXSystemMessageCell.m in Sources */,
 				581F5FE0219E5BD400604352 /* WalletsManageCell.m in Sources */,
 				582F238A21BF99A500A000D1 /* ODRefreshControl.m in Sources */,
+				5811B7552293D81500F657B5 /* QLCTransferViewController.m in Sources */,
 				583D9540211430D90057A90C /* PageOneView.m in Sources */,
 				5806C10D21C3CB1D000E693B /* CreateAccountTransferService.m in Sources */,
 				58FB8D942265C4500075698E /* RefreshHelper.m in Sources */,
@@ -4945,9 +5331,10 @@
 				587ABD6A21B8F8F800C3D81A /* BaseNetworkRequest.m in Sources */,
 				580D915420625A4400B12506 /* UIView+Frame.m in Sources */,
 				581D32E3219C158B001F88C3 /* Base58.swift in Sources */,
+				58A71E70229FC91C00C22D8C /* WorkUtil.swift in Sources */,
 				58105D4221882E4200B8B701 /* NavWhiteShadowView.m in Sources */,
 				587ABD5221B8F8F800C3D81A /* EOS_Permission.m in Sources */,
-				5806C11821C7A6E5000E693B /* CryptoUtil.swift in Sources */,
+				5806C11821C7A6E5000E693B /* NEOSignUtil.swift in Sources */,
 				581AFC4621B7BFFD001A37E1 /* EOSCPUNETViewController.m in Sources */,
 				587ABD5121B8F8F800C3D81A /* EOS_GetAccount.m in Sources */,
 				5809033D209B07370085FD70 /* ChatModel.m in Sources */,
@@ -4957,31 +5344,36 @@
 				585D1EF0225D9F4600468C4A /* RSAUtil.m in Sources */,
 				581D32EE219D107F001F88C3 /* NeoGotWGasModel.m in Sources */,
 				735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */,
+				5868497922A764BA00CF0F24 /* QLCAccountPendingModel.m in Sources */,
 				581AC35A21AFC63B00ACA80B /* AppDelegate+AppService.m in Sources */,
 				58FB8D902265B6C10075698E /* FinanceHistoryCell.m in Sources */,
 				581D32D1219C158B001F88C3 /* TransactionHistory.swift in Sources */,
 				58FB8D55226434AF0075698E /* EarningsRankingViewController.m in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,
+				58A71E5C229F6F0100C22D8C /* QLCBlock.swift in Sources */,
 				587ABD6121B8F8F800C3D81A /* BackupEosAccountRequest.m in Sources */,
 				5894A712225F4E18008B0854 /* FinanceProductDetailViewController.m in Sources */,
 				58270FC22072019400C08784 /* NEOWalletUtil.m in Sources */,
 				58A801C62268692B00640BBC /* FinanceHistoryModel.m in Sources */,
+				5868499922A7AF6300CF0F24 /* QLCMnemonicCrypto.swift in Sources */,
 				587ABD5A21B8F8F800C3D81A /* Buy_ram_abi_json_to_bin_request.m in Sources */,
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
 				5827BC1D219EA87300B7730E /* BinaTpcsModel.m in Sources */,
 				58270FD820720D3600C08784 /* ProfileViewController.m in Sources */,
+				582B116922952B7F005E2288 /* WalletRpc.swift in Sources */,
 				58A801D4226DC7DC00640BBC /* SetPWViewController.m in Sources */,
 				580D916720625A4400B12506 /* NSString+Base64Image.m in Sources */,
 				587ABD6621B8F8F800C3D81A /* BaseHttpsNetworkRequest.m in Sources */,
 				581A347F21AE694900623685 /* AddMarketsCell.m in Sources */,
+				582B116422952B7F005E2288 /* Bytes.swift in Sources */,
 				5894A70E225F451F008B0854 /* FinanceProductModel.m in Sources */,
 				580D915C20625A4400B12506 /* UIView+Screenshot.m in Sources */,
+				58A71E6C229FB62300C22D8C /* TokenMetaMng.swift in Sources */,
 				5839F5192068CFA8004C4A54 /* RequestService.m in Sources */,
 				735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */,
 				582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */,
 				581D32C1219C158B001F88C3 /* Global.swift in Sources */,
 				580D916B20625A4400B12506 /* BBaseModel.m in Sources */,
-				58E2E55E224DF73300CBFD54 /* CloseButton.swift in Sources */,
 				58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */,
 				5806C11321C3DB59000E693B /* CreateAccountPushTransactionRequest.m in Sources */,
 				581D32D6219C158B001F88C3 /* Transaction.swift in Sources */,
@@ -4993,8 +5385,10 @@
 				5812DDA320A1A7890043A8A8 /* ZXChatHelper.m in Sources */,
 				587ABD6221B8F8F800C3D81A /* CreateAccountRequest.m in Sources */,
 				73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */,
+				58A71E64229F78ED00C22D8C /* QLCPending.swift in Sources */,
 				582F239621C1126C00A000D1 /* EOSActivateAccountViewController.m in Sources */,
 				583D9548211430FA0057A90C /* RankingMode.m in Sources */,
+				582B116C22952B7F005E2288 /* P2PRpc.swift in Sources */,
 				581D32CC219C158B001F88C3 /* AccountState.swift in Sources */,
 				580D914E20625A4400B12506 /* UIButton+Block.m in Sources */,
 				581D32E2219C158B001F88C3 /* Data+Util.swift in Sources */,
@@ -5002,6 +5396,7 @@
 				581AF7AC21B6646E001A37E1 /* EOSAccountQRViewController.m in Sources */,
 				581AFC4B21B7D28B001A37E1 /* EOSRAMViewController.m in Sources */,
 				58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */,
+				580CF61E22A7C9AA00B0995C /* QLCImportWalletViewController.m in Sources */,
 				581AF7B821B66787001A37E1 /* EOSSymbolModel.m in Sources */,
 				580D915220625A4400B12506 /* UIView+Nib.m in Sources */,
 				580D914F20625A4400B12506 /* UIColor+Random.m in Sources */,
@@ -5012,9 +5407,10 @@
 				5812DDAB20A1A7890043A8A8 /* ZXChatBoxMoreView.m in Sources */,
 				7351508D20D3B71300194711 /* DBManageUtil.m in Sources */,
 				58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */,
+				58ED8C8D229E7796000A5F54 /* LedgerServices.swift in Sources */,
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,
 				581D32DB219C158B001F88C3 /* ContractResult.swift in Sources */,
-				58E2E560224DF73300CBFD54 /* TagListView.swift in Sources */,
+				58A9132A22966C9700A4E893 /* QLCUtil.swift in Sources */,
 				5812DDB020A1A7890043A8A8 /* ZXVoiceMessageCell.m in Sources */,
 				73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */,
 				58CDB5F220889FA600B74962 /* QShadowView.m in Sources */,
@@ -5585,6 +5981,7 @@
 					"$(PROJECT_DIR)/Qlink/Vender/NEO",
 					"$(PROJECT_DIR)/Qlink/Vender/ETH",
 					"$(PROJECT_DIR)/Qlink/Vender/EOS/EOSFramework",
+					"$(PROJECT_DIR)/Qlink/Vender/QLC/qlc/sign",
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Qlink/QlinkPrefixHeader.pch";
 				INFOPLIST_FILE = Qlink/Info.plist;
@@ -5627,6 +6024,7 @@
 					"$(PROJECT_DIR)/Qlink/Vender/NEO",
 					"$(PROJECT_DIR)/Qlink/Vender/ETH",
 					"$(PROJECT_DIR)/Qlink/Vender/EOS/EOSFramework",
+					"$(PROJECT_DIR)/Qlink/Vender/QLC/qlc/sign",
 				);
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Qlink/QlinkPrefixHeader.pch";
 				INFOPLIST_FILE = Qlink/Info.plist;

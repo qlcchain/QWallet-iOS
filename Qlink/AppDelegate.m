@@ -29,7 +29,7 @@
 
 #import "AppDelegate+AppService.h"
 #import "NSString+HexStr.h"
-#import "CryptoUtilOC.h"
+#import "EOSSignUtil.h"
 #import "ReportUtil.h"
 #import <ETHFramework/ETHFramework.h>
 #import "LoginViewController.h"
@@ -112,12 +112,14 @@
     [self checkGuidenPage];
     // 后台定位常驻
 //    [self getBackgroudLocation];
+    // 配置QLC钱包
+    [self configQLCWallet];
 
     [self.window makeKeyAndVisible];
     
     // 点击推送打开app
     [self handleLaunchWithPush:launchOptions];
-    
+        
 //    [VPNFileUtil removeVPNFile];
     
     return YES;

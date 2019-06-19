@@ -346,7 +346,7 @@ public class Wallet {
     }
 
 //    public func sendAssetTransaction(network: Network, seedURL: String, asset: AssetId, amount: Double, toAddress: String, attributes: [TransactionAttritbute]? = nil, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
-    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, network: Network, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
+    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, network: NeoNetwork, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
         
         var customAttributes: [TransactionAttritbute] = []
         let remarkInput = remarkStr ?? NEO_Transfer_Remark
@@ -428,7 +428,7 @@ public class Wallet {
         return finalPayload
     }
 
-    public func claimGas(network: Network, seedURL: String, completion: @escaping(Bool?, Error?) -> Void) {
+    public func claimGas(network: NeoNetwork, seedURL: String, completion: @escaping(Bool?, Error?) -> Void) {
         O3APIClient(network: network).getClaims(address: self.address) { result in
             switch result {
             case .failure(let error):
@@ -530,7 +530,7 @@ public class Wallet {
         case invokeFailed
     }
     
-    public func invokeContract(network: Network, seedURL: String?,
+    public func invokeContract(network: NeoNetwork, seedURL: String?,
                                invokeRequest: dAppProtocol.InvokeRequest, remarkStr: String?, completion: @escaping(String?, Error?) -> Void) {
 
         var customAttributes: [TransactionAttritbute] = []
@@ -598,7 +598,7 @@ public class Wallet {
     }
     
 //    public func sendNep5Token(network: Network, seedURL: String, tokenContractHash: String, decimals: Int, amount: Double, toAddress: String, attributes: [TransactionAttritbute]? = nil, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
-    public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, remarkStr: String?, decimals: Int, fee: Double = 0.0, network: Network, completion: @escaping(String?, Error?) -> Void) {
+    public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, remarkStr: String?, decimals: Int, fee: Double = 0.0, network: NeoNetwork, completion: @escaping(String?, Error?) -> Void) {
         print("sendNep5Token action")
     
         let amountToSend = Int(amount * pow(10, Double(decimals)))

@@ -10,7 +10,7 @@
 #import <TrustCore/Crypto.h>
 #import "NSString+HexStr.h"
 #import "Qlink-Swift.h"
-#import "CryptoUtilOC.h"
+#import "EOSSignUtil.h"
 #import <ETHFramework/ETHFramework.h>
 #import "UserModel.h"
 
@@ -40,12 +40,17 @@
     } else if ([blockChain isEqualToString:@"EOS"]) {
         pubKeyResult = pubKey;
         NSString *inputStr = [myP2pId stringByAppendingString:address];
-        NSString *sign = [CryptoUtilOC eosSignWithPrivateKey:privateKey message:inputStr];
+        NSString *sign = [EOSSignUtil eosSignWithPrivateKey:privateKey message:inputStr];
         [signResult appendString:sign];
         NSLog(@"signResult = %@",signResult);
     } else if ([blockChain isEqualToString:@"NEO"]) {
         pubKeyResult = pubKey;
-        NSString *sign = [CryptoUtil neoutilsignWithDataHex:myP2pId privateKey:privateKey]?:@"";
+        NSString *sign = [NEOSignUtil neoutilsignWithDataHex:myP2pId privateKey:privateKey]?:@"";
+        [signResult appendString:sign];
+        NSLog(@"signResult = %@",signResult);
+    } else if ([blockChain isEqualToString:@"QLC"]) {
+        pubKeyResult = pubKey;
+        NSString *sign = [QLCUtil signWithMessage:myP2pId secretKey:privateKey publicKey:pubKey]?:@"";
         [signResult appendString:sign];
         NSLog(@"signResult = %@",signResult);
     }

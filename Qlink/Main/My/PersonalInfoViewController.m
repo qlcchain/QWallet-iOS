@@ -14,6 +14,7 @@
 #import "UIImage+Resize.h"
 #import "RSAUtil.h"
 #import "ForgetPWViewController.h"
+#import "VerificationViewController.h"
 
 @interface PersonalInfoViewController () <UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -30,6 +31,7 @@ NSString *person_title2 = @"My Invitation Code";
 NSString *person_title3 = @"Email";
 NSString *person_title4 = @"Mobile";
 NSString *person_title5 = @"Reset Password";
+//NSString *person_title5 = @"Verification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,6 +89,7 @@ NSString *person_title5 = @"Reset Password";
     model = [PersonalInfoShowModel new];
     model.key = person_title5;
     model.val = person_title5;
+//    model.val = @"Unverified";
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = NO;
@@ -145,6 +148,7 @@ NSString *person_title5 = @"Reset Password";
         [self jumpToEditText:EditPhone];
     } else if ([model.key isEqualToString:person_title5]) {
         [self jumpToForgetPW];
+//        [self jumpToVerification];
     }
 }
 
@@ -171,6 +175,11 @@ NSString *person_title5 = @"Reset Password";
 - (void)jumpToForgetPW {
     ForgetPWViewController *vc = [ForgetPWViewController new];
     vc.inputTitle = person_title5;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToVerification {
+    VerificationViewController *vc = [VerificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
