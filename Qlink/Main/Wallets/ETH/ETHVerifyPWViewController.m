@@ -90,6 +90,7 @@
 #pragma mark - Transition
 - (void)jumpToETHExportMnemonic {
     ETHExportMnemonicViewController *vc = [[ETHExportMnemonicViewController alloc] init];
+    vc.enterType = ETHExportMnemonicEnterTypeExport;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

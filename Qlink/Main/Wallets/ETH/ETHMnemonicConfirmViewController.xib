@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,8 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETHMnemonicConfirmViewController">
             <connections>
                 <outlet property="confirmBtn" destination="OFi-Ze-QYx" id="edO-sG-I58"/>
-                <outlet property="normalTagListView" destination="VgD-l5-0P6" id="MsO-Om-tC0"/>
-                <outlet property="selectTagListView" destination="fM5-oW-EEp" id="w5C-ZW-srE"/>
+                <outlet property="normalTagListView" destination="9S3-hM-XMc" id="EXf-HW-Hgi"/>
+                <outlet property="selectTagListView" destination="RKn-eb-aGc" id="PMB-yb-ebV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -73,141 +74,41 @@
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLd-OI-1GU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fM5-oW-EEp" customClass="TagListView" customModule="TagListView">
-                                                    <rect key="frame" x="24" y="18" width="327" height="22"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RKn-eb-aGc" customClass="TTGTextTagCollectionView">
+                                                    <rect key="frame" x="24" y="18" width="327" height="128"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="vv0-EJ-JcB"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="5xW-Kk-D8N"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="marginY">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="marginX">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                            <color key="value" red="0.12156862745098039" green="0.19215686274509802" blue="0.29019607843137252" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                            <size key="value" width="0.0" height="2"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
-                                                            <color key="value" red="0.29019607843137252" green="0.0" blue="0.50588235294117645" alpha="0.88" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.29019607843137252" green="0.0" blue="0.50588235294117645" alpha="1" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="-1" id="HL7-Ms-eQh"/>
-                                                    </connections>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.90980392160000001" green="0.89019607840000003" blue="0.94117647059999998" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="fM5-oW-EEp" firstAttribute="top" secondItem="oLd-OI-1GU" secondAttribute="top" constant="18" id="BP7-kQ-yTQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="fM5-oW-EEp" secondAttribute="bottom" constant="18" id="Nfa-7S-4Y8"/>
-                                                <constraint firstItem="fM5-oW-EEp" firstAttribute="leading" secondItem="oLd-OI-1GU" secondAttribute="leading" constant="24" id="Sdl-L2-WCe"/>
-                                                <constraint firstAttribute="trailing" secondItem="fM5-oW-EEp" secondAttribute="trailing" constant="24" id="T6G-Ej-rQn"/>
+                                                <constraint firstItem="RKn-eb-aGc" firstAttribute="leading" secondItem="oLd-OI-1GU" secondAttribute="leading" constant="24" id="Zn8-Lb-JPW"/>
+                                                <constraint firstAttribute="bottom" secondItem="RKn-eb-aGc" secondAttribute="bottom" constant="18" id="dEk-5X-4fW"/>
+                                                <constraint firstAttribute="trailing" secondItem="RKn-eb-aGc" secondAttribute="trailing" constant="24" id="iRs-uI-sgU"/>
+                                                <constraint firstItem="RKn-eb-aGc" firstAttribute="top" secondItem="oLd-OI-1GU" secondAttribute="top" constant="18" id="tqf-Nj-j8R"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DjA-TT-M5G">
                                             <rect key="frame" x="0.0" y="58" width="375" height="58"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VgD-l5-0P6" customClass="TagListView" customModule="TagListView">
-                                                    <rect key="frame" x="24" y="18" width="327" height="22"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9S3-hM-XMc" customClass="TTGTextTagCollectionView">
+                                                    <rect key="frame" x="24" y="18" width="327" height="128"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="9St-u4-bmL"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="ADL-PL-MJB"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
-                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="marginY">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="marginX">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                            <color key="value" red="0.1215686275" green="0.19215686269999999" blue="0.2901960784" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                            <real key="value" value="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                            <size key="value" width="0.0" height="2"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
-                                                            <color key="value" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="0.88" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="-1" id="tpW-vr-89l"/>
-                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="VgD-l5-0P6" secondAttribute="trailing" constant="24" id="HQE-P6-bee"/>
-                                                <constraint firstItem="VgD-l5-0P6" firstAttribute="top" secondItem="DjA-TT-M5G" secondAttribute="top" constant="18" id="JUw-fX-8tZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="VgD-l5-0P6" secondAttribute="bottom" constant="18" id="VTC-0F-PE1"/>
-                                                <constraint firstItem="VgD-l5-0P6" firstAttribute="leading" secondItem="DjA-TT-M5G" secondAttribute="leading" constant="24" id="vAp-ra-qPC"/>
+                                                <constraint firstItem="9S3-hM-XMc" firstAttribute="top" secondItem="DjA-TT-M5G" secondAttribute="top" constant="18" id="8nz-7q-pcY"/>
+                                                <constraint firstAttribute="trailing" secondItem="9S3-hM-XMc" secondAttribute="trailing" constant="24" id="Yoi-R4-rGl"/>
+                                                <constraint firstAttribute="bottom" secondItem="9S3-hM-XMc" secondAttribute="bottom" constant="18" id="kID-9n-Str"/>
+                                                <constraint firstItem="9S3-hM-XMc" firstAttribute="leading" secondItem="DjA-TT-M5G" secondAttribute="leading" constant="24" id="ygR-jA-14U"/>
                                             </constraints>
                                         </view>
                                     </subviews>

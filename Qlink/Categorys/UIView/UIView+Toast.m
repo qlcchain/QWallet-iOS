@@ -89,7 +89,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     [view addSubview:HUD];
     [HUD showAnimated:YES];
     
-    HUD.userInteractionEnabled = isEnabled;
+    HUD.userInteractionEnabled = !isEnabled;
     //    HUD.backgroundView.userInteractionEnabled = isEnabled;
     HUD.removeFromSuperViewOnHide = YES;
     if (time > 0) {
@@ -110,7 +110,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     [HUD showAnimated:YES];
 }
 
-- (void)makeToastInView:(UIView *)view text:(NSString *)text userInteractionEnabled: (BOOL)isEnabled hideTime:(CGFloat)time {
+- (void)makeToastInView:(UIView *)view text:(NSString *)text userInteractionEnabled:(BOOL)isEnabled hideTime:(CGFloat)time {
     if ([self HUD]) {
         [self hideToast];
     }
@@ -122,8 +122,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     [view addSubview:HUD];
     [HUD showAnimated:YES];
     
-    HUD.userInteractionEnabled = isEnabled;
-//    HUD.backgroundView.userInteractionEnabled = isEnabled;
+    HUD.userInteractionEnabled = !isEnabled;
     HUD.removeFromSuperViewOnHide = YES;
     if (time > 0) {
         [HUD hideAnimated:YES afterDelay:time];
@@ -133,7 +132,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 - (void)makeToastDisappearInView:(UIView *)view text:(NSString *)text {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
     [view addSubview:HUD];
-    HUD.userInteractionEnabled = NO;
+    HUD.userInteractionEnabled = YES;
     
     // Configure for text only and offset down
     HUD.mode = MBProgressHUDModeText;
@@ -157,7 +156,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     //显示提示信息
     //    UIView *view = [[UIApplication sharedApplication].delegate window];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
-    hud.userInteractionEnabled = NO;
+    hud.userInteractionEnabled = YES;
     // Configure for text only and offset down
     hud.mode = MBProgressHUDModeText;
     hud.label.text = text;
@@ -178,7 +177,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     //显示提示信息
     UIView *view = [[UIApplication sharedApplication].delegate window];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.userInteractionEnabled = NO;
+    hud.userInteractionEnabled = YES;
     // Configure for text only and offset down
     hud.mode = MBProgressHUDModeText;
     hud.label.text = text;

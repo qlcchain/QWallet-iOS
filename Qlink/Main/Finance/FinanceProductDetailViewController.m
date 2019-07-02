@@ -16,7 +16,7 @@
 #import "NeoTransferUtil.h"
 #import "NEOAddressInfoModel.h"
 #import "NEOWalletUtil.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
 #import "RefreshHelper.h"
 
 @interface FinanceProductDetailViewController ()
@@ -82,9 +82,11 @@
     
     NSString *mainAddress = [NeoTransferUtil getShareObject].neoMainAddress;
     _sendToAddressLab.text = mainAddress;
-    [HMScanner qrImageWithString:mainAddress?:@"" avatar:nil completion:^(UIImage *image) {
-        weakself.sendToQRImgV.image = image;
-    }];
+    UIImage *img = [[UIImage imageNamed:@"icon_start_icon"] imgWithBackgroundColor:[UIColor whiteColor]];
+    _sendToQRImgV.image = [SGQRCodeObtain generateQRCodeWithData:mainAddress?:@"" size:_sendToQRImgV.width logoImage:img ratio:0.15 logoImageCornerRadius:4.0 logoImageBorderWidth:0.5 logoImageBorderColor:[UIColor whiteColor]];
+//    [HMScanner qrImageWithString:mainAddress?:@"" avatar:nil completion:^(UIImage *image) {
+//        weakself.sendToQRImgV.image = image;
+//    }];
 }
 
 - (void)refreshView {
@@ -100,6 +102,14 @@
 
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)allAction:(id)sender {
+    if (_qlcAssetM) {
+        _qlcTF.text = [NSString stringWithFormat:@"%@",_qlcAssetM.amount];
+    } else {
+        [kAppD.window makeToastDisappearWithText:@"Please scroll down to refresh Or switch NEO wallet."];
+    }
 }
 
 - (IBAction)rulesDetailAction:(id)sender {
@@ -133,7 +143,7 @@
     }
     
     if (!_qlcAssetM) {
-        [kAppD.window makeToastDisappearWithText:@"Please scroll down to refresh Or switch wallet."];
+        [kAppD.window makeToastDisappearWithText:@"Please scroll down to refresh Or switch NEO wallet."];
         return;
     }
     if ([_qlcAssetM.amount floatValue] < [_qlcTF.text floatValue]) {

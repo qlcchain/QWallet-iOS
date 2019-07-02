@@ -8,7 +8,7 @@
 
 #import "InviteFriendNowViewController.h"
 #import "UserModel.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
 #import "UIView+Visuals.h"
 
 @interface InviteFriendNowViewController ()
@@ -40,10 +40,11 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     _invitationCodeLab.text = userM.ID?:@"00000000";
     
-    kWeakSelf(self);
-    [HMScanner qrImageWithString:Download_Link avatar:nil completion:^(UIImage *image) {
-        weakself.qrImgV.image = image;
-    }];
+    _qrImgV.image = [SGQRCodeObtain generateQRCodeWithData:Download_Link size:_qrImgV.width logoImage:nil ratio:0.15];
+//    kWeakSelf(self);
+//    [HMScanner qrImageWithString:Download_Link avatar:nil completion:^(UIImage *image) {
+//        weakself.qrImgV.image = image;
+//    }];
 }
 
 #pragma mark - Action

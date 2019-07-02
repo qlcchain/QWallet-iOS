@@ -25,8 +25,7 @@
 #import "LoginSetPWViewController.h"
 #import "LoginInputPWViewController.h"
 #import "WalletCommonModel.h"
-#import "RunInBackground.h"
-
+//#import "RunInBackground.h"
 #import "AppDelegate+AppService.h"
 #import "NSString+HexStr.h"
 #import "EOSSignUtil.h"
@@ -40,7 +39,7 @@
 @import Firebase;
 
 @interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
-    BOOL isBackendRun;
+//    BOOL isBackendRun;
 }
 
 //@property (nonatomic, strong) LocationTracker * locationTracker;
@@ -112,15 +111,18 @@
     [self checkGuidenPage];
     // 后台定位常驻
 //    [self getBackgroudLocation];
-    // 配置QLC钱包
-    [self configQLCWallet];
 
     [self.window makeKeyAndVisible];
     
     // 点击推送打开app
     [self handleLaunchWithPush:launchOptions];
-        
+    
 //    [VPNFileUtil removeVPNFile];
+//    [WorkUtil generateWorkOfOperationWithHash:@"642206314f534b29ad297d82440a5f9f210e30ca5ced805a587ca402de927342" handler:^(NSString * _Nonnull result) {
+//    }];
+    
+//    [WorkUtil generateWorkOfOperationRandomWithHash:@"642206314f534b29ad297d82440a5f9f210e30ca5ced805a587ca402de927342" handler:^(NSString * _Nonnull result) {
+//    }];
     
     return YES;
 }
@@ -147,6 +149,7 @@
     
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
+    [self jumpToWallet];
 }
 
 - (void)jumpToWallet {
@@ -247,15 +250,14 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
 //    _allowPresentLogin = YES; // 打开app允许弹出输入密码
-    
     NSLog(@"backgroundTimeRemaining=%@",@(application.backgroundTimeRemaining));
     NSLog(@"applicationState=%@",@(application.applicationState));
     
     NSInteger seconds = [NSDate getTimestampFromDate:[NSDate date]] ;
     [HWUserdefault insertObj:@(seconds) withkey:In_Background_Time];
     
-    isBackendRun = YES;
-    [[RunInBackground sharedBg] startRunInbackGround];
+//    isBackendRun = YES;
+//    [[RunInBackground sharedBg] startRunInbackGround];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -278,10 +280,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    if (isBackendRun){
-        [[RunInBackground sharedBg] stopAudioPlay];
-        isBackendRun = NO;
-    }
+//    if (isBackendRun){
+//        [[RunInBackground sharedBg] stopAudioPlay];
+//        isBackendRun = NO;
+//    }
     
 }
 

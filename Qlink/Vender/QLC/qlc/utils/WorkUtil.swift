@@ -14,42 +14,28 @@ public class WorkUtil : NSObject {
     private static let WorkSize:Int = 8
     private static let THRESHOLD:UInt64 = 0xfffffe0000000000
     private static var stopWork = false
+    private static var isTimeOut = false
+    private static var startTime:Date?
+    private static var endTime:Date?
     
 //    private static let ThreadLocalRandom RANDOM = ThreadLocalRandom.current()
     
+    /*
     @objc public static func generateWorkOfOperation(hash:String ,handler:@escaping ((String) -> Void)) {
         var workResult = ""
-        let count = 1
+        let count = 2
         let queue = OperationQueue()
         for i in 0..<count {
+            print(Date(),"work\(i) = 开始")
             let operation = BlockOperation(block: { [weak queue] in
-                print(Date(),"work\(i) = 开始")
                 workResult = WorkUtil.generateWorkOfSingle(hash: hash, startWork: UInt64(i), offsetWork: UInt64(count))
-                queue?.cancelAllOperations()
                 if workResult.count > 0 {
+                    queue?.cancelAllOperations()
                     handler(workResult)
                 }
             })
             queue.addOperation(operation)
         }
-//        let operation1 = BlockOperation(block: { [weak queue] in
-//            print(Date(),"work0 = 开始")
-//            workResult = WorkUtil.generateWorkOfSingle(hash: hash, startWork: 0, offsetWork: 2)
-//            queue?.cancelAllOperations()
-//            if workResult.count > 0 {
-//                handler(workResult)
-//            }
-//        })
-//        queue.addOperation(operation1)
-//        let operation2 = BlockOperation(block: { [weak queue] in
-//            print(Date(),"work1 = 开始")
-//            workResult = WorkUtil.generateWorkOfSingle(hash: hash, startWork: 1, offsetWork: 2)
-//            queue?.cancelAllOperations()
-//            if workResult.count > 0 {
-//                handler(workResult)
-//            }
-//        })
-//        queue.addOperation(operation2)
         
     }
     
@@ -62,16 +48,15 @@ public class WorkUtil : NSObject {
                 break
             }
             var source = Bytes()
-//            let workB = work.uint64ToBytes
-//            let workUInt64 = workB.bytesToUInt64
-            let workB = work.toBytes
+            let workB = work.toBytes_Little
+//            let workB = work.toBytes_Big
             source.append(contentsOf: workB)
             let hashB = hash.hex2Bytes
             source.append(contentsOf: hashB)
             let valueB = Blake2b.hash(outLength: WorkSize, in: source) ?? Bytes(count:WorkSize)
-            let valueBReverse = QLCUtil.reverse(bytes: valueB)
-//            let value = valueBReverse.bytesToUInt64
-            let value = valueBReverse.bytesToUInt64_big
+            let value = valueB.bytesToUInt64_Little
+//            let valueBReverse = QLCUtil.reverse(bytes: valueB)
+//            let value = valueBReverse.bytesToUInt64_Big
             workIsValid = value >= THRESHOLD
             if workIsValid {
                 break
@@ -82,100 +67,136 @@ public class WorkUtil : NSObject {
             return ""
         }
         stopWork = true
-        print(Date(),"startWork:",startWork,"offsetWork:",offsetWork,"work:",work)
+        print(Date(),"startWork:",startWork,"offsetWork:",offsetWork,"work:",work, "开始---结束了")
         
-//        let workB = work.uint64ToBytes
-        let workB = work.toBytes
+        let workB = work.toBytes_Big
+        return workB.toHexString()
+//        let workBReverse = QLCUtil.reverse(bytes: workB)
+//        return workBReverse.toHexString()
+    }
+ */
+    
+    @objc static func getRandomNumFromNeg128ToPos126() -> String { // -128~126
+        var source = String()
+        for _ in 0..<8 {
+            var random = (-128 + (Int(arc4random()) % (126 + 128 + 1)))
+//            print("\(random)")
+            if random < 0 {
+                random = 256 + random
+//                print("\(random)")
+            }
+            var hex = String(random,radix:16)
+            if hex.count < 2 { // 自动补0
+                hex = "0"+hex
+            }
+            source.append(hex)
+        }
+//        print(source)
+//        print(source.hex2Bytes)
+        return source
+    }
+    
+    @objc public static func generateWorkOfOperationRandom(hash:String ,handler:@escaping ((String,Bool) -> Void)) {
+        isTimeOut = false
+        startTime = Date()
+//        WorkUtil.startTimer()
+        var workResult = ""
+        let count = 2
+        let queue = OperationQueue()
+        for i in 0..<count {
+            print(Date(),"work\(i) = 开始")
+            let operation = BlockOperation(block: { [weak queue] in
+                workResult = WorkUtil.generateWorkOfSingleRandom(hash: hash)
+                if isTimeOut == true {
+                    handler(workResult,true)
+                }
+                if workResult.count > 0 {
+                    queue?.cancelAllOperations()
+                    handler(workResult,false)
+                }
+            })
+            queue.addOperation(operation)
+        }
+        
+    }
+    
+    @objc public static func generateWorkOfSingleRandom(hash:String) -> String {
+        stopWork = false
+        var workIsValid : Bool = false
+        var workB:Bytes = Bytes(count: 8)
+        while !workIsValid {
+            endTime = Date()
+            let seconds = startTime!.secondsBetweenDate(toDate: endTime!)
+            if seconds >= 30 {
+                isTimeOut = true
+                stopWork = true
+            }
+            if stopWork == true {
+                break
+            }
+            let workHex = WorkUtil.getRandomNumFromNeg128ToPos126()
+            workB = workHex.hex2Bytes
+            for i in 0..<254 {
+                workB[7] = UInt8(i)
+                
+                var source = Bytes()
+                source.append(contentsOf: workB)
+                let hashB = hash.hex2Bytes
+                source.append(contentsOf: hashB)
+                let valueB = Blake2b.hash(outLength: WorkSize, in: source) ?? Bytes(count:WorkSize)
+                let valueBReverse = QLCUtil.reverse(bytes: valueB)
+                let value = valueBReverse.bytesToUInt64_Big
+//                let value = valueB.bytesToUInt64_Little
+                workIsValid = value >= THRESHOLD
+                if workIsValid {
+                    break
+                }
+            }
+        }
+        if stopWork == true {
+            return ""
+        }
+        stopWork = true
+        print(Date(),"work:",workB.toHexString(), "开始---结束了")
+
         let workBReverse = QLCUtil.reverse(bytes: workB)
         return workBReverse.toHexString()
+//        return workB.toHexString()
     }
-//    public static func generateWorkOneThread(hash:Bytes) -> String {
-//    final byte[] pow = new byte[8], zero = new byte[8];
-//    Arrays.fill(zero, (byte) 0x00);
-//    Arrays.fill(pow, (byte) 0x00);
-//
-//    Blake2b blake2b = new Blake2b(null, 8, null, null);
-//    byte[] output = new byte[8];
-//    while (isEqual(pow, zero)) {
-//    byte[] bytes = new byte[8];
-//    RANDOM.nextBytes(bytes);
-//    for (byte b = -128; b < 127; b++) {
-//    bytes[7] = b;
-//    blake2b.reset();
-//    blake2b.update(bytes, 0, bytes.length);
-//    blake2b.update(hash, 0, hash.length);
-//    blake2b.digest(output, 0);
-//    byte[] digest = Helper.reverse(output);
-//    if (overThreshold(digest)) {
-//    System.arraycopy(Helper.reverse(bytes), 0, pow, 0, 8);
-//    break;
-//    }
-//    }
-//    }
-//
-//    return Helper.byteToHexString(pow);
-//    }
-//
-//    public static func generateWork(hash:Bytes) -> String {
-//        final byte[] pow = new byte[8], zero = new byte[8];
-//        Arrays.fill(zero, (byte) 0x00);
-//        Arrays.fill(pow, (byte) 0x00);
-//
-//        Thread[] threads = new Thread[4];
-//        for (int i=0; i<4; i++) {
-//        Thread powFinder = new Thread() {
-//        @Override
-//        public void run() {
-//        Blake2b blake2b = new Blake2b(null, 8, null, null);
-//        byte[] output = new byte[8];
-//        while (isEqual(pow, zero)) {
-//        byte[] bytes = new byte[8];
-//        RANDOM.nextBytes(bytes);
-//        for (byte b = -128; b < 127; b++) {
-//        bytes[7] = b;
-//        blake2b.reset();
-//        blake2b.update(bytes, 0, bytes.length);
-//        blake2b.update(hash, 0, hash.length);
-//        blake2b.digest(output, 0);
-//        byte[] digest = Helper.reverse(output);
-//        if (overThreshold(digest)) {
-//        System.arraycopy(Helper.reverse(bytes), 0, pow, 0, 8);
-//        break;
-//        }
-//        }
-//        }
-//        }
-//        };
-//        threads[i] = powFinder;
-//        powFinder.start();
-//    }
-//
-//    while (isEqual(pow, zero)) {
-//    try {
-//    Thread.sleep(5);
-//    } catch (Exception e) {
-//    e.printStackTrace();
-//    }
-//    }
-//
-//    return Helper.byteToHexString(pow);
-//    }
-//
-//    private static boolean isEqual(byte[] b0, byte[] b1) {
-//    for (int i = 0; i < b0.length; i++) {
-//    if (b0[i] != b1[i])
-//    return false;
-//    }
-//    return true;
-//    }
-//
-//    private static boolean overThreshold(byte[] bytes) {
-//    long result = 0; //faster than ByteBuffer apparently:
-//    for (int i = 0; i < 8; i++) {
-//    result <<= 8;
-//    result |= (bytes[i] & 0xFF);
-//    }
-//    return Long.compareUnsigned(result, THRESHOLD) > 0; //wew java 8!
+    
+//    static func startTimer() {
+//        var timeCount = 30
+//        // 在global线程里创建一个时间源
+//        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
+//        // 设定这个时间源是每秒循环一次，立即开始
+//        timer.schedule(deadline: .now(), repeating: .seconds(1))
+//        // 设定时间源的触发事件
+//        timer.setEventHandler(handler: {
+//            if stopWork == true {
+//                timer.cancel()
+//            }
+//            // 每秒计时一次
+//            timeCount = timeCount - 1
+//            // 时间到了取消时间源
+//            if timeCount <= 0 {
+//                isTimeOut = true
+//                stopWork = true
+//                timer.cancel()
+//            }
+//            // 返回主线程处理一些事件，更新UI等等
+//            DispatchQueue.main.async {
+//                print(Date(),"-------%d",timeCount);
+//            }
+//        })
+//        // 启动时间源
+//        timer.resume()
 //    }
     
+}
+
+extension Date {
+    func secondsBetweenDate(toDate: Date) -> Int {
+        let components = Calendar.current.dateComponents([.second], from: self, to: toDate)
+        return components.second ?? 0
+    }
 }

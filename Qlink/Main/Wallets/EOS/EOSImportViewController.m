@@ -124,6 +124,8 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:Add_EOS_Wallet_Noti object:nil];
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }

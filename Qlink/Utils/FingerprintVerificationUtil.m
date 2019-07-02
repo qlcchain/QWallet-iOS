@@ -115,6 +115,12 @@
 //    }
 //}
 + (void)show:(void (^)(BOOL success))block {
+    if (![FingerprintVerificationUtil getScreenLock]) { // 未开启
+        if (block) {
+            block(YES);
+        }
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         DDLogDebug(@"开始解锁");
         LAContext *myContext = [[LAContext alloc] init];
@@ -154,6 +160,15 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          exit(0);
     });
+}
+
++ (BOOL)getScreenLock {
+    NSNumber *lock = [HWUserdefault getObjectWithKey:title_screen_lock];
+    return lock?[lock boolValue]:NO;
+}
+
++ (void)setScreenLock:(BOOL)lock {
+    [HWUserdefault insertObj:@(lock) withkey:title_screen_lock];
 }
 
 @end

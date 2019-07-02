@@ -16,7 +16,7 @@ struct LedgerServiceRequest<Batch: JSONRPCKit.Batch>: APIKit.Request {
     typealias Response = Batch.Responses
     
     var baseURL: URL {
-        return URL(string: testSeed)!
+        return URL(string: qlc_seed)!
     }
     
     var method: HTTPMethod {

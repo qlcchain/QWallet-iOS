@@ -407,7 +407,7 @@
     switch (checkFrom) {
         case CheckProcess_WALLET_TABBAR:
         {
-            kAppD.tabbarC.selectedIndex = 0;
+            kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
         }
             break;
         case CheckProcess_VPN_ADD:

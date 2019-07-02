@@ -6,25 +6,6 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(CustomProductName)</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string></string>
-			</array>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
-			<key>CFBundleTypeName</key>
-			<string>public.item</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>public.item</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -38,13 +19,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>1867</string>
+	<string>2094</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MiSDKAppID</key>
-	<string>2882303761517797279</string>
+	<string>2882303761518042537</string>
 	<key>MiSDKAppKey</key>
-	<string>5261779752279</string>
+	<string>5121804239537</string>
 	<key>MiSDKRun</key>
 	<string>${MiSDKRun}</string>
 	<key>NSAppTransportSecurity</key>
@@ -53,13 +34,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>WINQ VPN You need your permission to access the camera.</string>
+	<string>"Q-Wallet" Would Like to Access the Camera To set profile picture.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>WINQ VPN You need your permission to access the facial ID.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Access to VPN server based on user location.</string>
+	<string>Face ID/ Touch ID is used to confirm your identity when reading encrypted messages.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>WINQ VPN You need your permission to access the album.</string>
+	<string>"Q-Wallet" Would Like to Access Your Photos To set profile picture.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.ttf</string>

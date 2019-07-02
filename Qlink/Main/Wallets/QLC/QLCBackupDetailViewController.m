@@ -44,7 +44,7 @@
 }
 
 - (void)configInit {
-    _publicAddressLab.text = _walletInfo.publicKey;
+    _publicAddressLab.text = _walletInfo.address;
     _mnemonicLab.text = [[QLCWalletManage shareInstance] exportMnemonicWithSeed:_walletInfo.seed];
     _seedLab.text = _walletInfo.seed;
 }

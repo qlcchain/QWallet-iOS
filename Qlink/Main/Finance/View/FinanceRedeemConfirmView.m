@@ -41,9 +41,9 @@
     
 //    NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
     NSString *address = model.address;
-    WalletCommonModel *currentWalletM = [WalletCommonModel getWalletWithAddress:address];
-    _walletNameLab.text = currentWalletM.name;
-    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
+    WalletCommonModel *walletM = [WalletCommonModel getWalletWithAddress:address];
+    _walletNameLab.text = walletM.name;
+    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[address substringToIndex:8],[address substringWithRange:NSMakeRange(address.length - 8, 8)]];
 }
 
 - (void)show {

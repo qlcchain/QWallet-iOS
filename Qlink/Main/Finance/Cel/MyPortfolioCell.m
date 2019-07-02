@@ -32,6 +32,7 @@
     _nameLab.text = nil;
     _principalValLab.text = nil;
     _cumulativeEarnValLab.text = nil;
+    _maturityDateKeyLab.text = nil;
     _maturityDateValLab.text = nil;
 }
 
@@ -42,14 +43,24 @@
     _maturityDateValLab.hidden = NO;
     _redeemBtn.hidden = NO;
     
+    _nameLab.text = model.productName;
+    _principalValLab.text = [NSString stringWithFormat:@"%@",model.amount];
+    _cumulativeEarnValLab.text = [NSString stringWithFormat:@"%@",model.addRevenue];
+    _maturityDateValLab.text = [NSString stringWithFormat:@"%@",model.maturityTime.length>10?[model.maturityTime substringToIndex:10]:model.maturityTime];
+    
     if ([model.status isEqualToString:@"PAY"]) {
+        _maturityDateKeyLab.text = @"Maturity Date";
         _redeemBtn.hidden = YES;
         if ([model.maturityTime isEmptyString]) { // 日日盈
             if ([model.dueDays integerValue] == 0) {
                 _redeemBtn.hidden = NO;
                 _maturityDateKeyLab.hidden = YES;
                 _maturityDateValLab.hidden = YES;
+            } else { // 显示明天
+                NSString *tomorrow = [NSDate getTimeWithFromDate:[NSDate date] addDay:1];
+                _maturityDateValLab.text = [NSString stringWithFormat:@"%@",tomorrow.length>10?[tomorrow substringToIndex:10]:tomorrow];
             }
+            
         }
     } else if ([model.status isEqualToString:@"END"]) {
         if (![model.maturityTime isEmptyString]) { // 其他
@@ -67,11 +78,6 @@
     } else if ([model.status isEqualToString:@"BUY"]) {
         
     }
-    
-    _nameLab.text = model.productName;
-    _principalValLab.text = [NSString stringWithFormat:@"%@",model.amount];
-    _cumulativeEarnValLab.text = [NSString stringWithFormat:@"%@",model.addRevenue];
-    _maturityDateValLab.text = [NSString stringWithFormat:@"%@",model.maturityTime.length>10?[model.maturityTime substringToIndex:10]:model.maturityTime];
 }
 
 - (IBAction)redeemAction:(id)sender {

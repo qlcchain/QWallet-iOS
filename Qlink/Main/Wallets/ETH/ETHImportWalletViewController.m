@@ -241,6 +241,12 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:@"Please Input First"];
         return;
     }
+    NSArray *arr = [_mnemonicTV.text componentsSeparatedByString:@" "];
+    if (!arr || arr.count != 12) {
+        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Mnemonic"];
+        return;
+    }
+    
     
     kWeakSelf(self);
 //    NSString *pw = [LoginPWModel getLoginPW];
@@ -271,6 +277,8 @@ typedef enum : NSUInteger {
     //            [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
                 [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
             }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }
@@ -312,6 +320,8 @@ typedef enum : NSUInteger {
                 [weakself showImportSuccessView];
                 [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
             }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }
@@ -390,6 +400,8 @@ typedef enum : NSUInteger {
             [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }

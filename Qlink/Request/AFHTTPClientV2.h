@@ -63,4 +63,12 @@ typedef void (^HTTPRequestV2FailedBlock)(NSURLSessionDataTask *dataTask, NSError
                                   success:(void (^)(NSURLSessionDataTask *dataTask, id responseObject))success
                                   failure:(void (^)(NSURLSessionDataTask *dataTask, NSError *error))failure;
 
+
++ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
+                                         params:(id)params
+                                     httpMethod:(HttpMethod)httpMethod
+                                       userInfo:(NSDictionary*)userInfo
+                                   successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                                    failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock;
+
 @end

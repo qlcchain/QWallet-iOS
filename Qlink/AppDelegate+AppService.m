@@ -43,15 +43,6 @@
 
 @implementation AppDelegate (AppService)
 
-
-#pragma mark - 配置QLC钱包
-- (void)configQLCWallet {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    if (currentWalletM) {
-        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address]; // QLC钱包接收sendblock
-    }
-}
-
 #pragma mark - 配置DDLog
 - (void)configDDLog {
     //开启DDLog 颜色

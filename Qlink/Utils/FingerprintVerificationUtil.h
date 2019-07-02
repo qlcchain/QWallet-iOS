@@ -11,5 +11,7 @@
 @interface FingerprintVerificationUtil : NSObject
 
 + (void)show:(void (^)(BOOL success))block;
++ (BOOL)getScreenLock;
++ (void)setScreenLock:(BOOL)lock;
 
 @end

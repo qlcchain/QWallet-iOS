@@ -31,7 +31,7 @@ NSString *title1 = @"Currency Unit";
 NSString *title3 = @"Service Agreement";
 NSString *title4 = @"Help and Feedback";
 //NSString *title5 = @"Join the Community";
-NSString *title6 = @"About WINQ";
+NSString *title6 = @"About QLC-Wallet";
 NSString *title7 = @"Log out";
 
 #pragma mark - Observe
@@ -60,7 +60,7 @@ NSString *title7 = @"Log out";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[title1,title3,title4,title6]];
+    NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[title1,title3,title4,title6,title_screen_lock]];
     if ([UserModel haveLoginAccount]) {
         [titleArr addObject:title7];
     }
@@ -68,7 +68,13 @@ NSString *title7 = @"Log out";
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         SettingsShowModel *model = [[SettingsShowModel alloc] init];
         model.title = obj;
-        model.haveNextPage = YES;
+        if ([obj isEqualToString:title_screen_lock]) {
+            model.haveNextPage = NO;
+            model.showSwitch = YES;
+        } else {
+            model.haveNextPage = YES;
+            model.showSwitch = NO;
+        }
         model.detail = [obj isEqualToString:title1]?[ConfigUtil getLocalUsingCurrency]:[obj isEqualToString:title6]?[NSString stringWithFormat:@"Version %@(%@)",APP_Version,APP_Build]:nil;
         [weakself.sourceArr addObject:model];
     }];

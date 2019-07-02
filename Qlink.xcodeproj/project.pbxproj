@@ -262,6 +262,10 @@
 		58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC42072055800C08784 /* HistoryRecordsViewController.m */; };
 		58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FCA2072089800C08784 /* HistoryRecordsCell.m */; };
 		58270FD820720D3600C08784 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FD620720D3600C08784 /* ProfileViewController.m */; };
+		582717C722C9DC56003DC080 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 582717C022C9DC56003DC080 /* SGQRCode.bundle */; };
+		582717C822C9DC56003DC080 /* SGQRCodeObtainConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 582717C122C9DC56003DC080 /* SGQRCodeObtainConfigure.m */; };
+		582717C922C9DC56003DC080 /* SGQRCodeObtain.m in Sources */ = {isa = PBXBuildFile; fileRef = 582717C522C9DC56003DC080 /* SGQRCodeObtain.m */; };
+		582717CA22C9DC56003DC080 /* SGQRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 582717C622C9DC56003DC080 /* SGQRCodeScanView.m */; };
 		5827BC1D219EA87300B7730E /* BinaTpcsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC1C219EA87300B7730E /* BinaTpcsModel.m */; };
 		5827BC21219EBAF800B7730E /* ETHVerifyPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC1F219EBAF700B7730E /* ETHVerifyPWViewController.m */; };
 		5827BC22219EBAF800B7730E /* ETHVerifyPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5827BC20219EBAF800B7730E /* ETHVerifyPWViewController.xib */; };
@@ -590,9 +594,6 @@
 		58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B947E92064D145007F52F6 /* SkyRadiusView.m */; };
 		58E7C5DE20A3E62B00EDDD09 /* ChatTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E7C5DD20A3E62B00EDDD09 /* ChatTipView.m */; };
 		58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E7C5E120A3F62F00EDDD09 /* UITextView+ZWPlaceHolder.m */; };
-		58ED8C89229E7096000A5F54 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C86229E7096000A5F54 /* CloseButton.swift */; };
-		58ED8C8A229E7096000A5F54 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C87229E7096000A5F54 /* TagView.swift */; };
-		58ED8C8B229E7096000A5F54 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C88229E7096000A5F54 /* TagListView.swift */; };
 		58ED8C8D229E7796000A5F54 /* LedgerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C8C229E7796000A5F54 /* LedgerServices.swift */; };
 		58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2BCA2225C42410091DD53 /* LoginViewController.m */; };
 		58F2BCA5225C42410091DD53 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F2BCA3225C42410091DD53 /* LoginViewController.xib */; };
@@ -1158,6 +1159,14 @@
 		58270FCA2072089800C08784 /* HistoryRecordsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecordsCell.m; sourceTree = "<group>"; };
 		58270FD520720D3600C08784 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		58270FD620720D3600C08784 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		582717BF22C9DC56003DC080 /* SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
+		582717C022C9DC56003DC080 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
+		582717C122C9DC56003DC080 /* SGQRCodeObtainConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtainConfigure.m; sourceTree = "<group>"; };
+		582717C222C9DC56003DC080 /* SGQRCodeObtain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtain.h; sourceTree = "<group>"; };
+		582717C322C9DC56003DC080 /* SGQRCodeScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanView.h; sourceTree = "<group>"; };
+		582717C422C9DC56003DC080 /* SGQRCodeObtainConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeObtainConfigure.h; sourceTree = "<group>"; };
+		582717C522C9DC56003DC080 /* SGQRCodeObtain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeObtain.m; sourceTree = "<group>"; };
+		582717C622C9DC56003DC080 /* SGQRCodeScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanView.m; sourceTree = "<group>"; };
 		5827BC1B219EA87300B7730E /* BinaTpcsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BinaTpcsModel.h; sourceTree = "<group>"; };
 		5827BC1C219EA87300B7730E /* BinaTpcsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BinaTpcsModel.m; sourceTree = "<group>"; };
 		5827BC1E219EBAF700B7730E /* ETHVerifyPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHVerifyPWViewController.h; sourceTree = "<group>"; };
@@ -1714,9 +1723,6 @@
 		58E7C5DD20A3E62B00EDDD09 /* ChatTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatTipView.m; sourceTree = "<group>"; };
 		58E7C5E120A3F62F00EDDD09 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
 		58E7C5E220A3F63000EDDD09 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
-		58ED8C86229E7096000A5F54 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
-		58ED8C87229E7096000A5F54 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
-		58ED8C88229E7096000A5F54 /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		58ED8C8C229E7796000A5F54 /* LedgerServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LedgerServices.swift; sourceTree = "<group>"; };
 		58F2BCA2225C42410091DD53 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		58F2BCA3225C42410091DD53 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -2332,7 +2338,6 @@
 			isa = PBXGroup;
 			children = (
 				582B114A22952B3D005E2288 /* QLC */,
-				58ED8C85229E7096000A5F54 /* TagListView */,
 				582F238621BF99A400A000D1 /* ODRefreshControl */,
 				587ABCA921B8F8F700C3D81A /* EOS */,
 				581AC36E21AFD84400ACA80B /* XYTransition */,
@@ -2347,6 +2352,7 @@
 				73A05A252081D90700974483 /* ImageCliped */,
 				5807D6442080616E0049565D /* ShadowImageView */,
 				73C1BA08207E18190080C59F /* QRCode */,
+				582717BE22C9DC56003DC080 /* SGQRCode */,
 				58CF102C207CB7EC0026F28E /* UnderlineView */,
 				7377D192206CFCBA0072E628 /* SRRefreshView */,
 				58B947E82064D145007F52F6 /* SkyRadiusView */,
@@ -3069,6 +3075,21 @@
 				5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		582717BE22C9DC56003DC080 /* SGQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				582717BF22C9DC56003DC080 /* SGQRCode.h */,
+				582717C022C9DC56003DC080 /* SGQRCode.bundle */,
+				582717C122C9DC56003DC080 /* SGQRCodeObtainConfigure.m */,
+				582717C222C9DC56003DC080 /* SGQRCodeObtain.h */,
+				582717C322C9DC56003DC080 /* SGQRCodeScanView.h */,
+				582717C422C9DC56003DC080 /* SGQRCodeObtainConfigure.h */,
+				582717C522C9DC56003DC080 /* SGQRCodeObtain.m */,
+				582717C622C9DC56003DC080 /* SGQRCodeScanView.m */,
+			);
+			path = SGQRCode;
 			sourceTree = "<group>";
 		};
 		5827BC19219EA85600B7730E /* MarketsModel */ = {
@@ -4222,16 +4243,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		58ED8C85229E7096000A5F54 /* TagListView */ = {
-			isa = PBXGroup;
-			children = (
-				58ED8C86229E7096000A5F54 /* CloseButton.swift */,
-				58ED8C87229E7096000A5F54 /* TagView.swift */,
-				58ED8C88229E7096000A5F54 /* TagListView.swift */,
-			);
-			path = TagListView;
-			sourceTree = "<group>";
-		};
 		730DA8F720886A7800CE1909 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -4574,6 +4585,7 @@
 				585CDC1E225C8FCE00199FE1 /* ChooseAreaCodeCell.xib in Resources */,
 				5827BC22219EBAF800B7730E /* ETHVerifyPWViewController.xib in Resources */,
 				58F2BCA5225C42410091DD53 /* LoginViewController.xib in Resources */,
+				582717C722C9DC56003DC080 /* SGQRCode.bundle in Resources */,
 				583D959A211432110057A90C /* RankingSubCell.xib in Resources */,
 				581F5FE6219E68E800604352 /* JoinCommunityViewController.xib in Resources */,
 				58FB8D60226434DC0075698E /* ShareFriendsViewController.xib in Resources */,
@@ -4784,6 +4796,7 @@
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftColor/SwiftColor.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftTheme/SwiftTheme.framework",
+				"${BUILT_PRODUCTS_DIR}/TTGTagCollectionView/TTGTagCollectionView.framework",
 				"${BUILT_PRODUCTS_DIR}/TYCyclePagerView/TYCyclePagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/TrezorCrypto/TrezorCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustCore/TrustCore.framework",
@@ -4829,6 +4842,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftColor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTheme.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTGTagCollectionView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TYCyclePagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrezorCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustCore.framework",
@@ -5117,6 +5131,7 @@
 				580D916220625A4400B12506 /* UINavigationBar+Awesome.m in Sources */,
 				58E41C582182C36B004C87AA /* ETHWalletDetailCell.m in Sources */,
 				587ABD5F21B8F8F800C3D81A /* EOSResource.m in Sources */,
+				582717C822C9DC56003DC080 /* SGQRCodeObtainConfigure.m in Sources */,
 				58A71E68229F7B5F00C22D8C /* QLCConstants.swift in Sources */,
 				580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */,
 				581AF7BB21B66827001A37E1 /* EOSTraceModel.m in Sources */,
@@ -5178,6 +5193,7 @@
 				581D32E8219C16A8001F88C3 /* NEOWalletManage.swift in Sources */,
 				58A71E5E229F71AA00C22D8C /* QLCStateBlock.swift in Sources */,
 				583D959C211432110057A90C /* RankingSubCell.m in Sources */,
+				582717C922C9DC56003DC080 /* SGQRCodeObtain.m in Sources */,
 				5894A728226093D3008B0854 /* FinanceOrderListModel.m in Sources */,
 				58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */,
 				58990B6A219431880036FF4F /* ETHTransferConfirmView.m in Sources */,
@@ -5199,6 +5215,7 @@
 				589D4716225B502300A4A4E3 /* MyThemes.m in Sources */,
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
 				585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */,
+				582717CA22C9DC56003DC080 /* SGQRCodeScanView.m in Sources */,
 				581D32C5219C158B001F88C3 /* SHA256.swift in Sources */,
 				587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */,
 				580D915320625A4400B12506 /* UIView+ViewController.m in Sources */,
@@ -5247,7 +5264,6 @@
 				581D32CE219C158B001F88C3 /* ValueIn.swift in Sources */,
 				7377D173206B84620072E628 /* LocationManage.m in Sources */,
 				584911802105AEF4005232A2 /* LocationShareModel.m in Sources */,
-				58ED8C8A229E7096000A5F54 /* TagView.swift in Sources */,
 				73E52BD12062978200063ED6 /* QlinkTabbarViewController.m in Sources */,
 				580D915920625A4400B12506 /* UIView+Visuals.m in Sources */,
 				581D32C6219C158B001F88C3 /* scrypt.swift in Sources */,
@@ -5271,7 +5287,6 @@
 				5806C10421C3C3AC000E693B /* GetBlockRequest.m in Sources */,
 				5811B7432293D4B900F657B5 /* QLCWalletInfo.m in Sources */,
 				7377D179206B9E730072E628 /* VPNMode.m in Sources */,
-				58ED8C8B229E7096000A5F54 /* TagListView.swift in Sources */,
 				582B116722952B7F005E2288 /* AccountRpc.swift in Sources */,
 				585D1EEB225D8E5E00468C4A /* UserModel.m in Sources */,
 				587ABD4D21B8F8F800C3D81A /* EOS_BlockChainInfo.m in Sources */,
@@ -5281,7 +5296,6 @@
 				581AFC5021B7D5A5001A37E1 /* EOSRegisterAccountViewController.m in Sources */,
 				582B116522952B7F005E2288 /* AccountMng.swift in Sources */,
 				587ABD5021B8F8F800C3D81A /* GetAccountRequest.m in Sources */,
-				58ED8C89229E7096000A5F54 /* CloseButton.swift in Sources */,
 				581C226B21A6B7160009888B /* DeleteWalletConfirmView.m in Sources */,
 				58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */,
 				588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */,
@@ -5825,10 +5839,10 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qlink.winq.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -5844,10 +5858,10 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qlink.winq.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -5969,8 +5983,8 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CustomAppBundleld = com.qlink.winq;
-				CustomProductName = WinCash;
+				CustomAppBundleld = com.qlcchain.qwallet;
+				CustomProductName = "Q-Wallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				ENABLE_BITCODE = NO;
@@ -5992,7 +6006,7 @@
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
 				MiSDKRun = debug;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qlink.winq;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6013,8 +6027,8 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CustomAppBundleld = com.qlink.winq;
-				CustomProductName = WinCash;
+				CustomAppBundleld = com.qlcchain.qwallet;
+				CustomProductName = "Q-Wallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6035,7 +6049,7 @@
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
 				MiSDKRun = online;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qlink.winq;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

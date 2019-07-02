@@ -40,7 +40,8 @@ public class QLCUtil: NSObject {
     
     // seed
     @objc public static func generateSeed() -> String {
-        let seed = RandomString.sharedInstance.getRandomStringOfLength(length: 64)
+        let seed = RandomString.getRandomStringOfLength(length: 64)
+//        let seed = RandomString.sharedInstance.getRandomStringOfLength(length: 64)
         return seed
     }
     
@@ -165,15 +166,25 @@ public class QLCUtil: NSObject {
     // Mnemonic
     @objc public static func mnemonicToSeed(mnemonic:String) -> String {
         let entropy = Mnemonic.mnemonicsToEntropy(mnemonic)
-        print((entropy ?? Data()).dataToHexString())
-        return mnemonic
+        let seed = (entropy ?? Data()).dataToHexString()
+        print(seed)
+        return seed
+    }
+    
+    // Mnemonic
+    @objc public static func isValidMnemonic(mnemonic:String) -> Bool {
+        let arr = mnemonic.components(separatedBy: " ")
+        if (arr.count == 24) {
+            return true
+        }
+        return false
     }
     
     // Send
     @objc public static func sendAsset(from:String, tokenName:String, to:String, amount:UInt, sender: String?, receiver:String?, message:String?, privateKey:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let privateKeyB = privateKey.hex2Bytes
         let amountB = BigUInt(amount)
-        try? TransactionMng.sendBlock(from: from, tokenName: tokenName, to: to, amount: amountB, sender: sender ?? "", receiver: receiver ?? "", message: message ?? "", privateKey: privateKeyB, successHandler: { (response) in
+        try? TransactionMng.sendBlock(from: from, tokenName: tokenName, to: to, amount: amountB, sender: sender ?? "", receiver: receiver ?? "", message: message ?? "", privateKeyB: privateKeyB, successHandler: { (response) in
             if response != nil {
                 let dic = response as! Dictionary<String, Any>
                 try? LedgerMng.process(dic: dic, successHandler: { (response) in
@@ -222,7 +233,7 @@ public class QLCUtil: NSObject {
             if response != nil {
                 let tempBlock:QLCStateBlock = response as! QLCStateBlock
                 let privateKeyB = privateKey.hex2Bytes
-                try? TransactionMng.receiveBlock(sendBlock: tempBlock, privateKey: privateKeyB, successHandler: { (response) in
+                try? TransactionMng.receiveBlock(sendBlock: tempBlock, privateKeyB: privateKeyB, successHandler: { (response) in
                     if response != nil {
                         let dic = response as! Dictionary<String, Any>
                         try? LedgerMng.process(dic: dic, successHandler: { (response) in
@@ -315,16 +326,16 @@ public class QLCUtil: NSObject {
 
 
 /// 随机字符串生成
-class RandomString {
+public class RandomString:NSObject {
 //    let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    let characters = "0123456789abcdef"
+    static let characters = "0123456789abcdef"
     
     /**
      生成随机字符串,
      - parameter length: 生成的字符串的长度
      - returns: 随机生成的字符串
      */
-    func getRandomStringOfLength(length: Int) -> String {
+    @objc static func getRandomStringOfLength(length: Int) -> String {
         var ranStr = ""
         for _ in 0..<length {
             let index = Int(arc4random_uniform(UInt32(characters.count)))
@@ -334,5 +345,5 @@ class RandomString {
         }
         return ranStr
     }
-    static let sharedInstance = RandomString()
+//    static let sharedInstance = RandomString()
 }

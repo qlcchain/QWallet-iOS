@@ -115,7 +115,7 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
-    [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+    [kAppD.window makeToastInView:kAppD.window text:@"Process..." userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
@@ -183,6 +183,10 @@
 - (IBAction)scanAction:(id)sender {
     kWeakSelf(self);
     WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
+        if (![[QLCWalletManage shareInstance] walletAddressIsValid:codeValue?:@""]) {
+            [kAppD.window makeToastDisappearWithText:@"Invalid Address"];
+            return;
+        }
         weakself.sendtoAddressTV.text = codeValue;
     } needPop:YES];
     [self.navigationController pushViewController:vc animated:YES];

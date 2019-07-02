@@ -36,7 +36,7 @@ public class BlockMng {
     public static func getHash(block:QLCStateBlock) -> Bytes {
         var source : Bytes = Bytes()
         
-        let type = QLCBlock.QLCType.getIndex(type: block.type ?? "").toBytes
+        let type = QLCBlock.QLCType.getIndex(type: block.type ?? "").toBytes_Big
         source.append(contentsOf: [type.last!])
  
         let token = (block.token ?? "").hex2Bytes
@@ -77,10 +77,10 @@ public class BlockMng {
         let messageB = (block.message ?? "").hex2Bytes
         source.append(contentsOf: messageB)
 
-        let timestamp = (block.timestamp ?? 0).toBytes
+        let timestamp = (block.timestamp ?? 0).toBytes_Big
         source.append(contentsOf: timestamp)
 
-        let povHeight = (block.povHeight ?? 0).toBytes
+        let povHeight = (block.povHeight ?? 0).toBytes_Big
         source.append(contentsOf: povHeight)
 
         let extra = (block.extra ?? "").hex2Bytes

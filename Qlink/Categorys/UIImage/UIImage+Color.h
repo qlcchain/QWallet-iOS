@@ -19,4 +19,6 @@
 ///获得灰度图
 + (UIImage*)covertToGrayImageFromImage:(UIImage*)sourceImage;
 
+- (UIImage *)imgWithBackgroundColor:(UIColor *)theColor;
+
 @end

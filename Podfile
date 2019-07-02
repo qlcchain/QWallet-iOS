@@ -63,6 +63,7 @@ target "Qlink" do
     pod 'Firebase/Core', '~> 5.4.1'
 #    pod 'MMWormhole'
 #    pod 'TagListView'
+    pod 'TTGTagCollectionView'
     pod 'Charts', '3.1.0'
     pod 'SwiftTheme', '0.4.1'
     pod 'TYCyclePagerView'

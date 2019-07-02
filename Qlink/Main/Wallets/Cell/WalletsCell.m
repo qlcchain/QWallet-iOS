@@ -79,7 +79,7 @@
     if (![model isKindOfClass:[QLCTokenModel class]]) {
         return;
     }
-    _icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"neo_%@",model.tokenName.lowercaseString]];
+    _icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"qlc_%@",model.tokenName.lowercaseString]];
     _nameLab.text = model.tokenName;
     
     NSString *num = [model getTokenNum];

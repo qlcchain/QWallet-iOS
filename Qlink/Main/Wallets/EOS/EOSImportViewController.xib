@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -104,9 +105,9 @@
                                             <rect key="frame" x="24" y="308" width="284" height="44"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdH-FB-5b3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="82" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="78" id="8CY-nd-GLe"/>
+                                                        <constraint firstAttribute="width" constant="82" id="8CY-nd-GLe"/>
                                                         <constraint firstAttribute="height" constant="44" id="hxa-0w-jaA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -120,7 +121,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a13-M7-jFy">
-                                                    <rect key="frame" x="78" y="0.0" width="202" height="44"/>
+                                                    <rect key="frame" x="82" y="0.0" width="202" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="202" id="Sg6-X2-6wm"/>
                                                         <constraint firstAttribute="height" constant="44" id="sAv-HU-lfM"/>
@@ -296,8 +297,8 @@
     </objects>
     <resources>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="eth_scan" width="24" height="24"/>
-        <image name="icon_the_selected" width="19" height="19"/>
-        <image name="icon_the_uncheck" width="19" height="19"/>
+        <image name="eth_scan" width="20" height="20"/>
+        <image name="icon_the_selected" width="24" height="24"/>
+        <image name="icon_the_uncheck" width="24" height="24"/>
     </resources>
 </document>

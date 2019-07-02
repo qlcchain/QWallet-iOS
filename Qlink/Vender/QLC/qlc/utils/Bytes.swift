@@ -16,15 +16,15 @@ extension Array where Element == UInt8 {
 }
 
 public extension Bytes {
-//    var bytesToUInt64 : UInt64 {
-//        var value : UInt64 = 0
-//        let data = NSData(bytes: self, length: 8)
-//        data.getBytes(&value, length: 8)
-//        value = UInt64(littleEndian: value)
-//        return value
-//    }
+    var bytesToUInt64_Little : UInt64 {
+        var value : UInt64 = 0
+        let data = NSData(bytes: self, length: 8)
+        data.getBytes(&value, length: 8)
+        value = UInt64(littleEndian: value)
+        return value
+    }
     
-    var bytesToUInt64_big : UInt64 {
+    var bytesToUInt64_Big : UInt64 {
         var value : UInt64 = 0
         let data = NSData(bytes: self, length: 8)
         data.getBytes(&value, length: 8)
@@ -34,19 +34,19 @@ public extension Bytes {
 }
 
 extension FixedWidthInteger {
-    public var toBytes: Bytes {
+    public var toBytes_Big: Bytes {
         var bigEndian = self.bigEndian
         let data = Data(bytes: &bigEndian, count: MemoryLayout.size(ofValue: bigEndian))
         let bytes = [UInt8](data)
         return bytes
     }
     
-//    public var uint64ToBytes: Bytes {
-//        var littleEndian = self.littleEndian
-//        let data = Data(bytes: &littleEndian, count: MemoryLayout.size(ofValue: littleEndian))
-//        let bytes = [UInt8](data)
-//        return bytes
-//    }
+    public var toBytes_Little: Bytes {
+        var littleEndian = self.littleEndian
+        let data = Data(bytes: &littleEndian, count: MemoryLayout.size(ofValue: littleEndian))
+        let bytes = [UInt8](data)
+        return bytes
+    }
 }
 
 public extension String {

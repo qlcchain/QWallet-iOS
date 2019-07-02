@@ -58,6 +58,10 @@
     return [QLCUtil isValidSeedWithSeed:seed];
 }
 
+- (BOOL)walletMnemonicIsValid:(NSString *)mnemonic {
+    return [QLCUtil isValidMnemonicWithMnemonic:mnemonic];
+}
+
 - (BOOL)walletAddressIsValid:(NSString *)address {
     return [QLCUtil isValidAddressWithAddress:address];
 }
@@ -85,7 +89,6 @@
         } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
             
         }];
-//    });
     
 }
 
@@ -94,11 +97,15 @@
         QLCAccountPendingModel *firstM = _accountPendingArr.firstObject;
         NSString *privateKey = _wallet.privateKey;
         kWeakSelf(self)
+        NSString *showText = [NSString stringWithFormat:@"Account Pending %@",@(_accountPendingArr.count)];
+        [kAppD.window makeToastInView:kAppD.window text:showText userInteractionEnabled:NO hideTime:0];
         [QLCWallet receive_blocksInfo:firstM.Hash privateKey:privateKey successHandler:^(NSString * _Nullable responseObj) {
+            [kAppD.window hideToast];
             // 成功
             [weakself.accountPendingArr removeObjectAtIndex:0];
             [weakself receiveAsset];
         } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
+            [kAppD.window hideToast];
             // 失败（下次打开app会重新进行操作，所以直接删除进行下一个）
             [weakself.accountPendingArr removeObjectAtIndex:0];
             [weakself receiveAsset];

@@ -148,7 +148,8 @@
     }
     
     _tokenHash = model.Hash;
-    NSString *addressText = model.Hash;
+//    NSString *addressText = model.Hash;
+    NSString *addressText = model.address;
     if (addressText.length > 8) {
         addressText = [NSString stringWithFormat:@"%@...%@",[addressText substringToIndex:8],[addressText substringWithRange:NSMakeRange(addressText.length - 8, 8)]];
     }

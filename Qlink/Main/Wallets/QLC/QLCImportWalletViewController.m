@@ -161,6 +161,10 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:@"Please Input First"];
         return;
     }
+    if (![[QLCWalletManage shareInstance] walletMnemonicIsValid:_mnemonicTV.text]) {
+        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Mnemonic"];
+        return;
+    }
     
 //    NSString *pw = @"";
     NSString *mnemonic = _mnemonicTV.text;
@@ -190,6 +194,10 @@ typedef enum : NSUInteger {
     }
     if (_seedTV.text.length <= 0) {
         [kAppD.window makeToastDisappearWithText:@"Please Input Success"];
+        return;
+    }
+    if (![[QLCWalletManage shareInstance] walletSeedIsValid:_seedTV.text]) {
+        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Seed"];
         return;
     }
     

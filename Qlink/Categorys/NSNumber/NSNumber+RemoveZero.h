@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSNumber (RemoveZero)
 
 - (NSString *)show4floatStr;
+- (NSString *)showfloatStr:(NSNumber *)decimal;
 
 @end
 

@@ -28,6 +28,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomBack;
 @property (weak, nonatomic) IBOutlet UIView *chartBack;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chartBackHeight; // 219-144
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
@@ -104,7 +105,9 @@
         make.top.left.bottom.right.mas_equalTo(weakself.chartBack).offset(0);
     }];
     
-    [_chartV updateWithSymbol:_inputAsset.tokenName];
+    [_chartV updateWithSymbol:_inputAsset.tokenName noDataBlock:^{
+        weakself.chartBackHeight.constant = 219-144;
+    }];
 }
 
 #pragma mark - Request

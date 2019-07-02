@@ -29,7 +29,7 @@ public class TransactionMng {
      * @throws QlcException
      * @throws IOException
      */
-    public static func sendBlock(from:String, tokenName:String, to:String, amount: BigUInt, sender:String, receiver:String, message:String, privateKey: Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
+    public static func sendBlock(from:String, tokenName:String, to:String, amount: BigUInt, sender:String, receiver:String, message:String, privateKeyB: Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
 
         // token info
         var token: QLCToken? = nil
@@ -55,7 +55,7 @@ public class TransactionMng {
                                 previousBlock = response as? QLCStateBlock
                                 
                                 // create send block
-                                TransactionMng.fillSendBlock(token: token!, from: from, tokenMeta: tokenMeta!, amount: amount, to: to, sender: sender, receiver: receiver, message: message, previousBlock: previousBlock!, privateKey: privateKey, resultHandler: { (dic) in
+                                TransactionMng.fillSendBlock(token: token!, from: from, tokenMeta: tokenMeta!, amount: amount, to: to, sender: sender, receiver: receiver, message: message, previousBlock: previousBlock!, privateKeyB: privateKeyB, resultHandler: { (dic) in
                                     successHandler(dic)
                                 })
                                 
@@ -83,7 +83,7 @@ public class TransactionMng {
         }
     }
     
-    private static func fillSendBlock(token:QLCToken, from:String, tokenMeta:QLCTokenMeta, amount: BigUInt, to: String, sender: String, receiver: String, message: String, previousBlock: QLCStateBlock, privateKey:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)) {
+    private static func fillSendBlock(token:QLCToken, from:String, tokenMeta:QLCTokenMeta, amount: BigUInt, to: String, sender: String, receiver: String, message: String, previousBlock: QLCStateBlock, privateKeyB:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)) {
         let block = QLCStateBlock.factory(type: QLCConstants.BLOCK_TYPE_SEND, token: token.tokenId ?? "", address: from, balance: BigUInt(tokenMeta.balance!-amount), previous: tokenMeta.header ?? "", link: QLCUtil.addressToPublicKey(address: to), timestamp: Int64(Date().timeIntervalSince1970), representative: tokenMeta.representative ?? "")
         
         if !sender.isEmpty {
@@ -117,9 +117,10 @@ public class TransactionMng {
 //            return nil
         }
 
-        if (privateKey.count == 64 || privateKey.count == 128) {
+        let privateKey = privateKeyB.toHexString()
+        if (privateKey.count == 64) {
             // send address info
-            let sendAddress = QLCAddress.factory(address: from, publicKey: QLCUtil.addressToPublicKey(address: from), privateKey: privateKey.toHexString())
+            let sendAddress = QLCAddress.factory(address: from, publicKey: QLCUtil.addressToPublicKey(address: from), privateKey: privateKey)
             
             // set signature
             let priKey = sendAddress.privateKey!.replacingOccurrences(of: sendAddress.publicKey!, with: "")
@@ -134,15 +135,22 @@ public class TransactionMng {
             block.signature = signature
 
             // set work
-            WorkUtil.generateWorkOfOperation(hash: BlockMng.getRoot(block: block) ?? "") { (work) in
-                block.work = work
-                resultHandler(block.toJSON())
+            let workHash = BlockMng.getRoot(block: block) ?? ""
+            WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
+                if isTimeOut == true {
+                    RequestService.testRequest(withBaseURLStr: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                            block.work = (response as! String?) ?? ""
+                            resultHandler(block.toJSON())
+                    }, failedBlock: { (task, error) in
+                        block.work = ""
+                        resultHandler(block.toJSON())
+                    })
+                } else {
+                    block.work = work
+                    resultHandler(block.toJSON())
+                }
             }
-//            let work = WorkUtil.generateWorkOfSingle(hash: BlockMng.getRoot(block: block) ?? "", startWork: 0, offsetWork: 1)
-//            block.work = work
         }
-        
-//        return block.toJSON()
     }
     
     /**
@@ -154,7 +162,7 @@ public class TransactionMng {
      * @throws IOException
      * @return JSONObject
      */
-    public static func receiveBlock(sendBlock:QLCStateBlock, privateKey:Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
+    public static func receiveBlock(sendBlock:QLCStateBlock, privateKeyB:Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
 
         // the block hash
         let sendBlockHash:Bytes = BlockMng.getHash(block: sendBlock)
@@ -179,7 +187,7 @@ public class TransactionMng {
                 }
                 
                 // check private key and link
-                let priKey = privateKey.toHexString()
+                let priKey = privateKeyB.toHexString()
                 let pubKey = QLCUtil.privateKeyToPublicKey(privateKey: priKey)
                 if pubKey != sendBlock.link {
                     print(QLCConstants.EXCEPTION_BLOCK_MSG_2004)
@@ -222,7 +230,7 @@ public class TransactionMng {
                                 if tokenMeta != nil {
                                     has = true
                                 }
-                                
+                        
                                 // previous block info
                                 var previousBlock : QLCStateBlock?
                                 try? LedgerMng.blocksInfo(blockHash: tokenMeta!.header!.hex2Bytes, successHandler: { (response) in
@@ -230,7 +238,7 @@ public class TransactionMng {
                                         previousBlock = response as? QLCStateBlock
                                         
                                         // create receiver block
-                                        TransactionMng.fillReceiveBlock(has: has, receiveAddress: receiveAddress, tokenMeta: tokenMeta!, info: info!, previousBlock: previousBlock!, sendBlockHash: sendBlockHash, sendBlock: sendBlock, privateKey: privateKey, resultHandler: { (dic) in
+                                        TransactionMng.fillReceiveBlock(has: has, receiveAddress: receiveAddress, tokenMeta: tokenMeta!, info: info!, previousBlock: previousBlock!, sendBlockHash: sendBlockHash, sendBlock: sendBlock, privateKeyB: privateKeyB, resultHandler: { (dic) in
                                             successHandler(dic)
                                         });
                                     } else {
@@ -246,7 +254,15 @@ public class TransactionMng {
                             }
                         }, failureHandler: { (error, message) in
                             print("getTokenMeta = ",message ?? "")
-                            failureHandler(error, message)
+                            if message == "account not found" { // 第一次接收
+                                let has = false
+                                // create receiver block
+                                TransactionMng.fillReceiveBlock(has: has, receiveAddress: receiveAddress, tokenMeta: nil, info: info!, previousBlock: nil, sendBlockHash: sendBlockHash, sendBlock: sendBlock, privateKeyB: privateKeyB, resultHandler: { (dic) in
+                                    successHandler(dic)
+                                });
+                            } else {
+                                failureHandler(error, message)
+                            }
                         })
                     } else {
                         failureHandler(nil, nil)
@@ -262,22 +278,22 @@ public class TransactionMng {
         }
     }
     
-    private static func fillReceiveBlock(has:Bool,receiveAddress:String,tokenMeta:QLCTokenMeta,info:QLCPendingInfo,previousBlock:QLCStateBlock,sendBlockHash:Bytes,sendBlock:QLCStateBlock, privateKey:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)) {
+    private static func fillReceiveBlock(has:Bool,receiveAddress:String,tokenMeta:QLCTokenMeta?,info:QLCPendingInfo,previousBlock:QLCStateBlock?,sendBlockHash:Bytes,sendBlock:QLCStateBlock, privateKeyB:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)) {
         // create receive block
         let receiveBlock = QLCStateBlock()
         if (has) {
             // previous block info
             receiveBlock.type = QLCConstants.BLOCK_TYPE_RECEIVE
             receiveBlock.address = receiveAddress
-            receiveBlock.balance = BigUInt(tokenMeta.balance!+info.amount!)
-            receiveBlock.vote = previousBlock.vote
-            receiveBlock.network = previousBlock.network
-            receiveBlock.storage = previousBlock.storage
-            receiveBlock.oracle = previousBlock.oracle
-            receiveBlock.previous = tokenMeta.header
+            receiveBlock.balance = BigUInt(tokenMeta!.balance!+info.amount!)
+            receiveBlock.vote = previousBlock!.vote
+            receiveBlock.network = previousBlock!.network
+            receiveBlock.storage = previousBlock!.storage
+            receiveBlock.oracle = previousBlock!.oracle
+            receiveBlock.previous = tokenMeta!.header
             receiveBlock.link = sendBlockHash.toHexString()
-            receiveBlock.representative = tokenMeta.representative
-            receiveBlock.token = tokenMeta.type
+            receiveBlock.representative = tokenMeta!.representative
+            receiveBlock.token = tokenMeta!.type
             receiveBlock.extra = QLCConstants.ZERO_HASH
             receiveBlock.timestamp = Int64(Date().timeIntervalSince1970)
         } else {
@@ -302,11 +318,11 @@ public class TransactionMng {
         }
         receiveBlock.povHeight = QLCConstants.ZERO_LONG
         
-        if (privateKey.count == 64 || privateKey.count == 128) {
+        let privateKey = privateKeyB.toHexString()
+        if (privateKey.count == 64) {
             
             // check private key and link
-            let priKey = privateKey.toHexString()
-            let pubKey = QLCUtil.privateKeyToPublicKey(privateKey: priKey)
+            let pubKey = QLCUtil.privateKeyToPublicKey(privateKey: privateKey)
             if pubKey != sendBlock.link {
                 print(QLCConstants.EXCEPTION_BLOCK_MSG_2004)
                 resultHandler(nil)
@@ -314,7 +330,7 @@ public class TransactionMng {
             
             // set signature
             let receiveBlockHash = BlockMng.getHash(block: receiveBlock)
-            let signature = QLCUtil.sign(message: receiveBlockHash.toHexString(), secretKey: priKey, publicKey: pubKey)
+            let signature = QLCUtil.sign(message: receiveBlockHash.toHexString(), secretKey: privateKey, publicKey: pubKey)
             let signCheck : Bool = QLCUtil.signOpen(message: receiveBlockHash.toHexString(), publicKey: pubKey, signature: signature)
             if !signCheck {
                 print(QLCConstants.EXCEPTION_MSG_1005)
@@ -323,14 +339,27 @@ public class TransactionMng {
             receiveBlock.signature = signature
             
             // set work
-            WorkUtil.generateWorkOfOperation(hash: BlockMng.getRoot(block: receiveBlock) ?? "") { (work) in
-                receiveBlock.work = work
-                resultHandler(receiveBlock.toJSON())
+            let workHash = BlockMng.getRoot(block: receiveBlock) ?? ""
+            WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
+                if isTimeOut == true {
+                    RequestService.request(withUrl: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, isSign: true, timestamp: nil, addBase: false, successBlock: { (task, response) in
+                        if ((response as! Dictionary)[Server_Code] == "0") {
+                            receiveBlock.work = work
+                            resultHandler(receiveBlock.toJSON())
+                        } else {
+                            receiveBlock.work = ""
+                            resultHandler(receiveBlock.toJSON())
+                        }
+                    }, failedBlock: { (task, error) in
+                        receiveBlock.work = ""
+                        resultHandler(receiveBlock.toJSON())
+                    })
+                } else {
+                    receiveBlock.work = work
+                    resultHandler(receiveBlock.toJSON())
+                }
             }
         }
-        
-//        return receiveBlock.toJSON()
-        
     }
     
     /**
@@ -345,7 +374,7 @@ public class TransactionMng {
      * @throws IOException
      * @throws QlcException
      */
-    public static func changeBlock(address:String, representative:String, chainTokenHash:String, privateKey:Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
+    public static func changeBlock(address:String, representative:String, chainTokenHash:String, privateKeyB:Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
     
         // check representative
         var representativeInfo : QLCAccount?
@@ -383,7 +412,7 @@ public class TransactionMng {
                                 previousBlock = response as? QLCStateBlock
                                 
                                 // create change block
-                                TransactionMng.fillChangeBlock(address: address, tokenMeta: tokenMeta!, previousBlock: previousBlock!, representative: representative, privateKey: privateKey, resultHandler: { (dic) in
+                                TransactionMng.fillChangeBlock(address: address, tokenMeta: tokenMeta!, previousBlock: previousBlock!, representative: representative, privateKeyB: privateKeyB, resultHandler: { (dic) in
                                     successHandler(dic)
                                 });
                             } else {
@@ -413,7 +442,7 @@ public class TransactionMng {
         })
     }
 
-    private static func fillChangeBlock(address:String,tokenMeta:QLCTokenMeta,previousBlock:QLCStateBlock,representative:String, privateKey:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)){
+    private static func fillChangeBlock(address:String,tokenMeta:QLCTokenMeta,previousBlock:QLCStateBlock,representative:String, privateKeyB:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)){
         // create change block
         let changeBlock : QLCStateBlock = QLCStateBlock()
         changeBlock.type = QLCConstants.BLOCK_TYPE_CHANGE
@@ -432,6 +461,7 @@ public class TransactionMng {
         changeBlock.message = QLCConstants.ZERO_HASH
         changeBlock.povHeight = QLCConstants.ZERO_LONG
         
+        let privateKey = privateKeyB.toHexString()
         if (privateKey.count == 64 || privateKey.count == 128) {
             
             // check private key and link
@@ -454,13 +484,28 @@ public class TransactionMng {
             changeBlock.signature = signature
             
             // set work
-            WorkUtil.generateWorkOfOperation(hash: BlockMng.getRoot(block: changeBlock) ?? "") { (work) in
-                changeBlock.work = work
-                resultHandler(changeBlock.toJSON())
+            let workHash = BlockMng.getRoot(block: changeBlock) ?? ""
+            WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
+                if isTimeOut == true {
+                    RequestService.request(withUrl: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, isSign: true, timestamp: nil, addBase: false, successBlock: { (task, response) in
+                        if ((response as! Dictionary)[Server_Code] == "0") {
+                            changeBlock.work = work
+                            resultHandler(changeBlock.toJSON())
+                        } else {
+                            changeBlock.work = ""
+                            resultHandler(changeBlock.toJSON())
+                        }
+                    }, failedBlock: { (task, error) in
+                        changeBlock.work = ""
+                        resultHandler(changeBlock.toJSON())
+                    })
+                } else {
+                    changeBlock.work = work
+                    resultHandler(changeBlock.toJSON())
+                }
+                
             }
             
         }
-        
-//        return changeBlock.toJSON()
     }
 }

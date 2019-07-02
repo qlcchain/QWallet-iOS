@@ -152,6 +152,7 @@ NSString *exportPrivateKey = @"Export private key";
 
 - (void)jumpToETHExportMnemonic {
     ETHExportMnemonicViewController *vc = [[ETHExportMnemonicViewController alloc] init];
+    vc.enterType = ETHExportMnemonicEnterTypeExport;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -8,6 +8,7 @@
 
 #import "UserModel.h"
 #import "NEOWalletUtil.h"
+#import "Qlink-Swift.h"
 
 @implementation UserModel
 
@@ -24,12 +25,16 @@
 
 + (NSString *)getOwnP2PId {
     NSString *p2pid = [NEOWalletUtil getKeyValue:P2P_KEY];
+    if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
+        p2pid = [[RandomString getRandomStringOfLengthWithLength:76] uppercaseString];
+        [NEOWalletUtil setKeyValue:P2P_KEY value:p2pid];
+    }
 //    if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
 //        char p2pId[38*2+1];
 //        int result =ReturnOwnP2PId(&p2pId);
 //        if (result == 0) {
 //            p2pid = [NSString stringWithUTF8String:p2pId];
-//            [WalletUtil setKeyValue:P2P_KEY value:p2pid];
+//            [NEOWalletUtil setKeyValue:P2P_KEY value:p2pid];
 //        } else {
 //            return @"";
 //        }

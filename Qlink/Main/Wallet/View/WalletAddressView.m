@@ -9,7 +9,7 @@
 #import "WalletAddressView.h"
 #import "UIView+Animation.h"
 #import "WalletCommonModel.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
 
 @implementation WalletAddressView
 
@@ -20,12 +20,12 @@
     return nibView;
 }
 
-- (void) centerCodeImage
-{
-    kWeakSelf(self);
-    [HMScanner qrImageWithString:[WalletCommonModel getCurrentSelectWallet].address avatar:nil completion:^(UIImage *image) {
-        weakself.codeImageView.image = image;
-    }];
+- (void) centerCodeImage {
+    _codeImageView.image = [SGQRCodeObtain generateQRCodeWithData:[WalletCommonModel getCurrentSelectWallet].address?:@"" size:_codeImageView.width logoImage:nil ratio:0.15];
+//    kWeakSelf(self);
+//    [HMScanner qrImageWithString:[WalletCommonModel getCurrentSelectWallet].address avatar:nil completion:^(UIImage *image) {
+//        weakself.codeImageView.image = image;
+//    }];
 }
 
 - (IBAction)backAction:(id)sender {

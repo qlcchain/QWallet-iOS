@@ -9,7 +9,7 @@
 #import "NEOWalletAddressViewController.h"
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
 
 @interface NEOWalletAddressViewController ()
 
@@ -48,10 +48,8 @@
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     _addressLab.text = currentWalletM.address?:@"";
     
-    kWeakSelf(self);
-    [HMScanner qrImageWithString:currentWalletM.address?:@"" avatar:nil completion:^(UIImage *image) {
-        weakself.qrcodeImgV.image = image;
-    }];
+    UIImage *img = [UIImage imageNamed:@"qrcode_neo"];
+    _qrcodeImgV.image = [SGQRCodeObtain generateQRCodeWithData:currentWalletM.address?:@"" size:_qrcodeImgV.width logoImage:img ratio:0.2 logoImageCornerRadius:0 logoImageBorderWidth:0 logoImageBorderColor:[UIColor clearColor]];
 }
 
 #pragma mark -Action

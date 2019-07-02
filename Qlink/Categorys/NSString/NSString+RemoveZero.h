@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString*)removeFloatAllZero;
 - (NSString *)show4floatStr;
+- (NSString *)showfloatStr:(NSInteger)decimal;
 
 @end
 

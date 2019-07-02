@@ -15,6 +15,7 @@
 - (BOOL)importWalletWithSeed:(NSString *)seed;
 - (BOOL)importWalletWithMnemonic:(NSString *)mnemonic;
 - (BOOL)walletSeedIsValid:(NSString *)seed;
+- (BOOL)walletMnemonicIsValid:(NSString *)mnemonic;
 - (NSString *)exportMnemonicWithSeed:(NSString *)seed;
 - (NSString *)walletAddress;
 - (NSString *)walletPrivateKeyStr;

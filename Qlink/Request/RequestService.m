@@ -50,21 +50,24 @@
     return dataTask;
 }
 
-+ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp addBase:(BOOL)addBase successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",[RequestService getInstance].prefix_Url,url];
-
+    if (!addBase) {
+        requestUrl = url;
+    }
+    
     NSMutableDictionary *tempParams = [NSMutableDictionary dictionaryWithDictionary:@{@"system":[RequestService getSystemInfo]}];
     [tempParams addEntriesFromDictionary:params];
     id inputParams = tempParams;
-//    id inputParams = params;
+    //    id inputParams = params;
     
     if (isSign) {
         NSString *recordStr = @"";
         if (inputParams) {
             recordStr = ((NSDictionary *)inputParams).mj_JSONString;
             recordStr = [recordStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
-//            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
+            //            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
         }
         NSString *tempTimestamp = timestamp;
         if (!tempTimestamp) {
@@ -80,7 +83,7 @@
         
         NSString *jsonStr = ((NSDictionary *)jsonParam).mj_JSONString;
         jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
-//        NSString *jsonStr = [JSONUtil jsonStrFromDicWithTrim:jsonParam];
+        //        NSString *jsonStr = [JSONUtil jsonStrFromDicWithTrim:jsonParam];
         if ([K_Print_JsonStr boolValue]) {
             DDLogDebug(@"jsonStr = %@",jsonStr);
         }
@@ -134,6 +137,10 @@
     return dataTask;
 }
 
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    return [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:isSign timestamp:timestamp addBase:YES successBlock:successReqBlock failedBlock:failedReqBlock];
+}
+
 + (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params timestamp:(nullable NSString *)timestamp httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
     NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES timestamp:timestamp successBlock:successReqBlock failedBlock:failedReqBlock];
@@ -181,6 +188,16 @@
     [info appendFormat:@"version:%@",APP_Build];
     
     return info;
+}
+
++ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
+                                             params:(id)params
+                                         httpMethod:(HttpMethod)httpMethod
+                                           userInfo:(NSDictionary*)userInfo
+                                       successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                                        failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 testRequestWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:userInfo successBlock:successReqBlock failedBlock:failedReqBlock];
+    return dataTask;
 }
 
 @end

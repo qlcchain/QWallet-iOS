@@ -47,7 +47,7 @@
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     [self renderView];
     [self configInit];
-    [self ethAction:_ethBtn];
+    [self qlcAction:_qlcBtn];
 }
 
 #pragma mark - Operation

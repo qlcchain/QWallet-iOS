@@ -9,7 +9,7 @@
 #import "EOSAccountQRViewController.h"
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
 
 @interface EOSAccountQRViewController ()
 
@@ -48,10 +48,8 @@
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     _addressLab.text = currentWalletM.account_name?:@"";
     
-    kWeakSelf(self);
-    [HMScanner qrImageWithString:currentWalletM.account_name?:@"" avatar:nil completion:^(UIImage *image) {
-        weakself.qrcodeImgV.image = image;
-    }];
+    UIImage *img = [UIImage imageNamed:@"qrcode_eos"];
+    _qrcodeImgV.image = [SGQRCodeObtain generateQRCodeWithData:currentWalletM.address?:@"" size:_qrcodeImgV.width logoImage:img ratio:0.2 logoImageCornerRadius:0 logoImageBorderWidth:0 logoImageBorderColor:[UIColor clearColor]];
 }
 
 #pragma mark -Action

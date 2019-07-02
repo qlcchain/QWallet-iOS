@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +15,7 @@
                 <outlet property="balanceLab" destination="SNB-zK-KLb" id="bbe-jy-1EB"/>
                 <outlet property="bottomBack" destination="IQX-dM-aWc" id="5wR-7C-UzI"/>
                 <outlet property="chartBack" destination="NuP-ac-nXk" id="w96-sd-ifj"/>
+                <outlet property="chartBackHeight" destination="gUe-Ja-G7K" id="0lq-DO-Amp"/>
                 <outlet property="mainTable" destination="2E2-sA-GWi" id="xH6-xb-Ftf"/>
                 <outlet property="priceLab" destination="j5b-ee-yKd" id="GHA-zl-0Fm"/>
                 <outlet property="titleLab" destination="S66-0o-rYV" id="dFV-0f-BrG"/>
@@ -36,12 +38,18 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.28934" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-zK-KLb">
                                             <rect key="frame" x="122.5" y="16" width="130" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="3Ur-xk-Xle"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="≈$112,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5b-ee-yKd">
                                             <rect key="frame" x="151.5" y="56" width="72.5" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="qMj-54-4Ru"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>

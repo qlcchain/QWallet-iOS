@@ -101,6 +101,8 @@
         [self showImportSuccessView];
 //        [self performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
         [self performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
+    } else {
+        [kAppD.window makeToastDisappearWithText:@"Import fail"];
     }
 }
 

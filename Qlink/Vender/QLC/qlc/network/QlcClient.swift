@@ -10,10 +10,12 @@ import Foundation
 import APIKit
 import JSONRPCKit
 
-//public let testSeed:String = "http://47.103.40.20:19735"
-public let testSeed:String = "http://192.168.1.122:19735"
-//public let testSeed:String = "ws://47.103.40.20:19736"
-//public let testSeed:String = "ws://47.112.112.138:19736"
+//public let qlc_seed:String = "https://rpc.qlcchain.online" // 生产
+public let qlc_seed:String = "http://wrpc.qlcchain.org:9735" // 生产
+//public let qlc_seed:String = "http://47.103.40.20:19735"
+//public let qlc_seed:String = "http://192.168.1.122:19735" // 测试
+//public let qlc_seed:String = "ws://47.103.40.20:19736"
+//public let qlc_seed:String = "ws://47.112.112.138:19736"
 
 //public typealias JSONDictionary_qlc = [String: Any]
 
@@ -109,7 +111,7 @@ public class QlcClient  {
 //        Session.send(httpRequest) { result in
             switch result {
             case .success(let answer):
-                print(request.method,request.parameters ?? "","🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵 = ",answer)
+                print(httpRequest.baseURL,request.method,request.parameters ?? "","🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵🐵 = ",answer)
 //                let isMain = Thread.isMainThread
 //                if isMain {
                     successHandler(answer)
@@ -119,7 +121,7 @@ public class QlcClient  {
 //                    }
 //                }
             case .failure(let error):
-                print(request.method,request.parameters ?? "","🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶 = ",error)
+                print(httpRequest.baseURL,request.method,request.parameters ?? "","🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶 = ",error)
 //                let isMain = Thread.isMainThread
 //                if isMain {
 //
