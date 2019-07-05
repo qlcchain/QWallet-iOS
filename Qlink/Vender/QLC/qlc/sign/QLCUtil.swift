@@ -227,13 +227,13 @@ public class QLCUtil: NSObject {
     }
     
     // Receive
-    @objc public static func receive_blocksInfo(blockHash:String,privateKey:String,successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func receive_blocksInfo(blockHash:String, receiveAddress:String ,privateKey:String,successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let blockHashB = blockHash.hex2Bytes
         try? LedgerMng.blocksInfo(blockHash: blockHashB, successHandler: { (response) in
             if response != nil {
                 let tempBlock:QLCStateBlock = response as! QLCStateBlock
                 let privateKeyB = privateKey.hex2Bytes
-                try? TransactionMng.receiveBlock(sendBlock: tempBlock, privateKeyB: privateKeyB, successHandler: { (response) in
+                try? TransactionMng.receiveBlock(sendBlock: tempBlock, receiveAddress: receiveAddress, privateKeyB: privateKeyB, successHandler: { (response) in
                     if response != nil {
                         let dic = response as! Dictionary<String, Any>
                         try? LedgerMng.process(dic: dic, successHandler: { (response) in

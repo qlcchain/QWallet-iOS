@@ -82,10 +82,15 @@ public class QLCConstants {
     public static let BLOCK_TYPE_SEND:String = "Send"
     public static let BLOCK_TYPE_RECEIVE:String = "Receive"
     public static let BLOCK_TYPE_CHANGE:String = "Change"
+    public static let BLOCK_TYPE_CONTRACTSEND:String = "ContractSend"
+    public static let BLOCK_TYPE_CONTRACTREWARD:String = "ContractReward"
     
     // block parameter default value
     public static let ZERO_HASH:String = "0000000000000000000000000000000000000000000000000000000000000000"
     public static let ZERO_BIG_INTEGER:BigUInt = BigUInt(0)
     public static let ZERO_LONG:Int64 = 0
+    
+    // link type
+    public static let LINNK_TYPE_AIRDORP:String = "d614bb9d5e20ad063316ce091148e77c99136c6194d55c7ecc7ffa9620dbcaeb"
     
 }

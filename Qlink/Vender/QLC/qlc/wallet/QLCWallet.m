@@ -76,8 +76,8 @@
     [QLCUtil receive_accountsPendingWithAddress:address successHandler:successHandler failureHandler:failureHandler];
 }
 
-+ (void)receive_blocksInfo:(NSString *)blockHash privateKey:(NSString *)privateKey successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler {
-    [QLCUtil receive_blocksInfoWithBlockHash:blockHash privateKey:privateKey successHandler:successHandler failureHandler:failureHandler];
++ (void)receive_blocksInfo:(NSString *)blockHash receiveAddress:(NSString *)receiveAddress privateKey:(NSString *)privateKey successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler {
+    [QLCUtil receive_blocksInfoWithBlockHash:blockHash receiveAddress:receiveAddress privateKey:privateKey successHandler:successHandler failureHandler:failureHandler];
 }
 
 - (NSString *)address {

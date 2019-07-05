@@ -532,7 +532,6 @@
 		58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */; };
 		58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AE22074D28700CE983B /* WalletQRViewController.m */; };
 		58B947E62064A5AD007F52F6 /* UIView+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B947E52064A5AD007F52F6 /* UIView+Gradient.m */; };
-		58C003F0207C57E2007B0D2A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C003EF207C57E2007B0D2A /* NetworkExtension.framework */; };
 		58C3181A2181B829000344D3 /* WalletsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C318182181B829000344D3 /* WalletsCell.m */; };
 		58C3181B2181B829000344D3 /* WalletsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C318192181B829000344D3 /* WalletsCell.xib */; };
 		58CD93A720A2CCCD0004F1F0 /* ChatHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD93A420A2CCCD0004F1F0 /* ChatHeadView.m */; };
@@ -597,6 +596,7 @@
 		58ED8C8D229E7796000A5F54 /* LedgerServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58ED8C8C229E7796000A5F54 /* LedgerServices.swift */; };
 		58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F2BCA2225C42410091DD53 /* LoginViewController.m */; };
 		58F2BCA5225C42410091DD53 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58F2BCA3225C42410091DD53 /* LoginViewController.xib */; };
+		58F3183D22CDD5910024B4F0 /* RewardsMng.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F3183C22CDD5910024B4F0 /* RewardsMng.swift */; };
 		58FB8D55226434AF0075698E /* EarningsRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB8D53226434AF0075698E /* EarningsRankingViewController.m */; };
 		58FB8D56226434AF0075698E /* EarningsRankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB8D54226434AF0075698E /* EarningsRankingViewController.xib */; };
 		58FB8D5A226434C80075698E /* InviteRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB8D58226434C80075698E /* InviteRankingViewController.m */; };
@@ -1623,7 +1623,6 @@
 		58B947E52064A5AD007F52F6 /* UIView+Gradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Gradient.m"; sourceTree = "<group>"; };
 		58B947E92064D145007F52F6 /* SkyRadiusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyRadiusView.m; sourceTree = "<group>"; };
 		58B947EA2064D145007F52F6 /* SkyRadiusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyRadiusView.h; sourceTree = "<group>"; };
-		58C003EF207C57E2007B0D2A /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		58C318172181B829000344D3 /* WalletsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletsCell.h; sourceTree = "<group>"; };
 		58C318182181B829000344D3 /* WalletsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletsCell.m; sourceTree = "<group>"; };
 		58C318192181B829000344D3 /* WalletsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletsCell.xib; sourceTree = "<group>"; };
@@ -1727,6 +1726,7 @@
 		58F2BCA2225C42410091DD53 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		58F2BCA3225C42410091DD53 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		58F2BCA6225C425F0091DD53 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		58F3183C22CDD5910024B4F0 /* RewardsMng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsMng.swift; sourceTree = "<group>"; };
 		58FB8D52226434AF0075698E /* EarningsRankingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EarningsRankingViewController.h; sourceTree = "<group>"; };
 		58FB8D53226434AF0075698E /* EarningsRankingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EarningsRankingViewController.m; sourceTree = "<group>"; };
 		58FB8D54226434AF0075698E /* EarningsRankingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarningsRankingViewController.xib; sourceTree = "<group>"; };
@@ -2009,7 +2009,6 @@
 				734F529420B6BEF7002D45B7 /* UserNotifications.framework in Frameworks */,
 				581D32E6219C15CD001F88C3 /* neoutils.framework in Frameworks */,
 				734F529220B6BDEE002D45B7 /* libMiPushSDK.a in Frameworks */,
-				58C003F0207C57E2007B0D2A /* NetworkExtension.framework in Frameworks */,
 				58A913132296314200A4E893 /* TrezorCrytoEd25519.framework in Frameworks */,
 				7F4538A66F4431A83CB2C569 /* Pods_Qlink.framework in Frameworks */,
 			);
@@ -3187,6 +3186,7 @@
 				58A71E69229F88B200C22D8C /* TransactionMng.swift */,
 				58A71E6B229FB62300C22D8C /* TokenMetaMng.swift */,
 				58A71E6D229FBD8700C22D8C /* LedgerMng.swift */,
+				58F3183C22CDD5910024B4F0 /* RewardsMng.swift */,
 			);
 			path = mng;
 			sourceTree = "<group>";
@@ -4421,7 +4421,6 @@
 				734F529720B6BF4A002D45B7 /* libxml2.tbd */,
 				734F529520B6BF20002D45B7 /* libresolv.tbd */,
 				734F529320B6BEF7002D45B7 /* UserNotifications.framework */,
-				58C003EF207C57E2007B0D2A /* NetworkExtension.framework */,
 				3EA980B5D481A5FA6E3154F3 /* Pods_Qlink.framework */,
 			);
 			name = Frameworks;
@@ -4511,13 +4510,13 @@
 								enabled = 1;
 							};
 							com.apple.NetworkExtensions.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
 							};
 							com.apple.VPNLite = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -5048,6 +5047,7 @@
 				587ABD4921B8F8F800C3D81A /* Abi_json_to_bin_Result.m in Sources */,
 				5894EC4B217EC798007F5D39 /* ETHMnemonicConfirmViewController.m in Sources */,
 				58DF8E61206E26AC00ACFC65 /* WalletAddressView.m in Sources */,
+				58F3183D22CDD5910024B4F0 /* RewardsMng.swift in Sources */,
 				582B116122952B7F005E2288 /* Ed25519.swift in Sources */,
 				5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */,
 				587ABD6321B8F8F800C3D81A /* CreateEOSAccountRequest.m in Sources */,
@@ -5984,7 +5984,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CustomAppBundleld = com.qlcchain.qwallet;
-				CustomProductName = "Q-Wallet";
+				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				ENABLE_BITCODE = NO;
@@ -6028,7 +6028,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CustomAppBundleld = com.qlcchain.qwallet;
-				CustomProductName = "Q-Wallet";
+				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

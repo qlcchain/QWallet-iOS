@@ -162,10 +162,35 @@ public class TransactionMng {
      * @throws IOException
      * @return JSONObject
      */
-    public static func receiveBlock(sendBlock:QLCStateBlock, privateKeyB:Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
+    public static func receiveBlock(sendBlock:QLCStateBlock, receiveAddress:String, privateKeyB:Bytes, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) throws {
 
         // the block hash
         let sendBlockHash:Bytes = BlockMng.getHash(block: sendBlock)
+        
+        // is contract send block
+        if (QLCConstants.BLOCK_TYPE_CONTRACTSEND == sendBlock.type && QLCConstants.LINNK_TYPE_AIRDORP == sendBlock.link) {
+            // create reward block
+            try? RewardsMng.getReceiveRewardBlock(hashHex: sendBlockHash.toHexString(), successHandler: { (response) in
+                if response != nil {
+                    let receiveBlock:QLCStateBlock = response as! QLCStateBlock
+                    successHandler(receiveBlock.toJSON())
+                } else {
+                    failureHandler(nil, nil)
+                }
+            }) { (error, message) in
+                print("rewards_getReceiveRewardBlock = ",message ?? "")
+                failureHandler(error, message)
+            }
+            return
+        }
+        
+        // check the receive address
+        let tempReceiveAddress:String = QLCUtil.publicKeyToAddress(publicKey: sendBlock.link ?? "")
+        if (tempReceiveAddress != receiveAddress) {
+            print(QLCConstants.EXCEPTION_BLOCK_MSG_2000 + ", receive address is [" + tempReceiveAddress + "]")
+            failureHandler(nil, nil)
+            return
+        }
 
         // is send block
         if (QLCConstants.BLOCK_TYPE_SEND != sendBlock.type ?? "") {
@@ -180,7 +205,6 @@ public class TransactionMng {
             if response != nil {
                 tempBlock = response as? QLCStateBlock
                 if (tempBlock == nil) {
-//                throw new QlcException(Constants.EXCEPTION_BLOCK_CODE_2003, Constants.EXCEPTION_BLOCK_MSG_2003 + ", block hash[" + Helper.byteToHexString(sendBlockHash) + "]");
                     print(QLCConstants.EXCEPTION_BLOCK_MSG_2003 + ", block hash[" + sendBlockHash.toHexString() + "]")
                     failureHandler(nil, nil)
                     return
@@ -271,6 +295,8 @@ public class TransactionMng {
                     print("getAccountPending = ",message ?? "")
                     failureHandler(error, message)
                 })
+            } else {
+                failureHandler(nil, nil)
             }
         }) { (error, message) in
             print("getBlockInfoByHash = ",message ?? "")
@@ -342,14 +368,9 @@ public class TransactionMng {
             let workHash = BlockMng.getRoot(block: receiveBlock) ?? ""
             WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
                 if isTimeOut == true {
-                    RequestService.request(withUrl: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, isSign: true, timestamp: nil, addBase: false, successBlock: { (task, response) in
-                        if ((response as! Dictionary)[Server_Code] == "0") {
-                            receiveBlock.work = work
-                            resultHandler(receiveBlock.toJSON())
-                        } else {
-                            receiveBlock.work = ""
-                            resultHandler(receiveBlock.toJSON())
-                        }
+                    RequestService.testRequest(withBaseURLStr: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                        receiveBlock.work = (response as! String?) ?? ""
+                        resultHandler(receiveBlock.toJSON())
                     }, failedBlock: { (task, error) in
                         receiveBlock.work = ""
                         resultHandler(receiveBlock.toJSON())
@@ -487,14 +508,9 @@ public class TransactionMng {
             let workHash = BlockMng.getRoot(block: changeBlock) ?? ""
             WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
                 if isTimeOut == true {
-                    RequestService.request(withUrl: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, isSign: true, timestamp: nil, addBase: false, successBlock: { (task, response) in
-                        if ((response as! Dictionary)[Server_Code] == "0") {
-                            changeBlock.work = work
-                            resultHandler(changeBlock.toJSON())
-                        } else {
-                            changeBlock.work = ""
-                            resultHandler(changeBlock.toJSON())
-                        }
+                    RequestService.testRequest(withBaseURLStr: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                        changeBlock.work = (response as! String?) ?? ""
+                        resultHandler(changeBlock.toJSON())
                     }, failedBlock: { (task, error) in
                         changeBlock.work = ""
                         resultHandler(changeBlock.toJSON())

@@ -426,4 +426,10 @@ public class LedgerRpc : NSObject {
         let client : QlcClient = QlcClient()
         //client.call(method: "ledger_transactionsCount", params: params, successHandler: successHandler, failureHandler: failureHandler)
     }
+    
+    @objc public static func rewards_getReceiveRewardBlock(hashHex: String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+        let request = GetReceiveRewardBlock(hashHex: hashHex)
+        let client : QlcClient = QlcClient()
+        client.call(request, successHandler: successHandler, failureHandler: failureHandler)
+    }
 }

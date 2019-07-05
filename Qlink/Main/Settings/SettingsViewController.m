@@ -31,7 +31,7 @@ NSString *title1 = @"Currency Unit";
 NSString *title3 = @"Service Agreement";
 NSString *title4 = @"Help and Feedback";
 //NSString *title5 = @"Join the Community";
-NSString *title6 = @"About QLC-Wallet";
+NSString *title6 = @"About My QWallet";
 NSString *title7 = @"Log out";
 
 #pragma mark - Observe

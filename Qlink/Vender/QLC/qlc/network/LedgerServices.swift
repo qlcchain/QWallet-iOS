@@ -202,4 +202,27 @@ struct Tokens: JSONRPCKit.Request {
     }
 }
 
+struct GetReceiveRewardBlock: JSONRPCKit.Request {
+    typealias Response = [String: Any]
+    
+    let hashHex : String
+    
+    var method: String {
+        return "rewards_getReceiveRewardBlock"
+    }
+    
+    var parameters: Any? {
+        return [hashHex]
+    }
+    
+    func response(from resultObject: Any) throws -> Response {
+        if let response = resultObject as? Response {
+            return response
+        } else {
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
+        }
+    }
+}
+
+
 
