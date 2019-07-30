@@ -17,4 +17,11 @@
     return [dn stringValue];
 }
 
+- (NSString *)showfloatStr:(NSNumber *)decimal {
+    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:[decimal integerValue] raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSString *str = [NSString stringWithFormat:@"%@",self];
+    NSDecimalNumber *dn = [[NSDecimalNumber decimalNumberWithString:str] decimalNumberByRoundingAccordingToBehavior:hander];
+    return [dn stringValue];
+}
+
 @end

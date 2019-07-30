@@ -112,7 +112,8 @@
 
 - (void)checkSendBtnEnable {
     if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
-        [_sendBtn setBackgroundColor:MAIN_PURPLE_COLOR];
+//        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
     } else {
         [_sendBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];
@@ -138,7 +139,9 @@
     NSString *value = @"";
     BOOL isCoin = [_selectToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
     kWeakSelf(self);
+    [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
+        [kAppD.window hideToast];
         if (success) {
             [kAppD.window makeToastDisappearWithText:@"Send Success"];
             NSString *blockChain = @"ETH";
@@ -152,6 +155,21 @@
 
 - (void)backToRoot {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (BOOL)haveETHAssetNum {
+    __block BOOL haveEthAssetNum = NO;
+    [_inputSourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:@"ETH"]) {
+            NSString *ethNum = [model getTokenNum];
+            if ([ethNum doubleValue] > 0) {
+                haveEthAssetNum = YES;
+            }
+            *stop = YES;
+        }
+    }];
+    return haveEthAssetNum;
 }
 
 #pragma mark - Request
@@ -215,6 +233,11 @@
     BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text];
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is invalidate"];
+        return;
+    }
+    
+    if (![self haveETHAssetNum]) {
+        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address have not ETH banlance"];
         return;
     }
     

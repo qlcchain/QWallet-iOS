@@ -110,7 +110,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 #ifdef DEBUG
     HistoryRecrdInfo *model = _sourceArr[(_sourceArr.count -1) - indexPath.row];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"p2pid" message:model.toP2pId preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:okAction];
     [self presentViewController:alertVC animated:YES completion:nil];

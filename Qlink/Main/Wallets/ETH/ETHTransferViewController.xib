@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,7 +46,7 @@
                                             <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_down_purple" translatesAutoresizingMaskIntoConstraints="NO" id="CkV-i7-F7g">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_down_blue" translatesAutoresizingMaskIntoConstraints="NO" id="CkV-i7-F7g">
                                             <rect key="frame" x="59" y="25" width="11" height="6"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSs-Fe-5NL">
@@ -61,7 +61,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 0.00 ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRI-XJ-UVy">
                                             <rect key="frame" x="220.5" y="18.5" width="133.5" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.29019607843137252" green="0.0" blue="0.50588235294117645" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yHw-kP-qze">
@@ -187,6 +187,9 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gng-Ye-c5v">
                                                     <rect key="frame" x="24" y="14.5" width="64" height="19.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="2qF-Hu-8gj"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -194,7 +197,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0006 ether ≈ $0.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-Gd-1yq">
                                                     <rect key="frame" x="198.5" y="14.5" width="143.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9G-Nq-1ZC">
@@ -219,9 +222,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="x9G-Nq-1ZC" secondAttribute="trailing" constant="16" id="7GX-Sy-Cxl"/>
                                                 <constraint firstItem="3QA-UA-bkx" firstAttribute="centerY" secondItem="feB-eb-rYD" secondAttribute="centerY" id="87C-Fn-Ugf"/>
                                                 <constraint firstItem="Gng-Ye-c5v" firstAttribute="leading" secondItem="feB-eb-rYD" secondAttribute="leading" constant="24" id="8Rt-96-e9c"/>
-                                                <constraint firstItem="3QA-UA-bkx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gng-Ye-c5v" secondAttribute="trailing" id="ERG-fI-EgT"/>
                                                 <constraint firstAttribute="trailing" secondItem="Eep-Gd-1yq" secondAttribute="trailing" constant="33" id="L6S-B4-svl"/>
                                                 <constraint firstAttribute="trailing" secondItem="3QA-UA-bkx" secondAttribute="trailing" constant="15" id="MXy-GG-ThQ"/>
+                                                <constraint firstItem="Eep-Gd-1yq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gng-Ye-c5v" secondAttribute="trailing" id="WHD-dI-ISr"/>
                                                 <constraint firstItem="x9G-Nq-1ZC" firstAttribute="centerY" secondItem="feB-eb-rYD" secondAttribute="centerY" id="WmX-zg-4WR"/>
                                                 <constraint firstItem="Eep-Gd-1yq" firstAttribute="centerY" secondItem="feB-eb-rYD" secondAttribute="centerY" id="cq3-MM-Lgs"/>
                                                 <constraint firstAttribute="height" constant="48" id="mL6-7f-fqh"/>
@@ -236,8 +239,8 @@
                                                     <subviews>
                                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Dep-gB-H5u">
                                                             <rect key="frame" x="22" y="15" width="333" height="31"/>
-                                                            <color key="tintColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
-                                                            <color key="thumbTintColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                            <color key="tintColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                                            <color key="thumbTintColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                             <connections>
                                                                 <action selector="sliderAction:" destination="-1" eventType="valueChanged" id="SUo-zG-Njg"/>
                                                             </connections>
@@ -442,7 +445,7 @@
     </objects>
     <resources>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="eth_scan" width="24" height="24"/>
-        <image name="icon_arrow_down_purple" width="11" height="6"/>
+        <image name="eth_scan" width="20" height="20"/>
+        <image name="icon_arrow_down_blue" width="11" height="6"/>
     </resources>
 </document>

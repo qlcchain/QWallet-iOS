@@ -19,7 +19,7 @@ def library
     pod 'KissXML', '~> 5.2.2'
     #pod 'ICSMainFramework', :path => "./Library/ICSMainFramework/"
     pod 'MMWormhole', '~> 2.0.0'
-#    pod 'KeychainAccess'
+    pod 'KeychainAccess'
 end
 
 def tunnel
@@ -29,7 +29,8 @@ end
 def eth
     pod 'BigInt', '~> 3.0'
     pod 'R.swift'
-    pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
+#    pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
+    pod 'JSONRPCKit', '3.0.0'
     pod 'PromiseKit', '~> 6.0'
     pod 'APIKit'
 #    pod 'Eureka'
@@ -61,13 +62,22 @@ target "Qlink" do
     pod 'OLImageView'
     pod 'Firebase/Core', '~> 5.4.1'
 #    pod 'MMWormhole'
-#    pod 'TagListView', '1.2.0'
+#    pod 'TagListView'
+    pod 'TTGTagCollectionView'
     pod 'Charts', '3.1.0'
+    pod 'SwiftTheme', '0.4.1'
+    pod 'TYCyclePagerView'
+    pod 'MJRefresh'
 
 #  shadowsock
     pod 'SwiftColor'
     pod 'AsyncSwift'
     pod 'Appirater'
+    pod 'HandyJSON'
+#    pod 'NinaPagerView'
+
+    # qlc_sign
+#    pod 'TrezorCryptoEd25519WithBlake2b'
 
     tunnel
     library
@@ -79,34 +89,13 @@ target "Qlink" do
 end
 
 
-target "ShadowsockLibrary" do
-    library
-    model
-    # YAML-Framework 0.0.3 is not available in cocoapods so we install it from local using git submodule
-    # pod 'YAML-Framework', :path => "./Library/YAML-Framework"
-end
-
-target "ShadowsockModel" do
-    model
-end
-
-target "ShadowsockTunnel" do
-    tunnel
-    socket
-end
-
-target "ShadowsockProcessor" do
-    socket
-end
-
-
 post_install do |installer|
     installer.pods_project.targets.each do |target|
-        if ['JSONRPCKit'].include? target.name
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
-        end
+#        if ['JSONRPCKit'].include? target.name
+#            target.build_configurations.each do |config|
+#                config.build_settings['SWIFT_VERSION'] = '3.0'
+#            end
+#        end
         if ['TrustKeystore'].include? target.name
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'

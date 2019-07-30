@@ -10,6 +10,7 @@
 #import "NEOWalletInfo.h"
 #import "QlinkTabbarViewController.h"
 #import "SuccessTipView.h"
+#import "BackupKeyView.h"
 
 @interface NEOBackupDetailViewController () {
     BOOL isTip;
@@ -76,6 +77,16 @@
 - (IBAction)tipAction:(UIButton *)sender {
     sender.selected = !sender.selected;
     isTip = sender.selected;
+}
+
+- (IBAction)copyEncryptedKeyAction:(id)sender {
+    BackupKeyView *view = [BackupKeyView getInstance];
+    [view showWithPrivateKey:_encryptedKeyLab.text title:@"Encrypted Key(WIF)"];
+}
+
+- (IBAction)copyPrivateKeyAction:(id)sender {
+    BackupKeyView *view = [BackupKeyView getInstance];
+    [view showWithPrivateKey:_privateKeyLab.text title:@"Private Key(HEX)"];
 }
 
 #pragma mark - Transition

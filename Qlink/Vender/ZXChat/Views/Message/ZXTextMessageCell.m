@@ -87,7 +87,8 @@
     if (messageModel.ownerTyper == ZXMessageOwnerTypeSelf) {
         _messageNameLabel.textColor = [UIColor whiteColor];
     } else {
-        _messageNameLabel.textColor = MAIN_PURPLE_COLOR;
+//        _messageNameLabel.textColor = MAIN_BLUE_COLOR;
+        _messageNameLabel.theme_textColor = globalBackgroundColorPicker;
     }
     
     NSDictionary *messageDic = messageModel.message.mj_JSONObject;

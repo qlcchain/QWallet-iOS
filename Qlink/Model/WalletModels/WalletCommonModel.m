@@ -14,6 +14,8 @@
 #import "Qlink-Swift.h"
 #import "ETHWalletInfo.h"
 #import "EOSWalletInfo.h"
+#import "QLCWalletInfo.h"
+#import "QLCWalletManage.h"
 
 @implementation WalletCommonModel
 
@@ -139,6 +141,18 @@
     return resultArr;
 }
 
++ (NSArray *)getWalletModelWithType:(WalletType)type {
+    NSMutableArray *resultArr = [NSMutableArray array];
+    NSArray *localArr = [HWUserdefault getObjectWithKey:Local_All_Wallet];
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WalletCommonModel *model = [WalletCommonModel getObjectWithKeyValues:obj];
+        if (type == model.walletType) {
+            [resultArr addObject:model];
+        }
+    }];
+    return resultArr;
+}
+
 + (void)setCurrentSelectWallet:(WalletCommonModel *)model {
     NSMutableArray *allArr = [NSMutableArray array];
     NSArray *localArr = [HWUserdefault getObjectWithKey:Local_All_Wallet];
@@ -161,19 +175,26 @@
     
     [WalletCommonModel refreshCurrentWallet];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:Wallet_Change_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:Wallet_Change_Noti object:model.address];
 }
 
 + (void)refreshCurrentWallet {
-    WalletCommonModel *curretWalletM = [WalletCommonModel getCurrentSelectWallet];
-    if (curretWalletM.walletType == WalletTypeETH) {
-        // ETH切换钱包
-        [TrustWalletManage.sharedInstance switchWalletWithAddress:curretWalletM.address];
-    } else if (curretWalletM.walletType == WalletTypeNEO) {
-        [WalletCommonModel setDefaulNEOWallet:curretWalletM.address];
-    } else if (curretWalletM.walletType == WalletTypeEOS) {
-        
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    // 切换钱包
+    if (currentWalletM.walletType == WalletTypeETH) {
+        [TrustWalletManage.sharedInstance switchWalletWithAddress:currentWalletM.address];
+    } else if (currentWalletM.walletType == WalletTypeNEO) {
+        [WalletCommonModel setDefaulNEOWallet:currentWalletM.address];
+    } else if (currentWalletM.walletType == WalletTypeEOS) {
+        //TODO:切换EOS钱包
+    } else if (currentWalletM.walletType == WalletTypeQLC) {
+        [WalletCommonModel switchQLCWallet:currentWalletM.address];
     }
+}
+
++ (void)switchQLCWallet:(NSString *)address {
+    NSString *seed = [QLCWalletInfo getQLCSeedWithAddress:address];
+    [QLCWalletManage.shareInstance switchWalletWithSeed:seed];
 }
 
 + (void)setDefaulNEOWallet:(NSString *)address {
@@ -215,10 +236,19 @@
         }
     }];
     return result;
-    
-//    NSDictionary *walletDic = [HWUserdefault getObjectWithKey:Current_Select_Wallet];
-//    WalletCommonModel *model = [WalletCommonModel getObjectWithKeyValues:walletDic];
-//    return model;
+}
+
++ (WalletCommonModel *)getWalletWithAddress:(NSString *)address {
+    __block WalletCommonModel *result = nil;
+    NSArray *localArr = [HWUserdefault getObjectWithKey:Local_All_Wallet];
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WalletCommonModel *tempM = [WalletCommonModel getObjectWithKeyValues:obj];
+        if ([tempM.address isEqualToString:address]) {
+            result = tempM;
+            *stop = YES;
+        }
+    }];
+    return result;
 }
 
 #pragma mark - ETH
@@ -285,6 +315,23 @@
         commonM.symbol = @"EOS";
         commonM.walletType = WalletTypeEOS;
         NSString *name = [NSString stringWithFormat:@"EOS-Wallet %@",@(idx+1)];
+        commonM.name = name;
+        commonM.isSelect = NO;
+        [WalletCommonModel addWalletModel:commonM];
+    }];
+}
+
+#pragma mark - QLC
++ (void)refreshQLCWallet {
+    NSArray *walletArr = [QLCWalletInfo getAllWalletInKeychain];
+    // 赋值名字
+    [walletArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *walletM = obj;
+        WalletCommonModel *commonM = [[WalletCommonModel alloc] init];
+        commonM.address = walletM.address;
+        commonM.symbol = @"QLC";
+        commonM.walletType = WalletTypeQLC;
+        NSString *name = [NSString stringWithFormat:@"QLC Chain-Wallet %@",@(idx+1)];
         commonM.name = name;
         commonM.isSelect = NO;
         [WalletCommonModel addWalletModel:commonM];

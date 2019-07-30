@@ -99,7 +99,8 @@
 
 - (void)checkSendBtnEnable {
     if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
-        [_sendBtn setBackgroundColor:MAIN_PURPLE_COLOR];
+//        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
     } else {
         [_sendBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];

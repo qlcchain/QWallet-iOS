@@ -20,6 +20,7 @@
 #import "ChatUtil.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "ChatTipView.h"
+#import "UserModel.h"
 
 #define SenderName @"Jim"
 
@@ -52,7 +53,8 @@
     
     // Do any additional setup after loading the view.
 //    [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    self.view.backgroundColor = MAIN_PURPLE_COLOR;
+//    self.view.backgroundColor = MAIN_BLUE_COLOR;
+    self.view.theme_backgroundColor = globalBackgroundColorPicker;
     
     // 主屏幕的高度减去导航的高度，减去状态栏的高度。在PCH头文件
 //    viewHeight = HEIGHT_SCREEN - HEIGHT_NAVBAR - HEIGHT_STATUSBAR;
@@ -90,7 +92,8 @@
     kWeakSelf(self);
     ChatHeadView *chatHeadV = [ChatHeadView getNibView];
 //    chatHeadV.backgroundColor = [UIColor clearColor];
-    chatHeadV.backgroundColor = MAIN_PURPLE_COLOR;
+//    chatHeadV.backgroundColor = MAIN_BLUE_COLOR;
+    chatHeadV.theme_backgroundColor = globalBackgroundColorPicker;
     chatHeadV.title = ChatUtil.shareInstance.currentChatM.groupName.uppercaseString;
     chatHeadV.backB = ^{
         [weakself back];
@@ -135,7 +138,7 @@
 }
 
 - (NSString *)getSenderId {
-    NSString *p2pId = [ToxManage getOwnP2PId];
+    NSString *p2pId = [UserModel getOwnP2PId];
     return p2pId;
 }
 
@@ -189,7 +192,7 @@
     [self.chatMessageVC refreshNewMessage];
     
     // 发送p2p消息
-    [ToxManage sendMessageToGroupChat:groupNum message:sendMessage];
+//    [ToxManage sendMessageToGroupChat:groupNum message:sendMessage];
 }
 
 -(void)chatBoxViewController:(ZXChatBoxController *)chatboxViewController didChangeChatBoxHeight:(CGFloat)height

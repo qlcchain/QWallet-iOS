@@ -9,11 +9,14 @@
 #import "QlinkTabbarViewController.h"
 //#import "WifiViewController.h"
 #import "MarketsViewController.h"
-#import "SettingsViewController.h"
+//#import "SettingsViewController.h"
+#import "MyViewController.h"
 //#import "WalletViewController.h"
 #import "WalletsViewController.h"
 //#import "VpnViewController.h"
-#import "VPNViewController.h"
+//#import "VPNViewController.h"
+#import "FinanceViewController.h"
+#import "HomeBuySellViewController.h"
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
 #import "UIView+Gradient.h"
@@ -53,10 +56,11 @@
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
-    [self addChildViewController:[[VPNViewController alloc] init] text:@"VPN" imageName:@"vpn"];
+//    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
+    [self addChildViewController:[[HomeBuySellViewController alloc] init] text:@"Finance" imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:@"Wallet" imageName:@"wallet"];
-    [self addChildViewController:[[SettingsViewController alloc] init] text:@"Settings" imageName:@"settings"];
+    [self addChildViewController:[[MyViewController alloc] init] text:@"Me" imageName:@"settings"];
 }
 
 - (void) addChildViewController:(UIViewController *) childController text:(NSString *) text imageName:(NSString *) imageName {
@@ -66,7 +70,7 @@
     
     // 设置标题的属性
     [childController.tabBarItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:UIColorFromRGB(0x676767)} forState:UIControlStateNormal]; //[UIFont fontWithName:@"VAGRoundedBT-Regular" size:12]
-    [childController.tabBarItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:MAIN_PURPLE_COLOR} forState:UIControlStateSelected];
+    [childController.tabBarItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor mainColor]} forState:UIControlStateSelected];
     
     // 设置item的标题
     childController.tabBarItem.title = text;
@@ -83,20 +87,21 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     UIViewController *topVC = ((QNavigationController *)viewController).topViewController;
     if ([topVC isKindOfClass:[WalletsViewController class]]){
-        if (kAppD.allowPresentLogin) {
-            [kAppD presentLogin:^{
+        if (kAppD.needFingerprintVerification) {
+            [kAppD presentFingerprintVerify:^{
                 kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
             }];
             return NO;
         }
-    } else if ([topVC isKindOfClass:[SettingsViewController class]]){
-        if (kAppD.allowPresentLogin) {
-            [kAppD presentLogin:^{
-                kAppD.tabbarC.selectedIndex = TabbarIndexSettings;
-            }];
-            return NO;
-        }
     }
+//    if ([topVC isKindOfClass:[MyViewController class]]){
+//        if (kAppD.allowPresentLogin) {
+//            [kAppD presentLogin:^{
+//                kAppD.tabbarC.selectedIndex = TabbarIndexMy;
+//            }];
+//            return NO;
+//        }
+//    }
     
     return YES;
 }

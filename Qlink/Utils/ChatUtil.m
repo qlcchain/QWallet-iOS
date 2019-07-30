@@ -9,7 +9,7 @@
 #import "ChatUtil.h"
 #import "ChatModel.h"
 #import "VPNMode.h"
-#import "ToxManage.h"
+//#import "ToxManage.h"
 #import "GroupChatMessageModel.h"
 //#import "ChatMessage.h"
 #import "ZXMessageModel.h"
@@ -52,7 +52,8 @@ static BOOL createGroupOnce = YES;
         // 创建群聊model
         [vpnArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VPNInfo *vpnInfo = obj;
-            NSUInteger groupNum = [ToxManage createdNewGroupChat];
+            NSUInteger groupNum = 0;
+//            NSUInteger groupNum = [ToxManage createdNewGroupChat];
             ChatModel *chatM = [ChatModel new];
             chatM.groupNum = groupNum;
             chatM.isOwner = YES;

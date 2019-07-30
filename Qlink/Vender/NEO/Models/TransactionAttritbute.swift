@@ -15,7 +15,7 @@ import Foundation
     }
     
     //http://docs.neo.org/en-us/node/network-protocol.html
-    @objc enum Usage: UInt8 {
+    enum Usage: UInt8 {
         case contractHash = 0x00
         case ECDH02 = 0x02
         case ECDH03 = 0x03

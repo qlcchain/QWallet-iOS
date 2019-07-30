@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETHMnemonicViewController">
             <connections>
                 <outlet property="nextBtn" destination="ZTX-YC-jbS" id="fLT-K6-QiR"/>
-                <outlet property="tagListView" destination="Zxb-ii-70R" id="Uz2-67-HOL"/>
+                <outlet property="tagListView" destination="TWU-1N-tW9" id="iyC-nH-yTi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -69,7 +69,7 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTX-YC-jbS">
                                             <rect key="frame" x="23" y="215" width="329" height="49"/>
-                                            <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="49" id="6k8-ji-jPR"/>
                                             </constraints>
@@ -84,41 +84,18 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TU-vo-6zP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zxb-ii-70R" customClass="TagListView" customModule="TagListView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWU-1N-tW9" customClass="TTGTextTagCollectionView">
                                                     <rect key="frame" x="24" y="18" width="327" height="135"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                            <color key="value" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
-                                                            <color key="value" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="marginY">
-                                                            <real key="value" value="14"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="marginX">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.90980392156862744" green="0.8901960784313725" blue="0.94117647058823528" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="0.080000000000000002" colorSpace="deviceRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Zxb-ii-70R" secondAttribute="bottom" constant="22" id="8ML-Bw-POz"/>
-                                                <constraint firstAttribute="trailing" secondItem="Zxb-ii-70R" secondAttribute="trailing" constant="24" id="TEr-s9-2SG"/>
-                                                <constraint firstItem="Zxb-ii-70R" firstAttribute="top" secondItem="1TU-vo-6zP" secondAttribute="top" constant="18" id="Uud-jo-iyu"/>
+                                                <constraint firstItem="TWU-1N-tW9" firstAttribute="top" secondItem="1TU-vo-6zP" secondAttribute="top" constant="18" id="DQ6-cK-Nyi"/>
+                                                <constraint firstItem="TWU-1N-tW9" firstAttribute="leading" secondItem="1TU-vo-6zP" secondAttribute="leading" constant="24" id="FmQ-wf-dD6"/>
+                                                <constraint firstAttribute="bottom" secondItem="TWU-1N-tW9" secondAttribute="bottom" constant="22" id="Pff-h2-19Z"/>
+                                                <constraint firstAttribute="trailing" secondItem="TWU-1N-tW9" secondAttribute="trailing" constant="24" id="Xdp-tm-6ee"/>
                                                 <constraint firstAttribute="height" constant="175" id="cDX-X2-I9a"/>
-                                                <constraint firstItem="Zxb-ii-70R" firstAttribute="leading" secondItem="1TU-vo-6zP" secondAttribute="leading" constant="24" id="heh-4N-lLT"/>
                                             </constraints>
                                         </view>
                                     </subviews>

@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    TabbarIndexVPN,
+    TabbarIndexFinance,
 //    TabbarIndexMarkets,
     TabbarIndexWallet,
-    TabbarIndexSettings,
+    TabbarIndexMy,
 } TabbarIndex;
 
 @class WalletsViewController;

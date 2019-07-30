@@ -14,7 +14,8 @@ class KeychainUtil: NSObject {
     // 获取和存储密码
     private static let WalletPassKey : String = "walletPassKey"
     private static let OldKeyService : String = "network.o3.neo.wallet"
-    private static let KeyService : String = "com.qlink.winq.keyservice"
+//    private static let KeyService : String = "com.qlink.winq.keyservice"
+    private static let KeyService : String = "com.qlcchain.qwallet.keyservice"
     
    @objc public static func isExistWalletPass() -> Bool {
         return isExistKey(keyName: KeychainUtil.WalletPassKey)

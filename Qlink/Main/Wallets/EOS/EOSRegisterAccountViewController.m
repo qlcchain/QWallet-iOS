@@ -11,7 +11,7 @@
 #import <eosFramework/RegularExpression.h>
 #import <eosFramework/EosPrivateKey.h>
 #import "Qlink-Swift.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
 #import "NSString+RemoveZero.h"
 #import "ETHTransferConfirmView.h"
 #import "WalletCommonModel.h"
@@ -250,11 +250,12 @@
         [KeychainUtil saveValueToKeyWithKeyName:EOS_CreateSource_InKeychain keyValue:_eosCreateSourceM.mj_keyValues.mj_JSONString];
         
         NSDictionary *qrDic = @{@"accountName":_eosCreateSourceM.accountName,@"activePublicKey":_eosCreateSourceM.ownerPublicKey,@"ownerPublicKey":_eosCreateSourceM.activePublicKey};
-        kWeakSelf(self);
-        //[UIImage imageNamed:@"icon_winq"]
-        [HMScanner qrImageWithString:[qrDic mj_JSONString]?:@"" avatar:nil completion:^(UIImage *image) {
-            weakself.qrImg.image = image;
-        }];
+        
+        _qrImg.image = [SGQRCodeObtain generateQRCodeWithData:[qrDic mj_JSONString]?:@"" size:_qrImg.width logoImage:nil ratio:0.15];
+//        kWeakSelf(self);
+//        [HMScanner qrImageWithString:[qrDic mj_JSONString]?:@"" avatar:nil completion:^(UIImage *image) {
+//            weakself.qrImg.image = image;
+//        }];
     }
     
     sender.selected = !sender.selected;

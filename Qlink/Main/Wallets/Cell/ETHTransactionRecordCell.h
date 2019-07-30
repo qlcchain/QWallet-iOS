@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class Operation,NEOAddressHistoryModel,ETHAddressTransactionsModel,EOSTraceModel;
+@class Operation,NEOAddressHistoryModel,ETHAddressTransactionsModel,EOSTraceModel,QLCAddressHistoryModel;
 
 static NSString *ETHTransactionRecordCellReuse = @"ETHTransactionRecordCell";
 #define ETHTransactionRecordCell_Height 64
@@ -27,6 +27,7 @@ static NSString *ETHTransactionRecordCellReuse = @"ETHTransactionRecordCell";
 - (void)configCellWithETHOtherModel:(Operation *)model;
 - (void)configCellWithNEOModel:(NEOAddressHistoryModel *)model;
 - (void)configCellWithEOSModel:(EOSTraceModel *)model;
+- (void)configCellWithQLCModel:(QLCAddressHistoryModel *)model;
 
 @end
 

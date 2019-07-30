@@ -13,30 +13,35 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "NEOWalletUtil.h"
 #import <BGFMDB/BGFMDB.h>
-#import "VPNFileInputView.h"
+//#import "VPNFileInputView.h"
 #import "QNavigationController.h"
-#import "VPNFileUtil.h"
+//#import "VPNFileUtil.h"
 #import "OLImage.h"
 #import "NotifactionView.h"
-#import "VPNOperationUtil.h"
+//#import "VPNOperationUtil.h"
 #import "SystemUtil.h"
-#import "NeoTransferUtil.h"
+#import "WalletTransferUtil.h"
+#import "NEOTransferUtil.h"
 #import "MiPushSDK.h"
 #import "LoginSetPWViewController.h"
 #import "LoginInputPWViewController.h"
 #import "WalletCommonModel.h"
-#import "RunInBackground.h"
-
+//#import "RunInBackground.h"
 #import "AppDelegate+AppService.h"
 #import "NSString+HexStr.h"
-#import "CryptoUtilOC.h"
+#import "EOSSignUtil.h"
 #import "ReportUtil.h"
 #import <ETHFramework/ETHFramework.h>
+#import "LoginViewController.h"
+#import "UserModel.h"
+#import "FingerprintVerificationUtil.h"
+#import "NSDate+Category.h"
+#import "UserUtil.h"
 
 @import Firebase;
 
 @interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
-    BOOL isBackendRun;
+//    BOOL isBackendRun;
 }
 
 //@property (nonatomic, strong) LocationTracker * locationTracker;
@@ -49,14 +54,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [[NSUserDefaults standardUserDefaults] setValue:false forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
+    
+//    [UserModel deleteOneAccount];
 //    [NEOWalletUtil deleteAllWallet];
 //    [LoginPWModel deleteLoginPW];
 //    [WalletCommonModel deleteAllWallet];
+//    [UserModel cleanAllUser];
     
-    [KeychainUtil resetKeyService]; // 先重置keyservice  以后注释掉
+    [KeychainUtil resetKeyService]; // 先重置keyservice  以后1掉
     
     _checkPassLock = YES; // 处理tabbar连续点击的bug
-    _allowPresentLogin = YES; // 打开app允许弹出输入密码
+    kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
    // 配置Firebase
@@ -72,13 +81,13 @@
     // 开启VPN连接扣费
     [NeoTransferUtil startVPNConnectTran];
     // 开启VPN上传服务器
-    [VPNFileUtil startVPNSendServerTimer];
+//    [VPNFileUtil startVPNSendServerTimer];
 //    // 初始化当前钱包
 //    [NEOWalletUtil getCurrentWalletInfo];
     // 初始化data文件
-    [ToxManage readKeychainToLibary];
+//    [ToxManage readKeychainToLibary];
     // 初始化vpn文件
-    [VPNFileUtil keychainVPNFileToLibray];
+//    [VPNFileUtil keychainVPNFileToLibray];
     // 初始化手势默认为开启
     [self configTouch];
     // 配置状态栏
@@ -90,7 +99,7 @@
     // 配置FMDB
     [self configureFMDB];
     // 发送json请求
-    [ToxManage sendReqeuestToxJson];
+//    [ToxManage sendReqeuestToxJson];
     // 创建p2pid
     [self configToxP2PNetwork];
     // 获取用户信息
@@ -114,52 +123,121 @@
     [self handleLaunchWithPush:launchOptions];
     
 //    [VPNFileUtil removeVPNFile];
+//    [WorkUtil generateWorkOfOperationWithHash:@"642206314f534b29ad297d82440a5f9f210e30ca5ced805a587ca402de927342" handler:^(NSString * _Nonnull result) {
+//    }];
+    
+//    [WorkUtil generateWorkOfOperationRandomWithHash:@"642206314f534b29ad297d82440a5f9f210e30ca5ced805a587ca402de927342" handler:^(NSString * _Nonnull result) {
+//    }];
     
     return YES;
 }
 
 #pragma mark - 添加启动页动画
 - (void)addLaunchAnimation {    
-    LaunchViewController *vc = [[LaunchViewController alloc] init];
-    self.window.rootViewController = vc;
-    NSTimeInterval timeI = [LaunchViewController getGifDuration];
-    [self performSelector:@selector(setRootTabbar) withObject:nil afterDelay:timeI];
+//    LaunchViewController *vc = [[LaunchViewController alloc] init];
+//    self.window.rootViewController = vc;
+//    NSTimeInterval timeI = [LaunchViewController getGifDuration];
+//    [self performSelector:@selector(configRootAndBackground) withObject:nil afterDelay:timeI];
+    
+    [self configRootAndBackground];
+}
+
+- (void)configRootAndBackground {
+    [self setRootTabbar];
+    // 获取主地址
+    [[WalletTransferUtil getShareObject] startFetchServerMainAddress];
 }
 
 #pragma mark - 初始化Tabbar
 - (void)setRootTabbar {
     [WalletCommonModel walletInit]; // 钱包初始化
+    [UserUtil updateUserInfo];
     
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
+    [self jumpToWallet];
+}
+
+- (void)jumpToWallet {
+    if (kAppD.needFingerprintVerification) {
+        [kAppD presentFingerprintVerify:^{
+            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+        }];
+    } else {
+        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+    }
 }
 
 #pragma mark - Login
-- (void)setRootLogin {
-    BOOL isExist = [LoginPWModel isExistLoginPW];
-    UIViewController *vc = nil;
-    if (isExist) {
-        vc = [[LoginInputPWViewController alloc] init];
-    } else {
-        vc = [[LoginSetPWViewController alloc] init];
-    }
-//    QlinkNavViewController *nav = [[QlinkNavViewController alloc] initWithRootViewController:vc];
+//- (void)setRootLoginNew {
+//    LoginViewController *vc = [[LoginViewController alloc] init];
+//    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+//    self.window.rootViewController = nav;
+//}
+
+- (void)presentLoginNew {
+    LoginViewController *vc = [[LoginViewController alloc] init];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nav;
+    __weak typeof(vc) weakvc = vc;
+    [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
+        if ([UserModel haveAccountInLocal]) {
+            [weakvc showLastLoginAccount];
+        }
+    }];
+//    self.window.rootViewController = nav;
 }
 
-- (void)presentLogin:(LoginPWCompleteBlock)completeBlock {
-    BOOL isExist = [LoginPWModel isExistLoginPW];
-    UIViewController *vc = nil;
-    if (isExist) {
-        vc = [[LoginInputPWViewController alloc] init];
-        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
-    } else {
-        vc = [[LoginSetPWViewController alloc] init];
-        [((LoginSetPWViewController *)vc) configCompleteBlock:completeBlock];
+- (void)logout {
+    if (![UserModel haveLoginAccount]) {
+        return;
     }
-    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
-    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    userM.isLogin = @(NO);
+    [UserModel storeUser:userM useLogin:NO];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
+}
+
+//- (void)setRootLogin {
+//    BOOL isExist = [LoginPWModel isExistLoginPW];
+//    UIViewController *vc = nil;
+//    if (isExist) {
+//        vc = [[LoginInputPWViewController alloc] init];
+//    } else {
+//        vc = [[LoginSetPWViewController alloc] init];
+//    }
+//    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+//    self.window.rootViewController = nav;
+//}
+
+- (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock {
+//    kWeakSelf(self);
+    if ([ConfigUtil getLocalTouch]) {
+        [FingerprintVerificationUtil show:^(BOOL success) {
+            if (success) {
+                kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
+                if (completeBlock) {
+                    completeBlock();
+                }
+            }
+        }];
+    } else {
+        if (completeBlock) {
+            completeBlock();
+        }
+    }
+    
+//    BOOL isExist = [LoginPWModel isExistLoginPW];
+//    UIViewController *vc = nil;
+//    if (isExist) {
+//        vc = [[LoginInputPWViewController alloc] init];
+//        [((LoginInputPWViewController *)vc) configCompleteBlock:completeBlock];
+//    } else {
+//        vc = [[LoginSetPWViewController alloc] init];
+//        [((LoginSetPWViewController *)vc) configCompleteBlock:completeBlock];
+//    }
+//    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+//    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
 }
 
 #pragma mark - 配置小米推送
@@ -178,26 +256,40 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
 //    _allowPresentLogin = YES; // 打开app允许弹出输入密码
-    
     NSLog(@"backgroundTimeRemaining=%@",@(application.backgroundTimeRemaining));
     NSLog(@"applicationState=%@",@(application.applicationState));
     
-    isBackendRun = YES;
-    [[RunInBackground sharedBg] startRunInbackGround];
+    NSInteger seconds = [NSDate getTimestampFromDate:[NSDate date]] ;
+    [HWUserdefault insertObj:@(seconds) withkey:In_Background_Time];
+    
+//    isBackendRun = YES;
+//    [[RunInBackground sharedBg] startRunInbackGround];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];//进入前台取消应用消息图标
+    
+    // 进入后台大于5分钟需要开启指纹验证
+    NSInteger seconds = [[HWUserdefault getObjectWithKey:In_Background_Time] integerValue];
+    if (seconds == 0) {
+        return;
+    }
+    NSDate *backDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+    NSInteger minues = [backDate minutesAfterDate:[NSDate date]];
+    if (labs(minues) >= 5) {
+        [HWUserdefault insertObj:@(0) withkey:In_Background_Time];
+        kAppD.needFingerprintVerification = YES;
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    if (isBackendRun){
-        [[RunInBackground sharedBg] stopAudioPlay];
-        isBackendRun = NO;
-    }
+//    if (isBackendRun){
+//        [[RunInBackground sharedBg] stopAudioPlay];
+//        isBackendRun = NO;
+//    }
     
 }
 
@@ -369,12 +461,12 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     if(array && [fileName isEqualToString:@"ovpn"]) {
         array = [fileURL componentsSeparatedByString:@"/"];
         NSString *vpnFileName = [[array lastObject] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
-        fileView.lblMsg.text = NSStringLocalizable(@"save_ovpn");
-        fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
-        fileView.vpnURL = url;
-         UIWindow *win = [UIApplication sharedApplication].keyWindow;
-        [fileView showVPNFileInputView:win];
+//        VPNFileInputView *fileView = [VPNFileInputView loadVPNFileInputView];
+//        fileView.lblMsg.text = NSStringLocalizable(@"save_ovpn");
+//        fileView.txtFileName.text = [vpnFileName stringByReplacingOccurrencesOfString:@".ovpn" withString:@""];
+//        fileView.vpnURL = url;
+//         UIWindow *win = [UIApplication sharedApplication].keyWindow;
+//        [fileView showVPNFileInputView:win];
     }
 }
 

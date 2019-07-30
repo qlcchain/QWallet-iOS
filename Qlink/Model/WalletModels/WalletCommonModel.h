@@ -10,12 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum : NSUInteger {
-    WalletTypeETH,
-    WalletTypeEOS,
-    WalletTypeNEO,
-} WalletType;
-
 @interface WalletCommonModel : BBaseModel
 
 @property (nonatomic, strong) NSString *name;
@@ -24,7 +18,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSString *symbol;
 @property (nonatomic) WalletType walletType;
 @property (nonatomic, strong) NSNumber *balance;
-@property (nonatomic) BOOL isSelect;
+@property (nonatomic) BOOL isSelect; // 是否是当前钱包
 
 // NEO
 @property (nonatomic ,strong) NSString *privateKey;
@@ -41,8 +35,10 @@ typedef enum : NSUInteger {
 + (void)removeCurrentSelectWallet;
 + (void)updateWalletModel:(WalletCommonModel *)model;
 + (NSArray *)getAllWalletModel;
++ (NSArray *)getWalletModelWithType:(WalletType)type;
 + (void)setCurrentSelectWallet:(WalletCommonModel *)model;
 + (WalletCommonModel *)getCurrentSelectWallet;
++ (WalletCommonModel *)getWalletWithAddress:(NSString *)address;
 
 + (void)refreshCurrentWallet;
 + (void)setDefaulNEOWallet:(NSString *)address;
@@ -55,6 +51,9 @@ typedef enum : NSUInteger {
 
 #pragma mark - EOS
 + (void)refreshEOSWallet;
+
+#pragma mark - QLC
++ (void)refreshQLCWallet;
 
 
 @end

@@ -194,5 +194,16 @@
     [self.layer addAnimation: move forKey: @"positionAnimation"];
 }
 
+//获取截图
+- (UIImage *)getImageFromView {
+    CGSize s = self.bounds.size;
+    UIGraphicsBeginImageContextWithOptions(s, NO, [UIScreen mainScreen].scale);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 
 @end

@@ -29,6 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomBack;
 @property (weak, nonatomic) IBOutlet UIView *chartBack;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chartBackHeight;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight; // 48
 
@@ -90,7 +91,9 @@
         make.top.left.bottom.right.mas_equalTo(weakself.chartBack).offset(0);
     }];
     
-    [_chartV updateWithSymbol:_inputToken.tokenInfo.symbol];
+    [_chartV updateWithSymbol:_inputToken.tokenInfo.symbol noDataBlock:^{
+        weakself.chartBackHeight.constant = 219-144;
+    }];
 }
 
 - (void)refreshPrice {
@@ -163,6 +166,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if ([_inputToken.tokenInfo.symbol isEqualToString:ETH_SYMBOL]) {
+        ETHAddressTransactionsModel *model = _sourceArr[indexPath.row];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ETH_Transaction_Url,model.Hash]] options:@{} completionHandler:nil];
+    } else {
+        Operation *model = _sourceArr[indexPath.row];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ETH_Transaction_Url,model.transactionHash]] options:@{} completionHandler:nil];
+    }
 }
 
 #pragma mark - UITableViewDataSource

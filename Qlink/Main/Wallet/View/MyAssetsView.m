@@ -10,7 +10,7 @@
 #import "UIView+Animation.h"
 #import "VPNMode.h"
 #import "NEOWalletUtil.h"
-#import "VPNOperationUtil.h"
+//#import "VPNOperationUtil.h"
 
 @implementation MyAssetsView
 
@@ -82,7 +82,7 @@
     
     //NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
     if (self.soureArray.count > 0) { // 更新keyChain
-        [VPNOperationUtil saveArrayToKeyChain];
+//        [VPNOperationUtil saveArrayToKeyChain];
     }
     if (finfAlls && finfAlls.count > 0) {
         if (self.soureArray.count > 0) {

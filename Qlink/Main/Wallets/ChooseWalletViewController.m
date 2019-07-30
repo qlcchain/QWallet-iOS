@@ -18,6 +18,11 @@
 #import "ETHWalletInfo.h"
 #import "EOSImportViewController.h"
 #import "EOSRegisterAccountViewController.h"
+#import "QLCWalletManage.h"
+#import "QLCWalletInfo.h"
+#import "QLCImportWalletViewController.h"
+#import "QLCCreateWalletViewController.h"
+#import "WebViewController.h"
 
 @interface ChooseWalletViewController () {
     BOOL isAgree;
@@ -29,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *ethBtn;
 @property (weak, nonatomic) IBOutlet UIButton *eosBtn;
 @property (weak, nonatomic) IBOutlet UIButton *neoBtn;
+@property (weak, nonatomic) IBOutlet UIButton *qlcBtn;
 
 
 @end
@@ -39,9 +45,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.theme_backgroundColor = globalBackgroundColorPicker;
     [self renderView];
     [self configInit];
-    [self ethAction:_ethBtn];
+    [self qlcAction:_qlcBtn];
 }
 
 #pragma mark - Operation
@@ -49,7 +56,11 @@
     UIColor *shadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_importBtn addShadowWithOpacity:1 shadowColor:shadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
     [_createBtn addShadowWithOpacity:1 shadowColor:shadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
-    
+    CGFloat radius = (SCREEN_WIDTH-2*16-3*18)/4/2.0;
+    [_ethBtn cornerRadius:radius];
+    [_eosBtn cornerRadius:radius];
+    [_neoBtn cornerRadius:radius];
+    [_qlcBtn cornerRadius:radius];
 }
 
 - (void)configInit {
@@ -58,9 +69,18 @@
 }
 
 - (void)refreshSelectBtn:(UIButton *)sender {
+    UIColor *whiteC = [UIColor whiteColor];
+    UIColor *grayC = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
+    
     _ethBtn.selected = sender==_ethBtn?YES:NO;
+    _ethBtn.backgroundColor = sender==_ethBtn?whiteC:grayC;
     _eosBtn.selected = sender==_eosBtn?YES:NO;
+    _eosBtn.backgroundColor = sender==_eosBtn?whiteC:grayC;
     _neoBtn.selected = sender==_neoBtn?YES:NO;
+    _neoBtn.backgroundColor = sender==_neoBtn?whiteC:grayC;
+    _qlcBtn.selected = sender==_qlcBtn?YES:NO;
+    _qlcBtn.backgroundColor = sender==_qlcBtn?whiteC:grayC;
+    
 }
 
 - (void)createETHWallet {
@@ -121,6 +141,27 @@
     [self jumpToEOSRegister];
 }
 
+- (void)createQLCWallet {
+    [kAppD.window makeToastInView:kAppD.window];
+    BOOL isSuccess = [QLCWalletManage.shareInstance createWallet];
+    [kAppD.window hideToast];
+    if (isSuccess) {
+        QLCWalletInfo *walletInfo = [[QLCWalletInfo alloc] init];
+        walletInfo.address = [QLCWalletManage.shareInstance walletAddress];
+        walletInfo.seed = [QLCWalletManage.shareInstance walletSeed];
+        walletInfo.privateKey = [QLCWalletManage.shareInstance walletPrivateKeyStr];
+        walletInfo.publicKey = [QLCWalletManage.shareInstance walletPublicKeyStr];
+        // 存储keychain
+        [walletInfo saveToKeyChain];
+        
+        [ReportUtil requestWalletReportWalletCreateWithBlockChain:@"QLC" address:walletInfo.address pubKey:walletInfo.publicKey privateKey:walletInfo.privateKey]; // 上报钱包创建
+        [[NSNotificationCenter defaultCenter] postNotificationName:Add_QLC_Wallet_Noti object:nil];
+        [self jumpToCreateQLC:walletInfo];
+    } else {
+        DDLogDebug(@"创建qlc钱包失败");
+    }
+}
+
 #pragma mark - Action
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -137,6 +178,8 @@
         [self createEOSWallet];
     } else if (_neoBtn.selected) {
         [self createNEOWallet];
+    } else if (_qlcBtn.selected) {
+        [self createQLCWallet];
     }
 }
 
@@ -151,6 +194,8 @@
         [self jumpToEOSImport];
     } else if (_neoBtn.selected) {
         [self jumpToNEOImport];
+    } else if (_qlcBtn.selected) {
+        [self jumpToQLCImport];
     }
 }
 
@@ -160,7 +205,7 @@
 }
 
 - (IBAction)termAction:(id)sender {
-    
+    [self jumpToTerms];
 }
 
 - (IBAction)ethAction:(UIButton *)sender {
@@ -184,6 +229,12 @@
     [self refreshSelectBtn:sender];
 }
 
+- (IBAction)qlcAction:(UIButton *)sender {
+    if (sender.selected) {
+        return;
+    }
+    [self refreshSelectBtn:sender];
+}
 
 #pragma mark - Transition
 - (void)jumpToCreateETH {
@@ -223,5 +274,24 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToCreateQLC:(QLCWalletInfo *)walletInfo {
+    QLCCreateWalletViewController *vc = [[QLCCreateWalletViewController alloc] init];
+    vc.walletInfo = walletInfo;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToQLCImport {
+    QLCImportWalletViewController *vc = [[QLCImportWalletViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

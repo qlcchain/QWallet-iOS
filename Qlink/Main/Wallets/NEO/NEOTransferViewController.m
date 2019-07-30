@@ -94,7 +94,8 @@
 
 - (void)checkSendBtnEnable {
     if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
-        [_sendBtn setBackgroundColor:MAIN_PURPLE_COLOR];
+//        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
     } else {
         [_sendBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];
@@ -114,32 +115,14 @@
     NSString *amount = _amountTF.text;
     NSString *symbol = _selectAsset.asset_symbol;
     NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
+    NSString *remarkStr = _memoTF.text;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
         assetType = 0;
     }
     BOOL isMainNetTransfer = YES;
-    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer];
-//    [NEOWalletUtil sendNEOWithCount:_amountTF.text address:_sendtoAddressTV.text];
-//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-//    NSString *fromAddress = currentWalletM.address;
-//    NSString *contractAddress = _inputToken.tokenInfo.address;
-//    NSString *toAddress = _sendtoAddressTV.text;
-//    NSString *name = _inputToken.tokenInfo.name;
-//    NSString *symbol = _inputToken.tokenInfo.symbol;
-//    NSString *amount = _amountTF.text;
-//    NSInteger decimals = [_inputToken.tokenInfo.decimals integerValue];
-//    NSString *value = @"";
-//    BOOL isCoin = [_inputToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
-//    kWeakSelf(self);
-//    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success) {
-//        if (success) {
-//            [kAppD.window makeToast:@"发送成功" duration:1.5 position:CSToastPositionCenter];
-//            [weakself backToRoot];
-//        } else {
-//            [kAppD.window makeToast:@"发送失败" duration:1.5 position:CSToastPositionCenter];
-//        }
-//    }];
+    double fee = NEO_fee;
+    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee];
 }
 
 - (void)backToRoot {

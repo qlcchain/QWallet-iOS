@@ -22,7 +22,7 @@ static NSString *WalletsSwitchCellReuse = @"WalletsSwitchCell";
 @property (weak, nonatomic) IBOutlet UILabel *addressLab;
 @property (weak, nonatomic) IBOutlet UIImageView *selectImg;
 
-- (void)configCellWithModel:(WalletCommonModel *)model;
+- (void)configCellWithModel:(WalletCommonModel *)model selectM:(WalletCommonModel *)selectM;
 
 @end
 

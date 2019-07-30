@@ -18,14 +18,18 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BalanceInfo *balanceInfo;
 @property (nonatomic , assign) BOOL checkPassLock;
-@property (nonatomic) BOOL allowPresentLogin;
+@property (nonatomic) BOOL needFingerprintVerification;
 //@property (nonatomic) BOOL openShowPresentLogin;
+@property (nonatomic) BOOL pushToOrderList;
 @property (nonatomic, strong) QlinkTabbarViewController *tabbarC;
 
 - (void)addLaunchAnimation;
 //- (void)setRootLogin;
 - (void)setRootTabbar;
-- (void)presentLogin:(LoginPWCompleteBlock)completeBlock;
+- (void)presentLoginNew;
+- (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock;
+- (void)jumpToWallet;
+- (void)logout;
 
 @end
 

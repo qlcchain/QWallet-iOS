@@ -18,6 +18,40 @@
 
 @implementation NSDate (Category)
 
++ (NSString *)getTimeWithFromDate:(NSDate *)fromDate addDay:(NSInteger)addDay {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//    NSDate *fromDate = [format dateFromString:fromTime];
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:fromDate];
+    components.day += addDay;
+    NSDate *date = [CURRENT_CALENDAR dateFromComponents:components];
+    NSString *time = [format stringFromDate:date];
+    
+    return time;
+}
+
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime addDay:(NSInteger)addDay {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:fromDate];
+    components.day += addDay;
+    NSDate *date = [CURRENT_CALENDAR dateFromComponents:components];
+    NSString *time = [format stringFromDate:date];
+    
+    return time;
+}
+
++ (NSDate *)dateFromTime:(NSString *)fromTime {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    return fromDate;
+}
+
 + (NSInteger)getTimestampFromDate:(NSDate *)date {
     return (long)[date timeIntervalSince1970];
 }
@@ -551,6 +585,12 @@
 }
 
 #pragma mark Retrieving Intervals
+
+- (NSTimeInterval)secondsAfterDate: (NSDate *) aDate
+{
+    NSTimeInterval ti = [self timeIntervalSinceDate:aDate];
+    return ti;
+}
 
 - (NSInteger) minutesAfterDate: (NSDate *) aDate
 {

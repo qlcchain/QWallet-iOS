@@ -17,6 +17,7 @@
 #import "ReportUtil.h"
 #import <TrustCore/Crypto.h>
 #import "NSString+HexStr.h"
+#import "WebViewController.h"
 
 typedef enum : NSUInteger {
     ETHImportTypeMnemonic,
@@ -52,6 +53,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIView *officialTVBack;
 @property (weak, nonatomic) IBOutlet UITextView *officialTV;
 @property (weak, nonatomic) IBOutlet UIButton *officialStartImportBtn;
+@property (weak, nonatomic) IBOutlet UITextField *officialPWTF;
 
 #pragma mark - PrivateKey
 @property (weak, nonatomic) IBOutlet UIView *privateTVBack;
@@ -197,7 +199,6 @@ typedef enum : NSUInteger {
     watchAgree = sender.selected;
 }
 
-
 - (IBAction)mnemonicAction:(UIButton *)sender {
     [self refreshSelectImport:sender];
     [_mainScorll setContentOffset:CGPointMake(SCREEN_WIDTH*0, 0) animated:YES];
@@ -241,6 +242,12 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:@"Please Input First"];
         return;
     }
+    NSArray *arr = [_mnemonicTV.text componentsSeparatedByString:@" "];
+    if (!arr || arr.count != 12) {
+        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Mnemonic"];
+        return;
+    }
+    
     
     kWeakSelf(self);
 //    NSString *pw = [LoginPWModel getLoginPW];
@@ -271,6 +278,8 @@ typedef enum : NSUInteger {
     //            [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
                 [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
             }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }
@@ -286,7 +295,8 @@ typedef enum : NSUInteger {
     }
     
     kWeakSelf(self);
-    NSString *pw = [LoginPWModel getLoginPW];
+//    NSString *pw = [LoginPWModel getLoginPW];
+    NSString *pw = _officialPWTF.text?:@"";
     NSString *keystore = _officialTV.text;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:keystore privateKeyInput:nil addressInput:nil mnemonicInput:nil password:pw :^(BOOL success, NSString *address) {
@@ -311,6 +321,8 @@ typedef enum : NSUInteger {
                 [weakself showImportSuccessView];
                 [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
             }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }
@@ -389,14 +401,39 @@ typedef enum : NSUInteger {
             [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
+}
+
+- (IBAction)termsMnemonicAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsKeystoreAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsPrivateAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsWatchAction:(id)sender {
+    [self jumpToTerms];
 }
 
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
     kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

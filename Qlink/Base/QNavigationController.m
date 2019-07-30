@@ -28,13 +28,14 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     //导航栏背景图
     //    [navBar setBackgroundImage:[UIImage imageNamed:@"tabBarBj"] forBarMetrics:UIBarMetricsDefault];
-    [navBar setBarTintColor:MAIN_PURPLE_COLOR];
+//    [navBar setBarTintColor:MAIN_BLUE_COLOR];
+    navBar.theme_barTintColor = globalBackgroundColorPicker;
     [navBar setTintColor:[UIColor whiteColor]];
 //    [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName :CNavBgFontColor, NSFontAttributeName : [UIFont systemFontOfSize:18]}];
     [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:18.0],NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
     
 //    [navBar setBackgroundImage:[UIImage imageWithColor:CNavBgColor] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    [navBar setBackgroundImage:[UIImage imageWithColor:MAIN_PURPLE_COLOR]
+    [navBar setBackgroundImage:[UIImage imageWithColor:[UIColor mainColor]]
                             forBarPosition:UIBarPositionAny
                                 barMetrics:UIBarMetricsDefault];
     [navBar setShadowImage:[UIImage new]];//去掉阴影线
@@ -175,7 +176,7 @@
 //navigation切换是会走这个代理
 -(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
-    NSLog(@"转场动画代理方法");
+//    NSLog(@"转场动画代理方法");
     self.isSystemSlidBack = YES;
     //如果来源VC和目标VC都实现协议，那么都做动画
     if ([fromVC conformsToProtocol:@protocol(XYTransitionProtocol)] && [toVC conformsToProtocol:@protocol(XYTransitionProtocol)]) {

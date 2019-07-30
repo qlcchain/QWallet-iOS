@@ -21,4 +21,31 @@
     return [dn stringValue];
 }
 
+- (NSString *)showfloatStr:(NSInteger)decimal {
+    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:decimal raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSString *str = [NSString stringWithFormat:@"%@",self];
+    NSDecimalNumber *dn = [[NSDecimalNumber decimalNumberWithString:str] decimalNumberByRoundingAccordingToBehavior:hander];
+    return [dn stringValue];
+}
+
++ (double)doubleFormString:(NSString *)str {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *num = [numberFormatter numberFromString:str];
+    double dou = num.doubleValue;
+    return dou;
+}
+
++ (NSString *)stringFromDouble:(double)doubleVal {
+    NSString* stringValue = @"0.00";
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    formatter.usesSignificantDigits = true;
+    formatter.maximumSignificantDigits = 100;
+    formatter.groupingSeparator = @"";
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    stringValue = [formatter stringFromNumber:@(doubleVal)];
+    
+    return stringValue;
+}
+
 @end

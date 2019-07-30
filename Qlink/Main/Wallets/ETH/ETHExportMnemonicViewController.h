@@ -10,7 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    ETHExportMnemonicEnterTypeImport,
+    ETHExportMnemonicEnterTypeExport,
+} ETHExportMnemonicEnterType;
+
 @interface ETHExportMnemonicViewController : QBaseViewController
+
+@property (nonatomic) ETHExportMnemonicEnterType enterType;
 
 @end
 

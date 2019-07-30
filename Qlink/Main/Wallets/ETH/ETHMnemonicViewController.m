@@ -11,11 +11,12 @@
 //#import <TagListView/TagListView-Swift.h>
 #import "MnemonicTipView.h"
 #import "ETHMnemonicConfirmViewController.h"
+#import <TTGTextTagCollectionView.h>
 
 @interface ETHMnemonicViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
-@property (weak, nonatomic) IBOutlet TagListView *tagListView;
+@property (weak, nonatomic) IBOutlet TTGTextTagCollectionView *tagListView;
 
 
 @end
@@ -36,7 +37,26 @@
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_nextBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
     
-    _tagListView.textFont = [UIFont systemFontOfSize:18];
+    _tagListView.horizontalSpacing = 6.0;
+    _tagListView.verticalSpacing = 8.0;
+    _tagListView.enableTagSelection = NO;
+    _tagListView.backgroundColor = [UIColor clearColor];
+    TTGTextTagConfig *config = _tagListView.defaultConfig;
+    config.textFont = [UIFont systemFontOfSize:18.0f];
+    config.textColor = MAIN_BLUE_COLOR;
+    //    config.selectedTextColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
+    config.backgroundColor = [UIColor whiteColor];
+    //    config.selectedBackgroundColor = [UIColor colorWithRed:0.97 green:0.64 blue:0.27 alpha:1.00];
+    //    config.borderColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
+    //    config.selectedBorderColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
+    //    config.borderWidth = 1;
+    //    config.selectedBorderWidth = 1;
+    config.shadowColor = [UIColor blackColor];
+    config.shadowOffset = CGSizeMake(0, 0.3);
+    config.shadowOpacity = 0.3f;
+    config.shadowRadius = 0.5f;
+    config.cornerRadius = 7;
+//    _tagListView.textFont = [UIFont systemFontOfSize:18];
 //    [_tagListView addTags:@[@"crisp", @"second", @"fold", @"uniform", @"gas", @"elbow", @"bind", @"castle", @"index", @"machine", @"foster", @"elbow"]];
     [_tagListView addTags:AppConfigUtil.shareInstance.mnemonicArr];
 //    _tagListView.alignment = .Center // possible values are .Left, .Center, and .Right

@@ -7,6 +7,13 @@
 //
 
 #import "SettingsCell.h"
+#import "FingerprintVerificationUtil.h"
+
+@interface SettingsCell ()
+
+@property (nonatomic, strong) SettingsShowModel *showM;
+
+@end
 
 @implementation SettingsShowModel
 
@@ -26,15 +33,18 @@
 }
 
 - (void)configCellWithModel:(SettingsShowModel *)model {
+    _showM = model;
     if (model.haveNextPage) {
-        _swit.hidden = YES;
         _detailLab.hidden = NO;
         _arrow.hidden = NO;
         _detailLab.text = model.detail;
     } else {
-        _swit.hidden = NO;
         _detailLab.hidden = YES;
         _arrow.hidden = YES;
+    }
+    _swit.hidden = !model.showSwitch;
+    if ([model.title isEqualToString:title_screen_lock]) {
+        _swit.on = [FingerprintVerificationUtil getScreenLock];
     }
     _titleLab.text = model.title;
 }
@@ -44,6 +54,12 @@
     
     _titleLab.text = nil;
     _detailLab.text = nil;
+}
+
+- (IBAction)switchChange:(UISwitch *)sender {
+    if ([_showM.title isEqualToString:title_screen_lock]) {
+        [FingerprintVerificationUtil setScreenLock:sender.on];
+    }
 }
 
 @end

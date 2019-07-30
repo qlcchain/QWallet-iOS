@@ -10,10 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^HistoryChartNoDataBlock)(void);
+
 @interface HistoryChartView : UIView
 
 + (instancetype)getInstance;
-- (void)updateWithSymbol:(NSString *)symbol;
+- (void)updateWithSymbol:(NSString *)symbol noDataBlock:(HistoryChartNoDataBlock)noDataBlock;
 
 @end
 

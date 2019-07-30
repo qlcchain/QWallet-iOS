@@ -26,6 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomBack;
 @property (weak, nonatomic) IBOutlet UIView *chartBack;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chartBackHeight;
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
@@ -100,7 +101,9 @@
         make.top.left.bottom.right.mas_equalTo(weakself.chartBack).offset(0);
     }];
     
-    [_chartV updateWithSymbol:_inputAsset.asset_symbol];
+    [_chartV updateWithSymbol:_inputAsset.asset_symbol noDataBlock:^{
+        weakself.chartBackHeight.constant = 219-144;
+    }];
 }
 
 #pragma mark - Request
@@ -148,6 +151,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NEOAddressHistoryModel *model = _sourceArr[indexPath.row];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",NEO_Transaction_Url,model.txid]] options:@{} completionHandler:nil];
 }
 
 #pragma mark - UITableViewDataSource

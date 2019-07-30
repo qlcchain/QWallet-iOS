@@ -26,7 +26,7 @@
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     _sourceArr = [NSMutableArray array];
-    [_sourceArr addObjectsFromArray:@[@[@"icon_twitter_url",@"Twitter @playblockz",@"twitter.com/playblockz"],@[@"icon_telegram_url",@"Telegram",@"t.me/winqdapp"],@[@"icon_facebook_url",@"Facebook",@"t.me/playblockz"],@[@"icon_winq_url",@"WINQ Website",@"www.winq.net"]]];
+    [_sourceArr addObjectsFromArray:@[@[@"icon_twitter_url",@"Twitter",@"twitter.com/QLCchain"],@[@"icon_telegram_url",@"Telegram",@"t.me/qlinkmobile"],@[@"icon_facebook_url",@"Facebook",@"www.facebook.com/QLCchain/"],@[@"icon_qlcchain_url",@"QLC Chain",@"qlcchain.org/"]]];
     [_mainTable registerNib:[UINib nibWithNibName:JoinCommunityCellReuse bundle:nil] forCellReuseIdentifier:JoinCommunityCellReuse];
     
     [self renderView];

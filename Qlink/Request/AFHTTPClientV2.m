@@ -32,7 +32,7 @@
     if (![AFHTTPClientV2 shareInstance].urlManager) {
         [AFHTTPClientV2 shareInstance].urlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
-        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", nil];
+        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
         [AFHTTPClientV2 shareInstance].urlManager.responseSerializer = responseSerializer;
     }
     return [AFHTTPClientV2 shareInstance].urlManager;
@@ -43,7 +43,7 @@
         [AFHTTPClientV2 shareInstance].httpManager = [AFHTTPSessionManager manager];
         [AFHTTPClientV2 shareInstance].httpManager.requestSerializer = [AFHTTPRequestSerializer serializer];//[AFHTTPRequestSerializer serializer];
         [AFHTTPClientV2 shareInstance].httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];//[AFHTTPResponseSerializer serializer];
-        [AFHTTPClientV2 shareInstance].httpManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", nil];
+        [AFHTTPClientV2 shareInstance].httpManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
         [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setTimeoutInterval:TimeOut_Request];
         //    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithArray:@[@"POST", @"GET", @"HEAD"]];
         //    [manager.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
@@ -61,7 +61,7 @@
 + (AFHTTPSessionManager *) getJSONManager {
     if (![AFHTTPClientV2 shareInstance].jsonManager) {
         [AFHTTPClientV2 shareInstance].jsonManager = [AFHTTPSessionManager manager];
-        [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", nil];
+        [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
         
         [AFHTTPClientV2 shareInstance].jsonManager.requestSerializer = [AFJSONRequestSerializer serializer];//[AFHTTPRequestSerializer serializer];
         [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];//[AFHTTPResponseSerializer serializer];
@@ -158,6 +158,38 @@
         
     }
     
+    return dataTask;
+}
+
++ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
+                                         params:(id)params
+                                     httpMethod:(HttpMethod)httpMethod
+                                       userInfo:(NSDictionary*)userInfo
+                                   successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                                    failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
+{
+    NSURLSessionDataTask *dataTask;
+    
+    if (httpMethod == HttpMethodGet) {
+        
+        DDLogDebug(@"url = %@ param = %@",URLString,params);
+        
+        dataTask = [[self getHTTPManager] GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
+            NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            if (successReqBlock) {
+                successReqBlock(dataTask, jsonStr);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self printHTTPLogWithMethod:URLString Response:nil Error:error];
+            
+            if (failedReqBlock) {
+                failedReqBlock(dataTask, error);
+            }
+        }];
+        
+    }
     return dataTask;
 }
 

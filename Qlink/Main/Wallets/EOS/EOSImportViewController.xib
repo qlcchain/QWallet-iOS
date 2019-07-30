@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,7 +38,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tu3-on-UdZ">
                                             <rect key="frame" x="24" y="100" width="327" height="100"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywJ-qW-Oej">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywJ-qW-Oej">
                                                     <rect key="frame" x="160" y="68" width="155" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="155" id="1IP-Wq-ZHz"/>
@@ -46,7 +46,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <state key="normal" title="What is owner private key?">
-                                                        <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     </state>
                                                 </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dwl-6G-bzZ">
@@ -71,7 +71,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmR-Lg-Qup">
                                             <rect key="frame" x="24" y="208" width="327" height="100"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-Hg-aN1">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-Hg-aN1">
                                                     <rect key="frame" x="160" y="68" width="155" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="hI9-2j-u5y"/>
@@ -79,7 +79,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <state key="normal" title="What is active private key?">
-                                                        <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     </state>
                                                 </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7kR-pb-nzF">
@@ -105,9 +105,9 @@
                                             <rect key="frame" x="24" y="308" width="284" height="44"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdH-FB-5b3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="82" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="78" id="8CY-nd-GLe"/>
+                                                        <constraint firstAttribute="width" constant="82" id="8CY-nd-GLe"/>
                                                         <constraint firstAttribute="height" constant="44" id="hxa-0w-jaA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -121,15 +121,18 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a13-M7-jFy">
-                                                    <rect key="frame" x="78" y="0.0" width="202" height="44"/>
+                                                    <rect key="frame" x="82" y="0.0" width="202" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="202" id="Sg6-X2-6wm"/>
                                                         <constraint firstAttribute="height" constant="44" id="sAv-HU-lfM"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <state key="normal" title="Terms of Service and Privacy Policy">
-                                                        <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="termsAction:" destination="-1" eventType="touchUpInside" id="6TG-Rm-GN5"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -144,7 +147,7 @@
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRq-dp-z7W">
                                             <rect key="frame" x="23" y="382" width="329" height="49"/>
-                                            <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="49" id="3GJ-WO-qLe"/>
                                             </constraints>
@@ -297,8 +300,8 @@
     </objects>
     <resources>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="eth_scan" width="24" height="24"/>
-        <image name="icon_the_selected" width="19" height="19"/>
-        <image name="icon_the_uncheck" width="19" height="19"/>
+        <image name="eth_scan" width="20" height="20"/>
+        <image name="icon_the_selected" width="24" height="24"/>
+        <image name="icon_the_uncheck" width="24" height="24"/>
     </resources>
 </document>

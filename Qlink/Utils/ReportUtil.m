@@ -10,14 +10,15 @@
 #import <TrustCore/Crypto.h>
 #import "NSString+HexStr.h"
 #import "Qlink-Swift.h"
-#import "CryptoUtilOC.h"
+#import "EOSSignUtil.h"
 #import <ETHFramework/ETHFramework.h>
+#import "UserModel.h"
 
 @implementation ReportUtil
 
 #pragma mark - Request
 + (void)requestWalletReportWalletCreateWithBlockChain:(NSString *)blockChain address:(NSString *)address pubKey:(NSString *)pubKey privateKey:(nullable NSString *)privateKey {
-    NSString *myP2pId = [ToxManage getOwnP2PId];
+    NSString *myP2pId = [UserModel getOwnP2PId];
     NSMutableString *signResult = [NSMutableString string];
     __block NSString *pubKeyResult = @"";
     if ([blockChain isEqualToString:@"ETH"]) {
@@ -39,12 +40,17 @@
     } else if ([blockChain isEqualToString:@"EOS"]) {
         pubKeyResult = pubKey;
         NSString *inputStr = [myP2pId stringByAppendingString:address];
-        NSString *sign = [CryptoUtilOC eosSignWithPrivateKey:privateKey message:inputStr];
+        NSString *sign = [EOSSignUtil eosSignWithPrivateKey:privateKey message:inputStr];
         [signResult appendString:sign];
         NSLog(@"signResult = %@",signResult);
     } else if ([blockChain isEqualToString:@"NEO"]) {
         pubKeyResult = pubKey;
-        NSString *sign = [CryptoUtil neoutilsignWithDataHex:myP2pId privateKey:privateKey]?:@"";
+        NSString *sign = [NEOSignUtil neoutilsignWithDataHex:myP2pId privateKey:privateKey]?:@"";
+        [signResult appendString:sign];
+        NSLog(@"signResult = %@",signResult);
+    } else if ([blockChain isEqualToString:@"QLC"]) {
+        pubKeyResult = pubKey;
+        NSString *sign = [QLCUtil signWithMessage:myP2pId secretKey:privateKey publicKey:pubKey]?:@"";
         [signResult appendString:sign];
         NSLog(@"signResult = %@",signResult);
     }

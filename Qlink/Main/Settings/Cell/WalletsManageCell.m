@@ -37,6 +37,9 @@
     } else if (model.walletType == WalletTypeEOS) {
         _icon.image = [UIImage imageNamed:@"eos_wallet"];
         _addressLab.text = model.account_name;
+    } else if (model.walletType == WalletTypeQLC) {
+        _icon.image = [UIImage imageNamed:@"qlc_wallet"];
+        _addressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
     }
     
     _nameLab.text = model.name;
@@ -72,6 +75,16 @@
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"NEO"]) {
+                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
+                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+                *stop = YES;
+            }
+        }];
+    } else if (walletCommonM.walletType == WalletTypeQLC) {
+        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+        [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            TokenPriceModel *model = obj;
+            if ([model.symbol isEqualToString:@"QLC"]) {
                 NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
                 totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
                 *stop = YES;

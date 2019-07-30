@@ -26,7 +26,7 @@ class NEOWalletManage : NSObject {
         return NEOWalletManage.swiftSharedInstance
     }
     
-    var account:Account?
+    var account:Wallet?
     var transactionCompleted:Bool?
     //定义block
     //typealias fucBlock = (_ flag : Bool) ->()
@@ -42,7 +42,7 @@ class NEOWalletManage : NSObject {
     ///
     /// - Returns: 创建钱包是否成功
     @objc open func createWallet() -> Bool {
-        account = Account()
+        account = Wallet()
         if (account != nil) {
             return true;
         }
@@ -58,7 +58,7 @@ class NEOWalletManage : NSObject {
         if privatekey.count == 52 {
            return self.getWalletWithPrivateWif(wif: privatekey)
         } else {
-            account = Account(privateKey:privatekey)
+            account = Wallet(privateKey:privatekey)
             if (account != nil) {
                 return true;
             }
@@ -70,7 +70,7 @@ class NEOWalletManage : NSObject {
     /// - Parameter privatekey: 私钥
     /// - Returns: 钱包
     @objc open func getWalletWithPrivateWif(wif:String) -> Bool {
-        account = Account(wif: wif)
+        account = Wallet(wif: wif)
         if (account != nil) {
             return true;
         }
@@ -79,7 +79,7 @@ class NEOWalletManage : NSObject {
     
     
     
-    @objc open func getTXWithAddress(isQLC:Bool, address:String, tokeHash:String, qlc:String , mainNet: Bool, completeBlock:@escaping fucBlock) -> () {
+    @objc open func getTXWithAddress(isQLC:Bool, address:String, tokeHash:String, qlc:String , mainNet: Bool, remarkStr: String?, fee: Double, completeBlock:@escaping fucBlock) -> () {
         //print(account?.wif as Any);
         var decimal = 0
         if isQLC {
@@ -99,7 +99,7 @@ class NEOWalletManage : NSObject {
         let assetName = "Qlink Token"
         if isQLC {
 //            self.sendNEP5Token(tokenHash: tokeHash, assetName:assetName,amount:amountDouble, toAddress: address,completeBlock: completeBlock)
-            self.sendNEP5Token(assetHash: tokeHash, decimals: decimal, assetName: assetName, amount: amountDouble, toAddress: address, mainNet: mainNet, completeBlock: completeBlock)
+            self.sendNEP5Token(assetHash: tokeHash, decimals: decimal, assetName: assetName, amount: amountDouble, toAddress: address, mainNet: mainNet, remarkStr: remarkStr, fee: fee, completeBlock: completeBlock)
         }
     }
 
@@ -123,7 +123,7 @@ class NEOWalletManage : NSObject {
 //        }
 //    }
     
-    @objc open func sendNEOTranQLCWithAddress( address:String, tokeHash:String, qlc:String, mainNet: Bool, completeBlock:@escaping fucBlock) -> () {
+    @objc open func sendNEOTranQLCWithAddress( address:String, tokeHash:String, qlc:String, mainNet: Bool, remarkStr: String?, completeBlock:@escaping fucBlock) -> () {
         print(account?.wif as Any)
         
         let decimal = 0
@@ -134,7 +134,7 @@ class NEOWalletManage : NSObject {
         
         let amount = amountFormatter.number(from:(qlc))
        
-        self.sendNativeAsset(assetHash:tokeHash, assetId: AssetId(rawValue: AssetId.neoAssetId.rawValue)!, assetName: "NEO", amount: amount!.doubleValue, toAddress: address, mainNet: mainNet, completeBlock: completeBlock);
+        self.sendNativeAsset(assetHash:tokeHash, assetId: AssetId(rawValue: AssetId.neoAssetId.rawValue)!, assetName: "NEO", amount: amount!.doubleValue, toAddress: address, mainNet: mainNet, remarkStr: remarkStr, completeBlock: completeBlock);
 //        self.sendNativeAsset(asset:AssetId(rawValue: AssetId.neoAssetId.rawValue)!, assetName: "NEO", amount: amount!.doubleValue, toAddress: address,completeBlock: completeBlock)
     }
     
@@ -187,19 +187,19 @@ class NEOWalletManage : NSObject {
     
     @objc static public func configO3Network(isMain: Bool) ->() {
         // 设置O3网络
-        if isMain {
-            UserDefaultsManager.network = .main
-        } else {
-            UserDefaultsManager.network = .test
-        }
+//        if isMain {
+//            UserDefaultsManager.network = .main
+//        } else {
+//            UserDefaultsManager.network = .test
+//        }
         //  UserDefaultsManager.seed = "http://seed2.neo.org:20332" //self.tableNodes[indexPath.row].URL
         UserDefaultsManager.useDefaultSeed = false
     }
     
     // 初始化当前Account 信息   网络切换配置
     @objc open func configureAccount(mainNet:Bool) -> Bool {
-//        return (account?.configureWalletInfo(isMain: mainNet))!
-        return account?.configureWalletNetwork(mianNet: mainNet) ?? false
+//        return account?.configureWalletNetwork(mianNet: mainNet) ?? false
+        return true
     }
     
     @objc open func validateNEOAddress(address:String) -> Bool {
@@ -281,22 +281,30 @@ class NEOWalletManage : NSObject {
     
     // New Interface
     
-    func sendNEP5Token(assetHash: String, decimals: Int, assetName: String, amount: Double, toAddress: String, mainNet: Bool, completeBlock:@escaping fucBlock) {
+    func sendNEP5Token(assetHash: String, decimals: Int, assetName: String, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, fee: Double, completeBlock:@escaping fucBlock) {
         
         DispatchQueue.main.async {
-            if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
-                UserDefaultsManager.seed = bestNode
+            let network = NeoNetwork.main
+            var node = AppState.bestSeedNodeURL
+            if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
+                node = bestNode
+                UserDefaultsManager.seed = node
                 UserDefaultsManager.useDefaultSeed = false
+                AppState.bestSeedNodeURL = bestNode
             }
+//            if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+//                UserDefaultsManager.seed = node
+//                UserDefaultsManager.useDefaultSeed = false
+//            }
             #if TESTNET
             UserDefaultsManager.seed = "http://seed2.neo.org:20332"
             UserDefaultsManager.useDefaultSeed = false
             UserDefaultsManager.network = .test
             Authenticated.account?.neoClient = NeoClient(network: .test)
             #endif
-            
-            self.account?.sendNep5Token(tokenContractHash: assetHash, amount: amount, toAddress: toAddress, mainNet: mainNet, completion: { (txHex, error) in
-                print("neo转账结果:" + "\(String(describing: error))")
+        
+            self.account?.sendNep5Token(tokenContractHash: assetHash, amount: amount, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, decimals: decimals, fee: fee, network: network, completion: { (txHex, error) in
+                print("--------neo tx error:" + "\(String(describing: error))")
                 if txHex != nil {
                     print(txHex!)
                 }
@@ -305,12 +313,20 @@ class NEOWalletManage : NSObject {
         }
     }
     
-    func sendNativeAsset(assetHash: String, assetId: AssetId, assetName: String, amount: Double, toAddress: String, mainNet: Bool, completeBlock:@escaping fucBlock) {
+    func sendNativeAsset(assetHash: String, assetId: AssetId, assetName: String, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, completeBlock:@escaping fucBlock) {
         DispatchQueue.main.async {
-            if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
-                UserDefaultsManager.seed = bestNode
+            let network = NeoNetwork.main
+            var node = AppState.bestSeedNodeURL
+            if let bestNode = NEONetworkMonitor.autoSelectBestNode(network: network) {
+                node = bestNode
+                UserDefaultsManager.seed = node
                 UserDefaultsManager.useDefaultSeed = false
+                AppState.bestSeedNodeURL = bestNode
             }
+//            if let bestNode = NEONetworkMonitor.autoSelectBestNode() {
+//                UserDefaultsManager.seed = bestNode
+//                UserDefaultsManager.useDefaultSeed = false
+//            }
             #if TESTNET
             UserDefaultsManager.seed = "http://seed2.neo.org:20332"
             UserDefaultsManager.useDefaultSeed = false
@@ -318,8 +334,8 @@ class NEOWalletManage : NSObject {
             Authenticated.account?.neoClient = NeoClient(network: .test)
             #endif
             
-            self.account?.sendAssetTransaction(assetHash: assetHash, asset: assetId, amount: amount, toAddress: toAddress, mainNet: mainNet, completion: { (txHex, error) in
-                print("neo转账结果:" + "\(String(describing: error))")
+            self.account?.sendAssetTransaction(assetHash: assetHash, asset: assetId, amount: amount, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, network: network, completion: { (txHex, error) in
+                print("--------neo tx error:" + "\(String(describing: error))")
                 if txHex != nil {
                     print(txHex!)
                 }
@@ -328,7 +344,7 @@ class NEOWalletManage : NSObject {
         }
     }
     
-    @objc open func sendNEO(assetHash: String, decimals: Int, assetName: String, amount: String, toAddress: String, assetType: Int, mainNet: Bool, completeBlock:@escaping fucBlock) {
+    @objc open func getNEOTX(assetHash: String, decimals: Int, assetName: String, amount: String, toAddress: String, assetType: Int, mainNet: Bool, remarkStr: String?, fee: Double, completeBlock:@escaping fucBlock) {
         
 //        let assetId: String! = self.selectedAsset!.assetID!
 //        let assetName: String! = self.selectedAsset?.name!
@@ -349,11 +365,11 @@ class NEOWalletManage : NSObject {
             if assetName == "GAS" {
                 assetId = AssetId(rawValue: AssetId.gasAssetId.rawValue)!
             }
-            self.sendNativeAsset(assetHash: assetHash, assetId: assetId, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet) { txHex in
+            self.sendNativeAsset(assetHash: assetHash, assetId: assetId, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr) { txHex in
                 completeBlock(txHex)
             }
         } else if assetType == 1 { // token
-            self.sendNEP5Token(assetHash: assetHash, decimals: decimals, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet) { txHex in
+            self.sendNEP5Token(assetHash: assetHash, decimals: decimals, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, fee: fee) { txHex in
                 completeBlock(txHex)
             }
         }

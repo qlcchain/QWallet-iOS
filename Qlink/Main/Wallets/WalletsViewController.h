@@ -10,9 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class QLCTokenModel,Token;
+
 @interface WalletsViewController : QBaseViewController
 
-//@property (nonatomic, strong) NSMutableArray *tokenSymbolArr;
+- (QLCTokenModel *)getQGASAsset;
+- (Token *)getUSDTAsset;
 
 @end
 

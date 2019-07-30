@@ -13,6 +13,7 @@
 @interface NeoTransferUtil : NSObject
 
 @property (nonatomic , strong) NSMutableArray *vpnList;
+@property (nonatomic, strong) NSString *neoMainAddress;
 
 + (instancetype) getShareObject;
 

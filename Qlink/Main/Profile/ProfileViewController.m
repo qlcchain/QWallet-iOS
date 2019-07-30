@@ -14,7 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSDate+Category.h"
 #import "RequestService.h"
-
+#import "UserModel.h"
 
 @interface ProfileViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -55,7 +55,7 @@
 
 #pragma mark - 上传头像
 - (void)uploadImg:(UIImage *)img {
-    NSString *p2pId = [ToxManage getOwnP2PId]?:@"";
+    NSString *p2pId = [UserModel getOwnP2PId]?:@"";
     if (p2pId.length <= 0) {
         return;
     }
@@ -99,7 +99,8 @@
     attrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     [pickerController.navigationBar setTitleTextAttributes:attrs];
     pickerController.navigationBar.translucent = NO;
-    pickerController.navigationBar.barTintColor = MAIN_PURPLE_COLOR;
+//    pickerController.navigationBar.barTintColor = MAIN_BLUE_COLOR;
+    pickerController.navigationBar.theme_barTintColor = globalBackgroundColorPicker;
     //设置选取的照片是否可编辑
     pickerController.allowsEditing = YES;
     //设置相册呈现的样式

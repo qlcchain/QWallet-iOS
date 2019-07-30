@@ -9,7 +9,7 @@
 #import "NeoTransferUtil.h"
 #import "NEOWalletUtil.h"
 #import "ToxRequestModel.h"
-#import "P2pMessageManage.h"
+//#import "P2pMessageManage.h"
 #import "Qlink-Swift.h"
 #import "NSDate+Category.h"
 #import "NSDateFormatter+Category.h"
@@ -17,6 +17,7 @@
 #import "VPNTranferMode.h"
 //#import <NEOFramework/NEOFramework.h>
 #import "WalletCommonModel.h"
+#import "UserModel.h"
 
 #define TIMER_SEC  35
 #define Time_ReTransfer 60
@@ -45,8 +46,7 @@ dispatch_source_t _timer;
 
 @implementation NeoTransferUtil
 
-+ (instancetype) getShareObject
-{
++ (instancetype) getShareObject {
     static dispatch_once_t pred = 0;
     __strong static NeoTransferUtil *sharedObj  = nil;
     dispatch_once(&pred, ^{
@@ -71,15 +71,15 @@ dispatch_source_t _timer;
 + (VPNInfo *) currentConnectVPNInfo
 {
     //
-    NEVPNStatus status = [VPNUtil.shareInstance getVpnConnectStatus];
-    if (status != NEVPNStatusConnected) {
-        [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
-        return nil;
-    }
-    NSDictionary *dc = [HWUserdefault getObjectWithKey:Current_Connenct_VPN];
-    if (dc) {
-        return [VPNInfo getObjectWithKeyValues:dc];
-    }
+//    NEVPNStatus status = [VPNUtil.shareInstance getVpnConnectStatus];
+//    if (status != NEVPNStatusConnected) {
+//        [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
+//        return nil;
+//    }
+//    NSDictionary *dc = [HWUserdefault getObjectWithKey:Current_Connenct_VPN];
+//    if (dc) {
+//        return [VPNInfo getObjectWithKeyValues:dc];
+//    }
     return nil;
 }
 
@@ -150,7 +150,7 @@ dispatch_source_t _timer;
                     if (labs(minu) >= VPN_TRANFER_TIME) {
                         // 两次网络不一样时。关闭VPN
                         if (tranVPNMode.isMain != [ConfigUtil isMainNetOfServerNetwork]) {
-                            [[VPNUtil shareInstance] stopVPN];
+//                            [[VPNUtil shareInstance] stopVPN];
                             // 将当前VPN连接状态置为NO
                             [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
                         } else {
@@ -204,7 +204,7 @@ dispatch_source_t _timer;
             if ([NeoTransferUtil isConnectionAssetsAllowedWithCost:vpnInfo.tranferCost]) {
                 [NeoTransferUtil vpnConnectTranReqeustWithVpnTranferInfo:vpnInfo];
             } else {
-                [[VPNUtil shareInstance] stopVPN];
+//                [[VPNUtil shareInstance] stopVPN];
                // 将当前VPN连接状态置为NO
                 [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
             }
@@ -219,8 +219,8 @@ dispatch_source_t _timer;
         // 调用扣费
         [NeoTransferUtil tranferVPNConnestCostWithVPNInfo:vpnInfo];
     }  else {
-        
-        [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":[ToxManage getOwnP2PId]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        NSString *p2pId = [UserModel getOwnP2PId];
+        [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":p2pId} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
             if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
                 NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
                 if (dataDic) {
@@ -247,7 +247,8 @@ dispatch_source_t _timer;
 #pragma mark - 获取免费连接次数
 + (void) checkFreeConnectCount
 {
-    [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":[ToxManage getOwnP2PId]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSString *p2pId = [UserModel getOwnP2PId];
+    [RequestService requestWithUrl:zsFreeNum_Url params:@{@"p2pId":p2pId} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
             if (dataDic) {
@@ -266,8 +267,9 @@ dispatch_source_t _timer;
 + (void) sendFreeConnectVPNRequestWithVPNInfo:(VPNTranferMode *) vpnInfo
 {
     // 更新VPNInfo正在交易的状态
+    NSString *p2pId = [UserModel getOwnP2PId];
     [NeoTransferUtil updateVPNListDidTranferStatusWithVPNName:vpnInfo.vpnName status:YES];
-    NSDictionary *parames = @{@"assetName":vpnInfo.vpnName,@"fromP2pId":[ToxManage getOwnP2PId],@"toP2pId":vpnInfo.p2pId?:@"",@"addressTo":vpnInfo.tranferAddress?:@""};
+    NSDictionary *parames = @{@"assetName":vpnInfo.vpnName,@"fromP2pId":p2pId,@"toP2pId":vpnInfo.p2pId?:@"",@"addressTo":vpnInfo.tranferAddress?:@""};
     [RequestService requestWithUrl:freeConnection_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             // 更新VPNInfo支付的状态
@@ -348,7 +350,7 @@ dispatch_source_t _timer;
 {
     // 发送获取配置文件消息
     ToxRequestModel *model = [[ToxRequestModel alloc] init];
-    model.type = recordSaveReq;
+//    model.type = recordSaveReq;
     NSString *vpnName = @"";
     NSString *vpnCost = @"";
     NSString *recordId = @"";
@@ -383,7 +385,7 @@ dispatch_source_t _timer;
     NSDictionary *dataDic = @{APPVERSION:APP_Build,ASSETS_NAME:vpnName,QLC_COUNT:vpnCost,TRAN_TYPE:[NSString stringWithFormat:@"%ld",(long)type],EXCANGE_ID:[NSStringUtil getNotNullValue:recordId],TIME_SAMP:[NSString stringWithFormat:@"%llud",[NSDate getMillisecondTimestampFromDate:tranferDate]],TX_ID:[NSStringUtil getNotNullValue:recordId],IS_MAINNET:isMianNet?@"1":@"0"};
     model.data = dataDic.mj_JSONString;
     NSString *str = model.mj_JSONString;
-    [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
+//    [ToxManage sendMessageWithMessage:str withP2pid:p2pId];
 }
 
 #pragma -mark 设置本地通知
@@ -501,8 +503,15 @@ dispatch_source_t _timer;
         tokenHash = AESSET_MAIN_HASH;
     }
     vpnInfo.recordId = [NEOWalletUtil getExChangeId];
+    NSString *remarkStr = nil;
+    NSString *addressTo = [NSStringUtil getNotNullValue:vpnInfo.tranferAddress];
+    if ([addressTo isEmptyString]) {
+        return;
+    }
 
-    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:[NSStringUtil getNotNullValue:vpnInfo.tranferAddress] tokeHash:tokenHash qlc:vpnInfo.tranferCost mainNet:isMainNetTransfer completeBlock:^(NSString *txHex) {
+    double fee = NEO_fee;
+    
+    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.tranferCost mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txHex) {
         
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -513,7 +522,8 @@ dispatch_source_t _timer;
             // NSLog(@"%@ txid = %@",vpnInfo.vpnName,complete);
             // 发送交易请求
             NSNumber *typeNum = @(3);
-            NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":addressFrom,@"tx":txHex,@"qlc":vpnInfo.tranferCost,@"fromP2pId":[NSStringUtil getNotNullValue:[ToxManage getOwnP2PId]],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.tranferAddress],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
+            NSString *p2pId = [UserModel getOwnP2PId];
+            NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":addressFrom,@"tx":txHex,@"qlc":vpnInfo.tranferCost,@"fromP2pId":[NSStringUtil getNotNullValue:p2pId],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.tranferAddress],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
             
             [RequestService requestWithUrl:transTypeOperate_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //                [kAppD.window hideToast];
@@ -719,7 +729,7 @@ dispatch_source_t _timer;
                 });
             } else {
                 // 断开VPN连接
-                [[VPNUtil shareInstance] stopVPN];
+//                [[VPNUtil shareInstance] stopVPN];
             }
         } else if (type == 6) { // type =6 vpn注册
             [NeoTransferUtil sendTranAddressRequestWithVPNInfo:vpnInfo withType:type];
@@ -743,9 +753,16 @@ dispatch_source_t _timer;
     }
     
     vpnInfo.recordId = [NEOWalletUtil getExChangeId];
+    NSString *remarkStr = nil;
+    NSString *addressTo = [NSStringUtil getNotNullValue:vpnInfo.address];
+    if ([addressTo isEmptyString]) {
+        return;
+    }
+    
+    double fee = NEO_fee;
     
     __block int tranType = type;
-    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:[NSStringUtil getNotNullValue:vpnInfo.address] tokeHash:tokenHash qlc:vpnInfo.cost mainNet:isMainNetTransfer completeBlock:^(NSString *txHex) {
+    [NEOWalletManage.sharedInstance getTXWithAddressWithIsQLC:true address:addressTo tokeHash:tokenHash qlc:vpnInfo.cost mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txHex) {
         
         if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -760,7 +777,8 @@ dispatch_source_t _timer;
             
             // 发送交易请求
             NSNumber *typeNum = @(3);
-            NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":[WalletCommonModel getCurrentSelectWallet].address ,@"tx":txHex,@"qlc":vpnInfo.cost,@"fromP2pId":[NSStringUtil getNotNullValue:[ToxManage getOwnP2PId]],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.address],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
+            NSString *p2pId = [UserModel getOwnP2PId];
+            NSDictionary *parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"assetName":vpnInfo.vpnName,@"type":typeNum,@"addressFrom":[WalletCommonModel getCurrentSelectWallet].address ,@"tx":txHex,@"qlc":vpnInfo.cost,@"fromP2pId":[NSStringUtil getNotNullValue:p2pId],@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.address],@"toP2pId":[NSStringUtil getNotNullValue:vpnInfo.p2pId]};
             if (tranType == 6 || tranType == 5) { // 注册 抢注vpn转账
                 typeNum = @(1);
                 parames = @{@"recordId":[NSStringUtil getNotNullValue:vpnInfo.recordId],@"type":typeNum,@"addressFrom":[WalletCommonModel getCurrentSelectWallet].address ,@"tx":txHex,@"qlc":vpnInfo.cost,@"addressTo":[NSStringUtil getNotNullValue:vpnInfo.address]};
@@ -852,13 +870,12 @@ dispatch_source_t _timer;
  @param info 注册vpninfo
  @param type 操作类型
  */
-+ (void) sendTranAddressRequestWithVPNInfo:(VPNInfo *) info withType:(int) type
-{
++ (void) sendTranAddressRequestWithVPNInfo:(VPNInfo *) info withType:(int) type {
     // 获取NEO交换地址
-    [RequestService requestWithUrl:mainAddress_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl:mainAddressV2_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         NSDictionary *dataDic = [responseObject objectForKey:@"data"];
         if (dataDic) {
-            NSString *toAddress = [dataDic objectForKey:@"address"];
+            NSString *toAddress = dataDic[@"NEO"][@"address"];
             info.address = toAddress;
             // 发送交易
             [NeoTransferUtil vpnConnectTranReqeustWithVpnInfo:info tranType:type];
@@ -873,5 +890,7 @@ dispatch_source_t _timer;
         });
     }];
 }
+
+
 
 @end

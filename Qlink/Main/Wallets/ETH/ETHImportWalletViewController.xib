@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,6 +18,7 @@
                 <outlet property="mnemonicTV" destination="2Fn-BP-R1N" id="qj8-WP-q9q"/>
                 <outlet property="mnemonicTVBack" destination="0yu-V1-Db0" id="twO-eu-5ko"/>
                 <outlet property="officialBtn" destination="POe-gf-LS3" id="VqL-ZA-W3O"/>
+                <outlet property="officialPWTF" destination="r5q-5j-ZmG" id="gXn-vP-AjR"/>
                 <outlet property="officialStartImportBtn" destination="MfC-ey-8uW" id="awk-Xq-Idh"/>
                 <outlet property="officialTV" destination="YZn-SW-C5D" id="gcp-22-wlp"/>
                 <outlet property="officialTVBack" destination="H2o-Qi-FAa" id="BAc-7o-CMM"/>
@@ -60,7 +61,7 @@
                                                 <color key="titleColor" red="0.12156862745098039" green="0.19215686274509802" blue="0.29019607843137252" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="selected">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
                                                 <action selector="mnemonicAction:" destination="-1" eventType="touchUpInside" id="J92-DC-UXR"/>
@@ -77,7 +78,7 @@
                                                 <color key="titleColor" red="0.1215686275" green="0.19215686269999999" blue="0.2901960784" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="selected">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
                                                 <action selector="officialAction:" destination="-1" eventType="touchUpInside" id="Irw-V2-wps"/>
@@ -94,7 +95,7 @@
                                                 <color key="titleColor" red="0.1215686275" green="0.19215686269999999" blue="0.2901960784" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="selected">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
                                                 <action selector="privatekeyAction:" destination="-1" eventType="touchUpInside" id="veR-lu-yDK"/>
@@ -111,7 +112,7 @@
                                                 <color key="titleColor" red="0.1215686275" green="0.19215686269999999" blue="0.2901960784" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="selected">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
                                                 <action selector="watchAction:" destination="-1" eventType="touchUpInside" id="9l4-aW-l3d"/>
@@ -141,7 +142,7 @@
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H1d-03-kpN">
                                             <rect key="frame" x="0.0" y="45" width="80" height="2"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.29019607843137252" green="0.0" blue="0.50588235294117645" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -269,7 +270,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0yu-V1-Db0">
                                     <rect key="frame" x="24" y="20" width="309" height="144"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ec5-d2-rOU">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ec5-d2-rOU">
                                             <rect key="frame" x="171" y="112" width="126" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="6BO-xY-xGX"/>
@@ -277,7 +278,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="What is a mnemonic?">
-                                                <color key="titleColor" red="0.29019607843137252" green="0.0" blue="0.50588235294117645" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                         </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2Fn-BP-R1N">
@@ -363,10 +364,10 @@
                                     <rect key="frame" x="24" y="249" width="284" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njZ-Z7-yzz">
-                                            <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="84" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="YJD-Jq-4SJ"/>
-                                                <constraint firstAttribute="width" constant="78" id="t4B-p9-qTR"/>
+                                                <constraint firstAttribute="width" constant="84" id="t4B-p9-qTR"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -379,15 +380,18 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfk-LU-rHy">
-                                            <rect key="frame" x="78" y="0.0" width="202" height="44"/>
+                                            <rect key="frame" x="84" y="0.0" width="202" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="202" id="KgD-B5-wEM"/>
                                                 <constraint firstAttribute="height" constant="44" id="vXq-3e-UMl"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="Terms of Service and Privacy Policy">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="termsMnemonicAction:" destination="-1" eventType="touchUpInside" id="3Ji-gH-8H2"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -402,7 +406,7 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9s-G0-lxl">
                                     <rect key="frame" x="23" y="323" width="311" height="49"/>
-                                    <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="49" id="h7C-wO-gzy"/>
                                     </constraints>
@@ -443,7 +447,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2o-Qi-FAa">
                                     <rect key="frame" x="24" y="103" width="309" height="144"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbf-78-E4e">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbf-78-E4e">
                                             <rect key="frame" x="171" y="112" width="126" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="126" id="8Nc-fF-9sR"/>
@@ -451,7 +455,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="What is a keystore?">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                         </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YZn-SW-C5D">
@@ -474,13 +478,13 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hR7-XQ-fkU">
-                                    <rect key="frame" x="24" y="255" width="284" height="44"/>
+                                    <rect key="frame" x="24" y="307" width="284" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-6u-kMd">
-                                            <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="82" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="2nC-kY-BhW"/>
-                                                <constraint firstAttribute="width" constant="78" id="dlp-4J-0CC"/>
+                                                <constraint firstAttribute="width" constant="82" id="dlp-4J-0CC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -493,15 +497,18 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STc-V7-YyP">
-                                            <rect key="frame" x="78" y="0.0" width="202" height="44"/>
+                                            <rect key="frame" x="82" y="0.0" width="202" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="HUu-M0-e71"/>
                                                 <constraint firstAttribute="width" constant="202" id="V7J-4r-vN5"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="Terms of Service and Privacy Policy">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="termsKeystoreAction:" destination="-1" eventType="touchUpInside" id="V0a-er-CUO"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -515,8 +522,8 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfC-ey-8uW">
-                                    <rect key="frame" x="23" y="329" width="311" height="49"/>
-                                    <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                    <rect key="frame" x="23" y="381" width="311" height="49"/>
+                                    <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="49" id="Z32-Fn-amx"/>
                                     </constraints>
@@ -528,6 +535,25 @@
                                         <action selector="officialImportAction:" destination="-1" eventType="touchUpInside" id="Q7K-oT-WCX"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2g3-GE-ZzX">
+                                    <rect key="frame" x="24" y="255" width="309" height="44"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Input Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r5q-5j-ZmG">
+                                            <rect key="frame" x="15" y="0.0" width="279" height="44"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="r5q-5j-ZmG" firstAttribute="top" secondItem="2g3-GE-ZzX" secondAttribute="top" id="K4R-6V-uEp"/>
+                                        <constraint firstAttribute="bottom" secondItem="r5q-5j-ZmG" secondAttribute="bottom" id="Pnv-nH-Qg7"/>
+                                        <constraint firstAttribute="trailing" secondItem="r5q-5j-ZmG" secondAttribute="trailing" constant="15" id="cIt-a3-asU"/>
+                                        <constraint firstItem="r5q-5j-ZmG" firstAttribute="leading" secondItem="2g3-GE-ZzX" secondAttribute="leading" constant="15" id="lP1-Us-cUV"/>
+                                        <constraint firstAttribute="height" constant="44" id="pNX-x5-gaa"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -535,13 +561,16 @@
                                 <constraint firstItem="uxa-uT-ebM" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="23" id="70A-DS-yDH"/>
                                 <constraint firstItem="MfC-ey-8uW" firstAttribute="top" secondItem="hR7-XQ-fkU" secondAttribute="bottom" constant="30" id="EJX-3L-8rt"/>
                                 <constraint firstAttribute="trailing" secondItem="H2o-Qi-FAa" secondAttribute="trailing" constant="24" id="RaF-uJ-gew"/>
+                                <constraint firstItem="2g3-GE-ZzX" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="24" id="Twe-Qf-VLu"/>
+                                <constraint firstItem="2g3-GE-ZzX" firstAttribute="top" secondItem="H2o-Qi-FAa" secondAttribute="bottom" constant="8" id="WmM-Ad-LDl"/>
                                 <constraint firstItem="H2o-Qi-FAa" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="24" id="a6b-j6-zBc"/>
                                 <constraint firstAttribute="trailing" secondItem="MfC-ey-8uW" secondAttribute="trailing" constant="23" id="bB9-h1-0nc"/>
                                 <constraint firstItem="MfC-ey-8uW" firstAttribute="leading" secondItem="lZH-II-zCG" secondAttribute="leading" constant="23" id="lUS-U9-xMs"/>
                                 <constraint firstItem="H2o-Qi-FAa" firstAttribute="top" secondItem="uxa-uT-ebM" secondAttribute="bottom" constant="16" id="mSM-3a-oxK"/>
                                 <constraint firstItem="uxa-uT-ebM" firstAttribute="top" secondItem="lZH-II-zCG" secondAttribute="top" constant="20" id="qoU-Ov-wCg"/>
                                 <constraint firstAttribute="trailing" secondItem="uxa-uT-ebM" secondAttribute="trailing" constant="23" id="r7t-Nd-QKk"/>
-                                <constraint firstItem="hR7-XQ-fkU" firstAttribute="top" secondItem="H2o-Qi-FAa" secondAttribute="bottom" constant="8" id="u94-EV-PHY"/>
+                                <constraint firstItem="hR7-XQ-fkU" firstAttribute="top" secondItem="2g3-GE-ZzX" secondAttribute="bottom" constant="8" id="xyD-jc-UzO"/>
+                                <constraint firstAttribute="trailing" secondItem="2g3-GE-ZzX" secondAttribute="trailing" constant="24" id="yQk-S9-8r6"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoP-2s-4nw">
@@ -550,7 +579,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgX-QQ-ZgU">
                                     <rect key="frame" x="24" y="20" width="309" height="144"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCX-ei-hdg">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCX-ei-hdg">
                                             <rect key="frame" x="171" y="112" width="126" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="126" id="Hfg-3P-TzP"/>
@@ -558,7 +587,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="What is a private key?">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                         </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="22R-k2-AO7">
@@ -584,10 +613,10 @@
                                     <rect key="frame" x="24" y="172" width="284" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-mS-8Qn">
-                                            <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="82" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="Xhk-yN-eqo"/>
-                                                <constraint firstAttribute="width" constant="78" id="jkY-MC-JgN"/>
+                                                <constraint firstAttribute="width" constant="82" id="jkY-MC-JgN"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -600,15 +629,18 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q3-7a-2Ik">
-                                            <rect key="frame" x="78" y="0.0" width="202" height="44"/>
+                                            <rect key="frame" x="82" y="0.0" width="202" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="XEM-ky-LtK"/>
                                                 <constraint firstAttribute="width" constant="202" id="eF9-36-YlZ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="Terms of Service and Privacy Policy">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="termsPrivateAction:" destination="-1" eventType="touchUpInside" id="gIg-RZ-zLg"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -623,7 +655,7 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siQ-ZE-qsc">
                                     <rect key="frame" x="23" y="246" width="311" height="49"/>
-                                    <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="49" id="tNb-m1-S8i"/>
                                     </constraints>
@@ -661,7 +693,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLo-Fk-qyV">
                                     <rect key="frame" x="24" y="103" width="309" height="144"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjr-yD-lIK">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjr-yD-lIK">
                                             <rect key="frame" x="143" y="112" width="154" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="GXg-FM-lCD"/>
@@ -669,7 +701,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="How offline signing works?">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
                                         </button>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-yd-tVd">
@@ -695,10 +727,10 @@
                                     <rect key="frame" x="24" y="255" width="284" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJQ-cp-WnV">
-                                            <rect key="frame" x="0.0" y="0.0" width="78" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="82" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="eGX-iK-FT5"/>
-                                                <constraint firstAttribute="width" constant="78" id="g9G-0W-yqm"/>
+                                                <constraint firstAttribute="width" constant="82" id="g9G-0W-yqm"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -711,15 +743,18 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8j-xX-XBb">
-                                            <rect key="frame" x="78" y="0.0" width="202" height="44"/>
+                                            <rect key="frame" x="82" y="0.0" width="202" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="202" id="FXT-RV-is5"/>
                                                 <constraint firstAttribute="height" constant="44" id="bVu-Wb-xJn"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal" title="Terms of Service and Privacy Policy">
-                                                <color key="titleColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="termsWatchAction:" destination="-1" eventType="touchUpInside" id="upv-di-eUs"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -734,7 +769,7 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sec-cZ-gAO">
                                     <rect key="frame" x="23" y="397.5" width="311" height="49"/>
-                                    <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="49" id="mSA-fE-yA5"/>
                                     </constraints>
@@ -803,14 +838,14 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="5nj-ej-tOP"/>
-            <point key="canvasLocation" x="1692.8" y="77.361319340329842"/>
+            <point key="canvasLocation" x="1692" y="77"/>
         </scrollView>
     </objects>
     <resources>
         <image name="eth_detail_arrow" width="24" height="24"/>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="eth_scan" width="24" height="24"/>
-        <image name="icon_the_selected" width="19" height="19"/>
-        <image name="icon_the_uncheck" width="19" height="19"/>
+        <image name="eth_scan" width="20" height="20"/>
+        <image name="icon_the_selected" width="24" height="24"/>
+        <image name="icon_the_uncheck" width="24" height="24"/>
     </resources>
 </document>

@@ -7,36 +7,19 @@
 //
 
 import Foundation
-
 import UIKit
 
-//struct Authenticated {
-//    static var account: Account? {
-//        didSet {
-//            if account != nil {
-//                //store current address in user default
-//                UserDefaultsManager.o3WalletAddress = account?.address
-//            }
-//        }
-//    }
-//    static var watchOnlyAddresses: [String]? //watch only addresses
-//    static var contacts: [(String, String)]?
-//}
-
-class Neo {
-    static var sharedTest: NeoClient?
-    static var sharedMain: NeoClient?
-
-    static var client: NeoClient {
-        if sharedTest == nil {
-            sharedTest = NeoClient.sharedTest
+struct Authenticated {
+    static var wallet: Wallet? {
+        didSet {
+            if wallet != nil {
+                //store current address in user default
+                UserDefaultsManager.o3WalletAddress = wallet?.address
+            }
         }
-        if sharedMain == nil {
-            sharedMain = NeoClient.sharedMain
-        }
-
-        return sharedMain!
     }
+    static var watchOnlyAddresses: [String]? //watch only addresses
+    static var contacts: [(String, String)]?
 }
 
 struct Precision {
@@ -112,10 +95,4 @@ enum PriceInterval: String {
         default: return 0
         }
     }
-}
-
-enum PortfolioType {
-    case readOnly
-    case writable
-    case readOnlyAndWritable
 }

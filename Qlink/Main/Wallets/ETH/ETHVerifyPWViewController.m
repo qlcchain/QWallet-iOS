@@ -9,7 +9,7 @@
 #import "ETHVerifyPWViewController.h"
 #import "LoginPWModel.h"
 #import "QlinkTabbarViewController.h"
-#import "FingetprintVerificationUtil.h"
+#import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import "ETHExportMnemonicViewController.h"
 
@@ -51,7 +51,8 @@
 
 - (void)textFieldDidEnd {
     if (_pwTF.text && _pwTF.text.length > 0) {
-        [_joinBtn setBackgroundColor:MAIN_PURPLE_COLOR];
+//        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _joinBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _joinBtn.userInteractionEnabled = YES;
     } else {
         [_joinBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];
@@ -66,31 +67,30 @@
 }
 
 - (IBAction)joinAction:(id)sender {
-    [self.view endEditing:YES];
-    NSString *localPW = [LoginPWModel getLoginPW];
-    if (![localPW isEqualToString:_pwTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"Password Wrong"];
-        return;
-    }
-    
+//    [self.view endEditing:YES];
+//    NSString *localPW = [LoginPWModel getLoginPW];
+//    if (![localPW isEqualToString:_pwTF.text]) {
+//        [kAppD.window makeToastDisappearWithText:@"Password Wrong"];
+//        return;
+//    }
+//
 //    [self jumpToTabbar];
 }
 
 - (IBAction)fingerprintLoginAction:(id)sender {
     [self.view endEditing:YES];
     kWeakSelf(self);
-    [FingetprintVerificationUtil show:^(BOOL success) {
+    [FingerprintVerificationUtil show:^(BOOL success) {
         if (success) {
             [weakself jumpToETHExportMnemonic];
         }
     }];
 }
 
-
-
 #pragma mark - Transition
 - (void)jumpToETHExportMnemonic {
     ETHExportMnemonicViewController *vc = [[ETHExportMnemonicViewController alloc] init];
+    vc.enterType = ETHExportMnemonicEnterTypeExport;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

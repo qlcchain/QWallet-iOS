@@ -11,6 +11,7 @@
 #import "NSString+UrlEncode.h"
 #import "NSDate+Category.h"
 #import "AFHTTPClientV2.h"
+#import "UserModel.h"
 
 @interface RequestService ()
 
@@ -45,23 +46,34 @@
 }
 
 + (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:isSign timestamp:nil successBlock:successReqBlock failedBlock:failedReqBlock];
+    return dataTask;
+}
+
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp addBase:(BOOL)addBase successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",[RequestService getInstance].prefix_Url,url];
-
+    if (!addBase) {
+        requestUrl = url;
+    }
+    
     NSMutableDictionary *tempParams = [NSMutableDictionary dictionaryWithDictionary:@{@"system":[RequestService getSystemInfo]}];
     [tempParams addEntriesFromDictionary:params];
     id inputParams = tempParams;
-//    id inputParams = params;
+    //    id inputParams = params;
     
     if (isSign) {
         NSString *recordStr = @"";
         if (inputParams) {
             recordStr = ((NSDictionary *)inputParams).mj_JSONString;
             recordStr = [recordStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
-//            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
+            //            recordStr = [JSONUtil jsonStrFromDicWithTrim:params];
         }
-        NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
-        NSMutableDictionary *jsonParam = [NSMutableDictionary dictionaryWithDictionary: @{@"appid":[ConfigUtil getChannel],@"timestamp":timestamp,@"params":recordStr}];
+        NSString *tempTimestamp = timestamp;
+        if (!tempTimestamp) {
+            tempTimestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+        }
+        NSMutableDictionary *jsonParam = [NSMutableDictionary dictionaryWithDictionary: @{@"appid":[ConfigUtil getChannel],@"timestamp":tempTimestamp,@"params":recordStr}];
         // 升序、拼接、加密
         NSString *signStr = [DigestUtils getSignature:jsonParam];
         [jsonParam setObject:signStr forKey:@"sign"];
@@ -71,7 +83,7 @@
         
         NSString *jsonStr = ((NSDictionary *)jsonParam).mj_JSONString;
         jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"]; // 替换转义字符
-//        NSString *jsonStr = [JSONUtil jsonStrFromDicWithTrim:jsonParam];
+        //        NSString *jsonStr = [JSONUtil jsonStrFromDicWithTrim:jsonParam];
         if ([K_Print_JsonStr boolValue]) {
             DDLogDebug(@"jsonStr = %@",jsonStr);
         }
@@ -80,14 +92,65 @@
         inputParams = encodeStr;
     }
     
-    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:requestUrl params:inputParams httpMethod:httpMethod successBlock:successReqBlock failedBlock:failedReqBlock];
+    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:requestUrl params:inputParams httpMethod:httpMethod successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if (successReqBlock) {
+            successReqBlock(dataTask, responseObject);
+        }
+        
+        NSInteger code = [responseObject[Server_Code] integerValue];
+        switch (code) {
+            case 20001: // Account not found
+            {
+                
+            }
+                break;
+            case 20002: // Token invalid
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [kAppD logout];
+                });
+            }
+                break;
+            case 20003: // Decryption failed
+            {
+                
+            }
+                break;
+            case 20004: // Incorrent password
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [kAppD logout];
+                });
+            }
+                break;
+            case 20005: // Token parsing error
+            {
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    } failedBlock:failedReqBlock];
+    
+    return dataTask;
+}
+
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    return [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:isSign timestamp:timestamp addBase:YES successBlock:successReqBlock failedBlock:failedReqBlock];
+}
+
++ (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params timestamp:(nullable NSString *)timestamp httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES timestamp:timestamp successBlock:successReqBlock failedBlock:failedReqBlock];
     
     return dataTask;
 }
 
 + (NSURLSessionDataTask *)requestWithUrl:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
-    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES successBlock:successReqBlock failedBlock:failedReqBlock];
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl:url params:params httpMethod:httpMethod isSign:YES timestamp:nil successBlock:successReqBlock failedBlock:failedReqBlock];
     
     return dataTask;
 }
@@ -125,6 +188,16 @@
     [info appendFormat:@"version:%@",APP_Build];
     
     return info;
+}
+
++ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
+                                             params:(id)params
+                                         httpMethod:(HttpMethod)httpMethod
+                                           userInfo:(NSDictionary*)userInfo
+                                       successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                                        failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 testRequestWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:userInfo successBlock:successReqBlock failedBlock:failedReqBlock];
+    return dataTask;
 }
 
 @end

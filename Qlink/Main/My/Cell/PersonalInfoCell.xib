@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="48" id="KGk-i7-Jjw" customClass="PersonalInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtz-G7-lzx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="47.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="密码设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTN-Xm-dJ8">
+                                <rect key="frame" x="24" y="14" width="65.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="eth_detail_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="9mC-XH-i2b">
+                                <rect key="frame" x="286" y="12" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="apL-MU-owS"/>
+                                    <constraint firstAttribute="height" constant="24" id="cYE-mr-GBW"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345678901234567890123142534123435346" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1oY-xr-lfX">
+                                <rect key="frame" x="89.5" y="14" width="194.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM0-bV-pl6">
+                                <rect key="frame" x="24" y="46.5" width="296" height="1"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="AM3-iP-QaP"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray_copy" translatesAutoresizingMaskIntoConstraints="NO" id="zGQ-lH-T7N">
+                                <rect key="frame" x="293" y="18" width="11" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="11" id="9pb-DY-Pi2"/>
+                                    <constraint firstAttribute="height" constant="12" id="tDX-bO-41N"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_default_user" translatesAutoresizingMaskIntoConstraints="NO" id="DSM-Iq-TCW">
+                                <rect key="frame" x="252" y="8" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="JrB-dO-kVp"/>
+                                    <constraint firstAttribute="height" constant="32" id="Rd5-QW-Qrh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fM0-bV-pl6" secondAttribute="bottom" id="9dp-oA-ZMu"/>
+                            <constraint firstItem="fM0-bV-pl6" firstAttribute="leading" secondItem="Xtz-G7-lzx" secondAttribute="leading" constant="24" id="KMM-Th-Zen"/>
+                            <constraint firstItem="1oY-xr-lfX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sTN-Xm-dJ8" secondAttribute="trailing" id="MOU-9v-SiS"/>
+                            <constraint firstItem="sTN-Xm-dJ8" firstAttribute="centerY" secondItem="Xtz-G7-lzx" secondAttribute="centerY" id="NBy-u5-YKG"/>
+                            <constraint firstItem="zGQ-lH-T7N" firstAttribute="centerY" secondItem="Xtz-G7-lzx" secondAttribute="centerY" id="OKe-E5-IQo"/>
+                            <constraint firstAttribute="trailing" secondItem="fM0-bV-pl6" secondAttribute="trailing" id="PDJ-ub-Ocq"/>
+                            <constraint firstItem="1oY-xr-lfX" firstAttribute="centerY" secondItem="Xtz-G7-lzx" secondAttribute="centerY" id="S9J-62-GvC"/>
+                            <constraint firstAttribute="trailing" secondItem="zGQ-lH-T7N" secondAttribute="trailing" constant="16" id="WCc-ES-kv5"/>
+                            <constraint firstItem="sTN-Xm-dJ8" firstAttribute="leading" secondItem="Xtz-G7-lzx" secondAttribute="leading" constant="24" id="a3y-B0-9bR"/>
+                            <constraint firstItem="9mC-XH-i2b" firstAttribute="leading" secondItem="1oY-xr-lfX" secondAttribute="trailing" constant="2" id="cws-9h-gSZ"/>
+                            <constraint firstAttribute="trailing" secondItem="9mC-XH-i2b" secondAttribute="trailing" constant="10" id="fN7-f0-9d7"/>
+                            <constraint firstItem="9mC-XH-i2b" firstAttribute="centerY" secondItem="Xtz-G7-lzx" secondAttribute="centerY" id="iB9-B0-qqP"/>
+                            <constraint firstItem="9mC-XH-i2b" firstAttribute="leading" secondItem="DSM-Iq-TCW" secondAttribute="trailing" constant="2" id="iux-ZK-94e"/>
+                            <constraint firstItem="DSM-Iq-TCW" firstAttribute="centerY" secondItem="Xtz-G7-lzx" secondAttribute="centerY" id="pmU-VH-Zul"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Xtz-G7-lzx" secondAttribute="trailing" id="BNr-YQ-8Lt"/>
+                    <constraint firstItem="Xtz-G7-lzx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CSa-kq-sUS"/>
+                    <constraint firstAttribute="bottom" secondItem="Xtz-G7-lzx" secondAttribute="bottom" id="De0-N4-U7d"/>
+                    <constraint firstItem="Xtz-G7-lzx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wzT-fI-4to"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="iconArrow" destination="9mC-XH-i2b" id="AEo-lB-eiJ"/>
+                <outlet property="iconCopy" destination="zGQ-lH-T7N" id="iSG-yO-qvw"/>
+                <outlet property="iconHead" destination="DSM-Iq-TCW" id="u3m-CL-aAp"/>
+                <outlet property="keyLab" destination="sTN-Xm-dJ8" id="dUD-wt-xgH"/>
+                <outlet property="valLab" destination="1oY-xr-lfX" id="rUP-aG-5K1"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="eth_detail_arrow" width="24" height="24"/>
+        <image name="icon_default_user" width="60" height="60"/>
+        <image name="icon_gray_copy" width="11" height="12"/>
+    </resources>
+</document>

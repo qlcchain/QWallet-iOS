@@ -60,15 +60,18 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
+  - HandyJSON (5.0.0)
   - Hero (1.4.0)
   - IQKeyboardManager (6.2.0)
-  - JSONRPCKit (2.0.0):
-    - Result (~> 3.0)
+  - JSONRPCKit (3.0.0):
+    - Result (~> 3.2.0)
+  - KeychainAccess (3.1.2)
   - KeychainSwift (13.0.0)
   - KissXML (5.2.3)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.15.1)
+  - MJRefresh (3.1.16)
   - MMWormhole (2.0.0):
     - MMWormhole/Core (= 2.0.0)
   - MMWormhole/Core (2.0.0)
@@ -108,6 +111,7 @@ PODS:
   - SDWebImage/Core (4.4.2)
   - SipHash (1.2.2)
   - SwiftColor (1.0.0)
+  - SwiftTheme (0.4.1)
   - TrezorCrypto (0.0.9)
   - TrustCore (0.0.7):
     - BigInt
@@ -121,6 +125,8 @@ PODS:
     - Result
     - TrustCore
   - TrustWeb3Provider (0.1.7)
+  - TTGTagCollectionView (1.11.1)
+  - TYCyclePagerView (1.2.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -135,14 +141,17 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift
   - Eureka (= 4.2.0)
   - Firebase/Core (~> 5.4.1)
+  - HandyJSON
   - Hero
   - IQKeyboardManager
-  - JSONRPCKit (from `https://github.com/bricklife/JSONRPCKit.git`)
+  - JSONRPCKit (= 3.0.0)
+  - KeychainAccess
   - KeychainSwift
   - KissXML (~> 5.2.2)
   - Masonry
   - MBProgressHUD
   - MJExtension
+  - MJRefresh
   - MMWormhole (~> 2.0.0)
   - Moya (~> 10.0.1)
   - OLImageView
@@ -151,10 +160,13 @@ DEPENDENCIES:
   - RealmSwift (= 3.7.6)
   - SDWebImage
   - SwiftColor
+  - SwiftTheme (= 0.4.1)
   - TrustCore (from `https://github.com/TrustWallet/trust-core`, branch `master`)
   - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
   - TrustWalletSDK (from `https://github.com/TrustWallet/TrustSDK-iOS`, branch `master`)
   - TrustWeb3Provider (from `https://github.com/TrustWallet/trust-web3-provider`, commit `f4e0ebb1b8fa4812637babe85ef975d116543dfd`)
+  - TTGTagCollectionView
+  - TYCyclePagerView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -176,13 +188,17 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseInstanceID
     - GoogleToolboxForMac
+    - HandyJSON
     - Hero
     - IQKeyboardManager
+    - JSONRPCKit
+    - KeychainAccess
     - KeychainSwift
     - KissXML
     - Masonry
     - MBProgressHUD
     - MJExtension
+    - MJRefresh
     - MMWormhole
     - Moya
     - nanopb
@@ -196,11 +212,12 @@ SPEC REPOS:
     - SDWebImage
     - SipHash
     - SwiftColor
+    - SwiftTheme
     - TrezorCrypto
+    - TTGTagCollectionView
+    - TYCyclePagerView
 
 EXTERNAL SOURCES:
-  JSONRPCKit:
-    :git: https://github.com/bricklife/JSONRPCKit.git
   TrustCore:
     :branch: master
     :git: https://github.com/TrustWallet/trust-core
@@ -215,9 +232,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/TrustWallet/trust-web3-provider
 
 CHECKOUT OPTIONS:
-  JSONRPCKit:
-    :commit: 50d19a4f7ec593ac5e07cffa1e11c17f1fbe347d
-    :git: https://github.com/bricklife/JSONRPCKit.git
   TrustCore:
     :commit: f987ee12f98c2df9d1538d86448dd8e671669350
     :git: https://github.com/TrustWallet/trust-core
@@ -250,14 +264,17 @@ SPEC CHECKSUMS:
   FirebaseCore: 4c28e3b9708ba48a765e76515f913a71596eb5dd
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
-  JSONRPCKit: 22132c575ba2dc6f2f4ae72fda4943a63efca686
+  JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
+  KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   KeychainSwift: 23d6c16cbc33f20fafa30c3d783241b4b87d998c
   KissXML: 09f88ff8161fd058d67b70740b8b516687b52823
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  MJRefresh: 7798e16e53a5ef7f332dd05b27664db4e29530fd
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -271,12 +288,15 @@ SPEC CHECKSUMS:
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftColor: aad338783abbcdd78df9031a38a7a96aae3d9122
+  SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
   TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
   TrustCore: 6c7deb45f03664d650da712bb5a19b33df0534a6
   TrustKeystore: c54b52ade9c97d31d23ded9ae2518c62dd73b5fe
   TrustWalletSDK: 12451433bda69bc07e5a27408449b1f4692879e4
   TrustWeb3Provider: 50fa391bdf170feb43dd4419992931510a5751d8
+  TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
+  TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: a5f8bec5d1d97ff8ad5769c6f71858ac76b7b133
+PODFILE CHECKSUM: 43415298065c163cc731c5d8069070f8ba3a6c83
 
 COCOAPODS: 1.6.1

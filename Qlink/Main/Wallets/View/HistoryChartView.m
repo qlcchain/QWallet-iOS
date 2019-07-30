@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet LineChartView *chartView;
 @property (nonatomic, strong) NSMutableArray *lineArr;
 @property (nonatomic, strong) NSString *currentSymbol;
+@property (nonatomic, copy) HistoryChartNoDataBlock noDataB;
 
 @end
 
@@ -100,7 +101,8 @@
     leftAxis.axisMinimum = min;
 }
 
-- (void)updateWithSymbol:(NSString *)symbol {
+- (void)updateWithSymbol:(NSString *)symbol noDataBlock:(HistoryChartNoDataBlock)noDataBlock {
+    _noDataB = noDataBlock;
     _currentSymbol = symbol;
     [self requestBinaKlinesWithSymbol:symbol];
 }
@@ -141,8 +143,8 @@
         set1.highlightLineDashLengths = @[@5.f, @2.5f];
 //        [set1 setColor:UIColor.blackColor];
 //        [set1 setCircleColor:UIColor.blackColor];
-        [set1 setColor:MAIN_PURPLE_COLOR];
-        [set1 setCircleColor:MAIN_PURPLE_COLOR];
+        [set1 setColor:[UIColor mainColor]];
+        [set1 setCircleColor:[UIColor mainColor]];
         set1.lineWidth = 1.0;
         set1.circleRadius = 3.0;
         set1.drawCircleHoleEnabled = NO;
@@ -196,6 +198,11 @@
             NSArray *arr = [responseObject objectForKey:Server_Data];
             [weakself.lineArr addObjectsFromArray:arr];
             [weakself updateChartData];
+            if (weakself.lineArr.count <= 0) {
+                if (weakself.noDataB) {
+                    weakself.noDataB();
+                }
+            }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         

@@ -9,7 +9,7 @@
 #import "LoginInputPWViewController.h"
 #import "LoginPWModel.h"
 #import "QlinkTabbarViewController.h"
-#import "FingetprintVerificationUtil.h"
+#import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 
 @interface LoginInputPWViewController ()
@@ -55,7 +55,8 @@
 
 - (void)textFieldDidEnd {
     if (_pwTF.text && _pwTF.text.length > 0) {
-        [_joinBtn setBackgroundColor:MAIN_PURPLE_COLOR];
+//        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
+        _joinBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _joinBtn.userInteractionEnabled = YES;
     } else {
         [_joinBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];
@@ -91,17 +92,17 @@
         return;
     }
     
-    kAppD.allowPresentLogin = NO; // 设置已经输入过密码
+    kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
     [self dismissWithComplete:YES];
 //    [self jumpToTabbar];
 }
 
 - (IBAction)fingerprintLoginAction:(id)sender {
     kWeakSelf(self);
-    [FingetprintVerificationUtil show:^(BOOL success) {
+    [FingerprintVerificationUtil show:^(BOOL success) {
         if (success) {
 //            [weakself jumpToTabbar];
-            kAppD.allowPresentLogin = NO; // 设置已经输入过密码
+            kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
             [weakself dismissWithComplete:YES];
         }
     }];

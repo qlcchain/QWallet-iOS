@@ -13,6 +13,8 @@
 @interface PasswordManagementViewController ()
 
 @property (weak, nonatomic) IBOutlet UISwitch *touchSwitch;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordSettingsHeight; // 48
+
 
 @end
 
@@ -25,6 +27,7 @@
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     _touchSwitch.on = [ConfigUtil getLocalTouch];
+    _passwordSettingsHeight.constant = 0;
 }
 
 #pragma mark - Action

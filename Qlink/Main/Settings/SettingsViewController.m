@@ -14,6 +14,7 @@
 #import "WalletsManageViewController.h"
 #import "JoinCommunityViewController.h"
 #import "WebViewController.h"
+#import "UserModel.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,13 +25,14 @@
 
 @implementation SettingsViewController
 
-NSString *title0 = @"Password Management";
+//NSString *title0 = @"Password Management";
 NSString *title1 = @"Currency Unit";
-NSString *title2 = @"My Wallet";
+//NSString *title2 = @"My Wallet";
 NSString *title3 = @"Service Agreement";
 NSString *title4 = @"Help and Feedback";
-NSString *title5 = @"Join the Community";
-NSString *title6 = @"About WINQ";
+//NSString *title5 = @"Join the Community";
+NSString *title6 = @"About My QWallet";
+NSString *title7 = @"Log out";
 
 #pragma mark - Observe
 - (void)addObserve {
@@ -58,12 +60,21 @@ NSString *title6 = @"About WINQ";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSArray *titleArr = @[title0,title1,title2,title3,title4,title5,title6];
+    NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[title1,title3,title4,title6,title_screen_lock]];
+    if ([UserModel haveLoginAccount]) {
+        [titleArr addObject:title7];
+    }
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         SettingsShowModel *model = [[SettingsShowModel alloc] init];
         model.title = obj;
-        model.haveNextPage = YES;
+        if ([obj isEqualToString:title_screen_lock]) {
+            model.haveNextPage = NO;
+            model.showSwitch = YES;
+        } else {
+            model.haveNextPage = YES;
+            model.showSwitch = NO;
+        }
         model.detail = [obj isEqualToString:title1]?[ConfigUtil getLocalUsingCurrency]:[obj isEqualToString:title6]?[NSString stringWithFormat:@"Version %@(%@)",APP_Version,APP_Build]:nil;
         [weakself.sourceArr addObject:model];
     }];
@@ -82,6 +93,18 @@ NSString *title6 = @"About WINQ";
     [_mainTable reloadData];
 }
 
+- (void)logout {
+    [kAppD logout];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - Action
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return SettingsCell_Height;
@@ -91,17 +114,16 @@ NSString *title6 = @"About WINQ";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     SettingsShowModel *model = _sourceArr[indexPath.row];
-    if ([model.title isEqualToString:title0]) {
-        [self jumpToPWManagement];
-    } else if ([model.title isEqualToString:title1]) {
+//    if ([model.title isEqualToString:title0]) {
+//        [self jumpToPWManagement];
+//    } else
+    if ([model.title isEqualToString:title1]) {
         [self jumpToChooseCurrency];
-    } else if ([model.title isEqualToString:title2]) {
-        [self jumpToWalletsManage];
     } else if ([model.title isEqualToString:title3]) {
-        NSString *url = @"https://winq.net/disclaimer.html";
+        NSString *url = @"https://docs.google.com/document/d/1yTr1EDXmOclDuSt4o0RRUc0fVjJU3zPREK97C1RmYdI/edit?usp=sharing";
         [self jumpToWeb:url title:title3];
-    } else if ([model.title isEqualToString:title5]) {
-        [self jumpToJoinCommunity];
+    } else if ([model.title isEqualToString:title7]) {
+        [self logout];
     }
 }
 
@@ -122,33 +144,28 @@ NSString *title6 = @"About WINQ";
 #pragma mark - Transition
 - (void)jumpToChooseCurrency {
     ChooseCurrencyViewController *vc = [[ChooseCurrencyViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToPWManagement {
     PasswordManagementViewController *vc = [[PasswordManagementViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToWalletsManage {
-    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToWalletsManage {
+//    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
-- (void)jumpToJoinCommunity {
-    JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToJoinCommunity {
+//    JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)jumpToWeb:(NSString *)url title:(NSString *)title {
     WebViewController *vc = [[WebViewController alloc] init];
     vc.inputUrl = url;
     vc.inputTitle = title;
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -9,12 +9,15 @@
 #import "ETHWalletDetailViewController.h"
 #import "ETHWalletDetailCell.h"
 #import "ExportPrivateKeyView.h"
-#import "ETHExportKeystoreViewController.h"
+//#import "ETHExportKeystoreViewController.h"
 #import "WalletCommonModel.h"
 #import <ETHFramework/ETHFramework.h>
 #import "ETHVerifyPWViewController.h"
 #import "DeleteWalletConfirmView.h"
 #import "ETHWalletInfo.h"
+#import "ETHExportMnemonicViewController.h"
+#import "FingerprintVerificationUtil.h"
+#import "ETHExportKeystorePWViewController.h"
 
 @interface ETHWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -104,9 +107,19 @@ NSString *exportPrivateKey = @"Export private key";
     
     NSString *title = _sourceArr[indexPath.row];
     if ([title isEqualToString:exportMnemonicPhrase]) {
-        [self jumpToETHVerifyPW];
+        kWeakSelf(self);
+        if ([ConfigUtil getLocalTouch]) {
+            [FingerprintVerificationUtil show:^(BOOL success) {
+                if (success) {
+                    [weakself jumpToETHExportMnemonic];
+                }
+            }];
+        } else {
+            [self jumpToETHExportMnemonic];
+        }
+//        [self jumpToETHVerifyPW];
     } else if ([title isEqualToString:exportKeystore]) {
-        [self jumpToExportKeystore];
+        [self jumpToExportKeystorePW];
     } else if ([title isEqualToString:exportPrivateKey]) {
         [self showExportPrivateKey];
     }
@@ -127,15 +140,20 @@ NSString *exportPrivateKey = @"Export private key";
 }
 
 #pragma mark - Transition
-- (void)jumpToExportKeystore {
-    ETHExportKeystoreViewController *vc = [[ETHExportKeystoreViewController alloc] init];
+- (void)jumpToExportKeystorePW {
+    ETHExportKeystorePWViewController *vc = [[ETHExportKeystorePWViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToETHVerifyPW {
-    ETHVerifyPWViewController *vc = [[ETHVerifyPWViewController alloc] init];
+//- (void)jumpToETHVerifyPW {
+//    ETHVerifyPWViewController *vc = [[ETHVerifyPWViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
+
+- (void)jumpToETHExportMnemonic {
+    ETHExportMnemonicViewController *vc = [[ETHExportMnemonicViewController alloc] init];
+    vc.enterType = ETHExportMnemonicEnterTypeExport;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 @end

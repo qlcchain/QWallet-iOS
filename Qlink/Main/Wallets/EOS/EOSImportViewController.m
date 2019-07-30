@@ -16,6 +16,7 @@
 #import "ReportUtil.h"
 #import "EOSWalletUtil.h"
 #import <eosFramework/EOS_Key_Encode.h>
+#import "WebViewController.h"
 
 @interface EOSImportViewController () {
     BOOL privatekeyAgree;
@@ -121,17 +122,31 @@
     [[EOSWalletUtil shareInstance] importWithAccountName:accountName private_activeKey:private_activeKey private_ownerKey:private_ownerKey complete:^(BOOL success) {
         [kAppD.window hideToast];
         if (success) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:Add_NEO_Wallet_Noti object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Add_EOS_Wallet_Noti object:nil];
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Import fail"];
         }
     }];
 }
+
+- (IBAction)termsAction:(id)sender {
+    [self jumpToTerms];
+}
+
 
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
     kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -8,7 +8,8 @@
 
 #import "ExportPrivateKeyQRView.h"
 #import "UIView+Visuals.h"
-#import "HMScanner.h"
+#import "SGQRCodeObtain.h"
+#import "UIImage+Capture.h"
 
 @interface ExportPrivateKeyQRView ()
 
@@ -37,10 +38,11 @@
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
     
-    kWeakSelf(self);
-    [HMScanner qrImageWithString:_privateKey?:@"" avatar:nil completion:^(UIImage *image) {
-        weakself.qrImage.image = image;
-    }];
+    _qrImage.image = [SGQRCodeObtain generateQRCodeWithData:_privateKey?:@"" size:_qrImage.width logoImage:nil ratio:0.15];
+//    kWeakSelf(self);
+//    [HMScanner qrImageWithString:_privateKey?:@"" avatar:nil completion:^(UIImage *image) {
+//        weakself.qrImage.image = image;
+//    }];
 }
 
 - (void)hide {
@@ -55,8 +57,12 @@
         return;
     }
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//    pasteboard.string = _privateKey;
-    pasteboard.image = _qrImage.image;
+//    UIImage *image = _qrImage.image;
+//    NSData *imageData = UIImagePNGRepresentation(image);
+//    [pasteboard setData:imageData forPasteboardType:@"public.png"];
+    UIImage *image = [UIImage captureWithView:_qrImage];
+    [pasteboard setImage:image];
+//    pasteboard.image = image;
     [kAppD.window makeToastDisappearWithText:@"Copied"];
     [self hide];
 }

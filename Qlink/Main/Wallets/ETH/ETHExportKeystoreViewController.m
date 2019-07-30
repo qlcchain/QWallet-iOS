@@ -43,7 +43,8 @@
 
 - (void)configInit {
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    NSString *pw = [LoginPWModel getLoginPW];
+//    NSString *pw = [LoginPWModel getLoginPW];
+    NSString *pw = _inputPW?:@"";
     kWeakSelf(self);
     [TrustWalletManage.sharedInstance exportKeystoreWithAddress:currentWalletM.address?:@"" newPassword:pw :^(NSString * keystore) {
         weakself.textV.text = keystore;

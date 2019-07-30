@@ -14,6 +14,8 @@
 #import "TokenPriceModel.h"
 #import "ETHWalletDetailViewController.h"
 #import "NEOWalletDetailViewController.h"
+#import "QLCWalletDetailViewController.h"
+#import "EOSWalletDetailViewController.h"
 
 @interface WalletsManageViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -117,7 +119,9 @@
         } else if (commonM.walletType == WalletTypeNEO) {
             [self jumpToNEOWalletDetail:commonM];
         } else if (commonM.walletType == WalletTypeEOS) {
-            
+            [self jumpToEOSWalletDetail:commonM];
+        } else if (commonM.walletType == WalletTypeQLC) {
+            [self jumpToQLCWalletDetail:commonM];
         }
     };
     
@@ -144,6 +148,22 @@
 
 - (void)jumpToNEOWalletDetail:(WalletCommonModel *)model {
     NEOWalletDetailViewController *vc = [[NEOWalletDetailViewController alloc] init];
+    vc.inputWalletCommonM = model;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    vc.isDeleteCurrentWallet = [model.address isEqualToString:currentWalletM.address]?YES:NO;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToEOSWalletDetail:(WalletCommonModel *)model {
+    EOSWalletDetailViewController *vc = [[EOSWalletDetailViewController alloc] init];
+    vc.inputWalletCommonM = model;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    vc.isDeleteCurrentWallet = [model.address isEqualToString:currentWalletM.address]?YES:NO;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToQLCWalletDetail:(WalletCommonModel *)model {
+    QLCWalletDetailViewController *vc = [[QLCWalletDetailViewController alloc] init];
     vc.inputWalletCommonM = model;
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     vc.isDeleteCurrentWallet = [model.address isEqualToString:currentWalletM.address]?YES:NO;

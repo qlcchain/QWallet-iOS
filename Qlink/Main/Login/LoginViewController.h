@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginSetPWViewController : QBaseViewController
+@interface LoginViewController : QBaseViewController
+
+- (void)showLastLoginAccount;
 
 @end
 

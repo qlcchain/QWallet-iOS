@@ -14,6 +14,7 @@
 //#import <NEOFramework/NEOFramework.h>
 #import "WalletQRViewController.h"
 #import "ReportUtil.h"
+#import "WebViewController.h"
 
 @interface NEOImportViewController () {
     BOOL privatekeyAgree;
@@ -101,13 +102,27 @@
         [self showImportSuccessView];
 //        [self performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
         [self performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
+    } else {
+        [kAppD.window makeToastDisappearWithText:@"Import fail"];
     }
 }
+
+- (IBAction)termsAction:(id)sender {
+    [self jumpToTerms];
+}
+
 
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
     kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
