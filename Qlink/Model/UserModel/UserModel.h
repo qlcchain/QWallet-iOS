@@ -22,9 +22,15 @@
 @property (nonatomic, copy) NSString *md5PW;
 @property (nonatomic, copy) NSString *rsaPublicKey;
 @property (nonatomic, copy) NSNumber *isLogin;
+@property (nonatomic, copy) NSNumber *otcTimes;
+@property (nonatomic, copy) NSString *holdingPhoto;
+@property (nonatomic, copy) NSString *facePhoto;
+@property (nonatomic, copy) NSNumber *number;
+@property (nonatomic, copy) NSNumber *totalInvite;
+@property (nonatomic, copy) NSString *vStatus; // 验证状态[NOT_UPLOAD/未上传,UPLOADED/已上传,KYC_SUCCESS/KYC成功,KYC_FAIL/KYC失败]
 
 + (NSString *)getOwnP2PId;
-+ (void)storeUser:(UserModel *)model;
++ (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin;
 + (UserModel *)fetchUserOfLogin;
 + (UserModel *)fetchUser:(NSString *)account;
 + (void)logout:(NSString *)account;
@@ -35,5 +41,6 @@
 + (BOOL)haveAccountInLocal;
 + (void)storeLastLoginAccount:(NSString *)account; // 刷新最后一次登录的账号
 + (NSString *)getLastLoginAccount; // 获取最后一次登录的账号
++ (void)deleteOneAccount;
 
 @end

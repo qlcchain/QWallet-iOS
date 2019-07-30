@@ -9,6 +9,7 @@
 #import "ExportPrivateKeyQRView.h"
 #import "UIView+Visuals.h"
 #import "SGQRCodeObtain.h"
+#import "UIImage+Capture.h"
 
 @interface ExportPrivateKeyQRView ()
 
@@ -56,8 +57,12 @@
         return;
     }
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//    pasteboard.string = _privateKey;
-    pasteboard.image = _qrImage.image;
+//    UIImage *image = _qrImage.image;
+//    NSData *imageData = UIImagePNGRepresentation(image);
+//    [pasteboard setData:imageData forPasteboardType:@"public.png"];
+    UIImage *image = [UIImage captureWithView:_qrImage];
+    [pasteboard setImage:image];
+//    pasteboard.image = image;
     [kAppD.window makeToastDisappearWithText:@"Copied"];
     [self hide];
 }

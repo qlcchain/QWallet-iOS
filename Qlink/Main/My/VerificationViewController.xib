@@ -14,6 +14,10 @@
             <connections>
                 <outlet property="pic1" destination="W4d-do-vkD" id="OMY-aW-0TQ"/>
                 <outlet property="pic2" destination="F6W-sP-x5M" id="03h-qQ-UXQ"/>
+                <outlet property="picBtn1" destination="O1O-ha-hW5" id="bwt-hT-Qmy"/>
+                <outlet property="picBtn2" destination="lH7-t6-7rZ" id="XQj-Mk-WLe"/>
+                <outlet property="submitBtn" destination="YTn-gL-SzP" id="9j8-15-Vsz"/>
+                <outlet property="tipLab" destination="TWp-If-yAI" id="cJP-Jz-RjL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,13 +45,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vO6-mC-jaX">
-                                                    <rect key="frame" x="81" y="70.333333333333343" width="252" height="157"/>
+                                                    <rect key="frame" x="80" y="70.333333333333343" width="254" height="159"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W4d-do-vkD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="252" height="157"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_passport_back" translatesAutoresizingMaskIntoConstraints="NO" id="W4d-do-vkD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="159"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1O-ha-hW5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="252" height="157"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="159"/>
                                                             <connections>
                                                                 <action selector="pic1Action:" destination="-1" eventType="touchUpInside" id="9GF-IZ-jAd"/>
                                                             </connections>
@@ -59,28 +63,28 @@
                                                         <constraint firstItem="O1O-ha-hW5" firstAttribute="leading" secondItem="vO6-mC-jaX" secondAttribute="leading" id="6U9-qc-Z4K"/>
                                                         <constraint firstItem="W4d-do-vkD" firstAttribute="leading" secondItem="vO6-mC-jaX" secondAttribute="leading" id="8o5-J4-RuQ"/>
                                                         <constraint firstAttribute="bottom" secondItem="W4d-do-vkD" secondAttribute="bottom" id="L9r-ZG-gaN"/>
-                                                        <constraint firstAttribute="height" constant="157" id="Mgh-Vf-9TD"/>
+                                                        <constraint firstAttribute="height" constant="159" id="Mgh-Vf-9TD"/>
                                                         <constraint firstAttribute="trailing" secondItem="O1O-ha-hW5" secondAttribute="trailing" id="MlJ-un-lIV"/>
                                                         <constraint firstItem="W4d-do-vkD" firstAttribute="top" secondItem="vO6-mC-jaX" secondAttribute="top" id="OQo-TU-t3X"/>
-                                                        <constraint firstAttribute="width" constant="252" id="XNg-Da-jcB"/>
+                                                        <constraint firstAttribute="width" constant="254" id="XNg-Da-jcB"/>
                                                         <constraint firstItem="O1O-ha-hW5" firstAttribute="top" secondItem="vO6-mC-jaX" secondAttribute="top" id="a2B-Rz-YXa"/>
                                                         <constraint firstAttribute="bottom" secondItem="O1O-ha-hW5" secondAttribute="bottom" id="jkK-Xb-gBI"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Face photo page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfK-dR-fc8">
-                                                    <rect key="frame" x="153" y="235.33333333333331" width="108" height="17"/>
+                                                    <rect key="frame" x="153" y="237.33333333333331" width="108" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nly-Da-sFX">
-                                                    <rect key="frame" x="81" y="279.33333333333331" width="252" height="157"/>
+                                                    <rect key="frame" x="80" y="281.33333333333331" width="254" height="159"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F6W-sP-x5M">
-                                                            <rect key="frame" x="0.0" y="0.0" width="252" height="157"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_hand_passport_back" translatesAutoresizingMaskIntoConstraints="NO" id="F6W-sP-x5M">
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="159"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lH7-t6-7rZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="252" height="157"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="159"/>
                                                             <connections>
                                                                 <action selector="pic2Action:" destination="-1" eventType="touchUpInside" id="hfc-wB-ti4"/>
                                                             </connections>
@@ -88,8 +92,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="252" id="EnN-cy-d0U"/>
-                                                        <constraint firstAttribute="height" constant="157" id="UOr-px-QJb"/>
+                                                        <constraint firstAttribute="width" constant="254" id="EnN-cy-d0U"/>
+                                                        <constraint firstAttribute="height" constant="159" id="UOr-px-QJb"/>
                                                         <constraint firstItem="lH7-t6-7rZ" firstAttribute="leading" secondItem="Nly-Da-sFX" secondAttribute="leading" id="XIG-e3-9gS"/>
                                                         <constraint firstItem="lH7-t6-7rZ" firstAttribute="top" secondItem="Nly-Da-sFX" secondAttribute="top" id="d7a-nC-XqC"/>
                                                         <constraint firstAttribute="bottom" secondItem="lH7-t6-7rZ" secondAttribute="bottom" id="e2A-rl-ymL"/>
@@ -101,13 +105,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A photo of you holding the passport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jz-C4-lqE">
-                                                    <rect key="frame" x="91.000000000000014" y="444.33333333333331" width="232.33333333333337" height="17"/>
+                                                    <rect key="frame" x="91.000000000000014" y="448.33333333333337" width="232.33333333333337" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTn-gL-SzP">
-                                                    <rect key="frame" x="16" y="493.33333333333337" width="382" height="49"/>
+                                                    <rect key="frame" x="16" y="497.33333333333337" width="382" height="49"/>
                                                     <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="49" id="WuH-57-0iX"/>
@@ -227,6 +231,8 @@
     </objects>
     <resources>
         <image name="eth_gray_back" width="24" height="24"/>
+        <image name="icon_hand_passport_back" width="254" height="159"/>
+        <image name="icon_passport_back" width="254" height="159"/>
         <image name="icon_question_blue" width="20" height="20"/>
     </resources>
 </document>

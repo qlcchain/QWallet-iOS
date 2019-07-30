@@ -91,7 +91,7 @@
             model.md5PW = md5PW;
             //            model.rsaPublicKey = rsaPublicKey;
             model.isLogin = @(YES);
-            [UserModel storeUser:model];
+            [UserModel storeUser:model useLogin:NO];
             [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];

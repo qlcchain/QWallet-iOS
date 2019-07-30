@@ -67,7 +67,7 @@
 }
 
 - (void)refreshInvitationCodeView {
-    _invitationCodeLab.text = _myInfoM.ID?:@"";
+    _invitationCodeLab.text = _myInfoM.number?:@"";
 }
 
 - (void)refreshGuanggaoView {
@@ -86,7 +86,7 @@
 
 - (IBAction)copyAction:(id)sender {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
-    [pab setString:_myInfoM.ID?:@""];
+    [pab setString:_myInfoM.number?:@""];
     [kAppD.window makeToastDisappearWithText:@"Copied"];
 }
 

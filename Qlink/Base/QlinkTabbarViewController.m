@@ -16,6 +16,7 @@
 //#import "VpnViewController.h"
 //#import "VPNViewController.h"
 #import "FinanceViewController.h"
+#import "HomeBuySellViewController.h"
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
 #import "UIView+Gradient.h"
@@ -55,7 +56,8 @@
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
-    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
+//    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
+    [self addChildViewController:[[HomeBuySellViewController alloc] init] text:@"Finance" imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:@"Wallet" imageName:@"wallet"];
     [self addChildViewController:[[MyViewController alloc] init] text:@"Me" imageName:@"settings"];

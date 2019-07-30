@@ -20,7 +20,8 @@
 #import "NotifactionView.h"
 //#import "VPNOperationUtil.h"
 #import "SystemUtil.h"
-#import "NeoTransferUtil.h"
+#import "WalletTransferUtil.h"
+#import "NEOTransferUtil.h"
 #import "MiPushSDK.h"
 #import "LoginSetPWViewController.h"
 #import "LoginInputPWViewController.h"
@@ -35,6 +36,7 @@
 #import "UserModel.h"
 #import "FingerprintVerificationUtil.h"
 #import "NSDate+Category.h"
+#import "UserUtil.h"
 
 @import Firebase;
 
@@ -52,6 +54,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [[NSUserDefaults standardUserDefaults] setValue:false forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
+    
+//    [UserModel deleteOneAccount];
 //    [NEOWalletUtil deleteAllWallet];
 //    [LoginPWModel deleteLoginPW];
 //    [WalletCommonModel deleteAllWallet];
@@ -139,13 +144,14 @@
 
 - (void)configRootAndBackground {
     [self setRootTabbar];
-    // 获取NEO主地址
-    [[NeoTransferUtil getShareObject] startFetchNEOMainAddress];
+    // 获取主地址
+    [[WalletTransferUtil getShareObject] startFetchServerMainAddress];
 }
 
 #pragma mark - 初始化Tabbar
 - (void)setRootTabbar {
     [WalletCommonModel walletInit]; // 钱包初始化
+    [UserUtil updateUserInfo];
     
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
@@ -187,7 +193,7 @@
     }
     UserModel *userM = [UserModel fetchUserOfLogin];
     userM.isLogin = @(NO);
-    [UserModel storeUser:userM];
+    [UserModel storeUser:userM useLogin:NO];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
 }

@@ -188,6 +188,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    QLCAddressHistoryModel *model = _sourceArr[indexPath.row];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,model.Hash]] options:@{} completionHandler:nil];
 }
 
 #pragma mark - UITableViewDataSource

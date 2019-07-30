@@ -15,6 +15,7 @@
 #import "RSAUtil.h"
 #import "ForgetPWViewController.h"
 #import "VerificationViewController.h"
+#import "UserUtil.h"
 
 @interface PersonalInfoViewController () <UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -30,8 +31,17 @@ NSString *person_title1 = @"Username";
 NSString *person_title2 = @"My Invitation Code";
 NSString *person_title3 = @"Email";
 NSString *person_title4 = @"Mobile";
-NSString *person_title5 = @"Reset Password";
-//NSString *person_title5 = @"Verification";
+//NSString *person_title5 = @"Reset Password";
+NSString *person_title5 = @"Verification";
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)addObserve {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfoNot:) name:User_UpdateInfo_Noti object:nil];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +55,7 @@ NSString *person_title5 = @"Reset Password";
     [super viewWillAppear:animated];
     
     [self configInit];
+    [UserUtil updateUserInfo];
 }
 
 #pragma mark - Operation
@@ -88,8 +99,18 @@ NSString *person_title5 = @"Reset Password";
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
     model.key = person_title5;
-    model.val = person_title5;
-//    model.val = @"Unverified";
+//    model.val = person_title5;
+    NSString *vStatusStr = @"";
+    if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+        vStatusStr = @"Unverified";
+    } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
+        vStatusStr = @"Under review";
+    } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
+        vStatusStr = @"Verified";
+    } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
+        vStatusStr = @"Not approved";
+    }
+    model.val = vStatusStr;
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = NO;
@@ -147,8 +168,8 @@ NSString *person_title5 = @"Reset Password";
     } else if ([model.key isEqualToString:person_title4]) {
         [self jumpToEditText:EditPhone];
     } else if ([model.key isEqualToString:person_title5]) {
-        [self jumpToForgetPW];
-//        [self jumpToVerification];
+//        [self jumpToForgetPW];
+        [self jumpToVerification];
     }
 }
 
@@ -217,7 +238,7 @@ NSString *person_title5 = @"Reset Password";
             //            NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],responseObject[@"head"]];
             NSString *head = responseObject[@"head"];
             userM.head = head;
-            [UserModel storeUser:userM];
+            [UserModel storeUser:userM useLogin:NO];
             
             [weakself configInit];
 //            [UserManage setHeadUrl:head];
@@ -265,6 +286,11 @@ NSString *person_title5 = @"Reset Password";
         [self uploadImg:resultImage];
     }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Noti
+- (void)updateUserInfoNot:(NSNotification *)noti {
+    [self configInit];
 }
 
 - (void)didReceiveMemoryWarning {

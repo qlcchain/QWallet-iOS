@@ -142,7 +142,7 @@
     NSDictionary *params = @{@"account":_emailTF.text?:@""};
     [RequestService requestWithUrl:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
+            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
             [weakself openCountdown:weakself.verifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];

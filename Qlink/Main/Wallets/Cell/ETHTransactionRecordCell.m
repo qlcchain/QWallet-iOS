@@ -17,7 +17,7 @@
 
 @interface ETHTransactionRecordCell ()
 
-@property (nonatomic, strong) NSString *tokenHash;
+@property (nonatomic, strong) NSString *strToCopy;
 
 @end
 
@@ -56,7 +56,7 @@
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_fail"];
     }
 
-    _tokenHash = model.Hash;
+    _strToCopy = model.Hash;
     NSString *addressText = model.Hash;
     if (addressText.length > 8) {
         addressText = [NSString stringWithFormat:@"%@...%@",[addressText substringToIndex:8],[addressText substringWithRange:NSMakeRange(addressText.length - 8, 8)]];
@@ -79,7 +79,7 @@
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_fail"];
     }
 
-    _tokenHash = model.transactionHash;
+    _strToCopy = model.transactionHash;
     NSString *addressText = model.transactionHash;
     if (addressText.length > 8) {
         addressText = [NSString stringWithFormat:@"%@...%@",[addressText substringToIndex:8],[addressText substringWithRange:NSMakeRange(addressText.length - 8, 8)]];
@@ -102,7 +102,7 @@
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_fail"];
     }
     
-    _tokenHash = model.txid;
+    _strToCopy = model.txid;
     NSString *addressText = model.txid;
     if (addressText.length > 8) {
         addressText = [NSString stringWithFormat:@"%@...%@",[addressText substringToIndex:8],[addressText substringWithRange:NSMakeRange(addressText.length - 8, 8)]];
@@ -125,7 +125,7 @@
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_fail"];
     }
     
-    _tokenHash = model.trx_id;
+    _strToCopy = model.trx_id;
     NSString *addressText = model.trx_id;
     if (addressText.length > 8) {
         addressText = [NSString stringWithFormat:@"%@...%@",[addressText substringToIndex:8],[addressText substringWithRange:NSMakeRange(addressText.length - 8, 8)]];
@@ -147,7 +147,7 @@
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_fail"];
     }
     
-    _tokenHash = model.Hash;
+    _strToCopy = model.address;
 //    NSString *addressText = model.Hash;
     NSString *addressText = model.address;
     if (addressText.length > 8) {
@@ -161,7 +161,7 @@
 
 - (IBAction)copyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = _tokenHash?:@"";
+    pasteboard.string = _strToCopy?:@"";
     [kAppD.window makeToastDisappearWithText:@"Copied"];
 }
 

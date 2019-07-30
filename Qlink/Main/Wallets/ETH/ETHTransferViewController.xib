@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -186,6 +187,9 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gng-Ye-c5v">
                                                     <rect key="frame" x="24" y="14.5" width="64" height="19.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="2qF-Hu-8gj"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -218,9 +222,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="x9G-Nq-1ZC" secondAttribute="trailing" constant="16" id="7GX-Sy-Cxl"/>
                                                 <constraint firstItem="3QA-UA-bkx" firstAttribute="centerY" secondItem="feB-eb-rYD" secondAttribute="centerY" id="87C-Fn-Ugf"/>
                                                 <constraint firstItem="Gng-Ye-c5v" firstAttribute="leading" secondItem="feB-eb-rYD" secondAttribute="leading" constant="24" id="8Rt-96-e9c"/>
-                                                <constraint firstItem="3QA-UA-bkx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gng-Ye-c5v" secondAttribute="trailing" id="ERG-fI-EgT"/>
                                                 <constraint firstAttribute="trailing" secondItem="Eep-Gd-1yq" secondAttribute="trailing" constant="33" id="L6S-B4-svl"/>
                                                 <constraint firstAttribute="trailing" secondItem="3QA-UA-bkx" secondAttribute="trailing" constant="15" id="MXy-GG-ThQ"/>
+                                                <constraint firstItem="Eep-Gd-1yq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gng-Ye-c5v" secondAttribute="trailing" id="WHD-dI-ISr"/>
                                                 <constraint firstItem="x9G-Nq-1ZC" firstAttribute="centerY" secondItem="feB-eb-rYD" secondAttribute="centerY" id="WmX-zg-4WR"/>
                                                 <constraint firstItem="Eep-Gd-1yq" firstAttribute="centerY" secondItem="feB-eb-rYD" secondAttribute="centerY" id="cq3-MM-Lgs"/>
                                                 <constraint firstAttribute="height" constant="48" id="mL6-7f-fqh"/>

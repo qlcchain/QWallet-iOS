@@ -120,7 +120,7 @@ NSString *title7 = @"Log out";
     if ([model.title isEqualToString:title1]) {
         [self jumpToChooseCurrency];
     } else if ([model.title isEqualToString:title3]) {
-        NSString *url = @"https://winq.net/disclaimer.html";
+        NSString *url = @"https://docs.google.com/document/d/1yTr1EDXmOclDuSt4o0RRUc0fVjJU3zPREK97C1RmYdI/edit?usp=sharing";
         [self jumpToWeb:url title:title3];
     } else if ([model.title isEqualToString:title7]) {
         [self logout];

@@ -89,7 +89,6 @@
         } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
             
         }];
-    
 }
 
 - (void)receiveAsset {
@@ -105,6 +104,9 @@
             // 成功
             [weakself.accountPendingArr removeObjectAtIndex:0];
             [weakself receiveAsset];
+            if (weakself.accountPendingArr.count <= 0) { // account pending结束
+                [[NSNotificationCenter defaultCenter] postNotificationName:QLC_AccountPending_Done_Noti object:nil];
+            }
         } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
             [kAppD.window hideToast];
             // 失败（下次打开app会重新进行操作，所以直接删除进行下一个）

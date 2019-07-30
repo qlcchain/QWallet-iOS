@@ -107,6 +107,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currencyChang:) name:Currency_Change_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEOSWallet:) name:Add_EOS_Wallet_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addQLCWallet:) name:Add_QLC_Wallet_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qlcAccountPendingDone:) name:QLC_AccountPending_Done_Noti object:nil];
     
 }
 
@@ -118,6 +119,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    [QLCWalletManage.shareInstance walletAddressIsValid:@"qlc_14ggfxiaxgtxwb1coy4izpb6huqew3omrzkf4y1i6xzc9kaehboz8bruxxaz"];
     
     [self addObserve];
     
@@ -628,6 +631,37 @@
     }
 }
 
+- (QLCTokenModel *)getQGASAsset {
+    __block QLCTokenModel *gasAsset = nil;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeQLC) {
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[QLCTokenModel class]]) {
+                QLCTokenModel *temp = obj;
+                if ([temp.tokenName isEqualToString:@"QGAS"]) {
+                    gasAsset = temp;
+                    *stop = YES;
+                }
+            }
+        }];
+    }
+    return gasAsset;
+}
+
+- (Token *)getUSDTAsset {
+    __block Token *usdtAsset = nil;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeETH) {
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            Token *temp = obj;
+            if ([temp.tokenInfo.symbol isEqualToString:@"USDT"]) {
+                usdtAsset = temp;
+                *stop = YES;
+            }
+        }];
+    }
+    return usdtAsset;
+}
 
 #pragma mark - Request
 - (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
@@ -1206,7 +1240,6 @@
 
 - (void)jumpToWalletsSwitch {
     WalletsSwitchViewController *vc = [[WalletsSwitchViewController alloc] init];
-//    QlinkNavViewController *nav = [[QlinkNavViewController alloc] initWithRootViewController:vc];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
 }
@@ -1429,6 +1462,10 @@
 
 - (void)currencyChang:(NSNotification *)noti {
     [self refreshTokenList];
+}
+
+- (void)qlcAccountPendingDone:(NSNotification *)noti {
+    [self pullToRefresh];
 }
 
 #pragma mark - Lazy

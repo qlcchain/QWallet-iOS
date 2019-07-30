@@ -170,7 +170,9 @@ public class TransactionMng {
         // is contract send block
         if (QLCConstants.BLOCK_TYPE_CONTRACTSEND == sendBlock.type && QLCConstants.LINNK_TYPE_AIRDORP == sendBlock.link) {
             // create reward block
-            try? RewardsMng.getReceiveRewardBlock(hashHex: sendBlockHash.toHexString(), successHandler: { (response) in
+            let hashHex = sendBlock.hash
+            let hashHex1 = sendBlockHash.toHexString()
+            try? RewardsMng.getReceiveRewardBlock(hashHex: hashHex, successHandler: { (response) in
                 if response != nil {
                     let receiveBlock:QLCStateBlock = response as! QLCStateBlock
                     successHandler(receiveBlock.toJSON())
@@ -248,13 +250,14 @@ public class TransactionMng {
                         // has token meta
                         var tokenMeta:QLCTokenMeta?
                         try? TokenMetaMng.getTokenMeta(tokenHash: sendBlock.token!, address: receiveAddress, successHandler: { (response) in
-                            if response != nil {
+//                            if response != nil {
                                 tokenMeta = (response as! QLCTokenMeta)
                                 var has = false
                                 if tokenMeta != nil {
                                     has = true
                                 }
                         
+                            if has == true {
                                 // previous block info
                                 var previousBlock : QLCStateBlock?
                                 try? LedgerMng.blocksInfo(blockHash: tokenMeta!.header!.hex2Bytes, successHandler: { (response) in
@@ -273,9 +276,15 @@ public class TransactionMng {
                                     print("getBlockInfoByHash = ",message ?? "")
                                     failureHandler(error, message)
                                 })
-                            } else {
-                                failureHandler(nil, nil)
+                            } else { // has == false
+                                // create receiver block
+                                TransactionMng.fillReceiveBlock(has: has, receiveAddress: receiveAddress, tokenMeta: nil, info: info!, previousBlock: nil, sendBlockHash: sendBlockHash, sendBlock: sendBlock, privateKeyB: privateKeyB, resultHandler: { (dic) in
+                                    successHandler(dic)
+                                });
                             }
+//                            } else {
+//                                failureHandler(nil, nil)
+//                            }
                         }, failureHandler: { (error, message) in
                             print("getTokenMeta = ",message ?? "")
                             if message == "account not found" { // 第一次接收

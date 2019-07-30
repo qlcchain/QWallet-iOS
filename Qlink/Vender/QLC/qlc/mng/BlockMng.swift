@@ -46,7 +46,8 @@ public class BlockMng {
         source.append(contentsOf: addressB)
 
         let balance:BigUInt = block.balance ?? BigUInt(0)
-        source.append(contentsOf: [UInt8](balance.serialize()))
+        let balanceB = [UInt8](balance.serialize())
+        source.append(contentsOf: balanceB)
 
         let vote:BigUInt = block.vote ?? BigUInt(0)
         source.append(contentsOf: [UInt8](vote.serialize()))
@@ -67,15 +68,32 @@ public class BlockMng {
         source.append(contentsOf: linkB)
 
         //TODO:未检验
+//        var sender = Data()
+//        if (block.sender != nil) {
+//            sender = Data(base64Encoded: block.sender!, options: Data.Base64DecodingOptions(rawValue: 0)) ?? Data()
+//        }
+//        let senderB = sender.bytes
         let senderB = (block.sender ?? "").bytes
         source.append(contentsOf: senderB)
 
         //TODO:未检验
+//        var receiver = Data()
+//        if (block.receiver != nil) {
+//            receiver = Data(base64Encoded: block.receiver!, options: Data.Base64DecodingOptions(rawValue: 0)) ?? Data()
+//        }
+//        let receiverB = receiver.bytes
         let receiverB = (block.receiver ?? "").bytes
         source.append(contentsOf: receiverB)
 
         let messageB = (block.message ?? "").hex2Bytes
         source.append(contentsOf: messageB)
+        
+        var data = Data()
+        if (block.data != nil) {
+            data = Data(base64Encoded: block.data!, options: Data.Base64DecodingOptions(rawValue: 0)) ?? Data()
+        }
+        let dataB = data.bytes
+        source.append(contentsOf: dataB)
 
         let timestamp = (block.timestamp ?? 0).toBytes_Big
         source.append(contentsOf: timestamp)

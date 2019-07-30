@@ -25,10 +25,9 @@ public class RewardsMng {
         }
         
         LedgerRpc.rewards_getReceiveRewardBlock(hashHex: hashHex!, successHandler: { (response) in
-            let dic : Dictionary<String, Any?> = response as! Dictionary<String, Any?>
-            if (dic["result"] != nil) {
-                let result:Dictionary<String, Any?> = dic["result"] as! Dictionary<String, Any?>
-                let block : QLCStateBlock = QLCStateBlock.deserialize(from: result as [String : Any])!
+            let dic : Dictionary<String, Any?>? = response as! Dictionary<String, Any?>?
+            if (dic != nil) {
+                let block : QLCStateBlock = QLCStateBlock.deserialize(from: dic! as [String : Any])!
                 successHandler(block)
             }
         }) { (error, message) in

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -94,6 +95,9 @@
                                                 <constraint firstAttribute="width" constant="44" id="AXh-Cw-xgp"/>
                                             </constraints>
                                             <state key="normal" image="neo_qrcode_black"/>
+                                            <connections>
+                                                <action selector="copyEncryptedKeyAction:" destination="-1" eventType="touchUpInside" id="ThU-pZ-MPz"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -140,6 +144,9 @@
                                                 <constraint firstAttribute="width" constant="44" id="q6v-F3-SxW"/>
                                             </constraints>
                                             <state key="normal" image="neo_qrcode_black"/>
+                                            <connections>
+                                                <action selector="copyPrivateKeyAction:" destination="-1" eventType="touchUpInside" id="l2h-Gf-nk6"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -270,8 +277,8 @@
     </objects>
     <resources>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="icon_the_selected" width="19" height="19"/>
-        <image name="icon_the_uncheck" width="19" height="19"/>
+        <image name="icon_the_selected" width="24" height="24"/>
+        <image name="icon_the_uncheck" width="24" height="24"/>
         <image name="neo_qrcode_black" width="14" height="14"/>
     </resources>
 </document>

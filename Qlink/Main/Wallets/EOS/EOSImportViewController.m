@@ -16,6 +16,7 @@
 #import "ReportUtil.h"
 #import "EOSWalletUtil.h"
 #import <eosFramework/EOS_Key_Encode.h>
+#import "WebViewController.h"
 
 @interface EOSImportViewController () {
     BOOL privatekeyAgree;
@@ -130,10 +131,22 @@
     }];
 }
 
+- (IBAction)termsAction:(id)sender {
+    [self jumpToTerms];
+}
+
+
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
     kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

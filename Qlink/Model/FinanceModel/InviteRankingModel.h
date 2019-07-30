@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSNumber *sequence; // = 29;
 @property (nonatomic, strong) NSNumber *totalInvite; // = 0;
 @property (nonatomic, strong) NSNumber *myRanking; // = 29;
+@property (nonatomic, strong) NSString *number; // = "";
 
 @end

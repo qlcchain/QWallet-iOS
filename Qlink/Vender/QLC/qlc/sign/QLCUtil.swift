@@ -139,7 +139,9 @@ public class QLCUtil: NSObject {
             }
             return false
         }
-        let shortBytes = decodeAddressCharacters(data: String(parts[1])).hex2Bytes
+//        efbeb3ba0457574f4ad578367192da3b651d1c6de6c0a4b912c33b75fb38516136c20e9cd3
+//        9ce6f608ebb5de240aaf850fd9247eeece06b3c7e4d17810277ea3c90c7a6bf3271bef51f
+        let shortBytes = decodeAddressCharactersOf74(data: String(parts[1])).hex2Bytes
         var bytes = Bytes(count: 37) // total:37
         // Restore leading null bytes
         let range = Range<Int>(NSMakeRange(37 - shortBytes.count, shortBytes.count))!
@@ -261,12 +263,10 @@ public class QLCUtil: NSObject {
         }
         
     }
-    
 
     private static func decodeAddressCharacters(data: String) -> String {
         var muStr = String()
         for (i,_) in data.enumerated() {
-//            print(item)
             var dataMu = String(data)
             let dataSub:String = dataMu.slice(from: i, to: i+1)
             let index:Int = addressCodeArray.positionOfSubstring(dataSub)
@@ -274,8 +274,30 @@ public class QLCUtil: NSObject {
             let binarySub = binaryStr.slice(from: 1, to: binaryStr.count)
             muStr.append(binarySub)
         }
-        let result = String(BigInt(muStr, radix: 2)!, radix: 16)
-//        print(result)
+        var result = String(BigInt(muStr, radix: 2)!, radix: 16)
+        
+        return result
+    }
+    
+    private static func decodeAddressCharactersOf74(data: String) -> String {
+        var muStr = String()
+        for (i,_) in data.enumerated() {
+            var dataMu = String(data)
+            let dataSub:String = dataMu.slice(from: i, to: i+1)
+            let index:Int = addressCodeArray.positionOfSubstring(dataSub)
+            var binaryStr = String((0x20 | index), radix: 2)
+            let binarySub = binaryStr.slice(from: 1, to: binaryStr.count)
+            muStr.append(binarySub)
+        }
+        var result = String(BigInt(muStr, radix: 2)!, radix: 16)
+        if result.count < 74 { // 不足74位前面加0 （自己理解）
+            var temp = String()
+            for _ in 0..<74-result.count {
+                temp.append("0")
+            }
+            temp.append(result)
+            result = temp
+        }
         
         return result
     }

@@ -38,7 +38,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tu3-on-UdZ">
                                             <rect key="frame" x="24" y="100" width="327" height="100"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywJ-qW-Oej">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywJ-qW-Oej">
                                                     <rect key="frame" x="160" y="68" width="155" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="155" id="1IP-Wq-ZHz"/>
@@ -71,7 +71,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmR-Lg-Qup">
                                             <rect key="frame" x="24" y="208" width="327" height="100"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-Hg-aN1">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-Hg-aN1">
                                                     <rect key="frame" x="160" y="68" width="155" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="hI9-2j-u5y"/>
@@ -130,6 +130,9 @@
                                                     <state key="normal" title="Terms of Service and Privacy Policy">
                                                         <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="termsAction:" destination="-1" eventType="touchUpInside" id="6TG-Rm-GN5"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

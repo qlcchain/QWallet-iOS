@@ -141,6 +141,18 @@
     return resultArr;
 }
 
++ (NSArray *)getWalletModelWithType:(WalletType)type {
+    NSMutableArray *resultArr = [NSMutableArray array];
+    NSArray *localArr = [HWUserdefault getObjectWithKey:Local_All_Wallet];
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WalletCommonModel *model = [WalletCommonModel getObjectWithKeyValues:obj];
+        if (type == model.walletType) {
+            [resultArr addObject:model];
+        }
+    }];
+    return resultArr;
+}
+
 + (void)setCurrentSelectWallet:(WalletCommonModel *)model {
     NSMutableArray *allArr = [NSMutableArray array];
     NSArray *localArr = [HWUserdefault getObjectWithKey:Local_All_Wallet];

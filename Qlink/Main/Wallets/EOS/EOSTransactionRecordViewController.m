@@ -141,6 +141,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    EOSTraceModel *model = _sourceArr[indexPath.row];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",EOS_Transaction_Url,model.trx_id]] options:@{} completionHandler:nil];
 }
 
 #pragma mark - UITableViewDataSource

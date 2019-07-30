@@ -166,6 +166,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if ([_inputToken.tokenInfo.symbol isEqualToString:ETH_SYMBOL]) {
+        ETHAddressTransactionsModel *model = _sourceArr[indexPath.row];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ETH_Transaction_Url,model.Hash]] options:@{} completionHandler:nil];
+    } else {
+        Operation *model = _sourceArr[indexPath.row];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ETH_Transaction_Url,model.transactionHash]] options:@{} completionHandler:nil];
+    }
 }
 
 #pragma mark - UITableViewDataSource

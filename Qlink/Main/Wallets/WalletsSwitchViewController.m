@@ -58,7 +58,9 @@
 
 - (void)refreshData {
     [_sourceArr removeAllObjects];
-    [_sourceArr addObjectsFromArray:[WalletCommonModel getAllWalletModel]];
+    NSArray *arr = [WalletCommonModel getAllWalletModel];
+    [_sourceArr addObjectsFromArray:arr];
+    
 }
 
 - (void)checkEOS_Share_Register_Account_Is_Active { // 检查本地 需要注册的EOS账号是否激活了
@@ -130,7 +132,8 @@
     WalletsSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:WalletsSwitchCellReuse];
     
     WalletCommonModel *commonM = _sourceArr[indexPath.row];
-    [cell configCellWithModel:commonM];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    [cell configCellWithModel:commonM selectM:currentWalletM];
     
     return cell;
 }

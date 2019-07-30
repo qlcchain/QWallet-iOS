@@ -10,6 +10,8 @@
 
 @interface QLCWalletManage : NSObject
 
+@property (nonatomic, strong) NSString *qlcMainAddress;
+
 + (instancetype)shareInstance;
 - (BOOL)createWallet;
 - (BOOL)importWalletWithSeed:(NSString *)seed;

@@ -20,6 +20,7 @@
 @property (nonatomic , assign) BOOL checkPassLock;
 @property (nonatomic) BOOL needFingerprintVerification;
 //@property (nonatomic) BOOL openShowPresentLogin;
+@property (nonatomic) BOOL pushToOrderList;
 @property (nonatomic, strong) QlinkTabbarViewController *tabbarC;
 
 - (void)addLaunchAnimation;

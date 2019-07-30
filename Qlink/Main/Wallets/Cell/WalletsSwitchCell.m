@@ -31,32 +31,31 @@
 //    _selectImg.image = nil;
 }
 
-- (void)configCellWithModel:(WalletCommonModel *)model {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+- (void)configCellWithModel:(WalletCommonModel *)model selectM:(WalletCommonModel *)selectM {
     _selectImg.hidden = YES;
+    WalletCommonModel *compareWalletM = selectM;
     if (model.walletType == WalletTypeETH) {
-//        _icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_wallet",model.symbol.lowercaseString]];
         _icon.image = [UIImage imageNamed:@"eth_wallet"];
         _addressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-        if (currentWalletM && [currentWalletM.address isEqualToString:model.address]) {
+        if (compareWalletM && [compareWalletM.address isEqualToString:model.address]) {
             _selectImg.hidden = NO;
         }
     } else if (model.walletType == WalletTypeNEO) {
         _icon.image = [UIImage imageNamed:@"neo_wallet"];
         _addressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-        if (currentWalletM && [currentWalletM.address isEqualToString:model.address]) {
+        if (compareWalletM && [compareWalletM.address isEqualToString:model.address]) {
             _selectImg.hidden = NO;
         }
     } else if (model.walletType == WalletTypeEOS) {
         _icon.image = [UIImage imageNamed:@"eos_wallet"];
         _addressLab.text = model.account_name;
-        if (currentWalletM && [currentWalletM.account_name isEqualToString:model.account_name]) {
+        if (compareWalletM && [compareWalletM.account_name isEqualToString:model.account_name]) {
             _selectImg.hidden = NO;
         }
     } else if (model.walletType == WalletTypeQLC) {
         _icon.image = [UIImage imageNamed:@"qlc_wallet"];
         _addressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-        if (currentWalletM && [currentWalletM.address isEqualToString:model.address]) {
+        if (compareWalletM && [compareWalletM.address isEqualToString:model.address]) {
             _selectImg.hidden = NO;
         }
     }

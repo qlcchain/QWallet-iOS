@@ -203,7 +203,7 @@
             userM.phone = tempM.phone;
             userM.nickname = tempM.nickname;
             userM.isLogin = @(YES);
-            [UserModel storeUser:userM];
+            [UserModel storeUser:userM useLogin:NO];
             [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
@@ -222,7 +222,7 @@
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
     [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
+            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];
@@ -246,7 +246,7 @@
 //            model.md5PW = md5PW;
 //            model.rsaPublicKey = rsaPublicKey;
             model.isLogin = @(NO);
-            [UserModel storeUser:model];
+            [UserModel storeUser:model useLogin:NO];
             
             [weakself requestSign_in];
             

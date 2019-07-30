@@ -157,6 +157,21 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (BOOL)haveETHAssetNum {
+    __block BOOL haveEthAssetNum = NO;
+    [_inputSourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:@"ETH"]) {
+            NSString *ethNum = [model getTokenNum];
+            if ([ethNum doubleValue] > 0) {
+                haveEthAssetNum = YES;
+            }
+            *stop = YES;
+        }
+    }];
+    return haveEthAssetNum;
+}
+
 #pragma mark - Request
 - (void)requestTokenPrice {
     kWeakSelf(self);
@@ -218,6 +233,11 @@
     BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text];
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is invalidate"];
+        return;
+    }
+    
+    if (![self haveETHAssetNum]) {
+        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address have not ETH banlance"];
         return;
     }
     

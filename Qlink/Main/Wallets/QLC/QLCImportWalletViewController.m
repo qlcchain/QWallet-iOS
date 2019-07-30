@@ -14,6 +14,7 @@
 #import "ReportUtil.h"
 #import "QLCWalletInfo.h"
 #import "QLCWalletManage.h"
+#import "WebViewController.h"
 
 typedef enum : NSUInteger {
     QLCImportTypeMnemonic,
@@ -221,10 +222,25 @@ typedef enum : NSUInteger {
     }
 }
 
+- (IBAction)termsMnemonicAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsSeedAction:(id)sender {
+    [self jumpToTerms];
+}
+
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
     kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

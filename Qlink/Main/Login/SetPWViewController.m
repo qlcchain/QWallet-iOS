@@ -103,7 +103,7 @@
                 userM = [UserModel getObjectWithKeyValues:responseObject];
             }
             userM.md5PW = md5PW;
-            [UserModel storeUser:userM];
+            [UserModel storeUser:userM useLogin:NO];
             
             [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backTwice];

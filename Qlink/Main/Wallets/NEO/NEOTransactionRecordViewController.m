@@ -151,6 +151,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NEOAddressHistoryModel *model = _sourceArr[indexPath.row];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",NEO_Transaction_Url,model.txid]] options:@{} completionHandler:nil];
 }
 
 #pragma mark - UITableViewDataSource

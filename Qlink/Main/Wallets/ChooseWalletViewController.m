@@ -22,6 +22,7 @@
 #import "QLCWalletInfo.h"
 #import "QLCImportWalletViewController.h"
 #import "QLCCreateWalletViewController.h"
+#import "WebViewController.h"
 
 @interface ChooseWalletViewController () {
     BOOL isAgree;
@@ -204,7 +205,7 @@
 }
 
 - (IBAction)termAction:(id)sender {
-    
+    [self jumpToTerms];
 }
 
 - (IBAction)ethAction:(UIButton *)sender {
@@ -283,6 +284,13 @@
 - (void)jumpToQLCImport {
     QLCImportWalletViewController *vc = [[QLCImportWalletViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

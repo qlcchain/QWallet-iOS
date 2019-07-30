@@ -120,13 +120,13 @@
     _maskView = [HMScannerMaskView maskViewWithFrame:_parentView.bounds cropRect:_scannerBorder.frame];
     [_parentView insertSubview:_maskView atIndex:0];
     
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"bg_gray_button"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(clickBack:) forControlEvents:UIControlEventTouchUpInside];
-    backBtn.frame = CGRectMake((SCREEN_WIDTH-140)/2,CGRectGetMaxY(_scannerBorder.frame)+20, 140, 44);
-    [backBtn setTitle:NSStringLocalizable(@"cancel") forState:UIControlStateNormal];
-    backBtn.titleLabel.font = [UIFont fontWithName:@"VAGRoundedBT-Regular" size:14];
-    [_parentView addSubview:backBtn];
+//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [backBtn setBackgroundImage:[UIImage imageNamed:@"bg_gray_button"] forState:UIControlStateNormal];
+//    [backBtn addTarget:self action:@selector(clickBack:) forControlEvents:UIControlEventTouchUpInside];
+//    backBtn.frame = CGRectMake((SCREEN_WIDTH-140)/2,CGRectGetMaxY(_scannerBorder.frame)+20, 140, 44);
+//    [backBtn setTitle:NSStringLocalizable(@"cancel") forState:UIControlStateNormal];
+//    backBtn.titleLabel.font = [UIFont fontWithName:@"VAGRoundedBT-Regular" size:14];
+//    [_parentView addSubview:backBtn];
 }
 
 /**

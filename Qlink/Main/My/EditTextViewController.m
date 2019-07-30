@@ -199,7 +199,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.nickname = nickname;
-            [UserModel storeUser:userM];
+            [UserModel storeUser:userM useLogin:NO];
             
             [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];
@@ -219,7 +219,7 @@
     NSDictionary *params = @{@"account":account,@"email":email};
     [RequestService requestWithUrl:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
+            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
@@ -246,7 +246,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.email = email;
-            [UserModel storeUser:userM];
+            [UserModel storeUser:userM useLogin:NO];
             
             [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];
@@ -266,7 +266,7 @@
     NSDictionary *params = @{@"account":account,@"phone":phone};
     [RequestService requestWithUrl:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Sent Code Success."];
+            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
@@ -293,7 +293,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.phone = phone;
-            [UserModel storeUser:userM];
+            [UserModel storeUser:userM useLogin:NO];
             
             [kAppD.window makeToastDisappearWithText:@"Success."];
             [weakself backAction:nil];

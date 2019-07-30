@@ -11,16 +11,27 @@
 #import "NSDate+Category.h"
 #import "RSAUtil.h"
 #import "UIImage+Resize.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UserUtil.h"
+#import "TipOKView.h"
+#import "PhotoPickerUtil.h"
 
 typedef enum : NSUInteger {
     VerificationPicType1,
     VerificationPicType2,
 } VerificationPicType;
 
-@interface VerificationViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface VerificationViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *pic1;
+@property (weak, nonatomic) IBOutlet UIButton *picBtn1;
 @property (weak, nonatomic) IBOutlet UIImageView *pic2;
+@property (weak, nonatomic) IBOutlet UIButton *picBtn2;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tipLab;
+
+@property (nonatomic, strong) UIImage *selectImage1;
+@property (nonatomic, strong) UIImage *selectImage2;
 @property (nonatomic) VerificationPicType picType;
 
 @end
@@ -31,10 +42,65 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self configInit];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+//    [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 #pragma mark - Operation
+- (void)configInit {
+    _submitBtn.layer.cornerRadius = 4.0;
+    _submitBtn.layer.masksToBounds = YES;
+    
+    [self refreshPhotoStatus];
+}
+
+- (void)refreshPhotoStatus {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (userM) {
+        if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+            _tipLab.text = @"Please upload the required information of your PASSPORT.";
+        } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
+            _tipLab.text = @"Status: Under review.";
+        } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
+            _tipLab.text = @"Status: Verified.";
+        } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
+            _tipLab.text = @"Status: Not approved.";
+            [self showNotApproved];
+        }
+        
+        if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+            _pic1.image = [UIImage imageNamed:@"icon_passport_back"];
+            _pic2.image = [UIImage imageNamed:@"icon_hand_passport_back"];
+        } else {
+            kWeakSelf(self);
+            NSURL *url1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.facePhoto]];
+            [_pic1 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"icon_passport_back"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                weakself.selectImage1 = image;
+            }];
+            
+            NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.holdingPhoto]];
+            [_pic2 sd_setImageWithURL:url2 placeholderImage:[UIImage imageNamed:@"icon_hand_passport_back"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                weakself.selectImage2 = image;
+            }];
+        }
+        
+        if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"] || [userM.vStatus isEqualToString:@"UPLOADED"]) {
+            _picBtn1.userInteractionEnabled = NO;
+            _picBtn2.userInteractionEnabled = NO;
+            _submitBtn.hidden = YES;
+        } else {
+            _picBtn1.userInteractionEnabled = YES;
+            _picBtn2.userInteractionEnabled = YES;
+            _submitBtn.hidden = NO;
+        }
+    }
+}
+
 - (void)showPhotoAlert {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     kWeakSelf(self)
@@ -52,6 +118,33 @@ typedef enum : NSUInteger {
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (void)selectImage:(UIImagePickerControllerSourceType)type {
+    kWeakSelf(self);
+    [[PhotoPickerUtil getShareObject] selectSingleImage:type block:^(UIImage * _Nonnull image) {
+        if (weakself.picType == VerificationPicType1) {
+            weakself.selectImage1 = image;
+            weakself.pic1.image = weakself.selectImage1;
+        } else if (_picType == VerificationPicType2) {
+            weakself.selectImage2 = image;
+            weakself.pic2.image = weakself.selectImage2;
+        }
+    }];
+    
+}
+
+- (void)showTip {
+    TipOKView *view = [TipOKView getInstance];
+    [view showWithTitle:@"Verification is required to comply with KYC regulations and to protect your account from unauthorized access. It will be usually completed within 2 hours. Please contact qlc.chain@gmail.com if any questions. "];
+}
+
+- (void)showNotApproved {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Not approved" message:@"Please resubmit the required information. Photos submitted before were not eligible." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertVC addAction:action1];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
@@ -59,7 +152,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)questionAction:(id)sender {
-    
+    [self showTip];
 }
 
 - (IBAction)pic1Action:(id)sender {
@@ -73,7 +166,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)submitAction:(id)sender {
-    if (!_pic1.image || !_pic2.image) {
+    if (!_selectImage1 || !_selectImage2) {
         [kAppD.window makeToastDisappearWithText:@"Please upload the required information of your PASSPORT."];
         return;
     }
@@ -94,12 +187,12 @@ typedef enum : NSUInteger {
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
-    UIImage *img1 = _pic1.image;
-    UIImage *img2 = _pic2.image;
+    UIImage *img1 = _selectImage1;
+    UIImage *img2 = _selectImage2;
     [kAppD.window makeToastInView:self.view text:nil];
     [RequestService postImage:upload_id_card_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName1 = [NSString stringWithFormat:@"%llu",[NSDate getMillisecondTimestampFromDate:[NSDate date]]];
-        NSData *data1 = [img1 compressJPGImage:img1 toMaxFileSize:UploadImage_Size];
+        NSData *data1 = [img1 compressJPGImage:img1 toMaxFileSize:Upload_ID_Image_Size];
         NSString *name1 = [NSString stringWithFormat:@"%@.jpg", fileName1];
         [formData appendPartWithFileData:data1 name:@"facePhoto" fileName:name1 mimeType:@"image/jpeg"];
         
@@ -110,7 +203,13 @@ typedef enum : NSUInteger {
     } success:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Upload Success."];
+            [kAppD.window makeToastDisappearWithText:@"Upload Success, Wait for Verify"];
+            userM.vStatus = @"UPLOADED";
+            userM.facePhoto = responseObject[@"facePhoto"];
+            userM.holdingPhoto = responseObject[@"holdingPhoto"];
+            [UserModel storeUser:userM useLogin:NO];
+            
+            [UserUtil updateUserInfo];
             [weakself backAction:nil];
         }
     } failure:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -118,47 +217,7 @@ typedef enum : NSUInteger {
     }];
 }
 
-//调用系统相册
-- (void)selectImage:(UIImagePickerControllerSourceType)type {
-    //调用系统相册的类
-    UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
-    //    更改titieview的字体颜色
-    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
-    attrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
-    [pickerController.navigationBar setTitleTextAttributes:attrs];
-    pickerController.navigationBar.translucent = NO;
-    //    pickerController.navigationBar.barTintColor = MAIN_BLUE_COLOR;
-    pickerController.navigationBar.theme_barTintColor = globalBackgroundColorPicker;
-    //设置选取的照片是否可编辑
-    pickerController.allowsEditing = YES;
-    //设置相册呈现的样式
-    pickerController.sourceType = type; //UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
-    //照片的选取样式还有以下两种
-    // UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册
-    //UIImagePickerControllerSourceTypeCamera//调取摄像头
-    //选择完成图片或者点击取消按钮都是通过代理来操作我们所需要的逻辑过程
-    pickerController.delegate = self;
-    //使用模态呈现相册
-    //[self showDetailViewController:pickerController sender:nil];
-    [self.navigationController presentViewController:pickerController animated:YES completion:nil];
-    
-}
 
-#pragma UIImagePickerController delegate
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    //    UIImagePickerControllerEditedImage//编辑过的图片
-    //    UIImagePickerControllerOriginalImage//原图
-    UIImage *resultImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    if (resultImage) {
-        resultImage = [resultImage resizeImage:resultImage];
-        if (_picType == VerificationPicType1) {
-            _pic1.image = resultImage;
-        } else if (_picType == VerificationPicType2) {
-            _pic2.image = resultImage;
-        }
-    }
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
 
 
 @end

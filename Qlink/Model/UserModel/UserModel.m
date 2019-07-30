@@ -42,7 +42,7 @@
     return p2pid?:@"";
 }
 
-+ (void)storeUser:(UserModel *)model {
++ (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin {
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     NSMutableArray *muArr = [NSMutableArray array];
     if (!data) {
@@ -54,11 +54,20 @@
         __block NSInteger existIndex = 0;
         [muArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if ([tempM.ID isEqualToString:model.ID]) {
-                isExist = YES;
-                existIndex = idx;
-                *stop = YES;
+            if (useLogin) { // 根据登录用户
+                if ([tempM.isLogin boolValue]) {
+                    isExist = YES;
+                    existIndex = idx;
+                    *stop = YES;
+                }
+            } else {
+                if ([tempM.ID isEqualToString:model.ID]) {
+                    isExist = YES;
+                    existIndex = idx;
+                    *stop = YES;
+                }
             }
+            
         }];
         if (!isExist) {
             [muArr addObject:model];
@@ -144,7 +153,7 @@
         }];
         if (model) {
             model.isLogin = @(NO);
-            [UserModel storeUser:model];
+            [UserModel storeUser:model useLogin:NO];
         }
     }
 }
@@ -199,6 +208,20 @@
 
 + (NSString *)getLastLoginAccount {
     return [HWUserdefault getObjectWithKey:UserModel_LastLoginAccount]?:@"";
+}
+
++ (void)deleteOneAccount {
+    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+    NSMutableArray *muArr = [NSMutableArray array];
+    if (data) {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [muArr addObjectsFromArray:arr];
+
+        [muArr removeObjectAtIndex:0];
+
+        NSData *archiverData = [NSKeyedArchiver archivedDataWithRootObject:muArr];
+        [HWUserdefault insertObj:archiverData withkey:UserModel_Local];
+    }
 }
 
 @end

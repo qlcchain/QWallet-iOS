@@ -74,7 +74,8 @@ target "Qlink" do
     pod 'AsyncSwift'
     pod 'Appirater'
     pod 'HandyJSON'
-    
+#    pod 'NinaPagerView'
+
     # qlc_sign
 #    pod 'TrezorCryptoEd25519WithBlake2b'
 

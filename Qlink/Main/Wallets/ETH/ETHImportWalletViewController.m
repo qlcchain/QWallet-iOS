@@ -17,6 +17,7 @@
 #import "ReportUtil.h"
 #import <TrustCore/Crypto.h>
 #import "NSString+HexStr.h"
+#import "WebViewController.h"
 
 typedef enum : NSUInteger {
     ETHImportTypeMnemonic,
@@ -406,10 +407,33 @@ typedef enum : NSUInteger {
     }];
 }
 
+- (IBAction)termsMnemonicAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsKeystoreAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsPrivateAction:(id)sender {
+    [self jumpToTerms];
+}
+
+- (IBAction)termsWatchAction:(id)sender {
+    [self jumpToTerms];
+}
+
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
     kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+}
+
+- (void)jumpToTerms {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = TermsOfServiceAndPrivatePolicy_Url;
+    vc.inputTitle = TermsOfTitle;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

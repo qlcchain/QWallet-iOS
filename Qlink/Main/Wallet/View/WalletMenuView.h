@@ -13,9 +13,9 @@ typedef enum : NSUInteger {
     SendFunds,
     ViewHistory,
     BuyQlc,
-} WalletType;
+} WalletMenuType;
 
-typedef void(^WalletMenuBlock)(WalletType type);
+typedef void(^WalletMenuBlock)(WalletMenuType type);
 
 @interface WalletMenuView : UIView
 

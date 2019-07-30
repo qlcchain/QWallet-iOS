@@ -65,8 +65,9 @@ NSString *my_title4 = @"Settings";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSArray *titleArr = @[my_title0,my_title1,my_title2,my_title3,my_title4];
-    NSArray *iconArr = @[@"icon_my_wallet",@"icon_my_share",@"icon_my_community",@"icon_my_contact",@"icon_my_settings"];
+    //@"icon_my_contact"
+    NSArray *titleArr = @[my_title0,my_title1,my_title2,my_title4];
+    NSArray *iconArr = @[@"icon_my_wallet",@"icon_my_share",@"icon_my_community",@"icon_my_settings"];
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         MyShowModel *model = [MyShowModel new];
@@ -82,7 +83,7 @@ NSString *my_title4 = @"Settings";
         UserModel *userM = [UserModel fetchUserOfLogin];
         [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.head]] placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
-        _userNameLab.text = [userM.nickname isEmptyString]?userM.ID:userM.nickname;
+        _userNameLab.text = [userM.nickname isEmptyString]?userM.account:userM.nickname;
     } else {
         _userIcon.image = User_DefaultImage;
         _userNameLab.text = @"Log In/Sign Up";
