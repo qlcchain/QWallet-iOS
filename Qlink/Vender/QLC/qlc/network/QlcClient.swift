@@ -11,11 +11,9 @@ import APIKit
 import JSONRPCKit
 
 //public let qlc_seed:String = "https://rpc.qlcchain.online" // 测试
-public let qlc_seed:String = "http://wrpc.qlcchain.org:9735" // 生产
-//public let qlc_seed:String = "http://47.103.40.20:19735" // 测试
-//public let qlc_seed:String = "http://192.168.1.122:19735" // 测试
-//public let qlc_seed:String = "ws://47.103.40.20:19736"
-//public let qlc_seed:String = "ws://47.112.112.138:19736"
+//public let qlc_seed:String = "http://wrpc.qlcchain.org:9735" // 生产
+public let qlc_seed:String = "http://47.103.40.20:19735" // 测试
+//public let qlc_seed:String = "http://178.63.50.78:9735" // 欧洲生产
 
 //public typealias JSONDictionary_qlc = [String: Any]
 

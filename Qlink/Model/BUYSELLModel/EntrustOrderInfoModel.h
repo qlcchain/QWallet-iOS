@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *type;// = BUY;
 @property (nonatomic, strong) NSString *unitPrice;// = "0.001";
 @property (nonatomic, strong) NSString *usdtAddress;// = "";
+@property (nonatomic, strong) NSString *number;
+@property (nonatomic, strong) NSString *userId;
 
 @end
 

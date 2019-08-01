@@ -10,6 +10,8 @@
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
 #import "SGQRCodeObtain.h"
+#import "PayUsdtViewController.h"
+#import "TradeOrderInfoModel.h"
 
 @interface PayReceiveAddressViewController ()
 
@@ -55,11 +57,11 @@
     NSString *topTipStr = @"";
     if (_inputAddressType == PayReceiveAddressTypeUSDT) {
         _titleLab.text = @"USDT Receivable Address";
-        gasStr = [NSString stringWithFormat:@"%@ USDT",_inputAmount];
+        gasStr = [NSString stringWithFormat:@"%@ USDT",_tradeM.usdtAmount?:@""];
         topTipStr = [NSString stringWithFormat:@"Please send %@ to the ERC-20 address as below to place your order.",gasStr];
     } else if (_inputAddressType == PayReceiveAddressTypeQGAS) {
         _titleLab.text = @"QGAS Receivable Address";
-        gasStr = [NSString stringWithFormat:@"%@ QGAS",_inputAmount];
+        gasStr = [NSString stringWithFormat:@"%@ QGAS",_tradeM.qgasAmount?:@""];
         topTipStr = [NSString stringWithFormat:@"Please send %@ to the QLC Chain address as below to place your order.",gasStr];
     }
     NSMutableAttributedString *topTipAtt = [[NSMutableAttributedString alloc] initWithString:topTipStr];
@@ -68,10 +70,10 @@
     [topTipAtt addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, topTipStr.length)];
     _topTipLab.attributedText = topTipAtt;
     
-    _addressLab.text = _inputAddress?:@"";
+    _addressLab.text = _tradeM.usdtToAddress?:@"";
     
     UIImage *img = _inputAddressType == PayReceiveAddressTypeUSDT?[UIImage imageNamed:@"eth_usdt"]:[UIImage imageNamed:@"qlc_qgas"];
-    _qrcodeImgV.image = [SGQRCodeObtain generateQRCodeWithData:_inputAddress?:@"" size:_qrcodeImgV.width logoImage:img ratio:0.2 logoImageCornerRadius:0 logoImageBorderWidth:0 logoImageBorderColor:[UIColor clearColor]];
+    _qrcodeImgV.image = [SGQRCodeObtain generateQRCodeWithData:_tradeM.usdtToAddress?:@"" size:_qrcodeImgV.width logoImage:img ratio:0.2 logoImageCornerRadius:0 logoImageBorderWidth:0 logoImageBorderColor:[UIColor clearColor]];
 }
 
 - (void)showSubmitSuccess {
@@ -111,13 +113,24 @@
 }
 
 - (IBAction)confirmAction:(id)sender {
-    if (_backToRoot) {
-//        [self showSubmitSuccess];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    } else {
-        [self backAction:nil];
-    }
+//    if (_backToRoot) {
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    } else {
+//        [self backAction:nil];
+//    }
+//    return;
+    [self jumpToPayUsdt];
 }
 
+#pragma mark - Transition
+- (void)jumpToPayUsdt {
+    PayUsdtViewController *vc = [PayUsdtViewController new];
+    vc.transferToRoot = _backToRoot;
+    vc.transferToTradeDetail = _transferToTradeDetail;
+    vc.sendUsdtAmount = _tradeM.usdtAmount?:@"";
+    vc.sendToAddress = _tradeM.usdtToAddress?:@"";
+    vc.sendMemo = _tradeM.number?:@"";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

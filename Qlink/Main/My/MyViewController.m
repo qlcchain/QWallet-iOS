@@ -83,7 +83,9 @@ NSString *my_title4 = @"Settings";
         UserModel *userM = [UserModel fetchUserOfLogin];
         [_userIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],userM.head]] placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         }];
-        _userNameLab.text = [userM.nickname isEmptyString]?userM.account:userM.nickname;
+        NSString *account3 = [NSString stringWithFormat:@"%@...",[userM.account substringWithRange:NSMakeRange(0, 3)]];
+        _userNameLab.text = [userM.nickname isEmptyString]?account3:userM.nickname;
+//        _userNameLab.text = [userM.nickname isEmptyString]?userM.account:userM.nickname;
     } else {
         _userIcon.image = User_DefaultImage;
         _userNameLab.text = @"Log In/Sign Up";

@@ -442,6 +442,8 @@
 		585D1F09225EE38D00468C4A /* PersonalInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585D1F07225EE38D00468C4A /* PersonalInfoCell.xib */; };
 		585DD83D229CE0E7007944E9 /* QLCTransferConfirmView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585DD83A229CE0E6007944E9 /* QLCTransferConfirmView.xib */; };
 		585DD83E229CE0E7007944E9 /* QLCTransferConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 585DD83B229CE0E6007944E9 /* QLCTransferConfirmView.m */; };
+		585E13AB22F1842A0086488E /* PayUsdtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585E13A922F1842A0086488E /* PayUsdtViewController.m */; };
+		585E13AC22F1842A0086488E /* PayUsdtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 585E13AA22F1842A0086488E /* PayUsdtViewController.xib */; };
 		5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */; };
 		5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860AC9F20CFB42000EEB6CE /* WebViewController.xib */; };
 		5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ACA620CFB42E00EEB6CE /* MyAssetsViewController.xib */; };
@@ -1550,6 +1552,9 @@
 		585DD83A229CE0E6007944E9 /* QLCTransferConfirmView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QLCTransferConfirmView.xib; sourceTree = "<group>"; };
 		585DD83B229CE0E6007944E9 /* QLCTransferConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCTransferConfirmView.m; sourceTree = "<group>"; };
 		585DD83C229CE0E6007944E9 /* QLCTransferConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCTransferConfirmView.h; sourceTree = "<group>"; };
+		585E13A822F184290086488E /* PayUsdtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayUsdtViewController.h; sourceTree = "<group>"; };
+		585E13A922F1842A0086488E /* PayUsdtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayUsdtViewController.m; sourceTree = "<group>"; };
+		585E13AA22F1842A0086488E /* PayUsdtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayUsdtViewController.xib; sourceTree = "<group>"; };
 		5860AC7420CFB33200EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		5860AC9E20CFB42000EEB6CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WebViewController.xib; sourceTree = "<group>"; };
 		5860ACA120CFB42300EEB6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WebViewController.strings; sourceTree = "<group>"; };
@@ -4789,6 +4794,9 @@
 			children = (
 				58245BCA22DF1B490093E747 /* View */,
 				589E59C522D4340D000338B7 /* Cell */,
+				585E13A822F184290086488E /* PayUsdtViewController.h */,
+				585E13A922F1842A0086488E /* PayUsdtViewController.m */,
+				585E13AA22F1842A0086488E /* PayUsdtViewController.xib */,
 				5825556522EECBD300F0B9F0 /* WalletSelectViewController.h */,
 				5825556622EECBD300F0B9F0 /* WalletSelectViewController.m */,
 				5825556422EECBD200F0B9F0 /* WalletSelectViewController.xib */,
@@ -5281,6 +5289,7 @@
 				58FB8D912265B6C10075698E /* FinanceHistoryCell.xib in Resources */,
 				581AF7AB21B6646E001A37E1 /* EOSTransactionRecordViewController.xib in Resources */,
 				5855EB8E22758E9A00243703 /* InviteFriendNowViewController.xib in Resources */,
+				585E13AC22F1842A0086488E /* PayUsdtViewController.xib in Resources */,
 				5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */,
 				580D91B42063AE5300B12506 /* Roboto-LightItalic.ttf in Resources */,
 				581D511C217981E50064F60C /* SettingsViewController.xib in Resources */,
@@ -5864,6 +5873,7 @@
 				580D916120625A4400B12506 /* UITextView+Select.m in Sources */,
 				5812DDAC20A1A7890043A8A8 /* ZXChatFaceMenuView.m in Sources */,
 				581D32D0219C158B001F88C3 /* ValueOut.swift in Sources */,
+				585E13AB22F1842A0086488E /* PayUsdtViewController.m in Sources */,
 				580D91C72064A27100B12506 /* QGradientView.m in Sources */,
 				58CF40C3219980BD0000C3DA /* NEOTransactionRecordViewController.m in Sources */,
 				58A3D4F9225EEC7700ABABD9 /* NSString+Trim.m in Sources */,

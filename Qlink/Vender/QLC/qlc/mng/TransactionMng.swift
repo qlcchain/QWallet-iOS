@@ -251,7 +251,7 @@ public class TransactionMng {
                         var tokenMeta:QLCTokenMeta?
                         try? TokenMetaMng.getTokenMeta(tokenHash: sendBlock.token!, address: receiveAddress, successHandler: { (response) in
 //                            if response != nil {
-                                tokenMeta = (response as! QLCTokenMeta)
+                                tokenMeta = (response as! QLCTokenMeta?)
                                 var has = false
                                 if tokenMeta != nil {
                                     has = true
