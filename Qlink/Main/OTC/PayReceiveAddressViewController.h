@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TradeOrderInfoModel;
+
 typedef enum : NSUInteger {
     PayReceiveAddressTypeQGAS,
     PayReceiveAddressTypeUSDT,
@@ -17,11 +19,13 @@ typedef enum : NSUInteger {
 
 @interface PayReceiveAddressViewController : QBaseViewController
 
-@property (nonatomic, strong) NSString *inputAddress;
-@property (nonatomic, strong) NSString *inputAmount;
+//@property (nonatomic, strong) NSString *inputAddress;
+//@property (nonatomic, strong) NSString *inputAmount;
 @property (nonatomic) PayReceiveAddressType inputAddressType;
 //@property (nonatomic) BOOL showSubmitTip;
 @property (nonatomic) BOOL backToRoot;
+@property (nonatomic) BOOL transferToTradeDetail;
+@property (nonatomic, strong) TradeOrderInfoModel *tradeM;
 
 @end
 

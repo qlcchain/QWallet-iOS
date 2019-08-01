@@ -583,11 +583,11 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 
 - (void)jumpToUSDTAddress:(NSString *)usdtAddress  {
     PayReceiveAddressViewController *vc = [PayReceiveAddressViewController new];
-    vc.inputAddress = usdtAddress;
-    vc.inputAmount = _orderInfoM.usdtAmount;
+//    vc.inputAddress = usdtAddress;
+//    vc.inputAmount = _orderInfoM.usdtAmount;
     vc.inputAddressType = PayReceiveAddressTypeUSDT;
-//    vc.showSubmitTip = NO;
-    vc.backToRoot = NO;
+    vc.transferToTradeDetail = YES;
+    vc.tradeM = _orderInfoM;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

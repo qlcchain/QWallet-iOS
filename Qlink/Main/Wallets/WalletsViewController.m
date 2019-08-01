@@ -663,6 +663,15 @@
     return usdtAsset;
 }
 
+- (NSArray *)getETHSource {
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeETH) {
+        return _sourceArr;
+    } else {
+        return @[];
+    }
+}
+
 #pragma mark - Request
 - (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
     // 检查地址有效性
@@ -686,6 +695,8 @@
 //            weakSelf.ethAddressInfoM.name = name;
             [weakself updateWalletWithETH:weakself.ethAddressInfoM];
             [weakself refreshDataWithETH];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:Update_ETH_Wallet_Token_Noti object:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself endRefresh];

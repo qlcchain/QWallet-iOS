@@ -24,6 +24,7 @@
 #import "NSString+RemoveZero.h"
 #import "WalletSelectViewController.h"
 #import "QNavigationController.h"
+#import "TradeOrderInfoModel.h"
 
 @interface BuySellDetailViewController ()
 
@@ -175,7 +176,8 @@
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Success."];
             kAppD.pushToOrderList = YES;
-            [weakself jumpToUSDTAddress:weakself.orderInfoM.usdtAddress?:@""];
+            TradeOrderInfoModel *model = [TradeOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
+            [weakself jumpToUSDTAddress:model];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -271,26 +273,6 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-    return;
-    
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *arr = @[];
-    if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) {
-        arr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
-    } else {
-        arr = [WalletCommonModel getWalletModelWithType:WalletTypeETH];
-    }
-    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        WalletCommonModel *model = obj;
-        UIAlertAction *alert = [UIAlertAction actionWithTitle:model.address style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            weakself.addressTF.text = model.address;
-        }];
-        [alertC addAction:alert];
-    }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertC addAction:alertCancel];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 - (IBAction)showSendAddressAction:(id)sender {
@@ -307,22 +289,6 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-    return;
-    
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *qlcArr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
-    [qlcArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        WalletCommonModel *model = obj;
-        UIAlertAction *alert = [UIAlertAction actionWithTitle:model.address style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            weakself.qgasSendTF.text = model.address;
-            [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
-        }];
-        [alertC addAction:alert];
-    }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertC addAction:alertCancel];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 
@@ -331,6 +297,12 @@
 }
 
 - (IBAction)submitAction:(id)sender {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if ([_orderInfoM.userId isEqualToString:userM.ID]) {
+        [kAppD.window makeToastDisappearWithText:@"You can not buy or sell your own entrust order."];
+        return;
+    }
+    
     if ([_usdtMaxTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:@"USDT is empty"];
         return;
@@ -366,7 +338,6 @@
             [kAppD.window makeToastDisappearWithText:@"QLC Wallet Address is invalidate"];
             return;
         }
-        
     
         [self requestTrade_buy_order];
     } else { // 我要卖
@@ -431,13 +402,13 @@
 
 
 #pragma mark - Transition
-- (void)jumpToUSDTAddress:(NSString *)usdtAddress  {
+- (void)jumpToUSDTAddress:(TradeOrderInfoModel *)model {
     PayReceiveAddressViewController *vc = [PayReceiveAddressViewController new];
-    vc.inputAddress = usdtAddress;
-    vc.inputAmount = _usdtMaxTF.text;
+//    vc.inputAddress = model.usdtToAddress?:@"";
+//    vc.inputAmount = _usdtMaxTF.text;
     vc.inputAddressType = PayReceiveAddressTypeUSDT;
-//    vc.showSubmitTip = YES;
     vc.backToRoot = YES;
+    vc.tradeM = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

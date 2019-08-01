@@ -147,21 +147,6 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-    return;
-    
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *qlcArr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
-    [qlcArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        WalletCommonModel *model = obj;
-        UIAlertAction *alert = [UIAlertAction actionWithTitle:model.address style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            weakself.buyAddressTF.text = model.address;
-        }];
-        [alertC addAction:alert];
-    }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertC addAction:alertCancel];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 - (IBAction)showETHAddressAction:(id)sender {
@@ -177,21 +162,6 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-    return;
-    
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *ethArr = [WalletCommonModel getWalletModelWithType:WalletTypeETH];
-    [ethArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        WalletCommonModel *model = obj;
-        UIAlertAction *alert = [UIAlertAction actionWithTitle:model.address style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            weakself.sellAddressTF.text = model.address;
-        }];
-        [alertC addAction:alert];
-    }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertC addAction:alertCancel];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 - (IBAction)showSellSendQGasAction:(id)sender {
@@ -208,22 +178,6 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-    return;
-    
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    NSArray *qlcArr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
-    [qlcArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        WalletCommonModel *model = obj;
-        UIAlertAction *alert = [UIAlertAction actionWithTitle:model.address style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            weakself.sellQLCAddressTF.text = model.address;
-            [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
-        }];
-        [alertC addAction:alert];
-    }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertC addAction:alertCancel];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 - (IBAction)buySegAction:(id)sender {
