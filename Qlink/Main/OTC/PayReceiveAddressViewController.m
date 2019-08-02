@@ -130,6 +130,7 @@
     vc.sendUsdtAmount = _tradeM.usdtAmount?:@"";
     vc.sendToAddress = _tradeM.usdtToAddress?:@"";
     vc.sendMemo = _tradeM.number?:@"";
+    vc.inputTradeOrderId = _tradeM.ID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

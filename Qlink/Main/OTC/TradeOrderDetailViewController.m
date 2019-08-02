@@ -88,9 +88,9 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 
 
 // Bottom
+@property (weak, nonatomic) IBOutlet UIButton *revokeBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView1Height; // 59
 @property (weak, nonatomic) IBOutlet UIView *bottomBack1;
-//@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *iAlreadyPaidBtn;
 @property (weak, nonatomic) IBOutlet UIButton *payBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView2Height; // 59
@@ -102,6 +102,8 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 @property (weak, nonatomic) IBOutlet UIButton *viewComplaintBtn;
 
 @property (nonatomic, strong) TradeOrderInfoModel *orderInfoM;
+@property (nonatomic, strong) dispatch_source_t countDownTimer;
+@property (nonatomic, strong) NSString *serverTime;
 
 // 买单
 //@property (nonatomic, strong) Token *usdtAsset;
@@ -112,6 +114,13 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 @end
 
 @implementation TradeOrderDetailViewController
+
+- (void)dealloc {
+    if (_countDownTimer) {
+        dispatch_cancel(_countDownTimer);
+        _countDownTimer = nil;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -164,6 +173,8 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
             _statusTitleLab.text = @"Waiting for Buyer's payment";
             _statusSubTitleLab.text = @"The order will be closed automatically, if no further confirmation within 30 minutes.";
+            
+            [self requestGetServerTime];
             
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
@@ -265,6 +276,41 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 //                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
 //            }
             
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_CANCEL]) { // 取消
+            _statusBack.backgroundColor = UIColorFromRGB(0x999999);
+            
+            _orderIDHeight.constant = 56;
+            _orderIDLab.text = _orderInfoM.number;
+            _orderTimeHeight.constant = 56;
+            _orderTimeLab.text = _orderInfoM.orderTime;
+            if (_orderInfoM.closeDate && _orderInfoM.closeDate.length > 0) {
+                _closingTimeHeight.constant = 56;
+                _closingTimeLab.text = _orderInfoM.closeDate;
+            }
+            _orderStatusHeight.constant = 56;
+            _orderStatusLab.text = @"Revoked";
+            if (_orderInfoM.usdtFromAddress && _orderInfoM.usdtFromAddress.length > 0) {
+                _infoAddressHeight.constant = 76;
+                _infoAddressLab.text = _orderInfoM.usdtFromAddress;
+            }
+            if (_orderInfoM.txid && _orderInfoM.txid.length > 0) {
+                _tradeIDHeight.constant = 76;
+                _tradeIDLab.text = _orderInfoM.txid;
+            }
+            
+            _statusTitleLab.text = @"Closed";
+            _statusSubTitleLab.text = @"Closed";
+            _bottomView3Height.constant = 59;
+            _bottomBack3.hidden = NO;
+            if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
+                [_viewComplaintBtn setTitle:title_appeal forState:UIControlStateNormal];
+            } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
+                [_viewComplaintBtn setTitle:title_appeal_details forState:UIControlStateNormal];
+            } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
+                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+            } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
+                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+            }
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) { // 订单已关闭
             _statusBack.backgroundColor = UIColorFromRGB(0x999999);
             
@@ -309,7 +355,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _typeLab.text = @"BUY";
             _typeLab.textColor = MAIN_BLUE_COLOR;
             _buyOrSellLab.text = @"Seller";
-            _buyOrSellNameLab.text = _orderInfoM.nickname;
+            _buyOrSellNameLab.text = _orderInfoM.showNickName;
             
         } else {
             _addressTitleLab.text = @"ERC-20 Address to receive USDT";
@@ -317,7 +363,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _typeLab.text = @"SELL";
             _typeLab.textColor = UIColorFromRGB(0xFF3669);
             _buyOrSellLab.text = @"Buyer";
-            _buyOrSellNameLab.text = _orderInfoM.nickname;
+            _buyOrSellNameLab.text = _orderInfoM.showNickName;
 //            _payKeyLab.text = @"Amount";
 //            _payValLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
@@ -425,8 +471,36 @@ NSString *title_appeal_result = @"Check the Appeal Result";
     [view showWithTitle:title];
 }
 
+- (void)startCountDown:(NSTimeInterval)timecount {
+    kWeakSelf(self);
+    __block NSInteger second = timecount;
+    dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    _countDownTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, quene);
+    dispatch_source_set_timer(_countDownTimer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(_countDownTimer, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSString *str_hour = [NSString stringWithFormat:@"%02ld", second / 3600];
+            NSString *str_minute = [NSString stringWithFormat:@"%02ld", (second % 3600) / 60];
+            NSString *str_second = [NSString stringWithFormat:@"%02ld", second % 60];
+            NSString *strTime = [NSString stringWithFormat:@"The order will be closed automatically, if no further confirmation within %@:%@ minutes.", str_minute, str_second];
+            weakself.statusSubTitleLab.text = strTime;
+            if (second == 0) {
+                dispatch_cancel(weakself.countDownTimer);
+                weakself.countDownTimer = nil;
+            } else {
+                second--;
+            }
+        });
+    });
+    dispatch_resume(_countDownTimer);
+}
+
 #pragma mark - Request
 - (void)requestTrade_order_info {
+    if (_countDownTimer) {
+        dispatch_cancel(_countDownTimer);
+        _countDownTimer = nil;
+    }
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -503,16 +577,63 @@ NSString *title_appeal_result = @"Check the Appeal Result";
     }];
 }
 
+- (void)requestTrade_cancel {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@""}];
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl:trade_cancel_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            [weakself requestTrade_order_info];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+- (void)requestGetServerTime {
+    kWeakSelf(self);
+    NSDictionary *params = @{};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl:getServerTime_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            weakself.serverTime = responseObject[Server_Data][@"sysTime"];
+            
+            NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.orderTime];
+            NSDate *date30min = [date dateByAddingMinutes:30];
+            NSDate *dateNow = [NSDate dateFromTime:weakself.serverTime];
+            NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
+            if (countDownSecond >= 0) {
+                weakself.statusSubTitleLab.text = @"The order will be closed automatically, if no further confirmation within 30 minutes.";
+                [weakself startCountDown:countDownSecond];
+            } else {
+                weakself.statusSubTitleLab.text = @"The order will be closed automatically, if no further confirmation within 0 minutes.";
+            }
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
 
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-//- (IBAction)cancelAction:(id)sender {
-//
-//}
 
 - (IBAction)iAlreadyPaidAction:(id)sender {
     [self showTradeIDInputView];
@@ -573,6 +694,11 @@ NSString *title_appeal_result = @"Check the Appeal Result";
     pasteboard.string = _tradeIDLab.text?:@"";
     [kAppD.window makeToastDisappearWithText:@"Copied"];
 }
+
+- (IBAction)revokeAction:(id)sender {
+    [self requestTrade_cancel];
+}
+
 
 #pragma mark - Transition
 - (void)jumpToComplaintDetail {

@@ -59,7 +59,7 @@
     _usdtLab.text = model.unitPrice;
     _totalAmountLab.text = [NSString stringWithFormat:@"%@ QGAS",@([model.totalAmount integerValue] - [model.lockingAmount integerValue] - [model.completeAmount integerValue])];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",model.minAmount,model.maxAmount];
-    _nameLab.text = model.nickname;
+    _nameLab.text = model.showNickName;
     _dealsLab.text = [NSString stringWithFormat:@"%@ Deals",model.otcTimes];
     _operatorBtn.backgroundColor = [model.type isEqualToString:@"BUY"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     [_operatorBtn setTitle:[model.type isEqualToString:@"BUY"]?@"SELL":@"BUY" forState:UIControlStateNormal];

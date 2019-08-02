@@ -50,7 +50,7 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.head]];
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
-    _nameLab.text = model.nickname;
+    _nameLab.text = model.showNickName;
     _timeLab.text = model.createDate;
     UserModel *loginM = [UserModel fetchUserOfLogin];
     _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?@"Seller":@"Buyer";

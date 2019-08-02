@@ -7,11 +7,16 @@
 //
 
 #import "EntrustOrderListModel.h"
+#import "OTCUtil.h"
 
 @implementation EntrustOrderListModel
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{@"ID" : @"id"};
+}
+
+- (NSString *)showNickName {
+    return [OTCUtil getShowNickName:_nickname];
 }
 
 @end

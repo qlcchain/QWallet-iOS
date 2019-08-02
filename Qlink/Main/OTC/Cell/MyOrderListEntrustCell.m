@@ -53,7 +53,7 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.head]];
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
-    _nameLab.text = model.nickname;
+    _nameLab.text = model.showNickName;
     _timeLab.text = model.orderTime;
     _priceLab.text = [NSString stringWithFormat:@"%@ USDT",model.unitPrice];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",model.minAmount,model.maxAmount];
