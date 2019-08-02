@@ -21,6 +21,9 @@
 #import "QlinkTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "TradeOrderDetailViewController.h"
+#import "NSDate+Category.h"
+#import "UserModel.h"
+#import "RSAUtil.h"
 
 @interface PayUsdtViewController () <UITextViewDelegate>
 
@@ -173,6 +176,32 @@
             [kAppD.window makeToastDisappearWithText:@"Send Success"];
             NSString *blockChain = @"ETH";
             [ReportUtil requestWalletReportWalletRransferWithAddressFrom:fromAddress addressTo:toAddress blockChain:blockChain symbol:symbol amount:amount txid:txId?:@""]; // 上报钱包转账
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [weakself requestTrade_buyer_confirm:txId]; // 买家确认支付
+            });
+        } else {
+            [kAppD.window makeToastDisappearWithText:@"Send Fail"];
+        }
+    }];
+}
+
+- (void)requestTrade_buyer_confirm:(NSString *)txid {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@"",@"txid":txid?:@""}];
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl:trade_buyer_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
             if (weakself.transferToRoot) {
                 [weakself backToRoot];
             } else if (weakself.transferToTradeDetail) {
@@ -181,8 +210,10 @@
                 [weakself backAction:nil];
             }
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Send Fail"];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *photo4;
 @property (nonatomic, strong) NSString *auditFeedback;
 
+@property (nonatomic, strong) NSString *showNickName;
+
 @end
 
 NS_ASSUME_NONNULL_END

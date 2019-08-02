@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *sendUsdtAmount;
 @property (nonatomic, strong) NSString *sendToAddress;
 @property (nonatomic, strong) NSString *sendMemo;
+@property (nonatomic, strong) NSString *inputTradeOrderId;
 
 
 @end

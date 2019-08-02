@@ -624,6 +624,7 @@
 		58A913222296401800A4E893 /* QLCWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A913212296401800A4E893 /* QLCWallet.m */; };
 		58A9132A22966C9700A4E893 /* QLCUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A9132922966C9700A4E893 /* QLCUtil.swift */; };
 		58A9132C2297ECDD00A4E893 /* QLCStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A9132B2297ECDC00A4E893 /* QLCStringExtensions.swift */; };
+		58AA304F22F2D24D0041C842 /* OTCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA304E22F2D24D0041C842 /* OTCUtil.m */; };
 		58AE1AD92074D22F00CE983B /* KeyChainUitl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */; };
 		58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */; };
 		58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AE22074D28700CE983B /* WalletQRViewController.m */; };
@@ -1865,6 +1866,8 @@
 		58A913212296401800A4E893 /* QLCWallet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCWallet.m; sourceTree = "<group>"; };
 		58A9132922966C9700A4E893 /* QLCUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLCUtil.swift; sourceTree = "<group>"; };
 		58A9132B2297ECDC00A4E893 /* QLCStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLCStringExtensions.swift; sourceTree = "<group>"; };
+		58AA304D22F2D24D0041C842 /* OTCUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCUtil.h; sourceTree = "<group>"; };
+		58AA304E22F2D24D0041C842 /* OTCUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCUtil.m; sourceTree = "<group>"; };
 		58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainUitl.swift; sourceTree = "<group>"; };
 		58AE1ADB2074D23C00CE983B /* NEOWalletInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEOWalletInfo.h; sourceTree = "<group>"; };
 		58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEOWalletInfo.m; sourceTree = "<group>"; };
@@ -2678,6 +2681,8 @@
 				583FB53E22E97B2F00F5AE0F /* UserUtil.m */,
 				5825555B22EAD26900F0B9F0 /* PhotoPickerUtil.h */,
 				5825555C22EAD26900F0B9F0 /* PhotoPickerUtil.m */,
+				58AA304D22F2D24D0041C842 /* OTCUtil.h */,
+				58AA304E22F2D24D0041C842 /* OTCUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -5627,6 +5632,7 @@
 				58CF40B3219922A70000C3DA /* NEOTransferViewController.m in Sources */,
 				5812DDA920A1A7890043A8A8 /* ZXChatBoxItemView.m in Sources */,
 				5868498C22A7ABA100CF0F24 /* TraditionalChineseMnemonicList.swift in Sources */,
+				58AA304F22F2D24D0041C842 /* OTCUtil.m in Sources */,
 				58245C0622E05AF50093E747 /* TradeOrderInfoModel.m in Sources */,
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
 				581AF7B121B6646E001A37E1 /* EOSCreateWalletViewController.m in Sources */,

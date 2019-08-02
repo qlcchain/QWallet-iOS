@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *lockingAmount;
 @property (nonatomic, strong) NSNumber *completeAmount;
 
+@property (nonatomic, strong) NSString *showNickName;
+
 @end
 
 NS_ASSUME_NONNULL_END

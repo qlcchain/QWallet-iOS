@@ -127,6 +127,8 @@
             _orderStatusLab.text = @"Successful Deal";
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) { // 超时
             _orderStatusLab.text = @"Closed";
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_CANCEL]) { // 取消
+            _orderStatusLab.text = @"Revoked";
         }
         
         UserModel *loginM = [UserModel fetchUserOfLogin];
@@ -134,11 +136,11 @@
         if (i_am_buyer) {
             _typeLab.text = @"BUY";
             _buyOrSellLab.text = @"Seller";
-            _buyOrSellNameLab.text = _orderInfoM.nickname;
+            _buyOrSellNameLab.text = _orderInfoM.showNickName;
         } else {
             _typeLab.text = @"SELL";
             _buyOrSellLab.text = @"Buyer";
-            _buyOrSellNameLab.text = _orderInfoM.nickname;
+            _buyOrSellNameLab.text = _orderInfoM.showNickName;
 //            _payKeyLab.text = @"Amount";
 //            _payValLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
