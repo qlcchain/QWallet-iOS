@@ -7,6 +7,7 @@
 //
 
 #import "InviteRankingModel.h"
+#import "OTCUtil.h"
 
 @implementation InviteRankingModel
 
@@ -14,6 +15,10 @@
     return @{
              @"ID": @"id"
              };
+}
+
+- (NSString *)showName {
+    return [OTCUtil getShowNickName:_name];
 }
 
 @end

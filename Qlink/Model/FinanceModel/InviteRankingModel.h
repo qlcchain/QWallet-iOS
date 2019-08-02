@@ -18,4 +18,6 @@
 @property (nonatomic, strong) NSNumber *myRanking; // = 29;
 @property (nonatomic, strong) NSString *number; // = "";
 
+@property (nonatomic, strong) NSString *showName;
+
 @end

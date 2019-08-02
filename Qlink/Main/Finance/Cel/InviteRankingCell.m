@@ -31,7 +31,7 @@
 
 - (void)configCell:(InviteRankingModel *)model {
     _numLab.text = [NSString stringWithFormat:@"%@",model.sequence];
-    _nameLab.text = model.name;
+    _nameLab.text = model.showName;
     _inviteLab.text = [NSString stringWithFormat:@"Invited %@ Friends",model.totalInvite];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.head]];
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
