@@ -26,13 +26,13 @@
 
 @implementation PersonalInfoViewController
 
-NSString *person_title0 = @"Profile Photo";
-NSString *person_title1 = @"Username";
-NSString *person_title2 = @"My Invitation Code";
-NSString *person_title3 = @"Email";
-NSString *person_title4 = @"Mobile";
-//NSString *person_title5 = @"Reset Password";
-NSString *person_title5 = @"Verification";
+//NSString *person_title0 = @"Profile Photo";
+//NSString *person_title1 = @"Username";
+//NSString *person_title2 = @"My Invitation Code";
+//NSString *person_title3 = @"Email";
+//NSString *person_title4 = @"Mobile";
+////NSString *person_title5 = @"Reset Password";
+//NSString *person_title5 = @"Verification";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -63,42 +63,42 @@ NSString *person_title5 = @"Verification";
     [_sourceArr removeAllObjects];
     UserModel *userM = [UserModel fetchUserOfLogin];
     PersonalInfoShowModel *model = [PersonalInfoShowModel new];
-    model.key = person_title0;
+    model.key = kLang(@"profile_photo");
     model.val = userM.head;
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = YES;
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
-    model.key = person_title1;
+    model.key = kLang(@"username");
     model.val = userM.nickname;
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = NO;
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
-    model.key = person_title2;
-    model.val = userM.ID;
+    model.key = kLang(@"my_invitation_code");
+    model.val = [NSString stringWithFormat:@"%@",userM.number];
     model.showCopy = YES;
     model.showArrow = NO;
     model.showHead = NO;
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
-    model.key = person_title3;
+    model.key = kLang(@"email");
     model.val = userM.email;
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = NO;
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
-    model.key = person_title4;
+    model.key = kLang(@"mobile");
     model.val = userM.phone;
     model.showCopy = NO;
     model.showArrow = YES;
     model.showHead = NO;
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
-    model.key = person_title5;
+    model.key = kLang(@"verification");
 //    model.val = person_title5;
     NSString *vStatusStr = @"";
     if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
@@ -157,17 +157,17 @@ NSString *person_title5 = @"Verification";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     PersonalInfoShowModel *model = _sourceArr[indexPath.row];
-    if ([model.key isEqualToString:person_title0]) {
+    if ([model.key isEqualToString:kLang(@"profile_photo")]) {
         [self showPhotoAlert];
-    } else if ([model.key isEqualToString:person_title1]) {
+    } else if ([model.key isEqualToString:kLang(@"username")]) {
         [self jumpToEditText:EditUsername];
-    } else if ([model.key isEqualToString:person_title2]) {
+    } else if ([model.key isEqualToString:kLang(@"my_invitation_code")]) {
         [self handleCopy:model.val];
-    } else if ([model.key isEqualToString:person_title3]) {
+    } else if ([model.key isEqualToString:kLang(@"email")]) {
         [self jumpToEditText:EditEmail];
-    } else if ([model.key isEqualToString:person_title4]) {
+    } else if ([model.key isEqualToString:kLang(@"mobile")]) {
         [self jumpToEditText:EditPhone];
-    } else if ([model.key isEqualToString:person_title5]) {
+    } else if ([model.key isEqualToString:kLang(@"verification")]) {
 //        [self jumpToForgetPW];
         [self jumpToVerification];
     }
@@ -195,7 +195,7 @@ NSString *person_title5 = @"Verification";
 
 - (void)jumpToForgetPW {
     ForgetPWViewController *vc = [ForgetPWViewController new];
-    vc.inputTitle = person_title5;
+    vc.inputTitle = kLang(@"verification");
     [self.navigationController pushViewController:vc animated:YES];
 }
 

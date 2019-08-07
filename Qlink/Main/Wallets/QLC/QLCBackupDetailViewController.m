@@ -51,7 +51,7 @@
 
 - (void)showCreateSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Create Success"];
+    [tip showWithTitle:kLang(@"create_success")];
 }
 
 - (void)backToRoot {
@@ -61,7 +61,7 @@
 #pragma mark - Action
 - (IBAction)confirmAction:(id)sender {
     if (!isTip) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     
@@ -82,13 +82,13 @@
 - (IBAction)copyMnemonicAction:(id)sender {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:_mnemonicLab.text?:@""];
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)copySeedAction:(id)sender {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:_seedLab.text?:@""];
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 

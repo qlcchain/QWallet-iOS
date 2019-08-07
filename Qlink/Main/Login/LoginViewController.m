@@ -152,7 +152,7 @@
 - (IBAction)loginVerifyCodeAction:(id)sender {
     [self.view endEditing:YES];
     if (![_loginAccountTF.text isEmailAddress] && ![_loginAccountTF.text isMobileNumber]) {
-        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address or phone number."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address_or_phone_number")];
         return;
     }
     [self requestVcode_signin_code];
@@ -162,7 +162,7 @@
 - (IBAction)loginAction:(id)sender {
     [self.view endEditing:YES];
     if (![_loginAccountTF.text isEmailAddress] && ![_loginAccountTF.text isMobileNumber]) {
-        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address or phone number."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address_or_phone_number")];
         return;
     }
     
@@ -222,7 +222,7 @@
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
     [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];

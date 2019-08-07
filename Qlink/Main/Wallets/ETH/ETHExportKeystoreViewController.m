@@ -54,7 +54,7 @@
 - (void)copyKeystore {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _textV.text;
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 #pragma mark - Action

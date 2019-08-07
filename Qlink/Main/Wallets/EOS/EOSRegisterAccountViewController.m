@@ -109,11 +109,11 @@
         }];
         
         if (transferETHM == nil) {
-            [kAppD.window makeToastDisappearWithText:@"No ETH Wallet Of Enough Balance"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"no_eth_wallet_of_enough_balance")];
             return;
         }
     } else {
-        [kAppD.window makeToastDisappearWithText:@"No ETH Wallet"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"no_eth_wallet")];
         return;
     }
     
@@ -142,7 +142,7 @@
     kWeakSelf(self);
     [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         if (success) {
-            [kAppD.window makeToastDisappearWithText:@"Send Success"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
             NSString *blockChain = @"ETH";
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
@@ -152,7 +152,7 @@
             [weakself requestEosNew_account:txId?:@""]; // 后台创建eos账号
             
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Send Fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_fail")];
         }
     }];
 }
@@ -222,27 +222,27 @@
 - (IBAction)copyOwnerKeyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _ownerKeyTV.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)copyActiveKeyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _activeKeyTV.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)switchQRCodeAction:(UIButton *)sender {
     if (sender.selected == YES) {
         if (_accountNameTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Account name is empty"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"account_name_is_empty")];
             return;
         }
         if (![RegularExpression validateEosAccountName:_accountNameTF.text.trim]) {
-            [kAppD.window makeToastDisappearWithText:@"a-z and 1-5 combination of 12-bit characters"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"a_and_1_combination_of_12_characters")];
             return;
         }
         if (_isValidName == NO) {
-            [kAppD.window makeToastDisappearWithText:@"Account name is exist"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"account_name_is_exist")];
             return;
         }
         
@@ -265,15 +265,15 @@
 
 - (IBAction)registerAction:(id)sender {
     if (_accountNameTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Account name is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"account_name_is_empty")];
         return;
     }
     if (![RegularExpression validateEosAccountName:_accountNameTF.text.trim]) {
-        [kAppD.window makeToastDisappearWithText:@"a-z and 1-5 combination of 12-bit characters"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"a_and_1_combination_of_12_characters")];
         return;
     }
     if (_isValidName == NO) {
-        [kAppD.window makeToastDisappearWithText:@"Account name is exist"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"account_name_is_exist")];
         return;
     }
     

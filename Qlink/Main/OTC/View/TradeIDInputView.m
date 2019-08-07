@@ -28,7 +28,7 @@
 }
 
 - (void)configInit {
-    _textV.placeholder = @"Transaction ID";
+    _textV.placeholder = kLang(@"transaction_id");
 }
 
 - (void)show {

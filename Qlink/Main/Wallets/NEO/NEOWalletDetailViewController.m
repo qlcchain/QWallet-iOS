@@ -54,13 +54,13 @@ NSString *exportPrivateKeyWIF = @"Export Private Key(WIF)";
     NSString *publickKey = [NEOWalletInfo getNEOPublickKeyWithAddress:_inputWalletCommonM.address];
     // AU8T3i1jP8fMQmYHM4XvanoK1hEQnCDeEf
     // 
-    [view showWithPrivateKey:privateKey title:@"Export Private Key"];
+    [view showWithPrivateKey:privateKey title:kLang(@"export_private_key")];
 }
 
 - (void)showExportEncyptedKey {
     ExportPrivateKeyView *view = [ExportPrivateKeyView getInstance];
     NSString *encryptedKey = [NEOWalletInfo getNEOEncryptedKeyWithAddress:_inputWalletCommonM.address];
-    [view showWithPrivateKey:encryptedKey title:@"Export Encrypted Key"];
+    [view showWithPrivateKey:encryptedKey title:kLang(@"export_encrypted_key")];
 }
 
 - (void)backToRoot {
@@ -75,11 +75,11 @@ NSString *exportPrivateKeyWIF = @"Export Private Key(WIF)";
         if (_isDeleteCurrentWallet) { // 如果是当前选择钱包
             [WalletCommonModel removeCurrentSelectWallet];
         }
-        [kAppD.window makeToastDisappearWithText:@"Delete Successful"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"delete_successful")];
         [self backToRoot];
         [[NSNotificationCenter defaultCenter] postNotificationName:Delete_Wallet_Success_Noti object:nil];
     } else {
-        [kAppD.window makeToastDisappearWithText:@"Delete Failed"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"delete_failed")];
     }
 }
 

@@ -16,7 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
 @property (weak, nonatomic) IBOutlet UILabel *usdtLab;
 @property (weak, nonatomic) IBOutlet UILabel *totalAmountLab;
+@property (weak, nonatomic) IBOutlet UILabel *totalAmountKeyLab;
 @property (weak, nonatomic) IBOutlet UILabel *volumeSettingLab;
+@property (weak, nonatomic) IBOutlet UILabel *volumeSettingKeyLab;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *dealsLab;
@@ -57,12 +59,14 @@
     }];
     _usdtLab.textColor = [model.type isEqualToString:@"BUY"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     _usdtLab.text = model.unitPrice;
+    _totalAmountKeyLab.text = kLang(@"amount");
     _totalAmountLab.text = [NSString stringWithFormat:@"%@ QGAS",@([model.totalAmount integerValue] - [model.lockingAmount integerValue] - [model.completeAmount integerValue])];
+    _volumeSettingKeyLab.text = kLang(@"volume_settings");
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",model.minAmount,model.maxAmount];
     _nameLab.text = model.showNickName;
     _dealsLab.text = [NSString stringWithFormat:@"%@ Deals",model.otcTimes];
     _operatorBtn.backgroundColor = [model.type isEqualToString:@"BUY"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
-    [_operatorBtn setTitle:[model.type isEqualToString:@"BUY"]?@"SELL":@"BUY" forState:UIControlStateNormal];
+    [_operatorBtn setTitle:[model.type isEqualToString:@"BUY"]?kLang(@"sell"):kLang(@"buy") forState:UIControlStateNormal];
 }
 
 @end

@@ -119,7 +119,7 @@
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     _recipientAccountTF.text = currentWalletM.account_name?:@"";
     
-    _stakeBalance.text = [NSString stringWithFormat:@"Balance:%@ EOS",_inputSymbolM.balance];
+    _stakeBalance.text = [NSString stringWithFormat:@"%@:%@ EOS",kLang(@"balance"),_inputSymbolM.balance];
     
     [self requestRefresh];
 }
@@ -156,8 +156,8 @@
     _netBorrowLab.text = model.staked.net_weight;
     _netAvailableLab.text = [NSString stringWithFormat:@"%@ KB / %@ KB",@([model.net.available doubleValue]/1024),@([model.net.max doubleValue]/1024)];
     
-    _reclaimCpuBalance.text = [NSString stringWithFormat:@"Balance:%@ ms",@([model.cpu.available doubleValue]/1000)];
-    _reclaimNetBalance.text = [NSString stringWithFormat:@"Balance:%@ KB",@([model.net.available doubleValue]/1024)];
+    _reclaimCpuBalance.text = [NSString stringWithFormat:@"%@:%@ ms",kLang(@"balance"),@([model.cpu.available doubleValue]/1000)];
+    _reclaimNetBalance.text = [NSString stringWithFormat:@"%@:%@ KB",kLang(@"balance"),@([model.net.available doubleValue]/1024)];
 }
 
 - (void)refreshCurrenPriceWithModel:(EOSResourcePriceModel *)model {
@@ -169,12 +169,12 @@
     TipOKView *view = [TipOKView getInstance];
     view.okBlock = ^{
     };
-    [view showWithTitle:@"Insufficient resources"];
+    [view showWithTitle:kLang(@"insufficient_resources")];
 }
 
 - (void)refreshEosBalance {
     if (_isStake) {
-        _stakeBalance.text = [NSString stringWithFormat:@"Balance:%@ EOS",_inputSymbolM.balance];
+        _stakeBalance.text = [NSString stringWithFormat:@"%@:%@ EOS",kLang(@"balance"),_inputSymbolM.balance];
     }
 }
 
@@ -194,7 +194,7 @@
 
 - (void)showSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Success"];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 - (void)backToRoot {
@@ -300,15 +300,15 @@
     NSString *showAmount = nil;
     if (_isStake == YES) { // 抵押
         if (!_stakeAmountTF.text || _stakeAmountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input EOS Amount"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_eos_amount")];
             return;
         }
         if ([_stakeAmountTF.text doubleValue] > [_inputSymbolM.balance doubleValue]) { // 余额不足
-            [kAppD.window makeToastDisappearWithText:@"Insufficient balance"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
             return;
         }
         if (!_recipientAccountTF.text || _recipientAccountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input Recipient Account"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_recipient_account")];
             return;
         }
         
@@ -320,19 +320,19 @@
         stakeOrReclaimNetAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*(1-[_sliderVal doubleValue]))] removeFloatAllZero];
     } else { // 赎回
         if (!_reclaimCpuAmountTF.text || _reclaimCpuAmountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input CPU Amount"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_cpu_amount")];
             return;
         }
         if ([_reclaimCpuAmountTF.text doubleValue] > [_resourceInfoM.cpu.available doubleValue]/1000) { // 余额不足
-            [kAppD.window makeToastDisappearWithText:@"Insufficient CPU balance"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_cpu_balance")];
             return;
         }
         if (!_reclaimNetAmountTF.text || _reclaimNetAmountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input NET Amount"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_net_amount")];
             return;
         }
         if ([_reclaimNetAmountTF.text doubleValue] > [_resourceInfoM.net.available doubleValue]/1024) { // 余额不足
-            [kAppD.window makeToastDisappearWithText:@"Insufficient NET balance"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_net_balance")];
             return;
         }
         

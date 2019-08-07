@@ -6,6 +6,7 @@
 //
 
 #import "Language.h"
+#import "NSBundle+Language.h"
 
 @implementation Language
 
@@ -13,36 +14,37 @@ static NSBundle *bundle = nil;
 
 NSString *const LanguageCodeIdIndentifier = @"LanguageCodeIdIndentifier";
 
-+ (void)initialize {
-     NSString *current = @"zh-Hant";
-    [self setLanguage:current];
-}
+//+ (void)initialize {
+//     NSString *current = @"zh-Hans";
+//    [self setLanguage:current];
+//}
 
 + (void)setLanguage:(NSString *)language {
     NSString *path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj"];
     bundle = [NSBundle bundleWithPath:path];
+    [NSBundle setLanguage:language];
 }
 
 + (NSString *)currentLanguageCode {
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LanguageCodeIdIndentifier];
     NSString *userSelectedLanguage = [[NSUserDefaults standardUserDefaults] objectForKey:LanguageCodeIdIndentifier];
     if (userSelectedLanguage) {
         // Store selected language in local
-        
         return userSelectedLanguage;
     } else {
-        // 初始化本地语言  默认繁体
+        // 初始化本地语言
         [Language userSelectedLanguage:LanguageCode[1]];
         return [Language currentLanguageCode];
     }
     
-    NSString *systemLanguage = [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
-    if ([systemLanguage isEqualToString:@"en"] || [systemLanguage isEqualToString:@"zh-Hant"]) {
-        // Update selected language in local
-    } else {
-        // Update selected language in local
-    }
-    
-    return systemLanguage;
+//    NSString *systemLanguage = [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
+//    if ([systemLanguage isEqualToString:@"en"] || [systemLanguage isEqualToString:@"zh-Hans"]) {
+//        // Update selected language in local
+//    } else {
+//        // Update selected language in local
+//    }
+//
+//    return systemLanguage;
 }
 
 + (void)userSelectedLanguage:(NSString *)selectedLanguage {

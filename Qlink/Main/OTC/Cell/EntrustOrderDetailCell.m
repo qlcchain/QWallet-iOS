@@ -53,7 +53,7 @@
     _nameLab.text = model.showNickName;
     _timeLab.text = model.createDate;
     UserModel *loginM = [UserModel fetchUserOfLogin];
-    _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?@"Seller":@"Buyer";
+    _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?kLang(@"seller"):kLang(@"buyer");
     _typeLab.textColor = [loginM.ID isEqualToString:model.buyerId]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     _amountLab.text = model.usdtAmount;
     _statusLab.text = [OrderStatusUtil getStatusStr:model.status];

@@ -35,7 +35,7 @@
     NSNumber *num = isFirst?model.myRanking:model.sequence;
     _numLab.text = [NSString stringWithFormat:@"%@",num==0?@"99+":num];
     _nameLab.text = model.showName;
-    _inviteLab.text = [NSString stringWithFormat:@"Invited %@ Friends",model.totalInvite];
+    _inviteLab.text = [NSString stringWithFormat:@"%@ %@ %@",kLang(@"invited__"),model.totalInvite,kLang(@"friends__")];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.head]];
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];

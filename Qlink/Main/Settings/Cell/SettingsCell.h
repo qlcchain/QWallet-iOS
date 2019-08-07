@@ -16,7 +16,7 @@ static NSString *SettingsCellReuse = @"SettingsCell";
 @interface SettingsShowModel : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *detail;
+@property (nonatomic, strong, nullable) NSString *detail;
 @property (nonatomic) BOOL haveNextPage;
 @property (nonatomic) BOOL showSwitch;
 

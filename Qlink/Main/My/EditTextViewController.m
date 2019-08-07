@@ -55,15 +55,15 @@
     switch (self.editType) {
         case EditUsername:
         {
-            _lblNavTitle.text = @"Edit Username";
-            _nameTF.placeholder = @"Please enter Username";
+            _lblNavTitle.text = kLang(@"edit_username");
+            _nameTF.placeholder = kLang(@"please_enter_username");
             _nameTF.text = [UserModel fetchUserOfLogin].nickname?:@"";
         }
             break;
         case EditEmail:
         {
-            _lblNavTitle.text = @"Edit Email";
-            _nameTF.placeholder = @"Please enter Email";
+            _lblNavTitle.text = kLang(@"edit_email");
+            _nameTF.placeholder = kLang(@"please_enter_email");
             _nameTF.text = [UserModel fetchUserOfLogin].email?:@"";
             _codeBackHeight.constant = 49;
             _codeBtn.enabled = NO;
@@ -72,8 +72,8 @@
             break;
         case EditPhone:
         {
-            _lblNavTitle.text = @"Edit Phone";
-            _nameTF.placeholder = @"Please enter Phone";
+            _lblNavTitle.text = kLang(@"edit_phone");
+            _nameTF.placeholder = kLang(@"please_enter_phone");
             _nameTF.text = [UserModel fetchUserOfLogin].phone?:@"";
             _codeBackHeight.constant = 49;
             _codeBtn.enabled = NO;
@@ -125,7 +125,7 @@
         case EditUsername:
         {
             if ([name isEmptyString]) {
-                [kAppD.window makeToastDisappearWithText:@"Username cannot be empty"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"username_cannot_be_empty")];
             } else {
                 [self requestUser_change_nickname:name];
             }
@@ -134,11 +134,11 @@
         case EditEmail:
         {
             if ([name isEmptyString]) {
-                [kAppD.window makeToastDisappearWithText:@"Email cannot be empty"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"email_cannot_be_empty")];
                 return;
             }
             if ([code isEmptyString]) {
-                [kAppD.window makeToastDisappearWithText:@"Code cannot be empty"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
                 return;
             }
             [self requestUser_change_email:name code:code];
@@ -147,11 +147,11 @@
         case EditPhone:
         {
             if ([name isEmptyString]) {
-                [kAppD.window makeToastDisappearWithText:@"Phone cannot be empty"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"phone_cannot_be_empty")];
                 return;
             }
             if ([code isEmptyString]) {
-                [kAppD.window makeToastDisappearWithText:@"Code cannot be empty"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
                 return;
             }
             [self requestUser_change_phone:name code:code];
@@ -201,10 +201,10 @@
             userM.nickname = nickname;
             [UserModel storeUser:userM useLogin:NO];
             
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -219,9 +219,8 @@
     NSDictionary *params = @{@"account":account,@"email":email};
     [RequestService requestWithUrl:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
-//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -248,10 +247,10 @@
             userM.email = email;
             [UserModel storeUser:userM useLogin:NO];
             
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -266,9 +265,8 @@
     NSDictionary *params = @{@"account":account,@"phone":phone};
     [RequestService requestWithUrl:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
-//            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -295,10 +293,10 @@
             userM.phone = phone;
             [UserModel storeUser:userM useLogin:NO];
             
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

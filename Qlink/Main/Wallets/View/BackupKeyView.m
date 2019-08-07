@@ -50,7 +50,7 @@
 - (IBAction)copyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _privateKey;
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
     [self hide];
 }
 
@@ -61,7 +61,7 @@
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     UIImage *image = [UIImage captureWithView:_qrImage];
     [pasteboard setImage:image];
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
     [self hide];
 }
 

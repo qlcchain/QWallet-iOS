@@ -16,7 +16,13 @@ struct LedgerServiceRequest<Batch: JSONRPCKit.Batch>: APIKit.Request {
     typealias Response = Batch.Responses
     
     var baseURL: URL {
-        return URL(string: qlc_seed)!
+        let environment:String? = UserDefaults.standard.object(forKey: QLCChain_Environment) as! String?
+        if environment == nil || environment == "1" {
+            return URL(string: qlc_seed_pro)!
+        } else {
+            return URL(string: qlc_seed_dev)!
+        }
+        
     }
     
     var method: HTTPMethod {

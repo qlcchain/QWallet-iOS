@@ -39,7 +39,7 @@
 - (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount {
     _sendtoLab.text = sendto;
     _amountLab.text = amount;
-    _statusLab.text = @"SELL QGAS";
+    _statusLab.text = kLang(@"sell_qgas");
 }
 
 - (void)show {

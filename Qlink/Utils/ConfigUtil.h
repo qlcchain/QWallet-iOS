@@ -10,6 +10,8 @@
 
 @interface ConfigUtil : NSObject
 
++ (instancetype)shareInstance;
++ (void)setServerNetworkEnvironment:(BOOL)mainNet;
 + (BOOL)isMainNetOfServerNetwork;
     
 + (NSString *)getServerDomain;

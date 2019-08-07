@@ -63,13 +63,13 @@ typedef enum : NSUInteger {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (userM) {
         if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
-            _tipLab.text = @"Please upload the required information of your PASSPORT.";
+            _tipLab.text = kLang(@"please_upload_the_required_information_of_your_passport");
         } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
-            _tipLab.text = @"Status: Under review.";
+            _tipLab.text = kLang(@"status_under_review");
         } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
-            _tipLab.text = @"Status: Verified.";
+            _tipLab.text = kLang(@"status_verified");
         } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
-            _tipLab.text = @"Status: Not approved.";
+            _tipLab.text = kLang(@"status_not_approved");
             [self showNotApproved];
         }
         
@@ -104,15 +104,15 @@ typedef enum : NSUInteger {
 - (void)showPhotoAlert {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     kWeakSelf(self)
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"Photo Album" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"photo_album") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakself selectImage:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     [alertVC addAction:action1];
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:kLang(@"camera") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakself selectImage:UIImagePickerControllerSourceTypeCamera];
     }];
     [alertVC addAction:action2];
-    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action3];
     [self presentViewController:alertVC animated:YES completion:nil];
@@ -129,17 +129,16 @@ typedef enum : NSUInteger {
             weakself.pic2.image = weakself.selectImage2;
         }
     }];
-    
 }
 
 - (void)showTip {
     TipOKView *view = [TipOKView getInstance];
-    [view showWithTitle:@"Verification is required to comply with KYC regulations and to protect your account from unauthorized access. It will be usually completed within 2 hours. Please contact qlc.chain@gmail.com if any questions. "];
+    [view showWithTitle:kLang(@"verification_is_required___")];
 }
 
 - (void)showNotApproved {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Not approved" message:@"Please resubmit the required information. Photos submitted before were not eligible." preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:kLang(@"not_approved") message:kLang(@"please_resubmit_the_required_information___") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action1];
     [self presentViewController:alertVC animated:YES completion:nil];
@@ -167,7 +166,7 @@ typedef enum : NSUInteger {
 
 - (IBAction)submitAction:(id)sender {
     if (!_selectImage1 || !_selectImage2) {
-        [kAppD.window makeToastDisappearWithText:@"Please upload the required information of your PASSPORT."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_upload_the_required_information_of_your_passport")];
         return;
     }
     
@@ -203,7 +202,7 @@ typedef enum : NSUInteger {
     } success:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Upload Success, Wait for Verify"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"upload_success_wait_for_verify")];
             userM.vStatus = @"UPLOADED";
             userM.facePhoto = responseObject[@"facePhoto"];
             userM.holdingPhoto = responseObject[@"holdingPhoto"];
@@ -216,8 +215,5 @@ typedef enum : NSUInteger {
         [kAppD.window hideToast];
     }];
 }
-
-
-
 
 @end

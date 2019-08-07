@@ -81,7 +81,7 @@
     NSNumber *netStakedNum = @([[_resourceInfoM.staked.net_weight stringByReplacingOccurrencesOfString:@" EOS" withString:@""] doubleValue]);
     _stakedLab.text = [NSString stringWithFormat:@"%@ EOS",@([cpuStakedNum doubleValue]+[netStakedNum doubleValue]).show4floatStr];
     
-    _totalAssetsLab.text = [NSString stringWithFormat:@"Total Assets %@ EOS",@([netStakedNum doubleValue]+[cpuStakedNum doubleValue]+[_inputSymbolM.balance doubleValue]).show4floatStr];
+    _totalAssetsLab.text = [NSString stringWithFormat:@"%@ %@ EOS",kLang(@"total_assets"),@([netStakedNum doubleValue]+[cpuStakedNum doubleValue]+[_inputSymbolM.balance doubleValue]).show4floatStr];
     _balanceLab.text = [NSString stringWithFormat:@"%@ EOS",(_inputSymbolM.balance?:@(0)).show4floatStr];
 //    _reclaimLab.text = ;
     

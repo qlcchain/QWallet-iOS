@@ -34,8 +34,19 @@
 
 @implementation QlinkTabbarViewController
 
+#pragma mark - Observe
+- (void)addObserve {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self addObserve];
     
     [UITabBar appearance].translucent = NO;
     
@@ -57,10 +68,10 @@
     
     _walletsVC = [[WalletsViewController alloc] init];
 //    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
-    [self addChildViewController:[[HomeBuySellViewController alloc] init] text:@"Finance" imageName:@"finance"];
+    [self addChildViewController:[[HomeBuySellViewController alloc] init] text:kLang(@"finance") imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
-    [self addChildViewController:_walletsVC text:@"Wallet" imageName:@"wallet"];
-    [self addChildViewController:[[MyViewController alloc] init] text:@"Me" imageName:@"settings"];
+    [self addChildViewController:_walletsVC text:kLang(@"wallet") imageName:@"wallet"];
+    [self addChildViewController:[[MyViewController alloc] init] text:kLang(@"me") imageName:@"settings"];
 }
 
 - (void) addChildViewController:(UIViewController *) childController text:(NSString *) text imageName:(NSString *) imageName {
@@ -112,6 +123,19 @@
 //            [WalletUtil checkWalletPassAndPrivateKey:(WalletViewController *)(((QlinkNavViewController *)viewController).topViewController) TransitionFrom:CheckProcess_WALLET_TABBAR];
 //        }
 //    }
+}
+
+#pragma mark - Noti
+- (void)languageChangeNoti:(NSNotification *)noti {
+    [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx == 0) {
+            obj.title = kLang(@"finance");
+        } else if (idx == 1) {
+            obj.title = kLang(@"wallet");
+        } else if (idx == 2) {
+            obj.title = kLang(@"me");
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

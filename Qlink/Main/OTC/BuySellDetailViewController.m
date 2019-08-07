@@ -83,17 +83,17 @@
     [_qgasMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) { // 我是买家
-        _titleLab.text = @"BUY QGAS";
+        _titleLab.text = kLang(@"buy_qgas");
         _usdtLab.textColor = MAIN_BLUE_COLOR;
-        _addressTipLab.text = @"QLC Chain Address to receive QGAS";
-        _addressTF.placeholder = @"QLC Chain Wallet Address";
+        _addressTipLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
+        _addressTF.placeholder = kLang(@"qlc_chain_wallet_address");
         _createOneNowHeight.constant = 30;
         _qgasSendBackHeight.constant = 0;
     } else { // 我是卖家
-        _titleLab.text = @"SELL QGAS";
+        _titleLab.text = kLang(@"sell_qgas");
         _usdtLab.textColor = UIColorFromRGB(0xFF3669);
-        _addressTipLab.text = @"ERC-20 Address to receive USDT";
-        _addressTF.placeholder = @"ERC-20 Wallet Address";
+        _addressTipLab.text = kLang(@"erc-20_address_to_receive_usdt");
+        _addressTF.placeholder = kLang(@"erc-20_wallet_address");
         _createOneNowHeight.constant = 0;
         _qgasSendBackHeight.constant = 88;
     }
@@ -102,8 +102,8 @@
 //    _totalLab.text = [NSString stringWithFormat:@"%@",_inputEntrustOrderListM.totalAmount];
     _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_inputEntrustOrderListM.totalAmount integerValue] - [_inputEntrustOrderListM.lockingAmount integerValue] - [_inputEntrustOrderListM.completeAmount integerValue])];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_inputEntrustOrderListM.minAmount,_inputEntrustOrderListM.maxAmount];
-    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"Max %@",@([_inputEntrustOrderListM.maxAmount integerValue]*[_inputEntrustOrderListM.unitPrice floatValue])];
-    _qgasMaxTF.placeholder = [NSString stringWithFormat:@"Max %@",_inputEntrustOrderListM.maxAmount];
+    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_inputEntrustOrderListM.maxAmount integerValue]*[_inputEntrustOrderListM.unitPrice floatValue])];
+    _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount];
 }
 
 - (void)refreshView {
@@ -112,8 +112,8 @@
 //        _totalLab.text = [NSString stringWithFormat:@"%@",_orderInfoM.totalAmount];
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
         _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_orderInfoM.minAmount,_orderInfoM.maxAmount];
-        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"Max %@",@([_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice floatValue])];
-        _qgasMaxTF.placeholder = [NSString stringWithFormat:@"Max %@",_orderInfoM.maxAmount];
+        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice floatValue])];
+        _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount];
     }
 }
 
@@ -129,15 +129,15 @@
     }
 }
 
-- (void)showSubmitSuccess {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Submitted Successfully! " message:@"Verification status will be updated on the ME page." preferredStyle:UIAlertControllerStyleAlert];
-    kWeakSelf(self)
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakself.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    [alertVC addAction:action1];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
+//- (void)showSubmitSuccess {
+//    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Submitted Successfully! " message:@"Verification status will be updated on the ME page." preferredStyle:UIAlertControllerStyleAlert];
+//    kWeakSelf(self)
+//    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [weakself.navigationController popToRootViewControllerAnimated:YES];
+//    }];
+//    [alertVC addAction:action1];
+//    [self presentViewController:alertVC animated:YES completion:nil];
+//}
 
 #pragma mark - Request
 - (void)requestEntrust_order_info {
@@ -174,7 +174,7 @@
     [RequestService requestWithUrl:trade_buy_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             kAppD.pushToOrderList = YES;
             TradeOrderInfoModel *model = [TradeOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
             [weakself jumpToUSDTAddress:model];
@@ -193,11 +193,11 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
-    [kAppD.window makeToastInView:kAppD.window text:@"Process..." userInteractionEnabled:NO hideTime:0];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
-        [kAppD.window makeToastDisappearWithText:@"Transfer Successful."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         
         // 下卖单
         weakself.sellFromAddress = fromAddress;
@@ -233,12 +233,12 @@
     [RequestService requestWithUrl:trade_sell_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
 //            [weakself showSubmitSuccess];
             kAppD.pushToOrderList = YES;
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -299,34 +299,34 @@
 - (IBAction)submitAction:(id)sender {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if ([_orderInfoM.userId isEqualToString:userM.ID]) {
-        [kAppD.window makeToastDisappearWithText:@"You can not buy or sell your own entrust order."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"you_can_not_buy_or_sell_your_own_entrust_order")];
         return;
     }
     
     if ([_usdtMaxTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"USDT is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"usdt_is_empty")];
         return;
     }
     if ([_usdtMaxTF.text floatValue] > [_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice floatValue]) {
-        [kAppD.window makeToastDisappearWithText:@"USDT is over max"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"usdt_is_over_max")];
         return;
     }
     if ([_qgasMaxTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"QGAS is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qgas_is_empty")];
         return;
     }
     if ([_qgasMaxTF.text integerValue] > [_orderInfoM.maxAmount integerValue]) {
-        [kAppD.window makeToastDisappearWithText:@"QGAS is greater than max volume"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qgas_is_greater_than_max_volume")];
         return;
     }
     if ([_qgasMaxTF.text integerValue] < [_orderInfoM.minAmount integerValue]) {
-        [kAppD.window makeToastDisappearWithText:@"QGAS is less than min volume"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qgas_is_less_than_min_volume")];
         return;
     }
     // 检查剩余QGAS量
     NSInteger restAmount = [_orderInfoM.totalAmount integerValue]-[_orderInfoM.lockingAmount integerValue]-[_orderInfoM.completeAmount integerValue];
     if (restAmount<[_qgasMaxTF.text integerValue]) { // 交易量不足
-        NSString *tip = [NSString stringWithFormat:@"QGAS is only %@ left",@(restAmount)];
+        NSString *tip = [NSString stringWithFormat:@"%@ %@",kLang(@"qgas_remain"),@(restAmount)];
         [kAppD.window makeToastDisappearWithText:tip];
         return;
     }
@@ -335,7 +335,7 @@
         // 检查地址有效性
         BOOL validateQLCAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_addressTF.text];
         if (!validateQLCAddress) {
-            [kAppD.window makeToastDisappearWithText:@"QLC Wallet Address is invalidate"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_invalidate")];
             return;
         }
     
@@ -344,32 +344,32 @@
         // 检查地址有效性
         BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_addressTF.text];
         if (!isValid) {
-            [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is invalidate"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
             return;
         }
         
         // 判断当前钱包
         WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
         if (!currentWalletM || currentWalletM.walletType != WalletTypeQLC) {
-            [kAppD.window makeToastDisappearWithText:@"Please switch to QLC Wallet"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_qlc_wallet")];
             return;
         }
         
         // 判断QLC钱包的QLC asset
         QLCTokenModel *qgasAsset = [kAppD.tabbarC.walletsVC getQGASAsset];
         if (!qgasAsset) {
-            [kAppD.window makeToastDisappearWithText:@"Current QLC Wallet have not QGAS"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_qgas")];
             return;
         }
         if ([qgasAsset.balance floatValue] < [_qgasMaxTF.text floatValue]) {
-            [kAppD.window makeToastDisappearWithText:@"Current QLC Wallet have not enough QGAS"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_enough_qgas")];
             return;
         }
         
         // 检查平台地址
         NSString *qlcAddress = [QLCWalletManage shareInstance].qlcMainAddress;
         if ([qlcAddress isEmptyString]) {
-            [kAppD.window makeToastDisappearWithText:@"QLC Server Address is empty"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"qlc_server_address_is_empty")];
             return;
         }
         
@@ -406,7 +406,7 @@
     PayReceiveAddressViewController *vc = [PayReceiveAddressViewController new];
 //    vc.inputAddress = model.usdtToAddress?:@"";
 //    vc.inputAmount = _usdtMaxTF.text;
-    vc.inputAddressType = PayReceiveAddressTypeUSDT;
+//    vc.inputAddressType = PayReceiveAddressTypeUSDT;
     vc.backToRoot = YES;
     vc.tradeM = model;
     [self.navigationController pushViewController:vc animated:YES];

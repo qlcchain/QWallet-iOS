@@ -46,9 +46,9 @@
 #pragma mark - Operation
 - (void)renderView {
     [_ownerPrivateTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _ownerPrivateTV.placeholder = @"Please input owner private key";
+    _ownerPrivateTV.placeholder = kLang(@"please_input_owner_private_key");
     [_activePrivateTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _activePrivateTV.placeholder = @"Please input active private key";
+    _activePrivateTV.placeholder = kLang(@"please_input_active_private_key");
     
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_privateStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
@@ -56,7 +56,7 @@
 
 - (void)showImportSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Import Success"];
+    [tip showWithTitle:kLang(@"import_success")];
 }
 
 - (void)backToRoot {
@@ -89,28 +89,28 @@
 
 - (IBAction)importAction:(id)sender {
     if (!privatekeyAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_ownerPrivateTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input owner private key"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_owner_private_key")];
         return;
     }
     if (_activePrivateTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input active private key"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_active_private_key")];
         return;
     }
     if (_accountNameTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input Account name"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_account_name")];
         return;
     }
     
     if (![EOS_Key_Encode validateWif:_ownerPrivateTV.text]) {
-        [kAppD.window makeToastDisappearWithText:@"owner private key format error"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"owner_private_key_format_error")];
         return;
     }
     if (![EOS_Key_Encode validateWif:_activePrivateTV.text]) {
-        [kAppD.window makeToastDisappearWithText:@"active private key format error"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"active_private_key_format_error")];
         return;
     }
     
@@ -126,7 +126,7 @@
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Import fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
         }
     }];
 }

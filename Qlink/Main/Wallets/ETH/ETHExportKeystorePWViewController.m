@@ -69,7 +69,7 @@
 //        return;
 //    }
     if (![_confirmPWTF.text?:@"" isEqualToString:_pwTF.text?:@""]) {
-        [kAppD.window makeToastDisappearWithText:@"The passwords are different"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
     

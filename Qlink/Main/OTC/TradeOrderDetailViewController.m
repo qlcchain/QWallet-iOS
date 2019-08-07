@@ -171,8 +171,8 @@ NSString *title_appeal_result = @"Check the Appeal Result";
         BOOL i_am_Buyer = [loginM.ID isEqualToString:_orderInfoM.buyerId]?YES:NO;
         if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
             _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
-            _statusTitleLab.text = @"Waiting for Buyer's payment";
-            _statusSubTitleLab.text = @"The order will be closed automatically, if no further confirmation within 30 minutes.";
+            _statusTitleLab.text = kLang(@"waiting_for_buyer_payment");
+            _statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
             
             [self requestGetServerTime];
             
@@ -181,7 +181,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _orderTimeHeight.constant = 56;
             _orderTimeLab.text = _orderInfoM.orderTime;
             _orderStatusHeight.constant = 56;
-            _orderStatusLab.text = @"Waiting for Buyer's payment";
+            _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
             if (i_am_Buyer) {
                 _bottomView1Height.constant = 59;
                 _bottomBack1.hidden = NO;
@@ -190,8 +190,8 @@ NSString *title_appeal_result = @"Check the Appeal Result";
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
             _statusBack.backgroundColor = MAIN_BLUE_COLOR;
             
-            _statusTitleLab.text = @"Waiting for Seller's confirmation";
-            _statusSubTitleLab.text = @"Waiting for Seller's confirmation";
+            _statusTitleLab.text = kLang(@"waiting_for_seller_confirmation");
+            _statusSubTitleLab.text = kLang(@"waiting_for_seller_confirmation");
 
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
@@ -200,7 +200,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _confirmPayTimeHeight.constant = 56;
             _confirmPayTimeLab.text = _orderInfoM.buyerConfirmDate;
             _orderStatusHeight.constant = 56;
-            _orderStatusLab.text = @"Waiting for Seller's confirmation";
+            _orderStatusLab.text = kLang(@"waiting_for_seller_confirmation");
             _infoAddressHeight.constant = 76;
             _infoAddressLab.text = _orderInfoM.usdtFromAddress;
             _tradeIDHeight.constant = 76;
@@ -246,24 +246,24 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _successfulDealHeight.constant = 56;
             _successfulDealLab.text = _orderInfoM.sellerConfirmDate;
             _orderStatusHeight.constant = 56;
-            _orderStatusLab.text = @"Successful Deal";
+            _orderStatusLab.text = kLang(@"successful_deal");
             _infoAddressHeight.constant = 76;
             _infoAddressLab.text = _orderInfoM.usdtFromAddress;
             if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
                 _complaintHeight.constant = 56;
-                _complaintLab.text = @"Appeal Processing";
+                _complaintLab.text = kLang(@"appeal_processing");
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
                 _complaintHeight.constant = 56;
-                _complaintLab.text = @"Successful Appeal";
+                _complaintLab.text = kLang(@"successful_appeal");
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
                 _complaintHeight.constant = 56;
-                _complaintLab.text = @"Fail Appeal";
+                _complaintLab.text = kLang(@"fail_appeal");
             }
             _tradeIDHeight.constant = 76;
             _tradeIDLab.text = _orderInfoM.txid;
         
-            _statusTitleLab.text = @"Successful Deal";
-            _statusSubTitleLab.text = @"Successful Deal";
+            _statusTitleLab.text = kLang(@"successful_deal");
+            _statusSubTitleLab.text = kLang(@"successful_deal");
 //            _bottomView3Height.constant = 59;
 //            _bottomBack3.hidden = NO;
 //            if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
@@ -288,7 +288,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
                 _closingTimeLab.text = _orderInfoM.closeDate;
             }
             _orderStatusHeight.constant = 56;
-            _orderStatusLab.text = @"Revoked";
+            _orderStatusLab.text = kLang(@"revoked");
             if (_orderInfoM.usdtFromAddress && _orderInfoM.usdtFromAddress.length > 0) {
                 _infoAddressHeight.constant = 76;
                 _infoAddressLab.text = _orderInfoM.usdtFromAddress;
@@ -298,8 +298,8 @@ NSString *title_appeal_result = @"Check the Appeal Result";
                 _tradeIDLab.text = _orderInfoM.txid;
             }
             
-            _statusTitleLab.text = @"Closed";
-            _statusSubTitleLab.text = @"Closed";
+            _statusTitleLab.text = kLang(@"closed");
+            _statusSubTitleLab.text = kLang(@"closed");
             _bottomView3Height.constant = 59;
             _bottomBack3.hidden = NO;
             if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
@@ -323,7 +323,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
                 _closingTimeLab.text = _orderInfoM.closeDate;
             }
             _orderStatusHeight.constant = 56;
-            _orderStatusLab.text = @"Closed";
+            _orderStatusLab.text = kLang(@"closed");
             if (_orderInfoM.usdtFromAddress && _orderInfoM.usdtFromAddress.length > 0) {
                 _infoAddressHeight.constant = 76;
                 _infoAddressLab.text = _orderInfoM.usdtFromAddress;
@@ -333,8 +333,8 @@ NSString *title_appeal_result = @"Check the Appeal Result";
                 _tradeIDLab.text = _orderInfoM.txid;
             }
             
-            _statusTitleLab.text = @"Closed";
-            _statusSubTitleLab.text = @"Closed";
+            _statusTitleLab.text = kLang(@"closed");
+            _statusSubTitleLab.text = kLang(@"closed");
             _bottomView3Height.constant = 59;
             _bottomBack3.hidden = NO;
             if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
@@ -348,27 +348,26 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             }
         }
         
-        
         if (i_am_Buyer) {
-            _addressTitleLab.text = @"QLC Chain Address to receive QGAS";
+            _addressTitleLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
             _addressLab.text = _orderInfoM.qgasToAddress;
-            _typeLab.text = @"BUY";
+            _typeLab.text = kLang(@"buy");
             _typeLab.textColor = MAIN_BLUE_COLOR;
-            _buyOrSellLab.text = @"Seller";
+            _buyOrSellLab.text = kLang(@"seller");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
             
         } else {
-            _addressTitleLab.text = @"ERC-20 Address to receive USDT";
+            _addressTitleLab.text = kLang(@"erc-20_address_to_receive_usdt");
             _addressLab.text = _orderInfoM.usdtToAddress;
-            _typeLab.text = @"SELL";
+            _typeLab.text = kLang(@"sell");
             _typeLab.textColor = UIColorFromRGB(0xFF3669);
-            _buyOrSellLab.text = @"Buyer";
+            _buyOrSellLab.text = kLang(@"buyer");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
 //            _payKeyLab.text = @"Amount";
 //            _payValLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
         }
-        _payKeyLab.text = @"Amount";
+        _payKeyLab.text = kLang(@"amount");
         _payValLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.usdtAmount];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
@@ -463,7 +462,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 
 - (void)showAlreadyPaySuccessView {
     SuccessTipView *view = [SuccessTipView getInstance];
-    [view showWithTitle:@"Successful"];
+    [view showWithTitle:kLang(@"successful")];
 }
 
 - (void)showAlreadyPayFailView:(NSString *)title {
@@ -482,7 +481,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 //            NSString *str_hour = [NSString stringWithFormat:@"%02ld", second / 3600];
             NSString *str_minute = [NSString stringWithFormat:@"%02ld", (second % 3600) / 60];
             NSString *str_second = [NSString stringWithFormat:@"%02ld", second % 60];
-            NSString *strTime = [NSString stringWithFormat:@"The order will be closed automatically, if no further confirmation within %@:%@ minutes.", str_minute, str_second];
+            NSString *strTime = [NSString stringWithFormat:@"%@ %@:%@ %@.", kLang(@"the_order_will_be_closed_automatically_if_no_further_confirmation_within"),str_minute, str_second,kLang(@"minutes")];
             weakself.statusSubTitleLab.text = strTime;
             if (second == 0) {
                 dispatch_cancel(weakself.countDownTimer);
@@ -616,10 +615,10 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             NSDate *dateNow = [NSDate dateFromTime:weakself.serverTime];
             NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
             if (countDownSecond >= 0) {
-                weakself.statusSubTitleLab.text = @"The order will be closed automatically, if no further confirmation within 30 minutes.";
+                weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
                 [weakself startCountDown:countDownSecond];
             } else {
-                weakself.statusSubTitleLab.text = @"The order will be closed automatically, if no further confirmation within 0 minutes.";
+                weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____0");
             }
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
@@ -674,19 +673,19 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 - (IBAction)addressCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _addressLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)payCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _payValLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)buyerAddressCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _infoAddressLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)txidCopyAction:(id)sender {
@@ -707,11 +706,11 @@ NSString *title_appeal_result = @"Check the Appeal Result";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToUSDTAddress:(NSString *)usdtAddress  {
+- (void)jumpToUSDTAddress:(NSString *)usdtAddress {
     PayReceiveAddressViewController *vc = [PayReceiveAddressViewController new];
 //    vc.inputAddress = usdtAddress;
 //    vc.inputAmount = _orderInfoM.usdtAmount;
-    vc.inputAddressType = PayReceiveAddressTypeUSDT;
+//    vc.inputAddressType = PayReceiveAddressTypeUSDT;
     vc.transferToTradeDetail = YES;
     vc.tradeM = _orderInfoM;
     [self.navigationController pushViewController:vc animated:YES];

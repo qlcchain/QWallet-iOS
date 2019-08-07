@@ -63,7 +63,7 @@
     UIImage *image = [UIImage captureWithView:_qrImage];
     [pasteboard setImage:image];
 //    pasteboard.image = image;
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
     [self hide];
 }
 

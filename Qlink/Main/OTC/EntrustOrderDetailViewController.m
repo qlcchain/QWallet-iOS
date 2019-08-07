@@ -78,32 +78,32 @@
         
         if ([_orderInfoM.status isEqualToString:@"NORMAL"]) {
             _orderStatusBack.backgroundColor = MAIN_BLUE_COLOR;
-            _statusTitleLab.text = @"Active";
-            _statusSubTitleLab.text = @"Active";
+            _statusTitleLab.text = kLang(@"active");
+            _statusSubTitleLab.text = kLang(@"active");
             _bottomBackHeight.constant = 59;
         } else if ([_orderInfoM.status isEqualToString:@"CANCEL"]) {
             _orderStatusBack.backgroundColor = UIColorFromRGB(0x999999);
-            _statusTitleLab.text = @"Revoked";
-            _statusSubTitleLab.text = @"Revoked";
+            _statusTitleLab.text = kLang(@"revoked");
+            _statusSubTitleLab.text = kLang(@"revoked");
             _bottomBackHeight.constant = 0;
         } else if ([_orderInfoM.status isEqualToString:@"END"]) {
             _orderStatusBack.backgroundColor = UIColorFromRGB(0x4ACCAF);
-            _statusTitleLab.text = @"Completed";
-            _statusSubTitleLab.text = @"Completed";
+            _statusTitleLab.text = kLang(@"completed");
+            _statusSubTitleLab.text = kLang(@"completed");
             _bottomBackHeight.constant = 0;
         }
         
         if ([_orderInfoM.type isEqualToString:@"SELL"]) {
-            _addressTitleLab.text = @"ERC-20 Address to receive USDT";
+            _addressTitleLab.text = kLang(@"erc-20_address_to_receive_usdt");
             _addressLab.text = _orderInfoM.usdtAddress;
-            _typeLab.text = @"ENTRUST SELL QGAS";
+            _typeLab.text = kLang(@"entrust_sell_qgas");
             _typeLab.textColor = UIColorFromRGB(0xFF3669);
             _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
             _remainLab.textColor = UIColorFromRGB(0xFF3669);
         } else if ([_orderInfoM.type isEqualToString:@"BUY"]) {
-            _addressTitleLab.text = @"QLC Chain Address to receive QGAS";
+            _addressTitleLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
             _addressLab.text = _orderInfoM.qgasAddress;
-            _typeLab.text = @"ENTRUST BUY QGAS";
+            _typeLab.text = kLang(@"entrust_buy_qgas");
             _typeLab.textColor = MAIN_BLUE_COLOR;
             _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
             _remainLab.textColor = MAIN_BLUE_COLOR;
@@ -185,16 +185,15 @@
     [RequestService requestWithUrl:entrust_cancel_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself requestEntrust_order_info];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Fail."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
     }];
 }
-
 
 
 #pragma mark - UITableViewDataSource
@@ -230,9 +229,8 @@
 - (IBAction)addressCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _addressLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
-
 
 - (IBAction)cancelAction:(id)sender {
     [self requestEntrust_cancel_order];

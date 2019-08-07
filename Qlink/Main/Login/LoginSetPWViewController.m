@@ -89,7 +89,7 @@
 
 - (IBAction)joinAction:(id)sender {
     if (![_pwTF.text isEqualToString:_repeatTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"The two passwords were different"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_two_passwords_were_different")];
         return;
     }
     

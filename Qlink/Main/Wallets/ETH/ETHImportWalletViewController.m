@@ -100,28 +100,28 @@ typedef enum : NSUInteger {
 
 - (void)renderMnemonicView {
     [_mnemonicTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _mnemonicTV.placeholder = @"Please use space to separate the mnemonic words";
+    _mnemonicTV.placeholder = kLang(@"please_use_space_to_separate_the_mnemonic_words");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_mnemonicStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
 
 - (void)renderOfficialView {
     [_officialTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _officialTV.placeholder = @"Keystore content";
+    _officialTV.placeholder = kLang(@"keystore_content");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_officialStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
 
 - (void)renderPrivatekeyView {
     [_privateTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _privateTV.placeholder = @"Please input your private key";
+    _privateTV.placeholder = kLang(@"please_input_your_private_key");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_privateStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
 
 - (void)renderWatchView {
     [_watchTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _watchTV.placeholder = @"Wallet Address";
+    _watchTV.placeholder = kLang(@"wallet_address");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_watchStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
@@ -150,7 +150,7 @@ typedef enum : NSUInteger {
 
 - (void)showImportSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Import Success"];
+    [tip showWithTitle:kLang(@"import_success")];
 }
 
 - (void)backToRoot {
@@ -235,16 +235,16 @@ typedef enum : NSUInteger {
 
 - (IBAction)mnemonicImportAction:(id)sender {
     if (!mnemonicAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_mnemonicTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     NSArray *arr = [_mnemonicTV.text componentsSeparatedByString:@" "];
     if (!arr || arr.count != 12) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Mnemonic"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_valid_mnemonic")];
         return;
     }
     
@@ -279,18 +279,18 @@ typedef enum : NSUInteger {
                 [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
             }];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Import fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
         }
     }];
 }
 
 - (IBAction)officialImportAction:(id)sender {
     if (!keystoreAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_officialTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
@@ -322,18 +322,18 @@ typedef enum : NSUInteger {
                 [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
             }];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Import fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
         }
     }];
 }
 
 - (IBAction)privatekeyImportAction:(id)sender {
     if (!privatekeyAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_privateTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
@@ -360,25 +360,25 @@ typedef enum : NSUInteger {
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Import fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
         }
     }];
 }
 
 - (IBAction)watchImportAction:(id)sender {
     if (!watchAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_watchTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
     // 检查地址有效性
     BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_watchTV.text];
     if (!isValid) {
-        [kAppD.window makeToastDisappearWithText:@"Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"address_is_invalidate")];
         return;
     }
     
@@ -402,7 +402,7 @@ typedef enum : NSUInteger {
             [weakself showImportSuccessView];
             [weakself performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Import fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
         }
     }];
 }

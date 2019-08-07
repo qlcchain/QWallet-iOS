@@ -68,7 +68,7 @@
     _selectSymbol = _inputSymbol?:_inputSourceArr?_inputSourceArr.firstObject:nil;
     _tokenPriceArr = [NSMutableArray array];
     
-    _sendtoAddressTV.placeholder = @"Please input EOS account name";
+    _sendtoAddressTV.placeholder = kLang(@"please_input_eos_account_name");
     _sendtoAddressTV.text = _inputAccount_name;
     
     _sendBtn.userInteractionEnabled = NO;
@@ -80,7 +80,7 @@
 
 - (void)refreshView {
     _symbolLab.text = _selectSymbol.symbol;
-    _balanceLab.text = [NSString stringWithFormat:@"Balance: %@ %@",[_selectSymbol getTokenNum],_selectSymbol.symbol];
+    _balanceLab.text = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectSymbol getTokenNum],_selectSymbol.symbol];
     [self requestTokenPrice];
 }
 
@@ -127,7 +127,7 @@
 
 - (void)showTransferSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Success"];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 #pragma mark - Request
@@ -170,15 +170,15 @@
 
 - (IBAction)sendAction:(id)sender {
     if (!_amountTF.text || _amountTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"EOS Account is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eos_account_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] <= 0 || [_amountTF.text doubleValue] > [[_selectSymbol getTokenNum] doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Insufficient balance"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
         return;
     }
 //    if ([_amountTF.text doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
@@ -189,7 +189,7 @@
     // 检查地址有效性
     BOOL validateEOSAccountName = [RegularExpression validateEosAccountName:_sendtoAddressTV.text];
     if (!validateEOSAccountName) {
-        [kAppD.window makeToastDisappearWithText:@"EOS Account is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eos_account_is_invalidate")];
         return;
     }
     
@@ -207,7 +207,7 @@
         }];
         [alertC addAction:alert];
     }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
     [self presentViewController:alertC animated:YES completion:nil];

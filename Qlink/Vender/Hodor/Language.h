@@ -9,13 +9,13 @@
 
 // replace the NSLocalizedString() in run time
 #define kLang(key) [Language get:key alter:nil]
-#define LanguageCode @[@"en", @"zh-Hant"]
+#define LanguageCode @[@"en", @"zh-Hans"]
 #define kLanguageChangeNoti @"kLanguageChangeNoti"
 
 @interface Language : NSObject
 
-+ (void)initialize;
-+ (void)setLanguage:(NSString *)language;
+//+ (void)initialize;
+//+ (void)setLanguage:(NSString *)language;
 + (NSString*)currentLanguageCode;
 + (void)userSelectedLanguage:(NSString *)selectedLanguage;
 + (NSString *)get:(NSString *)key alter:(NSString *)alternate;

@@ -31,13 +31,24 @@
 @end
 
 @implementation HomeBuySellViewController
+    
+#pragma mark - Observe
+- (void)addObserve {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.view.theme_backgroundColor = globalBackgroundColorPicker;
+    [self addObserve];
     
+    self.view.theme_backgroundColor = globalBackgroundColorPicker;
+
     [self configInit];
     [self requestEntrust_order_list];
 }
@@ -53,6 +64,8 @@
 
 #pragma mark - Operation
 - (void)configInit {
+    [self refreshSegTitle];
+    
     [self.view addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     _currentBuyPage = 1;
@@ -82,7 +95,12 @@
     view.okBlock = ^{
         [weakself jumpToVerification];
     };
-    [view showWithTitle:@"Please finish the verification on Me Page."];
+    [view showWithTitle:kLang(@"please_finish_the_verification_on_me_page")];
+}
+
+- (void)refreshSegTitle {
+    [_mainSeg setTitle:kLang(@"buy") forSegmentAtIndex:0];
+    [_mainSeg setTitle:kLang(@"sell") forSegmentAtIndex:1];
 }
 
 #pragma mark - Request
@@ -232,6 +250,12 @@
 - (void)jumpToVerification {
     VerificationViewController *vc = [VerificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Noti
+- (void)languageChangeNoti:(NSNotification *)noti {
+    [self refreshSegTitle];
+    [_mainTable.mj_header beginRefreshing];
 }
 
 @end

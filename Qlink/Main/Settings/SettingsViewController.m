@@ -18,6 +18,7 @@
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 
@@ -25,18 +26,10 @@
 
 @implementation SettingsViewController
 
-//NSString *title0 = @"Password Management";
-NSString *title1 = @"Currency Unit";
-//NSString *title2 = @"My Wallet";
-NSString *title3 = @"Service Agreement";
-NSString *title4 = @"Help and Feedback";
-//NSString *title5 = @"Join the Community";
-NSString *title6 = @"About My QWallet";
-NSString *title7 = @"Log out";
-
 #pragma mark - Observe
 - (void)addObserve {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currencyChang:) name:Currency_Change_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -60,22 +53,33 @@ NSString *title7 = @"Log out";
 
 #pragma mark - Operation
 - (void)configInit {
-    NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[title1,title3,title4,title6,title_screen_lock]];
+    _titleLab.text = kLang(@"settings");
+    [_sourceArr removeAllObjects];
+    NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[kLang(@"currency_unit"),kLang(@"service_agreement"),kLang(@"help_and_feedback"),kLang(@"about_my_qwallet"),kLang(title_screen_lock),kLang(@"language")]];
     if ([UserModel haveLoginAccount]) {
-        [titleArr addObject:title7];
+        [titleArr addObject:kLang(@"log_out")];
     }
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         SettingsShowModel *model = [[SettingsShowModel alloc] init];
         model.title = obj;
-        if ([obj isEqualToString:title_screen_lock]) {
+        if ([obj isEqualToString:kLang(title_screen_lock)]) {
             model.haveNextPage = NO;
             model.showSwitch = YES;
         } else {
             model.haveNextPage = YES;
             model.showSwitch = NO;
         }
-        model.detail = [obj isEqualToString:title1]?[ConfigUtil getLocalUsingCurrency]:[obj isEqualToString:title6]?[NSString stringWithFormat:@"Version %@(%@)",APP_Version,APP_Build]:nil;
+        if ([obj isEqualToString:kLang(@"currency_unit")]) {
+            model.detail = [ConfigUtil getLocalUsingCurrency];
+        } else if ([obj isEqualToString:kLang(@"about_my_qwallet")]) {
+            model.detail = [NSString stringWithFormat:@"Version %@(%@)",APP_Version,APP_Build];
+        } else if ([obj isEqualToString:kLang(@"language")]) {
+            NSString *language = [Language currentLanguageCode];
+            model.detail = [language isEmptyString]?@"Chinese(Simplified)":[language isEqualToString:LanguageCode[0]]?@"English":@"Chinese(Simplified)";
+        } else {
+            model.detail = nil;
+        }
         [weakself.sourceArr addObject:model];
     }];
     [_mainTable reloadData];
@@ -99,6 +103,22 @@ NSString *title7 = @"Log out";
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)showSelectLanguage {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"English" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [Language userSelectedLanguage:LanguageCode[0]];
+    }];
+    [alertVC addAction:action1];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Chinese(Simplified)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [Language userSelectedLanguage:LanguageCode[1]];
+    }];
+    [alertVC addAction:action2];
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertVC addAction:action3];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
@@ -117,13 +137,15 @@ NSString *title7 = @"Log out";
 //    if ([model.title isEqualToString:title0]) {
 //        [self jumpToPWManagement];
 //    } else
-    if ([model.title isEqualToString:title1]) {
+    if ([model.title isEqualToString:kLang(@"currency_unit")]) {
         [self jumpToChooseCurrency];
-    } else if ([model.title isEqualToString:title3]) {
+    } else if ([model.title isEqualToString:kLang(@"service_agreement")]) {
         NSString *url = @"https://docs.google.com/document/d/1yTr1EDXmOclDuSt4o0RRUc0fVjJU3zPREK97C1RmYdI/edit?usp=sharing";
-        [self jumpToWeb:url title:title3];
-    } else if ([model.title isEqualToString:title7]) {
+        [self jumpToWeb:url title:kLang(@"service_agreement")];
+    } else if ([model.title isEqualToString:kLang(@"log_out")]) {
         [self logout];
+    } else if ([model.title isEqualToString:kLang(@"language")]) {
+        [self showSelectLanguage];
     }
 }
 
@@ -171,7 +193,11 @@ NSString *title7 = @"Log out";
 
 #pragma mark - Noti
 - (void)currencyChang:(NSNotification *)noti {
-    [self refreshDataWithTitle:title1 detail:[ConfigUtil getLocalUsingCurrency]];
+    [self refreshDataWithTitle:kLang(@"currency_unit") detail:[ConfigUtil getLocalUsingCurrency]];
+}
+
+- (void)languageChangeNoti:(NSNotification *)noti {
+    [self configInit];
 }
 
 @end

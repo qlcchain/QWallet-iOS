@@ -41,14 +41,14 @@
 #pragma mark - Operation
 - (void)renderView {
     [_privateTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _privateTV.placeholder = @"Please input your private key";
+    _privateTV.placeholder = kLang(@"please_input_your_private_key");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_privateStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
 
 - (void)showImportSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Import Success"];
+    [tip showWithTitle:kLang(@"import_success")];
 }
 
 - (void)backToRoot {
@@ -76,11 +76,11 @@
 
 - (IBAction)importAction:(id)sender {
     if (!privatekeyAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_privateTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input Success"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
@@ -103,7 +103,7 @@
 //        [self performSelector:@selector(jumpToTabbar) withObject:nil afterDelay:2];
         [self performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
     } else {
-        [kAppD.window makeToastDisappearWithText:@"Import fail"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
     }
 }
 

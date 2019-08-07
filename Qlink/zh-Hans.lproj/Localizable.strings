@@ -2,497 +2,250 @@
   Localizable.strings
   Qlink
 
-  Created by 旷自辉 on 2018/3/29.
-  Copyright © 2018年 pan. All rights reserved.
+  Created by Jelly Foo on 2019/8/5.
+  Copyright © 2019 pan. All rights reserved.
 */
 
-
-"vpn" = "VPN";
-
-"wifi" = "WIFI";
-
-"wallet" = "WALLET";
-
-"request_error" = "Network request error";
-
-"pass_input" = "Please enter your password";
-
-"pass_format" = "Please enter at least 6 passwords";
-
-"pass_same" = "The passwords do not match";
-
-"wallet_create" = "Wallet creation failed";
-
-"wallet_import" = "Failed wallet import";
-
-"private_key_exported" = "The private key was successfully exported";
-
-"copy"        = "copy";
-
-"import_private" = "Please enter the private key";
-
-"copy_successs" = "Copy success";
-
-"wait"       = "Please wait for";
-
-"buy_qlc"   = "For failure";
-
-"send_qlc"  = "Transfer failed";
-
-"address_format" = "The address format is incorrect";
-
-"p2p_connect_status"    = "Please wait for the p2p to be connected";
-
-"privateKey_format" = "The private key format is incorrect";
-
-"no_code" = "No qr code was recognized";
-
-"friend_unline_p2p" = "Friends are not online";
-
-//-----------Chat-----------
-
-"type_a_message" = "Please enter a message";
-
-//-----------VPN-----------
-"check" = "Verify validity...";
-
-"check_profile" = "Please check the network or profile";
-
-"input_fileName" = "Input file name";
-
-"characters" = "Contains illegal characters";
-
-"fileName_exists" = "The filename already exists";
-
-"choose_country" = "Choose a country";
-
-"depost_empty" = "Deposit cannot be empty";
-
-"vpnName_empty" = "The VPN name cannot be empty";
-
-"choose_a_profile" =  "Please Choose a Profile";
-
-"select_profile" = "Select the Profile";
-
-"timeout" = "Join Group timeout";
-
-"original_price" = "The price must be higher than the original price.";
-
-"save_failed" = "Save Preference Fail ! Tay Again...";
-
-"checking" = "Checking...";
-
-"connecting" = "Connecting...";
-
-"spending" = "Spending";
-
-"income" = "Income";
-
-"country" = "Country";
-
-"spend_account" = "You have QLC to spend your account!";
-
-"into_account" = "You have QLC into your account!";
-
-"loading" = "Loading...";
-
-"connect_timeout" = "Check connection timeout";
-
-"vpn_timeout" = "VPN connection timeout";
-
-"profile_empty" = "The Profile path is empty";
-
-"insufficient_assets" = "Insufficient assets";
-
-"no_assets" = "No asset records.";
-
-"no_records" = "No transaction records.";
-
-"unable_photo" = "Unable to access photo albums";
-
-"fingerprint_verification" = "Fingerprint verification";
-
-"group_invalid" = "The group is invalid";
-
-"transfer" = "Transfer";
-
-"wallets_available" = "Wallets available";
-
-"wifi_assets" = "WiFi Assets";
-
-"vpn_assets" = "VPN Assets";
-
-"english" = "English";
-
-"fingeprint_unlock" = "Fingerprint to unlock";
-
-"wallet_details" =  "Wallet Details";
-
-"swith_wallets" = "Switch Wallets";
-
-"language" = "Language";
-
-"my_register_assets" = "My Registered Assets";
-
-"disclaimer" = "disclaimer";
-
-"version" = "Version";
-
-"government" = "My government...";
-
-"want_spend" = "ARE YOU SURE YOU WANT\nTO SPEND";
-
-"qlc_to_connnect" = "QLC TO\nCONNECT?";
-
-"want_buy" = "Sure you want to buy";
-
-"neo?" = "NEO?";
-
-"amount_of" = "QLC\nfor the amount of";
-
-"want_send" = "Sure you want to send";
-
-"qlc_to" = "QLC\n to\n";
-
-"purchase" = "CONFIRM PURCHASE";
-
-"withdrawal" = "CONFIRM WITHDRAWAL";
-
-"vpn_detail" = "VPN DETAIL";
-
-"public_address" = "PUBLIC ADDRESS";
-
-"public_address_lower" = "Public Address";
-
-"encrypted_key" = "ENCRYPTED KEY";
-
-"encrypted_key_lower" = "Encrypted Key(WIF)";
-
-"private_key" = "PRIVATE KEY";
-
-"private_key_lower" = "Private Key(HEX)";
-
-"settings" = "SETTINGS";
-
-"register_assets" = "MY REGISTERED ASSETS";
-
-"profile_picture" = "PROFILE PICTURE";
-
-"save_picture" = "SAVE PICTURE";
-
-"skip" = "SKIP";
-
-"not_found" = "Not Found";
-
-// ~~~~~~~~~~~~~~~vpn注册界面~~~~~~~~~~~~~~~
-
-"vpn_infomation" = "VPN INFOMATION";
-
-"vpn_location" = "VPN Server Location ";
-
-"vpn_name" = "VPN Name";
-
-"changed_confirmed" = "can not be changed once confirmed";
-
-"asset_value" = "ASSET VALUE";
-
-"deposit" = "Deposit";
-
-"claim" = "Claim";
-
-"openvpn_profile" = "Import OpenVPN Configuration Profile";
-
-"privately_pass" = "Private Key Password";
-
-"username" = "Username";
-
-"pass" = "Password";
-
-"fields_optional" = "Fields are Optional";
-
-"hourly_fee" = "Hourly Fee (QLC)";
-
-"maxinum_connections" = "Maxinum Number of Connections";
-
-"vpn_schedule" = "VPN availability schedule";
-
-"enter_filename" = "ENTER A FILENAME";
-
-"filename_exists" = "The file name already exists";
-
-"cancel" = "CANCEL";
-
-"ok" = "OK";
-
-"next" = "NEXT";
-
-"finsh" = "FINISH";
-
-"contiune" = "CONTINUE";
-
-"yes" = "YES";
-
-// ~~~~~~~~~~~~~~~vpnCell界面~~~~~~~~~~~~~~~
-
-"vpn_asset" = "My VPN Asset";
-
-"price" = "Price";
-
-"users" = "Users";
-
-//~~~~~~~~~~~~~~~vpnController界面~~~~~~~~~~~~~~~
-
-"choose_vpn" = "Choose a VPN";
-
-"owner" = "Owner";
-
-"seize" = "Seize";
-
-"play_win" = "PLAY AND WIN!";
-
-"seize_asset" = "SEIZE VPN ASSET";
-
-// ~~~~~~~~~~~~~~~ChooseContinentViewController界面~~~~~~~~~~~~~~~
-
-"choose_continent" = "CHOOSE A CONTINENT";
-
-// ~~~~~~~~~~~~~~~ChooseCountryViewController界面~~~~~~~~~~~~~~~
-
-"choose_region" = "CHOOSE A REGION/COUNTRY";
-
-"searching" = "Searching";
-
-// ~~~~~~~~~~~~~~~VPNConnectViewController界面~~~~~~~~~~~~~~~
-
-"continent" = "Continent";
-
-"devices_connected" = "Devices connected";
-
-"band_width" = "Band Width";
-
-"yes_connect" = "YES,CONNECT";
-
-"ip_address" = "IP Address";
-
-"connected." = "CONNECTED";
-
-"userid" = "UserID / IP Address";
-
-"somecustomid" = "SomeCustomID / 47.90.56.140";
-
-// ~~~~~~~~~~~~~~~WalletMenuView界面~~~~~~~~~~~~~~~
-
-"register_assets" = "REGISTERED ASSETS";
-
-"send_funds" = "SEND FUNDS";
-
-"view_history" = "VIEW HISTORY";
-
-"buy_qlc" = "BUY QLC";
-
-"amount_neo" = "Amount of NEO";
-
-"max" = "MAX";
-
-"1mount_qlc" = "Amount of QLC";
-
-"current_rate" = "Current exchange rate:";
-
-"exchange" = "Exchange";
-
-"you_can" = "You can ";
-
-"buy_now" = "BUY NOW";
-
-"receiver_address" = "Receiver address";
-
-"past_address" = "PASTE ADDRESS";
-
-"scan_code" = "SCAN QR CODE";
-
-"amunt_send" = "Amount to send";
-
-"least_drop_gas" = "You must hold at least 1 drop of GAS in order to send NEP-5 tokens.";
-
-"send_now" = "SEND NOW";
-
-"your_address" = "Your address";
-
-"supported_tokens" = "Supported tokens";
-
-"receive_tokens" = "To receive NEP-5 tokens, copy the address and share it with the sender";
-
-"transfer_processed" = "Your transfer request is being processed";
-
-"withdrawal_soon" = "Your withdrawal will arrive soon";
-
-"purchase_successful" = "PURCHASE SUCCESSFUL";
-
-"copy_address" = "COPY ADDRESS";
-
-"your_regster_assets" = "Your Reigsted Assets";
-
-"values" = "Values";
-
-"earnings" = "Earnings";
-
-"security_check" = "SECURITY CHECK";
-
-"prompt" = "PROMPT";
-
-"sendig_gas_tran" = "When sending all GAS, please subtract 0.00000001 from the total amount. This prevents rounding errors which can cause the transaction to not process";
-
-"surroundings" = "Check your surroundings!";
-
-"always_keep" = "Always keep your Private Keys a secret\nCheck your surroundings! Make sure\nthere are\nno cammeras recording or people\nwatching.\nIs it safe to display your Private Key QR code?";
-
-// ~~~~~~~~~~~~~~~CreateNewWalletViewController界面~~~~~~~~~~~~~~~
-
-"create_wallet" = "CREATE NEW WALLET";
-
-"choose_pass" = "Choose a unique password";
-
-"protect_wallets" = "to protect yours wallets.";
-
-"repeat_pass" = "Repeat password";
-
-// ~~~~~~~~~~~~~~~HistoryRecordsViewController界面~~~~~~~~~~~~~~~
-
-"history_records" = "HISTORY RECORDS";
-
-"register_transactions" = "Registrations, Sharing, Transactions";
-
-// ~~~~~~~~~~~~~~~NewWalletViewController界面~~~~~~~~~~~~~~~
-
-"again" = "Hello again!";
-
-"another_wallet" = "Do you want to add another wallet?";
-
-"enter_privatekey" = "ENTER PRIVATE KEY";
-
-"scan_privatekey_qr" = "SCAN PRIVATE KEY QR";
-
-"new_wallet" = "NEW WALLET";
-
-"unlock_wallet" = "UNLOCK WALLET";
-
-"enter_pass_continue" = "You must enter your password to continue.";
-
-"wallet_created" = "WALLET CREATED";
-
-"enter_pass_unlock" = "You will still need to enter your password to unlock your wallet.";
-
-"export_keys" = "EXPORT KEYS";
-
-"manage_wallets" = "MANAGE YOUR WALLETS";
-
-"view_code" = "VIEW QR CODE";
-
-"change_wallet" = "CHANGE WALLET";
-
-"import_wallet" = "Import My Wallet";
-
-"import_privatekey_wallet" = "Enter private key to import your wallet:";
-
-"encrypted_key" = "Encrypted Key";
-
-"scan_address" = "Scan the Receivers address";
-
-"my_wallet" = "MY WALLET";
-
-"select_a_wallet" = "SELECT A WALLET";
-
-"select_wallet" = "SELECT WALLET";
-
-"add_wallet" = "ADD NEW WALLET";
-
-"welcome_chat" = "Welcome to Group Chat! Feel free to contact the owner if you have any questions.";
-
-"message" = "Type a message";
-
-"lorem_ipsum" = "Lorem ipsum!\nNulla sapien lacus, lacinia et lectus eu,\nposuere iaculis mauris. Sed et mauris enim.";
-
-"prasent_sed" = "Prasent sed aliquet ligula,non sodales\narcu. Sed eget pretium ligula, in placerat\nnulla. Vestibulum blandit sed tellus!";
-
-"start_rlaying" = "START RLAYING";
-
-"are_you_ready" = "ARE YOU READY ?";
-
-"welcome_game" = "WELCOME TO";
-
-"win_game" = "WINQ'S WORLDCUP GAME";
-
-"worldcup_game" = "WORLDCUP GAME";
-
-"matches" = "MATCHES";
-
-"match_results" = "MATCH RESULTS";
-
-"mainnet_wallet" = "MAINNET WALLET";
-
-// ####. 2018-06-14
-"switch_server" = "Switch Network";
-"main_server" = "MainNet";
-"test_server" = "TestNet";
-"switch_success" = "Switch Success";
-
-"VPNRegFailed" = "VPN registration failed";
-
-// -------7/10-----
-"just_const" = "This will cost %@ QLC. Would you like to connect?";
-"want_connect" = "Please disconnect the current one first.";
-"want_disconnect" = "Want to disconnect?";
-"repeat_vpn_name" = "VPN name already exists.";
-"tip" = "Tip";
-
-//------------7/11-------
-"vpn_update" = "UPDATE";
-
-//-----------7/12---
-"Import_File" = "There is no available configuration file to import. Open the file → Choose \"Open in another App\" → Choose \"WinQ VPN\"";
-
-//---------7/17------
-"save_ovpn" = "Save as the current file name ?";
-"free" = "FREE:";
-"all" = "ALL";
-"gain" = "Gain";
-"used" = "Used";
-"free_conncetions" = "This will consume one of your free connections.";
-"create_wallet_to_contiue" = "Please create a wallet to continue.";
-
-//---------7/26------
-"Fill_PrivateKey" = "Please fill in the Private Key Password";
-"Fill_Username" = "Please fill in the Username";
-"Fill_Password" = "Please fill in the Password";
-"Fail_Get_UserPass" = "Failed to get Info";//"Failed to get Username and Password";
-"Fail_Get_PrivateKey" = "Failed to get Info";//"Failed to get the Private Key Password";
-"Fail_Get_UserPass_PrivateKey" = "Failed to get Info";//"Failed to get Username and Password and Private Key Password";
-"Get_UserPass" = "Getting Info";//"Getting Username and Password";
-"Get_PrivateKey" = "Getting Info";//"Getting Private Key Password";
-"Get_UserPass_PrivateKey" = "Getting Info";//"Getting Username and Password and Private Key Password";
-"save_vpn_success" = "File saved successfully";
-"configuration_faield" = "Failed to apply OpenVPN configuration";
-"get_profile" = "Getting the configuration file";
-"get_profile_timeout" = "Get the configuration file timeout";
-"connect_success" = "The connection is successful";
-
-//-------------8/3-------------
-"rewards" = "Rewards";
-"price_pool" = "of the Price Pool";
-"qlc_pool" = "QLC Prize Pool";
-
-// 图片
-"img_activities" = "img_activities";
-"img_link" = "img_link";
-
-// -----------8/8--------------
-"website" = "Website";
-
-//---------8/21---------
-"p2pid_empty" = "P2pid cannot be empty";
-"get_files_faield" = "Failed to get file";
-"wait_p2p_online" = "Please wait P2P ID to online";
-
-//---------9/21---------
-"rank_top_title1" = "succesful connections";
-"rank_top_title2" = "TestNet Earnings";
+// 设置---
+"currency_unit" = "货币单位";
+"service_agreement" = "隐私条款";
+"help_and_feedback" = "帮助与反馈";
+"about_my_qwallet" = "关于My QWallet";
+"log_out" = "登出";
+"language" = "语言";
+"title_screen_lock" = "屏幕锁";
+
+// 我的---
+"crypto_wallet" = "加密钱包";
+"share_with_friends" = "与好友分享";
+"join_the_community" = "加入社区";
+"contact_us" = "联系我们";
+"settings" = "设置";
+"login_signup" = "登录/注册";
+"me" = "我的";
+
+// 个人信息---
+"profile_photo" = "档案照片";
+"username" = "昵称";
+"my_invitation_code" = "我的邀请码";
+"email" = "邮箱";
+"mobile" = "手机号";
+"verification" = "验证";
+
+// 编辑---
+"edit_username" = "编辑昵称";
+"please_enter_username" = "请输入昵称";
+"edit_email" = "编辑邮箱";
+"please_enter_email" = "请输入邮箱";
+"edit_phone" = "编辑手机号";
+"please_enter_phone" = "请输入手机号";
+"username_cannot_be_empty" = "昵称不能为空";
+"email_cannot_be_empty" = "邮箱不能为空";
+"code_cannot_be_empty" = "验证码不能为空";
+"phone_cannot_be_empty" = "手机号不能为空";
+"success_" = "成功.";
+"failed_" = "失败.";
+"the_verification_code_has_been_sent_successfully" = "验证码已成功发送.";
+
+// 身份认证---
+"please_upload_the_required_information_of_your_passport" = "请上传您的护照所需信息.";
+"status_under_review" = "状态: 审核中.";
+"status_verified" = "状态: 审核通过.";
+"status_not_approved" = "状态: 审核未通过.";
+"photo_album" = "相册";
+"camera" = "相机";
+"cancel" = "取消";
+"verification_is_required___" = "验证是需要遵守KYC规则, 并保护您的帐户从未经授权的访问. 通常在3天内完成. 如果有任何问题, 请联系yourpartner@qlcchain.org. ";
+"not_approved" = "审核未通过";
+"please_resubmit_the_required_information___" = "请重新提交所需资料. 之前提交的照片不合格. ";
+"ok" = "好的";
+"upload_success_wait_for_verify" = "上传成功, 等待验证";
+
+// OTC---
+"transaction_id" = "交易ID";
+"sell_qgas" = "卖出QGAS";
+"buy_qgas" = "买入QGAS";
+"successful_deal" = "成功的交易";
+"closed" = "已关闭";
+"appeal_processing" = "申诉处理中";
+"successful_appeal" = "成功的申诉";
+"appeal_failed" = "申诉失败";
+"sell" = "卖出";
+"buy" = "买入";
+"entrust_sell_qgas" = "卖出QGAS";
+"entrust_buy_qgas" = "买入QGAS";
+"active" = "正常";
+"revoked" = "已撤单";
+"completed" = "已完成";
+"seller" = "卖家";
+"buyer" = "买家";
+
+// 支付USDT---
+"eth_wallet_address" = "ETH钱包地址";
+"balance" = "余额";
+"send_success" = "发送成功";
+"send_fail" = "发送失败";
+"payment_wallet_is_empty" = "支付钱包为空";
+"eth_wallet_address_is_empty" = "ETH钱包地址为空";
+"amount_is_zero" = "数量为0";
+"balance_is_not_enough" = "余额不足";
+"eth_wallet_address_is_invalidate" = "ETH钱包地址是无效的";
+"eth_wallet_address_have_not_eth_balance" = "ETH钱包地址没有ETH余额";
+"current_qlc_wallet_have_not_usdt" = "当前的QLC钱包没有USD";
+
+// 申诉详情
+"appeallant_buyer" = "申诉人：买家";
+"appeallant_seller" = "申诉人：卖家";
+"appeal_result" = "申诉结果";
+"waiting_for_appeal_result" = "等待申诉结果";
+"successful_appeal" = "申诉成功";
+"appeal_failed" = "申诉失败";
+"waiting_for_buyer_payment" = "等待买家付款";
+"waiting_for_seller_confirmation" = "等待卖家确认";
+"amount" = "数量";
+"copied" = "已复制";
+
+// 委托单详情---
+"erc-20_address_to_receive_usdt" = "接收USDT的ERC-20地址";
+"qlc_chain_address_to_receive_qgas" = "接收QGAS的QLC Chain地址";
+
+// USDT接收地址---
+"usdt_receivable_address" = "USDT接收地址";
+"please_send" = "请发送";
+"to_the_erc-20_address_as_below_to_place_your_order" = "到以下ERC-20地址订购。";
+
+// Buy\Sell List---
+"please_finish_the_verification_on_me_page" = "请在我的页面上完成验证. ";
+"volume_settings" = "限值设置";
+
+// New Order---
+"unit_price_is_empty" = "单价为空";
+"unit_price_needs_greater_than_0" = "单价需要大于0";
+"amount_is_empty" = "数量为空";
+"min_amount_is_empty" = "最小数量为空";
+"max_amount_is_empty" = "最大数量为空";
+"address_is_empty" = "地址为空";
+"qlc_wallet_address_is_invalidate" = "QLC钱包地址无效";
+"amount_need_greater_than_or_equal_to_max_amount" = "数量必须大于等于最大数量";
+"qlc_chain_address_is_empty" = "QLC Chain地址为空";
+"please_switch_to_qlc_wallet" = "请切换到QLC钱包";
+"current_qlc_wallet_have_not_qgas" = "当前的QLC钱包没有QGAS";
+"current_qlc_wallet_have_not_enough_qgas" = "当前的QLC钱包没有足够的QGAS";
+"qlc_server_address_is_empty" = "QLC主网地址为空";
+"process___" = "请稍等...";
+"transfer_successful" = "转账成功.";
+
+// Buy\Sell Detail---
+"qlc_chain_wallet_address" = "QLC Chain钱包地址";
+"erc-20_wallet_address" = "ERC-20钱包地址";
+"max" = "最大";
+"you_can_not_buy_or_sell_your_own_entrust_order" = "您不能买卖自己的委单.";
+"usdt_is_empty" = "USDT为空";
+"usdt_is_over_max" = "USDT超过了最大值";
+"qgas_is_empty" = "QGAS为空";
+"qgas_is_greater_than_max_volume" = "QGAS大于最大值";
+"qgas_is_less_than_min_volume" = "QGAS小于最小值";
+"qgas_remain" = "QGAS剩余";
+
+// 订单详情---
+"the_order_will_be_closed_automatically____30" = "如果30分钟内没有进一步确认, 订单将自动关闭. ";
+"fail_appeal" = "申诉失败";
+"successful" = "成功";
+"the_order_will_be_closed_automatically_if_no_further_confirmation_within" = "订单将自动关闭, 如果没有确认在";
+"minutes" = "分钟内";
+"the_order_will_be_closed_automatically____0" = "The order will be 如果0分钟内没有进一步确认, 订单将自动关闭. ";
+
+// Appeal---
+"for_example_incorrect_amount_no_payment_received_etc" = "例如, 金额不正确, 没有收到付款等. ";
+"reason_is_empty" = "原由为空.";
+"image_size_need_smaller_than_5m" = "图片大小需要小于5M.";
+"submit_success" = "提交成功.";
+
+// Login---
+"the_two_passwords_were_different" = "两次密码不同";
+"password_wrong" = "密码错误";
+"please_enter_a_valid_email_address_or_phone_number" = "请输入有效的电邮地址或电话号码.";
+"forget_password" = "忘记密码";
+"please_enter_a_valid_email_address" = "请输入一个有效的电邮地址.";
+"the_passwords_are_different" = "密码匹配不同.";
+
+// 设置---
+"a_mix_of_uppercase_and_lowercase_letters_along_with_at_least_one_symbol" = "大写字母和小写字母的组合, 以及至少一个符号. ";
+"current_password_is_wrong" = "当前密码错误";
+"repeat_password_is_different_from_set_password" = "重复密码与设置密码不同";
+
+// 钱包---
+"export_qrcode" = "导出二维码";
+"please_use_space_to_separate_the_mnemonic_phase" = "请用空格分隔助记词";
+"please_input_wallet_seed" = "请输入钱包种子";
+"import_success" = "导入成功";
+"please_agree_first" = "请先同意";
+"please_input_first" = "请先输入";
+"please_input_valid_mnemonic" = "请输入有效的助记词";
+"please_input_valid_seed" = "请输入有效的种子";
+"qlc_wallet_address" = "QLC钱包地址";
+"invalid_address" = "地址无效";
+"qlc_wallet_address_is_empty" = "QLC钱包地址为空";
+"delete_successful" = "删除成功";
+"delete_failed" = "删除失败";
+"create_success" = "创建成功";
+"claimed_successfully" = "认领成功";
+"claimed_failed" = "认领失败";
+"please_provide_a_valid_qrcode_of_eth" = "请提供有效的ETH二维码";
+"please_provide_a_valid_qrcode_of_neo" = "请提供有效的NEO二维码";
+"please_provide_a_valid_qrcode_of_eos" = "请提供有效的EOS二维码";
+"please_provide_a_valid_qrcode_of_qlc" = "请提供有效的QLC二维码";
+"there_is_no_gas_to_claim" = "没有gas可以认领!";
+"no_wallet_is_available" = "暂无可用的钱包";
+"no_assets_can_be_transferred" = "没有可转账的资产.";
+"please_input_owner_private_key" = "请输入owner私钥";
+"please_input_active_private_key" = "请输入active私钥";
+"please_input_account_name" = "请输入帐户名称";
+"owner_private_key_format_error" = "owner私钥格式错误";
+"active_private_key_format_error" = "active私钥格式错误";
+"import_fail" = "导入失败";
+"please_input_eos_account_name" = "请输入EOS帐号名称";
+"success" = "成功";
+"eos_account_is_empty" = "EOS帐户为空";
+"insufficient_balance" = "余额不足";
+"eos_account_is_invalidate" = "EOS帐户无效";
+"total_assets" = "总资产";
+"insufficient_resources" = "资源不足";
+"input_eos_amount" = "输入EOS数量";
+"input_recipient_account" = "输入Recipient数量";
+"input_cpu_amount" = "输入CPU数量";
+"insufficient_cpu_balance" = "CPU余额不足";
+"input_net_amount" = "输入NET数量";
+"insufficient_net_balance" = "NET余额不足";
+"input_ram_amount" = "输入RAM数量";
+"no_eth_wallet_of_enough_balance" = "没有足够余额的ETH钱包";
+"no_eth_wallet" = "没有ETH钱包";
+"account_name_is_empty" = "帐户名称为空";
+"a_and_1_combination_of_12_characters" = "a-z和1-5组合的12位字符";
+"account_name_is_exist" = "帐户名存在";
+"please_switch_to_eos_wallet" = "请切换到EOS钱包";
+"neo_wallet_address" = "NEO钱包地址";
+"neo_wallet_address_is_empty" = "NEO钱包地址为空";
+"neo_wallet_address_is_invalidate" = "NEO钱包地址无效";
+"export_private_key" = "导出私钥";
+"export_encrypted_key" = "导出加密密钥";
+"encrypted_key_wif" = "加密密钥(WIF)";
+"private_key_hex" = "私钥(HEX)";
+"please_input_your_private_key" = "请输入您的私钥";
+"import_wallet" = "导入钱包";
+"export_mnemonic_phrase" = "导出助记词";
+"order_wrong" = "排序错误";
+"please_use_space_to_separate_the_mnemonic_words" = "请用空格分隔助记词";
+"keystore_content" = "Keystore内容";
+"wallet_address" = "钱包地址";
+"address_is_invalidate" = "地址无效";
+"the_passwords_are_different" = "密码匹配不同";
+"wallet" = "钱包";
+"resources" = "资源";
+
+// Tabbar---
+"finance" = "理财";
+
+// 邀请好友---
+"invited__" = "共邀请";
+"friends__" = "位好友";

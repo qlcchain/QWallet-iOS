@@ -78,14 +78,14 @@ typedef enum : NSUInteger {
 
 - (void)renderMnemonicView {
     [_mnemonicTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _mnemonicTV.placeholder = @"Please use space to separate the mnemonic phase";
+    _mnemonicTV.placeholder = kLang(@"please_use_space_to_separate_the_mnemonic_phase");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_mnemonicStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
 
 - (void)renderPrivatekeyView {
     [_seedTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _seedTV.placeholder = @"Please input wallet seed";
+    _seedTV.placeholder = kLang(@"please_input_wallet_seed");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_seedStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
@@ -108,7 +108,7 @@ typedef enum : NSUInteger {
 
 - (void)showImportSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Import Success"];
+    [tip showWithTitle:kLang(@"import_success")];
 }
 
 - (void)backToRoot {
@@ -155,15 +155,15 @@ typedef enum : NSUInteger {
 
 - (IBAction)mnemonicImportAction:(id)sender {
     if (!mnemonicAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_mnemonicTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     if (![[QLCWalletManage shareInstance] walletMnemonicIsValid:_mnemonicTV.text]) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Mnemonic"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_valid_mnemonic")];
         return;
     }
     
@@ -190,15 +190,15 @@ typedef enum : NSUInteger {
 
 - (IBAction)seedImportAction:(id)sender {
     if (!seedAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_seedTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input Success"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     if (![[QLCWalletManage shareInstance] walletSeedIsValid:_seedTV.text]) {
-        [kAppD.window makeToastDisappearWithText:@"Please Input Valid Seed"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_valid_seed")];
         return;
     }
     
