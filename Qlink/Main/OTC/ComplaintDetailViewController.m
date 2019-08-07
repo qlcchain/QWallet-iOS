@@ -145,7 +145,7 @@
 //            _payValLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
         }
-        _payKeyLab.text = kLang(@"amount");
+        _payKeyLab.text = kLang(@"amount_price");
         _payValLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.usdtAmount];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];

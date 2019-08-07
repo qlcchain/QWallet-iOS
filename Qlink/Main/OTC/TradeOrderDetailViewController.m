@@ -25,10 +25,6 @@
 #import "ComplaintSubmitViewController.h"
 #import "ComplaintDetailViewController.h"
 
-NSString *title_appeal = @"Appeal";
-NSString *title_appeal_details = @"Appeal Deals";
-NSString *title_appeal_result = @"Check the Appeal Result";
-
 @interface TradeOrderDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
@@ -209,25 +205,25 @@ NSString *title_appeal_result = @"Check the Appeal Result";
                 _bottomView3Height.constant = 59;
                 _bottomBack3.hidden = NO;
                 if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
-                    [_viewComplaintBtn setTitle:title_appeal forState:UIControlStateNormal];
+                    [_viewComplaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
-                    [_viewComplaintBtn setTitle:title_appeal_details forState:UIControlStateNormal];
+                    [_viewComplaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-                    [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                    [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-                    [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                    [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
                 }
             } else {
                 _bottomView2Height.constant = 59;
                 _bottomBack2.hidden = NO;
                 if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
-                    [_complaintBtn setTitle:title_appeal forState:UIControlStateNormal];
+                    [_complaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
-                    [_complaintBtn setTitle:title_appeal_details forState:UIControlStateNormal];
+                    [_complaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-                    [_complaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                    [_complaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-                    [_complaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                    [_complaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
                 }
             }
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_PAID]) { // 订单已完成
@@ -303,13 +299,13 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _bottomView3Height.constant = 59;
             _bottomBack3.hidden = NO;
             if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
-                [_viewComplaintBtn setTitle:title_appeal forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
-                [_viewComplaintBtn setTitle:title_appeal_details forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
             }
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) { // 订单已关闭
             _statusBack.backgroundColor = UIColorFromRGB(0x999999);
@@ -338,13 +334,13 @@ NSString *title_appeal_result = @"Check the Appeal Result";
             _bottomView3Height.constant = 59;
             _bottomBack3.hidden = NO;
             if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
-                [_viewComplaintBtn setTitle:title_appeal forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
-                [_viewComplaintBtn setTitle:title_appeal_details forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-                [_viewComplaintBtn setTitle:title_appeal_result forState:UIControlStateNormal];
+                [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
             }
         }
         
@@ -367,7 +363,7 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 //            _payValLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
         }
-        _payKeyLab.text = kLang(@"amount");
+        _payKeyLab.text = kLang(@"amount_price");
         _payValLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.usdtAmount];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
@@ -646,11 +642,11 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 }
 
 - (IBAction)complaintAction:(UIButton *)sender {
-    if ([sender.currentTitle isEqualToString:title_appeal]) { // 申诉
+    if ([sender.currentTitle isEqualToString:kLang(@"title_appeal")]) { // 申诉
         [self jumpToComplaintSubmit];
-    } else if ([sender.currentTitle isEqualToString:title_appeal_details]) {
+    } else if ([sender.currentTitle isEqualToString:kLang(@"title_appeal_details")]) {
         [self jumpToComplaintDetail];
-    } else if ([sender.currentTitle isEqualToString:title_appeal_result]) {
+    } else if ([sender.currentTitle isEqualToString:kLang(@"title_appeal_result")]) {
         [self jumpToComplaintDetail];
     }
 }
@@ -660,11 +656,11 @@ NSString *title_appeal_result = @"Check the Appeal Result";
 }
 
 - (IBAction)viewComplaintAction:(UIButton *)sender {
-    if ([sender.currentTitle isEqualToString:title_appeal]) { // 申诉
+    if ([sender.currentTitle isEqualToString:kLang(@"title_appeal")]) { // 申诉
         [self jumpToComplaintSubmit];
-    } else if ([sender.currentTitle isEqualToString:title_appeal_details]) {
+    } else if ([sender.currentTitle isEqualToString:kLang(@"title_appeal_details")]) {
         [self jumpToComplaintDetail];
-    } else if ([sender.currentTitle isEqualToString:title_appeal_result]) {
+    } else if ([sender.currentTitle isEqualToString:kLang(@"title_appeal_result")]) {
         [self jumpToComplaintDetail];
     }
     

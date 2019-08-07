@@ -76,7 +76,7 @@
             model.detail = [NSString stringWithFormat:@"Version %@(%@)",APP_Version,APP_Build];
         } else if ([obj isEqualToString:kLang(@"language")]) {
             NSString *language = [Language currentLanguageCode];
-            model.detail = [language isEmptyString]?@"Chinese(Simplified)":[language isEqualToString:LanguageCode[0]]?@"English":@"Chinese(Simplified)";
+            model.detail = [language isEmptyString]?kLang(@"chinese"):[language isEqualToString:LanguageCode[0]]?kLang(@"english"):kLang(@"chinese");
         } else {
             model.detail = nil;
         }
@@ -105,15 +105,15 @@
 
 - (void)showSelectLanguage {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"English" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"english") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[0]];
     }];
     [alertVC addAction:action1];
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"Chinese(Simplified)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:kLang(@"chinese") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[1]];
     }];
     [alertVC addAction:action2];
-    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action3];
     [self presentViewController:alertVC animated:YES completion:nil];

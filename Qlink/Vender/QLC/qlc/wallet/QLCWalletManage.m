@@ -102,7 +102,9 @@
         [QLCWallet receive_blocksInfo:firstM.Hash receiveAddress:receiveAddress privateKey:privateKey successHandler:^(NSString * _Nullable responseObj) {
             [kAppD.window hideToast];
             // 成功
-            [weakself.accountPendingArr removeObjectAtIndex:0];
+            if (weakself.accountPendingArr && weakself.accountPendingArr.count > 0) {
+                [weakself.accountPendingArr removeObjectAtIndex:0];
+            }
             [weakself receiveAsset];
             if (weakself.accountPendingArr.count <= 0) { // account pending结束
                 [[NSNotificationCenter defaultCenter] postNotificationName:QLC_AccountPending_Done_Noti object:nil];
