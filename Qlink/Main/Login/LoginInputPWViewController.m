@@ -88,7 +88,7 @@
 - (IBAction)joinAction:(id)sender {
     NSString *localPW = [LoginPWModel getLoginPW];
     if (![localPW isEqualToString:_pwTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"Password Wrong"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"password_wrong")];
         return;
     }
     

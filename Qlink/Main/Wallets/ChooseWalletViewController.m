@@ -169,7 +169,7 @@
 
 - (IBAction)createAction:(id)sender {
     if (!isAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_ethBtn.selected) {
@@ -185,7 +185,7 @@
 
 - (IBAction)importAction:(id)sender {
     if (!isAgree) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     if (_ethBtn.selected) {

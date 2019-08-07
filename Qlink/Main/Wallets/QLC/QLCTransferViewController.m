@@ -64,7 +64,7 @@
     _selectAsset = _inputAsset?:_inputSourceArr?_inputSourceArr.firstObject:nil;
     _tokenPriceArr = [NSMutableArray array];
     
-    _sendtoAddressTV.placeholder = @"QLC Wallet Address";
+    _sendtoAddressTV.placeholder = kLang(@"qlc_wallet_address");
     _sendtoAddressTV.text = _inputAddress;
     
     _sendBtn.userInteractionEnabled = NO;
@@ -76,7 +76,7 @@
 
 - (void)refreshView {
     _symbolLab.text = _selectAsset.tokenName;
-    _balanceLab.text = [NSString stringWithFormat:@"Balance: %@ %@",[_selectAsset getTokenNum],_selectAsset.tokenName];
+    _balanceLab.text = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectAsset getTokenNum],_selectAsset.tokenName];
     [self requestTokenPrice];
 }
 
@@ -115,11 +115,11 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
-    [kAppD.window makeToastInView:kAppD.window text:@"Process..." userInteractionEnabled:NO hideTime:0];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
-        [kAppD.window makeToastDisappearWithText:@"Transfer Successful."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         [weakself backToRoot];
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
         [kAppD.window hideToast];
@@ -184,7 +184,7 @@
     kWeakSelf(self);
     WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
         if (![[QLCWalletManage shareInstance] walletAddressIsValid:codeValue?:@""]) {
-            [kAppD.window makeToastDisappearWithText:@"Invalid Address"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"invalid_address")];
             return;
         }
         weakself.sendtoAddressTV.text = codeValue;
@@ -194,26 +194,26 @@
 
 - (IBAction)sendAction:(id)sender {
     if (!_amountTF.text || _amountTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"QLC Wallet Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] == 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is zero"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
     if ([_amountTF.text doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Balance is not enough"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
     
     // 检查地址有效性
     BOOL validateNEOAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_sendtoAddressTV.text];
     if (!validateNEOAddress) {
-        [kAppD.window makeToastDisappearWithText:@"QLC Wallet Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_invalidate")];
         return;
     }
     
@@ -231,7 +231,7 @@
         }];
         [alertC addAction:alert];
     }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
     [self presentViewController:alertC animated:YES completion:nil];

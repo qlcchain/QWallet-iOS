@@ -55,15 +55,15 @@
 - (void)configInit {
     NSString *gasStr = @"";
     NSString *topTipStr = @"";
-    if (_inputAddressType == PayReceiveAddressTypeUSDT) {
-        _titleLab.text = @"USDT Receivable Address";
-        gasStr = [NSString stringWithFormat:@"%@ USDT",_tradeM.usdtAmount?:@""];
-        topTipStr = [NSString stringWithFormat:@"Please send %@ to the ERC-20 address as below to place your order.",gasStr];
-    } else if (_inputAddressType == PayReceiveAddressTypeQGAS) {
-        _titleLab.text = @"QGAS Receivable Address";
-        gasStr = [NSString stringWithFormat:@"%@ QGAS",_tradeM.qgasAmount?:@""];
-        topTipStr = [NSString stringWithFormat:@"Please send %@ to the QLC Chain address as below to place your order.",gasStr];
-    }
+    _titleLab.text = kLang(@"usdt_receivable_address");
+    gasStr = [NSString stringWithFormat:@"%@ USDT",_tradeM.usdtAmount?:@""];
+    topTipStr = [NSString stringWithFormat:@"%@ %@ %@",kLang(@"please_send"),gasStr,kLang(@"to_the_erc-20_address_as_below_to_place_your_order")];
+//    if (_inputAddressType == PayReceiveAddressTypeUSDT) {
+//    } else if (_inputAddressType == PayReceiveAddressTypeQGAS) {
+//        _titleLab.text = @"QGAS Receivable Address";
+//        gasStr = [NSString stringWithFormat:@"%@ QGAS",_tradeM.qgasAmount?:@""];
+//        topTipStr = [NSString stringWithFormat:@"Please send %@ to the QLC Chain address as below to place your order.",gasStr];
+//    }
     NSMutableAttributedString *topTipAtt = [[NSMutableAttributedString alloc] initWithString:topTipStr];
     [topTipAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x030303) range:NSMakeRange(0, topTipStr.length)];
     [topTipAtt addAttribute:NSForegroundColorAttributeName value:MAIN_BLUE_COLOR range:[topTipStr rangeOfString:gasStr]];
@@ -72,19 +72,20 @@
     
     _addressLab.text = _tradeM.usdtToAddress?:@"";
     
-    UIImage *img = _inputAddressType == PayReceiveAddressTypeUSDT?[UIImage imageNamed:@"eth_usdt"]:[UIImage imageNamed:@"qlc_qgas"];
+    UIImage *img = [UIImage imageNamed:@"eth_usdt"];
+//    UIImage *img = _inputAddressType == PayReceiveAddressTypeUSDT?[UIImage imageNamed:@"eth_usdt"]:[UIImage imageNamed:@"qlc_qgas"];
     _qrcodeImgV.image = [SGQRCodeObtain generateQRCodeWithData:_tradeM.usdtToAddress?:@"" size:_qrcodeImgV.width logoImage:img ratio:0.2 logoImageCornerRadius:0 logoImageBorderWidth:0 logoImageBorderColor:[UIColor clearColor]];
 }
 
-- (void)showSubmitSuccess {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Submitted Successfully! " message:@"Verification status will be updated on the ME page." preferredStyle:UIAlertControllerStyleAlert];
-    kWeakSelf(self)
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakself.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    [alertVC addAction:action1];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
+//- (void)showSubmitSuccess {
+//    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Submitted Successfully! " message:@"Verification status will be updated on the ME page." preferredStyle:UIAlertControllerStyleAlert];
+//    kWeakSelf(self)
+//    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [weakself.navigationController popToRootViewControllerAnimated:YES];
+//    }];
+//    [alertVC addAction:action1];
+//    [self presentViewController:alertVC animated:YES completion:nil];
+//}
 
 #pragma mark -Action
 

@@ -58,7 +58,7 @@
     _selectToken = _inputToken?:_inputSourceArr?_inputSourceArr.firstObject:nil;
     _tokenPriceArr = [NSMutableArray array];
     
-    _sendtoAddressTV.placeholder = @"ETH Wallet Address";
+    _sendtoAddressTV.placeholder = kLang(@"eth_wallet_address");
     _sendtoAddressTV.text = _inputAddress;
     _gasDetailHeight.constant = 0;
     
@@ -71,7 +71,7 @@
 
 - (void)refreshView {
     _symbolLab.text = _selectToken.tokenInfo.symbol;
-    _balanceLab.text = [NSString stringWithFormat:@"Balance: %@ %@",[_selectToken getTokenNum],_selectToken.tokenInfo.symbol];
+    _balanceLab.text = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectToken getTokenNum],_selectToken.tokenInfo.symbol];
     [self refreshGasCost];
     [self requestTokenPrice];
 }
@@ -143,12 +143,12 @@
     [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         [kAppD.window hideToast];
         if (success) {
-            [kAppD.window makeToastDisappearWithText:@"Send Success"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
             NSString *blockChain = @"ETH";
             [ReportUtil requestWalletReportWalletRransferWithAddressFrom:fromAddress addressTo:toAddress blockChain:blockChain symbol:symbol amount:amount txid:txId?:@""]; // 上报钱包转账
             [weakself backToRoot];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Send Fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_fail")];
         }
     }];
 }
@@ -213,31 +213,31 @@
 
 - (IBAction)sendAction:(id)sender {
     if (!_amountTF.text || _amountTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] == 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is zero"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
     if ([_amountTF.text doubleValue] > [[_selectToken getTokenNum] doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Balance is not enough"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
     
     // 检查地址有效性
     BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text];
     if (!isValid) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
     }
     
     if (![self haveETHAssetNum]) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address have not ETH banlance"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_have_not_eth_balance")];
         return;
     }
     
@@ -265,7 +265,7 @@
         }];
         [alertC addAction:alert];
     }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
     [self presentViewController:alertC animated:YES completion:nil];

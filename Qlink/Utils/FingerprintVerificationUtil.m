@@ -163,12 +163,13 @@
 }
 
 + (BOOL)getScreenLock {
-    NSNumber *lock = [HWUserdefault getObjectWithKey:title_screen_lock];
+    NSString *key = kLang(title_screen_lock);
+    NSNumber *lock = [HWUserdefault getObjectWithKey:key];
     return lock?[lock boolValue]:NO;
 }
 
 + (void)setScreenLock:(BOOL)lock {
-    [HWUserdefault insertObj:@(lock) withkey:title_screen_lock];
+    [HWUserdefault insertObj:@(lock) withkey:kLang(title_screen_lock)];
 }
 
 @end

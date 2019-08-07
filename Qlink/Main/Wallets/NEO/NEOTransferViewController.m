@@ -64,7 +64,7 @@
     _selectAsset = _inputAsset?:_inputSourceArr?_inputSourceArr.firstObject:nil;
     _tokenPriceArr = [NSMutableArray array];
     
-    _sendtoAddressTV.placeholder = @"NEO Wallet Address";
+    _sendtoAddressTV.placeholder = kLang(@"neo_wallet_address");
     _sendtoAddressTV.text = _inputAddress;
     
     _sendBtn.userInteractionEnabled = NO;
@@ -76,7 +76,7 @@
 
 - (void)refreshView {
     _symbolLab.text = _selectAsset.asset_symbol;
-    _balanceLab.text = [NSString stringWithFormat:@"Balance: %@ %@",[_selectAsset getTokenNum],_selectAsset.asset_symbol];
+    _balanceLab.text = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectAsset getTokenNum],_selectAsset.asset_symbol];
     [self requestTokenPrice];
 }
 
@@ -169,26 +169,26 @@
 
 - (IBAction)sendAction:(id)sender {
     if (!_amountTF.text || _amountTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"NEO Wallet Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"neo_wallet_address_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] == 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is zero"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
     if ([_amountTF.text doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Balance is not enough"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
     
     // 检查地址有效性
     BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:_sendtoAddressTV.text];
     if (!validateNEOAddress) {
-        [kAppD.window makeToastDisappearWithText:@"NEO Wallet Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"neo_wallet_address_is_invalidate")];
         return;
     }
     

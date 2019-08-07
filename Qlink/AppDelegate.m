@@ -54,7 +54,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [[NSUserDefaults standardUserDefaults] setValue:false forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
+    [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
     
 //    [UserModel deleteOneAccount];
 //    [NEOWalletUtil deleteAllWallet];

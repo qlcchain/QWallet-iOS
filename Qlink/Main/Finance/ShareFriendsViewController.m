@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *invitationCodeBack;
 @property (weak, nonatomic) IBOutlet UILabel *invitationCodeLab;
 @property (weak, nonatomic) IBOutlet UIView *guangGaoBack;
+@property (weak, nonatomic) IBOutlet UIButton *inviteBtn;
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *guanggaoListArr;
@@ -44,6 +45,9 @@
 
 #pragma mark - Operation
 - (void)configInit {
+    _inviteBtn.layer.cornerRadius = 4.0;
+    _inviteBtn.layer.masksToBounds = YES;
+    
     _sourceArr = [NSMutableArray array];
     _guanggaoListArr = [NSMutableArray array];
     _mainTable.tableHeaderView = _headView;

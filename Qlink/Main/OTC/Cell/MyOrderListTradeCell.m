@@ -55,7 +55,7 @@
     _nameLab.text = model.showNickName;
     _timeLab.text = model.createDate;
     UserModel *loginM = [UserModel fetchUserOfLogin];
-    _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?@"BUY QGAS":@"SELL QGAS";
+    _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?kLang(@"buy_qgas"):kLang(@"sell_qgas");
     _typeLab.textColor = [loginM.ID isEqualToString:model.buyerId]?MAIN_BLUE_COLOR:UIColorFromRGB(0xFF3669);
     _amountLab.text = model.usdtAmount;
     NSString *statusStr = @"";
@@ -65,21 +65,21 @@
         statusColor = [OrderStatusUtil getStatusColor:model.status];
     } else if (type == RecordListTypeCompleted) {
         if ([model.status isEqualToString:ORDER_STATUS_QGAS_PAID]) {
-            statusStr = @"Successful Deal";
+            statusStr = kLang(@"successful_deal");
             statusColor = UIColorFromRGB(0x01B5AB);
         }
     } else if (type == RecordListTypeClosed) {
-        statusStr = @"Closed";
+        statusStr = kLang(@"closed");
         statusColor = UIColorFromRGB(0x29282A);
     } else if (type == RecordListTypeAppealed) {
         if ([model.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
-            statusStr = @"Appeal Processing";
+            statusStr = kLang(@"appeal_processing");
             statusColor = UIColorFromRGB(0xD0021B);
         } else if ([model.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-            statusStr = @"Successful Appeal";
+            statusStr = kLang(@"successful_appeal");
             statusColor = UIColorFromRGB(0x01B5AB);
         } else if ([model.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-            statusStr = @"Appeal Failed";
+            statusStr = kLang(@"appeal_failed");
             statusColor = UIColorFromRGB(0x29282A);
         }
     }

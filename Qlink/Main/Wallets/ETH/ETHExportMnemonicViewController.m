@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view from its nib.
 
     self.view.backgroundColor = MAIN_WHITE_COLOR;
-    _titleLab.text = _enterType==ETHExportMnemonicEnterTypeImport?@"Import Wallet":@"Export Mnemonic Phrase";
+    _titleLab.text = _enterType==ETHExportMnemonicEnterTypeImport?kLang(@"import_wallet"):kLang(@"export_mnemonic_phrase");
     
     [self renderView];
 }

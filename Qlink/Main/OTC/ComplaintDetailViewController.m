@@ -90,8 +90,8 @@
         _tradeIDHeight.constant = 0; // 76
         
         _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
-        _complaintPeopleLab.text = _orderInfoM.buyerConfirmDate.length>0?[NSString stringWithFormat:@"Appeallant：Buyer"]:[NSString stringWithFormat:@"Appeallant：Seller"];
-        _complaintResultLab.text = [NSString stringWithFormat:@"Appeal Result：%@",_orderInfoM.auditFeedback?:@""];
+        _complaintPeopleLab.text = _orderInfoM.buyerConfirmDate.length>0?kLang(@"appeallant_buyer"):kLang(@"appeallant_seller");
+        _complaintResultLab.text = [NSString stringWithFormat:@"%@：%@",kLang(@"appeal_result"),_orderInfoM.auditFeedback?:@""];
         _complaintResultHeight.constant = 64; // 64
         _orderIDHeight.constant = 56;
         _orderIDLab.text = _orderInfoM.number;
@@ -105,47 +105,47 @@
         if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) { // 无申诉
             _contentBack.hidden = YES;
         } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) { // 申诉中
-            _statusTitleLab.text = @"Waiting for Appeal Result";
+            _statusTitleLab.text = kLang(@"waiting_for_appeal_result");
             _statusSubTitleLab.text = _orderInfoM.appealDate;
             
             _complaintResultHeight.constant = 0;
         } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-            _statusTitleLab.text = @"Successful Appeal";
+            _statusTitleLab.text = kLang(@"successful_appeal");
             _statusSubTitleLab.text = _orderInfoM.appealDate;
             
         } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-            _statusTitleLab.text = @"Appeal Failed";
+            _statusTitleLab.text = kLang(@"appeal_failed");
             _statusSubTitleLab.text = _orderInfoM.appealDate;
             
         }
         
         if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
-            _orderStatusLab.text = @"Waiting for Buyer's payment";
+            _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
-            _orderStatusLab.text = @"Waiting for Seller's confirmation";
+            _orderStatusLab.text = kLang(@"waiting_for_seller_confirmation");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_PAID]) { // 完成
-            _orderStatusLab.text = @"Successful Deal";
+            _orderStatusLab.text = kLang(@"successful_deal");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) { // 超时
-            _orderStatusLab.text = @"Closed";
+            _orderStatusLab.text = kLang(@"closed");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_CANCEL]) { // 取消
-            _orderStatusLab.text = @"Revoked";
+            _orderStatusLab.text = kLang(@"revoked");
         }
         
         UserModel *loginM = [UserModel fetchUserOfLogin];
         BOOL i_am_buyer = [loginM.ID isEqualToString:_orderInfoM.buyerId];
         if (i_am_buyer) {
-            _typeLab.text = @"BUY";
-            _buyOrSellLab.text = @"Seller";
+            _typeLab.text = kLang(@"buy");
+            _buyOrSellLab.text = kLang(@"seller");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
         } else {
-            _typeLab.text = @"SELL";
-            _buyOrSellLab.text = @"Buyer";
+            _typeLab.text = kLang(@"sell");
+            _buyOrSellLab.text = kLang(@"buyer");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
 //            _payKeyLab.text = @"Amount";
 //            _payValLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
         }
-        _payKeyLab.text = @"Amount";
+        _payKeyLab.text = kLang(@"amount_price");
         _payValLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.usdtAmount];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
@@ -190,7 +190,7 @@
 - (IBAction)payCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _payValLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)complaintInfoAction:(id)sender {

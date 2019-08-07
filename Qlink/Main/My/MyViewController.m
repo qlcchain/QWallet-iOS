@@ -21,22 +21,24 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLab;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 
 @end
 
 @implementation MyViewController
 
-NSString *my_title0 = @"Crypto Wallet";
-NSString *my_title1 = @"Share with Friends";
-NSString *my_title2 = @"Join the Community";
-NSString *my_title3 = @"Contact Us";
-NSString *my_title4 = @"Settings";
+//NSString *my_title0 = @"Crypto Wallet";
+//NSString *my_title1 = @"Share with Friends";
+//NSString *my_title2 = @"Join the Community";
+//NSString *my_title3 = @"Contact Us";
+//NSString *my_title4 = @"Settings";
 
 #pragma mark - Observe
 - (void)addObserve {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccessNoti:) name:User_Logout_Success_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
 }
 
 - (void)dealloc {
@@ -65,8 +67,10 @@ NSString *my_title4 = @"Settings";
 
 #pragma mark - Operation
 - (void)configInit {
+    _titleLab.text = kLang(@"me");
     //@"icon_my_contact"
-    NSArray *titleArr = @[my_title0,my_title1,my_title2,my_title4];
+    [_sourceArr removeAllObjects];
+    NSArray *titleArr = @[kLang(@"crypto_wallet"),kLang(@"share_with_friends"),kLang(@"join_the_community"),kLang(@"settings")];
     NSArray *iconArr = @[@"icon_my_wallet",@"icon_my_share",@"icon_my_community",@"icon_my_settings"];
     kWeakSelf(self);
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -86,7 +90,7 @@ NSString *my_title4 = @"Settings";
         _userNameLab.text = [userM.nickname isEmptyString]?userM.account:userM.nickname;
     } else {
         _userIcon.image = User_DefaultImage;
-        _userNameLab.text = @"Log In/Sign Up";
+        _userNameLab.text = kLang(@"login_signup");
     }
 }
 
@@ -100,6 +104,30 @@ NSString *my_title4 = @"Settings";
     }
 }
 
+- (IBAction)switchQLCChainEnvironmentAction:(id)sender {
+#ifdef DEBUG
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"QLC Chain****DApp" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"wrpc.qlcchain.org:9735****dapp-t.qlink.mobi" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [HWUserdefault insertObj:@"1" withkey:QLCChain_Environment];
+        [ConfigUtil setServerNetworkEnvironment:YES];
+    }];
+    [alertVC addAction:action1];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"47.103.40.20:19735****192.168.0.114:8080" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [HWUserdefault insertObj:@"0" withkey:QLCChain_Environment];
+        [ConfigUtil setServerNetworkEnvironment:NO];
+    }];
+    [alertVC addAction:action2];
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertVC addAction:action3];
+    [self presentViewController:alertVC animated:YES completion:nil];
+#else
+    [HWUserdefault insertObj:@"1" withkey:QLCChain_Environment];
+    [ConfigUtil setServerNetworkEnvironment:YES];
+#endif
+}
+
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return MyCell_Height;
@@ -109,16 +137,16 @@ NSString *my_title4 = @"Settings";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     MyShowModel *model = _sourceArr[indexPath.row];
-    if ([model.title isEqualToString:my_title0]) {
+    if ([model.title isEqualToString:kLang(@"crypto_wallet")]) {
         [kAppD jumpToWallet];
 //        [self jumpToWalletsManage];
-    } else if ([model.title isEqualToString:my_title1]) {
+    } else if ([model.title isEqualToString:kLang(@"share_with_friends")]) {
         [self jumpToShareFriends];
-    } else if ([model.title isEqualToString:my_title2]) {
+    } else if ([model.title isEqualToString:kLang(@"join_the_community")]) {
         [self jumpToJoinCommunity];
-    } else if ([model.title isEqualToString:my_title3]) {
+    } else if ([model.title isEqualToString:kLang(@"contact_us")]) {
         
-    } else if ([model.title isEqualToString:my_title4]) {
+    } else if ([model.title isEqualToString:kLang(@"settings")]) {
         [self jumpToSettings];
     }
 }
@@ -181,6 +209,10 @@ NSString *my_title4 = @"Settings";
 
 - (void)loginSuccessNoti:(NSNotification *)noti {
     [self refreshUserInfoView];
+}
+    
+- (void)languageChangeNoti:(NSNotification *)noti {
+    [self configInit];
 }
 
 - (void)didReceiveMemoryWarning {

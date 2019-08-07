@@ -51,7 +51,7 @@
 
 - (void)showCreateSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Create Success"];
+    [tip showWithTitle:kLang(@"create_success")];
 }
 
 - (void)backToRoot {
@@ -61,7 +61,7 @@
 #pragma mark - Action
 - (IBAction)confirmAction:(id)sender {
     if (!isTip) {
-        [kAppD.window makeToastDisappearWithText:@"Please Agree First"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
     
@@ -81,12 +81,12 @@
 
 - (IBAction)copyEncryptedKeyAction:(id)sender {
     BackupKeyView *view = [BackupKeyView getInstance];
-    [view showWithPrivateKey:_encryptedKeyLab.text title:@"Encrypted Key(WIF)"];
+    [view showWithPrivateKey:_encryptedKeyLab.text title:kLang(@"encrypted_key_wif")];
 }
 
 - (IBAction)copyPrivateKeyAction:(id)sender {
     BackupKeyView *view = [BackupKeyView getInstance];
-    [view showWithPrivateKey:_privateKeyLab.text title:@"Private Key(HEX)"];
+    [view showWithPrivateKey:_privateKeyLab.text title:kLang(@"private_key_hex")];
 }
 
 #pragma mark - Transition

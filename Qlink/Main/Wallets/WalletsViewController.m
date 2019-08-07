@@ -59,6 +59,7 @@
 #import "QLCTokenInfoModel.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *refreshScroll;
@@ -76,6 +77,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *claimLab;
 @property (weak, nonatomic) IBOutlet UIImageView *claimStatusIcon;
 @property (weak, nonatomic) IBOutlet UIView *claimBtnBack;
+@property (weak, nonatomic) IBOutlet UILabel *eosResourceLab;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasBackHeight; // 71
 
@@ -108,7 +110,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addEOSWallet:) name:Add_EOS_Wallet_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addQLCWallet:) name:Add_QLC_Wallet_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qlcAccountPendingDone:) name:QLC_AccountPending_Done_Noti object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -119,14 +121,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
-    [QLCWalletManage.shareInstance walletAddressIsValid:@"qlc_14ggfxiaxgtxwb1coy4izpb6huqew3omrzkf4y1i6xzc9kaehboz8bruxxaz"];
     
     [self addObserve];
     
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     _sourceArr = [NSMutableArray array];
+    _contentView.hidden = YES;
     [_mainTable registerNib:[UINib nibWithNibName:WalletsCellReuse bundle:nil] forCellReuseIdentifier:WalletsCellReuse];
+    [self refreshTitle];
     [self renderView];
     [self configInit];
     
@@ -207,6 +209,10 @@
     }
 }
 
+- (void)showContentView {
+    _contentView.hidden = NO;
+}
+
 - (void)updateWalletWithETH:(ETHAddressInfoModel *)ethModel {
     NSArray *allWallets = [WalletCommonModel getAllWalletModel];
     [allWallets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -220,6 +226,7 @@
 }
 
 - (void)refreshDataWithETH {
+    [self showContentView];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
 //    _totalLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
     _walletNameLab.text = currentWalletM.name;
@@ -268,7 +275,8 @@
             [qlcModel.tokens enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 QLCTokenModel *tokenM = obj;
                 if ([tokenM.tokenName isEqualToString:@"QLC"]) {
-                    walletM.balance = [tokenM getTokenNum];
+                    NSString *balance = [tokenM getTokenNum];
+                    walletM.balance = @([balance doubleValue]);
                     [WalletCommonModel updateWalletModel:walletM];
                     *stop = YES;
                 }
@@ -280,6 +288,7 @@
 }
 
 - (void)refreshDataWithQLC {
+    [self showContentView];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
 //    _totalLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
     _walletNameLab.text = currentWalletM.name;
@@ -317,6 +326,7 @@
 }
 
 - (void)refreshDataWithNEO {
+    [self showContentView];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
 //    _totalLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
     _walletNameLab.text = currentWalletM.name;
@@ -358,9 +368,11 @@
 }
 
 - (void)refreshDataWithEOS:(NSArray *)tokenList {
+    [self showContentView];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
 //    _totalLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
     _walletNameLab.text = currentWalletM.name;
+    _eosResourceLab.text = kLang(@"resources");
 //    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
     _walletAddressLab.text = currentWalletM.account_name;
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
@@ -485,6 +497,7 @@
 //    _totalLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],totalPrice];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],walletBalance];
     
+    [self showContentView];
     [_mainTable reloadData];
 }
 
@@ -558,11 +571,11 @@
                         [weakself refreshClaimGas:nil];
                     }
 //                    [weakself requestGetNeoCliamGas];
-                    [kAppD.window makeToastDisappearWithText:@"Claimed Successfully"];
+                    [kAppD.window makeToastDisappearWithText:kLang(@"claimed_successfully")];
                 } else {
                     [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimFail;
                     [weakself refreshClaimGas:nil];
-                    [kAppD.window makeToastDisappearWithText:@"Claimed Failed"];
+                    [kAppD.window makeToastDisappearWithText:kLang(@"claimed_failed")];
                 }
             });
         }];
@@ -670,6 +683,10 @@
     } else {
         return @[];
     }
+}
+
+- (void)refreshTitle {
+    _titleLab.text = kLang(@"wallet");
 }
 
 #pragma mark - Request
@@ -985,14 +1002,14 @@
         if (currentWalletM.walletType == WalletTypeETH) {
             BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:codeValue];
             if (!isValid) {
-                [kAppD.window makeToastDisappearWithText:@"Please provide a valid QR Code Of ETH"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"please_provide_a_valid_qrcode_of_eth")];
                 return;
             }
             [weakself jumpToETHTransfer:codeValue];
         } else if (currentWalletM.walletType == WalletTypeNEO) {
             BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:codeValue];
             if (!validateNEOAddress) {
-                [kAppD.window makeToastDisappearWithText:@"Please provide a valid QR Code Of NEO"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"please_provide_a_valid_qrcode_of_neo")];
                 return;
             }
             [weakself jumpToNEOTransfer:codeValue];
@@ -1006,7 +1023,7 @@
                 if (accountName != nil && activePublicKey != nil && ownerPublicKey != nil) {
                     [weakself jumpToEOSActiveAccount:qrDic];
                 } else {
-                    [kAppD.window makeToastDisappearWithText:@"Please provide a valid QR Code Of EOS"];
+                    [kAppD.window makeToastDisappearWithText:kLang(@"please_provide_a_valid_qrcode_of_eos")];
                 }
             } else {
                 [weakself jumpToEOSTransfer:codeValue];
@@ -1014,7 +1031,7 @@
         } else if (currentWalletM.walletType == WalletTypeQLC) {
             BOOL validateQLCAddress = [QLCWalletManage.shareInstance walletAddressIsValid:codeValue];
             if (!validateQLCAddress) {
-                [kAppD.window makeToastDisappearWithText:@"Please provide a valid QR Code Of QLC"];
+                [kAppD.window makeToastDisappearWithText:kLang(@"please_provide_a_valid_qrcode_of_qlc")];
                 return;
             }
             [weakself jumpToQLCTransfer:codeValue];
@@ -1067,7 +1084,7 @@
     } else {
         pasteboard.string = currentWalletM.address;
     }
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)winqGasClaimAction:(id)sender {
@@ -1083,7 +1100,7 @@
         [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimLoading;
         NSString *gas = _claimgasLab.text?:@"0";
         if ([gas doubleValue] <= 0) {
-            [kAppD.window makeToastDisappearInView:kAppD.window text:@"There is no gas to claim!"];
+            [kAppD.window makeToastDisappearInView:kAppD.window text:kLang(@"there_is_no_gas_to_claim")];
             [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaim;
         } else {
             [self showNeoClaimGasTip:gas];
@@ -1285,7 +1302,7 @@
 
 - (void)jumpToNEOTransfer:(NSString *)address {
     if (_sourceArr.count<=0) {
-        [kAppD.window makeToastDisappearWithText:@"No wallet is available"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"no_wallet_is_available")];
         return;
     }
     id obj = _sourceArr.firstObject;
@@ -1324,7 +1341,7 @@
 
 - (void)jumpToQLCTransfer:(NSString *)address {
     if (_sourceArr.count<=0) {
-        [kAppD.window makeToastDisappearWithText:@"No wallet is available"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"no_wallet_is_available")];
         return;
     }
     id obj = _sourceArr.firstObject;
@@ -1341,7 +1358,7 @@
 
 - (void)jumpToETHTransfer:(NSString *)address {
     if (_sourceArr.count<=0) {
-        [kAppD.window makeToastDisappearWithText:@"No assets can be transferred."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"no_assets_can_be_transferred")];
         return;
     }
     id obj = _sourceArr.firstObject;
@@ -1412,7 +1429,7 @@
 
 - (void)jumpToEOSTransfer:(NSString *)accountName {
     if (_sourceArr.count<=0) {
-        [kAppD.window makeToastDisappearWithText:@"No wallet is available"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"no_wallet_is_available")];
         return;
     }
     id obj = _sourceArr.firstObject;
@@ -1477,6 +1494,11 @@
 
 - (void)qlcAccountPendingDone:(NSNotification *)noti {
     [self pullToRefresh];
+}
+
+- (void)languageChangeNoti:(NSNotification *)noti {
+    [self refreshTitle];
+    [_refreshScroll.mj_header beginRefreshing];
 }
 
 #pragma mark - Lazy

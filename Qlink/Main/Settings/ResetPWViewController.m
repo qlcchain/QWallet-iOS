@@ -62,7 +62,7 @@
     if ([pw containDigital] && [pw containLowercase] && [pw containUppercase]) {
         _pwWrongLab.text = nil;
     } else {
-        _pwWrongLab.text = @"A mix of uppercase and lowercase letters, along with at least one symbol.";
+        _pwWrongLab.text = kLang(@"a_mix_of_uppercase_and_lowercase_letters_along_with_at_least_one_symbol");
         [_storeBtn setBackgroundColor:UIColorFromRGB(0xD5D8DD)];
         _storeBtn.userInteractionEnabled = NO;
     }
@@ -104,17 +104,12 @@
 - (IBAction)storeAction:(id)sender {
     NSString *loginPW = [LoginPWModel getLoginPW];
     if (![_currentPWTF.text isEqualToString:loginPW]) {
-        [kAppD.window makeToastDisappearWithText:@"Current password is wrong"];
-        return;
-    }
-    
-    if (![_currentPWTF.text isEqualToString:loginPW]) {
-        [kAppD.window makeToastDisappearWithText:@"Current password is wrong"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"current_password_is_wrong")];
         return;
     }
     
     if (![_setPWTF.text isEqualToString:_repeatPWTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"Repeat password is different from Set password"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"repeat_password_is_different_from_set_password")];
         return;
     }
     

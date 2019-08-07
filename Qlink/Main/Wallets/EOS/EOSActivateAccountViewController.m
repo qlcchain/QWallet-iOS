@@ -78,7 +78,7 @@
         _paymentAccountLab.text = currentWalletM.name;
         _paymentAccountLab.alpha = 1;
     } else {
-        _paymentAccountLab.text = @"Please swith to EOS wallet";
+        _paymentAccountLab.text = kLang(@"please_switch_to_eos_wallet");
         _paymentAccountLab.alpha = 0.3;
     }
     
@@ -144,7 +144,7 @@
 
 - (void)showSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Success"];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 - (void)backToRoot {
@@ -163,7 +163,7 @@
 - (IBAction)activeAction:(id)sender {
     //创建费  0.1883 EOS, stake_net_quantity: '0.0400 EOS',stake_cpu_quantity: '0.2500 EOS',RAM 4KB
     if (!_paymentAccountLab.text || _paymentAccountLab.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Please swith to EOS wallet"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_eos_wallet")];
         return;
     }
     

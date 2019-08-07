@@ -80,7 +80,7 @@
     [self.view endEditing:YES];
     
     if (![_pwNewTF.text isEqualToString:_pwRepeatTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
     [self requestUser_change_password];
@@ -105,7 +105,7 @@
             userM.md5PW = md5PW;
             [UserModel storeUser:userM useLogin:NO];
             
-            [kAppD.window makeToastDisappearWithText:@"Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backTwice];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

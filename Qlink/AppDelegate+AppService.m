@@ -26,7 +26,6 @@
 #import "SystemUtil.h"
 #import "NeoTransferUtil.h"
 //#import "MiPushSDK.h"
-#import "NSBundle+Language.h"
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
 #import "QLCWalletManage.h"
@@ -36,6 +35,7 @@
 //#import "LoginInputPWViewController.h"
 //#import "LoginPWModel.h"
 //#import "WalletCommonModel.h"
+#import "NSBundle+Language.h"
 
 @interface AppDelegate () <BuglyDelegate>
 
@@ -72,9 +72,10 @@
 
 #pragma mark - 配置App语言
 - (void)configAppLanguage {
-    NSString *languages = [[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES];
-    if (languages && ![languages isEqualToString:@""]) {
-        [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
+    NSString *languages = [Language currentLanguageCode];
+    if ([languages isEmptyString]) {
+        [Language userSelectedLanguage:LanguageCode[1]];
+//        [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
     }
 }
 

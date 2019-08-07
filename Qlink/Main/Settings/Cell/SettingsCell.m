@@ -43,7 +43,7 @@
         _arrow.hidden = YES;
     }
     _swit.hidden = !model.showSwitch;
-    if ([model.title isEqualToString:title_screen_lock]) {
+    if ([model.title isEqualToString:kLang(title_screen_lock)]) {
         _swit.on = [FingerprintVerificationUtil getScreenLock];
     }
     _titleLab.text = model.title;
@@ -57,7 +57,7 @@
 }
 
 - (IBAction)switchChange:(UISwitch *)sender {
-    if ([_showM.title isEqualToString:title_screen_lock]) {
+    if ([_showM.title isEqualToString:kLang(title_screen_lock)]) {
         [FingerprintVerificationUtil setScreenLock:sender.on];
     }
 }

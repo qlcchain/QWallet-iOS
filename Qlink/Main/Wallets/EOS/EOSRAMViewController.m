@@ -125,7 +125,7 @@
 
 - (void)refreshEosBalance {
     if (_isBuy) {
-        _eosBalanceLab.text = [NSString stringWithFormat:@"Balance:%@ EOS",_inputSymbolM.balance];
+        _eosBalanceLab.text = [NSString stringWithFormat:@"%@:%@ EOS",kLang(@"balance"),_inputSymbolM.balance];
     }
 }
 
@@ -133,7 +133,7 @@
     TipOKView *view = [TipOKView getInstance];
     view.okBlock = ^{
     };
-    [view showWithTitle:@"Insufficient resources"];
+    [view showWithTitle:kLang(@"insufficient_resources")];
 }
 
 - (void)showPayDetailsViewWithPayInfo:(NSString *)payInfo amount:(NSString *)amount key1:(NSString *)key1 val1:(NSString *)val1 key2:(NSString *)key2 val2:(NSString *)val2 {
@@ -155,7 +155,7 @@
 
 - (void)showSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Success"];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 - (void)backToRoot {
@@ -232,7 +232,7 @@
     _purchaseTipHeight.constant = 15;
     _inputKeyLab.text = @"Purchase Amount";
     _inputAmountTF.placeholder = @"Input EOS Amount";
-    _eosBalanceLab.text = [NSString stringWithFormat:@"Balance:%@ EOS",_inputSymbolM.balance];
+    _eosBalanceLab.text = [NSString stringWithFormat:@"%@:%@ EOS",kLang(@"balance"),_inputSymbolM.balance];
 }
 
 - (IBAction)sellSelectAction:(id)sender {
@@ -244,7 +244,7 @@
     _inputKeyLab.text = @"Sell Amount(Bytes)";
     _inputAmountTF.placeholder = @"Input RAM Amount";
     NSNumber *availableNum = @([_resourceInfoM.ram.available doubleValue]-[_resourceInfoM.ram.used doubleValue]);
-    _eosBalanceLab.text = [NSString stringWithFormat:@"Balance:%@ Bytes",availableNum.show4floatStr];
+    _eosBalanceLab.text = [NSString stringWithFormat:@"%@:%@ Bytes",kLang(@"balance"),availableNum.show4floatStr];
 }
 
 - (IBAction)doAction:(id)sender {
@@ -254,15 +254,15 @@
     NSString *val2 = nil;
     if (_isBuy == YES) { // 买 （amount from to type）
         if (!_inputAmountTF.text || _inputAmountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input EOS Amount"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_eos_amount")];
             return;
         }
         if ([_inputAmountTF.text doubleValue] > [_inputSymbolM.balance doubleValue]) { // 余额不足
-            [kAppD.window makeToastDisappearWithText:@"Insufficient balance"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
             return;
         }
         if (!_recipientAccountTF.text || _recipientAccountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input Recipient Account"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_recipient_account")];
             return;
         }
         
@@ -275,11 +275,11 @@
         val2 = [NSString stringWithFormat:@"%@ Bytes",@([buyEosAmount doubleValue]/[self.resourcePriceM.ramPrice doubleValue]*1024)];
     } else { // 卖 （bytes from type）
         if (!_inputAmountTF.text || _inputAmountTF.text.length <= 0) {
-            [kAppD.window makeToastDisappearWithText:@"Input RAM Amount"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"input_ram_amount")];
             return;
         }
         if ([_inputAmountTF.text doubleValue] > [_resourceInfoM.ram.available doubleValue]-[_resourceInfoM.ram.used doubleValue]) { // 余额不足
-            [kAppD.window makeToastDisappearWithText:@"Insufficient balance"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
             return;
         }
         

@@ -13,19 +13,19 @@
 + (NSString *)getStatusStr:(NSString *)_status {
     NSString *statusStr = @"";
     if ([_status isEqualToString:ORDER_STATUS_OVERTIME]) {
-        statusStr = @"Closed";
+        statusStr = kLang(@"closed");
     } else if ([_status isEqualToString:ORDER_STATUS_NORMAL]) {
-        statusStr = @"Active";
+        statusStr = kLang(@"active");
     } else if ([_status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) {
-        statusStr = @"Waiting for Buyer's payment";
+        statusStr = kLang(@"waiting_for_buyer_payment");
     } else if ([_status isEqualToString:ORDER_STATUS_USDT_PAID] || [_status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
-        statusStr = @"Waiting for Seller's confirmation";
+        statusStr = kLang(@"waiting_for_seller_confirmation");
     } else if ([_status isEqualToString:ORDER_STATUS_NEW]) {
-        statusStr = @"Active";
+        statusStr = kLang(@"active");
     } else if ([_status isEqualToString:ORDER_STATUS_QGAS_PAID]) {
-        statusStr = @"Successful Deal";
+        statusStr = kLang(@"successful_deal");
     } else if ([_status isEqualToString:ORDER_STATUS_CANCEL]) {
-        statusStr = @"Revoked";
+        statusStr = kLang(@"revoked");
     }
     
     return statusStr;

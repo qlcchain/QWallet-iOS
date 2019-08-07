@@ -99,7 +99,7 @@
 
 - (void)showCreateSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:@"Create Success"];
+    [tip showWithTitle:kLang(@"create_success")];
 }
 
 - (void)backToRoot {
@@ -117,7 +117,7 @@
         [self showCreateSuccessView];
         [self performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
     } else {
-        [kAppD.window makeToastDisappearWithText:@"Order Wrong"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"order_wrong")];
     }
 }
 

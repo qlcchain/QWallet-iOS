@@ -48,13 +48,13 @@
 //    }
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _privateKey;
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
     [self hide];
 }
 
 - (IBAction)qrcodeAction:(id)sender {
     ExportPrivateKeyQRView *view = [ExportPrivateKeyQRView getInstance];
-    [view showWithPrivateKey:_privateKey title:@"Export QRCode"];
+    [view showWithPrivateKey:_privateKey title:kLang(@"export_qrcode")];
 }
 
 - (IBAction)closeAction:(id)sender {

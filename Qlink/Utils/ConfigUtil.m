@@ -8,21 +8,43 @@
 
 #import "ConfigUtil.h"
 
+@interface ConfigUtil ()
+
+@property (nonatomic, strong) NSNumber *mainNet;
+
+@end
+
 @implementation ConfigUtil
 
++ (instancetype)shareInstance {
+    static dispatch_once_t pred = 0;
+    __strong static ConfigUtil *sharedObj  = nil;
+    dispatch_once(&pred, ^{
+        sharedObj = [[self alloc] init];
+    });
+    return sharedObj;
+}
+
++ (void)setServerNetworkEnvironment:(BOOL)mainNet {
+    [ConfigUtil shareInstance].mainNet = @(mainNet);
+}
+
 + (BOOL)isMainNetOfServerNetwork {
-//    return YES;
-    return NO;
+    NSNumber *mainNet = [ConfigUtil shareInstance].mainNet;
+    if (mainNet == nil || [mainNet boolValue] == YES) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
     
 + (NSDictionary *)getConfig {
     NSBundle *bundle = [NSBundle mainBundle];
-//    NSString *serverNetwork = [HWUserdefault getStringWithKey:SERVER_NETWORK];
     NSString *path = @"";
-    if (![ConfigUtil isMainNetOfServerNetwork]) {
-       path = [bundle pathForResource:@"ConfigurationDebug" ofType:@"plist"];
-    } else {
+    if ([ConfigUtil isMainNetOfServerNetwork]) {
         path = [bundle pathForResource:@"ConfigurationRelease" ofType:@"plist"];
+    } else {
+        path = [bundle pathForResource:@"ConfigurationDebug" ofType:@"plist"];
     }
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
     return config;

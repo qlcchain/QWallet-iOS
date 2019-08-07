@@ -122,7 +122,7 @@
 - (IBAction)regVerifyCodeAction:(id)sender {
     [self.view endEditing:YES];
     if (![_emailTF.text isEmailAddress]) {
-        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
     [self requestSignup_code];
@@ -131,11 +131,11 @@
 - (IBAction)registerAction:(id)sender {
     [self.view endEditing:YES];
     if (![_emailTF.text isEmailAddress]) {
-        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
     if (![_pwTF.text isEqualToString:_pwRepeatTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
     [self requestSign_up];
@@ -149,7 +149,7 @@
     NSDictionary *params = @{@"account":_emailTF.text?:@""};
     [RequestService requestWithUrl:signup_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];
         } else {
             //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed"];

@@ -75,7 +75,7 @@
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = currentWalletM.account_name;
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 @end

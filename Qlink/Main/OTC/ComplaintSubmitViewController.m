@@ -71,7 +71,7 @@ static NSInteger columnNumber = 3;
 - (void)configInit {
     _submitBtn.layer.cornerRadius = 4.0;
     _submitBtn.layer.masksToBounds = YES;
-    _textV.placeholder = @"For example, incorrect amount, no payment received, etc.";
+    _textV.placeholder = kLang(@"for_example_incorrect_amount_no_payment_received_etc");
     
     [_bottomBack shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];
 
@@ -358,7 +358,7 @@ static NSInteger columnNumber = 3;
 
 - (IBAction)submitAction:(id)sender {
     if ([_textV.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Reason is empty."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"reason_is_empty")];
         return;
     }
     
@@ -372,7 +372,7 @@ static NSInteger columnNumber = 3;
         }
     }];
     if (photoIsBig) {
-        [kAppD.window makeToastDisappearWithText:@"Image size need smaller than 5M."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"image_size_need_smaller_than_5m")];
         return;
     }
     
@@ -406,7 +406,7 @@ static NSInteger columnNumber = 3;
     } success:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"Submit Success."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"submit_success")];
             [weakself backAction:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];

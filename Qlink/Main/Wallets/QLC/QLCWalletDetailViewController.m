@@ -72,11 +72,11 @@ NSString *exportQLCMnemonic = @"Export Mnemonic";
         if (_isDeleteCurrentWallet) { // 如果是当前选择钱包
             [WalletCommonModel removeCurrentSelectWallet];
         }
-        [kAppD.window makeToastDisappearWithText:@"Delete Successful"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"delete_successful")];
         [self backToRoot];
         [[NSNotificationCenter defaultCenter] postNotificationName:Delete_Wallet_Success_Noti object:nil];
     } else {
-        [kAppD.window makeToastDisappearWithText:@"Delete Failed"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"delete_failed")];
     }
 }
 

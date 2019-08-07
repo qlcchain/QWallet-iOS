@@ -43,7 +43,7 @@
 }
 
 - (void)dataInit {
-    _titleLab.text = _inputTitle?:@"Forget Password";
+    _titleLab.text = _inputTitle?:kLang(@"forget_password");
     _verifyCodeBtn.enabled = NO;
     _nextBtn.enabled = NO;
     _nextBtn.backgroundColor = [UIColor mainColorOfHalf];
@@ -118,7 +118,7 @@
     [self.view endEditing:YES];
     
     if (![_emailTF.text isEmailAddress]) {
-        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
     
@@ -129,7 +129,7 @@
     [self.view endEditing:YES];
     
     if (![_emailTF.text isEmailAddress]) {
-        [kAppD.window makeToastDisappearWithText:@"Please enter a valid email address."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
     
@@ -142,7 +142,7 @@
     NSDictionary *params = @{@"account":_emailTF.text?:@""};
     [RequestService requestWithUrl:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [kAppD.window makeToastDisappearWithText:@"The verification code has been sent successfully."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];
         } else {
 //            [kAppD.window makeToastDisappearWithText:@"Get Code Failed."];

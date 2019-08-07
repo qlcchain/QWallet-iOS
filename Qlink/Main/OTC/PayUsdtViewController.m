@@ -83,7 +83,7 @@
     
     _tokenPriceArr = [NSMutableArray array];
     
-    _sendtoAddressTV.placeholder = @"ETH Wallet Address";
+    _sendtoAddressTV.placeholder = kLang(@"eth_wallet_address");
     _sendtoAddressTV.text = _sendToAddress;
     _gasDetailHeight.constant = 0;
     _amountTF.text = _sendUsdtAmount;
@@ -98,9 +98,9 @@
 
 - (void)refreshView {
     _symbolLab.text = @"USDT";
-    NSString *balanceStr = @"Balance: 0 USDT";
+    NSString *balanceStr = [NSString stringWithFormat:@"%@: 0 USDT",kLang(@"balance")];
     if (_selectToken) {
-        balanceStr = [NSString stringWithFormat:@"Balance: %@ USDT",[_selectToken getTokenNum]];
+        balanceStr = [NSString stringWithFormat:@"%@: %@ USDT",kLang(@"balance"),[_selectToken getTokenNum]];
     }
     _balanceLab.text = balanceStr;
     [self refreshGasCost];
@@ -173,7 +173,7 @@
     [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         [kAppD.window hideToast];
         if (success) {
-            [kAppD.window makeToastDisappearWithText:@"Send Success"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
             NSString *blockChain = @"ETH";
             [ReportUtil requestWalletReportWalletRransferWithAddressFrom:fromAddress addressTo:toAddress blockChain:blockChain symbol:symbol amount:amount txid:txId?:@""]; // 上报钱包转账
             
@@ -181,7 +181,7 @@
                 [weakself requestTrade_buyer_confirm:txId]; // 买家确认支付
             });
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Send Fail"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_fail")];
         }
     }];
 }
@@ -289,35 +289,35 @@
 
 - (IBAction)sendAction:(id)sender {
     if (!_payWalletM) {
-        [kAppD.window makeToastDisappearWithText:@"Payment Wallet is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"payment_wallet_is_empty")];
         return;
     }
     if (!_amountTF.text || _amountTF.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] == 0) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is zero"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
     if ([_amountTF.text doubleValue] > [[_selectToken getTokenNum] doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Balance is not enough"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
     
     // 检查地址有效性
     BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text];
     if (!isValid) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
     }
     
     if (![self haveETHAssetNum]) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address have not ETH banlance"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_have_not_eth_balance")];
         return;
     }
     
@@ -371,7 +371,7 @@
     // 判断ETH钱包的USDT asset
     _selectToken = [kAppD.tabbarC.walletsVC getUSDTAsset];
     if (!_selectToken) {
-        [kAppD.window makeToastDisappearWithText:@"Current QLC Wallet have not USDT"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_usdt")];
         return;
     }
 

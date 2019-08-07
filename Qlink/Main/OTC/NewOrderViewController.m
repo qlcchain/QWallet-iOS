@@ -118,15 +118,15 @@
     }];
 }
 
-- (void)showSubmitSuccess {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Submitted Successfully! " message:@"Verification status will be updated on the ME page." preferredStyle:UIAlertControllerStyleAlert];
-    kWeakSelf(self)
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakself.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    [alertVC addAction:action1];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
+//- (void)showSubmitSuccess {
+//    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Submitted Successfully! " message:@"Verification status will be updated on the ME page." preferredStyle:UIAlertControllerStyleAlert];
+//    kWeakSelf(self)
+//    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [weakself.navigationController popToRootViewControllerAnimated:YES];
+//    }];
+//    [alertVC addAction:action1];
+//    [self presentViewController:alertVC animated:YES completion:nil];
+//}
 
 #pragma mark - Action
 
@@ -196,34 +196,34 @@
 
 - (IBAction)buyConfirmAction:(id)sender {
     if ([_buyUsdtTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Unit Price is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_is_empty")];
         return;
     }
     if ([_buyUsdtTF.text doubleValue] <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Unit Price needs greater than 0"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_needs_greater_than_0")];
         return;
     }
     if ([_buyTotalTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Total Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if ([_buyVolumeMinAmountTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Min Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"min_amount_is_empty")];
         return;
     }
     if ([_buyVolumeMaxAmountTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Max Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_is_empty")];
         return;
     }
     if ([_buyAddressTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
     // 检查地址有效性
     BOOL validateQLCAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_buyAddressTF.text];
     if (!validateQLCAddress) {
-        [kAppD.window makeToastDisappearWithText:@"QLC Wallet Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_invalidate")];
         return;
     }
     
@@ -233,67 +233,67 @@
 
 - (IBAction)sellNextAction:(id)sender {
     if ([_sellUsdtTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Unit Price is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_is_empty")];
         return;
     }
     if ([_sellUsdtTF.text doubleValue] <= 0) {
-        [kAppD.window makeToastDisappearWithText:@"Unit Price needs greater than 0"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_needs_greater_than_0")];
         return;
     }
     if ([_sellTotalTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Total Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if ([_sellVolumeMinAmountTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Min Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"min_amount_is_empty")];
         return;
     }
     if ([_sellVolumeMaxAmountTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Max Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_is_empty")];
         return;
     }
     if ([_sellTotalTF.text integerValue] < [_sellVolumeMaxAmountTF.text integerValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Total Amount need greater than or equal to Max Amount"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_need_greater_than_or_equal_to_max_amount")];
         return;
     }
     if ([_sellAddressTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     if ([_sellQLCAddressTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"QLC Chain Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_chain_address_is_empty")];
         return;
     }
     
     // 检查地址有效性
     BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sellAddressTF.text];
     if (!isValid) {
-        [kAppD.window makeToastDisappearWithText:@"ETH Wallet Address is invalidate"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
     }
     
     // 判断当前钱包
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (!currentWalletM || currentWalletM.walletType != WalletTypeQLC) {
-        [kAppD.window makeToastDisappearWithText:@"Please switch to QLC Wallet"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_qlc_wallet")];
         return;
     }
     
     // 判断QLC钱包的QLC asset
     QLCTokenModel *qgasAsset = [kAppD.tabbarC.walletsVC getQGASAsset];
     if (!qgasAsset) {
-        [kAppD.window makeToastDisappearWithText:@"Current QLC Wallet have not QGAS"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_qgas")];
         return;
     }
     if ([qgasAsset.balance floatValue] < [_sellTotalTF.text floatValue]) {
-        [kAppD.window makeToastDisappearWithText:@"Current QLC Wallet have not enough QGAS"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_enough_qgas")];
         return;
     }
     
     // 检查平台地址
     NSString *qlcAddress = [QLCWalletManage shareInstance].qlcMainAddress;
     if ([qlcAddress isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"QLC Server Address is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_server_address_is_empty")];
         return;
     }
     
@@ -381,7 +381,7 @@
 //            [weakself showSubmitSuccess];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -395,11 +395,11 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
-    [kAppD.window makeToastInView:kAppD.window text:@"Process..." userInteractionEnabled:NO hideTime:0];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
-        [kAppD.window makeToastDisappearWithText:@"Transfer Successful."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         
         // 下卖单
         weakself.sellFromAddress = fromAddress;
@@ -445,7 +445,7 @@
 //            [weakself showSubmitSuccess];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
-            [kAppD.window makeToastDisappearWithText:@"Failed."];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

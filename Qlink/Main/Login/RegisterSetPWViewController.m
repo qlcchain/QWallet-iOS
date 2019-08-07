@@ -68,7 +68,7 @@
 - (IBAction)registerAction:(id)sender {
     [self.view endEditing:YES];
     if (![_pwTF.text isEqualToString:_pwRepeatTF.text]) {
-        [kAppD.window makeToastDisappearWithText:@"The passwords are different."];
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
     [self requestSign_up];
