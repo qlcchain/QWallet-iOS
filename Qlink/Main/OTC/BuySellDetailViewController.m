@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usdtLab;
 @property (weak, nonatomic) IBOutlet UILabel *totalLab;
 @property (weak, nonatomic) IBOutlet UILabel *volumeSettingLab;
+@property (weak, nonatomic) IBOutlet UILabel *accountPayOrReceiveLab;
 @property (weak, nonatomic) IBOutlet UITextField *usdtMaxTF;
 @property (weak, nonatomic) IBOutlet UITextField *qgasMaxTF;
 @property (weak, nonatomic) IBOutlet UILabel *addressTipLab;
@@ -83,6 +84,7 @@
     [_qgasMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) { // 我是买家
+        _accountPayOrReceiveLab.text = kLang(@"account_payable");
         _titleLab.text = kLang(@"buy_qgas");
         _usdtLab.textColor = MAIN_BLUE_COLOR;
         _addressTipLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
@@ -90,6 +92,7 @@
         _createOneNowHeight.constant = 30;
         _qgasSendBackHeight.constant = 0;
     } else { // 我是卖家
+        _accountPayOrReceiveLab.text = kLang(@"account_receivable");
         _titleLab.text = kLang(@"sell_qgas");
         _usdtLab.textColor = UIColorFromRGB(0xFF3669);
         _addressTipLab.text = kLang(@"erc-20_address_to_receive_usdt");
