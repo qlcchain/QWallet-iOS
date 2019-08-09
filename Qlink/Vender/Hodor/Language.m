@@ -33,7 +33,7 @@ NSString *const LanguageCodeIdIndentifier = @"LanguageCodeIdIndentifier";
         return userSelectedLanguage;
     } else {
         // 初始化本地语言
-        [Language userSelectedLanguage:LanguageCode[1]];
+        [Language userSelectedLanguage:LanguageCode[0]];
         return [Language currentLanguageCode];
     }
     

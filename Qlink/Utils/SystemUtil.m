@@ -46,8 +46,8 @@
  */
 + (void) configureAPPTerminate {
 //    NSLog(@"applicationState = %ld",(long)[UIApplication sharedApplication].applicationState);
-    [SystemUtil deleteVPNConfig];
-    [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
+//    [SystemUtil deleteVPNConfig];
+//    [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
 //    [ToxManage readDataToKeychain];
     // 结束p2p连接
    // if ([ToxManage getP2PConnectionStatus]) {
@@ -55,14 +55,14 @@
    // }
 }
 
-+ (void)deleteVPNConfig {
-    // 断开vpn连接
-//    [VPNUtil.shareInstance stopVPN];
-    // 删除vpn本地配置
-//    [VPNUtil.shareInstance removeFromPreferences];
-    // 删除当前VPNInfo
-    [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
-    
-}
+//+ (void)deleteVPNConfig {
+//    // 断开vpn连接
+////    [VPNUtil.shareInstance stopVPN];
+//    // 删除vpn本地配置
+////    [VPNUtil.shareInstance removeFromPreferences];
+//    // 删除当前VPNInfo
+//    [HWUserdefault deleteObjectWithKey:Current_Connenct_VPN];
+//
+//}
 
 @end

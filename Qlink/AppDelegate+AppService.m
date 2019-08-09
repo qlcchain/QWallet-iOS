@@ -74,7 +74,7 @@
 - (void)configAppLanguage {
     NSString *languages = [Language currentLanguageCode];
     if ([languages isEmptyString]) {
-        [Language userSelectedLanguage:LanguageCode[1]];
+        [Language userSelectedLanguage:LanguageCode[0]];
 //        [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
     }
 }

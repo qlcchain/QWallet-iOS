@@ -105,7 +105,7 @@
 //    _totalLab.text = [NSString stringWithFormat:@"%@",_inputEntrustOrderListM.totalAmount];
     _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_inputEntrustOrderListM.totalAmount integerValue] - [_inputEntrustOrderListM.lockingAmount integerValue] - [_inputEntrustOrderListM.completeAmount integerValue])];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_inputEntrustOrderListM.minAmount,_inputEntrustOrderListM.maxAmount];
-    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_inputEntrustOrderListM.maxAmount integerValue]*[_inputEntrustOrderListM.unitPrice floatValue])];
+    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_inputEntrustOrderListM.maxAmount integerValue]*[_inputEntrustOrderListM.unitPrice doubleValue])];
     _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount];
 }
 
@@ -115,7 +115,7 @@
 //        _totalLab.text = [NSString stringWithFormat:@"%@",_orderInfoM.totalAmount];
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
         _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_orderInfoM.minAmount,_orderInfoM.maxAmount];
-        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice floatValue])];
+        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice doubleValue])];
         _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount];
     }
 }
@@ -310,7 +310,7 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"usdt_is_empty")];
         return;
     }
-    if ([_usdtMaxTF.text floatValue] > [_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice floatValue]) {
+    if ([_usdtMaxTF.text doubleValue] > [_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"usdt_is_over_max")];
         return;
     }
@@ -364,7 +364,7 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_qgas")];
             return;
         }
-        if ([qgasAsset.balance floatValue] < [_qgasMaxTF.text floatValue]) {
+        if ([qgasAsset.balance doubleValue] < [_qgasMaxTF.text doubleValue]) {
             [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_enough_qgas")];
             return;
         }
