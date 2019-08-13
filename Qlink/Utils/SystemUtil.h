@@ -19,5 +19,6 @@
  */
 + (void) configureAPPTerminate;
 //+ (void)deleteVPNConfig;
++ (void)checkAPPUpdate;
 
 @end

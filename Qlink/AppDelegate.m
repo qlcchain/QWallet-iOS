@@ -156,6 +156,8 @@
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
     [self jumpToWallet];
+    
+    [SystemUtil checkAPPUpdate]; // 检查app更新
 }
 
 - (void)jumpToWallet {
