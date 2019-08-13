@@ -285,7 +285,7 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_qgas")];
         return;
     }
-    if ([qgasAsset.balance floatValue] < [_sellTotalTF.text floatValue]) {
+    if ([qgasAsset.balance doubleValue] < [_sellTotalTF.text doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_enough_qgas")];
         return;
     }

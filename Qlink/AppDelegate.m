@@ -75,11 +75,11 @@
     // 配置app语言
     [self configAppLanguage];
     // 删除手机VPN配置
-    [SystemUtil deleteVPNConfig];
+//    [SystemUtil deleteVPNConfig];
     // 将连接状态置为NO
-    [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
+//    [NeoTransferUtil updateUserDefaultVPNListCurrentVPNConnectStatus];
     // 开启VPN连接扣费
-    [NeoTransferUtil startVPNConnectTran];
+//    [NeoTransferUtil startVPNConnectTran];
     // 开启VPN上传服务器
 //    [VPNFileUtil startVPNSendServerTimer];
 //    // 初始化当前钱包
@@ -156,6 +156,8 @@
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
     [self jumpToWallet];
+    
+    [SystemUtil checkAPPUpdate]; // 检查app更新
 }
 
 - (void)jumpToWallet {

@@ -111,7 +111,7 @@
     NSString *decimals = ETH_Decimals;
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
 //    long double ethFloat = _gasSlider.value*[_gasLimitLab.text floatValue]*decimalsDouble;
-    NSNumber *ethFloatNum = @(_gasSlider.value*[_gasLimitLab.text floatValue]*[decimalsNum doubleValue]);
+    NSNumber *ethFloatNum = @(_gasSlider.value*[_gasLimitLab.text integerValue]*[decimalsNum doubleValue]);
 //    _gasCostETH = [[NSString stringWithFormat:@"%Lf",ethFloat] removeFloatAllZero];
     _gasCostETH = [NSString stringWithFormat:@"%@",ethFloatNum];
     __block NSString *price = @"";
@@ -119,7 +119,7 @@
         TokenPriceModel *model = obj;
         if ([model.symbol isEqualToString:_selectToken.tokenInfo.symbol]) {
 //            double priceFloat = [_gasCostETH floatValue]*[model.price doubleValue];
-            NSNumber *priceNum = @([_gasCostETH floatValue]*[model.price doubleValue]);
+            NSNumber *priceNum = @([_gasCostETH doubleValue]*[model.price doubleValue]);
 //            price = [[NSString stringWithFormat:@"%f",priceFloat] removeFloatAllZero];
             price = [NSString stringWithFormat:@"%@",priceNum];
             *stop = YES;

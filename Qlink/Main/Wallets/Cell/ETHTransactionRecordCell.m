@@ -140,7 +140,7 @@
 
 - (void)configCellWithQLCModel:(QLCAddressHistoryModel *)model {
 //    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    BOOL isSend = [model.type isEqualToString:@"Send"]?YES:NO;
+    BOOL isSend = [model.type isEqualToString:@"Send"]||[model.type isEqualToString:@"ContractSend"]?YES:NO;
     if (!isSend) {
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_confirm"];
     } else {

@@ -27,7 +27,7 @@
     
 }
 - (IBAction)clickBuy:(id)sender {
-    if ([_txtNEO.text.trim isEmptyString] || [_txtNEO.text.trim floatValue] == 0.f) {
+    if ([_txtNEO.text.trim isEmptyString] || [_txtNEO.text.trim doubleValue] == 0.f) {
         return;
     }
     NSString *msg = [NSString stringWithFormat:@"%@ %@ %@ %@ NEO?",NSStringLocalizable(@"want_buy"),_txtQLC.text,NSStringLocalizable(@"amount_of"),_txtNEO.text];

@@ -18,6 +18,7 @@
  app退出时。配置
  */
 + (void) configureAPPTerminate;
-+ (void)deleteVPNConfig;
+//+ (void)deleteVPNConfig;
++ (void)checkAPPUpdate;
 
 @end
