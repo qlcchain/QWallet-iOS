@@ -11,6 +11,7 @@
 #import "QlinkTabbarViewController.h"
 #import "SuccessTipView.h"
 #import "QLCWalletManage.h"
+//#import "GlobalConstants.h"
 
 @interface QLCBackupDetailViewController () {
     BOOL isTip;

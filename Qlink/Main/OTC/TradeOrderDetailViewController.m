@@ -25,6 +25,9 @@
 #import "ComplaintSubmitViewController.h"
 #import "ComplaintDetailViewController.h"
 
+
+//#import "GlobalConstants.h"
+
 @interface TradeOrderDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
@@ -34,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *addressLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
+@property (weak, nonatomic) IBOutlet UILabel *typeUnitLab;
 @property (weak, nonatomic) IBOutlet UILabel *buyOrSellLab;
 @property (weak, nonatomic) IBOutlet UILabel *buyOrSellNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *totalLab;
@@ -165,7 +169,22 @@
         
         UserModel *loginM = [UserModel fetchUserOfLogin];
         BOOL i_am_Buyer = [loginM.ID isEqualToString:_orderInfoM.buyerId]?YES:NO;
-        if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
+        if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TRADE_TOKEN_PENDING]) { // 已转交易币 等待转成功
+            _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
+            _statusTitleLab.text = kLang(@"transaction_pending");
+            _statusSubTitleLab.text = kLang(@"please_be_patient_");
+                    
+            _orderIDHeight.constant = 56;
+            _orderIDLab.text = _orderInfoM.number;
+            _orderTimeHeight.constant = 56;
+            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderStatusHeight.constant = 56;
+            _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
+//            if (i_am_Buyer) {
+//                _bottomView1Height.constant = 59;
+//                _bottomBack1.hidden = NO;
+//            }
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
             _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
             _statusTitleLab.text = kLang(@"waiting_for_buyer_payment");
             _statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
@@ -186,8 +205,13 @@
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
             _statusBack.backgroundColor = MAIN_BLUE_COLOR;
             
-            _statusTitleLab.text = kLang(@"waiting_for_seller_confirmation");
-            _statusSubTitleLab.text = kLang(@"waiting_for_seller_confirmation");
+            if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                _statusTitleLab.text = kLang(@"waiting_for_public_Chain_confirmation");
+                _statusSubTitleLab.text = kLang(@"waiting_for_public_Chain_confirmation");
+            } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) {
+                _statusTitleLab.text = kLang(@"waiting_for_seller_confirmation");
+                _statusSubTitleLab.text = kLang(@"waiting_for_seller_confirmation");
+            }
 
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
@@ -196,9 +220,18 @@
             _confirmPayTimeHeight.constant = 56;
             _confirmPayTimeLab.text = _orderInfoM.buyerConfirmDate;
             _orderStatusHeight.constant = 56;
-            _orderStatusLab.text = kLang(@"waiting_for_seller_confirmation");
+            if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                _orderStatusLab.text = kLang(@"waiting_for_public_Chain_confirmation");
+            } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) {
+                _orderStatusLab.text = kLang(@"waiting_for_seller_confirmation");
+            }
+            
             _infoAddressHeight.constant = 76;
-            _infoAddressLab.text = _orderInfoM.usdtFromAddress;
+            if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                _infoAddressLab.text = _orderInfoM.usdtToAddress;
+            } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) {
+                _infoAddressLab.text = _orderInfoM.usdtFromAddress;
+            }
             _tradeIDHeight.constant = 76;
             _tradeIDLab.text = _orderInfoM.txid;
             if (i_am_Buyer) { // 买家
@@ -213,17 +246,31 @@
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
                     [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
                 }
-            } else {
-                _bottomView2Height.constant = 59;
-                _bottomBack2.hidden = NO;
-                if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
-                    [_complaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
-                } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
-                    [_complaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
-                } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
-                    [_complaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
-                } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
-                    [_complaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
+            } else { // 卖家
+                if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                    _bottomView3Height.constant = 59;
+                    _bottomBack3.hidden = NO;
+                    if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
+                        [_viewComplaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
+                    } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
+                        [_viewComplaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
+                    } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
+                        [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
+                    } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
+                        [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
+                    }
+                } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) {
+                    _bottomView2Height.constant = 59;
+                    _bottomBack2.hidden = NO;
+                    if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
+                        [_complaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
+                    } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
+                        [_complaintBtn setTitle:kLang(@"title_appeal_details") forState:UIControlStateNormal];
+                    } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_SUCCESS]) {
+                        [_complaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
+                    } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
+                        [_complaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
+                    }
                 }
             }
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_PAID]) { // 订单已完成
@@ -235,7 +282,7 @@
             _orderTimeLab.text = _orderInfoM.orderTime;
             _confirmPayTimeHeight.constant = 56;
             _confirmPayTimeLab.text = _orderInfoM.buyerConfirmDate;
-            if (_orderInfoM.appealStatus != APPEAL_STATUS_NO) {
+            if (![_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
                 _appealTimeHeight.constant = 56;
                 _appealTimeLab.text = _orderInfoM.appealDate;
             }
@@ -345,17 +392,19 @@
         }
         
         if (i_am_Buyer) {
-            _addressTitleLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
+            _addressTitleLab.text = kLang(@"receive_from");
             _addressLab.text = _orderInfoM.qgasToAddress;
             _typeLab.text = kLang(@"buy");
+            _typeUnitLab.text = _orderInfoM.tradeToken;
             _typeLab.textColor = MAIN_BLUE_COLOR;
             _buyOrSellLab.text = kLang(@"seller");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
             
         } else {
-            _addressTitleLab.text = kLang(@"erc-20_address_to_receive_usdt");
+            _addressTitleLab.text = kLang(@"receive_from");
             _addressLab.text = _orderInfoM.usdtToAddress;
             _typeLab.text = kLang(@"sell");
+            _typeUnitLab.text = _orderInfoM.tradeToken;
             _typeLab.textColor = UIColorFromRGB(0xFF3669);
             _buyOrSellLab.text = kLang(@"buyer");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
@@ -364,10 +413,10 @@
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
         }
         _payKeyLab.text = kLang(@"amount_price");
-        _payValLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.usdtAmount];
+        _payValLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.usdtAmount,_orderInfoM.payToken];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
-        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
-        _unitPriceLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.unitPrice];
+        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.qgasAmount,_orderInfoM.tradeToken];
+        _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice,_orderInfoM.payToken];
     }
 }
 
@@ -508,7 +557,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@""}];
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_order_info_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_order_info_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.orderInfoM = [TradeOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
@@ -534,7 +583,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@"",@"txid":txid?:@""}];
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_buyer_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_buyer_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself showAlreadyPaySuccessView];
@@ -560,7 +609,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@""}];
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_seller_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_seller_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself requestTrade_order_info];
@@ -585,7 +634,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@""}];
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_cancel_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_cancel_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself requestTrade_order_info];
@@ -601,7 +650,7 @@
     kWeakSelf(self);
     NSDictionary *params = @{};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:getServerTime_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:getServerTime_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.serverTime = responseObject[Server_Data][@"sysTime"];
@@ -652,6 +701,9 @@
 }
 
 - (IBAction)confirmReceiveAction:(id)sender {
+    if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+        return;
+    }
     [self requestTrade_seller_confirm];
 }
 

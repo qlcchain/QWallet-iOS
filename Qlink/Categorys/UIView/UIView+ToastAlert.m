@@ -9,6 +9,7 @@
 #import "UIView+ToastAlert.h"
 #import "WalletAlertView.h"
 //#import "VpnToastView.h"
+#import "GlobalConstants.h"
 
 @implementation UIView (ToastAlert)
 

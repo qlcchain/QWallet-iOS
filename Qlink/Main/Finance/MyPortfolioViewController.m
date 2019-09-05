@@ -19,6 +19,9 @@
 #import "FinanceHistoryViewController.h"
 #import "RefreshHelper.h"
 
+
+//#import "GlobalConstants.h"
+
 @interface MyPortfolioViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *topGradientBack;
@@ -111,7 +114,7 @@
     NSString *size = @"20";
     NSDictionary *params = @{@"account":account,@"token":token,@"address":address,@"page":page,@"size":size};
 //    [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
 //        [kAppD.window hideToast];
@@ -146,7 +149,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token,@"orderId":orderId};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:redeem_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:redeem_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Redeem Success."];

@@ -9,6 +9,7 @@
 #import "BinaTpcsModel.h"
 #import "NSString+RemoveZero.h"
 #import "TokenPriceModel.h"
+#import "GlobalConstants.h"
 
 @implementation BinaTpcsModel
 

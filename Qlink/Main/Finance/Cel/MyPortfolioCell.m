@@ -9,6 +9,8 @@
 #import "MyPortfolioCell.h"
 #import "FinanceOrderListModel.h"
 #import "NSDate+Category.h"
+#import "UIColor+Random.h"
+#import "NSString+EmptyUtil.h"
 
 @interface MyPortfolioCell ()
 

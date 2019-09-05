@@ -25,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *orderTime;
 @property (nonatomic, strong) NSNumber *lockingAmount;
 @property (nonatomic, strong) NSNumber *completeAmount;
+@property (nonatomic, strong) NSString *payToken;
+@property (nonatomic, strong) NSString *payTokenChain;
+@property (nonatomic, strong) NSString *tradeToken;
+@property (nonatomic, strong) NSString *tradeTokenChain;
+@property (nonatomic, strong) NSString *userId;
 
 @property (nonatomic, strong) NSString *showNickName;
 

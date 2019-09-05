@@ -23,8 +23,10 @@
 //#import "NounView.h"
 #import <Masonry/Masonry.h>
 #import "NEOWalletUtil.h"
+#import "GlobalConstants.h"
+#import "UIColor+Random.h"
 
-#define tabbaritems 3
+static NSInteger const tabbaritems = 3;
 
 @interface QlinkTabbarViewController ()<UITabBarControllerDelegate>
 

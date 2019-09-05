@@ -9,6 +9,8 @@
 #import "RegisterSetPWViewController.h"
 #import "MD5Util.h"
 #import "UserModel.h"
+#import "UIColor+Random.h"
+//#import "GlobalConstants.h"
 
 @interface RegisterSetPWViewController ()
 
@@ -82,7 +84,7 @@
     NSString *md5PW = [MD5Util md5:_pwTF.text?:@""];
     NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":_inputVerifyCode,@"number":_inviteCodeTF.text?:@"",@"p2pId":[UserModel getOwnP2PId]};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:sign_up_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:sign_up_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";

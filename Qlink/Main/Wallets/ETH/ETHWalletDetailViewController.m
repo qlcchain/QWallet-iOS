@@ -18,6 +18,7 @@
 #import "ETHExportMnemonicViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ETHExportKeystorePWViewController.h"
+//#import "GlobalConstants.h"
 
 @interface ETHWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 

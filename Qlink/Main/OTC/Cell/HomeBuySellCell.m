@@ -11,6 +11,8 @@
 #import "UIView+Visuals.h"
 #import <UIImageView+WebCache.h>
 
+#import "GlobalConstants.h"
+
 @interface HomeBuySellCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
@@ -23,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *dealsLab;
 @property (weak, nonatomic) IBOutlet UIButton *operatorBtn;
+@property (weak, nonatomic) IBOutlet UILabel *payUnitLab;
 
 
 @end
@@ -59,10 +62,11 @@
     }];
     _usdtLab.textColor = [model.type isEqualToString:@"BUY"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     _usdtLab.text = model.unitPrice;
+    _payUnitLab.text = [NSString stringWithFormat:@"%@/%@",model.tradeToken,model.payToken];
     _totalAmountKeyLab.text = kLang(@"amount");
-    _totalAmountLab.text = [NSString stringWithFormat:@"%@ QGAS",@([model.totalAmount integerValue] - [model.lockingAmount integerValue] - [model.completeAmount integerValue])];
+    _totalAmountLab.text = [NSString stringWithFormat:@"%@ %@",@([model.totalAmount doubleValue] - [model.lockingAmount doubleValue] - [model.completeAmount doubleValue]),model.tradeToken];
     _volumeSettingKeyLab.text = kLang(@"volume_settings");
-    _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",model.minAmount,model.maxAmount];
+    _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ %@",model.minAmount,model.maxAmount,model.tradeToken];
     _nameLab.text = model.showNickName;
     _dealsLab.text = [NSString stringWithFormat:@"%@ Deals",model.otcTimes];
     _operatorBtn.backgroundColor = [model.type isEqualToString:@"BUY"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;

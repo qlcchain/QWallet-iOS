@@ -10,6 +10,7 @@
 #import "UIView+Animation.h"
 #import "WalletCommonModel.h"
 #import "SGQRCodeObtain.h"
+#import "GlobalConstants.h"
 
 @implementation WalletAddressView
 

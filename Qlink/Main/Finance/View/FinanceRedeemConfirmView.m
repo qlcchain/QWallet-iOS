@@ -11,6 +11,7 @@
 #import "WalletCommonModel.h"
 #import "Qlink-Swift.h"
 #import "FinanceOrderListModel.h"
+#import "GlobalConstants.h"
 
 @interface FinanceRedeemConfirmView ()
 

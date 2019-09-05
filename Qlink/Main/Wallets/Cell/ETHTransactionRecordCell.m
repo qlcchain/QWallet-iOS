@@ -14,6 +14,7 @@
 #import "ETHAddressTransactionsModel.h"
 #import "EOSTraceModel.h"
 #import "QLCAddressHistoryModel.h"
+#import "GlobalConstants.h"
 
 @interface ETHTransactionRecordCell ()
 

@@ -8,6 +8,7 @@
 
 #import "SettingsCell.h"
 #import "FingerprintVerificationUtil.h"
+#import "GlobalConstants.h"
 
 @interface SettingsCell ()
 

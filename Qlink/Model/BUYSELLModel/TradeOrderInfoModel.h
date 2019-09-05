@@ -42,6 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *photo3;
 @property (nonatomic, strong) NSString *photo4;
 @property (nonatomic, strong) NSString *auditFeedback;
+@property (nonatomic, strong) NSString *payToken;// = QLC;
+@property (nonatomic, strong) NSString *payTokenChain;// = "NEO_CHAIN";
+@property (nonatomic, strong) NSString *tradeToken;// = QGAS;
+@property (nonatomic, strong) NSString *tradeTokenChain;// = "QLC_CHAIN";
+
 
 @property (nonatomic, strong) NSString *showNickName;
 

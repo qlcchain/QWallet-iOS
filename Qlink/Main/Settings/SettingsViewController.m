@@ -15,6 +15,7 @@
 #import "JoinCommunityViewController.h"
 #import "WebViewController.h"
 #import "UserModel.h"
+//#import "GlobalConstants.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 

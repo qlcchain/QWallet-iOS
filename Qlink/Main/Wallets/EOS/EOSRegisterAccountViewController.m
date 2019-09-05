@@ -21,6 +21,8 @@
 #import "EOSWalletInfo.h"
 #import "EOSAccountInfoModel.h"
 
+//#import "GlobalConstants.h"
+
 @implementation EOSCreateSourceModel
 
 @end
@@ -174,7 +176,7 @@
         if (_accountNameTF.text.length == 12) {
             kWeakSelf(self);
             NSDictionary *params = @{@"account":_accountNameTF.text?:@""};
-            [RequestService requestWithUrl:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+            [RequestService requestWithUrl5:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
                 if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
                     NSDictionary *dic = responseObject[Server_Data][Server_Data];
                     EOSAccountInfoModel *model = [EOSAccountInfoModel getObjectWithKeyValues:dic];
@@ -297,7 +299,7 @@
 - (void)requestEthEth_for_activate_eos_wallet {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl:ethEth_for_activate_eos_wallet params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:ethEth_for_activate_eos_wallet params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = [responseObject objectForKey:Server_Data];
             weakself.ethAmount = dic[@"ethAmount"];
@@ -314,7 +316,7 @@
     NSString *owner = _eosCreateSourceM.ownerPublicKey;
     NSString *active = _eosCreateSourceM.activePublicKey;
     NSDictionary *params = @{@"txid":txid?:@"",@"name":name?:@"",@"owner":owner?:@"",@"active":active?:@""};
-    [RequestService requestWithUrl:eosNew_account_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosNew_account_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         
         NSString *msg = [responseObject objectForKey:Server_Msg];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {

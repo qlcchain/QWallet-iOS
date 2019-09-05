@@ -18,6 +18,9 @@
 #import "QLCWalletManage.h"
 #import "QLCTokenInfoModel.h"
 
+
+//#import "GlobalConstants.h"
+
 @interface QLCTransferViewController () <UITextViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
@@ -34,25 +37,25 @@
 
 @implementation QLCTransferViewController
 
-#pragma mark - Observe
-- (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferSuccess:) name:NEO_Transfer_Success_Noti object:nil];
-}
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+//
+//#pragma mark - Observe
+//- (void)addObserve {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferSuccess:) name:NEO_Transfer_Success_Noti object:nil];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self addObserve];
+//    [self addObserve];
     
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     [self renderView];
     [self configInit];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Operation
@@ -135,7 +138,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_selectAsset.tokenName],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -237,9 +240,9 @@
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
-#pragma mark - Noti
-- (void)transferSuccess:(NSNotification *)noti {
-    [self backToRoot];
-}
+//#pragma mark - Noti
+//- (void)transferSuccess:(NSNotification *)noti {
+//    [self backToRoot];
+//}
 
 @end

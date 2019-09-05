@@ -13,6 +13,7 @@
 #import "EOSSignUtil.h"
 #import <ETHFramework/ETHFramework.h>
 #import "UserModel.h"
+#import "GlobalConstants.h"
 
 @implementation ReportUtil
 
@@ -57,7 +58,7 @@
     
     NSDictionary *params = @{@"p2pId":myP2pId, @"address":address?:@"", @"blockChain":blockChain, @"pubKey":pubKeyResult, @"signData":signResult};
     NSLog(@"上报参数：%@",params);
-    [RequestService requestWithUrl:walletReport_wallet_create_v2_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:walletReport_wallet_create_v2_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             //            NSDictionary *dic = [responseObject objectForKey:Server_Data];
         }
@@ -67,7 +68,7 @@
 
 + (void)requestWalletReportWalletRransferWithAddressFrom:(NSString *)addressFrom addressTo:(NSString *)addressTo blockChain:(NSString *)blockChain symbol:(NSString *)symbol amount:(NSString *)amount txid:(NSString *)txid {
     NSDictionary *parames = @{@"addressFrom":addressFrom ,@"txid":txid,@"addressTo":addressTo,@"blockChain":blockChain,@"symbol":symbol,@"amount":amount}; 
-    [RequestService requestWithUrl:walletReport_wallet_transfer_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:walletReport_wallet_transfer_Url params:parames httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0){
 //            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
         }

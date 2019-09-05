@@ -57,6 +57,10 @@
 #import "QLCWalletAddressViewController.h"
 #import "QLCTransferViewController.h"
 #import "QLCTokenInfoModel.h"
+#import "MyStakingsViewController.h"
+#import "NEOWalletInfo.h"
+//#import "WebTestViewController.h"
+//#import "GlobalConstants.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -73,10 +77,15 @@
 
 @property (weak, nonatomic) IBOutlet UIView *walletBack;
 
+// Staking
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stakingHeight; // 53
+
+// Gas
 @property (weak, nonatomic) IBOutlet UILabel *claimgasLab;
 @property (weak, nonatomic) IBOutlet UILabel *claimLab;
 @property (weak, nonatomic) IBOutlet UIImageView *claimStatusIcon;
 @property (weak, nonatomic) IBOutlet UIView *claimBtnBack;
+// Resources
 @property (weak, nonatomic) IBOutlet UILabel *eosResourceLab;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasBackHeight; // 71
@@ -157,6 +166,8 @@
     _tokenPriceArr = [NSMutableArray array];
     
     _gasBackHeight.constant = 0;
+    _eosResourcesHeight.constant = 0;
+    _stakingHeight.constant = 0;
 //    _contentHeight.constant = SCREEN_HEIGHT-Height_NavBar-Height_TabBar+_totalBackheight.constant;
     _contentHeight.constant = SCREEN_HEIGHT-Height_NavBar-Height_TabBar;
     
@@ -233,8 +244,8 @@
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
 //    _walletBalanceLab.text = [NSString stringWithFormat:@"$ %@",currentWalletM.balance];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-    _gasBackHeight.constant = 0;
-    _eosResourcesHeight.constant = 0;
+//    _gasBackHeight.constant = 0;
+//    _eosResourcesHeight.constant = 0;
     _walletIcon.image = [UIImage imageNamed:@"eth_wallet"];
     
     [_sourceArr removeAllObjects];
@@ -294,8 +305,9 @@
     _walletNameLab.text = currentWalletM.name;
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-    _gasBackHeight.constant = 0;
-    _eosResourcesHeight.constant = 0;
+//    _gasBackHeight.constant = 0;
+//    _eosResourcesHeight.constant = 0;
+    _stakingHeight.constant = 53;
     _walletIcon.image = [UIImage imageNamed:@"qlc_wallet"];
     
     [_sourceArr removeAllObjects];
@@ -334,7 +346,7 @@
     //    _walletBalanceLab.text = [NSString stringWithFormat:@"$ %@",currentWalletM.balance];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
     _gasBackHeight.constant = 71;
-    _eosResourcesHeight.constant = 0;
+//    _eosResourcesHeight.constant = 0;
     _walletIcon.image = [UIImage imageNamed:@"neo_wallet"];
     
     [_sourceArr removeAllObjects];
@@ -376,7 +388,7 @@
 //    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
     _walletAddressLab.text = currentWalletM.account_name;
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-    _gasBackHeight.constant = 0;
+//    _gasBackHeight.constant = 0;
     _eosResourcesHeight.constant = 53;
     _walletIcon.image = [UIImage imageNamed:@"eos_wallet"];
     
@@ -608,6 +620,9 @@
 }
 
 - (void)refreshTokenList {
+    _gasBackHeight.constant = 0;
+    _eosResourcesHeight.constant = 0;
+    _stakingHeight.constant = 0;
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     DDLogDebug(@"refreshTokenList:%@",@(currentWalletM.walletType));
     switch (currentWalletM.walletType) {
@@ -644,14 +659,65 @@
     }
 }
 
-- (QLCTokenModel *)getQGASAsset {
+- (NEOAssetModel *)getNEOAsset:(NSString *)tokenName {
+    __block NEOAssetModel *asset = nil;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeNEO) {
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[NEOAssetModel class]]) {
+                NEOAssetModel *temp = obj;
+                if ([temp.asset_symbol isEqualToString:tokenName]) {
+                    asset = temp;
+                    *stop = YES;
+                }
+            }
+        }];
+    }
+    return asset;
+}
+
+- (QLCTokenModel *)getQLCAsset:(NSString *)tokenName {
+    __block QLCTokenModel *asset = nil;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeQLC) {
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[QLCTokenModel class]]) {
+                QLCTokenModel *temp = obj;
+                if ([temp.tokenName isEqualToString:tokenName]) {
+                    asset = temp;
+                    *stop = YES;
+                }
+            }
+        }];
+    }
+    return asset;
+}
+
+- (Token *)getETHAsset:(NSString *)tokenName {
+    __block Token *asset = nil;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeETH) {
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[Token class]]) {
+                Token *temp = obj;
+                if ([temp.tokenInfo.symbol isEqualToString:tokenName]) {
+                    asset = temp;
+                    *stop = YES;
+                }
+            }
+        }];
+    }
+    return asset;
+}
+
+- (QLCTokenModel *)getQLCAsset {
     __block QLCTokenModel *gasAsset = nil;
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeQLC) {
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[QLCTokenModel class]]) {
                 QLCTokenModel *temp = obj;
-                if ([temp.tokenName isEqualToString:@"QGAS"]) {
+                if ([temp.tokenName isEqualToString:@"QLC"]) {
                     gasAsset = temp;
                     *stop = YES;
                 }
@@ -661,19 +727,53 @@
     return gasAsset;
 }
 
-- (Token *)getUSDTAsset {
-    __block Token *usdtAsset = nil;
+//- (NEOAssetModel *)getQLCAssetOfNeo {
+//    __block NEOAssetModel *asset = nil;
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    if (currentWalletM.walletType == WalletTypeNEO) {
+//        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            if ([obj isKindOfClass:[NEOAssetModel class]]) {
+//                NEOAssetModel *temp = obj;
+//                if ([temp.asset_symbol isEqualToString:@"QLC"]) {
+//                    asset = temp;
+//                    *stop = YES;
+//                }
+//            }
+//        }];
+//    }
+//    return asset;
+//}
+
+- (NEOAssetModel *)getNEOAsset {
+    __block NEOAssetModel *asset = nil;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeNEO) {
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[NEOAssetModel class]]) {
+                NEOAssetModel *temp = obj;
+                if ([temp.asset_symbol isEqualToString:@"NEO"]) {
+                    asset = temp;
+                    *stop = YES;
+                }
+            }
+        }];
+    }
+    return asset;
+}
+
+- (Token *)getETHAsset {
+    __block Token *asset = nil;
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeETH) {
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             Token *temp = obj;
-            if ([temp.tokenInfo.symbol isEqualToString:@"USDT"]) {
-                usdtAsset = temp;
+            if ([temp.tokenInfo.symbol isEqualToString:@"ETH"]) {
+                asset = temp;
                 *stop = YES;
             }
         }];
     }
-    return usdtAsset;
+    return asset;
 }
 
 - (NSArray *)getETHSource {
@@ -683,6 +783,50 @@
     } else {
         return @[];
     }
+}
+
+- (NSArray *)getEOSSource {
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeEOS) {
+        return _sourceArr;
+    } else {
+        return @[];
+    }
+}
+
+- (NSArray *)getNEOSource {
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeNEO) {
+        return _sourceArr;
+    } else {
+        return @[];
+    }
+}
+
+- (NSArray *)getQLCSource {
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeQLC) {
+        return _sourceArr;
+    } else {
+        return @[];
+    }
+}
+
+- (NSNumber *)getGasAssetBalanceOfNeo {
+    __block NSNumber *balance = @(0);
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeNEO) {
+        if (_neoAddressInfoM) {
+            [_neoAddressInfoM.balance enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NEOAssetModel *model = obj;
+                if ([model.asset_symbol isEqualToString:@"GAS"]) {
+                    balance = model.amount;
+                    *stop = YES;
+                }
+            }];
+        }
+    }
+    return balance;
 }
 
 - (void)refreshTitle {
@@ -701,7 +845,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [RequestService requestWithUrl:ethAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:ethAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself endRefresh];
         if (showLoad) {
             [kAppD.window hideToast];
@@ -734,7 +878,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [RequestService requestWithUrl:neoAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:neoAddressInfo_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself endRefresh];
         if (showLoad) {
             [kAppD.window hideToast];
@@ -754,6 +898,8 @@
             weakself.neoAddressInfoM.amount = amount;
             [weakself updateWalletWithNEO:weakself.neoAddressInfoM];
             [weakself refreshDataWithNEO];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:Update_NEO_Wallet_Token_Noti object:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself endRefresh];
@@ -774,7 +920,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [RequestService requestWithUrl:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself endRefresh];
         if (showLoad) {
             [kAppD.window hideToast];
@@ -867,6 +1013,8 @@
             }];
             [weakself updateWalletWithQLC:weakself.qlcAddressInfoM];
             [weakself refreshDataWithQLC];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:Update_QLC_Wallet_Token_Noti object:nil];
         }
         
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
@@ -884,7 +1032,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency]?:@"";
     NSDictionary *params = @{@"symbols":_tokenSymbolArr,@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -915,7 +1063,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window];
     }
-    [RequestService requestWithUrl:neoGotWGas_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:neoGotWGas_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }
@@ -938,7 +1086,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window];
     }
-    [RequestService requestWithUrl:neoQueryWGas_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:neoQueryWGas_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }
@@ -996,6 +1144,10 @@
 
 #pragma mark - Action
 - (IBAction)scanAction:(id)sender {
+//    WebTestViewController *vc1 = [WebTestViewController new];
+//    [self.navigationController pushViewController:vc1 animated:YES];
+//    return;
+    
     kWeakSelf(self);
     WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
         WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
@@ -1112,6 +1264,10 @@
     [self jumpToEOSResouces];
 }
 
+- (IBAction)myStakingsAction:(id)sender {
+    [self jumpToMyStakings];
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1220,13 +1376,13 @@
     
     [self refreshTokenList]; // 请求token列表
     
-    kWeakSelf(self);
+//    kWeakSelf(self);
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
 //        [weakself requestGetTokenBalance]; // 刷新winqgas
 //    });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-        [NeoTransferUtil sendGetBalanceRequest]; // 查询当前NEO钱包资产
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+//        [NeoTransferUtil sendGetBalanceRequest]; // 查询当前NEO钱包资产
+//    });
 }
 
 - (void)endRefresh {
@@ -1440,6 +1596,13 @@
     vc.inputSymbol = _sourceArr.firstObject;
     vc.inputSourceArr = _sourceArr;
     vc.inputAccount_name = accountName;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToMyStakings {
+    MyStakingsViewController *vc = [MyStakingsViewController new];
+    vc.inputAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

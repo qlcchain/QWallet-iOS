@@ -8,6 +8,7 @@
 
 #import "FinanceCell.h"
 #import "FinanceProductModel.h"
+#import "GlobalConstants.h"
 
 @implementation FinanceCell
 

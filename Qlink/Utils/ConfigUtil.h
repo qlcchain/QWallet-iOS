@@ -11,12 +11,17 @@
 @interface ConfigUtil : NSObject
 
 + (instancetype)shareInstance;
-+ (void)setServerNetworkEnvironment:(BOOL)mainNet;
+//+ (void)setServerNetworkEnvironment:(BOOL)mainNet;
 + (BOOL)isMainNetOfServerNetwork;
     
 + (NSString *)getServerDomain;
++ (NSString *)getReleaseServerDomain;
++ (NSString *)getDebugServerDomain;
 + (NSString *)getMIFI;
 + (NSString *)getChannel;
+
+// QLC Staking
++ (NSString *)get_qlc_staking_node;
 
 // 货币
 + (void)setLocalUsingCurrency:(NSString *)currency;

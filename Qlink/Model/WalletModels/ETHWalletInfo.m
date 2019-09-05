@@ -9,6 +9,7 @@
 #import "ETHWalletInfo.h"
 #import "Qlink-Swift.h"
 #import <ETHFramework/ETHFramework.h>
+#import "GlobalConstants.h"
 
 @implementation ETHWalletInfo
 

@@ -11,6 +11,8 @@
 #import <UIImageView+WebCache.h>
 #import "OrderStatusUtil.h"
 
+#import "GlobalConstants.h"
+
 @interface MyOrderListEntrustCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
@@ -55,15 +57,18 @@
     }];
     _nameLab.text = model.showNickName;
     _timeLab.text = model.orderTime;
-    _priceLab.text = [NSString stringWithFormat:@"%@ USDT",model.unitPrice];
-    _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",model.minAmount,model.maxAmount];
-    _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",model.totalAmount];
-    _typeLab.text = [model.type isEqualToString:@"SELL"]?kLang(@"entrust_sell_qgas"):kLang(@"entrust_buy_qgas");
+    _priceLab.text = [NSString stringWithFormat:@"%@ %@",model.unitPrice,model.payToken];
+    _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ %@",model.minAmount,model.maxAmount,model.tradeToken];
+    _totalLab.text = [NSString stringWithFormat:@"%@ %@",model.totalAmount,model.tradeToken];
+    _typeLab.text = [model.type isEqualToString:@"SELL"]?[NSString stringWithFormat:@"%@ %@",kLang(@"entrust_sell"),model.tradeToken]:[NSString stringWithFormat:@"%@ %@",kLang(@"entrust_buy"),model.tradeToken];
     _typeLab.textColor = [model.type isEqualToString:@"SELL"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     NSString *_status = model.status;
     NSString *statusStr = @"";
     UIColor *statusColor = nil;
-    if ([_status isEqualToString:ORDER_STATUS_NORMAL]) {
+    if ([_status isEqualToString:ORDER_STATUS_PENDING]) {
+        statusStr = kLang(@"pending");
+        statusColor = MAIN_BLUE_COLOR;
+    } else if ([_status isEqualToString:ORDER_STATUS_NORMAL]) {
         statusStr = kLang(@"active");
         statusColor = MAIN_BLUE_COLOR;
     } else if ([_status isEqualToString:ORDER_STATUS_CANCEL]) {

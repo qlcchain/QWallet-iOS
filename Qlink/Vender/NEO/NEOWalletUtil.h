@@ -10,7 +10,7 @@
 #import "QBaseViewController.h"
 #import "HistoryRecrdInfo.h"
 
-#define GAS_Control 0.00000001
+//#define GAS_Control 0.00000001
 
 @class NEOWalletInfo;
 
@@ -62,8 +62,8 @@ typedef enum : NSUInteger {
 
 #pragma mark - neo钱包新接口
 #pragma mark - neo转账send
-+ (void)sendNEOWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee;
++ (void)sendNEOWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee successBlock:(void(^)(NSString *txid))successBlock failureBlock:(void(^)(void))failureBlock;
 
-+ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee completeBlock:(void(^)(NSString *txHex))completeBlock;
++ (void)getNEOTXWithTokenHash:(NSString *)tokenHash decimals:(NSInteger)decimals assetName:(NSString *)assetName amount:(NSString *)amount toAddress:(NSString *)toAddress fromAddress:(NSString *)fromAddress symbol:(NSString *)symbol assetType:(NSInteger)assetType mainNet:(BOOL)mainNet remarkStr:(nullable NSString *)remarkStr fee:(double)fee completeBlock:(void(^)(NSString *txID ,NSString *txHex))completeBlock;
 
 @end

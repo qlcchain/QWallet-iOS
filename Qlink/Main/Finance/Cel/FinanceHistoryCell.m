@@ -9,6 +9,7 @@
 #import "FinanceHistoryCell.h"
 #import "FinanceHistoryModel.h"
 #import "WalletCommonModel.h"
+#import "GlobalConstants.h"
 
 @implementation FinanceHistoryCell
 

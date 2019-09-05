@@ -12,6 +12,8 @@
 #import "UserModel.h"
 #import "OrderStatusUtil.h"
 
+#import "GlobalConstants.h"
+
 @interface EntrustOrderDetailCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *icon;

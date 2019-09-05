@@ -17,6 +17,9 @@
 #import "ReportUtil.h"
 #import "WalletQRViewController.h"
 
+
+//#import "GlobalConstants.h"
+
 @interface ETHTransferViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
@@ -177,7 +180,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_selectToken.tokenInfo.symbol],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -237,7 +240,7 @@
     }
     
     if (![self haveETHAssetNum]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_have_not_eth_balance")];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_have_not_eth_balance")];
         return;
     }
     

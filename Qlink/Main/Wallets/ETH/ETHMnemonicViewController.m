@@ -12,6 +12,7 @@
 #import "MnemonicTipView.h"
 #import "ETHMnemonicConfirmViewController.h"
 #import <TTGTextTagCollectionView.h>
+#import "AppConfigUtil.h"
 
 @interface ETHMnemonicViewController ()
 

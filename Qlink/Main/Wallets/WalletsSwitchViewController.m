@@ -17,6 +17,7 @@
 #import "EOSWalletInfo.h"
 #import "ReportUtil.h"
 
+
 @interface WalletsSwitchViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -71,7 +72,7 @@
         EOSCreateSourceModel *eosCreateSourceM = [EOSCreateSourceModel getObjectWithKeyValues:eosSourceDic];
         kWeakSelf(self);
         NSDictionary *params = @{@"account":eosCreateSourceM.accountName?:@""};
-        [RequestService requestWithUrl:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [RequestService requestWithUrl5:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
             if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
                 NSDictionary *dic = responseObject[Server_Data][Server_Data];
                 EOSAccountInfoModel *model = [EOSAccountInfoModel getObjectWithKeyValues:dic];

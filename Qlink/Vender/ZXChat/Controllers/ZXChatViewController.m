@@ -22,6 +22,8 @@
 #import "ChatTipView.h"
 #import "UserModel.h"
 
+#import "GlobalConstants.h"
+
 #define SenderName @"Jim"
 
 @interface ZXChatViewController ()<ZXChatMessageControllerDelegate,ZXChatBoxViewControllerDelegate>

@@ -16,6 +16,9 @@
 #import "RequestService.h"
 #import "UserModel.h"
 
+
+//#import "GlobalConstants.h"
+
 @interface ProfileViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     UIImage *_selectImage;
@@ -62,7 +65,7 @@
     NSDictionary *params = @{@"p2pId":p2pId};
     kWeakSelf(self);
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:uploadHeadView_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:uploadHeadView_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName = [NSString stringWithFormat:@"%ld",[NSDate getTimestampFromDate:[NSDate date]]];
         NSData *data = UIImagePNGRepresentation(img);
         if (!data || [data isKindOfClass:[NSNull class]]) { // 不为png则转成jpg

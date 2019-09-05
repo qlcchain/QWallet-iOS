@@ -7,6 +7,7 @@
 //
 
 #import "GuidePageView1.h"
+#import "GlobalConstants.h"
 
 @interface GuidePageView1 ()
 

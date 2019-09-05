@@ -39,6 +39,7 @@
 #import "EOSWalletInfo.h"
 #import "CreateAccountSignTransactionRequest.h"
 #import "NSDate+Category.h"
+#import "GlobalConstants.h"
 
 @interface CreateAccountTransferService()
 

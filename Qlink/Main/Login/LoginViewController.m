@@ -16,6 +16,8 @@
 #import "RSAUtil.h"
 #import "NSString+RegexCategory.h"
 #import "RegisterMailViewController.h"
+#import "UIColor+Random.h"
+//#import "GlobalConstants.h"
 
 @interface LoginViewController ()
 
@@ -193,7 +195,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:sign_in_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:sign_in_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             UserModel *tempM = [UserModel getObjectWithKeyValues:responseObject];
@@ -220,7 +222,7 @@
 - (void)requestVcode_signin_code {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
-    [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
@@ -238,7 +240,7 @@
     NSString *account = _loginAccountTF.text?:@"";
     NSString *code = _loginVerifyCodeTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"code":code};
-    [RequestService requestWithUrl:user_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:user_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
             UserModel *model = [UserModel getObjectWithKeyValues:responseObject];

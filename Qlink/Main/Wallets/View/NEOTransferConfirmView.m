@@ -9,6 +9,7 @@
 #import "NEOTransferConfirmView.h"
 #import "UIView+Visuals.h"
 #import "WalletCommonModel.h"
+#import "GlobalConstants.h"
 
 @interface NEOTransferConfirmView ()
 

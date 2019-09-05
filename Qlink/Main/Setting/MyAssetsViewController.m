@@ -14,6 +14,7 @@
 #import "WalletCommonModel.h"
 //#import "VpnOldAssetUpdateViewController.h"
 #import "Qlink-Swift.h"
+//#import "GlobalConstants.h"
 
 @interface MyAssetsViewController ()
 

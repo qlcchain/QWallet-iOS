@@ -7,6 +7,7 @@
 //
 
 #import "HistoryWifiCell.h"
+#import "GlobalConstants.h"
 
 @implementation HistoryWifiCell
 

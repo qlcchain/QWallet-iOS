@@ -102,10 +102,9 @@
                                                 <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-vu-RlL">
-                                                <rect key="frame" x="71" y="62" width="33" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-vu-RlL">
+                                                <rect key="frame" x="71" y="62" width="32.5" height="15"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="33" id="AZz-nR-7fW"/>
                                                     <constraint firstAttribute="height" constant="15" id="wiT-No-oJa"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -181,6 +180,7 @@
                 <outlet property="icon" destination="LNR-CD-j8G" id="4B2-XN-CnH"/>
                 <outlet property="nameLab" destination="ppI-D0-PZJ" id="9T9-aW-XRp"/>
                 <outlet property="operatorBtn" destination="pY1-r4-JgR" id="XK2-n9-Hzv"/>
+                <outlet property="payUnitLab" destination="VI3-vu-RlL" id="WYY-tG-JDy"/>
                 <outlet property="totalAmountKeyLab" destination="odG-T7-XJ5" id="Nz5-HB-b6J"/>
                 <outlet property="totalAmountLab" destination="tpa-xb-Pwt" id="xxV-BV-oMv"/>
                 <outlet property="usdtLab" destination="Fcf-jl-WLh" id="MN5-ZQ-MjW"/>

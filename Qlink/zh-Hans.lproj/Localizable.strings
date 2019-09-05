@@ -74,14 +74,15 @@
 "appeal_failed" = "申诉失败";
 "sell" = "卖出";
 "buy" = "买入";
-"entrust_sell_qgas" = "卖出QGAS";
-"entrust_buy_qgas" = "买入QGAS";
+"entrust_sell" = "卖出";
+"entrust_buy" = "买入";
 "active" = "正常";
 "revoked" = "已撤单";
 "completed" = "已完成";
 "seller" = "卖家";
 "buyer" = "买家";
 "amount_price" = "总价";
+"pending" = "等待中";
 
 // 支付USDT---
 "eth_wallet_address" = "ETH钱包地址";
@@ -93,8 +94,12 @@
 "amount_is_zero" = "数量为0";
 "balance_is_not_enough" = "余额不足";
 "eth_wallet_address_is_invalidate" = "ETH钱包地址是无效的";
-"eth_wallet_address_have_not_eth_balance" = "ETH钱包地址没有ETH余额";
-"current_qlc_wallet_have_not_usdt" = "当前的QLC钱包没有USD";
+"eth_wallet_have_not_eth_balance" = "ETH钱包没有ETH余额";
+"wallet_have_not_balance_of" = "钱包没有余额->";
+"please_choose_wallet_first" = "请先选择钱包";
+"current_eth_wallet_have_not" = "当前的ETH钱包没有";
+"current_neo_wallet_have_not" = "当前的NEO钱包没有";
+"current_qlc_wallet_have_not" = "当前的QLC钱包没有";
 
 // 申诉详情
 "appeallant_buyer" = "申诉人：买家";
@@ -105,17 +110,15 @@
 "appeal_failed" = "申诉失败";
 "waiting_for_buyer_payment" = "等待买家付款";
 "waiting_for_seller_confirmation" = "等待卖家确认";
+"waiting_for_public_Chain_confirmation" = "等待公链确认";
 "amount" = "数量";
 "copied" = "已复制";
-
-// 委托单详情---
-"erc-20_address_to_receive_usdt" = "接收USDT的ERC-20地址";
-"qlc_chain_address_to_receive_qgas" = "接收QGAS的QLC Chain地址";
+"transaction_pending" = "交易等待中";
 
 // USDT接收地址---
-"usdt_receivable_address" = "USDT接收地址";
+"receivable_address" = "接收地址";
 "please_send" = "请发送";
-"to_the_erc-20_address_as_below_to_place_your_order" = "到以下ERC-20地址订购。";
+"to_the_address_as_below_to_place_your_order" = "to the address as 到以下地址订购. ";
 
 // Buy\Sell List---
 "please_finish_the_verification_on_me_page" = "请在我的页面上完成验证. ";
@@ -129,29 +132,35 @@
 "max_amount_is_empty" = "最大数量为空";
 "address_is_empty" = "地址为空";
 "qlc_wallet_address_is_invalidate" = "QLC钱包地址无效";
+"wallet_address_is_invalidate" = "钱包地址无效";
 "amount_need_greater_than_or_equal_to_max_amount" = "数量必须大于等于最大数量";
-"qlc_chain_address_is_empty" = "QLC Chain地址为空";
 "please_switch_to_qlc_wallet" = "请切换到QLC钱包";
-"current_qlc_wallet_have_not_qgas" = "当前的QLC钱包没有QGAS";
-"current_qlc_wallet_have_not_enough_qgas" = "当前的QLC钱包没有足够的QGAS";
-"qlc_server_address_is_empty" = "QLC主网地址为空";
+"please_switch_to_neo_wallet" = "请切换到NEO钱包";
+"please_switch_to_eos_wallet" = "请切换到EOS钱包";
+"please_switch_to_eth_wallet" = "请切换到ETH钱包";
+"current_wallet_have_not" = "当前钱包没有";
+"current_wallet_have_not_enough" = "当前钱包没有足够的";
+"server_address_is_empty" = "主网地址为空";
 "process___" = "请稍等...";
 "transfer_successful" = "转账成功.";
 
 // Buy\Sell Detail---
-"qlc_chain_wallet_address" = "QLC Chain钱包地址";
-"erc-20_wallet_address" = "ERC-20钱包地址";
 "max" = "最大";
 "you_can_not_buy_or_sell_your_own_entrust_order" = "您不能买卖自己的委单.";
-"usdt_is_empty" = "USDT为空";
-"usdt_is_over_max" = "USDT超过了最大值";
-"qgas_is_empty" = "QGAS为空";
-"qgas_is_greater_than_max_volume" = "QGAS大于最大值";
-"qgas_is_less_than_min_volume" = "QGAS小于最小值";
-"qgas_remain" = "QGAS剩余";
+"is_empty" = "为空";
+"is_over_max" = "超过了最大值";
+"is_greater_than_max_volume" = "大于最大值";
+"is_less_than_min_volume" = "小于最小值";
+"remain" = "剩余";
+"unit_price" = "单价";
+"volume_amount" = "剩余数量";
+"volume_settings" = "限值设置";
+"receive_from" = "付款钱包";
+"send_to" = "收币地址";
 
 // 订单详情---
 "the_order_will_be_closed_automatically____30" = "如果30分钟内没有进一步确认, 订单将自动关闭. ";
+"please_be_patient_" = "请耐心等待.";
 "fail_appeal" = "申诉失败";
 "successful" = "成功";
 "the_order_will_be_closed_automatically_if_no_further_confirmation_within" = "订单将自动关闭, 如果没有确认在";
@@ -184,7 +193,7 @@
 
 // 钱包---
 "export_qrcode" = "导出二维码";
-"please_use_space_to_separate_the_mnemonic_phase" = "请用空格分隔助记词";
+"please_use_space_to_separate_the_mnemonic_phrase" = "请用空格分隔助记词";
 "please_input_wallet_seed" = "请输入钱包种子";
 "import_success" = "导入成功";
 "please_agree_first" = "请先同意";
@@ -261,3 +270,9 @@
 // 更新版本---
 "install_now" = "现在安装";
 "a_new_version_of_my_qwallet__" = "My QWallet有了一个新版本. 现在就从App Store安装它. ";
+
+// 转NEO token
+"neo_transfer_fail" = "NEO转账失败";
+"neo_nep5_gas_less" = "NEO(nep5)转账需要gas";
+"transfer_tip" = "转账提示";
+"transfer_processed" = "转账进行中";

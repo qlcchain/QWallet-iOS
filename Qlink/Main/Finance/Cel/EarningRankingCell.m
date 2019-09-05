@@ -9,6 +9,7 @@
 #import "EarningRankingCell.h"
 #import "EarningsRankingModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalConstants.h"
 
 @implementation EarningRankingCell
 

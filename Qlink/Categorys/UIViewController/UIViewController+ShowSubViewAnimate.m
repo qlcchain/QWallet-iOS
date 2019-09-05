@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+ShowSubViewAnimate.h"
-#import "UIView+Frame.h"
+#import "GlobalConstants.h"
 
 @implementation UIViewController (ShowSubViewAnimate)
 

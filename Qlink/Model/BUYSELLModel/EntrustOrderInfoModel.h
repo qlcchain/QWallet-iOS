@@ -21,14 +21,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *nickname;// = 18670819116;
 @property (nonatomic, strong) NSString *orderTime;// = "2019-07-15 16:33:32";
 @property (nonatomic, strong) NSNumber *otcTimes;// = 0;
-@property (nonatomic, strong) NSString *qgasAddress;// = "qlc_1fyz7ksawbgak4tqfyhspsbo4udsao1x8prui9unp6ggw7rpifea6ia76pj7";
+@property (nonatomic, strong) NSString *qgasAddress;// 买卖币接收地址[委托买入]
+@property (nonatomic, strong) NSString *payToken;// = QLC;
+@property (nonatomic, strong) NSString *payTokenChain;// = "NEO_CHAIN";
 @property (nonatomic, strong) NSString *status;// = NORMAL;
 @property (nonatomic, strong) NSNumber *totalAmount;// = 1000;
 @property (nonatomic, strong) NSString *type;// = BUY;
 @property (nonatomic, strong) NSString *unitPrice;// = "0.001";
-@property (nonatomic, strong) NSString *usdtAddress;// = "";
+@property (nonatomic, strong) NSString *usdtAddress;// 支付币接收地址[委托卖出]
 @property (nonatomic, strong) NSString *number;
 @property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString *pairsId; // 交易对ID
+@property (nonatomic, strong) NSString *tradeToken;// = QGAS;
+@property (nonatomic, strong) NSString *tradeTokenChain;// = "QLC_CHAIN";
 
 @end
 

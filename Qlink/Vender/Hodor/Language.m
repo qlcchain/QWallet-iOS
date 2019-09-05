@@ -28,14 +28,15 @@ NSString *const LanguageCodeIdIndentifier = @"LanguageCodeIdIndentifier";
 + (NSString *)currentLanguageCode {
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LanguageCodeIdIndentifier];
     NSString *userSelectedLanguage = [[NSUserDefaults standardUserDefaults] objectForKey:LanguageCodeIdIndentifier];
-    if (userSelectedLanguage) {
-        // Store selected language in local
-        return userSelectedLanguage;
-    } else {
-        // 初始化本地语言
-        [Language userSelectedLanguage:LanguageCode[0]];
-        return [Language currentLanguageCode];
-    }
+    return userSelectedLanguage;
+//    if (userSelectedLanguage) {
+//        // Store selected language in local
+//        return userSelectedLanguage;
+//    } else {
+//        // 初始化本地语言
+//        [Language userSelectedLanguage:LanguageCode[0]];
+//        return [Language currentLanguageCode];
+//    }
     
 //    NSString *systemLanguage = [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
 //    if ([systemLanguage isEqualToString:@"en"] || [systemLanguage isEqualToString:@"zh-Hans"]) {
@@ -69,18 +70,18 @@ NSString *const LanguageCodeIdIndentifier = @"LanguageCodeIdIndentifier";
 }
 
 // 用于各个vc中，要监听通知
-+ (void)changeLanguage {
-    NSString *_currentLanguage = [[Language currentLanguageCode] mutableCopy];
-    if ([_currentLanguage isEqualToString:LanguageCode[0]]) {
-        _currentLanguage = LanguageCode[1];
-    } else if ([_currentLanguage isEqualToString:LanguageCode[1]]) {
-        _currentLanguage = LanguageCode[0];
-    }
-    
-    [Language userSelectedLanguage:_currentLanguage];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshText) name:kLanguageChangeNoti object:nil];
-//    _helloWorldLabel.text = kLang(@"Hello World");
-}
+//+ (void)changeLanguage {
+//    NSString *_currentLanguage = [[Language currentLanguageCode] mutableCopy];
+//    if ([_currentLanguage isEqualToString:LanguageCode[0]]) {
+//        _currentLanguage = LanguageCode[1];
+//    } else if ([_currentLanguage isEqualToString:LanguageCode[1]]) {
+//        _currentLanguage = LanguageCode[0];
+//    }
+//
+//    [Language userSelectedLanguage:_currentLanguage];
+//
+////    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshText) name:kLanguageChangeNoti object:nil];
+////    _helloWorldLabel.text = kLang(@"Hello World");
+//}
 
 @end

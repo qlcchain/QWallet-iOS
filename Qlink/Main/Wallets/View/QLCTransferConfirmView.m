@@ -9,6 +9,7 @@
 #import "QLCTransferConfirmView.h"
 #import "UIView+Visuals.h"
 #import "WalletCommonModel.h"
+#import "GlobalConstants.h"
 
 @interface QLCTransferConfirmView ()
 

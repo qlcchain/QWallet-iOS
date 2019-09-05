@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,7 +37,7 @@
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONFIRM WITHDRAWAL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYC-YH-4Kx">
                             <rect key="frame" x="0.0" y="0.0" width="339" height="56"/>
-                            <color key="backgroundColor" red="0.28627450980392155" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="56" id="CDB-ZE-kUw"/>
                             </constraints>
@@ -46,9 +47,9 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcX-wh-tFe">
                             <rect key="frame" x="173.5" y="141" width="143.5" height="44"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
-                            <state key="normal" title="YES" backgroundImage="bg_purple_button"/>
+                            <state key="normal" title="YES"/>
                             <state key="highlighted" backgroundImage="bg_back"/>
                             <connections>
                                 <action selector="clickYes:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Dt-JF-fuV"/>
@@ -77,14 +78,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWI-Ll-ZX4">
-                            <rect key="frame" x="86.5" y="141" width="165" height="44"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <rect key="frame" x="87" y="141" width="165" height="44"/>
+                            <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="165" id="8k5-Xi-3k1"/>
                                 <constraint firstAttribute="height" constant="44" id="Idq-e5-gTe"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="VAGRoundedBT-Regular" family="VAGRounded BT" pointSize="13"/>
-                            <state key="normal" title="OK" backgroundImage="bg_purple_button"/>
+                            <state key="normal" title="OK"/>
                             <state key="highlighted" backgroundImage="bg_back"/>
                             <connections>
                                 <action selector="clickYes:" destination="iN0-l3-epB" eventType="touchUpInside" id="3mj-T1-jGa"/>
@@ -141,8 +142,7 @@
     </objects>
     <resources>
         <image name="bg_back" width="8" height="44"/>
-        <image name="bg_continue" width="8" height="44"/>
-        <image name="bg_gray_button" width="9" height="44"/>
-        <image name="bg_purple_button" width="5" height="42"/>
+        <image name="bg_continue" width="8.5" height="44"/>
+        <image name="bg_gray_button" width="9.5" height="44"/>
     </resources>
 </document>

@@ -9,6 +9,7 @@
 #import "DigestUtils.h"
 #import "MD5Util.h"
 #import "NSString+HexStr.h"
+#import "ConfigUtil.h"
 
 @implementation DigestUtils
 

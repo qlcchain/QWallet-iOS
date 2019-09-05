@@ -13,6 +13,8 @@
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 
+//#import "GlobalConstants.h"
+
 @interface LoginSetPWViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;

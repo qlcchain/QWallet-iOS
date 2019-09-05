@@ -15,6 +15,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "NEOWalletUtil.h"
 #import "HistoryRecrdInfo.h"
+#import "GlobalConstants.h"
 
 @interface HistoryRecordsViewController () <UITableViewDelegate, UITableViewDataSource,SRRefreshDelegate>
 

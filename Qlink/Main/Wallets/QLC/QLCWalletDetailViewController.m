@@ -14,6 +14,7 @@
 //#import "NEOWalletUtil.h"
 #import "DeleteWalletConfirmView.h"
 #import "QLCWalletInfo.h"
+//#import "GlobalConstants.h"
 
 NSString *exportQLCSeed = @"Export Seed";
 NSString *exportQLCMnemonic = @"Export Mnemonic";

@@ -19,6 +19,6 @@
 + (NSString*)currentLanguageCode;
 + (void)userSelectedLanguage:(NSString *)selectedLanguage;
 + (NSString *)get:(NSString *)key alter:(NSString *)alternate;
-+ (void)changeLanguage;
+//+ (void)changeLanguage;
 
 @end

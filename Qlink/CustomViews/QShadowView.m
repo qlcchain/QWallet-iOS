@@ -7,6 +7,7 @@
 //
 
 #import "QShadowView.h"
+#import "GlobalConstants.h"
 
 @implementation QShadowView
 

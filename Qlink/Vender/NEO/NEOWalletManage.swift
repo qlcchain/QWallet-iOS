@@ -30,7 +30,7 @@ class NEOWalletManage : NSObject {
     var transactionCompleted:Bool?
     //定义block
     //typealias fucBlock = (_ flag : Bool) ->()
-    typealias fucBlock = (_ hex : String) ->()
+    typealias fucBlock = (_ txID : String, _ txHex : String) ->()
     //定义Neo兑换返回block
     typealias neoTranQlcBlock = (_ hex : String) ->()
     //定义QLC交易返回block
@@ -303,12 +303,12 @@ class NEOWalletManage : NSObject {
             Authenticated.account?.neoClient = NeoClient(network: .test)
             #endif
         
-            self.account?.sendNep5Token(tokenContractHash: assetHash, amount: amount, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, decimals: decimals, fee: fee, network: network, completion: { (txHex, error) in
+            self.account?.sendNep5Token(tokenContractHash: assetHash, amount: amount, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, decimals: decimals, fee: fee, network: network, completion: { (txID,txHex, error) in
                 print("--------neo tx error:" + "\(String(describing: error))")
                 if txHex != nil {
                     print(txHex!)
                 }
-                completeBlock(txHex ?? "")
+                completeBlock(txID ?? "",txHex ?? "")
             })
         }
     }
@@ -334,12 +334,12 @@ class NEOWalletManage : NSObject {
             Authenticated.account?.neoClient = NeoClient(network: .test)
             #endif
             
-            self.account?.sendAssetTransaction(assetHash: assetHash, asset: assetId, amount: amount, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, network: network, completion: { (txHex, error) in
+            self.account?.sendAssetTransaction(assetHash: assetHash, asset: assetId, amount: amount, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, network: network, completion: { (txID ,txHex, error) in
                 print("--------neo tx error:" + "\(String(describing: error))")
                 if txHex != nil {
                     print(txHex!)
                 }
-                completeBlock(txHex ?? "")
+                completeBlock(txID ?? "", txHex ?? "")
             })
         }
     }
@@ -365,13 +365,19 @@ class NEOWalletManage : NSObject {
             if assetName == "GAS" {
                 assetId = AssetId(rawValue: AssetId.gasAssetId.rawValue)!
             }
-            self.sendNativeAsset(assetHash: assetHash, assetId: assetId, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr) { txHex in
-                completeBlock(txHex)
-            }
+            self.sendNativeAsset(assetHash: assetHash, assetId: assetId, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, completeBlock: { (txID, txHex) in
+                completeBlock(txID, txHex)
+            })
+//            self.sendNativeAsset(assetHash: assetHash, assetId: assetId, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr) { txHex in
+//                completeBlock(txHex)
+//            }
         } else if assetType == 1 { // token
-            self.sendNEP5Token(assetHash: assetHash, decimals: decimals, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, fee: fee) { txHex in
-                completeBlock(txHex)
-            }
+            self.sendNEP5Token(assetHash: assetHash, decimals: decimals, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, fee: fee, completeBlock: { (txID, txHex) in
+                completeBlock(txID, txHex)
+            })
+//            self.sendNEP5Token(assetHash: assetHash, decimals: decimals, assetName: assetName, amount: amountDouble, toAddress: toAddress, mainNet: mainNet, remarkStr: remarkStr, fee: fee) { txHex in
+//                completeBlock(txHex)
+//            }
         }
     }
 }

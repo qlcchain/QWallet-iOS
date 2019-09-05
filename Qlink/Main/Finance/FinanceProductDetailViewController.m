@@ -18,6 +18,9 @@
 #import "NEOWalletUtil.h"
 #import "SGQRCodeObtain.h"
 #import "RefreshHelper.h"
+#import "QlinkTabbarViewController.h"
+#import "WalletsViewController.h"
+#import "GlobalConstants.h"
 
 @interface FinanceProductDetailViewController ()
 
@@ -158,7 +161,7 @@
 - (void)requestProduct_info {
     kWeakSelf(self);
     NSDictionary *params = @{@"id":_inputM.ID?:@""};
-    [RequestService requestWithUrl:product_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:product_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.requestProductM = [FinanceProductModel getObjectWithKeyValues:responseObject[Server_Data]];
             [weakself refreshView];
@@ -187,7 +190,7 @@
     NSString *hex = tx?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"productId":productId,@"amount":amount,@"addressFrom":addressFrom,@"addressTo":addressTo,@"hex":hex};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:@"Purchase Successful"];
@@ -212,7 +215,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [RequestService requestWithUrl:neoAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:neoAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainScroll.mj_header endRefreshing];
         if (showLoad) {
             [kAppD.window hideToast];
@@ -239,15 +242,13 @@
     if ([[NeoTransferUtil getShareObject].neoMainAddress isEmptyString]) {
         return;
     }
-    if (kAppD.balanceInfo == nil) {
-        [kAppD.window makeToastDisappearWithText:@"Please refresh wallet and try again"];
-        return;
-    }
-    // gas 检查
-    if (([kAppD.balanceInfo.gas doubleValue] < GAS_Control)) {
-        [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
-        return;
-    }
+
+//    // gas 检查
+//    if (([[kAppD.tabbarC.walletsVC getGasAssetBalanceOfNeo] doubleValue] < GAS_Control)) {
+//        [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"neo_nep5_gas_less")] isShowTwoBtn:NO block:^{
+//        }];
+//        return;
+//    }
 
     NSInteger decimals = 8;
     NSString *tokenHash = _qlcAssetM.asset_hash;
@@ -269,7 +270,7 @@
         [kAppD.window makeToastInView:kAppD.window];
     });
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txHex) {
+        [NEOWalletUtil getNEOTXWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee completeBlock:^(NSString *txID ,NSString *txHex) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([[NSStringUtil getNotNullValue:txHex] isEmptyString]) {
                         [kAppD.window hideToast];

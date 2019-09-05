@@ -11,6 +11,7 @@
 #import "UIView+DottedBox.h"
 #import "HMScanner.h"
 #import "SGQRCodeObtain.h"
+//#import "GlobalConstants.h"
 
 @interface QLCWalletAddressViewController ()
 

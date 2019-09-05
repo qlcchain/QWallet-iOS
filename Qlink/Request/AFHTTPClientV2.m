@@ -8,6 +8,7 @@
 
 #import "AFHTTPClientV2.h"
 #import "NSString+EmptyUtil.h"
+#import "GlobalConstants.h"
 
 @interface AFHTTPClientV2 ()
 

@@ -14,6 +14,7 @@
 //#import "ChatMessage.h"
 #import "ZXMessageModel.h"
 #import "UserManage.h"
+#import "GlobalConstants.h"
 
 @interface ChatUtil ()
 

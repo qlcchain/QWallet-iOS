@@ -9,6 +9,7 @@
 import UIKit
 import TrezorCrytoEd25519
 import BigInt
+import HandyJSON
 //import libsodium
 
 public class QLCUtil: NSObject {
@@ -182,6 +183,39 @@ public class QLCUtil: NSObject {
         return false
     }
     
+    // sign and work
+    @objc public static func signAndWork(dic : NSDictionary, publicKey: String, privateKey: String,resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)) {
+        let block:QLCStateBlock = QLCStateBlock.deserialize(from: dic) ?? QLCStateBlock()
+        // set signature
+        let blockHash = BlockMng.getHash(block: block)
+        let signature = QLCUtil.sign(message: blockHash.toHexString(), secretKey: privateKey, publicKey: publicKey)
+        let signCheck : Bool = QLCUtil.signOpen(message: blockHash.toHexString(), publicKey: publicKey, signature: signature)
+        if !signCheck {
+            print(QLCConstants.EXCEPTION_MSG_1005)
+            resultHandler(nil)
+        }
+        block.signature = signature
+        
+        // set work
+        let workHash = BlockMng.getRoot(block: block) ?? ""
+//        WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
+//            if isTimeOut == true {
+                let params = ["root":workHash]
+                print("http://pow1.qlcchain.org/work params=\(params)")
+                RequestService.testRequest(withBaseURLStr8: "http://pow1.qlcchain.org/work", params: params, httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                    block.work = (response as! String?) ?? ""
+                    resultHandler(block.toJSON())
+                }, failedBlock: { (task, error) in
+                    block.work = ""
+                    resultHandler(block.toJSON())
+                })
+//            } else {
+//                block.work = work
+//                resultHandler(block.toJSON())
+//            }
+//        }
+    }
+    
     // Send
     @objc public static func sendAsset(from:String, tokenName:String, to:String, amount:UInt, sender: String?, receiver:String?, message:String?, privateKey:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let privateKeyB = privateKey.hex2Bytes
@@ -343,6 +377,8 @@ public class QLCUtil: NSObject {
         }
         return bytesArr
     }
+    
+    
 
 }
 
@@ -357,7 +393,7 @@ public class RandomString:NSObject {
      - parameter length: 生成的字符串的长度
      - returns: 随机生成的字符串
      */
-    @objc static func getRandomStringOfLength(length: Int) -> String {
+    @objc public static func getRandomStringOfLength(length: Int) -> String {
         var ranStr = ""
         for _ in 0..<length {
             let index = Int(arc4random_uniform(UInt32(characters.count)))

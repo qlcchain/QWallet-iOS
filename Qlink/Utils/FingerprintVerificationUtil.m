@@ -8,6 +8,7 @@
 
 #import "FingerprintVerificationUtil.h"
 #import <LocalAuthentication/LocalAuthentication.h>
+#import "GlobalConstants.h"
 
 @implementation FingerprintVerificationUtil
 

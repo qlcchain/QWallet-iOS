@@ -8,6 +8,7 @@
 
 #import "EOSWalletInfo.h"
 #import "Qlink-Swift.h"
+#import "GlobalConstants.h"
 
 @implementation EOSWalletInfo
 

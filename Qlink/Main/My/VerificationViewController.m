@@ -16,6 +16,8 @@
 #import "TipOKView.h"
 #import "PhotoPickerUtil.h"
 
+//#import "GlobalConstants.h"
+
 typedef enum : NSUInteger {
     VerificationPicType1,
     VerificationPicType2,
@@ -189,7 +191,7 @@ typedef enum : NSUInteger {
     UIImage *img1 = _selectImage1;
     UIImage *img2 = _selectImage2;
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:upload_id_card_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:upload_id_card_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName1 = [NSString stringWithFormat:@"%llu",[NSDate getMillisecondTimestampFromDate:[NSDate date]]];
         NSData *data1 = [img1 compressJPGImage:img1 toMaxFileSize:Upload_ID_Image_Size];
         NSString *name1 = [NSString stringWithFormat:@"%@.jpg", fileName1];

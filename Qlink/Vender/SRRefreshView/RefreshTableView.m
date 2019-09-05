@@ -7,6 +7,7 @@
 //
 
 #import "RefreshTableView.h"
+#import "GlobalConstants.h"
 
 @implementation RefreshTableView
 

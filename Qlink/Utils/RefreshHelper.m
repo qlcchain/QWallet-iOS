@@ -7,6 +7,7 @@
 //
 
 #import "RefreshHelper.h"
+#import "GlobalConstants.h"
 
 @implementation RefreshHelper
 

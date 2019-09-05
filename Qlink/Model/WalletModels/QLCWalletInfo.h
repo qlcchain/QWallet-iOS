@@ -22,5 +22,7 @@
 
 + (NSString *)getQLCSeedWithAddress:(NSString *)address;
 + (NSString *)getQLCMnemonicWithAddress:(NSString *)address;
++ (NSString *)getQLCPrivateKeyWithAddress:(NSString *)address;
++ (NSString *)getQLCPublicKeyWithAddress:(NSString *)address;
 
 @end

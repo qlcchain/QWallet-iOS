@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GlobalConstants.h"
 
 @interface XYTransition : NSObject<UIViewControllerAnimatedTransitioning>
 

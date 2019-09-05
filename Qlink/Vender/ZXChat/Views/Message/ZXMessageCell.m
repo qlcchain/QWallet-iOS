@@ -9,6 +9,7 @@
 #import "ZXMessageCell.h"
 #import "UIView+TL.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalConstants.h"
 
 @implementation ZXMessageCell
 

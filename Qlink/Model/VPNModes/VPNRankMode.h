@@ -7,6 +7,7 @@
 //
 
 #import "BBaseModel.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface VPNRankMode : BBaseModel
 @property (nonatomic , strong) NSString *assetName;

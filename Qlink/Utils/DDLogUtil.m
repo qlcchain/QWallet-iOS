@@ -7,6 +7,7 @@
 //
 
 #import "DDLogUtil.h"
+#import "GlobalConstants.h"
 
 @implementation DDLogUtil
 

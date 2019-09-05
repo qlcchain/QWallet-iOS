@@ -17,6 +17,7 @@
 #import "NSString+RemoveZero.h"
 #import "HistoryChartView.h"
 
+
 @interface NEOTransactionRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -110,7 +111,7 @@
 - (void)requestNEOAddressInfo:(NSString *)address {
     kWeakSelf(self);
     NSDictionary *params = @{@"address":address,@"page":@(0)};
-    [RequestService requestWithUrl:neoGetAllTransferByAddress_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:neoGetAllTransferByAddress_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSMutableArray *getArr = [NSMutableArray array];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -128,7 +129,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_inputAsset.asset_symbol],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];

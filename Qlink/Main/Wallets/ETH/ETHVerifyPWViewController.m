@@ -13,6 +13,7 @@
 #import "ConfigUtil.h"
 #import "ETHExportMnemonicViewController.h"
 
+
 @interface ETHVerifyPWViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;

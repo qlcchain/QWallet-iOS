@@ -7,6 +7,7 @@
 //
 
 #import "WalletAlertView.h"
+#import "GlobalConstants.h"
 
 @implementation WalletAlertView
 

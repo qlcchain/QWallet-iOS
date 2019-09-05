@@ -16,6 +16,8 @@
 #import "EOSResourcePriceModel.h"
 #import "NSString+RemoveZero.h"
 
+//#import "GlobalConstants.h"
+
 @interface EOSActivateAccountViewController () {
     BOOL stakeCpuAndNetOK;
     BOOL buyRamOK;
@@ -177,7 +179,7 @@
 - (void)requestEosEos_resource_price {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data];
             weakself.resourcePriceM = [EOSResourcePriceModel getObjectWithKeyValues:dic];

@@ -9,6 +9,7 @@
 #import "UIView+Toast.h"
 #import "MBProgressHUD.h"
 #import <objc/runtime.h>
+#import "GlobalConstants.h"
 
 static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 //static const void *HttpRequestHUDMarkKey = &HttpRequestHUDMarkKey;

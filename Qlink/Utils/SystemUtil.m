@@ -10,6 +10,8 @@
 #import "Qlink-Swift.h"
 #import "NeoTransferUtil.h"
 
+#import "GlobalConstants.h"
+
 @implementation SystemUtil
 
 + (NSString *) uuidString
@@ -67,7 +69,7 @@
 
 + (void)checkAPPUpdate {
 //    NSString * url = [[NSString alloc] initWithFormat:@"http://itunes.apple.com/lookup?id=%@",AppStore_ID];
-    [RequestService requestWithUrl:sys_version_info_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:sys_version_info_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSDictionary *data = responseObject[Server_Data];
             // 线上

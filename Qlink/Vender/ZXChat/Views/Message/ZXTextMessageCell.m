@@ -11,6 +11,8 @@
 #import "NSDate+Category.h"
 #import "UIDevice+TL.h"
 
+#import "GlobalConstants.h"
+
 #define OffsetOfLab 4
 
 @implementation ZXTextMessageCell

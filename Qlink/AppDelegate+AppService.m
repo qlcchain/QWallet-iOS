@@ -72,10 +72,18 @@
 
 #pragma mark - 配置App语言
 - (void)configAppLanguage {
-    NSString *languages = [Language currentLanguageCode];
+    NSString *languages = [Language currentLanguageCode]?:@"";
     if ([languages isEmptyString]) {
-        [Language userSelectedLanguage:LanguageCode[0]];
-//        [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
+        NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+        NSString *languageName = appLanguages[0];
+        // 默认用系统语言
+        if (languageName && [languageName containsString:LanguageCode[1]]) {
+            [Language userSelectedLanguage:LanguageCode[1]];
+        } else {
+            [Language userSelectedLanguage:LanguageCode[0]];
+        }
+    } else {
+        [Language userSelectedLanguage:languages];
     }
 }
 

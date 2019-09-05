@@ -18,6 +18,7 @@
 #import <TrustCore/Crypto.h>
 #import "NSString+HexStr.h"
 #import "WebViewController.h"
+//#import "GlobalConstants.h"
 
 typedef enum : NSUInteger {
     ETHImportTypeMnemonic,

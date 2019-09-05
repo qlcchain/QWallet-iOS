@@ -7,10 +7,11 @@
 //
 
 #import "ConfigUtil.h"
+#import "GlobalConstants.h"
 
 @interface ConfigUtil ()
 
-@property (nonatomic, strong) NSNumber *mainNet;
+//@property (nonatomic, strong) NSNumber *mainNet;
 
 @end
 
@@ -25,13 +26,14 @@
     return sharedObj;
 }
 
-+ (void)setServerNetworkEnvironment:(BOOL)mainNet {
-    [ConfigUtil shareInstance].mainNet = @(mainNet);
-}
+//+ (void)setServerNetworkEnvironment:(BOOL)mainNet {
+//    [ConfigUtil shareInstance].mainNet = @(mainNet);
+//}
 
 + (BOOL)isMainNetOfServerNetwork {
-    NSNumber *mainNet = [ConfigUtil shareInstance].mainNet;
-    if (mainNet == nil || [mainNet boolValue] == YES) {
+    NSString *environment = [HWUserdefault getObjectWithKey:QLCChain_Environment];
+//    NSNumber *mainNet = [ConfigUtil shareInstance].mainNet;
+    if (environment == nil || [environment integerValue] == 1) {
         return YES;
     } else {
         return NO;
@@ -50,10 +52,36 @@
     return config;
 }
 
++ (NSDictionary *)getReleaseConfig {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"ConfigurationRelease" ofType:@"plist"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
+
++ (NSDictionary *)getDebugConfig {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"ConfigurationDebug" ofType:@"plist"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
+
 + (NSString *)getServerDomain {
     NSDictionary *config = [ConfigUtil getConfig];
     NSString *serverDomain = config[@"ServerDomain"];
 //    NSLog(@"配置文件url = %@",serverDomain);
+    return serverDomain;
+}
+
++ (NSString *)getReleaseServerDomain {
+    NSDictionary *config = [ConfigUtil getReleaseConfig];
+    NSString *serverDomain = config[@"ServerDomain"];
+    return serverDomain;
+}
+
++ (NSString *)getDebugServerDomain {
+    NSDictionary *config = [ConfigUtil getDebugConfig];
+    NSString *serverDomain = config[@"ServerDomain"];
     return serverDomain;
 }
     
@@ -68,6 +96,23 @@
     NSString *channel = config[@"Channel"];
     return channel;
 }
+
++ (NSString *)get_qlc_staking_node {
+    NSDictionary *config = [ConfigUtil getConfig];
+    NSString *channel = config[@"qlc_staking_node"];
+    return channel;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 + (void)setLocalUsingCurrency:(NSString *)currency {
     [HWUserdefault insertObj:currency withkey:Local_Currency];

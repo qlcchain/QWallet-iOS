@@ -9,6 +9,7 @@
 #import "QBaseViewController.h"
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
+#import "GlobalConstants.h"
 
 @interface QBaseViewController ()
 

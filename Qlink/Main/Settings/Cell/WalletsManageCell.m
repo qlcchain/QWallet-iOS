@@ -11,6 +11,7 @@
 #import "TokenPriceModel.h"
 #import "NSString+RemoveZero.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @implementation WalletsManageCell
 

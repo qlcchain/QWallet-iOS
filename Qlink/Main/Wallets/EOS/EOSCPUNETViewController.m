@@ -18,6 +18,8 @@
 #import "EOSWalletUtil.h"
 #import "NSString+RemoveZero.h"
 
+//#import "GlobalConstants.h"
+
 @interface EOSCPUNETViewController () {
     NSString *stakeOrReclaimCpuAmount;
     NSString *stakeOrReclaimNetAmount;
@@ -207,7 +209,7 @@
     [kAppD.window makeToastInView:kAppD.window];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSDictionary *params = @{@"account":currentWalletM.account_name?:@""};
-    [RequestService requestWithUrl:eosGet_account_resource_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_account_resource_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.refreshControl endRefreshing];
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
@@ -224,7 +226,7 @@
 - (void)requestEosEos_resource_price {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data];
             weakself.resourcePriceM = [EOSResourcePriceModel getObjectWithKeyValues:dic];
@@ -238,7 +240,7 @@
     kWeakSelf(self);
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSDictionary *params = @{@"account":currentWalletM.account_name?:@"", @"symbol":@"EOS"};
-    [RequestService requestWithUrl:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data][Server_Data];

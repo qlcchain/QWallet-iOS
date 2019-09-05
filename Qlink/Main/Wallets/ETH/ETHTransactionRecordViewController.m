@@ -18,6 +18,7 @@
 #import "ETHAddressTransactionsModel.h"
 #import "HistoryChartView.h"
 
+
 #define ETH_SYMBOL @"ETH"
 
 @interface ETHTransactionRecordViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -122,7 +123,7 @@
     kWeakSelf(self);
     NSDictionary *params = [_inputToken.tokenInfo.symbol isEqualToString:ETH_SYMBOL]?@{@"address":address}:@{@"address":address,@"token":token};
     NSString *url = [_inputToken.tokenInfo.symbol isEqualToString:ETH_SYMBOL]?ethAddress_transactions_Url:ethAddressHistory_Url;
-    [RequestService requestWithUrl:url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSString *str = [responseObject objectForKey:Server_Data];
             if ([_inputToken.tokenInfo.symbol isEqualToString:ETH_SYMBOL]) {
@@ -143,7 +144,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_inputToken.tokenInfo.symbol],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];

@@ -10,10 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class EntrustOrderListModel;
+@class EntrustOrderListModel, PairsModel;
 
 @interface BuySellDetailViewController : QBaseViewController
 
+@property (nonatomic, strong) NSString *inputTradeToken;
+@property (nonatomic, strong) NSString *inputPayToken;
 @property (nonatomic, strong) EntrustOrderListModel *inputEntrustOrderListM;
 
 @end

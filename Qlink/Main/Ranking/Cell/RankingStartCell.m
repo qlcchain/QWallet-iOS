@@ -10,6 +10,7 @@
 #import "VPNRankMode.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 //#import "RequestService.h"
+#import "GlobalConstants.h"
 
 @implementation RankingStartCell
 

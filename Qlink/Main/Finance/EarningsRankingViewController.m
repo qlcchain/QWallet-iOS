@@ -13,6 +13,8 @@
 #import "UserModel.h"
 #import "Qlink-Swift.h"
 
+//#import "GlobalConstants.h"
+
 @interface EarningsRankingViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -54,7 +56,7 @@
     NSString *size = @"20";
     NSDictionary *params = @{@"page":page,@"size":size};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:rich_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:rich_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [EarningsRankingModel mj_objectArrayWithKeyValuesArray:responseObject[Server_Data]];

@@ -12,6 +12,9 @@
 //#import "TagListView-Swift.h"
 #import "SuccessTipView.h"
 #import <TTGTextTagCollectionView.h>
+#import "AppConfigUtil.h"
+
+//#import "GlobalConstants.h"
 
 @interface ETHMnemonicConfirmViewController () <TTGTextTagCollectionViewDelegate>
 

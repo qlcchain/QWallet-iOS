@@ -138,7 +138,7 @@ public class TransactionMng {
             let workHash = BlockMng.getRoot(block: block) ?? ""
             WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
                 if isTimeOut == true {
-                    RequestService.testRequest(withBaseURLStr: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                    RequestService.testRequest(withBaseURLStr8: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
                             block.work = (response as! String?) ?? ""
                             resultHandler(block.toJSON())
                     }, failedBlock: { (task, error) in
@@ -316,6 +316,7 @@ public class TransactionMng {
     private static func fillReceiveBlock(has:Bool,receiveAddress:String,tokenMeta:QLCTokenMeta?,info:QLCPendingInfo,previousBlock:QLCStateBlock?,sendBlockHash:Bytes,sendBlock:QLCStateBlock, privateKeyB:Bytes, resultHandler: @escaping ((Dictionary<String, Any>?) -> Void)) {
         // create receive block
         let receiveBlock = QLCStateBlock()
+        
         if (has) {
             // previous block info
             receiveBlock.type = QLCConstants.BLOCK_TYPE_RECEIVE
@@ -377,7 +378,7 @@ public class TransactionMng {
             let workHash = BlockMng.getRoot(block: receiveBlock) ?? ""
             WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
                 if isTimeOut == true {
-                    RequestService.testRequest(withBaseURLStr: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                    RequestService.testRequest(withBaseURLStr8: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
                         receiveBlock.work = (response as! String?) ?? ""
                         resultHandler(receiveBlock.toJSON())
                     }, failedBlock: { (task, error) in
@@ -517,7 +518,7 @@ public class TransactionMng {
             let workHash = BlockMng.getRoot(block: changeBlock) ?? ""
             WorkUtil.generateWorkOfOperationRandom(hash: workHash) { (work,isTimeOut) in
                 if isTimeOut == true {
-                    RequestService.testRequest(withBaseURLStr: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
+                    RequestService.testRequest(withBaseURLStr8: "http://pow1.qlcchain.org/work", params: ["root":workHash], httpMethod: HttpMethodGet, userInfo: nil, successBlock: { (task, response) in
                         changeBlock.work = (response as! String?) ?? ""
                         resultHandler(changeBlock.toJSON())
                     }, failedBlock: { (task, error) in

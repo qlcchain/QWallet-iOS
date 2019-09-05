@@ -15,6 +15,8 @@
 #import "WalletQRViewController.h"
 #import "ReportUtil.h"
 #import "WebViewController.h"
+//#import "GlobalConstants.h"
+#import "NEOWalletInfo.h"
 
 @interface NEOImportViewController () {
     BOOL privatekeyAgree;

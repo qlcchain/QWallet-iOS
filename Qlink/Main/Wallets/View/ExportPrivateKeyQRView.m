@@ -10,6 +10,7 @@
 #import "UIView+Visuals.h"
 #import "SGQRCodeObtain.h"
 #import "UIImage+Capture.h"
+#import "GlobalConstants.h"
 
 @interface ExportPrivateKeyQRView ()
 

@@ -11,6 +11,8 @@
 #import "NSDate+Category.h"
 #import "RSAUtil.h"
 
+#import "GlobalConstants.h"
+
 @implementation UserUtil
 
 + (void)updateUserInfo {
@@ -27,7 +29,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token}];
-    [RequestService requestWithUrl:user_user_info_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:user_user_info_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             UserModel *tempUserM = [UserModel getObjectWithKeyValues:responseObject[Server_Data]];
             userM.head = tempUserM.head;

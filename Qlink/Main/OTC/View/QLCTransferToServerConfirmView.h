@@ -17,7 +17,7 @@ typedef void(^QLCTransferToServerConfirmBlock)(void);
 @property (nonatomic, copy) QLCTransferToServerConfirmBlock confirmBlock;
 
 + (instancetype)getInstance;
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount;
+- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount tokenName:(NSString *)tokenName;
 - (void)show;
 
 @end

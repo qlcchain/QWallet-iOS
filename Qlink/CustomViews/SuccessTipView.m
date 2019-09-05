@@ -8,6 +8,7 @@
 
 #import "SuccessTipView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface SuccessTipView ()
 

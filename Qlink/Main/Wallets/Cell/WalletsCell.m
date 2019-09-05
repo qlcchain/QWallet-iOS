@@ -13,6 +13,7 @@
 #import "NEOAddressInfoModel.h"
 #import "EOSSymbolModel.h"
 #import "QLCAddressInfoModel.h"
+#import "GlobalConstants.h"
 
 @implementation WalletsCell
 

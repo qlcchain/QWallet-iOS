@@ -65,8 +65,6 @@
 
 // OTC---
 "transaction_id" = "Transaction ID";
-"sell_qgas" = "SELL QGAS";
-"buy_qgas" = "BUY QGAS";
 "successful_deal" = "Successful Deal";
 "closed" = "Closed";
 "appeal_processing" = "Appeal Processing";
@@ -74,14 +72,15 @@
 "appeal_failed" = "Appeal Failed";
 "sell" = "SELL";
 "buy" = "BUY";
-"entrust_sell_qgas" = "ENTRUST SELL QGAS";
-"entrust_buy_qgas" = "ENTRUST BUY QGAS";
+"entrust_sell" = "ENTRUST SELL";
+"entrust_buy" = "ENTRUST BUY";
 "active" = "Active";
 "revoked" = "Revoked";
 "completed" = "Completed";
 "seller" = "Seller";
 "buyer" = "Buyer";
 "amount_price" = "Amount";
+"pending" = "Pending";
 
 // 支付USDT---
 "eth_wallet_address" = "ETH Wallet Address";
@@ -93,8 +92,12 @@
 "amount_is_zero" = "Amount is zero";
 "balance_is_not_enough" = "Balance is not enough";
 "eth_wallet_address_is_invalidate" = "ETH Wallet Address is invalidate";
-"eth_wallet_address_have_not_eth_balance" = "ETH Wallet Address have not ETH balance";
-"current_qlc_wallet_have_not_usdt" = "Current QLC Wallet have not USDT";
+"eth_wallet_have_not_eth_balance" = "ETH Wallet Address have not ETH balance";
+"wallet_have_not_balance_of" = "Wallet have not balance of";
+"please_choose_wallet_first" = "Please choose wallet first";
+"current_eth_wallet_have_not" = "Current ETH Wallet have not";
+"current_neo_wallet_have_not" = "Current NEO Wallet have not";
+"current_qlc_wallet_have_not" = "Current QLC Wallet have not";
 
 // 申诉详情
 "appeallant_buyer" = "Appeallant：Buyer";
@@ -105,17 +108,15 @@
 "appeal_failed" = "Appeal Failed";
 "waiting_for_buyer_payment" = "Waiting for Buyer's payment";
 "waiting_for_seller_confirmation" = "Waiting for Seller's confirmation";
+"waiting_for_public_Chain_confirmation" = "Waiting for public chain confirmation";
 "amount" = "Amount";
 "copied" = "Copied";
-
-// 委托单详情---
-"erc-20_address_to_receive_usdt" = "ERC-20 Address to receive USDT";
-"qlc_chain_address_to_receive_qgas" = "QLC Chain Address to receive QGAS";
+"transaction_pending" = "Transaction Pending";
 
 // USDT接收地址---
-"usdt_receivable_address" = "USDT Receivable Address";
+"receivable_address" = "Receivable Address";
 "please_send" = "Please send";
-"to_the_erc-20_address_as_below_to_place_your_order" = "to the ERC-20 address as below to place your order.";
+"to_the_address_as_below_to_place_your_order" = "to the address as below to place your order.";
 
 // Buy\Sell List---
 "please_finish_the_verification_on_me_page" = "Please finish the verification on Me Page.";
@@ -129,29 +130,35 @@
 "max_amount_is_empty" = "Max Amount is empty";
 "address_is_empty" = "Address is empty";
 "qlc_wallet_address_is_invalidate" = "QLC Wallet Address is invalidate";
+"wallet_address_is_invalidate" = "Wallet Address is invalidate";
 "amount_need_greater_than_or_equal_to_max_amount" = "Amount need greater than or equal to Max Amount";
-"qlc_chain_address_is_empty" = "QLC Chain Address is empty";
 "please_switch_to_qlc_wallet" = "Please switch to QLC Wallet";
-"current_qlc_wallet_have_not_qgas" = "Current QLC Wallet have not QGAS";
-"current_qlc_wallet_have_not_enough_qgas" = "Current QLC Wallet have not enough QGAS";
-"qlc_server_address_is_empty" = "QLC Server Address is empty";
+"please_switch_to_neo_wallet" = "Please switch to NEO Wallet";
+"please_switch_to_eos_wallet" = "Please switch to EOS Wallet";
+"please_switch_to_eth_wallet" = "Please switch to ETH Wallet";
+"current_wallet_have_not" = "Current Wallet have not";
+"current_wallet_have_not_enough" = "Current Wallet have not enough";
+"server_address_is_empty" = "Server Address is empty";
 "process___" = "Process...";
 "transfer_successful" = "Transfer Successful.";
 
 // Buy\Sell Detail---
-"qlc_chain_wallet_address" = "QLC Chain Wallet Address";
-"erc-20_wallet_address" = "ERC-20 Wallet Address";
 "max" = "Max";
 "you_can_not_buy_or_sell_your_own_entrust_order" = "You can not buy or sell your own entrust order.";
-"usdt_is_empty" = "USDT is empty";
-"usdt_is_over_max" = "USDT is over max";
-"qgas_is_empty" = "QGAS is empty";
-"qgas_is_greater_than_max_volume" = "QGAS is greater than max volume";
-"qgas_is_less_than_min_volume" = "QGAS is less than min volume";
-"qgas_remain" = "QGAS remain";
+"is_empty" = "is empty";
+"is_over_max" = "is over max";
+"is_greater_than_max_volume" = "is greater than max volume";
+"is_less_than_min_volume" = "is less than min volume";
+"remain" = "remain";
+"unit_price" = "Unit Price";
+"volume_amount" = "Volume Amount";
+"volume_settings" = "Volume Settings";
+"receive_from" = "Receive from";
+"send_to" = "Send to";
 
 // 订单详情---
 "the_order_will_be_closed_automatically____30" = "The order will be closed automatically, if no further confirmation within 30 minutes.";
+"please_be_patient_" = "Please be patient.";
 "fail_appeal" = "Fail Appeal";
 "successful" = "Successful";
 "the_order_will_be_closed_automatically_if_no_further_confirmation_within" = "The order will be closed automatically, if no further confirmation within";
@@ -184,7 +191,7 @@
 
 // 钱包---
 "export_qrcode" = "Export QRCode";
-"please_use_space_to_separate_the_mnemonic_phase" = "Please use space to separate the mnemonic phase";
+"please_use_space_to_separate_the_mnemonic_phrase" = "Please use space to separate the mnemonic phrase";
 "please_input_wallet_seed" = "Please input wallet seed";
 "import_success" = "Import Success";
 "please_agree_first" = "Please Agree First";
@@ -262,3 +269,8 @@
 "install_now" = "Install Now";
 "a_new_version_of_my_qwallet__" = "A new version of My QWallet is available. Install it now from App Store.";
 
+// 转NEO token
+"neo_transfer_fail" = "NEO transfer fail";
+"neo_nep5_gas_less" = "NEO(nep5) transfer need gas";
+"transfer_tip" = "Transfer tip";
+"transfer_processed" = "Transfer processed";

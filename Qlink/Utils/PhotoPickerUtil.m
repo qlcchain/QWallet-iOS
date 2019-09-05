@@ -10,6 +10,8 @@
 #import "ZQImageCropController.h"
 #import "UINavigationController+CurrentNav.h"
 
+#import "GlobalConstants.h"
+
 @interface PhotoPickerUtil () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, copy) PhotoPickerBlock selectBlock;

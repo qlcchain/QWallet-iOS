@@ -38,6 +38,8 @@
 #import "CreateAccountTransferService.h"
 #import "ReportUtil.h"
 
+#import "GlobalConstants.h"
+
 @interface EOSWalletUtil () <TransferServiceDelegate,CreateAccountTransferServiceDelegate> {
     // 从网络获取的公钥
     NSString *active_public_key_from_network;
@@ -370,7 +372,7 @@
 
     kWeakSelf(self);
     NSDictionary *params = @{@"account":accountName?:@""};
-    [RequestService requestWithUrl:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data][Server_Data];
             EOSAccountInfoModel *model = [EOSAccountInfoModel getObjectWithKeyValues:dic];

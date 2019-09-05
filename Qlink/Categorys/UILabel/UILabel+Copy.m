@@ -8,6 +8,7 @@
 
 #import "UILabel+Copy.h"
 #import <objc/runtime.h>
+#import "NSString+Localizable.h"
 
 @implementation UILabel (Copy)
 

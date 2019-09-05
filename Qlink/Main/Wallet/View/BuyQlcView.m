@@ -8,7 +8,7 @@
 
 #import "BuyQlcView.h"
 #import "UIView+Animation.h"
-
+#import "GlobalConstants.h"
 
 @implementation BuyQlcView
 

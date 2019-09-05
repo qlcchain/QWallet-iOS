@@ -7,6 +7,7 @@
 //
 
 #import "HMScannerMaskView.h"
+#import "GlobalConstants.h"
 
 @implementation HMScannerMaskView
 

@@ -8,6 +8,7 @@
 
 #import "UserHeadBtn.h"
 #import <SDWebImage/UIButton+WebCache.h>
+#import "GlobalConstants.h"
 
 @implementation UserHeadBtn
 

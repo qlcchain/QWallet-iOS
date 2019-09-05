@@ -130,7 +130,7 @@ class O3APIClient: NSObject {
 //        if mainNet == false { // 注册和连接vpn用测试接口
 //            url = "/api/neo/allUnpspentAsset.json"
 //        }
-        RequestService.request(withUrl: url, params: dict, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
+        RequestService.request(withUrl10: url, params: dict, httpMethod: HttpMethodPost, serverType:RequestServerTypeRelease, successBlock: { (request, responseObject) in
             
             var endDatas = Array<Any>()
             let responser = responseObject as! Dictionary<String,AnyObject>
@@ -169,76 +169,6 @@ class O3APIClient: NSObject {
                 }
             }
             
-            
-//            let dataDic = responser["data"] as! Dictionary<String,AnyObject>
-//            if  dataDic != nil {
-//                var gasDic = dataDic["GAS"] as! Dictionary<String,AnyObject>
-//                if gasDic != nil {
-//                    let dataArr = gasDic["unspent"] as! Array<AnyObject>
-//                    if dataArr != nil
-//                    {
-//                        for valueDic in dataArr
-//                        {
-//                            let assetDic = NSMutableDictionary(dictionary: valueDic as! Dictionary<String , AnyObject>)
-//
-//                            var indexValue:Int = 0
-//                            if let indexTemp = assetDic["index"] {
-//                                indexValue = Int(indexTemp as! String) ?? 0
-//                            }
-//
-//                            let valueStr = assetDic["value"]
-//                            var str:String = "0.00000001";
-//                            if let strTemp = valueStr {
-//                                if strTemp is String {
-//                                    let num = NSDecimalNumber(string: (strTemp as! String))
-//                                    str = num.stringValue
-//                                } else if strTemp is NSNumber {
-//                                    str = amountFormatter.string(from:strTemp as! NSNumber)!
-//                                }
-//                            }
-//                            print("valuestr = \(str)")
-//
-//                            let gass:[String : Any] = ["asset":"0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7","index":indexValue,"txid":assetDic["txid"] as! String,"value":str,"createdAtBlock":0]
-//
-//                            endDatas.append(gass)
-//
-//                        }
-//                    }
-//                }
-//            }
-//
-//            var neoDic = dataDic["NEO"] as! Dictionary<String,AnyObject>
-//            if neoDic != nil {
-//                let dataArr1 = neoDic["unspent"] as! Array<AnyObject>
-//                if dataArr1 != nil {
-//                    for valueDic in dataArr1
-//                    {
-//                        let assetDic = NSMutableDictionary(dictionary: valueDic as! Dictionary<String , AnyObject>)
-//
-//                        var indexValue = 0
-//                        if let indexTemp = assetDic["index"] {
-//                            indexValue = Int(indexTemp as! String) ?? 0
-//                        }
-//
-//                        let valueStr = assetDic["value"]
-//                        var str:String = "0.00000001";
-//                        if let strTemp = valueStr {
-//                            if strTemp is String {
-//                                let num = NSDecimalNumber(string: (strTemp as! String))
-//                                str = num.stringValue
-//                            } else if strTemp is NSNumber {
-//                                str = amountFormatter.string(from:strTemp as! NSNumber)!
-//                            }
-//                        }
-//                        print("valuestr = \(str)")
-//
-//                        let neos:[String : Any] = ["asset":"0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b","index":indexValue,"txid":assetDic["txid"] as! String,"value":str,"createdAtBlock":0]
-//                        endDatas.append(neos)
-//
-//                    }
-//                }
-//            }
-            
             if endDatas.count == 0 {
                 completion(.failure(.invalidData))
                 return
@@ -258,24 +188,6 @@ class O3APIClient: NSObject {
         }) { (request, error) in
             completion(.failure(O3APIClientError.noInternet))
         }
-        
-//        let url = "/v1/neo/" + address + "/" + o3APIResource.getUTXO.rawValue
-//        sendRESTAPIRequest(url, data: nil) { result in
-//            switch result {
-//            case .failure(let error):
-//                completion(.failure(error))
-//            case .success(let response):
-//                let decoder = JSONDecoder()
-//                guard let data = try? JSONSerialization.data(withJSONObject: response["result"] as Any, options: .prettyPrinted),
-//                    let assets = try? decoder.decode(Assets.self, from: data) else {
-//                        completion(.failure(.invalidData))
-//                        return
-//                }
-//
-//                let result = O3APIClientResult.success(assets)
-//                completion(result)
-//            }
-//        }
     }
 
     public func getClaims(address: String, completion: @escaping(O3APIClientResult<Claimable>) -> Void) {
@@ -283,7 +195,7 @@ class O3APIClient: NSObject {
         let dict = ["address" : address]
         //        let dict = ["address" : "AZRSCc47KuUae93AFowfdBTHr77KZGSnqp"]
         
-        RequestService.request(withUrl: "/api/neo/getClaims.json", params: dict, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
+        RequestService.request(withUrl5: "/api/neo/getClaims.json", params: dict, httpMethod: HttpMethodPost, successBlock: { (request, responseObject) in
             
             var responser: Dictionary<String,AnyObject>? = nil
             if responseObject is NSDictionary {

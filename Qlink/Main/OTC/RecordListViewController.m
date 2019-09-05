@@ -17,6 +17,8 @@
 #import "EntrustOrderListModel.h"
 #import "TradeOrderDetailViewController.h"
 #import "EntrustOrderDetailViewController.h"
+#import "PairsModel.h"
+//#import "GlobalConstants.h"
 
 @interface RecordListViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
     BOOL needRefreshSlider;
@@ -362,7 +364,7 @@
     } else { // 交易单
         [params setObject:status forKey:@"status"];
     }
-    [RequestService requestWithUrl:trade_order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself hideHeaderAndFooter];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [TradeOrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"orderList"]];
@@ -407,8 +409,8 @@
     NSString *size = @"20";
     NSString *type = @"";
     NSString *userId = [UserModel fetchUserOfLogin].ID;
-    NSDictionary *params = @{@"userId":userId?:@"",@"type":type,@"page":page,@"size":size};
-    [RequestService requestWithUrl:entrust_order_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"userId":userId?:@"",@"type":type,@"page":page,@"size":size,@"pairsId":@""};
+    [RequestService requestWithUrl5:entrust_order_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.postedTable.mj_header endRefreshing];
         [weakself.postedTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {

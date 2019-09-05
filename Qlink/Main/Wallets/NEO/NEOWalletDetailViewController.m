@@ -13,6 +13,8 @@
 //#import "Qlink-Swift.h"
 #import "NEOWalletUtil.h"
 #import "DeleteWalletConfirmView.h"
+//#import "GlobalConstants.h"
+#import "NEOWalletInfo.h"
 
 NSString *exportEncryptedKeyWIF = @"Export Encrypted Key(WIF)";
 NSString *exportPrivateKeyWIF = @"Export Private Key(WIF)";

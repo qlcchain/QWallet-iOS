@@ -8,6 +8,7 @@
 
 #import "QToastView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface QToastView ()
 

@@ -17,6 +17,7 @@
 #import "NSString+RemoveZero.h"
 #import "HistoryChartView.h"
 
+
 @interface EOSTransactionRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -99,7 +100,7 @@
 - (void)requestEOSGetAccountRelatedTrxInfo:(NSString *)account_name {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":account_name, @"symbol":_inputSymbol.symbol?:@"", @"code":_inputSymbol.code?:@"" , @"page":@(1), @"size":@(15)};
-    [RequestService requestWithUrl:eosGet_account_related_trx_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_account_related_trx_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSMutableArray *getArr = [NSMutableArray array];
             NSDictionary *dic = responseObject[Server_Data][Server_Data];
@@ -118,7 +119,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_inputSymbol.symbol],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];

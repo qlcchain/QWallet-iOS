@@ -7,6 +7,7 @@
 //
 
 #import "VersionManager.h"
+#import <UIKit/UIKit.h>
 
 @implementation VersionManager
 

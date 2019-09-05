@@ -9,6 +9,7 @@
 #import "QLCWalletInfo.h"
 #import "Qlink-Swift.h"
 #import "QLCWalletManage.h"
+#import "GlobalConstants.h"
 
 @implementation QLCWalletInfo
 
@@ -90,6 +91,36 @@
     }];
     
     return seed;
+}
+
++ (NSString *)getQLCPrivateKeyWithAddress:(NSString *)address {
+    __block NSString *privateKey = nil;
+    
+    NSArray *allQLC = [QLCWalletInfo getAllWalletInKeychain];
+    [allQLC enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        QLCWalletInfo *model = obj;
+        if ([model.address isEqualToString:address]) {
+            privateKey = model.privateKey;
+            *stop = YES;
+        }
+    }];
+    
+    return privateKey;
+}
+
++ (NSString *)getQLCPublicKeyWithAddress:(NSString *)address {
+    __block NSString *publicKey = nil;
+    
+    NSArray *allQLC = [QLCWalletInfo getAllWalletInKeychain];
+    [allQLC enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        QLCWalletInfo *model = obj;
+        if ([model.address isEqualToString:address]) {
+            publicKey = model.publicKey;
+            *stop = YES;
+        }
+    }];
+    
+    return publicKey;
 }
 
 + (NSString *)getQLCMnemonicWithAddress:(NSString *)address {

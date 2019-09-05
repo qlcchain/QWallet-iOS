@@ -23,6 +23,9 @@
 #import "QLCImportWalletViewController.h"
 #import "QLCCreateWalletViewController.h"
 #import "WebViewController.h"
+#import "NEOWalletInfo.h"
+//#import "GlobalConstants.h"
+#import "AppConfigUtil.h"
 
 @interface ChooseWalletViewController () {
     BOOL isAgree;

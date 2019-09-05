@@ -9,6 +9,7 @@
 #import "QLCTransferToServerConfirmView.h"
 #import "UIView+Visuals.h"
 #import "WalletCommonModel.h"
+#import "GlobalConstants.h"
 
 @interface QLCTransferToServerConfirmView ()
 
@@ -36,10 +37,10 @@
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
 }
 
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount {
+- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount tokenName:(NSString *)tokenName {
     _sendtoLab.text = sendto;
     _amountLab.text = amount;
-    _statusLab.text = kLang(@"sell_qgas");
+    _statusLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"sell"),tokenName];
 }
 
 - (void)show {

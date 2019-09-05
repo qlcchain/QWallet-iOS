@@ -42,6 +42,7 @@ PODS:
   - CocoaLumberjack/Swift (3.4.2):
     - CocoaLumberjack/Default
   - CryptoSwift (0.13.0)
+  - dsBridge (3.0.6)
   - Eureka (4.2.0)
   - Firebase/Core (5.4.1):
     - Firebase/CoreOnly
@@ -85,6 +86,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - NinaPagerView (1.6.3)
   - OLImageView (1.5.1):
     - OLImageView/Core (= 1.5.1)
   - OLImageView/Core (1.5.1)
@@ -112,6 +114,7 @@ PODS:
   - SipHash (1.2.2)
   - SwiftColor (1.0.0)
   - SwiftTheme (0.4.1)
+  - TMCache (2.1.0)
   - TrezorCrypto (0.0.9)
   - TrustCore (0.0.7):
     - BigInt
@@ -139,6 +142,7 @@ DEPENDENCIES:
   - Charts (= 3.1.0)
   - CocoaAsyncSocket (~> 7.4.3)
   - CocoaLumberjack/Swift
+  - dsBridge
   - Eureka (= 4.2.0)
   - Firebase/Core (~> 5.4.1)
   - HandyJSON
@@ -154,6 +158,7 @@ DEPENDENCIES:
   - MJRefresh
   - MMWormhole (~> 2.0.0)
   - Moya (~> 10.0.1)
+  - NinaPagerView
   - OLImageView
   - PromiseKit (~> 6.0)
   - R.swift
@@ -161,6 +166,7 @@ DEPENDENCIES:
   - SDWebImage
   - SwiftColor
   - SwiftTheme (= 0.4.1)
+  - TMCache
   - TrustCore (from `https://github.com/TrustWallet/trust-core`, branch `master`)
   - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
   - TrustWalletSDK (from `https://github.com/TrustWallet/TrustSDK-iOS`, branch `master`)
@@ -182,6 +188,7 @@ SPEC REPOS:
     - CocoaAsyncSocket
     - CocoaLumberjack
     - CryptoSwift
+    - dsBridge
     - Eureka
     - Firebase
     - FirebaseAnalytics
@@ -202,6 +209,7 @@ SPEC REPOS:
     - MMWormhole
     - Moya
     - nanopb
+    - NinaPagerView
     - OLImageView
     - PromiseKit
     - R.swift
@@ -213,6 +221,7 @@ SPEC REPOS:
     - SipHash
     - SwiftColor
     - SwiftTheme
+    - TMCache
     - TrezorCrypto
     - TTGTagCollectionView
     - TYCyclePagerView
@@ -258,6 +267,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
+  dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
   Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
@@ -278,6 +288,7 @@ SPEC CHECKSUMS:
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NinaPagerView: 4a245c33df8c5212fbde3c32ce39a3765eb334bc
   OLImageView: e03cd533ce6b1a155acb9f708ab9b2e71ea070d5
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
@@ -289,6 +300,7 @@ SPEC CHECKSUMS:
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftColor: aad338783abbcdd78df9031a38a7a96aae3d9122
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
+  TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
   TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
   TrustCore: 6c7deb45f03664d650da712bb5a19b33df0534a6
   TrustKeystore: c54b52ade9c97d31d23ded9ae2518c62dd73b5fe
@@ -297,6 +309,6 @@ SPEC CHECKSUMS:
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: 43415298065c163cc731c5d8069070f8ba3a6c83
+PODFILE CHECKSUM: c8f2703c2ab3a62ea71a6de299c93837353c64d9
 
 COCOAPODS: 1.6.1

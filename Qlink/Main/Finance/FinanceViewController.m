@@ -19,6 +19,8 @@
 #import "ShareFriendsViewController.h"
 #import "UserModel.h"
 #import "RefreshHelper.h"
+//#import "GlobalConstants.h"
+#import "UIColor+Random.h"
 
 @interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -117,7 +119,7 @@
     NSString *page = [NSString stringWithFormat:@"%li",(long)_currentPage];
     NSString *size = @"20";
     NSDictionary *params = @{@"page":page,@"size":size};
-    [RequestService requestWithUrl:product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainScroll.mj_header endRefreshing];
         [weakself.mainScroll.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {

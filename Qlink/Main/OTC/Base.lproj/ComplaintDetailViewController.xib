@@ -36,6 +36,7 @@
                 <outlet property="tradeIDHeight" destination="mD2-Y7-MQu" id="7i0-3l-avD"/>
                 <outlet property="tradeIDLab" destination="zKN-mm-Ebt" id="aen-fv-Gfu"/>
                 <outlet property="typeLab" destination="DgQ-PU-RJ7" id="qol-V2-zO1"/>
+                <outlet property="typeUnitLab" destination="Vt1-hi-jNg" id="zoG-ng-dAH"/>
                 <outlet property="unitPriceLab" destination="5gD-EB-tGx" id="Oyt-fC-0Ag"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -410,8 +411,8 @@
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiT-fV-1UA">
                                                     <rect key="frame" x="0.0" y="667" width="414" height="76"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buyer's ERC-20 address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnQ-1b-R9G">
-                                                            <rect key="frame" x="16" y="7" width="157.66666666666666" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnQ-1b-R9G">
+                                                            <rect key="frame" x="16" y="7" width="50" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>

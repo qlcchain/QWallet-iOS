@@ -25,6 +25,11 @@
 #import "WalletSelectViewController.h"
 #import "QNavigationController.h"
 #import "TradeOrderInfoModel.h"
+#import "PairsModel.h"
+#import "NewOrderQLCTransferUtil.h"
+#import "NewOrderNEOTransferUtil.h"
+#import "NewOrderETHTransferUtil.h"
+//#import "GlobalConstants.h"
 
 @interface BuySellDetailViewController ()
 
@@ -35,11 +40,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *accountPayOrReceiveLab;
 @property (weak, nonatomic) IBOutlet UITextField *usdtMaxTF;
 @property (weak, nonatomic) IBOutlet UITextField *qgasMaxTF;
-@property (weak, nonatomic) IBOutlet UILabel *addressTipLab;
-@property (weak, nonatomic) IBOutlet UITextField *addressTF;
+@property (weak, nonatomic) IBOutlet UILabel *receiveAddressTipLab;
+@property (weak, nonatomic) IBOutlet UITextField *receiveAddressTF;
+@property (weak, nonatomic) IBOutlet UILabel *sendAddressTipLab;
+
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *createOneNowHeight; // 30
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *qgasSendBackHeight; // 88
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *qgasSendBackHeight; // 102
 @property (weak, nonatomic) IBOutlet UITextField *qgasSendTF;
 
 @property (weak, nonatomic) IBOutlet UIView *addressWalletBack;
@@ -51,6 +59,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *sendQgasWalletIcon;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletAddressLab;
+
+@property (weak, nonatomic) IBOutlet UILabel *unitPriceTipLab;
+@property (weak, nonatomic) IBOutlet UILabel *volumeAmountTipLab;
+@property (weak, nonatomic) IBOutlet UILabel *volumeSettingsTipLab;
+@property (weak, nonatomic) IBOutlet UILabel *maxPayUnitTipLab;
+@property (weak, nonatomic) IBOutlet UILabel *maxTradeUnitTipLab;
+
 
 
 @property (nonatomic, strong) EntrustOrderInfoModel *orderInfoM;
@@ -83,29 +98,36 @@
     [_usdtMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     [_qgasMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     
+    _unitPriceTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"unit_price"),_inputPayToken];
+    _volumeAmountTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"volume_amount"),_inputTradeToken];
+    _volumeSettingsTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"volume_settings"),_inputTradeToken];
+    _maxPayUnitTipLab.text = _inputPayToken;
+    _maxTradeUnitTipLab.text = _inputTradeToken;
+    _receiveAddressTipLab.text = kLang(@"send_to");
+    _receiveAddressTF.placeholder = kLang(@"wallet_address");
+    _sendAddressTipLab.text = kLang(@"receive_from");
+    _qgasSendTF.placeholder = kLang(@"wallet_address");
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) { // 我是买家
         _accountPayOrReceiveLab.text = kLang(@"account_payable");
-        _titleLab.text = kLang(@"buy_qgas");
+        _titleLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"buy"),_inputTradeToken];
         _usdtLab.textColor = MAIN_BLUE_COLOR;
-        _addressTipLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
-        _addressTF.placeholder = kLang(@"qlc_chain_wallet_address");
+        
         _createOneNowHeight.constant = 30;
         _qgasSendBackHeight.constant = 0;
     } else { // 我是卖家
         _accountPayOrReceiveLab.text = kLang(@"account_receivable");
-        _titleLab.text = kLang(@"sell_qgas");
+        _titleLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"sell"),_inputEntrustOrderListM.tradeToken];
         _usdtLab.textColor = UIColorFromRGB(0xFF3669);
-        _addressTipLab.text = kLang(@"erc-20_address_to_receive_usdt");
-        _addressTF.placeholder = kLang(@"erc-20_wallet_address");
+        
         _createOneNowHeight.constant = 0;
-        _qgasSendBackHeight.constant = 88;
+        _qgasSendBackHeight.constant = 102;
     }
     
     _usdtLab.text = _inputEntrustOrderListM.unitPrice;
 //    _totalLab.text = [NSString stringWithFormat:@"%@",_inputEntrustOrderListM.totalAmount];
-    _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_inputEntrustOrderListM.totalAmount integerValue] - [_inputEntrustOrderListM.lockingAmount integerValue] - [_inputEntrustOrderListM.completeAmount integerValue])];
+    _totalLab.text = [NSString stringWithFormat:@"%@ %@",@([_inputEntrustOrderListM.totalAmount doubleValue] - [_inputEntrustOrderListM.lockingAmount doubleValue] - [_inputEntrustOrderListM.completeAmount doubleValue]),_inputTradeToken];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_inputEntrustOrderListM.minAmount,_inputEntrustOrderListM.maxAmount];
-    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_inputEntrustOrderListM.maxAmount integerValue]*[_inputEntrustOrderListM.unitPrice doubleValue])];
+    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_inputEntrustOrderListM.maxAmount doubleValue]*[_inputEntrustOrderListM.unitPrice doubleValue])];
     _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount];
 }
 
@@ -113,9 +135,9 @@
     if (_orderInfoM) {
         _usdtLab.text = _orderInfoM.unitPrice;
 //        _totalLab.text = [NSString stringWithFormat:@"%@",_orderInfoM.totalAmount];
-        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
+        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount doubleValue] - [_orderInfoM.lockingAmount doubleValue] - [_orderInfoM.completeAmount doubleValue])];
         _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_orderInfoM.minAmount,_orderInfoM.maxAmount];
-        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice doubleValue])];
+        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice doubleValue])];
         _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount];
     }
 }
@@ -126,7 +148,7 @@
         NSString *str = [NSString stringFromDouble:dou];
         _qgasMaxTF.text = [NSString stringWithFormat:@"%@",str];
     } else if (tf == _qgasMaxTF) {
-        double dou = [_qgasMaxTF.text integerValue]*[NSString doubleFormString:_orderInfoM.unitPrice];
+        double dou = [_qgasMaxTF.text doubleValue]*[NSString doubleFormString:_orderInfoM.unitPrice];
         NSString *str = [NSString stringFromDouble:dou];
         _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str];
     }
@@ -142,12 +164,40 @@
 //    [self presentViewController:alertVC animated:YES completion:nil];
 //}
 
+- (void)sell_transfer:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName {
+    kWeakSelf(self);
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        [NewOrderQLCTransferUtil transferQLC:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+            // 下卖单
+            weakself.sellFromAddress = sendAddress;
+            weakself.sellTxid = txid;
+            [weakself requestTrade_sell_order];
+        }];
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        [NewOrderNEOTransferUtil transferNEO:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+            // 下卖单
+            weakself.sellFromAddress = sendAddress;
+            weakself.sellTxid = txid;
+            [weakself requestTrade_sell_order];
+        }];
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        [NewOrderETHTransferUtil transferETH:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+            // 下卖单
+            weakself.sellFromAddress = sendAddress;
+            weakself.sellTxid = txid;
+            [weakself requestTrade_sell_order];
+        }];
+    }
+}
+
 #pragma mark - Request
 - (void)requestEntrust_order_info {
     kWeakSelf(self);
     NSDictionary *params = @{@"entrustOrderId":_inputEntrustOrderListM.ID?:@""};
-    [RequestService requestWithUrl:entrust_order_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([responseObject[Server_Code] integerValue] == 0) {
+    [RequestService requestWithUrl5:entrust_order_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] doubleValue] == 0) {
             weakself.orderInfoM = [EntrustOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
             [weakself refreshView];
         }
@@ -170,17 +220,17 @@
     NSString *entrustOrderId = _orderInfoM.ID?:@"";
     NSString *usdtAmount = _usdtMaxTF.text?:@"";
     NSString *qgasAmount = _qgasMaxTF.text?:@"";
-    NSString *qgasToAddress = _addressTF.text?:@"";
+    NSString *qgasToAddress = _receiveAddressTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"entrustOrderId":entrustOrderId,@"usdtAmount":usdtAmount,@"qgasAmount":qgasAmount,@"qgasToAddress":qgasToAddress};
 
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_buy_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_buy_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
-        if ([responseObject[Server_Code] integerValue] == 0) {
+        if ([responseObject[Server_Code] doubleValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             kAppD.pushToOrderList = YES;
             TradeOrderInfoModel *model = [TradeOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
-            [weakself jumpToUSDTAddress:model];
+            [weakself jumpToPayAddress:model];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -189,28 +239,28 @@
     }];
 }
 
-- (void)sendTransferToServer:(QLCTokenModel *)selectAsset fromAddress:(NSString *)fromAddress {
-    NSString *tokenName = selectAsset.tokenName;
-    NSString *to = [QLCWalletManage shareInstance].qlcMainAddress?:@"";
-    NSUInteger amount = [selectAsset getTransferNum:_qgasMaxTF.text];
-    NSString *sender = nil;
-    NSString *receiver = nil;
-    NSString *message = nil;
-    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
-    kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
-        [kAppD.window hideToast];
-        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
-        
-        // 下卖单
-        weakself.sellFromAddress = fromAddress;
-        weakself.sellTxid = responseObj;
-        [weakself requestTrade_sell_order];
-        
-    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
-        [kAppD.window hideToast];
-    }];
-}
+//- (void)sendTransferToServer:(QLCTokenModel *)selectAsset fromAddress:(NSString *)fromAddress {
+//    NSString *tokenName = selectAsset.tokenName;
+//    NSString *to = [QLCWalletManage shareInstance].qlcMainAddress?:@"";
+//    NSUInteger amount = [selectAsset getTransferNum:_qgasMaxTF.text];
+//    NSString *sender = nil;
+//    NSString *receiver = nil;
+//    NSString *message = nil;
+//    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
+//    kWeakSelf(self);
+//    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
+//        [kAppD.window hideToast];
+//        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
+//
+//        // 下卖单
+//        weakself.sellFromAddress = fromAddress;
+//        weakself.sellTxid = responseObj;
+//        [weakself requestTrade_sell_order];
+//
+//    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
+//        [kAppD.window hideToast];
+//    }];
+//}
 
 - (void)requestTrade_sell_order {
     UserModel *userM = [UserModel fetchUserOfLogin];
@@ -227,15 +277,15 @@
     NSString *entrustOrderId = _orderInfoM.ID?:@"";
     NSString *usdtAmount = _usdtMaxTF.text?:@"";
     NSString *qgasAmount = _qgasMaxTF.text?:@"";
-    NSString *usdtToAddress = _addressTF.text?:@"";
+    NSString *usdtToAddress = _receiveAddressTF.text?:@"";
     NSString *fromAddress = _sellFromAddress?:@"";
     NSString *txid = _sellTxid?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"entrustOrderId":entrustOrderId,@"usdtAmount":usdtAmount,@"qgasAmount":qgasAmount,@"usdtToAddress":usdtToAddress,@"fromAddress":fromAddress,@"txid":txid};
     
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_sell_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_sell_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
-        if ([responseObject[Server_Code] integerValue] == 0) {
+        if ([responseObject[Server_Code] doubleValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
 //            [weakself showSubmitSuccess];
             kAppD.pushToOrderList = YES;
@@ -257,22 +307,28 @@
 - (IBAction)showAddressAction:(id)sender {
     kWeakSelf(self);
     WalletSelectViewController *vc = [[WalletSelectViewController alloc] init];
+    NSString *tokenChain = nil;
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) {
-        vc.inputWalletType = WalletTypeQLC;
+        tokenChain = _inputEntrustOrderListM.tradeTokenChain;
     } else {
+        tokenChain = _inputEntrustOrderListM.payTokenChain;
+    }
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        vc.inputWalletType = WalletTypeQLC;
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        vc.inputWalletType = WalletTypeNEO;
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        vc.inputWalletType = WalletTypeEOS;
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
         vc.inputWalletType = WalletTypeETH;
     }
     [vc configSelectBlock:^(WalletCommonModel * _Nonnull model) {
-        if ([weakself.inputEntrustOrderListM.type isEqualToString:@"SELL"]) {
-            weakself.addressWalletIcon.image = [UIImage imageNamed:@"qlc_wallet"];
-        } else {
-            weakself.addressWalletIcon.image = [UIImage imageNamed:@"eth_wallet"];
-        }
+        weakself.addressWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
         weakself.addressWalletBack.hidden = NO;
         weakself.addressWalletM = model;
         weakself.addressWalletNameLab.text = model.name;
         weakself.addressWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-        weakself.addressTF.text = model.address;
+        weakself.receiveAddressTF.text = model.address;
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
@@ -281,10 +337,20 @@
 - (IBAction)showSendAddressAction:(id)sender {
     kWeakSelf(self);
     WalletSelectViewController *vc = [[WalletSelectViewController alloc] init];
-    vc.inputWalletType = WalletTypeQLC;
+    NSString *tokenChain = _inputEntrustOrderListM.tradeTokenChain;
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        vc.inputWalletType = WalletTypeQLC;
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        vc.inputWalletType = WalletTypeNEO;
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        vc.inputWalletType = WalletTypeEOS;
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        vc.inputWalletType = WalletTypeETH;
+    }
     [vc configSelectBlock:^(WalletCommonModel * _Nonnull model) {
         weakself.sendQgasWalletBack.hidden = NO;
         weakself.sendQgasWalletM = model;
+        weakself.sendQgasWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
         weakself.sendQgasWalletNameLab.text = model.name;
         weakself.sendQgasWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
         weakself.qgasSendTF.text = model.address;
@@ -307,94 +373,96 @@
     }
     
     if ([_usdtMaxTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"usdt_is_empty")];
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputPayToken,kLang(@"is_empty")]];
         return;
     }
-    if ([_usdtMaxTF.text doubleValue] > [_orderInfoM.maxAmount integerValue]*[_orderInfoM.unitPrice doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"usdt_is_over_max")];
+    if ([_usdtMaxTF.text doubleValue] > [_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputPayToken,kLang(@"is_over_max")]];
         return;
     }
     if ([_qgasMaxTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"qgas_is_empty")];
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"is_empty")]];
         return;
     }
-    if ([_qgasMaxTF.text integerValue] > [_orderInfoM.maxAmount integerValue]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"qgas_is_greater_than_max_volume")];
+    if ([_qgasMaxTF.text doubleValue] > [_orderInfoM.maxAmount doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"is_greater_than_max_volume")]];
         return;
     }
-    if ([_qgasMaxTF.text integerValue] < [_orderInfoM.minAmount integerValue]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"qgas_is_less_than_min_volume")];
+    if ([_qgasMaxTF.text doubleValue] < [_orderInfoM.minAmount doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"is_less_than_min_volume")]];
         return;
     }
     // 检查剩余QGAS量
-    NSInteger restAmount = [_orderInfoM.totalAmount integerValue]-[_orderInfoM.lockingAmount integerValue]-[_orderInfoM.completeAmount integerValue];
-    if (restAmount<[_qgasMaxTF.text integerValue]) { // 交易量不足
-        NSString *tip = [NSString stringWithFormat:@"%@ %@",kLang(@"qgas_remain"),@(restAmount)];
+    NSInteger restAmount = [_orderInfoM.totalAmount doubleValue]-[_orderInfoM.lockingAmount doubleValue]-[_orderInfoM.completeAmount doubleValue];
+    if (restAmount<[_qgasMaxTF.text doubleValue]) { // 交易量不足
+        NSString *tip = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"remain")],@(restAmount)];
         [kAppD.window makeToastDisappearWithText:tip];
         return;
     }
     
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) { // 我要买
         // 检查地址有效性
-        BOOL validateQLCAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_addressTF.text];
-        if (!validateQLCAddress) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_invalidate")];
+        BOOL validReceiveAddress = [WalletCommonModel validAddress:_receiveAddressTF.text tokenChain:_inputEntrustOrderListM.tradeTokenChain];
+        if (!validReceiveAddress) {
+            [kAppD.window makeToastDisappearWithText:kLang(@"wallet_address_is_invalidate")];
             return;
         }
     
         [self requestTrade_buy_order];
     } else { // 我要卖
         // 检查地址有效性
-        BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_addressTF.text];
-        if (!isValid) {
+        BOOL validReceiveAddress = [WalletCommonModel validAddress:_receiveAddressTF.text tokenChain:_inputEntrustOrderListM.payTokenChain];
+        if (!validReceiveAddress) {
             [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
             return;
         }
         
-        // 判断当前钱包
-        WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-        if (!currentWalletM || currentWalletM.walletType != WalletTypeQLC) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_qlc_wallet")];
-            return;
-        }
+        [self sell_transfer:_qgasMaxTF.text tokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken];
         
-        // 判断QLC钱包的QLC asset
-        QLCTokenModel *qgasAsset = [kAppD.tabbarC.walletsVC getQGASAsset];
-        if (!qgasAsset) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_qgas")];
-            return;
-        }
-        if ([qgasAsset.balance doubleValue] < [_qgasMaxTF.text doubleValue]) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_enough_qgas")];
-            return;
-        }
-        
-        // 检查平台地址
-        NSString *qlcAddress = [QLCWalletManage shareInstance].qlcMainAddress;
-        if ([qlcAddress isEmptyString]) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"qlc_server_address_is_empty")];
-            return;
-        }
-        
-        [self showSellComfirmView:qlcAddress qgasAsset:qgasAsset fromAddress:currentWalletM.address];
+//        // 判断当前钱包
+//        WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//        if (!currentWalletM || currentWalletM.walletType != WalletTypeQLC) {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_qlc_wallet")];
+//            return;
+//        }
+//
+//        // 判断QLC钱包的QLC asset
+//        QLCTokenModel *qgasAsset = [kAppD.tabbarC.walletsVC getQGASAsset];
+//        if (!qgasAsset) {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_qgas")];
+//            return;
+//        }
+//        if ([qgasAsset.balance doubleValue] < [_qgasMaxTF.text doubleValue]) {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"current_qlc_wallet_have_not_enough_qgas")];
+//            return;
+//        }
+//
+//        // 检查平台地址
+//        NSString *qlcAddress = [QLCWalletManage shareInstance].qlcMainAddress;
+//        if ([qlcAddress isEmptyString]) {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"qlc_server_address_is_empty")];
+//            return;
+//        }
+//
+//        [self showSellComfirmView:qlcAddress qgasAsset:qgasAsset fromAddress:currentWalletM.address];
     }
 }
 
-- (void)showSellComfirmView:(NSString *)qlcAddress qgasAsset:(QLCTokenModel *)qgasAsset fromAddress:(NSString *)fromAddress {
-    QLCTransferToServerConfirmView *view = [QLCTransferToServerConfirmView getInstance];
-    [view configWithAddress:qlcAddress amount:_qgasMaxTF.text?:@""];
-    kWeakSelf(self);
-    view.confirmBlock = ^{
-        // 转账给平台
-        [weakself sendTransferToServer:qgasAsset fromAddress:fromAddress];
-    };
-    [view show];
-}
+//- (void)showSellComfirmView:(NSString *)qlcAddress qgasAsset:(QLCTokenModel *)qgasAsset fromAddress:(NSString *)fromAddress {
+//    QLCTransferToServerConfirmView *view = [QLCTransferToServerConfirmView getInstance];
+//    [view configWithAddress:qlcAddress amount:_qgasMaxTF.text?:@"" tokenName:qgasAsset.tokenName];
+//    kWeakSelf(self);
+//    view.confirmBlock = ^{
+//        // 转账给平台
+//        [weakself sendTransferToServer:qgasAsset fromAddress:fromAddress];
+//    };
+//    [view show];
+//}
 
 - (IBAction)addressWalletCloseAction:(id)sender {
     _addressWalletM = nil;
     _addressWalletBack.hidden = YES;
-    _addressTF.text = nil;
+    _receiveAddressTF.text = nil;
 }
 
 - (IBAction)sendQgasWalletCloseAction:(id)sender {
@@ -405,7 +473,7 @@
 
 
 #pragma mark - Transition
-- (void)jumpToUSDTAddress:(TradeOrderInfoModel *)model {
+- (void)jumpToPayAddress:(TradeOrderInfoModel *)model {
     PayReceiveAddressViewController *vc = [PayReceiveAddressViewController new];
 //    vc.inputAddress = model.usdtToAddress?:@"";
 //    vc.inputAmount = _usdtMaxTF.text;

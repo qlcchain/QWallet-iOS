@@ -10,6 +10,7 @@
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
 #import "SGQRCodeObtain.h"
+//#import "GlobalConstants.h"
 
 @interface NEOWalletAddressViewController ()
 

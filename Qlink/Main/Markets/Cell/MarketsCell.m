@@ -11,6 +11,7 @@
 #import "BinaTpcsModel.h"
 #import "WalletCommonModel.h"
 #import "NSString+RemoveZero.h"
+#import "GlobalConstants.h"
 
 @implementation MarketsCell
 

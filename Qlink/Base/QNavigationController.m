@@ -10,6 +10,7 @@
 #import "XYTransitionProtocol.h"
 #import "XYTransition.h"
 #import "ChooseWalletViewController.h"
+#import "UIColor+Random.h"
 
 @interface QNavigationController ()<UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 

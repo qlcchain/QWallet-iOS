@@ -9,6 +9,7 @@
 #import "InviteRankingCell.h"
 #import "InviteRankingModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalConstants.h"
 
 @implementation InviteRankingCell
 

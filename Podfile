@@ -68,13 +68,15 @@ target "Qlink" do
     pod 'SwiftTheme', '0.4.1'
     pod 'TYCyclePagerView'
     pod 'MJRefresh'
+    pod 'TMCache'
 
 #  shadowsock
     pod 'SwiftColor'
     pod 'AsyncSwift'
     pod 'Appirater'
     pod 'HandyJSON'
-#    pod 'NinaPagerView'
+    pod 'NinaPagerView'
+    pod 'dsBridge'
 
     # qlc_sign
 #    pod 'TrezorCryptoEd25519WithBlake2b'

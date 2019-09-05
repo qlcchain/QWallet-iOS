@@ -15,6 +15,7 @@ public class WorkUtil : NSObject {
     private static let THRESHOLD:UInt64 = 0xfffffe0000000000
     private static var stopWork = false
     private static var isTimeOut = false
+    private static var hasBackResult = false
     private static var startTime:Date?
     private static var endTime:Date?
     
@@ -98,6 +99,7 @@ public class WorkUtil : NSObject {
     
     @objc public static func generateWorkOfOperationRandom(hash:String ,handler:@escaping ((String,Bool) -> Void)) {
         isTimeOut = false
+        hasBackResult = false
         startTime = Date()
 //        WorkUtil.startTimer()
         var workResult = ""
@@ -108,11 +110,20 @@ public class WorkUtil : NSObject {
             let operation = BlockOperation(block: { [weak queue] in
                 workResult = WorkUtil.generateWorkOfSingleRandom(hash: hash)
                 if isTimeOut == true {
-                    handler(workResult,true)
+//                    print(Date(),"走timeout \(i)")
+                    queue?.cancelAllOperations()
+                    if hasBackResult == false {
+                        hasBackResult = true
+                        handler(workResult,true)
+                    }
                 }
                 if workResult.count > 0 {
+//                    print(Date(),"走cancel \(i)")
                     queue?.cancelAllOperations()
-                    handler(workResult,false)
+                    if hasBackResult == false {
+                        hasBackResult = true
+                        handler(workResult,false)
+                    }
                 }
             })
             queue.addOperation(operation)

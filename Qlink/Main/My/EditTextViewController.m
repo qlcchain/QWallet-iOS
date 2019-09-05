@@ -14,6 +14,8 @@
 #import "MD5Util.h"
 #import "RSAUtil.h"
 #import "NSDate+Category.h"
+#import "UIColor+Random.h"
+//#import "GlobalConstants.h"
 
 @interface EditTextViewController ()
 
@@ -195,7 +197,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token,@"nickname":nickname};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:user_change_nickname_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:user_change_nickname_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.nickname = nickname;
@@ -217,7 +219,7 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
     NSDictionary *params = @{@"account":account,@"email":email};
-    [RequestService requestWithUrl:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
@@ -241,7 +243,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token,@"email":email,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:user_change_email_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:user_change_email_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.email = email;
@@ -263,7 +265,7 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
     NSDictionary *params = @{@"account":account,@"phone":phone};
-    [RequestService requestWithUrl:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
@@ -287,7 +289,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token,@"phone":phone,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:user_change_phone_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:user_change_phone_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.phone = phone;

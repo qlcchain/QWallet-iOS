@@ -16,6 +16,8 @@
 #import "InviteRankingViewController.h"
 #import "GuangGaoView.h"
 #import "InviteFriendNowViewController.h"
+#import "UIColor+Random.h"
+//#import "GlobalConstants.h"
 
 @interface ShareFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -107,7 +109,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
-    [RequestService requestWithUrl:invite_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:invite_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             ShareFriendsModel *model = [ShareFriendsModel getObjectWithKeyValues:responseObject];
             weakself.myInfoM = model.myInfo;

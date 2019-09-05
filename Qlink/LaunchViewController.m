@@ -11,6 +11,8 @@
 #import "OLImage.h"
 #import "OLImageView.h"
 
+#import "GlobalConstants.h"
+
 @interface LaunchViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;

@@ -10,6 +10,7 @@
 #import "QLCWallet.h"
 #import "Qlink-Swift.h"
 #import "QLCAccountPendingModel.h"
+#import "GlobalConstants.h"
 
 @interface QLCWalletManage ()
 
@@ -69,6 +70,14 @@
 - (BOOL)switchWalletWithSeed:(NSString *)seed {
     _wallet = [QLCWallet switchWalletWithSeed:seed];
     return _wallet!=nil?YES:NO;
+}
+
++ (void)signAndWork:(NSDictionary *)dic publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey resultHandler:(void(^_Nonnull)(NSDictionary * _Nullable responseDic))resultHandler {
+    [QLCUtil signAndWorkWithDic:dic publicKey:publicKey privateKey:privateKey resultHandler:^(NSDictionary<NSString *,id> * _Nullable responseDic) {
+        if (resultHandler) {
+            resultHandler(responseDic);
+        }
+    }];
 }
 
 - (void)sendAssetWithTokenName:(NSString *)tokenName to:(NSString *)to amount:(NSUInteger)amount sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler {

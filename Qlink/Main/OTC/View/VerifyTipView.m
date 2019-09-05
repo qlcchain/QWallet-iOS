@@ -7,6 +7,7 @@
 //
 
 #import "VerifyTipView.h"
+#import "GlobalConstants.h"
 
 @interface VerifyTipView ()
 

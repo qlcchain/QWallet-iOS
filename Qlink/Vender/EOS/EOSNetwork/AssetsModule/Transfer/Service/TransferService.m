@@ -35,7 +35,7 @@
 #import "MJExtension.h"
 #import "EOS_AccountInfo.h"
 #import "EOSWalletInfo.h"
-
+#import "GlobalConstants.h"
 
 @interface TransferService()
 

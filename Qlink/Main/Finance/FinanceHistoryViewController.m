@@ -15,6 +15,7 @@
 #import "Qlink-Swift.h"
 #import "RefreshHelper.h"
 
+
 @interface FinanceHistoryViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -73,7 +74,7 @@
     NSString *size = @"20";
     NSDictionary *params = @{@"account":account,@"token":token,@"address":address,@"page":page,@"size":size};
 //    [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:history_record_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:history_record_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
 //        [kAppD.window hideToast];

@@ -346,7 +346,7 @@ public class Wallet {
     }
 
 //    public func sendAssetTransaction(network: Network, seedURL: String, asset: AssetId, amount: Double, toAddress: String, attributes: [TransactionAttritbute]? = nil, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
-    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, network: NeoNetwork, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
+    public func sendAssetTransaction(assetHash: String, asset: AssetId, amount: Double, toAddress: String, mainNet: Bool, remarkStr: String?, network: NeoNetwork, fee: Double = 0.0, completion: @escaping(String?, String?, Error?) -> Void) {
         
         var customAttributes: [TransactionAttritbute] = []
         let remarkInput = remarkStr ?? NEO_Transfer_Remark
@@ -358,12 +358,12 @@ public class Wallet {
         O3APIClient(network: network).getUTXO(for: self.address) { result in
             switch result {
             case .failure(let error):
-                completion(nil, error)
+                completion(nil, nil, error)
             case .success(let assets):
                 let payload = self.generateSendTransactionPayload(asset: asset, amount: amount, toAddress: toAddress, assets: assets, attributes: customAttributes, fee: fee)
                 let txid = self.unsignedPayloadToTransactionId(payload.0)
                 let txHex = payload.1.fullHexString
-                completion(txHex,nil)
+                completion(txid, txHex,nil)
 //                NeoClient(seed: seedURL).sendRawTransaction(with: payload.1) { (result) in
 //                    switch result {
 //                    case .failure(let error):
@@ -531,7 +531,7 @@ public class Wallet {
     }
     
     public func invokeContract(network: NeoNetwork, seedURL: String?,
-                               invokeRequest: dAppProtocol.InvokeRequest, remarkStr: String?, completion: @escaping(String?, Error?) -> Void) {
+                               invokeRequest: dAppProtocol.InvokeRequest, remarkStr: String?, completion: @escaping(String?, String?, Error?) -> Void) {
 
         var customAttributes: [TransactionAttritbute] = []
         let remarkInput = remarkStr ?? NEO_Transfer_Remark
@@ -555,7 +555,7 @@ public class Wallet {
             let payloadHex = payload.1 + invokeRequest.scriptHash.dataWithHexString().bytes
             let txHex = payloadHex.fullHexString
             print("txHex = \(txHex)")
-            completion(txHex,nil)
+            completion(txID,txHex,nil)
 //            NeoClient(seed: seedURL).sendRawTransaction(with: payload.1) { (result) in
 //                switch result {
 //                case .failure(let error):
@@ -572,14 +572,14 @@ public class Wallet {
             O3APIClient(network: network).getUTXO(for: self.address) { result in
                 switch result {
                 case .failure(let error):
-                    completion(nil, error)
+                    completion(nil, nil, error)
                 case .success(let assets):
                     let payload = self.generateGenericInvokeTransactionPayload(assets: assets, script: scriptBytes.fullHexString, attributes: customAttributes, invokeRequest: invokeRequest)
 //                    payload.1 += invokeRequest.scriptHash.dataWithHexString().bytes
                     let txID = payload.0
                     let payloadHex = payload.1 + invokeRequest.scriptHash.dataWithHexString().bytes
                     let txHex = payloadHex.fullHexString
-                    completion(txHex,nil)
+                    completion(txID,txHex,nil)
 //                    NeoClient(seed: seedURL).sendRawTransaction(with: payload.1) { (result) in
 //                        switch result {
 //                        case .failure(let error):
@@ -598,7 +598,7 @@ public class Wallet {
     }
     
 //    public func sendNep5Token(network: Network, seedURL: String, tokenContractHash: String, decimals: Int, amount: Double, toAddress: String, attributes: [TransactionAttritbute]? = nil, fee: Double = 0.0, completion: @escaping(String?, Error?) -> Void) {
-    public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, remarkStr: String?, decimals: Int, fee: Double = 0.0, network: NeoNetwork, completion: @escaping(String?, Error?) -> Void) {
+    public func sendNep5Token(tokenContractHash: String, amount: Double, toAddress: String, mainNet: Bool, attributes: [TransactionAttritbute]? = nil, remarkStr: String?, decimals: Int, fee: Double = 0.0, network: NeoNetwork, completion: @escaping(String?, String?, Error?) -> Void) {
         print("sendNep5Token action")
     
         let amountToSend = Int(amount * pow(10, Double(decimals)))
@@ -610,8 +610,8 @@ public class Wallet {
         let invokeRequest = dAppProtocol.InvokeRequest(operation: "transfer", scriptHash: tokenContractHash, assetIntentOverrides: nil,
                                                        attachedAssets: nil, triggerContractVerification: false, fee: String(fee),
                                                        args: args, network: network.rawValue)
-        invokeContract(network: network, seedURL: nil, invokeRequest: invokeRequest, remarkStr: remarkStr) { (hex, err) in
-            completion(hex,err)
+        invokeContract(network: network, seedURL: nil, invokeRequest: invokeRequest, remarkStr: remarkStr) { (txID ,txHex, err) in
+            completion(txID ,txHex,err)
         }
     }
 }

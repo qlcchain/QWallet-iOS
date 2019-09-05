@@ -10,6 +10,8 @@
 #import "InviteRankingCell.h"
 #import "InviteRankingModel.h"
 
+//#import "GlobalConstants.h"
+
 @interface InviteRankingViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -47,7 +49,7 @@
     NSString *size = @"20";
     NSDictionary *params = @{@"page":page,@"size":size};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:invite_rankings_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:invite_rankings_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [InviteRankingModel mj_objectArrayWithKeyValuesArray:responseObject[Server_Data]];

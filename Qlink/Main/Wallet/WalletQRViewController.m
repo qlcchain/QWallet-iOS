@@ -18,6 +18,9 @@
 #import "UIImage+Resize.h"
 #import "Qlink-Swift.h"
 //#import <NEOFramework/NEOFramework.h>
+#import "NEOWalletInfo.h"
+
+#import "GlobalConstants.h"
 
 @interface WalletQRViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -254,7 +257,7 @@
     /*
     [kAppD.window showHudInView:self.view hint:@"Loading.."];
     NSDictionary *params = @{@"key":privateKey};
-    [RequestService requestWithUrl:exportKey_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:exportKey_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dataDic = [responseObject objectForKey:Server_Data];

@@ -17,6 +17,9 @@
 #import "VerificationViewController.h"
 #import "UserUtil.h"
 
+
+//#import "GlobalConstants.h"
+
 @interface PersonalInfoViewController () <UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -218,7 +221,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:user_upload_headview_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:user_upload_headview_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName = [NSString stringWithFormat:@"%ld",[NSDate getTimestampFromDate:[NSDate date]]];
         NSData *data = UIImagePNGRepresentation(img);
         if (!data || [data isKindOfClass:[NSNull class]]) { // 不为png则转成jpg
