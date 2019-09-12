@@ -26,6 +26,7 @@
                 <outlet property="stakeToWalletIcon" destination="uzQ-YM-TxJ" id="iCN-Bc-rbt"/>
                 <outlet property="stakeToWalletNameLab" destination="IxB-aF-35y" id="Ora-QN-B4w"/>
                 <outlet property="stakingPeriodTF" destination="k6L-CQ-fyb" id="ql7-3i-KOg"/>
+                <outlet property="stakingPeriodTimeLab" destination="G9D-yC-81C" id="ZiW-t1-12A"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,7 +35,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="761"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ype-mq-GpJ">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ype-mq-GpJ">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="761"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMs-tc-H3E">
@@ -78,7 +79,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="QLC Chain Wallet Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VQM-dI-m7J">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NEO Wallet Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VQM-dI-m7J">
                                                     <rect key="frame" x="16" y="38.333333333333343" width="354" height="54.666666666666657"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>

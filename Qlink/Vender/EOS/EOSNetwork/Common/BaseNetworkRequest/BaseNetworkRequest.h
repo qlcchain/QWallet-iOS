@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
+#import <AFNetworking/AFNetworking.h>
 
 typedef void(^RequestSuccessBlock)(id DAO , id data);
 typedef void(^RequestFailedBlock)(id DAO, NSError *error);

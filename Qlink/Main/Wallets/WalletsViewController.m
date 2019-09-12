@@ -50,7 +50,8 @@
 #import "UserModel.h"
 #import "RefreshHelper.h"
 #import "QLCWalletInfo.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
+#import <QLCFramework/QLCFramework-Swift.h>
 #import "QLCAddressInfoModel.h"
 #import "QLCWalletDetailViewController.h"
 #import "QLCTransactionRecordViewController.h"
@@ -78,6 +79,7 @@
 @property (weak, nonatomic) IBOutlet UIView *walletBack;
 
 // Staking
+@property (weak, nonatomic) IBOutlet UILabel *myStakingsLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stakingHeight; // 53
 
 // Gas
@@ -655,7 +657,8 @@
 - (void)startReceiveQLC {
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeQLC) {
-        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address]; // QLC钱包接收sendblock
+        BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address isMainNetwork:isMainNetwork]; // QLC钱包接收sendblock
     }
 }
 
@@ -833,6 +836,10 @@
     _titleLab.text = kLang(@"wallet");
 }
 
+- (void)refreshLanguage {
+    _myStakingsLab.text = kLang(@"my_stakings");
+}
+
 #pragma mark - Request
 - (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
     // 检查地址有效性
@@ -960,7 +967,8 @@
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
 //    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
-    [LedgerRpc accountInfoWithAddress:address successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    [QLCLedgerRpc accountInfoWithAddress:address isMainNetwork:isMainNetwork successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
         [weakself endRefresh];
         if (showLoad) {
             [kAppD.window hideToast];
@@ -994,7 +1002,8 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [LedgerRpc tokensWithSuccessHandler:^(id _Nullable responseObject) {
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }
@@ -1611,6 +1620,8 @@
 - (void)walletChange:(NSNotification *)noti {
     [self neoGasStatusInit]; // neo gas 状态初始化
     [self refreshTokenList]; // 请求token列表
+    
+    [self startReceiveQLC];
 //    kWeakSelf(self);
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
 //        [weakself requestGetTokenBalance]; // 刷新winqgas
@@ -1661,6 +1672,7 @@
 
 - (void)languageChangeNoti:(NSNotification *)noti {
     [self refreshTitle];
+    [self refreshLanguage];
     [_refreshScroll.mj_header beginRefreshing];
 }
 

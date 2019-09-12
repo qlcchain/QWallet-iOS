@@ -12,11 +12,11 @@
 #import <WebKit/WebKit.h>
 #import "WalletCommonModel.h"
 #import "NEOWalletInfo.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "GlobalConstants.h"
 #import "AFJSONRPCClient.h"
 #import "ConfigUtil.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "NSString+RandomStr.h"
 
 static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e513fd299d2cb844318b1b8ad5";
@@ -31,14 +31,28 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 
 @implementation QContractView
 
-+ (instancetype)shareInstance {
-    static id shareObject = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        shareObject = [[self alloc] init];
-        [shareObject config];
-    });
-    return shareObject;
+//+ (instancetype)shareInstance {
+//    static id shareObject = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        shareObject = [[self alloc] init];
+//        [shareObject config];
+//    });
+//    return shareObject;
+//}
+
++ (QContractView *)addQContractView {
+    QContractView *contractV = [QContractView new];
+    contractV.frame = CGRectZero;
+    [contractV config];
+    [kAppD.window addSubview:contractV];
+    return contractV;
+}
+
++ (void)removeQContractView:(QContractView *)contractV {
+    if (contractV) {
+        [contractV removeFromSuperview];
+    }
 }
 
 #pragma mark - Operation
@@ -147,7 +161,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     
     kWeakSelf(self);
     DDLogDebug(@"benefit_getnep5transferbytxid urlStr = %@",urlStr);
-    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil requestManagerType: QRequestManagerTypeHTTP successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         DDLogDebug(@"benefit_getnep5transferbytxid responseObject=%@",responseObject);
         NSDictionary *responseDic = [responseObject mj_JSONObject];
         NSDictionary *resultDic = responseDic[@"result"];
@@ -301,7 +315,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     
     kWeakSelf(self);
     DDLogDebug(@"mintage_getnep5transferbytxid urlStr = %@",urlStr);
-    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil requestManagerType: QRequestManagerTypeHTTP successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         DDLogDebug(@"mintage_getnep5transferbytxid responseObject=%@",responseObject);
         NSDictionary *responseDic = [responseObject mj_JSONObject];
         NSDictionary *resultDic = responseDic[@"result"];

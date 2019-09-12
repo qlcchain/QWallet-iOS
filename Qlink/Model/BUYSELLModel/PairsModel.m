@@ -7,7 +7,7 @@
 //
 
 #import "PairsModel.h"
-#import <TMCache.h>
+#import <TMCache/TMCache.h>
 #import "GlobalConstants.h"
 
 @implementation PairsModel

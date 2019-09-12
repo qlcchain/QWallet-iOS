@@ -18,7 +18,7 @@
 #import "ETHWalletInfo.h"
 #import "EOSImportViewController.h"
 #import "EOSRegisterAccountViewController.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "QLCWalletInfo.h"
 #import "QLCImportWalletViewController.h"
 #import "QLCCreateWalletViewController.h"

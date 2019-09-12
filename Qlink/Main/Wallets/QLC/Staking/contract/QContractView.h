@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QContractView : UIView
 
-+ (instancetype)shareInstance;
+//+ (instancetype)shareInstance;
++ (QContractView *)addQContractView;
++ (void)removeQContractView:(QContractView *)contractV;
+- (void)config;
+
 #pragma mark - Benefit Pledge
 - (void)benefit_createMultiSig:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(void (^)(NSString *result, BOOL success))resultHandler;
 #pragma mark - Benefit Pledge pledgestart状态调用
@@ -24,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Mintag Withdraw
 - (void)nep5_mintageWithdraw:(NSString *)lockTxId tokenId:(NSString *)tokenId resultHandler:(void (^)(NSString *result, BOOL success))resultHandler;
 
-//- (void)config;
+
 //- (void)nep5_prePareBenefitPledge:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount multiSigAddress:(NSString *)multiSigAddress neo_publicKey:(NSString *)neo_publicKey lockTxId:(NSString *)lockTxId qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(void (^)(NSString *result, BOOL success))resultHandle;
 //- (void)nep5_benefitPledge:(NSString *)lockTxId qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(void (^)(NSString *result, BOOL success))resultHandler;
 

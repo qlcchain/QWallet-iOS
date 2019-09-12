@@ -35,10 +35,14 @@
 #pragma mark - Operation
 - (void)setupNinaPage {
     VotingMiningNodeViewController *vc1 = [VotingMiningNodeViewController new];
-    ConfidantViewController *vc2 = [ConfidantViewController new];
+//    ConfidantViewController *vc2 = [ConfidantViewController new];
     TokenMintageViewController *vc3 = [TokenMintageViewController new];
+//    NSArray *titles = @[kLang(@"voting_mining_node"), @"Confidant", kLang(@"token_mintage")];
+    NSArray *titles = @[kLang(@"voting_mining_node"), kLang(@"token_mintage")];
+//    NSArray *objs = @[vc1, vc2, vc3];
+    NSArray *objs = @[vc1, vc3];
     
-    NinaPagerView *_ninaPageView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) WithTitles:@[@"Voting/Mining Node", @"Confidant", @"Token Mintage"] WithObjects:@[vc1, vc2, vc3]];
+    NinaPagerView *_ninaPageView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) WithTitles:titles WithObjects:objs];
     _ninaPageView.unSelectTitleColor = UIColorFromRGB(0xB3B3B3);
     _ninaPageView.selectTitleColor = MAIN_BLUE_COLOR;
     _ninaPageView.titleFont = 14;

@@ -85,11 +85,9 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 }
 
 - (void)refreshAmountView {
-    if (_currentPage == PledgeInfo_PageFirst) {
-        _totalStakingVolume = @(0);
-        _stakingAmount = @(0);
-        _earnings = @(0);
-    }
+    _totalStakingVolume = @(0);
+    _stakingAmount = @(0);
+    _earnings = @(0);
     kWeakSelf(self);
     [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PledgeInfoByBeneficialModel *model = obj;

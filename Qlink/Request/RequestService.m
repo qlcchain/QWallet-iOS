@@ -233,10 +233,10 @@
 + (NSURLSessionDataTask *)testRequestWithBaseURLStr8:(NSString *)URLString
                                              params:(id)params
                                          httpMethod:(HttpMethod)httpMethod
-                                           userInfo:(NSDictionary*)userInfo
+                                            userInfo:(NSDictionary*)userInfo requestManagerType:(QRequestManagerType)requestManagerType
                                        successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
                                         failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
-    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 testRequestWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:userInfo successBlock:successReqBlock failedBlock:failedReqBlock];
+    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 testRequestWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:userInfo requestManagerType:requestManagerType successBlock:successReqBlock failedBlock:failedReqBlock];
     return dataTask;
 }
 

@@ -10,7 +10,7 @@
 #import "QLCWalletInfo.h"
 #import "QlinkTabbarViewController.h"
 #import "SuccessTipView.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 //#import "GlobalConstants.h"
 
 @interface QLCBackupDetailViewController () {

@@ -1,0 +1,11 @@
+framework module QLCFramework {
+  umbrella header "QLCFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module QLCFramework.Swift {
+    header "QLCFramework-Swift.h"
+    requires objc
+}

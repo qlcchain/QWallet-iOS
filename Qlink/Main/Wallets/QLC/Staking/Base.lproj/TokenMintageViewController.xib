@@ -26,6 +26,7 @@
                 <outlet property="stakeToWalletIcon" destination="fNp-gy-tfA" id="9sV-mO-UPK"/>
                 <outlet property="stakeToWalletNameLab" destination="uHr-1r-gyF" id="iQM-vh-DMC"/>
                 <outlet property="stakingPeriodTF" destination="KMo-aE-cGy" id="r6J-di-Jw7"/>
+                <outlet property="stakingPeriodTimeLab" destination="e8y-5l-rx0" id="Jkk-6r-OWe"/>
                 <outlet property="tokenAmountTF" destination="z4I-rj-rEP" id="l8U-TS-eFE"/>
                 <outlet property="tokenNameTF" destination="xcB-Iv-kWM" id="TlH-zp-SlP"/>
                 <outlet property="tokenSupplyTF" destination="hIB-Vr-gjl" id="iMQ-t9-A3a"/>
@@ -38,7 +39,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="1076"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zke-bI-6e8">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zke-bI-6e8">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="1076"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBn-Bv-KDL">
@@ -100,7 +101,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="QLC Chain Wallet Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2vW-Ja-NA2">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NEO Wallet Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2vW-Ja-NA2">
                                                     <rect key="frame" x="16" y="38.333333333333343" width="354" height="54.666666666666657"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -373,7 +374,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="From 1 QLC" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSA-Hm-ozP">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="500000" placeholder="From 1 QLC" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSA-Hm-ozP">
                                                     <rect key="frame" x="16" y="0.0" width="350.33333333333331" height="48"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -453,7 +454,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="From 10" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMo-aE-cGy">
+                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="180" placeholder="From 10" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMo-aE-cGy">
                                                     <rect key="frame" x="16" y="0.0" width="346" height="48"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -630,8 +631,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvh-m8-cgs">
                                     <rect key="frame" x="0.0" y="887.33333333333337" width="414" height="72"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3w4-cv-hiD">
-                                            <rect key="frame" x="15.999999999999993" y="10.999999999999998" width="104.33333333333331" height="19.333333333333329"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token Decimal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3w4-cv-hiD">
+                                            <rect key="frame" x="16" y="10.999999999999998" width="106" height="19.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>

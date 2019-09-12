@@ -14,6 +14,7 @@
 #import "AFJSONRPCClient.h"
 #import "ConfigUtil.h"
 #import "NSString+RandomStr.h"
+#import "RevokingProcessView.h"
 
 @interface StakingDetailViewController ()
 
@@ -31,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *stakeToLab;
 @property (weak, nonatomic) IBOutlet UILabel *transactionLab;
 
+@property (nonatomic, strong) RevokingProcessView *revokingProcessV;
+@property (nonatomic, strong) QContractView *contractV;
 
 @end
 
@@ -50,41 +53,45 @@
     NSString *typeStr = @"";
     if ([_inputPledgeM.pType isEqualToString:@"vote"]) {
         iconImg = [UIImage imageNamed:@"icon_node"];
-        title = @"Voting/Mining Node";
-        typeStr = [NSString stringWithFormat:@"For %@",title];
+        title = kLang(@"voting_mining_node");
+        typeStr = [NSString stringWithFormat:@"%@ %@",kLang(@"for"),title];
     }
     NSString *stateStr = @"";
     BOOL stateArrowHidden = NO;
     if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeStart]) {
-        stateStr = @"Not succeed, continue to invoke";
+        stateStr = kLang(@"not_succeed_continue_to_invoke");
         stateArrowHidden = NO;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
+        stateStr = _inputPledgeM.state;
         stateArrowHidden = YES;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
-        stateStr = _inputPledgeM.state;
-        stateArrowHidden = NO;
+        stateStr = kLang(@"staking_in_progress");
+        stateArrowHidden = YES;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
         stateStr = _inputPledgeM.state;
         stateArrowHidden = NO;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawProcess]) {
+        stateStr = _inputPledgeM.state;
         stateArrowHidden = YES;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawDone]) {
-        stateStr = @"Withdraw Complete";
+        stateStr = kLang(@"withdraw_complete");
         stateArrowHidden = YES;
     }
     _icon.image = iconImg;
     _titleLab.text = title;
     _stakingAmountLab.text = [NSString stringWithFormat:@"%@",@([_inputPledgeM.amount doubleValue]/QLC_UnitNum)];
-    _votingEarningsLab.text = @"--";
+    _votingEarningsLab.text = [NSString stringWithFormat:@"+%@",@([_inputPledgeM.qgas doubleValue]/QLC_UnitNum)];
     _miningEarningsLab.text = @"--";
     _stateLab.text = stateStr;
     _stateArrow.hidden = stateArrowHidden;
-    _amountLab.text = [NSString stringWithFormat:@"%@",@([_inputPledgeM.qgas doubleValue]/QLC_UnitNum)];
-    if (_inputPledgeM.withdrawTime) {
-        _revokeOnLab.text = [NSDate getTimeWithTimestamp:_inputPledgeM.withdrawTime format:@"HH:mm:ss yyyy-MM-dd" isMil:NO];
+    _amountLab.text = [NSString stringWithFormat:@"%@",@([_inputPledgeM.amount doubleValue]/QLC_UnitNum)];
+    NSString *withdrawTimeStr = @"--";
+    if (![_inputPledgeM.withdrawTime isEmptyString] && [_inputPledgeM.withdrawTime integerValue] != 0) {
+        withdrawTimeStr = [NSDate getTimeWithTimestamp:_inputPledgeM.withdrawTime format:@"HH:mm:ss yyyy-MM-dd" isMil:NO];
     }
+    _revokeOnLab.text = withdrawTimeStr;
     _stakingTypeLab.text = typeStr;
-    _stakeFromLab.text = _inputPledgeM.pledge;
+    _stakeFromLab.text = _inputPledgeM.multiSigAddress;
     _stakeToLab.text = _inputPledgeM.beneficial;
     _transactionLab.text = _inputPledgeM.nep5TxId;
 }
@@ -100,9 +107,11 @@
     NSString *qlcAmount = _inputPledgeM.amount;
     NSString *lockTxId = _inputPledgeM.nep5TxId;
     kWeakSelf(self);
+    _contractV = [QContractView addQContractView];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
-    [[QContractView shareInstance] nep5_benefitWithdraw:lockTxId beneficial:beneficial amount:qlcAmount qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+    [_contractV nep5_benefitWithdraw:lockTxId beneficial:beneficial amount:qlcAmount qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
         [kAppD.window hideToast];
+        [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself ledger_pledgeInfoByTransactionID];
@@ -121,9 +130,13 @@
     NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:qlcAddress];
     NSString *lockTxId = _inputPledgeM.nep5TxId;
     kWeakSelf(self);
-    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
-    [[QContractView shareInstance] benefit_getnep5transferbytxid:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
-        [kAppD.window hideToast];
+//    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
+    _contractV = [QContractView addQContractView];
+    [self showRevokingProcessView];
+    [_contractV benefit_getnep5transferbytxid:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+//        [kAppD.window hideToast];
+        [weakself hideRevokingProcessView];
+        [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself ledger_pledgeInfoByTransactionID];
@@ -140,9 +153,11 @@
     NSString *tokenId = @"";
     NSString *lockTxId = _inputPledgeM.nep5TxId;
     kWeakSelf(self);
+    _contractV = [QContractView addQContractView];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
-    [[QContractView shareInstance] nep5_mintageWithdraw:lockTxId tokenId:tokenId resultHandler:^(NSString * _Nonnull result, BOOL success) {
+    [_contractV nep5_mintageWithdraw:lockTxId tokenId:tokenId resultHandler:^(NSString * _Nonnull result, BOOL success) {
         [kAppD.window hideToast];
+        [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself ledger_pledgeInfoByTransactionID];
@@ -150,6 +165,18 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     }];
+}
+
+- (void)showRevokingProcessView {
+    _revokingProcessV = [RevokingProcessView getInstance];
+    [_revokingProcessV show];
+}
+
+- (void)hideRevokingProcessView {
+    if (_revokingProcessV) {
+        [_revokingProcessV hide];
+        _revokingProcessV = nil;
+    }
 }
 
 #pragma mark - Request
@@ -203,5 +230,22 @@
     }
 }
 
+- (IBAction)stakeFromCopyAction:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = _stakeFromLab.text?:@"";
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
+}
+
+- (IBAction)stakeToCopyAction:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = _stakeToLab.text?:@"";
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
+}
+
+- (IBAction)trasactionCopyAction:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = _transactionLab.text?:@"";
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
+}
 
 @end

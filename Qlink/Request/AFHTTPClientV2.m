@@ -62,15 +62,15 @@
 + (AFHTTPSessionManager *) getJSONManager {
     if (![AFHTTPClientV2 shareInstance].jsonManager) {
         [AFHTTPClientV2 shareInstance].jsonManager = [AFHTTPSessionManager manager];
-        [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
         
         [AFHTTPClientV2 shareInstance].jsonManager.requestSerializer = [AFJSONRequestSerializer serializer];//[AFHTTPRequestSerializer serializer];
         [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];//[AFHTTPResponseSerializer serializer];
     //    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
         [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setTimeoutInterval:TimeOut_Request];
     //    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platform"];
-        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    //    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
     
     /**** SSL Pinning ****/
 //    if ([[RequestHelper getInstance].prefix_Url containsString:@"https"]) { //
@@ -162,25 +162,54 @@
     return dataTask;
 }
 
-+ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
-                                         params:(id)params
-                                     httpMethod:(HttpMethod)httpMethod
-                                       userInfo:(NSDictionary*)userInfo
-                                   successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
-                                    failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
-{
++ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString params:(id)params httpMethod:(HttpMethod)httpMethod userInfo:(NSDictionary*)userInfo requestManagerType:(QRequestManagerType)requestManagerType successBlock:(HTTPRequestV2SuccessBlock)successReqBlock  failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     NSURLSessionDataTask *dataTask;
     
+    AFHTTPSessionManager *manager = nil;
+    if (requestManagerType == QRequestManagerTypeHTTP) {
+        manager = [self getHTTPManager];
+    } else if (requestManagerType == QRequestManagerTypeJSON) {
+        manager = [self getJSONManager];
+    }
     if (httpMethod == HttpMethodGet) {
         
         DDLogDebug(@"url = %@ param = %@",URLString,params);
         
-        dataTask = [[self getHTTPManager] GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        dataTask = [manager GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
             NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             if (successReqBlock) {
                 successReqBlock(dataTask, jsonStr);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self printHTTPLogWithMethod:URLString Response:nil Error:error];
+            
+            if (failedReqBlock) {
+                failedReqBlock(dataTask, error);
+            }
+        }];
+        
+    } else if (httpMethod == HttpMethodPost) {
+        
+        DDLogDebug(@"url = %@ param = %@",URLString,params);
+        
+        dataTask = [manager POST:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                if (successReqBlock) {
+                    successReqBlock(dataTask, jsonStr);
+                }
+            } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                if (successReqBlock) {
+                    successReqBlock(dataTask, responseObject);
+                }
+            } else {
+                if (successReqBlock) {
+                    successReqBlock(dataTask, responseObject);
+                }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self printHTTPLogWithMethod:URLString Response:nil Error:error];

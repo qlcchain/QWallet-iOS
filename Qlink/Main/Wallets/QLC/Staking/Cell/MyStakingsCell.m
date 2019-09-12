@@ -8,7 +8,7 @@
 
 #import "MyStakingsCell.h"
 #import "PledgeInfoByBeneficialModel.h"
-#import "QConstants.h"
+#import "GlobalConstants.h"
 
 @implementation MyStakingsCell
 
@@ -28,11 +28,25 @@
     NSString *name = @"";
     if ([model.pType isEqualToString:@"vote"]) {
         iconImg = [UIImage imageNamed:@"icon_node"];
-        name = @"Voting/Mining Node";
+        name = kLang(@"voting_mining_node");
     }
     _icon.image = iconImg;
     _nameLab.text = name;
-    _stateLab.text = model.state;
+    NSString *stateStr = @"";
+    if ([model.state isEqualToString:PledgeState_PledgeStart]) {
+        stateStr = kLang(@"not_succeed");
+    } else if ([model.state isEqualToString:PledgeState_PledgeProcess]) {
+        stateStr = model.state;
+    } else if ([model.state isEqualToString:PledgeState_PledgeDone]) {
+        stateStr = kLang(@"staking_in_progress");
+    } else if ([model.state isEqualToString:PledgeState_WithdrawStart]) {
+        stateStr = model.state;
+    } else if ([model.state isEqualToString:PledgeState_WithdrawProcess]) {
+        stateStr = model.state;
+    } else if ([model.state isEqualToString:PledgeState_WithdrawDone]) {
+        stateStr = model.state;
+    }
+    _stateLab.text = stateStr;
     _stakingAmountLab.text = [NSString stringWithFormat:@"%@",@([model.amount doubleValue]/QLC_UnitNum)];
     _earningsLab.text = [NSString stringWithFormat:@"%@",@([model.qgas doubleValue]/QLC_UnitNum)];
 }

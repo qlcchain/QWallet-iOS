@@ -9,7 +9,7 @@
 #import "BuySellDetailViewController.h"
 #import "EntrustOrderListModel.h"
 #import "EntrustOrderInfoModel.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "NSDate+Category.h"
 #import "UserModel.h"
 #import "RSAUtil.h"
@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLab;
 @property (weak, nonatomic) IBOutlet UILabel *volumeSettingLab;
 @property (weak, nonatomic) IBOutlet UILabel *accountPayOrReceiveLab;
+@property (weak, nonatomic) IBOutlet UILabel *toPayOrReceiveLab;
 @property (weak, nonatomic) IBOutlet UITextField *usdtMaxTF;
 @property (weak, nonatomic) IBOutlet UITextField *qgasMaxTF;
 @property (weak, nonatomic) IBOutlet UILabel *receiveAddressTipLab;
@@ -100,7 +101,7 @@
     
     _unitPriceTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"unit_price"),_inputPayToken];
     _volumeAmountTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"volume_amount"),_inputTradeToken];
-    _volumeSettingsTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"volume_settings"),_inputTradeToken];
+    _volumeSettingsTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"limits"),_inputTradeToken];
     _maxPayUnitTipLab.text = _inputPayToken;
     _maxTradeUnitTipLab.text = _inputTradeToken;
     _receiveAddressTipLab.text = kLang(@"send_to");
@@ -108,14 +109,16 @@
     _sendAddressTipLab.text = kLang(@"receive_from");
     _qgasSendTF.placeholder = kLang(@"wallet_address");
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) { // 我是买家
-        _accountPayOrReceiveLab.text = kLang(@"account_payable");
+        _accountPayOrReceiveLab.text = kLang(@"buying_amount");
+        _toPayOrReceiveLab.text = kLang(@"to_pay");
         _titleLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"buy"),_inputTradeToken];
         _usdtLab.textColor = MAIN_BLUE_COLOR;
         
         _createOneNowHeight.constant = 30;
         _qgasSendBackHeight.constant = 0;
     } else { // 我是卖家
-        _accountPayOrReceiveLab.text = kLang(@"account_receivable");
+        _accountPayOrReceiveLab.text = kLang(@"selling_amount");
+        _toPayOrReceiveLab.text = kLang(@"to_receive");
         _titleLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"sell"),_inputEntrustOrderListM.tradeToken];
         _usdtLab.textColor = UIColorFromRGB(0xFF3669);
         

@@ -8,7 +8,7 @@
 
 #import "EOSResourceService.h"
 #import <eosFramework/AppConstant.h>
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation EOSResourceService
 

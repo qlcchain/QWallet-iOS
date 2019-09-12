@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKd-T1-VQu">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKd-T1-VQu">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoB-Kg-oGj">
@@ -145,14 +145,24 @@
                                                     <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUr-ur-C18">
+                                                    <rect key="frame" x="269.66666666666669" y="4" width="128.33333333333331" height="40"/>
+                                                    <connections>
+                                                        <action selector="sendSecurityCodeAction:" destination="-1" eventType="touchUpInside" id="jiA-uT-nmK"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="SUF-Yt-P9t" firstAttribute="leading" secondItem="5n2-ZB-q9Y" secondAttribute="leading" constant="16" id="5TQ-k4-xHB"/>
                                                 <constraint firstAttribute="trailing" secondItem="W8E-Cx-Qc1" secondAttribute="trailing" constant="16" id="65j-2v-dib"/>
+                                                <constraint firstAttribute="bottom" secondItem="jUr-ur-C18" secondAttribute="bottom" constant="4" id="7wV-NS-6l0"/>
                                                 <constraint firstItem="SUF-Yt-P9t" firstAttribute="centerY" secondItem="5n2-ZB-q9Y" secondAttribute="centerY" id="O0a-SC-pC6"/>
+                                                <constraint firstItem="jUr-ur-C18" firstAttribute="top" secondItem="5n2-ZB-q9Y" secondAttribute="top" constant="4" id="QrA-17-rEL"/>
                                                 <constraint firstAttribute="height" constant="48" id="eXE-Ao-kTx"/>
+                                                <constraint firstItem="jUr-ur-C18" firstAttribute="leading" secondItem="W8E-Cx-Qc1" secondAttribute="leading" id="iST-j4-sIM"/>
                                                 <constraint firstItem="W8E-Cx-Qc1" firstAttribute="centerY" secondItem="5n2-ZB-q9Y" secondAttribute="centerY" id="qhZ-tg-9ql"/>
+                                                <constraint firstItem="jUr-ur-C18" firstAttribute="trailing" secondItem="W8E-Cx-Qc1" secondAttribute="trailing" id="xdg-sT-hNL"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHl-f1-vdz">

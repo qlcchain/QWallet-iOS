@@ -14,6 +14,7 @@
 #import <ETHFramework/ETHFramework.h>
 #import "UserModel.h"
 #import "GlobalConstants.h"
+#import <QLCFramework/QLCFramework-Swift.h>
 
 @implementation ReportUtil
 

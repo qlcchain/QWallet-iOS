@@ -8,7 +8,7 @@
 
 #import "MyOrderListTradeCell.h"
 #import "TradeOrderListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "UserModel.h"
 #import "OrderStatusUtil.h"
 

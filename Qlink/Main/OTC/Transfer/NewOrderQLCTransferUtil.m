@@ -13,7 +13,7 @@
 #import "WalletsViewController.h"
 #import "QlinkTabbarViewController.h"
 #import "QLCTransferToServerConfirmView.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 
 
 @implementation NewOrderQLCTransferUtil
@@ -68,7 +68,8 @@
     NSString *message = nil;
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
 //    kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
         [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         

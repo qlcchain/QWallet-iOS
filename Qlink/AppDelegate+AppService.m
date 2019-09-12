@@ -28,7 +28,7 @@
 //#import "MiPushSDK.h"
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "WalletCommonModel.h"
 //#import "LocationTracker.h"
 //#import "LoginSetPWViewController.h"

@@ -1,0 +1,2 @@
+1、QLCFramework生成成功之后，需要检查QLCFramework/QLCFramework-Swift.h文件中支持的指令集，一般会缺少arm64\arm7s的指令集，需要合并之前生成的真机QLCFramework中的文件，这种问题可能是运行的Run Script缺少完美合并的方法，暂时未找到更好的Run Script。
+2、因为生成的是动态库，所以在Embedded Binaries中导入。

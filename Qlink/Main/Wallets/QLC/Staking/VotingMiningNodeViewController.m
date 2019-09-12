@@ -15,6 +15,8 @@
 #import "QLCWalletInfo.h"
 #import "NEOAddressInfoModel.h"
 #import "Qlink-Swift.h"
+#import "NSDate+Category.h"
+#import "StakingProcessView.h"
 
 @interface VotingMiningNodeViewController ()
 
@@ -35,11 +37,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *balanceLab;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextField *stakingPeriodTF;
+@property (weak, nonatomic) IBOutlet UILabel *stakingPeriodTimeLab;
 @property (weak, nonatomic) IBOutlet UIButton *invokeBtn;
 
 @property (nonatomic, strong) WalletCommonModel *stakeFromWalletM;
 @property (nonatomic, strong) WalletCommonModel *stakeToWalletM;
 @property (nonatomic, strong) NEOAssetModel *currentNEOAsset;
+@property (nonatomic, strong) StakingProcessView *stakingProcessV;
+@property (nonatomic, strong) QContractView *contractV;
 
 @end
 
@@ -64,12 +69,23 @@
     _stakeFromWalletBack.hidden = YES;
     _stakeToWalletBack.hidden = YES;
     
+    _stakingPeriodTimeLab.text = [NSString stringWithFormat:@"%@%@, %@",kLang(@"staking_will_end_on"),@"",kLang(@"the_minimum_period_is_10_days")];
     [_amountTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     [_stakingPeriodTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
 }
 
-- (void)changedTextField:(id)textField {
+- (void)changedTextField:(UITextField *)textField {
     [self refreshInvokeBtnState];
+    
+    if (textField == _stakingPeriodTF) {
+        if ([_stakingPeriodTF.text integerValue]) {
+            NSString *timeStr = [NSDate getTimeWithFromDate:[NSDate date] addDay:[_stakingPeriodTF.text integerValue]];
+            if (![timeStr isEmptyString]) {
+                NSString *periodTime = [timeStr substringToIndex:10];
+                _stakingPeriodTimeLab.text = [NSString stringWithFormat:@"%@%@, %@",kLang(@"staking_will_end_on"),periodTime,kLang(@"the_minimum_period_is_10_days")];
+            }
+        }
+    }
 }
 
 - (void)refreshInvokeBtnState {
@@ -88,6 +104,18 @@
         balanceStr = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_currentNEOAsset getTokenNum],_currentNEOAsset.asset_symbol];
     }
     _balanceLab.text = balanceStr;
+}
+
+- (void)showStakingProcessView {
+    _stakingProcessV = [StakingProcessView getInstance];
+    [_stakingProcessV show];
+}
+
+- (void)hideStakingProcessView {
+    if (_stakingProcessV) {
+        [_stakingProcessV hide];
+        _stakingProcessV = nil;
+    }
 }
 
 #pragma mark - Request
@@ -175,20 +203,21 @@
 }
 
 - (IBAction)invokeAction:(id)sender {
+    [self.view endEditing:YES];
     if (!_stakeFromWalletM) {
-        [kAppD.window makeToastDisappearWithText:@"Stake From is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"stake_from_is_empty")];
         return;
     }
     if (!_stakeToWalletM) {
-        [kAppD.window makeToastDisappearWithText:@"Stake To is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"stake_to_is_empty")];
         return;
     }
     if ([_amountTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] < 1) {
-        [kAppD.window makeToastDisappearWithText:@"Amount is at least 1 QLC"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_at_least_1_qlc")];
         return;
     }
     if ([_amountTF.text doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
@@ -196,11 +225,11 @@
         return;
     }
     if ([_stakingPeriodTF.text isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:@"Staking Period is empty"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"staking_period_is_empty")];
         return;
     }
     if ([_stakingPeriodTF.text doubleValue] < 10) {
-        [kAppD.window makeToastDisappearWithText:@"Staking Period is at least 10 days"];
+        [kAppD.window makeToastDisappearWithText:kLang(@"staking_period_is_at_least_10_days")];
         return;
     }
     
@@ -214,9 +243,13 @@
     NSString *qlcAmount = _amountTF.text;
     NSString *lockTime = _stakingPeriodTF.text;
     kWeakSelf(self);
-    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
-    [[QContractView shareInstance] benefit_createMultiSig:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
-        [kAppD.window hideToast];
+//    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
+    _contractV = [QContractView addQContractView];
+    [self showStakingProcessView];
+    [_contractV benefit_createMultiSig:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+//        [kAppD.window hideToast];
+        [weakself hideStakingProcessView];
+        [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself.navigationController popViewControllerAnimated:YES];

@@ -8,7 +8,7 @@
 
 #import "QLCWalletInfo.h"
 #import "Qlink-Swift.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "GlobalConstants.h"
 
 @implementation QLCWalletInfo

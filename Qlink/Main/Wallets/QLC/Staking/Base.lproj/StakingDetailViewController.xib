@@ -36,7 +36,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3c7-Lb-6vm">
                     <rect key="frame" x="0.0" y="20" width="414" height="730"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ij-Eh-TLz">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ij-Eh-TLz">
                             <rect key="frame" x="0.0" y="44" width="414" height="686"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gK-iL-4yH">
@@ -298,6 +298,9 @@
                                                         <constraint firstAttribute="width" constant="40" id="1AC-rK-p7T"/>
                                                     </constraints>
                                                     <state key="normal" image="icon_address_copy"/>
+                                                    <connections>
+                                                        <action selector="stakeFromCopyAction:" destination="-1" eventType="touchUpInside" id="Dzz-Z5-0LB"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -316,8 +319,8 @@
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pzu-pj-ORG">
                                             <rect key="frame" x="0.0" y="510" width="414" height="76"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stake To: GO-QLC Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbX-R8-6do">
-                                                    <rect key="frame" x="16" y="7" width="175.33333333333334" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stake To: QLC Chain Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbX-R8-6do">
+                                                    <rect key="frame" x="16" y="7" width="188.66666666666666" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -334,6 +337,9 @@
                                                         <constraint firstAttribute="width" constant="40" id="b57-p1-8Sx"/>
                                                     </constraints>
                                                     <state key="normal" image="icon_address_copy"/>
+                                                    <connections>
+                                                        <action selector="stakeToCopyAction:" destination="-1" eventType="touchUpInside" id="jNP-gV-7St"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -370,6 +376,9 @@
                                                         <constraint firstAttribute="width" constant="40" id="6TJ-Tj-5QV"/>
                                                     </constraints>
                                                     <state key="normal" image="icon_address_copy"/>
+                                                    <connections>
+                                                        <action selector="trasactionCopyAction:" destination="-1" eventType="touchUpInside" id="gHe-fP-Dkt"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

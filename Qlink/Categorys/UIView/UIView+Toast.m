@@ -7,7 +7,7 @@
 //
 
 #import "UIView+Toast.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import <objc/runtime.h>
 #import "GlobalConstants.h"
 

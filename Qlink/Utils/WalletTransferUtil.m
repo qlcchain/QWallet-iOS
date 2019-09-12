@@ -9,7 +9,8 @@
 #import "WalletTransferUtil.h"
 #import "RequestService.h"
 #import "NeoTransferUtil.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
+//#import <QLCFramework/QLCFramework.h>
 #import "GlobalConstants.h"
 #import "ETHWalletManage.h"
 

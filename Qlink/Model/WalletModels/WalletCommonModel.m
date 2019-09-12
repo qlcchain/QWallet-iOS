@@ -15,7 +15,7 @@
 #import "ETHWalletInfo.h"
 #import "EOSWalletInfo.h"
 #import "QLCWalletInfo.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "NEOWalletInfo.h"
 #import <eosFramework/RegularExpression.h>
 

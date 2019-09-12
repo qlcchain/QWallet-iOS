@@ -15,7 +15,8 @@
 #import <MJExtension/MJExtension.h>
 #import "NEOWalletUtil.h"
 #import "AppDelegate.h"
-#import "QLCMnemonicBit.h"
+//#import <QLCFramework/QLCMnemonicBit.h>
+//#import "QLCMnemonicBit.h"
 
 //@import ShadowsockLibrary;
 //@import ShadowsockModel;

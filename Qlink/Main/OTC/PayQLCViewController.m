@@ -15,7 +15,7 @@
 #import "NSString+RemoveZero.h"
 #import "NEOWalletUtil.h"
 #import "WalletQRViewController.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "QLCTokenInfoModel.h"
 #import "NSDate+Category.h"
 #import "UserModel.h"
@@ -141,9 +141,10 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork successHandler:^(NSString * _Nullable responseObj) {
 //        [kAppD.window hideToast];
 //        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
 //        [weakself backToRoot];

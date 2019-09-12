@@ -17,7 +17,7 @@
 #import <eosFramework/NSString+Extention.h>
 #import <eosFramework/ContractConstant.h>
 #import "EOS_BaseResult.h"
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 #import <eosFramework/StringConstant.h>
 #import "GetAccountRequest.h"
 #import <eosFramework/EosPrivateKey.h>

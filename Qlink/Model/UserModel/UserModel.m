@@ -9,6 +9,7 @@
 #import "UserModel.h"
 #import "NEOWalletUtil.h"
 #import "Qlink-Swift.h"
+#import <QLCFramework/QLCFramework-Swift.h>
 
 @implementation UserModel
 
@@ -26,7 +27,7 @@
 + (NSString *)getOwnP2PId {
     NSString *p2pid = [NEOWalletUtil getKeyValue:P2P_KEY];
     if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
-        p2pid = [[RandomString getRandomStringOfLengthWithLength:76] uppercaseString];
+        p2pid = [[QLCUtil getRandomStringOfLengthWithLength:76] uppercaseString];
         [NEOWalletUtil setKeyValue:P2P_KEY value:p2pid];
     }
 //    if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {

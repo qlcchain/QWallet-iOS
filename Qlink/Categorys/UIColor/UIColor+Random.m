@@ -8,7 +8,7 @@
 
 #import "UIColor+Random.h"
 #import "ThemeConstants.h"
-#import <SwiftTheme-Swift.h>
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @implementation UIColor (Random)
 + (UIColor *)RandomColor {

@@ -44,7 +44,7 @@ static NSInteger const RequestServerTypeRelease = 3;//正式服务器接口
 + (NSURLSessionDataTask *)testRequestWithBaseURLStr8:(NSString *)URLString
                                              params:(id)params
                                          httpMethod:(HttpMethod)httpMethod
-                                           userInfo:(NSDictionary*)userInfo
+                                           userInfo:(NSDictionary*)userInfo requestManagerType:(QRequestManagerType)requestManagerType
                                        successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
                                         failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock;
 

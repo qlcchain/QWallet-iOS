@@ -32,7 +32,7 @@
 #import <eosFramework/NSData+Hash.h>
 #import <eosFramework/AppConstant.h>
 #import <eosFramework/AESCrypt.h>
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 #import "EOS_AccountInfo.h"
 #import "EOSWalletInfo.h"
 #import "GlobalConstants.h"

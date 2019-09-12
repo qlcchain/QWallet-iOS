@@ -44,7 +44,7 @@
     ChartLimitLine *llXAxis = [[ChartLimitLine alloc] initWithLimit:10.0 label:@"Index 10"];
     llXAxis.lineWidth = 4.0;
     llXAxis.lineDashLengths = @[@(10.f), @(10.f), @(0.f)];
-    llXAxis.labelPosition = ChartLimitLabelPositionRightBottom;
+    llXAxis.labelPosition = ChartLimitLabelPositionBottomRight;
     llXAxis.valueFont = [UIFont systemFontOfSize:10.f];
     
     //[_chartView.xAxis addLimitLine:llXAxis];
@@ -131,13 +131,13 @@
     if (_chartView.data.dataSetCount > 0)
     {
         set1 = (LineChartDataSet *)_chartView.data.dataSets[0];
-        set1.values = values;
+        [set1 replaceEntries: values];
         [_chartView.data notifyDataChanged];
         [_chartView notifyDataSetChanged];
     }
     else
     {
-        set1 = [[LineChartDataSet alloc] initWithValues:values label:_currentSymbol?:@""];
+        set1 = [[LineChartDataSet alloc] initWithEntries:values label:_currentSymbol?:@""];
         
         set1.drawIconsEnabled = NO;
         

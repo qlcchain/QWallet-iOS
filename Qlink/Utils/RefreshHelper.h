@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MJRefresh.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface RefreshHelper : NSObject
 

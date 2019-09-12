@@ -8,7 +8,7 @@
 
 #import "MyOrderListEntrustCell.h"
 #import "EntrustOrderListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "OrderStatusUtil.h"
 
 #import "GlobalConstants.h"

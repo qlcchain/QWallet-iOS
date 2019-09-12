@@ -10,7 +10,7 @@
 #import "NSDate+Category.h"
 #import "UserModel.h"
 #import "RSAUtil.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "WalletCommonModel.h"
 #import "QlinkTabbarViewController.h"
 #import "WalletsViewController.h"
@@ -149,7 +149,7 @@
 //        _buy_sendToWalletTF.text = nil;
 //        _buy_sendToWalletM = nil;
         
-        _buy_sellingLab.text = _buy_PairsM.payToken;
+        _buy_sellingLab.text = [NSString stringWithFormat:@"%@/%@",_buy_PairsM.tradeToken,_buy_PairsM.payToken];
         _buy_sellingUnitLab.text = _buy_PairsM.payToken;
         _buyUsdtTF.text = nil;
         _buyReceiveQgasWalletBack.hidden = YES;
@@ -169,7 +169,7 @@
         _sell_sendAddressTF.text = nil;
         _sell_sendToWalletM = nil;
         
-        _sell_buyingLab.text = _sell_PairsM.payToken;
+        _sell_buyingLab.text = [NSString stringWithFormat:@"%@/%@",_sell_PairsM.tradeToken,_sell_PairsM.payToken];
         _sell_buyingUnitLab.text = _sell_PairsM.payToken;
         _sellUsdtTF.text = nil;
         _sellReceiveUsdtWalletBack.hidden = YES;
@@ -563,7 +563,7 @@
 
 //- (void)requestQLCTokens {
 //    [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
-//    [LedgerRpc tokensWithSuccessHandler:^(id _Nullable responseObject) {
+//    [QLCLedgerRpc tokensWithSuccessHandler:^(id _Nullable responseObject) {
 //        [kAppD.window hideToast];
 //
 //        if (responseObject != nil) {

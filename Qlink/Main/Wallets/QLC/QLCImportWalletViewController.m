@@ -13,7 +13,7 @@
 #import "WalletQRViewController.h"
 #import "ReportUtil.h"
 #import "QLCWalletInfo.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "WebViewController.h"
 //#import "GlobalConstants.h"
 

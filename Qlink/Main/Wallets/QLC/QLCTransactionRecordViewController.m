@@ -18,6 +18,7 @@
 #import "HistoryChartView.h"
 #import "Qlink-Swift.h"
 #import "QLCTokenInfoModel.h"
+#import <QLCFramework/QLCFramework-Swift.h>
 
 //#import "GlobalConstants.h"
 
@@ -116,7 +117,8 @@
 - (void)requestQLCAddressInfo:(NSString *)address {
     kWeakSelf(self);
 //    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
-    [LedgerRpc accountHistoryTopnWithAddress:address successHandler:^(id _Nonnull responseObject) {
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    [QLCLedgerRpc accountHistoryTopnWithAddress:address isMainNetwork:isMainNetwork successHandler:^(id _Nonnull responseObject) {
         if (responseObject != nil) {
             [weakself.addressHistoryArr removeAllObjects];
             [responseObject enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -135,7 +137,8 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [LedgerRpc tokensWithSuccessHandler:^(id _Nullable responseObject) {
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }
