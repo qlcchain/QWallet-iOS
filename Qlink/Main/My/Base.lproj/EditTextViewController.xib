@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +17,7 @@
                 <outlet property="codeTF" destination="DGh-GG-XYA" id="Ou2-xU-jjS"/>
                 <outlet property="lblNavTitle" destination="3N2-yY-u9z" id="fqC-oj-FNP"/>
                 <outlet property="nameTF" destination="uC3-rU-Y1B" id="MkK-Il-JP5"/>
+                <outlet property="phonePrefixLab" destination="msy-OK-F4C" id="ACx-rW-yjb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,8 +32,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROR-ht-iH8">
                             <rect key="frame" x="0.0" y="74" width="375" height="48"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+86" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msy-OK-F4C">
+                                    <rect key="frame" x="8" y="15" width="28.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="uC3-rU-Y1B">
-                                    <rect key="frame" x="8" y="0.0" width="359" height="48"/>
+                                    <rect key="frame" x="36.5" y="0.0" width="330.5" height="48"/>
                                     <color key="textColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -39,15 +47,17 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="uC3-rU-Y1B" firstAttribute="leading" secondItem="ROR-ht-iH8" secondAttribute="leading" constant="8" id="1Wv-u6-dnm"/>
+                                <constraint firstItem="msy-OK-F4C" firstAttribute="leading" secondItem="ROR-ht-iH8" secondAttribute="leading" constant="8" id="4DR-h9-xe8"/>
                                 <constraint firstItem="uC3-rU-Y1B" firstAttribute="top" secondItem="ROR-ht-iH8" secondAttribute="top" id="85J-26-czj"/>
                                 <constraint firstAttribute="bottom" secondItem="uC3-rU-Y1B" secondAttribute="bottom" id="EXD-VB-ZFj"/>
                                 <constraint firstAttribute="trailing" secondItem="uC3-rU-Y1B" secondAttribute="trailing" constant="8" id="NNq-RL-nvh"/>
+                                <constraint firstItem="uC3-rU-Y1B" firstAttribute="leading" secondItem="msy-OK-F4C" secondAttribute="trailing" id="nzK-wH-kcK"/>
+                                <constraint firstItem="msy-OK-F4C" firstAttribute="centerY" secondItem="ROR-ht-iH8" secondAttribute="centerY" id="rkI-gP-wzQ"/>
                                 <constraint firstAttribute="height" constant="48" id="vFE-4C-pNf"/>
                             </constraints>
                         </view>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAh-Oz-TR9">
-                            <rect key="frame" x="0.0" y="122" width="375" height="49"/>
+                            <rect key="frame" x="0.0" y="122.5" width="375" height="49"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Verification Code " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGh-GG-XYA">
                                     <rect key="frame" x="8" y="0.0" width="259" height="49"/>

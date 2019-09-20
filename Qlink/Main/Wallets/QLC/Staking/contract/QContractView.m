@@ -164,7 +164,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil requestManagerType: QRequestManagerTypeHTTP successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         DDLogDebug(@"benefit_getnep5transferbytxid responseObject=%@",responseObject);
         NSDictionary *responseDic = [responseObject mj_JSONObject];
-        NSDictionary *resultDic = responseDic[@"result"];
+        NSArray *resultDic = responseDic[@"result"];
         if (resultDic) {
             [weakself nep5_benefitPledge:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
         } else {
@@ -201,7 +201,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         DDLogDebug(@"nep5_benefitPledge responseObject=%@",responseObject);
         
         if (responseObject) {
-            [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId resultHandler:resultHandler];
+            [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId unlockTxParams:nil resultHandler:resultHandler];
         } else {
             if (resultHandler) {
                 resultHandler(nil, NO);
@@ -218,7 +218,38 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 #pragma mark - Benefit Withdraw
-- (void)nep5_benefitWithdraw:(NSString *)lockTxId beneficial:(NSString *)beneficial amount:(NSString *)amount qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
+- (void)request_benefit_neo_address:(NSString *)lockTxId resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
+    NSString *requestId = [NSString randomOf32];
+    NSDictionary *params = @{@"jsonrpc":@"2.0",@"method":@"getnep5transferbytxid",@"params":[NSString stringWithFormat:@"[\"%@\"]",lockTxId],@"id":requestId};
+    NSString *urlStr = @"https://api.nel.group/api/mainnet";
+    
+//    kWeakSelf(self);
+    DDLogDebug(@"benefit_getnep5transferbytxid urlStr = %@",urlStr);
+    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil requestManagerType: QRequestManagerTypeHTTP successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        DDLogDebug(@"benefit_getnep5transferbytxid responseObject=%@",responseObject);
+        NSDictionary *responseDic = [responseObject mj_JSONObject];
+        NSArray *resultArr = responseDic[@"result"];
+        if (resultArr) {
+            NSDictionary *resultDic = resultArr.firstObject;
+            NSString *neo_addrss = resultDic[@"from"];
+            if (resultHandler) {
+                resultHandler(neo_addrss, YES);
+            }
+        } else {
+            if (resultHandler) {
+                resultHandler(nil, NO);
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        if (resultHandler) {
+            resultHandler(nil, NO);
+        }
+        DDLogDebug(@"getnep5transferbytxid error=%@",error);
+    }];
+    
+}
+
+- (void)nep5_benefitWithdraw:(NSString *)lockTxId beneficial:(NSString *)beneficial amount:(NSString *)amount qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey neo_publicKey:(NSString *)neo_publicKey resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
@@ -229,7 +260,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         DDLogDebug(@"nep5_benefitWithdraw responseObject=%@",responseObject);
         
         if (responseObject) {
-            [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId resultHandler:resultHandler];
+            [weakself request_UnlockTxParams:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey neo_publicKey:neo_publicKey resultHandler:resultHandler];
         } else {
             if (resultHandler) {
                 resultHandler(nil, NO);
@@ -318,7 +349,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodGet userInfo:nil requestManagerType: QRequestManagerTypeHTTP successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         DDLogDebug(@"mintage_getnep5transferbytxid responseObject=%@",responseObject);
         NSDictionary *responseDic = [responseObject mj_JSONObject];
-        NSDictionary *resultDic = responseDic[@"result"];
+        NSArray *resultDic = responseDic[@"result"];
         if (resultDic) {
             [weakself nep5_benefitPledge:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
         } else {
@@ -355,7 +386,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         DDLogDebug(@"nep5_mintagePledge responseObject=%@",responseObject);
         
         if (responseObject) {
-            [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId resultHandler:resultHandler];
+            [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId unlockTxParams:nil resultHandler:resultHandler];
         } else {
             if (resultHandler) {
                 resultHandler(nil, NO);
@@ -401,16 +432,38 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     
 }
 
-
-
-
+#pragma mark - UnlockTxParams
+- (void)request_UnlockTxParams:(NSString *)lockTxId qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey neo_publicKey:(NSString *)neo_publicKey resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
+    NSDictionary *params = @{@"publicKeyA":neo_publicKey,@"publicKeyB":PublicKeyB,@"txid":lockTxId};
+    NSString *urlStr = @"http://192.168.0.190:8081/unlock";
+    
+    kWeakSelf(self);
+    DDLogDebug(@"UnlockTxParams urlStr = %@  params = %@",urlStr, params);
+    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodPost userInfo:nil requestManagerType: QRequestManagerTypeHTTP successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        DDLogDebug(@"UnlockTxParams responseObject=%@",responseObject);
+        NSDictionary *unlockTxParams = [responseObject mj_JSONObject];
+        if (unlockTxParams) {
+            [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId unlockTxParams:unlockTxParams resultHandler:resultHandler];
+        } else {
+            if (resultHandler) {
+                resultHandler(nil, NO);
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        if (resultHandler) {
+            resultHandler(nil, NO);
+        }
+        DDLogDebug(@"UnlockTxParams error=%@",error);
+    }];
+    
+}
 
 #pragma mark - SignAndWork
-- (void)signAndWork:(NSDictionary *)dic qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey lockTxId:(NSString *)lockTxId resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
+- (void)signAndWork:(NSDictionary *)dic qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey lockTxId:(NSString *)lockTxId unlockTxParams:(NSDictionary *)unlockTxParams resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
     kWeakSelf(self);
     [QLCWalletManage signAndWork:dic publicKey:qlc_publicKey privateKey:qlc_privateKey resultHandler:^(NSDictionary * _Nullable responseDic) {
         if (responseDic) {
-            [weakself ledger_process:lockTxId blockDic:responseDic resultHandler:resultHandler];
+            [weakself ledger_process:lockTxId blockDic:responseDic unlockTxParams:unlockTxParams resultHandler:resultHandler];
         } else {
             if (resultHandler) {
                 resultHandler(nil, NO);
@@ -420,11 +473,15 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 #pragma mark - Process
-- (void)ledger_process:(NSString *)lockTxId blockDic:(NSDictionary *)blockDic resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
+- (void)ledger_process:(NSString *)lockTxId blockDic:(NSDictionary *)blockDic unlockTxParams:(NSDictionary *)unlockTxParams resultHandler:(void (^)(NSString *result, BOOL success))resultHandler {
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
     NSArray *params = @[blockDic,lockTxId];
+    if (unlockTxParams) {
+        params = @[blockDic,lockTxId,unlockTxParams];
+    }
+    
     DDLogDebug(@"ledger_process params = %@",params);
     [client invokeMethod:@"ledger_process" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
         DDLogDebug(@"ledger_process responseObject=%@",responseObject);

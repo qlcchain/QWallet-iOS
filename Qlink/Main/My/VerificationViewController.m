@@ -64,18 +64,18 @@ typedef enum : NSUInteger {
 - (void)refreshPhotoStatus {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (userM) {
-        if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+        if ([userM.vStatus isEqualToString:kyc_not_upload]) {
             _tipLab.text = kLang(@"please_upload_the_required_information_of_your_passport");
-        } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
+        } else if ([userM.vStatus isEqualToString:kyc_uploaded]) {
             _tipLab.text = kLang(@"status_under_review");
-        } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
+        } else if ([userM.vStatus isEqualToString:kyc_success]) {
             _tipLab.text = kLang(@"status_verified");
-        } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
+        } else if ([userM.vStatus isEqualToString:kyc_fail]) {
             _tipLab.text = kLang(@"status_not_approved");
             [self showNotApproved];
         }
         
-        if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+        if ([userM.vStatus isEqualToString:kyc_not_upload]) {
             _pic1.image = [UIImage imageNamed:@"icon_passport_back"];
             _pic2.image = [UIImage imageNamed:@"icon_hand_passport_back"];
         } else {
@@ -91,7 +91,7 @@ typedef enum : NSUInteger {
             }];
         }
         
-        if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"] || [userM.vStatus isEqualToString:@"UPLOADED"]) {
+        if ([userM.vStatus isEqualToString:kyc_success] || [userM.vStatus isEqualToString:kyc_uploaded]) {
             _picBtn1.userInteractionEnabled = NO;
             _picBtn2.userInteractionEnabled = NO;
             _submitBtn.hidden = YES;

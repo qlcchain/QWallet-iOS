@@ -16,7 +16,7 @@
 #import <ETHFramework/ETHFramework.h>
 #import "ReportUtil.h"
 #import "WalletQRViewController.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 //#import "GlobalConstants.h"
 

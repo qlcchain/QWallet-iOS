@@ -674,6 +674,7 @@
 		58BAFC71232A3D4C00421C70 /* SwiftTheme.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58BAFC6E232A3D4200421C70 /* SwiftTheme.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		58BAFC73232A40CB00421C70 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BAFC72232A40CB00421C70 /* Charts.framework */; };
 		58BAFC75232A40E200421C70 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58BAFC72232A40CB00421C70 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		58BAFC7C2331D95E00421C70 /* StakingUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BAFC7B2331D95E00421C70 /* StakingUtil.m */; };
 		58BDD4E3230BFF590060FBCC /* ETHWalletManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BDD4E1230BFF580060FBCC /* ETHWalletManage.m */; };
 		58BDD4EE230CDB900060FBCC /* NewOrderETHTransferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BDD4E6230CDB900060FBCC /* NewOrderETHTransferUtil.m */; };
 		58BDD4EF230CDB900060FBCC /* NewOrderNEOTransferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BDD4E8230CDB900060FBCC /* NewOrderNEOTransferUtil.m */; };
@@ -2219,6 +2220,8 @@
 		58BAFC6A232A302400421C70 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = "<group>"; };
 		58BAFC6E232A3D4200421C70 /* SwiftTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftTheme.framework; sourceTree = "<group>"; };
 		58BAFC72232A40CB00421C70 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
+		58BAFC7A2331D95E00421C70 /* StakingUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StakingUtil.h; sourceTree = "<group>"; };
+		58BAFC7B2331D95E00421C70 /* StakingUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StakingUtil.m; sourceTree = "<group>"; };
 		58BDD4E0230BEE5A0060FBCC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ComplaintInfoViewController.strings"; sourceTree = "<group>"; };
 		58BDD4E1230BFF580060FBCC /* ETHWalletManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETHWalletManage.m; sourceTree = "<group>"; };
 		58BDD4E2230BFF580060FBCC /* ETHWalletManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHWalletManage.h; sourceTree = "<group>"; };
@@ -3057,6 +3060,8 @@
 				5825555C22EAD26900F0B9F0 /* PhotoPickerUtil.m */,
 				58AA304D22F2D24D0041C842 /* OTCUtil.h */,
 				58AA304E22F2D24D0041C842 /* OTCUtil.m */,
+				58BAFC7A2331D95E00421C70 /* StakingUtil.h */,
+				58BAFC7B2331D95E00421C70 /* StakingUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -5990,6 +5995,7 @@
 				5825552F22EACF9100F0B9F0 /* ImageRotateToolBar.m in Sources */,
 				73B1AEC420BE7D3800947749 /* MyAssetsViewController.m in Sources */,
 				581AF7B421B665DB001A37E1 /* EOSWalletInfo.m in Sources */,
+				58BAFC7C2331D95E00421C70 /* StakingUtil.m in Sources */,
 				587ABD8921BA3BCA00C3D81A /* EOSAccountInfoModel.m in Sources */,
 				585CDC12225C785500199FE1 /* ForgetPWViewController.m in Sources */,
 				580D916020625A4400B12506 /* UITextView+PinchZoom.m in Sources */,

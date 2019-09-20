@@ -18,7 +18,7 @@
 #import "FinanceRedeemConfirmView.h"
 #import "FinanceHistoryViewController.h"
 #import "RefreshHelper.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 //#import "GlobalConstants.h"
 

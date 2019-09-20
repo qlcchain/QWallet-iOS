@@ -62,6 +62,7 @@
 #import "NEOWalletInfo.h"
 //#import "WebTestViewController.h"
 //#import "GlobalConstants.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;

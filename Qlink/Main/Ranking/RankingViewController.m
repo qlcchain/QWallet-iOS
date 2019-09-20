@@ -23,6 +23,7 @@
 #import "SkyRadiusView.h"
 #import "RankingStartCell.h"
 //#import "GlobalConstants.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 #define PAGE_PADDING 86
 #define PAGE_HEIGHT 150//(SCREEN_WIDTH - PAGE_PADDING) * 9 / 16

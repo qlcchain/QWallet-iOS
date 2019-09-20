@@ -20,7 +20,7 @@
 #import <eosFramework/RegularExpression.h>
 #import "EOSWalletUtil.h"
 #import "SuccessTipView.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 //#import "GlobalConstants.h"
 

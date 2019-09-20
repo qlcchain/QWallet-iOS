@@ -27,6 +27,8 @@
 #import "NewOrderQLCTransferUtil.h"
 #import "NewOrderNEOTransferUtil.h"
 #import "NewOrderETHTransferUtil.h"
+#import "VerifyTipView.h"
+#import "VerificationViewController.h"
 
 @interface NewOrderViewController () <UITextFieldDelegate>
 
@@ -260,6 +262,15 @@
     }
 }
 
+- (void)showVerifyTipView {
+    VerifyTipView *view = [VerifyTipView getInstance];
+    kWeakSelf(self);
+    view.okBlock = ^{
+        [weakself jumpToVerification];
+    };
+    [view showWithTitle:kLang(@"please_finish_the_verification_on_me_page")];
+}
+
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
@@ -356,6 +367,14 @@
         return;
     }
     
+    if ([_buy_PairsM.tradeToken isEqualToString:@"QGAS"] && [_buyTotalTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if (![userM.vStatus isEqualToString:kyc_success]) {
+            [self showVerifyTipView];
+            return;
+        }
+    }
+    
     // 下买单
     [self requestEntrustBuyOrder];
 }
@@ -399,6 +418,14 @@
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
+    }
+    
+    if ([_sell_PairsM.tradeToken isEqualToString:@"QGAS"] && [_sellTotalTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if (![userM.vStatus isEqualToString:kyc_success]) {
+            [self showVerifyTipView];
+            return;
+        }
     }
     
     [self sell_transfer:_sellTotalTF.text tokenChain:_sell_PairsM.tradeTokenChain tokenName:_sell_PairsM.tradeToken];
@@ -594,6 +621,11 @@
 - (void)jumpToChooseWallet {
     ChooseWalletViewController *vc = [[ChooseWalletViewController alloc] init];
     vc.showBack = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToVerification {
+    VerificationViewController *vc = [VerificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

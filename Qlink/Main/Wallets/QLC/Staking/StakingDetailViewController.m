@@ -15,6 +15,8 @@
 #import "ConfigUtil.h"
 #import "NSString+RandomStr.h"
 #import "RevokingProcessView.h"
+#import "StakingUtil.h"
+#import "NEOWalletInfo.h"
 
 @interface StakingDetailViewController ()
 
@@ -65,8 +67,13 @@
         stateStr = _inputPledgeM.state;
         stateArrowHidden = YES;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
-        stateStr = kLang(@"staking_in_progress");
-        stateArrowHidden = YES;
+        if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) {
+            stateStr = kLang(@"revoke");
+            stateArrowHidden = NO;
+        } else {
+            stateStr = kLang(@"staking_in_progress");
+            stateArrowHidden = YES;
+        }
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
         stateStr = _inputPledgeM.state;
         stateArrowHidden = NO;
@@ -109,16 +116,32 @@
     kWeakSelf(self);
     _contractV = [QContractView addQContractView];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
-    [_contractV nep5_benefitWithdraw:lockTxId beneficial:beneficial amount:qlcAmount qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
-        [kAppD.window hideToast];
-        [QContractView removeQContractView:weakself.contractV];
+    [_contractV request_benefit_neo_address:lockTxId resultHandler:^(NSString * _Nonnull result, BOOL success) {
         if (success) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
-            [weakself ledger_pledgeInfoByTransactionID];
+            NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:result];
+            if (!neo_publicKey) {
+                [kAppD.window hideToast];
+                [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+                return;
+            }
+            [weakself.contractV nep5_benefitWithdraw:lockTxId beneficial:beneficial amount:qlcAmount qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey neo_publicKey:neo_publicKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+                [kAppD.window hideToast];
+                [QContractView removeQContractView:weakself.contractV];
+                if (success) {
+                    [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
+                    [weakself ledger_pledgeInfoByTransactionID];
+                } else {
+                    [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+                }
+            }];
         } else {
+            [kAppD.window hideToast];
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     }];
+    
+    
+    
 }
 
 - (void)vote_continueInvoke {
@@ -212,6 +235,11 @@
             [self vote_continueInvoke];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
+            if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) { // 可赎回
+                 [self startBenefitWithdraw];
+            } else {
+
+            }
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
             [self startBenefitWithdraw];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawProcess]) {
@@ -222,6 +250,11 @@
             
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
+            if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) { // 可赎回
+                [self startMintageWithdraw];
+            } else {
+                
+            }
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
             [self startMintageWithdraw];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawProcess]) {

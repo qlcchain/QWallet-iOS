@@ -11,7 +11,7 @@
 #import "QlinkTabbarViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 //#import "GlobalConstants.h"
 
 @interface LoginInputPWViewController ()

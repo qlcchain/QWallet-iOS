@@ -17,6 +17,7 @@
 #import "RefreshHelper.h"
 #import "PledgeInfoByBeneficialModel.h"
 #import "NSString+RandomStr.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 static NSInteger const PledgeInfo_PageCount = 10;
 static NSInteger const PledgeInfo_PageFirst = 0;
@@ -91,9 +92,11 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     kWeakSelf(self);
     [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PledgeInfoByBeneficialModel *model = obj;
-        weakself.totalStakingVolume = @([weakself.totalStakingVolume doubleValue]+[model.amount doubleValue]);
-        weakself.stakingAmount = @([weakself.stakingAmount doubleValue]+[model.amount doubleValue]);
-        weakself.earnings = @([weakself.earnings doubleValue]+[model.qgas doubleValue]);
+        if (![model.state isEqualToString:PledgeState_WithdrawDone]) { // 赎回成功的不需要加
+            weakself.totalStakingVolume = @([weakself.totalStakingVolume doubleValue]+[model.amount doubleValue]);
+            weakself.stakingAmount = @([weakself.stakingAmount doubleValue]+[model.amount doubleValue]);
+            weakself.earnings = @([weakself.earnings doubleValue]+[model.qgas doubleValue]);
+        }
     }];
     
     _totalStakingVolumeLab.text = [NSString stringWithFormat:@"%@",@([_totalStakingVolume doubleValue]/QLC_UnitNum)];

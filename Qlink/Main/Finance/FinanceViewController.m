@@ -21,6 +21,7 @@
 #import "RefreshHelper.h"
 //#import "GlobalConstants.h"
 #import "UIColor+Random.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface FinanceViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 

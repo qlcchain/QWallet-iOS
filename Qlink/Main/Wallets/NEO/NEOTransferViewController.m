@@ -17,7 +17,7 @@
 #import "NEOWalletUtil.h"
 #import "WalletQRViewController.h"
 #import "Qlink-Swift.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 //#import "GlobalConstants.h"
 

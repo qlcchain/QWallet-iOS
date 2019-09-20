@@ -11,6 +11,11 @@
 #define UserModel_Local @"UserModel_Local"
 #define UserModel_LastLoginAccount @"UserModel_LastLoginAccount"
 
+static NSString *const kyc_success = @"KYC_SUCCESS";
+static NSString *const kyc_not_upload = @"NOT_UPLOAD";
+static NSString *const kyc_uploaded = @"UPLOADED";
+static NSString *const kyc_fail = @"KYC_FAIL";
+
 @interface UserModel : BBaseModel
 
 @property (nonatomic, copy) NSString *email; // = "";

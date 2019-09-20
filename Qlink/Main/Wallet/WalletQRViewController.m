@@ -19,7 +19,7 @@
 #import "Qlink-Swift.h"
 //#import <NEOFramework/NEOFramework.h>
 #import "NEOWalletInfo.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 #import "GlobalConstants.h"
 
 @interface WalletQRViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>

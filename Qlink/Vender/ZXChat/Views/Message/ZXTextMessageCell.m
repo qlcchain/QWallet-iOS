@@ -10,8 +10,8 @@
 #import "UIView+TL.h"
 #import "NSDate+Category.h"
 #import "UIDevice+TL.h"
-
 #import "GlobalConstants.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 #define OffsetOfLab 4
 

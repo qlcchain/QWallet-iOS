@@ -17,7 +17,7 @@
 #import "WalletQRViewController.h"
 #import <QLCFramework/QLCFramework.h>
 #import "QLCTokenInfoModel.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 //#import "GlobalConstants.h"
 

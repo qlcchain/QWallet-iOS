@@ -9,7 +9,7 @@
 #import "PhotoPickerUtil.h"
 #import "ZQImageCropController.h"
 #import "UINavigationController+CurrentNav.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 #import "GlobalConstants.h"
 
 @interface PhotoPickerUtil () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>

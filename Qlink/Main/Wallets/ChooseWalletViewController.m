@@ -26,6 +26,7 @@
 #import "NEOWalletInfo.h"
 //#import "GlobalConstants.h"
 #import "AppConfigUtil.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface ChooseWalletViewController () {
     BOOL isAgree;

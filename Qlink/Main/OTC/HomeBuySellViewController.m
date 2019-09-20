@@ -20,6 +20,7 @@
 #import "CQScrollMenuView.h"
 #import <TTGTextTagCollectionView.h>
 #import "PairsModel.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 static NSString *const NetworkSize = @"20";
 //#import "GlobalConstants.h"
@@ -447,11 +448,11 @@ static NSString *const NetworkSize = @"20";
         [kAppD presentLoginNew];
         return;
     }
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    if (![userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
-        [self showVerifyTipView];
-        return;
-    }
+//    UserModel *userM = [UserModel fetchUserOfLogin];
+//    if (![userM.vStatus isEqualToString:kyc_success]) {
+//        [self showVerifyTipView];
+//        return;
+//    }
     
     RecordListViewController *vc = [RecordListViewController new];
     [self.navigationController pushViewController:vc animated:YES];
@@ -463,11 +464,11 @@ static NSString *const NetworkSize = @"20";
         [kAppD presentLoginNew];
         return;
     }
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    if (![userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
-        [self showVerifyTipView];
-        return;
-    }
+//    UserModel *userM = [UserModel fetchUserOfLogin];
+//    if (![userM.vStatus isEqualToString:kyc_success]) {
+//        [self showVerifyTipView];
+//        return;
+//    }
     
     NewOrderViewController *vc = [NewOrderViewController new];
     vc.inputPairsArr = _pairsArr;
@@ -480,10 +481,12 @@ static NSString *const NetworkSize = @"20";
         [kAppD presentLoginNew];
         return;
     }
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    if (![userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
-        [self showVerifyTipView];
-        return;
+    if ([model.tradeToken isEqualToString:@"QGAS"] && [model.totalAmount doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if (![userM.vStatus isEqualToString:kyc_success]) {
+            [self showVerifyTipView];
+            return;
+        }
     }
     
     BuySellDetailViewController *vc = [BuySellDetailViewController new];

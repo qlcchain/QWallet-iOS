@@ -11,6 +11,7 @@
 #import "XYTransition.h"
 #import "ChooseWalletViewController.h"
 #import "UIColor+Random.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface QNavigationController ()<UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 

@@ -26,6 +26,7 @@
 #import "WalletsViewController.h"
 //#import "GlobalConstants.h"
 #import "QNavigationController.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface PayQLCViewController () <UITextViewDelegate, UITextFieldDelegate>
 

@@ -9,6 +9,7 @@
 #import "MyStakingsCell.h"
 #import "PledgeInfoByBeneficialModel.h"
 #import "GlobalConstants.h"
+#import "StakingUtil.h"
 
 @implementation MyStakingsCell
 
@@ -38,7 +39,11 @@
     } else if ([model.state isEqualToString:PledgeState_PledgeProcess]) {
         stateStr = model.state;
     } else if ([model.state isEqualToString:PledgeState_PledgeDone]) {
-        stateStr = kLang(@"staking_in_progress");
+        if ([StakingUtil isRedeemable:[model.withdrawTime doubleValue]]) {
+            stateStr = kLang(@"staking_in_progress_redeemable");
+        } else {
+            stateStr = kLang(@"staking_in_progress");
+        }
     } else if ([model.state isEqualToString:PledgeState_WithdrawStart]) {
         stateStr = model.state;
     } else if ([model.state isEqualToString:PledgeState_WithdrawProcess]) {
@@ -47,8 +52,13 @@
         stateStr = model.state;
     }
     _stateLab.text = stateStr;
+    
     _stakingAmountLab.text = [NSString stringWithFormat:@"%@",@([model.amount doubleValue]/QLC_UnitNum)];
     _earningsLab.text = [NSString stringWithFormat:@"%@",@([model.qgas doubleValue]/QLC_UnitNum)];
+    
+    
+    
+    
 }
 
 - (void)prepareForReuse {

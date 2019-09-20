@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *codeTF;
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeBackHeight; // 49
+@property (weak, nonatomic) IBOutlet UILabel *phonePrefixLab;
 
 @property (nonatomic ,assign) EditType editType;
 
@@ -53,6 +54,7 @@
     [self addObserve];
     
     _codeBackHeight.constant = 0;
+    NSString *phonePrefix = @"";
     
     switch (self.editType) {
         case EditUsername:
@@ -74,6 +76,7 @@
             break;
         case EditPhone:
         {
+            phonePrefix = @"+86";
             _lblNavTitle.text = kLang(@"edit_phone");
             _nameTF.placeholder = kLang(@"please_enter_phone");
             _nameTF.text = [UserModel fetchUserOfLogin].phone?:@"";
@@ -85,6 +88,7 @@
         default:
             break;
     }
+    _phonePrefixLab.text = phonePrefix;
     
     [self performSelector:@selector(beginFirst) withObject:self afterDelay:0.7];
     

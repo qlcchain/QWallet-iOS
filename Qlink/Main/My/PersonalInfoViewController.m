@@ -16,7 +16,7 @@
 #import "ForgetPWViewController.h"
 #import "VerificationViewController.h"
 #import "UserUtil.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 //#import "GlobalConstants.h"
 
@@ -104,13 +104,13 @@
     model.key = kLang(@"verification");
 //    model.val = person_title5;
     NSString *vStatusStr = @"";
-    if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+    if ([userM.vStatus isEqualToString:kyc_not_upload]) {
         vStatusStr = @"Unverified";
-    } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
+    } else if ([userM.vStatus isEqualToString:kyc_uploaded]) {
         vStatusStr = @"Under review";
-    } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
+    } else if ([userM.vStatus isEqualToString:kyc_success]) {
         vStatusStr = @"Verified";
-    } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
+    } else if ([userM.vStatus isEqualToString:kyc_fail]) {
         vStatusStr = @"Not approved";
     }
     model.val = vStatusStr;

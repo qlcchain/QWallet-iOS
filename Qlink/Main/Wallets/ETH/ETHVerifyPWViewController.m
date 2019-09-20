@@ -12,7 +12,7 @@
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import "ETHExportMnemonicViewController.h"
-
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface ETHVerifyPWViewController ()
 
