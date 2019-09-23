@@ -25,8 +25,9 @@
 #import "NEOWalletUtil.h"
 #import "GlobalConstants.h"
 #import "UIColor+Random.h"
+#import "TopupViewController.h"
 
-static NSInteger const tabbaritems = 3;
+//static NSInteger const tabbaritems = 3;
 
 @interface QlinkTabbarViewController ()<UITabBarControllerDelegate>
 
@@ -69,6 +70,7 @@ static NSInteger const tabbaritems = 3;
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
+    [self addChildViewController:[[TopupViewController alloc] init] text:kLang(@"top_up") imageName:@"finance"];
 //    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
     [self addChildViewController:[[HomeBuySellViewController alloc] init] text:kLang(@"finance") imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
@@ -130,11 +132,13 @@ static NSInteger const tabbaritems = 3;
 #pragma mark - Noti
 - (void)languageChangeNoti:(NSNotification *)noti {
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx == 0) {
+        if (idx == TabbarIndexTopup) {
+            obj.title = kLang(@"top_up");
+        } else if (idx == TabbarIndexFinance) {
             obj.title = kLang(@"finance");
-        } else if (idx == 1) {
+        } else if (idx == TabbarIndexWallet) {
             obj.title = kLang(@"wallet");
-        } else if (idx == 2) {
+        } else if (idx == TabbarIndexMy) {
             obj.title = kLang(@"me");
         }
     }];

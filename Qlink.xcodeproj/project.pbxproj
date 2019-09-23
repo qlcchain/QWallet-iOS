@@ -507,6 +507,8 @@
 		5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5860ADC520CFB62200EEB6CE /* NotifactionView.xib */; };
 		5860FD2120B7B0F1005AA1DA /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5860FD2020B7B0F1005AA1DA /* NotificationService.m */; };
 		5860FD2520B7B0F1005AA1DA /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		58639D7B2338BAB9005B39FA /* TopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58639D792338BAB9005B39FA /* TopupViewController.m */; };
+		58639D7C2338BAB9005B39FA /* TopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58639D7A2338BAB9005B39FA /* TopupViewController.xib */; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
 		586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */ = {isa = PBXBuildFile; fileRef = 586F371E207B049400E12F95 /* ContinentAndCountryBean.json */; };
 		58779A9922642976008590EE /* ETHExportKeystorePWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58779A9722642976008590EE /* ETHExportKeystorePWViewController.m */; };
@@ -1937,6 +1939,9 @@
 		5860FD2020B7B0F1005AA1DA /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		5860FD2220B7B0F1005AA1DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5860FD2920B7B0FA005AA1DA /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
+		58639D782338BAB9005B39FA /* TopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupViewController.h; sourceTree = "<group>"; };
+		58639D792338BAB9005B39FA /* TopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupViewController.m; sourceTree = "<group>"; };
+		58639D7A2338BAB9005B39FA /* TopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupViewController.xib; sourceTree = "<group>"; };
 		586EE0962089951D009EAF40 /* FriendStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendStatusModel.h; sourceTree = "<group>"; };
 		586EE0972089951D009EAF40 /* FriendStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendStatusModel.m; sourceTree = "<group>"; };
 		586F371E207B049400E12F95 /* ContinentAndCountryBean.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContinentAndCountryBean.json; sourceTree = "<group>"; };
@@ -2940,6 +2945,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				58639D772338BA52005B39FA /* Topup */,
 				58F3184D22D31BDB0024B4F0 /* OTC */,
 				585D1EF1225DEA9A00468C4A /* My */,
 				589D470D225B325200A4A4E3 /* Finance */,
@@ -4281,6 +4287,16 @@
 				5860FD2220B7B0F1005AA1DA /* Info.plist */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		58639D772338BA52005B39FA /* Topup */ = {
+			isa = PBXGroup;
+			children = (
+				58639D782338BAB9005B39FA /* TopupViewController.h */,
+				58639D792338BAB9005B39FA /* TopupViewController.m */,
+				58639D7A2338BAB9005B39FA /* TopupViewController.xib */,
+			);
+			path = Topup;
 			sourceTree = "<group>";
 		};
 		586EE0952089950A009EAF40 /* P2PModel */ = {
@@ -5679,6 +5695,7 @@
 				581F825522F7C1EE00F8291E /* NEOCreateWalletViewController.xib in Resources */,
 				5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */,
 				581925832114363E009AE406 /* PageThreeView.xib in Resources */,
+				58639D7C2338BAB9005B39FA /* TopupViewController.xib in Resources */,
 				581F80B122F7BE1200F8291E /* HomeBuySellCell.xib in Resources */,
 				581F835822F7C42D00F8291E /* PasswordManagementViewController.xib in Resources */,
 				58FB8D8C2265AB970075698E /* GuangGaoCollectionCell.xib in Resources */,
@@ -6071,6 +6088,7 @@
 				587ABD6721B8F8F800C3D81A /* EOS_BaseResult.m in Sources */,
 				587ABD4121B8F8F700C3D81A /* GetBlockChainInfoRequest.m in Sources */,
 				58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */,
+				58639D7B2338BAB9005B39FA /* TopupViewController.m in Sources */,
 				5825552D22EACF9100F0B9F0 /* ZQImageRotationController.m in Sources */,
 				58F3185122D33CB60024B4F0 /* HomeBuySellViewController.m in Sources */,
 				587ABD5E21B8F8F800C3D81A /* EOSResourceResult.m in Sources */,
