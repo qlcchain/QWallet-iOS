@@ -84,6 +84,16 @@
 					//return err;
 				});
 			},
+            // signature
+            signature:function (unsignedRawTx, privateKey, responseCallback) {
+                
+                const signature = Neon.wallet.sign(unsignedRawTx, privateKey);
+
+                const result = {
+                    'signature': signature
+                }
+                responseCallback(result);
+            }
 		})
 
 	</script>

@@ -252,7 +252,8 @@
         [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
-            [weakself.navigationController popViewControllerAnimated:YES];
+//            [weakself.navigationController popViewControllerAnimated:YES];
+            [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }

@@ -4,6 +4,8 @@ inhibit_all_warnings!
 
 use_frameworks!
 
+#更新pod请用pod install
+
 #  shadowsock-----pod
 def socket
 #    pod 'CocoaAsyncSocket', '~> 7.4.3'
@@ -20,21 +22,22 @@ def tunnel
 end
 
 def eth
-    pod 'BigInt', '~> 3.0'
     pod 'R.swift'
-#    pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
-    pod 'JSONRPCKit', '3.0.0'
-    pod 'PromiseKit', '~> 6.0'
-    pod 'APIKit'
-#    pod 'Eureka'
-    pod 'Eureka', '4.2.0'
+    pod 'PromiseKit'
     pod 'KeychainSwift'
+    pod 'APIKit'
+    pod 'JSONRPCKit'
+    pod 'Eureka', '4.2.0'
     pod 'Moya', '~> 10.0.1'
-    pod 'TrustCore', :git=>'https://github.com/TrustWallet/trust-core', :branch=>'master'
-    pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master'
+    
+    pod 'BigInt', '~> 3.0' #参考ETHFramework
+    pod 'TrustCore', :git=>'https://github.com/TrustWallet/trust-core', :branch=>'master' #参考ETHFramework
+    pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master' #参考ETHFramework
+    pod 'TrustWalletSDK', :git=>'https://github.com/TrustWallet/TrustSDK-iOS', :branch=>'master' #参考ETHFramework
+    pod 'TrustWeb3Provider', :git=>'https://github.com/TrustWallet/trust-web3-provider', :commit=>'f4e0ebb1b8fa4812637babe85ef975d116543dfd' #参考ETHFramework
+
+#    pod 'Eureka'
 #    pod 'TrezorCrypto'
-    pod 'TrustWeb3Provider', :git=>'https://github.com/TrustWallet/trust-web3-provider', :commit=>'f4e0ebb1b8fa4812637babe85ef975d116543dfd'
-    pod 'TrustWalletSDK', :git=>'https://github.com/TrustWallet/TrustSDK-iOS', :branch=>'master'
 #    pod 'Result', '~> 3.0'
 end
 
@@ -50,8 +53,19 @@ def qlc
 #  pod 'HandyJSON'   #(已集成在QLCFramework中)
 end
 
-target "Qlink" do
+def app
 
+    pod 'Firebase/Core', '~> 5.4.1'
+    pod 'TTGTagCollectionView'
+    pod 'NinaPagerView'
+    pod 'BGFMDB'
+    pod 'TYCyclePagerView'
+    pod 'dsBridge'
+  
+end
+  
+target "Qlink" do
+  
 #    pod 'AFNetworking'
 #    pod 'IQKeyboardManager'
 #    pod 'Masonry'
@@ -68,14 +82,6 @@ target "Qlink" do
 #    pod 'SwiftTheme', '0.4.1'
 #    pod 'Charts', '3.1.0'
 
-    pod 'Firebase/Core', '~> 5.4.1'
-    pod 'OLImageView'
-    pod 'TTGTagCollectionView'
-    pod 'NinaPagerView'
-    pod 'BGFMDB'
-    pod 'TYCyclePagerView'
-    pod 'dsBridge'
-
 #  shadowsock
 #    pod 'MMWormhole'
 #    pod 'SwiftColor'
@@ -88,26 +94,6 @@ target "Qlink" do
     socket
     eth
     qlc
+    app
 
-end
-
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-#        if ['JSONRPCKit'].include? target.name
-#            target.build_configurations.each do |config|
-#                config.build_settings['SWIFT_VERSION'] = '3.0'
-#            end
-#        end
-        if ['TrustKeystore'].include? target.name
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
-            end
-        end
-        # if target.name != 'Realm'
-        #     target.build_configurations.each do |config|
-        #         config.build_settings['MACH_O_TYPE'] = 'staticlib'
-        #     end
-        # end
-    end
 end

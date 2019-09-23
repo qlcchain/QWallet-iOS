@@ -608,11 +608,11 @@
 		58990B6A219431880036FF4F /* ETHTransferConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B67219431870036FF4F /* ETHTransferConfirmView.m */; };
 		58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B6E219457EC0036FF4F /* TokenPriceModel.m */; };
 		58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B7121951EA00036FF4F /* NSString+RemoveZero.m */; };
+		589AE1B92338650200C0A666 /* QLCFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589AE1B82338650200C0A666 /* QLCFramework.framework */; };
+		589AE1BB2338656400C0A666 /* TrezorCrytoEd25519.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */; };
 		589D4711225B327500A4A4E3 /* FinanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589D470F225B327500A4A4E3 /* FinanceViewController.m */; };
 		589D4712225B327500A4A4E3 /* FinanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589D4710225B327500A4A4E3 /* FinanceViewController.xib */; };
 		589D4716225B502300A4A4E3 /* MyThemes.m in Sources */ = {isa = PBXBuildFile; fileRef = 589D4715225B502200A4A4E3 /* MyThemes.m */; };
-		589DA8782329E7CD00CC22BD /* QLCFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589DA8772329E7CD00CC22BD /* QLCFramework.framework */; };
-		589DA87A2329E7D300CC22BD /* QLCFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 589DA8772329E7CD00CC22BD /* QLCFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		589DA89D2329FF1100CC22BD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589DA89B2329FF1000CC22BD /* Realm.framework */; };
 		589DA8A0232A004900CC22BD /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 589DA89B2329FF1000CC22BD /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		589DA8A1232A004900CC22BD /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589DA89C2329FF1100CC22BD /* RealmSwift.framework */; };
@@ -727,6 +727,8 @@
 		58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E56206E26AB00ACFC65 /* BuyQlcView.m */; };
 		58DF8E61206E26AC00ACFC65 /* WalletAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF8E5B206E26AC00ACFC65 /* WalletAddressView.m */; };
 		58E032B121883F500061C72D /* ETHTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E032AF21883F500061C72D /* ETHTransferViewController.m */; };
+		58E0DAE02334DACE00549018 /* OLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E0DADB2334DACE00549018 /* OLImageView.m */; };
+		58E0DAE12334DACE00549018 /* OLImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E0DADC2334DACE00549018 /* OLImage.m */; };
 		58E3997422B376610029D105 /* VerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E3997222B376610029D105 /* VerificationViewController.m */; };
 		58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E41C4B2181CA36004C87AA /* WalletHomeSwitchCell.m */; };
 		58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E41C512182C1D6004C87AA /* ETHWalletDetailViewController.m */; };
@@ -860,7 +862,6 @@
 				58BAFC75232A40E200421C70 /* Charts.framework in Embed Frameworks */,
 				589DA8A0232A004900CC22BD /* Realm.framework in Embed Frameworks */,
 				58BAFC61232A2F8700421C70 /* MJExtension.framework in Embed Frameworks */,
-				589DA87A2329E7D300CC22BD /* QLCFramework.framework in Embed Frameworks */,
 				58BAFC5F232A2F8700421C70 /* MBProgressHUD.framework in Embed Frameworks */,
 				58BAFC65232A2F8700421C70 /* SDWebImage.framework in Embed Frameworks */,
 				58BAFC59232A2F8600421C70 /* Hero.framework in Embed Frameworks */,
@@ -2136,12 +2137,13 @@
 		58990B6E219457EC0036FF4F /* TokenPriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenPriceModel.m; sourceTree = "<group>"; };
 		58990B7021951EA00036FF4F /* NSString+RemoveZero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RemoveZero.h"; sourceTree = "<group>"; };
 		58990B7121951EA00036FF4F /* NSString+RemoveZero.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RemoveZero.m"; sourceTree = "<group>"; };
+		589AE1B82338650200C0A666 /* QLCFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QLCFramework.framework; sourceTree = "<group>"; };
+		589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TrezorCrytoEd25519.framework; sourceTree = "<group>"; };
 		589D470E225B327500A4A4E3 /* FinanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceViewController.h; sourceTree = "<group>"; };
 		589D470F225B327500A4A4E3 /* FinanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceViewController.m; sourceTree = "<group>"; };
 		589D4710225B327500A4A4E3 /* FinanceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceViewController.xib; sourceTree = "<group>"; };
 		589D4714225B502200A4A4E3 /* MyThemes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThemes.h; sourceTree = "<group>"; };
 		589D4715225B502200A4A4E3 /* MyThemes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyThemes.m; sourceTree = "<group>"; };
-		589DA8772329E7CD00CC22BD /* QLCFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QLCFramework.framework; sourceTree = "<group>"; };
 		589DA89B2329FF1000CC22BD /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		589DA89C2329FF1100CC22BD /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		589E59C622D43427000338B7 /* HomeBuySellCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeBuySellCell.h; sourceTree = "<group>"; };
@@ -2328,6 +2330,11 @@
 		58DF8E5B206E26AC00ACFC65 /* WalletAddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAddressView.m; sourceTree = "<group>"; };
 		58E032AE21883F500061C72D /* ETHTransferViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETHTransferViewController.h; sourceTree = "<group>"; };
 		58E032AF21883F500061C72D /* ETHTransferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETHTransferViewController.m; sourceTree = "<group>"; };
+		58E0DADB2334DACE00549018 /* OLImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLImageView.m; sourceTree = "<group>"; };
+		58E0DADC2334DACE00549018 /* OLImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLImage.m; sourceTree = "<group>"; };
+		58E0DADD2334DACE00549018 /* OLImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLImageView.h; sourceTree = "<group>"; };
+		58E0DADE2334DACE00549018 /* OLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLImage.h; sourceTree = "<group>"; };
+		58E0DADF2334DACE00549018 /* OLImageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLImageViewDelegate.h; sourceTree = "<group>"; };
 		58E3997122B376610029D105 /* VerificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerificationViewController.h; sourceTree = "<group>"; };
 		58E3997222B376610029D105 /* VerificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerificationViewController.m; sourceTree = "<group>"; };
 		58E41C4A2181CA36004C87AA /* WalletHomeSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletHomeSwitchCell.h; sourceTree = "<group>"; };
@@ -2531,6 +2538,7 @@
 			files = (
 				58C07B802328F00C0088D18E /* Pods_Qlink.framework in Frameworks */,
 				58BAFC43232A2ED400421C70 /* AFNetworking.framework in Frameworks */,
+				589AE1B92338650200C0A666 /* QLCFramework.framework in Frameworks */,
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
 				58A71E7222A00E6F00C22D8C /* ETHFramework.framework in Frameworks */,
 				589DA8A1232A004900CC22BD /* RealmSwift.framework in Frameworks */,
@@ -2554,11 +2562,11 @@
 				58BAFC54232A2F0900421C70 /* Hero.framework in Frameworks */,
 				58BAFC6F232A3D4200421C70 /* SwiftTheme.framework in Frameworks */,
 				581D32E6219C15CD001F88C3 /* neoutils.framework in Frameworks */,
-				589DA8782329E7CD00CC22BD /* QLCFramework.framework in Frameworks */,
 				58BAFC52232A2F0900421C70 /* SDWebImage.framework in Frameworks */,
 				58BAFC51232A2F0900421C70 /* IQKeyboardManager.framework in Frameworks */,
 				58BAFC5E232A2F8700421C70 /* MBProgressHUD.framework in Frameworks */,
 				589DA89D2329FF1100CC22BD /* Realm.framework in Frameworks */,
+				589AE1BB2338656400C0A666 /* TrezorCrytoEd25519.framework in Frameworks */,
 				734F529220B6BDEE002D45B7 /* libMiPushSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2888,6 +2896,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				58E0DADA2334DACE00549018 /* OLImageView */,
 				5885D41D231E491800F9DEDE /* AFJSONRPCClient */,
 				58822DC2230E9DF7007C8DC2 /* CQScrollMenuView */,
 				582554CF22EACF9100F0B9F0 /* CropImage */,
@@ -4019,7 +4028,8 @@
 		582B114A22952B3D005E2288 /* QLC */ = {
 			isa = PBXGroup;
 			children = (
-				589DA8772329E7CD00CC22BD /* QLCFramework.framework */,
+				589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */,
+				589AE1B82338650200C0A666 /* QLCFramework.framework */,
 			);
 			path = QLC;
 			sourceTree = "<group>";
@@ -5188,6 +5198,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		58E0DADA2334DACE00549018 /* OLImageView */ = {
+			isa = PBXGroup;
+			children = (
+				58E0DADB2334DACE00549018 /* OLImageView.m */,
+				58E0DADC2334DACE00549018 /* OLImage.m */,
+				58E0DADD2334DACE00549018 /* OLImageView.h */,
+				58E0DADE2334DACE00549018 /* OLImage.h */,
+				58E0DADF2334DACE00549018 /* OLImageViewDelegate.h */,
+			);
+			path = OLImageView;
+			sourceTree = "<group>";
+		};
 		58F3184D22D31BDB0024B4F0 /* OTC */ = {
 			isa = PBXGroup;
 			children = (
@@ -5469,6 +5491,7 @@
 				09D7B0261B241149721BA6FE /* [CP] Copy Pods Resources */,
 				587ABD8A21BA4D6800C3D81A /* BuildNum */,
 				58C07BA12328FD3B0088D18E /* Embed Frameworks */,
+				5885318E2338ADF5009DF4C7 /* AppStore Framework */,
 			);
 			buildRules = (
 			);
@@ -5815,7 +5838,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NinaPagerView/NinaPagerView.framework",
-				"${BUILT_PRODUCTS_DIR}/OLImageView/OLImageView.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -5842,7 +5864,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NinaPagerView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OLImageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -5902,6 +5923,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "version=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $PRODUCT_SETTINGS_PATH`\nversion=`expr $version + 1`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $version\" $PRODUCT_SETTINGS_PATH\n\n\n";
+		};
+		5885318E2338ADF5009DF4C7 /* AppStore Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "AppStore Framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
 		};
 		58B4716F20D9FA05007D9D7E /* UploadBuglySymbol */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6016,6 +6055,7 @@
 				73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */,
 				58245C4E22E192550093E747 /* TZPhotoPickerController.m in Sources */,
 				587ABD4221B8F8F800C3D81A /* GetRequiredPublicKeyRequest.m in Sources */,
+				58E0DAE12334DACE00549018 /* OLImage.m in Sources */,
 				73A05A242081D52200974483 /* UIImage+RoundedCorner.m in Sources */,
 				5812DDA620A1A7890043A8A8 /* ZXChatBoxController.m in Sources */,
 				5825554822EACF9200F0B9F0 /* PECropRectView.m in Sources */,
@@ -6278,6 +6318,7 @@
 				58B947E62064A5AD007F52F6 /* UIView+Gradient.m in Sources */,
 				581D32C2219C158B001F88C3 /* NeoScan.swift in Sources */,
 				5895701F21897ACF00DB7497 /* ChooseCurrencyCell.m in Sources */,
+				58E0DAE02334DACE00549018 /* OLImageView.m in Sources */,
 				581AFC4121B7AEE8001A37E1 /* EOSResourcesViewController.m in Sources */,
 				58F3185622D345530024B4F0 /* NewOrderViewController.m in Sources */,
 				58B2D49F2321120300C15465 /* NSString+RandomStr.m in Sources */,

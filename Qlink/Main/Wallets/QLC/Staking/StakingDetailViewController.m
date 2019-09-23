@@ -17,6 +17,7 @@
 #import "RevokingProcessView.h"
 #import "StakingUtil.h"
 #import "NEOWalletInfo.h"
+#import "RefreshHelper.h"
 
 @interface StakingDetailViewController ()
 
@@ -34,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *stakeToLab;
 @property (weak, nonatomic) IBOutlet UILabel *transactionLab;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (nonatomic, strong) RevokingProcessView *revokingProcessV;
 @property (nonatomic, strong) QContractView *contractV;
 
@@ -45,10 +47,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self configRefresh];
     [self configInit];
 }
 
 #pragma mark - Operation
+- (void)configRefresh {
+    kWeakSelf(self);
+    _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+        [weakself ledger_pledgeInfoByTransactionID];
+    }];
+}
+
 - (void)configInit {
     UIImage *iconImg = nil;
     NSString *title = @"";
@@ -64,8 +74,9 @@
         stateStr = kLang(@"not_succeed_continue_to_invoke");
         stateArrowHidden = NO;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
-        stateStr = _inputPledgeM.state;
-        stateArrowHidden = YES;
+//        stateStr = _inputPledgeM.state;
+        stateStr = kLang(@"pledge_process");
+        stateArrowHidden = NO;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
         if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) {
             stateStr = kLang(@"revoke");
@@ -75,13 +86,13 @@
             stateArrowHidden = YES;
         }
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
-        stateStr = _inputPledgeM.state;
+        stateStr = kLang(@"withdraw_start");
         stateArrowHidden = NO;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawProcess]) {
-        stateStr = _inputPledgeM.state;
-        stateArrowHidden = YES;
+        stateStr = kLang(@"withdraw_process");
+        stateArrowHidden = NO;
     } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawDone]) {
-        stateStr = kLang(@"withdraw_complete");
+        stateStr = kLang(@"withdraw_done");
         stateArrowHidden = YES;
     }
     _icon.image = iconImg;
@@ -113,23 +124,26 @@
     NSString *beneficial = qlcAddress;
     NSString *qlcAmount = _inputPledgeM.amount;
     NSString *lockTxId = _inputPledgeM.nep5TxId;
+    NSString *multisigAddress = _inputPledgeM.multiSigAddress;
     kWeakSelf(self);
     _contractV = [QContractView addQContractView];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
-    [_contractV request_benefit_neo_address:lockTxId resultHandler:^(NSString * _Nonnull result, BOOL success) {
+    [_contractV nep5_getLockInfo:lockTxId resultHandler:^(NSString * _Nonnull result, BOOL success) {
         if (success) {
             NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:result];
+            NSString *neo_privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:result];
             if (!neo_publicKey) {
                 [kAppD.window hideToast];
-                [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+                [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@(%@)",kLang(@"the_wallet_is_none___"),result]];
                 return;
             }
-            [weakself.contractV nep5_benefitWithdraw:lockTxId beneficial:beneficial amount:qlcAmount qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey neo_publicKey:neo_publicKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+            [weakself.contractV nep5_benefitWithdraw:lockTxId beneficial:beneficial amount:qlcAmount qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey neo_publicKey:neo_publicKey neo_privateKey:neo_privateKey multisigAddress:multisigAddress resultHandler:^(NSString * _Nonnull result, BOOL success) {
                 [kAppD.window hideToast];
                 [QContractView removeQContractView:weakself.contractV];
                 if (success) {
                     [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
-                    [weakself ledger_pledgeInfoByTransactionID];
+//                    [weakself ledger_pledgeInfoByTransactionID];
+                    [weakself.navigationController popToRootViewControllerAnimated:YES];
                 } else {
                     [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
                 }
@@ -139,9 +153,6 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     }];
-    
-    
-    
 }
 
 - (void)vote_continueInvoke {
@@ -162,7 +173,8 @@
         [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
-            [weakself ledger_pledgeInfoByTransactionID];
+//            [weakself ledger_pledgeInfoByTransactionID];
+            [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
@@ -183,7 +195,8 @@
         [QContractView removeQContractView:weakself.contractV];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
-            [weakself ledger_pledgeInfoByTransactionID];
+//            [weakself ledger_pledgeInfoByTransactionID];
+            [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
@@ -212,12 +225,13 @@
     DDLogDebug(@"ledger_pledgeInfoByTransactionID params = %@",params);
     [client invokeMethod:@"ledger_pledgeInfoByTransactionID" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
         DDLogDebug(@"ledger_pledgeInfoByTransactionID responseObject=%@",responseObject);
-        
+        [weakself.mainScroll.mj_header endRefreshing];
         if (responseObject) {
             weakself.inputPledgeM = [PledgeInfoByBeneficialModel mj_objectWithKeyValues:responseObject];
             [weakself configInit];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [weakself.mainScroll.mj_header endRefreshing];
         NSLog(@"error=%@",error);
     }];
     
@@ -234,30 +248,30 @@
         if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeStart]) {
             [self vote_continueInvoke];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
+            [self vote_continueInvoke];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
             if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) { // 可赎回
                  [self startBenefitWithdraw];
             } else {
-
             }
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
             [self startBenefitWithdraw];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawProcess]) {
+//            [self startBenefitWithdraw];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawDone]) {
         }
     } else if ([_inputPledgeM.pType isEqualToString:@"mintage"]) {
         if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeStart]) {
-            
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
             if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) { // 可赎回
                 [self startMintageWithdraw];
             } else {
-                
             }
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawStart]) {
             [self startMintageWithdraw];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawProcess]) {
+//            [self startMintageWithdraw];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_WithdrawDone]) {
         }
     }

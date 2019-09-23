@@ -45,11 +45,11 @@
             stateStr = kLang(@"staking_in_progress");
         }
     } else if ([model.state isEqualToString:PledgeState_WithdrawStart]) {
-        stateStr = model.state;
+        stateStr = kLang(@"withdraw_start");
     } else if ([model.state isEqualToString:PledgeState_WithdrawProcess]) {
-        stateStr = model.state;
+        stateStr = kLang(@"withdraw_process");
     } else if ([model.state isEqualToString:PledgeState_WithdrawDone]) {
-        stateStr = model.state;
+        stateStr = kLang(@"withdraw_done");
     }
     _stateLab.text = stateStr;
     
