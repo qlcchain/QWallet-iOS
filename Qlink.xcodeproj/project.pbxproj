@@ -572,6 +572,8 @@
 		58822DC8230E9DF8007C8DC2 /* UIView+frameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */; };
 		58822DCC230F9DBE007C8DC2 /* PayQLCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC9230F9DB8007C8DC2 /* PayQLCViewController.m */; };
 		58822DCE23102442007C8DC2 /* PayQLCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58822DD023102442007C8DC2 /* PayQLCViewController.xib */; };
+		5884736F233A083D00BB6F76 /* TopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5884736C233A083D00BB6F76 /* TopupCell.xib */; };
+		58847370233A083D00BB6F76 /* TopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5884736E233A083D00BB6F76 /* TopupCell.m */; };
 		5885D414231E0CDE00F9DEDE /* JsApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5885D413231E0CDD00F9DEDE /* JsApiTest.m */; };
 		5885D420231E491800F9DEDE /* AFJSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5885D41E231E491800F9DEDE /* AFJSONRPCClient.m */; };
 		5885D422231E4EC100F9DEDE /* contract.html in Resources */ = {isa = PBXBuildFile; fileRef = 5885D421231E4EC100F9DEDE /* contract.html */; };
@@ -586,7 +588,6 @@
 		5885D458231F49E400F9DEDE /* StakingDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5885D45A231F49E400F9DEDE /* StakingDetailViewController.xib */; };
 		5885D461231F997300F9DEDE /* QContractView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5885D460231F997300F9DEDE /* QContractView.m */; };
 		588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 588A7021208DD29B004B41D4 /* Assets.xcassets */; };
-		588A7024208DD2CC004B41D4 /* launchAnimate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 588A7023208DD2CC004B41D4 /* launchAnimate.gif */; };
 		588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 588A7026208DE67F004B41D4 /* ToxRequestModel.m */; };
 		5893721722A664A800BD5CB6 /* QLCTokenInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5893721622A664A800BD5CB6 /* QLCTokenInfoModel.m */; };
 		5894A709225F3105008B0854 /* FinanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A707225F3105008B0854 /* FinanceCell.m */; };
@@ -2066,6 +2067,9 @@
 		58822DC9230F9DB8007C8DC2 /* PayQLCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayQLCViewController.m; sourceTree = "<group>"; };
 		58822DCB230F9DBC007C8DC2 /* PayQLCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayQLCViewController.h; sourceTree = "<group>"; };
 		58822DCF23102442007C8DC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PayQLCViewController.xib; sourceTree = "<group>"; };
+		5884736C233A083D00BB6F76 /* TopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopupCell.xib; sourceTree = "<group>"; };
+		5884736D233A083D00BB6F76 /* TopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupCell.h; sourceTree = "<group>"; };
+		5884736E233A083D00BB6F76 /* TopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupCell.m; sourceTree = "<group>"; };
 		5885D412231E0CDD00F9DEDE /* JsApiTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsApiTest.h; sourceTree = "<group>"; };
 		5885D413231E0CDD00F9DEDE /* JsApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsApiTest.m; sourceTree = "<group>"; };
 		5885D41E231E491800F9DEDE /* AFJSONRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRPCClient.m; sourceTree = "<group>"; };
@@ -2100,7 +2104,6 @@
 		5885D45F231F997300F9DEDE /* QContractView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QContractView.h; sourceTree = "<group>"; };
 		5885D460231F997300F9DEDE /* QContractView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QContractView.m; sourceTree = "<group>"; };
 		588A7021208DD29B004B41D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		588A7023208DD2CC004B41D4 /* launchAnimate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchAnimate.gif; sourceTree = "<group>"; };
 		588A7025208DE67F004B41D4 /* ToxRequestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToxRequestModel.h; sourceTree = "<group>"; };
 		588A7026208DE67F004B41D4 /* ToxRequestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToxRequestModel.m; sourceTree = "<group>"; };
 		5893721522A664A800BD5CB6 /* QLCTokenInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCTokenInfoModel.h; sourceTree = "<group>"; };
@@ -2676,7 +2679,6 @@
 				73FF64F120F599E600E29B3B /* CountryList.json */,
 				586F371E207B049400E12F95 /* ContinentAndCountryBean.json */,
 				58CDB5DF20871DBE00B74962 /* tox.json */,
-				588A7023208DD2CC004B41D4 /* launchAnimate.gif */,
 				588A7021208DD29B004B41D4 /* Assets.xcassets */,
 				58A4DEB8206234AC00E72F52 /* main.m */,
 				580D919720638F8900B12506 /* Qlink-Bridging-Header.h */,
@@ -4292,6 +4294,7 @@
 		58639D772338BA52005B39FA /* Topup */ = {
 			isa = PBXGroup;
 			children = (
+				5884736B233A07E800BB6F76 /* Cell */,
 				58639D782338BAB9005B39FA /* TopupViewController.h */,
 				58639D792338BAB9005B39FA /* TopupViewController.m */,
 				58639D7A2338BAB9005B39FA /* TopupViewController.xib */,
@@ -4782,6 +4785,16 @@
 			path = CQScrollMenuView;
 			sourceTree = "<group>";
 		};
+		5884736B233A07E800BB6F76 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5884736D233A083D00BB6F76 /* TopupCell.h */,
+				5884736E233A083D00BB6F76 /* TopupCell.m */,
+				5884736C233A083D00BB6F76 /* TopupCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		5885D415231E16C200F9DEDE /* contract */ = {
 			isa = PBXGroup;
 			children = (
@@ -4840,7 +4853,7 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		5894A705225F30F0008B0854 /* Cel */ = {
+		5894A705225F30F0008B0854 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				5894A706225F3105008B0854 /* FinanceCell.h */,
@@ -4862,7 +4875,7 @@
 				58FB8D8E2265B6C10075698E /* FinanceHistoryCell.m */,
 				58FB8D8F2265B6C10075698E /* FinanceHistoryCell.xib */,
 			);
-			path = Cel;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5894A70B225F44B7008B0854 /* FinanceModel */ = {
@@ -4950,7 +4963,7 @@
 			isa = PBXGroup;
 			children = (
 				5894A71E22606273008B0854 /* View */,
-				5894A705225F30F0008B0854 /* Cel */,
+				5894A705225F30F0008B0854 /* Cell */,
 				589D470E225B327500A4A4E3 /* FinanceViewController.h */,
 				589D470F225B327500A4A4E3 /* FinanceViewController.m */,
 				589D4710225B327500A4A4E3 /* FinanceViewController.xib */,
@@ -5507,7 +5520,7 @@
 				09D7B0261B241149721BA6FE /* [CP] Copy Pods Resources */,
 				587ABD8A21BA4D6800C3D81A /* BuildNum */,
 				58C07BA12328FD3B0088D18E /* Embed Frameworks */,
-				5885318E2338ADF5009DF4C7 /* AppStore Framework */,
+				5885C71B2339C9F300E5AFF9 /* AppStore Framework */,
 			);
 			buildRules = (
 			);
@@ -5688,6 +5701,7 @@
 				589D4712225B327500A4A4E3 /* FinanceViewController.xib in Resources */,
 				581F820F22F7C17000F8291E /* EOSAccountQRViewController.xib in Resources */,
 				58245C5922E197CE0093E747 /* ComplaintPhotoCell.xib in Resources */,
+				5884736F233A083D00BB6F76 /* TopupCell.xib in Resources */,
 				581F810522F7BEDC00F8291E /* TradeOrderDetailViewController.xib in Resources */,
 				58C9283022FA7A540020BDC0 /* ShareFriendsCell.xib in Resources */,
 				581A347B21AE653400623685 /* AddMarketsViewController.xib in Resources */,
@@ -5752,7 +5766,6 @@
 				580D91B42063AE5300B12506 /* Roboto-LightItalic.ttf in Resources */,
 				58DA5BB02322330E004E8D5A /* StakingProcessView.xib in Resources */,
 				581F834322F7C3FE00F8291E /* SettingsViewController.xib in Resources */,
-				588A7024208DD2CC004B41D4 /* launchAnimate.gif in Resources */,
 				585CDC20225C99EE00199FE1 /* CountryCode.json in Resources */,
 				581F819122F7C05700F8291E /* DeleteWalletConfirmView.xib in Resources */,
 				581F80E222F7BE8E00F8291E /* PayReceiveAddressViewController.xib in Resources */,
@@ -5941,7 +5954,7 @@
 			shellPath = /bin/sh;
 			shellScript = "version=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $PRODUCT_SETTINGS_PATH`\nversion=`expr $version + 1`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $version\" $PRODUCT_SETTINGS_PATH\n\n\n";
 		};
-		5885318E2338ADF5009DF4C7 /* AppStore Framework */ = {
+		5885C71B2339C9F300E5AFF9 /* AppStore Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5957,7 +5970,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=0\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
 		};
 		58B4716F20D9FA05007D9D7E /* UploadBuglySymbol */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6130,6 +6143,7 @@
 				58245C4622E192550093E747 /* TZVideoPlayerController.m in Sources */,
 				581A347421AE39C200623685 /* MarketSortBtn.m in Sources */,
 				587ABD4921B8F8F800C3D81A /* Abi_json_to_bin_Result.m in Sources */,
+				58847370233A083D00BB6F76 /* TopupCell.m in Sources */,
 				5894EC4B217EC798007F5D39 /* ETHMnemonicConfirmViewController.m in Sources */,
 				58DF8E61206E26AC00ACFC65 /* WalletAddressView.m in Sources */,
 				58245C4C22E192550093E747 /* TZProgressView.m in Sources */,

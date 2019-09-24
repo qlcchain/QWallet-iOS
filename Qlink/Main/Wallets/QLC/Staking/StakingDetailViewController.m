@@ -155,7 +155,7 @@
     }];
 }
 
-- (void)vote_continueInvoke {
+- (void)vote_continueInvoke_pledgestart {
     if (!_inputPledgeM) {
         return;
     }
@@ -176,6 +176,45 @@
 //            [weakself ledger_pledgeInfoByTransactionID];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+        }
+    }];
+}
+
+- (void)vote_continueInvoke_pledgeprocess {
+    if (!_inputPledgeM) {
+        return;
+    }
+    NSString *qlcAddress = _inputPledgeM.beneficial;
+    NSString *qlc_publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:qlcAddress];
+    NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:qlcAddress];
+    NSString *lockTxId = _inputPledgeM.nep5TxId;
+    NSString *qlcAmount = [NSString stringWithFormat:@"%@",@([_inputPledgeM.amount doubleValue]/QLC_UnitNum)];
+    NSString *multiSigAddress = _inputPledgeM.multiSigAddress;
+    kWeakSelf(self);
+    _contractV = [QContractView addQContractView];
+    [self showRevokingProcessView];
+    [_contractV nep5_getLockInfo:lockTxId resultHandler:^(NSString * _Nonnull result, BOOL success) {
+        if (success) {
+            NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:result];
+            if (!neo_publicKey) {
+                [weakself hideRevokingProcessView];
+                [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@(%@)",kLang(@"the_wallet_is_none___"),result]];
+                return;
+            }
+            [_contractV nep5_prePareBenefitPledge:qlcAddress qlcAmount:qlcAmount multiSigAddress:multiSigAddress neo_publicKey:neo_publicKey lockTxId:lockTxId qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+        //    [_contractV benefit_getnep5transferbytxid:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:^(NSString * _Nonnull result, BOOL success) {
+                [weakself hideRevokingProcessView];
+                [QContractView removeQContractView:weakself.contractV];
+                if (success) {
+                    [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
+                    [weakself.navigationController popToRootViewControllerAnimated:YES];
+                } else {
+                    [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+                }
+            }];
+        } else {
+            [weakself hideRevokingProcessView];
             [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
         }
     }];
@@ -246,9 +285,9 @@
 - (IBAction)stateBtnAction:(id)sender {
     if ([_inputPledgeM.pType isEqualToString:@"vote"]) {
         if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeStart]) {
-            [self vote_continueInvoke];
+            [self vote_continueInvoke_pledgestart];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeProcess]) {
-            [self vote_continueInvoke];
+            [self vote_continueInvoke_pledgeprocess];
         } else if ([_inputPledgeM.state isEqualToString:PledgeState_PledgeDone]) {
             if ([StakingUtil isRedeemable:[_inputPledgeM.withdrawTime doubleValue]]) { // 可赎回
                  [self startBenefitWithdraw];

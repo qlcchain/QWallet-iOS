@@ -70,7 +70,7 @@
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
-    [self addChildViewController:[[TopupViewController alloc] init] text:kLang(@"top_up") imageName:@"finance"];
+    [self addChildViewController:[[TopupViewController alloc] init] text:kLang(@"top_up") imageName:@"topup"];
 //    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
     [self addChildViewController:[[HomeBuySellViewController alloc] init] text:kLang(@"finance") imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];

@@ -49,6 +49,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     [self renderView];
     [self configInit];
