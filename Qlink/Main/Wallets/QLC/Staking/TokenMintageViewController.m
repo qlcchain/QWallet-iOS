@@ -273,7 +273,7 @@
 //    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
     _contractV = [QContractView addQContractView];
     [self showStakingProcessView];
-    [_contractV mintage_createMultiSig:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey tokenName:tokenName tokenSymbol:tokenSymbol totalSupply:totalSupply decimals:decimals resultHandler:^(NSString * _Nonnull result, BOOL success) {
+    [_contractV mintage_createMultiSig:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey tokenName:tokenName tokenSymbol:tokenSymbol totalSupply:totalSupply decimals:decimals resultHandler:^(NSString * _Nullable result, BOOL success, NSString * _Nullable message) {
 //        [kAppD.window hideToast];
         [weakself hideStakingProcessView];
         [QContractView removeQContractView:weakself.contractV];
@@ -282,7 +282,8 @@
 //            [weakself.navigationController popViewControllerAnimated:YES];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
-            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+            NSString *tip = [kLang(@"failed_") stringByAppendingFormat:@"(%@)",message ?: @""];
+            [kAppD.window makeToastDisappearWithText:tip];
         }
     }];
 }

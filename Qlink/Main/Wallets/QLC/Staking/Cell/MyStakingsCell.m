@@ -37,7 +37,7 @@
     if ([model.state isEqualToString:PledgeState_PledgeStart]) {
         stateStr = kLang(@"not_succeed");
     } else if ([model.state isEqualToString:PledgeState_PledgeProcess]) {
-        stateStr = model.state;
+        stateStr = kLang(@"pledge_process");
     } else if ([model.state isEqualToString:PledgeState_PledgeDone]) {
         if ([StakingUtil isRedeemable:[model.withdrawTime doubleValue]]) {
             stateStr = kLang(@"staking_in_progress_redeemable");

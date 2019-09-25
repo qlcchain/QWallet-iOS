@@ -14,6 +14,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    _discountBack.layer.cornerRadius = 14;
+    _discountBack.layer.masksToBounds = YES;
+    _contentBack.layer.cornerRadius = 10;
+    _contentBack.layer.masksToBounds = YES;
 }
 
 - (void)prepareForReuse {

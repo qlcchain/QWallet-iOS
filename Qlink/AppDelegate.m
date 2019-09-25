@@ -170,6 +170,10 @@
     }
 }
 
+- (void)jumpToOTC {
+    kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
+}
+
 #pragma mark - Login
 //- (void)setRootLoginNew {
 //    LoginViewController *vc = [[LoginViewController alloc] init];

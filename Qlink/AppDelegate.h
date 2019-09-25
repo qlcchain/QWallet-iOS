@@ -27,6 +27,7 @@
 - (void)presentLoginNew;
 - (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock;
 - (void)jumpToWallet;
+- (void)jumpToOTC;
 - (void)logout;
 
 @end

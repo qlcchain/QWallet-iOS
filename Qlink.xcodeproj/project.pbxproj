@@ -646,6 +646,18 @@
 		58A801CA226DC7A200640BBC /* RegisterMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801C8226DC7A200640BBC /* RegisterMailViewController.m */; };
 		58A801CF226DC7B800640BBC /* RegisterSetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801CD226DC7B800640BBC /* RegisterSetPWViewController.m */; };
 		58A801D4226DC7DC00640BBC /* SetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A801D2226DC7DC00640BBC /* SetPWViewController.m */; };
+		58A8B1AF233B0061007E2CE3 /* MyTopupOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8B1AD233B0061007E2CE3 /* MyTopupOrderViewController.m */; };
+		58A8B1B0233B0061007E2CE3 /* MyTopupOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A8B1AE233B0061007E2CE3 /* MyTopupOrderViewController.xib */; };
+		58A8B1B4233B048F007E2CE3 /* MyTopupOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8B1B2233B048F007E2CE3 /* MyTopupOrderCell.m */; };
+		58A8B1B5233B048F007E2CE3 /* MyTopupOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A8B1B3233B048F007E2CE3 /* MyTopupOrderCell.xib */; };
+		58A8B1B9233B09DB007E2CE3 /* ChooseTopupPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8B1B7233B09DB007E2CE3 /* ChooseTopupPlanViewController.m */; };
+		58A8B1BA233B09DB007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A8B1B8233B09DB007E2CE3 /* ChooseTopupPlanViewController.xib */; };
+		58A8B1BE233B0C79007E2CE3 /* TopupWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8B1BC233B0C79007E2CE3 /* TopupWebViewController.m */; };
+		58A8B1BF233B0C79007E2CE3 /* TopupWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A8B1BD233B0C79007E2CE3 /* TopupWebViewController.xib */; };
+		58A8B1C8233B1454007E2CE3 /* ChooseTopupPlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A8B1C5233B1453007E2CE3 /* ChooseTopupPlanCell.xib */; };
+		58A8B1C9233B1454007E2CE3 /* ChooseTopupPlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8B1C7233B1454007E2CE3 /* ChooseTopupPlanCell.m */; };
+		58A8B1CD233B389A007E2CE3 /* TopupPayQGASViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A8B1CA233B3899007E2CE3 /* TopupPayQGASViewController.xib */; };
+		58A8B1CE233B389A007E2CE3 /* TopupPayQGASViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A8B1CB233B3899007E2CE3 /* TopupPayQGASViewController.m */; };
 		58AA304F22F2D24D0041C842 /* OTCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA304E22F2D24D0041C842 /* OTCUtil.m */; };
 		58AE1AD92074D22F00CE983B /* KeyChainUitl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */; };
 		58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AE1ADC2074D23C00CE983B /* NEOWalletInfo.m */; };
@@ -2204,6 +2216,24 @@
 		58A801CD226DC7B800640BBC /* RegisterSetPWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterSetPWViewController.m; sourceTree = "<group>"; };
 		58A801D1226DC7DC00640BBC /* SetPWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetPWViewController.h; sourceTree = "<group>"; };
 		58A801D2226DC7DC00640BBC /* SetPWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetPWViewController.m; sourceTree = "<group>"; };
+		58A8B1AC233B0061007E2CE3 /* MyTopupOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTopupOrderViewController.h; sourceTree = "<group>"; };
+		58A8B1AD233B0061007E2CE3 /* MyTopupOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTopupOrderViewController.m; sourceTree = "<group>"; };
+		58A8B1AE233B0061007E2CE3 /* MyTopupOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTopupOrderViewController.xib; sourceTree = "<group>"; };
+		58A8B1B1233B048F007E2CE3 /* MyTopupOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTopupOrderCell.h; sourceTree = "<group>"; };
+		58A8B1B2233B048F007E2CE3 /* MyTopupOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTopupOrderCell.m; sourceTree = "<group>"; };
+		58A8B1B3233B048F007E2CE3 /* MyTopupOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTopupOrderCell.xib; sourceTree = "<group>"; };
+		58A8B1B6233B09DB007E2CE3 /* ChooseTopupPlanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseTopupPlanViewController.h; sourceTree = "<group>"; };
+		58A8B1B7233B09DB007E2CE3 /* ChooseTopupPlanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseTopupPlanViewController.m; sourceTree = "<group>"; };
+		58A8B1B8233B09DB007E2CE3 /* ChooseTopupPlanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTopupPlanViewController.xib; sourceTree = "<group>"; };
+		58A8B1BB233B0C79007E2CE3 /* TopupWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupWebViewController.h; sourceTree = "<group>"; };
+		58A8B1BC233B0C79007E2CE3 /* TopupWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupWebViewController.m; sourceTree = "<group>"; };
+		58A8B1BD233B0C79007E2CE3 /* TopupWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupWebViewController.xib; sourceTree = "<group>"; };
+		58A8B1C5233B1453007E2CE3 /* ChooseTopupPlanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseTopupPlanCell.xib; sourceTree = "<group>"; };
+		58A8B1C6233B1454007E2CE3 /* ChooseTopupPlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTopupPlanCell.h; sourceTree = "<group>"; };
+		58A8B1C7233B1454007E2CE3 /* ChooseTopupPlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTopupPlanCell.m; sourceTree = "<group>"; };
+		58A8B1CA233B3899007E2CE3 /* TopupPayQGASViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopupPayQGASViewController.xib; sourceTree = "<group>"; };
+		58A8B1CB233B3899007E2CE3 /* TopupPayQGASViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupPayQGASViewController.m; sourceTree = "<group>"; };
+		58A8B1CC233B389A007E2CE3 /* TopupPayQGASViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupPayQGASViewController.h; sourceTree = "<group>"; };
 		58AA304D22F2D24D0041C842 /* OTCUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCUtil.h; sourceTree = "<group>"; };
 		58AA304E22F2D24D0041C842 /* OTCUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCUtil.m; sourceTree = "<group>"; };
 		58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainUitl.swift; sourceTree = "<group>"; };
@@ -4295,9 +4325,21 @@
 			isa = PBXGroup;
 			children = (
 				5884736B233A07E800BB6F76 /* Cell */,
+				58A8B1CC233B389A007E2CE3 /* TopupPayQGASViewController.h */,
+				58A8B1CB233B3899007E2CE3 /* TopupPayQGASViewController.m */,
+				58A8B1CA233B3899007E2CE3 /* TopupPayQGASViewController.xib */,
 				58639D782338BAB9005B39FA /* TopupViewController.h */,
 				58639D792338BAB9005B39FA /* TopupViewController.m */,
 				58639D7A2338BAB9005B39FA /* TopupViewController.xib */,
+				58A8B1AC233B0061007E2CE3 /* MyTopupOrderViewController.h */,
+				58A8B1AD233B0061007E2CE3 /* MyTopupOrderViewController.m */,
+				58A8B1AE233B0061007E2CE3 /* MyTopupOrderViewController.xib */,
+				58A8B1B6233B09DB007E2CE3 /* ChooseTopupPlanViewController.h */,
+				58A8B1B7233B09DB007E2CE3 /* ChooseTopupPlanViewController.m */,
+				58A8B1B8233B09DB007E2CE3 /* ChooseTopupPlanViewController.xib */,
+				58A8B1BB233B0C79007E2CE3 /* TopupWebViewController.h */,
+				58A8B1BC233B0C79007E2CE3 /* TopupWebViewController.m */,
+				58A8B1BD233B0C79007E2CE3 /* TopupWebViewController.xib */,
 			);
 			path = Topup;
 			sourceTree = "<group>";
@@ -4788,9 +4830,15 @@
 		5884736B233A07E800BB6F76 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				58A8B1C6233B1454007E2CE3 /* ChooseTopupPlanCell.h */,
+				58A8B1C7233B1454007E2CE3 /* ChooseTopupPlanCell.m */,
+				58A8B1C5233B1453007E2CE3 /* ChooseTopupPlanCell.xib */,
 				5884736D233A083D00BB6F76 /* TopupCell.h */,
 				5884736E233A083D00BB6F76 /* TopupCell.m */,
 				5884736C233A083D00BB6F76 /* TopupCell.xib */,
+				58A8B1B1233B048F007E2CE3 /* MyTopupOrderCell.h */,
+				58A8B1B2233B048F007E2CE3 /* MyTopupOrderCell.m */,
+				58A8B1B3233B048F007E2CE3 /* MyTopupOrderCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -5672,6 +5720,7 @@
 				581F809A22F7BD8200F8291E /* VerifyTipView.xib in Resources */,
 				5885D443231F498E00F9DEDE /* ConfidantViewController.xib in Resources */,
 				580D91BA2063AE5300B12506 /* Roboto-Bold.ttf in Resources */,
+				58A8B1C8233B1454007E2CE3 /* ChooseTopupPlanCell.xib in Resources */,
 				581F834A22F7C41100F8291E /* ChooseCurrencyViewController.xib in Resources */,
 				581F818322F7C03A00F8291E /* ExportPrivateKeyQRView.xib in Resources */,
 				580D91B52063AE5300B12506 /* Roboto-Regular.ttf in Resources */,
@@ -5712,6 +5761,7 @@
 				58639D7C2338BAB9005B39FA /* TopupViewController.xib in Resources */,
 				581F80B122F7BE1200F8291E /* HomeBuySellCell.xib in Resources */,
 				581F835822F7C42D00F8291E /* PasswordManagementViewController.xib in Resources */,
+				58A8B1CD233B389A007E2CE3 /* TopupPayQGASViewController.xib in Resources */,
 				58FB8D8C2265AB970075698E /* GuangGaoCollectionCell.xib in Resources */,
 				5825553F22EACF9200F0B9F0 /* Kaiti.ttf in Resources */,
 				5825554322EACF9200F0B9F0 /* PEPhotoCropEditor.bundle in Resources */,
@@ -5753,6 +5803,7 @@
 				58FC12C3230D391F0069474C /* PayNEOViewController.xib in Resources */,
 				581F81BB22F7C0A200F8291E /* HistoryChartView.xib in Resources */,
 				581F832722F7C3B200F8291E /* SettingsCell.xib in Resources */,
+				58A8B1B5233B048F007E2CE3 /* MyTopupOrderCell.xib in Resources */,
 				581F824E22F7C1E100F8291E /* NEOTransferViewController.xib in Resources */,
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
 				5860AD4520CFB56700EEB6CE /* BuyQlcView.xib in Resources */,
@@ -5787,6 +5838,7 @@
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
 				581F82FD22F7C34A00F8291E /* ForgetPWViewController.xib in Resources */,
 				581F814B22F7BF7800F8291E /* WalletHomeSwitchCell.xib in Resources */,
+				58A8B1B0233B0061007E2CE3 /* MyTopupOrderViewController.xib in Resources */,
 				581F81D022F7C0D500F8291E /* QLCTransferViewController.xib in Resources */,
 				581F819F22F7C07300F8291E /* NEOTransferConfirmView.xib in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
@@ -5816,8 +5868,10 @@
 				581F81F322F7C11E00F8291E /* EOSCreateWalletViewController.xib in Resources */,
 				581F828622F7C24900F8291E /* ETHMnemonicViewController.xib in Resources */,
 				581F82DA22F7C30600F8291E /* QToastView.xib in Resources */,
+				58A8B1BF233B0C79007E2CE3 /* TopupWebViewController.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
+				58A8B1BA233B09DB007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */,
 				581925852114363E009AE406 /* NewRankView.xib in Resources */,
 				581F828D22F7C25500F8291E /* ETHMnemonicConfirmViewController.xib in Resources */,
 				58FB8D65226436820075698E /* EarningRankingCell.xib in Resources */,
@@ -6029,6 +6083,7 @@
 				580D915020625A4400B12506 /* UIAlertView+Block.m in Sources */,
 				587ABD4F21B8F8F800C3D81A /* GetRateRequest.m in Sources */,
 				585D1F03225EE18500468C4A /* PersonalInfoViewController.m in Sources */,
+				58A8B1B9233B09DB007E2CE3 /* ChooseTopupPlanViewController.m in Sources */,
 				589D4711225B327500A4A4E3 /* FinanceViewController.m in Sources */,
 				580D914120625A4300B12506 /* UIImage+BetterFace.m in Sources */,
 				73625EC2208F3A710027C62A /* HistoryWifiCell.m in Sources */,
@@ -6198,6 +6253,7 @@
 				580D916920625A4400B12506 /* UIViewController+BarItem.m in Sources */,
 				58090343209C517B0085FD70 /* GroupChatMessageModel.m in Sources */,
 				581D5120217981F40064F60C /* MarketsViewController.m in Sources */,
+				58A8B1C9233B1454007E2CE3 /* ChooseTopupPlanCell.m in Sources */,
 				73048F16207A19B500A4EFEE /* BalanceInfo.m in Sources */,
 				581D32BE219C158B001F88C3 /* ShamirSecret.swift in Sources */,
 				581D32BF219C158B001F88C3 /* NeoClient.swift in Sources */,
@@ -6253,6 +6309,7 @@
 				58A3D4F5225EEBED00ABABD9 /* EditTextViewController.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
 				581D32E4219C158B001F88C3 /* NEP9.swift in Sources */,
+				58A8B1CE233B389A007E2CE3 /* TopupPayQGASViewController.m in Sources */,
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
 				583910F9208495F200A19E7E /* DDLogUtil.m in Sources */,
@@ -6370,6 +6427,7 @@
 				58DF8E5E206E26AC00ACFC65 /* BuyQlcView.m in Sources */,
 				58DA5BB52322361D004E8D5A /* RevokingProcessView.m in Sources */,
 				58A6500621BE196600E52FFF /* PaymentDetailsView.m in Sources */,
+				58A8B1BE233B0C79007E2CE3 /* TopupWebViewController.m in Sources */,
 				73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */,
 				73C200C2209A9D460043E889 /* NotifactionView.m in Sources */,
 				582F87BF2153338F0008331D /* RankingStartCell.m in Sources */,
@@ -6494,6 +6552,7 @@
 				5806C11821C7A6E5000E693B /* NEOSignUtil.swift in Sources */,
 				581AFC4621B7BFFD001A37E1 /* EOSCPUNETViewController.m in Sources */,
 				587ABD5121B8F8F800C3D81A /* EOS_GetAccount.m in Sources */,
+				58A8B1B4233B048F007E2CE3 /* MyTopupOrderCell.m in Sources */,
 				5809033D209B07370085FD70 /* ChatModel.m in Sources */,
 				58DF8C57209B0638000B0A2F /* ChatUtil.m in Sources */,
 				580D917420625FDB00B12506 /* Language.m in Sources */,
@@ -6563,6 +6622,7 @@
 				58822DCC230F9DBE007C8DC2 /* PayQLCViewController.m in Sources */,
 				5812DDAB20A1A7890043A8A8 /* ZXChatBoxMoreView.m in Sources */,
 				7351508D20D3B71300194711 /* DBManageUtil.m in Sources */,
+				58A8B1AF233B0061007E2CE3 /* MyTopupOrderViewController.m in Sources */,
 				58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */,
 				58F3186A22D346600024B4F0 /* TradeOrderDetailViewController.m in Sources */,
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,

@@ -13,5 +13,13 @@ static NSString *TopupCellReuse = @"TopupCell";
 
 @interface TopupCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *discountBack;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *checkDiscountLab;
+@property (weak, nonatomic) IBOutlet UILabel *discountLab;
+@property (weak, nonatomic) IBOutlet UILabel *desLab;
+@property (weak, nonatomic) IBOutlet UIView *contentBack;
+
 
 @end
