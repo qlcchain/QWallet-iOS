@@ -28,7 +28,7 @@ extern  NSString * _Nonnull const QLC_AccountPending_Done_Noti;
 - (NSString *)walletSeed;
 - (BOOL)walletAddressIsValid:(NSString *)address;
 - (BOOL)switchWalletWithSeed:(NSString *)seed;
-- (void)sendAssetWithTokenName:(NSString *)tokenName to:(NSString *)to amount:(NSUInteger)amount sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message isMainNetwork:(BOOL)isMainNetwork successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+- (void)sendAssetWithTokenName:(NSString *)tokenName to:(NSString *)to amount:(NSUInteger)amount sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message isMainNetwork:(BOOL)isMainNetwork workInLocal:(BOOL)workInLocal successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
 - (void)receive_accountsPending:(NSString *)address isMainNetwork:(BOOL)isMainNetwork;
 
 + (void)signAndWork:(NSDictionary *)dic publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey resultHandler:(void(^_Nonnull)(NSDictionary * _Nullable responseDic))resultHandler;

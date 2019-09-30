@@ -26,6 +26,11 @@
 #import "WalletsViewController.h"
 #import "QNavigationController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+#import "TopupConstants.h"
+#import "TopupOrderModel.h"
+#import "TopupProductModel.h"
+#import "MyTopupOrderViewController.h"
+#import "TopupWebViewController.h"
 
 @interface TopupPayQGASViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -67,6 +72,7 @@
     
     [self renderView];
     [self configInit];
+    
 }
 
 #pragma mark - Operation
@@ -141,64 +147,28 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
+    BOOL workInLocal = NO;
     BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork successHandler:^(NSString * _Nullable responseObj) {
-//        [kAppD.window hideToast];
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+        [kAppD.window hideToast];
 //        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
 //        [weakself backToRoot];
+        [kAppD.window makeToastInView:kAppD.window text:kLang(@"qgas_has_been_paid_successfully_Please_wait_for_a_moment") userInteractionEnabled:NO hideTime:0];
+        NSString *txid = responseObj;
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-//            [weakself requestTrade_buyer_confirm:responseObj]; // 买家确认支付
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [weakself requestTopup_order:txid];
         });
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
         [kAppD.window hideToast];
     }];
 }
 
-//- (void)requestTrade_buyer_confirm:(NSString *)txid {
-//    UserModel *userM = [UserModel fetchUserOfLogin];
-//    if (!userM.md5PW || userM.md5PW.length <= 0) {
-//        return;
-//    }
-//    kWeakSelf(self);
-//    NSString *account = userM.account?:@"";
-//    NSString *md5PW = userM.md5PW?:@"";
-//    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
-//    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
-//    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@"",@"txid":txid?:@""}];
-//    [kAppD.window makeToastInView:kAppD.window];
-//    [RequestService requestWithUrl6:trade_buyer_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-//        [kAppD.window hideToast];
-//        if ([responseObject[Server_Code] integerValue] == 0) {
-//            if (weakself.transferToRoot) {
-//                [weakself backToRoot];
-//            } else if (weakself.transferToTradeDetail) {
-//                [weakself backToTradeDetail];
-//            } else {
-//                [weakself backAction:nil];
-//            }
-//        } else {
-//            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
-//        }
-//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-//        [kAppD.window hideToast];
-//    }];
-//}
-
 - (void)backToRoot {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
-//- (void)backToTradeDetail {
-//    for (UIViewController *controller in self.navigationController.viewControllers) {
-//        if ([controller isKindOfClass:[TradeOrderDetailViewController class]]) {
-//            [self.navigationController popToViewController:controller animated:YES];
-//        }
-//    }
-//}
 
 - (BOOL)haveQLCTokenAssetNum:(NSString *)tokenName {
     __block BOOL haveAssetNum = NO;
@@ -217,13 +187,13 @@
 }
 
 - (void)showNotEnoughOfBalance {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:@"余额不足\n到OTC页面购买QGAS" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_qgas") preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakself backToRoot];
     }];
     [alertC addAction:alertCancel];
-    UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:@"购买" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"purchase") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [kAppD jumpToOTC];
     }];
     [alertC addAction:alertBuy];
@@ -249,6 +219,42 @@
             }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
+- (void)requestTopup_order:(NSString *)txid {
+    kWeakSelf(self);
+    NSString *account = @"";
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if ([UserModel haveLoginAccount]) {
+        account = userM.account;
+    }
+    NSString *p2pId = [UserModel getTopupP2PId];
+    NSString *productId = _inputProductM.ID?:@"";
+    NSString *areaCode = _inputAreaCode?:@"";
+    NSString *phoneNumber = _inputPhoneNumber?:@"";
+    NSString *amount = [NSString stringWithFormat:@"%@",_inputProductM.amount];
+    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":txid?:@""};
+//    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:topup_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            TopupOrderModel *model = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];
+            
+            if ([model.status isEqualToString:Topup_Order_Status_New]) { // 跳转订单列表
+                [weakself jumpToMyTopupOrder];
+            } else if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) { // 跳转h5购买
+                // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
+                NSString *sid = Topup_Pay_H5_sid;
+                NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,model.userId?:@"",model.ID?:@""];
+                NSString *package = [NSString stringWithFormat:@"%@",weakself.inputProductM.amount];
+                NSString *mobile = weakself.inputPhoneNumber;
+                NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
+                [weakself jumpToTopupH5:urlStr];
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 
@@ -373,6 +379,28 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+#pragma mark - Transition
+- (void)jumpToTopupH5:(NSString *)urlStr {
+    TopupWebViewController *vc = [TopupWebViewController new];
+    vc.inputUrl = urlStr;
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
+    
+//    NSURL *url = [NSURL URLWithString:@"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        [self backToRoot];
+    }
+    
+}
+
+- (void)jumpToMyTopupOrder {
+    MyTopupOrderViewController *vc = [MyTopupOrderViewController new];
+    vc.inputBackToRoot = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Noti

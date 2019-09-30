@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - QLC
 + (void)refreshQLCWallet;
++ (BOOL)haveQLCWallet;
 
 
 @end

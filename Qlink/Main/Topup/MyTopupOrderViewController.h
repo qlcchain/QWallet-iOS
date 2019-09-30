@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyTopupOrderViewController : QBaseViewController
 
+@property (nonatomic) BOOL inputBackToRoot;
+
 @end
 
 NS_ASSUME_NONNULL_END

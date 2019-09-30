@@ -17,6 +17,7 @@
 #import "Qlink-Swift.h"
 #import "NSDate+Category.h"
 #import "StakingProcessView.h"
+#import "QLogHelper.h"
 
 @interface VotingMiningNodeViewController ()
 

@@ -101,6 +101,10 @@ static NSString *const NetworkSize = @"20";
     _pairsArr = [NSMutableArray array];
     _resetBtn.layer.borderColor = MAIN_BLUE_COLOR.CGColor;
     _resetBtn.layer.borderWidth = 0.5;
+    _resetBtn.layer.cornerRadius = 4;
+    _resetBtn.layer.masksToBounds = YES;
+    _confirmBtn.layer.cornerRadius = 4;
+    _confirmBtn.layer.masksToBounds = YES;
     
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{

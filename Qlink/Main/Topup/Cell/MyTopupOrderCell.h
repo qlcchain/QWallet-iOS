@@ -10,8 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TopupOrderModel;
+
 static NSString *MyTopupOrderCellReuse = @"MyTopupOrderCell";
-#define MyTopupOrderCell_Height 170
+#define MyTopupOrderCell_Height 180
+
+typedef void(^MyTopupOrderCancelBlock)(void);
+typedef void(^MyTopupOrderPayBlock)(void);
 
 @interface MyTopupOrderCell : UITableViewCell
 
@@ -22,7 +27,13 @@ static NSString *MyTopupOrderCellReuse = @"MyTopupOrderCell";
 @property (weak, nonatomic) IBOutlet UILabel *topupAmountLab;
 @property (weak, nonatomic) IBOutlet UILabel *payAmountLab;
 @property (weak, nonatomic) IBOutlet UILabel *topupStateLab;
+@property (weak, nonatomic) IBOutlet UILabel *discountAmountLab;
+@property (weak, nonatomic) IBOutlet UILabel *qgasAmountLab;
+@property (weak, nonatomic) IBOutlet UIView *btnBack;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIButton *payBtn;
 
+- (void)config:(TopupOrderModel *)model cancelB:(MyTopupOrderCancelBlock)cancelB payB:(MyTopupOrderPayBlock)payB;
 
 @end
 

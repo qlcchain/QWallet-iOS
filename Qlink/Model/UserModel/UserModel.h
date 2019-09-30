@@ -35,6 +35,7 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 @property (nonatomic, copy) NSString *vStatus; // 验证状态[NOT_UPLOAD/未上传,UPLOADED/已上传,KYC_SUCCESS/KYC成功,KYC_FAIL/KYC失败]
 
 + (NSString *)getOwnP2PId;
++ (NSString *)getTopupP2PId;
 + (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin;
 + (UserModel *)fetchUserOfLogin;
 + (UserModel *)fetchUser:(NSString *)account;

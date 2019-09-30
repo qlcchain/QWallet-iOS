@@ -241,10 +241,10 @@ public class QLCUtil: NSObject {
     }
     
     // Send
-    @objc public static func sendAsset(from:String, tokenName:String, to:String, amount:UInt, sender: String?, receiver:String?, message:String?, privateKey:String,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func sendAsset(from:String, tokenName:String, to:String, amount:UInt, sender: String?, receiver:String?, message:String?, privateKey:String,isMainNetwork:Bool, workInLocal:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let privateKeyB = privateKey.hex2Bytes
         let amountB = BigUInt(amount)
-        try? TransactionMng.sendBlock(from: from, tokenName: tokenName, to: to, amount: amountB, sender: sender ?? "", receiver: receiver ?? "", message: message ?? "", privateKeyB: privateKeyB,isMainNetwork:isMainNetwork, successHandler: { (response) in
+        try? TransactionMng.sendBlock(from: from, tokenName: tokenName, to: to, amount: amountB, sender: sender ?? "", receiver: receiver ?? "", message: message ?? "", privateKeyB: privateKeyB,isMainNetwork:isMainNetwork, workInLocal: workInLocal, successHandler: { (response) in
             if response != nil {
                 let dic = response as! Dictionary<String, Any>
                 try? LedgerMng.process(dic: dic,isMainNetwork:isMainNetwork, successHandler: { (response) in

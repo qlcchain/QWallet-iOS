@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class TopupProductModel;
+
 static NSString *TopupCellReuse = @"TopupCell";
 #define TopupCell_Height 196
 
@@ -20,6 +22,8 @@ static NSString *TopupCellReuse = @"TopupCell";
 @property (weak, nonatomic) IBOutlet UILabel *discountLab;
 @property (weak, nonatomic) IBOutlet UILabel *desLab;
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
+@property (weak, nonatomic) IBOutlet UIImageView *backImg;
 
+- (void)config:(TopupProductModel *)model;
 
 @end

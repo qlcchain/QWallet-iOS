@@ -1,75 +1,37 @@
 //
-//  TopupWebViewController.m
+//  WebViewController.m
 //  Qlink
 //
-//  Created by Jelly Foo on 2019/9/25.
-//  Copyright © 2019 pan. All rights reserved.
+//  Created by 旷自辉 on 2018/5/30.
+//  Copyright © 2018年 pan. All rights reserved.
 //
 
 #import "TopupWebViewController.h"
 #import <WebKit/WebKit.h>
-//#import "dsbridge.h"
 
-@interface TopupWebViewController () <WKNavigationDelegate>
+@interface TopupWebViewController ()<WKNavigationDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *contentView;
-//@property (nonatomic, strong) DWKWebView *dwebview;
-@property (nonatomic, strong) WKWebView *dwebview;
+@property (weak, nonatomic) IBOutlet WKWebView *myWebView;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+//设置加载进度条
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (nonatomic) BOOL checkmwebLoad;
 
 @end
 
 @implementation TopupWebViewController
 
-- (void)dealloc {
-    [_dwebview removeObserver:self
-                    forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+- (IBAction)clickBack:(id)sender {
+    [self leftNavBarItemPressedWithPop:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    [self configInit];
-}
-
-#pragma mark - Operation
-- (void)configInit {
-//    _dwebview=[[DWKWebView alloc] initWithFrame:CGRectZero];
-    _dwebview=[[WKWebView alloc] initWithFrame:CGRectZero];
-    [_contentView addSubview:_dwebview];
-    kWeakSelf(self);
-    [_dwebview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(weakself.contentView).offset(0);
-    }];
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
     
-    // register api object without namespace
-//    [_dwebview addJavascriptObject:[[JsApiTest alloc] init] namespace:@"staking"];
-//
-//#ifdef DEBUG
-//    [_dwebview setDebugMode:true];
-//#else
-//    [_dwebview setDebugMode:false];
-//#endif
-//
-//    [_dwebview customJavascriptDialogLabelTitles:@{@"alertTitle":@"Notification",@"alertBtn":@"OK"}];
-    
-    _dwebview.navigationDelegate=self;
-    
-//    NSString *path = [[NSBundle mainBundle] bundlePath];
-//    NSURL *baseURL = [NSURL fileURLWithPath:path];
-//    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"contract" ofType:@"html"];
-//    NSString * htmlContent = [NSString stringWithContentsOfFile:htmlPath
-//                                                       encoding:NSUTF8StringEncoding
-//                                                          error:nil];
-//    [_dwebview loadHTMLString:htmlContent baseURL:baseURL];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0"]];
-    [_dwebview loadRequest:urlRequest];
-    
-    // set javascript close listener
-//    [_dwebview setJavascriptCloseWindowListener:^{
-//        NSLog(@"window.close called");
-//    } ];
+    _checkmwebLoad = NO;
+    _myWebView.navigationDelegate = self;
     
     [_progressView setTrackTintColor:[UIColor colorWithRed:240.0/255
                                                      green:240.0/255
@@ -77,99 +39,107 @@
                                                      alpha:1.0]];
     _progressView.progressTintColor = [UIColor greenColor];
     // 添加进度观察者
-    [_dwebview addObserver:self
+    [_myWebView addObserver:self
                  forKeyPath:NSStringFromSelector(@selector(estimatedProgress))
                     options:0
                     context:nil];
+
+
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_inputUrl?:@""] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    [_myWebView loadRequest:request];
 }
 
-#pragma mark - Action
-
-- (IBAction)backAction:(id)sender {
-    if ([_dwebview canGoBack]) {
-        [_dwebview goBack];
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+- (void)backToRoot {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - WKNavigationDelegate
 // 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    DDLogDebug(@"didStartProvisionalNavigation");
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    //开始加载的时候，让进度条显示
+    self.progressView.hidden = NO;
 }
-// 页面加载失败时调用
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
-    DDLogDebug(@"didFailProvisionalNavigation");
-    [self.progressView setProgress:0.0f animated:NO];
-}
+
 // 当内容开始返回时调用
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    DDLogDebug(@"didCommitNavigation");
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+    
 }
+
 // 页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    DDLogDebug(@"didFinishNavigation");
-//    [self getCookie];
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+  
 }
-//提交发生错误时调用
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
-    DDLogDebug(@"didFailNavigation");
-    [self.progressView setProgress:0.0f animated:NO];
+
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    // NSStringLocalizable(@"request_error")
+//    [kAppD.window showHint:error.domain];
 }
-// 接收到服务器跳转请求即服务重定向时之后调用
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
-    DDLogDebug(@"didReceiveServerRedirectForProvisionalNavigation");
+
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+    [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"request_error")];
 }
-// 根据WebView对于即将跳转的HTTP请求头信息和相关信息来决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    DDLogDebug(@"decidePolicyForNavigationAction");
-    NSString * urlStr = navigationAction.request.URL.absoluteString;
-    NSLog(@"发送跳转请求：%@",urlStr);
-    //自己定义的协议头
-//    NSString *htmlHeadString = @"github://";
-//    if([urlStr hasPrefix:htmlHeadString]){
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"通过截取URL调用OC" message:@"你想前往我的Github主页?" preferredStyle:UIAlertControllerStyleAlert];
-//        [alertController addAction:([UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//        }])];
-//        [alertController addAction:([UIAlertAction actionWithTitle:@"打开" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            NSURL * url = [NSURL URLWithString:[urlStr stringByReplacingOccurrencesOfString:@"github://callName_?" withString:@""]];
-//            [[UIApplication sharedApplication] openURL:url];
-//        }])];
-//        [self presentViewController:alertController animated:YES completion:nil];
-//        decisionHandler(WKNavigationActionPolicyCancel);
-//    }else{
+
+// 接收到服务器跳转请求之后调用
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    NSURLRequest *request        = navigationAction.request;
+        NSString     *scheme         = [request.URL scheme];
+        // decode for all URL to avoid url contains some special character so that it wasn't load.
+        NSString     *absoluteString = [navigationAction.request.URL.absoluteString stringByRemovingPercentEncoding];
+        NSLog(@"Current URL is %@",absoluteString);
+        
+        static NSString *endPayRedirectURL = nil;
+        
+        // Wechat Pay, Note : modify redirect_url to resolve we couldn't return our app from wechat client.
+        if ([absoluteString hasPrefix:@"https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb"] && ![absoluteString hasSuffix:[NSString stringWithFormat:@"redirect_url=%@://",Weixin_Pay_Url_Scheme]]) {
+            decisionHandler(WKNavigationActionPolicyCancel);
+            // 1. If the url contain "redirect_url" : We need to remember it to use our scheme replace it.
+            // 2. If the url not contain "redirect_url" , We should add it so that we will could jump to our app.
+            //  Note : 2. if the redirect_url is not last string, you should use correct strategy, because the redirect_url's value may contain some "&" special character so that my cut method may be incorrect.
+            NSString *redirectUrl = nil;
+            if ([absoluteString containsString:@"redirect_url="]) {
+                NSRange redirectRange = [absoluteString rangeOfString:@"redirect_url"];
+                endPayRedirectURL =  [absoluteString substringFromIndex:redirectRange.location+redirectRange.length+1];
+                redirectUrl = [[absoluteString substringToIndex:redirectRange.location] stringByAppendingString:[NSString stringWithFormat:@"redirect_url=%@://",Weixin_Pay_Url_Scheme]];
+            }else {
+                redirectUrl = [absoluteString stringByAppendingString:[NSString stringWithFormat:@"&redirect_url=%@://",Weixin_Pay_Url_Scheme]];
+            }
+            
+            NSMutableURLRequest *newRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:redirectUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+            newRequest.allHTTPHeaderFields = request.allHTTPHeaderFields;
+            newRequest.URL = [NSURL URLWithString:redirectUrl];
+            [webView loadRequest:newRequest];
+            return;
+        }
+        
+        // Judge is whether to jump to other app.
+        if (![scheme isEqualToString:@"https"] && ![scheme isEqualToString:@"http"]) {
+            decisionHandler(WKNavigationActionPolicyCancel);
+            if ([scheme isEqualToString:@"weixin"]) {
+                // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.
+                if (endPayRedirectURL) {
+                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60]];
+                }
+            }else if ([scheme isEqualToString:[NSString stringWithFormat:@"%@",Weixin_Pay_Url_Scheme]]) {
+                
+            }
+            
+            BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:request.URL];
+            if (canOpen) {
+                [[UIApplication sharedApplication] openURL:request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:nil];
+                [self backToRoot];
+            }
+            return;
+        }
+        
         decisionHandler(WKNavigationActionPolicyAllow);
-//    }
 }
 
-// 根据客户端受到的服务器响应头以及response相关信息来决定是否可以跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
-    DDLogDebug(@"decidePolicyForNavigationResponse");
-    NSString * urlStr = navigationResponse.response.URL.absoluteString;
-    NSLog(@"当前跳转地址：%@",urlStr);
-    //允许跳转
-    decisionHandler(WKNavigationResponsePolicyAllow);
-    //不允许跳转
-    //decisionHandler(WKNavigationResponsePolicyCancel);
-}
-//需要响应身份验证时调用 同样在block中需要传入用户身份凭证
-//- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler{
-//    DDLogDebug(@"didReceiveAuthenticationChallenge");
-//    //用户身份信息
-//    NSURLCredential * newCred = [[NSURLCredential alloc] initWithUser:@"user123" password:@"123" persistence:NSURLCredentialPersistenceNone];
-//    //为 challenge 的发送方提供 credential
-//    [challenge.sender useCredential:newCred forAuthenticationChallenge:challenge];
-//    completionHandler(NSURLSessionAuthChallengeUseCredential,newCred);
-//}
-
-//进程被终止时调用
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
-    DDLogDebug(@"webViewWebContentProcessDidTerminate");
-}
-
-
-#pragma mark - KVO
 //kvo 监听进度
 -(void)observeValueForKeyPath:(NSString *)keyPath
                      ofObject:(id)object
@@ -177,13 +147,13 @@
                       context:(void *)context{
     
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))]
-        && object == _dwebview) {
+        && object == _myWebView) {
         [self.progressView setAlpha:1.0f];
-        BOOL animated = _dwebview.estimatedProgress > self.progressView.progress;
-        [self.progressView setProgress:_dwebview.estimatedProgress
+        BOOL animated = _myWebView.estimatedProgress > self.progressView.progress;
+        [self.progressView setProgress:_myWebView.estimatedProgress
                               animated:animated];
         
-        if (_dwebview.estimatedProgress >= 1.0f) {
+        if (_myWebView.estimatedProgress >= 1.0f) {
             [UIView animateWithDuration:0.3f
                                   delay:0.3f
                                 options:UIViewAnimationOptionCurveEaseOut
@@ -202,5 +172,14 @@
     }
 }
 
+-(void)dealloc{
+    [_myWebView removeObserver:self
+                        forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end

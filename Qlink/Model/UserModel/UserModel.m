@@ -43,6 +43,15 @@
     return p2pid?:@"";
 }
 
++ (NSString *)getTopupP2PId {
+    NSString *p2pid = [NEOWalletUtil getKeyValue:Topup_p2p_key];
+    if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
+        p2pid = [[QLCUtil getRandomStringOfLengthWithLength:32] uppercaseString];
+        [NEOWalletUtil setKeyValue:Topup_p2p_key value:p2pid];
+    }
+    return p2pid?:@"";
+}
+
 + (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin {
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     NSMutableArray *muArr = [NSMutableArray array];

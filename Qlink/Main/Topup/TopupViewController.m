@@ -14,27 +14,56 @@
 #import "UIView+Gradient.h"
 #import "MyTopupOrderViewController.h"
 #import "ChooseTopupPlanViewController.h"
-#import "TopupWebViewController.h"
+#import "RefreshHelper.h"
+#import "TopupProductModel.h"
+#import "WalletCommonModel.h"
+#import "ChooseWalletViewController.h"
+
+static NSString *const TopupNetworkSize = @"20";
 
 @interface TopupViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *sendRechargeLab;
+@property (weak, nonatomic) IBOutlet UILabel *inputTipLab;
+@property (weak, nonatomic) IBOutlet UILabel *earnMoreLab;
+@property (weak, nonatomic) IBOutlet UIButton *actNowBtn;
+@property (weak, nonatomic) IBOutlet UILabel *carrierPackageLab;
+
 
 @property (weak, nonatomic) IBOutlet UIView *topGradientBack;
 @property (weak, nonatomic) IBOutlet UIView *sendTopupBack;
 @property (weak, nonatomic) IBOutlet UIView *numBack;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
+@property (nonatomic) NSInteger currentPage;
 
 @end
 
 @implementation TopupViewController
 
+#pragma mark - Observe
+- (void)addObserve {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinPayBackNoti:) name:Weixin_Pay_Back_Noti object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self addObserve];
+    
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     
     [self configInit];
+    [self refreshViewText];
+    [self requestTopup_product_list];
 }
 
 #pragma mark - Operation
@@ -47,10 +76,76 @@
     _numBack.layer.borderWidth = 1;
     _sendTopupBack.layer.cornerRadius = 6;
     _sendTopupBack.layer.masksToBounds = YES;
+    _actNowBtn.layer.cornerRadius = 2;
+    _actNowBtn.layer.masksToBounds = YES;
     
+    _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:TopupCellReuse bundle:nil] forCellReuseIdentifier:TopupCellReuse];
+    
+    kWeakSelf(self)
+    _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+        weakself.currentPage = 1;
+        [weakself requestTopup_product_list];
+    }];
+    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+        [weakself requestTopup_product_list];
+    }];
 }
+
+- (void)refreshViewText {
+    _titleLab.text = kLang(@"top_up");
+    _sendRechargeLab.text = kLang(@"send_recharge_to");
+    _inputTipLab.text = kLang(@"enter_your_phone_number_or_select_from_your_contacts_");
+    _earnMoreLab.text = kLang(@"earn_more_qgas");
+    [_actNowBtn setTitle:kLang(@"act_now__") forState:UIControlStateNormal];
+    _carrierPackageLab.text = kLang(@"carrier_package");
+}
+
+#pragma mark - Request
+- (void)requestTopup_product_list {
+    kWeakSelf(self);
+//    NSString *phoneNumber = @"";
+    NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
+    NSString *size = TopupNetworkSize;
+    NSDictionary *params = @{@"page":page,@"size":size};
+    [RequestService requestWithUrl10:topup_product_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//    [RequestService requestWithUrl5:topup_product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [weakself.mainTable.mj_header endRefreshing];
+        [weakself.mainTable.mj_footer endRefreshing];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            NSArray *arr = [TopupProductModel mj_objectArrayWithKeyValuesArray:responseObject[@"productList"]];
+            if (weakself.currentPage == 1) {
+                [weakself.sourceArr removeAllObjects];
+            }
+            
+//            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                TopupProductModel *model1 = obj;
+//                [[model1.amountOfMoney componentsSeparatedByString:@","] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    TopupProductModel *model2 = [TopupProductModel getObjectWithKeyValues:model1.mj_keyValues];
+//                    NSString *amountStr = obj;
+//                    model2.amount = @([amountStr doubleValue]);
+//                    [weakself.sourceArr addObject:model2];
+//                }];
+//            }];
+            [weakself.sourceArr addObjectsFromArray:arr];
+            weakself.currentPage += 1;
+            
+            [weakself.mainTable reloadData];
+            
+            if (arr.count < [TopupNetworkSize integerValue]) {
+                [weakself.mainTable.mj_footer endRefreshingWithNoMoreData];
+                weakself.mainTable.mj_footer.hidden = arr.count<=0?YES:NO;
+            } else {
+                weakself.mainTable.mj_footer.hidden = NO;
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [weakself.mainTable.mj_header endRefreshing];
+        [weakself.mainTable.mj_footer endRefreshing];
+    }];
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -65,12 +160,14 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return _sourceArr.count;
-    return 5;
+    return _sourceArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TopupCell *cell = [tableView dequeueReusableCellWithIdentifier:TopupCellReuse];
+    
+    TopupProductModel *model = _sourceArr[indexPath.row];
+    [cell config:model];
     
     return cell;
 }
@@ -82,8 +179,8 @@
 }
 
 - (IBAction)inputNumAction:(id)sender {
-//    [self jumpToChooseTopupPlan];
-    [self jumpToTopupWeb];
+    [self jumpToChooseTopupPlan];
+//    [self jumpToTopupH5];
 }
 
 - (IBAction)makeQGASAction:(id)sender {
@@ -93,22 +190,43 @@
 #pragma mark - Transition
 - (void)jumpToMyTopupOrder {
     MyTopupOrderViewController *vc = [MyTopupOrderViewController new];
+    vc.inputBackToRoot = NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jumpToChooseTopupPlan {
+    if (![WalletCommonModel haveQLCWallet]) {
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"you_do_not_have_qlc_wallet_created_immediately") preferredStyle:UIAlertControllerStyleAlert];
+        kWeakSelf(self);
+        UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alertC addAction:alertCancel];
+        UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"create") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [weakself jumpToChooseWallet:YES];
+        }];
+        [alertC addAction:alertBuy];
+        [self presentViewController:alertC animated:YES completion:nil];
+        
+        return;
+    }
     ChooseTopupPlanViewController *vc = [ChooseTopupPlanViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToTopupWeb {
-    NSURL *url = [NSURL URLWithString:@"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"];
-    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-    }
-    
-//    TopupWebViewController *vc = [TopupWebViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];
+- (void)jumpToChooseWallet:(BOOL)showBack {
+    ChooseWalletViewController *vc = [[ChooseWalletViewController alloc] init];
+    vc.showBack = showBack;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Noti
+- (void)languageChangeNoti:(NSNotification *)noti {
+    [self refreshViewText];
+    [_mainTable.mj_header beginRefreshing];
+}
+
+- (void)weixinPayBackNoti:(NSNotification *)noti {
+    [self jumpToMyTopupOrder];
 }
 
 

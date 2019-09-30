@@ -40,7 +40,9 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     _invitationCodeLab.text = userM.number?[NSString stringWithFormat:@"%@",userM.number]:@"00000000";
     
-    _qrImgV.image = [SGQRCodeObtain generateQRCodeWithData:Download_Link size:_qrImgV.width logoImage:nil ratio:0.15];
+    UIImage *img = [[UIImage imageNamed:@"icon_start_icon"] imgWithBackgroundColor:[UIColor whiteColor]];
+    _qrImgV.image = [SGQRCodeObtain generateQRCodeWithData:Download_Link size:_qrImgV.width logoImage:img ratio:0.15 logoImageCornerRadius:4.0 logoImageBorderWidth:0.5 logoImageBorderColor:[UIColor whiteColor]];
+//    _qrImgV.image = [SGQRCodeObtain generateQRCodeWithData:Download_Link size:_qrImgV.width logoImage:nil ratio:0.15];
 //    kWeakSelf(self);
 //    [HMScanner qrImageWithString:Download_Link avatar:nil completion:^(UIImage *image) {
 //        weakself.qrImgV.image = image;

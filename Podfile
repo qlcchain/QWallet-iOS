@@ -24,10 +24,10 @@ end
 def eth
     pod 'R.swift'
     pod 'PromiseKit'
-    pod 'KeychainSwift'
-    pod 'APIKit'
+#    pod 'KeychainSwift'
+#    pod 'APIKit'
     pod 'JSONRPCKit'
-    pod 'Eureka', '4.2.0'
+#    pod 'Eureka', '4.2.0'
     pod 'Moya', '~> 10.0.1'
     
     pod 'BigInt', '~> 3.0' #参考ETHFramework
@@ -55,7 +55,7 @@ end
 
 def app
 
-    pod 'Firebase/Core', '~> 5.4.1'
+#    pod 'Firebase/Core', '~> 5.4.1'
     pod 'TTGTagCollectionView'
     pod 'NinaPagerView'
     pod 'BGFMDB'

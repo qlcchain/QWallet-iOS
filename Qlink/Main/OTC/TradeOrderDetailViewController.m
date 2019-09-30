@@ -140,6 +140,16 @@
     _contentBack.hidden = YES;
     _viewComplaintBtn.layer.cornerRadius = 4.0;
     _viewComplaintBtn.layer.masksToBounds = YES;
+    _revokeBtn.layer.cornerRadius = 4;
+    _revokeBtn.layer.masksToBounds = YES;
+    _iAlreadyPaidBtn.layer.cornerRadius = 4;
+    _iAlreadyPaidBtn.layer.masksToBounds = YES;
+    _payBtn.layer.cornerRadius = 4;
+    _payBtn.layer.masksToBounds = YES;
+    _complaintBtn.layer.cornerRadius = 4;
+    _complaintBtn.layer.masksToBounds = YES;
+    _confirmReceiveBtn.layer.cornerRadius = 4;
+    _confirmReceiveBtn.layer.masksToBounds = YES;
     
     [_bottomBack1 shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];
     [_bottomBack2 shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];

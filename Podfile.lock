@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.8.2)
-  - APIKit (5.0.0)
   - BGFMDB (2.0.13):
     - BGFMDB/BG (= 2.0.13)
     - BGFMDB/FMDB (= 2.0.13)
@@ -11,37 +10,13 @@ PODS:
     - SipHash (~> 1.2)
   - CryptoSwift (0.13.0)
   - dsBridge (3.0.6)
-  - Eureka (4.2.0)
-  - Firebase/Core (5.4.1):
-    - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.0.1)
-  - Firebase/CoreOnly (5.4.1):
-    - FirebaseCore (= 5.0.6)
-  - FirebaseAnalytics (5.0.1):
-    - FirebaseCore (~> 5.0)
-    - FirebaseInstanceID (~> 3.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-    - nanopb (~> 0.3)
-  - FirebaseCore (5.0.6):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (3.1.1):
-    - FirebaseCore (~> 5.0)
-  - GoogleToolboxForMac/Defines (2.2.1)
-  - "GoogleToolboxForMac/NSData+zlib (2.2.1)":
-    - GoogleToolboxForMac/Defines (= 2.2.1)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
-  - KeychainSwift (16.0.1)
   - Moya (10.0.2):
     - Moya/Core (= 10.0.2)
   - Moya/Core (10.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
   - NinaPagerView (1.6.3)
   - PromiseKit (6.10.0):
     - PromiseKit/CorePromise (= 6.10.0)
@@ -74,14 +49,10 @@ PODS:
   - TYCyclePagerView (1.2.0)
 
 DEPENDENCIES:
-  - APIKit
   - BGFMDB
   - BigInt (~> 3.0)
   - dsBridge
-  - Eureka (= 4.2.0)
-  - Firebase/Core (~> 5.4.1)
   - JSONRPCKit
-  - KeychainSwift
   - Moya (~> 10.0.1)
   - NinaPagerView
   - PromiseKit
@@ -96,21 +67,12 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - APIKit
     - BGFMDB
     - BigInt
     - CryptoSwift
     - dsBridge
-    - Eureka
-    - Firebase
-    - FirebaseAnalytics
-    - FirebaseCore
-    - FirebaseInstanceID
-    - GoogleToolboxForMac
     - JSONRPCKit
-    - KeychainSwift
     - Moya
-    - nanopb
     - NinaPagerView
     - PromiseKit
     - R.swift
@@ -151,21 +113,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  APIKit: b27d79b022733b2f50e7a092e67c4cb9ea30f968
   BGFMDB: 48e6823027232402a678acc7f71484b1fc9171d0
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
-  Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
-  Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
-  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
-  FirebaseCore: 4c28e3b9708ba48a765e76515f913a71596eb5dd
-  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
-  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
-  KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NinaPagerView: 4a245c33df8c5212fbde3c32ce39a3765eb334bc
   PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
   R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
@@ -180,6 +133,6 @@ SPEC CHECKSUMS:
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: 0aea72a6575a34224fb64eb37a782f8419972f0f
+PODFILE CHECKSUM: 5b39b013645f0d323019b483b57ec396291c20fb
 
 COCOAPODS: 1.7.5

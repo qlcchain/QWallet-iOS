@@ -399,5 +399,10 @@
     }];
 }
 
++ (BOOL)haveQLCWallet {
+    NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
+    return arr.count>0?YES:NO;
+}
+
 
 @end
