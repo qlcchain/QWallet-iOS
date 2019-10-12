@@ -187,12 +187,25 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTV-Ab-LZJ">
+                                    <rect key="frame" x="370" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="HJu-ew-Y6M"/>
+                                        <constraint firstAttribute="width" constant="44" id="MNZ-eZ-GNa"/>
+                                    </constraints>
+                                    <state key="normal" title="Txid"/>
+                                    <connections>
+                                        <action selector="txidAction:" destination="-1" eventType="touchUpInside" id="kgK-6t-huz"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="x3p-qs-uvr" firstAttribute="centerY" secondItem="kgb-tW-uMr" secondAttribute="centerY" id="ARO-bi-2MC"/>
+                                <constraint firstAttribute="trailing" secondItem="CTV-Ab-LZJ" secondAttribute="trailing" id="cwt-OS-xEL"/>
                                 <constraint firstItem="r06-h7-EVN" firstAttribute="leading" secondItem="kgb-tW-uMr" secondAttribute="leading" constant="8" id="hmB-qZ-qW4"/>
                                 <constraint firstAttribute="height" constant="44" id="kuL-CT-2Nb"/>
+                                <constraint firstItem="CTV-Ab-LZJ" firstAttribute="centerY" secondItem="kgb-tW-uMr" secondAttribute="centerY" id="tBK-5L-ljc"/>
                                 <constraint firstItem="x3p-qs-uvr" firstAttribute="centerX" secondItem="kgb-tW-uMr" secondAttribute="centerX" id="tbw-rw-z0X"/>
                                 <constraint firstItem="r06-h7-EVN" firstAttribute="centerY" secondItem="kgb-tW-uMr" secondAttribute="centerY" id="whM-0g-DR8"/>
                             </constraints>

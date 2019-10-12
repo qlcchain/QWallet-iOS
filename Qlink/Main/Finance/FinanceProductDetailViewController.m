@@ -180,7 +180,7 @@
     kWeakSelf(self);
     NSString *account = userM.account?:@"";
     NSString *md5PW = userM.md5PW?:@"";
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *productId = _inputM.ID?:@"";

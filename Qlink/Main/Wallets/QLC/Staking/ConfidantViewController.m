@@ -57,7 +57,7 @@
     NSString *urlStr = @"https://myconfidant.io/api/explorer";
     NSDictionary *params = @{@"action": @"sendSecurityCode",@"email_address": @"dzerix@gmail.com"};
     NSLog(@"sendSecurityCode url = %@    params = %@",urlStr,params);
-    [RequestService testRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodPost userInfo:nil requestManagerType: QRequestManagerTypeJSON successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService normalRequestWithBaseURLStr8:urlStr params:params httpMethod:HttpMethodPost userInfo:nil requestManagerType: QRequestManagerTypeJSON successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         NSLog(@"sendSecurityCode responseObject=%@",responseObject);
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         DDLogDebug(@"sendSecurityCode error=%@",error);

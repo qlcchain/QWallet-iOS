@@ -247,7 +247,7 @@
 //    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
     _contractV = [QContractView addQContractView];
     [self showStakingProcessView];
-    [_contractV benefit_createMultiSig:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:^(NSString * _Nullable result, BOOL success, NSString * _Nullable message) {
+    [_contractV benefit_createMultiSig:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:^(id result, BOOL success, NSString * _Nullable message) {
 //        [kAppD.window hideToast];
         [weakself hideStakingProcessView];
         [QContractView removeQContractView:weakself.contractV];

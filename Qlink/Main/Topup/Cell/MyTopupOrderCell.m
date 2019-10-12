@@ -78,15 +78,15 @@
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
     NSString *discountAmountStr = @"";
-//    if ([language isEqualToString:LanguageCode[0]]) { // 英文
-//        topupAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.originalPrice];
-//        payAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.discountPrice];
-//        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNum];
-//    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+    if ([language isEqualToString:LanguageCode[0]]) { // 英文
+        topupAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.originalPrice];
+        payAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.discountPrice];
+        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNum];
+    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,kLang(@"rmb")];
         payAmountStr = [NSString stringWithFormat:@"%@%@",model.discountPrice,kLang(@"rmb")];
         discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNum,kLang(@"rmb")];
-//    }
+    }
     _topupAmountLab.text = topupAmountStr;
     _payAmountLab.text = payAmountStr;
     NSNumber *qgasNum = model.qgasAmount;

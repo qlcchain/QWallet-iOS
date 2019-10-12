@@ -38,7 +38,7 @@
 #import "NSDate+Category.h"
 #import "UserUtil.h"
 #import "QLogHelper.h"
-//@import Firebase;
+#import "ClaimQGASTipView.h"
 
 @interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -68,8 +68,8 @@
     kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//   // 配置Firebase
-//    [FIRApp configure];
+   // 配置Firebase
+    [self configFirebase];
     // 配置DDLog
     [self configDDLog];
     // 配置app语言

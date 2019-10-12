@@ -104,7 +104,8 @@
         }
         NSString *tempTimestamp = timestamp;
         if (!tempTimestamp) {
-            tempTimestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+//            tempTimestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+            tempTimestamp = [RequestService getRequestTimestamp];
         }
         NSMutableDictionary *jsonParam = [NSMutableDictionary dictionaryWithDictionary: @{@"appid":[ConfigUtil getChannel],@"timestamp":tempTimestamp,@"params":recordStr}];
         // 升序、拼接、加密
@@ -181,6 +182,13 @@
     return dataTask;
 }
 
++ (NSURLSessionDataTask *)requestWithUrl11:(NSString *)url params:(id)params timestamp:(nullable NSString *)timestamp httpMethod:(HttpMethod)httpMethod serverType:(NSInteger)serverType successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
+    
+    NSURLSessionDataTask *dataTask = [RequestService requestWithUrl9:url params:params httpMethod:httpMethod isSign:YES timestamp:timestamp addBase:YES serverType:serverType successBlock:successReqBlock failedBlock:failedReqBlock];
+    
+    return dataTask;
+}
+
 + (NSURLSessionDataTask *)requestWithUrl5:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
     NSURLSessionDataTask *dataTask = [RequestService requestWithUrl3:url params:params httpMethod:httpMethod isSign:YES timestamp:nil successBlock:successReqBlock failedBlock:failedReqBlock];
@@ -208,11 +216,11 @@
     return dataTask;
 }
 
-+ (NSURLSessionDataTask *)requestWithJsonUrl1:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
-{
-    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:url params:params httpMethod:httpMethod successBlock:successReqBlock failedBlock:failedReqBlock];
-    return dataTask;
-}
+//+ (NSURLSessionDataTask *)requestWithJsonUrl1:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
+//{
+//    NSURLSessionDataTask *dataTask = [AFHTTPClientV2 requestWithBaseURLStr:url params:params httpMethod:httpMethod successBlock:successReqBlock failedBlock:failedReqBlock];
+//    return dataTask;
+//}
 
 + (NSString *)getSystemInfo {
     NSMutableString *info = [NSMutableString string];
@@ -230,7 +238,7 @@
     return info;
 }
 
-+ (NSURLSessionDataTask *)testRequestWithBaseURLStr8:(NSString *)URLString
++ (NSURLSessionDataTask *)normalRequestWithBaseURLStr8:(NSString *)URLString
                                              params:(id)params
                                          httpMethod:(HttpMethod)httpMethod
                                             userInfo:(NSDictionary*)userInfo requestManagerType:(QRequestManagerType)requestManagerType
@@ -238,6 +246,11 @@
                                         failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     NSURLSessionDataTask *dataTask = [AFHTTPClientV2 testRequestWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:userInfo requestManagerType:requestManagerType successBlock:successReqBlock failedBlock:failedReqBlock];
     return dataTask;
+}
+
++ (NSString *)getRequestTimestamp {
+    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getMillisecondTimestampFromDate:[NSDate date]])];
+    return timestamp;
 }
 
 @end

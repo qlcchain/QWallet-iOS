@@ -190,7 +190,7 @@
     UserModel *userM = [UserModel fetchUser:account];
     kWeakSelf(self);
     NSString *md5PW = [MD5Util md5:_loginPWTF.text?:@""];
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};

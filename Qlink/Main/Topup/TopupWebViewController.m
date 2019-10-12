@@ -47,6 +47,9 @@
 
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_inputUrl?:@""] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     [_myWebView loadRequest:request];
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+//    [_myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
 }
 
 - (void)backToRoot {
@@ -71,6 +74,7 @@
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    NSLog(@"didFailProvisionalNavigation %@",error);
     // NSStringLocalizable(@"request_error")
 //    [kAppD.window showHint:error.domain];
 }
@@ -118,7 +122,7 @@
         }
         
         // Judge is whether to jump to other app.
-        if (![scheme isEqualToString:@"https"] && ![scheme isEqualToString:@"http"]) {
+        if (![scheme isEqualToString:@"https"] && ![scheme isEqualToString:@"http"] && ![scheme isEqualToString:@"file"]) {
             decisionHandler(WKNavigationActionPolicyCancel);
             if ([scheme isEqualToString:@"weixin"]) {
                 // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.

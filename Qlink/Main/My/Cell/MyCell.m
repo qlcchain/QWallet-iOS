@@ -17,6 +17,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    _redView.layer.cornerRadius = 4;
+    _redView.layer.masksToBounds = YES;
 }
 
 - (void)prepareForReuse {
@@ -29,6 +32,7 @@
 - (void)configCellWithModel:(MyShowModel *)model {
     _titleLab.text = model.title;
     _icon.image = [UIImage imageNamed:model.icon];
+    _redView.hidden = !model.showRed;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

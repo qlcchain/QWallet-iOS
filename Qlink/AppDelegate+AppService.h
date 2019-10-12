@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppDelegate (AppService)
 
+- (void)configFirebase;
 - (void)configDDLog;
 - (void)configAppLanguage;
 - (void)configTouch;

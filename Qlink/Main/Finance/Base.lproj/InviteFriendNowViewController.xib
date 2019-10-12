@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="invitationCodeLab" destination="fhs-7E-P8H" id="bMj-ha-S6e"/>
                 <outlet property="inviteBack" destination="I9A-NZ-MSu" id="xgv-K0-Mvo"/>
+                <outlet property="inviteBackImg" destination="VGd-j4-fBi" id="Rvh-08-SqY"/>
                 <outlet property="qrBack" destination="Qo4-xX-MjP" id="ZIz-U3-Oe4"/>
                 <outlet property="qrImgV" destination="Z7J-fS-HwD" id="8dI-fC-mre"/>
                 <outlet property="shareBack" destination="13R-oc-zCu" id="X9A-Jj-BAo"/>
@@ -40,7 +41,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13R-oc-zCu">
                                                     <rect key="frame" x="16" y="32" width="343" height="464"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_invitation_a" translatesAutoresizingMaskIntoConstraints="NO" id="VGd-j4-fBi">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_invitation_ch" translatesAutoresizingMaskIntoConstraints="NO" id="VGd-j4-fBi">
                                                             <rect key="frame" x="0.0" y="0.0" width="343" height="464"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make money together" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrg-tJ-4BD">
@@ -67,22 +68,22 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9A-NZ-MSu">
-                                                            <rect key="frame" x="54.5" y="245.5" width="234.5" height="33"/>
+                                                            <rect key="frame" x="59" y="245.5" width="225.5" height="33"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invitation Code：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDw-f7-EQn">
-                                                                    <rect key="frame" x="21" y="7.5" width="118.5" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referral Code：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDw-f7-EQn">
+                                                                    <rect key="frame" x="21" y="7.5" width="109.5" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="textColor" red="0.53333333333333333" green="0.51372549019607838" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <color key="textColor" red="1" green="0.9673423171043396" blue="0.83295893669128418" alpha="1" colorSpace="deviceRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhs-7E-P8H">
-                                                                    <rect key="frame" x="139.5" y="7.5" width="74" height="18"/>
+                                                                    <rect key="frame" x="130.5" y="7.5" width="74" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <color key="textColor" red="0.97254901960784312" green="0.90588235294117647" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="backgroundColor" red="0.97647058823529409" green="0.49019607843137253" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="33" id="2Va-lQ-sII"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fhs-7E-P8H" secondAttribute="trailing" constant="21" id="7vB-em-8QE"/>
@@ -149,7 +150,7 @@
                                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="7RS-kf-W5n"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYY-zH-9Z0">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refer NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYY-zH-9Z0">
                                     <rect key="frame" x="142" y="11" width="91" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -205,7 +206,7 @@
     <resources>
         <image name="eth_gray_back" width="24" height="24"/>
         <image name="eth_share" width="20" height="20"/>
-        <image name="icon_invitation_a" width="343" height="464"/>
+        <image name="icon_invitation_ch" width="343" height="464"/>
         <image name="icon_invite_qr" width="147" height="146"/>
     </resources>
 </document>

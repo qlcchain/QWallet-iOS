@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,14 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPf-k4-dKw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftj-5n-QAd">
-                                <rect key="frame" x="56" y="18" width="65.5" height="19.5"/>
+                                <rect key="frame" x="56" y="18.5" width="65.5" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
@@ -35,7 +34,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1x-Ht-Anw">
-                                <rect key="frame" x="24" y="54.5" width="296" height="1"/>
+                                <rect key="frame" x="24" y="55" width="296" height="1"/>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="2kJ-Yw-wj9"/>
@@ -48,10 +47,19 @@
                                     <constraint firstAttribute="height" constant="32" id="Z2b-PJ-5bh"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Dc-tH-KgQ">
+                                <rect key="frame" x="129.5" y="24" width="8" height="8"/>
+                                <color key="backgroundColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="8" id="Nor-M2-h12"/>
+                                    <constraint firstAttribute="height" constant="8" id="hSB-eA-val"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="D5i-cl-pbe" firstAttribute="leading" secondItem="DPf-k4-dKw" secondAttribute="leading" constant="16" id="1f5-jp-8Bq"/>
+                            <constraint firstItem="2Dc-tH-KgQ" firstAttribute="leading" secondItem="ftj-5n-QAd" secondAttribute="trailing" constant="8" id="2dV-Nb-UDo"/>
                             <constraint firstItem="ftj-5n-QAd" firstAttribute="centerY" secondItem="DPf-k4-dKw" secondAttribute="centerY" id="7D1-WI-H6g"/>
                             <constraint firstItem="C1x-Ht-Anw" firstAttribute="leading" secondItem="DPf-k4-dKw" secondAttribute="leading" constant="24" id="BvA-cm-s8P"/>
                             <constraint firstAttribute="trailing" secondItem="UDH-VI-Dy4" secondAttribute="trailing" constant="10" id="E7n-ND-Xew"/>
@@ -60,6 +68,7 @@
                             <constraint firstItem="UDH-VI-Dy4" firstAttribute="centerY" secondItem="DPf-k4-dKw" secondAttribute="centerY" id="Plf-hl-pt6"/>
                             <constraint firstAttribute="bottom" secondItem="C1x-Ht-Anw" secondAttribute="bottom" id="gdZ-6v-Zwj"/>
                             <constraint firstItem="D5i-cl-pbe" firstAttribute="centerY" secondItem="DPf-k4-dKw" secondAttribute="centerY" id="gki-of-Ej5"/>
+                            <constraint firstItem="2Dc-tH-KgQ" firstAttribute="centerY" secondItem="DPf-k4-dKw" secondAttribute="centerY" id="ifz-Vk-Nou"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -73,8 +82,10 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="icon" destination="D5i-cl-pbe" id="eQg-KQ-Flk"/>
+                <outlet property="redView" destination="2Dc-tH-KgQ" id="V1S-tj-zx3"/>
                 <outlet property="titleLab" destination="ftj-5n-QAd" id="51u-DA-GoG"/>
             </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>
         </tableViewCell>
     </objects>
     <resources>

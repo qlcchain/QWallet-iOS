@@ -64,11 +64,11 @@
     
     NSString *rmbStr = kLang(@"rmb");
     NSString *amountShowStr = @"";
-//    if ([language isEqualToString:LanguageCode[0]]) { // 英文
-//        amountShowStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.amount];
-//    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+    if ([language isEqualToString:LanguageCode[0]]) { // 英文
+        amountShowStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.amount];
+    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         amountShowStr = [NSString stringWithFormat:@"%@%@",model.amount,kLang(@"rmb")];
-//    }
+    }
     NSMutableAttributedString *amountAtt = [[NSMutableAttributedString alloc] initWithString:amountShowStr];
     // .SFUIDisplay-Semibold
     [amountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:30] range:NSMakeRange(0, amountShowStr.length)];
@@ -83,11 +83,11 @@
     NSString *qgasStr = @"QGAS";
     NSString *addStr = @"+";
     NSString *topupAmountShowStr = @"";
-//    if ([language isEqualToString:LanguageCode[0]]) { // 英文
-//        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitNum,addStr,qgasNum,qgasStr];
-//    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+    if ([language isEqualToString:LanguageCode[0]]) { // 英文
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitNum,addStr,qgasNum,qgasStr];
+    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitNum,kLang(@"rmb"),addStr,qgasNum,qgasStr];
-//    }
+    }
     NSMutableAttributedString *topupAmountAtt = [[NSMutableAttributedString alloc] initWithString:topupAmountShowStr];
     // .SFUIDisplay-Semibold
     [topupAmountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:20] range:NSMakeRange(0, topupAmountShowStr.length)];

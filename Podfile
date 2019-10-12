@@ -55,7 +55,8 @@ end
 
 def app
 
-#    pod 'Firebase/Core', '~> 5.4.1'
+#    pod 'Firebase/Core'
+    pod 'Firebase/Analytics'
     pod 'TTGTagCollectionView'
     pod 'NinaPagerView'
     pod 'BGFMDB'

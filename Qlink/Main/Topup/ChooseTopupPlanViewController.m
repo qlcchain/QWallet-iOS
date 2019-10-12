@@ -93,7 +93,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
     NSString *size = ChooseTopupPlanNetworkSize;
     NSDictionary *params = @{@"page":page,@"size":size,@"phoneNumber":phoneNumber};
-    [RequestService requestWithUrl10:topup_product_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:topup_product_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {

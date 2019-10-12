@@ -63,6 +63,8 @@
 //#import "WebTestViewController.h"
 //#import "GlobalConstants.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+#import "ClaimQGASTipView.h"
+#import "UserUtil.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -123,6 +125,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addQLCWallet:) name:Add_QLC_Wallet_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qlcAccountPendingDone:) name:QLC_AccountPending_Done_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInfoAfterLoginNoti:) name:User_UpdateInfoAfterLogin_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -144,6 +148,7 @@
     [self renderView];
     [self configInit];
     
+    [ClaimQGASTipView show];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -1675,6 +1680,14 @@
     [self refreshTitle];
     [self refreshLanguage];
     [_refreshScroll.mj_header beginRefreshing];
+}
+
+- (void)updateInfoAfterLoginNoti:(NSNotification *)noti {
+    [ClaimQGASTipView show];
+}
+
+- (void)loginSuccessNoti:(NSNotification *)noti {
+    [UserUtil updateUserInfoAfterLogin];
 }
 
 #pragma mark - Lazy

@@ -88,7 +88,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
     NSString *size = MyTopupOrderNetworkSize;
     NSDictionary *params = @{@"page":page,@"size":size,@"account":account,@"p2pId":p2pId};
-    [RequestService requestWithUrl10:topup_order_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:topup_order_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
@@ -125,7 +125,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     NSString *p2pId = [UserModel getTopupP2PId];
     NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"orderId":orderId};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl10:topup_cancel_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:topup_cancel_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             TopupOrderModel *model = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];

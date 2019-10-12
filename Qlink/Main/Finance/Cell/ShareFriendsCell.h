@@ -26,6 +26,7 @@ typedef void(^ShareFriendsMoreBlock)(void);
 
 @property (nonatomic, copy) ShareFriendsMoreBlock moreB;
 
-- (void)configCell:(InviteRankingModel *)model isFirst:(BOOL)isFirst isSecond:(BOOL)isSecond isLast:(BOOL)isLast;
+//- (void)configCell:(InviteRankingModel *)model isFirst:(BOOL)isFirst isSecond:(BOOL)isSecond isLast:(BOOL)isLast;
+- (void)configCell:(InviteRankingModel *)model qgasUnit:(NSString *)qgasUnit;
 
 @end

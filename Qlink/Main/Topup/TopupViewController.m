@@ -18,6 +18,7 @@
 #import "TopupProductModel.h"
 #import "WalletCommonModel.h"
 #import "ChooseWalletViewController.h"
+#import "TopupWebViewController.h"
 
 static NSString *const TopupNetworkSize = @"20";
 
@@ -109,7 +110,7 @@ static NSString *const TopupNetworkSize = @"20";
     NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
     NSString *size = TopupNetworkSize;
     NSDictionary *params = @{@"page":page,@"size":size};
-    [RequestService requestWithUrl10:topup_product_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:topup_product_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //    [RequestService requestWithUrl5:topup_product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];

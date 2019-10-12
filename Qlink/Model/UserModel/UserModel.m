@@ -234,4 +234,15 @@
     }
 }
 
++ (BOOL)isBind {
+    BOOL bind = NO;
+    if ([UserModel haveLoginAccount]) {
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if (userM.bindDate && ![userM.bindDate isEmptyString]) {
+            bind = YES;
+        }
+    }
+    return bind;
+}
+
 @end

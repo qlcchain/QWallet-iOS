@@ -18,6 +18,9 @@
 #import "PledgeInfoByBeneficialModel.h"
 #import "NSString+RandomStr.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+#import "QContractView.h"
+#import "NEOWalletInfo.h"
+#import "QLCWalletInfo.h"
 
 static NSInteger const PledgeInfo_PageCount = 10;
 static NSInteger const PledgeInfo_PageFirst = 0;
@@ -34,6 +37,7 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 @property (nonatomic) __block NSNumber *totalStakingVolume;
 @property (nonatomic) __block NSNumber *stakingAmount;
 @property (nonatomic) __block NSNumber *earnings;
+@property (nonatomic, strong) QContractView *contractV;
 
 @end
 
@@ -104,6 +108,80 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     _earningsLab.text = [NSString stringWithFormat:@"%@",@([_earnings doubleValue]/QLC_UnitNum)];
 }
 
+- (void)startBenefitPrepare:(NSString *)lockTxId {
+
+    kWeakSelf(self);
+    _contractV = [QContractView addQContractView];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
+    [_contractV nep5_getLockInfo:lockTxId resultHandler:^(id result, BOOL success, NSString * _Nullable message) {
+        if (success) {
+            NSDictionary *dic = result;
+            NSString *neoAddress = dic[@"neoAddress"];
+            NSString *qlcAddress = dic[@"qlcAddress"];
+            NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:neoAddress];
+//            NSString *neo_privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:neoAddress];
+            NSString *qlc_publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:qlcAddress];
+            NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:qlcAddress];
+            NSString *multiSigAddress = dic[@"multiSigAddress"];
+            NSString *qlcAmount = dic[@"amount"];
+            NSString *state = dic[@"state"];
+            if (!neo_publicKey) {
+                [kAppD.window hideToast];
+                [QContractView removeQContractView:weakself.contractV];
+                [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@(%@)",kLang(@"the_wallet_is_none___"),neoAddress]];
+                return;
+            }
+            if (!qlc_publicKey) {
+                [kAppD.window hideToast];
+                [QContractView removeQContractView:weakself.contractV];
+                [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@(%@)",kLang(@"the_wallet_is_none___"),qlcAddress]];
+                return;
+            }
+            if ([state integerValue] == 0) {
+                [kAppD.window hideToast];
+                [QContractView removeQContractView:weakself.contractV];
+                return;
+            }
+            
+            [weakself.contractV ledger_pledgeInfoByTransactionID:lockTxId resultHandler:^(id result, BOOL success, NSString * _Nullable message) {
+                if (!success) {
+                    NSNumber *num = result;
+                    if ([num integerValue] == 1) { // lock成功 未走prepare
+                        NSString *qlc_amount = [NSString stringWithFormat:@"%@",@([qlcAmount doubleValue]/QLC_UnitNum)];
+                        [weakself.contractV nep5_prePareBenefitPledge:qlcAddress qlcAmount:qlc_amount multiSigAddress:multiSigAddress neo_publicKey:neo_publicKey lockTxId:lockTxId qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:^(NSString * _Nullable result, BOOL success, NSString * _Nullable message) {
+                            [kAppD.window hideToast];
+                            [QContractView removeQContractView:weakself.contractV];
+                            if (success) {
+                                [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
+                                [weakself.navigationController popToRootViewControllerAnimated:YES];
+                            } else {
+                                NSString *tip = [kLang(@"failed_") stringByAppendingFormat:@"(%@)",message ?: @""];
+                                [kAppD.window makeToastDisappearWithText:tip];
+                            }
+                        }];
+                    } else {
+                        [kAppD.window hideToast];
+                        [QContractView removeQContractView:weakself.contractV];
+//                        NSString *tip = [kLang(@"failed_") stringByAppendingFormat:@"(%@)",message ?: @""];
+//                        [kAppD.window makeToastDisappearWithText:tip];
+                    }
+                } else {
+                    [kAppD.window hideToast];
+                    [QContractView removeQContractView:weakself.contractV];
+//                    NSString *tip = [kLang(@"failed_") stringByAppendingFormat:@"(%@)",message ?: @""];
+//                    [kAppD.window makeToastDisappearWithText:tip];
+                }
+            }];
+            
+        } else {
+            [kAppD.window hideToast];
+            [QContractView removeQContractView:weakself.contractV];
+//            NSString *tip = [kLang(@"failed_") stringByAppendingFormat:@"(%@)",message ?: @""];
+//            [kAppD.window makeToastDisappearWithText:tip];
+        }
+    }];
+}
+
 #pragma mark - Request
 - (void)requestPledgeInfoByPledge:(BOOL)showLoad {
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
@@ -149,11 +227,6 @@ static NSInteger const PledgeInfo_PageFirst = 0;
         [weakself.mainTable.mj_footer endRefreshing];
         NSLog(@"error=%@",error);
     }];
-//    [client invokeMethod:@"nep5_prePareBenefitPledge" withParameters:@[@{@"beneficial":@"qlc_3fn7dsybngcf3ieoynyqox1xo8rx8haxh97tuq6f96erne7h844z7jt3x3h1",@"amount":@"100000000",@"pType":@"vote"}, @{@"multiSigAddress":@"APJL237LMQvP7E5c2BXnVe9wA1FsradG64",@"publicKey":@"0259c03e13f70ff2ff9e0da1a6200f071ee31938e1f2a6b5eee9bbabb95d6d722d",@"lockTxId":@"c4c767bb9852a443767fb8a64ef1d1112ed4d2e9c97ec86b56a39d70bbcb4db6"}] requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSLog(@"result=%@",responseObject);
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        NSLog(@"error=%@",error);
-//    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -192,6 +265,27 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 - (IBAction)invokeNewStakingAction:(id)sender {
     [self jumpToNewStaking];
 }
+
+- (IBAction)txidAction:(id)sender {
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_qgas") preferredStyle:UIAlertControllerStyleAlert];
+    kWeakSelf(self);
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertC addAction:alertCancel];
+    UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"confirm") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *txid = alertC.textFields.firstObject.text;
+        if ([txid isEmptyString]) {
+            return;
+        }
+        [weakself startBenefitPrepare:txid];
+    }];
+    [alertC addAction:alertBuy];
+    [alertC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"txid";
+    }];
+    [self presentViewController:alertC animated:YES completion:nil];
+}
+
 
 #pragma mark - Transition
 - (void)jumpToNewStaking {

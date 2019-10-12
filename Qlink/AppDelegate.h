@@ -15,7 +15,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic , assign) BOOL checkPassLock;
+@property (nonatomic, assign) BOOL checkPassLock;
 @property (nonatomic) BOOL needFingerprintVerification;
 //@property (nonatomic) BOOL openShowPresentLogin;
 @property (nonatomic) BOOL pushToOrderList;

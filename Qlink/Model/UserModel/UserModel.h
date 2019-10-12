@@ -33,6 +33,7 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 @property (nonatomic, copy) NSNumber *number;
 @property (nonatomic, copy) NSNumber *totalInvite;
 @property (nonatomic, copy) NSString *vStatus; // 验证状态[NOT_UPLOAD/未上传,UPLOADED/已上传,KYC_SUCCESS/KYC成功,KYC_FAIL/KYC失败]
+@property (nonatomic, copy) NSString *bindDate;
 
 + (NSString *)getOwnP2PId;
 + (NSString *)getTopupP2PId;
@@ -48,5 +49,6 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 + (void)storeLastLoginAccount:(NSString *)account; // 刷新最后一次登录的账号
 + (NSString *)getLastLoginAccount; // 获取最后一次登录的账号
 + (void)deleteOneAccount;
++ (BOOL)isBind;
 
 @end
