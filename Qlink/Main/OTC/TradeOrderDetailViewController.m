@@ -749,7 +749,7 @@
 - (IBAction)txidCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _tradeIDLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)revokeAction:(id)sender {

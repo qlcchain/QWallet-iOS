@@ -510,6 +510,11 @@
 		5860FD2520B7B0F1005AA1DA /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5860FD1D20B7B0F1005AA1DA /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5862C6DA2340A785006F4AC5 /* QLogHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5862C6D92340A785006F4AC5 /* QLogHelper.m */; };
 		58639D7B2338BAB9005B39FA /* TopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58639D792338BAB9005B39FA /* TopupViewController.m */; };
+		58644E372357FA7E00EFA9A2 /* FirebaseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E362357FA7E00EFA9A2 /* FirebaseConstants.m */; };
+		58644E3A2358034200EFA9A2 /* FirebaseUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E392358034200EFA9A2 /* FirebaseUtil.m */; };
+		58644E3E235817ED00EFA9A2 /* TopupCredentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */; };
+		58644E3F235817ED00EFA9A2 /* TopupCredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58644E3C235817EC00EFA9A2 /* TopupCredentialViewController.xib */; };
+		5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5869C5AE2359A84F0016BD38 /* InviteRankView.m */; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
 		586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */ = {isa = PBXBuildFile; fileRef = 586F371E207B049400E12F95 /* ContinentAndCountryBean.json */; };
 		5874E33E234DB2ED000835A0 /* ClaimQGASTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5874E33C234DB2ED000835A0 /* ClaimQGASTipView.m */; };
@@ -580,6 +585,7 @@
 		58822DC8230E9DF8007C8DC2 /* UIView+frameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */; };
 		58822DCC230F9DBE007C8DC2 /* PayQLCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC9230F9DB8007C8DC2 /* PayQLCViewController.m */; };
 		58822DCE23102442007C8DC2 /* PayQLCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58822DD023102442007C8DC2 /* PayQLCViewController.xib */; };
+		588444E22359E166007882AB /* HttpRedirect302Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 588444E12359E166007882AB /* HttpRedirect302Helper.m */; };
 		58847370233A083D00BB6F76 /* TopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5884736E233A083D00BB6F76 /* TopupCell.m */; };
 		5885D414231E0CDE00F9DEDE /* JsApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5885D413231E0CDD00F9DEDE /* JsApiTest.m */; };
 		5885D420231E491800F9DEDE /* AFJSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5885D41E231E491800F9DEDE /* AFJSONRPCClient.m */; };
@@ -750,6 +756,7 @@
 		58D689D2230B9C6600115610 /* DeviceConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D689D1230B9C6600115610 /* DeviceConstants.m */; };
 		58D689D5230B9FEA00115610 /* QConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D689D4230B9FEA00115610 /* QConstants.m */; };
 		58D689D8230BA17C00115610 /* GlobalConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D689D7230BA17C00115610 /* GlobalConstants.m */; };
+		58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D7099A2359A9EE008880A0 /* InviteRankView.xib */; };
 		58DA5BAF2322330E004E8D5A /* StakingProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DA5BAC2322330D004E8D5A /* StakingProcessView.m */; };
 		58DA5BB52322361D004E8D5A /* RevokingProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DA5BB22322361C004E8D5A /* RevokingProcessView.m */; };
 		58DC64F9206B6748002CF682 /* ConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DC64F8206B6748002CF682 /* ConfigUtil.m */; };
@@ -1982,6 +1989,15 @@
 		5862C6D92340A785006F4AC5 /* QLogHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLogHelper.m; sourceTree = "<group>"; };
 		58639D782338BAB9005B39FA /* TopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupViewController.h; sourceTree = "<group>"; };
 		58639D792338BAB9005B39FA /* TopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupViewController.m; sourceTree = "<group>"; };
+		58644E352357FA7E00EFA9A2 /* FirebaseConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseConstants.h; sourceTree = "<group>"; };
+		58644E362357FA7E00EFA9A2 /* FirebaseConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseConstants.m; sourceTree = "<group>"; };
+		58644E382358034200EFA9A2 /* FirebaseUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUtil.h; sourceTree = "<group>"; };
+		58644E392358034200EFA9A2 /* FirebaseUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUtil.m; sourceTree = "<group>"; };
+		58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupCredentialViewController.m; sourceTree = "<group>"; };
+		58644E3C235817EC00EFA9A2 /* TopupCredentialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopupCredentialViewController.xib; sourceTree = "<group>"; };
+		58644E3D235817EC00EFA9A2 /* TopupCredentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupCredentialViewController.h; sourceTree = "<group>"; };
+		5869C5AD2359A84F0016BD38 /* InviteRankView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteRankView.h; sourceTree = "<group>"; };
+		5869C5AE2359A84F0016BD38 /* InviteRankView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteRankView.m; sourceTree = "<group>"; };
 		586EE0962089951D009EAF40 /* FriendStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendStatusModel.h; sourceTree = "<group>"; };
 		586EE0972089951D009EAF40 /* FriendStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendStatusModel.m; sourceTree = "<group>"; };
 		586F371E207B049400E12F95 /* ContinentAndCountryBean.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContinentAndCountryBean.json; sourceTree = "<group>"; };
@@ -2117,6 +2133,8 @@
 		58822DC9230F9DB8007C8DC2 /* PayQLCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayQLCViewController.m; sourceTree = "<group>"; };
 		58822DCB230F9DBC007C8DC2 /* PayQLCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayQLCViewController.h; sourceTree = "<group>"; };
 		58822DCF23102442007C8DC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PayQLCViewController.xib; sourceTree = "<group>"; };
+		588444E02359E166007882AB /* HttpRedirect302Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpRedirect302Helper.h; sourceTree = "<group>"; };
+		588444E12359E166007882AB /* HttpRedirect302Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpRedirect302Helper.m; sourceTree = "<group>"; };
 		5884736D233A083D00BB6F76 /* TopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupCell.h; sourceTree = "<group>"; };
 		5884736E233A083D00BB6F76 /* TopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupCell.m; sourceTree = "<group>"; };
 		5885D412231E0CDD00F9DEDE /* JsApiTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsApiTest.h; sourceTree = "<group>"; };
@@ -2414,6 +2432,9 @@
 		58D689D6230BA17C00115610 /* GlobalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalConstants.h; sourceTree = "<group>"; };
 		58D689D7230BA17C00115610 /* GlobalConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalConstants.m; sourceTree = "<group>"; };
 		58D689D9230BC7FB00115610 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ComplaintInfoViewController.strings; sourceTree = "<group>"; };
+		58D709992359A9EE008880A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InviteRankView.xib; sourceTree = "<group>"; };
+		58D7099C2359A9F1008880A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InviteRankView.strings; sourceTree = "<group>"; };
+		58D7099E2359A9F5008880A0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InviteRankView.strings"; sourceTree = "<group>"; };
 		58DA5BAC2322330D004E8D5A /* StakingProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StakingProcessView.m; sourceTree = "<group>"; };
 		58DA5BAD2322330D004E8D5A /* StakingProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StakingProcessView.h; sourceTree = "<group>"; };
 		58DA5BB22322361C004E8D5A /* RevokingProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevokingProcessView.m; sourceTree = "<group>"; };
@@ -3197,6 +3218,8 @@
 				58BAFC7B2331D95E00421C70 /* StakingUtil.m */,
 				5862C6D82340A785006F4AC5 /* QLogHelper.h */,
 				5862C6D92340A785006F4AC5 /* QLogHelper.m */,
+				58644E382358034200EFA9A2 /* FirebaseUtil.h */,
+				58644E392358034200EFA9A2 /* FirebaseUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4429,6 +4452,11 @@
 				58A8B1B6233B09DB007E2CE3 /* ChooseTopupPlanViewController.h */,
 				58A8B1B7233B09DB007E2CE3 /* ChooseTopupPlanViewController.m */,
 				58A8B213233C8812007E2CE3 /* ChooseTopupPlanViewController.xib */,
+				58644E3D235817EC00EFA9A2 /* TopupCredentialViewController.h */,
+				58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */,
+				58644E3C235817EC00EFA9A2 /* TopupCredentialViewController.xib */,
+				588444E02359E166007882AB /* HttpRedirect302Helper.h */,
+				588444E12359E166007882AB /* HttpRedirect302Helper.m */,
 			);
 			path = Topup;
 			sourceTree = "<group>";
@@ -5025,6 +5053,8 @@
 				58A8B1E5233C5C20007E2CE3 /* TopupConstants.m */,
 				58EBECFA234ED963007EEF1F /* ClaimConstants.h */,
 				58EBECFB234ED963007EEF1F /* ClaimConstants.m */,
+				58644E352357FA7E00EFA9A2 /* FirebaseConstants.h */,
+				58644E362357FA7E00EFA9A2 /* FirebaseConstants.m */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -5094,6 +5124,9 @@
 				58FB8D882265AB970075698E /* GuangGaoCollectionCell.h */,
 				58FB8D892265AB970075698E /* GuangGaoCollectionCell.m */,
 				58FB8D8A2265AB970075698E /* GuangGaoCollectionCell.xib */,
+				5869C5AD2359A84F0016BD38 /* InviteRankView.h */,
+				5869C5AE2359A84F0016BD38 /* InviteRankView.m */,
+				58D7099A2359A9EE008880A0 /* InviteRankView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5821,6 +5854,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */,
 				580D91B92063AE5300B12506 /* Roboto-Thin.ttf in Resources */,
 				581F80D422F7BE6F00F8291E /* ComplaintDetailViewController.xib in Resources */,
 				581F826322F7C20800F8291E /* NEOBackupDetailViewController.xib in Resources */,
@@ -5919,6 +5953,7 @@
 				581D32C9219C158B001F88C3 /* nodes.json in Resources */,
 				581F825522F7C1EE00F8291E /* NEOCreateWalletViewController.xib in Resources */,
 				5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */,
+				58644E3F235817ED00EFA9A2 /* TopupCredentialViewController.xib in Resources */,
 				581925832114363E009AE406 /* PageThreeView.xib in Resources */,
 				58A8B203233C87DD007E2CE3 /* TopupViewController.xib in Resources */,
 				5874E35D234DDAA6000835A0 /* js in Resources */,
@@ -6298,6 +6333,7 @@
 				58245C0622E05AF50093E747 /* TradeOrderInfoModel.m in Sources */,
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
 				581AF7B121B6646E001A37E1 /* EOSCreateWalletViewController.m in Sources */,
+				5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */,
 				73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */,
 				58245C4E22E192550093E747 /* TZPhotoPickerController.m in Sources */,
 				587ABD4221B8F8F800C3D81A /* GetRequiredPublicKeyRequest.m in Sources */,
@@ -6480,6 +6516,7 @@
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
 				583910F9208495F200A19E7E /* DDLogUtil.m in Sources */,
+				58644E3E235817ED00EFA9A2 /* TopupCredentialViewController.m in Sources */,
 				5812DDAA20A1A7890043A8A8 /* ZXChatFaceItemView.m in Sources */,
 				58822DC7230E9DF8007C8DC2 /* CQScrollMenuView.m in Sources */,
 				580D914720625A4400B12506 /* UIImage+Capture.m in Sources */,
@@ -6597,6 +6634,7 @@
 				58DA5BB52322361D004E8D5A /* RevokingProcessView.m in Sources */,
 				58A6500621BE196600E52FFF /* PaymentDetailsView.m in Sources */,
 				73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */,
+				58644E3A2358034200EFA9A2 /* FirebaseUtil.m in Sources */,
 				73C200C2209A9D460043E889 /* NotifactionView.m in Sources */,
 				582F87BF2153338F0008331D /* RankingStartCell.m in Sources */,
 				58D689D8230BA17C00115610 /* GlobalConstants.m in Sources */,
@@ -6769,6 +6807,7 @@
 				581D32F5219D13DD001F88C3 /* NeoQueryWGasView.m in Sources */,
 				5894A709225F3105008B0854 /* FinanceCell.m in Sources */,
 				5812DDA320A1A7890043A8A8 /* ZXChatHelper.m in Sources */,
+				58644E372357FA7E00EFA9A2 /* FirebaseConstants.m in Sources */,
 				587ABD6221B8F8F800C3D81A /* CreateAccountRequest.m in Sources */,
 				73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */,
 				5825553722EACF9100F0B9F0 /* ImageWaterMarkView.m in Sources */,
@@ -6796,6 +6835,7 @@
 				58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */,
 				58F3186A22D346600024B4F0 /* TradeOrderDetailViewController.m in Sources */,
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,
+				588444E22359E166007882AB /* HttpRedirect302Helper.m in Sources */,
 				581D32DB219C158B001F88C3 /* ContractResult.swift in Sources */,
 				5812DDB020A1A7890043A8A8 /* ZXVoiceMessageCell.m in Sources */,
 				73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */,
@@ -8382,6 +8422,16 @@
 				58C9283622FA7A5B0020BDC0 /* zh-Hans */,
 			);
 			name = ShareFriendsCell.xib;
+			sourceTree = "<group>";
+		};
+		58D7099A2359A9EE008880A0 /* InviteRankView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58D709992359A9EE008880A0 /* Base */,
+				58D7099C2359A9F1008880A0 /* en */,
+				58D7099E2359A9F5008880A0 /* zh-Hans */,
+			);
+			name = InviteRankView.xib;
 			sourceTree = "<group>";
 		};
 		58EBED03234F223C007EEF1F /* DailyEarningsViewController.xib */ = {

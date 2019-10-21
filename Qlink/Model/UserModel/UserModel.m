@@ -90,13 +90,14 @@
 }
 
 + (UserModel *)fetchUser:(NSString *)account {
+    NSString *compareAccount = [account lowercaseString];
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     __block UserModel *model = nil;
     if (data) {
         NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if ([tempM.account isEqualToString:account] || [tempM.email isEqualToString:account] || [tempM.phone isEqualToString:account]) {
+            if ([[tempM.account lowercaseString] isEqualToString:compareAccount] || [[tempM.email lowercaseString] isEqualToString:compareAccount] || [[tempM.phone lowercaseString] isEqualToString:compareAccount]) {
                 model = tempM;
                 *stop = YES;
             }

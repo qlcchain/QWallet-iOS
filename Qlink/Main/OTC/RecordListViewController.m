@@ -20,6 +20,8 @@
 #import "PairsModel.h"
 //#import "GlobalConstants.h"
 
+static NSString *RecordListRequestSize = @"20";
+
 @interface RecordListViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
     BOOL needRefreshSlider;
 }
@@ -68,6 +70,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     needRefreshSlider = YES;
     [self configInit];
@@ -356,9 +360,8 @@
         page = [NSString stringWithFormat:@"%@",@(_closedPage)];
         status = @"closed";
     }
-    NSString *size = @"20";
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"page":page,@"size":size}];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"page":page,@"size":RecordListRequestSize}];
     if (_postedBtn.selected) { // 委托单
         [params setObject:@"" forKey:@"entrustOrderId"];
     } else { // 交易单
@@ -375,6 +378,13 @@
                 [weakself.processingArr addObjectsFromArray:arr];
                 weakself.processingPage += 1;
                 [weakself.processingTable reloadData];
+                
+                if (arr.count < [RecordListRequestSize integerValue]) {
+                    [weakself.processingTable.mj_footer endRefreshingWithNoMoreData];
+                    weakself.processingTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                } else {
+                    weakself.processingTable.mj_footer.hidden = NO;
+                }
             } else if (weakself.completedBtn.selected) {
                 if (weakself.completedPage == 1) {
                     [weakself.completedArr removeAllObjects];
@@ -382,6 +392,13 @@
                 [weakself.completedArr addObjectsFromArray:arr];
                 weakself.completedPage += 1;
                 [weakself.completedTable reloadData];
+                
+                if (arr.count < [RecordListRequestSize integerValue]) {
+                    [weakself.completedTable.mj_footer endRefreshingWithNoMoreData];
+                    weakself.completedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                } else {
+                    weakself.completedTable.mj_footer.hidden = NO;
+                }
             } else if (weakself.appealedBtn.selected) {
                 if (weakself.appealedPage == 1) {
                     [weakself.appealedArr removeAllObjects];
@@ -389,6 +406,13 @@
                 [weakself.appealedArr addObjectsFromArray:arr];
                 weakself.appealedPage += 1;
                 [weakself.appealedTable reloadData];
+                
+                if (arr.count < [RecordListRequestSize integerValue]) {
+                    [weakself.appealedTable.mj_footer endRefreshingWithNoMoreData];
+                    weakself.appealedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                } else {
+                    weakself.appealedTable.mj_footer.hidden = NO;
+                }
             } else if (weakself.closedBtn.selected) {
                 if (weakself.closedPage == 1) {
                     [weakself.closedArr removeAllObjects];
@@ -396,6 +420,13 @@
                 [weakself.closedArr addObjectsFromArray:arr];
                 weakself.closedPage += 1;
                 [weakself.closedTable reloadData];
+                
+                if (arr.count < [RecordListRequestSize integerValue]) {
+                    [weakself.closedTable.mj_footer endRefreshingWithNoMoreData];
+                    weakself.closedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                } else {
+                    weakself.closedTable.mj_footer.hidden = NO;
+                }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -421,6 +452,13 @@
             [weakself.postedArr addObjectsFromArray:arr];
             weakself.postedPage += 1;
             [weakself.postedTable reloadData];
+            
+            if (arr.count < [RecordListRequestSize integerValue]) {
+                [weakself.postedTable.mj_footer endRefreshingWithNoMoreData];
+                weakself.postedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+            } else {
+                weakself.postedTable.mj_footer.hidden = NO;
+            }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.postedTable.mj_header endRefreshing];

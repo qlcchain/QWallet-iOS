@@ -10,11 +10,14 @@
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
 #import "TopupOrderModel.h"
+#import "NSString+RemoveZero.h"
 
 @interface MyTopupOrderCell ()
 
 @property (nonatomic, copy) MyTopupOrderCancelBlock orderCancelB;
 @property (nonatomic, copy) MyTopupOrderPayBlock orderPayB;
+@property (nonatomic, copy) MyTopupOrderCredentialBlock orderCredentialB;
+@property (nonatomic, copy) MyTopupOrderCredentialDetalBlock orderCredentialDetailB;
 
 @end
 
@@ -51,9 +54,19 @@
     _qgasAmountLab.text = nil;
 }
 
-- (void)config:(TopupOrderModel *)model cancelB:(MyTopupOrderCancelBlock)cancelB payB:(MyTopupOrderPayBlock)payB {
++ (CGFloat)cellHeight:(TopupOrderModel *)model {
+    CGFloat otherHeight = 333-48-48;
+    CGFloat detailHeight = [model.status isEqualToString:Topup_Order_Status_SUCCESS]?48:0;
+    CGFloat payHeight = [model.status isEqualToString:Topup_Order_Status_QGAS_PAID]?48:0;
+    
+    return otherHeight+detailHeight+payHeight;
+}
+
+- (void)config:(TopupOrderModel *)model cancelB:(MyTopupOrderCancelBlock)cancelB payB:(MyTopupOrderPayBlock)payB credentialB:(MyTopupOrderCredentialBlock)credentialB credetialDetalB:(MyTopupOrderCredentialDetalBlock)credentialDetailB {
     _orderCancelB = cancelB;
     _orderPayB = payB;
+    _orderCredentialB = credentialB;
+    _orderCredentialDetailB = credentialDetailB;
     NSString *language = [Language currentLanguageCode];
     NSString *country = @"";
     NSString *province = @"";
@@ -74,18 +87,19 @@
     _timeLab.text = model.orderTime;
     _numLab.text = [NSString stringWithFormat:@"%@%@",model.areaCode,model.phoneNumber];
     
-    NSNumber *discountNum = @([model.originalPrice doubleValue] - [model.discountPrice doubleValue]);
+//    NSNumber *discountNum = @([model.originalPrice doubleValue] - [model.discountPrice doubleValue]);
+    NSString *discountNumStr = [NSString stringFromDouble:[model.originalPrice doubleValue] - [model.discountPrice doubleValue]];
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
     NSString *discountAmountStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
         topupAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.originalPrice];
         payAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.discountPrice];
-        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNum];
+        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNumStr];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,kLang(@"rmb")];
         payAmountStr = [NSString stringWithFormat:@"%@%@",model.discountPrice,kLang(@"rmb")];
-        discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNum,kLang(@"rmb")];
+        discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,kLang(@"rmb")];
     }
     _topupAmountLab.text = topupAmountStr;
     _payAmountLab.text = payAmountStr;
@@ -93,14 +107,11 @@
     _discountAmountLab.text = discountAmountStr;
     _qgasAmountLab.text = [NSString stringWithFormat:@"%@QGAS",qgasNum];
     
-    if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
-        _btnBack.hidden = NO;
-        
-    } else {
-        _btnBack.hidden = YES;
-        _topupStateLab.text = [model getStatusString];
-        _topupStateLab.textColor = [model getStatusColor];
-    }
+    _credentialLab.text = [model.txid isEmptyString]?@"":[NSString stringWithFormat:@"%@...%@",[model.txid substringToIndex:8],[model.txid substringFromIndex:model.txid.length-8]];
+    _topupStateLab.text = [model getStatusString];
+    _topupStateLab.textColor = [model getStatusColor];
+    _credentialDetailHeight.constant = [model.status isEqualToString:Topup_Order_Status_SUCCESS]?48:0;
+    _payHeight.constant = [model.status isEqualToString:Topup_Order_Status_QGAS_PAID]?48:0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -118,6 +129,18 @@
 - (IBAction)payAction:(id)sender {
     if (_orderPayB) {
         _orderPayB();
+    }
+}
+
+- (IBAction)credentialAction:(id)sender {
+    if (_orderCredentialB) {
+        _orderCredentialB();
+    }
+}
+
+- (IBAction)credentialDetailAction:(id)sender {
+    if (_orderCredentialDetailB) {
+        _orderCredentialDetailB();
     }
 }
 

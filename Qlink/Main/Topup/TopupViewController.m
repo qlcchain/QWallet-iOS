@@ -19,6 +19,7 @@
 #import "WalletCommonModel.h"
 #import "ChooseWalletViewController.h"
 #import "TopupWebViewController.h"
+#import "InviteRankView.h"
 
 static NSString *const TopupNetworkSize = @"20";
 
@@ -31,13 +32,21 @@ static NSString *const TopupNetworkSize = @"20";
 @property (weak, nonatomic) IBOutlet UIButton *actNowBtn;
 @property (weak, nonatomic) IBOutlet UILabel *carrierPackageLab;
 
-
 @property (weak, nonatomic) IBOutlet UIView *topGradientBack;
 @property (weak, nonatomic) IBOutlet UIView *sendTopupBack;
+@property (weak, nonatomic) IBOutlet UIView *makeMoreBack;
 @property (weak, nonatomic) IBOutlet UIView *numBack;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainTableHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *inviteRankBack;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inviteRankHeight;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
+
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
+@property (nonatomic, strong) InviteRankView *inviteRankV;
 
 @end
 
@@ -47,12 +56,13 @@ static NSString *const TopupNetworkSize = @"20";
 - (void)addObserve {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinPayBackNoti:) name:Weixin_Pay_Back_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccessNoti:) name:User_Logout_Success_Noti object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,6 +75,7 @@ static NSString *const TopupNetworkSize = @"20";
     [self configInit];
     [self refreshViewText];
     [self requestTopup_product_list];
+    [self configInviteRankView];
 }
 
 #pragma mark - Operation
@@ -77,20 +88,41 @@ static NSString *const TopupNetworkSize = @"20";
     _numBack.layer.borderWidth = 1;
     _sendTopupBack.layer.cornerRadius = 6;
     _sendTopupBack.layer.masksToBounds = YES;
+    _makeMoreBack.layer.cornerRadius = 6;
+    _makeMoreBack.layer.masksToBounds = YES;
     _actNowBtn.layer.cornerRadius = 2;
     _actNowBtn.layer.masksToBounds = YES;
     
     _currentPage = 1;
+    _mainTableHeight.constant = 0;
+    _inviteRankHeight.constant = 0;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:TopupCellReuse bundle:nil] forCellReuseIdentifier:TopupCellReuse];
     
     kWeakSelf(self)
-    _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+    _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTopup_product_list];
+        
+        if (weakself.inviteRankV) {
+            [weakself.inviteRankV startRefresh];
+        }
     }];
-    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTopup_product_list];
+    }];
+}
+
+- (void)configInviteRankView {
+    kWeakSelf(self);
+    _inviteRankV = [InviteRankView getInstance];
+    [_inviteRankV config:^(CGFloat height) {
+        weakself.inviteRankHeight.constant = height;
+    }];
+    [_inviteRankV startRefresh];
+    [_inviteRankBack addSubview:_inviteRankV];
+    [_inviteRankV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.mas_equalTo(weakself.inviteRankBack).offset(0);
     }];
 }
 
@@ -112,8 +144,8 @@ static NSString *const TopupNetworkSize = @"20";
     NSDictionary *params = @{@"page":page,@"size":size};
     [RequestService requestWithUrl10:topup_product_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //    [RequestService requestWithUrl5:topup_product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [weakself.mainTable.mj_header endRefreshing];
-        [weakself.mainTable.mj_footer endRefreshing];
+        [weakself.mainScroll.mj_header endRefreshing];
+        [weakself.mainScroll.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [TopupProductModel mj_objectArrayWithKeyValuesArray:responseObject[@"productList"]];
             if (weakself.currentPage == 1) {
@@ -132,18 +164,19 @@ static NSString *const TopupNetworkSize = @"20";
             [weakself.sourceArr addObjectsFromArray:arr];
             weakself.currentPage += 1;
             
+            weakself.mainTableHeight.constant = weakself.sourceArr.count*TopupCell_Height;
             [weakself.mainTable reloadData];
             
             if (arr.count < [TopupNetworkSize integerValue]) {
-                [weakself.mainTable.mj_footer endRefreshingWithNoMoreData];
-                weakself.mainTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                [weakself.mainScroll.mj_footer endRefreshingWithNoMoreData];
+                weakself.mainScroll.mj_footer.hidden = arr.count<=0?YES:NO;
             } else {
-                weakself.mainTable.mj_footer.hidden = NO;
+                weakself.mainScroll.mj_footer.hidden = NO;
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [weakself.mainTable.mj_header endRefreshing];
-        [weakself.mainTable.mj_footer endRefreshing];
+        [weakself.mainScroll.mj_header endRefreshing];
+        [weakself.mainScroll.mj_footer endRefreshing];
     }];
 }
 
@@ -223,11 +256,20 @@ static NSString *const TopupNetworkSize = @"20";
 #pragma mark - Noti
 - (void)languageChangeNoti:(NSNotification *)noti {
     [self refreshViewText];
-    [_mainTable.mj_header beginRefreshing];
+    [_mainScroll.mj_header beginRefreshing];
+    [_inviteRankV startRefresh];
 }
 
 - (void)weixinPayBackNoti:(NSNotification *)noti {
     [self jumpToMyTopupOrder];
+}
+
+- (void)loginSuccessNoti:(NSNotification *)noti {
+    [_inviteRankV startRefresh];
+}
+
+- (void)logoutSuccessNoti:(NSNotification *)noti {
+    [_inviteRankV startRefresh];
 }
 
 

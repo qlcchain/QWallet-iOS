@@ -12,6 +12,7 @@
 #import "UserModel.h"
 #import "UIColor+Random.h"
 //#import "GlobalConstants.h"
+#import "FirebaseUtil.h"
 
 @interface RegisterMailViewController ()
 
@@ -181,6 +182,9 @@
             [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            
+            [FirebaseUtil logEventWithItemID:Firebase_Event_Register itemName:Firebase_Event_Register contentType:Firebase_Event_Register];
+            
             [weakself dismiss];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];

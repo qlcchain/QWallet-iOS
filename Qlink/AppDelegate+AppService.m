@@ -36,6 +36,7 @@
 //#import "LoginPWModel.h"
 //#import "WalletCommonModel.h"
 #import "NSBundle+Language.h"
+#import "FirebaseUtil.h"
 @import Firebase;
 
 @interface AppDelegate () <BuglyDelegate>
@@ -48,12 +49,7 @@
 - (void)configFirebase {
     [FIRApp configure];
     
-//    [FIRAnalytics logEventWithName:kFIREventSelectContent
-//    parameters:@{
-//                 kFIRParameterItemID:[NSString stringWithFormat:@"id-%@", @"app launch"],
-//                 kFIRParameterItemName:@"app launch",
-//                 kFIRParameterContentType:@"image"
-//                 }];
+    [FirebaseUtil logEventWithItemID:Firebase_Event_StartApp itemName:Firebase_Event_StartApp contentType:Firebase_Event_StartApp];
 }
 
 #pragma mark - 配置DDLog

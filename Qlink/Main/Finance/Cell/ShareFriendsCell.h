@@ -23,10 +23,12 @@ typedef void(^ShareFriendsMoreBlock)(void);
 @property (weak, nonatomic) IBOutlet UILabel *inviteLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topHeight; // 30
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight; // 30
+@property (weak, nonatomic) IBOutlet UIView *contentBack;
+
 
 @property (nonatomic, copy) ShareFriendsMoreBlock moreB;
 
 //- (void)configCell:(InviteRankingModel *)model isFirst:(BOOL)isFirst isSecond:(BOOL)isSecond isLast:(BOOL)isLast;
-- (void)configCell:(InviteRankingModel *)model qgasUnit:(NSString *)qgasUnit;
+- (void)configCell:(InviteRankingModel *)model qgasUnit:(NSString *)qgasUnit color:(UIColor *)color;
 
 @end

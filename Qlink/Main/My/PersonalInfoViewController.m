@@ -49,6 +49,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
 
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:PersonalInfoCellReuse bundle:nil] forCellReuseIdentifier:PersonalInfoCellReuse];
@@ -125,7 +127,7 @@
 - (void)handleCopy:(NSString *)str {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:str];
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (void)showPhotoAlert {

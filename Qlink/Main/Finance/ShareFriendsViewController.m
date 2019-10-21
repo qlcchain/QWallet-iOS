@@ -182,7 +182,7 @@
 - (IBAction)copyAction:(id)sender {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:_myInfoM.number?:@""];
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)claimAction:(id)sender {
@@ -343,7 +343,7 @@
 //    BOOL isSecond = indexPath.row == 1?YES:NO;
 //    BOOL isLast = indexPath.row == _sourceArr.count-1?YES:NO;
 //    [cell configCell:model isFirst:isFirst isSecond:isSecond isLast:isLast];
-    [cell configCell:model qgasUnit:_invite_reward_amount?:@"0"];
+    [cell configCell:model qgasUnit:_invite_reward_amount?:@"0" color:UIColorFromRGB(0xFEFCF2)];
     kWeakSelf(self)
     cell.moreB = ^{
         [weakself jumpToInviteRanking];

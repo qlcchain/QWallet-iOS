@@ -115,7 +115,7 @@
 - (IBAction)copyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _addressLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
     
 }
 

@@ -10,6 +10,8 @@
 #import "GlobalConstants.h"
 #import "TopupProductModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "NSNumber+RemoveZero.h"
+#import "NSString+RemoveZero.h"
 
 @implementation TopupCell
 
@@ -41,26 +43,29 @@
     NSString *province = @"";
     NSString *isp = @"";
     NSString *name = @"";
-    NSNumber *discountNum = @(0);
+//    NSNumber *discountNum = @(0);
+    NSString *discountNumStr = @"0";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
         country = model.countryEn;
         province = model.provinceEn;
         isp = model.ispEn;
         name = model.nameEn;
-        discountNum = @(100-[model.discount doubleValue]*100);
+//        discountNum = @(100-[model.discount doubleValue]*100);
+        discountNumStr = [NSString stringFromDouble:100-[model.discount doubleValue]*100];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         country = model.country;
         province = model.province;
         isp = model.isp;
         name = model.name;
-        discountNum = @([model.discount doubleValue]*10);
+//        discountNum = @([model.discount doubleValue]*10);
+        discountNumStr = [NSString stringFromDouble:[model.discount doubleValue]*10];
     }
     _titleLab.text = [NSString stringWithFormat:@"%@%@%@",country,province,isp];
     _subTitleLab.text = name;
     _checkDiscountLab.text = kLang(@"view_your_exclusive_offers");
     
     NSString *discountStr = kLang(@"_discount");
-    NSString *discountShowStr = [NSString stringWithFormat:@"%@%@",discountNum,discountStr];
+    NSString *discountShowStr = [NSString stringWithFormat:@"%@%@",discountNumStr,discountStr];
     NSMutableAttributedString *discountAtt = [[NSMutableAttributedString alloc] initWithString:discountShowStr];
     // .SFUIDisplay-Semibold
     [discountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:30] range:NSMakeRange(0, discountShowStr.length)];

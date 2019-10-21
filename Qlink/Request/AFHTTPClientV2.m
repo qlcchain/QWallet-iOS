@@ -29,15 +29,15 @@
     return shareObject;
 }
 
-+ (AFURLSessionManager *)getURLManager {
-    if (![AFHTTPClientV2 shareInstance].urlManager) {
-        [AFHTTPClientV2 shareInstance].urlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-        AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
-        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
-        [AFHTTPClientV2 shareInstance].urlManager.responseSerializer = responseSerializer;
-    }
-    return [AFHTTPClientV2 shareInstance].urlManager;
-}
+//+ (AFURLSessionManager *)getURLManager {
+//    if (![AFHTTPClientV2 shareInstance].urlManager) {
+//        [AFHTTPClientV2 shareInstance].urlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//        AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+//        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
+//        [AFHTTPClientV2 shareInstance].urlManager.responseSerializer = responseSerializer;
+//    }
+//    return [AFHTTPClientV2 shareInstance].urlManager;
+//}
 
 + (AFHTTPSessionManager *)getHTTPManager {
     if (![AFHTTPClientV2 shareInstance].httpManager) {
@@ -52,8 +52,8 @@
         
         //    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platform"];
         //    [manager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"application/json;charset=utf-8"forHTTPHeaderField:@"Content-Type"];
-        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0"forHTTPHeaderField:@"User-Agent"];
+        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
     }
     
     return [AFHTTPClientV2 shareInstance].httpManager;
@@ -67,6 +67,7 @@
         [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];//[AFHTTPResponseSerializer serializer];
     //    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
         [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setTimeoutInterval:TimeOut_Request];
+//        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"ios"forHTTPHeaderField:@"User-Agent"];
     //    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platform"];
 //        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
         [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -262,7 +263,7 @@
         if (!isJson) {
             NSMutableURLRequest *request = [[self getHTTPManager].requestSerializer requestWithMethod:@"POST" URLString:URLString parameters:nil error:nil];
             [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-            [request setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
+//            [request setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
             request.timeoutInterval = TimeOut_Request;
             NSData *body = [params dataUsingEncoding:NSUTF8StringEncoding];
             [request setHTTPBody:body];

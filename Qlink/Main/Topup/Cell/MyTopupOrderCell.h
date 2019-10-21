@@ -13,10 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class TopupOrderModel;
 
 static NSString *MyTopupOrderCellReuse = @"MyTopupOrderCell";
-#define MyTopupOrderCell_Height 180
+//#define MyTopupOrderCell_Height 180
 
 typedef void(^MyTopupOrderCancelBlock)(void);
 typedef void(^MyTopupOrderPayBlock)(void);
+typedef void(^MyTopupOrderCredentialBlock)(void);
+typedef void(^MyTopupOrderCredentialDetalBlock)(void);
 
 @interface MyTopupOrderCell : UITableViewCell
 
@@ -32,8 +34,13 @@ typedef void(^MyTopupOrderPayBlock)(void);
 @property (weak, nonatomic) IBOutlet UIView *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *payBtn;
+@property (weak, nonatomic) IBOutlet UILabel *credentialLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *credentialDetailHeight; // 48
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payHeight; // 48
 
-- (void)config:(TopupOrderModel *)model cancelB:(MyTopupOrderCancelBlock)cancelB payB:(MyTopupOrderPayBlock)payB;
+
++ (CGFloat)cellHeight:(TopupOrderModel *)model;
+- (void)config:(TopupOrderModel *)model cancelB:(MyTopupOrderCancelBlock)cancelB payB:(MyTopupOrderPayBlock)payB credentialB:(MyTopupOrderCredentialBlock)credentialB credetialDetalB:(MyTopupOrderCredentialDetalBlock)credentialDetailB;
 
 @end
 

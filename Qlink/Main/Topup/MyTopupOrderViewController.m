@@ -13,6 +13,8 @@
 #import "TopupOrderModel.h"
 #import "TopupConstants.h"
 #import "TopupWebViewController.h"
+#import "TopupCredentialViewController.h"
+#import "HttpRedirect302Helper.h"
 
 static NSString *const MyTopupOrderNetworkSize = @"20";
 
@@ -60,6 +62,8 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
         NSString *package = [NSString stringWithFormat:@"%@",model.originalPrice];
     NSString *mobile = model.phoneNumber;
     NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
+    
+    
     [self jumpToTopupH5:urlStr];
 }
 
@@ -74,6 +78,13 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     }];
     [alertC addAction:alertBuy];
     [self presentViewController:alertC animated:YES completion:nil];
+}
+
+- (void)credentialHandler:(NSString *)txid {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,txid]];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    }
 }
 
 #pragma mark - Request
@@ -152,7 +163,8 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return MyTopupOrderCell_Height;
+    TopupOrderModel *model = _sourceArr[indexPath.row];
+    return [MyTopupOrderCell cellHeight:model];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -173,6 +185,10 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
         [weakself cancelHandler:model];
     } payB:^{
         [weakself payHandler:model];
+    } credentialB:^{
+        [weakself credentialHandler:model.txid?:@""];
+    } credetialDetalB:^{
+        [weakself jumpToCredentialDetail:model];
     }];
     
     return cell;
@@ -201,6 +217,12 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         [self backToRoot];
     }
+}
+
+- (void)jumpToCredentialDetail:(TopupOrderModel *)model {
+    TopupCredentialViewController *vc = [TopupCredentialViewController new];
+    vc.inputCredentailM = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

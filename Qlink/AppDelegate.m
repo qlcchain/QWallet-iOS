@@ -39,6 +39,7 @@
 #import "UserUtil.h"
 #import "QLogHelper.h"
 #import "ClaimQGASTipView.h"
+#import "NSString+Base64.h"
 
 @interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
