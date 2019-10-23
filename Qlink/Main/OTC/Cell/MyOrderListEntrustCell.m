@@ -10,7 +10,7 @@
 #import "EntrustOrderListModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "OrderStatusUtil.h"
-
+#import "NSDate+Category.h"
 #import "GlobalConstants.h"
 
 @interface MyOrderListEntrustCell ()
@@ -56,7 +56,7 @@
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     _nameLab.text = model.showNickName;
-    _timeLab.text = model.orderTime;
+    _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
     _priceLab.text = [NSString stringWithFormat:@"%@ %@",model.unitPrice,model.payToken];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ %@",model.minAmount,model.maxAmount,model.tradeToken];
     _totalLab.text = [NSString stringWithFormat:@"%@ %@",model.totalAmount,model.tradeToken];

@@ -45,7 +45,7 @@
             userM.holdingPhoto = tempUserM.holdingPhoto;
             userM.ID = tempUserM.ID;
             userM.bindDate = tempUserM.bindDate;
-            [UserModel storeUser:userM useLogin:YES];
+            [UserModel storeUserByLogin:userM];
             [[NSNotificationCenter defaultCenter] postNotificationName:User_UpdateInfo_Noti object:nil];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -82,7 +82,7 @@
             userM.holdingPhoto = tempUserM.holdingPhoto;
             userM.ID = tempUserM.ID;
             userM.bindDate = tempUserM.bindDate;
-            [UserModel storeUser:userM useLogin:YES];
+            [UserModel storeUserByLogin:userM];
             [[NSNotificationCenter defaultCenter] postNotificationName:User_UpdateInfo_Noti object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:User_UpdateInfoAfterLogin_Noti object:nil];
         }

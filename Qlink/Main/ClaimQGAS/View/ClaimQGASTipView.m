@@ -16,6 +16,7 @@
 #import "RSAUtil.h"
 #import "NSDate+Category.h"
 #import "SuccessTipView.h"
+#import "JPushTagHelper.h"
 
 @interface ClaimQGASTipView ()
 
@@ -117,7 +118,9 @@
             SuccessTipView *view = [SuccessTipView getInstance];
             [view showWithTitle:kLang(@"successful")];
             userM.bindDate = responseObject[@"bindDate"];
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
+            
+            [JPushTagHelper setTags]; // 极光设置tag
         }
         
         [weakself hide];

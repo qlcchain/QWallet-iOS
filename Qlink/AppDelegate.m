@@ -22,7 +22,7 @@
 #import "SystemUtil.h"
 #import "WalletTransferUtil.h"
 #import "NEOTransferUtil.h"
-#import "MiPushSDK.h"
+//#import "MiPushSDK.h"
 #import "LoginSetPWViewController.h"
 #import "LoginInputPWViewController.h"
 #import "WalletCommonModel.h"
@@ -40,8 +40,10 @@
 #import "QLogHelper.h"
 #import "ClaimQGASTipView.h"
 #import "NSString+Base64.h"
+#import "JPUSHService.h"
+#import "JPushTagHelper.h"
 
-@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
+@interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
 }
 
@@ -109,8 +111,10 @@
     [self setUserNotifationSettings:application];
     // 配置群聊
     [self configChat];
-    // 配置小米推送
-    [self configPush];
+//    // 配置小米推送
+//    [self configPush];
+    // 配置JPush
+    [self configJPush:launchOptions];
     // Root
 //    [self setTabbarRoot];
     // 是否需要显示引导页
@@ -200,7 +204,9 @@
     }
     UserModel *userM = [UserModel fetchUserOfLogin];
     userM.isLogin = @(NO);
-    [UserModel storeUser:userM useLogin:NO];
+    [UserModel storeUserByID:userM];
+    
+    [JPushTagHelper cleanTags]; // 清除tag
     
     [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
 }
@@ -247,10 +253,10 @@
 //    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
 }
 
-#pragma mark - 配置小米推送
-- (void)configPush {
-    [MiPushSDK registerMiPush:self];
-}
+//#pragma mark - 配置小米推送
+//- (void)configPush {
+//    [MiPushSDK registerMiPush:self];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -276,6 +282,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];//进入前台取消应用消息图标
+    [JPUSHService setBadge:0];
     
     // 进入后台大于5分钟需要开启指纹验证
     NSInteger seconds = [[HWUserdefault getObjectWithKey:In_Background_Time] integerValue];
@@ -297,6 +304,7 @@
 //        [[RunInBackground sharedBg] stopAudioPlay];
 //        isBackendRun = NO;
 //    }
+    
     
 }
 
@@ -326,17 +334,17 @@
 //}
 
 #pragma mark - UIApplicationDelegate
-- (void)application:(UIApplication *)app
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // 注册APNS成功, 注册deviceToken
-    [MiPushSDK bindDeviceToken:deviceToken];
-}
-
-- (void)application:(UIApplication *)app
-didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    // 注册APNS失败
-    // 自行处理
-}
+//- (void)application:(UIApplication *)app
+//didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//    // 注册APNS成功, 注册deviceToken
+//    [MiPushSDK bindDeviceToken:deviceToken];
+//}
+//
+//- (void)application:(UIApplication *)app
+//didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+//    // 注册APNS失败
+//    // 自行处理
+//}
 
 #pragma mark - 注册本地通知
 - (void) setUserNotifationSettings:(UIApplication *) application
@@ -392,51 +400,51 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 }
 
 #pragma mark - 收到推送
-- ( void )application:( UIApplication *)application didReceiveRemoteNotification:( NSDictionary *)userInfo
-{
-    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
-    // 使用此方法后，所有消息会进行去重，然后通过miPushReceiveNotification:回调返回给App
-}
-
-// iOS10新加入的回调方法
-// 应用在前台收到通知
-- (void) userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {
-    NSDictionary * userInfo = notification.request.content.userInfo;
-    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
-    }
-    
-    if ([notification.request.trigger isKindOfClass:[UNTimeIntervalNotificationTrigger class]]) {
-        NSDictionary *dic = notification.request.content.userInfo;
-        [self showNotificationAlertViewWtihDic:dic];
-    }
-    
-    //    completionHandler(UNNotificationPresentationOptionAlert);
-}
-
-// 点击通知进入应用
-- (void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {
-    NSDictionary * userInfo = response.notification.request.content.userInfo;
-    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
-    }
-    completionHandler();
-}
-
-#pragma mark - MiPushSDKDelegate
-- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data {
-    // 请求成功
-    // 可在此获取regId
-    DDLogDebug(@"小米推送请求方法 selector = %@ data = %@",selector,data);
-    if ([selector isEqualToString:@"bindDeviceToken:"]) {
-        DDLogDebug(@"regid = %@", data[@"regid"]);
-    }
-}
-
-- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data {
-    // 请求失败
-    DDLogDebug(@"小米推送失败方法  selector = %@  error = %i  data = %@",selector,error,data);
-}
+//- ( void )application:( UIApplication *)application didReceiveRemoteNotification:( NSDictionary *)userInfo
+//{
+//    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
+//    // 使用此方法后，所有消息会进行去重，然后通过miPushReceiveNotification:回调返回给App
+//}
+//
+//// iOS10新加入的回调方法
+//// 应用在前台收到通知
+//- (void) userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {
+//    NSDictionary * userInfo = notification.request.content.userInfo;
+//    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+//    }
+//
+//    if ([notification.request.trigger isKindOfClass:[UNTimeIntervalNotificationTrigger class]]) {
+//        NSDictionary *dic = notification.request.content.userInfo;
+//        [self showNotificationAlertViewWtihDic:dic];
+//    }
+//
+//    //    completionHandler(UNNotificationPresentationOptionAlert);
+//}
+//
+//// 点击通知进入应用
+//- (void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {
+//    NSDictionary * userInfo = response.notification.request.content.userInfo;
+//    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+//    }
+//    completionHandler();
+//}
+//
+//#pragma mark - MiPushSDKDelegate
+//- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data {
+//    // 请求成功
+//    // 可在此获取regId
+//    DDLogDebug(@"小米推送请求方法 selector = %@ data = %@",selector,data);
+//    if ([selector isEqualToString:@"bindDeviceToken:"]) {
+//        DDLogDebug(@"regid = %@", data[@"regid"]);
+//    }
+//}
+//
+//- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data {
+//    // 请求失败
+//    DDLogDebug(@"小米推送失败方法  selector = %@  error = %i  data = %@",selector,error,data);
+//}
 
 
 #pragma mark - 第三方app传输文件回调
@@ -488,10 +496,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     // 处理点击通知打开app的逻辑
     NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if(userInfo){//推送信息
-        NSString *messageId = [userInfo objectForKey:@"_id_"];
-        if (messageId!=nil) {
-            [MiPushSDK openAppNotify:messageId];
-        }
+//        NSString *messageId = [userInfo objectForKey:@"_id_"];
+//        if (messageId!=nil) {
+//            [MiPushSDK openAppNotify:messageId];
+//        }
     }
 }
 

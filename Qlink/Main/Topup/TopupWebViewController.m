@@ -43,9 +43,14 @@
                  forKeyPath:NSStringFromSelector(@selector(estimatedProgress))
                     options:0
                     context:nil];
+    
+//    //allWebsiteDataTypes清除所有缓存
+//    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+//    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+//    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+//    }];
 
-
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_inputUrl?:@""] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_inputUrl?:@""] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
     [_myWebView loadRequest:request];
     
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
@@ -114,7 +119,7 @@
                 redirectUrl = [absoluteString stringByAppendingString:[NSString stringWithFormat:@"&redirect_url=%@://",Weixin_Pay_Url_Scheme]];
             }
             
-            NSMutableURLRequest *newRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:redirectUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+            NSMutableURLRequest *newRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:redirectUrl] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60];
             newRequest.allHTTPHeaderFields = request.allHTTPHeaderFields;
             newRequest.URL = [NSURL URLWithString:redirectUrl];
             [webView loadRequest:newRequest];
@@ -127,7 +132,7 @@
             if ([scheme isEqualToString:@"weixin"]) {
                 // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.
                 if (endPayRedirectURL) {
-                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60]];
+                    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60]];
                 }
             }else if ([scheme isEqualToString:[NSString stringWithFormat:@"%@",Weixin_Pay_Url_Scheme]]) {
                 

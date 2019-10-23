@@ -1516,6 +1516,14 @@ Copyright 2019 Google
    limitations under the License.
 
 
+## JCore
+
+Copyright jpush.cn
+
+## JPush
+
+Copyright jiguang.cn
+
 ## JSONRPCKit
 
 Copyright (c) 2015-2016 Shinichiro Oba

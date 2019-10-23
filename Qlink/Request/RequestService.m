@@ -12,7 +12,7 @@
 #import "NSDate+Category.h"
 #import "AFHTTPClientV2.h"
 #import "UserModel.h"
-
+#import "SystemUtil.h"
 #import "GlobalConstants.h"
 
 @interface RequestService ()
@@ -141,6 +141,7 @@
             case 20002: // Token invalid
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
+//                    [SystemUtil requestLogout:nil];
                     [kAppD logout];
                 });
             }
@@ -153,6 +154,7 @@
             case 20004: // Incorrent password
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
+//                    [SystemUtil requestLogout:nil];
                     [kAppD logout];
                 });
             }

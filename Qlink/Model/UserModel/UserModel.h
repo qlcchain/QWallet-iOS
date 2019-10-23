@@ -37,7 +37,8 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 
 + (NSString *)getOwnP2PId;
 + (NSString *)getTopupP2PId;
-+ (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin;
++ (void)storeUserByID:(UserModel *)model;
++ (void)storeUserByLogin:(UserModel *)model;
 + (UserModel *)fetchUserOfLogin;
 + (UserModel *)fetchUser:(NSString *)account;
 + (void)logout:(NSString *)account;
@@ -49,6 +50,6 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 + (void)storeLastLoginAccount:(NSString *)account; // 刷新最后一次登录的账号
 + (NSString *)getLastLoginAccount; // 获取最后一次登录的账号
 + (void)deleteOneAccount;
-+ (BOOL)isBind;
++ (BOOL)isBind; // 领取QGAS
 
 @end

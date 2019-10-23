@@ -208,7 +208,7 @@ typedef enum : NSUInteger {
             userM.vStatus = @"UPLOADED";
             userM.facePhoto = responseObject[@"facePhoto"];
             userM.holdingPhoto = responseObject[@"holdingPhoto"];
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [UserUtil updateUserInfo];
             [weakself backAction:nil];

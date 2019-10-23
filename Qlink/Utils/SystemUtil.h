@@ -20,5 +20,7 @@
 + (void) configureAPPTerminate;
 //+ (void)deleteVPNConfig;
 + (void)checkAPPUpdate;
++ (void)requestLogout:(void (^)(void))completeBlock;
++ (void)requestBind_jpush;
 
 @end

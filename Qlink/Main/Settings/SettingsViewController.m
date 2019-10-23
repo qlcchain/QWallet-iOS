@@ -16,6 +16,7 @@
 #import "WebViewController.h"
 #import "UserModel.h"
 //#import "GlobalConstants.h"
+#import "SystemUtil.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -99,9 +100,10 @@
 }
 
 - (void)logout {
-    [kAppD logout];
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    kWeakSelf(self);
+    [SystemUtil requestLogout:^{
+        [weakself.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 
 - (void)showSelectLanguage {

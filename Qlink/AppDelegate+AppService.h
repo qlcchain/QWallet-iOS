@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchUserInfo;
 - (void)configChat;
 - (void)checkGuidenPage;
+- (void)configJPush:(NSDictionary *)launchOptions;
 
 /**
  当前顶层控制器

@@ -44,6 +44,23 @@
     return time;
 }
 
++ (NSString*)getOutputDate:(NSString*)inputTime formatStr:(NSString*)formatStr {
+    // 中国东八区
+    NSDateFormatter*inputFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
+    [inputFormatter setTimeZone:timeZone];
+    [inputFormatter setDateFormat:formatStr];
+    NSDate*inputDate = [inputFormatter dateFromString:inputTime];
+    // 转换当前系统时区
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//    NSTimeZone *timeZone1 = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0900"];
+//    [outputFormatter setTimeZone:timeZone1];
+    [outputFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [outputFormatter setDateFormat:formatStr];
+    NSString*dateString = [outputFormatter stringFromDate:inputDate];
+    return dateString;
+}
+
 + (NSDate *)dateFromTime:(NSString *)fromTime {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
     format.timeZone = [NSTimeZone localTimeZone];

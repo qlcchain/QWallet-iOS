@@ -243,7 +243,7 @@
             //            NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],responseObject[@"head"]];
             NSString *head = responseObject[@"head"];
             userM.head = head;
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [weakself configInit];
 //            [UserManage setHeadUrl:head];

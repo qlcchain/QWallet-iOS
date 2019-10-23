@@ -94,17 +94,17 @@
                             <rect key="frame" x="0.0" y="44" width="414" height="1056"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Uv-JW-sWD">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="1096"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="1086"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgi-Ib-ww0">
-                                            <rect key="frame" x="0.0" y="65" width="414" height="1031"/>
+                                            <rect key="frame" x="0.0" y="65" width="414" height="1021"/>
                                             <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7C-aX-0Qy">
-                                            <rect key="frame" x="0.0" y="285" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="285" width="414" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="运营商套餐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li2-TG-ihX">
-                                                    <rect key="frame" x="19" y="15.333333333333313" width="81.666666666666671" height="19.333333333333329"/>
+                                                    <rect key="frame" x="19" y="16.666666666666686" width="81.666666666666671" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -112,13 +112,13 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="li2-TG-ihX" firstAttribute="centerY" secondItem="v7C-aX-0Qy" secondAttribute="centerY" id="IX2-je-NmJ"/>
-                                                <constraint firstAttribute="height" constant="50" id="ef9-ts-dKp"/>
+                                                <constraint firstAttribute="height" constant="40" id="ef9-ts-dKp"/>
                                                 <constraint firstItem="li2-TG-ihX" firstAttribute="leading" secondItem="v7C-aX-0Qy" secondAttribute="leading" constant="19" id="h2u-SN-iNT"/>
+                                                <constraint firstAttribute="bottom" secondItem="li2-TG-ihX" secondAttribute="bottom" constant="4" id="lXk-IT-zgq"/>
                                             </constraints>
                                         </view>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kw2-2k-NRT">
-                                            <rect key="frame" x="0.0" y="335" width="414" height="388"/>
+                                            <rect key="frame" x="0.0" y="325" width="414" height="388"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="388" id="9Zx-Cl-p4b"/>
@@ -242,7 +242,7 @@
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIp-sJ-FTA">
-                                            <rect key="frame" x="0.0" y="723" width="414" height="373"/>
+                                            <rect key="frame" x="0.0" y="713" width="414" height="373"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="373" id="s9f-Go-kqe"/>

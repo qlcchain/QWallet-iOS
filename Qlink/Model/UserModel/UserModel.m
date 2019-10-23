@@ -52,7 +52,7 @@
     return p2pid?:@"";
 }
 
-+ (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin {
++ (void)storeUserByID:(UserModel *)model {
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     NSMutableArray *muArr = [NSMutableArray array];
     if (!data) {
@@ -64,20 +64,39 @@
         __block NSInteger existIndex = 0;
         [muArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if (useLogin) { // 根据登录用户
-                if ([tempM.isLogin boolValue]) {
-                    isExist = YES;
-                    existIndex = idx;
-                    *stop = YES;
-                }
-            } else {
-                if ([tempM.ID isEqualToString:model.ID]) {
-                    isExist = YES;
-                    existIndex = idx;
-                    *stop = YES;
-                }
+            if ([tempM.ID isEqualToString:model.ID]) {
+                isExist = YES;
+                existIndex = idx;
+                *stop = YES;
             }
-            
+        }];
+        if (!isExist) {
+            [muArr addObject:model];
+        } else {
+            [muArr replaceObjectAtIndex:existIndex withObject:model];
+        }
+    }
+    NSData *archiverData = [NSKeyedArchiver archivedDataWithRootObject:muArr];
+    [HWUserdefault insertObj:archiverData withkey:UserModel_Local];
+}
+
++ (void)storeUserByLogin:(UserModel *)model {
+    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+    NSMutableArray *muArr = [NSMutableArray array];
+    if (!data) {
+        [muArr addObject:model];
+    } else {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [muArr addObjectsFromArray:arr];
+        __block BOOL isExist = NO;
+        __block NSInteger existIndex = 0;
+        [muArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UserModel *tempM = obj;
+            if ([tempM.isLogin boolValue]) {
+                isExist = YES;
+                existIndex = idx;
+                *stop = YES;
+            }
         }];
         if (!isExist) {
             [muArr addObject:model];
@@ -164,7 +183,7 @@
         }];
         if (model) {
             model.isLogin = @(NO);
-            [UserModel storeUser:model useLogin:NO];
+            [UserModel storeUserByID:model];
         }
     }
 }

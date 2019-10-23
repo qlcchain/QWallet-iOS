@@ -89,13 +89,16 @@
 
 // Bottom
 @property (weak, nonatomic) IBOutlet UIButton *revokeBtn;
+@property (weak, nonatomic) IBOutlet UIView *revokeBtnBack;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView1Height; // 59
 @property (weak, nonatomic) IBOutlet UIView *bottomBack1;
 @property (weak, nonatomic) IBOutlet UIButton *iAlreadyPaidBtn;
+@property (weak, nonatomic) IBOutlet UIView *iAlreadyPaidBtnBack;
 @property (weak, nonatomic) IBOutlet UIButton *payBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView2Height; // 59
 @property (weak, nonatomic) IBOutlet UIView *bottomBack2;
 @property (weak, nonatomic) IBOutlet UIButton *complaintBtn;
+@property (weak, nonatomic) IBOutlet UIView *complaintBtnBack;
 @property (weak, nonatomic) IBOutlet UIButton *confirmReceiveBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView3Height; // 59
 @property (weak, nonatomic) IBOutlet UIView *bottomBack3;
@@ -103,7 +106,7 @@
 
 @property (nonatomic, strong) TradeOrderInfoModel *orderInfoM;
 @property (nonatomic, strong) dispatch_source_t countDownTimer;
-@property (nonatomic, strong) NSString *serverTime;
+//@property (nonatomic, strong) NSString *serverTime;
 
 // 买单
 //@property (nonatomic, strong) Token *usdtAsset;
@@ -142,12 +145,18 @@
     _viewComplaintBtn.layer.masksToBounds = YES;
     _revokeBtn.layer.cornerRadius = 4;
     _revokeBtn.layer.masksToBounds = YES;
+    _revokeBtnBack.layer.cornerRadius = 4;
+    _revokeBtnBack.layer.masksToBounds = YES;
     _iAlreadyPaidBtn.layer.cornerRadius = 4;
     _iAlreadyPaidBtn.layer.masksToBounds = YES;
+    _iAlreadyPaidBtnBack.layer.cornerRadius = 4;
+    _iAlreadyPaidBtnBack.layer.masksToBounds = YES;
     _payBtn.layer.cornerRadius = 4;
     _payBtn.layer.masksToBounds = YES;
     _complaintBtn.layer.cornerRadius = 4;
     _complaintBtn.layer.masksToBounds = YES;
+    _complaintBtnBack.layer.cornerRadius = 4;
+    _complaintBtnBack.layer.masksToBounds = YES;
     _confirmReceiveBtn.layer.cornerRadius = 4;
     _confirmReceiveBtn.layer.masksToBounds = YES;
     
@@ -187,7 +196,7 @@
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
-            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
 //            if (i_am_Buyer) {
@@ -199,12 +208,24 @@
             _statusTitleLab.text = kLang(@"waiting_for_buyer_payment");
             _statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
             
-            [self requestGetServerTime];
+            kWeakSelf(self);
+            [self requestGetServerTime:^(NSString *serverTime) {
+                NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.orderTime];
+                NSDate *date30min = [date dateByAddingMinutes:30];
+                NSDate *dateNow = [NSDate dateFromTime:serverTime];
+                NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
+                if (countDownSecond >= 0) {
+                    weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
+                    [weakself startCountDown:countDownSecond];
+                } else {
+                    weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____0");
+                }
+            }];
             
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
-            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
             if (i_am_Buyer) {
@@ -226,9 +247,9 @@
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
-            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
             _confirmPayTimeHeight.constant = 56;
-            _confirmPayTimeLab.text = _orderInfoM.buyerConfirmDate;
+            _confirmPayTimeLab.text = [NSDate getOutputDate:_orderInfoM.buyerConfirmDate formatStr:yyyyMMddHHmmss];
             _orderStatusHeight.constant = 56;
             if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
                 _orderStatusLab.text = kLang(@"waiting_for_public_Chain_confirmation");
@@ -289,12 +310,12 @@
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
-            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
             _confirmPayTimeHeight.constant = 56;
-            _confirmPayTimeLab.text = _orderInfoM.buyerConfirmDate;
+            _confirmPayTimeLab.text = [NSDate getOutputDate:_orderInfoM.buyerConfirmDate formatStr:yyyyMMddHHmmss];
             if (![_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
                 _appealTimeHeight.constant = 56;
-                _appealTimeLab.text = _orderInfoM.appealDate;
+                _appealTimeLab.text = [NSDate getOutputDate:_orderInfoM.appealDate formatStr:yyyyMMddHHmmss];
             }
             _successfulDealHeight.constant = 56;
             _successfulDealLab.text = _orderInfoM.sellerConfirmDate;
@@ -335,10 +356,10 @@
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
-            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
             if (_orderInfoM.closeDate && _orderInfoM.closeDate.length > 0) {
                 _closingTimeHeight.constant = 56;
-                _closingTimeLab.text = _orderInfoM.closeDate;
+                _closingTimeLab.text = [NSDate getOutputDate:_orderInfoM.closeDate formatStr:yyyyMMddHHmmss];
             }
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"revoked");
@@ -370,10 +391,10 @@
             _orderIDHeight.constant = 56;
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
-            _orderTimeLab.text = _orderInfoM.orderTime;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
             if (_orderInfoM.closeDate && _orderInfoM.closeDate.length > 0) {
                 _closingTimeHeight.constant = 56;
-                _closingTimeLab.text = _orderInfoM.closeDate;
+                _closingTimeLab.text = [NSDate getOutputDate:_orderInfoM.closeDate formatStr:yyyyMMddHHmmss];
             }
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"closed");
@@ -656,30 +677,23 @@
     }];
 }
 
-- (void)requestGetServerTime {
-    kWeakSelf(self);
+- (void)requestGetServerTime:(void (^)(NSString *serverTime))completeBlock {
+//    kWeakSelf(self);
     NSDictionary *params = @{};
-    [kAppD.window makeToastInView:kAppD.window];
+//    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl5:getServerTime_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            weakself.serverTime = responseObject[Server_Data][@"sysTime"];
+            NSString *serverTime = responseObject[Server_Data][@"sysTime"];
             
-            NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.orderTime];
-            NSDate *date30min = [date dateByAddingMinutes:30];
-            NSDate *dateNow = [NSDate dateFromTime:weakself.serverTime];
-            NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
-            if (countDownSecond >= 0) {
-                weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
-                [weakself startCountDown:countDownSecond];
-            } else {
-                weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____0");
+            if (completeBlock) {
+                completeBlock(serverTime);
             }
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
     }];
 }
 
@@ -697,7 +711,6 @@
     if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
         [self jumpToUSDTAddress:_orderInfoM.usdtToAddress];
     }
-    
 }
 
 - (IBAction)complaintAction:(UIButton *)sender {
@@ -714,12 +727,40 @@
     if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
         return;
     }
-    [self requestTrade_seller_confirm];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"i_ve_received") preferredStyle:UIAlertControllerStyleAlert];
+    kWeakSelf(self);
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [weakself requestTrade_seller_confirm];
+    }];
+    [alertC addAction:alertCancel];
+    UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"ok_") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertC addAction:alertBuy];
+    [self presentViewController:alertC animated:YES completion:nil];
+
 }
 
 - (IBAction)viewComplaintAction:(UIButton *)sender {
     if ([sender.currentTitle isEqualToString:kLang(@"title_appeal")]) { // 申诉
-        [self jumpToComplaintSubmit];
+        kWeakSelf(self);
+        [kAppD.window makeToastInView:kAppD.window];
+        [self requestGetServerTime:^(NSString *serverTime) {
+            [kAppD.window hideToast];
+            NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.buyerConfirmDate];
+            NSDate *date30min = [date dateByAddingMinutes:30];
+            NSDate *dateNow = [NSDate dateFromTime:serverTime];
+            NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
+            if (countDownSecond >= 0) { // 未到30分钟
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"please_be_patiently_it_hasnt_been_30_minutes_") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"ok_") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                }];
+                [alertC addAction:alertBuy];
+                [self presentViewController:alertC animated:YES completion:nil];
+            } else {
+                [weakself jumpToComplaintSubmit];
+            }
+        }];
+        
     } else if ([sender.currentTitle isEqualToString:kLang(@"title_appeal_details")]) {
         [self jumpToComplaintDetail];
     } else if ([sender.currentTitle isEqualToString:kLang(@"title_appeal_result")]) {

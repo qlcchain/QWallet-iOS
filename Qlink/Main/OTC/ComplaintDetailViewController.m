@@ -99,7 +99,7 @@
         _orderIDHeight.constant = 56;
         _orderIDLab.text = _orderInfoM.number;
         _orderTimeHeight.constant = 56;
-        _orderTimeLab.text = _orderInfoM.orderTime;
+        _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
         _orderStatusHeight.constant = 56;
         _infoAddressHeight.constant = 76;
         _infoAddressLab.text = _orderInfoM.usdtFromAddress;

@@ -11,6 +11,8 @@
 #import "GlobalConstants.h"
 #import "TopupOrderModel.h"
 #import "NSString+RemoveZero.h"
+#import "NSNumber+Operation.h"
+#import "NSDate+Category.h"
 
 @interface MyTopupOrderCell ()
 
@@ -84,11 +86,11 @@
         name = model.productName;
     }
     _titleLab.text = [NSString stringWithFormat:@"%@%@%@-%@",country,province,isp,name];
-    _timeLab.text = model.orderTime;
+    _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
     _numLab.text = [NSString stringWithFormat:@"%@%@",model.areaCode,model.phoneNumber];
-    
-//    NSNumber *discountNum = @([model.originalPrice doubleValue] - [model.discountPrice doubleValue]);
-    NSString *discountNumStr = [NSString stringFromDouble:[model.originalPrice doubleValue] - [model.discountPrice doubleValue]];
+
+    NSString *discountNumStr = [NSD([model.originalPrice stringValue]).sub(model.discountPrice) stringValue];
+//    NSString *discountNumStr = [NSString stringFromDouble:[model.originalPrice doubleValue] - [model.discountPrice doubleValue]];
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
     NSString *discountAmountStr = @"";

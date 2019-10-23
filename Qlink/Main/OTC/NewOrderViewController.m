@@ -33,52 +33,50 @@
 @interface NewOrderViewController () <UITextFieldDelegate>
 
 // BUY
-@property (weak, nonatomic) IBOutlet UITextField *buyUsdtTF;
-@property (weak, nonatomic) IBOutlet UITextField *buyTotalTF;
+@property (weak, nonatomic) IBOutlet UITextField *buyPayUnitTF;
+@property (weak, nonatomic) IBOutlet UITextField *buyTradeAmountTF;
 @property (weak, nonatomic) IBOutlet UITextField *buyVolumeMinAmountTF;
 @property (weak, nonatomic) IBOutlet UITextField *buyVolumeMaxAmountTF;
-@property (weak, nonatomic) IBOutlet UITextField *buyAddressTF;
+@property (weak, nonatomic) IBOutlet UITextField *buyTradeTF;
 @property (weak, nonatomic) IBOutlet UIButton *buyConfirmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *buySegBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *buyReceiveQgasWalletIcon;
-@property (weak, nonatomic) IBOutlet UILabel *buyReceiveQgasWalletNameLab;
-@property (weak, nonatomic) IBOutlet UILabel *buyReceiveQgasWalletAddressLab;
-@property (weak, nonatomic) IBOutlet UIView *buyReceiveQgasWalletBack;
+@property (weak, nonatomic) IBOutlet UIImageView *buyTradeWalletIcon;
+@property (weak, nonatomic) IBOutlet UILabel *buyTradeWalletNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *buyTradeWalletAddressLab;
+@property (weak, nonatomic) IBOutlet UIView *buyTradeWalletBack;
+@property (weak, nonatomic) IBOutlet UIView *buyPayWalletBack;
+@property (weak, nonatomic) IBOutlet UIImageView *buyPayWalletIcon;
+@property (weak, nonatomic) IBOutlet UILabel *buyPayWalletNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *buyPayWalletAddressLab;
+@property (weak, nonatomic) IBOutlet UITextField *buyPayTF;
 @property (weak, nonatomic) IBOutlet UILabel *buy_buyingLab;
 @property (weak, nonatomic) IBOutlet UILabel *buy_buyingQuantityUnitLab;
-//@property (weak, nonatomic) IBOutlet UIImageView *buy_sendToWalletIcon;
-//@property (weak, nonatomic) IBOutlet UILabel *buy_sendToWalletNameLab;
-//@property (weak, nonatomic) IBOutlet UILabel *buy_sendToWalletAddressLab;
-//@property (weak, nonatomic) IBOutlet UIView *buy_sendToWalletBack;
-//@property (weak, nonatomic) IBOutlet UITextField *buy_sendToWalletTF;
 @property (weak, nonatomic) IBOutlet UILabel *buy_sellingLab;
 @property (weak, nonatomic) IBOutlet UILabel *buy_sellingUnitLab;
 
 
 
 // SELL
-@property (weak, nonatomic) IBOutlet UITextField *sellUsdtTF;
-@property (weak, nonatomic) IBOutlet UITextField *sellTotalTF;
+@property (weak, nonatomic) IBOutlet UITextField *sellPayUnitTF;
+@property (weak, nonatomic) IBOutlet UITextField *sellTradeAmountTF;
 @property (weak, nonatomic) IBOutlet UITextField *sellVolumeMinAmountTF;
 @property (weak, nonatomic) IBOutlet UITextField *sellVolumeMaxAmountTF;
-@property (weak, nonatomic) IBOutlet UITextField *sell_receiveAddressTF;
-@property (weak, nonatomic) IBOutlet UITextField *sell_sendAddressTF;
+@property (weak, nonatomic) IBOutlet UITextField *sellPayAddressTF;
+@property (weak, nonatomic) IBOutlet UITextField *sellTradeAddressTF;
 @property (weak, nonatomic) IBOutlet UIButton *sellNextBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sellSegBtn;
-@property (weak, nonatomic) IBOutlet UIView *sellReceiveUsdtWalletBack;
-@property (weak, nonatomic) IBOutlet UIImageView *sellReceiveUsdtWalletIcon;
-@property (weak, nonatomic) IBOutlet UILabel *sellReceiveUsdtWalletNameLab;
-@property (weak, nonatomic) IBOutlet UILabel *sellReceiveUsdtWalletAddressLab;
-
-@property (weak, nonatomic) IBOutlet UIView *sellSendQgasWalletBack;
-@property (weak, nonatomic) IBOutlet UIImageView *sellSendQgasWalletIcon;
-@property (weak, nonatomic) IBOutlet UILabel *sellSendQgasWalletNameLab;
-@property (weak, nonatomic) IBOutlet UILabel *sellSendQgasWalletAddressLab;
+@property (weak, nonatomic) IBOutlet UIView *sellPayWalletBack;
+@property (weak, nonatomic) IBOutlet UIImageView *sellPayWalletIcon;
+@property (weak, nonatomic) IBOutlet UILabel *sellPayWalletNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *sellPayWalletAddressLab;
+@property (weak, nonatomic) IBOutlet UIView *sellTradeWalletBack;
+@property (weak, nonatomic) IBOutlet UIImageView *sellTradeWalletIcon;
+@property (weak, nonatomic) IBOutlet UILabel *sellTradeWalletNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *sellTradeWalletAddressLab;
 @property (weak, nonatomic) IBOutlet UILabel *sell_sellingLab;
 @property (weak, nonatomic) IBOutlet UILabel *sell_buyingLab;
 @property (weak, nonatomic) IBOutlet UILabel *sell_sellingQuantityLab;
 @property (weak, nonatomic) IBOutlet UILabel *sell_buyingUnitLab;
-
 
 
 @property (weak, nonatomic) IBOutlet UIView *sliderV;
@@ -88,10 +86,10 @@
 @property (nonatomic, strong) NSString *sellFromAddress;
 @property (nonatomic, strong) NSString *sellTxid;
 
-//@property (nonatomic, strong) WalletCommonModel *buy_sendToWalletM;
-@property (nonatomic, strong) WalletCommonModel *buy_receiveFromWalletM;
-@property (nonatomic, strong) WalletCommonModel *sell_receiveFromWalletM;
-@property (nonatomic, strong) WalletCommonModel *sell_sendToWalletM;
+@property (nonatomic, strong) WalletCommonModel *buy_PayWalletM;
+@property (nonatomic, strong) WalletCommonModel *buy_TradeWalletM;
+@property (nonatomic, strong) WalletCommonModel *sell_PayWalletM;
+@property (nonatomic, strong) WalletCommonModel *sell_TradeWalletM;
 @property (nonatomic) BOOL isFirstAppear;
 @property (nonatomic, strong) PairsModel *buy_PairsM;
 @property (nonatomic, strong) PairsModel *sell_PairsM;
@@ -125,9 +123,10 @@
     _sellNextBtn.layer.cornerRadius = 4.0;
     _sellNextBtn.layer.masksToBounds = YES;
     
-    _buyReceiveQgasWalletBack.hidden = YES;
-    _sellReceiveUsdtWalletBack.hidden = YES;
-    _sellSendQgasWalletBack.hidden = YES;
+    _buyTradeWalletBack.hidden = YES;
+    _sellPayWalletBack.hidden = YES;
+    _sellTradeWalletBack.hidden = YES;
+    _buyPayWalletBack.hidden = YES;
 
     _scrollContentWidth.constant = 2*SCREEN_WIDTH;
     _sliderV.frame = CGRectMake((SCREEN_WIDTH/2.0-57-(_buySegBtn.width+10)/2.0), _buySegBtn.height, _buySegBtn.width+10, 2);
@@ -144,19 +143,19 @@
     if (_buy_PairsM) {
         _buy_buyingLab.text = _buy_PairsM.tradeToken;
         _buy_buyingQuantityUnitLab.text = _buy_PairsM.tradeToken;
-        _buyTotalTF.text = nil;
+        _buyTradeAmountTF.text = nil;
         _buyVolumeMinAmountTF.text = nil;
         _buyVolumeMaxAmountTF.text = nil;
-//        _buy_sendToWalletBack.hidden = YES;
-//        _buy_sendToWalletTF.text = nil;
-//        _buy_sendToWalletM = nil;
+        _buyPayWalletBack.hidden = YES;
+        _buyPayTF.text = nil;
+        _buy_PayWalletM = nil;
         
         _buy_sellingLab.text = [NSString stringWithFormat:@"%@/%@",_buy_PairsM.tradeToken,_buy_PairsM.payToken];
         _buy_sellingUnitLab.text = _buy_PairsM.payToken;
-        _buyUsdtTF.text = nil;
-        _buyReceiveQgasWalletBack.hidden = YES;
-        _buyAddressTF.text = nil;
-        _buy_receiveFromWalletM = nil;
+        _buyPayUnitTF.text = nil;
+        _buyTradeWalletBack.hidden = YES;
+        _buyTradeTF.text = nil;
+        _buy_TradeWalletM = nil;
     }
 }
 
@@ -164,19 +163,19 @@
     if (_sell_PairsM) {
         _sell_sellingLab.text = _sell_PairsM.tradeToken;
         _sell_sellingQuantityLab.text = _sell_PairsM.tradeToken;
-        _sellTotalTF.text = nil;
+        _sellTradeAmountTF.text = nil;
         _sellVolumeMinAmountTF.text = nil;
         _sellVolumeMaxAmountTF.text = nil;
-        _sellSendQgasWalletBack.hidden = YES;
-        _sell_sendAddressTF.text = nil;
-        _sell_sendToWalletM = nil;
+        _sellTradeWalletBack.hidden = YES;
+        _sellTradeAddressTF.text = nil;
+        _sell_TradeWalletM = nil;
         
         _sell_buyingLab.text = [NSString stringWithFormat:@"%@/%@",_sell_PairsM.tradeToken,_sell_PairsM.payToken];
         _sell_buyingUnitLab.text = _sell_PairsM.payToken;
-        _sellUsdtTF.text = nil;
-        _sellReceiveUsdtWalletBack.hidden = YES;
-        _sell_receiveAddressTF.text = nil;
-        _sell_receiveFromWalletM = nil;
+        _sellPayUnitTF.text = nil;
+        _sellPayWalletBack.hidden = YES;
+        _sellPayAddressTF.text = nil;
+        _sell_PayWalletM = nil;
     }
 }
 
@@ -281,12 +280,26 @@
     if (_buy_PairsM) {
         kWeakSelf(self);
         [self showSelectWallet:_buy_PairsM.tradeTokenChain completeB:^(WalletCommonModel *model) {
-            weakself.buyReceiveQgasWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
-            weakself.buyReceiveQgasWalletBack.hidden = NO;
-            weakself.buy_receiveFromWalletM = model;
-            weakself.buyReceiveQgasWalletNameLab.text = model.name;
-            weakself.buyReceiveQgasWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-            weakself.buyAddressTF.text = model.address;
+            weakself.buyTradeWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
+            weakself.buyTradeWalletBack.hidden = NO;
+            weakself.buy_TradeWalletM = model;
+            weakself.buyTradeWalletNameLab.text = model.name;
+            weakself.buyTradeWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
+            weakself.buyTradeTF.text = model.address;
+        }];
+    }
+}
+
+- (IBAction)showBuyPayAction:(id)sender {
+    if (_buy_PairsM) {
+        kWeakSelf(self);
+        [self showSelectWallet:_buy_PairsM.payTokenChain completeB:^(WalletCommonModel *model) {
+            weakself.buyPayWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
+            weakself.buyPayWalletBack.hidden = NO;
+            weakself.buy_PayWalletM = model;
+            weakself.buyPayWalletNameLab.text = model.name;
+            weakself.buyPayWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
+            weakself.buyPayTF.text = model.address;
         }];
     }
 }
@@ -295,12 +308,12 @@
     if (_sell_PairsM) {
         kWeakSelf(self);
         [self showSelectWallet:_sell_PairsM.payTokenChain completeB:^(WalletCommonModel *model) {
-            weakself.sellReceiveUsdtWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
-            weakself.sellReceiveUsdtWalletBack.hidden = NO;
-            weakself.sell_receiveFromWalletM = model;
-            weakself.sellReceiveUsdtWalletNameLab.text = model.name;
-            weakself.sellReceiveUsdtWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-            weakself.sell_receiveAddressTF.text = model.address;
+            weakself.sellPayWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
+            weakself.sellPayWalletBack.hidden = NO;
+            weakself.sell_PayWalletM = model;
+            weakself.sellPayWalletNameLab.text = model.name;
+            weakself.sellPayWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
+            weakself.sellPayAddressTF.text = model.address;
         }];
     }
 }
@@ -309,12 +322,12 @@
     if (_sell_PairsM) {
         kWeakSelf(self);
         [self showSelectWallet:_sell_PairsM.tradeTokenChain completeB:^(WalletCommonModel *model) {
-            weakself.sellSendQgasWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
-            weakself.sellSendQgasWalletBack.hidden = NO;
-            weakself.sell_sendToWalletM = model;
-            weakself.sellSendQgasWalletNameLab.text = model.name;
-            weakself.sellSendQgasWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-            weakself.sell_sendAddressTF.text = model.address;
+            weakself.sellTradeWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
+            weakself.sellTradeWalletBack.hidden = NO;
+            weakself.sell_TradeWalletM = model;
+            weakself.sellTradeWalletNameLab.text = model.name;
+            weakself.sellTradeWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
+            weakself.sellTradeAddressTF.text = model.address;
             [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
         }];
     }
@@ -335,15 +348,15 @@
 //}
 
 - (IBAction)buyConfirmAction:(id)sender {
-    if ([_buyUsdtTF.text isEmptyString]) {
+    if ([_buyPayUnitTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_is_empty")];
         return;
     }
-    if ([_buyUsdtTF.text doubleValue] <= 0) {
+    if ([_buyPayUnitTF.text doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_needs_greater_than_0")];
         return;
     }
-    if ([_buyTotalTF.text isEmptyString]) {
+    if ([_buyTradeAmountTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
@@ -355,19 +368,23 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_is_empty")];
         return;
     }
-    if ([_buyAddressTF.text isEmptyString]) {
+    if ([_buyTradeTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
+//    if ([_buyPayTF.text isEmptyString]) {
+//        [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
+//        return;
+//    }
     
     // 检查地址有效性
-    BOOL validReceiveAddress = [WalletCommonModel validAddress:_buyAddressTF.text tokenChain:_buy_PairsM.tradeTokenChain];
+    BOOL validReceiveAddress = [WalletCommonModel validAddress:_buyTradeTF.text tokenChain:_buy_PairsM.tradeTokenChain];
     if (!validReceiveAddress) {
         [kAppD.window makeToastDisappearWithText:kLang(@"wallet_address_is_invalidate")];
         return;
     }
     
-    if ([_buy_PairsM.tradeToken isEqualToString:@"QGAS"] && [_buyTotalTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+    if ([_buy_PairsM.tradeToken isEqualToString:@"QGAS"] && [_buyTradeAmountTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
         UserModel *userM = [UserModel fetchUserOfLogin];
         if (![userM.vStatus isEqualToString:kyc_success]) {
             [self showVerifyTipView];
@@ -380,15 +397,15 @@
 }
 
 - (IBAction)sellNextAction:(id)sender {
-    if ([_sellUsdtTF.text isEmptyString]) {
+    if ([_sellPayUnitTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_is_empty")];
         return;
     }
-    if ([_sellUsdtTF.text doubleValue] <= 0) {
+    if ([_sellPayUnitTF.text doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_needs_greater_than_0")];
         return;
     }
-    if ([_sellTotalTF.text isEmptyString]) {
+    if ([_sellTradeAmountTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
@@ -400,27 +417,27 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_is_empty")];
         return;
     }
-    if ([_sellTotalTF.text doubleValue] < [_sellVolumeMaxAmountTF.text doubleValue]) {
+    if ([_sellTradeAmountTF.text doubleValue] < [_sellVolumeMaxAmountTF.text doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_need_greater_than_or_equal_to_max_amount")];
         return;
     }
-    if ([_sell_receiveAddressTF.text isEmptyString]) {
+    if ([_sellPayAddressTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
-    if ([_sell_sendAddressTF.text isEmptyString]) {
+    if ([_sellTradeAddressTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
     // 检查地址有效性
-    BOOL isValid = [WalletCommonModel validAddress:_sell_receiveAddressTF.text tokenChain:_sell_PairsM.payTokenChain];
+    BOOL isValid = [WalletCommonModel validAddress:_sellPayAddressTF.text tokenChain:_sell_PairsM.payTokenChain];
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
     }
     
-    if ([_sell_PairsM.tradeToken isEqualToString:@"QGAS"] && [_sellTotalTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+    if ([_sell_PairsM.tradeToken isEqualToString:@"QGAS"] && [_sellTradeAmountTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
         UserModel *userM = [UserModel fetchUserOfLogin];
         if (![userM.vStatus isEqualToString:kyc_success]) {
             [self showVerifyTipView];
@@ -428,25 +445,31 @@
         }
     }
     
-    [self sell_transfer:_sellTotalTF.text tokenChain:_sell_PairsM.tradeTokenChain tokenName:_sell_PairsM.tradeToken];
+    [self sell_transfer:_sellTradeAmountTF.text tokenChain:_sell_PairsM.tradeTokenChain tokenName:_sell_PairsM.tradeToken];
 }
 
 - (IBAction)buyReceiveQgasWalletCloseAction:(id)sender {
-    _buy_receiveFromWalletM = nil;
-    _buyReceiveQgasWalletBack.hidden = YES;
-    _buyAddressTF.text = nil;
+    _buy_TradeWalletM = nil;
+    _buyTradeWalletBack.hidden = YES;
+    _buyTradeTF.text = nil;
+}
+
+- (IBAction)buyPayWalletCloseAction:(id)sender {
+    _buy_PayWalletM = nil;
+    _buyPayWalletBack.hidden = YES;
+    _buyPayTF.text = nil;
 }
 
 - (IBAction)sellReceiveUsdtWalletCloseAction:(id)sender {
-    _sell_receiveFromWalletM = nil;
-    _sellReceiveUsdtWalletBack.hidden = YES;
-    _sell_receiveAddressTF.text = nil;
+    _sell_PayWalletM = nil;
+    _sellPayWalletBack.hidden = YES;
+    _sellPayAddressTF.text = nil;
 }
 
 - (IBAction)sellSendQgasWalletCloseAction:(id)sender {
-    _sell_sendToWalletM = nil;
-    _sellSendQgasWalletBack.hidden = YES;
-    _sell_sendAddressTF.text = nil;
+    _sell_TradeWalletM = nil;
+    _sellTradeWalletBack.hidden = YES;
+    _sellTradeAddressTF.text = nil;
 }
 
 - (IBAction)buy_buyingAction:(id)sender {
@@ -486,7 +509,7 @@
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField == _buyUsdtTF || textField == _sellUsdtTF) {
+    if (textField == _buyPayUnitTF || textField == _sellPayUnitTF) {
         if (string.length == 0) {
             return YES;
         }
@@ -520,11 +543,11 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
-    NSString *unitPrice = _buyUsdtTF.text?:@"";
-    NSString *totalAmount = _buyTotalTF.text?:@"";
+    NSString *unitPrice = _buyPayUnitTF.text?:@"";
+    NSString *totalAmount = _buyTradeAmountTF.text?:@"";
     NSString *minAmount = _buyVolumeMinAmountTF.text?:@"";
     NSString *maxAmount = _buyVolumeMaxAmountTF.text?:@"";
-    NSString *qgasAddress = _buyAddressTF.text?:@"";
+    NSString *qgasAddress = _buyTradeTF.text?:@"";
     NSString *pairsId = _buy_PairsM.ID?:@"";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"account":account,@"token":token,@"type":@"BUY",@"unitPrice":unitPrice,@"totalAmount":totalAmount,@"minAmount":minAmount,@"maxAmount":maxAmount,@"pairsId":pairsId}];
     [params setObject:qgasAddress forKey:@"qgasAddress"];
@@ -558,11 +581,11 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
-    NSString *unitPrice = _sellUsdtTF.text?:@"";
-    NSString *totalAmount = _sellTotalTF.text?:@"";
+    NSString *unitPrice = _sellPayUnitTF.text?:@"";
+    NSString *totalAmount = _sellTradeAmountTF.text?:@"";
     NSString *minAmount = _sellVolumeMinAmountTF.text?:@"";
     NSString *maxAmount = _sellVolumeMaxAmountTF.text?:@"";
-    NSString *usdtAddress = _sell_receiveAddressTF.text?:@"";
+    NSString *usdtAddress = _sellPayAddressTF.text?:@"";
     NSString *fromAddress = _sellFromAddress?:@"";
     NSString *txid = _sellTxid?:@"";
     NSString *pairsId = _sell_PairsM.ID?:@"";

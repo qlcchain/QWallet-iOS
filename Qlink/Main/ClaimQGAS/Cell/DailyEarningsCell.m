@@ -8,6 +8,7 @@
 
 #import "DailyEarningsCell.h"
 #import "RewardListModel.h"
+#import "NSDate+Category.h"
 
 @implementation DailyEarningsCell
 
@@ -27,7 +28,7 @@
 - (void)config:(RewardListModel *)model {
 //    _titleLab.text = nil;
 //    _statusLab.text = nil;
-    _timeLab.text = model.rewardDate;
+    _timeLab.text = [NSDate getOutputDate:model.rewardDate formatStr:yyyyMMddHHmmss];
     _qgasLab.text = [NSString stringWithFormat:@"+%@ QGAS",model.rewardAmount];
 }
 

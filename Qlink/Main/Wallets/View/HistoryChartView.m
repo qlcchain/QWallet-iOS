@@ -132,6 +132,7 @@
     {
         set1 = (LineChartDataSet *)_chartView.data.dataSets[0];
         [set1 replaceEntries: values];
+        set1.drawValuesEnabled = NO;
         [_chartView.data notifyDataChanged];
         [_chartView notifyDataSetChanged];
     }
@@ -140,7 +141,7 @@
         set1 = [[LineChartDataSet alloc] initWithEntries:values label:_currentSymbol?:@""];
         
         set1.drawIconsEnabled = NO;
-        
+        set1.drawValuesEnabled = NO;
         set1.lineDashLengths = @[@5.f, @2.5f];
         set1.highlightLineDashLengths = @[@5.f, @2.5f];
 //        [set1 setColor:UIColor.blackColor];

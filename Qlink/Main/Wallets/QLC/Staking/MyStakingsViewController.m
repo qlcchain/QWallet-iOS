@@ -21,17 +21,25 @@
 #import "QContractView.h"
 #import "NEOWalletInfo.h"
 #import "QLCWalletInfo.h"
+#import "UserModel.h"
+#import "DailyEarningsViewController.h"
 
 static NSInteger const PledgeInfo_PageCount = 10;
 static NSInteger const PledgeInfo_PageFirst = 0;
 
 @interface MyStakingsViewController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIView *topBack;
+@property (weak, nonatomic) IBOutlet UIView *totalBack;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (weak, nonatomic) IBOutlet UIButton *invokeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalStakingVolumeLab;
 @property (weak, nonatomic) IBOutlet UILabel *stakingAmountLab;
 @property (weak, nonatomic) IBOutlet UILabel *earningsLab;
+@property (weak, nonatomic) IBOutlet UIView *lendingBack;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lendingHeight; // 70
+
+
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic) __block NSNumber *totalStakingVolume;
@@ -62,8 +70,12 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 
 #pragma mark - Operation
 - (void)configInit {
-    [self.view addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_topBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
+    _lendingBack.layer.cornerRadius = 6;
+    _lendingBack.layer.masksToBounds = YES;
+    _totalBack.layer.cornerRadius = 4;
+    _totalBack.layer.masksToBounds = YES;
     _invokeBtn.layer.cornerRadius = 4.0f;
     _invokeBtn.layer.masksToBounds = YES;
     [_mainTable registerNib:[UINib nibWithNibName:MyStakingsCellReuse bundle:nil] forCellReuseIdentifier:MyStakingsCellReuse];
@@ -72,6 +84,10 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     _totalStakingVolume = @(0);
     _stakingAmount = @(0);
     _earnings = @(0);
+    _lendingHeight.constant = 0;
+    if ([UserModel haveLoginAccount] && [UserModel isBind]) { // 登录且已绑定
+        _lendingHeight.constant = 70;
+    }
     
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
@@ -286,6 +302,11 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
+- (IBAction)lendingDetailAction:(id)sender {
+    [self jumpToDailyEarnings];
+}
+
+
 
 #pragma mark - Transition
 - (void)jumpToNewStaking {
@@ -299,5 +320,9 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToDailyEarnings {
+    DailyEarningsViewController *vc = [DailyEarningsViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

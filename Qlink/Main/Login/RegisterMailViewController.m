@@ -13,6 +13,8 @@
 #import "UIColor+Random.h"
 //#import "GlobalConstants.h"
 #import "FirebaseUtil.h"
+#import "SystemUtil.h"
+#import "JPushTagHelper.h"
 
 @interface RegisterMailViewController ()
 
@@ -178,10 +180,13 @@
             model.md5PW = md5PW;
             //            model.rsaPublicKey = rsaPublicKey;
             model.isLogin = @(YES);
-            [UserModel storeUser:model useLogin:NO];
+            [UserModel storeUserByID:model];
             [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            
+            [SystemUtil requestBind_jpush]; // 绑定极光推送
+            [JPushTagHelper setTags]; // 极光设置tag
             
             [FirebaseUtil logEventWithItemID:Firebase_Event_Register itemName:Firebase_Event_Register contentType:Firebase_Event_Register];
             

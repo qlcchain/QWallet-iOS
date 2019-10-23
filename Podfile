@@ -62,6 +62,8 @@ def app
     pod 'BGFMDB'
     pod 'TYCyclePagerView'
     pod 'dsBridge'
+    pod 'JCore', '2.1.4-noidfa' # 必选项
+    pod 'JPush', '3.2.4-noidfa' # 必选项
   
 end
   

@@ -116,6 +116,8 @@
 		5812DDBD20A1A7D20043A8A8 /* UIView+TL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812DDB620A1A7D10043A8A8 /* UIView+TL.m */; };
 		5812DDBE20A1A7D20043A8A8 /* UIDevice+TL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812DDB720A1A7D10043A8A8 /* UIDevice+TL.m */; };
 		5812DDBF20A1A7D20043A8A8 /* NSString+TL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5812DDBA20A1A7D10043A8A8 /* NSString+TL.m */; };
+		58161532235ED4A50041A92B /* JPushConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58161531235ED4A50041A92B /* JPushConstants.m */; };
+		58161535235ED56C0041A92B /* JPushTagHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58161534235ED56C0041A92B /* JPushTagHelper.m */; };
 		58178AF0234C944A00A96A29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58178AEF234C944900A96A29 /* GoogleService-Info.plist */; };
 		581925832114363E009AE406 /* PageThreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5819257D2114363E009AE406 /* PageThreeView.xib */; };
 		581925842114363E009AE406 /* PageOneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5819257F2114363E009AE406 /* PageOneView.xib */; };
@@ -757,6 +759,7 @@
 		58D689D5230B9FEA00115610 /* QConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D689D4230B9FEA00115610 /* QConstants.m */; };
 		58D689D8230BA17C00115610 /* GlobalConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D689D7230BA17C00115610 /* GlobalConstants.m */; };
 		58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58D7099A2359A9EE008880A0 /* InviteRankView.xib */; };
+		58DA4ACC235DA52000481476 /* NSNumber+Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DA4ACA235DA52000481476 /* NSNumber+Operation.m */; };
 		58DA5BAF2322330E004E8D5A /* StakingProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DA5BAC2322330D004E8D5A /* StakingProcessView.m */; };
 		58DA5BB52322361D004E8D5A /* RevokingProcessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DA5BB22322361C004E8D5A /* RevokingProcessView.m */; };
 		58DC64F9206B6748002CF682 /* ConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DC64F8206B6748002CF682 /* ConfigUtil.m */; };
@@ -1135,6 +1138,10 @@
 		5812DDB920A1A7D10043A8A8 /* UIView+TL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TL.h"; sourceTree = "<group>"; };
 		5812DDBA20A1A7D10043A8A8 /* NSString+TL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TL.m"; sourceTree = "<group>"; };
 		5812DDBB20A1A7D10043A8A8 /* UIDevice+TL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TL.h"; sourceTree = "<group>"; };
+		58161530235ED4A50041A92B /* JPushConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPushConstants.h; sourceTree = "<group>"; };
+		58161531235ED4A50041A92B /* JPushConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPushConstants.m; sourceTree = "<group>"; };
+		58161533235ED56C0041A92B /* JPushTagHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPushTagHelper.h; sourceTree = "<group>"; };
+		58161534235ED56C0041A92B /* JPushTagHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPushTagHelper.m; sourceTree = "<group>"; };
 		58178AEF234C944900A96A29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5819257E2114363E009AE406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PageThreeView.xib; sourceTree = "<group>"; };
 		581925802114363E009AE406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PageOneView.xib; sourceTree = "<group>"; };
@@ -2435,6 +2442,8 @@
 		58D709992359A9EE008880A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InviteRankView.xib; sourceTree = "<group>"; };
 		58D7099C2359A9F1008880A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InviteRankView.strings; sourceTree = "<group>"; };
 		58D7099E2359A9F5008880A0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InviteRankView.strings"; sourceTree = "<group>"; };
+		58DA4ACA235DA52000481476 /* NSNumber+Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Operation.m"; sourceTree = "<group>"; };
+		58DA4ACB235DA52000481476 /* NSNumber+Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Operation.h"; sourceTree = "<group>"; };
 		58DA5BAC2322330D004E8D5A /* StakingProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StakingProcessView.m; sourceTree = "<group>"; };
 		58DA5BAD2322330D004E8D5A /* StakingProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StakingProcessView.h; sourceTree = "<group>"; };
 		58DA5BB22322361C004E8D5A /* RevokingProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevokingProcessView.m; sourceTree = "<group>"; };
@@ -3220,6 +3229,8 @@
 				5862C6D92340A785006F4AC5 /* QLogHelper.m */,
 				58644E382358034200EFA9A2 /* FirebaseUtil.h */,
 				58644E392358034200EFA9A2 /* FirebaseUtil.m */,
+				58161533235ED56C0041A92B /* JPushTagHelper.h */,
+				58161534235ED56C0041A92B /* JPushTagHelper.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3460,6 +3471,8 @@
 		581CB3A721CA2629004DED10 /* NSNumber */ = {
 			isa = PBXGroup;
 			children = (
+				58DA4ACB235DA52000481476 /* NSNumber+Operation.h */,
+				58DA4ACA235DA52000481476 /* NSNumber+Operation.m */,
 				581CB3A821CA2650004DED10 /* NSNumber+RemoveZero.h */,
 				581CB3A921CA2650004DED10 /* NSNumber+RemoveZero.m */,
 			);
@@ -5055,6 +5068,8 @@
 				58EBECFB234ED963007EEF1F /* ClaimConstants.m */,
 				58644E352357FA7E00EFA9A2 /* FirebaseConstants.h */,
 				58644E362357FA7E00EFA9A2 /* FirebaseConstants.m */,
+				58161530235ED4A50041A92B /* JPushConstants.h */,
+				58161531235ED4A50041A92B /* JPushConstants.m */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -6409,6 +6424,7 @@
 				58A8B1D5233B5776007E2CE3 /* TopupOrderModel.m in Sources */,
 				58CF40D2219A64350000C3DA /* NEOAddressHistoryModel.m in Sources */,
 				5827BC3B21A3BB7600B7730E /* ETHWalletInfo.m in Sources */,
+				58DA4ACC235DA52000481476 /* NSNumber+Operation.m in Sources */,
 				584092682304EB1A0054BCBB /* MyStakingsViewController.m in Sources */,
 				587ABD6C21B8F8F800C3D81A /* EOS_Follow.m in Sources */,
 				58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */,
@@ -6645,6 +6661,7 @@
 				58D689D5230B9FEA00115610 /* QConstants.m in Sources */,
 				58D689C8230A535A00115610 /* PairsModel.m in Sources */,
 				580D914C20625A4400B12506 /* UILabel+Block.m in Sources */,
+				58161532235ED4A50041A92B /* JPushConstants.m in Sources */,
 				580D916620625A4400B12506 /* NSString+EmptyUtil.m in Sources */,
 				5812DDB120A1A7890043A8A8 /* ZXTextMessageCell.m in Sources */,
 				58FB8D802265A8A40075698E /* GuangGaoView.m in Sources */,
@@ -6845,6 +6862,7 @@
 				7377D17D206C81E90072E628 /* NSStringUtil.m in Sources */,
 				5825553822EACF9100F0B9F0 /* ImageBrightnessView.m in Sources */,
 				58245C5D22E1A62B0093E747 /* ComplaintInfoViewController.m in Sources */,
+				58161535235ED56C0041A92B /* JPushTagHelper.m in Sources */,
 				5885D461231F997300F9DEDE /* QContractView.m in Sources */,
 				7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */,
 				5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */,

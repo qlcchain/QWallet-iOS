@@ -205,7 +205,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.nickname = nickname;
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
@@ -251,7 +251,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.email = email;
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
@@ -297,7 +297,7 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             userM.phone = phone;
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];

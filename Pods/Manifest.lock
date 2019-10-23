@@ -69,6 +69,9 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.2.5):
     - GoogleUtilities/Logger
+  - JCore (2.1.4-noidfa)
+  - JPush (3.2.4-noidfa):
+    - JCore (< 3.0.0, >= 2.0.0)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
   - Moya (10.0.2):
@@ -116,7 +119,9 @@ DEPENDENCIES:
   - BGFMDB
   - BigInt (~> 3.0)
   - dsBridge
-  - Firebase/Analytics (~> 6.6.0)
+  - Firebase/Analytics
+  - JCore (= 2.1.4-noidfa)
+  - JPush (= 3.2.4-noidfa)
   - JSONRPCKit
   - Moya (~> 10.0.1)
   - NinaPagerView
@@ -130,7 +135,7 @@ DEPENDENCIES:
   - TYCyclePagerView
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - BGFMDB
     - BigInt
@@ -146,6 +151,8 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - JCore
+    - JPush
     - JSONRPCKit
     - Moya
     - nanopb
@@ -203,6 +210,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: ffbadce4ab93c88fb9dd8e6366c47bfcb4a32193
   GoogleDataTransportCCTSupport: 3451e7d8ba19093e533362a6d78d6d9014c6a037
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
+  JCore: 2f15311e6889ab43ed5d629802ef793cac566465
+  JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -220,6 +229,6 @@ SPEC CHECKSUMS:
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: 9145b83d172edb91dd3ee972a60645caac1ce276
+PODFILE CHECKSUM: 5f6e77daa0e94ee9c81ac5bc8316e81300f578fd
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
