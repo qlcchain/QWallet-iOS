@@ -58,7 +58,7 @@
 
 - (void)configInit {
     _tokenPriceArr = [NSMutableArray array];
-    _titleLab.text = _inputAsset.asset;
+    _titleLab.text = _inputAsset.asset_symbol;
     _balanceLab.text = [_inputAsset getTokenNum];
     
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];

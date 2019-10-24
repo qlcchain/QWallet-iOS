@@ -68,7 +68,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 }
 
 - (void)cancelHandler:(TopupOrderModel *)model {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"qgas_will_be_returned_to_the_payment_address") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"_will_be_returned_to_the_payment_address"),model.symbol] preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
@@ -80,8 +80,14 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
-- (void)credentialHandler:(NSString *)txid {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,txid]];
+- (void)credentialHandler:(TopupOrderModel *)model {
+    NSURL *url = nil;
+    if ([model.chain isEqualToString:ETH_Chain]) {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ETH_Transaction_Url,model.txid?:@""]];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    } else if ([model.chain isEqualToString:QLC_Chain]) {
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,model.txid?:@""]];
+    }
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
@@ -187,7 +193,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     } payB:^{
         [weakself payHandler:model];
     } credentialB:^{
-        [weakself credentialHandler:model.txid?:@""];
+        [weakself credentialHandler:model];
     } credetialDetalB:^{
         [weakself jumpToCredentialDetail:model];
     }];

@@ -15,7 +15,7 @@
 #import "SuccessTipView.h"
 #import "EOSResourcePriceModel.h"
 #import "NSString+RemoveZero.h"
-
+#import "RLArithmetic.h"
 //#import "GlobalConstants.h"
 
 @interface EOSActivateAccountViewController () {
@@ -169,7 +169,8 @@
         return;
     }
     
-    _eosAmount = [[NSString stringWithFormat:@"%@",@(0.1883+0.0400+0.2500+[_resourcePriceM.ramPrice doubleValue]*4)] removeFloatAllZero];
+//    _eosAmount = [[NSString stringWithFormat:@"%@",@(0.1883+0.0400+0.2500+[_resourcePriceM.ramPrice doubleValue]*4)] removeFloatAllZero];
+    _eosAmount = @(0.1883+0.0400+0.2500+[_resourcePriceM.ramPrice doubleValue]*4).mul(@(1));
     NSString *showAmount = [NSString stringWithFormat:@"≈%@ EOS",_eosAmount];
     
     [self showEOSTransferConfirmView:showAmount];

@@ -30,8 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *explainEn; //" : "1",
 @property (nonatomic, strong) NSString *ID; //" : "56594c9614984f149ec93b51e5161fyy",
 @property (nonatomic, strong) NSString *provinceEn; //" : "广东"
+@property (nonatomic, strong) NSNumber *stock;//  0:代表没有库存
 
 @property (nonatomic, strong) NSNumber *amount;
+
 
 @end
 

@@ -46,6 +46,7 @@
     
     NSString *num = [model getTokenNum];
     NSString *price = [model getPrice:tokenPriceArr];
+    
     _balanceLab.text = [NSString stringWithFormat:@"%@",num];
     _priceLab.text = [NSString stringWithFormat:@"%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
     _priceLab.hidden = [price doubleValue]<= 0?YES:NO;

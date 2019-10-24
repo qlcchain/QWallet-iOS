@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (RemoveZero)
 
-- (NSString*)removeFloatAllZero;
+//- (NSString*)removeFloatAllZero;
 - (NSString *)show4floatStr;
 - (NSString *)showfloatStr:(NSInteger)decimal;
-+ (double)doubleFormString:(NSString *)str;
-+ (NSString*)stringFromDouble:(double)doubleVal;
+//+ (double)doubleFormString:(NSString *)str;
+//+ (NSString*)stringFromDouble:(double)doubleVal;
 
 @end
 

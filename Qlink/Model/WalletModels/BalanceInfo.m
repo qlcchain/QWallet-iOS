@@ -7,7 +7,8 @@
 //
 
 #import "BalanceInfo.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation BalanceInfo
 // 实现这个方法的目的：告诉MJExtension框架模型中的属性名对应着字典的哪个key
@@ -32,7 +33,8 @@
 //}
 
 - (NSString *)getWinqGas {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.qlc] removeFloatAllZero];
+    NSString *num = self.qlc.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.qlc] removeFloatAllZero];
     return num;
 }
 

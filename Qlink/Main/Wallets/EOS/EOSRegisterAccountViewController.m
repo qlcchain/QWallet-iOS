@@ -20,7 +20,7 @@
 #import "TipOKView.h"
 #import "EOSWalletInfo.h"
 #import "EOSAccountInfoModel.h"
-
+#import "RLArithmetic.h"
 //#import "GlobalConstants.h"
 
 @implementation EOSCreateSourceModel
@@ -119,8 +119,8 @@
         return;
     }
     
-//    NSString *gasCostETH = [[NSString stringWithFormat:@"%Lf",ethFloat] removeFloatAllZero];
-    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
+//    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
+    NSString *gasCostETH = ethFloatNum.mul(@(1));
     NSString *fromAddress = transferETHM.address;
     NSString *name = transferETHM.name;
     NSString *toAddress = _toEthAddress;

@@ -60,8 +60,11 @@
 - (void)refreshData {
     [_sourceArr removeAllObjects];
     NSArray *arr = [WalletCommonModel getAllWalletModel];
-    [_sourceArr addObjectsFromArray:arr];
-    
+    NSArray *sortArr = [arr sortedArrayUsingComparator:^NSComparisonResult(WalletCommonModel *obj1, WalletCommonModel *obj2) {
+        return [obj1.name compare:obj2.name];
+    }];
+    [_sourceArr addObjectsFromArray:sortArr];
+    [_mainTable reloadData];
 }
 
 - (void)checkEOS_Share_Register_Account_Is_Active { // 检查本地 需要注册的EOS账号是否激活了

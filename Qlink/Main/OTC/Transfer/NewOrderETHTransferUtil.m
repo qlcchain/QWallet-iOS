@@ -17,6 +17,7 @@
 #import "WalletsViewController.h"
 #import "QlinkTabbarViewController.h"
 #import "ETHWalletManage.h"
+#import "RLArithmetic.h"
 
 @implementation NewOrderETHTransferUtil
 
@@ -120,7 +121,8 @@
     NSInteger gasLimit = 60000;
     NSInteger gasPrice = 6;
     NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
-    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
+//    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
+    NSString *gasCostETH = ethFloatNum.mul(@(1));
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",gasCostETH];
     ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
     [view configWithAddress:address amount:amount gasfee:gasfee];

@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 //设置加载进度条
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
-@property (nonatomic) BOOL checkmwebLoad;
+//@property (nonatomic) BOOL checkmwebLoad;
 
 @end
 
@@ -30,7 +30,7 @@
     
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
-    _checkmwebLoad = NO;
+//    _checkmwebLoad = NO;
     _myWebView.navigationDelegate = self;
     
     [_progressView setTrackTintColor:[UIColor colorWithRed:240.0/255

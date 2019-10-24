@@ -283,7 +283,7 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 }
 
 - (IBAction)txidAction:(id)sender {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_qgas") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_"),@"QGAS"] preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];

@@ -12,6 +12,7 @@
 #import "NSString+RemoveZero.h"
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
+#import "RLArithmetic.h"
 
 @implementation WalletsManageCell
 
@@ -56,8 +57,9 @@
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"ETH"]) {
-                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
-                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+//                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
+//                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+                totalPrice = num.mul(model.price);
                 *stop = YES;
             }
         }];
@@ -66,8 +68,9 @@
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"EOS"]) {
-                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
-                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+//                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
+//                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+                totalPrice = num.mul(model.price);
                 *stop = YES;
             }
         }];
@@ -76,8 +79,9 @@
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"NEO"]) {
-                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
-                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+//                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
+//                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+                totalPrice = num.mul(model.price);
                 *stop = YES;
             }
         }];
@@ -86,8 +90,9 @@
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"QLC"]) {
-                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
-                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+//                NSNumber *usdNum = @([num doubleValue]*[model.price doubleValue]);
+//                totalPrice = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+                totalPrice = num.mul(model.price);
                 *stop = YES;
             }
         }];

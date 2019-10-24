@@ -189,6 +189,11 @@ static NSString *const TopupNetworkSize = @"20";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    TopupProductModel *model = _sourceArr[indexPath.row];
+    if ([model.stock doubleValue] == 0) { // 售罄
+        return;
+    }
+    
     [self jumpToChooseTopupPlan];
 }
 
@@ -229,27 +234,7 @@ static NSString *const TopupNetworkSize = @"20";
 }
 
 - (void)jumpToChooseTopupPlan {
-    if (![WalletCommonModel haveQLCWallet]) {
-        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"you_do_not_have_qlc_wallet_created_immediately") preferredStyle:UIAlertControllerStyleAlert];
-        kWeakSelf(self);
-        UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        [alertC addAction:alertCancel];
-        UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"create") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [weakself jumpToChooseWallet:YES];
-        }];
-        [alertC addAction:alertBuy];
-        [self presentViewController:alertC animated:YES completion:nil];
-        
-        return;
-    }
     ChooseTopupPlanViewController *vc = [ChooseTopupPlanViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)jumpToChooseWallet:(BOOL)showBack {
-    ChooseWalletViewController *vc = [[ChooseWalletViewController alloc] init];
-    vc.showBack = showBack;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

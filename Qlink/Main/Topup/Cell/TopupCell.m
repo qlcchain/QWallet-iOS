@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSNumber+RemoveZero.h"
 #import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation TopupCell
 
@@ -25,6 +26,12 @@
     _discountBack.layer.borderColor = [UIColor whiteColor].CGColor;
     _contentBack.layer.cornerRadius = 10;
     _contentBack.layer.masksToBounds = YES;
+    
+    _soldoutBack.layer.cornerRadius = 6;
+    _soldoutBack.layer.masksToBounds = YES;
+    _soldout_tipBack.layer.cornerRadius = 13;
+    _soldout_tipBack.layer.masksToBounds = YES;
+    
 }
 
 - (void)prepareForReuse {
@@ -50,15 +57,15 @@
         province = model.provinceEn;
         isp = model.ispEn;
         name = model.nameEn;
-//        discountNum = @(100-[model.discount doubleValue]*100);
-        discountNumStr = [NSString stringFromDouble:100-[model.discount doubleValue]*100];
+//        discountNumStr = [NSString stringFromDouble:100-[model.discount doubleValue]*100];
+        discountNumStr = @(100).sub(model.discount.mul(@(100)));
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         country = model.country;
         province = model.province;
         isp = model.isp;
         name = model.name;
-//        discountNum = @([model.discount doubleValue]*10);
-        discountNumStr = [NSString stringFromDouble:[model.discount doubleValue]*10];
+//        discountNumStr = [NSString stringFromDouble:[model.discount doubleValue]*10];
+        discountNumStr = model.discount.mul(@(10));
     }
     _titleLab.text = [NSString stringWithFormat:@"%@%@%@",country,province,isp];
     _subTitleLab.text = name;
@@ -79,6 +86,10 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.imgPath]];
     [_backImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"topup_guangdong_mobile"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
+    
+    _soldoutBack.hidden = [model.stock doubleValue] == 0?NO:YES;// 售罄
+    _soldout_topTipLab.text = kLang(@"coming_soon_next_month");
+    _soldout_tipLab.text = kLang(@"sold_out");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

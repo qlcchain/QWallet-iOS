@@ -9,12 +9,21 @@
 #import "ChooseTopupPlanViewController.h"
 #import "ChooseTopupPlanCell.h"
 #import <ContactsUI/ContactsUI.h>
-#import "TopupPayQGASViewController.h"
+#import "TopupPayQLCViewController.h"
 #import "RefreshHelper.h"
 #import "TopupProductModel.h"
 #import <QLCFramework/QLCWalletManage.h>
 #import "TopupConstants.h"
+#import "TopupPayTokenModel.h"
+#import "TopupPayETHViewController.h"
+#import "RLArithmetic.h"
+#import "WalletCommonModel.h"
+#import "ChooseWalletViewController.h"
+#import "NSString+RemoveZero.h"
+#import "ETHWalletManage.h"
 
+static NSInteger PayTokenBtnTag = 6649;
+static NSInteger PayTokenTickTag = 9223;
 static NSString *const ChooseTopupPlanNetworkSize = @"20";
 
 @interface ChooseTopupPlanViewController () <UITableViewDelegate, UITableViewDataSource, CNContactPickerDelegate> {
@@ -28,8 +37,13 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 @property (weak, nonatomic) IBOutlet UIButton *phonePrefixBtn;
 @property (weak, nonatomic) IBOutlet UIButton *lookupProductBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *waitingBackHeight; // 102
-@property (nonatomic) NSInteger currentPage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tokenBackHeight; // 76
+@property (weak, nonatomic) IBOutlet UIView *payTokenContentV;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payTokenContentWidth;
 
+@property (nonatomic) NSInteger currentPage;
+@property (nonatomic, strong) NSArray *payTokenArr;
+@property (nonatomic, strong) TopupPayTokenModel *selectPayTokenM;
 
 @end
 
@@ -40,6 +54,15 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     // Do any additional setup after loading the view from its nib.
     
     [self configInit];
+    [self requestTopup_pay_token];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (_sourceArr.count <= 0) {
+        [_phoneTF becomeFirstResponder];
+    }
 }
 
 #pragma mark - Operation
@@ -86,8 +109,106 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)refreshPayTokenView {
+    if (!_payTokenArr || _payTokenArr.count <= 0) {
+        [_payTokenContentV.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
+        _payTokenContentWidth.constant = 0;
+        return;
+    }
+    
+    CGFloat offset = 13;
+    CGFloat btnWidth = (SCREEN_WIDTH-16*2-13)/2.0;
+    CGFloat btnHeight = 40;
+    CGFloat top = (_payTokenContentV.height-btnHeight)/2.0;
+    kWeakSelf(self);
+    [_payTokenArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(idx*(btnWidth+offset), top, btnWidth, btnHeight);
+        btn.tag = PayTokenBtnTag+idx;
+        [btn addTarget:weakself action:@selector(payTokenAction:) forControlEvents:UIControlEventTouchUpInside];
+        [weakself.payTokenContentV addSubview:btn];
+        
+        UIImageView *imgV = [UIImageView new];
+        imgV.frame = CGRectMake(btn.right-21, btn.bottom-19, 21, 19);
+        imgV.tag = PayTokenTickTag+idx;
+        imgV.image = [UIImage imageNamed:@"topup_btn_selected"];
+        [weakself.payTokenContentV addSubview:imgV];
+        
+        TopupPayTokenModel *model = obj;
+        [weakself showPayTokenUnselect:idx];
+        if (idx == 0) {
+            weakself.selectPayTokenM = model;
+            [weakself showPayTokenSelect:idx];
+        }
+    }];
+    
+    _payTokenContentWidth.constant = _payTokenArr.count*btnWidth+(_payTokenArr.count-1)*offset;
+}
+
+- (void)payTokenAction:(UIButton *)btn {
+    NSInteger selectIdx = btn.tag - PayTokenBtnTag;
+    
+    kWeakSelf(self);
+    [_payTokenArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        TopupPayTokenModel *model = obj;
+        [weakself showPayTokenUnselect:idx];
+        if (idx == selectIdx) {
+            weakself.selectPayTokenM = model;
+            [weakself showPayTokenSelect:idx];
+        }
+    }];
+    
+    [_mainTable reloadData];
+    if (_sourceArr.count>0) {
+        [_mainTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+
+- (void)showPayTokenUnselect:(NSInteger)idx {
+    TopupPayTokenModel *model = _payTokenArr[idx];
+    UIButton *btn = [_payTokenContentV viewWithTag:PayTokenBtnTag+idx];
+    [btn setImage:[model getPayTokenImage] forState:UIControlStateNormal];
+    [btn setTitle:model.symbol forState:UIControlStateNormal];
+    [btn setTitleColor:UIColorFromRGB(0x1E1E24) forState:UIControlStateNormal];
+    btn.layer.cornerRadius = 6;
+    btn.layer.masksToBounds = YES;
+    btn.layer.borderWidth = 1;
+    btn.layer.borderColor = UIColorFromRGB(0xE3E3E3).CGColor;
+    
+    UIImageView *imgV = [_payTokenContentV viewWithTag:PayTokenTickTag+idx];
+    imgV.hidden = YES;
+    
+    btn.alpha = 0.5;
+    imgV.alpha = 0.5;
+}
+
+- (void)showPayTokenSelect:(NSInteger)idx {
+    TopupPayTokenModel *model = _payTokenArr[idx];
+    UIButton *btn = [_payTokenContentV viewWithTag:PayTokenBtnTag+idx];
+    [btn setImage:[model getPayTokenImage] forState:UIControlStateNormal];
+    [btn setTitle:model.symbol forState:UIControlStateNormal];
+    [btn setTitleColor:MAIN_BLUE_COLOR forState:UIControlStateNormal];
+    btn.layer.cornerRadius = 6;
+    btn.layer.masksToBounds = YES;
+    btn.layer.borderWidth = 1;
+    btn.layer.borderColor = MAIN_BLUE_COLOR.CGColor;
+    
+    UIImageView *imgV = [_payTokenContentV viewWithTag:PayTokenTickTag+idx];
+    imgV.hidden = NO;
+    
+    btn.alpha = 1;
+    imgV.alpha = 1;
+}
+
 #pragma mark - Request
 - (void)requestTopup_product_list {
+    if (!_selectPayTokenM) {
+        [_mainTable.mj_header endRefreshing];
+        [_mainTable.mj_footer endRefreshing];
+        return;
+    }
     kWeakSelf(self);
     NSString *phoneNumber = _phoneTF.text?:@"";
     NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
@@ -129,6 +250,18 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }];
 }
 
+- (void)requestTopup_pay_token {
+    kWeakSelf(self);
+    NSDictionary *params = @{};
+    [RequestService requestWithUrl10:topup_pay_token_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            weakself.payTokenArr = [TopupPayTokenModel mj_objectArrayWithKeyValuesArray:responseObject[@"payTokenList"]];
+            [weakself refreshPayTokenView];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return ChooseTopupPlanCell_Height;
@@ -137,19 +270,63 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if ([_selectPayTokenM.chain isEqualToString:ETH_Chain]) {
+        if (![WalletCommonModel haveETHWallet]) {
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"you_do_not_have_wallet_created_immediately"),@"ETH"] preferredStyle:UIAlertControllerStyleAlert];
+            kWeakSelf(self);
+            UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [alertC addAction:alertCancel];
+            UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"create") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [weakself jumpToChooseWallet:YES];
+            }];
+            [alertC addAction:alertBuy];
+            [self presentViewController:alertC animated:YES completion:nil];
+            
+            return;
+        }
+    } else if ([_selectPayTokenM.chain isEqualToString:QLC_Chain]) {
+        if (![WalletCommonModel haveQLCWallet]) {
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"you_do_not_have_wallet_created_immediately"),@"QLC"] preferredStyle:UIAlertControllerStyleAlert];
+            kWeakSelf(self);
+            UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [alertC addAction:alertCancel];
+            UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"create") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [weakself jumpToChooseWallet:YES];
+            }];
+            [alertC addAction:alertBuy];
+            [self presentViewController:alertC animated:YES completion:nil];
+            
+            return;
+        }
+    }
+    
     TopupProductModel *model = _sourceArr[indexPath.row];
     
     NSNumber *amountNum = model.amount;
-    NSNumber *faitNum = @([model.discount doubleValue]*[model.amount doubleValue]);
-    NSNumber *qgasNum = @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
-    NSString *message = [NSString stringWithFormat:kLang(@"use_qgas_to_purchase__yuan_of_phone_charge_for_deduction"),amountNum,qgasNum,faitNum];
+//    NSNumber *faitNum = @([model.discount doubleValue]*[model.amount doubleValue]);
+//    NSNumber *qgasNum = @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
+    NSString *faitStr = [model.discount.mul(model.amount) showfloatStr:4];
+    NSString *qgasStr = [model.amount.mul(model.qgasDiscount).div(_selectPayTokenM.price) showfloatStr:3];
+    NSString *message = @"";
+    if ([_selectPayTokenM.chain isEqualToString:ETH_Chain]) {
+        message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction"),amountNum,qgasStr,_selectPayTokenM.symbol,faitStr];
+    } else if ([_selectPayTokenM.chain isEqualToString:QLC_Chain]) {
+        message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction"),amountNum,qgasStr,_selectPayTokenM.symbol,faitStr];
+    }
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
     UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"purchase") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakself jumpToTopupPayQGAS:model];
+        if ([weakself.selectPayTokenM.chain isEqualToString:ETH_Chain]) {
+            [weakself jumpToTopupPayETH:model];
+        } else if ([weakself.selectPayTokenM.chain isEqualToString:QLC_Chain]) {
+            [weakself jumpToTopupPayQLC:model];
+        }
+       
     }];
     [alertC addAction:alertBuy];
     [self presentViewController:alertC animated:YES completion:nil];
@@ -164,7 +341,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     ChooseTopupPlanCell *cell = [tableView dequeueReusableCellWithIdentifier:ChooseTopupPlanCellReuse];
     
     TopupProductModel *model = _sourceArr[indexPath.row];
-    [cell config:model];
+    [cell config:model payToken:_selectPayTokenM];
     
     return cell;
 }
@@ -277,7 +454,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 }
 
 #pragma mark - Transition
-- (void)jumpToTopupPayQGAS:(TopupProductModel *)model {
+- (void)jumpToTopupPayQLC:(TopupProductModel *)model {
     // 检查平台地址
     NSString *qlcAddress = [QLCWalletManage shareInstance].qlcMainAddress;
     if ([qlcAddress isEmptyString]) {
@@ -285,16 +462,44 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
         return;
     }
     
-//    NSNumber *faitNum = @([model.discount doubleValue]*[model.amount doubleValue]);
-    NSNumber *qgasNum = @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
-    TopupPayQGASViewController *vc = [TopupPayQGASViewController new];
-    vc.sendAmount = [NSString stringWithFormat:@"%@",qgasNum];
+//    NSNumber *qgasNum = @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
+    NSString *qgasStr = [model.amount.mul(model.qgasDiscount).div(_selectPayTokenM.price) showfloatStr:3];
+    TopupPayQLCViewController *vc = [TopupPayQLCViewController new];
+    vc.sendAmount = [NSString stringWithFormat:@"%@",qgasStr];
     vc.sendToAddress = qlcAddress;
-    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge__QGAS_deduction__yuan"),model.amount,qgasNum,qgasNum];
-    vc.inputPayToken = @"QGAS";
+    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.amount,qgasStr,_selectPayTokenM.symbol,qgasStr];
+    vc.inputPayToken = _selectPayTokenM.symbol?:@"QGAS";
     vc.inputProductM = model;
     vc.inputAreaCode = _phonePrefixBtn.currentTitle?:@"";
     vc.inputPhoneNumber = _phoneTF.text?:@"";
+    vc.inputPayTokenId = _selectPayTokenM.ID?:@"";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTopupPayETH:(TopupProductModel *)model {
+    // 检查平台地址
+    NSString *ethAddress = [ETHWalletManage shareInstance].ethMainAddress;
+    if ([ethAddress isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
+        return;
+    }
+    
+    NSString *okbStr = [model.amount.mul(model.qgasDiscount).div(_selectPayTokenM.price) showfloatStr:3];// @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
+    TopupPayETHViewController *vc = [TopupPayETHViewController new];
+    vc.sendAmount = [NSString stringWithFormat:@"%@",okbStr];
+    vc.sendToAddress = ethAddress;
+    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.amount,okbStr,_selectPayTokenM.symbol,okbStr];
+    vc.inputPayToken = _selectPayTokenM.symbol?:@"OKB";
+    vc.inputProductM = model;
+    vc.inputAreaCode = _phonePrefixBtn.currentTitle?:@"";
+    vc.inputPhoneNumber = _phoneTF.text?:@"";
+    vc.inputPayTokenId = _selectPayTokenM.ID?:@"";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToChooseWallet:(BOOL)showBack {
+    ChooseWalletViewController *vc = [[ChooseWalletViewController alloc] init];
+    vc.showBack = showBack;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

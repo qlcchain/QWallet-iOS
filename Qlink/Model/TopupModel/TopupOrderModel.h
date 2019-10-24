@@ -41,6 +41,8 @@ static NSString *const Topup_Order_Status_QGAS_RETURNED = @"QGAS_RETURNED"; // å
 @property (nonatomic, strong) NSNumber *qgasAmount;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *txid;
+@property (nonatomic, strong) NSString *symbol;
+@property (nonatomic, strong) NSString *chain;
 
 - (NSString *)getStatusString;
 - (UIColor *)getStatusColor;

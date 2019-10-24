@@ -52,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - ETH
 + (void)refreshETHWallet;
++ (BOOL)haveETHWallet;
 
 #pragma mark - NEO
 + (void)refreshNEOWallet;

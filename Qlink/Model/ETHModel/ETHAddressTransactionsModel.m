@@ -7,7 +7,8 @@
 //
 
 #import "ETHAddressTransactionsModel.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation ETHAddressTransactionsModel
 
@@ -16,7 +17,8 @@
 }
 
 - (NSString *)getTokenNum {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.value] removeFloatAllZero];
+    NSString *num = self.value.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.value] removeFloatAllZero];
     return num;
 }
 

@@ -6,60 +6,66 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import "TopupPayQGASViewController.h"
-#import "QLCTransferConfirmView.h"
+#import "TopupPayETHViewController.h"
+#import "ETHTransferConfirmView.h"
 #import "UITextView+ZWPlaceHolder.h"
 #import "WalletCommonModel.h"
-#import "QLCAddressInfoModel.h"
+#import "ETHAddressInfoModel.h"
 #import "TokenPriceModel.h"
 #import "NSString+RemoveZero.h"
-#import "NEOWalletUtil.h"
+#import <ETHFramework/ETHFramework.h>
+#import "ReportUtil.h"
 #import "WalletQRViewController.h"
-#import <QLCFramework/QLCFramework.h>
-#import "QLCTokenInfoModel.h"
+#import "WalletSelectViewController.h"
+#import "QNavigationController.h"
+#import "QlinkTabbarViewController.h"
+#import "WalletsViewController.h"
+//#import "TradeOrderDetailViewController.h"
 #import "NSDate+Category.h"
 #import "UserModel.h"
 #import "RSAUtil.h"
-#import "WalletSelectViewController.h"
-//#import "TradeOrderDetailViewController.h"
-#import "QlinkTabbarViewController.h"
-#import "WalletsViewController.h"
-#import "QNavigationController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+//#import "GlobalConstants.h"
 #import "TopupConstants.h"
 #import "TopupOrderModel.h"
 #import "TopupProductModel.h"
 #import "MyTopupOrderViewController.h"
 #import "TopupWebViewController.h"
+#import "RLArithmetic.h"
 
-@interface TopupPayQGASViewController () <UITextViewDelegate, UITextFieldDelegate>
+@interface TopupPayETHViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *payWalletIcon;
 @property (weak, nonatomic) IBOutlet UILabel *payWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *payWalletAddressLab;
 
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (weak, nonatomic) IBOutlet UIButton *gasDetailBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasDetailHeight; // 143
 @property (weak, nonatomic) IBOutlet UILabel *balanceLab;
 @property (weak, nonatomic) IBOutlet UILabel *symbolLab;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextView *sendtoAddressTV;
 @property (weak, nonatomic) IBOutlet UITextField *memoTF;
+@property (weak, nonatomic) IBOutlet UILabel *gascostLab;
+@property (weak, nonatomic) IBOutlet UISlider *gasSlider;
+@property (weak, nonatomic) IBOutlet UILabel *gasLimitLab;
 
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
-@property (nonatomic, strong) QLCTokenModel *selectAsset;
+@property (nonatomic, strong) NSString *gasCostETH;
+@property (nonatomic, strong) Token *selectToken;
 @property (nonatomic, strong) WalletCommonModel *payWalletM;
 
 @end
 
-@implementation TopupPayQGASViewController
+@implementation TopupPayETHViewController
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Observe
 - (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTokenNoti:) name:Update_QLC_Wallet_Token_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTokenNoti:) name:Update_ETH_Wallet_Token_Noti object:nil];
 }
 
 - (void)viewDidLoad {
@@ -72,7 +78,6 @@
     
     [self renderView];
     [self configInit];
-    
 }
 
 #pragma mark - Operation
@@ -84,11 +89,11 @@
     _payWalletNameLab.text = nil;
     _payWalletAddressLab.text = nil;
     
-//    _selectAsset = _inputAsset?:_inputSourceArr?_inputSourceArr.firstObject:nil;
     _tokenPriceArr = [NSMutableArray array];
     
-    _sendtoAddressTV.placeholder = kLang(@"qlc_wallet_address");
+    _sendtoAddressTV.placeholder = kLang(@"eth_wallet_address");
     _sendtoAddressTV.text = _sendToAddress;
+    _gasDetailHeight.constant = 0;
     _amountTF.text = _sendAmount;
     _memoTF.text = _sendMemo;
     
@@ -100,23 +105,43 @@
 }
 
 - (void)refreshView {
-    NSString *symbolStr = @"QGAS";
-    NSString *balanceStr = [NSString stringWithFormat:@"%@: 0 QGAS",kLang(@"balance")];
-    if (_selectAsset) {
-        balanceStr = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectAsset getTokenNum],_selectAsset.tokenName];
-        symbolStr = _selectAsset.tokenName;
+    NSString *symbolStr = _inputPayToken;
+    NSString *balanceStr = [NSString stringWithFormat:@"%@: 0 %@",kLang(@"balance"),_inputPayToken];
+    if (_selectToken) {
+        balanceStr = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectToken getTokenNum],_selectToken.tokenInfo.symbol];
+        symbolStr = _selectToken.tokenInfo.symbol;
     }
     _balanceLab.text = balanceStr;
     _symbolLab.text = symbolStr;
-    
+    [self refreshGasCost];
     [self requestTokenPrice];
 }
 
-- (void)showQLCTransferConfirmView {
+- (void)refreshGasCost {
+    NSString *decimals = ETH_Decimals;
+    NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
+//    NSNumber *ethFloatNum = @(_gasSlider.value*[_gasLimitLab.text integerValue]*[decimalsNum doubleValue]);
+    NSString *ethFloatStr = @(_gasSlider.value).mul(_gasLimitLab.text).mul(decimalsNum);
+    _gasCostETH = [NSString stringWithFormat:@"%@",ethFloatStr];
+    __block NSString *price = @"";
+    [_tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        TokenPriceModel *model = obj;
+        if ([model.symbol isEqualToString:_selectToken.tokenInfo.symbol]) {
+//            NSNumber *priceNum = @([_gasCostETH doubleValue]*[model.price doubleValue]);
+//            price = [NSString stringWithFormat:@"%@",priceNum];
+            price = _gasCostETH.mul(model.price);
+            *stop = YES;
+        }
+    }];
+    _gascostLab.text = [NSString stringWithFormat:@"%@ ETH ≈ %@%@",_gasCostETH,[ConfigUtil getLocalUsingCurrencySymbol],price];
+}
+
+- (void)showETHTransferConfirmView {
     NSString *address = _sendtoAddressTV.text;
-    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName];
-    QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount];
+    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectToken.tokenInfo.symbol];
+    NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",_gasCostETH];
+    ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
+    [view configWithAddress:address amount:amount gasfee:gasfee];
     kWeakSelf(self);
     view.confirmBlock = ^{
         [weakself sendTransfer];
@@ -125,8 +150,7 @@
 }
 
 - (void)checkSendBtnEnable {
-    if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
-//        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
+    if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0 && _payWalletM != nil) {
         _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
     } else {
@@ -140,29 +164,37 @@
 }
 
 - (void)sendTransfer {
-    NSString *tokenName = _selectAsset.tokenName;
-    NSString *to = _sendtoAddressTV.text;
-    NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text];
-//    NSUInteger amount = [_amountTF.text integerValue];
-    NSString *sender = nil;
-    NSString *receiver = nil;
-    NSString *message = nil;
-    BOOL workInLocal = NO;
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
-    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    NSString *fromAddress = currentWalletM.address;
+    NSString *contractAddress = _selectToken.tokenInfo.address;
+    NSString *toAddress = _sendtoAddressTV.text;
+    NSString *name = _selectToken.tokenInfo.name;
+    NSString *symbol = _selectToken.tokenInfo.symbol;
+    NSString *amount = _amountTF.text;
+    NSInteger gasLimit = [_gasLimitLab.text integerValue];
+    NSInteger gasPrice = _gasSlider.value;
+    NSInteger decimals = [_selectToken.tokenInfo.decimals integerValue];
+    NSString *value = @"";
+    BOOL isCoin = [_selectToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+//    [kAppD.window makeToastInView:kAppD.window];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
+    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         [kAppD.window hideToast];
-//        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
-//        [weakself backToRoot];
-        [kAppD.window makeToastInView:kAppD.window text:kLang(@"qgas_has_been_paid_successfully_Please_wait_for_a_moment") userInteractionEnabled:NO hideTime:0];
-        NSString *txid = responseObj;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [weakself requestTopup_order:txid];
-        });
-    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
-        [kAppD.window hideToast];
+        if (success) {
+            [kAppD.window hideToast];
+//            [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
+            [kAppD.window makeToastInView:kAppD.window text:[NSString stringWithFormat:kLang(@"_has_been_paid_successfully_Please_wait_for_a_moment"),weakself.selectToken.tokenInfo.symbol] userInteractionEnabled:NO hideTime:0];
+            NSString *blockChain = @"ETH";
+            [ReportUtil requestWalletReportWalletRransferWithAddressFrom:fromAddress addressTo:toAddress blockChain:blockChain symbol:symbol amount:amount txid:txId?:@""]; // 上报钱包转账
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [weakself requestTopup_order:txId?:@""];
+            });
+        } else {
+            [kAppD.window hideToast];
+            [kAppD.window makeToastDisappearWithText:kLang(@"send_fail")];
+        }
     }];
 }
 
@@ -170,24 +202,37 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (BOOL)haveQLCTokenAssetNum:(NSString *)tokenName {
-    __block BOOL haveAssetNum = NO;
-    NSArray *source = [kAppD.tabbarC.walletsVC getQLCSource];
-    [source enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        QLCTokenModel *model = obj;
-        if ([model.tokenName isEqualToString:tokenName]) {
-            NSString *num = [model getTokenNum];
-            if ([num doubleValue] > 0) {
-                haveAssetNum = YES;
+- (BOOL)haveETHTokenAssetNum:(NSString *)tokenName {
+    __block BOOL haveEthAssetNum = NO;
+    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
+            NSString *ethNum = [model getTokenNum];
+            if ([ethNum doubleValue] > 0) {
+                haveEthAssetNum = YES;
             }
             *stop = YES;
         }
     }];
-    return haveAssetNum;
+    return haveEthAssetNum;
+}
+
+- (NSString *)getETHTokenAssetNum:(NSString *)tokenName {
+    __block NSString *ethAssetNum = @"0";
+    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
+            ethAssetNum = [model getTokenNum];
+            *stop = YES;
+        }
+    }];
+    return ethAssetNum;
 }
 
 - (void)showNotEnoughOfBalance {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_qgas") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_"),_selectToken.tokenInfo.symbol] preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakself backToRoot];
@@ -202,12 +247,12 @@
 
 #pragma mark - Request
 - (void)requestTokenPrice {
-    if (!_selectAsset) {
+    if (!_selectToken) {
         return;
     }
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
-    NSDictionary *params = @{@"symbols":@[_selectAsset.tokenName],@"coin":coin};
+    NSDictionary *params = @{@"symbols":@[_selectToken.tokenInfo.symbol],@"coin":coin};
     [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
@@ -217,6 +262,7 @@
                 model.coin = coin;
                 [weakself.tokenPriceArr addObject:model];
             }];
+            [self refreshGasCost];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -234,8 +280,9 @@
     NSString *areaCode = _inputAreaCode?:@"";
     NSString *phoneNumber = _inputPhoneNumber?:@"";
     NSString *amount = [NSString stringWithFormat:@"%@",_inputProductM.amount];
-    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":txid?:@""};
-//    [kAppD.window makeToastInView:kAppD.window];
+    NSString *payTokenId = _inputPayTokenId?:@"";
+    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":txid?:@"",@"payTokenId":payTokenId};
+    //    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:topup_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
@@ -244,7 +291,6 @@
             if ([model.status isEqualToString:Topup_Order_Status_New]) { // 跳转订单列表
                 [weakself jumpToMyTopupOrder];
             } else if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) { // 跳转h5购买
-                // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
                 NSString *sid = Topup_Pay_H5_sid;
                 NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,model.userId?:@"",model.ID?:@""];
                 NSString *package = [NSString stringWithFormat:@"%@",weakself.inputProductM.amount];
@@ -258,29 +304,9 @@
     }];
 }
 
-#pragma mark - UITextViewDelegete
+#pragma mark - UITextViewDelete
 - (void)textViewDidEndEditing:(UITextView *)textView {
     [self checkSendBtnEnable];
-}
-
-#pragma mark - UITextFieldDelegete
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField == _amountTF) {
-        NSMutableString * futureString = [NSMutableString stringWithString:textField.text];
-        [futureString  insertString:string atIndex:range.location];
-        NSInteger flag=0;
-        const NSInteger limited = [_selectAsset.tokenInfoM.decimals integerValue];//小数点后需要限制的个数
-        for (int i = (int)(futureString.length - 1); i>=0; i--) {
-            if ([futureString characterAtIndex:i] == '.') {
-                if (flag > limited) {
-                    return NO;
-                }
-                break;
-            }
-            flag++;
-        }
-    }
-    return YES;
 }
 
 #pragma mark - Action
@@ -292,10 +318,6 @@
 //- (IBAction)scanAction:(id)sender {
 //    kWeakSelf(self);
 //    WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
-//        if (![[QLCWalletManage shareInstance] walletAddressIsValid:codeValue?:@""]) {
-//            [kAppD.window makeToastDisappearWithText:kLang(@"invalid_address")];
-//            return;
-//        }
 //        weakself.sendtoAddressTV.text = codeValue;
 //    } needPop:YES];
 //    [self.navigationController pushViewController:vc animated:YES];
@@ -311,33 +333,50 @@
         return;
     }
     if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_empty")];
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_empty")];
         return;
     }
     if ([_amountTF.text doubleValue] == 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
-    if ([_amountTF.text doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
-//        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
-        [self showNotEnoughOfBalance];
+    if ([_amountTF.text doubleValue] > [[_selectToken getTokenNum] doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+        return;
+    }
+    if (![self haveETHTokenAssetNum:@"ETH"]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),@"ETH"]];
+        return;
+    }
+    if ([_gasCostETH doubleValue] > [[self getETHTokenAssetNum:@"ETH"] doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@(ETH)",kLang(@"balance_is_not_enough")]];
         return;
     }
     
     // 检查地址有效性
-    BOOL validateAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_sendtoAddressTV.text];
-    if (!validateAddress) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_invalidate")];
+    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text];
+    if (!isValid) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
     }
     
-    if (![self haveQLCTokenAssetNum:_selectAsset.tokenName]) {
-//        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),_selectAsset.tokenName]];
+    if (![self haveETHTokenAssetNum:_selectToken.tokenInfo.symbol]) {
+//        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),_selectToken.tokenInfo.symbol]];
         [self showNotEnoughOfBalance];
         return;
     }
     
-    [self showQLCTransferConfirmView];
+    [self showETHTransferConfirmView];
+}
+
+- (IBAction)gasDetailAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    _gasDetailHeight.constant = sender.selected?143:0;
+}
+
+
+- (IBAction)sliderAction:(UISlider *)sender {
+    [self refreshGasCost];
 }
 
 - (IBAction)showCurrencyAction:(id)sender {
@@ -348,19 +387,19 @@
     
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     kWeakSelf(self);
-    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getQLCSource];
+    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getETHSource];
     [sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        QLCTokenModel *model = obj;
-        if ([model.tokenName isEqualToString:weakself.inputPayToken]) {
-            UIAlertAction *alert = [UIAlertAction actionWithTitle:model.tokenName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                weakself.selectAsset = model;
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:weakself.inputPayToken]) {
+            UIAlertAction *alert = [UIAlertAction actionWithTitle:model.tokenInfo.symbol style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                weakself.selectToken = model;
                 [weakself refreshView];
             }];
             [alertC addAction:alert];
             *stop = YES;
         }
     }];
-    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
     [self presentViewController:alertC animated:YES completion:nil];
@@ -369,7 +408,7 @@
 - (IBAction)showPayWalletAction:(id)sender {
     kWeakSelf(self);
     WalletSelectViewController *vc = [[WalletSelectViewController alloc] init];
-    vc.inputWalletType = WalletTypeQLC;
+    vc.inputWalletType = WalletTypeETH;
     [vc configSelectBlock:^(WalletCommonModel * _Nonnull model) {
         weakself.payWalletM = model;
         weakself.payWalletNameLab.text = model.name;
@@ -386,15 +425,6 @@
     TopupWebViewController *vc = [TopupWebViewController new];
     vc.inputUrl = urlStr;
     [self.navigationController pushViewController:vc animated:YES];
-    return;
-    
-//    NSURL *url = [NSURL URLWithString:@"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-        [self backToRoot];
-    }
-    
 }
 
 - (void)jumpToMyTopupOrder {
@@ -404,18 +434,16 @@
 }
 
 #pragma mark - Noti
-//- (void)transferSuccess:(NSNotification *)noti {
-//    [self backToRoot];
-//}
-
 - (void)updateTokenNoti:(NSNotification *)noti {
-    _selectAsset = [kAppD.tabbarC.walletsVC getQLCAsset:_inputPayToken];
-    if (!_selectAsset) {
-        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_qlc_wallet_have_not"),_inputPayToken]];
+    // 判断ETH钱包的USDT asset
+    _selectToken = [kAppD.tabbarC.walletsVC getETHAsset:_inputPayToken];
+    if (!_selectToken) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_eth_wallet_have_not"),_inputPayToken]];
         return;
     }
-    
+
     [self refreshView];
 }
+
 
 @end

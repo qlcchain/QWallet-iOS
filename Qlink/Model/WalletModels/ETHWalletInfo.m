@@ -78,6 +78,22 @@
     return YES;
 }
 
++ (ETHWalletInfo *)getWalletInKeychain:(NSString *)address {
+    __block ETHWalletInfo *result = nil;
+    NSString *string = [KeychainUtil getKeyValueWithKeyName:ETH_WALLET_KEYCHAIN];
+    if (string) {
+        NSArray *arr = string.mj_JSONObject;
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            ETHWalletInfo *tempM = [ETHWalletInfo getObjectWithKeyValues:obj];
+            if ([address isEqualToString:tempM.address]) {
+                result = tempM;
+                *stop = YES;
+            }
+        }];
+    }
+    return result;
+}
+
 + (void)refreshTrustWallet {
     NSArray *keychainArr = [ETHWalletInfo getAllWalletInKeychain];
     [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

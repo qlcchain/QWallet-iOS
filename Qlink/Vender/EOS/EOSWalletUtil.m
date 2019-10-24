@@ -37,7 +37,7 @@
 #import "Create_account_abi_json_to_bin_request.h"
 #import "CreateAccountTransferService.h"
 #import "ReportUtil.h"
-
+#import "RLArithmetic.h"
 #import "GlobalConstants.h"
 
 @interface EOSWalletUtil () <TransferServiceDelegate,CreateAccountTransferServiceDelegate> {
@@ -517,10 +517,9 @@
 //    self.transferAbi_json_to_bin_request.code = self.currentToken.contract_name;
     self.transferAbi_json_to_bin_request.code = symbolM.code;
     
-//    NSString *percision = [NSString stringWithFormat:@"%lu", [NSString getDecimalStringPercisionWithDecimalStr:self.currentToken.balance]];
-    NSString *decimalBalance = [[NSString stringWithFormat:@"%@",symbolM.balance] removeFloatAllZero];
+//    NSString *decimalBalance = [[NSString stringWithFormat:@"%@",symbolM.balance] removeFloatAllZero];
+    NSString *decimalBalance = symbolM.balance.mul(@(1));
     NSString *percision = [NSString stringWithFormat:@"%lu", [NSString getDecimalStringPercisionWithDecimalStr:decimalBalance]];
-//    self.transferAbi_json_to_bin_request.quantity = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"%.*f", percision.intValue, amount.doubleValue], self.currentToken.token_symbol];
     self.transferAbi_json_to_bin_request.quantity = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"%.*f", percision.intValue, amount.doubleValue], symbolM.symbol];
     
     self.transferAbi_json_to_bin_request.action = ContractAction_TRANSFER;

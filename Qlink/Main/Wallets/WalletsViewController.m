@@ -65,6 +65,7 @@
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "ClaimQGASTipView.h"
 #import "UserUtil.h"
+#import "RLArithmetic.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -420,17 +421,18 @@
     __block NSString *walletBalance = @"";
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeETH) {
-        __block NSNumber *totalPriceNum = @(0);
+        __block NSString *totalPriceStr = @"0";
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[Token class]]) {
                 *stop = YES;
             } else {
                 Token *token = obj;
-                totalPriceNum = @([totalPriceNum doubleValue]+[[token getPrice:_tokenPriceArr] doubleValue]);
-//                totalPriceDouble += [[token getPrice:_tokenPriceArr] doubleValue];
+//                totalPriceNum = @([totalPriceNum doubleValue]+[[token getPrice:_tokenPriceArr] doubleValue]);
+                totalPriceStr = totalPriceStr.add([token getPrice:_tokenPriceArr]);
             }
         }];
-        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+//        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+        totalPrice = totalPriceStr;
         
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[Token class]]) {
@@ -444,16 +446,18 @@
             }
         }];
     } else if (currentWalletM.walletType == WalletTypeEOS) {
-        __block NSNumber *totalPriceNum = @(0);
+        __block NSString *totalPriceStr = @"0";
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[EOSSymbolModel class]]) {
                 *stop = YES;
             } else {
                 EOSSymbolModel *model = obj;
-                totalPriceNum = @([totalPriceNum doubleValue]+[[model getPrice:_tokenPriceArr] doubleValue]);
+//                totalPriceNum = @([totalPriceNum doubleValue]+[[model getPrice:_tokenPriceArr] doubleValue]);
+                totalPriceStr = totalPriceStr.add([model getPrice:_tokenPriceArr]);
             }
         }];
-        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+//        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+        totalPrice = totalPriceStr;
         
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[EOSSymbolModel class]]) {
@@ -467,16 +471,18 @@
             }
         }];
     } else if (currentWalletM.walletType == WalletTypeNEO) {
-        __block NSNumber *totalPriceNum = @(0);
+        __block NSString *totalPriceStr = @"0";
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[NEOAssetModel class]]) {
                 *stop = YES;
             } else {
                 NEOAssetModel *asset = obj;
-                totalPriceNum = @([totalPriceNum doubleValue]+[[asset getPrice:_tokenPriceArr] doubleValue]);
+//                totalPriceNum = @([totalPriceNum doubleValue]+[[asset getPrice:_tokenPriceArr] doubleValue]);
+                totalPriceStr = totalPriceStr.add([asset getPrice:_tokenPriceArr]);
             }
         }];
-        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+//        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+        totalPrice = totalPriceStr;
         
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[NEOAssetModel class]]) {
@@ -490,16 +496,18 @@
             }
         }];
     } else if (currentWalletM.walletType == WalletTypeQLC) {
-        __block NSNumber *totalPriceNum = @(0);
+        __block NSString *totalPriceStr = @"0";
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[QLCTokenModel class]]) {
                 *stop = YES;
             } else {
                 QLCTokenModel *asset = obj;
-                totalPriceNum = @([totalPriceNum doubleValue]+[[asset getPrice:_tokenPriceArr] doubleValue]);
+//                totalPriceNum = @([totalPriceNum doubleValue]+[[asset getPrice:_tokenPriceArr] doubleValue]);
+                totalPriceStr = totalPriceStr.add([asset getPrice:_tokenPriceArr]);
             }
         }];
-        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+//        totalPrice = [[NSString stringWithFormat:@"%@",totalPriceNum] removeFloatAllZero];
+        totalPrice = totalPriceStr;
         
         [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![obj isKindOfClass:[QLCTokenModel class]]) {

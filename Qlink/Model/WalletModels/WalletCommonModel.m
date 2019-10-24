@@ -188,7 +188,7 @@
     } else if (currentWalletM.walletType == WalletTypeNEO) {
         [WalletCommonModel setDefaulNEOWallet:currentWalletM.address];
     } else if (currentWalletM.walletType == WalletTypeEOS) {
-        //TODO:切换EOS钱包
+        
     } else if (currentWalletM.walletType == WalletTypeQLC) {
         [WalletCommonModel switchQLCWallet:currentWalletM.address];
     }
@@ -401,6 +401,11 @@
 
 + (BOOL)haveQLCWallet {
     NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
+    return arr.count>0?YES:NO;
+}
+
++ (BOOL)haveETHWallet {
+    NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeETH];
     return arr.count>0?YES:NO;
 }
 

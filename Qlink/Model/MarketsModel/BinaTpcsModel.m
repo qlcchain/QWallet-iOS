@@ -10,21 +10,25 @@
 #import "NSString+RemoveZero.h"
 #import "TokenPriceModel.h"
 #import "GlobalConstants.h"
+#import "RLArithmetic.h"
 
 @implementation BinaTpcsModel
 
 - (NSString *)getNum {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.lastPrice] removeFloatAllZero];
+    NSString *num = self.lastPrice.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.lastPrice] removeFloatAllZero];
     return num;
 }
 
 - (NSString *)getPrice {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.coinVal] removeFloatAllZero];
+    NSString *num = self.coinVal.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.coinVal] removeFloatAllZero];
     return num;
 }
 
 - (NSString *)getChange {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.priceChangePercent] removeFloatAllZero];
+    NSString *num = self.priceChangePercent.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.priceChangePercent] removeFloatAllZero];
     return num;
 }
 

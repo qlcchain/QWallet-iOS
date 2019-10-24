@@ -9,6 +9,7 @@
 #import "ETHAddressInfoModel.h"
 #import "NSString+RemoveZero.h"
 #import "TokenPriceModel.h"
+#import "RLArithmetic.h"
 
 @implementation Price
 
@@ -28,9 +29,13 @@
     NSString *decimals = [NSString stringWithFormat:@"1e-%@",self.tokenInfo.decimals];
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSNumber *balanceNum = @([[NSString stringWithFormat:@"%@",self.balance] doubleValue]);
-    NSNumber *numberNum = @([decimalsNum doubleValue]*[balanceNum doubleValue]);
-    NSString *num = [[NSString stringWithFormat:@"%@",numberNum] removeFloatAllZero];
+    
+    NSString *num = decimalsNum.mul(balanceNum);
+
     return num;
+//    NSNumber *numberNum = @([decimalsNum doubleValue]*[balanceNum doubleValue]);
+//    NSString *num = [[NSString stringWithFormat:@"%@",numberNum] removeFloatAllZero];
+//    return num;
 }
 
 - (NSString *)getPrice:(NSArray *)tokenPriceArr {
@@ -39,8 +44,9 @@
     [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         TokenPriceModel *tempM = obj;
         if ([tempM.symbol isEqualToString:self.tokenInfo.symbol]) {
-            NSNumber *usdNum = @([num doubleValue]*[tempM.price doubleValue]);
-            price = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+//            NSNumber *usdNum = @([num doubleValue]*[tempM.price doubleValue]);
+//            price = [[NSString stringWithFormat:@"%@",usdNum] removeFloatAllZero];
+            price = num.mul(tempM.price);
             *stop = YES;
         }
     }];

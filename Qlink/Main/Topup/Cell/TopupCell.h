@@ -23,6 +23,12 @@ static NSString *TopupCellReuse = @"TopupCell";
 @property (weak, nonatomic) IBOutlet UILabel *desLab;
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
 @property (weak, nonatomic) IBOutlet UIImageView *backImg;
+@property (weak, nonatomic) IBOutlet UIView *soldoutBack;
+@property (weak, nonatomic) IBOutlet UIView *soldout_topTipBack;
+@property (weak, nonatomic) IBOutlet UIView *soldout_tipBack;
+@property (weak, nonatomic) IBOutlet UILabel *soldout_topTipLab;
+@property (weak, nonatomic) IBOutlet UILabel *soldout_tipLab;
+
 
 - (void)config:(TopupProductModel *)model;
 

@@ -30,6 +30,7 @@
 #import "NewOrderNEOTransferUtil.h"
 #import "NewOrderETHTransferUtil.h"
 //#import "GlobalConstants.h"
+#import "RLArithmetic.h"
 
 @interface BuySellDetailViewController ()
 
@@ -147,12 +148,14 @@
 
 - (void)changedTextField:(UITextField *)tf {
     if (tf == _usdtMaxTF) {
-        double dou = [_usdtMaxTF.text doubleValue]/[_orderInfoM.unitPrice doubleValue];
-        NSString *str = [NSString stringFromDouble:dou];
+//        double dou = [_usdtMaxTF.text doubleValue]/[_orderInfoM.unitPrice doubleValue];
+//        NSString *str = [NSString stringFromDouble:dou];
+        NSString *str = _usdtMaxTF.text.div(_orderInfoM.unitPrice);
         _qgasMaxTF.text = [NSString stringWithFormat:@"%@",str];
     } else if (tf == _qgasMaxTF) {
-        double dou = [_qgasMaxTF.text doubleValue]*[NSString doubleFormString:_orderInfoM.unitPrice];
-        NSString *str = [NSString stringFromDouble:dou];
+//        double dou = [_qgasMaxTF.text doubleValue]*[NSString doubleFormString:_orderInfoM.unitPrice];
+//        NSString *str = [NSString stringFromDouble:dou];
+        NSString *str = _qgasMaxTF.text.mul(_orderInfoM.unitPrice);
         _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str];
     }
 }

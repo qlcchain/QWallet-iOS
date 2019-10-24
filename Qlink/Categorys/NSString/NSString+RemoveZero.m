@@ -10,10 +10,10 @@
 
 @implementation NSString (RemoveZero)
 
-- (NSString *)removeFloatAllZero {
-    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:self];
-    return [dn stringValue];
-}
+//- (NSString *)removeFloatAllZero {
+//    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:self];
+//    return [dn stringValue];
+//}
 
 - (NSString *)show4floatStr {
     NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:4 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
@@ -28,24 +28,24 @@
     return [dn stringValue];
 }
 
-+ (double)doubleFormString:(NSString *)str {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *num = [numberFormatter numberFromString:str];
-    double dou = num.doubleValue;
-    return dou;
-}
-
-+ (NSString *)stringFromDouble:(double)doubleVal {
-    NSString* stringValue = @"0.00";
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    formatter.usesSignificantDigits = true;
-    formatter.maximumSignificantDigits = 100;
-    formatter.groupingSeparator = @"";
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    stringValue = [formatter stringFromNumber:@(doubleVal)];
-    
-    return stringValue;
-}
+//+ (double)doubleFormString:(NSString *)str {
+//    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+//    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    NSNumber *num = [numberFormatter numberFromString:str];
+//    double dou = num.doubleValue;
+//    return dou;
+//}
+//
+//+ (NSString *)stringFromDouble:(double)doubleVal {
+//    NSString* stringValue = @"0.00";
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+//    formatter.usesSignificantDigits = true;
+//    formatter.maximumSignificantDigits = 100;
+//    formatter.groupingSeparator = @"";
+//    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    stringValue = [formatter stringFromNumber:@(doubleVal)];
+//
+//    return stringValue;
+//}
 
 @end

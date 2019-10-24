@@ -10,12 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class QLCTokenModel,TopupProductModel;
+//@class Token;
+@class TopupProductModel;
 
-@interface TopupPayQGASViewController : QBaseViewController
+@interface TopupPayETHViewController : QBaseViewController
 
+//@property (nonatomic, strong) Token *inputToken;
+//@property (nonatomic, strong) NSArray *inputSourceArr;
+//@property (nonatomic, strong) NSString *inputAddress;
 //@property (nonatomic) BOOL transferToRoot;
 //@property (nonatomic) BOOL transferToTradeDetail;
+
 @property (nonatomic, strong) NSString *sendAmount;
 @property (nonatomic, strong) NSString *sendToAddress;
 @property (nonatomic, strong) NSString *sendMemo;
@@ -24,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) TopupProductModel *inputProductM;
 @property (nonatomic, strong) NSString *inputAreaCode;
 @property (nonatomic, strong) NSString *inputPhoneNumber;
+@property (nonatomic, strong) NSString *inputPayTokenId;
 
 @end
 

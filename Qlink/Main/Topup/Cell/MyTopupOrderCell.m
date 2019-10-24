@@ -11,8 +11,8 @@
 #import "GlobalConstants.h"
 #import "TopupOrderModel.h"
 #import "NSString+RemoveZero.h"
-#import "NSNumber+Operation.h"
 #import "NSDate+Category.h"
+#import "RLArithmetic.h"
 
 @interface MyTopupOrderCell ()
 
@@ -89,7 +89,8 @@
     _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
     _numLab.text = [NSString stringWithFormat:@"%@%@",model.areaCode,model.phoneNumber];
 
-    NSString *discountNumStr = [NSD([model.originalPrice stringValue]).sub(model.discountPrice) stringValue];
+    NSString *discountNumStr = model.originalPrice.sub(model.discountPrice);
+//    NSString *discountNumStr = [NSD([model.originalPrice stringValue]).sub(model.discountPrice) stringValue];
 //    NSString *discountNumStr = [NSString stringFromDouble:[model.originalPrice doubleValue] - [model.discountPrice doubleValue]];
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
@@ -107,7 +108,7 @@
     _payAmountLab.text = payAmountStr;
     NSNumber *qgasNum = model.qgasAmount;
     _discountAmountLab.text = discountAmountStr;
-    _qgasAmountLab.text = [NSString stringWithFormat:@"%@QGAS",qgasNum];
+    _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.symbol];
     
     _credentialLab.text = [model.txid isEmptyString]?@"":[NSString stringWithFormat:@"%@...%@",[model.txid substringToIndex:8],[model.txid substringFromIndex:model.txid.length-8]];
     _topupStateLab.text = [model getStatusString];

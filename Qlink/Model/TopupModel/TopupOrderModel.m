@@ -18,7 +18,7 @@
 - (NSString *)getStatusString {
     NSString *str = @"";
     if ([_status isEqualToString:Topup_Order_Status_New]) {
-        str = kLang(@"waiting_for_qgas_to_arrive");
+        str = [NSString stringWithFormat:kLang(@"waiting_for_to_arrive"),_symbol];
     } else if ([_status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
         str = kLang(@"no_phone_bill_paid");
     } else if ([_status isEqualToString:Topup_Order_Status_RECHARGE]) {
@@ -30,7 +30,7 @@
     } else if ([_status isEqualToString:Topup_Order_Status_ERROR]) {
         str = kLang(@"qgas_parsing_failed");
     } else if ([_status isEqualToString:Topup_Order_Status_QGAS_RETURNED]) {
-        str = kLang(@"phone_charge_recharge_failed_qgas_has_been_returned");
+        str = [NSString stringWithFormat:kLang(@"phone_charge_recharge_failed_has_been_returned"),_symbol];
     }
     return str;
 }

@@ -7,12 +7,14 @@
 //
 
 #import "NeoGotWGasModel.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation NeoGotWGasModel
 
 - (NSString *)getNum {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.receiveNum] removeFloatAllZero];
+    NSString *num = self.receiveNum.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.receiveNum] removeFloatAllZero];
     return num;
 }
 
