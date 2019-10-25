@@ -142,7 +142,7 @@
 - (void)requestVcode_change_password_code {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":_emailTF.text?:@""};
-    [RequestService requestWithUrl5:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];

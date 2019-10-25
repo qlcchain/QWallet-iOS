@@ -36,10 +36,14 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UIButton *phonePrefixBtn;
 @property (weak, nonatomic) IBOutlet UIButton *lookupProductBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *waitingBackHeight; // 102
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *waitingBackHeight; // 80
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tokenBackHeight; // 76
 @property (weak, nonatomic) IBOutlet UIView *payTokenContentV;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *payTokenContentWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *foundTopHeight; // 20
+@property (weak, nonatomic) IBOutlet UILabel *foundTipLab;
+@property (weak, nonatomic) IBOutlet UIView *waitBack;
+@property (weak, nonatomic) IBOutlet UIView *tokenBack;
 
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic, strong) NSArray *payTokenArr;
@@ -67,6 +71,10 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 
 #pragma mark - Operation
 - (void)configInit {
+    _foundTipLab.hidden = YES;
+    _waitBack.hidden = YES;
+    _tokenBack.hidden = YES;
+    
     _numBack.layer.cornerRadius = 8;
     _numBack.layer.masksToBounds = YES;
     _numBack.layer.borderColor = UIColorFromRGB(0xEDEDED).CGColor;
@@ -93,7 +101,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 
 - (void)changedTextField:(UITextField *)tf {
     if ([tf.text isEmptyString]) {
-        _waitingBackHeight.constant = 102;
+        _waitingBackHeight.constant = 80;
         [_sourceArr removeAllObjects];
         [_mainTable reloadData];
     }
@@ -129,6 +137,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
         btn.tag = PayTokenBtnTag+idx;
         [btn addTarget:weakself action:@selector(payTokenAction:) forControlEvents:UIControlEventTouchUpInside];
         [weakself.payTokenContentV addSubview:btn];
+        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
         
         UIImageView *imgV = [UIImageView new];
         imgV.frame = CGRectMake(btn.right-21, btn.bottom-19, 21, 19);
@@ -234,7 +243,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             }];
             weakself.currentPage += 1;
             
-            weakself.waitingBackHeight.constant = _sourceArr.count<=0?102:0;
+            weakself.waitingBackHeight.constant = _sourceArr.count<=0?80:0;
             [weakself.mainTable reloadData];
             
             if (arr.count < [ChooseTopupPlanNetworkSize integerValue]) {
@@ -243,6 +252,11 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             } else {
                 weakself.mainTable.mj_footer.hidden = NO;
             }
+            
+            weakself.foundTipLab.hidden = weakself.sourceArr.count<=0?YES:NO;
+            weakself.foundTopHeight.constant = weakself.sourceArr.count<=0?-20:20;
+            weakself.waitBack.hidden = NO;
+            weakself.tokenBack.hidden = weakself.sourceArr.count<=0?YES:NO;
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.mainTable.mj_header endRefreshing];

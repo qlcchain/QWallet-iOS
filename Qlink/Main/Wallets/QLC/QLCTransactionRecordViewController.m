@@ -117,7 +117,7 @@
 - (void)requestQLCAddressInfo:(NSString *)address {
     kWeakSelf(self);
 //    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [QLCLedgerRpc accountHistoryTopnWithAddress:address isMainNetwork:isMainNetwork successHandler:^(id _Nonnull responseObject) {
         if (responseObject != nil) {
             [weakself.addressHistoryArr removeAllObjects];
@@ -137,7 +137,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];

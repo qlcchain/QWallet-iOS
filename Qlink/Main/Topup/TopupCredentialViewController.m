@@ -11,16 +11,18 @@
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "UIView+Gradient.h"
 #import "TopupOrderModel.h"
+#import "GlobalConstants.h"
 
 @interface TopupCredentialViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *topGradientBack;
-@property (weak, nonatomic) IBOutlet UILabel *sendLab;
-@property (weak, nonatomic) IBOutlet UILabel *receiveLab;
+//@property (weak, nonatomic) IBOutlet UILabel *sendLab;
+//@property (weak, nonatomic) IBOutlet UILabel *receiveLab;
 @property (weak, nonatomic) IBOutlet UILabel *amountLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *projectLab;
 @property (weak, nonatomic) IBOutlet UILabel *txidLab;
+@property (weak, nonatomic) IBOutlet UILabel *numLab;
 
 
 @end
@@ -45,14 +47,30 @@
 
 #pragma mark - Operation
 - (void)configInit {
-//    _sendLab.text = [NSString stringWithFormat:@"%@%@",_inputCredentailM.areaCode,_inputCredentailM.phoneNumber];
-    _sendLab.text = _inputCredentailM.phoneNumber;
-//    _receiveLab;
-    NSString *payAmountStr = [NSString stringWithFormat:@"%@%@",_inputCredentailM.discountPrice,kLang(@"rmb")];
-    NSString *qgasAmountStr = [NSString stringWithFormat:@"%@%@",_inputCredentailM.qgasAmount,@"QGAS"];
-    _amountLab.text = [NSString stringWithFormat:@"%@+%@",payAmountStr,qgasAmountStr];
+    NSNumber *faitStr = _inputCredentailM.discountPrice;
+    NSNumber *qgasStr = _inputCredentailM.qgasAmount;
+    
+    NSString *symbolStr = _inputCredentailM.symbol;
+    NSString *addStr = @"+";
+    NSString *topupAmountShowStr = @"";
+    NSString *projectStr = @"";
+    NSString *language = [Language currentLanguageCode];
+    if ([language isEqualToString:LanguageCode[0]]) { // 英文
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitStr,addStr,qgasStr,symbolStr];
+        projectStr = [NSString stringWithFormat:@"Top up-%@Phone bill-%@",_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,faitStr,symbolStr];
+        projectStr = [NSString stringWithFormat:@"话费慢充-%@元手机话费-%@",_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+    }
+    
+    _amountLab.text = topupAmountShowStr;
     _timeLab.text = _inputCredentailM.orderTime;
-//    _projectLab.text;
+    _projectLab.text = projectStr;
+    NSString *numStr = @"";
+    if (_inputCredentailM.number && _inputCredentailM.number.length > 8) { // 去掉年月日
+        numStr = [_inputCredentailM.number substringFromIndex:8];
+    }
+    _numLab.text = numStr;
     _txidLab.text = _inputCredentailM.txid;
 }
 

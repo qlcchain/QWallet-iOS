@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    RecordListTypePosted,
+    RecordListTypePosted = 0,
     RecordListTypeProcessing,
     RecordListTypeCompleted,
     RecordListTypeClosed,

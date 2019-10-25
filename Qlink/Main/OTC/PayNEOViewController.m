@@ -234,7 +234,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_selectAsset.asset_symbol],@"coin":coin};
-    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:tokenPrice_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];

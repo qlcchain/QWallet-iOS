@@ -591,7 +591,7 @@
 //                                [[NSNotificationCenter defaultCenter] postNotificationName:NEO_Transfer_Success_Noti object:txHex];
                             }];
 //                            [weakself performSelector:@selector(sendGetBalanceRequest) withObject:self afterDelay:WAIL_TIME];
-                            [NEOWalletUtil saveTranQLCRecordWithQlc:amount txtid:recorid neo:@"0" recordType:2 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO isMianNet:[ConfigUtil isMainNetOfServerNetwork]];
+                            [NEOWalletUtil saveTranQLCRecordWithQlc:amount txtid:recorid neo:@"0" recordType:2 assetName:@"" friendNum:0 p2pID:@"" connectType:0 isReported:NO isMianNet:[ConfigUtil isMainNetOfChainNetwork]];
                         } else {
                             [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"neo_transfer_fail")];
                             if (failureBlock) {

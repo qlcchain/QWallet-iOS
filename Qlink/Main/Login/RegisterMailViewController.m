@@ -152,7 +152,7 @@
 - (void)requestSignup_code {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":_emailTF.text?:@""};
-    [RequestService requestWithUrl5:signup_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:signup_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];
@@ -161,6 +161,7 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window makeToastDisappearWithText:error.localizedDescription?:@""];
     }];
 }
 
@@ -171,7 +172,7 @@
     NSString *md5PW = [MD5Util md5:_pwTF.text?:@""];
     NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":_verifyCodeTF.text?:@"",@"number":_inviteCodeTF.text?:@"",@"p2pId":[UserModel getOwnP2PId]};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl5:sign_up_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:sign_up_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";

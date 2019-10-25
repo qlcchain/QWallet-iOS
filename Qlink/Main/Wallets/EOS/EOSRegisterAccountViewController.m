@@ -93,17 +93,19 @@
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSInteger gasLimit = 60000;
     NSInteger gasPrice = 6;
-    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
+//    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
+    NSString *ethFloatStr = @(gasPrice).mul(@(gasLimit)).mul(decimalsNum);
     
     __block WalletCommonModel *transferETHM = nil;
     // 判断是否有eth钱包
     if ([TrustWalletManage.sharedInstance isHavaWallet]) {
         // 判断是否有足够余额的eth钱包
-        NSNumber *enoughBalanceNum = @([ethFloatNum doubleValue]+[_ethAmount doubleValue]);
+//        NSNumber *enoughBalanceNum = @([ethFloatNum doubleValue]+[_ethAmount doubleValue]);
+        NSString *enoughBalanceStr = ethFloatStr.add(_ethAmount);
         [[WalletCommonModel getAllWalletModel] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             WalletCommonModel *model = obj;
             if (model.walletType==WalletTypeETH) {
-                if ([model.balance doubleValue] >= [enoughBalanceNum doubleValue]) {
+                if ([model.balance doubleValue] >= [enoughBalanceStr doubleValue]) {
                     transferETHM = model;
                     *stop = YES;
                 }
@@ -120,7 +122,7 @@
     }
     
 //    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
-    NSString *gasCostETH = ethFloatNum.mul(@(1));
+    NSString *gasCostETH = ethFloatStr;
     NSString *fromAddress = transferETHM.address;
     NSString *name = transferETHM.name;
     NSString *toAddress = _toEthAddress;

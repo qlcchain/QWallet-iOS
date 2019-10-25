@@ -185,12 +185,14 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"QLC Chain****DApp" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"wrpc.qlcchain.org:9735****dapp-t.qlink.mobi" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [HWUserdefault insertObj:@"1" withkey:QLCChain_Environment];
+        [HWUserdefault insertObj:@"1" withkey:QLCServer_Environment];
         // 获取主地址
         [WalletTransferUtil requestServerMainAddress];
     }];
     [alertVC addAction:action1];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"47.103.40.20:19735****DApp测试服务器" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [HWUserdefault insertObj:@"0" withkey:QLCChain_Environment];
+        [HWUserdefault insertObj:@"1" withkey:QLCChain_Environment];
+        [HWUserdefault insertObj:@"0" withkey:QLCServer_Environment];
         // 获取主地址
         [WalletTransferUtil requestServerMainAddress];
     }];

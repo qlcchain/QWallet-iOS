@@ -17,8 +17,10 @@
 #import "ReportUtil.h"
 #import "WalletQRViewController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
-
+#import "RLArithmetic.h"
 //#import "GlobalConstants.h"
+#import "QlinkTabbarViewController.h"
+#import "WalletsViewController.h"
 
 @interface ETHTransferViewController () <UITextViewDelegate>
 
@@ -82,18 +84,16 @@
 - (void)refreshGasCost {
     NSString *decimals = ETH_Decimals;
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
-//    long double ethFloat = _gasSlider.value*[_gasLimitLab.text floatValue]*decimalsDouble;
-    NSNumber *ethFloatNum = @(_gasSlider.value*[_gasLimitLab.text doubleValue]*[decimalsNum doubleValue]);
-//    _gasCostETH = [[NSString stringWithFormat:@"%Lf",ethFloat] removeFloatAllZero];
-    _gasCostETH = [NSString stringWithFormat:@"%@",ethFloatNum];
+//    NSNumber *ethFloatNum = @(_gasSlider.value*[_gasLimitLab.text doubleValue]*[decimalsNum doubleValue]);
+    NSString *ethFloatStr = @(_gasSlider.value).mul(_gasLimitLab.text).mul(decimalsNum);
+    _gasCostETH = [NSString stringWithFormat:@"%@",ethFloatStr];
     __block NSString *price = @"";
     [_tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         TokenPriceModel *model = obj;
         if ([model.symbol isEqualToString:_selectToken.tokenInfo.symbol]) {
-//            double priceFloat = [_gasCostETH floatValue]*[model.price doubleValue];
-            NSNumber *priceNum = @([_gasCostETH doubleValue]*[model.price doubleValue]);
-//            price = [[NSString stringWithFormat:@"%f",priceFloat] removeFloatAllZero];
-            price = [NSString stringWithFormat:@"%@",priceNum];
+//            NSNumber *priceNum = @([_gasCostETH doubleValue]*[model.price doubleValue]);
+//            price = [NSString stringWithFormat:@"%@",priceNum];
+            price = _gasCostETH.mul(model.price);
             *stop = YES;
         }
     }];
@@ -175,6 +175,35 @@
     return haveEthAssetNum;
 }
 
+- (BOOL)haveETHTokenAssetNum:(NSString *)tokenName {
+    __block BOOL haveEthAssetNum = NO;
+    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
+            NSString *ethNum = [model getTokenNum];
+            if ([ethNum doubleValue] > 0) {
+                haveEthAssetNum = YES;
+            }
+            *stop = YES;
+        }
+    }];
+    return haveEthAssetNum;
+}
+
+- (NSString *)getETHTokenAssetNum:(NSString *)tokenName {
+    __block NSString *ethAssetNum = @"0";
+    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Token *model = obj;
+        if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
+            ethAssetNum = [model getTokenNum];
+            *stop = YES;
+        }
+    }];
+    return ethAssetNum;
+}
+
 #pragma mark - Request
 - (void)requestTokenPrice {
     kWeakSelf(self);
@@ -229,6 +258,14 @@
     }
     if ([_amountTF.text doubleValue] > [[_selectToken getTokenNum] doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+        return;
+    }
+    if (![self haveETHTokenAssetNum:@"ETH"]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),@"ETH"]];
+        return;
+    }
+    if ([_gasCostETH doubleValue] > [[self getETHTokenAssetNum:@"ETH"] doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@(ETH)",kLang(@"balance_is_not_enough")]];
         return;
     }
     

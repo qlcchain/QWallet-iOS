@@ -129,7 +129,7 @@
     NSDictionary *params = @{@"entrustOrderId":_inputEntrustOrderId?:@""};
     kWeakSelf(self);
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl5:entrust_order_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:entrust_order_info_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.orderInfoM = [EntrustOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];

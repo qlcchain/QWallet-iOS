@@ -31,8 +31,16 @@
 //}
 
 + (BOOL)isMainNetOfServerNetwork {
+    NSString *environment = [HWUserdefault getObjectWithKey:QLCServer_Environment];
+    if (environment == nil || [environment integerValue] == 1) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (BOOL)isMainNetOfChainNetwork {
     NSString *environment = [HWUserdefault getObjectWithKey:QLCChain_Environment];
-//    NSNumber *mainNet = [ConfigUtil shareInstance].mainNet;
     if (environment == nil || [environment integerValue] == 1) {
         return YES;
     } else {

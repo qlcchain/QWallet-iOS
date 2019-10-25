@@ -98,7 +98,7 @@
 //    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *code = _inputVerifyCode;
     NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":code};
-    [RequestService requestWithUrl5:user_change_password_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:user_change_password_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             UserModel *userM = [UserModel fetchUser:account];
             if (!userM) { // 本地不存在则新增

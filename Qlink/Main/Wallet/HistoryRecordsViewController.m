@@ -42,7 +42,7 @@
      */
     NSArray* finfAlls = nil;
 //    [HistoryRecrdInfo bg_findAll:HISTORYRECRD_TABNAME];
-    if ([ConfigUtil isMainNetOfServerNetwork]) {
+    if ([ConfigUtil isMainNetOfChainNetwork]) {
         finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%d",bg_sqlKey(@"isMainNet"),1]];
     } else {
         finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet")]];

@@ -231,7 +231,7 @@
 - (void)requestVcode_signin_code {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
-    [RequestService requestWithUrl5:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:vcode_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
@@ -249,7 +249,7 @@
     NSString *account = _loginAccountTF.text?:@"";
     NSString *code = _loginVerifyCodeTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"code":code};
-    [RequestService requestWithUrl5:user_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:user_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
             UserModel *model = [UserModel getObjectWithKeyValues:responseObject];

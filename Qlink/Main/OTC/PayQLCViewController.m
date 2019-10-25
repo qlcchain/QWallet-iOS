@@ -143,7 +143,7 @@
     NSString *receiver = nil;
     NSString *message = nil;
     BOOL workInLocal = YES;
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
@@ -226,7 +226,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_selectAsset.tokenName],@"coin":coin};
-    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:tokenPrice_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];

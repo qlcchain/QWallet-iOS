@@ -10,9 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, OTCRecordListType) {
+    OTCRecordListTypePosted = 0,
+    OTCRecordListTypeProcessing,
+    OTCRecordListTypeCompleted,
+    OTCRecordListTypeClosed,
+    OTCRecordListTypeAppealed,
+};
+
 @class PairsModel;
 
 @interface RecordListViewController : QBaseViewController
+
+@property (nonatomic) OTCRecordListType inputType;
 
 @end
 

@@ -223,7 +223,7 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
     NSDictionary *params = @{@"account":account,@"email":email};
-    [RequestService requestWithUrl5:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
@@ -269,7 +269,7 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
     NSDictionary *params = @{@"account":account,@"phone":phone};
-    [RequestService requestWithUrl5:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {

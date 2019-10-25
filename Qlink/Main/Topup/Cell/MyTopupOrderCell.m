@@ -74,20 +74,24 @@
     NSString *province = @"";
     NSString *isp = @"";
     NSString *name = @"";
+    NSString *claimStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
         country = model.productCountryEn;
         province = model.productProvinceEn;
         isp = model.productIspEn;
         name = model.productNameEn;
+        claimStr = @"icon_background_reim_en";
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         country = model.productCountry;
         province = model.productProvince;
         isp = model.productIsp;
         name = model.productName;
+        claimStr = @"icon_background_reim";
     }
     _titleLab.text = [NSString stringWithFormat:@"%@%@%@-%@",country,province,isp,name];
     _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
     _numLab.text = [NSString stringWithFormat:@"%@%@",model.areaCode,model.phoneNumber];
+    _toClaimIcon.image = [UIImage imageNamed:claimStr];
 
     NSString *discountNumStr = model.originalPrice.sub(model.discountPrice);
 //    NSString *discountNumStr = [NSD([model.originalPrice stringValue]).sub(model.discountPrice) stringValue];
@@ -108,7 +112,7 @@
     _payAmountLab.text = payAmountStr;
     NSNumber *qgasNum = model.qgasAmount;
     _discountAmountLab.text = discountAmountStr;
-    _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.symbol];
+    _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.symbol?:@""];
     
     _credentialLab.text = [model.txid isEmptyString]?@"":[NSString stringWithFormat:@"%@...%@",[model.txid substringToIndex:8],[model.txid substringFromIndex:model.txid.length-8]];
     _topupStateLab.text = [model getStatusString];

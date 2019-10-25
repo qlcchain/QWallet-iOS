@@ -13,6 +13,7 @@
 + (instancetype)shareInstance;
 //+ (void)setServerNetworkEnvironment:(BOOL)mainNet;
 + (BOOL)isMainNetOfServerNetwork;
++ (BOOL)isMainNetOfChainNetwork;
     
 + (NSString *)getServerDomain;
 + (NSString *)getReleaseServerDomain;

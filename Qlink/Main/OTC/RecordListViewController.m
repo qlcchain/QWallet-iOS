@@ -75,7 +75,14 @@ static NSString *RecordListRequestSize = @"20";
     
     needRefreshSlider = YES;
     [self configInit];
-    [self requestEntrust_order_list];
+    if (_inputType == RecordListTypePosted) {
+        _postedBtn.selected = YES;
+        [self requestEntrust_order_list];
+    } else if (_inputType == RecordListTypeProcessing) {
+        _processingBtn.selected = YES;
+        [self requestTrade_order_list];
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -83,7 +90,12 @@ static NSString *RecordListRequestSize = @"20";
     
     if (needRefreshSlider) {
         needRefreshSlider = NO;
-        [self refreshSelect:_postedBtn];
+        if (_inputType == RecordListTypePosted) {
+            [self refreshSelect:_postedBtn];
+        } else if (_inputType == RecordListTypeProcessing) {
+            [self refreshSelect:_processingBtn];
+        }
+        
     }
 }
 
@@ -100,8 +112,14 @@ static NSString *RecordListRequestSize = @"20";
     _closedPage = 1;
     _appealedArr = [NSMutableArray array];
     _appealedPage = 1;
-    _postedBtn.selected = YES;
-    _recordListType = RecordListTypePosted;
+    if (_inputType == RecordListTypePosted) {
+        _postedBtn.selected = YES;
+        _recordListType = RecordListTypePosted;
+    } else if (_inputType == RecordListTypeProcessing) {
+        _processingBtn.selected = YES;
+        _recordListType = RecordListTypeProcessing;
+    }
+    
     
     kWeakSelf(self)
     [_postedTable registerNib:[UINib nibWithNibName:MyOrderListEntrustCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListEntrustCellReuse];
@@ -441,7 +459,7 @@ static NSString *RecordListRequestSize = @"20";
     NSString *type = @"";
     NSString *userId = [UserModel fetchUserOfLogin].ID;
     NSDictionary *params = @{@"userId":userId?:@"",@"type":type,@"page":page,@"size":size,@"pairsId":@""};
-    [RequestService requestWithUrl5:entrust_order_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:entrust_order_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.postedTable.mj_header endRefreshing];
         [weakself.postedTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {

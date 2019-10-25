@@ -120,9 +120,8 @@
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSInteger gasLimit = 60000;
     NSInteger gasPrice = 6;
-    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
-//    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
-    NSString *gasCostETH = ethFloatNum.mul(@(1));
+//    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
+    NSString *gasCostETH = @(gasPrice).mul(@(gasLimit)).mul(decimalsNum);
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",gasCostETH];
     ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
     [view configWithAddress:address amount:amount gasfee:gasfee];

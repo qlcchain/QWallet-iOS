@@ -37,6 +37,7 @@ typedef void(^MyTopupOrderCredentialDetalBlock)(void);
 @property (weak, nonatomic) IBOutlet UILabel *credentialLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *credentialDetailHeight; // 48
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *payHeight; // 48
+@property (weak, nonatomic) IBOutlet UIImageView *toClaimIcon;
 
 
 + (CGFloat)cellHeight:(TopupOrderModel *)model;

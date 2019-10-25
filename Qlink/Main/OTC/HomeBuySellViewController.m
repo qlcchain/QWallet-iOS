@@ -80,7 +80,7 @@ static NSString *const NetworkSize = @"20";
     
     if (kAppD.pushToOrderList) {
         kAppD.pushToOrderList = NO;
-        [self jumpToMyOrderList];
+        [self jumpToMyOrderList:OTCRecordListTypeProcessing];
     }
 }
 
@@ -252,7 +252,7 @@ static NSString *const NetworkSize = @"20";
         [pairsId deleteCharactersInRange:NSMakeRange(pairsId.length-1, 1)];
     }
     NSDictionary *params = @{@"userId":@"",@"type":type,@"page":page,@"size":size,@"status":@"NORMAL",@"pairsId":pairsId};
-    [RequestService requestWithUrl5:entrust_order_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:entrust_order_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
@@ -295,7 +295,7 @@ static NSString *const NetworkSize = @"20";
 - (void)requestPairs_pairs {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl5:pairs_pairs_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:pairs_pairs_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself.pairsArr removeAllObjects];
             [responseObject[@"pairsList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -388,7 +388,7 @@ static NSString *const NetworkSize = @"20";
 }
 
 - (IBAction)listAction:(id)sender {
-    [self jumpToMyOrderList];
+    [self jumpToMyOrderList:OTCRecordListTypePosted];
 }
 
 - (IBAction)segAction:(id)sender {
@@ -446,7 +446,7 @@ static NSString *const NetworkSize = @"20";
 
 
 #pragma mark - Transition
-- (void)jumpToMyOrderList {
+- (void)jumpToMyOrderList:(OTCRecordListType)listType {
     BOOL haveLogin = [UserModel haveLoginAccount];
     if (!haveLogin) {
         [kAppD presentLoginNew];
@@ -459,6 +459,7 @@ static NSString *const NetworkSize = @"20";
 //    }
     
     RecordListViewController *vc = [RecordListViewController new];
+    vc.inputType = listType;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

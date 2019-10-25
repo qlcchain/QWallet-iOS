@@ -119,7 +119,7 @@
     NSString *receiver = nil;
     NSString *message = nil;
     BOOL workInLocal = YES;
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {

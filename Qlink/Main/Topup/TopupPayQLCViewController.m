@@ -31,6 +31,7 @@
 #import "TopupProductModel.h"
 #import "MyTopupOrderViewController.h"
 #import "TopupWebViewController.h"
+#import "TopupPayLoadView.h"
 
 @interface TopupPayQLCViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -48,6 +49,9 @@
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
 @property (nonatomic, strong) QLCTokenModel *selectAsset;
 @property (nonatomic, strong) WalletCommonModel *payWalletM;
+@property (nonatomic, strong) TopupPayLoadView *payLoadView;
+@property (nonatomic, strong) TopupOrderModel *orderM;
+@property (nonatomic, strong) NSString *payTxid;
 
 @end
 
@@ -103,8 +107,8 @@
     NSString *symbolStr = _inputPayToken;
     NSString *balanceStr = [NSString stringWithFormat:@"%@: 0 %@",kLang(@"balance"),_inputPayToken];
     if (_selectAsset) {
-        balanceStr = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectAsset getTokenNum],_selectAsset.tokenName];
-        symbolStr = _selectAsset.tokenName;
+        balanceStr = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectAsset getTokenNum],_selectAsset.tokenName?:@""];
+        symbolStr = _selectAsset.tokenName?:@"";
     }
     _balanceLab.text = balanceStr;
     _symbolLab.text = symbolStr;
@@ -114,7 +118,7 @@
 
 - (void)showQLCTransferConfirmView {
     NSString *address = _sendtoAddressTV.text;
-    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName];
+    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName?:@""];
     QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
     [view configWithAddress:address amount:amount];
     kWeakSelf(self);
@@ -140,7 +144,7 @@
 }
 
 - (void)sendTransfer {
-    NSString *tokenName = _selectAsset.tokenName;
+    NSString *tokenName = _selectAsset.tokenName?:@"";
     NSString *to = _sendtoAddressTV.text;
     NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text];
 //    NSUInteger amount = [_amountTF.text integerValue];
@@ -148,21 +152,21 @@
     NSString *receiver = nil;
     NSString *message = nil;
     BOOL workInLocal = NO;
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
-    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+//    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
+    [self showPayLoadView];
     kWeakSelf(self);
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
-        [kAppD.window hideToast];
-//        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
-//        [weakself backToRoot];
-        [kAppD.window makeToastInView:kAppD.window text:[NSString stringWithFormat:kLang(@"_has_been_paid_successfully_Please_wait_for_a_moment"),weakself.selectAsset.tokenName] userInteractionEnabled:NO hideTime:0];
-        NSString *txid = responseObj;
+//        [kAppD.window hideToast];
+//        [kAppD.window makeToastInView:kAppD.window text:[NSString stringWithFormat:kLang(@"_has_been_paid_successfully_Please_wait_for_a_moment"),weakself.selectAsset.tokenName] userInteractionEnabled:NO hideTime:0];
+        weakself.payTxid = responseObj;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [weakself requestTopup_order:txid];
+            [weakself requestTopup_order];
         });
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
+        [weakself hidePayLoadView];
     }];
 }
 
@@ -187,7 +191,7 @@
 }
 
 - (void)showNotEnoughOfBalance {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_"),_selectAsset.tokenName] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_"),_selectAsset.tokenName?:@""] preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakself backToRoot];
@@ -200,6 +204,42 @@
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
+- (void)showPayLoadView {
+    if (!_payWalletM) {
+        return;
+    }
+    kWeakSelf(self);
+    _payLoadView = [TopupPayLoadView getInstance];
+    [_payLoadView config:_payWalletM symbol:_selectAsset.tokenName?:@"" completeB:^{
+        weakself.payLoadView = nil;
+        [weakself handlerPayTransition];
+    }];
+    [_payLoadView show];
+}
+
+- (void)hidePayLoadView {
+    if (_payLoadView) {
+        [_payLoadView hide];
+    }
+}
+
+- (void)handlerPayTransition {
+    if (!_orderM) {
+        return;
+    }
+    if ([_orderM.status isEqualToString:Topup_Order_Status_New]) { // 跳转订单列表
+        [self jumpToMyTopupOrder];
+    } else if ([_orderM.status isEqualToString:Topup_Order_Status_QGAS_PAID]) { // 跳转h5购买
+        // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
+        NSString *sid = Topup_Pay_H5_sid;
+        NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,_orderM.userId?:@"",_orderM.ID?:@""];
+        NSString *package = [NSString stringWithFormat:@"%@",_inputProductM.amount];
+        NSString *mobile = _inputPhoneNumber;
+        NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
+        [self jumpToTopupH5:urlStr];
+    }
+}
+
 #pragma mark - Request
 - (void)requestTokenPrice {
     if (!_selectAsset) {
@@ -207,8 +247,8 @@
     }
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
-    NSDictionary *params = @{@"symbols":@[_selectAsset.tokenName],@"coin":coin};
-    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"symbols":@[_selectAsset.tokenName?:@""],@"coin":coin};
+    [RequestService requestWithUrl10:tokenPrice_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -222,7 +262,10 @@
     }];
 }
 
-- (void)requestTopup_order:(NSString *)txid {
+- (void)requestTopup_order {
+    if (!_payTxid) {
+        return;
+    }
     kWeakSelf(self);
     NSString *account = @"";
     UserModel *userM = [UserModel fetchUserOfLogin];
@@ -235,27 +278,21 @@
     NSString *phoneNumber = _inputPhoneNumber?:@"";
     NSString *amount = [NSString stringWithFormat:@"%@",_inputProductM.amount];
     NSString *payTokenId = _inputPayTokenId?:@"";
-    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":txid?:@"",@"payTokenId":payTokenId};
+    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":_payTxid?:@"",@"payTokenId":payTokenId};
 //    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:topup_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            TopupOrderModel *model = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];
+            weakself.orderM = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];
             
-            if ([model.status isEqualToString:Topup_Order_Status_New]) { // 跳转订单列表
-                [weakself jumpToMyTopupOrder];
-            } else if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) { // 跳转h5购买
-                // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
-                NSString *sid = Topup_Pay_H5_sid;
-                NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,model.userId?:@"",model.ID?:@""];
-                NSString *package = [NSString stringWithFormat:@"%@",weakself.inputProductM.amount];
-                NSString *mobile = weakself.inputPhoneNumber;
-                NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
-                [weakself jumpToTopupH5:urlStr];
-            }
+            [weakself.payLoadView startPayAnimate]; // 开始动画
+        } else {
+            [weakself requestTopup_order];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [kAppD.window hideToast];
+//        [kAppD.window hideToast];
+//        [weakself hidePayLoadView];
+        [weakself requestTopup_order];
     }];
 }
 
@@ -332,7 +369,7 @@
         return;
     }
     
-    if (![self haveQLCTokenAssetNum:_selectAsset.tokenName]) {
+    if (![self haveQLCTokenAssetNum:_selectAsset.tokenName?:@""]) {
 //        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),_selectAsset.tokenName]];
         [self showNotEnoughOfBalance];
         return;
@@ -373,6 +410,7 @@
     vc.inputWalletType = WalletTypeQLC;
     [vc configSelectBlock:^(WalletCommonModel * _Nonnull model) {
         weakself.payWalletM = model;
+        weakself.payWalletIcon.image = [WalletCommonModel walletIcon:model.walletType];
         weakself.payWalletNameLab.text = model.name;
         weakself.payWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
         [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包

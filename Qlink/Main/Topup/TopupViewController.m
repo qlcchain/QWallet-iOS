@@ -190,7 +190,7 @@ static NSString *const TopupNetworkSize = @"20";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     TopupProductModel *model = _sourceArr[indexPath.row];
-    if ([model.stock doubleValue] == 0) { // 售罄
+    if (model.stock && [model.stock doubleValue] == 0) { // 售罄
         return;
     }
     

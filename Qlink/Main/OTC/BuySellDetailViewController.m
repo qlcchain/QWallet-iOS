@@ -202,7 +202,7 @@
 - (void)requestEntrust_order_info {
     kWeakSelf(self);
     NSDictionary *params = @{@"entrustOrderId":_inputEntrustOrderListM.ID?:@""};
-    [RequestService requestWithUrl5:entrust_order_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:entrust_order_info_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] doubleValue] == 0) {
             weakself.orderInfoM = [EntrustOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
             [weakself refreshView];

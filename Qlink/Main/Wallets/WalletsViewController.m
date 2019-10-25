@@ -671,7 +671,7 @@
 - (void)startReceiveQLC {
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeQLC) {
-        BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+        BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
         [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address isMainNetwork:isMainNetwork]; // QLC钱包接收sendblock
     }
 }
@@ -981,7 +981,7 @@
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
 //    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [QLCLedgerRpc accountInfoWithAddress:address isMainNetwork:isMainNetwork successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
         [weakself endRefresh];
         if (showLoad) {
@@ -1016,7 +1016,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfServerNetwork];
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];

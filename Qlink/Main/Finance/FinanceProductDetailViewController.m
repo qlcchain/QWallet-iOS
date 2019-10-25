@@ -161,7 +161,7 @@
 - (void)requestProduct_info {
     kWeakSelf(self);
     NSDictionary *params = @{@"id":_inputM.ID?:@""};
-    [RequestService requestWithUrl5:product_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:product_info_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.requestProductM = [FinanceProductModel getObjectWithKeyValues:responseObject[Server_Data]];
             [weakself refreshView];
@@ -215,7 +215,7 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    [RequestService requestWithUrl5:neoAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:neoAddressInfo_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainScroll.mj_header endRefreshing];
         if (showLoad) {
             [kAppD.window hideToast];

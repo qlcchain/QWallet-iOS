@@ -56,7 +56,7 @@
     NSString *size = @"20";
     NSDictionary *params = @{@"page":page,@"size":size};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl5:rich_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:rich_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [EarningsRankingModel mj_objectArrayWithKeyValuesArray:responseObject[Server_Data]];

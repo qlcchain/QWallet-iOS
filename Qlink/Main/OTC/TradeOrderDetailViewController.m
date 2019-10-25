@@ -681,7 +681,7 @@
 //    kWeakSelf(self);
     NSDictionary *params = @{};
 //    [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl5:getServerTime_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:getServerTime_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSString *serverTime = responseObject[Server_Data][@"sysTime"];

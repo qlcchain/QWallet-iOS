@@ -45,6 +45,7 @@
 }
 
 - (void)config:(TopupProductModel *)model {
+    
     NSString *language = [Language currentLanguageCode];
     NSString *country = @"";
     NSString *province = @"";
@@ -87,7 +88,7 @@
     [_backImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"topup_guangdong_mobile"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     
-    _soldoutBack.hidden = [model.stock doubleValue] == 0?NO:YES;// 售罄
+    _soldoutBack.hidden = (model.stock && [model.stock doubleValue] == 0)?NO:YES;// 售罄
     _soldout_topTipLab.text = kLang(@"coming_soon_next_month");
     _soldout_tipLab.text = kLang(@"sold_out");
 }
