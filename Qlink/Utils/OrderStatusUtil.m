@@ -21,6 +21,8 @@
         statusStr = kLang(@"active");
     } else if ([_status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) {
         statusStr = kLang(@"waiting_for_buyer_payment");
+    } else if ([_status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+        statusStr = kLang(@"waiting_for_buyer_payment");
     } else if ([_status isEqualToString:ORDER_STATUS_USDT_PAID]) {
         statusStr = kLang(@"waiting_for_seller_confirmation");
     } else if ([_status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
@@ -46,7 +48,9 @@
         color = MAIN_BLUE_COLOR;
     } else if ([_status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) {
         color = MAIN_BLUE_COLOR;
-    } else if ([_status isEqualToString:ORDER_STATUS_USDT_PAID] || [_status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+    } else if ([_status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+        color = MAIN_BLUE_COLOR;
+   } else if ([_status isEqualToString:ORDER_STATUS_USDT_PAID] || [_status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
         color = MAIN_BLUE_COLOR;
     } else if ([_status isEqualToString:ORDER_STATUS_NEW]) {
         color = MAIN_BLUE_COLOR;

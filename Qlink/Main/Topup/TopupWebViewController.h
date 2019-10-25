@@ -11,5 +11,6 @@
 @interface TopupWebViewController : QBaseViewController
 
 @property (nonatomic, strong) NSString *inputUrl;
+@property (nonatomic) BOOL inputBackToRoot;
 
 @end

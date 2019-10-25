@@ -21,7 +21,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img2;
 @property (weak, nonatomic) IBOutlet UILabel *tipLab1;
 @property (weak, nonatomic) IBOutlet UILabel *tipLab2;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (nonatomic, copy) TopupPayCompleteBlock completeB;
+@property (nonatomic, copy) TopupPayCloseBlock closeB;
 @property (nonatomic, strong) NSString *currentSymbol;
 
 @end
@@ -34,10 +36,12 @@
     return view;
 }
 
-- (void)config:(WalletCommonModel *)model symbol:(NSString *)symbol completeB:(TopupPayCompleteBlock)completeB {
+- (void)config:(WalletCommonModel *)model symbol:(NSString *)symbol completeB:(TopupPayCompleteBlock)completeB closeB:(TopupPayCloseBlock)closeB {
     _completeB = completeB;
+    _closeB = closeB;
     _currentSymbol = symbol;
     
+    _closeBtn.hidden = YES;
     _img1.image = [UIImage imageNamed:@"icon_background_load"];
     _img2.image = [UIImage imageNamed:@"icon_background_no"];
     _tipLab1.text = [NSString stringWithFormat:kLang(@"_is_being_paid"),_currentSymbol];
@@ -48,7 +52,11 @@
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
 }
 
-- (void)startPayAnimate {
+- (void)showCloseBtn {
+    _closeBtn.hidden = NO;
+}
+
+- (void)startPayAnimate1 {
     kWeakSelf(self);
     _img1.image = [UIImage imageNamed:@"icon_background_success"];
     _img2.image = [UIImage imageNamed:@"icon_background_load"];
@@ -63,26 +71,27 @@
             weakself.img2.transform = CGAffineTransformIdentity;
         }];
     }];
+}
+
+- (void)startPayAnimate2 {
+    kWeakSelf(self);
+    _img2.image = [UIImage imageNamed:@"icon_background_success"];
+    _tipLab1.text = [NSString stringWithFormat:kLang(@"successfully_paid_"),_currentSymbol];
+    _tipLab2.text = kLang(@"the_recharge_voucher_on_the_chain_was_successfully_generated");
+    [UIView animateWithDuration:0.2 animations:^{
+        weakself.img2.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            weakself.img2.transform = CGAffineTransformIdentity;
+        }];
+    }];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-        weakself.img2.image = [UIImage imageNamed:@"icon_background_success"];
-        weakself.tipLab1.text = [NSString stringWithFormat:kLang(@"successfully_paid_"),_currentSymbol];
-        _tipLab2.text = kLang(@"the_recharge_voucher_on_the_chain_was_successfully_generated");
-        [UIView animateWithDuration:0.2 animations:^{
-            weakself.img2.transform = CGAffineTransformMakeScale(1.2, 1.2);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.2 animations:^{
-                weakself.img2.transform = CGAffineTransformIdentity;
-            }];
-        }];
+        if (weakself.completeB) {
+            weakself.completeB();
+        }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            if (weakself.completeB) {
-                weakself.completeB();
-            }
-            
-            [weakself hide];
-        });
+        [weakself hide];
     });
 }
 
@@ -94,6 +103,13 @@
 - (void)hide {
     [self removeFromSuperview];
 }
+
+- (IBAction)closeAction:(id)sender {
+    if (_closeB) {
+        _closeB();
+    }
+}
+
 
 
 @end

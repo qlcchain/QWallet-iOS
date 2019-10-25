@@ -162,6 +162,8 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
                 [weakself.sourceArr replaceObjectAtIndex:cancelIndex withObject:model];
                 [weakself.mainTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cancelIndex inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
             }
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -214,6 +216,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 #pragma mark - Transition
 - (void)jumpToTopupH5:(NSString *)urlStr {
     TopupWebViewController *vc = [TopupWebViewController new];
+    vc.inputBackToRoot = NO;
     vc.inputUrl = urlStr;
     [self.navigationController pushViewController:vc animated:YES];
     return;

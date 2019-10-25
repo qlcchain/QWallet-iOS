@@ -32,6 +32,7 @@
 #import "MyTopupOrderViewController.h"
 #import "TopupWebViewController.h"
 #import "TopupPayLoadView.h"
+#import "TopupPayOrderTodo.h"
 
 @interface TopupPayQLCViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -52,6 +53,7 @@
 @property (nonatomic, strong) TopupPayLoadView *payLoadView;
 @property (nonatomic, strong) TopupOrderModel *orderM;
 @property (nonatomic, strong) NSString *payTxid;
+@property (nonatomic) BOOL topupOrderConfirmEnable;
 
 @end
 
@@ -162,6 +164,7 @@
         weakself.payTxid = responseObj;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [weakself.payLoadView startPayAnimate1]; // 开始动画
             [weakself requestTopup_order];
         });
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
@@ -211,6 +214,11 @@
     kWeakSelf(self);
     _payLoadView = [TopupPayLoadView getInstance];
     [_payLoadView config:_payWalletM symbol:_selectAsset.tokenName?:@"" completeB:^{
+        weakself.payLoadView = nil;
+        [weakself handlerPayTransition];
+    } closeB:^{
+        [weakself hidePayLoadView];
+        weakself.topupOrderConfirmEnable = NO;
         weakself.payLoadView = nil;
         [weakself handlerPayTransition];
     }];
@@ -280,12 +288,24 @@
     NSString *payTokenId = _inputPayTokenId?:@"";
     NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":_payTxid?:@"",@"payTokenId":payTokenId};
 //    [kAppD.window makeToastInView:kAppD.window];
+    TopupPayOrderParamsModel *paramsM = [TopupPayOrderParamsModel getObjectWithKeyValues:params];
+    [[TopupPayOrderTodo shareInstance] savePayOrder:paramsM];
     [RequestService requestWithUrl10:topup_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
+            [[TopupPayOrderTodo shareInstance] handlerPayOrderSuccess:paramsM];
+            
             weakself.orderM = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];
             
-            [weakself.payLoadView startPayAnimate]; // 开始动画
+            if ([weakself.orderM.status isEqualToString:Topup_Order_Status_New]) {
+                weakself.topupOrderConfirmEnable = YES;
+                [weakself.payLoadView showCloseBtn];
+                
+                [weakself requestTopup_order_confirm:weakself.orderM.ID];
+                
+            } else if ([weakself.orderM.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
+                [weakself.payLoadView startPayAnimate2]; // 开始动画
+            }
         } else {
             [weakself requestTopup_order];
         }
@@ -293,6 +313,35 @@
 //        [kAppD.window hideToast];
 //        [weakself hidePayLoadView];
         [weakself requestTopup_order];
+    }];
+}
+
+- (void)requestTopup_order_confirm:(NSString *)orderId {
+    if (_topupOrderConfirmEnable == NO) {
+        return;
+    }
+    kWeakSelf(self);
+    NSDictionary *params = @{@"orderId":orderId};
+    [RequestService requestWithUrl10:topup_order_confirm_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            weakself.orderM = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];
+            
+            if ([weakself.orderM.status isEqualToString:Topup_Order_Status_New]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                    [weakself requestTopup_order_confirm:orderId];
+                });
+            } else if ([weakself.orderM.status isEqualToString:Topup_Order_Status_QGAS_PAID]) { // 已支付QGAS，未支付法币
+                [weakself.payLoadView startPayAnimate2]; // 开始动画
+            }
+        } else {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [weakself requestTopup_order_confirm:orderId];
+            });
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [weakself requestTopup_order_confirm:orderId];
+        });
     }];
 }
 
@@ -388,6 +437,9 @@
     kWeakSelf(self);
     NSArray *sourceArr = [kAppD.tabbarC.walletsVC getQLCSource];
     [sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![obj isKindOfClass:[QLCTokenModel class]]) {
+            return;
+        }
         QLCTokenModel *model = obj;
         if ([model.tokenName isEqualToString:weakself.inputPayToken]) {
             UIAlertAction *alert = [UIAlertAction actionWithTitle:model.tokenName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -423,6 +475,7 @@
 #pragma mark - Transition
 - (void)jumpToTopupH5:(NSString *)urlStr {
     TopupWebViewController *vc = [TopupWebViewController new];
+    vc.inputBackToRoot = YES;
     vc.inputUrl = urlStr;
     [self.navigationController pushViewController:vc animated:YES];
     return;

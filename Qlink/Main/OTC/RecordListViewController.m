@@ -75,13 +75,13 @@ static NSString *RecordListRequestSize = @"20";
     
     needRefreshSlider = YES;
     [self configInit];
-    if (_inputType == RecordListTypePosted) {
-        _postedBtn.selected = YES;
-        [self requestEntrust_order_list];
-    } else if (_inputType == RecordListTypeProcessing) {
-        _processingBtn.selected = YES;
-        [self requestTrade_order_list];
-    }
+//    if (_inputType == RecordListTypePosted) {
+//        _postedBtn.selected = YES;
+//        [self requestEntrust_order_list];
+//    } else if (_inputType == RecordListTypeProcessing) {
+//        _processingBtn.selected = YES;
+//        [self requestTrade_order_list];
+//    }
     
 }
 
@@ -91,9 +91,11 @@ static NSString *RecordListRequestSize = @"20";
     if (needRefreshSlider) {
         needRefreshSlider = NO;
         if (_inputType == RecordListTypePosted) {
-            [self refreshSelect:_postedBtn];
+//            [self refreshSelect:_postedBtn];
+            [self postedAction:_postedBtn];
         } else if (_inputType == RecordListTypeProcessing) {
-            [self refreshSelect:_processingBtn];
+//            [self refreshSelect:_processingBtn];
+            [self processingAction:_processingBtn];
         }
         
     }
@@ -395,13 +397,16 @@ static NSString *RecordListRequestSize = @"20";
                 }
                 [weakself.processingArr addObjectsFromArray:arr];
                 weakself.processingPage += 1;
-                [weakself.processingTable reloadData];
                 
-                if (arr.count < [RecordListRequestSize integerValue]) {
-                    [weakself.processingTable.mj_footer endRefreshingWithNoMoreData];
-                    weakself.processingTable.mj_footer.hidden = arr.count<=0?YES:NO;
-                } else {
-                    weakself.processingTable.mj_footer.hidden = NO;
+                if (weakself.recordListType == RecordListTypeProcessing) {
+                    [weakself.processingTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.processingTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.processingTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.processingTable.mj_footer.hidden = NO;
+                    }
                 }
             } else if (weakself.completedBtn.selected) {
                 if (weakself.completedPage == 1) {
@@ -409,13 +414,16 @@ static NSString *RecordListRequestSize = @"20";
                 }
                 [weakself.completedArr addObjectsFromArray:arr];
                 weakself.completedPage += 1;
-                [weakself.completedTable reloadData];
                 
-                if (arr.count < [RecordListRequestSize integerValue]) {
-                    [weakself.completedTable.mj_footer endRefreshingWithNoMoreData];
-                    weakself.completedTable.mj_footer.hidden = arr.count<=0?YES:NO;
-                } else {
-                    weakself.completedTable.mj_footer.hidden = NO;
+                if (weakself.recordListType == RecordListTypeCompleted) {
+                    [weakself.completedTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.completedTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.completedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.completedTable.mj_footer.hidden = NO;
+                    }
                 }
             } else if (weakself.appealedBtn.selected) {
                 if (weakself.appealedPage == 1) {
@@ -423,13 +431,16 @@ static NSString *RecordListRequestSize = @"20";
                 }
                 [weakself.appealedArr addObjectsFromArray:arr];
                 weakself.appealedPage += 1;
-                [weakself.appealedTable reloadData];
                 
-                if (arr.count < [RecordListRequestSize integerValue]) {
-                    [weakself.appealedTable.mj_footer endRefreshingWithNoMoreData];
-                    weakself.appealedTable.mj_footer.hidden = arr.count<=0?YES:NO;
-                } else {
-                    weakself.appealedTable.mj_footer.hidden = NO;
+                if (weakself.recordListType == RecordListTypeAppealed) {
+                    [weakself.appealedTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.appealedTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.appealedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.appealedTable.mj_footer.hidden = NO;
+                    }
                 }
             } else if (weakself.closedBtn.selected) {
                 if (weakself.closedPage == 1) {
@@ -437,13 +448,16 @@ static NSString *RecordListRequestSize = @"20";
                 }
                 [weakself.closedArr addObjectsFromArray:arr];
                 weakself.closedPage += 1;
-                [weakself.closedTable reloadData];
                 
-                if (arr.count < [RecordListRequestSize integerValue]) {
-                    [weakself.closedTable.mj_footer endRefreshingWithNoMoreData];
-                    weakself.closedTable.mj_footer.hidden = arr.count<=0?YES:NO;
-                } else {
-                    weakself.closedTable.mj_footer.hidden = NO;
+                if (weakself.recordListType == RecordListTypeClosed) {
+                    [weakself.closedTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.closedTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.closedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.closedTable.mj_footer.hidden = NO;
+                    }
                 }
             }
         }
@@ -469,13 +483,16 @@ static NSString *RecordListRequestSize = @"20";
             }
             [weakself.postedArr addObjectsFromArray:arr];
             weakself.postedPage += 1;
-            [weakself.postedTable reloadData];
             
-            if (arr.count < [RecordListRequestSize integerValue]) {
-                [weakself.postedTable.mj_footer endRefreshingWithNoMoreData];
-                weakself.postedTable.mj_footer.hidden = arr.count<=0?YES:NO;
-            } else {
-                weakself.postedTable.mj_footer.hidden = NO;
+            if (weakself.recordListType == RecordListTypePosted) {
+                [weakself.postedTable reloadData];
+                
+                if (arr.count < [RecordListRequestSize integerValue]) {
+                    [weakself.postedTable.mj_footer endRefreshingWithNoMoreData];
+                    weakself.postedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                } else {
+                    weakself.postedTable.mj_footer.hidden = NO;
+                }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

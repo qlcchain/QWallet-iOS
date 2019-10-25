@@ -22,7 +22,11 @@
 @implementation TopupWebViewController
 
 - (IBAction)clickBack:(id)sender {
-    [self leftNavBarItemPressedWithPop:YES];
+    if (_inputBackToRoot) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [self leftNavBarItemPressedWithPop:YES];
+    }
 }
 
 - (void)viewDidLoad {

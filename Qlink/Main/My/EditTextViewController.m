@@ -210,7 +210,7 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -256,7 +256,7 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -302,7 +302,7 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backAction:nil];
         } else {
-            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

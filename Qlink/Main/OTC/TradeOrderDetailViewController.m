@@ -233,7 +233,36 @@
                 _bottomBack1.hidden = NO;
             }
             
-        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TXID_ERROR]) { // 未支付USDT
+               _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
+               _statusTitleLab.text = kLang(@"waiting_for_buyer_payment");
+               _statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
+               
+               kWeakSelf(self);
+               [self requestGetServerTime:^(NSString *serverTime) {
+                   NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.orderTime];
+                   NSDate *date30min = [date dateByAddingMinutes:30];
+                   NSDate *dateNow = [NSDate dateFromTime:serverTime];
+                   NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
+                   if (countDownSecond >= 0) {
+                       weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
+                       [weakself startCountDown:countDownSecond];
+                   } else {
+                       weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____0");
+                   }
+               }];
+               
+               _orderIDHeight.constant = 56;
+               _orderIDLab.text = _orderInfoM.number;
+               _orderTimeHeight.constant = 56;
+               _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
+               _orderStatusHeight.constant = 56;
+               _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
+               if (i_am_Buyer) {
+                   _bottomView1Height.constant = 59;
+                   _bottomBack1.hidden = NO;
+               }
+           } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
             _statusBack.backgroundColor = MAIN_BLUE_COLOR;
             
             if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
@@ -730,10 +759,10 @@
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"i_ve_received") preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [weakself requestTrade_seller_confirm];
     }];
     [alertC addAction:alertCancel];
     UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"ok_") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakself requestTrade_seller_confirm];
     }];
     [alertC addAction:alertBuy];
     [self presentViewController:alertC animated:YES completion:nil];

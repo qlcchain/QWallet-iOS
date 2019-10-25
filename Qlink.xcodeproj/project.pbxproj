@@ -821,7 +821,7 @@
 		58FB8D942265C4500075698E /* RefreshHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB8D932265C4500075698E /* RefreshHelper.m */; };
 		58FC12C3230D391F0069474C /* PayNEOViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FC12C5230D391F0069474C /* PayNEOViewController.xib */; };
 		58FE26002362EAE50032ABBE /* TopupCredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FE26022362EAE50032ABBE /* TopupCredentialViewController.xib */; };
-		58FE26092362F9980032ABBE /* TopupPayOrderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE26082362F9970032ABBE /* TopupPayOrderHelper.m */; };
+		58FE26092362F9980032ABBE /* TopupPayOrderTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */; };
 		73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */; };
 		73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */; };
 		73048F132079FE9000A4EFEE /* RatesMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F122079FE9000A4EFEE /* RatesMode.m */; };
@@ -2576,8 +2576,8 @@
 		58FE26012362EAE50032ABBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TopupCredentialViewController.xib; sourceTree = "<group>"; };
 		58FE26042362EAEF0032ABBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TopupCredentialViewController.strings; sourceTree = "<group>"; };
 		58FE26062362EAF80032ABBE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TopupCredentialViewController.strings"; sourceTree = "<group>"; };
-		58FE26072362F9970032ABBE /* TopupPayOrderHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupPayOrderHelper.h; sourceTree = "<group>"; };
-		58FE26082362F9970032ABBE /* TopupPayOrderHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupPayOrderHelper.m; sourceTree = "<group>"; };
+		58FE26072362F9970032ABBE /* TopupPayOrderTodo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupPayOrderTodo.h; sourceTree = "<group>"; };
+		58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupPayOrderTodo.m; sourceTree = "<group>"; };
 		73007F9A207C98D100F11341 /* HistoryRecrdInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecrdInfo.h; sourceTree = "<group>"; };
 		73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecrdInfo.m; sourceTree = "<group>"; };
 		73048F0B2079B5BB00A4EFEE /* UILabel+Copy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Copy.h"; sourceTree = "<group>"; };
@@ -3259,8 +3259,8 @@
 				58644E392358034200EFA9A2 /* FirebaseUtil.m */,
 				58161533235ED56C0041A92B /* JPushTagHelper.h */,
 				58161534235ED56C0041A92B /* JPushTagHelper.m */,
-				58FE26072362F9970032ABBE /* TopupPayOrderHelper.h */,
-				58FE26082362F9970032ABBE /* TopupPayOrderHelper.m */,
+				58FE26072362F9970032ABBE /* TopupPayOrderTodo.h */,
+				58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -6294,7 +6294,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=0\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
+			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=1\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
 		};
 		58B4716F20D9FA05007D9D7E /* UploadBuglySymbol */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6853,7 +6853,7 @@
 				58245C6722E1ACF30093E747 /* ComplaintDetailViewController.m in Sources */,
 				581AC35A21AFC63B00ACA80B /* AppDelegate+AppService.m in Sources */,
 				58FB8D902265B6C10075698E /* FinanceHistoryCell.m in Sources */,
-				58FE26092362F9980032ABBE /* TopupPayOrderHelper.m in Sources */,
+				58FE26092362F9980032ABBE /* TopupPayOrderTodo.m in Sources */,
 				581D32D1219C158B001F88C3 /* TransactionHistory.swift in Sources */,
 				58FB8D55226434AF0075698E /* EarningsRankingViewController.m in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,

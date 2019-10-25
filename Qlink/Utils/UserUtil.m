@@ -10,7 +10,6 @@
 #import "UserModel.h"
 #import "NSDate+Category.h"
 #import "RSAUtil.h"
-
 #import "GlobalConstants.h"
 
 @implementation UserUtil

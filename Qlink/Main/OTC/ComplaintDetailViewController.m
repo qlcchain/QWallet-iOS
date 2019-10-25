@@ -126,7 +126,9 @@
             _orderStatusLab.text = kLang(@"transaction_pending");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
             _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
-        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) { // 买家已付款
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TXID_ERROR]) { // 未支付USDT
+           _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
+       } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) { // 买家已付款
             _orderStatusLab.text = kLang(@"waiting_for_seller_confirmation");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
             _orderStatusLab.text = kLang(@"waiting_for_public_Chain_confirmation");

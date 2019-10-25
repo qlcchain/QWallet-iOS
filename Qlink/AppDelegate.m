@@ -42,6 +42,7 @@
 #import "NSString+Base64.h"
 #import "JPUSHService.h"
 #import "JPushTagHelper.h"
+#import "TopupPayOrderTodo.h"
 
 @interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -163,6 +164,14 @@
     [self jumpToWallet];
     
     [SystemUtil checkAPPUpdate]; // 检查app更新
+    
+//    NSDictionary *params = @{@"account":@"111",@"p2pId":@"sgsd",@"productId":@"sagag",@"areaCode":@"agag",@"phoneNumber":@"0099",@"amount":@"222",@"txid":@"1234567",@"payTokenId":@"sndksdj"};
+//    TopupPayOrderParamsModel *paramsM = [TopupPayOrderParamsModel getObjectWithKeyValues:params];
+//    [[TopupPayOrderTodo shareInstance] savePayOrder:paramsM];
+//    [[TopupPayOrderTodo shareInstance] handlerPayOrderSuccess:paramsM];
+//    [[TopupPayOrderTodo shareInstance] cleanPayOrder];
+    
+    [[TopupPayOrderTodo shareInstance] checkLocalPayOrder];
 }
 
 - (void)jumpToWallet {

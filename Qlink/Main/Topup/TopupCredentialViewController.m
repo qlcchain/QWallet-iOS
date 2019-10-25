@@ -59,7 +59,7 @@
         topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitStr,addStr,qgasStr,symbolStr];
         projectStr = [NSString stringWithFormat:@"Top up-%@Phone bill-%@",_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,faitStr,symbolStr];
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,qgasStr,symbolStr];
         projectStr = [NSString stringWithFormat:@"话费慢充-%@元手机话费-%@",_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
     }
     

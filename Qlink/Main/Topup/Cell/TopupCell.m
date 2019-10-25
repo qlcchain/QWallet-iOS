@@ -75,7 +75,7 @@
     NSString *discountStr = kLang(@"_discount");
     NSString *discountShowStr = [NSString stringWithFormat:@"%@%@",discountNumStr,discountStr];
     NSMutableAttributedString *discountAtt = [[NSMutableAttributedString alloc] initWithString:discountShowStr];
-    // .SFUIDisplay-Semibold
+    // .SFUIDisplay-Semibold  .SFUI-Semibold
     [discountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:30] range:NSMakeRange(0, discountShowStr.length)];
     [discountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:14] range:[discountShowStr rangeOfString:discountStr]];
     [discountAtt addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, discountShowStr.length)];

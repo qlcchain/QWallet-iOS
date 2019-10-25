@@ -31,7 +31,7 @@
     [kAppD.window addSubview:view];
     view.titleLab.text = title;
     
-    [view performSelector:@selector(hide) withObject:nil afterDelay:1.5];
+    [view performSelector:@selector(hide) withObject:nil afterDelay:1.8];
 }
 
 - (void)hide {

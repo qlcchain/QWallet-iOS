@@ -100,8 +100,8 @@
 }
 
 - (void)refreshView {
-    NSString *symbolStr = @"ETH";
-    NSString *balanceStr = [NSString stringWithFormat:@"%@: 0 ETH",kLang(@"balance")];
+    NSString *symbolStr = _inputPayToken?:@"";
+    NSString *balanceStr = [NSString stringWithFormat:@"%@: 0 %@",kLang(@"balance"),_inputPayToken?:@""];
     if (_selectToken) {
         balanceStr = [NSString stringWithFormat:@"%@: %@ %@",kLang(@"balance"),[_selectToken getTokenNum],_selectToken.tokenInfo.symbol];
         symbolStr = _selectToken.tokenInfo.symbol;
@@ -282,6 +282,7 @@
             [self refreshGasCost];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        
     }];
 }
 
@@ -369,6 +370,9 @@
     kWeakSelf(self);
     NSArray *sourceArr = [kAppD.tabbarC.walletsVC getETHSource];
     [sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![obj isKindOfClass:[Token class]]) {
+            return;
+        }
         Token *model = obj;
         if ([model.tokenInfo.symbol isEqualToString:weakself.inputPayToken]) {
             UIAlertAction *alert = [UIAlertAction actionWithTitle:model.tokenInfo.symbol style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

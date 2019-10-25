@@ -32,6 +32,7 @@ static NSString *TopupPayOrderLocal_Key = @"TopupPayOrderLocal_Key";
 - (void)checkLocalPayOrder;
 - (void)savePayOrder:(TopupPayOrderParamsModel *)model;
 - (void)handlerPayOrderSuccess:(TopupPayOrderParamsModel *)model;
+- (void)cleanPayOrder;
 
 @end
 

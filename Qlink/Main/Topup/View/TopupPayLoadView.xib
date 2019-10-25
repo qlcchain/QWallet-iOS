@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -84,11 +86,23 @@
                             <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKm-2l-EL0">
+                            <rect key="frame" x="283" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="Ey1-bV-RkF"/>
+                                <constraint firstAttribute="height" constant="44" id="wwy-r1-oBe"/>
+                            </constraints>
+                            <state key="normal" image="mnemonic_tip_close"/>
+                            <connections>
+                                <action selector="closeAction:" destination="KmZ-c1-dpz" eventType="touchUpInside" id="776-A3-G8h"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="OzD-gU-D8K" firstAttribute="centerX" secondItem="KW7-ve-n5v" secondAttribute="centerX" id="0Xx-Ql-amw"/>
                         <constraint firstItem="OzD-gU-D8K" firstAttribute="top" secondItem="KW7-ve-n5v" secondAttribute="bottom" constant="-6" id="0gH-eB-azP"/>
+                        <constraint firstAttribute="trailing" secondItem="JKm-2l-EL0" secondAttribute="trailing" id="2Op-Wb-MzB"/>
                         <constraint firstItem="KW7-ve-n5v" firstAttribute="top" secondItem="hMF-eH-spf" secondAttribute="bottom" constant="-2" id="49g-gH-8rX"/>
                         <constraint firstItem="S3S-dL-gfD" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" constant="34" id="4hi-iH-wMY"/>
                         <constraint firstItem="SZu-ro-a58" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" constant="160" id="8l1-61-bFi"/>
@@ -102,6 +116,7 @@
                         <constraint firstItem="Ssi-Q5-ZYg" firstAttribute="leading" secondItem="0wO-ck-vii" secondAttribute="leading" id="Kfk-7a-OFP"/>
                         <constraint firstItem="hMF-eH-spf" firstAttribute="centerY" secondItem="SZu-ro-a58" secondAttribute="centerY" id="PvB-LH-RWb"/>
                         <constraint firstItem="SZu-ro-a58" firstAttribute="leading" secondItem="hMF-eH-spf" secondAttribute="trailing" constant="24" id="RjM-L3-Sm3"/>
+                        <constraint firstItem="JKm-2l-EL0" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" id="Xt6-24-TE4"/>
                         <constraint firstItem="KW7-ve-n5v" firstAttribute="centerX" secondItem="hMF-eH-spf" secondAttribute="centerX" id="bDh-ba-mEU"/>
                         <constraint firstItem="Ssi-Q5-ZYg" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" id="bia-qH-MeA"/>
                         <constraint firstItem="hcx-ve-LXp" firstAttribute="centerY" secondItem="OzD-gU-D8K" secondAttribute="centerY" id="fbT-zi-2En"/>
@@ -125,6 +140,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="H3L-5l-45G"/>
             <connections>
+                <outlet property="closeBtn" destination="JKm-2l-EL0" id="i1o-2y-FaF"/>
                 <outlet property="img1" destination="hMF-eH-spf" id="RIk-Mh-gyc"/>
                 <outlet property="img2" destination="OzD-gU-D8K" id="1QW-wO-QgF"/>
                 <outlet property="tipBack" destination="0wO-ck-vii" id="4TA-Aa-wCC"/>
@@ -141,6 +157,7 @@
         <image name="background_voucher_n" width="327" height="139.5"/>
         <image name="icon_background_load" width="24" height="24"/>
         <image name="icon_background_no" width="24" height="24"/>
+        <image name="mnemonic_tip_close" width="24" height="24"/>
         <image name="qlc_wallet" width="46" height="46"/>
     </resources>
 </document>

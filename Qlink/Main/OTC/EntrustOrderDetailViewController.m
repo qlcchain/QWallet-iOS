@@ -196,7 +196,7 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself requestEntrust_order_info];
         } else {
-            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

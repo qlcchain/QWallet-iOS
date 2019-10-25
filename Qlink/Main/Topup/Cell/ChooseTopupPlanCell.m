@@ -90,7 +90,7 @@
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
         topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitStr,addStr,qgasStr,symbolStr];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,faitStr,symbolStr];
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,qgasStr,symbolStr];
     }
     NSMutableAttributedString *topupAmountAtt = [[NSMutableAttributedString alloc] initWithString:topupAmountShowStr];
     // .SFUIDisplay-Semibold
