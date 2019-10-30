@@ -181,7 +181,7 @@ public class TrustWalletManage: NSObject {
         }
     }
     
-    @objc public func send(fromAddress:String,contractAddress:String,toAddress:String,name:String,symbol:String,amount:String,gasLimit:Int,gasPrice:Int,decimals:Int,value:String,isCoin:Bool,_ sendComplete : @escaping ((Bool, String?) -> Void)) {
+    @objc public func send(fromAddress:String,contractAddress:String,toAddress:String,name:String,symbol:String,amount:String,gasLimit:Int,gasPrice:Int,memo:String?,decimals:Int,value:String,isCoin:Bool,_ sendComplete : @escaping ((Bool, String?) -> Void)) {
 //        let walletInfo : WalletInfo = self.keystore.wallets[0]
         var walletInfo : WalletInfo? = nil
         for tempWalletInfo in self.keystore.wallets {
@@ -212,7 +212,14 @@ public class TrustWalletManage: NSObject {
         let fullFormatter = EtherNumberFormatter.full
         let gasPriceBig = fullFormatter.number(from: String(Int(gasPrice)), units: UnitConfiguration.gasPriceUnit) ?? BigInt()
         let gasLimitBig = BigInt(String(Int(gasLimit)), radix: 10) ?? BigInt()
+        
         let data = Data()
+//        if let dataString = memo {
+//            data = Data(hex: dataString.drop0x)
+//        } else {
+//            data = Data()
+//        }
+        
         let nonceBig = BigInt("0") ?? 0
         let configuration = TransactionConfiguration(
             gasPrice: gasPriceBig,
@@ -403,6 +410,12 @@ public class TrustWalletManage: NSObject {
         }()
         
         let data = Data()
+//        let testData:String? = "0x1234567890"
+//        if let dataString = testData {
+//            data = Data(hex: dataString.drop0x)
+//        } else {
+//            data = Data()
+//        }
         let balance = Balance(value: transfer.type.token.valueBigInt)
         let chainState: ChainState = ChainState(server: transfer.server)
         chainState.fetch()
@@ -565,10 +578,10 @@ public class TrustWalletManage: NSObject {
                 self.keystore.exportMnemonic(wallet: walletInfo.currentAccount.wallet!) { result in
                     switch result {
                     case .success(let words):
-                        print("exportKeystore success:\(words)")
+                        print("exportMnemonic success:\(words)")
                         export(words)
                     case .failure(let error):
-                        print("exportKeystore fail:\(error)")
+                        print("exportMnemonic fail:\(error)")
                         export(nil)
                     }
                 }
@@ -576,13 +589,32 @@ public class TrustWalletManage: NSObject {
         }
     }
     
+//    @objc public func exportPrivateKeyTest() {
+//        for (idx,walletInfo) in self.keystore.wallets.enumerated() {
+//            print("\(idx)","*****walletInfo = ",walletInfo)
+//            print("\(idx)","*****currentAccount = ",walletInfo.currentAccount)
+//            print("\(idx)","*****derivationPath = ",walletInfo.currentAccount.derivationPath)
+//            print("\(idx)","*****wallet = ",walletInfo.currentAccount.wallet ?? "")
+//            print("\(idx)","*****address = ",walletInfo.currentAccount.address.description)
+//            self.keystore.exportPrivateKey(account: walletInfo.currentAccount) { result in
+//                switch result {
+//                case .success(let privateKey):
+//                    print("\(idx)","exportPrivateKey success:\(privateKey.hexString)")
+//                    print("\(idx)","*****privateKey = ",privateKey.hexString)
+//                case .failure(let error):
+//                    print("\(idx)","exportPrivateKey fail:\(error)")
+//                }
+//            }
+//        }
+//    }
+    
     @objc public func exportPrivateKey(address:String,_ export : @escaping ((String?) -> Void)) {
         for walletInfo in self.keystore.wallets {
             if address == walletInfo.currentAccount.address.description {
                 self.keystore.exportPrivateKey(account: walletInfo.currentAccount) { result in
                     switch result {
                     case .success(let privateKey):
-                        print("exportPrivateKey success:\(privateKey)")
+                        print("exportPrivateKey success:\(privateKey.hexString)")
                         export(privateKey.hexString)
                     case .failure(let error):
                         print("exportPrivateKey fail:\(error)")
@@ -617,9 +649,11 @@ public class TrustWalletManage: NSObject {
         for walletInfo in self.keystore.wallets {
             if address == walletInfo.currentAccount.address.description {
                 account = walletInfo
+                break
             }
         }
         if account == nil {
+            print("ETH切换钱包失败account=nil address=\(address)")
             return
         }
         let migration = MigrationInitializer(account: account!)

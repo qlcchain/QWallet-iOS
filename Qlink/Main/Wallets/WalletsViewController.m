@@ -66,6 +66,11 @@
 #import "ClaimQGASTipView.h"
 #import "UserUtil.h"
 #import "RLArithmetic.h"
+#import "JPushConstants.h"
+#import "AppDelegate+AppService.h"
+#import "NEOBackupDetailViewController.h"
+#import "QLCBackupDetailViewController.h"
+#import "ETHCreateWalletViewController.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -101,6 +106,14 @@
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *totalBackheight; // 147
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 
+// 备份助记词
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backupBackHeight; // 180 220
+@property (weak, nonatomic) IBOutlet UILabel *backupTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *backupTip1Lab;
+@property (weak, nonatomic) IBOutlet UILabel *backupTip2Lab;
+@property (weak, nonatomic) IBOutlet UIButton *backupBtn;
+
+
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
@@ -128,6 +141,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInfoAfterLoginNoti:) name:User_UpdateInfoAfterLogin_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ethBackupUpdateNoti:) name:ETH_Wallet_Backup_Update_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(neoBackupUpdateNoti:) name:NEO_Wallet_Backup_Update_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qlcBackupUpdateNoti:) name:QLC_Wallet_Backup_Update_Noti object:nil];
 }
 
 #pragma mark - Life Cycle
@@ -148,8 +164,11 @@
     [self refreshTitle];
     [self renderView];
     [self configInit];
+    [self refreshBackupView]; // 刷新备份助记词
     
     [ClaimQGASTipView show];
+    
+    [self handlerPushJump];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -168,6 +187,9 @@
     [_walletBack addShadowWithOpacity:1 shadowColor:walletShadowColor shadowOffset:CGSizeMake(0,4) shadowRadius:10 andCornerRadius:12];
     
     [_claimLab cornerRadius:8.5];
+    
+    _backupBtn.layer.cornerRadius = 6;
+    _backupBtn.layer.masksToBounds = YES;
 }
 
 - (void)configInit {
@@ -179,6 +201,7 @@
     _stakingHeight.constant = 0;
 //    _contentHeight.constant = SCREEN_HEIGHT-Height_NavBar-Height_TabBar+_totalBackheight.constant;
     _contentHeight.constant = SCREEN_HEIGHT-Height_NavBar-Height_TabBar;
+    _backupBackHeight.constant = 0;
     
     kWeakSelf(self)
     _refreshScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
@@ -191,10 +214,10 @@
 
 - (void)judgeWallet {
 //    [ETHWalletInfo refreshTrustWallet]; // 如果keychain中的钱包在Trust中没有则自动导入
-    BOOL haveEthWallet = TrustWalletManage.sharedInstance.isHavaWallet;
-    BOOL haveNeoWallet = [NEOWalletInfo getAllNEOWallet].count>0?YES:NO;
-    BOOL haveEosWallet = [EOSWalletInfo getAllWalletInKeychain].count>0?YES:NO;
-    BOOL haveQlcWallet = [QLCWalletInfo getAllWalletInKeychain].count>0?YES:NO;
+    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
+    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
+    BOOL haveEosWallet = [EOSWalletInfo haveEOSWallet];
+    BOOL haveQlcWallet = [QLCWalletInfo haveQLCWallet];
     if (haveEthWallet) {
         [WalletCommonModel refreshETHWallet];
     }
@@ -216,17 +239,43 @@
         }
     }
     if (currentWalletM) {
-//        [WalletCommonModel refreshCurrentWallet]; // 刷新当前钱包
         [self refreshTokenList];
-//        kWeakSelf(self);
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-//            [weakself requestGetTokenBalance]; // 刷新winqgas
-//        });
         
-        [self startReceiveQLC];
-    } else {
+        [self startReceiveQLC]; // QLC--account pending
+        
+        [self handlerCreateWalletInAuto];
+    } else { // 没有钱包 则跳转创建钱包页面
         [self jumpToChooseWallet:NO];
     }
+}
+
+- (void)handlerCreateWalletInAuto {
+    // 如果当前有钱包  自动生成暂无的钱包（ETH\QLC\NEO）不包括EOS
+    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
+    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
+    BOOL haveQlcWallet = [QLCWalletInfo haveQLCWallet];
+    if (!haveEthWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [ETHWalletInfo createETHWalletInAuto];
+        });
+    }
+    if (!haveNeoWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [NEOWalletInfo createNEOWalletInAuto];
+        });
+    }
+    if (!haveQlcWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [QLCWalletInfo createQLCWalletInAuto];
+        });
+    }
+}
+
+- (void)handlerPushJump {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        NSDictionary *userInfo = [HWUserdefault getObjectWithKey:JPush_Tag_Jump];
+        [kAppD handlerPushJump:userInfo isTapLaunch:NO];
+    });
 }
 
 - (void)showContentView {
@@ -854,6 +903,51 @@
     _myStakingsLab.text = kLang(@"my_stakings");
 }
 
+- (void)refreshBackupView {
+    _backupBackHeight.constant = 0;
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (!currentWalletM) {
+        return;
+    }
+    
+    _backupTitleLab.text = kLang(@"security_reminders");
+    _backupTip1Lab.text = kLang(@"please_back_up_your_private_key_mnemonic_phrase_now_");
+    _backupTip2Lab.text = kLang(@"if_your_lose_your_mobile_devices_you_could_use_your_private_key_or_mnemonic_phrase_to_recover_your_wallet_");
+    [_backupBtn setTitle:kLang(@"backup_now") forState:UIControlStateNormal];
+    
+    NSString *language = [Language currentLanguageCode];
+    if (currentWalletM.walletType == WalletTypeETH) {
+        ETHWalletInfo *walletInfo = [ETHWalletInfo getWalletInKeychain:currentWalletM.address?:@""];
+        if (walletInfo.mnemonicArr && walletInfo.isBackup && [walletInfo.isBackup boolValue] == NO) { // 字段存在且未备份且有助记词
+            if ([language isEqualToString:LanguageCode[0]]) { // 英文
+                _backupBackHeight.constant = 220;
+            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+                _backupBackHeight.constant = 180;
+            }
+        }
+    } else if (currentWalletM.walletType == WalletTypeNEO) {
+        NEOWalletInfo *walletInfo = [NEOWalletInfo getNEOWalletWithAddress:currentWalletM.address?:@""];
+        if (walletInfo.isBackup && [walletInfo.isBackup boolValue] == NO) { // 字段存在且未备份
+            if ([language isEqualToString:LanguageCode[0]]) { // 英文
+                _backupBackHeight.constant = 220;
+            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+                _backupBackHeight.constant = 180;
+            }
+        }
+    } else if (currentWalletM.walletType == WalletTypeEOS) {
+        
+    } else if (currentWalletM.walletType == WalletTypeQLC) {
+        QLCWalletInfo *walletInfo = [QLCWalletInfo getQLCWalletWithAddress:currentWalletM.address?:@""];
+        if (walletInfo.isBackup && [walletInfo.isBackup boolValue] == NO) { // 字段存在且未备份
+            if ([language isEqualToString:LanguageCode[0]]) { // 英文
+                _backupBackHeight.constant = 220;
+            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+                _backupBackHeight.constant = 180;
+            }
+        }
+    }
+}
+
 #pragma mark - Request
 - (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
     // 检查地址有效性
@@ -1291,6 +1385,25 @@
     [self jumpToMyStakings];
 }
 
+- (IBAction)backupAction:(id)sender {
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (!currentWalletM) {
+        return;
+    }
+    if (currentWalletM.walletType == WalletTypeETH) {
+        ETHWalletInfo *walletInfo = [ETHWalletInfo getWalletInKeychain:currentWalletM.address?:@""];
+        [self jumpToCreateETH:walletInfo];
+    } else if (currentWalletM.walletType == WalletTypeNEO) {
+        NEOWalletInfo *walletInfo = [NEOWalletInfo getNEOWalletWithAddress:currentWalletM.address?:@""];
+        [self jumpToNEOBackupDetail:walletInfo];
+    } else if (currentWalletM.walletType == WalletTypeEOS) {
+        
+    } else if (currentWalletM.walletType == WalletTypeQLC) {
+        QLCWalletInfo *walletInfo = [QLCWalletInfo getQLCWalletWithAddress:currentWalletM.address?:@""];
+        [self jumpToQLCBackupDetail:walletInfo];
+    }
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1630,6 +1743,24 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToNEOBackupDetail:(NEOWalletInfo *)walletInfo {
+    NEOBackupDetailViewController *vc = [[NEOBackupDetailViewController alloc] init];
+    vc.walletInfo = walletInfo;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToQLCBackupDetail:(QLCWalletInfo *)walletInfo {
+    QLCBackupDetailViewController *vc = [[QLCBackupDetailViewController alloc] init];
+    vc.walletInfo = walletInfo;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToCreateETH:(ETHWalletInfo *)walletInfo {
+    ETHCreateWalletViewController *vc = [[ETHCreateWalletViewController alloc] init];
+    vc.walletInfo = walletInfo;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Noti
 - (void)walletChange:(NSNotification *)noti {
     [self neoGasStatusInit]; // neo gas 状态初始化
@@ -1640,26 +1771,39 @@
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
 //        [weakself requestGetTokenBalance]; // 刷新winqgas
 //    });
+    [self refreshBackupView];
 }
 
 - (void)addETHWallet:(NSNotification *)noti {
     [WalletCommonModel refreshETHWallet];
-    [self judgeWallet];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (!currentWalletM || currentWalletM.walletType == WalletTypeETH) {
+        [self judgeWallet];
+    }
 }
 
 - (void)addNEOWallet:(NSNotification *)noti {
     [WalletCommonModel refreshNEOWallet];
-    [self judgeWallet];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (!currentWalletM || currentWalletM.walletType == WalletTypeNEO) {
+        [self judgeWallet];
+    }
 }
 
 - (void)addEOSWallet:(NSNotification *)noti {
     [WalletCommonModel refreshEOSWallet];
-    [self judgeWallet];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (!currentWalletM || currentWalletM.walletType == WalletTypeEOS) {
+        [self judgeWallet];
+    }
 }
 
 - (void)addQLCWallet:(NSNotification *)noti {
     [WalletCommonModel refreshQLCWallet];
-    [self judgeWallet];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (!currentWalletM || currentWalletM.walletType == WalletTypeQLC) {
+        [self judgeWallet];
+    }
 }
 
 - (void)deleteWalletSuccess:(NSNotification *)noti {
@@ -1688,6 +1832,8 @@
     [self refreshTitle];
     [self refreshLanguage];
     [_refreshScroll.mj_header beginRefreshing];
+    
+    [self refreshBackupView];
 }
 
 - (void)updateInfoAfterLoginNoti:(NSNotification *)noti {
@@ -1696,6 +1842,18 @@
 
 - (void)loginSuccessNoti:(NSNotification *)noti {
     [UserUtil updateUserInfoAfterLogin];
+}
+
+- (void)ethBackupUpdateNoti:(NSNotification *)noti {
+    [self refreshBackupView];
+}
+
+- (void)neoBackupUpdateNoti:(NSNotification *)noti {
+    [self refreshBackupView];
+}
+
+- (void)qlcBackupUpdateNoti:(NSNotification *)noti {
+    [self refreshBackupView];
 }
 
 #pragma mark - Lazy

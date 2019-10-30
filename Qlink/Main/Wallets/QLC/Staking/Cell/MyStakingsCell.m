@@ -10,6 +10,8 @@
 #import "PledgeInfoByBeneficialModel.h"
 #import "GlobalConstants.h"
 #import "StakingUtil.h"
+#import "RLArithmetic.h"
+#import "NSString+RemoveZero.h"
 
 @implementation MyStakingsCell
 
@@ -53,12 +55,8 @@
     }
     _stateLab.text = stateStr;
     
-    _stakingAmountLab.text = [NSString stringWithFormat:@"%@",@([model.amount doubleValue]/QLC_UnitNum)];
-    _earningsLab.text = [NSString stringWithFormat:@"%@",@([model.qgas doubleValue]/QLC_UnitNum)];
-    
-    
-    
-    
+    _stakingAmountLab.text = model.amount.div(@(QLC_UnitNum));
+    _earningsLab.text = model.qgas.div(@(QLC_UnitNum));
 }
 
 - (void)prepareForReuse {

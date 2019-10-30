@@ -24,6 +24,7 @@
 #import "RewardListModel.h"
 #import "ClaimQGASViewController.h"
 #import "WebViewController.h"
+#import "JPushConstants.h"
 
 static NSInteger const DailyEarnings_PageCount = 20;
 static NSInteger const DailyEarnings_PageFirst = 1;

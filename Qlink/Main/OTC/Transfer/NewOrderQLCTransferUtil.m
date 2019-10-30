@@ -15,7 +15,6 @@
 #import "QLCTransferToServerConfirmView.h"
 #import <QLCFramework/QLCFramework.h>
 
-
 @implementation NewOrderQLCTransferUtil
 
 #pragma mark - Transfer QLC
@@ -46,31 +45,32 @@
     }
     
     //    [self jumpToSellOrderAddress:qlcAddress qgasAsset:qgasAsset fromAddress:currentWalletM.address];
-    [self showSellComfirmView:qlcAddress asset:asset fromAddress:currentWalletM.address amountStr:amountStr successB:successB];
+    [self showSellComfirmView:qlcAddress asset:asset fromAddress:currentWalletM.address amountStr:amountStr memo:@"" successB:successB];
 }
 
-+ (void)showSellComfirmView:(NSString *)qlcAddress asset:(QLCTokenModel *)asset fromAddress:(NSString *)fromAddress amountStr:(NSString *)amountStr  successB:(void(^)(NSString *sendAddress, NSString *txid))successB {
++ (void)showSellComfirmView:(NSString *)qlcAddress asset:(QLCTokenModel *)asset fromAddress:(NSString *)fromAddress amountStr:(NSString *)amountStr memo:(NSString *)memo successB:(void(^)(NSString *sendAddress, NSString *txid))successB {
     QLCTransferToServerConfirmView *view = [QLCTransferToServerConfirmView getInstance];
     [view configWithAddress:qlcAddress amount:amountStr?:@"" tokenName:asset.tokenName];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransferToServer:asset fromAddress:fromAddress amountStr:amountStr successB:successB];
+        [weakself sendTransferToServer:asset fromAddress:fromAddress amountStr:amountStr memo:memo successB:successB];
     };
     [view show];
 }
 
-+ (void)sendTransferToServer:(QLCTokenModel *)selectAsset fromAddress:(NSString *)fromAddress amountStr:(NSString *)amountStr successB:(void(^)(NSString *sendAddress, NSString *txid))successB {
++ (void)sendTransferToServer:(QLCTokenModel *)selectAsset fromAddress:(NSString *)fromAddress amountStr:(NSString *)amountStr memo:(NSString *)memo successB:(void(^)(NSString *sendAddress, NSString *txid))successB {
     NSString *tokenName = selectAsset.tokenName;
     NSString *to = [QLCWalletManage shareInstance].qlcMainAddress?:@"";
     NSUInteger amount = [selectAsset getTransferNum:amountStr?:@""];
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
+    NSString *data = memo?:@"";
     BOOL workInLocal = YES;
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
 //    kWeakSelf(self);
     BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
         [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         

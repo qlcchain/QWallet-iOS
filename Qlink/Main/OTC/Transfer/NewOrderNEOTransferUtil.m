@@ -15,6 +15,8 @@
 #import "QlinkTabbarViewController.h"
 #import "NeoTransferUtil.h"
 #import "NEOTransferConfirmView.h"
+#import "NEOWalletInfo.h"
+#import "NEOJSUtil.h"
 
 @interface NewOrderNEOTransferUtil ()
 
@@ -95,14 +97,31 @@
     BOOL isNEOMainNetTransfer = YES;
     double fee = NEO_fee;
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
-    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isNEOMainNetTransfer remarkStr:remarkStr fee:fee successBlock:^(NSString *txid) {
+    
+    NSString *wif = [NEOWalletInfo getNEOEncryptedKeyWithAddress:fromAddress]?:@"";
+    NSString *decimalStr = NEO_Decimals;
+    [NEOJSUtil addNEOJSView];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
+    [NEOJSUtil neoTransferWithFromAddress:fromAddress toAddress:toAddress assetHash:tokenHash amount:amount numOfDecimals:decimalStr wif:wif resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
         [kAppD.window hideToast];
-        if (successB) {
-            successB(fromAddress, txid);
+        [NEOJSUtil removeNEOJSView];
+        if (success) {
+            NSString *txid = result;
+            if (successB) {
+                successB(fromAddress, txid);
+            }
         }
-    } failureBlock:^{
-        [kAppD.window hideToast];
     }];
+    
+    // 原生停用
+//    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isNEOMainNetTransfer remarkStr:remarkStr fee:fee successBlock:^(NSString *txid) {
+//        [kAppD.window hideToast];
+//        if (successB) {
+//            successB(fromAddress, txid);
+//        }
+//    } failureBlock:^{
+//        [kAppD.window hideToast];
+//    }];
 }
 
 

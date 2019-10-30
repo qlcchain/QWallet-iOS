@@ -13,6 +13,7 @@
 #import "ETHMnemonicConfirmViewController.h"
 #import <TTGTextTagCollectionView.h>
 #import "AppConfigUtil.h"
+#import "ETHWalletInfo.h"
 
 @interface ETHMnemonicViewController ()
 
@@ -59,7 +60,7 @@
     config.cornerRadius = 7;
 //    _tagListView.textFont = [UIFont systemFontOfSize:18];
 //    [_tagListView addTags:@[@"crisp", @"second", @"fold", @"uniform", @"gas", @"elbow", @"bind", @"castle", @"index", @"machine", @"foster", @"elbow"]];
-    [_tagListView addTags:AppConfigUtil.shareInstance.mnemonicArr];
+    [_tagListView addTags:_walletInfo.mnemonicArr];
 //    _tagListView.alignment = .Center // possible values are .Left, .Center, and .Right
 //    _tagListView.addTag("TagListView")
 //    _tagListView.insertTag("This should be the second tag", at: 1)
@@ -90,6 +91,7 @@
 #pragma mark - Transition
 - (void)jumpToMnemonicConfirm {
     ETHMnemonicConfirmViewController *vc = [[ETHMnemonicConfirmViewController alloc] init];
+    vc.walletInfo = _walletInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

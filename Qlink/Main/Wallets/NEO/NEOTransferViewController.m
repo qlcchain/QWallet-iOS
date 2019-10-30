@@ -18,7 +18,8 @@
 #import "WalletQRViewController.h"
 #import "Qlink-Swift.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
-
+#import "NEOJSUtil.h"
+#import "NEOWalletInfo.h"
 //#import "GlobalConstants.h"
 
 @interface NEOTransferViewController () <UITextViewDelegate>
@@ -127,12 +128,32 @@
     double fee = NEO_fee;
     kWeakSelf(self);
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
-    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isNEOMainNetTransfer remarkStr:remarkStr fee:fee successBlock:^(NSString *txid) {
+    
+    NSString *wif = [NEOWalletInfo getNEOEncryptedKeyWithAddress:fromAddress]?:@"";
+    NSString *decimalStr = NEO_Decimals;
+    [NEOJSUtil addNEOJSView];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
+    [NEOJSUtil neoTransferWithFromAddress:fromAddress toAddress:toAddress assetHash:tokenHash amount:amount numOfDecimals:decimalStr wif:wif resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
         [kAppD.window hideToast];
-        [weakself backToRoot];
-    } failureBlock:^{
-        [kAppD.window hideToast];
+        [NEOJSUtil removeNEOJSView];
+        if (success) {
+//            NSString *txid = result;
+            [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"transfer_tip") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"transfer_processed")] isShowTwoBtn:NO block:^{
+                [weakself backToRoot];
+            }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"neo_transfer_fail")];
+        }
     }];
+    
+    
+    // 原生NEO转账(服务器已关)
+//    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isNEOMainNetTransfer remarkStr:remarkStr fee:fee successBlock:^(NSString *txid) {
+//        [kAppD.window hideToast];
+//        [weakself backToRoot];
+//    } failureBlock:^{
+//        [kAppD.window hideToast];
+//    }];
 }
 
 - (void)backToRoot {

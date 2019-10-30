@@ -257,7 +257,7 @@
         return;
     }
     
-    NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:_stakeFromWalletM.address];
+    NSString *neo_publicKey = [NEOWalletInfo getNEOPublicKeyWithAddress:_stakeFromWalletM.address];
     NSString *neo_wifKey = [NEOWalletInfo getNEOEncryptedKeyWithAddress:_stakeFromWalletM.address];
     NSString *qlc_publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:_stakeToWalletM.address];
     NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:_stakeToWalletM.address];

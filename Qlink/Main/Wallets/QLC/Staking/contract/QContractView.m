@@ -78,7 +78,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
     //    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"];
-    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"contract" ofType:@"html"];
+    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"qwallet_js" ofType:@"html"];
     NSString * htmlContent = [NSString stringWithContentsOfFile:htmlPath
                                                        encoding:NSUTF8StringEncoding
                                                           error:nil];

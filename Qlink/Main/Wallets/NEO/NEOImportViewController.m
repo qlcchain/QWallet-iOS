@@ -96,6 +96,7 @@
         walletInfo.wif = [NEOWalletManage.sharedInstance getWalletWif];
         walletInfo.privateKey = [NEOWalletManage.sharedInstance getWalletPrivateKey];
         walletInfo.publicKey = [NEOWalletManage.sharedInstance getWalletPublicKey];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         

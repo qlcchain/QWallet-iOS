@@ -6,7 +6,7 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import "PayNEOViewController.h"
+#import "OTCPayNEOViewController.h"
 #import "NEOTransferConfirmView.h"
 #import "UITextView+ZWPlaceHolder.h"
 #import "WalletCommonModel.h"
@@ -29,7 +29,7 @@
 #import "ReportUtil.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 
-@interface PayNEOViewController () <UITextViewDelegate>
+@interface OTCPayNEOViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *payWalletIcon;
 @property (weak, nonatomic) IBOutlet UILabel *payWalletNameLab;
@@ -48,7 +48,7 @@
 
 @end
 
-@implementation PayNEOViewController
+@implementation OTCPayNEOViewController
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

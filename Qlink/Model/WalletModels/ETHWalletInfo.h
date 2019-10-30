@@ -28,12 +28,17 @@ typedef enum : NSUInteger {
 @property (nonatomic ,strong) NSString *address;
 
 @property (nonatomic ,strong) NSString *type;
+@property (nonatomic ,strong) NSNumber *isBackup;
+@property (nonatomic, strong) NSArray *mnemonicArr;
 
 - (BOOL)saveToKeyChain;
 + (void)refreshTrustWallet;
 + (BOOL)deleteFromKeyChain:(NSString *)address;
 + (ETHWalletInfo *)getWalletInKeychain:(NSString *)address;
 + (BOOL)deleteAllWallet;
+
++ (void)createETHWalletInAuto;
++ (BOOL)haveETHWallet;
 
 @end
 

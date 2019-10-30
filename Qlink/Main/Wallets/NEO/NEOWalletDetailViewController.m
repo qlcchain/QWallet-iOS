@@ -53,7 +53,7 @@ NSString *exportPrivateKeyWIF = @"Export Private Key(WIF)";
 - (void)showExportPrivateKey {
     ExportPrivateKeyView *view = [ExportPrivateKeyView getInstance];
     NSString *privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:_inputWalletCommonM.address];
-    NSString *publickKey = [NEOWalletInfo getNEOPublickKeyWithAddress:_inputWalletCommonM.address];
+    NSString *publickKey = [NEOWalletInfo getNEOPublicKeyWithAddress:_inputWalletCommonM.address];
     // AU8T3i1jP8fMQmYHM4XvanoK1hEQnCDeEf
     // 
     [view showWithPrivateKey:privateKey title:kLang(@"export_private_key")];
@@ -71,7 +71,7 @@ NSString *exportPrivateKeyWIF = @"Export Private Key(WIF)";
 
 - (void)deleteWallet {
 //    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    BOOL success = [NEOWalletInfo deleteNEOWalletWithAddress:_inputWalletCommonM.address];
+    BOOL success = [NEOWalletInfo deleteFromKeyChain:_inputWalletCommonM.address];
     if (success) {
         [WalletCommonModel deleteWalletModel:_inputWalletCommonM];
         if (_isDeleteCurrentWallet) { // 如果是当前选择钱包

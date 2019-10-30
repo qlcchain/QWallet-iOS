@@ -131,7 +131,7 @@
     [_contractV nep5_getLockInfo:lockTxId resultHandler:^(id result, BOOL success, NSString * _Nullable message) {
         if (success) {
             NSString *neo_address = result[@"neoAddress"];
-            NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:neo_address];
+            NSString *neo_publicKey = [NEOWalletInfo getNEOPublicKeyWithAddress:neo_address];
             NSString *neo_privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:neo_address];
             if (!neo_publicKey) {
                 [kAppD.window hideToast];
@@ -188,7 +188,7 @@
             NSDictionary *dic = result;
             NSString *neoAddress = dic[@"neoAddress"];
             NSString *qlcAddress = dic[@"qlcAddress"];
-            NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:neoAddress];
+            NSString *neo_publicKey = [NEOWalletInfo getNEOPublicKeyWithAddress:neoAddress];
 //            NSString *neo_privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:neoAddress];
             NSString *qlc_publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:qlcAddress];
             NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:qlcAddress];

@@ -24,6 +24,9 @@ static NSInteger seq = 1;
     if ([UserModel isBind]) {
         [tags addObject:JPush_Tag_Debit];
     }
+    if ([UserModel isTestAccount]) {
+        [tags addObject:JPush_Tag_QWallet_Test];
+    }
     [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
         DDLogDebug(@"setTags iResCode:%@  iTags:%@   seq:%@",@(iResCode),iTags,@(seq));
     } seq:seq++];

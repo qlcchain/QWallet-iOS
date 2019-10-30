@@ -28,8 +28,8 @@
 
 + (void)walletInit {
     [ETHWalletInfo refreshTrustWallet]; // 如果keychain中的钱包在Trust中没有则自动导入
-    BOOL haveEthWallet = TrustWalletManage.sharedInstance.isHavaWallet;
-    BOOL haveNeoWallet = [NEOWalletInfo getAllNEOWallet].count>0?YES:NO;
+    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
+    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
     BOOL haveEosWallet = NO;
     if (haveEthWallet) {
         [WalletCommonModel refreshETHWallet];
@@ -334,7 +334,7 @@
 
 #pragma mark - NEO
 + (void)refreshNEOWallet {
-    NSArray *walletArr = [NEOWalletInfo getAllNEOWallet];
+    NSArray *walletArr = [NEOWalletInfo getAllWalletInKeychain];
     // 赋值名字
     [walletArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NEOWalletInfo *walletM = obj;
@@ -356,7 +356,7 @@
 + (NSString *)getDefaultNEOWalletAddress {
     NSString *address = [HWUserdefault getObjectWithKey:Default_NEOWallet_Address];
     if (address == nil) {
-        NSArray *walletArr = [NEOWalletInfo getAllNEOWallet];
+        NSArray *walletArr = [NEOWalletInfo getAllWalletInKeychain];
         if (walletArr.count > 0) {
             NEOWalletInfo *walletM = walletArr.firstObject;
             address = walletM.address;

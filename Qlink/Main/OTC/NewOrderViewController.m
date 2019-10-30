@@ -85,6 +85,8 @@
 
 @property (nonatomic, strong) NSString *sellFromAddress;
 @property (nonatomic, strong) NSString *sellTxid;
+@property (nonatomic, strong) NSString *buyFromAddress;
+@property (nonatomic, strong) NSString *buyTxid;
 
 @property (nonatomic, strong) WalletCommonModel *buy_PayWalletM;
 @property (nonatomic, strong) WalletCommonModel *buy_TradeWalletM;
@@ -231,6 +233,34 @@
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)buy_transfer:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName {
+    kWeakSelf(self);
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        [NewOrderQLCTransferUtil transferQLC:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+            // 下买单
+            weakself.buyFromAddress = sendAddress;
+            weakself.buyTxid = txid;
+            [weakself requestEntrustBuyOrder];
+        }];
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        [NewOrderNEOTransferUtil transferNEO:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+            // 下买单
+            weakself.buyFromAddress = sendAddress;
+            weakself.buyTxid = txid;
+            [weakself requestEntrustBuyOrder];
+        }];
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        [NewOrderETHTransferUtil transferETH:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+            // 下买单
+            weakself.buyFromAddress = sendAddress;
+            weakself.buyTxid = txid;
+            [weakself requestEntrustBuyOrder];
+        }];
+    }
 }
 
 - (void)sell_transfer:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName {
@@ -392,6 +422,7 @@
         }
     }
     
+//    [self buy_transfer:_buyTradeAmountTF.text tokenChain:_buy_PairsM.tradeTokenChain tokenName:_buy_PairsM.tradeToken];
     // 下买单
     [self requestEntrustBuyOrder];
 }

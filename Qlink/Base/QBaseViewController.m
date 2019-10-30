@@ -38,7 +38,7 @@
     [super viewDidLoad];
     
     if (@available(iOS 13.0, *)) {
-//        self.view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        self.view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 //    self.view.backgroundColor = [UIColor RandomColor];
 //    self.view.backgroundColor = MAIN_BLUE_COLOR;

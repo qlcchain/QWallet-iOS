@@ -10,6 +10,7 @@
 #import "Qlink-Swift.h"
 #import <ETHFramework/ETHFramework.h>
 #import "GlobalConstants.h"
+#import "ReportUtil.h"
 
 @implementation ETHWalletInfo
 
@@ -58,10 +59,12 @@
 - (BOOL)saveToKeyChain {
     NSArray *keychainArr = [ETHWalletInfo getAllWalletInKeychain];
     __block BOOL isExist = NO;
+    __block NSInteger existIndex = 0;
     [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         ETHWalletInfo *tempM = obj;
         if ([tempM.address isEqualToString:self.address]) {
             isExist = YES;
+            existIndex = idx;
         }
     }];
     if (!isExist) {
@@ -71,6 +74,16 @@
             [muArr addObject:tempM.mj_keyValues];
         }];
         [muArr addObject:self.mj_keyValues];
+        NSString *jsonStr = muArr.mj_JSONString;
+        [KeychainUtil saveValueToKeyWithKeyName:ETH_WALLET_KEYCHAIN keyValue:jsonStr];
+    } else {
+        NSMutableArray *muModelArr = [NSMutableArray arrayWithArray:keychainArr];
+        [muModelArr replaceObjectAtIndex:existIndex withObject:self];
+        NSMutableArray *muArr = [NSMutableArray array];
+        [muModelArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            ETHWalletInfo *tempM = obj;
+            [muArr addObject:tempM.mj_keyValues];
+        }];
         NSString *jsonStr = muArr.mj_JSONString;
         [KeychainUtil saveValueToKeyWithKeyName:ETH_WALLET_KEYCHAIN keyValue:jsonStr];
     }
@@ -114,6 +127,40 @@
             }];
         }
     }];
+}
+
+
++ (void)createETHWalletInAuto {
+//    kWeakSelf(self);
+    [TrustWalletManage.sharedInstance createInstantWallet:^(NSArray<NSString *> * arr, NSString *address) {
+        
+        [TrustWalletManage.sharedInstance exportPrivateKeyWithAddress:address?:@"" :^(NSString * privateKey) {
+            
+            ETHWalletInfo *walletInfo = [[ETHWalletInfo alloc] init];
+            walletInfo.privatekey = privateKey;
+            walletInfo.mnemonic = @"";
+            walletInfo.keystore = @"";
+            walletInfo.password = @"";
+            walletInfo.address = address;
+            walletInfo.type = @"0"; // 创建
+            walletInfo.isBackup = @(NO);
+            walletInfo.mnemonicArr = arr;
+            // 存储keychain
+            [walletInfo saveToKeyChain];
+            
+            [TrustWalletManage.sharedInstance exportPublicKeyWithAddress:walletInfo.address :^(NSString * _Nullable publicKey) {
+                [ReportUtil requestWalletReportWalletCreateWithBlockChain:@"ETH" address:address pubKey:publicKey?:@"" privateKey:walletInfo.privatekey]; // 上报钱包创建
+            }];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
+            });
+        }];
+    }];
+}
+
++ (BOOL)haveETHWallet {
+    return TrustWalletManage.sharedInstance.isHavaWallet;
 }
 
 @end

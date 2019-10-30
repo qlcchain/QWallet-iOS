@@ -9,14 +9,16 @@
 #import "NEOWalletInfo.h"
 #import "NEOWalletUtil.h"
 #import "Qlink-Swift.h"
+#import "ReportUtil.h"
 
 @implementation NEOWalletInfo
 
+#pragma mark - OLD
 /**
  将私钥和公钥还有地址 存储keychain
  @return yes
  */
-- (BOOL)saveToKeyChain {
+- (BOOL)saveToKeyChain_old {
 //    BOOL isFirstWallet = NO;
 //    // 判断是否是第一个钱包。第一个则默认为当前钱包
 //    if (![NEOWalletUtil isExistWalletPrivateKey]) {
@@ -48,14 +50,14 @@
     
 }
 
-+ (void)deleteAllWallet {
++ (void)deleteAllWallet_old {
     [KeychainUtil removeKeyWithKeyName:WALLET_PRIVATE_KEY];
     [KeychainUtil removeKeyWithKeyName:WALLET_PUBLIC_KEY];
     [KeychainUtil removeKeyWithKeyName:WALLET_ADDRESS_KEY];
     [KeychainUtil removeKeyWithKeyName:WALLET_WIF_KEY];
 }
 
-+ (NSArray *)getAllNEOWallet {
++ (NSArray *)getAllNEOWallet_old {
     NSString *privateValues = [KeychainUtil getKeyValueWithKeyName:WALLET_PRIVATE_KEY];
     NSString *publicValues = [KeychainUtil getKeyValueWithKeyName:WALLET_PUBLIC_KEY];
     NSString *adderssValues = [KeychainUtil getKeyValueWithKeyName:WALLET_ADDRESS_KEY];
@@ -85,10 +87,10 @@
     return resultArr;
 }
 
-+ (NEOWalletInfo *)getNEOWalletWithAddress:(NSString *)address {
++ (NEOWalletInfo *)getNEOWalletWithAddress_old:(NSString *)address {
     __block NEOWalletInfo *walletInfo = nil;
     
-    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet];
+    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet_old];
     [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NEOWalletInfo *model = obj;
         if ([model.address isEqualToString:address]) {
@@ -100,10 +102,10 @@
     return walletInfo;
 }
 
-+ (NSString *)getNEOPrivateKeyWithAddress:(NSString *)address {
++ (NSString *)getNEOPrivateKeyWithAddress_old:(NSString *)address {
     __block NSString *privateKey = nil;
     
-    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet];
+    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet_old];
     [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NEOWalletInfo *model = obj;
         if ([model.address isEqualToString:address]) {
@@ -115,10 +117,10 @@
     return privateKey;
 }
 
-+ (NSString *)getNEOEncryptedKeyWithAddress:(NSString *)address {
++ (NSString *)getNEOEncryptedKeyWithAddress_old:(NSString *)address {
     __block NSString *encryptedKey = nil;
     
-    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet];
+    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet_old];
     [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NEOWalletInfo *model = obj;
         if ([model.address isEqualToString:address]) {
@@ -130,10 +132,10 @@
     return encryptedKey;
 }
 
-+ (NSString *)getNEOPublickKeyWithAddress:(NSString *)address {
++ (NSString *)getNEOPublickKeyWithAddress_old:(NSString *)address {
     __block NSString *publicKey = nil;
     
-    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet];
+    NSArray *allNEO = [NEOWalletInfo getAllNEOWallet_old];
     [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NEOWalletInfo *model = obj;
         if ([model.address isEqualToString:address]) {
@@ -145,11 +147,11 @@
     return publicKey;
 }
 
-+ (BOOL)deleteNEOWalletWithAddress:(NSString *)address {
++ (BOOL)deleteNEOWalletWithAddress_old:(NSString *)address {
     NSString *getAddress = address;
-    NSString *getPrivateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:address];
-    NSString *getPublicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:address];
-    NSString *getWif = [NEOWalletInfo getNEOEncryptedKeyWithAddress:address];
+    NSString *getPrivateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress_old:address];
+    NSString *getPublicKey = [NEOWalletInfo getNEOPublickKeyWithAddress_old:address];
+    NSString *getWif = [NEOWalletInfo getNEOEncryptedKeyWithAddress_old:address];
     
     NSString *privateValues = [KeychainUtil getKeyValueWithKeyName:WALLET_PRIVATE_KEY];
     NSString *publicValues = [KeychainUtil getKeyValueWithKeyName:WALLET_PUBLIC_KEY];
@@ -171,15 +173,15 @@
         [wifArr removeObject:getWif];
     }
     
-    [self saveToKeychainWithWalletArr:privateArr key:WALLET_PRIVATE_KEY];
-    [self saveToKeychainWithWalletArr:publicArr key:WALLET_PUBLIC_KEY];
-    [self saveToKeychainWithWalletArr:addressArr key:WALLET_ADDRESS_KEY];
-    [self saveToKeychainWithWalletArr:wifArr key:WALLET_WIF_KEY];
+    [self saveToKeychainWithWalletArr_old:privateArr key:WALLET_PRIVATE_KEY];
+    [self saveToKeychainWithWalletArr_old:publicArr key:WALLET_PUBLIC_KEY];
+    [self saveToKeychainWithWalletArr_old:addressArr key:WALLET_ADDRESS_KEY];
+    [self saveToKeychainWithWalletArr_old:wifArr key:WALLET_WIF_KEY];
     
     return YES;
 }
 
-+ (BOOL)saveToKeychainWithWalletArr:(NSArray *)arr key:(NSString *)walletKey {
++ (BOOL)saveToKeychainWithWalletArr_old:(NSArray *)arr key:(NSString *)walletKey {
     NSMutableString *muStr = [NSMutableString string];
     [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [muStr appendString:obj];
@@ -188,6 +190,188 @@
         }
     }];
     return [KeychainUtil saveValueToKeyWithKeyName:walletKey keyValue:muStr];
+}
+
+
+
+
+
+
+
+
+#pragma mark - NEW
++ (void)updateNEOWallet_local {
+    NSArray *local_old_Arr = [NEOWalletInfo getAllNEOWallet_old];
+    [local_old_Arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *model = obj;
+        [model saveToKeyChain];
+    }];
+}
+
++ (BOOL)deleteAllWallet {
+    BOOL success = [KeychainUtil removeKeyWithKeyName:NEO_WALLET_KEYCHAIN];
+    return success;
+}
+
++ (NSArray *)getAllWalletInKeychain {
+    NSString *string = [KeychainUtil getKeyValueWithKeyName:NEO_WALLET_KEYCHAIN];
+    NSMutableArray *muArr = [NSMutableArray array];
+    if (string) {
+        NSArray *arr = string.mj_JSONObject;
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NEOWalletInfo *tempM = [NEOWalletInfo getObjectWithKeyValues:obj];
+            [muArr addObject:tempM];
+        }];
+    }
+    return muArr;
+}
+
++ (BOOL)deleteFromKeyChain:(NSString *)address {
+    [self deleteNEOWalletWithAddress_old:address];
+    
+    NSArray *keychainArr = [NEOWalletInfo getAllWalletInKeychain];
+    __block BOOL isExist = NO;
+    [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *tempM = obj;
+        if ([tempM.address isEqualToString:address]) {
+            isExist = YES;
+        }
+    }];
+    if (isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NEOWalletInfo *tempM = obj;
+            if (![tempM.address isEqualToString:address]) {
+                [muArr addObject:tempM.mj_keyValues];
+            }
+        }];
+        NSString *jsonStr = muArr.mj_JSONString;
+        [KeychainUtil saveValueToKeyWithKeyName:NEO_WALLET_KEYCHAIN keyValue:jsonStr];
+    }
+    
+    return YES;
+}
+
+- (BOOL)saveToKeyChain {
+    NSArray *keychainArr = [NEOWalletInfo getAllWalletInKeychain];
+    __block BOOL isExist = NO;
+    __block NSInteger existIndex = 0;
+    [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *tempM = obj;
+        if ([tempM.address isEqualToString:self.address]) {
+            existIndex = idx;
+            isExist = YES;
+        }
+    }];
+    if (!isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NEOWalletInfo *tempM = obj;
+            [muArr addObject:tempM.mj_keyValues];
+        }];
+        [muArr addObject:self.mj_keyValues];
+        NSString *jsonStr = muArr.mj_JSONString;
+        [KeychainUtil saveValueToKeyWithKeyName:NEO_WALLET_KEYCHAIN keyValue:jsonStr];
+    } else {
+        NSMutableArray *muModelArr = [NSMutableArray arrayWithArray:keychainArr];
+        [muModelArr replaceObjectAtIndex:existIndex withObject:self];
+        NSMutableArray *muArr = [NSMutableArray array];
+        [muModelArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NEOWalletInfo *tempM = obj;
+            [muArr addObject:tempM.mj_keyValues];
+        }];
+        NSString *jsonStr = muArr.mj_JSONString;
+        [KeychainUtil saveValueToKeyWithKeyName:NEO_WALLET_KEYCHAIN keyValue:jsonStr];
+    }
+    
+    return YES;
+}
+
++ (NEOWalletInfo *)getNEOWalletWithAddress:(NSString *)address {
+    __block NEOWalletInfo *temp = nil;
+    
+    NSArray *allNEO = [NEOWalletInfo getAllWalletInKeychain];
+    [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *model = obj;
+        if ([model.address isEqualToString:address]) {
+            temp = model;
+            *stop = YES;
+        }
+    }];
+    
+    return temp;
+}
+
++ (NSString *)getNEOEncryptedKeyWithAddress:(NSString *)address {
+    __block NSString *seed = nil;
+    
+    NSArray *allNEO = [NEOWalletInfo getAllWalletInKeychain];
+    [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *model = obj;
+        if ([model.address isEqualToString:address]) {
+            seed = model.wif;
+            *stop = YES;
+        }
+    }];
+    
+    return seed;
+}
+
++ (NSString *)getNEOPrivateKeyWithAddress:(NSString *)address {
+    __block NSString *privateKey = nil;
+    
+    NSArray *allNEO = [NEOWalletInfo getAllWalletInKeychain];
+    [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *model = obj;
+        if ([model.address isEqualToString:address]) {
+            privateKey = model.privateKey;
+            *stop = YES;
+        }
+    }];
+    
+    return privateKey;
+}
+
++ (NSString *)getNEOPublicKeyWithAddress:(NSString *)address {
+    __block NSString *publicKey = nil;
+    
+    NSArray *allNEO = [NEOWalletInfo getAllWalletInKeychain];
+    [allNEO enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOWalletInfo *model = obj;
+        if ([model.address isEqualToString:address]) {
+            publicKey = model.publicKey;
+            *stop = YES;
+        }
+    }];
+    
+    return publicKey;
+}
+
++ (void)createNEOWalletInAuto {
+    BOOL isSuccess = [NEOWalletManage.sharedInstance createWallet];
+    if (isSuccess) {
+        NEOWalletInfo *walletInfo = [[NEOWalletInfo alloc] init];
+        walletInfo.address = [NEOWalletManage.sharedInstance getWalletAddress];
+        walletInfo.wif = [NEOWalletManage.sharedInstance getWalletWif];
+        walletInfo.privateKey = [NEOWalletManage.sharedInstance getWalletPrivateKey];
+        walletInfo.publicKey = [NEOWalletManage.sharedInstance getWalletPublicKey];
+        walletInfo.isBackup = @(NO);
+        // 存储keychain
+        [walletInfo saveToKeyChain];
+        
+        [ReportUtil requestWalletReportWalletCreateWithBlockChain:@"NEO" address:walletInfo.address pubKey:walletInfo.publicKey privateKey:walletInfo.privateKey]; // 上报钱包创建
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [[NSNotificationCenter defaultCenter] postNotificationName:Add_NEO_Wallet_Noti object:nil];
+        });
+        
+    } else {
+        DDLogDebug(@"创建neo钱包失败");
+    }
+}
+
++ (BOOL)haveNEOWallet {
+    return [NEOWalletInfo getAllWalletInKeychain].count>0?YES:NO;
 }
 
 @end

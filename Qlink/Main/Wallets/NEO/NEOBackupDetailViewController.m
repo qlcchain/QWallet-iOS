@@ -52,7 +52,8 @@
 
 - (void)showCreateSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:kLang(@"create_success")];
+//    [tip showWithTitle:kLang(@"create_success")];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 - (void)backToRoot {
@@ -64,6 +65,15 @@
     if (!isTip) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
+    }
+    
+    NEOWalletInfo *backupWalletInfo = [NEOWalletInfo getNEOWalletWithAddress:_walletInfo.address?:@""];
+    if (backupWalletInfo) {
+        backupWalletInfo.isBackup = @(YES);
+        // 存储keychain
+        [backupWalletInfo saveToKeyChain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NEO_Wallet_Backup_Update_Noti object:nil];
     }
     
     [self showCreateSuccessView];

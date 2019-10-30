@@ -10,11 +10,11 @@
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
 #import "SGQRCodeObtain.h"
-#import "PayETHViewController.h"
+#import "OTCPayETHViewController.h"
 #import "TradeOrderInfoModel.h"
 //#import "GlobalConstants.h"
-#import "PayNEOViewController.h"
-#import "PayQLCViewController.h"
+#import "OTCPayNEOViewController.h"
+#import "OTCPayQLCViewController.h"
 
 @interface PayReceiveAddressViewController ()
 
@@ -135,7 +135,7 @@
 
 #pragma mark - Transition
 - (void)jumpToPayETH {
-    PayETHViewController *vc = [PayETHViewController new];
+    OTCPayETHViewController *vc = [OTCPayETHViewController new];
     vc.transferToRoot = _backToRoot;
     vc.transferToTradeDetail = _transferToTradeDetail;
     vc.sendAmount = _tradeM.usdtAmount?:@"";
@@ -147,7 +147,7 @@
 }
 
 - (void)jumpToPayNEO {
-    PayNEOViewController *vc = [PayNEOViewController new];
+    OTCPayNEOViewController *vc = [OTCPayNEOViewController new];
     vc.transferToRoot = _backToRoot;
     vc.transferToTradeDetail = _transferToTradeDetail;
     vc.sendAmount = _tradeM.usdtAmount?:@"";
@@ -159,7 +159,7 @@
 }
 
 - (void)jumpToPayQLC {
-    PayQLCViewController *vc = [PayQLCViewController new];
+    OTCPayQLCViewController *vc = [OTCPayQLCViewController new];
     vc.transferToRoot = _backToRoot;
     vc.transferToTradeDetail = _transferToTradeDetail;
     vc.sendAmount = _tradeM.usdtAmount?:@"";

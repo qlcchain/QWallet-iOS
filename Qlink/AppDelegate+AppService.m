@@ -40,6 +40,7 @@
 #import "JPUSHService.h"
 #import <UserNotifications/UserNotifications.h>
 #import "JPushTagHelper.h"
+#import "JPushConstants.h"
 
 @interface AppDelegate () <BuglyDelegate,JPUSHRegisterDelegate>
 
@@ -308,6 +309,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
 }
 
@@ -318,6 +320,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    [self handlerPushJump:userInfo isTapLaunch:NO];
+    
     completionHandler();  // 系统要求执行这个方法
 }
 
@@ -332,6 +336,21 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     // Required, For systems with less than or equal to iOS 6
     [JPUSHService handleRemoteNotification:userInfo];
+}
+
+#pragma mark - 处理推送跳转
+- (void)handlerPushJump:(NSDictionary *)userInfo isTapLaunch:(BOOL)isTapLaunch {
+    NSString *skip = userInfo[JPush_Extra_Skip];
+    if (skip) {
+        if ([skip isEqualToString:JPush_Extra_Skip_Debit]) {
+            if (isTapLaunch) { // 点击推送启动
+                [HWUserdefault insertObj:userInfo withkey:JPush_Tag_Jump];
+            } else { // app运行时点击推送
+                [HWUserdefault deleteObjectWithKey:JPush_Tag_Jump];
+                [self jumpToDailyEarnings];
+            }
+        }
+    }
 }
 
 @end

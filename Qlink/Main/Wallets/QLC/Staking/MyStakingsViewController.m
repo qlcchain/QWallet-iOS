@@ -23,6 +23,10 @@
 #import "QLCWalletInfo.h"
 #import "UserModel.h"
 #import "DailyEarningsViewController.h"
+#import "RLArithmetic.h"
+#import "RSAUtil.h"
+#import "ClaimConstants.h"
+#import "NSString+RemoveZero.h"
 
 static NSInteger const PledgeInfo_PageCount = 10;
 static NSInteger const PledgeInfo_PageFirst = 0;
@@ -36,15 +40,19 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 @property (weak, nonatomic) IBOutlet UILabel *totalStakingVolumeLab;
 @property (weak, nonatomic) IBOutlet UILabel *stakingAmountLab;
 @property (weak, nonatomic) IBOutlet UILabel *earningsLab;
+@property (weak, nonatomic) IBOutlet UILabel *freeAmountLab;
+@property (weak, nonatomic) IBOutlet UILabel *freeEarningsLab;
+@property (weak, nonatomic) IBOutlet UILabel *totalEarningsLab;
 @property (weak, nonatomic) IBOutlet UIView *lendingBack;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lendingHeight; // 70
 
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
-@property (nonatomic) __block NSNumber *totalStakingVolume;
-@property (nonatomic) __block NSNumber *stakingAmount;
-@property (nonatomic) __block NSNumber *earnings;
+@property (nonatomic) __block NSString *myStakingAmount;
+@property (nonatomic) __block NSString *myEarningsAmount;
+@property (nonatomic) __block NSString *freeStakingAmount;
+@property (nonatomic) __block NSString *freeEarningsAmount;
 @property (nonatomic, strong) QContractView *contractV;
 
 @end
@@ -59,12 +67,13 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     
     [self configInit];
     
-    [self requestPledgeInfoByPledge:NO];
+    [self pullToRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self getFreeRequest];
     [self refreshView];
 }
 
@@ -81,9 +90,10 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     [_mainTable registerNib:[UINib nibWithNibName:MyStakingsCellReuse bundle:nil] forCellReuseIdentifier:MyStakingsCellReuse];
     _sourceArr = [NSMutableArray array];
     _currentPage = PledgeInfo_PageFirst;
-    _totalStakingVolume = @(0);
-    _stakingAmount = @(0);
-    _earnings = @(0);
+    _freeStakingAmount = @"0";
+    _freeEarningsAmount = @"0";
+    _myStakingAmount = @"0";
+    _myEarningsAmount = @"0";
     _lendingHeight.constant = 0;
     if ([UserModel haveLoginAccount] && [UserModel isBind]) { // 登录且已绑定
         _lendingHeight.constant = 70;
@@ -92,36 +102,81 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = PledgeInfo_PageFirst;
-        [weakself requestPledgeInfoByPledge:NO];
+//        [weakself requestPledgeInfoByPledge:NO];
+        [weakself pullToRequest];
     }];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestPledgeInfoByPledge:NO];
     }];
 }
 
+- (void)pullToRequest {
+    [self requestPledgeInfoByPledge:NO];
+    
+    [self getFreeRequest];
+}
+
+- (void)getFreeRequest {
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        [weakself getClaimedAmount];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        [weakself getFreeStakeAmount];
+    });
+}
+
+- (void)getClaimedAmount {
+    kWeakSelf(self);
+    [self requestReward_reward_total:Claim_Type_Register status:Claim_Status_Success completeBlock:^(NSString *reward) {
+        weakself.freeEarningsAmount = reward;
+        [weakself refreshAmountViewOfFree];
+    }];
+}
+
+- (void)getFreeStakeAmount {
+    kWeakSelf(self);
+    [self requestWinq_reward_qlc_amountWithCompleteBlock:^(NSString *amount) {
+        weakself.freeStakingAmount = amount;
+        [weakself refreshAmountViewOfFree];
+    }];
+}
+
 - (void)refreshView {
     [_mainTable reloadData];
     
-    [self refreshAmountView];
+    [self refreshAmountViewOfMy];
 }
 
-- (void)refreshAmountView {
-    _totalStakingVolume = @(0);
-    _stakingAmount = @(0);
-    _earnings = @(0);
+- (void)refreshAmountViewOfTotal {
+    _totalStakingVolumeLab.text = [_myStakingAmount.div(@(QLC_UnitNum)).add(_freeStakingAmount) showfloatStrWith2Decimal];
+    NSString *dd = _myEarningsAmount.div(@(QLC_UnitNum)).add(_freeEarningsAmount);
+    _totalEarningsLab.text = [dd showfloatStrWith2Decimal];
+}
+
+- (void)refreshAmountViewOfFree {
+    _freeAmountLab.text = _freeStakingAmount;
+    _freeEarningsLab.text = _freeEarningsAmount;
+    
+    [self refreshAmountViewOfTotal];
+}
+
+- (void)refreshAmountViewOfMy {
+    _myStakingAmount = @"0";
+    _myEarningsAmount = @"0";
     kWeakSelf(self);
     [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PledgeInfoByBeneficialModel *model = obj;
         if (![model.state isEqualToString:PledgeState_WithdrawDone]) { // 赎回成功的不需要加
-            weakself.totalStakingVolume = @([weakself.totalStakingVolume doubleValue]+[model.amount doubleValue]);
-            weakself.stakingAmount = @([weakself.stakingAmount doubleValue]+[model.amount doubleValue]);
-            weakself.earnings = @([weakself.earnings doubleValue]+[model.qgas doubleValue]);
+            weakself.myStakingAmount = weakself.myStakingAmount.add(model.amount);
         }
+        weakself.myEarningsAmount = weakself.myEarningsAmount.add(model.qgas);
     }];
     
-    _totalStakingVolumeLab.text = [NSString stringWithFormat:@"%@",@([_totalStakingVolume doubleValue]/QLC_UnitNum)];
-    _stakingAmountLab.text = [NSString stringWithFormat:@"%@",@([_stakingAmount doubleValue]/QLC_UnitNum)];
-    _earningsLab.text = [NSString stringWithFormat:@"%@",@([_earnings doubleValue]/QLC_UnitNum)];
+    _stakingAmountLab.text = _myStakingAmount.div(@(QLC_UnitNum));
+    _earningsLab.text = _myEarningsAmount.div(@(QLC_UnitNum));
+    
+    [self refreshAmountViewOfTotal];
 }
 
 - (void)startBenefitPrepare:(NSString *)lockTxId {
@@ -134,7 +189,7 @@ static NSInteger const PledgeInfo_PageFirst = 0;
             NSDictionary *dic = result;
             NSString *neoAddress = dic[@"neoAddress"];
             NSString *qlcAddress = dic[@"qlcAddress"];
-            NSString *neo_publicKey = [NEOWalletInfo getNEOPublickKeyWithAddress:neoAddress];
+            NSString *neo_publicKey = [NEOWalletInfo getNEOPublicKeyWithAddress:neoAddress];
 //            NSString *neo_privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:neoAddress];
             NSString *qlc_publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:qlcAddress];
             NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:qlcAddress];
@@ -199,6 +254,44 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 }
 
 #pragma mark - Request
+- (void)requestWinq_reward_qlc_amountWithCompleteBlock:(void(^)(NSString *amount))completeBlock {
+    //    kWeakSelf(self);
+    NSDictionary *params = @{@"dictType":winq_reward_qlc_amount};
+    [RequestService requestWithUrl10:sys_dict_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            NSString *valueStr = responseObject[Server_Data][@"value"];
+            
+            if (completeBlock) {
+                completeBlock(valueStr);
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
+- (void)requestReward_reward_total:(NSString *)type status:(NSString *)status completeBlock:(void(^)(NSString *reward))completeBlock {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    //    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSDictionary *params = @{@"account":account,@"token":token,@"type":type,@"status":status};
+    [RequestService requestWithUrl11:reward_reward_total_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            if (completeBlock) {
+                NSString *result = [NSString stringWithFormat:@"%@",responseObject[@"rewardTotal"]];
+                completeBlock(result);
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
 - (void)requestPledgeInfoByPledge:(BOOL)showLoad {
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID

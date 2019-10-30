@@ -435,6 +435,7 @@
         walletInfo.account_owner_public_key = owner_public_key_from_local;
         walletInfo.account_owner_private_key = private_ownerKey;
     }
+    walletInfo.isBackup = @(NO);
     // 存储keychain
     [walletInfo saveToKeyChain];
     

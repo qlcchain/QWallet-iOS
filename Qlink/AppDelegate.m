@@ -43,6 +43,8 @@
 #import "JPUSHService.h"
 #import "JPushTagHelper.h"
 #import "TopupPayOrderTodo.h"
+#import "DailyEarningsViewController.h"
+#import "NEOWalletInfo.h"
 
 @interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -61,12 +63,13 @@
     [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
     
 //    [UserModel deleteOneAccount];
-//    [NEOWalletUtil deleteAllWallet];
+//    [NEOWalletInfo deleteAllWallet];
 //    [LoginPWModel deleteLoginPW];
 //    [WalletCommonModel deleteAllWallet];
 //    [UserModel cleanAllUser];
     
-    [KeychainUtil resetKeyService]; // 先重置keyservice  以后1掉
+    [KeychainUtil resetKeyService]; // 重置keyservice
+    [NEOWalletInfo updateNEOWallet_local]; // 更新NEO本地
     
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
@@ -186,6 +189,22 @@
 
 - (void)jumpToOTC {
     kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
+}
+
+- (void)jumpToDailyEarnings {
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
+    if (![UserModel isBind]) {
+        [ClaimQGASTipView show];
+        return;
+    }
+    
+    DailyEarningsViewController *vc = [DailyEarningsViewController new];
+    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 #pragma mark - Login
@@ -503,12 +522,15 @@
 #pragma mark - 点击推送启动app
 - (void)handleLaunchWithPush:(NSDictionary *)launchOptions {
     // 处理点击通知打开app的逻辑
-    NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(userInfo){//推送信息
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(userInfo) {
+        // 小米推送
 //        NSString *messageId = [userInfo objectForKey:@"_id_"];
 //        if (messageId!=nil) {
 //            [MiPushSDK openAppNotify:messageId];
 //        }
+        // 极光推送
+        [self handlerPushJump:userInfo isTapLaunch:YES];
     }
 }
 

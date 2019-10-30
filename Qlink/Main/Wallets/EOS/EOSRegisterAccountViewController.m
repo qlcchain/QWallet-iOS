@@ -142,9 +142,10 @@
     NSString *symbol = @"ETH";
     NSInteger decimals = 0;
     NSString *value = @"";
+    NSString *memo = @"";
     BOOL isCoin = YES;
     kWeakSelf(self);
-    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
+    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice memo:memo decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
             NSString *blockChain = @"ETH";

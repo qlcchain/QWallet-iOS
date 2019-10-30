@@ -140,10 +140,11 @@
     NSInteger gasPrice = _gasSlider.value;
     NSInteger decimals = [_selectToken.tokenInfo.decimals integerValue];
     NSString *value = @"";
+    NSString *memo = _memoTF.text?:@"";
     BOOL isCoin = [_selectToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
     kWeakSelf(self);
     [kAppD.window makeToastInView:kAppD.window];
-    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
+    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice memo:memo decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         [kAppD.window hideToast];
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];

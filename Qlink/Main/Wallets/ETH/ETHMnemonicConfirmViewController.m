@@ -13,8 +13,9 @@
 #import "SuccessTipView.h"
 #import <TTGTextTagCollectionView.h>
 #import "AppConfigUtil.h"
-
+#import "ETHWalletInfo.h"
 //#import "GlobalConstants.h"
+#import "QConstants.h"
 
 @interface ETHMnemonicConfirmViewController () <TTGTextTagCollectionViewDelegate>
 
@@ -85,7 +86,7 @@
 //    _selectTagListView.textFont = [UIFont systemFontOfSize:18];
 //    _normalTagListView.textFont = [UIFont systemFontOfSize:18];
     [_selectTagListView addTags:@[]];
-    [_normalTagListView addTags:[self randomArr:AppConfigUtil.shareInstance.mnemonicArr]];
+    [_normalTagListView addTags:[self randomArr:_walletInfo.mnemonicArr]];
 }
 
 - (NSArray *)randomArr:(NSArray *)arr {
@@ -102,7 +103,8 @@
 
 - (void)showCreateSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:kLang(@"create_success")];
+//    [tip showWithTitle:kLang(@"create_success")];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 - (void)backToRoot {
@@ -116,9 +118,18 @@
     [_selectTagListView.allTags enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [tagArr addObject:obj];
     }];
-    if ([AppConfigUtil.shareInstance.mnemonicArr isEqualToArray:tagArr]) {
+    if ([_walletInfo.mnemonicArr isEqualToArray:tagArr]) {
         [self showCreateSuccessView];
         [self performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
+        
+        ETHWalletInfo *backupWalletInfo = [ETHWalletInfo getWalletInKeychain:_walletInfo.address?:@""];
+        if (backupWalletInfo) {
+            backupWalletInfo.isBackup = @(YES);
+            // 存储keychain
+            [backupWalletInfo saveToKeyChain];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:ETH_Wallet_Backup_Update_Noti object:nil];
+        }
     } else {
         [kAppD.window makeToastDisappearWithText:kLang(@"order_wrong")];
     }

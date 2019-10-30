@@ -106,6 +106,8 @@
             walletInfo.password = @"";
             walletInfo.address = address;
             walletInfo.type = @"0"; // 创建
+            walletInfo.isBackup = @(NO);
+            walletInfo.mnemonicArr = arr;
             // 存储keychain
             [walletInfo saveToKeyChain];
             
@@ -114,9 +116,10 @@
             }];
             [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
             
-            if (arr) {
-                AppConfigUtil.shareInstance.mnemonicArr = arr;
-                [weakself jumpToCreateETH];
+            if (walletInfo.mnemonicArr) {
+//                AppConfigUtil.shareInstance.ethMnemonicArr = arr;
+//                AppConfigUtil.shareInstance.ethBackupAddress = address;
+                [weakself jumpToCreateETH:walletInfo];
             }
         }];
     }];
@@ -132,6 +135,7 @@
         walletInfo.wif = [NEOWalletManage.sharedInstance getWalletWif];
         walletInfo.privateKey = [NEOWalletManage.sharedInstance getWalletPrivateKey];
         walletInfo.publicKey = [NEOWalletManage.sharedInstance getWalletPublicKey];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         
@@ -157,6 +161,7 @@
         walletInfo.seed = [QLCWalletManage.shareInstance walletSeed];
         walletInfo.privateKey = [QLCWalletManage.shareInstance walletPrivateKeyStr];
         walletInfo.publicKey = [QLCWalletManage.shareInstance walletPublicKeyStr];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         
@@ -243,8 +248,9 @@
 }
 
 #pragma mark - Transition
-- (void)jumpToCreateETH {
+- (void)jumpToCreateETH:(ETHWalletInfo *)walletInfo {
     ETHCreateWalletViewController *vc = [[ETHCreateWalletViewController alloc] init];
+    vc.walletInfo = walletInfo;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

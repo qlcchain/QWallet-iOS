@@ -57,10 +57,12 @@
 - (BOOL)saveToKeyChain {
     NSArray *keychainArr = [EOSWalletInfo getAllWalletInKeychain];
     __block BOOL isExist = NO;
+    __block NSInteger existIndex = 0;
     [keychainArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         EOSWalletInfo *tempM = obj;
         if ([tempM.account_name isEqualToString:self.account_name]) {
             isExist = YES;
+            existIndex = idx;
         }
     }];
     if (!isExist) {
@@ -70,6 +72,16 @@
             [muArr addObject:tempM.mj_keyValues];
         }];
         [muArr addObject:self.mj_keyValues];
+        NSString *jsonStr = muArr.mj_JSONString;
+        [KeychainUtil saveValueToKeyWithKeyName:EOS_WALLET_KEYCHAIN keyValue:jsonStr];
+    } else {
+        NSMutableArray *muModelArr = [NSMutableArray arrayWithArray:keychainArr];
+        [muModelArr replaceObjectAtIndex:existIndex withObject:self];
+        NSMutableArray *muArr = [NSMutableArray array];
+        [muModelArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            EOSWalletInfo *tempM = obj;
+            [muArr addObject:tempM.mj_keyValues];
+        }];
         NSString *jsonStr = muArr.mj_JSONString;
         [KeychainUtil saveValueToKeyWithKeyName:EOS_WALLET_KEYCHAIN keyValue:jsonStr];
     }
@@ -131,6 +143,11 @@
     }];
     
     return result;
+}
+
+
++ (BOOL)haveEOSWallet {
+    return [EOSWalletInfo getAllWalletInKeychain].count>0?YES:NO;
 }
 
 @end

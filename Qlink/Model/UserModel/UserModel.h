@@ -51,5 +51,6 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 + (NSString *)getLastLoginAccount; // 获取最后一次登录的账号
 + (void)deleteOneAccount;
 + (BOOL)isBind; // 领取QGAS
++ (BOOL)isTestAccount;
 
 @end

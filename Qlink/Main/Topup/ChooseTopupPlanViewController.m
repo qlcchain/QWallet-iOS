@@ -477,11 +477,12 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }
     
 //    NSNumber *qgasNum = @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
+    NSString *qgasFaitStr = [model.qgasDiscount.mul(model.amount) showfloatStr:4];
     NSString *qgasStr = [model.amount.mul(model.qgasDiscount).div(_selectPayTokenM.price) showfloatStr:3];
     TopupPayQLCViewController *vc = [TopupPayQLCViewController new];
     vc.sendAmount = [NSString stringWithFormat:@"%@",qgasStr];
     vc.sendToAddress = qlcAddress;
-    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.amount,qgasStr,_selectPayTokenM.symbol,qgasStr];
+    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.amount,qgasStr,_selectPayTokenM.symbol,qgasFaitStr];
     vc.inputPayToken = _selectPayTokenM.symbol?:@"QGAS";
     vc.inputProductM = model;
     vc.inputAreaCode = _phonePrefixBtn.currentTitle?:@"";
@@ -498,11 +499,12 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
         return;
     }
     
+    NSString *okbFaitStr = [model.qgasDiscount.mul(model.amount) showfloatStr:4];
     NSString *okbStr = [model.amount.mul(model.qgasDiscount).div(_selectPayTokenM.price) showfloatStr:3];// @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
     TopupPayETHViewController *vc = [TopupPayETHViewController new];
     vc.sendAmount = [NSString stringWithFormat:@"%@",okbStr];
     vc.sendToAddress = ethAddress;
-    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.amount,okbStr,_selectPayTokenM.symbol,okbStr];
+    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.amount,okbStr,_selectPayTokenM.symbol,okbFaitStr];
     vc.inputPayToken = _selectPayTokenM.symbol?:@"OKB";
     vc.inputProductM = model;
     vc.inputAreaCode = _phonePrefixBtn.currentTitle?:@"";

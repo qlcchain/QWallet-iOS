@@ -265,4 +265,15 @@
     return bind;
 }
 
++ (BOOL)isTestAccount {
+    BOOL isTest = NO;
+    if ([UserModel haveLoginAccount]) {
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if ([userM.account isEqualToString:@"741229443@qq.com"]) {
+            isTest = YES;
+        }
+    }
+    return isTest;
+}
+
 @end

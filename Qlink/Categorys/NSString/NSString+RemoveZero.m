@@ -28,6 +28,12 @@
     return [dn stringValue];
 }
 
+- (NSString *)showfloatStrWith2Decimal {
+    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumber *dn = [[NSDecimalNumber decimalNumberWithString:self] decimalNumberByRoundingAccordingToBehavior:hander];
+    return [NSString stringWithFormat:@"%.2f",[dn floatValue]];
+}
+
 //+ (double)doubleFormString:(NSString *)str {
 //    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 //    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;

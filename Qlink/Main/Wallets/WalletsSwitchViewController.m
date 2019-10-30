@@ -86,6 +86,7 @@
                     walletInfo.account_active_private_key = eosCreateSourceM.activePrivateKey;
                     walletInfo.account_owner_public_key = eosCreateSourceM.ownerPublicKey;
                     walletInfo.account_owner_private_key = eosCreateSourceM.ownerPrivateKey;
+                    walletInfo.isBackup = @(NO);
                     // 存储keychain
                     [walletInfo saveToKeyChain];
                     

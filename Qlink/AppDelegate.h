@@ -28,6 +28,7 @@
 - (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock;
 - (void)jumpToWallet;
 - (void)jumpToOTC;
+- (void)jumpToDailyEarnings;
 - (void)logout;
 
 @end

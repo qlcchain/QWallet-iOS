@@ -267,6 +267,7 @@ typedef enum : NSUInteger {
                 walletInfo.password = pw;
                 walletInfo.address = address;
                 walletInfo.type = @"1"; // mnemonic
+                walletInfo.isBackup = @(NO);
                 // 存储keychain
                 [walletInfo saveToKeyChain];
                 
@@ -312,6 +313,7 @@ typedef enum : NSUInteger {
                 walletInfo.password = pw;
                 walletInfo.address = address;
                 walletInfo.type = @"2"; // keystore
+                walletInfo.isBackup = @(NO);
                 // 存储keychain
                 [walletInfo saveToKeyChain];
             
@@ -351,6 +353,7 @@ typedef enum : NSUInteger {
             walletInfo.password = @"";
             walletInfo.address = address;
             walletInfo.type = @"3"; // private
+            walletInfo.isBackup = @(NO);
             // 存储keychain
             [walletInfo saveToKeyChain];
             
@@ -396,6 +399,7 @@ typedef enum : NSUInteger {
             walletInfo.password = @"";
             walletInfo.address = address;
             walletInfo.type = @"4"; // address
+            walletInfo.isBackup = @(NO);
             // 存储keychain
             [walletInfo saveToKeyChain];
             

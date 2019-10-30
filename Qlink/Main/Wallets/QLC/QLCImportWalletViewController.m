@@ -179,6 +179,7 @@ typedef enum : NSUInteger {
         walletInfo.seed = [QLCWalletManage.shareInstance walletSeed];
         walletInfo.privateKey = [QLCWalletManage.shareInstance walletPrivateKeyStr];
         walletInfo.publicKey = [QLCWalletManage.shareInstance walletPublicKeyStr];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         
@@ -213,6 +214,7 @@ typedef enum : NSUInteger {
         walletInfo.seed = [QLCWalletManage.shareInstance walletSeed];
         walletInfo.privateKey = [QLCWalletManage.shareInstance walletPrivateKeyStr];
         walletInfo.publicKey = [QLCWalletManage.shareInstance walletPublicKeyStr];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         
