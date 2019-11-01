@@ -300,6 +300,10 @@
             if (i_am_Buyer) { // 买家
                 _bottomView3Height.constant = 59;
                 _bottomBack3.hidden = NO;
+                if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                    _bottomView3Height.constant = 0;
+                    _bottomBack3.hidden = YES;
+                }
                 if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
                     [_viewComplaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
                 } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
@@ -313,6 +317,10 @@
                 if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
                     _bottomView3Height.constant = 59;
                     _bottomBack3.hidden = NO;
+                    if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                        _bottomView3Height.constant = 0;
+                        _bottomBack3.hidden = YES;
+                    }
                     if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_NO]) {
                         [_viewComplaintBtn setTitle:kLang(@"title_appeal") forState:UIControlStateNormal];
                     } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {

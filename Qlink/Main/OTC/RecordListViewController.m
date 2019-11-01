@@ -209,6 +209,10 @@ static NSString *RecordListRequestSize = @"20";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_postedBtn.selected) {
+        if (tableView != _postedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListEntrustCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListEntrustCellReuse];
         
         EntrustOrderListModel *model = _postedArr[indexPath.row];
@@ -216,6 +220,10 @@ static NSString *RecordListRequestSize = @"20";
         
         return cell;
     } else if (_processingBtn.selected) {
+        if (tableView != _processingTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _processingArr[indexPath.row];
@@ -223,6 +231,10 @@ static NSString *RecordListRequestSize = @"20";
         
         return cell;
     } else if (_completedBtn.selected) {
+        if (tableView != _completedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _completedArr[indexPath.row];
@@ -230,6 +242,10 @@ static NSString *RecordListRequestSize = @"20";
         
         return cell;
     } else if (_appealedBtn.selected) {
+        if (tableView != _appealedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _appealedArr[indexPath.row];
@@ -237,6 +253,10 @@ static NSString *RecordListRequestSize = @"20";
         
         return cell;
     } else if (_closedBtn.selected) {
+        if (tableView != _closedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _closedArr[indexPath.row];
