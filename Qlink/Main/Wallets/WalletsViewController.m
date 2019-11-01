@@ -70,7 +70,7 @@
 #import "AppDelegate+AppService.h"
 #import "NEOBackupDetailViewController.h"
 #import "QLCBackupDetailViewController.h"
-#import "ETHCreateWalletViewController.h"
+#import "ETHMnemonicViewController.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -1756,7 +1756,7 @@
 }
 
 - (void)jumpToCreateETH:(ETHWalletInfo *)walletInfo {
-    ETHCreateWalletViewController *vc = [[ETHCreateWalletViewController alloc] init];
+    ETHMnemonicViewController *vc = [[ETHMnemonicViewController alloc] init];
     vc.walletInfo = walletInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }

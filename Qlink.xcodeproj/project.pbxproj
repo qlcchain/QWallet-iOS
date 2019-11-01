@@ -470,11 +470,13 @@
 		5840927D23052A410054BCBB /* ConfidantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927B23052A410054BCBB /* ConfidantViewController.m */; };
 		5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840928023052A640054BCBB /* TokenMintageViewController.m */; };
 		5842E0C72368181D001BB0D6 /* qwallet_js.html in Resources */ = {isa = PBXBuildFile; fileRef = 5842E0C62368181D001BB0D6 /* qwallet_js.html */; };
-		5842E0CE23681D02001BB0D6 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5842E0CD23681D02001BB0D6 /* neoutils.framework */; };
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
 		5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117C2105AEF4005232A2 /* LocationTracker.m */; };
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
 		5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */; };
+		584BFB1F236AEF2700D7CCD1 /* QLCFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */; };
+		584BFB23236AEF3D00D7CCD1 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB22236AEF3C00D7CCD1 /* neoutils.framework */; };
+		584BFB27236B0E3C00D7CCD1 /* ETHFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB26236B0E3C00D7CCD1 /* ETHFramework.framework */; };
 		58517B5023682B2B008396EE /* NEOJSUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58517B4F23682B2B008396EE /* NEOJSUtil.m */; };
 		5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */; };
 		585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C9A1C2181A16B00DD12DB /* WalletsViewController.m */; };
@@ -534,10 +536,6 @@
 		5874E35C234DDAA6000835A0 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5874E35A234DDAA5000835A0 /* index.html */; };
 		5874E35D234DDAA6000835A0 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 5874E35B234DDAA5000835A0 /* js */; };
 		58779A9922642976008590EE /* ETHExportKeystorePWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58779A9722642976008590EE /* ETHExportKeystorePWViewController.m */; };
-		5877A9462367E59C005AD8F8 /* ETHFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A71E7122A00E6F00C22D8C /* ETHFramework.framework */; };
-		5877A9472367E59C005AD8F8 /* ETHFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58A71E7122A00E6F00C22D8C /* ETHFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5877A9482367E5A4005AD8F8 /* QLCFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589AE1B82338650200C0A666 /* QLCFramework.framework */; };
-		5877A9492367E5A4005AD8F8 /* QLCFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 589AE1B82338650200C0A666 /* QLCFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		58786CD323681F75009D6ACA /* NEOJSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58786CD223681F74009D6ACA /* NEOJSView.m */; };
 		587ABD3D21B8F8F700C3D81A /* eosFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587ABCAB21B8F8F700C3D81A /* eosFramework.framework */; };
 		587ABD3E21B8F8F700C3D81A /* EOSWalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABCAC21B8F8F700C3D81A /* EOSWalletUtil.m */; };
@@ -595,6 +593,7 @@
 		587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABD3C21B8F8F700C3D81A /* AskQuestion_abi_to_json_request.m */; };
 		587ABD8921BA3BCA00C3D81A /* EOSAccountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABD8821BA3BCA00C3D81A /* EOSAccountInfoModel.m */; };
 		587ABD8D21BA539600C3D81A /* EOSAccountResourceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABD8C21BA539600C3D81A /* EOSAccountResourceInfoModel.m */; };
+		587CCF7F236BDD8F00CB9DF3 /* AgentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587CCF7E236BDD8F00CB9DF3 /* AgentModel.m */; };
 		58822DC7230E9DF8007C8DC2 /* CQScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC3230E9DF7007C8DC2 /* CQScrollMenuView.m */; };
 		58822DC8230E9DF8007C8DC2 /* UIView+frameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */; };
 		58822DCC230F9DBE007C8DC2 /* OTCPayQLCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC9230F9DB8007C8DC2 /* OTCPayQLCViewController.m */; };
@@ -924,9 +923,7 @@
 				58BAFC61232A2F8700421C70 /* MJExtension.framework in Embed Frameworks */,
 				58BAFC5F232A2F8700421C70 /* MBProgressHUD.framework in Embed Frameworks */,
 				58BAFC65232A2F8700421C70 /* SDWebImage.framework in Embed Frameworks */,
-				5877A9472367E59C005AD8F8 /* ETHFramework.framework in Embed Frameworks */,
 				58BAFC59232A2F8600421C70 /* Hero.framework in Embed Frameworks */,
-				5877A9492367E5A4005AD8F8 /* QLCFramework.framework in Embed Frameworks */,
 				58BAFC71232A3D4C00421C70 /* SwiftTheme.framework in Embed Frameworks */,
 				581F94E1232A1704002F9EF0 /* KeychainAccess.framework in Embed Frameworks */,
 				58A2F987233DDB750045F0A6 /* Eureka.framework in Embed Frameworks */,
@@ -1899,7 +1896,6 @@
 		5840927F23052A640054BCBB /* TokenMintageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMintageViewController.h; sourceTree = "<group>"; };
 		5840928023052A640054BCBB /* TokenMintageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMintageViewController.m; sourceTree = "<group>"; };
 		5842E0C62368181D001BB0D6 /* qwallet_js.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = qwallet_js.html; sourceTree = "<group>"; };
-		5842E0CD23681D02001BB0D6 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		584911782105AEF4005232A2 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
 		584911792105AEF4005232A2 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
 		5849117A2105AEF4005232A2 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
@@ -1908,6 +1904,9 @@
 		5849117D2105AEF4005232A2 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
 		5849BE99229E8940008B291E /* QLCAddressHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCAddressHistoryModel.h; sourceTree = "<group>"; };
 		5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCAddressHistoryModel.m; sourceTree = "<group>"; };
+		584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QLCFramework.framework; sourceTree = "<group>"; };
+		584BFB22236AEF3C00D7CCD1 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
+		584BFB26236B0E3C00D7CCD1 /* ETHFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETHFramework.framework; sourceTree = "<group>"; };
 		584CE2CF22F7BB49003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GuidePageView1.strings"; sourceTree = "<group>"; };
 		584CE2D022F7BB4A003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RankingRuleViewController.strings"; sourceTree = "<group>"; };
 		584CE2D122F7BB4A003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RankingViewController.strings"; sourceTree = "<group>"; };
@@ -2164,6 +2163,8 @@
 		587ABD8821BA3BCA00C3D81A /* EOSAccountInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOSAccountInfoModel.m; sourceTree = "<group>"; };
 		587ABD8B21BA539600C3D81A /* EOSAccountResourceInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOSAccountResourceInfoModel.h; sourceTree = "<group>"; };
 		587ABD8C21BA539600C3D81A /* EOSAccountResourceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOSAccountResourceInfoModel.m; sourceTree = "<group>"; };
+		587CCF7D236BDD8F00CB9DF3 /* AgentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentModel.h; sourceTree = "<group>"; };
+		587CCF7E236BDD8F00CB9DF3 /* AgentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentModel.m; sourceTree = "<group>"; };
 		58822DC3230E9DF7007C8DC2 /* CQScrollMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQScrollMenuView.m; sourceTree = "<group>"; };
 		58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+frameAdjust.m"; sourceTree = "<group>"; };
 		58822DC5230E9DF7007C8DC2 /* CQScrollMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQScrollMenuView.h; sourceTree = "<group>"; };
@@ -2251,7 +2252,6 @@
 		58990B6E219457EC0036FF4F /* TokenPriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenPriceModel.m; sourceTree = "<group>"; };
 		58990B7021951EA00036FF4F /* NSString+RemoveZero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RemoveZero.h"; sourceTree = "<group>"; };
 		58990B7121951EA00036FF4F /* NSString+RemoveZero.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RemoveZero.m"; sourceTree = "<group>"; };
-		589AE1B82338650200C0A666 /* QLCFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QLCFramework.framework; sourceTree = "<group>"; };
 		589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TrezorCrytoEd25519.framework; sourceTree = "<group>"; };
 		589D470E225B327500A4A4E3 /* FinanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceViewController.h; sourceTree = "<group>"; };
 		589D470F225B327500A4A4E3 /* FinanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceViewController.m; sourceTree = "<group>"; };
@@ -2303,7 +2303,6 @@
 		58A6500221BE196500E52FFF /* PaymentDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentDetailsView.h; sourceTree = "<group>"; };
 		58A6500421BE196600E52FFF /* PaymentDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentDetailsView.m; sourceTree = "<group>"; };
 		58A6E962206CD5F5004535E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		58A71E7122A00E6F00C22D8C /* ETHFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETHFramework.framework; sourceTree = "<group>"; };
 		58A801C42268692B00640BBC /* FinanceHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceHistoryModel.h; sourceTree = "<group>"; };
 		58A801C52268692B00640BBC /* FinanceHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceHistoryModel.m; sourceTree = "<group>"; };
 		58A801C7226DC7A200640BBC /* RegisterMailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterMailViewController.h; sourceTree = "<group>"; };
@@ -2729,7 +2728,7 @@
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
 				589DA8A1232A004900CC22BD /* RealmSwift.framework in Frameworks */,
 				734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */,
-				5842E0CE23681D02001BB0D6 /* neoutils.framework in Frameworks */,
+				584BFB23236AEF3D00D7CCD1 /* neoutils.framework in Frameworks */,
 				58BAFC4D232A2F0900421C70 /* MJExtension.framework in Frameworks */,
 				58BAFC73232A40CB00421C70 /* Charts.framework in Frameworks */,
 				58A2F986233DDB750045F0A6 /* Eureka.framework in Frameworks */,
@@ -2747,12 +2746,12 @@
 				734F529420B6BEF7002D45B7 /* UserNotifications.framework in Frameworks */,
 				58A2F988233DDBB30045F0A6 /* KeychainSwift.framework in Frameworks */,
 				58BAFC66232A2F8700421C70 /* TMCache.framework in Frameworks */,
+				584BFB1F236AEF2700D7CCD1 /* QLCFramework.framework in Frameworks */,
+				584BFB27236B0E3C00D7CCD1 /* ETHFramework.framework in Frameworks */,
 				58BAFC4E232A2F0900421C70 /* MJRefresh.framework in Frameworks */,
-				5877A9462367E59C005AD8F8 /* ETHFramework.framework in Frameworks */,
 				58BAFC54232A2F0900421C70 /* Hero.framework in Frameworks */,
 				58BAFC6F232A3D4200421C70 /* SwiftTheme.framework in Frameworks */,
 				58BAFC52232A2F0900421C70 /* SDWebImage.framework in Frameworks */,
-				5877A9482367E5A4005AD8F8 /* QLCFramework.framework in Frameworks */,
 				58A2F98A233DDBFC0045F0A6 /* APIKit.framework in Frameworks */,
 				58BAFC51232A2F0900421C70 /* IQKeyboardManager.framework in Frameworks */,
 				58BAFC5E232A2F8700421C70 /* MBProgressHUD.framework in Frameworks */,
@@ -2817,7 +2816,7 @@
 			children = (
 				58BDD4E2230BFF580060FBCC /* ETHWalletManage.h */,
 				58BDD4E1230BFF580060FBCC /* ETHWalletManage.m */,
-				58A71E7122A00E6F00C22D8C /* ETHFramework.framework */,
+				584BFB26236B0E3C00D7CCD1 /* ETHFramework.framework */,
 			);
 			path = ETH;
 			sourceTree = "<group>";
@@ -4221,8 +4220,8 @@
 		582B114A22952B3D005E2288 /* QLC */ = {
 			isa = PBXGroup;
 			children = (
+				584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */,
 				589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */,
-				589AE1B82338650200C0A666 /* QLCFramework.framework */,
 			);
 			path = QLC;
 			sourceTree = "<group>";
@@ -4358,7 +4357,7 @@
 		5842E0C823681AB7001BB0D6 /* Trust */ = {
 			isa = PBXGroup;
 			children = (
-				5842E0CD23681D02001BB0D6 /* neoutils.framework */,
+				584BFB22236AEF3C00D7CCD1 /* neoutils.framework */,
 				5806C11721C7A6E3000E693B /* NEOSignUtil.swift */,
 				5832CB39228133190011160D /* O3APIClient.swift */,
 				5832CB36228125030011160D /* Wallet.swift */,
@@ -4471,6 +4470,8 @@
 			children = (
 				585D1EE9225D8E5E00468C4A /* UserModel.h */,
 				585D1EEA225D8E5E00468C4A /* UserModel.m */,
+				587CCF7D236BDD8F00CB9DF3 /* AgentModel.h */,
+				587CCF7E236BDD8F00CB9DF3 /* AgentModel.m */,
 			);
 			path = UserModel;
 			sourceTree = "<group>";
@@ -6545,6 +6546,7 @@
 				583D959D211432110057A90C /* RankMenuView.m in Sources */,
 				587ABD6F21B8F8F800C3D81A /* EOS_WalletAccount.m in Sources */,
 				581AC37221AFD84500ACA80B /* XYTransition.m in Sources */,
+				587CCF7F236BDD8F00CB9DF3 /* AgentModel.m in Sources */,
 				583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */,
 				5825556322EEC22A00F0B9F0 /* ProjectEnum.m in Sources */,
 				580D914020625A4300B12506 /* UIImage+Orientation.m in Sources */,

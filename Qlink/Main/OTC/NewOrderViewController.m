@@ -29,6 +29,8 @@
 #import "NewOrderETHTransferUtil.h"
 #import "VerifyTipView.h"
 #import "VerificationViewController.h"
+#import "RLArithmetic.h"
+#import "OTCOrderTodo.h"
 
 @interface NewOrderViewController () <UITextFieldDelegate>
 
@@ -330,6 +332,7 @@
             weakself.buyPayWalletNameLab.text = model.name;
             weakself.buyPayWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
             weakself.buyPayTF.text = model.address;
+            [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
         }];
     }
 }
@@ -402,10 +405,10 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
-//    if ([_buyPayTF.text isEmptyString]) {
-//        [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
-//        return;
-//    }
+    if ([_buyPayTF.text isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
+        return;
+    }
     
     // 检查地址有效性
     BOOL validReceiveAddress = [WalletCommonModel validAddress:_buyTradeTF.text tokenChain:_buy_PairsM.tradeTokenChain];
@@ -422,9 +425,10 @@
         }
     }
     
-//    [self buy_transfer:_buyTradeAmountTF.text tokenChain:_buy_PairsM.tradeTokenChain tokenName:_buy_PairsM.tradeToken];
-    // 下买单
-    [self requestEntrustBuyOrder];
+    NSString *transferAmount = _buyTradeAmountTF.text.mul(_buyPayUnitTF.text);
+    [self buy_transfer:transferAmount tokenChain:_buy_PairsM.payTokenChain tokenName:_buy_PairsM.payToken];
+//    // 下买单
+//    [self requestEntrustBuyOrder];
 }
 
 - (IBAction)sellNextAction:(id)sender {
@@ -579,14 +583,25 @@
     NSString *minAmount = _buyVolumeMinAmountTF.text?:@"";
     NSString *maxAmount = _buyVolumeMaxAmountTF.text?:@"";
     NSString *qgasAddress = _buyTradeTF.text?:@"";
+    NSString *fromAddress = _buyFromAddress?:@"";
+    NSString *txid = _buyTxid?:@"";
     NSString *pairsId = _buy_PairsM.ID?:@"";
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"account":account,@"token":token,@"type":@"BUY",@"unitPrice":unitPrice,@"totalAmount":totalAmount,@"minAmount":minAmount,@"maxAmount":maxAmount,@"pairsId":pairsId}];
     [params setObject:qgasAddress forKey:@"qgasAddress"];
+    [params setObject:fromAddress forKey:@"fromAddress"];
+    [params setObject:txid forKey:@"txid"];
+    
+    OTCOrder_Entrust_Buy_ParamsModel *paramsM = [OTCOrder_Entrust_Buy_ParamsModel getObjectWithKeyValues:params];
+    paramsM.timestamp = timestamp;
+    [[OTCOrderTodo shareInstance] savePayOrder_Entrust_Buy:paramsM];
     
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl6:entrust_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
+            [[OTCOrderTodo shareInstance] handlerPayOrder_Entrust_Buy_Success:paramsM];
+            
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
 //            [weakself showSubmitSuccess];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
@@ -626,10 +641,16 @@
     [params setObject:fromAddress forKey:@"fromAddress"];
     [params setObject:txid forKey:@"txid"];
     
+    OTCOrder_Entrust_Sell_ParamsModel *paramsM = [OTCOrder_Entrust_Sell_ParamsModel getObjectWithKeyValues:params];
+    paramsM.timestamp = timestamp;
+    [[OTCOrderTodo shareInstance] savePayOrder_Entrust_Sell:paramsM];
+    
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl6:entrust_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
+            [[OTCOrderTodo shareInstance] handlerPayOrder_Entrust_Sell_Success:paramsM];
+            
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             
 //            [weakself showSubmitSuccess];

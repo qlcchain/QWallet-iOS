@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *ID;// = 25d073543212425b8f175ba2412ff3a0;
 @property (nonatomic, strong) NSNumber *price;// = 18;
 @property (nonatomic, strong) NSString *symbol;// = OKB;
+@property (nonatomic, strong) NSString *logo_png;
+@property (nonatomic, strong) NSString *logo_webp;
 
 - (UIImage *)getPayTokenImage;
 

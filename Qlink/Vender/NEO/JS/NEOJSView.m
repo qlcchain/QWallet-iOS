@@ -95,18 +95,28 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
                     if (resultHandler) {
                         resultHandler(nil,NO,@"");
                     }
+                    [NEOJSView saveLog:value];
                 }
             } else {
                 if (resultHandler) {
                     resultHandler(nil,NO,@"");
                 }
+                [NEOJSView saveLog:value];
             }
         } else {
             if (resultHandler) {
                 resultHandler(nil,NO,@"");
             }
+            [NEOJSView saveLog:value];
         }
     }];
+}
+
++ (void)saveLog:(NSDictionary *)dic {
+    NSString *des = [@"staking.send error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"staking.send",dic];
+    NSString *className = NSStringFromClass([self class]);
+    NSString *methodName = NSStringFromSelector(_cmd);
+    [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
 }
 
 @end

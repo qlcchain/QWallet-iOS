@@ -739,6 +739,8 @@
 - (IBAction)payAction:(id)sender {
     if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
         [self jumpToUSDTAddress:_orderInfoM.usdtToAddress];
+    } else {
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_order_status_is_not_correct_and_cannot_be_transferred")];
     }
 }
 

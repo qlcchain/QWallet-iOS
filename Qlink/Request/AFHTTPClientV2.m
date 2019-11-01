@@ -9,6 +9,8 @@
 #import "AFHTTPClientV2.h"
 #import "NSString+EmptyUtil.h"
 #import "GlobalConstants.h"
+#import "AgentModel.h"
+#import "UserModel.h"
 
 @interface AFHTTPClientV2 ()
 
@@ -54,6 +56,10 @@
         //    [manager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
         [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 //        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
+        
+        NSString *userAgent = [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
+        userAgent = [AFHTTPClientV2 getAgent:userAgent].mj_JSONString;
+        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     }
     
     return [AFHTTPClientV2 shareInstance].httpManager;
@@ -85,6 +91,10 @@
 //    securityPolicy.validatesDomainName = NO;
 //    /**** SSL Pinning ****/
 //    [manager setSecurityPolicy:securityPolicy];
+        
+        NSString *userAgent = [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
+        userAgent = [AFHTTPClientV2 getAgent:userAgent].mj_JSONString;
+        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     }
     return [AFHTTPClientV2 shareInstance].jsonManager;
 }
@@ -456,6 +466,16 @@
     }
     
     return result;
+}
+
++ (AgentModel *)getAgent:(NSString *)userAgent {
+    AgentModel *model = [AgentModel new];
+    model.agent = userAgent;
+    model.uuid = [UserModel getTopupP2PId];
+    model.platform = @"iOS";
+    model.appVersion = APP_Version;
+    model.appBuild = APP_Build;
+    return model;
 }
 
 @end

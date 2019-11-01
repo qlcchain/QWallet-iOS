@@ -20,7 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _mainScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+//    _mainScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    _mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _mainScrollView.bounces = NO;
     _mainScrollView.showsHorizontalScrollIndicator = NO;
     _mainScrollView.showsVerticalScrollIndicator = NO;

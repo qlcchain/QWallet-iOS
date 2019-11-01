@@ -62,8 +62,7 @@
     [self refreshContent];
 }
 
-- (void) initVariables
-{
+- (void) initVariables {
     showRightNavBarItem = NO;
     showNavigationBar = YES;
 }

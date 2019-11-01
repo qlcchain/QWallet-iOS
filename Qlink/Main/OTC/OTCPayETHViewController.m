@@ -27,6 +27,7 @@
 #import <SwiftTheme/SwiftTheme-Swift.h>
 //#import "GlobalConstants.h"
 #import "RLArithmetic.h"
+#import "OTCOrderTodo.h"
 
 @interface OTCPayETHViewController () <UITextViewDelegate>
 
@@ -203,10 +204,17 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@"",@"txid":txid?:@""}];
+    
+    OTCOrder_Buysell_Buy_Confirm_ParamsModel *paramsM = [OTCOrder_Buysell_Buy_Confirm_ParamsModel getObjectWithKeyValues:params];
+    paramsM.timestamp = timestamp;
+    [[OTCOrderTodo shareInstance] savePayOrder_Buysell_Buy_Confirm:paramsM];
+    
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl6:trade_buyer_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
+            [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Buy_Confirm_Success:paramsM];
+            
             if (weakself.transferToRoot) {
                 [weakself backToRoot];
             } else if (weakself.transferToTradeDetail) {

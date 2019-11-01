@@ -21,6 +21,8 @@
 #import "ChooseWalletViewController.h"
 #import "NSString+RemoveZero.h"
 #import "ETHWalletManage.h"
+//#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 
 static NSInteger PayTokenBtnTag = 6649;
 static NSInteger PayTokenTickTag = 9223;
@@ -127,7 +129,14 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }
     
     CGFloat offset = 13;
-    CGFloat btnWidth = (SCREEN_WIDTH-16*2-13)/2.0;
+    CGFloat btnWidth = 0;
+    if (_payTokenArr.count<=1) {
+        btnWidth = SCREEN_WIDTH-16*2;
+    } else if (_payTokenArr.count==2) {
+        btnWidth = (SCREEN_WIDTH-16*2-offset)/2;
+    } else if (_payTokenArr.count>2) {
+        btnWidth = (SCREEN_WIDTH-16*2-2*offset)/2.5;
+    }
     CGFloat btnHeight = 40;
     CGFloat top = (_payTokenContentV.height-btnHeight)/2.0;
     kWeakSelf(self);
@@ -178,7 +187,9 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 - (void)showPayTokenUnselect:(NSInteger)idx {
     TopupPayTokenModel *model = _payTokenArr[idx];
     UIButton *btn = [_payTokenContentV viewWithTag:PayTokenBtnTag+idx];
-    [btn setImage:[model getPayTokenImage] forState:UIControlStateNormal];
+//    [btn setImage:[model getPayTokenImage] forState:UIControlStateNormal];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.logo_png]];
+    [btn sd_setImageWithURL:url forState:UIControlStateNormal placeholderImage:[model getPayTokenImage]];
     [btn setTitle:model.symbol forState:UIControlStateNormal];
     [btn setTitleColor:UIColorFromRGB(0x1E1E24) forState:UIControlStateNormal];
     btn.layer.cornerRadius = 6;
@@ -196,7 +207,9 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 - (void)showPayTokenSelect:(NSInteger)idx {
     TopupPayTokenModel *model = _payTokenArr[idx];
     UIButton *btn = [_payTokenContentV viewWithTag:PayTokenBtnTag+idx];
-    [btn setImage:[model getPayTokenImage] forState:UIControlStateNormal];
+//    [btn setImage:[model getPayTokenImage] forState:UIControlStateNormal];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.logo_png]];
+    [btn sd_setImageWithURL:url forState:UIControlStateNormal placeholderImage:[model getPayTokenImage]];
     [btn setTitle:model.symbol forState:UIControlStateNormal];
     [btn setTitleColor:MAIN_BLUE_COLOR forState:UIControlStateNormal];
     btn.layer.cornerRadius = 6;

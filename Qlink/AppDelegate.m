@@ -45,6 +45,7 @@
 #import "TopupPayOrderTodo.h"
 #import "DailyEarningsViewController.h"
 #import "NEOWalletInfo.h"
+#import "OTCOrderTodo.h"
 
 @interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -175,6 +176,10 @@
 //    [[TopupPayOrderTodo shareInstance] cleanPayOrder];
     
     [[TopupPayOrderTodo shareInstance] checkLocalPayOrder];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Entrust_Buy];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Entrust_Sell];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Buysell_Sell];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Buysell_Buy_Confirm];
 }
 
 - (void)jumpToWallet {

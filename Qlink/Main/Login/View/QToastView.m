@@ -21,7 +21,7 @@
 
 + (instancetype)getInstance {
     QToastView *view = [[[NSBundle mainBundle] loadNibNamed:@"QToastView" owner:self options:nil] lastObject];
-    [view.tipBack cornerRadius:8];
+    [view.tipBack cornerRadius:4];
     return view;
 }
 
@@ -31,7 +31,13 @@
     [kAppD.window addSubview:view];
     view.titleLab.text = title;
     
-    [view performSelector:@selector(hide) withObject:nil afterDelay:1.8];
+    view.alpha = 0;
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view.alpha = 1;
+    } completion:^(BOOL finished) {
+    }];
+    
+    [view performSelector:@selector(hide) withObject:nil afterDelay:2];
 }
 
 - (void)hide {

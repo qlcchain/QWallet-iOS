@@ -72,7 +72,7 @@
     BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
-        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
+//        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         
         if (successB) {
             successB(fromAddress, responseObj);
