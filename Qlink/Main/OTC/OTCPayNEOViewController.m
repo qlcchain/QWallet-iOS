@@ -169,6 +169,8 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
                 [weakself requestTrade_buyer_confirm:txid]; // 买家确认支付
             });
+        } else {
+            [kAppD.window makeToastDisappearWithText:kLang(@"transfer_error")];
         }
     }];
     

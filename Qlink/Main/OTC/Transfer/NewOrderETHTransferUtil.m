@@ -150,7 +150,8 @@
     [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice memo:memo decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         [kAppD.window hideToast];
         if (success) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
+//            [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
+            
 //            NSString *blockChain = @"ETH";
 //            [ReportUtil requestWalletReportWalletRransferWithAddressFrom:fromAddress addressTo:toAddress blockChain:blockChain symbol:symbol amount:amount txid:txId?:@""]; // 上报钱包转账
             if (successB) {

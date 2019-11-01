@@ -93,6 +93,8 @@
     
     [_chartV updateWithSymbol:_inputSymbol.symbol noDataBlock:^{
         weakself.chartBackHeight.constant = 219-144;
+    } haveDataBlock:^{
+        weakself.chartBackHeight.constant = 219;
     }];
 }
 

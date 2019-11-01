@@ -134,7 +134,8 @@
 //    _totalLab.text = [NSString stringWithFormat:@"%@",_inputEntrustOrderListM.totalAmount];
     _totalLab.text = [NSString stringWithFormat:@"%@ %@",@([_inputEntrustOrderListM.totalAmount doubleValue] - [_inputEntrustOrderListM.lockingAmount doubleValue] - [_inputEntrustOrderListM.completeAmount doubleValue]),_inputTradeToken];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_inputEntrustOrderListM.minAmount,_inputEntrustOrderListM.maxAmount];
-    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_inputEntrustOrderListM.maxAmount doubleValue]*[_inputEntrustOrderListM.unitPrice doubleValue])];
+    
+    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount.mul(_inputEntrustOrderListM.unitPrice)];
     _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount];
 }
 
@@ -144,7 +145,8 @@
 //        _totalLab.text = [NSString stringWithFormat:@"%@",_orderInfoM.totalAmount];
         _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount doubleValue] - [_orderInfoM.lockingAmount doubleValue] - [_orderInfoM.completeAmount doubleValue])];
         _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_orderInfoM.minAmount,_orderInfoM.maxAmount];
-        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),@([_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice doubleValue])];
+        
+        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount.mul(_orderInfoM.unitPrice)];
         _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount];
     }
 }

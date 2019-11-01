@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *lineArr;
 @property (nonatomic, strong) NSString *currentSymbol;
 @property (nonatomic, copy) HistoryChartNoDataBlock noDataB;
+@property (nonatomic, copy) HistoryChartHaveDataBlock haveDataB;
 
 @end
 
@@ -103,10 +104,18 @@
     leftAxis.axisMinimum = min;
 }
 
-- (void)updateWithSymbol:(NSString *)symbol noDataBlock:(HistoryChartNoDataBlock)noDataBlock {
+- (void)updateWithSymbol:(NSString *)symbol noDataBlock:(HistoryChartNoDataBlock)noDataBlock haveDataBlock:(HistoryChartHaveDataBlock)haveDataBlock {
     _noDataB = noDataBlock;
+    _haveDataB = haveDataBlock;
     _currentSymbol = symbol;
-    [self requestBinaKlinesWithSymbol:symbol];
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        [weakself requestBinaKlinesWithSymbol:symbol];
+    });
+    
+    if (_noDataB) {
+        _noDataB();
+    }
 }
 
 - (void)updateChartData {
@@ -205,10 +214,16 @@
                 if (weakself.noDataB) {
                     weakself.noDataB();
                 }
+            } else {
+                if (weakself.haveDataB) {
+                    weakself.haveDataB();
+                }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        
+        if (weakself.noDataB) {
+            weakself.noDataB();
+        }
     }];
 }
 

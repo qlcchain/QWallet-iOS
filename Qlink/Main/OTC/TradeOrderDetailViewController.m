@@ -265,7 +265,9 @@
            } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
             _statusBack.backgroundColor = MAIN_BLUE_COLOR;
             
+            _confirmPayTimeHeight.constant = 56;
             if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+                _confirmPayTimeHeight.constant = 0; // 56
                 _statusTitleLab.text = kLang(@"waiting_for_public_Chain_confirmation");
                 _statusSubTitleLab.text = kLang(@"waiting_for_public_Chain_confirmation");
             } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) {
@@ -277,7 +279,7 @@
             _orderIDLab.text = _orderInfoM.number;
             _orderTimeHeight.constant = 56;
             _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
-            _confirmPayTimeHeight.constant = 56;
+            
             _confirmPayTimeLab.text = [NSDate getOutputDate:_orderInfoM.buyerConfirmDate formatStr:yyyyMMddHHmmss];
             _orderStatusHeight.constant = 56;
             if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
@@ -287,6 +289,7 @@
             }
             
             _infoAddressHeight.constant = 76;
+            _infoAddressTitleLab.text = kLang(@"receive_from");
             if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
                 _infoAddressLab.text = _orderInfoM.usdtToAddress;
             } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) {
@@ -351,7 +354,12 @@
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"successful_deal");
             _infoAddressHeight.constant = 76;
-            _infoAddressLab.text = _orderInfoM.usdtFromAddress;
+            _infoAddressTitleLab.text = kLang(@"receive_from");
+            if (i_am_Buyer) {
+                _infoAddressLab.text = _orderInfoM.usdtFromAddress;
+            } else {
+                _infoAddressLab.text = _orderInfoM.qgasFromAddress;
+            }
             if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_YES]) {
                 _complaintHeight.constant = 56;
                 _complaintLab.text = kLang(@"appeal_processing");
@@ -393,6 +401,7 @@
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"revoked");
             if (_orderInfoM.usdtFromAddress && _orderInfoM.usdtFromAddress.length > 0) {
+                _infoAddressTitleLab.text = kLang(@"receive_from");
                 _infoAddressHeight.constant = 76;
                 _infoAddressLab.text = _orderInfoM.usdtFromAddress;
             }
@@ -428,6 +437,7 @@
             _orderStatusHeight.constant = 56;
             _orderStatusLab.text = kLang(@"closed");
             if (_orderInfoM.usdtFromAddress && _orderInfoM.usdtFromAddress.length > 0) {
+                _infoAddressTitleLab.text = kLang(@"receive_from");
                 _infoAddressHeight.constant = 76;
                 _infoAddressLab.text = _orderInfoM.usdtFromAddress;
             }
@@ -452,7 +462,7 @@
         }
         
         if (i_am_Buyer) {
-            _addressTitleLab.text = kLang(@"receive_from");
+            _addressTitleLab.text = kLang(@"send_to");
             _addressLab.text = _orderInfoM.qgasToAddress;
             _typeLab.text = kLang(@"buy");
             _typeUnitLab.text = _orderInfoM.tradeToken;
@@ -461,7 +471,7 @@
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
             
         } else {
-            _addressTitleLab.text = kLang(@"receive_from");
+            _addressTitleLab.text = kLang(@"send_to");
             _addressLab.text = _orderInfoM.usdtToAddress;
             _typeLab.text = kLang(@"sell");
             _typeUnitLab.text = _orderInfoM.tradeToken;

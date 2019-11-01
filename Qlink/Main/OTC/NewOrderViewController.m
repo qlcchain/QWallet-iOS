@@ -106,6 +106,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
     _isFirstAppear = YES;
     [self configInit];
 }

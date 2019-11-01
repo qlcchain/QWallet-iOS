@@ -50,6 +50,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
     [self configInit];
     [self requestEntrust_order_info];
 }
