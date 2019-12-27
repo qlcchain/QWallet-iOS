@@ -300,13 +300,27 @@
     }
     if ([_orderM.status isEqualToString:Topup_Order_Status_New]) { // 跳转订单列表
         [self jumpToMyTopupOrder];
-    } else if ([_orderM.status isEqualToString:Topup_Order_Status_QGAS_PAID]) { // 跳转h5购买
-        if ([self.inputOrderM.payTokenChain isEqualToString:QLC_Chain]) {
-            
-        } else if ([self.inputOrderM.payTokenChain isEqualToString:NEO_Chain]) {
-            [self jumpToTopupPayNEO_Pay];
-        } else if ([self.inputOrderM.payTokenChain isEqualToString:ETH_Chain]) {
-            
+    } else if ([_orderM.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
+        if ([_orderM.payWay isEqualToString:@"FIAT"]) { // 法币支付
+            if ([_orderM.payFiat isEqualToString:@"CNY"]) {
+                // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
+                NSString *sid = Topup_Pay_H5_sid;
+                NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,_orderM.userId?:@"",_orderM.ID?:@""];
+                NSString *package = [NSString stringWithFormat:@"%@",_orderM.originalPrice];
+                NSString *mobile = _orderM.phoneNumber?:@"";
+                NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
+                [self jumpToTopupH5:urlStr];
+            } else if ([_orderM.payFiat isEqualToString:@"USD"]) {
+                
+            }
+        } else if ([_orderM.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+            if ([self.orderM.payTokenChain isEqualToString:QLC_Chain]) {
+                
+            } else if ([self.orderM.payTokenChain isEqualToString:NEO_Chain]) {
+                [self jumpToTopupPayNEO_Pay];
+            } else if ([self.orderM.payTokenChain isEqualToString:ETH_Chain]) {
+                
+            }
         }
     }
 }
@@ -549,6 +563,13 @@
 - (void)jumpToMyTopupOrder {
     MyTopupOrderViewController *vc = [MyTopupOrderViewController new];
     vc.inputBackToRoot = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTopupH5:(NSString *)urlStr {
+    TopupWebViewController *vc = [TopupWebViewController new];
+    vc.inputBackToRoot = YES;
+    vc.inputUrl = urlStr;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

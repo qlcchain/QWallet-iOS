@@ -310,12 +310,12 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }];
     [alertC addAction:alertCancel];
     UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"purchase") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if ([weakself.selectDeductionTokenM.chain isEqualToString:ETH_Chain]) {
-            [weakself jumpToTopupPayETH_Deduction_CNY:model];
-        } else if ([weakself.selectDeductionTokenM.chain isEqualToString:QLC_Chain]) {
-            [weakself jumpToTopupPayQLC_Deduction_CNY:model];
-        }
-       
+//        if ([weakself.selectDeductionTokenM.chain isEqualToString:ETH_Chain]) {
+//            [weakself jumpToTopupPayETH_Deduction_CNY:model];
+//        } else if ([weakself.selectDeductionTokenM.chain isEqualToString:QLC_Chain]) {
+//            [weakself jumpToTopupPayQLC_Deduction_CNY:model];
+//        }
+       [weakself requestTopup_order:model];
     }];
     [alertC addAction:alertBuy];
     alertC.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -533,6 +533,11 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     
     TopupProductModel *model = _sourceArr[indexPath.row];
     
+    if ([_phoneTF.text isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
+        return;
+    }
+    
     if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
         if ([model.payFiat isEqualToString:@"CNY"]) {
             [self handlerPayCNY:model];
@@ -540,11 +545,6 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             
         }
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
-        if ([_phoneTF.text isEmptyString]) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
-            return;
-        }
-        
         [self handlerPayToken:model];
     }
     
