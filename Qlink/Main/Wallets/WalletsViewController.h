@@ -14,16 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletsViewController : QBaseViewController
 
-- (NEOAssetModel *)getNEOAsset:(NSString *)tokenName;
-- (QLCTokenModel *)getQLCAsset:(NSString *)tokenName;
-- (Token *)getETHAsset:(NSString *)tokenName;
-- (NSArray *)getETHSource;
-- (NSArray *)getQLCSource;
-- (NSArray *)getNEOSource;
-- (NSArray *)getEOSSource;
-- (NEOAssetModel *)getNEOAsset;
-- (Token *)getETHAsset;
-- (QLCTokenModel *)getQLCAsset;
+//- (NEOAssetModel *)getNEOAsset:(NSString *)tokenName;
+//- (QLCTokenModel *)getQLCAsset:(NSString *)tokenName;
+//- (Token *)getETHAsset:(NSString *)tokenName;
+//- (NSArray *)getETHSource;
+//- (NSArray *)getQLCSource;
+//- (NSArray *)getNEOSource;
+//- (NSArray *)getEOSSource;
+//- (NEOAssetModel *)getNEOAsset;
+//- (Token *)getETHAsset;
+//- (QLCTokenModel *)getQLCAsset;
 - (NSNumber *)getGasAssetBalanceOfNeo;
 
 @end

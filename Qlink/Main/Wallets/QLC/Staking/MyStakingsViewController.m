@@ -376,7 +376,8 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 }
 
 - (IBAction)txidAction:(id)sender {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_"),@"QGAS"] preferredStyle:UIAlertControllerStyleAlert];
+    // [NSString stringWithFormat:kLang(@"insufficient_balance_go_to_otc_page_to_purchase_"),@"QGAS"]
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
@@ -392,6 +393,7 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     [alertC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"txid";
     }];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 

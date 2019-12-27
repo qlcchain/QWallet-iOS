@@ -75,13 +75,6 @@ static NSString *RecordListRequestSize = @"20";
     
     needRefreshSlider = YES;
     [self configInit];
-//    if (_inputType == RecordListTypePosted) {
-//        _postedBtn.selected = YES;
-//        [self requestEntrust_order_list];
-//    } else if (_inputType == RecordListTypeProcessing) {
-//        _processingBtn.selected = YES;
-//        [self requestTrade_order_list];
-//    }
     
 }
 
@@ -91,11 +84,11 @@ static NSString *RecordListRequestSize = @"20";
     if (needRefreshSlider) {
         needRefreshSlider = NO;
         if (_inputType == RecordListTypePosted) {
-//            [self refreshSelect:_postedBtn];
             [self postedAction:_postedBtn];
         } else if (_inputType == RecordListTypeProcessing) {
-//            [self refreshSelect:_processingBtn];
             [self processingAction:_processingBtn];
+        } else if (_inputType == OTCRecordListTypeCompleted) {
+            [self completedAction:_completedBtn];
         }
         
     }
@@ -120,7 +113,10 @@ static NSString *RecordListRequestSize = @"20";
     } else if (_inputType == RecordListTypeProcessing) {
         _processingBtn.selected = YES;
         _recordListType = RecordListTypeProcessing;
-    }
+    } else if (_inputType == OTCRecordListTypeCompleted) {
+       _completedBtn.selected = YES;
+       _recordListType = RecordListTypeCompleted;
+   }
     
     
     kWeakSelf(self)

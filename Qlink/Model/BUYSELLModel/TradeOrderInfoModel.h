@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *tradeToken;// = QGAS;
 @property (nonatomic, strong) NSString *tradeTokenChain;// = "QLC_CHAIN";
 
-
 @property (nonatomic, strong) NSString *showNickName;
 
 @end

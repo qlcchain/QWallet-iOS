@@ -102,6 +102,7 @@
 - (IBAction)shareAction:(id)sender {
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[_qrcodeImgV.image] applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAirDrop];
+    activityVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:activityVC animated:YES completion:nil];
     activityVC.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
         if (completed) {
@@ -164,7 +165,8 @@
     vc.transferToTradeDetail = _transferToTradeDetail;
     vc.sendAmount = _tradeM.usdtAmount?:@"";
     vc.sendToAddress = _tradeM.usdtToAddress?:@"";
-    vc.sendMemo = _tradeM.number?:@"";
+//    vc.sendMemo = _tradeM.number?:@"";
+    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@_%@",@"otc",@"trade",_isBuyOrder?@"buy":@"sell",_tradeM.ID?:@""];
     vc.inputTradeOrderId = _tradeM.ID;
     vc.inputPayToken = _tradeM.payToken;
     [self.navigationController pushViewController:vc animated:YES];

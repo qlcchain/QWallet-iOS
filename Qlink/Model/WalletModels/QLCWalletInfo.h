@@ -8,6 +8,8 @@
 
 #import "BBaseModel.h"
 
+@class QLCTokenModel;
+
 @interface QLCWalletInfo : BBaseModel
 
 @property (nonatomic ,strong) NSString *privateKey;

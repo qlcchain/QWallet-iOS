@@ -41,6 +41,8 @@
 #import <UserNotifications/UserNotifications.h>
 #import "JPushTagHelper.h"
 #import "JPushConstants.h"
+#import "AppJumpHelper.h"
+#import "ProjectEnum.h"
 
 @interface AppDelegate () <BuglyDelegate,JPUSHRegisterDelegate>
 
@@ -347,7 +349,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                 [HWUserdefault insertObj:userInfo withkey:JPush_Tag_Jump];
             } else { // app运行时点击推送
                 [HWUserdefault deleteObjectWithKey:JPush_Tag_Jump];
-                [self jumpToDailyEarnings];
+                [AppJumpHelper jumpToDailyEarnings];
+            }
+        } else if ([skip isEqualToString:JPush_Extra_Skip_Trade_Order]) {
+            if (isTapLaunch) { // 点击推送启动
+                [HWUserdefault insertObj:userInfo withkey:JPush_Tag_Jump];
+            } else { // app运行时点击推送
+                [HWUserdefault deleteObjectWithKey:JPush_Tag_Jump];
+                [AppJumpHelper jumpToMyOrderList:OTCRecordListTypeCompleted];
             }
         }
     }

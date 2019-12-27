@@ -472,7 +472,7 @@
     AgentModel *model = [AgentModel new];
     model.agent = userAgent;
     model.uuid = [UserModel getTopupP2PId];
-    model.platform = @"iOS";
+    model.platform = Platform_iOS;
     model.appVersion = APP_Version;
     model.appBuild = APP_Build;
     return model;

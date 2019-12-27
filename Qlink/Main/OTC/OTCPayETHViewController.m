@@ -28,6 +28,8 @@
 //#import "GlobalConstants.h"
 #import "RLArithmetic.h"
 #import "OTCOrderTodo.h"
+#import "TxidBackUtil.h"
+#import "TokenListHelper.h"
 
 @interface OTCPayETHViewController () <UITextViewDelegate>
 
@@ -50,7 +52,9 @@
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
 @property (nonatomic, strong) NSString *gasCostETH;
 @property (nonatomic, strong) Token *selectToken;
+@property (nonatomic, strong) Token *ethToken;
 @property (nonatomic, strong) WalletCommonModel *payWalletM;
+@property (nonatomic, strong) NSArray *ethSource;
 
 @end
 
@@ -61,7 +65,7 @@
 }
 
 - (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTokenNoti:) name:Update_ETH_Wallet_Token_Noti object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTokenNoti:) name:Update_ETH_Wallet_Token_Noti object:nil];
 }
 
 - (void)viewDidLoad {
@@ -134,14 +138,16 @@
 }
 
 - (void)showETHTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = _payWalletM.address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectToken.tokenInfo.symbol];
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",_gasCostETH];
     ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount gasfee:gasfee];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount gasfee:gasfee];
+//    [view configWithAddress:address amount:amount gasfee:gasfee];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -160,9 +166,10 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    NSString *fromAddress = currentWalletM.address;
+- (void)sendTransfer:(NSString *)from_address {
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    NSString *fromAddress = currentWalletM.address;
+    NSString *fromAddress = from_address;
     NSString *contractAddress = _selectToken.tokenInfo.address;
     NSString *toAddress = _sendtoAddressTV.text;
     NSString *name = _selectToken.tokenInfo.name;
@@ -184,7 +191,7 @@
             [ReportUtil requestWalletReportWalletRransferWithAddressFrom:fromAddress addressTo:toAddress blockChain:blockChain symbol:symbol amount:amount txid:txId?:@""]; // 上报钱包转账
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-                [weakself requestTrade_buyer_confirm:txId]; // 买家确认支付
+                [weakself requestTrade_buyer_confirm:txId tokenName:symbol tokenAmount:amount]; // 买家确认支付
             });
         } else {
             [kAppD.window makeToastDisappearWithText:kLang(@"send_fail")];
@@ -192,7 +199,7 @@
     }];
 }
 
-- (void)requestTrade_buyer_confirm:(NSString *)txid {
+- (void)requestTrade_buyer_confirm:(NSString *)txid tokenName:(NSString *)tokenName tokenAmount:(NSString *)tokenAmount {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -224,6 +231,20 @@
             }
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TRADE_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = ETH_Chain;
+            txidBackM.tokenName = tokenName?:@"";
+            txidBackM.amount = tokenAmount?:@"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Buy_Confirm_Success:paramsM];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -244,8 +265,11 @@
 
 - (BOOL)haveETHTokenAssetNum:(NSString *)tokenName {
     __block BOOL haveEthAssetNum = NO;
-    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
-    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!_ethSource) {
+        return haveEthAssetNum;
+    }
+//    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [_ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Token *model = obj;
         if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
             NSString *ethNum = [model getTokenNum];
@@ -260,8 +284,11 @@
 
 - (NSString *)getETHTokenAssetNum:(NSString *)tokenName {
     __block NSString *ethAssetNum = @"0";
-    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
-    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!_ethSource) {
+        return ethAssetNum;
+    }
+//    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [_ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Token *model = obj;
         if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
             ethAssetNum = [model getTokenNum];
@@ -377,8 +404,11 @@
     
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     kWeakSelf(self);
-    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getETHSource];
-    [sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!_ethSource) {
+        return;
+    }
+//    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getETHSource];
+    [_ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (![obj isKindOfClass:[Token class]]) {
             return;
         }
@@ -395,6 +425,7 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
@@ -406,24 +437,37 @@
         weakself.payWalletM = model;
         weakself.payWalletNameLab.text = model.name;
         weakself.payWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
-        [weakself checkSendBtnEnable];
+        
+//        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
+        [TokenListHelper requestETHAssetWithAddress:model.address?:@"" tokenName:weakself.inputPayToken?:@"" completeBlock:^(ETHAddressInfoModel * _Nonnull infoM, Token * _Nonnull tokenM, Token * _Nonnull ethTokenM, BOOL success) {
+            weakself.ethSource = infoM.tokens;
+            weakself.ethToken = ethTokenM;
+            weakself.selectToken = tokenM;
+            if (!weakself.selectToken) {
+                [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_eth_wallet_have_not"),weakself.inputPayToken]];
+                return;
+            }
+
+            [weakself refreshView];
+            [weakself checkSendBtnEnable];
+        }];
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - Noti
-- (void)updateTokenNoti:(NSNotification *)noti {
-    // 判断ETH钱包的USDT asset
-    _selectToken = [kAppD.tabbarC.walletsVC getETHAsset:_inputPayToken];
-    if (!_selectToken) {
-        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_eth_wallet_have_not"),_inputPayToken]];
-        return;
-    }
-
-    [self refreshView];
-}
+//- (void)updateTokenNoti:(NSNotification *)noti {
+//    // 判断ETH钱包的USDT asset
+//    _selectToken = [kAppD.tabbarC.walletsVC getETHAsset:_inputPayToken];
+//    if (!_selectToken) {
+//        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_eth_wallet_have_not"),_inputPayToken]];
+//        return;
+//    }
+//
+//    [self refreshView];
+//}
 
 
 @end

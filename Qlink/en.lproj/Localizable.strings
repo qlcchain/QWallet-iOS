@@ -16,6 +16,7 @@
 "title_screen_lock" = "Screen Lock";
 "english" = "English";
 "chinese" = "Chinese(Simplified)";
+"indonesian" = "Bahasa Indonesia";
 
 // 我的---
 "crypto_wallet" = "Crypto Wallet";
@@ -26,6 +27,8 @@
 "login_signup" = "Log In/Sign Up";
 "me" = "Me";
 "daily_earnings"="Earning Details";
+"join_us_on_telegram_to_get_the_latest_qgas_news" = "Join us on Telegram To get the latest QGAS news";
+"join_now" = "Join Now";
 
 // 个人信息---
 "profile_photo" = "Profile Photo";
@@ -73,8 +76,8 @@
 "appeal_failed" = "Appeal Failed";
 "sell" = "SELL";
 "buy" = "BUY";
-"entrust_sell" = "ENTRUST SELL";
-"entrust_buy" = "ENTRUST BUY";
+"entrust_sell" = "SELL";
+"entrust_buy" = "BUY";
 "active" = "Active";
 "revoked" = "Revoked";
 "completed" = "Completed";
@@ -83,6 +86,10 @@
 "amount_price" = "Amount";
 "pending" = "Pending";
 "the_order_status_is_not_correct_and_cannot_be_transferred" = "The order status is not correct and cannot be transferred.";
+"filter" = "Filter";
+"trading_pairs" = "Trading Pairs";
+"reset" = "Reset";
+"filter_confirm" = "Confirm";
 
 // 支付USDT---
 "eth_wallet_address" = "ETH Wallet Address";
@@ -114,6 +121,7 @@
 "amount" = "Amount";
 "copied" = "Copied";
 "transaction_pending" = "Transaction Pending";
+"new_order" = "New Order";
 
 // USDT接收地址---
 "receivable_address" = "Receivable Address";
@@ -134,6 +142,10 @@
 "qlc_wallet_address_is_invalidate" = "QLC Wallet Address is invalidate";
 "wallet_address_is_invalidate" = "Wallet Address is invalidate";
 "amount_need_greater_than_or_equal_to_max_amount" = "Amount need greater than or equal to Max Amount";
+"max_amount_need_greater_than_or_equal_to_min_amount" = "Max Amount need greater than or equal to Min Amount";
+"the_min_amount_should_be_equal_or_greater_than_1" = "The Min Amount should be equal or greater than 1";
+"buying_amount_need_greater_than_or_equal_to_min_amount" = "Buying Amount need greater than or equal to Min Amount";
+"selling_amount_need_greater_than_or_equal_to_min_amount" = "Selling Amount need greater than or equal to Min Amount";
 "please_switch_to_qlc_wallet" = "Please switch to QLC Wallet";
 "please_switch_to_neo_wallet" = "Please switch to NEO Wallet";
 "please_switch_to_eos_wallet" = "Please switch to EOS Wallet";
@@ -175,6 +187,8 @@
 "i_ve_received" = "I've received";
 "ok_" = "OK";
 "please_be_patiently_it_hasnt_been_30_minutes_" = "Please be patiently. It hasn't been 30 minutes.";
+"transaction_parsing_failed" = "Transaction parsing failed";
+"overtime" = "OverTime";
 
 // Appeal---
 "for_example_incorrect_amount_no_payment_received_etc" = "For example, incorrect amount, no payment received, etc.";
@@ -316,7 +330,7 @@
 "for" = "For";
 "my_stakings" = "My Stakings";
 "revoke" = "Revoke";
-"the_wallet_is_none___" = "The wallet is none";
+"the_wallet_is_none___" = "The wallet is not exist";
 
 // Topup
 "rmb" = "￥";
@@ -332,6 +346,7 @@
 "you_do_not_have_wallet_created_immediately" = "You don‘t have a %@ Wallet yet\n Create one";
 "create" = "Create";
 "use_to_purchase__yuan_of_phone_charge_for_deduction" = "Top-up value ￥%@\npay %@ %@ and ￥%@";
+"use_to_purchase__yuan_of_phone_charge_for_deduction_1" = "Top-up value %@ %@\npay %@ %@ and %@ %@";
 "choose_international_and_regional" = "Choose a country and a region";
 "please_enter_your_mobile_phone_number" = "Please enter your mobile number";
 "recharge__yuan_phone_charge_deduction__yuan" = "Top-up value ￥%@, Use %@ %@ to for ￥%@off";
@@ -344,6 +359,11 @@
 "phone_charge_failed" = "Top-up failure";
 "qgas_parsing_failed" = "Confirmation failed on the Blockchain";
 "phone_charge_recharge_failed_has_been_returned" = "%@ has been returned";
+"pay_token_returned" = "Pay token returned";
+"cancelled" = "Cancelled";
+"deduction_txid_error" = "Deduction txid error";
+"pay_txid_error" = "Pay txid error";
+"pay_token_paid" = "Pay token paid";
 "_will_be_returned_to_the_payment_address" = "%@ will be returned to the payment address";
 "confirm" = "Confirm";
 "coming_soon_next_month" = "Coming soon next month";
@@ -353,6 +373,7 @@
 "successfully_paid_" = "%@ Transferred";
 "generating_recharge_vouchers_on_the_chain" = "To Create Blockchain Invoice";
 "the_recharge_voucher_on_the_chain_was_successfully_generated" = "Blockchain Inoice Created";
+"refer_friends_" = "Refer Friends >";
 
 // 领取QGAS
 "free_qlc_lending_for_staking" = "Free QLC lending for staking";
@@ -363,3 +384,39 @@
 "immediately_invite" = "Refer NOW";
 "ranking_in_the_last_30_days" = "Ranking in the Last 30 Days";
 "00000000_Copy" = "00000000（Copy）";
+"use_qgas_to_get_phone_bill_discount_or_just_trade_in_otc_market_" = "Use QGAS to get phone bill discount or just trade in OTC market.";
+
+// 交易挖矿
+"sheet_mining" = "Trade Mining";
+"minging_more_details" = "More Details";
+"daily_qgas_trade_mining_pool_up_to_" = "Daily QGAS Trade Mining Pool up to ";
+"no_qlc_can_claim" = "No QLC can claim";
+"qgas_trade_mining_pool_up_to" = "QGAS Trade Mining Pool up to";
+"mined_qlc_redeem_every_day" = "Mined QLC Redeem Every Day";
+
+// QLC k线
+"qlc_go_trade" = "trade  >";
+"qlc_hour" = "1H";
+"qlc_day" = "1D";
+"qlc_week" = "1W";
+"qlc_month" = "1M";
+"qlc_year" = "1Y";
+
+// Sheet mining
+"___qgas_traded" = "%@ QGAS traded";
+"i_have_claimed__qlc" = "I have claimed %@ QLC";
+
+// Topup Credential
+"top_up__phone_bill__" = "Top up-%@Phone bill-%@";
+
+// Share friends
+"i_have_claimed__qgas" = "I have claimed %@ QGAS";
+"__friends_referred " = "%@ friends referred ";
+"you_can_claim_the_reward_when_successfully_invited_more_than__friends_" = "You can claim the reward when successfully invited more than %@ friends.";
+"get__qgas" = "Get %@ QGAS";
+
+// Topup Choose Country Code
+"please_choose_country_code_first" = "Please choose country code first";
+"please_choose_operator_first" = "Please choose operator first";
+"optional" = "Optional";
+"phone_number_cannot_be_empty" = "Phone number cannot be empty";

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="95" id="KGk-i7-Jjw" customClass="MiningDailyDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIB-dt-N2O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="mining_mining_icon" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-6B-fnz">
+                                <rect key="frame" x="16" y="18" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="DnI-0Q-Xa4"/>
+                                    <constraint firstAttribute="width" constant="24" id="b3L-wD-bzw"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="挂单挖矿瓜分奖金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbr-NN-91a">
+                                <rect key="frame" x="56" y="18" width="131" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="挂单挖矿" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtM-NS-brV">
+                                <rect key="frame" x="56" y="45.5" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0039215686269999999" green="0.70980392160000005" blue="0.6705882353" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-07-13 19:22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-3U-N35">
+                                <rect key="frame" x="56" y="70.5" width="101.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ona-wx-PlU">
+                                <rect key="frame" x="56" y="93.5" width="264" height="1"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="o9d-0b-2to"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1.23 QLC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVv-Vl-XOb">
+                                <rect key="frame" x="228" y="18" width="76" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wVv-Vl-XOb" secondAttribute="trailing" constant="16" id="085-IM-Bch"/>
+                            <constraint firstItem="wVv-Vl-XOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vbr-NN-91a" secondAttribute="trailing" id="4ua-bE-tWq"/>
+                            <constraint firstItem="UtM-NS-brV" firstAttribute="top" secondItem="vbr-NN-91a" secondAttribute="bottom" constant="8" id="89T-XC-0ga"/>
+                            <constraint firstItem="vbr-NN-91a" firstAttribute="top" secondItem="ZIB-dt-N2O" secondAttribute="top" constant="18" id="8be-i1-KG3"/>
+                            <constraint firstItem="wVv-Vl-XOb" firstAttribute="centerY" secondItem="vbr-NN-91a" secondAttribute="centerY" id="Apb-AL-NdC"/>
+                            <constraint firstAttribute="trailing" secondItem="ona-wx-PlU" secondAttribute="trailing" id="B0E-9m-SGe"/>
+                            <constraint firstAttribute="bottom" secondItem="ona-wx-PlU" secondAttribute="bottom" id="BiK-qH-cRy"/>
+                            <constraint firstItem="vbr-NN-91a" firstAttribute="leading" secondItem="j1i-6B-fnz" secondAttribute="trailing" constant="16" id="K0z-5S-A8D"/>
+                            <constraint firstItem="ulO-3U-N35" firstAttribute="leading" secondItem="UtM-NS-brV" secondAttribute="leading" id="L2j-7T-oBs"/>
+                            <constraint firstItem="j1i-6B-fnz" firstAttribute="leading" secondItem="ZIB-dt-N2O" secondAttribute="leading" constant="16" id="PhH-LS-Q3m"/>
+                            <constraint firstItem="ona-wx-PlU" firstAttribute="leading" secondItem="ulO-3U-N35" secondAttribute="leading" id="SRA-58-SWO"/>
+                            <constraint firstItem="UtM-NS-brV" firstAttribute="leading" secondItem="vbr-NN-91a" secondAttribute="leading" id="fIu-PH-sOa"/>
+                            <constraint firstItem="ulO-3U-N35" firstAttribute="top" secondItem="UtM-NS-brV" secondAttribute="bottom" constant="8" id="l4W-z7-i2J"/>
+                            <constraint firstItem="j1i-6B-fnz" firstAttribute="top" secondItem="ZIB-dt-N2O" secondAttribute="top" constant="18" id="yby-8I-22W"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZIB-dt-N2O" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Tdi-He-UgZ"/>
+                    <constraint firstItem="ZIB-dt-N2O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sXv-qo-3VA"/>
+                    <constraint firstAttribute="bottom" secondItem="ZIB-dt-N2O" secondAttribute="bottom" id="u68-K5-eDO"/>
+                    <constraint firstAttribute="trailing" secondItem="ZIB-dt-N2O" secondAttribute="trailing" id="urL-p1-Z0d"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="qgasLab" destination="wVv-Vl-XOb" id="L8O-Kt-B2e"/>
+                <outlet property="statusLab" destination="UtM-NS-brV" id="afa-1U-aL0"/>
+                <outlet property="timeLab" destination="ulO-3U-N35" id="dwT-sp-cIo"/>
+                <outlet property="titleLab" destination="vbr-NN-91a" id="1lh-5n-Jad"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="mining_mining_icon" width="24" height="24"/>
+    </resources>
+</document>

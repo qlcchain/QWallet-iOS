@@ -93,7 +93,6 @@
 #pragma mark - 创建
 - (void)createAccountWithAccountName:(NSString *)accountName {
 //    if (self.headerView.agreeItemBtn.isSelected) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"请勾选同意条款!", nil)];
 //        return;
 //    }
 //    if (![RegularExpression validateEosAccountName:accountName]) {
@@ -508,7 +507,6 @@
     // 验证密码输入是否正确
 //    Wallet *current_wallet = CURRENT_WALLET;
 //    if (![WalletUtil validateWalletPasswordWithSha256:current_wallet.wallet_shapwd password:self.loginPasswordView.inputPasswordTF.text]) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"密码输入错误!", nil)];
 //        return;
 //    }
 //    if (IsNilOrNull(self.currentToken)) {
@@ -593,7 +591,6 @@
     // 验证密码输入是否正确
 //    Wallet *current_wallet = CURRENT_WALLET;
 //    if (![WalletUtil validateWalletPasswordWithSha256:current_wallet.wallet_shapwd password:self.loginPasswordView.inputPasswordTF.text]) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"密码输入错误!", nil)];
 //        return;
 //    }
     
@@ -737,7 +734,6 @@
     // 验证密码输入是否正确
 //    Wallet *current_wallet = CURRENT_WALLET;
 //    if (![WalletUtil validateWalletPasswordWithSha256:current_wallet.wallet_shapwd password:self.loginPasswordView.inputPasswordTF.text]) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"密码输入错误!", nil)];
 //        return;
 //    }
     

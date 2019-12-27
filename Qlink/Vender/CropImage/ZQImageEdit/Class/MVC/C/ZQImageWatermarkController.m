@@ -177,6 +177,7 @@
     imagePickerVc.navigationBar.barTintColor = [ZQUtil R:68 G:170 B:240 A:1];
     imagePickerVc.maxImagesCount = 1;
     imagePickerVc.allowPickingVideo = NO;
+    imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 

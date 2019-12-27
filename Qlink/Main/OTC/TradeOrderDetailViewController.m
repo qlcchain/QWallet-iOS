@@ -24,9 +24,13 @@
 #import "FailTipView.h"
 #import "ComplaintSubmitViewController.h"
 #import "ComplaintDetailViewController.h"
-
-
+#import "QLCWalletInfo.h"
+#import "QLCAddressInfoModel.h"
 //#import "GlobalConstants.h"
+#import <QLCFramework/QLCFramework.h>
+#import "OTCOrderTodo.h"
+#import "TxidBackUtil.h"
+#import "TokenListHelper.h"
 
 @interface TradeOrderDetailViewController ()
 
@@ -104,6 +108,13 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomBack3;
 @property (weak, nonatomic) IBOutlet UIButton *viewComplaintBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomBack4;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomBack4Height; // 59
+//@property (weak, nonatomic) IBOutlet UIButton *bottom4RevokeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *bottom4TransferBtn;
+
+
+
 @property (nonatomic, strong) TradeOrderInfoModel *orderInfoM;
 @property (nonatomic, strong) dispatch_source_t countDownTimer;
 //@property (nonatomic, strong) NSString *serverTime;
@@ -159,10 +170,13 @@
     _complaintBtnBack.layer.masksToBounds = YES;
     _confirmReceiveBtn.layer.cornerRadius = 4;
     _confirmReceiveBtn.layer.masksToBounds = YES;
+    _bottom4TransferBtn.layer.cornerRadius = 4;
+    _bottom4TransferBtn.layer.masksToBounds = YES;
     
     [_bottomBack1 shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];
     [_bottomBack2 shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];
     [_bottomBack3 shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];
+    [_bottomBack4 shadowWithColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] offset:CGSizeMake(0,-0.5) opacity:1 radius:0];
 }
 
 - (void)refreshView {
@@ -185,6 +199,8 @@
         _bottomBack2.hidden = YES;
         _bottomView3Height.constant = 0; // 59
         _bottomBack3.hidden = YES;
+        _bottomBack4Height.constant = 0; // 59
+        _bottomBack4.hidden = YES;
         
         UserModel *loginM = [UserModel fetchUserOfLogin];
         BOOL i_am_Buyer = [loginM.ID isEqualToString:_orderInfoM.buyerId]?YES:NO;
@@ -467,6 +483,21 @@
             } else if ([_orderInfoM.appealStatus isEqualToString:APPEAL_STATUS_FAIL]) {
                 [_viewComplaintBtn setTitle:kLang(@"title_appeal_result") forState:UIControlStateNormal];
             }
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_NEW]) { // 新订单
+            _statusBack.backgroundColor = UIColorFromRGB(0xFF3669);
+            _statusTitleLab.text = kLang(@"new_order");
+            _statusSubTitleLab.text = kLang(@"new_order");
+            
+            _orderIDHeight.constant = 56;
+            _orderIDLab.text = _orderInfoM.number;
+            _orderTimeHeight.constant = 56;
+            _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
+            _orderStatusHeight.constant = 56;
+            _orderStatusLab.text = kLang(@"new_order");
+            if (!i_am_Buyer) { // 卖家
+                _bottomBack4Height.constant = 59;
+                _bottomBack4.hidden = NO;
+            }
         }
         
         if (i_am_Buyer) {
@@ -617,6 +648,32 @@
     dispatch_resume(_countDownTimer);
 }
 
+- (void)sendQLCTransfer:(QLCTokenModel *)model fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress amountStr:(NSString *)amountStr privateKey:(NSString *)privateKey memo:(NSString *)memo {
+    
+    NSString *tokenName = model.tokenName;
+    NSString *to = toAddress;
+    NSString *from = fromAddress;
+    NSUInteger amount = [model getTransferNum:amountStr];
+    NSString *sender = nil;
+    NSString *receiver = nil;
+    NSString *message = nil;
+    NSString *data = memo?:@"";
+    BOOL workInLocal = YES;
+    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
+    kWeakSelf(self);
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+        [kAppD.window hideToast];
+        
+        NSString *tokenChain = QLC_Chain;
+        NSString *tokenName = @"QGAS";
+        [weakself requestTrade_sell_order_txidWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr sellTxid:responseObj?:@""];
+        
+    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
+        [kAppD.window hideToast];
+    }];
+}
+
 #pragma mark - Request
 - (void)requestTrade_order_info {
     if (_countDownTimer) {
@@ -744,6 +801,57 @@
     }];
 }
 
+- (void)requestTrade_sell_order_txidWithTokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName tokenAmount:(NSString *)tokenAmount sellTxid:(NSString *)sellTxid {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    
+    NSString *tradeOrderId = _orderInfoM.ID?:@"";
+    NSString *txid = sellTxid?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"tradeOrderId":tradeOrderId,@"txid":txid};
+    
+    OTCOrder_Buysell_Sell_Txid_ParamsModel *paramsM = [OTCOrder_Buysell_Sell_Txid_ParamsModel getObjectWithKeyValues:params];
+    paramsM.timestamp = timestamp;
+    [[OTCOrderTodo shareInstance] savePayOrder_Buysell_Sell:paramsM];
+    
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl6:trade_sell_order_txid_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] doubleValue] == 0) {
+            [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Sell_Success:paramsM];
+            
+            [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
+            
+            [weakself requestTrade_order_info]; // 刷新界面
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TRADE_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = tokenChain?:@"";
+            txidBackM.tokenName = tokenName?:@"";
+            txidBackM.amount = tokenAmount?:@"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Sell_Success:paramsM];
+                }
+            }];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
@@ -785,6 +893,7 @@
         [weakself requestTrade_seller_confirm];
     }];
     [alertC addAction:alertBuy];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 
 }
@@ -804,6 +913,7 @@
                 UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"ok_") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 }];
                 [alertC addAction:alertBuy];
+                alertC.modalPresentationStyle = UIModalPresentationFullScreen;
                 [self presentViewController:alertC animated:YES completion:nil];
             } else {
                 [weakself jumpToComplaintSubmit];
@@ -846,6 +956,45 @@
     [self requestTrade_cancel];
 }
 
+//- (IBAction)bottom4RevokeAction:(id)sender {
+//
+//}
+
+- (IBAction)bottom4TransferAction:(id)sender {
+    kWeakSelf(self);
+    // 卖家
+    if (_orderInfoM) {
+        // 查找钱包
+        QLCWalletInfo *wallet = [QLCWalletInfo getQLCWalletWithAddress:_orderInfoM.qgasFromAddress?:@""];
+        if (wallet) {
+            NSString *fromAddress = _orderInfoM.qgasFromAddress?:@"";
+            NSString *tokenName = _orderInfoM.tradeToken?:@"";
+            NSString *toAddress = [QLCWalletManage shareInstance].qlcMainAddress?:@"";
+            NSString *amountStr = [NSString stringWithFormat:@"%@",_orderInfoM.qgasAmount?:@""];
+            NSString *privateKey = wallet.privateKey?:@"";
+            NSString *memo = [NSString stringWithFormat:@"%@_%@_%@_%@",@"otc",@"trade",@"sell",_orderInfoM.ID?:@""];
+            [kAppD.window makeToastInView:kAppD.window];
+            [TokenListHelper requestQLCAssetWithAddress:fromAddress tokenName:tokenName completeBlock:^(QLCAddressInfoModel *infoM, QLCTokenModel *tokenM, BOOL success) {
+                [kAppD.window hideToast];
+                
+                if (!tokenM) {
+                    [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+                    return;
+                }
+                if ([weakself.orderInfoM.qgasAmount doubleValue] > [[tokenM getTokenNum] doubleValue]) {
+                    [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+                    return;
+                }
+                
+                [self sendQLCTransfer:tokenM fromAddress:fromAddress toAddress:toAddress amountStr:amountStr privateKey:privateKey memo:memo];
+            }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:kLang(@"the_wallet_is_none___")];
+        }
+    }
+}
+
+
 
 #pragma mark - Transition
 - (void)jumpToComplaintDetail {
@@ -861,6 +1010,9 @@
 //    vc.inputAddressType = PayReceiveAddressTypeUSDT;
     vc.transferToTradeDetail = YES;
     vc.tradeM = _orderInfoM;
+//    UserModel *loginM = [UserModel fetchUserOfLogin];
+//    BOOL i_am_Buyer = [loginM.ID isEqualToString:_orderInfoM.buyerId]?YES:NO;
+    vc.isBuyOrder = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

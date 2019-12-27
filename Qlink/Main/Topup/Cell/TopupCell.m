@@ -38,7 +38,9 @@
     [super prepareForReuse];
     
     _titleLab.text = nil;
+    _titleEnLab.text = nil;
     _subTitleLab.text = nil;
+    _subTitleEnLab.text = nil;
     _checkDiscountLab.text = nil;
     _discountLab.text = nil;
     _desLab.text = nil;
@@ -47,29 +49,22 @@
 - (void)config:(TopupProductModel *)model {
     
     NSString *language = [Language currentLanguageCode];
-    NSString *country = @"";
-    NSString *province = @"";
-    NSString *isp = @"";
-    NSString *name = @"";
 //    NSNumber *discountNum = @(0);
     NSString *discountNumStr = @"0";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        country = model.countryEn;
-        province = model.provinceEn;
-        isp = model.ispEn;
-        name = model.nameEn;
 //        discountNumStr = [NSString stringFromDouble:100-[model.discount doubleValue]*100];
         discountNumStr = @(100).sub(model.discount.mul(@(100)));
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        country = model.country;
-        province = model.province;
-        isp = model.isp;
-        name = model.name;
 //        discountNumStr = [NSString stringFromDouble:[model.discount doubleValue]*10];
         discountNumStr = model.discount.mul(@(10));
+    } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+//        discountNumStr = [NSString stringFromDouble:100-[model.discount doubleValue]*100];
+        discountNumStr = @(100).sub(model.discount.mul(@(100)));
     }
-    _titleLab.text = [NSString stringWithFormat:@"%@%@%@",country,province,isp];
-    _subTitleLab.text = name;
+    _titleLab.text = [NSString stringWithFormat:@"%@%@%@",model.country,model.province,model.isp];
+    _titleEnLab.text = [NSString stringWithFormat:@"%@%@%@",model.countryEn,model.provinceEn,model.ispEn];
+    _subTitleLab.text = model.name;
+    _subTitleEnLab.text = model.nameEn;
     _checkDiscountLab.text = kLang(@"view_your_exclusive_offers");
     
     NSString *discountStr = kLang(@"_discount");

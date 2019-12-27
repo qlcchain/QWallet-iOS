@@ -88,14 +88,16 @@
 }
 
 - (void)showEOSTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].account_name?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectSymbol.symbol];
     NSString *memo = _memoTF.text?:@"";
     EOSTransferConfirmView *view = [EOSTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount memo:memo];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount memo:memo];
+//    [view configWithAddress:address amount:amount memo:memo];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -115,13 +117,14 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
+- (void)sendTransfer:(NSString *)from_address {
     NSString *name = _sendtoAddressTV.text;
     NSString *amount = _amountTF.text;
     NSString *memo = _memoTF.text?:@"";
     
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    [EOSWalletUtil.shareInstance transferWithSymbol:_selectSymbol From:currentWalletM.account_name?:@"" to:name amount:amount memo:memo];
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    NSString *fromAddress = from_address;
+    [EOSWalletUtil.shareInstance transferWithSymbol:_selectSymbol From:fromAddress to:name amount:amount memo:memo];
 }
 
 - (void)backToRoot {
@@ -213,6 +216,7 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 

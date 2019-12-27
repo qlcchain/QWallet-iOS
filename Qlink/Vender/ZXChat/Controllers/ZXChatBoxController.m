@@ -266,6 +266,7 @@
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         [imagePicker setDelegate:self];
+        imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:imagePicker animated:YES completion:^{
             
         }];
@@ -276,6 +277,7 @@
             [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
             imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
             [imagePicker setDelegate:self];
+            imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:imagePicker animated:YES completion:^{
                 
             }];

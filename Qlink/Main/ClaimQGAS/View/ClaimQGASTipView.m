@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *amountLab;
 @property (weak, nonatomic) IBOutlet UILabel *tipLab;
 @property (weak, nonatomic) IBOutlet UIButton *claimBtn;
+@property (nonatomic, copy) ClaimQGASTipConfirmBlock confirmBlock;
 
 @end
 
@@ -41,27 +42,28 @@
 }
 
 - (void)configInit {
-    NSString *language = [Language currentLanguageCode];
-    if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        
-    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        
-    }
     _titleLab.text = kLang(@"free_qlc_lending_for_staking");
 //    _amountLab;
     _tipLab.text = kLang(@"claim_entitled_qgas_earnings_everyday");
     [_claimBtn setTitle:kLang(@"receive_now") forState:UIControlStateNormal];
 }
 
-+ (void)show {
-    if (![UserModel haveLoginAccount]) {
-        return;
++ (void)show:(ClaimQGASTipConfirmBlock)block {
+    BOOL showV = NO;
+    if (![UserModel haveLoginAccount]) { // 未登录状态
+//        return;
+        showV = YES;
+    } else { // 登录状态
+        if (![UserModel isBind]) { // 未绑定 弹出领取QGAS view
+            showV = YES;
+        }
     }
-    if (![UserModel isBind]) { // 未绑定 弹出领取QGAS view
+    
+    if (showV) {
         ClaimQGASTipView *view = [ClaimQGASTipView getInstance];
-        
         view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [kAppD.window addSubview:view];
+        view.confirmBlock = block;
     }
 }
 
@@ -73,8 +75,16 @@
     if (_confirmBlock) {
         _confirmBlock();
     }
-    [self requestUser_bind];
-//    [self hide];
+    
+    if ([UserModel haveLoginAccount]) { // 登录状态
+        [self requestUser_bind];
+    } else {  // 未登录状态
+        [self hide];
+        
+        if (![UserModel haveLoginAccount]) {
+            [kAppD presentLoginNew];
+        }
+    }
 }
 
 - (IBAction)closeAction:(id)sender {

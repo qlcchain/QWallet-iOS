@@ -32,8 +32,11 @@
 //#import "GlobalConstants.h"
 #import "RLArithmetic.h"
 #import "OTCOrderTodo.h"
+#import "NSString+Valid.h"
+#import "TxidBackUtil.h"
+#import "TradeOrderListModel.h"
 
-@interface BuySellDetailViewController ()
+@interface BuySellDetailViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *usdtLab;
@@ -79,6 +82,7 @@
 
 @property (nonatomic, strong) WalletCommonModel *addressWalletM;
 @property (nonatomic, strong) WalletCommonModel *sendQgasWalletM;
+@property (nonatomic, strong) TradeOrderListModel *sellOrderM;
 
 @end
 
@@ -100,7 +104,7 @@
     _addressWalletBack.hidden = YES;
     _sendQgasWalletBack.hidden = YES;
     
-    [_usdtMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
+//    [_usdtMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     [_qgasMaxTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     
     _unitPriceTipLab.text = [NSString stringWithFormat:@"%@ (%@)",kLang(@"unit_price"),_inputPayToken];
@@ -153,15 +157,16 @@
 
 - (void)changedTextField:(UITextField *)tf {
     if (tf == _usdtMaxTF) {
-//        double dou = [_usdtMaxTF.text doubleValue]/[_orderInfoM.unitPrice doubleValue];
-//        NSString *str = [NSString stringFromDouble:dou];
         NSString *str = _usdtMaxTF.text.div(_orderInfoM.unitPrice);
         _qgasMaxTF.text = [NSString stringWithFormat:@"%@",str];
     } else if (tf == _qgasMaxTF) {
-//        double dou = [_qgasMaxTF.text doubleValue]*[NSString doubleFormString:_orderInfoM.unitPrice];
-//        NSString *str = [NSString stringFromDouble:dou];
-        NSString *str = _qgasMaxTF.text.mul(_orderInfoM.unitPrice);
-        _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str];
+        if ([tf.text isEmptyString]) {
+            _usdtMaxTF.text = nil;
+        } else {
+            NSString *str = _qgasMaxTF.text.mul(_orderInfoM.unitPrice);
+            NSString *str3 = str.roundPlain(3);
+            _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str3];
+        }
     }
 }
 
@@ -175,17 +180,17 @@
 //    [self presentViewController:alertVC animated:YES completion:nil];
 //}
 
-- (void)buy_transfer:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName {
+- (void)buy_transfer:(NSString *)fromAddress amountStr:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName memo:(NSString *)memo {
     kWeakSelf(self);
     if ([tokenChain isEqualToString:QLC_Chain]) {
-        [NewOrderQLCTransferUtil transferQLC:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderQLCTransferUtil transferQLC:fromAddress tokenName:tokenName amountStr:amountStr memo:memo successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下买单
             weakself.buyFromAddress = sendAddress;
             weakself.buyTxid = txid;
             [weakself requestTrade_buy_order];
         }];
     } else if ([tokenChain isEqualToString:NEO_Chain]) {
-        [NewOrderNEOTransferUtil transferNEO:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderNEOTransferUtil transferNEO:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下买单
             weakself.buyFromAddress = sendAddress;
             weakself.buyTxid = txid;
@@ -194,7 +199,7 @@
     } else if ([tokenChain isEqualToString:EOS_Chain]) {
         
     } else if ([tokenChain isEqualToString:ETH_Chain]) {
-        [NewOrderETHTransferUtil transferETH:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下买单
             weakself.buyFromAddress = sendAddress;
             weakself.buyTxid = txid;
@@ -203,30 +208,33 @@
     }
 }
 
-- (void)sell_transfer:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName {
+- (void)sell_transfer:(NSString *)fromAddress amountStr:(NSString *)amountStr tokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName memo:(NSString *)memo {
     kWeakSelf(self);
     if ([tokenChain isEqualToString:QLC_Chain]) {
-        [NewOrderQLCTransferUtil transferQLC:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderQLCTransferUtil transferQLC:fromAddress tokenName:tokenName amountStr:amountStr memo:memo successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下卖单
             weakself.sellFromAddress = sendAddress;
             weakself.sellTxid = txid;
-            [weakself requestTrade_sell_order];
+//            [weakself requestTrade_sell_orderWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr];
+            [weakself requestTrade_sell_order_txidWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr];
         }];
     } else if ([tokenChain isEqualToString:NEO_Chain]) {
-        [NewOrderNEOTransferUtil transferNEO:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderNEOTransferUtil transferNEO:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下卖单
             weakself.sellFromAddress = sendAddress;
             weakself.sellTxid = txid;
-            [weakself requestTrade_sell_order];
+//            [weakself requestTrade_sell_orderWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr];
+            [weakself requestTrade_sell_order_txidWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr];
         }];
     } else if ([tokenChain isEqualToString:EOS_Chain]) {
         
     } else if ([tokenChain isEqualToString:ETH_Chain]) {
-        [NewOrderETHTransferUtil transferETH:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下卖单
             weakself.sellFromAddress = sendAddress;
             weakself.sellTxid = txid;
-            [weakself requestTrade_sell_order];
+//            [weakself requestTrade_sell_orderWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr];
+            [weakself requestTrade_sell_order_txidWithTokenChain:tokenChain tokenName:tokenName tokenAmount:amountStr];
         }];
     }
 }
@@ -305,7 +313,7 @@
 //    }];
 //}
 
-- (void)requestTrade_sell_order {
+- (void)requestTrade_sell_orderWithTokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName tokenAmount:(NSString *)tokenAmount {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -322,25 +330,73 @@
     NSString *qgasAmount = _qgasMaxTF.text?:@"";
     NSString *usdtToAddress = _receiveAddressTF.text?:@"";
     NSString *fromAddress = _sellFromAddress?:@"";
-    NSString *txid = _sellTxid?:@"";
-    NSDictionary *params = @{@"account":account,@"token":token,@"entrustOrderId":entrustOrderId,@"usdtAmount":usdtAmount,@"qgasAmount":qgasAmount,@"usdtToAddress":usdtToAddress,@"fromAddress":fromAddress,@"txid":txid};
+//    NSString *txid = _sellTxid?:@"";
     
-    OTCOrder_Buysell_Sell_ParamsModel *paramsM = [OTCOrder_Buysell_Sell_ParamsModel getObjectWithKeyValues:params];
+    NSDictionary *params = @{@"account":account,@"token":token,@"entrustOrderId":entrustOrderId,@"usdtAmount":usdtAmount,@"qgasAmount":qgasAmount,@"usdtToAddress":usdtToAddress,@"fromAddress":fromAddress};
+    
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl6:trade_sell_order_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] doubleValue] == 0) {
+            
+            weakself.sellOrderM = [TradeOrderListModel getObjectWithKeyValues:responseObject[@"order"]];
+//            [weakself showSubmitSuccess];
+            NSString *memo = [NSString stringWithFormat:@"%@_%@_%@_%@",@"otc",@"trade",@"sell",weakself.sellOrderM.ID?:@""];
+            [weakself sell_transfer:fromAddress amountStr:tokenAmount tokenChain:tokenChain tokenName:tokenName memo:memo];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+- (void)requestTrade_sell_order_txidWithTokenChain:(NSString *)tokenChain tokenName:(NSString *)tokenName tokenAmount:(NSString *)tokenAmount {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    
+    NSString *tradeOrderId = _sellOrderM!=nil?_sellOrderM.ID:@"";
+    NSString *txid = _sellTxid?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"tradeOrderId":tradeOrderId,@"txid":txid};
+    
+    OTCOrder_Buysell_Sell_Txid_ParamsModel *paramsM = [OTCOrder_Buysell_Sell_Txid_ParamsModel getObjectWithKeyValues:params];
     paramsM.timestamp = timestamp;
     [[OTCOrderTodo shareInstance] savePayOrder_Buysell_Sell:paramsM];
     
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl6:trade_sell_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_sell_order_txid_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] doubleValue] == 0) {
             [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Sell_Success:paramsM];
             
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
-//            [weakself showSubmitSuccess];
+            //            [weakself showSubmitSuccess];
             kAppD.pushToOrderList = YES;
             [weakself.navigationController popToRootViewControllerAnimated:YES];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TRADE_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = tokenChain?:@"";
+            txidBackM.tokenName = tokenName?:@"";
+            txidBackM.amount = tokenAmount?:@"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Sell_Success:paramsM];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -380,6 +436,7 @@
         weakself.receiveAddressTF.text = model.address;
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -408,9 +465,10 @@
         weakself.sendQgasWalletNameLab.text = model.name;
         weakself.sendQgasWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
         weakself.qgasSendTF.text = model.address;
-        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
+//        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -487,7 +545,12 @@
             return;
         }
         
-        [self sell_transfer:_qgasMaxTF.text tokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken];
+        _sellFromAddress = _qgasSendTF.text?:@"";
+        [self requestTrade_sell_orderWithTokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken tokenAmount:_qgasMaxTF.text];
+        
+//        [self sell_transfer:_qgasMaxTF.text tokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken];
+        
+        
         
 //        // 判断当前钱包
 //        WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
@@ -541,6 +604,47 @@
     _qgasSendTF.text = nil;
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == _qgasMaxTF) {
+//        if (textField.text.length == 0 && [string isEqualToString:@"0"]) { // 首位不为0
+//            return NO;
+//        }
+//
+//        if (![string isNumber]) { // 限制为数字
+//            return NO;
+//        }
+        
+        if (string.length == 0) {
+            return YES;
+        }
+        NSString *checkStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        //正则表达式（只支持3位小数）
+        NSString *regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,3})?$";
+        if (![self isValid:checkStr withRegex:regex]) {
+            return NO;
+        }
+        
+        // 限制最大值
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (_orderInfoM) {
+            NSInteger compareR = newString.compare(_orderInfoM.maxAmount);
+            if (compareR <= 0) { // 小于等于最大值
+                return YES;
+            } else { // 大于最大值
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)isValid:(NSString *)checkStr withRegex:(NSString *)regex {
+    NSPredicate *predicte = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    return [predicte evaluateWithObject:checkStr];
+}
+
 
 #pragma mark - Transition
 - (void)jumpToPayAddress:(TradeOrderInfoModel *)model {
@@ -550,6 +654,7 @@
 //    vc.inputAddressType = PayReceiveAddressTypeUSDT;
     vc.backToRoot = YES;
     vc.tradeM = model;
+    vc.isBuyOrder = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

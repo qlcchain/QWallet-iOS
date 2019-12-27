@@ -21,4 +21,7 @@ typedef enum : NSUInteger {
 + (NSString *)getContinentOfCountry:(NSString *)inputCountry;
 + (NSString *) getConutryNameWithCode:(NSString *) code;
 + (NSMutableArray *) getAllCountry;
++ (NSString *)removeCodeContain:(NSString *)originNum;
+
+
 @end

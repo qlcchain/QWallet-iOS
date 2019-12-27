@@ -22,6 +22,8 @@
 #import "RSAUtil.h"
 #import "NSDate+Category.h"
 #import "SuccessTipView.h"
+#import "ClaimSuccessTipView.h"
+#import "AppJumpHelper.h"
 
 @interface ClaimQGASViewController ()
 
@@ -83,10 +85,13 @@
     [RequestService requestWithUrl11:reward_claim_bind_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            SuccessTipView *view = [SuccessTipView getInstance];
-            [view showWithTitle:kLang(@"successful")];
+            ClaimSuccessTipView *view = [ClaimSuccessTipView getInstance];
+            [view showWithTitle:kLang(@"successful") tip:kLang(@"use_qgas_to_get_phone_bill_discount_or_just_trade_in_otc_market_")];
             
-            [weakself backAction:nil];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [AppJumpHelper jumpToTopup];
+                [weakself.navigationController popToRootViewControllerAnimated:YES];
+            });
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -138,9 +143,10 @@
         weakself.sendQgasWalletNameLab.text = model.name;
         weakself.sendQgasWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
         weakself.qgasSendTF.text = model.address;
-        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
+//        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 

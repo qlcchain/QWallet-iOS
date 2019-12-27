@@ -117,6 +117,7 @@ typedef enum : NSUInteger {
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action3];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -143,6 +144,7 @@ typedef enum : NSUInteger {
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action1];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 

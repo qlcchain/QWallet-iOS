@@ -16,6 +16,7 @@
 "title_screen_lock" = "屏幕锁";
 "english" = "英文";
 "chinese" = "中文";
+"indonesian" = "印度尼西亚语";
 
 // 我的---
 "crypto_wallet" = "加密钱包";
@@ -26,6 +27,8 @@
 "login_signup" = "登录/注册";
 "me" = "我的";
 "daily_earnings"="每日收益";
+"join_us_on_telegram_to_get_the_latest_qgas_news" = "加入我们的电报群 获得最新QGAS动态";
+"join_now" = "立即加入";
 
 // 个人信息---
 "profile_photo" = "档案照片";
@@ -85,6 +88,10 @@
 "amount_price" = "总价";
 "pending" = "等待中";
 "the_order_status_is_not_correct_and_cannot_be_transferred" = "订单状态错误, 不能转账. ";
+"filter" = "筛选";
+"trading_pairs" = "交易对";
+"reset" = "重置";
+"filter_confirm" = "确定";
 
 // 支付USDT---
 "eth_wallet_address" = "ETH钱包地址";
@@ -116,6 +123,7 @@
 "amount" = "数量";
 "copied" = "已复制";
 "transaction_pending" = "交易等待中";
+"new_order" = "新订单";
 
 // USDT接收地址---
 "receivable_address" = "接收地址";
@@ -136,6 +144,10 @@
 "qlc_wallet_address_is_invalidate" = "QLC钱包地址无效";
 "wallet_address_is_invalidate" = "钱包地址无效";
 "amount_need_greater_than_or_equal_to_max_amount" = "数量必须大于等于最大数量";
+"max_amount_need_greater_than_or_equal_to_min_amount" = "最大数量必须大于等于最小数量";
+"the_min_amount_should_be_equal_or_greater_than_1" = "最小值应该等于或大于1";
+"buying_amount_need_greater_than_or_equal_to_min_amount" = "买入数量必须大于等于最小数量";
+"selling_amount_need_greater_than_or_equal_to_min_amount" = "卖出数量必须大于等于最小数量";
 "please_switch_to_qlc_wallet" = "请切换到QLC钱包";
 "please_switch_to_neo_wallet" = "请切换到NEO钱包";
 "please_switch_to_eos_wallet" = "请切换到EOS钱包";
@@ -177,6 +189,8 @@
 "i_ve_received" = "我已经接收";
 "ok_" = "确定";
 "please_be_patiently_it_hasnt_been_30_minutes_" = "请耐心等待. 还不到30分钟. ";
+"transaction_parsing_failed" = "交易解析失败";
+"overtime" = "超时";
 
 // Appeal---
 "for_example_incorrect_amount_no_payment_received_etc" = "例如, 金额不正确, 没有收到付款等. ";
@@ -335,6 +349,7 @@
 "you_do_not_have_wallet_created_immediately" = "您还没有%@钱包\n立即创建";
 "create" = "创建";
 "use_to_purchase__yuan_of_phone_charge_for_deduction" = "充值%@元话费\n需要支付%@ %@和%@元";
+"use_to_purchase__yuan_of_phone_charge_for_deduction_1" = "充值%@ %@话费\n需要支付%@ %@和%@ %@";
 "choose_international_and_regional" = "选择国家和地区";
 "please_enter_your_mobile_phone_number" = "请输入手机号码";
 "recharge__yuan_phone_charge_deduction__yuan" = "充值%@元话费, %@%@抵扣%@元";
@@ -347,6 +362,11 @@
 "phone_charge_failed" = "话费充值失败";
 "qgas_parsing_failed" = "链确认失败";
 "phone_charge_recharge_failed_has_been_returned" = "已退回%@";
+"pay_token_returned" = "支付币已退回";
+"cancelled" = "已取消";
+"pay_txid_error" = "支付币解析失败";
+"deduction_txid_error" = "抵扣币解析失败";
+"pay_token_paid" = "支付币已支付";
 "_will_be_returned_to_the_payment_address" = "%@将退回至支付钱包";
 "confirm" = "确认";
 "coming_soon_next_month" = "次月优惠即将上架";
@@ -356,6 +376,7 @@
 "successfully_paid_" = "成功支付%@";
 "generating_recharge_vouchers_on_the_chain" = "正在生成链上充值凭证";
 "the_recharge_voucher_on_the_chain_was_successfully_generated" = "成功生成链上充值凭证";
+"refer_friends_" = "介绍朋友 >";
 
 // 领取QGAS
 "free_qlc_lending_for_staking" = "免费借得抵押金";
@@ -366,4 +387,39 @@
 "immediately_invite" = "立即邀请";
 "ranking_in_the_last_30_days" = "最近30天推荐奖励排名";
 "00000000_Copy" = "00000000（点击复制）";
+"use_qgas_to_get_phone_bill_discount_or_just_trade_in_otc_market_" = "使用QGAS享受话费充值优惠，更可直接在OTC市场交易。";
 
+// 交易挖矿
+"sheet_mining" = "挂单挖矿";
+"minging_more_details" = "了解详情";
+"daily_qgas_trade_mining_pool_up_to_" = "QGAS挂单挖矿, 挂单即可瓜分每日最多";
+"no_qlc_can_claim" = "没有可以领取的QLC";
+"qgas_trade_mining_pool_up_to" = "挂单挖矿瓜分最高";
+"mined_qlc_redeem_every_day" = "每日挂单挖矿得奖励，每日结算";
+
+// QLC k线
+"qlc_go_trade" = "去交易  >";
+"qlc_hour" = "小时";
+"qlc_day" = "天";
+"qlc_week" = "周";
+"qlc_month" = "月";
+"qlc_year" = "年";
+
+// Sheet mining
+"___qgas_traded" = "已成交%@ QGAS";
+"i_have_claimed__qlc" = "已领取奖励：%@ QLC";
+
+// Topup Credential
+"top_up__phone_bill__" = "话费慢充-%@元手机话费-%@";
+
+// Share friends
+"i_have_claimed__qgas" = "已领取奖励：%@ QGAS";
+"__friends_referred " = "已邀请%@人";
+"you_can_claim_the_reward_when_successfully_invited_more_than__friends_" = "邀请好友满%@位可立即领取";
+"get__qgas" = "获得%@QGAS";
+
+// Topup Choose Country Code
+"please_choose_country_code_first" = "请先选择国家区号";
+"please_choose_operator_first" = "请先选择运营商";
+"optional" = "选填";
+"phone_number_cannot_be_empty" = "手机号不能为空";

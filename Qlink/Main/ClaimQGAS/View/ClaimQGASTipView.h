@@ -14,10 +14,8 @@ typedef void(^ClaimQGASTipConfirmBlock)(void);
 
 @interface ClaimQGASTipView : UIView
 
-@property (nonatomic, copy) ClaimQGASTipConfirmBlock confirmBlock;
-
 //+ (instancetype)getInstance;
-+ (void)show;
++ (void)show:(ClaimQGASTipConfirmBlock)block;
 
 @end
 

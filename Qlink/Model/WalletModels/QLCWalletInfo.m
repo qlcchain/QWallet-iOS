@@ -193,4 +193,5 @@
     return [QLCWalletInfo getAllWalletInKeychain].count>0?YES:NO;
 }
 
+
 @end

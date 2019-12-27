@@ -19,7 +19,7 @@ typedef void(^EOSTransferConfirmBlock)(void);
 @property (nonatomic, copy) EOSTransferConfirmBlock confirmBlock;
 
 + (instancetype)getInstance;
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount memo:(NSString *)memo;
+- (void)configWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress amount:(NSString *)amount memo:(NSString *)memo;
 - (void)configWithWallet:(WalletCommonModel *)fromM to:(NSString *)sendto amount:(NSString *)amount memo:(NSString *)memo showMemo:(BOOL)showMemo;
 - (void)show;
 

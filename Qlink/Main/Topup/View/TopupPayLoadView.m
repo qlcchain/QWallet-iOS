@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLab1;
 @property (weak, nonatomic) IBOutlet UILabel *tipLab2;
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (nonatomic, copy) TopupPayCompleteBlock completeB;
 @property (nonatomic, copy) TopupPayCloseBlock closeB;
 @property (nonatomic, strong) NSString *currentSymbol;
@@ -41,6 +42,7 @@
     _closeB = closeB;
     _currentSymbol = symbol;
     
+    _lineView.backgroundColor = UIColorFromRGB(0xE6E6E6);
     _closeBtn.hidden = YES;
     _img1.image = [UIImage imageNamed:@"icon_background_load"];
     _img2.image = [UIImage imageNamed:@"icon_background_no"];
@@ -56,35 +58,58 @@
     _closeBtn.hidden = NO;
 }
 
-- (void)startPayAnimate1 {
+- (void)addScaleAnimate:(UIView *)view {
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.duration = 0.6;
+    scaleAnimation.repeatCount = HUGE_VALF;
+    scaleAnimation.autoreverses = YES;
+    scaleAnimation.removedOnCompletion = NO;
+    scaleAnimation.fromValue = @(0.6);
+    scaleAnimation.toValue = @(1.4);
+    [view.layer addAnimation:scaleAnimation forKey:@"scale-layer"];
+}
+
+- (void)removeScaleAnimate:(UIView *)view {
+    [view.layer removeAllAnimations];
+}
+
+- (void)finishStepAnimate1 {
+    [self removeScaleAnimate:self.img1];
+    _lineView.backgroundColor = MAIN_BLUE_COLOR;
+    [self addScaleAnimate:self.img2];
+    
     kWeakSelf(self);
     _img1.image = [UIImage imageNamed:@"icon_background_success"];
     _img2.image = [UIImage imageNamed:@"icon_background_load"];
     _tipLab1.text = [NSString stringWithFormat:kLang(@"successfully_paid_"),_currentSymbol];
     _tipLab2.text = kLang(@"generating_recharge_vouchers_on_the_chain");
-    [UIView animateWithDuration:0.2 animations:^{
-        weakself.img1.transform = CGAffineTransformMakeScale(1.2, 1.2);
-        weakself.img2.transform = CGAffineTransformMakeScale(1.2, 1.2);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2 animations:^{
-            weakself.img1.transform = CGAffineTransformIdentity;
-            weakself.img2.transform = CGAffineTransformIdentity;
-        }];
-    }];
+    
+//    [UIView animateWithDuration:0.2 animations:^{
+//        weakself.img1.transform = CGAffineTransformMakeScale(1.2, 1.2);
+//        weakself.img2.transform = CGAffineTransformMakeScale(1.2, 1.2);
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.2 animations:^{
+//            weakself.img1.transform = CGAffineTransformIdentity;
+//            weakself.img2.transform = CGAffineTransformIdentity;
+//        }];
+//    }];
 }
 
-- (void)startPayAnimate2 {
+- (void)finishStepAnimate2 {
+    [self removeScaleAnimate:self.img2];
+    
     kWeakSelf(self);
     _img2.image = [UIImage imageNamed:@"icon_background_success"];
     _tipLab1.text = [NSString stringWithFormat:kLang(@"successfully_paid_"),_currentSymbol];
     _tipLab2.text = kLang(@"the_recharge_voucher_on_the_chain_was_successfully_generated");
-    [UIView animateWithDuration:0.2 animations:^{
-        weakself.img2.transform = CGAffineTransformMakeScale(1.2, 1.2);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2 animations:^{
-            weakself.img2.transform = CGAffineTransformIdentity;
-        }];
-    }];
+    
+//    [UIView animateWithDuration:0.2 animations:^{
+//        weakself.img2.transform = CGAffineTransformMakeScale(1.2, 1.2);
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.2 animations:^{
+//            weakself.img2.transform = CGAffineTransformIdentity;
+//        }];
+//    }];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
         if (weakself.completeB) {
@@ -98,6 +123,8 @@
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    
+    [self addScaleAnimate:self.img1];
 }
 
 - (void)hide {

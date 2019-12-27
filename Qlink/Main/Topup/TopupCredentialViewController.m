@@ -47,21 +47,39 @@
 
 #pragma mark - Operation
 - (void)configInit {
-    NSNumber *faitStr = _inputCredentailM.discountPrice;
+    NSNumber *faitStr = @(0);
     NSNumber *qgasStr = _inputCredentailM.qgasAmount;
     
     NSString *symbolStr = _inputCredentailM.symbol;
     NSString *addStr = @"+";
     NSString *topupAmountShowStr = @"";
     NSString *projectStr = @"";
-    NSString *language = [Language currentLanguageCode];
-    if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitStr,addStr,qgasStr,symbolStr];
-        projectStr = [NSString stringWithFormat:@"Top up-%@Phone bill-%@",_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
-    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,qgasStr,symbolStr];
-        projectStr = [NSString stringWithFormat:@"话费慢充-%@元手机话费-%@",_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+    NSString *paySymbolStr = @"";
+    if ([_inputCredentailM.payWay isEqualToString:@"FIAT"]) { // 法币支付
+        if ([_inputCredentailM.payFiat isEqualToString:@"CNY"]) {
+            faitStr = _inputCredentailM.discountPrice;
+            paySymbolStr = _inputCredentailM.localFiat;
+        } else if ([_inputCredentailM.payFiat isEqualToString:@"USD"]) {
+            
+        }
+    } else if ([_inputCredentailM.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+        faitStr = _inputCredentailM.payTokenAmount;
+        paySymbolStr = _inputCredentailM.payTokenSymbol;
     }
+    topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,paySymbolStr,addStr,qgasStr,symbolStr];
+    projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+    
+//    NSString *language = [Language currentLanguageCode];
+//    if ([language isEqualToString:LanguageCode[0]]) { // 英文
+//        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitStr,addStr,qgasStr,symbolStr];
+//        projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+//    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+//        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,kLang(@"rmb"),addStr,qgasStr,symbolStr];
+//        projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+//    } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+//        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",kLang(@"rmb"),faitStr,addStr,qgasStr,symbolStr];
+//        projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+//    }
     
     _amountLab.text = topupAmountShowStr;
     _timeLab.text = _inputCredentailM.orderTime;

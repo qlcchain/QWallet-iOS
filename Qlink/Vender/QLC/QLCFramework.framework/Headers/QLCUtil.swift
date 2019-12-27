@@ -251,13 +251,13 @@ public class QLCUtil: NSObject {
                     if response != nil {
                         successHandler(response)
                     } else {
-                        failureHandler(nil, nil)
+                        failureHandler(nil, "qlc process api return nil")
                     }
                 }) { (error, message) in
                     failureHandler(error, message)
                 }
             } else {
-                failureHandler(nil, nil)
+                failureHandler(nil, "sendBlock func return nil")
             }
         }) { (error, message) in
             failureHandler(error, message)
@@ -405,7 +405,34 @@ public class QLCUtil: NSObject {
     @objc public static func getRandomStringOfLength(length: Int) -> String {
         return RandomString.getRandomStringOfLength(length: length)
     }
-
+    
+    /// 根据本地时区转换
+    static func getUTCDateFromatAnDate(_ anyDate: Date?) -> Date {
+        //设置源日期时区
+        let sourceTimeZone = NSTimeZone.local as NSTimeZone
+        //或GMT
+        //设置转换后的目标日期时区
+        let destinationTimeZone = NSTimeZone(abbreviation: "UTC")
+        //得到源日期与世界标准时间的偏移量
+        var sourceGMTOffset: Int? = nil
+        if let aDate = anyDate {
+            sourceGMTOffset = sourceTimeZone.secondsFromGMT(for: aDate)
+        }
+        //目标日期与本地时区的偏移量
+        var destinationGMTOffset: Int? = nil
+        if let aDate = anyDate {
+            destinationGMTOffset = destinationTimeZone!.secondsFromGMT(for: aDate)
+        }
+        //得到时间偏移量的差值
+        let interval = TimeInterval((destinationGMTOffset ?? 0) - (sourceGMTOffset ?? 0))
+        //转为现在时间
+        var destinationDateNow: Date? = nil
+        if let aDate = anyDate {
+            destinationDateNow = Date(timeInterval: interval, since: aDate)
+        }
+        return destinationDateNow!
+    }
+    
 }
 
 

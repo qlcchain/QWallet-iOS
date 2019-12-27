@@ -11,13 +11,15 @@
 @class TopupProductModel;
 
 static NSString *TopupCellReuse = @"TopupCell";
-#define TopupCell_Height 196
+#define TopupCell_Height 212
 
 @interface TopupCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *discountBack;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *titleEnLab;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleEnLab;
 @property (weak, nonatomic) IBOutlet UILabel *checkDiscountLab;
 @property (weak, nonatomic) IBOutlet UILabel *discountLab;
 @property (weak, nonatomic) IBOutlet UILabel *desLab;

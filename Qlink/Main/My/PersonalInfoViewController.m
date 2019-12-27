@@ -144,6 +144,7 @@
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action3];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -277,6 +278,7 @@
     pickerController.delegate = self;
     //使用模态呈现相册
     //[self showDetailViewController:pickerController sender:nil];
+    pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:pickerController animated:YES completion:nil];
     
 }

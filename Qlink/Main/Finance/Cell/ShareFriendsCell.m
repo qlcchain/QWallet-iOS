@@ -59,6 +59,20 @@
     }];
 }
 
+- (void)configCell_MiningReward:(InviteRankingModel *)model color:(UIColor *)color {
+    _contentBack.backgroundColor = color;
+    _topHeight.constant = 0;
+    _bottomHeight.constant = 0;
+    NSNumber *num = model.sequence;
+    _numLab.text = [NSString stringWithFormat:@"%@",num==0?@"99+":num];
+    _nameLab.text = model.showName;
+    
+    _inviteLab.text = [NSString stringWithFormat:@"%@ QLC",model.totalReward.mul(@"1")];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.head]];
+    [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    }];
+}
+
 - (IBAction)moreAction:(id)sender {
     if (_moreB) {
         _moreB();

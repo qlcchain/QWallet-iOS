@@ -12,6 +12,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TopupProductModel : BBaseModel
 
+/**
+* countryEn : All Operators in China
+* explain : 72小时内到账 急用勿拍
+* country : 中国
+* descriptionEn : 慢充话费，折扣低，价格实惠
+* localFiat : CNY 当地法币
+* isp : 通用  运营商
+* payWay : FIAT   支付方式，fiat= 法币 token = 代币
+* description : 慢充话费，折扣低，价格实惠
+* discount : 0.98
+* nameEn : All provinces of China
+* qgasDiscount : 0.02   抵扣币的折扣
+* amountOfMoney : 30,50,100   当地法币的金额，和支付币的金额一一对应
+* upTime : 2019-10-19 13:31:34
+* ispEn :
+* payFiatAmount : 30,50,100      支付币的金额
+* province : 全国
+* payFiat : CYN  支付法币是哪一个
+* imgPath : /userfiles/1/images/topup/2019/10/3a117d16c4654ab78a332db30613dadb.jpg
+* name : 全国通用
+* explainEn : 72小时内到账 急用勿拍
+* id : 4b51058ae87141df9217b2d8de9530cc
+* stock : -1    库存
+* provinceEn :
+* payTokenSymbol : QLC 支付币，如果是法币支付，这个字段没有
+* payTokenUsdProce : 0.0   支付币美元价格
+* payTokenCnyProce : 0.5   支付币人民币价格
+*/
+
 @property (nonatomic, strong) NSString *countryEn; //" : "中国",
 @property (nonatomic, strong) NSString *explain; //" : "1",
 @property (nonatomic, strong) NSString *country; //" : "中国",
@@ -31,8 +60,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *ID; //" : "56594c9614984f149ec93b51e5161fyy",
 @property (nonatomic, strong) NSString *provinceEn; //" : "广东"
 @property (nonatomic, strong) NSNumber *stock;//  0:代表没有库存
+@property (nonatomic, strong) NSString *deductionToken; //  QGAS
+@property (nonatomic, strong) NSString *payFiat; // CYN
+@property (nonatomic, strong) NSString *payFiatAmount; //
+@property (nonatomic, strong) NSString *payWay; //  FIAT
+@property (nonatomic, strong) NSString *payTokenSymbol;
+@property (nonatomic, strong) NSNumber *payTokenUsdPrice;
+@property (nonatomic, strong) NSNumber *payTokenCnyPrice;
+@property (nonatomic, strong) NSString *localFiat;
+@property (nonatomic, strong) NSString *payTokenChain; // QLC_CHAIN
 
-@property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, strong) NSString *localFaitMoney;
+@property (nonatomic, strong) NSString *payTokenMoney;
 
 
 @end

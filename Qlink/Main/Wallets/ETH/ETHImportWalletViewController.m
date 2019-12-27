@@ -231,6 +231,7 @@ typedef enum : NSUInteger {
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 

@@ -52,16 +52,55 @@
     _topupAmountLab.text = nil;
     _payAmountLab.text = nil;
     _topupStateLab.text = nil;
-    _discountAmountLab.text = nil;
+//    _discountAmountLab.text = nil;
     _qgasAmountLab.text = nil;
 }
 
++ (BOOL)blockchainInvoiceExist:(NSString *)invoice {
+    if (invoice == nil || [invoice isEmptyString]) {
+        return NO;
+    }
+    return YES;
+}
+
 + (CGFloat)cellHeight:(TopupOrderModel *)model {
-    CGFloat otherHeight = 333-48-48;
-    CGFloat detailHeight = [model.status isEqualToString:Topup_Order_Status_SUCCESS]?48:0;
-    CGFloat payHeight = [model.status isEqualToString:Topup_Order_Status_QGAS_PAID]?48:0;
+    CGFloat detail_const = 48;
+    CGFloat invoice_const = 48;
+    CGFloat pay_const = 48;
+    CGFloat cardSerial_const = 30;
+    CGFloat cardPW_const = 30;
+    CGFloat cardPin_const = 30;
+    CGFloat expiryDate_const = 30;
+    CGFloat otherHeight = 453-detail_const-invoice_const-pay_const-cardSerial_const-cardPW_const-cardPin_const-expiryDate_const;
     
-    return otherHeight+detailHeight+payHeight;
+    CGFloat detailHeight = [model.status isEqualToString:Topup_Order_Status_SUCCESS]?detail_const:0;
+    CGFloat invoiceHeight = [MyTopupOrderCell blockchainInvoiceExist:model.txid]?detail_const:0;
+    CGFloat payHeight = 0;
+    if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
+        if ([model.payFiat isEqualToString:@"CNY"]) {
+            payHeight = [model.status isEqualToString:Topup_Order_Status_QGAS_PAID]?pay_const:0;
+        } else if ([model.payFiat isEqualToString:@"USD"]) {
+            
+        }
+    } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+        payHeight = 0;
+        if (model.txid == nil || [model.txid isEmptyString]) {
+            payHeight = pay_const;
+        } else {
+            if (model.payTokenInTxid == nil || [model.payTokenInTxid isEmptyString]) {
+                if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
+                    payHeight = pay_const;
+                }
+            }
+        }
+    }
+    
+    CGFloat cardSerialHeight = (model.serialno && ![model.serialno isEmptyString])?cardSerial_const:0;
+    CGFloat cardPWHeight = (model.passwd && ![model.passwd isEmptyString])?cardPW_const:0;
+    CGFloat cardPinHeight = (model.pin && ![model.pin isEmptyString])?cardPin_const:0;
+    CGFloat expiryDateHeight = (model.expiredtime && ![model.expiredtime isEmptyString])?expiryDate_const:0;
+    
+    return otherHeight+detailHeight+payHeight+invoiceHeight+cardSerialHeight+cardPWHeight+cardPinHeight+expiryDateHeight;
 }
 
 - (void)config:(TopupOrderModel *)model cancelB:(MyTopupOrderCancelBlock)cancelB payB:(MyTopupOrderPayBlock)payB credentialB:(MyTopupOrderCredentialBlock)credentialB credetialDetalB:(MyTopupOrderCredentialDetalBlock)credentialDetailB {
@@ -92,33 +131,94 @@
     _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
     _numLab.text = [NSString stringWithFormat:@"%@%@",model.areaCode,model.phoneNumber];
     _toClaimIcon.image = [UIImage imageNamed:claimStr];
-
-    NSString *discountNumStr = model.originalPrice.sub(model.discountPrice);
-//    NSString *discountNumStr = [NSD([model.originalPrice stringValue]).sub(model.discountPrice) stringValue];
-//    NSString *discountNumStr = [NSString stringFromDouble:[model.originalPrice doubleValue] - [model.discountPrice doubleValue]];
-    NSString *topupAmountStr = @"";
-    NSString *payAmountStr = @"";
-    NSString *discountAmountStr = @"";
-    if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        topupAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.originalPrice];
-        payAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.discountPrice];
-        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNumStr];
-    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,kLang(@"rmb")];
-        payAmountStr = [NSString stringWithFormat:@"%@%@",model.discountPrice,kLang(@"rmb")];
-        discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,kLang(@"rmb")];
+    
+    _cardSerialNumberHeight.constant = (model.serialno && ![model.serialno isEmptyString])?30:0;
+    _cardPWNumberHeight.constant = (model.passwd && ![model.passwd isEmptyString])?30:0;
+    _cardPinNumberHeight.constant = (model.pin && ![model.pin isEmptyString])?30:0;
+    _expiryDateHeight.constant = (model.expiredtime && ![model.expiredtime isEmptyString])?30:0;
+    _cardSerialNumberLab.text = model.serialno;
+    _cardPWNumberLab.text = model.passwd;
+    _cardPinNumberLab.text = model.pin;
+    _expiryDateLab.text = model.expiredtime;
+    
+    if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
+        if ([model.payFiat isEqualToString:@"CNY"]) {
+            [self handlerPayCNY:model];
+        } else if ([model.payFiat isEqualToString:@"USD"]) {
+            
+        }
+    } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+        [self handlerPayToken:model];
     }
-    _topupAmountLab.text = topupAmountStr;
-    _payAmountLab.text = payAmountStr;
-    NSNumber *qgasNum = model.qgasAmount;
-    _discountAmountLab.text = discountAmountStr;
-    _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.symbol?:@""];
     
     _credentialLab.text = [model.txid isEmptyString]?@"":[NSString stringWithFormat:@"%@...%@",[model.txid substringToIndex:8],[model.txid substringFromIndex:model.txid.length-8]];
     _topupStateLab.text = [model getStatusString];
     _topupStateLab.textColor = [model getStatusColor];
     _credentialDetailHeight.constant = [model.status isEqualToString:Topup_Order_Status_SUCCESS]?48:0;
+    _blockchainHeight.constant = [MyTopupOrderCell blockchainInvoiceExist:model.txid]?48:0;
+    
+    _cancelBtn.hidden = YES;
+    if ([model.status isEqualToString:Topup_Order_Status_New] || [model.status isEqualToString:Topup_Order_Status_QGAS_PAID] || [model.status isEqualToString:Topup_Order_Status_Pay_TOKEN_PAID]) {
+        _cancelBtn.hidden = NO;
+    }
+}
+
+- (void)handlerPayCNY:(TopupOrderModel *)model {
+//    NSString *language = [Language currentLanguageCode];
+    NSString *discountNumStr = model.originalPrice.sub(model.discountPrice);
+    NSString *topupAmountStr = @"";
+    NSString *payAmountStr = @"";
+    NSString *discountAmountStr = @"";
+    topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,model.localFiat];
+    payAmountStr = [NSString stringWithFormat:@"%@%@",model.discountPrice,model.localFiat];
+    discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.localFiat];
+//    if ([language isEqualToString:LanguageCode[0]]) { // 英文
+//        topupAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.originalPrice];
+//        payAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.discountPrice];
+//        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNumStr];
+//    } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+//        topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,kLang(@"rmb")];
+//        payAmountStr = [NSString stringWithFormat:@"%@%@",model.discountPrice,kLang(@"rmb")];
+//        discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,kLang(@"rmb")];
+//    } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+//        topupAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.originalPrice];
+//        payAmountStr = [NSString stringWithFormat:@"%@%@",kLang(@"rmb"),model.discountPrice];
+//        discountAmountStr = [NSString stringWithFormat:@"-%@%@",kLang(@"rmb"),discountNumStr];
+//    }
+    _topupAmountLab.text = topupAmountStr;
+    _payAmountLab.text = payAmountStr;
+    NSNumber *qgasNum = model.qgasAmount;
+//    _discountAmountLab.text = discountAmountStr;
+    _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.symbol?:@""];
+    
     _payHeight.constant = [model.status isEqualToString:Topup_Order_Status_QGAS_PAID]?48:0;
+}
+
+- (void)handlerPayToken:(TopupOrderModel *)model {
+    NSString *topupAmountStr = @"";
+    NSString *payAmountStr = @"";
+//    NSString *discountAmountStr = @"";
+    topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,model.localFiat];
+    payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount,model.payTokenSymbol];
+//    discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.symbol];
+    NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.qgasAmount,model.symbol?:@""];
+    
+    _topupAmountLab.text = topupAmountStr;
+    _payAmountLab.text = payAmountStr;
+//    _discountAmountLab.text = discountAmountStr;
+    _qgasAmountLab.text = qgasNumStr;
+    
+    _payHeight.constant = 0;
+    if (model.txid == nil || [model.txid isEmptyString]) {
+        _payHeight.constant = 48;
+    } else {
+        if (model.payTokenInTxid == nil || [model.payTokenInTxid isEmptyString]) {
+            if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
+                _payHeight.constant = 48;
+            }
+        }
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

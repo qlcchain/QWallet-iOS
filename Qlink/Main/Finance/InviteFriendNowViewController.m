@@ -47,10 +47,13 @@
     NSString *shareUrl = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
         _inviteBackImg.image = [UIImage imageNamed:@"icon_invitation_en"];
-        shareUrl = @"https://fir.im/qlc1";
+        shareUrl = @"https://qwallet.network/en";
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         _inviteBackImg.image = [UIImage imageNamed:@"icon_invitation_ch"];
-        shareUrl = @"https://fir.im/qlc1";
+        shareUrl = @"https://qwallet.network/cn";
+    } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+        _inviteBackImg.image = [UIImage imageNamed:@"icon_invitation_en"];
+        shareUrl = @"https://qwallet.network/en";
     }
     UIImage *img = [[UIImage imageNamed:@"icon_start_icon"] imgWithBackgroundColor:[UIColor whiteColor]];
     _qrImgV.image = [SGQRCodeObtain generateQRCodeWithData:shareUrl size:_qrImgV.width logoImage:img ratio:0.15 logoImageCornerRadius:4.0 logoImageBorderWidth:0.5 logoImageBorderColor:[UIColor whiteColor]];
@@ -66,6 +69,7 @@
     UIImage *img = [_shareBack getImageFromView];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[img] applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAirDrop];
+    activityVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:activityVC animated:YES completion:nil];
     activityVC.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
         if (completed) {

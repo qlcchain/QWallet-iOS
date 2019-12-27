@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class TopupProductModel,TopupPayTokenModel;
+@class TopupProductModel,TopupDeductionTokenModel;
 
 static NSString *ChooseTopupPlanCellReuse = @"ChooseTopupPlanCell";
 #define ChooseTopupPlanCell_Height 196
@@ -25,6 +25,6 @@ static NSString *ChooseTopupPlanCellReuse = @"ChooseTopupPlanCell";
 @property (weak, nonatomic) IBOutlet UILabel *explainLab;
 @property (weak, nonatomic) IBOutlet UILabel *desLab;
 
-- (void)config:(TopupProductModel *)productM payToken:(TopupPayTokenModel *)payTokenM;
+- (void)config:(TopupProductModel *)productM token:(TopupDeductionTokenModel *)tokenM;
 
 @end

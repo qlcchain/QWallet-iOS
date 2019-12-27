@@ -203,7 +203,7 @@
 - (void)requestBinaKlinesWithSymbol:(NSString *)symbol {
     kWeakSelf(self);
     NSString *interval = @"1m";
-    NSDictionary *params = @{@"symbol":symbol,@"interval":interval, @"size":@(20)};
+    NSDictionary *params = @{@"symbol":symbol,@"interval":interval, @"size":@(500)};
     [RequestService requestWithUrl5:binaKlines_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.lineArr removeAllObjects];

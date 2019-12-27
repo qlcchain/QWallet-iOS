@@ -18,11 +18,13 @@ static NSString *TopupPayOrderLocal_Key = @"TopupPayOrderLocal_Key";
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *p2pId;
 @property (nonatomic, strong) NSString *productId;
-@property (nonatomic, strong) NSString *areaCode;
+//@property (nonatomic, strong) NSString *areaCode;
 @property (nonatomic, strong) NSString *phoneNumber;
-@property (nonatomic, strong) NSString *amount;
+//@property (nonatomic, strong) NSString *amount;
+@property (nonatomic, strong) NSString *localFiatAmount;
 @property (nonatomic, strong) NSString *txid;
-@property (nonatomic, strong) NSString *payTokenId;
+//@property (nonatomic, strong) NSString *payTokenId;
+@property (nonatomic, strong) NSString *deductionTokenId;
 
 @end
 

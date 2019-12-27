@@ -28,6 +28,9 @@
 #import "QNavigationController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "OTCOrderTodo.h"
+#import "TxidBackUtil.h"
+#import "TokenListHelper.h"
+#import "QLCWalletInfo.h"
 
 @interface OTCPayQLCViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -45,6 +48,7 @@
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
 @property (nonatomic, strong) QLCTokenModel *selectAsset;
 @property (nonatomic, strong) WalletCommonModel *payWalletM;
+@property (nonatomic, strong) NSArray *qlcSource;
 
 @end
 
@@ -56,7 +60,7 @@
 
 #pragma mark - Observe
 - (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTokenNoti:) name:Update_QLC_Wallet_Token_Noti object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTokenNoti:) name:Update_QLC_Wallet_Token_Noti object:nil];
 }
 
 - (void)viewDidLoad {
@@ -109,13 +113,15 @@
 }
 
 - (void)showQLCTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = _payWalletM.address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName];
     QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
+//    [view configWithAddress:address amount:amount];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -135,7 +141,9 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
+- (void)sendTransfer:(NSString *)fromAddress {
+    NSString *from = fromAddress;
+    NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:fromAddress]?:@"";
     NSString *tokenName = _selectAsset.tokenName;
     NSString *to = _sendtoAddressTV.text;
     NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text];
@@ -148,20 +156,21 @@
     BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+//    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
 //        [kAppD.window hideToast];
 //        [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
 //        [weakself backToRoot];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [weakself requestTrade_buyer_confirm:responseObj]; // 买家确认支付
+            [weakself requestTrade_buyer_confirm:responseObj tokenName:tokenName tokenAmount:[NSString stringWithFormat:@"%@",@(amount)]]; // 买家确认支付
         });
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
         [kAppD.window hideToast];
     }];
 }
 
-- (void)requestTrade_buyer_confirm:(NSString *)txid {
+- (void)requestTrade_buyer_confirm:(NSString *)txid tokenName:(NSString *)tokenName tokenAmount:(NSString *)tokenAmount {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -192,6 +201,20 @@
             }
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TRADE_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = QLC_Chain;
+            txidBackM.tokenName = tokenName?:@"";
+            txidBackM.amount = tokenAmount?:@"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [[OTCOrderTodo shareInstance] handlerPayOrder_Buysell_Buy_Confirm_Success:paramsM];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -212,8 +235,11 @@
 
 - (BOOL)haveQLCTokenAssetNum:(NSString *)tokenName {
     __block BOOL haveAssetNum = NO;
-    NSArray *source = [kAppD.tabbarC.walletsVC getQLCSource];
-    [source enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!_qlcSource) {
+        return haveAssetNum;
+    }
+//    NSArray *source = [kAppD.tabbarC.walletsVC getQLCSource];
+    [_qlcSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         QLCTokenModel *model = obj;
         if ([model.tokenName isEqualToString:tokenName]) {
             NSString *num = [model getTokenNum];
@@ -336,8 +362,11 @@
     
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     kWeakSelf(self);
-    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getQLCSource];
-    [sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!_qlcSource) {
+        return;
+    }
+//    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getQLCSource];
+    [_qlcSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         QLCTokenModel *model = obj;
         if ([model.tokenName isEqualToString:weakself.inputPayToken]) {
             UIAlertAction *alert = [UIAlertAction actionWithTitle:model.tokenName style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -351,6 +380,7 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
@@ -362,10 +392,22 @@
         weakself.payWalletM = model;
         weakself.payWalletNameLab.text = model.name;
         weakself.payWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
-        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
-        [weakself checkSendBtnEnable];
+        
+//        [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
+        [TokenListHelper requestQLCAssetWithAddress:model.address?:@"" tokenName:weakself.inputPayToken?:@"" completeBlock:^(QLCAddressInfoModel *infoM, QLCTokenModel * _Nonnull tokenM, BOOL success) {
+            weakself.qlcSource = infoM.tokens;
+            weakself.selectAsset = tokenM;
+            if (!weakself.selectAsset) {
+                [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_qlc_wallet_have_not"),weakself.inputPayToken]];
+                return;
+            }
+            [weakself refreshView];
+            [weakself checkSendBtnEnable];
+        }];
+        
     }];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -374,14 +416,14 @@
 //    [self backToRoot];
 //}
 
-- (void)updateTokenNoti:(NSNotification *)noti {
-    _selectAsset = [kAppD.tabbarC.walletsVC getQLCAsset:_inputPayToken];
-    if (!_selectAsset) {
-        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_qlc_wallet_have_not"),_inputPayToken]];
-        return;
-    }
-    
-    [self refreshView];
-}
+//- (void)updateTokenNoti:(NSNotification *)noti {
+//    _selectAsset = [kAppD.tabbarC.walletsVC getQLCAsset:_inputPayToken];
+//    if (!_selectAsset) {
+//        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_qlc_wallet_have_not"),_inputPayToken]];
+//        return;
+//    }
+//
+//    [self refreshView];
+//}
 
 @end

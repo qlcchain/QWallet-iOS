@@ -231,7 +231,7 @@
     NSString *systemVersion = [[UIDevice currentDevice] systemVersion]; //获取系统版本 例如：9.2
 //    NSString *deviceUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; //获取设备唯一标识符 例如：FBF2306E-A0D8-4F4B-BDED-9333B627D3E6
     NSString *deviceModel = [[UIDevice currentDevice] model]; //获取设备的型号 例如：iPhone
-    [info appendString:@"iOS"];
+    [info appendString:Platform_iOS];
     [info appendString:@" "];
     [info appendString:deviceModel];
     [info appendString:@":"];

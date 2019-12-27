@@ -100,6 +100,7 @@
                     }];
                     [alert addAction:ok];
                     [alert addAction:update];
+                    alert.modalPresentationStyle = UIModalPresentationFullScreen;
                     [kAppD.window.rootViewController presentViewController:alert animated:YES completion:nil];
                 }
             }
@@ -125,10 +126,12 @@
     [RequestService requestWithUrl5:user_logout_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
+            [kAppD logout];
+            
             if (completeBlock) {
                 completeBlock();
             }
-            [kAppD logout];
+            
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

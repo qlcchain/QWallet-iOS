@@ -63,14 +63,14 @@
 //#import "WebTestViewController.h"
 //#import "GlobalConstants.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
-#import "ClaimQGASTipView.h"
 #import "UserUtil.h"
 #import "RLArithmetic.h"
-#import "JPushConstants.h"
 #import "AppDelegate+AppService.h"
 #import "NEOBackupDetailViewController.h"
 #import "QLCBackupDetailViewController.h"
 #import "ETHMnemonicViewController.h"
+#import "TokenListHelper.h"
+#import "EOSAddressInfoModel.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -113,7 +113,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *backupTip2Lab;
 @property (weak, nonatomic) IBOutlet UIButton *backupBtn;
 
-
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
@@ -139,7 +138,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addQLCWallet:) name:Add_QLC_Wallet_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qlcAccountPendingDone:) name:QLC_AccountPending_Done_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeNoti:) name:kLanguageChangeNoti object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInfoAfterLoginNoti:) name:User_UpdateInfoAfterLogin_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ethBackupUpdateNoti:) name:ETH_Wallet_Backup_Update_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(neoBackupUpdateNoti:) name:NEO_Wallet_Backup_Update_Noti object:nil];
@@ -166,9 +164,7 @@
     [self configInit];
     [self refreshBackupView]; // 刷新备份助记词
     
-    [ClaimQGASTipView show];
     
-    [self handlerPushJump];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -243,39 +239,10 @@
         
         [self startReceiveQLC]; // QLC--account pending
         
-        [self handlerCreateWalletInAuto];
-    } else { // 没有钱包 则跳转创建钱包页面
-        [self jumpToChooseWallet:NO];
     }
-}
-
-- (void)handlerCreateWalletInAuto {
-    // 如果当前有钱包  自动生成暂无的钱包（ETH\QLC\NEO）不包括EOS
-    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
-    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
-    BOOL haveQlcWallet = [QLCWalletInfo haveQLCWallet];
-    if (!haveEthWallet) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [ETHWalletInfo createETHWalletInAuto];
-        });
-    }
-    if (!haveNeoWallet) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [NEOWalletInfo createNEOWalletInAuto];
-        });
-    }
-    if (!haveQlcWallet) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [QLCWalletInfo createQLCWalletInAuto];
-        });
-    }
-}
-
-- (void)handlerPushJump {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-        NSDictionary *userInfo = [HWUserdefault getObjectWithKey:JPush_Tag_Jump];
-        [kAppD handlerPushJump:userInfo isTapLaunch:NO];
-    });
+//    else { // 没有钱包 则跳转创建钱包页面
+//        [self jumpToChooseWallet:NO];
+//    }
 }
 
 - (void)showContentView {
@@ -307,12 +274,12 @@
     _walletIcon.image = [UIImage imageNamed:@"eth_wallet"];
     
     [_sourceArr removeAllObjects];
-    [_sourceArr addObject:[self getETHToken]];
+//    [_sourceArr addObject:[self getETHToken]];
     [_sourceArr addObjectsFromArray:_ethAddressInfoM.tokens];
     [_mainTable reloadData];
     
     [_tokenSymbolArr removeAllObjects];
-    [_tokenSymbolArr addObject:@"ETH"];
+//    [_tokenSymbolArr addObject:@"ETH"];
     kWeakSelf(self);
     [_ethAddressInfoM.tokens enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Token *token = obj;
@@ -324,17 +291,17 @@
     });
 }
 
-- (Token *)getETHToken {
-    TokenInfo *tokenInfo = [[TokenInfo alloc] init];
-    tokenInfo.address = _ethAddressInfoM.address;
-    tokenInfo.decimals = @"0";
-    tokenInfo.name = @"ETH";
-    tokenInfo.symbol = @"ETH";
-    Token *token = [[Token alloc] init];
-    token.balance = _ethAddressInfoM.ETH.balance;
-    token.tokenInfo = tokenInfo;
-    return token;
-}
+//- (Token *)getETHToken {
+//    TokenInfo *tokenInfo = [[TokenInfo alloc] init];
+//    tokenInfo.address = _ethAddressInfoM.address;
+//    tokenInfo.decimals = @"0";
+//    tokenInfo.name = @"ETH";
+//    tokenInfo.symbol = @"ETH";
+//    Token *token = [[Token alloc] init];
+//    token.balance = _ethAddressInfoM.ETH.balance;
+//    token.tokenInfo = tokenInfo;
+//    return token;
+//}
 
 - (void)updateWalletWithQLC:(QLCAddressInfoModel *)qlcModel {
     NSArray *allWallets = [WalletCommonModel getAllWalletModel];
@@ -684,31 +651,128 @@
     [kAppD.window makeToastDisappearWithText:model.tips];
 }
 
+//- (void)refreshTokenList {
+//    _gasBackHeight.constant = 0;
+//    _eosResourcesHeight.constant = 0;
+//    _stakingHeight.constant = 0;
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    DDLogDebug(@"refreshTokenList:%@",@(currentWalletM.walletType));
+//    switch (currentWalletM.walletType) {
+//        case WalletTypeETH:
+//        {
+//            [self requestETHAddressInfo:currentWalletM.address?:@"" showLoad:NO];
+//        }
+//            break;
+//        case WalletTypeEOS:
+//        {
+//            [self requestEOSTokenList:currentWalletM.account_name?:@"" showLoad:NO];
+//        }
+//            break;
+//        case WalletTypeNEO:
+//        {
+//            [self requestNEOAddressInfo:currentWalletM.address?:@"" showLoad:NO];
+//        }
+//            break;
+//        case WalletTypeQLC:
+//        {
+//            [self requestQLCAddressInfo:currentWalletM.address?:@"" showLoad:NO];
+//        }
+//            break;
+//
+//        default:
+//            break;
+//    }
+//}
+
+- (void)handlerWithETH:(ETHAddressInfoModel *)infoM {
+    self.ethAddressInfoM = infoM;
+    [self updateWalletWithETH:_ethAddressInfoM];
+    [self refreshDataWithETH];
+}
+
+- (void)handlerWithEOS:(EOSAddressInfoModel *)infoM accountName:(NSString *)accountName {
+    __block NSNumber *eosBalance = @(0);
+    [infoM.symbol_list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        EOSSymbolModel *model = obj;
+        if ([model.symbol isEqualToString:@"EOS"]) { // 赋值EOS余额
+            eosBalance = model.balance;
+        }
+    }];
+    [self updateWalletWithEosBalance:eosBalance accountName:accountName];
+    [self refreshDataWithEOS:infoM.symbol_list];
+}
+
+- (void)handlerWithNEO:(NEOAddressInfoModel *)infoM {
+    self.neoAddressInfoM = infoM;
+    
+    [self requestGetNeoCliamGas]; // 请求neocliamgas
+    
+    __block NSNumber *amount = @(0);
+    [self.neoAddressInfoM.balance enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NEOAssetModel *model = obj;
+        if ([model.asset_symbol isEqualToString:@"NEO"]) { // 赋值NEO余额
+            amount = model.amount;
+        }
+    }];
+    self.neoAddressInfoM.amount = amount;
+    [self updateWalletWithNEO:self.neoAddressInfoM];
+    [self refreshDataWithNEO];
+}
+
+- (void)handlerWithQLC:(QLCAddressInfoModel *)infoM {
+    self.qlcAddressInfoM = infoM;
+    
+    [self updateWalletWithQLC:self.qlcAddressInfoM];
+    [self refreshDataWithQLC];
+}
+
 - (void)refreshTokenList {
     _gasBackHeight.constant = 0;
     _eosResourcesHeight.constant = 0;
     _stakingHeight.constant = 0;
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     DDLogDebug(@"refreshTokenList:%@",@(currentWalletM.walletType));
+    kWeakSelf(self);
     switch (currentWalletM.walletType) {
         case WalletTypeETH:
         {
-            [self requestETHAddressInfo:currentWalletM.address?:@"" showLoad:NO];
+            [TokenListHelper requestETHAddressInfo:currentWalletM.address?:@"" showLoad:NO completeBlock:^(ETHAddressInfoModel *infoM, BOOL success) {
+                [weakself endRefresh];
+                if (success) {
+                    [weakself handlerWithETH:infoM];
+                }
+            }];
         }
             break;
         case WalletTypeEOS:
         {
-            [self requestEOSTokenList:currentWalletM.account_name?:@"" showLoad:NO];
+            NSString *accountName = currentWalletM.account_name?:@"";
+            [TokenListHelper requestEOSTokenList:accountName showLoad:NO completeBlock:^(EOSAddressInfoModel *infoM, BOOL success) {
+                [weakself endRefresh];
+                if (success) {
+                    [weakself handlerWithEOS:infoM accountName:accountName];
+                }
+            }];
         }
             break;
         case WalletTypeNEO:
         {
-            [self requestNEOAddressInfo:currentWalletM.address?:@"" showLoad:NO];
+            [TokenListHelper requestNEOAddressInfo:currentWalletM.address?:@"" showLoad:NO completeBlock:^(NEOAddressInfoModel *infoM, BOOL success) {
+                [weakself endRefresh];
+                if (success) {
+                    [weakself handlerWithNEO:infoM];
+                }
+            }];
         }
             break;
         case WalletTypeQLC:
         {
-            [self requestQLCAddressInfo:currentWalletM.address?:@"" showLoad:NO];
+            [TokenListHelper requestQLCAddressInfo:currentWalletM.address?:@"" showLoad:NO completeBlock:^(QLCAddressInfoModel *infoM, BOOL success) {
+                [weakself endRefresh];
+                if (success) {
+                    [weakself handlerWithQLC:infoM];
+                }
+            }];
         }
             break;
             
@@ -923,6 +987,8 @@
                 _backupBackHeight.constant = 220;
             } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
                 _backupBackHeight.constant = 180;
+            } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+                _backupBackHeight.constant = 220;
             }
         }
     } else if (currentWalletM.walletType == WalletTypeNEO) {
@@ -932,6 +998,8 @@
                 _backupBackHeight.constant = 220;
             } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
                 _backupBackHeight.constant = 180;
+            } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+                _backupBackHeight.constant = 220;
             }
         }
     } else if (currentWalletM.walletType == WalletTypeEOS) {
@@ -943,204 +1011,206 @@
                 _backupBackHeight.constant = 220;
             } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
                 _backupBackHeight.constant = 180;
+            } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+                _backupBackHeight.constant = 220;
             }
         }
     }
 }
 
 #pragma mark - Request
-- (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
-    // 检查地址有效性
-    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:address];
-    if (!isValid) {
-        return;
-    }
-    kWeakSelf(self);
-    NSDictionary *params = @{@"address":address,@"token":@""}; // @"0x980e7917c610e2c2d4e669c920980cb1b915bbc7"
-    if (showLoad) {
-        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
-    }
-    [RequestService requestWithUrl5:ethAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            NSDictionary *dic = [responseObject objectForKey:Server_Data];
-            weakself.ethAddressInfoM = [ETHAddressInfoModel getObjectWithKeyValues:dic];
-//            weakSelf.ethAddressInfoM.name = name;
-            [weakself updateWalletWithETH:weakself.ethAddressInfoM];
-            [weakself refreshDataWithETH];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:Update_ETH_Wallet_Token_Noti object:nil];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-    }];
-}
+//- (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
+//    // 检查地址有效性
+//    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:address];
+//    if (!isValid) {
+//        return;
+//    }
+//    kWeakSelf(self);
+//    NSDictionary *params = @{@"address":address,@"token":@""}; // @"0x980e7917c610e2c2d4e669c920980cb1b915bbc7"
+//    if (showLoad) {
+//        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+//    }
+//    [RequestService requestWithUrl5:ethAddressInfo_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+//            NSDictionary *dic = [responseObject objectForKey:Server_Data];
+//            weakself.ethAddressInfoM = [ETHAddressInfoModel getObjectWithKeyValues:dic];
+////            weakSelf.ethAddressInfoM.name = name;
+//            [weakself updateWalletWithETH:weakself.ethAddressInfoM];
+//            [weakself refreshDataWithETH];
+//
+//            [[NSNotificationCenter defaultCenter] postNotificationName:Update_ETH_Wallet_Token_Noti object:nil];
+//        }
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//    }];
+//}
 
-- (void)requestNEOAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
-    // 检查地址有效性
-    BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:address];
-    if (!validateNEOAddress) {
-        return;
-    }
-    kWeakSelf(self);
-    NSDictionary *params = @{@"address":address};
-    if (showLoad) {
-        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
-    }
-    [RequestService requestWithUrl10:neoAddressInfo_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        [weakself requestGetNeoCliamGas]; // 请求neocliamgas
-        
-        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            NSDictionary *dic = [responseObject objectForKey:Server_Data];
-            weakself.neoAddressInfoM = [NEOAddressInfoModel getObjectWithKeyValues:dic];
-            __block NSNumber *amount = @(0);
-            [weakself.neoAddressInfoM.balance enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                NEOAssetModel *model = obj;
-                if ([model.asset_symbol isEqualToString:@"NEO"]) { // 赋值NEO余额
-                    amount = model.amount;
-                }
-            }];
-            weakself.neoAddressInfoM.amount = amount;
-            [weakself updateWalletWithNEO:weakself.neoAddressInfoM];
-            [weakself refreshDataWithNEO];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:Update_NEO_Wallet_Token_Noti object:nil];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-    }];
-}
+//- (void)requestNEOAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
+//    // 检查地址有效性
+//    BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:address];
+//    if (!validateNEOAddress) {
+//        return;
+//    }
+//    kWeakSelf(self);
+//    NSDictionary *params = @{@"address":address};
+//    if (showLoad) {
+//        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+//    }
+//    [RequestService requestWithUrl10:neoAddressInfo_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//        [weakself requestGetNeoCliamGas]; // 请求neocliamgas
+//
+//        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+//            NSDictionary *dic = [responseObject objectForKey:Server_Data];
+//            weakself.neoAddressInfoM = [NEOAddressInfoModel getObjectWithKeyValues:dic];
+//            __block NSNumber *amount = @(0);
+//            [weakself.neoAddressInfoM.balance enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                NEOAssetModel *model = obj;
+//                if ([model.asset_symbol isEqualToString:@"NEO"]) { // 赋值NEO余额
+//                    amount = model.amount;
+//                }
+//            }];
+//            weakself.neoAddressInfoM.amount = amount;
+//            [weakself updateWalletWithNEO:weakself.neoAddressInfoM];
+//            [weakself refreshDataWithNEO];
+//
+//            [[NSNotificationCenter defaultCenter] postNotificationName:Update_NEO_Wallet_Token_Noti object:nil];
+//        }
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//    }];
+//}
 
-- (void)requestEOSTokenList:(NSString *)account_name showLoad:(BOOL)showLoad {
-    // 检查地址有效性
-    BOOL validateEOSAccountName = [RegularExpression validateEosAccountName:account_name];
-    if (!validateEOSAccountName) {
-        return;
-    }
-    kWeakSelf(self);
-    NSDictionary *params = @{@"account":account_name, @"symbol":@""};
-    if (showLoad) {
-        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
-    }
-    [RequestService requestWithUrl5:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        
-        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            NSDictionary *dic = responseObject[Server_Data][Server_Data];
-            NSArray *symbol_list = dic[@"symbol_list"];
-            __block NSNumber *eosBalance = @(0);
-            NSMutableArray *symbolListArr = [NSMutableArray array];
-            [symbol_list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                EOSSymbolModel *model = [EOSSymbolModel getObjectWithKeyValues:obj];
-                [symbolListArr addObject:model];
-                if ([model.symbol isEqualToString:@"EOS"]) { // 赋值EOS余额
-                    eosBalance = model.balance;
-                }
-            }];
-            [weakself updateWalletWithEosBalance:eosBalance accountName:account_name];
-            [weakself refreshDataWithEOS:symbolListArr];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-    }];
-}
+//- (void)requestEOSTokenList:(NSString *)account_name showLoad:(BOOL)showLoad {
+//    // 检查地址有效性
+//    BOOL validateEOSAccountName = [RegularExpression validateEosAccountName:account_name];
+//    if (!validateEOSAccountName) {
+//        return;
+//    }
+//    kWeakSelf(self);
+//    NSDictionary *params = @{@"account":account_name, @"symbol":@""};
+//    if (showLoad) {
+//        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+//    }
+//    [RequestService requestWithUrl5:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//
+//        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+//            NSDictionary *dic = responseObject[Server_Data][Server_Data];
+//            NSArray *symbol_list = dic[@"symbol_list"];
+//            __block NSNumber *eosBalance = @(0);
+//            NSMutableArray *symbolListArr = [NSMutableArray array];
+//            [symbol_list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                EOSSymbolModel *model = [EOSSymbolModel getObjectWithKeyValues:obj];
+//                [symbolListArr addObject:model];
+//                if ([model.symbol isEqualToString:@"EOS"]) { // 赋值EOS余额
+//                    eosBalance = model.balance;
+//                }
+//            }];
+//            [weakself updateWalletWithEosBalance:eosBalance accountName:account_name];
+//            [weakself refreshDataWithEOS:symbolListArr];
+//        }
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//    }];
+//}
 
-- (void)requestQLCAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
-    // 检查地址有效性
-    BOOL validateQLCAddress = [QLCWalletManage.shareInstance walletAddressIsValid:address];
-    if (!validateQLCAddress) {
-        return;
-    }
-    kWeakSelf(self);
-    if (showLoad) {
-        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
-    }
-//    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [QLCLedgerRpc accountInfoWithAddress:address isMainNetwork:isMainNetwork successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        
-        if (responseObject != nil) {
-            weakself.qlcAddressInfoM = [QLCAddressInfoModel getObjectWithKeyValues:responseObject];
-            [weakself requestQLCTokensWithShowLoad:NO]; // 请求tokens
+//- (void)requestQLCAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
+//    // 检查地址有效性
+//    BOOL validateQLCAddress = [QLCWalletManage.shareInstance walletAddressIsValid:address];
+//    if (!validateQLCAddress) {
+//        return;
+//    }
+//    kWeakSelf(self);
+//    if (showLoad) {
+//        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+//    }
+////    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+//    [QLCLedgerRpc accountInfoWithAddress:address isMainNetwork:isMainNetwork successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//
+//        if (responseObject != nil) {
+//            weakself.qlcAddressInfoM = [QLCAddressInfoModel getObjectWithKeyValues:responseObject];
+//            [weakself requestQLCTokensWithShowLoad:NO]; // 请求tokens
+////            [weakself updateWalletWithQLC:weakself.qlcAddressInfoM];
+////            [weakself refreshDataWithQLC];
+//        }
+//
+//    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
+//        [weakself endRefresh];
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//        if ([message isEqualToString:@"account not found"]) { // 找不到账户做特殊处理（先显示出来）
+//            weakself.qlcAddressInfoM = [QLCAddressInfoModel new];
+//            weakself.qlcAddressInfoM.account = address;
+//            weakself.qlcAddressInfoM.coinBalance = @(0);
+//            [weakself requestQLCTokensWithShowLoad:NO]; // 请求tokens
+//        } else {
+//            [kAppD.window makeToastDisappearWithText:message];
+//        }
+//    }];
+//}
+//
+//- (void)requestQLCTokensWithShowLoad:(BOOL)showLoad {
+//    kWeakSelf(self);
+//    if (showLoad) {
+//        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
+//    }
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+//    [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//
+//        if (responseObject != nil) {
+//            NSArray *tokenArr = [QLCTokenInfoModel mj_objectArrayWithKeyValuesArray:responseObject];
+//            [weakself.qlcAddressInfoM.tokens enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                QLCTokenModel *tokenM = obj;
+//                [tokenArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    QLCTokenInfoModel *tokenInfoM = obj;
+//                    if ([tokenM.tokenName isEqualToString:tokenInfoM.tokenName]) {
+//                        tokenM.tokenInfoM = tokenInfoM;
+//                        *stop = YES;
+//                    }
+//                }];
+//            }];
 //            [weakself updateWalletWithQLC:weakself.qlcAddressInfoM];
 //            [weakself refreshDataWithQLC];
-        }
-        
-    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
-        [weakself endRefresh];
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        if ([message isEqualToString:@"account not found"]) { // 找不到账户做特殊处理（先显示出来）
-            weakself.qlcAddressInfoM = [QLCAddressInfoModel new];
-            weakself.qlcAddressInfoM.account = address;
-            weakself.qlcAddressInfoM.coinBalance = @(0);
-            [weakself requestQLCTokensWithShowLoad:NO]; // 请求tokens
-        } else {
-            [kAppD.window makeToastDisappearWithText:message];
-        }
-    }];
-}
-
-- (void)requestQLCTokensWithShowLoad:(BOOL)showLoad {
-    kWeakSelf(self);
-    if (showLoad) {
-        [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
-    }
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        
-        if (responseObject != nil) {
-            NSArray *tokenArr = [QLCTokenInfoModel mj_objectArrayWithKeyValuesArray:responseObject];
-            [weakself.qlcAddressInfoM.tokens enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                QLCTokenModel *tokenM = obj;
-                [tokenArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    QLCTokenInfoModel *tokenInfoM = obj;
-                    if ([tokenM.tokenName isEqualToString:tokenInfoM.tokenName]) {
-                        tokenM.tokenInfoM = tokenInfoM;
-                        *stop = YES;
-                    }
-                }];
-            }];
-            [weakself updateWalletWithQLC:weakself.qlcAddressInfoM];
-            [weakself refreshDataWithQLC];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:Update_QLC_Wallet_Token_Noti object:nil];
-        }
-        
-    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
-        if (showLoad) {
-            [kAppD.window hideToast];
-        }
-        [kAppD.window makeToastDisappearWithText:message];
-    }];
-}
+//
+//            [[NSNotificationCenter defaultCenter] postNotificationName:Update_QLC_Wallet_Token_Noti object:nil];
+//        }
+//
+//    } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
+//        if (showLoad) {
+//            [kAppD.window hideToast];
+//        }
+//        [kAppD.window makeToastDisappearWithText:message];
+//    }];
+//}
 
 - (void)requestTokenPrice {
     if (_tokenSymbolArr.count <= 0) {
@@ -1561,6 +1631,7 @@
 - (void)jumpToWalletsSwitch {
     WalletsSwitchViewController *vc = [[WalletsSwitchViewController alloc] init];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -1766,12 +1837,12 @@
     [self neoGasStatusInit]; // neo gas 状态初始化
     [self refreshTokenList]; // 请求token列表
     
-    [self startReceiveQLC];
+    [self startReceiveQLC]; // 接收qlc链数据
 //    kWeakSelf(self);
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
 //        [weakself requestGetTokenBalance]; // 刷新winqgas
 //    });
-    [self refreshBackupView];
+    [self refreshBackupView]; // 刷新备份view
 }
 
 - (void)addETHWallet:(NSNotification *)noti {
@@ -1813,11 +1884,18 @@
         if (currentWalletM == nil) { // 当前钱包不存在
             WalletCommonModel *firstM = [WalletCommonModel getAllWalletModel].firstObject;
             [WalletCommonModel setCurrentSelectWallet:firstM];
-            [self requestETHAddressInfo:firstM.address?:@"" showLoad:NO];
+//            [self requestETHAddressInfo:firstM.address?:@"" showLoad:NO];
+            kWeakSelf(self);
+            [TokenListHelper requestETHAddressInfo:currentWalletM.address?:@"" showLoad:NO completeBlock:^(ETHAddressInfoModel *infoM, BOOL success) {
+                if (success) {
+                    [weakself handlerWithETH:infoM];
+                }
+            }];
         }
-    } else {
-        [self jumpToChooseWallet:NO];
     }
+//    else {
+//        [self jumpToChooseWallet:NO];
+//    }
 }
 
 - (void)currencyChang:(NSNotification *)noti {
@@ -1836,12 +1914,8 @@
     [self refreshBackupView];
 }
 
-- (void)updateInfoAfterLoginNoti:(NSNotification *)noti {
-    [ClaimQGASTipView show];
-}
-
 - (void)loginSuccessNoti:(NSNotification *)noti {
-    [UserUtil updateUserInfoAfterLogin];
+    
 }
 
 - (void)ethBackupUpdateNoti:(NSNotification *)noti {

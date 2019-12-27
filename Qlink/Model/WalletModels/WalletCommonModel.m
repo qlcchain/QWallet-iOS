@@ -312,6 +312,28 @@
     return chain;
 }
 
++ (void)handlerCreateWalletInAuto {
+    // 如果当前有钱包  自动生成暂无的钱包（ETH\QLC\NEO）不包括EOS
+    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
+    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
+    BOOL haveQlcWallet = [QLCWalletInfo haveQLCWallet];
+    if (!haveEthWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [ETHWalletInfo createETHWalletInAuto];
+        });
+    }
+    if (!haveNeoWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [NEOWalletInfo createNEOWalletInAuto];
+        });
+    }
+    if (!haveQlcWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [QLCWalletInfo createQLCWalletInAuto];
+        });
+    }
+}
+
 #pragma mark - ETH
 + (void)refreshETHWallet {
     NSArray *ethWalletArr = [TrustWalletManage.sharedInstance getAllWalletModel];

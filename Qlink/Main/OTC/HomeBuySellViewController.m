@@ -21,11 +21,15 @@
 #import <TTGTextTagCollectionView.h>
 #import "PairsModel.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+#import "SheetMiningUtil.h"
+#import "SheetMiningTipView.h"
+#import "SheetMiningViewController.h"
+#import "UISegmentedControl+Adapt.h"
 
 static NSString *const NetworkSize = @"20";
 //#import "GlobalConstants.h"
 
-@interface HomeBuySellViewController () <UITableViewDelegate, UITableViewDataSource, TTGTextTagCollectionViewDelegate,CQScrollMenuViewDelegate>
+@interface HomeBuySellViewController () <UITableViewDelegate, UITableViewDataSource, TTGTextTagCollectionViewDelegate, CQScrollMenuViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mainSeg;
@@ -38,6 +42,10 @@ static NSString *const NetworkSize = @"20";
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet TTGTextTagCollectionView *tagListView;
 
+@property (weak, nonatomic) IBOutlet UIButton *filterBtn;
+@property (weak, nonatomic) IBOutlet UILabel *tradingPairsLab;
+
+
 @property (nonatomic, strong) NSArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *buyArr;
 @property (nonatomic, strong) NSMutableArray *sellArr;
@@ -49,6 +57,8 @@ static NSString *const NetworkSize = @"20";
 @property (nonatomic, strong) UIView *slideBack;
 @property (nonatomic, strong) NSMutableArray *selectPairsTagArr;
 @property (nonatomic, strong) NSString *selectTradeToken;
+@property (nonatomic) BOOL buyFooterHidden;
+@property (nonatomic) BOOL sellFooterHidden;
 
 @end
 
@@ -73,6 +83,9 @@ static NSString *const NetworkSize = @"20";
 
     [self configInit];
     [self requestPairs_pairs];
+    
+    [self showSheetMining];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,6 +102,7 @@ static NSString *const NetworkSize = @"20";
     [self refreshSegTitle];
     
     [self.view addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_mainSeg segmentedIOS13Style];
     
     _selectPairsTagArr = [NSMutableArray array];
     _showSlide = NO;
@@ -235,6 +249,33 @@ static NSString *const NetworkSize = @"20";
     [_mainSeg setTitle:kLang(@"sell") forSegmentAtIndex:1];
 }
 
+- (void)refreshFilterView {
+    [_filterBtn setTitle:kLang(@"filter") forState:UIControlStateNormal];
+    _tradingPairsLab.text = kLang(@"trading_pairs");
+    [_confirmBtn setTitle:kLang(@"filter_confirm") forState:UIControlStateNormal];
+    [_resetBtn setTitle:kLang(@"reset") forState:UIControlStateNormal];
+}
+
+- (void)showSheetMining {
+//    [HWUserdefault deleteObjectWithKey:OTC_Show_SheetMining_ID];
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SheetMiningUtil requestTrade_mining_list:^(NSArray<MiningActivityModel *> * _Nonnull arr) {
+            if (arr.count > 0) {
+                NSString *local_show_ID = [HWUserdefault getObjectWithKey:OTC_Show_SheetMining_ID];
+                MiningActivityModel *model = arr.firstObject;
+                if (local_show_ID==nil || (local_show_ID && ![local_show_ID isEqualToString:model.ID])) { // 本地不存在 或者 本地id和线上id不同  --》弹框
+                    [SheetMiningTipView show:model confirmB:^{
+                        [HWUserdefault insertObj:model.ID withkey:OTC_Show_SheetMining_ID];
+                        [weakself jumpToSheetMining];
+                    }];
+                }
+            }
+        }]; // 交易挖矿活动列表
+    });
+    
+}
+
 #pragma mark - Request
 - (void)requestEntrust_order_list {
     kWeakSelf(self);
@@ -281,9 +322,20 @@ static NSString *const NetworkSize = @"20";
             
             if (arr.count < [NetworkSize integerValue]) {
                 [weakself.mainTable.mj_footer endRefreshingWithNoMoreData];
-                weakself.mainTable.mj_footer.hidden = arr.count<=0?YES:NO;
+//                weakself.mainTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                weakself.mainTable.mj_footer.hidden = YES;
+                if (weakself.mainSeg.selectedSegmentIndex == 0) {
+                    weakself.buyFooterHidden = YES;
+                } else {
+                    weakself.sellFooterHidden = YES;
+                }
             } else {
                 weakself.mainTable.mj_footer.hidden = NO;
+                if (weakself.mainSeg.selectedSegmentIndex == 0) {
+                    weakself.buyFooterHidden = NO;
+                } else {
+                    weakself.sellFooterHidden = NO;
+                }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -379,6 +431,7 @@ static NSString *const NetworkSize = @"20";
 //    [_pairsArr enumerateObjectsUsingBlock:^(PairsModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 //        [weakself.tagListView setTagAtIndex:idx selected:idx==index?YES:NO];
 //    }];
+    
 }
 
 #pragma mark - Action
@@ -392,12 +445,14 @@ static NSString *const NetworkSize = @"20";
 }
 
 - (IBAction)segAction:(id)sender {
+
     if (_mainSeg.selectedSegmentIndex == 0) {
         if (_currentBuyPage == 1) {
             [self requestEntrust_order_list];
         } else {
             _sourceArr = _buyArr;
             [_mainTable reloadData];
+            _mainTable.mj_footer.hidden = _buyFooterHidden;
         }
     } else {
         if (_currentSellPage == 1) {
@@ -405,6 +460,7 @@ static NSString *const NetworkSize = @"20";
         } else {
             _sourceArr = _sellArr;
             [_mainTable reloadData];
+            _mainTable.mj_footer.hidden = _sellFooterHidden;
         }
     }
 }
@@ -506,9 +562,21 @@ static NSString *const NetworkSize = @"20";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToSheetMining {
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
+    SheetMiningViewController *vc = [SheetMiningViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Noti
 - (void)languageChangeNoti:(NSNotification *)noti {
     [self refreshSegTitle];
+    [self refreshFilterView];
     [_mainTable.mj_header beginRefreshing];
 }
 

@@ -85,13 +85,15 @@
 }
 
 - (void)showNEOTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.asset_symbol];
     NEOTransferConfirmView *view = [NEOTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
+//    [view configWithAddress:address amount:amount];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -111,14 +113,15 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
+- (void)sendTransfer:(NSString *)from_address {
     NSInteger decimals = [NEO_Decimals integerValue];
     NSString *tokenHash = _selectAsset.asset_hash;
     NSString *assetName = _selectAsset.asset;
     NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = _amountTF.text;
     NSString *symbol = _selectAsset.asset_symbol;
-    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
+//    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
+    NSString *fromAddress = from_address;
     NSString *remarkStr = _memoTF.text;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
@@ -256,6 +259,7 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 

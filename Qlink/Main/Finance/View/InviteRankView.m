@@ -19,7 +19,7 @@
 #import "UIView+Visuals.h"
 #import "AppDelegate.h"
 #import "QlinkTabbarViewController.h"
-#import "TopupViewController.h"
+#import "Topup1ViewController.h"
 
 static CGFloat InviteRankTopHeight = 172;
 

@@ -46,6 +46,7 @@
 #import "DailyEarningsViewController.h"
 #import "NEOWalletInfo.h"
 #import "OTCOrderTodo.h"
+#import "TradeOrderDetailViewController.h"
 
 @interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -165,7 +166,7 @@
     
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
-    [self jumpToWallet];
+//    [self jumpToWallet];
     
     [SystemUtil checkAPPUpdate]; // 检查app更新
     
@@ -175,6 +176,10 @@
 //    [[TopupPayOrderTodo shareInstance] handlerPayOrderSuccess:paramsM];
 //    [[TopupPayOrderTodo shareInstance] cleanPayOrder];
     
+    [self startTodo];
+}
+
+- (void)startTodo {
     [[TopupPayOrderTodo shareInstance] checkLocalPayOrder];
     [[OTCOrderTodo shareInstance] checkLocalPayOrder_Entrust_Buy];
     [[OTCOrderTodo shareInstance] checkLocalPayOrder_Entrust_Sell];
@@ -182,35 +187,45 @@
     [[OTCOrderTodo shareInstance] checkLocalPayOrder_Buysell_Buy_Confirm];
 }
 
-- (void)jumpToWallet {
-    if (kAppD.needFingerprintVerification) {
-        [kAppD presentFingerprintVerify:^{
-            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
-        }];
-    } else {
-        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
-    }
-}
-
-- (void)jumpToOTC {
-    kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
-}
-
-- (void)jumpToDailyEarnings {
-    BOOL haveLogin = [UserModel haveLoginAccount];
-    if (!haveLogin) {
-        [kAppD presentLoginNew];
-        return;
-    }
-    
-    if (![UserModel isBind]) {
-        [ClaimQGASTipView show];
-        return;
-    }
-    
-    DailyEarningsViewController *vc = [DailyEarningsViewController new];
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
-}
+//- (void)jumpToWallet {
+//    if (kAppD.needFingerprintVerification) {
+//        [kAppD presentFingerprintVerify:^{
+//            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+//        }];
+//    } else {
+//        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+//    }
+//}
+//
+//- (void)jumpToOTC {
+//    kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
+//}
+//
+//- (void)jumpToTopup {
+//    kAppD.tabbarC.selectedIndex = TabbarIndexTopup;
+//}
+//
+//- (void)jumpToDailyEarnings {
+//    BOOL haveLogin = [UserModel haveLoginAccount];
+//    if (!haveLogin) {
+//        [kAppD presentLoginNew];
+//        return;
+//    }
+//    
+//    if (![UserModel isBind]) {
+//        [ClaimQGASTipView show:^{
+//        }];
+//        return;
+//    }
+//    
+//    DailyEarningsViewController *vc = [DailyEarningsViewController new];
+//    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+//}
+//
+//- (void)jumpToOTCTradeOrderDetail {
+//    TradeOrderDetailViewController *vc = [TradeOrderDetailViewController new];
+//    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+//}
 
 #pragma mark - Login
 //- (void)setRootLoginNew {
@@ -223,6 +238,7 @@
     LoginViewController *vc = [[LoginViewController alloc] init];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     __weak typeof(vc) weakvc = vc;
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
         if ([UserModel haveAccountInLocal]) {
             [weakvc showLastLoginAccount];
@@ -240,6 +256,8 @@
     [UserModel storeUserByID:userM];
     
     [JPushTagHelper cleanTags]; // 清除tag
+    
+    [HWUserdefault insertObj:@(YES) withkey:Join_Telegram_Key]; // 设置加入电报key
     
     [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
 }

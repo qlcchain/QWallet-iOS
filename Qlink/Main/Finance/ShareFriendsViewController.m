@@ -97,6 +97,8 @@
         topImgStr = @"claim_ad_share_en";
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         topImgStr = @"claim_ad_share_ch";
+    } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
+        topImgStr = @"claim_ad_share_en";
     }
     _topImgV.image = [UIImage imageNamed:topImgStr];
     
@@ -143,13 +145,13 @@
     kWeakSelf(self);
     [self requestUser_invite_amount:Invite_Status_AWARDED completeBlock:^(NSString *amount) {
         NSNumber *num = @([amount doubleValue]*[weakself.invite_reward_amount doubleValue]);
-        NSString *claimedStr = @"";
-        NSString *language = [Language currentLanguageCode];
-        if ([language isEqualToString:LanguageCode[0]]) { // 英文
-            claimedStr = [NSString stringWithFormat:@"I have claimed %@ QGAS",num];
-        } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-            claimedStr = [NSString stringWithFormat:@"已领取奖励：%@ QGAS",num];
-        }
+        NSString *claimedStr = [NSString stringWithFormat:kLang(@"i_have_claimed__qgas"),num];
+//        NSString *language = [Language currentLanguageCode];
+//        if ([language isEqualToString:LanguageCode[0]]) { // 英文
+//            claimedStr = [NSString stringWithFormat:kLang(@"i_have_claimed__qgas"),num];
+//        } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+//            claimedStr = [NSString stringWithFormat:kLang(@"i_have_claimed__qgas"),num];
+//        }
         weakself.claimedAmountLab.text = claimedStr;
     }];
 }
@@ -158,13 +160,13 @@
     kWeakSelf(self);
     [self requestUser_invite_amount:nil completeBlock:^(NSString *amount) {
         
-        NSString *invitedStr = @"";
-        NSString *language = [Language currentLanguageCode];
-        if ([language isEqualToString:LanguageCode[0]]) { // 英文
-            invitedStr = [NSString stringWithFormat:@"%@ friends referred ",amount];
-        } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-            invitedStr = [NSString stringWithFormat:@"已邀请%@人",amount];
-        }
+        NSString *invitedStr = [NSString stringWithFormat:kLang(@"__friends_referred"),amount];
+//        NSString *language = [Language currentLanguageCode];
+//        if ([language isEqualToString:LanguageCode[0]]) { // 英文
+//            invitedStr = [NSString stringWithFormat:kLang(@"__friends_referred"),amount];
+//        } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+//            invitedStr = [NSString stringWithFormat:kLang(@"__friends_referred"),amount];
+//        }
         weakself.invitedAmountLab.text = invitedStr;
     }];
 }
@@ -202,13 +204,13 @@
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSString *valueStr = responseObject[Server_Data][@"value"];
             
-            NSString *claimTipStr = @"";
-            NSString *language = [Language currentLanguageCode];
-            if ([language isEqualToString:LanguageCode[0]]) { // 英文
-                claimTipStr = [NSString stringWithFormat:@"You can claim the reward when successfully invited more than %@ friends.",valueStr];
-            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-                claimTipStr = [NSString stringWithFormat:@"邀请好友满%@位可立即领取",valueStr];
-            }
+            NSString *claimTipStr = [NSString stringWithFormat:kLang(@"you_can_claim_the_reward_when_successfully_invited_more_than__friends_"),valueStr];
+//            NSString *language = [Language currentLanguageCode];
+//            if ([language isEqualToString:LanguageCode[0]]) { // 英文
+//                claimTipStr = [NSString stringWithFormat:kLang(@"you_can_claim_the_reward_when_successfully_invited_more_than__friends_"),valueStr];
+//            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+//                claimTipStr = [NSString stringWithFormat:kLang(@"you_can_claim_the_reward_when_successfully_invited_more_than__friends_"),valueStr];
+//            }
             weakself.claimTipLab.text = claimTipStr;
             
             weakself.invite_user_amount = valueStr?:@"0";
@@ -229,16 +231,16 @@
         
             weakself.invite_reward_amount = valueStr?:@"0";
             
-            NSString *getQGASBy1Str = @"";
-            NSString *getQGASBy2Str = @"";
-            NSString *language = [Language currentLanguageCode];
-            if ([language isEqualToString:LanguageCode[0]]) { // 英文
-                getQGASBy1Str = [NSString stringWithFormat:@"Get %@ QGAS",@([valueStr doubleValue]*1)];
-                getQGASBy2Str = [NSString stringWithFormat:@"Get %@ QGAS",@([valueStr doubleValue]*2)];
-            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-                getQGASBy1Str = [NSString stringWithFormat:@"获得%@QGAS",@([valueStr doubleValue]*1)];
-                getQGASBy2Str = [NSString stringWithFormat:@"获得%@QGAS",@([valueStr doubleValue]*2)];
-            }
+            NSString *getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*1)];
+            NSString *getQGASBy2Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*2)];
+//            NSString *language = [Language currentLanguageCode];
+//            if ([language isEqualToString:LanguageCode[0]]) { // 英文
+//                getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*1)];
+//                getQGASBy2Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*2)];
+//            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
+//                getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*1)];
+//                getQGASBy2Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*2)];
+//            }
             weakself.getQGASBy1Lab.text = getQGASBy1Str;
             weakself.getQGASBy2Lab.text = getQGASBy2Str;
             

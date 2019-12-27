@@ -114,6 +114,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:okAction];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 #endif
 }

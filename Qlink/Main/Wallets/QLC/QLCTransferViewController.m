@@ -18,7 +18,7 @@
 #import <QLCFramework/QLCFramework.h>
 #import "QLCTokenInfoModel.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
-
+#import "QLCWalletInfo.h"
 //#import "GlobalConstants.h"
 
 @interface QLCTransferViewController () <UITextViewDelegate, UITextFieldDelegate>
@@ -84,13 +84,15 @@
 }
 
 - (void)showQLCTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName];
     QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
+//    [view configWithAddress:address amount:amount];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -110,7 +112,9 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
+- (void)sendTransfer:(NSString *)fromAddress {
+    NSString *from = fromAddress;
+    NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:fromAddress]?:@"";
     NSString *tokenName = _selectAsset.tokenName;
     NSString *to = _sendtoAddressTV.text;
     NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text];
@@ -123,7 +127,8 @@
     BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+//    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
         [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         [weakself backToRoot];
@@ -240,6 +245,7 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 

@@ -374,4 +374,6 @@
     return [NEOWalletInfo getAllWalletInKeychain].count>0?YES:NO;
 }
 
+
+
 @end

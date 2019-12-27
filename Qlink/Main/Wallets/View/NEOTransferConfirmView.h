@@ -17,7 +17,7 @@ typedef void(^NEOTransferConfirmBlock)(void);
 @property (nonatomic, copy) NEOTransferConfirmBlock confirmBlock;
 
 + (instancetype)getInstance;
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount;
+- (void)configWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress amount:(NSString *)amount;
 - (void)show;
 
 @end

@@ -14,7 +14,7 @@ typedef void(^ETHTransferSuccessBlock)(NSString *sendAddress, NSString *txid);
 
 @interface NewOrderETHTransferUtil : NSObject
 
-+ (void)transferETH:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(ETHTransferSuccessBlock)successB;
++ (void)transferETH:(NSString *)fromAddress tokenName:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(ETHTransferSuccessBlock)successB;
 
 @end
 

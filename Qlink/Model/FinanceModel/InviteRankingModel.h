@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSNumber *totalInvite; // = 0;
 @property (nonatomic, strong) NSNumber *myRanking; // = 29;
 @property (nonatomic, strong) NSString *number; // = "";
+@property (nonatomic, strong) NSNumber *totalReward; // = 0;
 
 @property (nonatomic, strong) NSString *showName;
 

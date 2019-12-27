@@ -163,4 +163,5 @@
     return TrustWalletManage.sharedInstance.isHavaWallet;
 }
 
+
 @end

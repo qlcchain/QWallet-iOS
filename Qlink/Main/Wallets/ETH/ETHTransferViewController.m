@@ -101,14 +101,16 @@
 }
 
 - (void)showETHTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectToken.tokenInfo.symbol];
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",_gasCostETH];
     ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount gasfee:gasfee];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount gasfee:gasfee];
+//    [view configWithAddress:address amount:amount gasfee:gasfee];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -128,9 +130,10 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    NSString *fromAddress = currentWalletM.address;
+- (void)sendTransfer:(NSString *)from_address {
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    NSString *fromAddress = currentWalletM.address;
+    NSString *fromAddress = from_address;
     NSString *contractAddress = _selectToken.tokenInfo.address;
     NSString *toAddress = _sendtoAddressTV.text;
     NSString *name = _selectToken.tokenInfo.name;
@@ -178,8 +181,8 @@
 
 - (BOOL)haveETHTokenAssetNum:(NSString *)tokenName {
     __block BOOL haveEthAssetNum = NO;
-    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
-    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [_inputSourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Token *model = obj;
         if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
             NSString *ethNum = [model getTokenNum];
@@ -194,8 +197,8 @@
 
 - (NSString *)getETHTokenAssetNum:(NSString *)tokenName {
     __block NSString *ethAssetNum = @"0";
-    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
-    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//    NSArray *ethSource = [kAppD.tabbarC.walletsVC getETHSource];
+    [_inputSourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Token *model = obj;
         if ([model.tokenInfo.symbol isEqualToString:tokenName]) {
             ethAssetNum = [model getTokenNum];
@@ -309,6 +312,7 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 

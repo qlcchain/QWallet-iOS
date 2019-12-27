@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (WalletType)walletTypeFromTokenChain:(NSString *)tokenChain;
 + (NSString *)chainFromTokenChain:(NSString *)tokenChain;
 
++ (void)handlerCreateWalletInAuto;
+
 #pragma mark - ETH
 + (void)refreshETHWallet;
 + (BOOL)haveETHWallet;

@@ -13,11 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 static NSString *const Topup_Order_Status_New = @"NEW"; // QGAS未到账
 static NSString *const Topup_Order_Status_QGAS_PAID = @"QGAS_PAID"; // 已支付QGAS，未支付法币
+static NSString *const Topup_Order_Status_Pay_TOKEN_PAID = @"PAY_TOKEN_PAID"; // 已支付支付币(代币支付产品才有此状态)
 static NSString *const Topup_Order_Status_RECHARGE = @"RECHARGE"; // 充值中（支付成功）
 static NSString *const Topup_Order_Status_SUCCESS = @"SUCCESS"; // 充值成功（话费到账）
 static NSString *const Topup_Order_Status_FAIL = @"FAIL"; // 充值失败（充值失败订单已退款取消）
+static NSString *const Topup_Order_Status_DEDUCTION_TXID_ERROR = @"DEDUCTION_TXID_ERROR"; // 抵扣币解析失败
+static NSString *const Topup_Order_Status_PAY_TXID_ERROR = @"PAY_TXID_ERROR"; // 支付币解析失败
+static NSString *const Topup_Order_Status_CANCEL = @"CANCEL"; // 取消
 static NSString *const Topup_Order_Status_ERROR = @"ERROR"; // QGAS解析失败
 static NSString *const Topup_Order_Status_QGAS_RETURNED = @"QGAS_RETURNED"; // 已退回QGAS（充值失败）
+static NSString *const Topup_Order_Status_PAY_TOKEN_RETURNED = @"PAY_TOKEN_RETURNED"; // 已退回支付币（代币支付产品才有此状态，先退QGAS，再退支付币）
 
 @interface TopupOrderModel : BBaseModel
 
@@ -43,9 +48,27 @@ static NSString *const Topup_Order_Status_QGAS_RETURNED = @"QGAS_RETURNED"; // �
 @property (nonatomic, strong) NSString *txid;
 @property (nonatomic, strong) NSString *symbol;
 @property (nonatomic, strong) NSString *chain;
+@property (nonatomic, strong) NSNumber *deductionPrice;
+@property (nonatomic, strong) NSString *Hash;
+@property (nonatomic, strong) NSNumber *payPrice;
+@property (nonatomic, strong) NSString *payTokenInTxid;
+@property (nonatomic, strong) NSNumber *payTokenAmount;
+@property (nonatomic, strong) NSString *payWay;
+@property (nonatomic, strong) NSString *payFiat;
+@property (nonatomic, strong) NSString *payTokenHash;
+@property (nonatomic, strong) NSString *payTokenSymbol;
+@property (nonatomic, strong) NSString *payTokenChain;
+@property (nonatomic, strong) NSString *localFiat;
+
+@property (nonatomic, strong) NSString *expiredtime;
+@property (nonatomic, strong) NSString *serialno;
+@property (nonatomic, strong) NSString *passwd;
+@property (nonatomic, strong) NSString *pin;
 
 - (NSString *)getStatusString;
 - (UIColor *)getStatusColor;
++ (BOOL)checkPayTokenChainServerAddressIsEmpty:(TopupOrderModel *)model;
++ (NSString *)getPayTokenChainServerAddress:(TopupOrderModel *)model;
 
 @end
 

@@ -29,18 +29,22 @@
 + (instancetype)getInstance {
     EOSTransferConfirmView *view = [[[NSBundle mainBundle] loadNibNamed:@"EOSTransferConfirmView" owner:self options:nil] lastObject];
     [view.tipBack cornerRadius:8];
-    [view configInit];
+//    [view configInit];
     return view;
 }
 
-- (void)configInit {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    _walletNameLab.text = currentWalletM.name;
-    _walletAddressLab.text = currentWalletM.account_name;
-}
+//- (void)configInit {
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    _walletNameLab.text = currentWalletM.name;
+//    _walletAddressLab.text = currentWalletM.account_name;
+//}
 
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount memo:(NSString *)memo {
-    _sendtoLab.text = sendto;
+- (void)configWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress amount:(NSString *)amount memo:(NSString *)memo {
+    WalletCommonModel *walletM = [WalletCommonModel getWalletWithAddress:fromAddress];
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    _walletNameLab.text = walletM.name;
+    _walletAddressLab.text = walletM.account_name;
+    _sendtoLab.text = toAddress;
     _amountLab.text = amount;
     _memoLab.text = memo;
 }

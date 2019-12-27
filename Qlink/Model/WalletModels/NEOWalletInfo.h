@@ -8,6 +8,8 @@
 
 #import "BBaseModel.h"
 
+@class NEOAssetModel;
+
 @interface NEOWalletInfo : BBaseModel
 
 @property (nonatomic ,strong) NSString *privateKey;

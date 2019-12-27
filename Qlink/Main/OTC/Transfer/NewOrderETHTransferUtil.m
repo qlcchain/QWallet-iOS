@@ -18,44 +18,52 @@
 #import "QlinkTabbarViewController.h"
 #import "ETHWalletManage.h"
 #import "RLArithmetic.h"
+#import "TokenListHelper.h"
 
 @implementation NewOrderETHTransferUtil
 
 #pragma mark - Transfer
-+ (void)transferETH:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(ETHTransferSuccessBlock)successB {
-    // 判断当前钱包
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    if (!currentWalletM || currentWalletM.walletType != WalletTypeETH) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_eth_wallet")];
-        return;
-    }
++ (void)transferETH:(NSString *)fromAddress tokenName:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(ETHTransferSuccessBlock)successB {
+//    // 判断当前钱包
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    if (!currentWalletM || currentWalletM.walletType != WalletTypeETH) {
+//        [kAppD.window makeToastDisappearWithText:kLang(@"please_switch_to_eth_wallet")];
+//        return;
+//    }
     
-    // 判断NEO钱包的asset
-    Token *asset = [kAppD.tabbarC.walletsVC getETHAsset:tokenName];
-    if (!asset) {
-        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_wallet_have_not"),tokenName]];
-        return;
-    }
-    
-    // 检查平台地址
-    NSString *serverAddress = [ETHWalletManage shareInstance].ethMainAddress;
-    if ([serverAddress isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
-        return;
-    }
-    
-    if (![NewOrderETHTransferUtil haveETHAssetNum]) {
-        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),@"ETH"]];
-        return;
-    }
-    
-    [NewOrderETHTransferUtil showETHTransferConfirmView:asset amountStr:amountStr to_address:serverAddress successB:successB];
+    // 判断ETH钱包的asset
+    [TokenListHelper requestETHAssetWithAddress:fromAddress tokenName:tokenName completeBlock:^(ETHAddressInfoModel * _Nonnull infoM, Token * _Nonnull tokenM, Token * _Nonnull ethTokenM, BOOL success) {
+        NSArray *ethSource = infoM.tokens;
+        Token *asset = tokenM;
+//        Token *asset = [kAppD.tabbarC.walletsVC getETHAsset:tokenName];
+        if (!asset) {
+            [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"current_wallet_have_not"),tokenName]];
+            return;
+        }
+        
+        // 检查平台地址
+        NSString *serverAddress = [ETHWalletManage shareInstance].ethMainAddress;
+        if ([serverAddress isEmptyString]) {
+            [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
+            return;
+        }
+        
+        if (![NewOrderETHTransferUtil haveETHAssetNum:ethSource]) {
+            [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",kLang(@"wallet_have_not_balance_of"),tokenName]];
+            return;
+        }
+        
+        [NewOrderETHTransferUtil showETHTransferConfirmView:asset amountStr:amountStr from_address:fromAddress to_address:serverAddress successB:successB];
+    }];
 }
 
-+ (BOOL)haveETHAssetNum {
++ (BOOL)haveETHAssetNum:(NSArray *)ethSource {
     __block BOOL haveEthAssetNum = NO;
-    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getETHSource];
-    [sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!ethSource) {
+        return haveEthAssetNum;
+    }
+//    NSArray *sourceArr = [kAppD.tabbarC.walletsVC getETHSource];
+    [ethSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Token *model = obj;
         if ([model.tokenInfo.symbol isEqualToString:@"ETH"]) {
             NSString *ethNum = [model getTokenNum];
@@ -68,7 +76,7 @@
     return haveEthAssetNum;
 }
 
-+ (void)showETHTransferConfirmView:(Token *)token amountStr:(NSString *)amountStr to_address:(NSString *)to_address successB:(ETHTransferSuccessBlock)successB {
++ (void)showETHTransferConfirmView:(Token *)token amountStr:(NSString *)amountStr from_address:(NSString *)from_address to_address:(NSString *)to_address successB:(ETHTransferSuccessBlock)successB {
 //    NSString *decimals = ETH_Decimals;
 //    NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
 //    NSInteger gasLimit = 60000;
@@ -113,8 +121,8 @@
 //    };
 //    [view show];
     
-    
-    NSString *address = to_address;
+    NSString *fromAddress = from_address;
+    NSString *toAddress = to_address;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",amountStr,token.tokenInfo.symbol];
     NSString *decimals = ETH_Decimals;
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
@@ -124,16 +132,18 @@
     NSString *gasCostETH = @(gasPrice).mul(@(gasLimit)).mul(decimalsNum);
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",gasCostETH];
     ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount gasfee:gasfee];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount gasfee:gasfee];
+//    [view configWithAddress:address amount:amount gasfee:gasfee];
     view.confirmBlock = ^{
-        [NewOrderETHTransferUtil sendTransfer:token amountStr:amountStr to_address:to_address gasLimit:gasLimit gasPrice:gasPrice successB:successB];
+        [NewOrderETHTransferUtil sendTransfer:token amountStr:amountStr from_address:fromAddress to_address:to_address gasLimit:gasLimit gasPrice:gasPrice successB:successB];
     };
     [view show];
 }
 
-+ (void)sendTransfer:(Token *)token amountStr:(NSString *)amountStr to_address:(NSString *)to_address gasLimit:(NSInteger)gasLimit gasPrice:(NSInteger)gasPrice successB:(ETHTransferSuccessBlock)successB {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    NSString *fromAddress = currentWalletM.address;
++ (void)sendTransfer:(Token *)token amountStr:(NSString *)amountStr from_address:(NSString *)from_address to_address:(NSString *)to_address gasLimit:(NSInteger)gasLimit gasPrice:(NSInteger)gasPrice successB:(ETHTransferSuccessBlock)successB {
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    NSString *fromAddress = currentWalletM.address;
+    NSString *fromAddress = from_address;
     NSString *contractAddress = token.tokenInfo.address;
     NSString *toAddress = to_address;
     NSString *name = token.tokenInfo.name;

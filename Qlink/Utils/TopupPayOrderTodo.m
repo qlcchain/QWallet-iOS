@@ -9,6 +9,7 @@
 #import "TopupPayOrderTodo.h"
 #import <TMCache/TMCache.h>
 #import "GlobalConstants.h"
+#import "TxidBackUtil.h"
 
 @implementation TopupPayOrderParamsModel
 
@@ -39,12 +40,23 @@
 
 - (void)savePayOrder:(TopupPayOrderParamsModel *)model {    
     NSArray *localArr = [[TMCache sharedCache] objectForKey:TopupPayOrderLocal_Key];
-    NSMutableArray *muArr = [NSMutableArray array];
-    if (localArr) {
-        [muArr addObjectsFromArray:localArr];
+    // 去重
+    __block BOOL isExist = NO;
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        TopupPayOrderParamsModel *temp = obj;
+        if ([temp.txid isEqualToString:model.txid]) {
+            isExist = YES;
+            *stop = YES;
+        }
+    }];
+    if (!isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        if (localArr) {
+            [muArr addObjectsFromArray:localArr];
+        }
+        [muArr addObject:model];
+        [[TMCache sharedCache] setObject:muArr forKey:TopupPayOrderLocal_Key];
     }
-    [muArr addObject:model];
-    [[TMCache sharedCache] setObject:muArr forKey:TopupPayOrderLocal_Key];
 }
 
 - (void)cleanPayOrder {
@@ -76,6 +88,24 @@
     [RequestService requestWithUrl10:topup_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself handlerPayOrderSuccess:model];
+        } else {
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TOPUP;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = @"";
+            txidBackM.tokenName = @"";
+            txidBackM.amount = @"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [weakself handlerPayOrderSuccess:model];
+                } else {
+                    if (msg && [msg containsString:@"txid repeat"]) {
+                        [weakself handlerPayOrderSuccess:model];
+                    }
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

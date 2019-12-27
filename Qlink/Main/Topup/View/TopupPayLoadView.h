@@ -21,8 +21,8 @@ typedef void(^TopupPayCloseBlock)(void);
 - (void)config:(WalletCommonModel *)model symbol:(NSString *)symbol completeB:(TopupPayCompleteBlock)completeB closeB:(TopupPayCloseBlock)closeB;
 - (void)show;
 - (void)hide;
-- (void)startPayAnimate1;
-- (void)startPayAnimate2;
+- (void)finishStepAnimate1;
+- (void)finishStepAnimate2;
 - (void)showCloseBtn;
 
 @end

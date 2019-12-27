@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL backToRoot;
 @property (nonatomic) BOOL transferToTradeDetail;
 @property (nonatomic, strong) TradeOrderInfoModel *tradeM;
+@property (nonatomic) BOOL isBuyOrder;
 
 @end
 

@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class Token;
+
 typedef enum : NSUInteger {
     ETHWalletInfoTypeCreate = 0,
     ETHWalletInfoTypeMnemonic,

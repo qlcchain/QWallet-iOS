@@ -91,11 +91,16 @@
             _statusTitleLab.text = kLang(@"active");
             _statusSubTitleLab.text = kLang(@"active");
             _bottomBackHeight.constant = 59;
-        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME] || [_orderInfoM.status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) {
            _orderStatusBack.backgroundColor = MAIN_BLUE_COLOR;
-           _statusTitleLab.text = kLang(@"active");
-           _statusSubTitleLab.text = kLang(@"active");
+           _statusTitleLab.text = kLang(@"overtime");
+           _statusSubTitleLab.text = kLang(@"overtime");
            _bottomBackHeight.constant = 59;
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+            _orderStatusBack.backgroundColor = MAIN_BLUE_COLOR;
+            _statusTitleLab.text = kLang(@"transaction_parsing_failed");
+            _statusSubTitleLab.text = kLang(@"transaction_parsing_failed");
+            _bottomBackHeight.constant = 59;
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_CANCEL]) {
             _orderStatusBack.backgroundColor = UIColorFromRGB(0x999999);
             _statusTitleLab.text = kLang(@"revoked");

@@ -23,7 +23,7 @@
     NSString *phoneModel = [[UIDevice currentDevice] model];
     //地方型号  （国际化区域名称）
 //    NSString *localPhoneModel = [[UIDevice currentDevice] localizedModel];
-    NSString *os = @"iOS";
+    NSString *os = Platform_iOS;
     NSString *deviceModel = [NSString stringWithFormat:@"%@/%@/%@",deviceName,phoneVersion,phoneModel];
     NSString *mode = className?:@"";
     NSString *operation = method?:@"";

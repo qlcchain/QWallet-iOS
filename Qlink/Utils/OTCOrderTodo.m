@@ -9,6 +9,7 @@
 #import "OTCOrderTodo.h"
 #import <TMCache/TMCache.h>
 #import "GlobalConstants.h"
+#import "TxidBackUtil.h"
 
 @implementation OTCOrder_Entrust_Buy_ParamsModel
 
@@ -18,7 +19,7 @@
 
 @end
 
-@implementation OTCOrder_Buysell_Sell_ParamsModel
+@implementation OTCOrder_Buysell_Sell_Txid_ParamsModel
 
 @end
 
@@ -57,12 +58,23 @@
 
 - (void)savePayOrder_Entrust_Buy:(OTCOrder_Entrust_Buy_ParamsModel *)model {
     NSArray *localArr = [[TMCache sharedCache] objectForKey:OTCOrder_Entrust_Buy_Key];
-    NSMutableArray *muArr = [NSMutableArray array];
-    if (localArr) {
-        [muArr addObjectsFromArray:localArr];
+    // 去重
+    __block BOOL isExist = NO;
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        OTCOrder_Entrust_Buy_ParamsModel *temp = obj;
+        if ([temp.txid isEqualToString:model.txid]) {
+            isExist = YES;
+            *stop = YES;
+        }
+    }];
+    if (!isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        if (localArr) {
+            [muArr addObjectsFromArray:localArr];
+        }
+        [muArr addObject:model];
+        [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Entrust_Buy_Key];
     }
-    [muArr addObject:model];
-    [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Entrust_Buy_Key];
 }
 
 - (void)handlerPayOrder_Entrust_Buy_Success:(OTCOrder_Entrust_Buy_ParamsModel *)model {
@@ -89,6 +101,20 @@
     [RequestService requestWithUrl6:entrust_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself handlerPayOrder_Entrust_Buy_Success:model];
+        } else {
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_ENTRUST_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = @"";
+            txidBackM.tokenName = @"";
+            txidBackM.amount = @"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [weakself handlerPayOrder_Entrust_Buy_Success:model];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -114,12 +140,23 @@
 
 - (void)savePayOrder_Entrust_Sell:(OTCOrder_Entrust_Sell_ParamsModel *)model {
     NSArray *localArr = [[TMCache sharedCache] objectForKey:OTCOrder_Entrust_Sell_Key];
-    NSMutableArray *muArr = [NSMutableArray array];
-    if (localArr) {
-        [muArr addObjectsFromArray:localArr];
+    // 去重
+    __block BOOL isExist = NO;
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        OTCOrder_Entrust_Sell_ParamsModel *temp = obj;
+        if ([temp.txid isEqualToString:model.txid]) {
+            isExist = YES;
+            *stop = YES;
+        }
+    }];
+    if (!isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        if (localArr) {
+            [muArr addObjectsFromArray:localArr];
+        }
+        [muArr addObject:model];
+        [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Entrust_Sell_Key];
     }
-    [muArr addObject:model];
-    [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Entrust_Sell_Key];
 }
 
 - (void)handlerPayOrder_Entrust_Sell_Success:(OTCOrder_Entrust_Sell_ParamsModel *)model {
@@ -146,6 +183,20 @@
     [RequestService requestWithUrl6:entrust_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself handlerPayOrder_Entrust_Sell_Success:model];
+        } else {
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_ENTRUST_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = @"";
+            txidBackM.tokenName = @"";
+            txidBackM.amount = @"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [weakself handlerPayOrder_Entrust_Sell_Success:model];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -163,28 +214,39 @@
     NSArray *localArr = [[TMCache sharedCache] objectForKey:OTCOrder_Buysell_Sell_Key];
     [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         float timeOffset = 1;
-        OTCOrder_Buysell_Sell_ParamsModel *model = obj;
+        OTCOrder_Buysell_Sell_Txid_ParamsModel *model = obj;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((idx+1)*timeOffset * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [weakself requestTrade_sell_order:model];
+            [weakself requestTrade_sell_order_txid:model];
         });
     }];
 }
 
-- (void)savePayOrder_Buysell_Sell:(OTCOrder_Buysell_Sell_ParamsModel *)model {
+- (void)savePayOrder_Buysell_Sell:(OTCOrder_Buysell_Sell_Txid_ParamsModel *)model {
     NSArray *localArr = [[TMCache sharedCache] objectForKey:OTCOrder_Buysell_Sell_Key];
-    NSMutableArray *muArr = [NSMutableArray array];
-    if (localArr) {
-        [muArr addObjectsFromArray:localArr];
+    // 去重
+    __block BOOL isExist = NO;
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        OTCOrder_Buysell_Sell_Txid_ParamsModel *temp = obj;
+        if ([temp.txid isEqualToString:model.txid]) {
+            isExist = YES;
+            *stop = YES;
+        }
+    }];
+    if (!isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        if (localArr) {
+            [muArr addObjectsFromArray:localArr];
+        }
+        [muArr addObject:model];
+        [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Buysell_Sell_Key];
     }
-    [muArr addObject:model];
-    [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Buysell_Sell_Key];
 }
 
-- (void)handlerPayOrder_Buysell_Sell_Success:(OTCOrder_Buysell_Sell_ParamsModel *)model {
+- (void)handlerPayOrder_Buysell_Sell_Success:(OTCOrder_Buysell_Sell_Txid_ParamsModel *)model {
     NSArray *localArr = [[TMCache sharedCache] objectForKey:OTCOrder_Buysell_Sell_Key];
     __block NSInteger removeIdx = -1;
     [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        OTCOrder_Buysell_Sell_ParamsModel *tempM = obj;
+        OTCOrder_Buysell_Sell_Txid_ParamsModel *tempM = obj;
         if ([tempM.txid isEqualToString:model.txid]) {
             removeIdx = idx;
             *stop = YES;
@@ -197,13 +259,27 @@
     }
 }
 
-- (void)requestTrade_sell_order:(OTCOrder_Buysell_Sell_ParamsModel *)model {
+- (void)requestTrade_sell_order_txid:(OTCOrder_Buysell_Sell_Txid_ParamsModel *)model {
     kWeakSelf(self);
     NSDictionary *params = [model mj_keyValues];
     NSString *timestamp = model.timestamp;
-    [RequestService requestWithUrl6:trade_sell_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_sell_order_txid_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself handlerPayOrder_Buysell_Sell_Success:model];
+        } else {
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TRADE_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = @"";
+            txidBackM.tokenName = @"";
+            txidBackM.amount = @"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [weakself handlerPayOrder_Buysell_Sell_Success:model];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
@@ -228,12 +304,23 @@
 
 - (void)savePayOrder_Buysell_Buy_Confirm:(OTCOrder_Buysell_Buy_Confirm_ParamsModel *)model {
     NSArray *localArr = [[TMCache sharedCache] objectForKey:OTCOrder_Buysell_Buy_Confirm_Key];
-    NSMutableArray *muArr = [NSMutableArray array];
-    if (localArr) {
-        [muArr addObjectsFromArray:localArr];
+    // 去重
+    __block BOOL isExist = NO;
+    [localArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        OTCOrder_Buysell_Buy_Confirm_ParamsModel *temp = obj;
+        if ([temp.txid isEqualToString:model.txid]) {
+            isExist = YES;
+            *stop = YES;
+        }
+    }];
+    if (!isExist) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        if (localArr) {
+            [muArr addObjectsFromArray:localArr];
+        }
+        [muArr addObject:model];
+        [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Buysell_Buy_Confirm_Key];
     }
-    [muArr addObject:model];
-    [[TMCache sharedCache] setObject:muArr forKey:OTCOrder_Buysell_Buy_Confirm_Key];
 }
 
 - (void)handlerPayOrder_Buysell_Buy_Confirm_Success:(OTCOrder_Buysell_Buy_Confirm_ParamsModel *)model {
@@ -260,6 +347,20 @@
     [RequestService requestWithUrl6:trade_buyer_confirm_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [weakself handlerPayOrder_Buysell_Buy_Confirm_Success:model];
+        } else {
+            // 上传txid备份
+            TxidBackModel *txidBackM = [TxidBackModel new];
+            txidBackM.txid = params[@"txid"];
+            txidBackM.type = Txid_Backup_Type_TRADE_ORDER;
+            txidBackM.platform = Platform_iOS;
+            txidBackM.chain = @"";
+            txidBackM.tokenName = @"";
+            txidBackM.amount = @"";
+            [TxidBackUtil requestSys_txid_backup:txidBackM completeBlock:^(BOOL success, NSString *msg) {
+                if (success) {
+                    [weakself handlerPayOrder_Buysell_Buy_Confirm_Success:model];
+                }
+            }];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

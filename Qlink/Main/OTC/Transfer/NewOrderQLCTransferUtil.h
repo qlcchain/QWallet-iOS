@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NewOrderQLCTransferUtil : NSObject
 
-+ (void)transferQLC:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(void(^)(NSString *sendAddress, NSString *txid))successB;
++ (void)transferQLC:(NSString *)fromAddress tokenName:(NSString *)tokenName amountStr:(NSString *)amountStr memo:(NSString *)memo successB:(void(^)(NSString *sendAddress, NSString *txid))successB;
 
 @end
 

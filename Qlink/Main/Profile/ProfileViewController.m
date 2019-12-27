@@ -115,6 +115,7 @@
     pickerController.delegate = self;
     //使用模态呈现相册
     //[self showDetailViewController:pickerController sender:nil];
+    pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:pickerController animated:YES completion:nil];
     
 }

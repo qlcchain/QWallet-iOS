@@ -14,7 +14,7 @@ typedef void(^NEOTransferSuccessBlock)(NSString *sendAddress, NSString *txid);
 
 @interface NewOrderNEOTransferUtil : NSObject
 
-+ (void)transferNEO:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(NEOTransferSuccessBlock)successB;
++ (void)transferNEO:(NSString *)fromAddress tokenName:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(NEOTransferSuccessBlock)successB;
 
 
 @end

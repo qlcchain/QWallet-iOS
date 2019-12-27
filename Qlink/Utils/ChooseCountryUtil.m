@@ -75,4 +75,31 @@
     return countryArr;
 }
 
++ (NSMutableArray *)getAllCountryCode {
+    __block NSMutableArray *countryArr = [NSMutableArray array];
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CountryCodeList" ofType:@"json"]];
+    NSArray *arr = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+         CountryModel *countryM = [CountryModel getObjectWithKeyValues:obj];
+         [countryArr addObject:countryM];
+       
+    }];
+    return countryArr;
+}
+
++ (NSString *)removeCodeContain:(NSString *)originNum {
+    __block NSString *resultNum = originNum;
+    NSArray *allCountry = [ChooseCountryUtil getAllCountryCode];
+    [allCountry enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        CountryModel *countryM = obj;
+        if ([originNum containsString:countryM.dial_code]) {
+            NSMutableString *muStr = [NSMutableString stringWithString:originNum];
+            resultNum = [muStr stringByReplacingOccurrencesOfString:countryM.dial_code withString:@""];
+            *stop = YES;
+        }
+    }];
+    
+    return resultNum;
+}
+
 @end

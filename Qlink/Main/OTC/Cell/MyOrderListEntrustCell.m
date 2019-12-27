@@ -71,9 +71,12 @@
     } else if ([_status isEqualToString:ORDER_STATUS_NORMAL]) {
         statusStr = kLang(@"active");
         statusColor = MAIN_BLUE_COLOR;
-    } else if ([_status isEqualToString:ORDER_STATUS_OVERTIME] || [_status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
-           statusStr = kLang(@"active");
-           statusColor = MAIN_BLUE_COLOR;
+    } else if ([_status isEqualToString:ORDER_STATUS_OVERTIME]) {
+        statusStr = kLang(@"overtime");
+        statusColor = MAIN_BLUE_COLOR;
+    } else if ([_status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+        statusStr = kLang(@"transaction_parsing_failed");
+        statusColor = MAIN_BLUE_COLOR;
     } else if ([_status isEqualToString:ORDER_STATUS_CANCEL]) {
         statusStr = kLang(@"revoked");
         statusColor = UIColorFromRGB(0x909090);

@@ -15,6 +15,11 @@
 #import "TopupWebViewController.h"
 #import "TopupCredentialViewController.h"
 #import "HttpRedirect302Helper.h"
+#import "TopupPayQLC_DeductionViewController.h"
+#import "TopupPayETH_DeductionViewController.h"
+#import "ETHWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
+#import "TopupPayNEO_PayViewController.h"
 
 static NSString *const MyTopupOrderNetworkSize = @"20";
 
@@ -56,7 +61,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)payHandler:(TopupOrderModel *)model {
+- (void)payHandlerCNY:(TopupOrderModel *)model {
     NSString *sid = Topup_Pay_H5_sid;
     NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,model.userId?:@"",model.ID?:@""];
         NSString *package = [NSString stringWithFormat:@"%@",model.originalPrice];
@@ -65,6 +70,30 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     
     
     [self jumpToTopupH5:urlStr];
+}
+
+- (void)handlerPayToken:(TopupOrderModel *)model {
+    if (model.txid == nil || [model.txid isEmptyString]) { // 抵扣币未支付
+        if ([model.chain isEqualToString:QLC_Chain]) {
+            [self jumpToTopupPayQLC_Deduction:model];
+        } else if ([model.chain isEqualToString:ETH_Chain]) {
+            [self jumpToTopupPayETH_Deduction:model];
+        } else if ([model.chain isEqualToString:NEO_Chain]) {
+            
+        }
+    } else {
+        if (model.payTokenInTxid == nil || [model.payTokenInTxid isEmptyString]) { // 支付币未支付
+            if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
+                if ([model.payTokenChain isEqualToString:QLC_Chain]) {
+                    
+                } else if ([model.payTokenChain isEqualToString:ETH_Chain]) {
+                    
+                } else if ([model.payTokenChain isEqualToString:NEO_Chain]) {
+                    [self jumpToTopupPayNEO_Pay:model];
+                }
+            }
+        }
+    }
 }
 
 - (void)cancelHandler:(TopupOrderModel *)model {
@@ -77,6 +106,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
         [weakself requestTopup_cancel_order:model.ID?:@""];
     }];
     [alertC addAction:alertBuy];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
@@ -101,8 +131,8 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     if ([UserModel haveLoginAccount]) {
         account = userM.account;
     }
-//    NSString *p2pId = [UserModel getTopupP2PId];
-    NSString *p2pId = @"EE455D4982A1AECA9E326FF3886850F4";
+    NSString *p2pId = [UserModel getTopupP2PId];
+//    NSString *p2pId = @"EE455D4982A1AECA9E326FF3886850F4";
     NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
     NSString *size = MyTopupOrderNetworkSize;
     NSDictionary *params = @{@"page":page,@"size":size,@"account":account,@"p2pId":p2pId};
@@ -193,7 +223,16 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     [cell config:model cancelB:^{
         [weakself cancelHandler:model];
     } payB:^{
-        [weakself payHandler:model];
+        if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
+            if ([model.payFiat isEqualToString:@"CNY"]) {
+                [weakself payHandlerCNY:model];
+            } else if ([model.payFiat isEqualToString:@"USD"]) {
+                
+            }
+        } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+            [weakself handlerPayToken:model];
+        }
+        
     } credentialB:^{
         [weakself credentialHandler:model];
     } credetialDetalB:^{
@@ -232,6 +271,76 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 - (void)jumpToCredentialDetail:(TopupOrderModel *)model {
     TopupCredentialViewController *vc = [TopupCredentialViewController new];
     vc.inputCredentailM = model;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTopupPayQLC_Deduction:(TopupOrderModel *)orderM {
+    // 检查平台地址
+    NSString *qlcAddress = [QLCWalletManage shareInstance].qlcMainAddress;
+    if ([qlcAddress isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
+        return;
+    }
+    
+    if ([TopupOrderModel checkPayTokenChainServerAddressIsEmpty:orderM]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
+        return;
+    }
+    
+    TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionToAddress = qlcAddress;
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.inputPayToken = orderM.payTokenSymbol;
+    vc.inputDeductionToken = orderM.symbol?:@"QGAS";
+//    vc.inputProductM = productM;
+    vc.inputOrderM = orderM;
+//    vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
+//    vc.inputPhoneNumber = _phoneTF.text?:@"";
+//    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTopupPayETH_Deduction:(TopupOrderModel *)orderM {
+    // 检查平台地址
+    NSString *ethAddress = [ETHWalletManage shareInstance].ethMainAddress;
+    if ([ethAddress isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
+        return;
+    }
+    
+    if ([TopupOrderModel checkPayTokenChainServerAddressIsEmpty:orderM]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"server_address_is_empty")];
+        return;
+    }
+    
+    TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionToAddress = ethAddress;
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.inputPayToken = orderM.payTokenSymbol;
+    vc.inputDeductionToken = orderM.symbol;
+//    vc.inputProductM = productM;
+    vc.inputOrderM = orderM;
+//    vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
+//    vc.inputPhoneNumber = _phoneTF.text?:@"";
+//    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTopupPayNEO_Pay:(TopupOrderModel *)orderM {
+    TopupPayNEO_PayViewController *vc = [TopupPayNEO_PayViewController new];
+    vc.sendAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
+    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.inputPayToken = orderM.payTokenSymbol;
+    vc.inputOrderId = orderM.ID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -58,15 +58,11 @@ typedef NS_ENUM(NSInteger, OTCORderTodoType) {
 
 @end
 
-@interface OTCOrder_Buysell_Sell_ParamsModel : BBaseModel
+@interface OTCOrder_Buysell_Sell_Txid_ParamsModel : BBaseModel
 
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) NSString *entrustOrderId;
-@property (nonatomic, strong) NSString *usdtAmount;
-@property (nonatomic, strong) NSString *qgasAmount;
-@property (nonatomic, strong) NSString *usdtToAddress;
-@property (nonatomic, strong) NSString *fromAddress;
+@property (nonatomic, strong) NSString *tradeOrderId;
 @property (nonatomic, strong) NSString *txid;
 @property (nonatomic, strong) NSString *timestamp;
 
@@ -108,9 +104,9 @@ typedef NS_ENUM(NSInteger, OTCORderTodoType) {
 #pragma mark - 买卖单--卖家
 - (void)cleanPayOrder_Buysell_Sell;
 - (void)checkLocalPayOrder_Buysell_Sell;
-- (void)savePayOrder_Buysell_Sell:(OTCOrder_Buysell_Sell_ParamsModel *)model;
-- (void)handlerPayOrder_Buysell_Sell_Success:(OTCOrder_Buysell_Sell_ParamsModel *)model;
-- (void)requestTrade_sell_order:(OTCOrder_Buysell_Sell_ParamsModel *)model;
+- (void)savePayOrder_Buysell_Sell:(OTCOrder_Buysell_Sell_Txid_ParamsModel *)model;
+- (void)handlerPayOrder_Buysell_Sell_Success:(OTCOrder_Buysell_Sell_Txid_ParamsModel *)model;
+- (void)requestTrade_sell_order_txid:(OTCOrder_Buysell_Sell_Txid_ParamsModel *)model;
 
 
 #pragma mark - 买卖单--买家确认

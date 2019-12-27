@@ -153,6 +153,7 @@
         [FingerprintVerificationUtil exitAPP];
     }];
     [alertC addAction:alertConfirm];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [kAppD.window.rootViewController presentViewController:alertC animated:YES completion:nil];
 }
 

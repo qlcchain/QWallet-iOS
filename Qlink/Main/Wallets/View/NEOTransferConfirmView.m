@@ -26,18 +26,22 @@
 + (instancetype)getInstance {
     NEOTransferConfirmView *view = [[[NSBundle mainBundle] loadNibNamed:@"NEOTransferConfirmView" owner:self options:nil] lastObject];
     [view.tipBack cornerRadius:8];
-    [view configInit];
+//    [view configInit];
     return view;
 }
 
-- (void)configInit {
-    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    _walletNameLab.text = currentWalletM.name;
-    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
-}
+//- (void)configInit {
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    _walletNameLab.text = currentWalletM.name;
+//    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
+//}
 
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount {
-    _sendtoLab.text = sendto;
+- (void)configWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress amount:(NSString *)amount {
+    WalletCommonModel *walletM = [WalletCommonModel getWalletWithAddress:fromAddress];
+//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    _walletNameLab.text = walletM.name;
+    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[walletM.address substringToIndex:8],[walletM.address substringWithRange:NSMakeRange(walletM.address.length - 8, 8)]];
+    _sendtoLab.text = toAddress;
     _amountLab.text = amount;
 }
 

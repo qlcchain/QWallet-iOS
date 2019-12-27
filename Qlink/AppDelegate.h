@@ -26,9 +26,11 @@
 - (void)setRootTabbar;
 - (void)presentLoginNew;
 - (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock;
-- (void)jumpToWallet;
-- (void)jumpToOTC;
-- (void)jumpToDailyEarnings;
+//- (void)jumpToWallet;
+//- (void)jumpToOTC;
+//- (void)jumpToTopup;
+//- (void)jumpToDailyEarnings;
+//- (void)jumpToOTCTradeOrderDetail;
 - (void)logout;
 
 @end
