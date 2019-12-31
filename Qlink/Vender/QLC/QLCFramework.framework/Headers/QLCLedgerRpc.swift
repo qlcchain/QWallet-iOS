@@ -432,4 +432,10 @@ public class QLCLedgerRpc : NSObject {
         let client : QlcClient = QlcClient()
         client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
     }
+    
+    @objc public static func pov_getFittestHeader(isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+        let request = GetFittestHeader()
+        let client : QlcClient = QlcClient()
+        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+    }
 }

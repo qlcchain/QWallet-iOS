@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="height" constant="139" id="UTN-l9-RR5"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Operators in China" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfQ-oU-m1d">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Operators in China" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfQ-oU-m1d">
                                 <rect key="frame" x="8" y="145" width="152" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -38,9 +38,8 @@
                                 <color key="textColor" red="1" green="0.21176470588235294" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone top up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFr-d3-j5F">
-                                <rect key="frame" x="8" y="183" width="76" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone top up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFr-d3-j5F">
+                                <rect key="frame" x="8" y="186" width="76" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -139,11 +138,13 @@
                             <constraint firstItem="UuX-vu-rFI" firstAttribute="leading" secondItem="NBR-Xr-OKU" secondAttribute="leading" id="IaT-7i-EYv"/>
                             <constraint firstItem="01M-F6-WBX" firstAttribute="top" secondItem="NBR-Xr-OKU" secondAttribute="top" constant="8" id="TXs-tr-lqb"/>
                             <constraint firstItem="MfQ-oU-m1d" firstAttribute="top" secondItem="ta8-Cx-w9T" secondAttribute="bottom" constant="6" id="TuL-W2-NQw"/>
+                            <constraint firstItem="hFr-d3-j5F" firstAttribute="leading" secondItem="Y34-VA-mqN" secondAttribute="leading" id="UkY-Cv-dgd"/>
                             <constraint firstItem="Y34-VA-mqN" firstAttribute="leading" secondItem="NBR-Xr-OKU" secondAttribute="leading" constant="8" id="VRd-g6-ucj"/>
                             <constraint firstItem="Y34-VA-mqN" firstAttribute="top" secondItem="MfQ-oU-m1d" secondAttribute="bottom" id="W1p-Yq-dD1"/>
                             <constraint firstItem="ta8-Cx-w9T" firstAttribute="top" secondItem="NBR-Xr-OKU" secondAttribute="top" id="ahZ-g6-JWU"/>
                             <constraint firstAttribute="trailing" secondItem="MfQ-oU-m1d" secondAttribute="trailing" constant="8" id="cmA-an-RTQ"/>
                             <constraint firstAttribute="bottom" secondItem="UuX-vu-rFI" secondAttribute="bottom" id="fD6-mf-4fq"/>
+                            <constraint firstItem="hFr-d3-j5F" firstAttribute="top" secondItem="Y34-VA-mqN" secondAttribute="bottom" id="fag-Vr-qmY"/>
                             <constraint firstItem="UuX-vu-rFI" firstAttribute="top" secondItem="NBR-Xr-OKU" secondAttribute="top" id="j21-sB-jok"/>
                             <constraint firstItem="ta8-Cx-w9T" firstAttribute="leading" secondItem="NBR-Xr-OKU" secondAttribute="leading" id="oFc-eL-CAa"/>
                         </constraints>

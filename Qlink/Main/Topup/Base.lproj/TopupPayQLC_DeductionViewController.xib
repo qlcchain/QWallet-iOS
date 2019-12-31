@@ -12,7 +12,7 @@
             <connections>
                 <outlet property="amountTF" destination="yHw-kP-qze" id="jR8-aP-CHy"/>
                 <outlet property="balanceLab" destination="oRI-XJ-UVy" id="lPC-gD-6gD"/>
-                <outlet property="memoTF" destination="6Pt-zW-YxL" id="wUQ-un-Ffj"/>
+                <outlet property="memoTV" destination="8ce-Du-sbW" id="Mmh-ng-llE"/>
                 <outlet property="payWalletAddressLab" destination="cqC-7H-ztZ" id="vmW-Bv-Og8"/>
                 <outlet property="payWalletIcon" destination="S7T-Nc-7C2" id="hKl-PS-0LD"/>
                 <outlet property="payWalletNameLab" destination="b81-h3-grg" id="do8-h2-c7w"/>
@@ -157,25 +157,26 @@
                                                 <constraint firstAttribute="height" constant="1" id="36a-9g-jwU"/>
                                             </constraints>
                                         </view>
-                                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="if any" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Pt-zW-YxL">
-                                            <rect key="frame" x="24" y="30.5" width="327" height="33.5"/>
-                                            <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-Du-sbW">
+                                            <rect key="frame" x="24" y="30.5" width="327" height="34.5"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="Sld-8k-KXf" firstAttribute="top" secondItem="6Pt-zW-YxL" secondAttribute="bottom" constant="7" id="1SQ-gD-q2q"/>
                                         <constraint firstItem="Sld-8k-KXf" firstAttribute="leading" secondItem="8fh-VI-7n8" secondAttribute="leading" constant="24" id="4eP-m8-FdQ"/>
                                         <constraint firstItem="C9G-w1-lBA" firstAttribute="top" secondItem="8fh-VI-7n8" secondAttribute="top" constant="11" id="AkQ-RK-zrc"/>
                                         <constraint firstAttribute="bottom" secondItem="Sld-8k-KXf" secondAttribute="bottom" id="Ceb-x4-puX"/>
-                                        <constraint firstAttribute="trailing" secondItem="6Pt-zW-YxL" secondAttribute="trailing" constant="24" id="EWS-4F-foR"/>
                                         <constraint firstAttribute="height" constant="72" id="L4t-kY-ckV"/>
                                         <constraint firstAttribute="trailing" secondItem="Sld-8k-KXf" secondAttribute="trailing" id="PUv-lq-eUF"/>
-                                        <constraint firstItem="6Pt-zW-YxL" firstAttribute="leading" secondItem="8fh-VI-7n8" secondAttribute="leading" constant="24" id="S0q-Ou-lNH"/>
+                                        <constraint firstAttribute="trailing" secondItem="8ce-Du-sbW" secondAttribute="trailing" constant="24" id="Pkf-SM-erv"/>
+                                        <constraint firstAttribute="bottom" secondItem="8ce-Du-sbW" secondAttribute="bottom" constant="7" id="Q7h-VG-mE6"/>
+                                        <constraint firstItem="8ce-Du-sbW" firstAttribute="leading" secondItem="8fh-VI-7n8" secondAttribute="leading" constant="24" id="aZS-LB-KZp"/>
+                                        <constraint firstItem="8ce-Du-sbW" firstAttribute="top" secondItem="C9G-w1-lBA" secondAttribute="bottom" id="cGa-Aq-NfA"/>
                                         <constraint firstItem="C9G-w1-lBA" firstAttribute="leading" secondItem="8fh-VI-7n8" secondAttribute="leading" constant="24" id="llJ-3P-624"/>
-                                        <constraint firstItem="6Pt-zW-YxL" firstAttribute="top" secondItem="C9G-w1-lBA" secondAttribute="bottom" id="u2b-3d-5nP"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-LR-IwG">

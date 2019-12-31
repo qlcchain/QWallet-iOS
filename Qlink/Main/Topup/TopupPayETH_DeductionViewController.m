@@ -51,7 +51,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *symbolLab;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextView *sendtoAddressTV;
-@property (weak, nonatomic) IBOutlet UITextField *memoTF;
+@property (weak, nonatomic) IBOutlet UITextView *memoTV;
 @property (weak, nonatomic) IBOutlet UILabel *gascostLab;
 @property (weak, nonatomic) IBOutlet UISlider *gasSlider;
 @property (weak, nonatomic) IBOutlet UILabel *gasLimitLab;
@@ -106,7 +106,7 @@
     _sendtoAddressTV.text = _sendDeductionToAddress;
     _gasDetailHeight.constant = 0;
     _amountTF.text = _sendDeductionAmount;
-    _memoTF.text = _sendDeductionMemo;
+    _memoTV.text = _sendDeductionMemo;
     
     _sendBtn.userInteractionEnabled = NO;
     [_amountTF addTarget:self action:@selector(textFieldDidEnd) forControlEvents:UIControlEventEditingDidEnd];
@@ -189,7 +189,7 @@
     NSInteger gasPrice = _gasSlider.value;
     NSInteger decimals = [_selectToken.tokenInfo.decimals integerValue];
     NSString *value = @"";
-    NSString *memo = _memoTF.text?:@"";
+    NSString *memo = _memoTV.text?:@"";
     BOOL isCoin = [_selectToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
     kWeakSelf(self);
 //    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];

@@ -20,7 +20,7 @@ static NSInteger const Btn_Tag = 2342;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (weak, nonatomic) IBOutlet UIView *scrollContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentWidth;
-
+@property (nonatomic) NSInteger selectIndex;
 
 @end
 
@@ -37,11 +37,16 @@ static NSInteger const Btn_Tag = 2342;
 #pragma mark - Operation
 - (void)configInit {
     _sourceArr = [NSMutableArray array];
+    _selectIndex = -1;
     
     [self requestTopup_country_list];
 }
 
 - (void)configCountryView {
+    [_scrollContent.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+    
     kWeakSelf(self);
     [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         TopupCountryModel *model = obj;
@@ -60,20 +65,36 @@ static NSInteger const Btn_Tag = 2342;
         btn.tag = Btn_Tag + idx;
         [btn addTarget:self action:@selector(flagAction:) forControlEvents:UIControlEventTouchUpInside];
         [weakself.scrollContent addSubview:btn];
+        if (weakself.selectIndex == idx) {
+            btn.selected = YES;
+            btn.alpha = 1;
+        }
     }];
 }
 
 - (void)flagAction:(UIButton *)btn {
+//    [self resetAllBtn];
     btn.selected = !btn.selected;
+    
     NSInteger selectIndex = btn.tag - Btn_Tag;
     [self refreshAllBtn:selectIndex];
     btn.alpha = btn.selected?1:.5;
     TopupCountryModel *model = _sourceArr[btn.tag - Btn_Tag];
 
-    NSString *selectGlobalRoaming = btn.selected?model.globalRoaming:@"";
+    _selectIndex = btn.selected?selectIndex:-1;
+//    NSString *selectGlobalRoaming = btn.selected?model.globalRoaming:@"";
     if (_countrySelectB) {
-        _countrySelectB(selectGlobalRoaming);
+        _countrySelectB(model);
     }
+}
+
+- (void)resetAllBtn {
+    kWeakSelf(self);
+    [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *aBtn = [weakself.scrollContent viewWithTag:Btn_Tag + idx];
+        aBtn.selected = NO;
+        aBtn.alpha = .5;
+    }];
 }
 
 - (void)refreshAllBtn:(NSInteger)selectIndex {
@@ -82,6 +103,7 @@ static NSInteger const Btn_Tag = 2342;
         UIButton *aBtn = [weakself.scrollContent viewWithTag:Btn_Tag + idx];
         if (idx != selectIndex) {
             aBtn.selected = NO;
+            aBtn.alpha = .5;
         }
     }];
 }

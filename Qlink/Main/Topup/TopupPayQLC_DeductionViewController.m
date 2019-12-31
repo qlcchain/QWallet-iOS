@@ -49,7 +49,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *symbolLab;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextView *sendtoAddressTV;
-@property (weak, nonatomic) IBOutlet UITextField *memoTF;
+@property (weak, nonatomic) IBOutlet UITextView *memoTV;
 
 //@property (nonatomic, strong) NSMutableArray *tokenPriceArr;
 @property (nonatomic, strong) QLCTokenModel *selectAsset;
@@ -100,7 +100,7 @@
     _sendtoAddressTV.placeholder = kLang(@"qlc_wallet_address");
     _sendtoAddressTV.text = _sendDeductionToAddress;
     _amountTF.text = _sendDeductionAmount;
-    _memoTF.text = _sendDeductionMemo;
+    _memoTV.text = _sendDeductionMemo;
     
     _sendBtn.userInteractionEnabled = NO;
     [_amountTF addTarget:self action:@selector(textFieldDidEnd) forControlEvents:UIControlEventEditingDidEnd];
@@ -161,7 +161,7 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
-    NSString *data = _memoTF.text?:@"";
+    NSString *data = _memoTV.text?:@"";
     BOOL workInLocal = NO;
     BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
 //    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];

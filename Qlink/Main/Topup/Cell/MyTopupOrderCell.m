@@ -85,7 +85,9 @@
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
         payHeight = 0;
         if (model.txid == nil || [model.txid isEmptyString]) {
-            payHeight = pay_const;
+            if ([model.status isEqualToString:Topup_Order_Status_New]) {
+                payHeight = pay_const;
+            }
         } else {
             if (model.payTokenInTxid == nil || [model.payTokenInTxid isEmptyString]) {
                 if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
@@ -158,8 +160,15 @@
     _blockchainHeight.constant = [MyTopupOrderCell blockchainInvoiceExist:model.txid]?48:0;
     
     _cancelBtn.hidden = YES;
-    if ([model.status isEqualToString:Topup_Order_Status_New] || [model.status isEqualToString:Topup_Order_Status_QGAS_PAID] || [model.status isEqualToString:Topup_Order_Status_Pay_TOKEN_PAID]) {
+    if ([model.status isEqualToString:Topup_Order_Status_New]) {
         _cancelBtn.hidden = NO;
+    } else if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
+        if (!model.payTokenInTxid || [model.payTokenInTxid isEmptyString]) {
+            _cancelBtn.hidden = NO;
+        }
+    } else if ([model.status isEqualToString:Topup_Order_Status_Pay_TOKEN_PAID]) {
+        _cancelBtn.hidden = NO;
+//        _cancelBtn.hidden = YES;
     }
 }
 
@@ -169,6 +178,7 @@
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
     NSString *discountAmountStr = @"";
+    
     topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,model.localFiat];
     payAmountStr = [NSString stringWithFormat:@"%@%@",model.discountPrice,model.localFiat];
     discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.localFiat];
@@ -198,7 +208,7 @@
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
 //    NSString *discountAmountStr = @"";
-    topupAmountStr = [NSString stringWithFormat:@"%@%@",model.originalPrice,model.localFiat];
+    topupAmountStr = [NSString stringWithFormat:@"%@%@",model.localFiatMoney,model.localFiat];
     payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount,model.payTokenSymbol];
 //    discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.symbol];
     NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.qgasAmount,model.symbol?:@""];
@@ -209,10 +219,12 @@
     _qgasAmountLab.text = qgasNumStr;
     
     _payHeight.constant = 0;
-    if (model.txid == nil || [model.txid isEmptyString]) {
-        _payHeight.constant = 48;
+    if (model.txid == nil || [model.txid isEmptyString]) { // 未支付抵扣币
+        if ([model.status isEqualToString:Topup_Order_Status_New]) {
+            _payHeight.constant = 48;
+        }
     } else {
-        if (model.payTokenInTxid == nil || [model.payTokenInTxid isEmptyString]) {
+        if (model.payTokenInTxid == nil || [model.payTokenInTxid isEmptyString]) { // 未支付支付币
             if ([model.status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
                 _payHeight.constant = 48;
             }

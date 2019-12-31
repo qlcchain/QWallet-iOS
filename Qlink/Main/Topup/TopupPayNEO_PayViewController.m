@@ -46,7 +46,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *symbolLab;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextView *sendtoAddressTV;
-@property (weak, nonatomic) IBOutlet UITextField *memoTF;
+@property (weak, nonatomic) IBOutlet UITextView *memoTV;
 
 //@property (nonatomic, strong) NSMutableArray *tokenPriceArr;
 @property (nonatomic, strong) NEOAssetModel *selectAsset;
@@ -94,7 +94,7 @@
     _sendtoAddressTV.placeholder = kLang(@"neo_wallet_address");
     _sendtoAddressTV.text = _sendToAddress;
     _amountTF.text = _sendAmount;
-    _memoTF.text = _sendMemo;
+    _memoTV.text = _sendMemo;
     
     _sendBtn.userInteractionEnabled = NO;
     [_amountTF addTarget:self action:@selector(textFieldDidEnd) forControlEvents:UIControlEventEditingDidEnd];
@@ -154,7 +154,7 @@
     NSString *symbol = _selectAsset.asset_symbol;
 //    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
     NSString *fromAddress = from_address;
-    NSString *remarkStr = _memoTF.text;
+    NSString *remarkStr = _memoTV.text;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
         assetType = 0;
@@ -289,8 +289,8 @@
     }
     NSString *p2pId = [UserModel getTopupP2PId];
     NSString *orderId = _inputOrderId?:@"";
-    NSString *deductionTokenTxid = txid?:@"";
-    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"orderId":orderId,@"deductionTokenTxid":deductionTokenTxid};
+    NSString *payTokenTxid = txid?:@"";
+    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"orderId":orderId,@"payTokenTxid":payTokenTxid};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:topup_pay_token_txid_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -300,6 +300,8 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"successful")];
             
             [weakself jumpToMyTopupOrder];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

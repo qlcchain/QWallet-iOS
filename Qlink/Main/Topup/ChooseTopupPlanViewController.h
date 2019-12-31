@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TopupCountryModel;
+
 @interface ChooseTopupPlanViewController : QBaseViewController
+
+@property (nonatomic, strong) TopupCountryModel *inputCountryM;
 
 @end
 

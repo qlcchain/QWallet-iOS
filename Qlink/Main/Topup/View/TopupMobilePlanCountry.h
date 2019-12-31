@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^TopupMobilePlanCountrySelectBlock)(NSString *selectGlobalRoaming);
+@class TopupCountryModel;
+
+typedef void(^TopupMobilePlanCountrySelectBlock)(TopupCountryModel *selectCountryM);
 
 @interface TopupMobilePlanCountry : UIView
 

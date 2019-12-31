@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *symbol;// = OKB;
 @property (nonatomic, strong) NSString *logoPng;
 @property (nonatomic, strong) NSString *logoWebp;
+@property (nonatomic, strong) NSNumber *usdPrice;
 
 - (UIImage *)getDeductionTokenImage;
 

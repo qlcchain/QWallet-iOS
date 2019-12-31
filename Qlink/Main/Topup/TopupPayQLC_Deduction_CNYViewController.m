@@ -296,16 +296,16 @@
     }
     NSString *p2pId = [UserModel getTopupP2PId];
     NSString *productId = _inputProductM.ID?:@"";
-//    NSString *areaCode = _inputAreaCode?:@"";
+    NSString *areaCode = _inputAreaCode?:@"";
     NSString *phoneNumber = _inputPhoneNumber?:@"";
     NSString *amount = [NSString stringWithFormat:@"%@",_inputProductM.localFaitMoney];
     NSString *deductionTokenId = _inputDeductionTokenId?:@"";
-//    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":_payTxid?:@"",@"payTokenId":payTokenId};
-    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"phoneNumber":phoneNumber,@"localFiatAmount":amount,@"deductionTokenId":deductionTokenId?:@""};
+    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":_payTxid?:@"",@"payTokenId":deductionTokenId};
+//    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"phoneNumber":phoneNumber,@"localFiatAmount":amount,@"deductionTokenId":deductionTokenId?:@""};
 //    [kAppD.window makeToastInView:kAppD.window];
     TopupPayOrderParamsModel *paramsM = [TopupPayOrderParamsModel getObjectWithKeyValues:params];
     [[TopupPayOrderTodo shareInstance] savePayOrder:paramsM];
-    [RequestService requestWithUrl10:topup_order_v2_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:topup_order_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [[TopupPayOrderTodo shareInstance] handlerPayOrderSuccess:paramsM];

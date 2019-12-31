@@ -112,7 +112,7 @@ static NSInteger const miniSpacingDistance = 8;
 @property (nonatomic, strong) MiningActivityModel *miningActivityM;
 @property (nonatomic) BOOL showQLC;
 @property (nonatomic, strong) TopupMobilePlanCountry *countryV;
-@property (nonatomic, strong) NSString *selectGlobalRoaming;
+@property (nonatomic, strong) TopupCountryModel *selectCountryM;
 
 @end
 
@@ -360,16 +360,18 @@ static NSInteger const miniSpacingDistance = 8;
 
 - (void)addCountryView {
     kWeakSelf(self);
-    _countryV = [TopupMobilePlanCountry getInstance];
-    _countryV.countrySelectB = ^(NSString *selectGlobalRoaming) {
-        weakself.selectGlobalRoaming = selectGlobalRoaming;
-        weakself.currentPage = 1;
-        [weakself requestTopup_product_list];
-    };
-    [_countryBack addSubview:_countryV];
-    [_countryV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(weakself.countryBack).offset(0);
-    }];
+    if (!_countryV) {
+        _countryV = [TopupMobilePlanCountry getInstance];
+        _countryV.countrySelectB = ^(TopupCountryModel *selectCountryM) {
+            weakself.selectCountryM = selectCountryM;
+            weakself.currentPage = 1;
+            [weakself requestTopup_product_list];
+        };
+        [_countryBack addSubview:_countryV];
+        [_countryV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.countryBack).offset(0);
+        }];
+    }
 }
 
 #pragma mark - 轮播图
@@ -402,8 +404,9 @@ static NSInteger const miniSpacingDistance = 8;
     NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
     NSString *size = TopupNetworkSize;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"page":page,@"size":size}];
-    if (_selectGlobalRoaming != nil && ![_selectGlobalRoaming isEmptyString]) {
-        [params setObject:_selectGlobalRoaming forKey:@"globalRoaming"];
+    NSString *selectGlobalRoaming = _selectCountryM?_selectCountryM.globalRoaming:@"";
+    if (selectGlobalRoaming != nil && ![selectGlobalRoaming isEmptyString]) {
+        [params setObject:selectGlobalRoaming forKey:@"globalRoaming"];
     }
     [RequestService requestWithUrl10:topup_product_list_v2_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //    [RequestService requestWithUrl5:topup_product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -649,6 +652,7 @@ static NSInteger const miniSpacingDistance = 8;
 
 - (void)jumpToChooseTopupPlan {
     ChooseTopupPlanViewController *vc = [ChooseTopupPlanViewController new];
+    vc.inputCountryM = _selectCountryM;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

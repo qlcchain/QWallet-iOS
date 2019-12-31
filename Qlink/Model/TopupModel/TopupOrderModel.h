@@ -59,6 +59,7 @@ static NSString *const Topup_Order_Status_PAY_TOKEN_RETURNED = @"PAY_TOKEN_RETUR
 @property (nonatomic, strong) NSString *payTokenSymbol;
 @property (nonatomic, strong) NSString *payTokenChain;
 @property (nonatomic, strong) NSString *localFiat;
+@property (nonatomic, strong) NSNumber *localFiatMoney;
 
 @property (nonatomic, strong) NSString *expiredtime;
 @property (nonatomic, strong) NSString *serialno;

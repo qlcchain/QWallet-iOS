@@ -121,7 +121,7 @@
 //    支付代币数量  =    支付代币金额/支付代币价格
     
     NSString *rmbStr = productM.localFiat?:@"";
-    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",rmbStr,productM.localFaitMoney];
+    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",productM.localFaitMoney,rmbStr];
     NSString *amountLabFontName = _amountLab.font.fontName;
     NSMutableAttributedString *amountAtt = [[NSMutableAttributedString alloc] initWithString:amountShowStr];
     // .SFUIDisplay-Semibold  .SFUI-Semibold
@@ -133,7 +133,13 @@
     NSString *fait1Str = productM.discount.mul(productM.payTokenMoney);
     NSString *faitMoneyStr = [productM.discount.mul(productM.payTokenMoney) showfloatStr:4];
     NSString *deduction1Str = productM.payTokenMoney.mul(productM.qgasDiscount);
-    NSString *deductionAmountStr = [productM.payTokenMoney.mul(productM.qgasDiscount).div(tokenM.price) showfloatStr:3];
+    NSNumber *deductionTokenPrice = @(1);
+    if ([productM.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = tokenM.price;
+    } else if ([productM.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = tokenM.usdPrice;
+    }
+    NSString *deductionAmountStr = [productM.payTokenMoney.mul(productM.qgasDiscount).div(deductionTokenPrice) showfloatStr:3];
     
     NSString *deductionSymbolStr = tokenM.symbol;
     NSString *addStr = @"+";
@@ -141,7 +147,7 @@
     NSString *payTokenSymbol = @"";
     if ([productM.payWay isEqualToString:@"FIAT"]) {
         payTokenSymbol = rmbStr;
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payTokenSymbol,faitMoneyStr,addStr,deductionAmountStr,deductionSymbolStr];
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitMoneyStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
     } else if ([productM.payWay isEqualToString:@"TOKEN"]) {
         payTokenSymbol = productM.payTokenSymbol?:@"";
         NSNumber *payTokenPrice = [productM.payFiat isEqualToString:@"CNY"]?productM.payTokenCnyPrice:[productM.payFiat isEqualToString:@"USD"]?productM.payTokenUsdPrice:@(0);

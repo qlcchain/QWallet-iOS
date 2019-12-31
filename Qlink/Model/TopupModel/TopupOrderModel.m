@@ -23,7 +23,15 @@
     if ([_status isEqualToString:Topup_Order_Status_New]) {
         str = [NSString stringWithFormat:kLang(@"waiting_for_to_arrive"),_symbol];
     } else if ([_status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
-        str = kLang(@"no_phone_bill_paid");
+        if ([_payWay isEqualToString:@"FIAT"]) {
+            str = kLang(@"no_phone_bill_paid");
+        } else if ([_payWay isEqualToString:@"TOKEN"]) {
+            if (_payTokenInTxid == nil || [_payTokenInTxid isEmptyString]) {
+                str = kLang(@"no_phone_bill_paid");
+            } else {
+                str = kLang(@"please_wait_for_confirmation");
+            }
+        }
     } else if ([_status isEqualToString:Topup_Order_Status_RECHARGE]) {
         str = kLang(@"waiting_for_the_bill");
     } else if ([_status isEqualToString:Topup_Order_Status_SUCCESS]) {

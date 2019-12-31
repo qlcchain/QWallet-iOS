@@ -65,19 +65,22 @@
     NSString *language = [Language currentLanguageCode];
     NSString *discountNumStr = @"0";
     NSString *titleStr = @"";
+    NSString *locationStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
         discountNumStr = @(100).sub(model.discount.mul(@(100)));
         titleStr = [NSString stringWithFormat:@"%@%@%@",model.countryEn,model.provinceEn,model.ispEn];
+        locationStr = model.countryEn.uppercaseString;
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         discountNumStr = model.discount.mul(@(10));
         titleStr = [NSString stringWithFormat:@"%@%@%@",model.country,model.province,model.isp];
+        locationStr = model.country;
     } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
         discountNumStr = @(100).sub(model.discount.mul(@(100)));
         titleStr = [NSString stringWithFormat:@"%@%@%@",model.countryEn,model.provinceEn,model.ispEn];
+        locationStr = model.countryEn.uppercaseString;
     }
     _titleLab.text = titleStr;
-    
-    _locationLab.text = model.countryEn.uppercaseString;
+    _locationLab.text = locationStr;
     
     NSString *discountStr = kLang(@"_discount");
     NSString *discountShowStr = [NSString stringWithFormat:@"%@%@",discountNumStr,discountStr];

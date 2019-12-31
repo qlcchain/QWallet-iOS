@@ -38,11 +38,14 @@ static NSInteger DeductionTokenBtnTag = 6649;
 static NSInteger DeductionTokenTickTag = 9223;
 static NSString *const ChooseTopupPlanNetworkSize = @"20";
 
-@interface ChooseTopupPlanViewController () <UITableViewDelegate, UITableViewDataSource, CNContactPickerDelegate> {
+@interface ChooseTopupPlanViewController () <UITableViewDelegate, UITableViewDataSource, CNContactPickerDelegate, UITextFieldDelegate> {
     CNContactPickerViewController * _peoplePickVC;
 }
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
+
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainTableHeight;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 
 @property (weak, nonatomic) IBOutlet UILabel *countryCodeLab;
@@ -76,6 +79,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     // Do any additional setup after loading the view from its nib.
     
     [self configInit];
+    [self refreshCountrySelect:_inputCountryM];
     [self requestTopup_pay_token];
 }
 
@@ -108,15 +112,27 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     
     [_phoneTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     [_phoneTF addTarget:self action:@selector(textFieldEditDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
+    _phoneTF.delegate = self;
 
     kWeakSelf(self)
-    _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
+    _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTopup_product_list_v2];
     }];
-    _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
+    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTopup_product_list_v2];
     }];
+}
+
+- (void)refreshCountrySelect:(TopupCountryModel *)model {
+    if (!model) {
+        return;
+    }
+    _countryCodeLab.text = [NSString stringWithFormat:@"%@ %@",model.nameEn,model.globalRoaming];
+    _cardLab.text = nil;
+    _ispArr = nil;
+    _regionLab.text = kLang(@"optional");
+    _provinceArr = nil;
 }
 
 - (void)changedTextField:(UITextField *)tf {
@@ -129,7 +145,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 
 - (void)textFieldEditDidEnd:(UITextField *)tf {
     if (![tf.text isEmptyString]) {
-        [_mainTable.mj_header beginRefreshing];
+        [_mainScroll.mj_header beginRefreshing];
     }
 }
 
@@ -265,7 +281,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
         NSString *isp = obj;
         UIAlertAction *alert = [UIAlertAction actionWithTitle:isp style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             weakself.cardLab.text = isp;
-            weakself.regionLab.text = nil;
+            weakself.regionLab.text = kLang(@"optional");
             weakself.provinceArr = nil;
         }];
         [alertC addAction:alert];
@@ -297,7 +313,13 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 - (void)handlerPayCNY:(TopupProductModel *)model {
     NSString *amountNum = model.localFaitMoney;
     NSString *faitStr = [model.discount.mul(model.payTokenMoney) showfloatStr:4];
-    NSString *qgasStr = [model.payTokenMoney.mul(model.qgasDiscount).div(_selectDeductionTokenM.price) showfloatStr:3];
+    NSNumber *deductionTokenPrice = @(1);
+    if ([model.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = _selectDeductionTokenM.price;
+    } else if ([model.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = _selectDeductionTokenM.usdPrice;
+    }
+    NSString *qgasStr = [model.payTokenMoney.mul(model.qgasDiscount).div(deductionTokenPrice) showfloatStr:3];
     NSString *message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction"),amountNum,qgasStr,_selectDeductionTokenM.symbol,faitStr];
 //    if ([_selectDeductionTokenM.chain isEqualToString:ETH_Chain]) {
 //        message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction"),amountNum,qgasStr,_selectDeductionTokenM.symbol,faitStr];
@@ -310,11 +332,13 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }];
     [alertC addAction:alertCancel];
     UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"purchase") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // 老版本
 //        if ([weakself.selectDeductionTokenM.chain isEqualToString:ETH_Chain]) {
 //            [weakself jumpToTopupPayETH_Deduction_CNY:model];
 //        } else if ([weakself.selectDeductionTokenM.chain isEqualToString:QLC_Chain]) {
 //            [weakself jumpToTopupPayQLC_Deduction_CNY:model];
 //        }
+        // 新版
        [weakself requestTopup_order:model];
     }];
     [alertC addAction:alertBuy];
@@ -327,7 +351,13 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     NSString *fait1Str = model.discount.mul(model.payTokenMoney);
 //    NSString *faitMoneyStr = [model.discount.mul(model.payTokenMoney) showfloatStr:4];
     NSString *deduction1Str = model.payTokenMoney.mul(model.qgasDiscount);
-    NSString *deductionAmountStr = [model.payTokenMoney.mul(model.qgasDiscount).div(_selectDeductionTokenM.price) showfloatStr:3];
+    NSNumber *deductionTokenPrice = @(1);
+    if ([model.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = _selectDeductionTokenM.price;
+    } else if ([model.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = _selectDeductionTokenM.usdPrice;
+    }
+    NSString *deductionAmountStr = [model.payTokenMoney.mul(model.qgasDiscount).div(deductionTokenPrice) showfloatStr:3];
     NSNumber *payTokenPrice = [model.payFiat isEqualToString:@"CNY"]?model.payTokenCnyPrice:[model.payFiat isEqualToString:@"USD"]?model.payTokenUsdPrice:@(0);
     NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
     // Top-up value %@ %@\npay %@ %@ and %@ %@
@@ -351,8 +381,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 #pragma mark - Request
 - (void)requestTopup_product_list_v2 {
     if (!_selectDeductionTokenM) {
-        [_mainTable.mj_header endRefreshing];
-        [_mainTable.mj_footer endRefreshing];
+        [_mainScroll.mj_header endRefreshing];
+        [_mainScroll.mj_footer endRefreshing];
         return;
     }
     kWeakSelf(self);
@@ -373,8 +403,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
         [params setObject:province forKey:@"province"];
     }
     [RequestService requestWithUrl10:topup_product_list_v2_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [weakself.mainTable.mj_header endRefreshing];
-        [weakself.mainTable.mj_footer endRefreshing];
+        [weakself.mainScroll.mj_header endRefreshing];
+        [weakself.mainScroll.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [TopupProductModel mj_objectArrayWithKeyValuesArray:responseObject[@"productList"]];
             if (weakself.currentPage == 1) {
@@ -387,7 +417,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
                     TopupProductModel *model2 = [TopupProductModel getObjectWithKeyValues:model1.mj_keyValues];
                     model2.localFaitMoney = obj;
                     if (![model1.payFiatAmount isEmptyString]) {
-                        model2.payTokenMoney = [model1.payFiatAmount componentsSeparatedByString:@","][idx];
+                        model2.payTokenMoney = [model1.payFiatAmount componentsSeparatedByString:@","][idx]?:@"0";
                     }
                     [weakself.sourceArr addObject:model2];
                 }];
@@ -395,14 +425,15 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             weakself.currentPage += 1;
             
             weakself.waitingBackHeight.constant = _sourceArr.count<=0?80:0;
+            weakself.mainTableHeight.constant = _sourceArr.count*ChooseTopupPlanCell_Height;
             [weakself.mainTable reloadData];
             
             if (arr.count < [ChooseTopupPlanNetworkSize integerValue]) {
-                [weakself.mainTable.mj_footer endRefreshingWithNoMoreData];
+                [weakself.mainScroll.mj_footer endRefreshingWithNoMoreData];
 //                weakself.mainTable.mj_footer.hidden = arr.count<=0?YES:NO;
-                weakself.mainTable.mj_footer.hidden = YES;
+                weakself.mainScroll.mj_footer.hidden = YES;
             } else {
-                weakself.mainTable.mj_footer.hidden = NO;
+                weakself.mainScroll.mj_footer.hidden = NO;
             }
             
             weakself.foundTipLab.hidden = weakself.sourceArr.count<=0?YES:NO;
@@ -411,8 +442,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             weakself.tokenBack.hidden = weakself.sourceArr.count<=0?YES:NO;
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [weakself.mainTable.mj_header endRefreshing];
-        [weakself.mainTable.mj_footer endRefreshing];
+        [weakself.mainScroll.mj_header endRefreshing];
+        [weakself.mainScroll.mj_footer endRefreshing];
     }];
 }
 
@@ -480,6 +511,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             } else if ([weakself.selectDeductionTokenM.chain isEqualToString:QLC_Chain]) {
                 [weakself jumpToTopupPayQLC_Deduction:orderM];
             }
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -487,6 +520,29 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }];
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == _phoneTF) {
+        return [self validateNumber:string];
+    }
+    return YES;
+}
+ 
+- (BOOL)validateNumber:(NSString*)number {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    int i = 0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -535,6 +591,10 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     
     if ([_phoneTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
+        return;
+    }
+    if ([[_phoneTF.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || _phoneTF.text.length < 6) { // 大于6位的纯数字
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_fill_in_a_valid_phone_number")];
         return;
     }
     
@@ -632,7 +692,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 //        return;
 //    }
     
-    [_mainTable.mj_header beginRefreshing];
+    [_mainScroll.mj_header beginRefreshing];
 }
 
 #pragma mark - CNContactPickerDelegate
@@ -664,7 +724,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     _phoneTF.text = num;
     
     if (![_phoneTF.text isEmptyString]) {
-        [_mainTable.mj_header beginRefreshing];
+        [_mainScroll.mj_header beginRefreshing];
     }
 }
 
@@ -704,7 +764,13 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 //    NSNumber *qgasNum = @([model.amount doubleValue]*[model.qgasDiscount doubleValue]);
     NSString *faitStr = [model.discount.mul(model.payTokenMoney) showfloatStr:4];
 //    NSString *qgasFaitStr = [model.qgasDiscount.mul(model.amount) showfloatStr:4];
-    NSString *qgasStr = [model.payTokenMoney.mul(model.qgasDiscount).div(_selectDeductionTokenM.price) showfloatStr:3];
+    NSNumber *deductionTokenPrice = @(1);
+    if ([model.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = _selectDeductionTokenM.price;
+    } else if ([model.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = _selectDeductionTokenM.usdPrice;
+    }
+    NSString *qgasStr = [model.payTokenMoney.mul(model.qgasDiscount).div(deductionTokenPrice) showfloatStr:3];
     TopupPayQLC_Deduction_CNYViewController *vc = [TopupPayQLC_Deduction_CNYViewController new];
     vc.sendAmount = [NSString stringWithFormat:@"%@",qgasStr];
     vc.sendToAddress = qlcAddress;
@@ -729,7 +795,13 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     NSString *fait1Str = model.discount.mul(model.payTokenMoney);
     NSString *faitMoneyStr = [model.discount.mul(model.payTokenMoney) showfloatStr:4];
     NSString *deduction1Str = model.payTokenMoney.mul(model.qgasDiscount);
-    NSString *deductionAmountStr = [model.payTokenMoney.mul(model.qgasDiscount).div(_selectDeductionTokenM.price) showfloatStr:3];
+    NSNumber *deductionTokenPrice = @(1);
+    if ([model.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = _selectDeductionTokenM.price;
+    } else if ([model.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = _selectDeductionTokenM.usdPrice;
+    }
+    NSString *deductionAmountStr = [model.payTokenMoney.mul(model.qgasDiscount).div(deductionTokenPrice) showfloatStr:3];
     NSNumber *payTokenPrice = [model.payFiat isEqualToString:@"CNY"]?model.payTokenCnyPrice:[model.payFiat isEqualToString:@"USD"]?model.payTokenUsdPrice:@(0);
     NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
     TopupPayETH_Deduction_CNYViewController *vc = [TopupPayETH_Deduction_CNYViewController new];
@@ -764,7 +836,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"QGAS";
 //    vc.inputProductM = productM;
@@ -791,7 +863,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
     vc.sendDeductionToAddress = ethAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
@@ -816,11 +888,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     vc.inputCountryCode = [self getGlobalRoamingFromCountryCodeLab];
     kWeakSelf(self);
     vc.resultB = ^(TopupCountryModel * _Nonnull selectM) {
-        weakself.countryCodeLab.text = [NSString stringWithFormat:@"%@ %@",selectM.nameEn,selectM.globalRoaming];
-        weakself.cardLab.text = nil;
-        weakself.ispArr = nil;
-        weakself.regionLab.text = nil;
-        weakself.provinceArr = nil;
+        [weakself refreshCountrySelect:selectM];
     };
     [self.navigationController pushViewController:vc animated:YES];
 }

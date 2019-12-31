@@ -55,19 +55,25 @@
     NSString *topupAmountShowStr = @"";
     NSString *projectStr = @"";
     NSString *paySymbolStr = @"";
+    NSNumber *localShowStr = @(0);
+    NSString *localSymbolStr = @"";
     if ([_inputCredentailM.payWay isEqualToString:@"FIAT"]) { // 法币支付
         if ([_inputCredentailM.payFiat isEqualToString:@"CNY"]) {
             faitStr = _inputCredentailM.discountPrice;
             paySymbolStr = _inputCredentailM.localFiat;
+            localShowStr = _inputCredentailM.originalPrice;
+            localSymbolStr = _inputCredentailM.localFiat;
         } else if ([_inputCredentailM.payFiat isEqualToString:@"USD"]) {
             
         }
     } else if ([_inputCredentailM.payWay isEqualToString:@"TOKEN"]) { // 代币支付
         faitStr = _inputCredentailM.payTokenAmount;
         paySymbolStr = _inputCredentailM.payTokenSymbol;
+        localShowStr = _inputCredentailM.localFiatMoney;
+        localSymbolStr = _inputCredentailM.localFiat;
     }
     topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,paySymbolStr,addStr,qgasStr,symbolStr];
-    projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),_inputCredentailM.originalPrice?:@"",_inputCredentailM.phoneNumber?:@""];
+    projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),localShowStr?:@"" ,localSymbolStr?:@"",_inputCredentailM.phoneNumber?:@""];
     
 //    NSString *language = [Language currentLanguageCode];
 //    if ([language isEqualToString:LanguageCode[0]]) { // 英文

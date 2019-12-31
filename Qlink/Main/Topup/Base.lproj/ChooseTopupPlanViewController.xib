@@ -17,7 +17,9 @@
                 <outlet property="foundTipLab" destination="Nt3-dS-886" id="Yse-US-o5Z"/>
                 <outlet property="foundTopHeight" destination="jHw-F9-en0" id="BFq-DM-eYP"/>
                 <outlet property="lookupProductBtn" destination="WR4-DY-1qS" id="WTT-nt-J9f"/>
+                <outlet property="mainScroll" destination="MkF-tf-7bi" id="e0F-5T-uDG"/>
                 <outlet property="mainTable" destination="TfR-BL-Iwn" id="hDY-1L-Zvu"/>
+                <outlet property="mainTableHeight" destination="bUg-GI-OLK" id="LPQ-ma-fQH"/>
                 <outlet property="phoneTF" destination="PJG-N3-rv9" id="syc-47-LzW"/>
                 <outlet property="regionLab" destination="1Kd-pV-is6" id="Dy4-NP-HXH"/>
                 <outlet property="tokenBack" destination="zJG-I6-smz" id="BeP-AR-obz"/>
@@ -82,6 +84,9 @@
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TfR-BL-Iwn">
                                                     <rect key="frame" x="0.0" y="478.33333333333337" width="414" height="401.66666666666663"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="401.66666666666663" id="bUg-GI-OLK"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="dataSource" destination="-1" id="H3z-kI-6G6"/>
                                                         <outlet property="delegate" destination="-1" id="45P-mu-JLz"/>
@@ -386,7 +391,6 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="880" id="CWn-im-AQ7"/>
                                         <constraint firstAttribute="trailing" secondItem="u65-nd-3M8" secondAttribute="trailing" id="Fdm-fo-nZ1"/>
                                         <constraint firstAttribute="bottom" secondItem="u65-nd-3M8" secondAttribute="bottom" id="GbR-6T-PYl"/>
                                         <constraint firstItem="u65-nd-3M8" firstAttribute="leading" secondItem="OA0-V0-x9m" secondAttribute="leading" id="a7g-NA-01n"/>
