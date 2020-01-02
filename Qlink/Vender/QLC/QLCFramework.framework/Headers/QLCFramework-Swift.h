@@ -449,6 +449,7 @@ SWIFT_CLASS("_TtC12QLCFramework7QLCUtil")
 + (void)receive_accountsPendingWithAddress:(NSString * _Nonnull)address isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)receive_blocksInfoWithBlockHash:(NSString * _Nonnull)blockHash receiveAddress:(NSString * _Nonnull)receiveAddress privateKey:(NSString * _Nonnull)privateKey isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (NSString * _Nonnull)getRandomStringOfLengthWithLength:(NSInteger)length SWIFT_WARN_UNUSED_RESULT;
++ (void)test;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -922,6 +923,7 @@ SWIFT_CLASS("_TtC12QLCFramework7QLCUtil")
 + (void)receive_accountsPendingWithAddress:(NSString * _Nonnull)address isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)receive_blocksInfoWithBlockHash:(NSString * _Nonnull)blockHash receiveAddress:(NSString * _Nonnull)receiveAddress privateKey:(NSString * _Nonnull)privateKey isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (NSString * _Nonnull)getRandomStringOfLengthWithLength:(NSInteger)length SWIFT_WARN_UNUSED_RESULT;
++ (void)test;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1395,6 +1397,7 @@ SWIFT_CLASS("_TtC12QLCFramework7QLCUtil")
 + (void)receive_accountsPendingWithAddress:(NSString * _Nonnull)address isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)receive_blocksInfoWithBlockHash:(NSString * _Nonnull)blockHash receiveAddress:(NSString * _Nonnull)receiveAddress privateKey:(NSString * _Nonnull)privateKey isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (NSString * _Nonnull)getRandomStringOfLengthWithLength:(NSInteger)length SWIFT_WARN_UNUSED_RESULT;
++ (void)test;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1868,6 +1871,7 @@ SWIFT_CLASS("_TtC12QLCFramework7QLCUtil")
 + (void)receive_accountsPendingWithAddress:(NSString * _Nonnull)address isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)receive_blocksInfoWithBlockHash:(NSString * _Nonnull)blockHash receiveAddress:(NSString * _Nonnull)receiveAddress privateKey:(NSString * _Nonnull)privateKey isMainNetwork:(BOOL)isMainNetwork successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (NSString * _Nonnull)getRandomStringOfLengthWithLength:(NSInteger)length SWIFT_WARN_UNUSED_RESULT;
++ (void)test;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

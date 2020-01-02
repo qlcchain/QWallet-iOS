@@ -433,6 +433,11 @@ public class QLCUtil: NSObject {
         return destinationDateNow!
     }
     
+    
+    @objc public static func test() {
+        
+    }
+    
 }
 
 

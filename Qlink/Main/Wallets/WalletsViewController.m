@@ -781,6 +781,7 @@
     }
 }
 
+// 接收qlc钱包pending
 - (void)startReceiveQLC {
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeQLC) {

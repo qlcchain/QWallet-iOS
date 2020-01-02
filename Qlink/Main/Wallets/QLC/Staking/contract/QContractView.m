@@ -27,6 +27,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 @property (nonatomic, strong) DWKWebView *dwebview;
+@property (nonatomic, copy) QContractStageBlock stageBlock;
 
 @end
 
@@ -93,7 +94,12 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 
 #pragma mark - Request
 #pragma mark - Benefit Pledge
-- (void)benefit_createMultiSig:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(QContractResultBlock)resultHandler {
+- (void)benefit_createMultiSig:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(QContractResultBlock)resultHandler stageHandler:(QContractStageBlock)stageHandler {
+    _stageBlock = stageHandler;
+    
+    if (_stageBlock) {
+        _stageBlock(Stage_MultiSig);
+    }
     
     NSArray *argu1 = @[neo_publicKey,PublicKeyB];
     DDLogDebug(@"staking.createMultiSig argu1 = %@",argu1);
@@ -108,6 +114,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 - (void)benefit_contractLock:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(QContractResultBlock)resultHandler {
+    if (_stageBlock) {
+        _stageBlock(Stage_ContractLock);
+    }
+    
     NSArray *argu2 = @[neo_wifKey,fromAddress,toAddress,qlcAddress,qlcAmount,lockTime];
     DDLogDebug(@"staking.contractLock argu2 = %@",argu2);
     kWeakSelf(self);
@@ -133,6 +143,11 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 - (void)nep5_prePareBenefitPledge:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount multiSigAddress:(NSString *)multiSigAddress neo_publicKey:(NSString *)neo_publicKey lockTxId:(NSString *)lockTxId qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(QContractResultBlock)resultHandler {
+    
+    if (_stageBlock) {
+        _stageBlock(Stage_PrePareBenefitPledge);
+    }
+    
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
@@ -169,6 +184,11 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 - (void)benefit_getnep5transferbytxid:(NSString *)lockTxId qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(QContractResultBlock)resultHandler {
+    
+    if (_stageBlock) {
+        _stageBlock(Stage_NEOLockState);
+    }
+    
 //    NSString *requestId = [NSString randomOf32];
 //    NSDictionary *params = @{@"jsonrpc":@"2.0",@"method":@"getnep5transferbytxid",@"params":[[NSString stringWithFormat:@"[\"%@\"]",lockTxId] stringByReplacingOccurrencesOfString:@"\\" withString:@""],@"id":requestId};
 //    NSString *urlStr = @"https://api.nel.group/api/mainnet";
@@ -202,6 +222,11 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 }
 
 - (void)nep5_benefitPledge:(NSString *)lockTxId qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(QContractResultBlock)resultHandler {
+    
+    if (_stageBlock) {
+        _stageBlock(Stage_BenefitPledge);
+    }
+    
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
@@ -631,6 +656,11 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 
 #pragma mark - SignAndWork
 - (void)signAndWork:(NSDictionary *)dic qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey lockTxId:(NSString *)lockTxId unlockTxParams:(NSDictionary *)unlockTxParams resultHandler:(QContractResultBlock)resultHandler {
+
+    if (_stageBlock) {
+        _stageBlock(Stage_SignAndWork);
+    }
+    
     kWeakSelf(self);
     [QLCWalletManage signAndWork:dic publicKey:qlc_publicKey privateKey:qlc_privateKey resultHandler:^(NSDictionary * _Nullable responseDic) {
         if (responseDic) {
@@ -649,6 +679,14 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
 
 #pragma mark - Process
 - (void)ledger_process:(NSString *)lockTxId blockDic:(NSDictionary *)blockDic unlockTxParams:(NSDictionary *)unlockTxParams resultHandler:(QContractResultBlock)resultHandler {
+    
+    kWeakSelf(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (weakself.stageBlock) {
+            weakself.stageBlock(Stage_Process);
+        }
+    });
+    
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];

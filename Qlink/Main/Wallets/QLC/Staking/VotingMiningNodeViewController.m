@@ -16,7 +16,7 @@
 #import "NEOAddressInfoModel.h"
 #import "Qlink-Swift.h"
 #import "NSDate+Category.h"
-#import "StakingProcessView.h"
+#import "StakingProcessAnimateView.h"
 #import "QLogHelper.h"
 
 @interface VotingMiningNodeViewController ()
@@ -44,7 +44,7 @@
 @property (nonatomic, strong) WalletCommonModel *stakeFromWalletM;
 @property (nonatomic, strong) WalletCommonModel *stakeToWalletM;
 @property (nonatomic, strong) NEOAssetModel *currentNEOAsset;
-@property (nonatomic, strong) StakingProcessView *stakingProcessV;
+@property (nonatomic, strong) StakingProcessAnimateView *stakingProcessV;
 @property (nonatomic, strong) QContractView *contractV;
 
 @end
@@ -108,7 +108,7 @@
 }
 
 - (void)showStakingProcessView {
-    _stakingProcessV = [StakingProcessView getInstance];
+    _stakingProcessV = [StakingProcessAnimateView getInstance];
     [_stakingProcessV show];
 }
 
@@ -260,6 +260,10 @@
         } else {
             NSString *tip = [kLang(@"failed_") stringByAppendingFormat:@"(%@)",message ?: @""];
             [kAppD.window makeToastDisappearWithText:tip];
+        }
+    } stageHandler:^(NSString * _Nonnull stage) {
+        if (weakself.stakingProcessV) {
+            [weakself.stakingProcessV updateStage:stage?:@"0"];
         }
     }];
     

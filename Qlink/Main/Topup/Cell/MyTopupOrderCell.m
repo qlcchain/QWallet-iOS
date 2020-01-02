@@ -167,8 +167,8 @@
             _cancelBtn.hidden = NO;
         }
     } else if ([model.status isEqualToString:Topup_Order_Status_Pay_TOKEN_PAID]) {
-        _cancelBtn.hidden = NO;
-//        _cancelBtn.hidden = YES;
+//        _cancelBtn.hidden = NO;
+        _cancelBtn.hidden = YES;
     }
 }
 

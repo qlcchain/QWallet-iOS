@@ -747,6 +747,8 @@
 		58CDB5EC208742CA00B74962 /* UserHeadBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CDB5EB208742CA00B74962 /* UserHeadBtn.m */; };
 		58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CDB5EE20888E7600B74962 /* WhiteCiycleImageView.m */; };
 		58CDB5F220889FA600B74962 /* QShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CDB5F120889FA600B74962 /* QShadowView.m */; };
+		58CDBAB023BDCEA300982D54 /* StakingProcessAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CDBAAE23BDCEA300982D54 /* StakingProcessAnimateView.m */; };
+		58CDBAB123BDD9B100982D54 /* StakingProcessAnimateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CDBAB323BDD9B100982D54 /* StakingProcessAnimateView.xib */; };
 		58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF102A207CA4640026F28E /* ChooseCountryUtil.m */; };
 		58CF1032207CBFDF0026F28E /* UnderlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF1031207CBFDF0026F28E /* UnderlineView.m */; };
 		58CF40AA219916860000C3DA /* NEOBackupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CF40A8219916860000C3DA /* NEOBackupDetailViewController.m */; };
@@ -2482,6 +2484,12 @@
 		58CDB5EE20888E7600B74962 /* WhiteCiycleImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteCiycleImageView.m; sourceTree = "<group>"; };
 		58CDB5F020889FA600B74962 /* QShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QShadowView.h; sourceTree = "<group>"; };
 		58CDB5F120889FA600B74962 /* QShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QShadowView.m; sourceTree = "<group>"; };
+		58CDBAAD23BDCEA200982D54 /* StakingProcessAnimateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StakingProcessAnimateView.h; sourceTree = "<group>"; };
+		58CDBAAE23BDCEA300982D54 /* StakingProcessAnimateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StakingProcessAnimateView.m; sourceTree = "<group>"; };
+		58CDBAB223BDD9B100982D54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StakingProcessAnimateView.xib; sourceTree = "<group>"; };
+		58CDBAB523BDD9BB00982D54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StakingProcessAnimateView.strings; sourceTree = "<group>"; };
+		58CDBAB723BDD9C000982D54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StakingProcessAnimateView.strings"; sourceTree = "<group>"; };
+		58CDBAB923BDD9C400982D54 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/StakingProcessAnimateView.strings; sourceTree = "<group>"; };
 		58CF1029207CA4640026F28E /* ChooseCountryUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseCountryUtil.h; sourceTree = "<group>"; };
 		58CF102A207CA4640026F28E /* ChooseCountryUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryUtil.m; sourceTree = "<group>"; };
 		58CF1030207CBFDF0026F28E /* UnderlineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnderlineView.h; sourceTree = "<group>"; };
@@ -5918,6 +5926,9 @@
 		58DA5BAB232232CE004E8D5A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				58CDBAAD23BDCEA200982D54 /* StakingProcessAnimateView.h */,
+				58CDBAAE23BDCEA300982D54 /* StakingProcessAnimateView.m */,
+				58CDBAB323BDD9B100982D54 /* StakingProcessAnimateView.xib */,
 				58DA5BB32322361C004E8D5A /* RevokingProcessView.h */,
 				58DA5BB22322361C004E8D5A /* RevokingProcessView.m */,
 				58A8B1D8233C52BE007E2CE3 /* RevokingProcessView.xib */,
@@ -6420,6 +6431,7 @@
 				581F815922F7BF9400F8291E /* ETHTransactionRecordCell.xib in Resources */,
 				581F829422F7C26F00F8291E /* ETHImportWalletViewController.xib in Resources */,
 				586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */,
+				58CDBAB123BDD9B100982D54 /* StakingProcessAnimateView.xib in Resources */,
 				581F823222F7C1AE00F8291E /* EOSRegisterAccountViewController.xib in Resources */,
 				581F835F22F7C43A00F8291E /* WalletsManageViewController.xib in Resources */,
 				73A05A1E2081A02200974483 /* icon_map_refresh@2x.png in Resources */,
@@ -6753,7 +6765,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=0\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
+			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=1\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
 		};
 		58B4716F20D9FA05007D9D7E /* UploadBuglySymbol */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7024,6 +7036,7 @@
 				58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */,
 				58A57D3A22DDA22F00699C3F /* WalletTransferUtil.m in Sources */,
 				583D9549211430FA0057A90C /* VPNRankMode.m in Sources */,
+				58CDBAB023BDCEA300982D54 /* StakingProcessAnimateView.m in Sources */,
 				587ABD5421B8F8F800C3D81A /* EOS_Rate.m in Sources */,
 				5812DDB220A1A7890043A8A8 /* ZXImageMessageCell.m in Sources */,
 				58E3997422B376610029D105 /* VerificationViewController.m in Sources */,
@@ -9225,6 +9238,17 @@
 			name = ShareFriendsCell.xib;
 			sourceTree = "<group>";
 		};
+		58CDBAB323BDD9B100982D54 /* StakingProcessAnimateView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58CDBAB223BDD9B100982D54 /* Base */,
+				58CDBAB523BDD9BB00982D54 /* en */,
+				58CDBAB723BDD9C000982D54 /* zh-Hans */,
+				58CDBAB923BDD9C400982D54 /* id */,
+			);
+			name = StakingProcessAnimateView.xib;
+			sourceTree = "<group>";
+		};
 		58D7099A2359A9EE008880A0 /* InviteRankView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9328,7 +9352,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9348,7 +9372,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9473,7 +9497,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6641;
+				CURRENT_PROJECT_VERSION = 6668;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9496,7 +9520,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9518,7 +9542,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6641;
+				CURRENT_PROJECT_VERSION = 6668;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9540,7 +9564,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

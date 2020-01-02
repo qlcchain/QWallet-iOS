@@ -10,7 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString *Stage_MultiSig = @"1"; // 获取多重签名地址
+static NSString *Stage_ContractLock = @"2"; // 锁定QLC
+static NSString *Stage_PrePareBenefitPledge = @"3"; // prePareBenefitPledge
+static NSString *Stage_NEOLockState = @"4"; // 去NEO链查询锁定状态
+static NSString *Stage_BenefitPledge = @"5"; // benefitPledge
+static NSString *Stage_SignAndWork = @"6"; // Sign Work
+static NSString *Stage_Process = @"7"; // process
+
 typedef void(^QContractResultBlock)(id _Nullable result, BOOL success,  NSString * _Nullable message);
+typedef void(^QContractStageBlock)(NSString *stage);
 
 @interface QContractView : UIView
 
@@ -20,7 +29,7 @@ typedef void(^QContractResultBlock)(id _Nullable result, BOOL success,  NSString
 - (void)config;
 
 #pragma mark - Benefit Pledge
-- (void)benefit_createMultiSig:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(QContractResultBlock)resultHandler;
+- (void)benefit_createMultiSig:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(QContractResultBlock)resultHandler stageHandler:(QContractStageBlock)stageHandler;
 #pragma mark - Benefit Pledge pledge_start 状态调用
 - (void)benefit_getnep5transferbytxid:(NSString *)lockTxId qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(QContractResultBlock)resultHandler;
 #pragma mark - Benefit Pledge 调用
