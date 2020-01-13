@@ -11,6 +11,12 @@
 
 @interface AgentRewardViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *personBack;
+
+@property (weak, nonatomic) IBOutlet UILabel *openLab;
+@property (weak, nonatomic) IBOutlet UIView *openDelegateBtnBack;
+
+
 @end
 
 @implementation AgentRewardViewController
@@ -24,7 +30,18 @@
 
 #pragma mark - Operation
 - (void)configInit {
-    [self.view addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_personBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    
+    _openLab.layer.cornerRadius = 8;
+    _openLab.layer.masksToBounds = YES;
+    [_openDelegateBtnBack addQGradientWithStart:UIColorFromRGB(0xFE6B4B) end:UIColorFromRGB(0xFC5140) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    
+}
+
+#pragma mark - Action
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

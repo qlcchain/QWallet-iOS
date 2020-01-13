@@ -7,8 +7,11 @@
 //
 
 #import "OpenAgentViewController.h"
+#import "UIView+Gradient.h"
 
 @interface OpenAgentViewController ()
+
+@property (weak, nonatomic) IBOutlet UIView *personBack;
 
 @end
 
@@ -17,16 +20,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self configInit];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Operation
+- (void)configInit {
+    [_personBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 }
-*/
+
+#pragma mark - Action
+
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

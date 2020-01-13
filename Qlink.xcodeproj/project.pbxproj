@@ -663,6 +663,18 @@
 		58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B6E219457EC0036FF4F /* TokenPriceModel.m */; };
 		58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B7121951EA00036FF4F /* NSString+RemoveZero.m */; };
 		589AE1BB2338656400C0A666 /* TrezorCrytoEd25519.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */; };
+		589AE86223CC4C4200476D53 /* OpenDelegateSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE85F23CC4C4100476D53 /* OpenDelegateSuccessView.xib */; };
+		589AE86323CC4C4200476D53 /* OpenDelegateSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE86123CC4C4100476D53 /* OpenDelegateSuccessView.m */; };
+		589AE86723CC4E2000476D53 /* OpenDelegateCheckView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE86523CC4E2000476D53 /* OpenDelegateCheckView.xib */; };
+		589AE86823CC4E2000476D53 /* OpenDelegateCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE86623CC4E2000476D53 /* OpenDelegateCheckView.m */; };
+		589AE86D23CC532900476D53 /* GroupBuyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */; };
+		589AE86E23CC532900476D53 /* GroupBuyDetialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE86C23CC532900476D53 /* GroupBuyDetialViewController.xib */; };
+		589AE87223CC535500476D53 /* OngoingGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE87023CC535500476D53 /* OngoingGroupViewController.m */; };
+		589AE87323CC535500476D53 /* OngoingGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE87123CC535500476D53 /* OngoingGroupViewController.xib */; };
+		589AE87823CC65A600476D53 /* OngoingGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE87623CC65A600476D53 /* OngoingGroupCell.m */; };
+		589AE87923CC65A600476D53 /* OngoingGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE87723CC65A600476D53 /* OngoingGroupCell.xib */; };
+		589AE87D23CC6ADC00476D53 /* GroupPeopleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE87C23CC6ADC00476D53 /* GroupPeopleView.m */; };
+		589AE87F23CC6B1200476D53 /* GroupPeopleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE87E23CC6B1200476D53 /* GroupPeopleView.xib */; };
 		589D4711225B327500A4A4E3 /* FinanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589D470F225B327500A4A4E3 /* FinanceViewController.m */; };
 		589D4712225B327500A4A4E3 /* FinanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589D4710225B327500A4A4E3 /* FinanceViewController.xib */; };
 		589D4716225B502300A4A4E3 /* MyThemes.m in Sources */ = {isa = PBXBuildFile; fileRef = 589D4715225B502200A4A4E3 /* MyThemes.m */; };
@@ -2308,6 +2320,24 @@
 		58990B7021951EA00036FF4F /* NSString+RemoveZero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RemoveZero.h"; sourceTree = "<group>"; };
 		58990B7121951EA00036FF4F /* NSString+RemoveZero.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RemoveZero.m"; sourceTree = "<group>"; };
 		589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TrezorCrytoEd25519.framework; sourceTree = "<group>"; };
+		589AE85F23CC4C4100476D53 /* OpenDelegateSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenDelegateSuccessView.xib; sourceTree = "<group>"; };
+		589AE86023CC4C4100476D53 /* OpenDelegateSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenDelegateSuccessView.h; sourceTree = "<group>"; };
+		589AE86123CC4C4100476D53 /* OpenDelegateSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenDelegateSuccessView.m; sourceTree = "<group>"; };
+		589AE86423CC4E1F00476D53 /* OpenDelegateCheckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenDelegateCheckView.h; sourceTree = "<group>"; };
+		589AE86523CC4E2000476D53 /* OpenDelegateCheckView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenDelegateCheckView.xib; sourceTree = "<group>"; };
+		589AE86623CC4E2000476D53 /* OpenDelegateCheckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenDelegateCheckView.m; sourceTree = "<group>"; };
+		589AE86A23CC532900476D53 /* GroupBuyDetialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupBuyDetialViewController.h; sourceTree = "<group>"; };
+		589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupBuyDetialViewController.m; sourceTree = "<group>"; };
+		589AE86C23CC532900476D53 /* GroupBuyDetialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupBuyDetialViewController.xib; sourceTree = "<group>"; };
+		589AE86F23CC535500476D53 /* OngoingGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OngoingGroupViewController.h; sourceTree = "<group>"; };
+		589AE87023CC535500476D53 /* OngoingGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OngoingGroupViewController.m; sourceTree = "<group>"; };
+		589AE87123CC535500476D53 /* OngoingGroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OngoingGroupViewController.xib; sourceTree = "<group>"; };
+		589AE87523CC65A600476D53 /* OngoingGroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OngoingGroupCell.h; sourceTree = "<group>"; };
+		589AE87623CC65A600476D53 /* OngoingGroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OngoingGroupCell.m; sourceTree = "<group>"; };
+		589AE87723CC65A600476D53 /* OngoingGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OngoingGroupCell.xib; sourceTree = "<group>"; };
+		589AE87B23CC6ADC00476D53 /* GroupPeopleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupPeopleView.h; sourceTree = "<group>"; };
+		589AE87C23CC6ADC00476D53 /* GroupPeopleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupPeopleView.m; sourceTree = "<group>"; };
+		589AE87E23CC6B1200476D53 /* GroupPeopleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupPeopleView.xib; sourceTree = "<group>"; };
 		589D470E225B327500A4A4E3 /* FinanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceViewController.h; sourceTree = "<group>"; };
 		589D470F225B327500A4A4E3 /* FinanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceViewController.m; sourceTree = "<group>"; };
 		589D4710225B327500A4A4E3 /* FinanceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanceViewController.xib; sourceTree = "<group>"; };
@@ -4826,6 +4856,7 @@
 				5810F47123628D4A00346A43 /* View */,
 				5874E350234DD461000835A0 /* huagaotx */,
 				5884736B233A07E800BB6F76 /* Cell */,
+				589AE86923CC52E300476D53 /* GroupBuy */,
 				5836CFBB23B49AA40072187A /* TopupPayNEO_PayViewController.h */,
 				5836CFBD23B49AA50072187A /* TopupPayNEO_PayViewController.m */,
 				5836CFDE23B5D9B30072187A /* TopupPayNEO_PayViewController.xib */,
@@ -4881,6 +4912,7 @@
 		5872056323C715A8009A6217 /* Invite */ = {
 			isa = PBXGroup;
 			children = (
+				589AE85E23CC4BDB00476D53 /* View */,
 				58FB8D5C226434DC0075698E /* ShareFriendsViewController.h */,
 				58FB8D5D226434DC0075698E /* ShareFriendsViewController.m */,
 				58C9282B22FA79CE0020BDC0 /* ShareFriendsViewController.xib */,
@@ -5679,6 +5711,54 @@
 				5827BC2D21A28B2400B7730E /* HistoryChartView.h */,
 				5827BC2E21A28B2400B7730E /* HistoryChartView.m */,
 				581F81BD22F7C0A200F8291E /* HistoryChartView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		589AE85E23CC4BDB00476D53 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				589AE86423CC4E1F00476D53 /* OpenDelegateCheckView.h */,
+				589AE86623CC4E2000476D53 /* OpenDelegateCheckView.m */,
+				589AE86523CC4E2000476D53 /* OpenDelegateCheckView.xib */,
+				589AE86023CC4C4100476D53 /* OpenDelegateSuccessView.h */,
+				589AE86123CC4C4100476D53 /* OpenDelegateSuccessView.m */,
+				589AE85F23CC4C4100476D53 /* OpenDelegateSuccessView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		589AE86923CC52E300476D53 /* GroupBuy */ = {
+			isa = PBXGroup;
+			children = (
+				589AE87A23CC6AC100476D53 /* View */,
+				589AE87423CC658100476D53 /* Cell */,
+				589AE86A23CC532900476D53 /* GroupBuyDetialViewController.h */,
+				589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */,
+				589AE86C23CC532900476D53 /* GroupBuyDetialViewController.xib */,
+				589AE86F23CC535500476D53 /* OngoingGroupViewController.h */,
+				589AE87023CC535500476D53 /* OngoingGroupViewController.m */,
+				589AE87123CC535500476D53 /* OngoingGroupViewController.xib */,
+			);
+			path = GroupBuy;
+			sourceTree = "<group>";
+		};
+		589AE87423CC658100476D53 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				589AE87523CC65A600476D53 /* OngoingGroupCell.h */,
+				589AE87623CC65A600476D53 /* OngoingGroupCell.m */,
+				589AE87723CC65A600476D53 /* OngoingGroupCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		589AE87A23CC6AC100476D53 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				589AE87B23CC6ADC00476D53 /* GroupPeopleView.h */,
+				589AE87C23CC6ADC00476D53 /* GroupPeopleView.m */,
+				589AE87E23CC6B1200476D53 /* GroupPeopleView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6498,6 +6578,7 @@
 				58A6500121BE16BD00E52FFF /* TipOKView.xib in Resources */,
 				58D8E8802361410900209BB2 /* TopupPayETH_Deduction_CNYViewController.xib in Resources */,
 				581F819822F7C06400F8291E /* NeoQueryWGasView.xib in Resources */,
+				589AE87923CC65A600476D53 /* OngoingGroupCell.xib in Resources */,
 				581F818A22F7C04800F8291E /* NeoClaimGasTipView.xib in Resources */,
 				58EC938523B0AF2C0054C074 /* TopupMobilePlanCountry.xib in Resources */,
 				58A3EB63237D82E700AEF7C8 /* SheetMiningViewController.xib in Resources */,
@@ -6536,6 +6617,7 @@
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
 				5860AD4520CFB56700EEB6CE /* BuyQlcView.xib in Resources */,
 				581D5121217981F40064F60C /* MarketsViewController.xib in Resources */,
+				589AE86223CC4C4200476D53 /* OpenDelegateSuccessView.xib in Resources */,
 				58FB8D912265B6C10075698E /* FinanceHistoryCell.xib in Resources */,
 				581F820122F7C15800F8291E /* EOSTransactionRecordViewController.xib in Resources */,
 				5885D427231F493800F9DEDE /* MyStakingsCell.xib in Resources */,
@@ -6576,6 +6658,7 @@
 				58A8B20A233C8805007E2CE3 /* MyTopupOrderViewController.xib in Resources */,
 				581F81D022F7C0D500F8291E /* QLCTransferViewController.xib in Resources */,
 				581F819F22F7C07300F8291E /* NEOTransferConfirmView.xib in Resources */,
+				589AE86E23CC532900476D53 /* GroupBuyDetialViewController.xib in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
 				581F831222F7C37900F8291E /* RegisterSetPWViewController.xib in Resources */,
 				581F80AA22F7BDFB00F8291E /* MyOrderListTradeCell.xib in Resources */,
@@ -6593,6 +6676,7 @@
 				58EC937B23B08D9A0054C074 /* TopupMobilePlanCell.xib in Resources */,
 				58245C4B22E192550093E747 /* TZImagePickerController.bundle in Resources */,
 				581F81AD22F7C08D00F8291E /* ExportPrivateKeyView.xib in Resources */,
+				589AE87F23CC6B1200476D53 /* GroupPeopleView.xib in Resources */,
 				5860AD5A20CFB58800EEB6CE /* MyAssetsView.xib in Resources */,
 				581F82EF22F7C33200F8291E /* LoginInputPWViewController.xib in Resources */,
 				581F809322F7BD2000F8291E /* TradeIDInputView.xib in Resources */,
@@ -6608,8 +6692,10 @@
 				5872056823C71653009A6217 /* AgentRewardViewController.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
+				589AE86723CC4E2000476D53 /* OpenDelegateCheckView.xib in Resources */,
 				58A8B211233C8812007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */,
 				581925852114363E009AE406 /* NewRankView.xib in Resources */,
+				589AE87323CC535500476D53 /* OngoingGroupViewController.xib in Resources */,
 				581F828D22F7C25500F8291E /* ETHMnemonicConfirmViewController.xib in Resources */,
 				58FB8D65226436820075698E /* EarningRankingCell.xib in Resources */,
 				581F80FE22F7BECC00F8291E /* RecordListViewController.xib in Resources */,
@@ -6759,7 +6845,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "version=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $PRODUCT_SETTINGS_PATH`\nversion=`expr $version + 1`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $version\" $PRODUCT_SETTINGS_PATH\n\n";
+			shellScript = "\nif [ $ACTION == install ]; then\necho \"Bumping build number...\"\necho $ACTION\nplist=${PROJECT_DIR}/${INFOPLIST_FILE}\n \n#increment the build number (ie 115 to 116)\nbuildnum=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${plist}\")\nif [[ \"${buildnum}\" == \"\" ]]; then\necho \"No build number in $plist\"\nexit 2\nfi\n \nbuildnum=$(expr $buildnum + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\necho \"Bumped build number to $buildnum\"\n \nelse\necho $CONFIGURATION \" build - Not bumping build number.\"\n \n fi\n\n";
 		};
 		587ABD8E21BA7C4300C3D81A /* BuildNum */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6908,6 +6994,7 @@
 				58AA304F22F2D24D0041C842 /* OTCUtil.m in Sources */,
 				58245C0622E05AF50093E747 /* TradeOrderInfoModel.m in Sources */,
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
+				589AE87D23CC6ADC00476D53 /* GroupPeopleView.m in Sources */,
 				581AF7B121B6646E001A37E1 /* EOSCreateWalletViewController.m in Sources */,
 				58A3EB84237E739F00AEF7C8 /* MiningConstants.m in Sources */,
 				5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */,
@@ -7148,6 +7235,7 @@
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
 				581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
+				589AE86823CC4E2000476D53 /* OpenDelegateCheckView.m in Sources */,
 				585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */,
 				581F5FD6219D6C6000604352 /* PasswordManagementViewController.m in Sources */,
 				58EC938023B096290054C074 /* Topup1ViewController.m in Sources */,
@@ -7226,6 +7314,7 @@
 				58245C4A22E192550093E747 /* TZPhotoPreviewController.m in Sources */,
 				58245C4F22E192550093E747 /* TZPhotoPreviewCell.m in Sources */,
 				581D32D8219C158B001F88C3 /* Asset.swift in Sources */,
+				589AE87223CC535500476D53 /* OngoingGroupViewController.m in Sources */,
 				5832CB2F22811E690011160D /* AppState.swift in Sources */,
 				581C228621AD2BC10009888B /* RunInBackground.m in Sources */,
 				5812DDA020A1A7890043A8A8 /* ChatFace.m in Sources */,
@@ -7381,6 +7470,7 @@
 				585D1EF0225D9F4600468C4A /* RSAUtil.m in Sources */,
 				581D32EE219D107F001F88C3 /* NeoGotWGasModel.m in Sources */,
 				5825553322EACF9100F0B9F0 /* ImageEditToolBar.m in Sources */,
+				589AE87823CC65A600476D53 /* OngoingGroupCell.m in Sources */,
 				735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */,
 				58245C6722E1ACF30093E747 /* ComplaintDetailViewController.m in Sources */,
 				581AC35A21AFC63B00ACA80B /* AppDelegate+AppService.m in Sources */,
@@ -7397,6 +7487,7 @@
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
 				5827BC1D219EA87300B7730E /* BinaTpcsModel.m in Sources */,
 				58270FD820720D3600C08784 /* ProfileViewController.m in Sources */,
+				589AE86323CC4C4200476D53 /* OpenDelegateSuccessView.m in Sources */,
 				58A801D4226DC7DC00640BBC /* SetPWViewController.m in Sources */,
 				580D916720625A4400B12506 /* NSString+Base64Image.m in Sources */,
 				587ABD6621B8F8F800C3D81A /* BaseHttpsNetworkRequest.m in Sources */,
@@ -7464,6 +7555,7 @@
 				7377D17D206C81E90072E628 /* NSStringUtil.m in Sources */,
 				5825553822EACF9100F0B9F0 /* ImageBrightnessView.m in Sources */,
 				58245C5D22E1A62B0093E747 /* ComplaintInfoViewController.m in Sources */,
+				589AE86D23CC532900476D53 /* GroupBuyDetialViewController.m in Sources */,
 				58161535235ED56C0041A92B /* JPushTagHelper.m in Sources */,
 				5885D461231F997300F9DEDE /* QContractView.m in Sources */,
 				7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */,
@@ -9525,7 +9617,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6688;
+				CURRENT_PROJECT_VERSION = 6698;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9570,7 +9662,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6688;
+				CURRENT_PROJECT_VERSION = 6698;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;

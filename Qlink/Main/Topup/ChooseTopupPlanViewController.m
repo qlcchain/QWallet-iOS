@@ -33,6 +33,7 @@
 #import "TopupPayQLC_DeductionViewController.h"
 #import "TopupPayETH_DeductionViewController.h"
 #import "NeoTransferUtil.h"
+#import "GroupBuyDetialViewController.h"
 
 static NSInteger DeductionTokenBtnTag = 6649;
 static NSInteger DeductionTokenTickTag = 9223;
@@ -605,7 +606,12 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             
         }
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
-        [self handlerPayToken:model];
+        BOOL isGroupBuy = YES;
+        if (isGroupBuy) {
+            [self jumpToGroupBuyDetial];
+        } else {
+            [self handlerPayToken:model];
+        }
     }
     
 }
@@ -893,5 +899,9 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)jumpToGroupBuyDetial {
+    GroupBuyDetialViewController *vc = [GroupBuyDetialViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
