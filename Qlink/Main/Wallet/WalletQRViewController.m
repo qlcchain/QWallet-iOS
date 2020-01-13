@@ -232,7 +232,7 @@
     
     [kAppD.window makeToastInView:self.view text:NSStringLocalizable(@"Loading")];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        BOOL isScueess = [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:privateKey];
+        BOOL isScueess = [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privateKey];
         if (isScueess) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [kAppD.window hideToast];

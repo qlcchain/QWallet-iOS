@@ -69,6 +69,13 @@
 //    [LoginPWModel deleteLoginPW];
 //    [WalletCommonModel deleteAllWallet];
 //    [UserModel cleanAllUser];
+    NSDate *date = [NSDate date];
+    NSInteger timestamp = [NSDate getTimestampFromDate:date];
+    NSLog(@"timestamp = %@",@(timestamp));
+    
+    // 1577958919  // 北京   17：55
+    // 1577959002  // 美国   4：56    北京   17：56
+    // 1577959108  // 日本   18：58   北京   17：58
     
     [KeychainUtil resetKeyService]; // 重置keyservice
     [NEOWalletInfo updateNEOWallet_local]; // 更新NEO本地

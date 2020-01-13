@@ -202,7 +202,7 @@
 + (void)setDefaulNEOWallet:(NSString *)address {
     NSString *privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:address];
     // 得到当前钱包对象
-    [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:privateKey];
+    [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privateKey];
     // 选取交易网络
     [NEOWalletManage configO3NetworkWithIsMain:[NEOWalletUtil isMainNetOfNeo]];
     // 重新初始化 Account->将Account设为当前钱包

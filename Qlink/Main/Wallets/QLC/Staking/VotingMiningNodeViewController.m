@@ -236,9 +236,15 @@
         return;
     }
     
-    NSString *neo_publicKey = [NEOWalletInfo getNEOPublicKeyWithAddress:_stakeFromWalletM.address];
-    NSString *neo_wifKey = [NEOWalletInfo getNEOEncryptedKeyWithAddress:_stakeFromWalletM.address];
+    NSString *neo_wifKey = [NEOWalletInfo getNEOEncryptedKeyWithAddress:_stakeFromWalletM.address]?:@"";
+    NSString *neo_publicKey = [NEOWalletInfo getNEOPublicKeyWithAddress:_stakeFromWalletM.address]?:[NEOWalletInfo getNEOPublicKeyWithPrivateKey:neo_wifKey]?:@"";
 //    NSString *neo_wifKey = @"KxjMqfd8zKDWySLF974dh6CBXEZzroRRLKijszv9Xiz5kfzp0000";
+    
+    if ([neo_publicKey isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:@"NEO Wallet Publickey error, try import wallet again, or contact developer."];
+        return;
+    }
+    
     NSString *qlc_publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:_stakeToWalletM.address];
     NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:_stakeToWalletM.address];
     NSString *fromAddress = _stakeFromWalletM.address;

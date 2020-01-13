@@ -39,6 +39,7 @@
 + (NSString *)getNEOEncryptedKeyWithAddress:(NSString *)address;
 + (NSString *)getNEOPrivateKeyWithAddress:(NSString *)address;
 + (NSString *)getNEOPublicKeyWithAddress:(NSString *)address;
++ (NSString *)getNEOPublicKeyWithPrivateKey:(NSString *)privateKey;
 + (void)createNEOWalletInAuto;
 + (BOOL)haveNEOWallet;
 

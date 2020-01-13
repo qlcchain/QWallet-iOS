@@ -334,7 +334,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // 得到当前钱包对象
-        [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:[WalletCommonModel getCurrentSelectWallet].privateKey];
+        [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:[WalletCommonModel getCurrentSelectWallet].privateKey];
         // 选取交易网络
         [NEOWalletManage configO3NetworkWithIsMain:[NEOWalletUtil isMainNetOfNeo]];
         // 重新初始化 Account->将Account设为当前钱包

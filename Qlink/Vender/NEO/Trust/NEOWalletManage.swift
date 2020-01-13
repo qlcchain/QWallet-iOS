@@ -47,10 +47,10 @@ class NEOWalletManage : NSObject {
     ///
     /// - Parameter privatekey: 私钥
     /// - Returns: 钱包
-    @objc open func getWalletWithPrivatekey(privatekey:String) -> Bool {
+    @objc open func getWalletAccount(privatekey:String) -> Bool {
         
         if privatekey.count == 52 {
-           return self.getWalletWithPrivateWif(wif: privatekey)
+           return self.getWalletAccount(wif: privatekey)
         } else {
             account = Wallet(privateKey:privatekey)
             if (account != nil) {
@@ -63,7 +63,7 @@ class NEOWalletManage : NSObject {
     ///
     /// - Parameter privatekey: 私钥
     /// - Returns: 钱包
-    @objc open func getWalletWithPrivateWif(wif:String) -> Bool {
+    @objc open func getWalletAccount(wif:String) -> Bool {
         account = Wallet(wif: wif)
         if (account != nil) {
             return true;

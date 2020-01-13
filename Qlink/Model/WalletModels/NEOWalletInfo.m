@@ -347,6 +347,17 @@
     return publicKey;
 }
 
++ (NSString *)getNEOPublicKeyWithPrivateKey:(NSString *)privateKey {
+    NSString *publicKey = nil;
+    
+    BOOL result = [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privateKey];
+    if (result) {
+        publicKey = [NEOWalletManage.sharedInstance getWalletPublicKey];
+    }
+    
+    return publicKey;
+}
+
 + (void)createNEOWalletInAuto {
     BOOL isSuccess = [NEOWalletManage.sharedInstance createWallet];
     if (isSuccess) {

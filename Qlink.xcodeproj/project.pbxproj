@@ -538,6 +538,10 @@
 		586E7D31238CD6E1005718B4 /* AppJumpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E7D30238CD6E1005718B4 /* AppJumpHelper.m */; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
 		586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */ = {isa = PBXBuildFile; fileRef = 586F371E207B049400E12F95 /* ContinentAndCountryBean.json */; };
+		5872056723C71653009A6217 /* AgentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872056523C71653009A6217 /* AgentRewardViewController.m */; };
+		5872056823C71653009A6217 /* AgentRewardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5872056623C71653009A6217 /* AgentRewardViewController.xib */; };
+		5872056C23C71799009A6217 /* OpenAgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872056A23C71799009A6217 /* OpenAgentViewController.m */; };
+		5872056D23C71799009A6217 /* OpenAgentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5872056B23C71799009A6217 /* OpenAgentViewController.xib */; };
 		5872133C2361748600E50744 /* NSNumber+RLArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 587213372361748600E50744 /* NSNumber+RLArithmetic.m */; };
 		5872133D2361748600E50744 /* NSString+RLArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872133B2361748600E50744 /* NSString+RLArithmetic.m */; };
 		587213422361A87B00E50744 /* TopupDeductionTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587213412361A87B00E50744 /* TopupDeductionTokenModel.m */; };
@@ -2056,6 +2060,12 @@
 		586EE0962089951D009EAF40 /* FriendStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendStatusModel.h; sourceTree = "<group>"; };
 		586EE0972089951D009EAF40 /* FriendStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendStatusModel.m; sourceTree = "<group>"; };
 		586F371E207B049400E12F95 /* ContinentAndCountryBean.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContinentAndCountryBean.json; sourceTree = "<group>"; };
+		5872056423C71653009A6217 /* AgentRewardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentRewardViewController.h; sourceTree = "<group>"; };
+		5872056523C71653009A6217 /* AgentRewardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentRewardViewController.m; sourceTree = "<group>"; };
+		5872056623C71653009A6217 /* AgentRewardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentRewardViewController.xib; sourceTree = "<group>"; };
+		5872056923C71799009A6217 /* OpenAgentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenAgentViewController.h; sourceTree = "<group>"; };
+		5872056A23C71799009A6217 /* OpenAgentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenAgentViewController.m; sourceTree = "<group>"; };
+		5872056B23C71799009A6217 /* OpenAgentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenAgentViewController.xib; sourceTree = "<group>"; };
 		587213372361748600E50744 /* NSNumber+RLArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+RLArithmetic.m"; sourceTree = "<group>"; };
 		587213382361748600E50744 /* NSString+RLArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RLArithmetic.h"; sourceTree = "<group>"; };
 		587213392361748600E50744 /* NSNumber+RLArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+RLArithmetic.h"; sourceTree = "<group>"; };
@@ -3338,6 +3348,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5872056323C715A8009A6217 /* Invite */,
 				58231D35237BE386009CDE90 /* TransactionMining */,
 				5874E339234D9228000835A0 /* ClaimQGAS */,
 				58639D772338BA52005B39FA /* Topup */,
@@ -4867,6 +4878,25 @@
 			path = P2PModel;
 			sourceTree = "<group>";
 		};
+		5872056323C715A8009A6217 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				58FB8D5C226434DC0075698E /* ShareFriendsViewController.h */,
+				58FB8D5D226434DC0075698E /* ShareFriendsViewController.m */,
+				58C9282B22FA79CE0020BDC0 /* ShareFriendsViewController.xib */,
+				5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */,
+				5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */,
+				583E6C1D22FAA352004F1134 /* InviteFriendNowViewController.xib */,
+				5872056423C71653009A6217 /* AgentRewardViewController.h */,
+				5872056523C71653009A6217 /* AgentRewardViewController.m */,
+				5872056623C71653009A6217 /* AgentRewardViewController.xib */,
+				5872056923C71799009A6217 /* OpenAgentViewController.h */,
+				5872056A23C71799009A6217 /* OpenAgentViewController.m */,
+				5872056B23C71799009A6217 /* OpenAgentViewController.xib */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
 		587213362361748600E50744 /* RLArithmetic */ = {
 			isa = PBXGroup;
 			children = (
@@ -5673,15 +5703,9 @@
 				58FB8D57226434C80075698E /* InviteRankingViewController.h */,
 				58FB8D58226434C80075698E /* InviteRankingViewController.m */,
 				583E6C0F22FAA2AC004F1134 /* InviteRankingViewController.xib */,
-				58FB8D5C226434DC0075698E /* ShareFriendsViewController.h */,
-				58FB8D5D226434DC0075698E /* ShareFriendsViewController.m */,
-				58C9282B22FA79CE0020BDC0 /* ShareFriendsViewController.xib */,
 				58FB8D79226587620075698E /* FinanceHistoryViewController.h */,
 				58FB8D7A226587620075698E /* FinanceHistoryViewController.m */,
 				58FB8D7B226587620075698E /* FinanceHistoryViewController.xib */,
-				5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */,
-				5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */,
-				583E6C1D22FAA352004F1134 /* InviteFriendNowViewController.xib */,
 			);
 			path = Finance;
 			sourceTree = "<group>";
@@ -6485,6 +6509,7 @@
 				581F80F722F7BEBF00F8291E /* BuySellDetailViewController.xib in Resources */,
 				580D91BE2063AE5300B12506 /* Roboto-BlackItalic.ttf in Resources */,
 				581F81DE22F7C0EE00F8291E /* QLCWalletDetailViewController.xib in Resources */,
+				5872056D23C71799009A6217 /* OpenAgentViewController.xib in Resources */,
 				9391A6A4212BB8F3001A1707 /* MyriadPro-Regular.otf in Resources */,
 				581F820822F7C16400F8291E /* EOSTransferViewController.xib in Resources */,
 				581F82A922F7C29D00F8291E /* ETHWalletAddressViewController.xib in Resources */,
@@ -6580,6 +6605,7 @@
 				581F81F322F7C11E00F8291E /* EOSCreateWalletViewController.xib in Resources */,
 				581F828622F7C24900F8291E /* ETHMnemonicViewController.xib in Resources */,
 				581F82DA22F7C30600F8291E /* QToastView.xib in Resources */,
+				5872056823C71653009A6217 /* AgentRewardViewController.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
 				58A8B211233C8812007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */,
@@ -6765,7 +6791,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=1\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
+			shellScript = "#Archive上传需要置为1\nUpload_To_AppStore=0\n\n##检查是否Archive操作\nif [ $Upload_To_AppStore -eq 1 ]; then\n#if [[ \"$project_config\" == *\"Release\"* ]]; then\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n\nfi\n#fi\n\n\n\n";
 		};
 		58B4716F20D9FA05007D9D7E /* UploadBuglySymbol */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7032,6 +7058,7 @@
 				73C1BA10207E18270080C59F /* HMScannerBorder.m in Sources */,
 				581D32C0219C158B001F88C3 /* commoncry.m in Sources */,
 				58CF40B7219925990000C3DA /* NEOImportViewController.m in Sources */,
+				5872056C23C71799009A6217 /* OpenAgentViewController.m in Sources */,
 				5825552A22EACF9100F0B9F0 /* ZQBrightnessController.m in Sources */,
 				58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */,
 				58A57D3A22DDA22F00699C3F /* WalletTransferUtil.m in Sources */,
@@ -7407,6 +7434,7 @@
 				585D1EFF225ED9A700468C4A /* NSString+PinYin.m in Sources */,
 				581AF7AC21B6646E001A37E1 /* EOSAccountQRViewController.m in Sources */,
 				587213422361A87B00E50744 /* TopupDeductionTokenModel.m in Sources */,
+				5872056723C71653009A6217 /* AgentRewardViewController.m in Sources */,
 				581AFC4B21B7D28B001A37E1 /* EOSRAMViewController.m in Sources */,
 				58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */,
 				580CF61E22A7C9AA00B0995C /* QLCImportWalletViewController.m in Sources */,
@@ -9352,7 +9380,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9372,7 +9400,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9497,7 +9525,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6668;
+				CURRENT_PROJECT_VERSION = 6688;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9520,7 +9548,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9542,7 +9570,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6668;
+				CURRENT_PROJECT_VERSION = 6688;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9564,7 +9592,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

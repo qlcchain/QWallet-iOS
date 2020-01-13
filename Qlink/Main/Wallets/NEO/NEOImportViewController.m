@@ -88,7 +88,7 @@
     
     NSString *privatekey = _privateTV.text.trim;
     [kAppD.window makeToastInView:kAppD.window];
-    BOOL isScueess = [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:privatekey];
+    BOOL isScueess = [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privatekey];
     [kAppD.window hideToast];
     if (isScueess) {
         NEOWalletInfo *walletInfo = [[NEOWalletInfo alloc] init];
