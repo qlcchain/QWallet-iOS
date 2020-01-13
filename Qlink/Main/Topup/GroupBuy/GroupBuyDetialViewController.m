@@ -8,6 +8,7 @@
 
 #import "GroupBuyDetialViewController.h"
 #import "OngoingGroupCell.h"
+#import "OngoingGroupViewController.h"
 
 @interface GroupBuyDetialViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -61,6 +62,17 @@
 
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)ongoingCheckAllAction:(id)sender {
+    [self jumpToOngoingGroup];
+}
+
+
+#pragma mark - Transition
+- (void)jumpToOngoingGroup {
+    OngoingGroupViewController *vc = [OngoingGroupViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

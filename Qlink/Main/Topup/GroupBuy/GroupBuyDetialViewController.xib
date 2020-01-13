@@ -176,6 +176,9 @@
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrA-IA-9Zq">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                                                            <connections>
+                                                                <action selector="ongoingCheckAllAction:" destination="-1" eventType="touchUpInside" id="0WQ-eu-U9X"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
