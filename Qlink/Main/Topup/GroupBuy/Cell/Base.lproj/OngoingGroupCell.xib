@@ -44,6 +44,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Join now"/>
+                                <connections>
+                                    <action selector="joinAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2dm-0d-4pA"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10% off, 3 discount partners " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCo-te-uZz">
                                 <rect key="frame" x="82" y="12" width="142" height="14.5"/>
@@ -57,7 +60,7 @@
                                 <color key="textColor" red="1" green="0.34901960784313724" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余23:13:22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3q-xm-Hz6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23:13:22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3q-xm-Hz6">
                                 <rect key="frame" x="82" y="38.5" width="142" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -94,7 +97,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="discountLab" destination="mCo-te-uZz" id="Dn8-au-ZW2"/>
+                <outlet property="joinBtn" destination="RvS-pw-EVv" id="kWk-zt-Rwc"/>
                 <outlet property="peopleBack" destination="6E6-bd-okc" id="cMW-N0-PlE"/>
+                <outlet property="remainLab" destination="Bvu-EI-c5R" id="Q9u-tk-a1Y"/>
+                <outlet property="timeLab" destination="Z3q-xm-Hz6" id="ewm-lD-vbe"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="127.90178571428571"/>
         </tableViewCell>

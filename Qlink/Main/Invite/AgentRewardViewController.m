@@ -8,6 +8,7 @@
 
 #import "AgentRewardViewController.h"
 #import "UIView+Gradient.h"
+#import "OpenAgentViewController.h"
 
 @interface AgentRewardViewController ()
 
@@ -30,11 +31,13 @@
 
 #pragma mark - Operation
 - (void)configInit {
-    [_personBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [_personBack addQGradientWithStart:UIColorFromRGB(0xF9BD5E) end:UIColorFromRGB(0xFC7D32) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     _openLab.layer.cornerRadius = 8;
     _openLab.layer.masksToBounds = YES;
-    [_openDelegateBtnBack addQGradientWithStart:UIColorFromRGB(0xFE6B4B) end:UIColorFromRGB(0xFC5140) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [_openDelegateBtnBack addQGradientWithStart:UIColorFromRGB(0xFE6B4B) end:UIColorFromRGB(0xFC5140) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _openDelegateBtnBack.layer.cornerRadius = 20;
+    _openDelegateBtnBack.layer.masksToBounds = YES;
     
 }
 
@@ -42,6 +45,17 @@
 
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)openDelegateAction:(id)sender {
+    [self jumpToOpenDelegate];
+}
+
+
+#pragma mark - Transition
+- (void)jumpToOpenDelegate {
+    OpenAgentViewController *vc = [OpenAgentViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

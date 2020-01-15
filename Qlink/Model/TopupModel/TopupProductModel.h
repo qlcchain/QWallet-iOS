@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TopupDeductionTokenModel;
+
 @interface TopupProductModel : BBaseModel
 
 /**
@@ -73,6 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *localFaitMoney;
 @property (nonatomic, strong) NSString *payTokenMoney;
 
+
++ (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM;
++ (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM groupDiscount:(NSString *)groupDiscount;
 
 @end
 

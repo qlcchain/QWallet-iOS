@@ -7,6 +7,7 @@
 //
 
 #import "QBaseViewController.h"
+#import "ProjectEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //@property (nonatomic, strong) TopupProductModel *inputProductM;
 @property (nonatomic, strong) NSString *inputOrderId;
+
+@property (nonatomic) TopupPayType inputPayType;
 
 @end
 

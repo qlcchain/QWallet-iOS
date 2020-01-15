@@ -21,10 +21,14 @@
 #import "ClaimQGASViewController.h"
 #import "ClaimConstants.h"
 #import "RefreshHelper.h"
+#import <NinaPagerView/NinaPagerView.h>
+#import "ShareFriendsSubViewController.h"
+#import "AgentRewardViewController.h"
 
-@interface ShareFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ShareFriendsViewController () <NinaPagerViewDelegate>
+// <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *mainTable;
+//@property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (weak, nonatomic) IBOutlet UILabel *invitationCodeLab;
 @property (weak, nonatomic) IBOutlet UIButton *inviteBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *topImgV;
@@ -35,19 +39,24 @@
 @property (weak, nonatomic) IBOutlet UIView *horizontalLineV;
 @property (weak, nonatomic) IBOutlet UIView *claimTipV;
 @property (weak, nonatomic) IBOutlet UILabel *claimTipLab;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainTableHeight;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainTableHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBackHeight; // +30
+
 @property (weak, nonatomic) IBOutlet UILabel *getQGASBy1Lab;
 @property (weak, nonatomic) IBOutlet UILabel *getQGASBy2Lab;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
+@property (weak, nonatomic) IBOutlet UIView *tableBack;
 
 
-@property (nonatomic, strong) NSMutableArray *sourceArr;
+//@property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) InviteRankingModel *myInfoM;
 //@property (nonatomic, strong) GuangGaoView *guangGaoView;
 @property (nonatomic, strong) NSString *invite_reward_amount;
 @property (nonatomic, strong) NSString *invite_user_amount;
 //@property (nonatomic, strong) NSString *invite_all_amount;
 @property (nonatomic, strong) NSString *no_award_amount;
+
+@property (nonatomic, strong) NinaPagerView *ninaPageView;
 
 @end
 
@@ -76,9 +85,9 @@
     _inviteBtn.layer.cornerRadius = 20.0;
     _inviteBtn.layer.masksToBounds = YES;
     
-    _sourceArr = [NSMutableArray array];
-    [_mainTable registerNib:[UINib nibWithNibName:ShareFriendsCellReuse bundle:nil] forCellReuseIdentifier:ShareFriendsCellReuse];
-    _mainTableHeight.constant = 0;
+//    _sourceArr = [NSMutableArray array];
+//    [_mainTable registerNib:[UINib nibWithNibName:ShareFriendsCellReuse bundle:nil] forCellReuseIdentifier:ShareFriendsCellReuse];
+//    _mainTableHeight.constant = 0;
     
     _invite_reward_amount = @"0";
     _invite_user_amount = @"0";
@@ -94,18 +103,48 @@
     NSString *topImgStr = @"";
     NSString *language = [Language currentLanguageCode];
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        topImgStr = @"claim_ad_share_en";
+        topImgStr = @"ad_share_en";
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        topImgStr = @"claim_ad_share_ch";
+        topImgStr = @"ad_share_ch";
     } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
-        topImgStr = @"claim_ad_share_en";
+        topImgStr = @"ad_share_en";
     }
     _topImgV.image = [UIImage imageNamed:topImgStr];
-    
+        
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         [weakself requestWinq_invite_reward_amount]; // 邀请一个用户奖励QGAS数量
     }];
+}
+
+- (void)setupNinaPage {
+    if (!_ninaPageView) {
+        ShareFriendsSubViewController *vc0 = [ShareFriendsSubViewController new];
+        vc0.inputType = InviteAwardTypeInvite;
+        vc0.input_invite_reward_amount = _invite_reward_amount;
+        ShareFriendsSubViewController *vc1 = [ShareFriendsSubViewController new];
+        vc1.inputType = InviteAwardTypeFriend;
+        ShareFriendsSubViewController *vc2 = [ShareFriendsSubViewController new];
+        vc2.inputType = InviteAwardTypeDelegate;
+        
+        NSArray *titleArr = @[@"邀请奖励榜",@"邀请成功好友",@"代理提成奖励"];
+        _ninaPageView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100) WithTitles:titleArr WithObjects:@[vc0, vc1, vc2]];
+        _ninaPageView.unSelectTitleColor = UIColorFromRGB(0xBB7944);
+        _ninaPageView.selectTitleColor = UIColorFromRGB(0xF3522E);
+        _ninaPageView.titleFont = 12;
+        _ninaPageView.titleScale = 16.f / 14;
+        _ninaPageView.selectBottomLinePer = 0.8;
+        _ninaPageView.selectBottomLineHeight = 4;
+        _ninaPageView.underlineColor = UIColorFromRGB(0xF3522E);
+        _ninaPageView.topTabHeight = 30;
+        _ninaPageView.topTabBackGroundColor = UIColorFromRGB(0xF6EAD4);
+        _ninaPageView.delegate = self;
+        [_tableBack addSubview:_ninaPageView];
+        kWeakSelf(self);
+        [_ninaPageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.tableBack).offset(0);
+        }];
+    }
 }
 
 - (void)refreshInvitationCodeView {
@@ -171,6 +210,11 @@
     }];
 }
 
+#pragma mark - NinaPagerViewDelegate
+- (void)ninaCurrentPageIndex:(NSInteger)currentPage currentObject:(id)currentObject lastObject:(id)lastObject {
+    
+}
+
 #pragma mark - Action
 
 - (IBAction)backAction:(id)sender {
@@ -195,6 +239,11 @@
     
     [self jumpToClaimQGAS];
 }
+
+- (IBAction)checkNowAction:(id)sender {
+    [self jumpToAgentReward];
+}
+
 
 #pragma mark - Request
 - (void)requestWinq_invite_user_amount { // 邀请多少个用户可以领取QGAS奖励
@@ -254,6 +303,7 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
                 [weakself requestInvite];
             });
+            [weakself setupNinaPage];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.mainScroll.mj_header endRefreshing];
@@ -305,54 +355,53 @@
             ShareFriendsModel *model = [ShareFriendsModel getObjectWithKeyValues:responseObject];
             weakself.myInfoM = model.myInfo;
             [weakself refreshInvitationCodeView];
-            [weakself.sourceArr removeAllObjects];
-//            [weakself.sourceArr addObject:model.myInfo];
-            [weakself.sourceArr addObjectsFromArray:model.top5];
-            weakself.mainTableHeight.constant = weakself.sourceArr.count*ShareFriendsCell_Height;
-            [weakself.mainTable reloadData];
+//            [weakself.sourceArr removeAllObjects];
+//            [weakself.sourceArr addObjectsFromArray:model.top5];
+//            weakself.mainTableHeight.constant = weakself.sourceArr.count*ShareFriendsCell_Height;
+//            [weakself.mainTable reloadData];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
 }
 
-#pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = ShareFriendsCell_Height;
-//    if (indexPath.row == 1) {
-//        height += 30;
-//    }
-//    if (indexPath.row == _sourceArr.count - 1) {
-//        height += 30;
-//    }
-    return height;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-}
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _sourceArr.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ShareFriendsCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareFriendsCellReuse];
-    
-    InviteRankingModel *model = _sourceArr[indexPath.row];
-//    BOOL isFirst = indexPath.row == 0?YES:NO;
-//    BOOL isSecond = indexPath.row == 1?YES:NO;
-//    BOOL isLast = indexPath.row == _sourceArr.count-1?YES:NO;
-//    [cell configCell:model isFirst:isFirst isSecond:isSecond isLast:isLast];
-    [cell configCell:model qgasUnit:_invite_reward_amount?:@"0" color:UIColorFromRGB(0xFEFCF2)];
-    kWeakSelf(self)
-    cell.moreB = ^{
-        [weakself jumpToInviteRanking];
-    };
-    
-    return cell;
-}
+//#pragma mark - UITableViewDelegate
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    CGFloat height = ShareFriendsCell_Height;
+////    if (indexPath.row == 1) {
+////        height += 30;
+////    }
+////    if (indexPath.row == _sourceArr.count - 1) {
+////        height += 30;
+////    }
+//    return height;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    
+//}
+//
+//#pragma mark - UITableViewDataSource
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return _sourceArr.count;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    ShareFriendsCell *cell = [tableView dequeueReusableCellWithIdentifier:ShareFriendsCellReuse];
+//    
+//    InviteRankingModel *model = _sourceArr[indexPath.row];
+////    BOOL isFirst = indexPath.row == 0?YES:NO;
+////    BOOL isSecond = indexPath.row == 1?YES:NO;
+////    BOOL isLast = indexPath.row == _sourceArr.count-1?YES:NO;
+////    [cell configCell:model isFirst:isFirst isSecond:isSecond isLast:isLast];
+//    [cell configCell:model qgasUnit:_invite_reward_amount?:@"0" color:UIColorFromRGB(0xFEFCF2)];
+//    kWeakSelf(self)
+//    cell.moreB = ^{
+//        [weakself jumpToInviteRanking];
+//    };
+//    
+//    return cell;
+//}
 
 #pragma mark - Transition
 - (void)jumpToInviteRanking {
@@ -369,6 +418,11 @@
     ClaimQGASViewController *vc = [ClaimQGASViewController new];
     vc.inputCanClaimAmount = _canClaimAmountLab.text?:@"0";
     vc.claimQGASType = ClaimQGASTypeReferralRewards;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToAgentReward {
+    AgentRewardViewController *vc = [AgentRewardViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

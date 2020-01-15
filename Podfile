@@ -87,6 +87,7 @@ target "Qlink" do
    pod 'TMCache'
    pod 'SwiftTheme'
    pod 'Charts'
+   pod 'NinaPagerView'
 
 #  shadowsock
 #    pod 'MMWormhole'

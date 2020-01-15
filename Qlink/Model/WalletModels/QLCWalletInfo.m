@@ -11,6 +11,7 @@
 #import <QLCFramework/QLCFramework.h>
 #import "GlobalConstants.h"
 #import "ReportUtil.h"
+#import "NSString+HexStr.h"
 
 @implementation QLCWalletInfo
 
@@ -191,6 +192,15 @@
 
 + (BOOL)haveQLCWallet {
     return [QLCWalletInfo getAllWalletInKeychain].count>0?YES:NO;
+}
+
++ (NSString *)signWithMessage:(NSString *)message address:(NSString *)address {
+    NSString *messageHex = [NSString hexStringFromString:message];
+    NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:address];
+    NSString *publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:address];
+    NSString *sign = [QLCUtil signWithMessage:messageHex secretKey:privateKey publicKey:publicKey];
+    BOOL signCheck = [QLCUtil signOpenWithMessage:messageHex publicKey:publicKey signature:sign];
+    return sign;
 }
 
 

@@ -20,6 +20,7 @@
 #import "ETHWalletManage.h"
 #import <QLCFramework/QLCFramework.h>
 #import "TopupPayNEO_PayViewController.h"
+#import "MyGroupBuyOrderViewController.h"
 
 static NSString *const MyTopupOrderNetworkSize = @"20";
 
@@ -253,6 +254,11 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     }
 }
 
+- (IBAction)groupOrderAction:(id)sender {
+    [self jumpToGroupOrder];
+}
+
+
 #pragma mark - Transition
 - (void)jumpToTopupH5:(NSString *)urlStr {
     TopupWebViewController *vc = [TopupWebViewController new];
@@ -302,6 +308,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 //    vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
 //    vc.inputPhoneNumber = _phoneTF.text?:@"";
 //    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
+    vc.inputPayType = TopupPayTypeNormal;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -332,6 +339,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 //    vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
 //    vc.inputPhoneNumber = _phoneTF.text?:@"";
 //    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
+    vc.inputPayType = TopupPayTypeNormal;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -342,6 +350,12 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputOrderId = orderM.ID;
+    vc.inputPayType = TopupPayTypeNormal;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToGroupOrder {
+    MyGroupBuyOrderViewController *vc = [MyGroupBuyOrderViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

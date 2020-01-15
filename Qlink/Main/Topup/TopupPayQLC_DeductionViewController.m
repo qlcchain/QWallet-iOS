@@ -175,7 +175,11 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [weakself.payLoadView finishStepAnimate1]; // 开始动画
-            [weakself requestTopup_deduction_token_txid];
+            if (weakself.inputPayType == TopupPayTypeNormal) {
+                [weakself requestTopup_deduction_token_txid];
+            } else if (weakself.inputPayType == TopupPayTypeGroupBuy) {
+                [weakself requestTopup_item_deduction_token_txid];
+            }
         });
         
     } failureHandler:^(NSError * _Nullable error, NSString * _Nullable message) {
@@ -230,12 +234,21 @@
     _payLoadView = [TopupPayLoadView getInstance];
     [_payLoadView config:_payWalletM symbol:_selectAsset.tokenName?:@"" completeB:^{
         weakself.payLoadView = nil;
-        [weakself handlerPayTransition];
+        if (weakself.inputPayType == TopupPayTypeNormal) {
+            [weakself handlerPayTransition];
+        } else if (weakself.inputPayType == TopupPayTypeGroupBuy) {
+            [weakself handlerGroupBuyPayTransition];
+        }
+        
     } closeB:^{
         [weakself hidePayLoadView];
         weakself.topupOrderConfirmEnable = NO;
         weakself.payLoadView = nil;
-        [weakself handlerPayTransition];
+        if (weakself.inputPayType == TopupPayTypeNormal) {
+            [weakself handlerPayTransition];
+        } else if (weakself.inputPayType == TopupPayTypeGroupBuy) {
+            [weakself handlerGroupBuyPayTransition];
+        }
     }];
     [_payLoadView show];
 }
@@ -274,6 +287,37 @@
                 
             }
         }
+    }
+}
+
+- (void)handlerGroupBuyPayTransition {
+    if (!_orderM) {
+        return;
+    }
+    if ([_orderM.status isEqualToString:Topup_Order_Status_New]) { // 跳转订单列表
+        [self jumpToMyTopupOrder];
+    } else if ([_orderM.status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
+//        if ([_orderM.payWay isEqualToString:@"FIAT"]) { // 法币支付
+//            if ([_orderM.payFiat isEqualToString:@"CNY"]) {
+//                // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
+//                NSString *sid = Topup_Pay_H5_sid;
+//                NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,_orderM.userId?:@"",_orderM.ID?:@""];
+//                NSString *package = [NSString stringWithFormat:@"%@",_orderM.originalPrice];
+//                NSString *mobile = _orderM.phoneNumber?:@"";
+//                NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
+//                [self jumpToTopupH5:urlStr];
+//            } else if ([_orderM.payFiat isEqualToString:@"USD"]) {
+//
+//            }
+//        } else if ([_orderM.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+            if ([self.orderM.payTokenChain isEqualToString:QLC_Chain]) {
+                
+            } else if ([self.orderM.payTokenChain isEqualToString:NEO_Chain]) {
+                [self jumpToTopupPayNEO_Pay];
+            } else if ([self.orderM.payTokenChain isEqualToString:ETH_Chain]) {
+                
+            }
+//        }
     }
 }
 
@@ -339,6 +383,76 @@
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [weakself requestTopup_order_confirm:orderId];
+        });
+    }];
+}
+
+#pragma mark - 团购
+- (void)requestTopup_item_deduction_token_txid {
+    if (!_payTxid) {
+        return;
+    }
+    kWeakSelf(self);
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    //    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+//    NSString *p2pId = [UserModel getTopupP2PId];
+    NSString *groupItemId = _inputOrderM.ID?:@"";
+    NSString *deductionTokenTxid = _payTxid?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"groupItemId":groupItemId,@"deductionTokenTxid":deductionTokenTxid};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:topup_item_deduction_token_txid_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            
+            weakself.orderM = [TopupOrderModel getObjectWithKeyValues:responseObject[@"item"]];
+            
+            if ([weakself.orderM.status isEqualToString:Topup_Order_Status_New]) {
+                weakself.topupOrderConfirmEnable = YES;
+                [weakself.payLoadView showCloseBtn];
+                [weakself requestTopup_item_deduction_token_confirm:weakself.orderM.ID];
+            } else if ([weakself.orderM.status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
+                [weakself.payLoadView finishStepAnimate2]; // 开始动画
+            }
+            
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+- (void)requestTopup_item_deduction_token_confirm:(NSString *)groupItemId {
+    if (_topupOrderConfirmEnable == NO) {
+        return;
+    }
+    kWeakSelf(self);
+    NSDictionary *params = @{@"groupItemId":groupItemId};
+    [RequestService requestWithUrl10:topup_item_deduction_token_confirm_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            weakself.orderM = [TopupOrderModel getObjectWithKeyValues:responseObject[@"item"]];
+            
+            if ([weakself.orderM.status isEqualToString:Topup_Order_Status_New]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                    [weakself requestTopup_item_deduction_token_confirm:groupItemId];
+                });
+            } else if ([weakself.orderM.status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) { // 已支付QGAS，未支付法币
+                [weakself.payLoadView finishStepAnimate2]; // 开始动画
+            }
+        } else {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [weakself requestTopup_item_deduction_token_confirm:groupItemId];
+            });
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [weakself requestTopup_item_deduction_token_confirm:groupItemId];
         });
     }];
 }
@@ -483,6 +597,7 @@
     vc.sendMemo = _sendPayTokenMemo;
     vc.inputPayToken = _inputPayToken;
     vc.inputOrderId = _orderM.ID;
+    vc.inputPayType = _inputPayType;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

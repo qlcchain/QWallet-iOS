@@ -44,6 +44,19 @@
     return time;
 }
 
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime addMin:(NSInteger)addMin {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:fromDate];
+    components.minute += addMin;
+    NSDate *date = [CURRENT_CALENDAR dateFromComponents:components];
+    NSString *time = [format stringFromDate:date];
+    
+    return time;
+}
+
 + (NSString*)getOutputDate:(NSString*)inputTime formatStr:(NSString*)formatStr {
     // 中国东八区
     NSDateFormatter*inputFormatter = [[NSDateFormatter alloc] init];

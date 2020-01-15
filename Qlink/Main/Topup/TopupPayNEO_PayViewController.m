@@ -174,7 +174,12 @@
         if (success) {
             NSString *txid = result;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-                [weakself requestTopup_pay_token_txid:txid];
+                if (weakself.inputPayType == TopupPayTypeNormal) {
+                    [weakself requestTopup_pay_token_txid:txid];
+                } else if (weakself.inputPayType == TopupPayTypeGroupBuy) {
+                    [weakself requestTopup_item_pay_token_txid:txid];
+                }
+                
             });
         } else {
             [kAppD.window makeToastDisappearWithText:kLang(@"transfer_error")];
@@ -308,26 +313,43 @@
     }];
 }
 
-//- (void)requestTokenPrice {
-//    if (!_selectAsset) {
-//        return;
-//    }
-//    kWeakSelf(self);
-//    NSString *coin = [ConfigUtil getLocalUsingCurrency];
-//    NSDictionary *params = @{@"symbols":@[_selectAsset.asset_symbol],@"coin":coin};
-//    [RequestService requestWithUrl10:tokenPrice_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-//        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-//            [weakself.tokenPriceArr removeAllObjects];
-//            NSArray *arr = [responseObject objectForKey:Server_Data];
-//            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                TokenPriceModel *model = [TokenPriceModel getObjectWithKeyValues:obj];
-//                model.coin = coin;
-//                [weakself.tokenPriceArr addObject:model];
-//            }];
-//        }
-//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-//    }];
-//}
+#pragma mark - 团购
+- (void)requestTopup_item_pay_token_txid:(NSString *)txid {
+    if (!txid) {
+        return;
+    }
+    kWeakSelf(self);
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    //    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+//    NSString *p2pId = [UserModel getTopupP2PId];
+    NSString *groupItemId = _inputOrderId?:@"";
+    NSString *payTokenTxid = txid?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"groupItemId":groupItemId,@"payTokenTxid":payTokenTxid};
+//    {"sign":"f728bb76561da22de847f5fe83b90f7e","appid":"MIFI","timestamp":"1579085452939","params":{"system":"iOS iPhone:13.3 version:6698","account":"741229443@qq.com","groupItemId":"347a58c675304c7e8adb2d63ca58e834","p2pId":"EE455D4982A1AECA9E326FF3886850F4","payTokenTxid":"2f9419f5cba0c0f5323df512adc3f47a0bf73abf44cfc8628571b2e9d9969979"}}
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:topup_item_pay_token_txid_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            
+//            weakself.orderM = [TopupOrderModel getObjectWithKeyValues:responseObject[@"order"]];
+            [kAppD.window makeToastDisappearWithText:kLang(@"successful")];
+            
+            [weakself jumpToMyTopupOrder];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
 
 #pragma mark - UITextViewDelete
 - (void)textViewDidEndEditing:(UITextView *)textView {

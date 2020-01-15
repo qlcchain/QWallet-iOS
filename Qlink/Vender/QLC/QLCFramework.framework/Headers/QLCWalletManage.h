@@ -35,6 +35,7 @@ extern  NSString * _Nonnull const QLC_AccountPending_Done_Noti;
 
 - (void)receive_accountsPending:(NSString *)address isMainNetwork:(BOOL)isMainNetwork;
 + (void)signAndWork:(NSDictionary *)dic publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey resultHandler:(void(^_Nonnull)(NSDictionary * _Nullable responseDic))resultHandler;
++ (NSString *)qlcSign:(NSString *)message publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey;
 
 + (void)test:(void(^)(NSInteger tag))cancelBlock;
 

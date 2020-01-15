@@ -10,6 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenAgentViewController">
             <connections>
+                <outlet property="bindBtn" destination="OnX-GI-xqT" id="Diw-PI-5bn"/>
+                <outlet property="bindWalletAddressLab" destination="iTB-A0-utB" id="WjQ-Sk-zpp"/>
+                <outlet property="bindWalletIcon" destination="wUO-2Y-goN" id="obM-DL-VQY"/>
+                <outlet property="bindWalletNameLab" destination="W2a-mY-9HU" id="BH2-QQ-2pa"/>
                 <outlet property="personBack" destination="uSK-j9-Hzn" id="FJF-2o-DDa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -72,8 +76,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1A-M0-Opr">
                                                     <rect key="frame" x="0.0" y="86" width="414" height="80"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抵押1500QLC获得代理权" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ev-vg-8SM">
-                                                            <rect key="frame" x="16" y="28" width="230" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stake 1500 QLC to gain the qulification of Recharge Agent Partner" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ev-vg-8SM">
+                                                            <rect key="frame" x="16" y="16" width="382" height="48"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                             <color key="textColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
@@ -89,6 +93,7 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstItem="zbe-DU-yic" firstAttribute="leading" secondItem="E1A-M0-Opr" secondAttribute="leading" constant="16" id="0fV-DH-eWG"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1ev-vg-8SM" secondAttribute="trailing" constant="16" id="6iy-Xc-4nf"/>
                                                         <constraint firstAttribute="height" constant="80" id="CsH-XR-kw2"/>
                                                         <constraint firstItem="1ev-vg-8SM" firstAttribute="centerY" secondItem="E1A-M0-Opr" secondAttribute="centerY" id="Q5T-EI-atm"/>
                                                         <constraint firstItem="1ev-vg-8SM" firstAttribute="leading" secondItem="E1A-M0-Opr" secondAttribute="leading" constant="16" id="cVo-8R-PgE"/>
@@ -115,15 +120,15 @@
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTL-XJ-mxn">
                                                             <rect key="frame" x="0.0" y="30.666666666666657" width="414" height="71"/>
                                                             <subviews>
-                                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="neo_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="wUO-2Y-goN">
+                                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="qlc_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="wUO-2Y-goN">
                                                                     <rect key="frame" x="13" y="12.333333333333343" width="46" height="46"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="46" id="UDY-RE-fWd"/>
                                                                         <constraint firstAttribute="height" constant="46" id="kVJ-N8-gEV"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEO-Wallet 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2a-mY-9HU">
-                                                                    <rect key="frame" x="73" y="13.999999999999998" width="105.66666666666669" height="19.333333333333329"/>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QLC-Wallet 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2a-mY-9HU">
+                                                                    <rect key="frame" x="73" y="13.999999999999998" width="104" height="19.333333333333329"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -141,6 +146,9 @@
                                                                         <constraint firstAttribute="height" constant="44" id="Zdl-vN-W23"/>
                                                                     </constraints>
                                                                     <state key="normal" image="eth_detail_arrow"/>
+                                                                    <connections>
+                                                                        <action selector="showWalletAction:" destination="-1" eventType="touchUpInside" id="mOC-fc-ugf"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -177,7 +185,10 @@
                                                         <constraint firstAttribute="height" constant="49" id="Q51-3c-LGb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <state key="normal" title="验证资格"/>
+                                                    <state key="normal" title="Verify Eligibility"/>
+                                                    <connections>
+                                                        <action selector="bindAction:" destination="-1" eventType="touchUpInside" id="Cb2-ra-3nN"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,8 +240,8 @@
                                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Oki-gS-SHA"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refer NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWO-AK-ZZx">
-                                    <rect key="frame" x="161.66666666666666" y="11" width="91" height="22"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开启代理资格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWO-AK-ZZx">
+                                    <rect key="frame" x="152" y="11" width="110.33333333333331" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
@@ -273,6 +284,6 @@
         <image name="eth_detail_arrow" width="24" height="24"/>
         <image name="eth_gray_back" width="24" height="24"/>
         <image name="icon_default_user" width="60" height="60"/>
-        <image name="neo_wallet" width="46" height="46"/>
+        <image name="qlc_wallet" width="46" height="46"/>
     </resources>
 </document>

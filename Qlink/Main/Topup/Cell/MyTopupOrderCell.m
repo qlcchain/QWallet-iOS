@@ -154,7 +154,7 @@
     }
     
     _credentialLab.text = [model.txid isEmptyString]?@"":[NSString stringWithFormat:@"%@...%@",[model.txid substringToIndex:8],[model.txid substringFromIndex:model.txid.length-8]];
-    _topupStateLab.text = [model getStatusString];
+    _topupStateLab.text = [model getStatusString:TopupPayTypeNormal];
     _topupStateLab.textColor = [model getStatusColor];
     _credentialDetailHeight.constant = [model.status isEqualToString:Topup_Order_Status_SUCCESS]?48:0;
     _blockchainHeight.constant = [MyTopupOrderCell blockchainInvoiceExist:model.txid]?48:0;

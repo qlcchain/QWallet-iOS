@@ -62,11 +62,27 @@
                                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="mbi-TN-Mvx"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrU-uS-LVU">
+                                    <rect key="frame" x="325" y="1" width="88" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="88" id="Yo6-hM-1PG"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="Group order">
+                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="groupOrderAction:" destination="-1" eventType="touchUpInside" id="8Jp-di-MQL"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="CrU-uS-LVU" secondAttribute="trailing" constant="1" id="7x4-4G-MnO"/>
                                 <constraint firstItem="Tmt-un-4qg" firstAttribute="leading" secondItem="X5W-ee-JQh" secondAttribute="leading" constant="8" id="Hn1-Xb-8iQ"/>
+                                <constraint firstAttribute="bottom" secondItem="CrU-uS-LVU" secondAttribute="bottom" constant="1" id="ZL0-t7-Rgk"/>
                                 <constraint firstItem="Tmt-un-4qg" firstAttribute="centerY" secondItem="X5W-ee-JQh" secondAttribute="centerY" id="aeK-Np-0Wd"/>
+                                <constraint firstItem="CrU-uS-LVU" firstAttribute="top" secondItem="X5W-ee-JQh" secondAttribute="top" constant="1" id="h7d-Ug-7Nq"/>
                                 <constraint firstAttribute="height" constant="44" id="iFX-1S-ahR"/>
                                 <constraint firstItem="cbc-pt-t6a" firstAttribute="centerY" secondItem="X5W-ee-JQh" secondAttribute="centerY" id="t2f-WV-NzQ"/>
                                 <constraint firstItem="cbc-pt-t6a" firstAttribute="centerX" secondItem="X5W-ee-JQh" secondAttribute="centerX" id="uGq-UI-c6f"/>

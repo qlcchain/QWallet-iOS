@@ -18,10 +18,14 @@
     return @{@"ID" : @"id", @"Hash":@"hash"};
 }
 
-- (NSString *)getStatusString {
+- (NSString *)getStatusString:(TopupPayType)payType {
     NSString *str = @"";
     if ([_status isEqualToString:Topup_Order_Status_New]) {
-        str = [NSString stringWithFormat:kLang(@"waiting_for_to_arrive"),_symbol];
+        if (payType == TopupPayTypeNormal) {
+            str = [NSString stringWithFormat:kLang(@"waiting_for_to_arrive"),_symbol];
+        } else if (payType == TopupPayTypeGroupBuy) {
+            str = [NSString stringWithFormat:kLang(@"waiting_for_to_arrive"),_deductionToken];
+        }
     } else if ([_status isEqualToString:Topup_Order_Status_QGAS_PAID]) {
         if ([_payWay isEqualToString:@"FIAT"]) {
             str = kLang(@"no_phone_bill_paid");
@@ -52,6 +56,16 @@
         str = kLang(@"pay_token_returned");
     } else if ([_status isEqualToString:Topup_Order_Status_CANCEL]) {
         str = kLang(@"cancelled");
+    } else if ([_status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
+//        if ([_payWay isEqualToString:@"FIAT"]) {
+//            str = kLang(@"no_phone_bill_paid");
+//        } else if ([_payWay isEqualToString:@"TOKEN"]) {
+            if (_payTokenInTxid == nil || [_payTokenInTxid isEmptyString]) {
+                str = kLang(@"no_phone_bill_paid");
+            } else {
+                str = kLang(@"please_wait_for_confirmation");
+            }
+//        }
     }
     return str;
 }
@@ -82,7 +96,9 @@
        color = UIColorFromRGB(0xFF3669);
    } else if ([_status isEqualToString:Topup_Order_Status_CANCEL]) {
       color = UIColorFromRGB(0xFF3669);
-  }
+  } else if ([_status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
+         color = UIColorFromRGB(0xFF3669);
+     }
     return color;
 }
 

@@ -8,6 +8,7 @@
 
 #import "BBaseModel.h"
 #import <UIKit/UIKit.h>
+#import "ProjectEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,11 @@ static NSString *const Topup_Order_Status_CANCEL = @"CANCEL"; // 取消
 static NSString *const Topup_Order_Status_ERROR = @"ERROR"; // QGAS解析失败
 static NSString *const Topup_Order_Status_QGAS_RETURNED = @"QGAS_RETURNED"; // 已退回QGAS（充值失败）
 static NSString *const Topup_Order_Status_PAY_TOKEN_RETURNED = @"PAY_TOKEN_RETURNED"; // 已退回支付币（代币支付产品才有此状态，先退QGAS，再退支付币）
+
+// 团购
+static NSString *const Topup_Order_Status_DEDUCTION_TOKEN_PAID = @"DEDUCTION_TOKEN_PAID"; // 已支付抵扣币
+
+
 
 @interface TopupOrderModel : BBaseModel
 
@@ -43,8 +49,8 @@ static NSString *const Topup_Order_Status_PAY_TOKEN_RETURNED = @"PAY_TOKEN_RETUR
 @property (nonatomic, strong) NSString *ID; //" : "0815c1b7b7f64111903b8ae58c600cd0",
 @property (nonatomic, strong) NSString *productProvince; //" : "广东",
 @property (nonatomic, strong) NSString *status; //" : "NEW"
-@property (nonatomic, strong) NSNumber *qgasAmount;
 @property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSNumber *qgasAmount;
 @property (nonatomic, strong) NSString *txid;
 @property (nonatomic, strong) NSString *symbol;
 @property (nonatomic, strong) NSString *chain;
@@ -66,7 +72,25 @@ static NSString *const Topup_Order_Status_PAY_TOKEN_RETURNED = @"PAY_TOKEN_RETUR
 @property (nonatomic, strong) NSString *passwd;
 @property (nonatomic, strong) NSString *pin;
 
-- (NSString *)getStatusString;
+// 团购
+@property (nonatomic, strong) NSString *createDate;// = "2020-01-15 16:49:29";
+@property (nonatomic, strong) NSString *deductionToken;// = QGAS;
+@property (nonatomic, strong) NSString *deductionTokenChain; // "QLC_CHAIN";
+@property (nonatomic, strong) NSString *deductionTokenAmount;// = "10.35";
+@property (nonatomic, strong) NSString *deductionTokenInTxid;// = "";
+@property (nonatomic, strong) NSString *head;// = "/data/dapp/head/a8d08590d6e64f37983faf68c7593320.png";
+//@property (nonatomic, strong) NSString *ID;
+@property (nonatomic, strong) NSString *payFiatMoney;// = "3.68";
+@property (nonatomic, strong) NSString *payToken;// = QLC;
+//@property (nonatomic, strong) NSString *payTokenAmount;
+//@property (nonatomic, strong) NSString *payTokenChain
+//@property (nonatomic, strong) NSString *payTokenInTxid
+@property (nonatomic, strong) NSNumber *payTokenPrice;// = 1;
+//@property (nonatomic, strong) NSString *status
+//@property (nonatomic, strong) NSString *userId
+
+
+- (NSString *)getStatusString:(TopupPayType)payType;
 - (UIColor *)getStatusColor;
 + (BOOL)checkPayTokenChainServerAddressIsEmpty:(TopupOrderModel *)model;
 + (NSString *)getPayTokenChainServerAddress:(TopupOrderModel *)model;

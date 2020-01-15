@@ -608,7 +608,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
         BOOL isGroupBuy = YES;
         if (isGroupBuy) {
-            [self jumpToGroupBuyDetial];
+            [self jumpToGroupBuyDetial:model];
         } else {
             [self handlerPayToken:model];
         }
@@ -850,6 +850,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 //    vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
 //    vc.inputPhoneNumber = _phoneTF.text?:@"";
 //    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
+    vc.inputPayType = TopupPayTypeNormal;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -880,6 +881,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 //    vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
 //    vc.inputPhoneNumber = _phoneTF.text?:@"";
 //    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
+    vc.inputPayType = TopupPayTypeNormal;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -899,8 +901,12 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToGroupBuyDetial {
+- (void)jumpToGroupBuyDetial:(TopupProductModel *)model {
     GroupBuyDetialViewController *vc = [GroupBuyDetialViewController new];
+    vc.inputProductM = model;
+    vc.inputCountryM = _inputCountryM;
+    vc.inputPhoneNum = _phoneTF.text?:@"";
+    vc.inputDeductionTokenM = _selectDeductionTokenM;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -240,6 +240,11 @@ public class QLCUtil: NSObject {
 //        }
     }
     
+    @objc public func qlcSign(message : String, publicKey: String, privateKey: String) -> String {
+        let signature = QLCUtil.sign(message: message, secretKey: privateKey, publicKey: publicKey)
+        return signature
+    }
+    
     // Send
     @objc public static func sendAsset(from:String, tokenName:String, to:String, amount:UInt, sender: String?, receiver:String?, message:String?, data:String?, privateKey:String,isMainNetwork:Bool, workInLocal:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let privateKeyB = privateKey.hex2Bytes

@@ -26,6 +26,7 @@
 + (NSString*)getOutputDate:(NSString*)inputTime formatStr:(NSString*)formatStr; // 时区转换
 + (NSString *)getTimeWithFromDate:(NSDate *)fromDate addDay:(NSInteger)addDay;
 + (NSString *)getTimeWithFromTime:(NSString *)fromTime addDay:(NSInteger)addDay;
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime addMin:(NSInteger)addMin;
 + (NSDate *)dateFromTime:(NSString *)fromTime;
 /**
  *  秒时间戳

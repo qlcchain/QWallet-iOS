@@ -7,11 +7,65 @@
 //
 
 #import "TopupProductModel.h"
+#import "TopupDeductionTokenModel.h"
+#import "RLArithmetic.h"
+#import "NSString+RemoveZero.h"
 
 @implementation TopupProductModel
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{@"Description" : @"description", @"ID" : @"id"};
+}
+
++ (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM {
+    NSString *fait1Str = productM.discount.mul(productM.payTokenMoney);
+//    NSString *faitMoneyStr = [productM.discount.mul(productM.payTokenMoney) showfloatStr:4];
+    NSString *deduction1Str = productM.payTokenMoney.mul(productM.qgasDiscount);
+    NSNumber *deductionTokenPrice = @(1);
+    if ([productM.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = tokenM.price;
+    } else if ([productM.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = tokenM.usdPrice;
+    }
+    NSString *deductionAmountStr = [deduction1Str.div(deductionTokenPrice) showfloatStr:3];
+    NSString *deductionSymbolStr = tokenM.symbol;
+    NSString *addStr = @"+";
+    NSString *topupAmountShowStr = @"";
+    NSString *payTokenSymbol = @"";
+    if ([productM.payWay isEqualToString:@"TOKEN"]) {
+        payTokenSymbol = productM.payTokenSymbol?:@"";
+        NSNumber *payTokenPrice = [productM.payFiat isEqualToString:@"CNY"]?productM.payTokenCnyPrice:[productM.payFiat isEqualToString:@"USD"]?productM.payTokenUsdPrice:@(0);
+        NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payAmountStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
+    }
+    
+    return topupAmountShowStr;
+}
+
+#pragma mark - 团购
++ (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM groupDiscount:(NSString *)groupDiscount {
+    NSString *fait1Str = productM.payTokenMoney.mul(groupDiscount);
+//    NSString *faitMoneyStr = [productM.discount.mul(productM.payTokenMoney) showfloatStr:4];
+    NSString *deduction1Str = productM.payTokenMoney.mul(productM.qgasDiscount).mul(groupDiscount);
+    NSNumber *deductionTokenPrice = @(1);
+    if ([productM.payFiat isEqualToString:@"CNY"]) {
+        deductionTokenPrice = tokenM.price;
+    } else if ([productM.payFiat isEqualToString:@"USD"]) {
+        deductionTokenPrice = tokenM.usdPrice;
+    }
+    NSString *deductionAmountStr = [deduction1Str.div(deductionTokenPrice) showfloatStr:3];
+    NSString *deductionSymbolStr = tokenM.symbol;
+    NSString *addStr = @"+";
+    NSString *topupAmountShowStr = @"";
+    NSString *payTokenSymbol = @"";
+    if ([productM.payWay isEqualToString:@"TOKEN"]) {
+        payTokenSymbol = productM.payTokenSymbol?:@"";
+        NSNumber *payTokenPrice = [productM.payFiat isEqualToString:@"CNY"]?productM.payTokenCnyPrice:[productM.payFiat isEqualToString:@"USD"]?productM.payTokenUsdPrice:@(0);
+        NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
+        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payAmountStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
+    }
+    
+    return topupAmountShowStr;
 }
 
 @end

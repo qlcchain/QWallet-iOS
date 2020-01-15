@@ -28,6 +28,7 @@
 + (NSString *)getQLCMnemonicWithAddress:(NSString *)address;
 + (NSString *)getQLCPrivateKeyWithAddress:(NSString *)address;
 + (NSString *)getQLCPublicKeyWithAddress:(NSString *)address;
++ (NSString *)signWithMessage:(NSString *)message address:(NSString *)address;
 
 + (void)createQLCWalletInAuto;
 + (BOOL)haveQLCWallet;

@@ -7,6 +7,7 @@
 //
 
 #import "QBaseViewController.h"
+#import "ProjectEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *sendPayTokenToAddress;
 @property (nonatomic, strong) NSString *sendPayTokenMemo;
 @property (nonatomic, strong) NSString *inputPayToken;
+
+@property (nonatomic) TopupPayType inputPayType;
 
 @end
 
