@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)showfloatStrWith2Decimal;
 //+ (double)doubleFormString:(NSString *)str;
 //+ (NSString*)stringFromDouble:(double)doubleVal;
++ (NSString *)doubleToString:(double)doubleV;
 
 @end
 

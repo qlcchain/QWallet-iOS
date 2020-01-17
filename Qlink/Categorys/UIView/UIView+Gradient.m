@@ -33,12 +33,22 @@
     [self.layer insertSublayer:gradientLayer atIndex:0];
 }
 
-- (void)addQGradientWithStart:(UIColor *)startColor end:(UIColor *)endColor frame:(CGRect)frame {
+- (void)addHorizontalQGradientWithStart:(UIColor *)startColor end:(UIColor *)endColor frame:(CGRect)frame {
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
     gradientLayer.locations = @[@0.0, @1.0];
     gradientLayer.startPoint = CGPointMake(0, 0);
     gradientLayer.endPoint = CGPointMake(1.0, 0);
+    gradientLayer.frame = frame;
+    [self.layer insertSublayer:gradientLayer atIndex:0];
+}
+
+- (void)addVerticalQGradientWithStart:(UIColor *)startColor end:(UIColor *)endColor frame:(CGRect)frame {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
+    gradientLayer.locations = @[@0.0, @1.0];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1.0);
     gradientLayer.frame = frame;
     [self.layer insertSublayer:gradientLayer atIndex:0];
 }

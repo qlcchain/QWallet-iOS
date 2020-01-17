@@ -11,6 +11,11 @@
 #import <QLCFramework/QLCFramework.h>
 #import "NeoTransferUtil.h"
 #import "ETHWalletManage.h"
+#import "NSString+RemoveZero.h"
+
+@implementation TopupOrderProductModel
+
+@end
 
 @implementation TopupOrderModel
 
@@ -66,6 +71,12 @@
                 str = kLang(@"please_wait_for_confirmation");
             }
 //        }
+    } else if ([_status isEqualToString:Topup_Order_Status_TIME_OUT]) {
+        str = kLang(@"time_out");
+    } else if ([_status isEqualToString:Topup_Order_Status_TIME_OUT_DOWN]) {
+        str = kLang(@"time_out_down");
+    } else if ([_status isEqualToString:Topup_Order_Status_ORDERED]) {
+        str = kLang(@"ordered");
     }
     return str;
 }
@@ -97,8 +108,14 @@
    } else if ([_status isEqualToString:Topup_Order_Status_CANCEL]) {
       color = UIColorFromRGB(0xFF3669);
   } else if ([_status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
-         color = UIColorFromRGB(0xFF3669);
-     }
+     color = UIColorFromRGB(0xFF3669);
+ } else if ([_status isEqualToString:Topup_Order_Status_TIME_OUT]) {
+       color = UIColorFromRGB(0xFF3669);
+   } else if ([_status isEqualToString:Topup_Order_Status_TIME_OUT_DOWN]) {
+       color = UIColorFromRGB(0xFF3669);
+   } else if ([_status isEqualToString:Topup_Order_Status_ORDERED]) {
+      color = UIColorFromRGB(0xFF3669);
+  }
     return color;
 }
 
@@ -129,6 +146,14 @@
     }
     
     return address;
+}
+
+- (NSString *)deductionTokenAmount_str {
+    return [NSString doubleToString:_deductionTokenAmount];
+}
+
+- (NSString *)payTokenAmount_str {
+    return [NSString doubleToString:_payTokenAmount];
 }
 
 @end

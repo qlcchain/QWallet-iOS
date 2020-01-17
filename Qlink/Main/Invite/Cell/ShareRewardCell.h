@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class InviteeListModel,InviteRankingModel;
+
+static NSString *ShareRewardCell_Reuse = @"ShareRewardCell";
+#define ShareRewardCell_Height 64
+
 @interface ShareRewardCell : UITableViewCell
+
+- (void)config_friend:(InviteeListModel *)model;
+- (void)config_delegate:(InviteRankingModel *)model;
 
 @end
 

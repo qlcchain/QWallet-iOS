@@ -36,11 +36,11 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ef-KV-q3g">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="968"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="irD-ia-Vgb">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irD-ia-Vgb">
                             <rect key="frame" x="0.0" y="44" width="375" height="924"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rel-a9-QbB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="801"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="970"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ad_share_en" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-5u-ih3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="155"/>
@@ -453,10 +453,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1U-UK-Ylq">
-                                            <rect key="frame" x="0.0" y="570" width="375" height="231"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <rect key="frame" x="0.0" y="570" width="375" height="400"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="231" id="hhU-du-DRK"/>
+                                                <constraint firstAttribute="height" constant="400" id="hhU-du-DRK"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKI-KF-Y48">

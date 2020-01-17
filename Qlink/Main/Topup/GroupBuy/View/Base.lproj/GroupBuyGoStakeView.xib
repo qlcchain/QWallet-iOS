@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="KmZ-c1-dpz" customClass="OpenDelegateSuccessView">
+        <view contentMode="scaleToFill" id="KmZ-c1-dpz" customClass="GroupBuyGoStakeView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -28,13 +28,13 @@
                                 <constraint firstAttribute="height" constant="1" id="TAt-yV-ALn"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are a Recharge Agent Partner now." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlW-Up-aTy">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't staked 1500 QLC in this wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlW-Up-aTy">
                             <rect key="frame" x="16" y="97" width="234" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="set_pw_success" translatesAutoresizingMaskIntoConstraints="NO" id="aJm-oh-5Dd">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="know_delegate_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="aJm-oh-5Dd">
                             <rect key="frame" x="107" y="30" width="52" height="52"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="52" id="TSW-z5-1PK"/>
@@ -47,7 +47,7 @@
                                 <constraint firstAttribute="height" constant="50" id="XFk-gW-BAF"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <state key="normal" title="Got it">
+                            <state key="normal" title="Stake Now">
                                 <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                             <connections>
@@ -105,7 +105,7 @@
         </view>
     </objects>
     <resources>
+        <image name="know_delegate_yellow" width="64" height="58"/>
         <image name="mnemonic_tip_close" width="24" height="24"/>
-        <image name="set_pw_success" width="58" height="58"/>
     </resources>
 </document>

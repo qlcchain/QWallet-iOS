@@ -53,14 +53,14 @@
                                     <constraint firstAttribute="height" constant="0.5" id="cr1-4W-G2e"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值佣金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7i-Vf-MN2">
-                                <rect key="frame" x="64" y="36" width="41" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recharge Commission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7i-Vf-MN2">
+                                <rect key="frame" x="64" y="36" width="107.5" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.73725490196078436" green="0.4823529411764706" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.99607843137254903" green="0.9882352941176471" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pml-4y-K1U" firstAttribute="leading" secondItem="VWv-AH-ovM" secondAttribute="leading" constant="16" id="3Y4-Wb-Zy6"/>
                             <constraint firstItem="j7i-Vf-MN2" firstAttribute="top" secondItem="f1E-7c-NdZ" secondAttribute="bottom" constant="4" id="7K1-22-3d6"/>
@@ -88,6 +88,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="icon" destination="pml-4y-K1U" id="KeA-t4-ZD3"/>
+                <outlet property="inviteLab" destination="l1X-xH-wmd" id="PKB-2o-Z52"/>
+                <outlet property="nameLab" destination="f1E-7c-NdZ" id="d72-MP-uDq"/>
+                <outlet property="typeLab" destination="j7i-Vf-MN2" id="hFu-0B-Kbp"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="127.90178571428571"/>
         </tableViewCell>
     </objects>

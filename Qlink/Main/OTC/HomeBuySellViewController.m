@@ -101,7 +101,7 @@ static NSString *const NetworkSize = @"20";
 - (void)configInit {
     [self refreshSegTitle];
     
-    [self.view addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [_mainSeg segmentedIOS13Style];
     
     _selectPairsTagArr = [NSMutableArray array];

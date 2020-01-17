@@ -28,6 +28,7 @@
 + (NSString *)getTimeWithFromTime:(NSString *)fromTime addDay:(NSInteger)addDay;
 + (NSString *)getTimeWithFromTime:(NSString *)fromTime addMin:(NSInteger)addMin;
 + (NSDate *)dateFromTime:(NSString *)fromTime;
++ (NSDate *)getDateWithTimestamp:(NSString *)timestamp isMil:(BOOL)isMil;
 /**
  *  秒时间戳
  */

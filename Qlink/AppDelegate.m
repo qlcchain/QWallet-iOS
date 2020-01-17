@@ -258,6 +258,7 @@
     if (![UserModel haveLoginAccount]) {
         return;
     }
+    [UserModel removeMul];
     UserModel *userM = [UserModel fetchUserOfLogin];
     userM.isLogin = @(NO);
     [UserModel storeUserByID:userM];

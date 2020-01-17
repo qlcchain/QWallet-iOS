@@ -27,7 +27,27 @@ static NSString *const Topup_Order_Status_PAY_TOKEN_RETURNED = @"PAY_TOKEN_RETUR
 
 // 团购
 static NSString *const Topup_Order_Status_DEDUCTION_TOKEN_PAID = @"DEDUCTION_TOKEN_PAID"; // 已支付抵扣币
+static NSString *const Topup_Order_Status_TIME_OUT = @"TIME_OUT"; // 超时(超过10分钟 不是PAY_TOKEN_PAID)
+static NSString *const Topup_Order_Status_TIME_OUT_DOWN = @"TIME_OUT_DOWN"; // 超时处理结束(退币等操作)
+static NSString *const Topup_Order_Status_ORDERED = @"ORDERED"; // 已生成充值订单
 
+
+@interface TopupOrderProductModel : BBaseModel
+
+@property (nonatomic, strong) NSString *country;// = Singapore;
+@property (nonatomic, strong) NSString *countryEn;// = Singapore;
+@property (nonatomic, strong) NSString *globalRoaming;// = "+65";
+@property (nonatomic, strong) NSString *isp;// = " Starhub";
+@property (nonatomic, strong) NSString *ispEn;// = " Starhub";
+@property (nonatomic, strong) NSString *localFiat;// = SGD;
+@property (nonatomic, strong) NSNumber *localFiatMoney;// = 5;
+@property (nonatomic, strong) NSString *productName;// = "Starhub - Happy Card";
+@property (nonatomic, strong) NSString *productNameEn;// = "Starhub - Happy Card";
+@property (nonatomic, strong) NSString *province;// = "";
+@property (nonatomic, strong) NSString *provinceEn;// = "";
+
+
+@end
 
 
 @interface TopupOrderModel : BBaseModel
@@ -58,7 +78,8 @@ static NSString *const Topup_Order_Status_DEDUCTION_TOKEN_PAID = @"DEDUCTION_TOK
 @property (nonatomic, strong) NSString *Hash;
 @property (nonatomic, strong) NSNumber *payPrice;
 @property (nonatomic, strong) NSString *payTokenInTxid;
-@property (nonatomic, strong) NSNumber *payTokenAmount;
+@property (nonatomic, strong) NSString *payTokenAmount_str;
+@property (nonatomic) double payTokenAmount;
 @property (nonatomic, strong) NSString *payWay;
 @property (nonatomic, strong) NSString *payFiat;
 @property (nonatomic, strong) NSString *payTokenHash;
@@ -76,7 +97,8 @@ static NSString *const Topup_Order_Status_DEDUCTION_TOKEN_PAID = @"DEDUCTION_TOK
 @property (nonatomic, strong) NSString *createDate;// = "2020-01-15 16:49:29";
 @property (nonatomic, strong) NSString *deductionToken;// = QGAS;
 @property (nonatomic, strong) NSString *deductionTokenChain; // "QLC_CHAIN";
-@property (nonatomic, strong) NSString *deductionTokenAmount;// = "10.35";
+@property (nonatomic, strong) NSString *deductionTokenAmount_str;// = "10.35";
+@property (nonatomic) double deductionTokenAmount;
 @property (nonatomic, strong) NSString *deductionTokenInTxid;// = "";
 @property (nonatomic, strong) NSString *head;// = "/data/dapp/head/a8d08590d6e64f37983faf68c7593320.png";
 //@property (nonatomic, strong) NSString *ID;
@@ -88,6 +110,8 @@ static NSString *const Topup_Order_Status_DEDUCTION_TOKEN_PAID = @"DEDUCTION_TOK
 @property (nonatomic, strong) NSNumber *payTokenPrice;// = 1;
 //@property (nonatomic, strong) NSString *status
 //@property (nonatomic, strong) NSString *userId
+
+@property (nonatomic, strong) TopupOrderProductModel *product;//
 
 
 - (NSString *)getStatusString:(TopupPayType)payType;

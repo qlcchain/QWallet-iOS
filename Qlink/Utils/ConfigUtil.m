@@ -111,6 +111,11 @@
     return channel;
 }
 
++ (NSString *)get_qlc_node {
+    NSDictionary *config = [ConfigUtil getReleaseConfig];
+    NSString *channel = config[@"qlc_node"];
+    return channel;
+}
 
 
 

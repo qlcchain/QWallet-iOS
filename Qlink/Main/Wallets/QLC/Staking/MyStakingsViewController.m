@@ -79,7 +79,7 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 
 #pragma mark - Operation
 - (void)configInit {
-    [_topBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_topBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     _lendingBack.layer.cornerRadius = 6;
     _lendingBack.layer.masksToBounds = YES;

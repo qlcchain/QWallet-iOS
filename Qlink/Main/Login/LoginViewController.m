@@ -249,7 +249,9 @@
     NSString *account = _loginAccountTF.text?:@"";
     NSString *code = _loginVerifyCodeTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"code":code};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:user_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
             UserModel *model = [UserModel getObjectWithKeyValues:responseObject];
@@ -267,6 +269,7 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

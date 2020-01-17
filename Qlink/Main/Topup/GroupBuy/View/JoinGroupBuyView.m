@@ -93,8 +93,8 @@
     [_productIcon sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"topup_guangdong_mobile"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     
-    _productPriceLab.text = [TopupProductModel getAmountShow:productM tokenM:tokenM groupDiscount:joinM.discount?:@"1"];
-    
+    _productPriceLab.text = [NSString stringWithFormat:@"%@%@+%@%@",_joinM.payTokenAmount_str?:@"0",_joinM.payToken,_joinM.deductionTokenAmount_str?:@"0",_joinM.deductionToken];
+        
     NSString *discountNumStr = @"0";
     NSString *language = [Language currentLanguageCode];
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
@@ -108,20 +108,20 @@
     NSString *discountShowStr = @"";
     NSString *remainShowStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        discountShowStr = [NSString stringWithFormat:@"%@ off, %@ discount partners",discountNumStr,joinM.numberOfPeople];
+        discountShowStr = [NSString stringWithFormat:@"%@%% off, %@ discount partners",discountNumStr,joinM.numberOfPeople];
         remainShowStr = [NSString stringWithFormat:@"%@ more partner needed",joinM.numberOfPeople.sub(joinM.joined?:@"0")];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         discountShowStr = [NSString stringWithFormat:@"满%@人%@折团",joinM.numberOfPeople,discountNumStr];
         remainShowStr = [NSString stringWithFormat:@"还差%@人",joinM.numberOfPeople.sub(joinM.joined?:@"0")];
     } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
-        discountShowStr = [NSString stringWithFormat:@"%@ off, %@ discount partners",discountNumStr,joinM.numberOfPeople];
+        discountShowStr = [NSString stringWithFormat:@"%@%% off, %@ discount partners",discountNumStr,joinM.numberOfPeople];
         remainShowStr = [NSString stringWithFormat:@"%@ more partner needed",joinM.numberOfPeople.sub(joinM.joined?:@"0")];
     }
     _discountLab.text = discountShowStr;
     NSString *discountShowBtnStr = [NSString stringWithFormat:@"   %@   ",discountShowStr];
     [_discountBtn setTitle:discountShowBtnStr forState:UIControlStateNormal];
     _remainLab.text = remainShowStr;
-    _timeLab.text = [NSDate getTimeWithFromTime:joinM.createDate addMin:[joinM.duration integerValue]];
+    _timeLab.text = [NSString stringWithFormat:@"%@:%@",kLang(@"valid_till"),[NSDate getTimeWithFromTime:joinM.createDate addMin:[joinM.duration integerValue]]];
     
     GroupBuyListItemModel *itemM = [GroupBuyListItemModel new];
     itemM.head = joinM.head;
@@ -135,39 +135,28 @@
 
 - (void)handlerGroupBuyPayToken {
     NSString *amountNum = _productM.localFaitMoney;
-//    NSString *fait1Str = _productM.discount.mul(_productM.payTokenMoney);
-//    NSString *deduction1Str = _productM.payTokenMoney.mul(_productM.qgasDiscount);
-//    NSNumber *deductionTokenPrice = @(1);
-//    if ([_productM.payFiat isEqualToString:@"CNY"]) {
-//        deductionTokenPrice = _deductionTokenM.price;
-//    } else if ([_productM.payFiat isEqualToString:@"USD"]) {
-//        deductionTokenPrice = _deductionTokenM.usdPrice;
-//    }
-//    NSString *deductionAmountStr = [_productM.payTokenMoney.mul(_productM.qgasDiscount).div(deductionTokenPrice) showfloatStr:3];
-//    NSNumber *payTokenPrice = [_productM.payFiat isEqualToString:@"CNY"]?_productM.payTokenCnyPrice:[_productM.payFiat isEqualToString:@"USD"]?_productM.payTokenUsdPrice:@(0);
-//    NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
-
-    NSString *fait1Str = _productM.discount.mul(_productM.payTokenMoney);
-    NSString *deduction1Str = _productM.payTokenMoney.mul(_productM.qgasDiscount);
-    NSNumber *deductionTokenPrice = @(1);
-    if ([_productM.payFiat isEqualToString:@"CNY"]) {
-        deductionTokenPrice = _deductionTokenM.price;
-    } else if ([_productM.payFiat isEqualToString:@"USD"]) {
-        deductionTokenPrice = _deductionTokenM.usdPrice;
-    }
-    NSString *deductionAmountStr = [deduction1Str.div(deductionTokenPrice) showfloatStr:3];
-    NSString *deductionSymbolStr = _deductionTokenM.symbol;
-    NSString *addStr = @"+";
-    NSString *topupAmountShowStr = @"";
-    NSString *payTokenSymbol = @"";
-//    if ([_productM.payWay isEqualToString:@"TOKEN"]) {
-        payTokenSymbol = _productM.payTokenSymbol?:@"";
-        NSNumber *payTokenPrice = [_productM.payFiat isEqualToString:@"CNY"]?_productM.payTokenCnyPrice:[_productM.payFiat isEqualToString:@"USD"]?_productM.payTokenUsdPrice:@(0);
-        NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payAmountStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
-//    }
+    NSString *groupDiscount = _joinM.discount?:@"1";
+    NSString *fait1Str = _productM.payTokenMoney.mul(groupDiscount);
+        NSString *deduction1Str = _productM.payTokenMoney.mul(_productM.qgasDiscount).mul(groupDiscount);
+        NSNumber *deductionTokenPrice = @(1);
+        if ([_productM.payFiat isEqualToString:@"CNY"]) {
+            deductionTokenPrice = _deductionTokenM.price;
+        } else if ([_productM.payFiat isEqualToString:@"USD"]) {
+            deductionTokenPrice = _deductionTokenM.usdPrice;
+        }
+        NSString *deductionAmountStr = [deduction1Str.div(deductionTokenPrice) showfloatStr:3];
+        NSString *deductionSymbolStr = _deductionTokenM.symbol;
+        NSString *addStr = @"+";
+        NSString *topupAmountShowStr = @"";
+        NSString *payTokenSymbol = @"";
+//        if ([_productM.payWay isEqualToString:@"TOKEN"]) {
+            payTokenSymbol = _productM.payTokenSymbol?:@"";
+            NSNumber *payTokenPrice = [_productM.payFiat isEqualToString:@"CNY"]?_productM.payTokenCnyPrice:[_productM.payFiat isEqualToString:@"USD"]?_productM.payTokenUsdPrice:@(0);
+            NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
+            topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payAmountStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
+//        }
     
-    NSString *message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction_1"),amountNum, _productM.localFiat, deductionAmountStr,_deductionTokenM.symbol,payAmountStr, _productM.payTokenSymbol];
+    NSString *message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction_1"),amountNum, _productM.localFiat, _joinM.deductionTokenAmount_str?:@"0",_deductionTokenM.symbol,_joinM.payTokenAmount_str?:@"0", _productM.payTokenSymbol];
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -197,22 +186,22 @@
     NSString *groupId = _joinM.ID?:@"";
     NSString *phoneNumber = _phoneNum?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"groupId":groupId,@"phoneNumber":phoneNumber};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:topup_join_group_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             TopupOrderModel *model = [TopupOrderModel getObjectWithKeyValues:responseObject[@"item"]];
             if (weakself.successBlock) {
                 weakself.successBlock(model);
             }
             [weakself hide];
-            
-            
-            
-            
+
 //            [kAppD.window makeToastDisappearWithText:kLang(@"success")];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

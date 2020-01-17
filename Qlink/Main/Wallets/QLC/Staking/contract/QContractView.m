@@ -131,8 +131,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
             [weakself nep5_prePareBenefitPledge:qlcAddress qlcAmount:qlcAmount multiSigAddress:toAddress neo_publicKey:neo_publicKey lockTxId:lockTxId qlc_privateKey:qlc_privateKey qlc_publicKey:qlc_publicKey resultHandler:resultHandler];
         } else {
             if (resultHandler) {
+                NSString *showDes = @"lock qlc error, try later. (error reported)";
+                resultHandler(nil, NO, showDes);
+                
                 NSString *des = [@"contractLock error" stringByAppendingFormat:@"   ***method:%@   ***fromAddress:%@   ***neo_publicKey:%@   ***error:%@",callMethod,fromAddress,neo_publicKey,value.mj_JSONString];
-                resultHandler(nil, NO, des);
                 NSString *className = NSStringFromClass([self class]);
                 NSString *methodName = NSStringFromSelector(_cmd);
                 [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -162,9 +164,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
             [weakself benefit_getnep5transferbytxid:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
         } else {
             if (resultHandler) {
-//                NSString *test = [@"ss" stringByAppendingString:@""];
+                NSString *showDes = @"nep5_prePareBenefitPledge error, try later. (error reported)";
+                resultHandler(nil, NO, showDes);
+                
                 NSString *des = [@"nep5_prePareBenefitPledge error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"nep5_prePareBenefitPledge",responseObject];
-                resultHandler(nil, NO, des);
                 NSString *className = NSStringFromClass([self class]);
                 NSString *methodName = NSStringFromSelector(_cmd);
                 [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -172,8 +175,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (resultHandler) {
+            NSString *showDes = @"nep5_prePareBenefitPledge error, try later. (error reported)";
+            resultHandler(nil, NO, showDes);
+            
             NSString *des = [@"nep5_prePareBenefitPledge error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"nep5_prePareBenefitPledge",error.description];
-            resultHandler(nil, NO, des);
             NSString *className = NSStringFromClass([self class]);
             NSString *methodName = NSStringFromSelector(_cmd);
             [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -205,8 +210,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
             [weakself nep5_benefitPledge:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
         } else {
             if (resultHandler) {
+                NSString *showDes = @"neo_get_transaction error, try later. (error reported)";
+                resultHandler(nil, NO, showDes);
+                
                 NSString *des = [@"neo_get_transaction error" stringByAppendingFormat:@"   ***method:%@  ***error:%@",urlStr,[responseDic mj_JSONString]];
-                resultHandler(nil, NO, des);
                 NSString *className = NSStringFromClass([self class]);
                 NSString *methodName = NSStringFromSelector(_cmd);
                 [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -240,8 +247,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
             [weakself signAndWork:responseObject qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey lockTxId:lockTxId unlockTxParams:nil resultHandler:resultHandler];
         } else {
             if (resultHandler) {
+                NSString *showDes = @"nep5_benefitPledge error, try later. (error reported)";
+                resultHandler(nil, NO, showDes);
+                
                 NSString *des = [@"nep5_benefitPledge error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"nep5_benefitPledge",[responseObject mj_JSONString]];
-                resultHandler(nil, NO, des);
                 NSString *className = NSStringFromClass([self class]);
                 NSString *methodName = NSStringFromSelector(_cmd);
                 [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -249,8 +258,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (resultHandler) {
+            NSString *showDes = @"nep5_benefitPledge error, try later. (error reported)";
+            resultHandler(nil, NO, showDes);
+            
             NSString *des = [@"nep5_benefitPledge error" stringByAppendingFormat:@"   ***method:%@    ***error:%@",@"nep5_benefitPledge",error.description];
-            resultHandler(nil, NO, des);
             NSString *className = NSStringFromClass([self class]);
             NSString *methodName = NSStringFromSelector(_cmd);
             [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -277,8 +288,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
             }
         } else {
             if (resultHandler) {
-                NSString *des = [@"ledger_pledgeInfoByTransactionID error" stringByAppendingFormat:@"   ***method:%@    ***error:%@",@"nep5_getLockInfo",[responseObject mj_JSONString]];
-                resultHandler(@(0), NO, des);
+                NSString *showDes = @"ledger_pledgeInfoByTransactionID error, try later. (error reported)";
+                resultHandler(@(0), NO, showDes);
+                
+                NSString *des = [@"ledger_pledgeInfoByTransactionID error" stringByAppendingFormat:@"   ***method:%@    ***error:%@",@"ledger_pledgeInfoByTransactionID",[responseObject mj_JSONString]];
                 NSString *className = NSStringFromClass([self class]);
                 NSString *methodName = NSStringFromSelector(_cmd);
                 [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
@@ -286,8 +299,10 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (resultHandler) {
+            NSString *showDes = @"ledger_pledgeInfoByTransactionID error, try later. (error reported)";
+            resultHandler(@(1), NO, showDes);
+            
             NSString *des = [@"ledger_pledgeInfoByTransactionID error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"ledger_pledgeInfoByTransactionID",error.description];
-            resultHandler(@(1), NO, des);
 //            NSString *className = NSStringFromClass([self class]);
 //            NSString *methodName = NSStringFromSelector(_cmd);
 //            [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];

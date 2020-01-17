@@ -53,7 +53,7 @@
     _nameLab.text = model.showName;
     
 //    _inviteLab.text = [NSString stringWithFormat:@"%@ QGAS",[NSString stringFromDouble:[model.totalInvite doubleValue]*[qgasUnit doubleValue]]];
-    _inviteLab.text = model.totalInvite.mul(qgasUnit);
+    _inviteLab.text = [NSString stringWithFormat:@"%@ QGAS",model.totalInvite.mul(qgasUnit)];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.head]];
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];

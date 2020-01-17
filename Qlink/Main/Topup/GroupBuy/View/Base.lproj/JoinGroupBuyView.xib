@@ -21,11 +21,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wO-ck-vii">
                     <rect key="frame" x="1" y="120" width="373" height="679"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5b-cW-bQr">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5b-cW-bQr">
                             <rect key="frame" x="1" y="1" width="371" height="618"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xE4-xX-I7z">
-                                    <rect key="frame" x="0.0" y="0.0" width="371" height="581"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="371" height="538"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGs-qn-bEi">
                                             <rect key="frame" x="0.0" y="0.0" width="371" height="107"/>
@@ -161,7 +161,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cad-dQ-EpA">
-                                            <rect key="frame" x="0.0" y="274" width="371" height="307"/>
+                                            <rect key="frame" x="0.0" y="274" width="371" height="264"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmz-UP-5QB">
                                                     <rect key="frame" x="16" y="16" width="35.5" height="17"/>
@@ -173,20 +173,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61x-MC-pyz">
-                                                    <rect key="frame" x="16" y="41" width="339" height="258"/>
-                                                    <string key="text">1. 发起人发起拼团时设定一个拼团人数目标，下单价格就按照对应的折扣来
-满3人9折团： Family Plan
-满5人8折团：Group Plan
-满8人及以上7折团: Great Value Plan
-    
-2. 限定时间内参加这个团充值的人数够了就全团购买成功，转账完成即视为发起拼团或入团。
-3人团： 3小时
-5人团：9小时
-8人团：24小时
-    
-3. 组团成功，根据团员人数，团长每人拿2qgas，团员上级销售代理拿1qgas，团员上上级销售代理拿0.5qgas，团长可以自己参与团购。
-    
-4. 限定时间内人数不够则购买失败，已下单者的QGas/QLC 原路退回。</string>
+                                                    <rect key="frame" x="16" y="41" width="339" height="215"/>
+                                                    <string key="text">1. The user who starts the Group Recharge sets the target number of group which decides the discount.\n10% off for Family Plan (group of 3)\n20% off for Group Plan (group of 5)\n30% off for Great Value Plan (group of 8 or above)\n\n2. The plan will be effective when all group members pay successfully within limited time.\n3 hours for Family Plan (group of 3)\n9 hours for Group Plan (group of 5)\n24 hours for Great Value Plan (group of 8 or above)\n\n3. Commission distribution details for successful Group Plan The initiator gets 2 QGAS rewards;\nHis/her primary sales partner gets 1 QGAS rewards;\nHis/her secondary sales partner gets 0.5 QGAS rewards.\n\n4. If all group members can't pay withinn the limited time which means unsuccessful Group Plan, paid QGAS and QLC will be refunded to the payment wallet.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>

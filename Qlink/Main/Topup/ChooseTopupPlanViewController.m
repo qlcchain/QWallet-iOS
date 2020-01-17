@@ -34,6 +34,8 @@
 #import "TopupPayETH_DeductionViewController.h"
 #import "NeoTransferUtil.h"
 #import "GroupBuyDetialViewController.h"
+#import "GroupBuyListModel.h"
+#import "ClaimConstants.h"
 
 static NSInteger DeductionTokenBtnTag = 6649;
 static NSInteger DeductionTokenTickTag = 9223;
@@ -521,6 +523,27 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }];
 }
 
+- (void)requestHaveGroupBuyActiviy:(void(^)(BOOL haveGroupBuyActivity))completeBlock {
+//    kWeakSelf(self);
+    NSDictionary *params = @{@"dictType":app_dict};
+    [RequestService requestWithUrl10:sys_dict_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            BOOL haveGroupBuyActivity = NO;
+            NSString *topupGroupStartDateStr = responseObject[Server_Data][@"topupGroupStartDate"]?:@"";
+            NSString *topopGroupEndDateStr = responseObject[Server_Data][@"topopGroupEndDate"]?:@"";
+            NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
+            NSDate *startDate = [NSDate dateFromTime:topupGroupStartDateStr];
+            NSDate *endDate = [NSDate dateFromTime:topopGroupEndDateStr];
+            NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
+            haveGroupBuyActivity = [startDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:endDate];
+            if (completeBlock) {
+                completeBlock(haveGroupBuyActivity);
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == _phoneTF) {
@@ -606,12 +629,16 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
             
         }
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
-        BOOL isGroupBuy = YES;
-        if (isGroupBuy) {
-            [self jumpToGroupBuyDetial:model];
-        } else {
-            [self handlerPayToken:model];
-        }
+        
+        kWeakSelf(self);
+        [self requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
+            if (haveGroupBuyActivity) {
+                [weakself jumpToGroupBuyDetial:model];
+            } else {
+                [weakself handlerPayToken:model];
+            }
+        }];
+        
     }
     
 }
@@ -839,8 +866,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
-    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
@@ -871,9 +898,9 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
     vc.sendDeductionToAddress = ethAddress;
     vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
-    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"OKB";
 //    vc.inputProductM = productM;

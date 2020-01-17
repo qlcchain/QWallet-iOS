@@ -75,28 +75,28 @@
     NSString *discountShowStr = @"";
     NSString *remainShowStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        discountShowStr = [NSString stringWithFormat:@"%@ off, %@ discount partners",discountNumStr,model.numberOfPeople];
+        discountShowStr = [NSString stringWithFormat:@"%@%% off, %@ discount partners",discountNumStr,model.numberOfPeople];
         remainShowStr = [NSString stringWithFormat:@"%@ more partner needed",model.numberOfPeople.sub(model.joined?:@"0")];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         discountShowStr = [NSString stringWithFormat:@"满%@人%@折团",model.numberOfPeople,discountNumStr];
         remainShowStr = [NSString stringWithFormat:@"还差%@人",model.numberOfPeople.sub(model.joined?:@"0")];
     } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
-        discountShowStr = [NSString stringWithFormat:@"%@ off, %@ discount partners",discountNumStr,model.numberOfPeople];
+        discountShowStr = [NSString stringWithFormat:@"%@%% off, %@ discount partners",discountNumStr,model.numberOfPeople];
         remainShowStr = [NSString stringWithFormat:@"%@ more partner needed",model.numberOfPeople.sub(model.joined?:@"0")];
     }
     _discountLab.text = discountShowStr;
     _remainLab.text = remainShowStr;
-    _timeLab.text = [NSDate getTimeWithFromTime:model.createDate addMin:[model.duration integerValue]];
+    _timeLab.text = [NSString stringWithFormat:@"%@:%@",kLang(@"valid_till"),[NSDate getTimeWithFromTime:model.createDate addMin:[model.duration integerValue]]];
     
-    __block BOOL isJoin = NO;
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    [model.items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        GroupBuyListItemModel *tempM = obj;
-        if ([tempM.ID isEqualToString:userM.ID]) {
-            isJoin = YES;
-        }
-    }];
-    _joinBtn.hidden = isJoin;
+//    __block BOOL isJoin = NO;
+//    UserModel *userM = [UserModel fetchUserOfLogin];
+//    [model.items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        GroupBuyListItemModel *tempM = obj;
+//        if ([tempM.ID isEqualToString:userM.ID]) {
+//            isJoin = YES;
+//        }
+//    }];
+//    _joinBtn.hidden = isJoin;
     
     GroupBuyListItemModel *itemM = [GroupBuyListItemModel new];
     itemM.head = model.head;

@@ -158,6 +158,7 @@ static NSInteger const miniSpacingDistance = 8;
     [self getTokenPrice];
     [self getRedDotOfMe];
     [self addCountryView];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -174,7 +175,7 @@ static NSInteger const miniSpacingDistance = 8;
 
 #pragma mark - Operation
 - (void)configInit {
-    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+    [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
     
     _showQLC = NO;
     _qlcBackHeight.constant = _showQLC?318:0;

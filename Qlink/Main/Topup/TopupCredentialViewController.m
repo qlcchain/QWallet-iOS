@@ -12,6 +12,7 @@
 #import "UIView+Gradient.h"
 #import "TopupOrderModel.h"
 #import "GlobalConstants.h"
+#import "NSString+RemoveZero.h"
 
 @interface TopupCredentialViewController ()
 
@@ -42,15 +43,23 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+    [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
 }
 
 #pragma mark - Operation
 - (void)configInit {
     NSNumber *faitStr = @(0);
-    NSNumber *qgasStr = _inputCredentailM.qgasAmount;
     
-    NSString *symbolStr = _inputCredentailM.symbol;
+    NSString *qgasStr = @"0";
+    NSString *symbolStr = @"";
+    if (_inputPayType == TopupPayTypeNormal) {
+        qgasStr = [NSString stringWithFormat:@"%@",_inputCredentailM.qgasAmount];
+        symbolStr = _inputCredentailM.symbol;
+    } else if (_inputPayType == TopupPayTypeGroupBuy) {
+        qgasStr = [NSString doubleToString:_inputCredentailM.deductionTokenAmount];
+        symbolStr = _inputCredentailM.deductionToken;
+    }
+    
     NSString *addStr = @"+";
     NSString *topupAmountShowStr = @"";
     NSString *projectStr = @"";
@@ -67,10 +76,17 @@
             
         }
     } else if ([_inputCredentailM.payWay isEqualToString:@"TOKEN"]) { // 代币支付
-        faitStr = _inputCredentailM.payTokenAmount;
-        paySymbolStr = _inputCredentailM.payTokenSymbol;
-        localShowStr = _inputCredentailM.localFiatMoney;
-        localSymbolStr = _inputCredentailM.localFiat;
+        faitStr = _inputCredentailM.payTokenAmount_str;
+        
+        if (_inputPayType == TopupPayTypeNormal) {
+            paySymbolStr = _inputCredentailM.payTokenSymbol;
+            localShowStr = _inputCredentailM.localFiatMoney;
+            localSymbolStr = _inputCredentailM.localFiat;
+        } else if (_inputPayType == TopupPayTypeGroupBuy) {
+            paySymbolStr = _inputCredentailM.payToken;
+            localShowStr = _inputCredentailM.product.localFiatMoney;
+            localSymbolStr = _inputCredentailM.product.localFiat;
+        }
     }
     topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitStr,paySymbolStr,addStr,qgasStr,symbolStr];
     projectStr = [NSString stringWithFormat:kLang(@"top_up__phone_bill__"),localShowStr?:@"" ,localSymbolStr?:@"",_inputCredentailM.phoneNumber?:@""];
@@ -95,7 +111,12 @@
         numStr = [_inputCredentailM.number substringFromIndex:8];
     }
     _numLab.text = numStr;
-    _txidLab.text = _inputCredentailM.txid;
+    
+    if (_inputPayType == TopupPayTypeNormal) {
+        _txidLab.text = _inputCredentailM.txid;
+    } else if (_inputPayType == TopupPayTypeGroupBuy) {
+        _txidLab.text = _inputCredentailM.deductionTokenInTxid;
+    }
 }
 
 #pragma mark - Action
@@ -105,7 +126,14 @@
 }
 
 - (IBAction)txidAction:(id)sender {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,_inputCredentailM.txid?:@""]];
+    NSString *str = @"";
+    if (_inputPayType == TopupPayTypeNormal) {
+        str = [NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,_inputCredentailM.txid?:@""];
+    } else if (_inputPayType == TopupPayTypeGroupBuy) {
+        str = [NSString stringWithFormat:@"%@%@",QLC_Transaction_Url,_inputCredentailM.deductionTokenInTxid?:@""];
+    }
+    NSURL *url = [NSURL URLWithString:str];
+    
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }

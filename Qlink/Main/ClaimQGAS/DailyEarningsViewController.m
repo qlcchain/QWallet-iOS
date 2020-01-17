@@ -65,7 +65,7 @@ static NSInteger const DailyEarnings_PageFirst = 1;
 
 #pragma mark - Operation
 - (void)configInit {
-    [self.view addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     _claimBtn.layer.cornerRadius = 4.0f;
     _claimBtn.layer.masksToBounds = YES;

@@ -117,16 +117,16 @@
     NSString *name = @"";
     NSString *claimStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        country = model.productCountryEn;
-        province = model.productProvinceEn;
-        isp = model.productIspEn;
-        name = model.productNameEn;
+        country = model.product.countryEn;
+        province = model.product.provinceEn;
+        isp = model.product.ispEn;
+        name = model.product.productNameEn;
         claimStr = @"icon_background_reim_en";
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-        country = model.productCountry;
-        province = model.productProvince;
-        isp = model.productIsp;
-        name = model.productName;
+        country = model.product.country;
+        province = model.product.province;
+        isp = model.product.isp;
+        name = model.product.productName;
         claimStr = @"icon_background_reim";
     }
     _titleLab.text = [NSString stringWithFormat:@"%@%@%@-%@",country?:@"",province?:@"",isp?:@"",name?:@""];
@@ -160,16 +160,16 @@
     _blockchainHeight.constant = [MyGroupBuyOrderCell blockchainInvoiceExist:model.deductionTokenInTxid]?48:0;
     
     _cancelBtn.hidden = YES;
-    if ([model.status isEqualToString:Topup_Order_Status_New]) {
-        _cancelBtn.hidden = NO;
-    } else if ([model.status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
-        if (!model.payTokenInTxid || [model.payTokenInTxid isEmptyString]) {
-            _cancelBtn.hidden = NO;
-        }
-    } else if ([model.status isEqualToString:Topup_Order_Status_Pay_TOKEN_PAID]) {
+//    if ([model.status isEqualToString:Topup_Order_Status_New]) {
 //        _cancelBtn.hidden = NO;
-        _cancelBtn.hidden = YES;
-    }
+//    } else if ([model.status isEqualToString:Topup_Order_Status_DEDUCTION_TOKEN_PAID]) {
+//        if (!model.payTokenInTxid || [model.payTokenInTxid isEmptyString]) {
+//            _cancelBtn.hidden = NO;
+//        }
+//    } else if ([model.status isEqualToString:Topup_Order_Status_Pay_TOKEN_PAID]) {
+////        _cancelBtn.hidden = NO;
+//        _cancelBtn.hidden = YES;
+//    }
 }
 
 - (void)handlerPayCNY:(TopupOrderModel *)model {
@@ -197,7 +197,7 @@
 //    }
     _topupAmountLab.text = topupAmountStr;
     _payAmountLab.text = payAmountStr;
-    NSString *qgasNum = model.deductionTokenAmount;
+    NSString *qgasNum = model.deductionTokenAmount_str;
 //    _discountAmountLab.text = discountAmountStr;
     _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.deductionToken?:@""];
     
@@ -208,10 +208,10 @@
     NSString *topupAmountStr = @"";
     NSString *payAmountStr = @"";
 //    NSString *discountAmountStr = @"";
-    topupAmountStr = [NSString stringWithFormat:@"%@%@",model.localFiatMoney?:@"",model.localFiat?:@""];
-    payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount,model.payToken];
+    topupAmountStr = [NSString stringWithFormat:@"%@%@",model.product.localFiatMoney?:@"",model.product.localFiat?:@""];
+    payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount_str,model.payToken];
 //    discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.symbol];
-    NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.deductionTokenAmount,model.deductionToken?:@""];
+    NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.deductionTokenAmount_str,model.deductionToken?:@""];
     
     _topupAmountLab.text = topupAmountStr;
     _payAmountLab.text = payAmountStr;

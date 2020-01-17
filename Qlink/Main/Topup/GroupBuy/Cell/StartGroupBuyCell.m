@@ -55,11 +55,11 @@
     
     NSString *discountShowStr = @"";
     if ([language isEqualToString:LanguageCode[0]]) { // 英文
-        discountShowStr = [NSString stringWithFormat:@"%@ off, %@ discount partners",discountNumStr,model.numberOfPeople];
+        discountShowStr = [NSString stringWithFormat:@"%@%% off, %@ discount partners",discountNumStr,model.numberOfPeople];
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         discountShowStr = [NSString stringWithFormat:@"满%@人%@折团",model.numberOfPeople,discountNumStr];
     } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
-        discountShowStr = [NSString stringWithFormat:@"%@ off, %@ discount partners",discountNumStr,model.numberOfPeople];
+        discountShowStr = [NSString stringWithFormat:@"%@%% off, %@ discount partners",discountNumStr,model.numberOfPeople];
     }
     NSString *discountShowBtnStr = [NSString stringWithFormat:@"   %@   ",discountShowStr];
     [_typeBtn setTitle:discountShowBtnStr forState:UIControlStateNormal];

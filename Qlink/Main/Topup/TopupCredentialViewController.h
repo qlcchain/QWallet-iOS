@@ -7,6 +7,7 @@
 //
 
 #import "QBaseViewController.h"
+#import "ProjectEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TopupCredentialViewController : QBaseViewController
 
 @property (nonatomic, strong) TopupOrderModel *inputCredentailM;
+@property (nonatomic) TopupPayType inputPayType;
 
 @end
 

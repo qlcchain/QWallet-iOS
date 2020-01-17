@@ -54,4 +54,11 @@
 //    return stringValue;
 //}
 
+
+
++ (NSString *)doubleToString:(double)doubleV {
+    NSString *str = [[[NSDecimalNumber alloc] initWithDouble:doubleV] stringValue];
+    return str;
+}
+
 @end

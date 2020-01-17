@@ -489,6 +489,10 @@
 		584BFB1F236AEF2700D7CCD1 /* QLCFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */; };
 		584BFB23236AEF3D00D7CCD1 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB22236AEF3C00D7CCD1 /* neoutils.framework */; };
 		584BFB27236B0E3C00D7CCD1 /* ETHFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB26236B0E3C00D7CCD1 /* ETHFramework.framework */; };
+		584F4EDD23D07536004F579B /* GroupBuyGoStakeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584F4EDB23D07536004F579B /* GroupBuyGoStakeView.m */; };
+		584F4EDE23D0758A004F579B /* GroupBuyGoStakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584F4EE023D0758A004F579B /* GroupBuyGoStakeView.xib */; };
+		584F4EEA23D17EBD004F579B /* AgentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 584F4EE823D17EBD004F579B /* AgentDetailsViewController.m */; };
+		584F4EEB23D17EBD004F579B /* AgentDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584F4EE923D17EBD004F579B /* AgentDetailsViewController.xib */; };
 		58517B5023682B2B008396EE /* NEOJSUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58517B4F23682B2B008396EE /* NEOJSUtil.m */; };
 		5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */; };
 		585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C9A1C2181A16B00DD12DB /* WalletsViewController.m */; };
@@ -550,13 +554,10 @@
 		5871924723CEFA3B00728E15 /* StartGroupBuyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5871924923CEFA3B00728E15 /* StartGroupBuyView.xib */; };
 		5871925623CEFAAB00728E15 /* JoinGroupBuyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5871925823CEFAAB00728E15 /* JoinGroupBuyView.xib */; };
 		5871928223CF066100728E15 /* MyGroupBuyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5871927F23CF066100728E15 /* MyGroupBuyOrderViewController.m */; };
-		5871928323CF066100728E15 /* MyGroupBuyOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5871928123CF066100728E15 /* MyGroupBuyOrderViewController.xib */; };
 		5871928A23CF0EB300728E15 /* MyGroupBuyOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5871928823CF0EB200728E15 /* MyGroupBuyOrderCell.m */; };
 		5871928B23CF0EB300728E15 /* MyGroupBuyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5871928923CF0EB300728E15 /* MyGroupBuyOrderCell.xib */; };
 		5872056723C71653009A6217 /* AgentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872056523C71653009A6217 /* AgentRewardViewController.m */; };
-		5872056823C71653009A6217 /* AgentRewardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5872056623C71653009A6217 /* AgentRewardViewController.xib */; };
 		5872056C23C71799009A6217 /* OpenAgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872056A23C71799009A6217 /* OpenAgentViewController.m */; };
-		5872056D23C71799009A6217 /* OpenAgentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5872056B23C71799009A6217 /* OpenAgentViewController.xib */; };
 		5872133C2361748600E50744 /* NSNumber+RLArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 587213372361748600E50744 /* NSNumber+RLArithmetic.m */; };
 		5872133D2361748600E50744 /* NSString+RLArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872133B2361748600E50744 /* NSString+RLArithmetic.m */; };
 		587213422361A87B00E50744 /* TopupDeductionTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587213412361A87B00E50744 /* TopupDeductionTokenModel.m */; };
@@ -681,9 +682,7 @@
 		58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B6E219457EC0036FF4F /* TokenPriceModel.m */; };
 		58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */ = {isa = PBXBuildFile; fileRef = 58990B7121951EA00036FF4F /* NSString+RemoveZero.m */; };
 		589AE1BB2338656400C0A666 /* TrezorCrytoEd25519.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */; };
-		589AE86223CC4C4200476D53 /* OpenDelegateSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE85F23CC4C4100476D53 /* OpenDelegateSuccessView.xib */; };
 		589AE86323CC4C4200476D53 /* OpenDelegateSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE86123CC4C4100476D53 /* OpenDelegateSuccessView.m */; };
-		589AE86723CC4E2000476D53 /* OpenDelegateCheckView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589AE86523CC4E2000476D53 /* OpenDelegateCheckView.xib */; };
 		589AE86823CC4E2000476D53 /* OpenDelegateCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE86623CC4E2000476D53 /* OpenDelegateCheckView.m */; };
 		589AE86D23CC532900476D53 /* GroupBuyDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */; };
 		589AE87823CC65A600476D53 /* OngoingGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589AE87623CC65A600476D53 /* OngoingGroupCell.m */; };
@@ -848,6 +847,12 @@
 		58F3186022D346180024B4F0 /* BuySellDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F3185E22D346180024B4F0 /* BuySellDetailViewController.m */; };
 		58F3186522D3464F0024B4F0 /* RecordListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F3186322D3464F0024B4F0 /* RecordListViewController.m */; };
 		58F3186A22D346600024B4F0 /* TradeOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F3186822D346600024B4F0 /* TradeOrderDetailViewController.m */; };
+		58FB349B23CFF5400045CAB4 /* OpenDelegateCheckView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB349D23CFF5400045CAB4 /* OpenDelegateCheckView.xib */; };
+		58FB34A423CFF5960045CAB4 /* OpenDelegateSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB34A623CFF5960045CAB4 /* OpenDelegateSuccessView.xib */; };
+		58FB34AD23CFF6250045CAB4 /* MyGroupBuyOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB34AF23CFF6250045CAB4 /* MyGroupBuyOrderViewController.xib */; };
+		58FB34B623CFFAD10045CAB4 /* OpenAgentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB34B823CFFAD10045CAB4 /* OpenAgentViewController.xib */; };
+		58FB34BF23D004700045CAB4 /* AgentRewardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB34C123D004700045CAB4 /* AgentRewardViewController.xib */; };
+		58FB34CA23D055570045CAB4 /* InviteeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB34C923D055570045CAB4 /* InviteeListModel.m */; };
 		58FB8D55226434AF0075698E /* EarningsRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB8D53226434AF0075698E /* EarningsRankingViewController.m */; };
 		58FB8D56226434AF0075698E /* EarningsRankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FB8D54226434AF0075698E /* EarningsRankingViewController.xib */; };
 		58FB8D5A226434C80075698E /* InviteRankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FB8D58226434C80075698E /* InviteRankingViewController.m */; };
@@ -1993,6 +1998,15 @@
 		584CE2E822F7BB53003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ChatHeadView.strings"; sourceTree = "<group>"; };
 		584CE2E922F7BB54003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ChatTipView.strings"; sourceTree = "<group>"; };
 		584CE2EA22F7BB54003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NotifactionView.strings"; sourceTree = "<group>"; };
+		584F4EDA23D07535004F579B /* GroupBuyGoStakeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupBuyGoStakeView.h; sourceTree = "<group>"; };
+		584F4EDB23D07536004F579B /* GroupBuyGoStakeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupBuyGoStakeView.m; sourceTree = "<group>"; };
+		584F4EDF23D0758A004F579B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GroupBuyGoStakeView.xib; sourceTree = "<group>"; };
+		584F4EE223D0758E004F579B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GroupBuyGoStakeView.strings; sourceTree = "<group>"; };
+		584F4EE423D07591004F579B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GroupBuyGoStakeView.strings"; sourceTree = "<group>"; };
+		584F4EE623D07593004F579B /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/GroupBuyGoStakeView.strings; sourceTree = "<group>"; };
+		584F4EE723D17EBD004F579B /* AgentDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentDetailsViewController.h; sourceTree = "<group>"; };
+		584F4EE823D17EBD004F579B /* AgentDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentDetailsViewController.m; sourceTree = "<group>"; };
+		584F4EE923D17EBD004F579B /* AgentDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentDetailsViewController.xib; sourceTree = "<group>"; };
 		58517B4E23682B2B008396EE /* NEOJSUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEOJSUtil.h; sourceTree = "<group>"; };
 		58517B4F23682B2B008396EE /* NEOJSUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NEOJSUtil.m; sourceTree = "<group>"; };
 		5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteFriendNowViewController.h; sourceTree = "<group>"; };
@@ -2120,16 +2134,13 @@
 		5871925E23CEFAB900728E15 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/JoinGroupBuyView.strings; sourceTree = "<group>"; };
 		5871927F23CF066100728E15 /* MyGroupBuyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGroupBuyOrderViewController.m; sourceTree = "<group>"; };
 		5871928023CF066100728E15 /* MyGroupBuyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGroupBuyOrderViewController.h; sourceTree = "<group>"; };
-		5871928123CF066100728E15 /* MyGroupBuyOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyGroupBuyOrderViewController.xib; sourceTree = "<group>"; };
 		5871928723CF0EB200728E15 /* MyGroupBuyOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGroupBuyOrderCell.h; sourceTree = "<group>"; };
 		5871928823CF0EB200728E15 /* MyGroupBuyOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGroupBuyOrderCell.m; sourceTree = "<group>"; };
 		5871928923CF0EB300728E15 /* MyGroupBuyOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyGroupBuyOrderCell.xib; sourceTree = "<group>"; };
 		5872056423C71653009A6217 /* AgentRewardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentRewardViewController.h; sourceTree = "<group>"; };
 		5872056523C71653009A6217 /* AgentRewardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentRewardViewController.m; sourceTree = "<group>"; };
-		5872056623C71653009A6217 /* AgentRewardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentRewardViewController.xib; sourceTree = "<group>"; };
 		5872056923C71799009A6217 /* OpenAgentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenAgentViewController.h; sourceTree = "<group>"; };
 		5872056A23C71799009A6217 /* OpenAgentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenAgentViewController.m; sourceTree = "<group>"; };
-		5872056B23C71799009A6217 /* OpenAgentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenAgentViewController.xib; sourceTree = "<group>"; };
 		587213372361748600E50744 /* NSNumber+RLArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+RLArithmetic.m"; sourceTree = "<group>"; };
 		587213382361748600E50744 /* NSString+RLArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RLArithmetic.h"; sourceTree = "<group>"; };
 		587213392361748600E50744 /* NSNumber+RLArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+RLArithmetic.h"; sourceTree = "<group>"; };
@@ -2377,11 +2388,9 @@
 		58990B7021951EA00036FF4F /* NSString+RemoveZero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RemoveZero.h"; sourceTree = "<group>"; };
 		58990B7121951EA00036FF4F /* NSString+RemoveZero.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RemoveZero.m"; sourceTree = "<group>"; };
 		589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TrezorCrytoEd25519.framework; sourceTree = "<group>"; };
-		589AE85F23CC4C4100476D53 /* OpenDelegateSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenDelegateSuccessView.xib; sourceTree = "<group>"; };
 		589AE86023CC4C4100476D53 /* OpenDelegateSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenDelegateSuccessView.h; sourceTree = "<group>"; };
 		589AE86123CC4C4100476D53 /* OpenDelegateSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenDelegateSuccessView.m; sourceTree = "<group>"; };
 		589AE86423CC4E1F00476D53 /* OpenDelegateCheckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenDelegateCheckView.h; sourceTree = "<group>"; };
-		589AE86523CC4E2000476D53 /* OpenDelegateCheckView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenDelegateCheckView.xib; sourceTree = "<group>"; };
 		589AE86623CC4E2000476D53 /* OpenDelegateCheckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenDelegateCheckView.m; sourceTree = "<group>"; };
 		589AE86A23CC532900476D53 /* GroupBuyDetialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupBuyDetialViewController.h; sourceTree = "<group>"; };
 		589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupBuyDetialViewController.m; sourceTree = "<group>"; };
@@ -2890,6 +2899,28 @@
 		58F3186322D3464F0024B4F0 /* RecordListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordListViewController.m; sourceTree = "<group>"; };
 		58F3186722D346600024B4F0 /* TradeOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeOrderDetailViewController.h; sourceTree = "<group>"; };
 		58F3186822D346600024B4F0 /* TradeOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeOrderDetailViewController.m; sourceTree = "<group>"; };
+		58FB349C23CFF5400045CAB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenDelegateCheckView.xib; sourceTree = "<group>"; };
+		58FB349F23CFF5480045CAB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpenDelegateCheckView.strings; sourceTree = "<group>"; };
+		58FB34A123CFF54A0045CAB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenDelegateCheckView.strings"; sourceTree = "<group>"; };
+		58FB34A323CFF54D0045CAB4 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OpenDelegateCheckView.strings; sourceTree = "<group>"; };
+		58FB34A523CFF5960045CAB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenDelegateSuccessView.xib; sourceTree = "<group>"; };
+		58FB34A823CFF59B0045CAB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpenDelegateSuccessView.strings; sourceTree = "<group>"; };
+		58FB34AA23CFF59E0045CAB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenDelegateSuccessView.strings"; sourceTree = "<group>"; };
+		58FB34AC23CFF5A10045CAB4 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OpenDelegateSuccessView.strings; sourceTree = "<group>"; };
+		58FB34AE23CFF6250045CAB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MyGroupBuyOrderViewController.xib; sourceTree = "<group>"; };
+		58FB34B123CFF6290045CAB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MyGroupBuyOrderViewController.strings; sourceTree = "<group>"; };
+		58FB34B323CFF62C0045CAB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MyGroupBuyOrderViewController.strings"; sourceTree = "<group>"; };
+		58FB34B523CFF62F0045CAB4 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MyGroupBuyOrderViewController.strings; sourceTree = "<group>"; };
+		58FB34B723CFFAD10045CAB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenAgentViewController.xib; sourceTree = "<group>"; };
+		58FB34BA23CFFAD40045CAB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpenAgentViewController.strings; sourceTree = "<group>"; };
+		58FB34BC23CFFAD60045CAB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenAgentViewController.strings"; sourceTree = "<group>"; };
+		58FB34BE23CFFAD80045CAB4 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OpenAgentViewController.strings; sourceTree = "<group>"; };
+		58FB34C023D004700045CAB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AgentRewardViewController.xib; sourceTree = "<group>"; };
+		58FB34C323D004750045CAB4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AgentRewardViewController.strings; sourceTree = "<group>"; };
+		58FB34C523D004770045CAB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AgentRewardViewController.strings"; sourceTree = "<group>"; };
+		58FB34C723D004790045CAB4 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/AgentRewardViewController.strings; sourceTree = "<group>"; };
+		58FB34C823D055570045CAB4 /* InviteeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteeListModel.h; sourceTree = "<group>"; };
+		58FB34C923D055570045CAB4 /* InviteeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteeListModel.m; sourceTree = "<group>"; };
 		58FB8D52226434AF0075698E /* EarningsRankingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EarningsRankingViewController.h; sourceTree = "<group>"; };
 		58FB8D53226434AF0075698E /* EarningsRankingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EarningsRankingViewController.m; sourceTree = "<group>"; };
 		58FB8D54226434AF0075698E /* EarningsRankingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarningsRankingViewController.xib; sourceTree = "<group>"; };
@@ -5003,13 +5034,16 @@
 				583E6C1D22FAA352004F1134 /* InviteFriendNowViewController.xib */,
 				5872056423C71653009A6217 /* AgentRewardViewController.h */,
 				5872056523C71653009A6217 /* AgentRewardViewController.m */,
-				5872056623C71653009A6217 /* AgentRewardViewController.xib */,
+				58FB34C123D004700045CAB4 /* AgentRewardViewController.xib */,
 				5872056923C71799009A6217 /* OpenAgentViewController.h */,
 				5872056A23C71799009A6217 /* OpenAgentViewController.m */,
-				5872056B23C71799009A6217 /* OpenAgentViewController.xib */,
+				58FB34B823CFFAD10045CAB4 /* OpenAgentViewController.xib */,
 				5871921A23CD8CBC00728E15 /* ShareFriendsSubViewController.h */,
 				5871921B23CD8CBC00728E15 /* ShareFriendsSubViewController.m */,
 				5871921C23CD8CBC00728E15 /* ShareFriendsSubViewController.xib */,
+				584F4EE723D17EBD004F579B /* AgentDetailsViewController.h */,
+				584F4EE823D17EBD004F579B /* AgentDetailsViewController.m */,
+				584F4EE923D17EBD004F579B /* AgentDetailsViewController.xib */,
 			);
 			path = Invite;
 			sourceTree = "<group>";
@@ -5728,6 +5762,8 @@
 				58FB8D7722657FC10075698E /* ShareFriendsModel.m */,
 				58A801C42268692B00640BBC /* FinanceHistoryModel.h */,
 				58A801C52268692B00640BBC /* FinanceHistoryModel.m */,
+				58FB34C823D055570045CAB4 /* InviteeListModel.h */,
+				58FB34C923D055570045CAB4 /* InviteeListModel.m */,
 			);
 			path = FinanceModel;
 			sourceTree = "<group>";
@@ -5802,10 +5838,10 @@
 			children = (
 				589AE86423CC4E1F00476D53 /* OpenDelegateCheckView.h */,
 				589AE86623CC4E2000476D53 /* OpenDelegateCheckView.m */,
-				589AE86523CC4E2000476D53 /* OpenDelegateCheckView.xib */,
+				58FB349D23CFF5400045CAB4 /* OpenDelegateCheckView.xib */,
 				589AE86023CC4C4100476D53 /* OpenDelegateSuccessView.h */,
 				589AE86123CC4C4100476D53 /* OpenDelegateSuccessView.m */,
-				589AE85F23CC4C4100476D53 /* OpenDelegateSuccessView.xib */,
+				58FB34A623CFF5960045CAB4 /* OpenDelegateSuccessView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5817,7 +5853,7 @@
 				589AE87423CC658100476D53 /* Cell */,
 				5871928023CF066100728E15 /* MyGroupBuyOrderViewController.h */,
 				5871927F23CF066100728E15 /* MyGroupBuyOrderViewController.m */,
-				5871928123CF066100728E15 /* MyGroupBuyOrderViewController.xib */,
+				58FB34AF23CFF6250045CAB4 /* MyGroupBuyOrderViewController.xib */,
 				589AE86A23CC532900476D53 /* GroupBuyDetialViewController.h */,
 				589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */,
 				5871923723CEF75400728E15 /* GroupBuyDetialViewController.xib */,
@@ -5844,6 +5880,9 @@
 		589AE87A23CC6AC100476D53 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				584F4EDA23D07535004F579B /* GroupBuyGoStakeView.h */,
+				584F4EDB23D07536004F579B /* GroupBuyGoStakeView.m */,
+				584F4EE023D0758A004F579B /* GroupBuyGoStakeView.xib */,
 				588EA75323CD67A400889F7D /* StartGroupBuyView.h */,
 				588EA75123CD67A300889F7D /* StartGroupBuyView.m */,
 				5871924923CEFA3B00728E15 /* StartGroupBuyView.xib */,
@@ -6667,6 +6706,7 @@
 				581F829B22F7C27D00F8291E /* ETHWalletDetailViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
 				581F816E22F7C01000F8291E /* QLCTransferConfirmView.xib in Resources */,
+				584F4EEB23D17EBD004F579B /* AgentDetailsViewController.xib in Resources */,
 				5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */,
 				581F80DB22F7BE7D00F8291E /* EntrustOrderDetailViewController.xib in Resources */,
 				583D959B211432110057A90C /* RankingCell.xib in Resources */,
@@ -6690,9 +6730,9 @@
 				581F81FA22F7C12B00F8291E /* EOSImportViewController.xib in Resources */,
 				581F80F722F7BEBF00F8291E /* BuySellDetailViewController.xib in Resources */,
 				580D91BE2063AE5300B12506 /* Roboto-BlackItalic.ttf in Resources */,
-				5871928323CF066100728E15 /* MyGroupBuyOrderViewController.xib in Resources */,
+				58FB34AD23CFF6250045CAB4 /* MyGroupBuyOrderViewController.xib in Resources */,
 				581F81DE22F7C0EE00F8291E /* QLCWalletDetailViewController.xib in Resources */,
-				5872056D23C71799009A6217 /* OpenAgentViewController.xib in Resources */,
+				58FB34B623CFFAD10045CAB4 /* OpenAgentViewController.xib in Resources */,
 				9391A6A4212BB8F3001A1707 /* MyriadPro-Regular.otf in Resources */,
 				581F820822F7C16400F8291E /* EOSTransferViewController.xib in Resources */,
 				581F82A922F7C29D00F8291E /* ETHWalletAddressViewController.xib in Resources */,
@@ -6719,7 +6759,7 @@
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
 				5860AD4520CFB56700EEB6CE /* BuyQlcView.xib in Resources */,
 				581D5121217981F40064F60C /* MarketsViewController.xib in Resources */,
-				589AE86223CC4C4200476D53 /* OpenDelegateSuccessView.xib in Resources */,
+				58FB34A423CFF5960045CAB4 /* OpenDelegateSuccessView.xib in Resources */,
 				58FB8D912265B6C10075698E /* FinanceHistoryCell.xib in Resources */,
 				581F820122F7C15800F8291E /* EOSTransactionRecordViewController.xib in Resources */,
 				5885D427231F493800F9DEDE /* MyStakingsCell.xib in Resources */,
@@ -6760,6 +6800,7 @@
 				581F814B22F7BF7800F8291E /* WalletHomeSwitchCell.xib in Resources */,
 				58A3EB76237D869000AEF7C8 /* ClaimQLCViewController.xib in Resources */,
 				58A8B20A233C8805007E2CE3 /* MyTopupOrderViewController.xib in Resources */,
+				584F4EDE23D0758A004F579B /* GroupBuyGoStakeView.xib in Resources */,
 				581F81D022F7C0D500F8291E /* QLCTransferViewController.xib in Resources */,
 				581F819F22F7C07300F8291E /* NEOTransferConfirmView.xib in Resources */,
 				5871923523CEF75400728E15 /* GroupBuyDetialViewController.xib in Resources */,
@@ -6794,10 +6835,10 @@
 				581F81F322F7C11E00F8291E /* EOSCreateWalletViewController.xib in Resources */,
 				581F828622F7C24900F8291E /* ETHMnemonicViewController.xib in Resources */,
 				581F82DA22F7C30600F8291E /* QToastView.xib in Resources */,
-				5872056823C71653009A6217 /* AgentRewardViewController.xib in Resources */,
+				58FB34BF23D004700045CAB4 /* AgentRewardViewController.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
-				589AE86723CC4E2000476D53 /* OpenDelegateCheckView.xib in Resources */,
+				58FB349B23CFF5400045CAB4 /* OpenDelegateCheckView.xib in Resources */,
 				58A8B211233C8812007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */,
 				581925852114363E009AE406 /* NewRankView.xib in Resources */,
 				581F828D22F7C25500F8291E /* ETHMnemonicConfirmViewController.xib in Resources */,
@@ -7267,6 +7308,7 @@
 				581D32D2219C158B001F88C3 /* Block.swift in Sources */,
 				5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */,
 				5875B2092387B34F00FCA894 /* RedPointModel.m in Sources */,
+				584F4EEA23D17EBD004F579B /* AgentDetailsViewController.m in Sources */,
 				5874E33E234DB2ED000835A0 /* ClaimQGASTipView.m in Sources */,
 				58A801CA226DC7A200640BBC /* RegisterMailViewController.m in Sources */,
 				58EBED00234F1F51007EEF1F /* RewardListModel.m in Sources */,
@@ -7515,6 +7557,7 @@
 				5825554422EACF9200F0B9F0 /* UIImage+PECrop.m in Sources */,
 				58EE817D23054D4B00299261 /* StakingTypesViewController.m in Sources */,
 				58EBECFC234ED963007EEF1F /* ClaimConstants.m in Sources */,
+				58FB34CA23D055570045CAB4 /* InviteeListModel.m in Sources */,
 				5827BC26219EBDBD00B7730E /* ETHExportMnemonicViewController.m in Sources */,
 				58DF7F702189860F00228718 /* ResetPWSuccessView.m in Sources */,
 				5827BC2F21A28B2400B7730E /* HistoryChartView.m in Sources */,
@@ -7563,6 +7606,7 @@
 				58231D3F237BF1B2009CDE90 /* SheetMiningViewController.m in Sources */,
 				580D915420625A4400B12506 /* UIView+Frame.m in Sources */,
 				5825553522EACF9100F0B9F0 /* ImageTextView.m in Sources */,
+				584F4EDD23D07536004F579B /* GroupBuyGoStakeView.m in Sources */,
 				581D32E3219C158B001F88C3 /* Base58.swift in Sources */,
 				5825556022EAD58A00F0B9F0 /* UINavigationController+CurrentNav.m in Sources */,
 				588EA75423CD67A400889F7D /* StartGroupBuyView.m in Sources */,
@@ -8965,6 +9009,17 @@
 			name = InviteFriendNowViewController.xib;
 			sourceTree = "<group>";
 		};
+		584F4EE023D0758A004F579B /* GroupBuyGoStakeView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				584F4EDF23D0758A004F579B /* Base */,
+				584F4EE223D0758E004F579B /* en */,
+				584F4EE423D07591004F579B /* zh-Hans */,
+				584F4EE623D07593004F579B /* id */,
+			);
+			name = GroupBuyGoStakeView.xib;
+			sourceTree = "<group>";
+		};
 		5860AC7520CFB33200EEB6CE /* ProfileViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9592,6 +9647,61 @@
 			name = ClaimQGASViewController.xib;
 			sourceTree = "<group>";
 		};
+		58FB349D23CFF5400045CAB4 /* OpenDelegateCheckView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58FB349C23CFF5400045CAB4 /* Base */,
+				58FB349F23CFF5480045CAB4 /* en */,
+				58FB34A123CFF54A0045CAB4 /* zh-Hans */,
+				58FB34A323CFF54D0045CAB4 /* id */,
+			);
+			name = OpenDelegateCheckView.xib;
+			sourceTree = "<group>";
+		};
+		58FB34A623CFF5960045CAB4 /* OpenDelegateSuccessView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58FB34A523CFF5960045CAB4 /* Base */,
+				58FB34A823CFF59B0045CAB4 /* en */,
+				58FB34AA23CFF59E0045CAB4 /* zh-Hans */,
+				58FB34AC23CFF5A10045CAB4 /* id */,
+			);
+			name = OpenDelegateSuccessView.xib;
+			sourceTree = "<group>";
+		};
+		58FB34AF23CFF6250045CAB4 /* MyGroupBuyOrderViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58FB34AE23CFF6250045CAB4 /* Base */,
+				58FB34B123CFF6290045CAB4 /* en */,
+				58FB34B323CFF62C0045CAB4 /* zh-Hans */,
+				58FB34B523CFF62F0045CAB4 /* id */,
+			);
+			name = MyGroupBuyOrderViewController.xib;
+			sourceTree = "<group>";
+		};
+		58FB34B823CFFAD10045CAB4 /* OpenAgentViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58FB34B723CFFAD10045CAB4 /* Base */,
+				58FB34BA23CFFAD40045CAB4 /* en */,
+				58FB34BC23CFFAD60045CAB4 /* zh-Hans */,
+				58FB34BE23CFFAD80045CAB4 /* id */,
+			);
+			name = OpenAgentViewController.xib;
+			sourceTree = "<group>";
+		};
+		58FB34C123D004700045CAB4 /* AgentRewardViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58FB34C023D004700045CAB4 /* Base */,
+				58FB34C323D004750045CAB4 /* en */,
+				58FB34C523D004770045CAB4 /* zh-Hans */,
+				58FB34C723D004790045CAB4 /* id */,
+			);
+			name = AgentRewardViewController.xib;
+			sourceTree = "<group>";
+		};
 		58FC12C5230D391F0069474C /* OTCPayNEOViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9785,7 +9895,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6698;
+				CURRENT_PROJECT_VERSION = 7047;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9830,7 +9940,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6698;
+				CURRENT_PROJECT_VERSION = 7047;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;

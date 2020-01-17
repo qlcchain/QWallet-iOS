@@ -278,6 +278,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 - (void)jumpToCredentialDetail:(TopupOrderModel *)model {
     TopupCredentialViewController *vc = [TopupCredentialViewController new];
     vc.inputCredentailM = model;
+    vc.inputPayType = TopupPayTypeNormal;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -298,9 +299,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
     vc.sendDeductionToAddress = qlcAddress;
     vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
-    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = orderM.symbol?:@"QGAS";
 //    vc.inputProductM = productM;
@@ -329,9 +330,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
     vc.sendDeductionToAddress = ethAddress;
     vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
-    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = orderM.symbol;
 //    vc.inputProductM = productM;
@@ -345,9 +346,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 
 - (void)jumpToTopupPayNEO_Pay:(TopupOrderModel *)orderM {
     TopupPayNEO_PayViewController *vc = [TopupPayNEO_PayViewController new];
-    vc.sendAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputOrderId = orderM.ID;
     vc.inputPayType = TopupPayTypeNormal;

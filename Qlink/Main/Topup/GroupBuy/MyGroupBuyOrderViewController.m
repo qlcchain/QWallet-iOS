@@ -21,6 +21,7 @@
 #import "ETHWalletManage.h"
 #import <QLCFramework/QLCFramework.h>
 #import "TopupPayNEO_PayViewController.h"
+#import "NSString+RemoveZero.h"
 
 static NSString *const MyTopupOrderNetworkSize = @"20";
 
@@ -260,6 +261,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 - (void)jumpToCredentialDetail:(TopupOrderModel *)model {
     TopupCredentialViewController *vc = [TopupCredentialViewController new];
     vc.inputCredentailM = model;
+    vc.inputPayType = TopupPayTypeGroupBuy;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -277,12 +279,12 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     }
     
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.deductionTokenAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.deductionTokenAmount_str];
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.deductionTokenAmount?:@""];
-    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.deductionTokenAmount_str?:@""];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payToken;
     vc.inputDeductionToken = orderM.deductionToken?:@"QGAS";
     vc.inputOrderM = orderM;
@@ -304,12 +306,12 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     }
     
     TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.deductionTokenAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.deductionTokenAmount_str];
     vc.sendDeductionToAddress = ethAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.deductionTokenAmount?:@""];
-    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.deductionTokenAmount_str?:@""];
+    vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payToken;
     vc.inputDeductionToken = orderM.deductionToken;
     vc.inputOrderM = orderM;
@@ -319,9 +321,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 
 - (void)jumpToTopupPayNEO_Pay:(TopupOrderModel *)orderM {
     TopupPayNEO_PayViewController *vc = [TopupPayNEO_PayViewController new];
-    vc.sendAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount];
+    vc.sendAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount?:@""];
+    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payToken;
     vc.inputOrderId = orderM.ID;
     vc.inputPayType = TopupPayTypeGroupBuy;

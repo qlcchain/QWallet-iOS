@@ -25,7 +25,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8q-3x-wGI">
                             <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-GJ-7qA">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-GJ-7qA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="deviceRGB"/>
                                     <connections>
@@ -45,8 +45,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5W-ee-JQh" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-pt-t6a">
-                                    <rect key="frame" x="164.66666666666666" y="11" width="84.666666666666657" height="22"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-pt-t6a">
+                                    <rect key="frame" x="152" y="11" width="110" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>

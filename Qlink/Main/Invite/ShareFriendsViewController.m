@@ -24,6 +24,7 @@
 #import <NinaPagerView/NinaPagerView.h>
 #import "ShareFriendsSubViewController.h"
 #import "AgentRewardViewController.h"
+#import "RLArithmetic.h"
 
 @interface ShareFriendsViewController () <NinaPagerViewDelegate>
 // <UITableViewDelegate, UITableViewDataSource>
@@ -55,6 +56,10 @@
 @property (nonatomic, strong) NSString *invite_user_amount;
 //@property (nonatomic, strong) NSString *invite_all_amount;
 @property (nonatomic, strong) NSString *no_award_amount;
+@property (nonatomic, strong) NSString *totalTopupReward_amount;
+
+@property (nonatomic, strong) NSString *canClaim_invite; // 推广可领取
+@property (nonatomic) BOOL isCanClaim_invite; // 推广是否可领取
 
 @property (nonatomic, strong) NinaPagerView *ninaPageView;
 
@@ -65,6 +70,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     [self configInit];
     [self requestWinq_invite_user_amount]; // 邀请多少个用户可以领取QGAS奖励
@@ -93,6 +100,8 @@
     _invite_user_amount = @"0";
 //    _invite_all_amount = @"0";
     _no_award_amount = @"0";
+    _totalTopupReward_amount = @"0";
+    _isCanClaim_invite = NO;
     
     _horizontalLineV.layer.cornerRadius = 3;
     _horizontalLineV.layer.masksToBounds = YES;
@@ -127,18 +136,19 @@
         ShareFriendsSubViewController *vc2 = [ShareFriendsSubViewController new];
         vc2.inputType = InviteAwardTypeDelegate;
         
-        NSArray *titleArr = @[@"邀请奖励榜",@"邀请成功好友",@"代理提成奖励"];
+        NSArray *titleArr = @[kLang(@"ranking"),kLang(@"friends_referred"),kLang(@"sales_partner_commission")];
         _ninaPageView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100) WithTitles:titleArr WithObjects:@[vc0, vc1, vc2]];
         _ninaPageView.unSelectTitleColor = UIColorFromRGB(0xBB7944);
         _ninaPageView.selectTitleColor = UIColorFromRGB(0xF3522E);
         _ninaPageView.titleFont = 12;
-        _ninaPageView.titleScale = 16.f / 14;
+        _ninaPageView.titleScale = 1;
         _ninaPageView.selectBottomLinePer = 0.8;
-        _ninaPageView.selectBottomLineHeight = 4;
+        _ninaPageView.selectBottomLineHeight = 2;
         _ninaPageView.underlineColor = UIColorFromRGB(0xF3522E);
         _ninaPageView.topTabHeight = 30;
         _ninaPageView.topTabBackGroundColor = UIColorFromRGB(0xF6EAD4);
         _ninaPageView.delegate = self;
+        _ninaPageView.underLineHidden = YES;
         [_tableBack addSubview:_ninaPageView];
         kWeakSelf(self);
         [_ninaPageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -153,10 +163,15 @@
 
 - (void)refreshClaimBtnStatus {
     BOOL btnEnable = NO;
-    if ([_invite_user_amount doubleValue] > 0) {
+    _isCanClaim_invite = NO;
+    if ([_invite_user_amount doubleValue] > 0) { // 推广可领取
         if ([_no_award_amount doubleValue] >= [_invite_user_amount doubleValue]) {
+            _isCanClaim_invite = YES;
             btnEnable = YES;
         }
+    }
+    if ([_totalTopupReward_amount doubleValue]>0) { // (拼团+充值)可领取
+        btnEnable = YES;
     }
     
     if (btnEnable) {
@@ -170,11 +185,14 @@
 
 - (void)getNoAward { // 未领取的
     kWeakSelf(self);
-    [self requestUser_invite_amount:Invite_Status_NO_AWARD completeBlock:^(NSString *amount) {
-        NSNumber *num = @([amount doubleValue]*[weakself.invite_reward_amount doubleValue]);
-        NSString *canClaimStr = [NSString stringWithFormat:@"%@",num];
-        weakself.canClaimAmountLab.text = canClaimStr;
+    _isCanClaim_invite = NO;
+    [self requestUser_invite_amount:Invite_Status_NO_AWARD completeBlock:^(NSString *amount, NSString *totalTopupReward_amount) {
+//        NSNumber *num = @([amount doubleValue]*[weakself.invite_reward_amount doubleValue]+[totalTopupReward_amount doubleValue]);
+        NSString *num = amount.mul(weakself.invite_reward_amount).add(totalTopupReward_amount);
+        weakself.canClaim_invite = [NSString stringWithFormat:@"%@",num];
+        weakself.canClaimAmountLab.text = weakself.canClaim_invite;
         
+        weakself.totalTopupReward_amount = totalTopupReward_amount?:@"0";
         weakself.no_award_amount = amount?:@"0";
         [weakself refreshClaimBtnStatus];
     }];
@@ -182,8 +200,9 @@
 
 - (void)getAward { // 已领取的
     kWeakSelf(self);
-    [self requestUser_invite_amount:Invite_Status_AWARDED completeBlock:^(NSString *amount) {
-        NSNumber *num = @([amount doubleValue]*[weakself.invite_reward_amount doubleValue]);
+    [self requestUser_invite_amount:Invite_Status_AWARDED completeBlock:^(NSString *amount, NSString *totalTopupReward_amount) {
+//        NSNumber *num = @([amount doubleValue]*[weakself.invite_reward_amount doubleValue]);
+        NSString *num = amount.mul(weakself.invite_reward_amount).add(totalTopupReward_amount);
         NSString *claimedStr = [NSString stringWithFormat:kLang(@"i_have_claimed__qgas"),num];
 //        NSString *language = [Language currentLanguageCode];
 //        if ([language isEqualToString:LanguageCode[0]]) { // 英文
@@ -197,7 +216,7 @@
 
 - (void)getAllInvite { // 所有邀请的人数
     kWeakSelf(self);
-    [self requestUser_invite_amount:nil completeBlock:^(NSString *amount) {
+    [self requestUser_invite_amount:nil completeBlock:^(NSString *amount, NSString *totalTopupReward_amount) {
         
         NSString *invitedStr = [NSString stringWithFormat:kLang(@"__friends_referred"),amount];
 //        NSString *language = [Language currentLanguageCode];
@@ -280,8 +299,10 @@
         
             weakself.invite_reward_amount = valueStr?:@"0";
             
-            NSString *getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*1)];
-            NSString *getQGASBy2Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*2)];
+//            NSString *getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*1)];
+//            NSString *getQGASBy2Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*2)];
+            NSString *getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),valueStr.mul(@"1")];
+            NSString *getQGASBy2Str = [NSString stringWithFormat:kLang(@"get__qgas"),valueStr.mul(@"2")];
 //            NSString *language = [Language currentLanguageCode];
 //            if ([language isEqualToString:LanguageCode[0]]) { // 英文
 //                getQGASBy1Str = [NSString stringWithFormat:kLang(@"get__qgas"),@([valueStr doubleValue]*1)];
@@ -310,7 +331,7 @@
     }];
 }
 
-- (void)requestUser_invite_amount:(nullable NSString *)status completeBlock:(void(^)(NSString *amount))completeBlock { // 邀请人数
+- (void)requestUser_invite_amount:(nullable NSString *)status completeBlock:(void(^)(NSString *amount, NSString *totalTopupReward_amount))completeBlock { // 邀请人数
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -329,8 +350,9 @@
     [RequestService requestWithUrl11:user_invite_amount_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             if (completeBlock) {
-                NSString *result = [NSString stringWithFormat:@"%@",responseObject[@"inviteTotal"]];
-                completeBlock(result);
+                NSString *amount = [NSString stringWithFormat:@"%@",responseObject[@"inviteTotal"]];
+                NSString *totalTopupReward_amount = [NSString stringWithFormat:@"%@",responseObject[@"totalTopupReward"]]?:@"0";
+                completeBlock(amount,totalTopupReward_amount);
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -416,7 +438,14 @@
 
 - (void)jumpToClaimQGAS {
     ClaimQGASViewController *vc = [ClaimQGASViewController new];
-    vc.inputCanClaimAmount = _canClaimAmountLab.text?:@"0";
+    NSString *canClaim = @"0";
+    if (_isCanClaim_invite) { // 推广领取
+        canClaim = canClaim.add(_canClaim_invite);
+    }
+    if ([_totalTopupReward_amount doubleValue]>0) { // (拼团+充值)领取
+        canClaim = canClaim.add(_totalTopupReward_amount);
+    }
+    vc.inputCanClaimAmount = canClaim;
     vc.claimQGASType = ClaimQGASTypeReferralRewards;
     [self.navigationController pushViewController:vc animated:YES];
 }

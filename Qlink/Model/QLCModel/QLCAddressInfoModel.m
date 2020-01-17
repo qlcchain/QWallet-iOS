@@ -18,10 +18,11 @@
 - (NSUInteger)getTransferNum:(NSString *)input {
     NSString *decimals = [NSString stringWithFormat:@"1e%@",self.tokenInfoM.decimals];
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
-    NSNumber *balanceNum = @([[NSString stringWithFormat:@"%@",input] doubleValue]);
+//    NSNumber *balanceNum = @([[NSString stringWithFormat:@"%@",input] doubleValue]);
 //    NSNumber *numberNum = @([decimalsNum doubleValue]*[balanceNum doubleValue]);
 //    NSString *num = [[NSString stringWithFormat:@"%@",numberNum] removeFloatAllZero];
-    NSString *num = decimalsNum.mul(balanceNum);
+    NSString *num = decimalsNum.mul(input);
+//    NSString *num = decimalsNum.mul(balanceNum);
     return [num longLongValue];
 }
 

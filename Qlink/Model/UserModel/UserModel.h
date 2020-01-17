@@ -34,6 +34,7 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 @property (nonatomic, copy) NSNumber *totalInvite;
 @property (nonatomic, copy) NSString *vStatus; // 验证状态[NOT_UPLOAD/未上传,UPLOADED/已上传,KYC_SUCCESS/KYC成功,KYC_FAIL/KYC失败]
 @property (nonatomic, copy) NSString *bindDate;
+@property (nonatomic, copy) NSString *qlcAddress; // 领取奖励 绑定的qlcAddress
 
 + (NSString *)getOwnP2PId;
 + (NSString *)getTopupP2PId;
@@ -52,5 +53,6 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 + (void)deleteOneAccount;
 + (BOOL)isBind; // 领取QGAS
 + (BOOL)isTestAccount;
++ (void)removeMul;
 
 @end

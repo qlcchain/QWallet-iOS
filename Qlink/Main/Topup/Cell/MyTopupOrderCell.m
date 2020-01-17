@@ -209,7 +209,7 @@
     NSString *payAmountStr = @"";
 //    NSString *discountAmountStr = @"";
     topupAmountStr = [NSString stringWithFormat:@"%@%@",model.localFiatMoney,model.localFiat];
-    payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount,model.payTokenSymbol];
+    payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount_str,model.payTokenSymbol];
 //    discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.symbol];
     NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.qgasAmount,model.symbol?:@""];
     

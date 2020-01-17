@@ -18,6 +18,14 @@
 #import "UserModel.h"
 #import "NSDate+Category.h"
 #import "RSAUtil.h"
+#import "GroupBuyKnowDelegateView.h"
+#import "AgentRewardViewController.h"
+#import "QNavigationController.h"
+#import "QlinkTabbarViewController.h"
+#import "AppDelegate.h"
+#import "AppJumpHelper.h"
+#import "GroupBuyGoStakeView.h"
+#import "MyStakingsViewController.h"
 
 static NSString *const TopupNetworkSize = @"30";
 
@@ -99,6 +107,27 @@ static NSString *const TopupNetworkSize = @"30";
     [self refreshProductPriceView];
 }
 
+- (void)showKnowDelegateView {
+    GroupBuyKnowDelegateView *view = [GroupBuyKnowDelegateView getInstance];
+    kWeakSelf(self);
+    view.okBlock = ^{
+        [weakself jumpToAgentReward];
+        [weakself hide];
+    };
+    [view show];
+}
+
+- (void)showGoStakeView {
+    GroupBuyGoStakeView *view = [GroupBuyGoStakeView getInstance];
+    kWeakSelf(self);
+    view.okBlock = ^{
+//        [AppJumpHelper jumpToWallet];
+        [weakself jumpToMyStakings];
+        [weakself hide];
+    };
+    [view show];
+}
+
 #pragma mark - Request
 - (void)requestTopup_group_kind_list {
     kWeakSelf(self);
@@ -142,7 +171,9 @@ static NSString *const TopupNetworkSize = @"30";
     NSString *localFiatMoney = _productM.localFaitMoney?:@"";
     NSString *deductionTokenId = _deductionTokenM.ID?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"groupKindId":groupKindId,@"productId":productId,@"localFiatMoney":localFiatMoney,@"deductionTokenId":deductionTokenId};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:topup_create_group_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             if (weakself.successBlock) {
                 weakself.successBlock();
@@ -151,9 +182,16 @@ static NSString *const TopupNetworkSize = @"30";
             [kAppD.window makeToastDisappearWithText:kLang(@"success")];
             
         } else {
-            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            NSString *msg = responseObject[Server_Msg];
+            [kAppD.window makeToastDisappearWithText:msg];
+            if ([msg containsString:@"The amount of QLC mortgage must be greater than 1500!"]) {
+                [weakself showGoStakeView];
+            } else if ([msg containsString:@"Please bind qlc chain address!"]) {
+                [weakself showKnowDelegateView];
+            }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 
@@ -204,5 +242,22 @@ static NSString *const TopupNetworkSize = @"30";
     [self hide];
 }
 
+#pragma mark - Transition
+- (void)jumpToAgentReward {
+    AgentRewardViewController *vc = [AgentRewardViewController new];
+    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+}
+
+- (void)jumpToMyStakings {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    NSString *inputAddress = userM.qlcAddress?:@"";
+    if ([inputAddress isEmptyString]) {
+        [AppJumpHelper jumpToWallet];
+        return;
+    }
+    MyStakingsViewController *vc = [MyStakingsViewController new];
+    vc.inputAddress = inputAddress;
+    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+}
 
 @end

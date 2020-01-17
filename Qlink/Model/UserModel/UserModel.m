@@ -53,6 +53,9 @@
 }
 
 + (void)storeUserByID:(UserModel *)model {
+    if (!model) {
+        return;
+    }
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     NSMutableArray *muArr = [NSMutableArray array];
     if (!data) {
@@ -218,6 +221,26 @@
         }];
     }
     return isLogin;
+}
+
++ (void)removeMul { // 去重
+    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+    if (data) {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSMutableArray *muArr = [NSMutableArray arrayWithArray:arr];
+        for (int i = 0; i < arr.count-1; i++) {
+            UserModel *tempM1 = arr[i];
+            for (int j = i + 1; j < arr.count; j++) {
+                UserModel *tempM2 = arr[j];
+                if ([tempM1.ID isEqualToString:tempM2.ID]) {
+                    [muArr removeObject:tempM2];
+                }
+            }
+        }
+        
+        NSData *archiverData = [NSKeyedArchiver archivedDataWithRootObject:muArr];
+        [HWUserdefault insertObj:archiverData withkey:UserModel_Local];
+    }
 }
 
 + (BOOL)haveAccountInLocal {

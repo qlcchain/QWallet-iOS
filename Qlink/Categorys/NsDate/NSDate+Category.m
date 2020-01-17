@@ -90,6 +90,25 @@
     return (UInt64)([date timeIntervalSince1970]*1000);
 }
 
++ (NSDate *)getDateWithTimestamp:(NSString *)timestamp isMil:(BOOL)isMil
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone localTimeZone];
+//    [formatter setDateStyle:NSDateFormatterMediumStyle];
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+//    [formatter setDateFormat:format];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSTimeInterval timeI = [timestamp doubleValue];
+    if (isMil) {
+        timeI = timeI/1000.0;
+    }
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeI];
+//    NSString* dateString = [formatter stringFromDate:date];
+    return date;
+}
+
 + (NSString *)getTimeWithTimestamp:(NSString *)timestamp format:(NSString *)format isMil:(BOOL)isMil
 {
     // 格式化时间

@@ -51,7 +51,7 @@
 
 #pragma mark - Operation
 - (void)configInit {
-    [_topGradientBack addQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+    [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
     
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyPortfolioCellReuse bundle:nil] forCellReuseIdentifier:MyPortfolioCellReuse];

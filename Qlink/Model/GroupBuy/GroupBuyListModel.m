@@ -7,6 +7,7 @@
 //
 
 #import "GroupBuyListModel.h"
+#import "NSString+RemoveZero.h"
 
 @implementation GroupBuyListItemModel
 
@@ -25,6 +26,14 @@
 + (NSDictionary *) mj_objectClassInArray
 {
     return @{@"items" : @"GroupBuyListItemModel"};
+}
+
+- (NSString *)deductionTokenAmount_str {
+    return [NSString doubleToString:_deductionTokenAmount];
+}
+
+- (NSString *)payTokenAmount_str {
+    return [NSString doubleToString:_payTokenAmount];
 }
 
 @end

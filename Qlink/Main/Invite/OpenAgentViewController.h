@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OpenAgentViewController : QBaseViewController
 
+@property (nonatomic) BOOL inputStake1500;
+
 @end
 
 NS_ASSUME_NONNULL_END
