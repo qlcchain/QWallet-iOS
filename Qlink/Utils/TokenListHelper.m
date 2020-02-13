@@ -247,8 +247,9 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [QLCLedgerRpc accountInfoWithAddress:address isMainNetwork:isMainNetwork successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
+    [QLCLedgerRpc accountInfoWithAddress:address baseUrl:baseUrl successHandler:^(NSDictionary<NSString * ,id> * _Nonnull responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }
@@ -287,8 +288,9 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
+    [QLCLedgerRpc tokensWithBaseUrl:baseUrl successHandler:^(id _Nullable responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }

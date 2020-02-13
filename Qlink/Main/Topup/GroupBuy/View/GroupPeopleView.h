@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GroupPeopleView : UIView
 
 + (instancetype)getInstance;
-- (void)config:(NSArray *)urlArr;
+- (void)configGroupBuy:(NSArray *)urlArr;
+- (void)configAssemble:(NSArray *)urlArr;
 
 @end
 

@@ -785,8 +785,10 @@
 - (void)startReceiveQLC {
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeQLC) {
-        BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address isMainNetwork:isMainNetwork]; // QLC钱包接收sendblock
+//        BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+        NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
+        NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:currentWalletM.address]?:@"";
+        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address baseUrl:baseUrl privateKey:privateKey]; // QLC钱包接收sendblock
     }
 }
 

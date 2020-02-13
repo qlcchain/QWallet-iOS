@@ -47,8 +47,20 @@
         return NO;
     }
 }
+
++ (NSDictionary *)getConfig_ChainNetwork {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = @"";
+    if ([ConfigUtil isMainNetOfChainNetwork]) {
+        path = [bundle pathForResource:@"ConfigurationRelease" ofType:@"plist"];
+    } else {
+        path = [bundle pathForResource:@"ConfigurationDebug" ofType:@"plist"];
+    }
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
     
-+ (NSDictionary *)getConfig {
++ (NSDictionary *)getConfig_ServerNetwork {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = @"";
     if ([ConfigUtil isMainNetOfServerNetwork]) {
@@ -75,7 +87,7 @@
 }
 
 + (NSString *)getServerDomain {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *serverDomain = config[@"ServerDomain"];
 //    NSLog(@"配置文件url = %@",serverDomain);
     return serverDomain;
@@ -94,29 +106,34 @@
 }
     
 + (NSString *)getMIFI {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *mifi = config[@"MIFI"];
     return mifi;
 }
 
 + (NSString *)getChannel {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *channel = config[@"Channel"];
     return channel;
 }
 
 + (NSString *)get_qlc_staking_node {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *channel = config[@"qlc_staking_node"];
     return channel;
 }
 
-+ (NSString *)get_qlc_node {
++ (NSString *)get_qlc_node_release {
     NSDictionary *config = [ConfigUtil getReleaseConfig];
     NSString *channel = config[@"qlc_node"];
     return channel;
 }
 
++ (NSString *)get_qlc_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_ChainNetwork];
+    NSString *channel = config[@"qlc_node"];
+    return channel;
+}
 
 
 

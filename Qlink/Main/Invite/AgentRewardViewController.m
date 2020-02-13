@@ -119,7 +119,7 @@
     } else {
         return;
     }
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_node]]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_node_release]]];
     NSString *requestId = [NSString randomOf32];
     kWeakSelf(self);
 //    NSString *address = _bindWalletM.address?:@"";

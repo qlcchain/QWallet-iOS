@@ -17,4 +17,4 @@ FOUNDATION_EXPORT const unsigned char QLCFrameworkVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <QLCFramework/PublicHeader.h>
 #import <QLCFramework/QLCMnemonicBit.h>
 #import <QLCFramework/QLCWalletManage.h>
-
+#import <QLCFramework/QLCDPKIManager.h>

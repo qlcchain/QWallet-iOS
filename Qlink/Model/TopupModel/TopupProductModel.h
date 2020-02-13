@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TopupDeductionTokenModel;
+@class TopupDeductionTokenModel,GroupBuyListItemModel;
 
 @interface TopupProductModel : BBaseModel
 
@@ -74,6 +74,38 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *localFaitMoney;
 @property (nonatomic, strong) NSString *payTokenMoney;
+
+@property (nonatomic, strong) NSString *localFiatAmount;
+@property (nonatomic, strong) NSString *orderTimes;
+@property (nonatomic, strong) NSString *haveGroupBuy;
+@property (nonatomic, strong) NSArray *items;
+
+//"countryEn" : "All Operators in China",
+//"explain" : "72小时内到账 急用勿拍",
+//"country" : "中国",
+//"isp" : "通用",
+//"payWay" : "FIAT",
+//"description" : "慢充话费，折扣低，价格实惠",
+//"discount" : 0.98,
+//"qgasDiscount" : 0.02,
+//"payFiatAmount" : "100",
+//"province" : "全国",
+//"explainEn" : "72小时内到账 急用勿拍",
+//"id" : "4b51058ae87141df9217b2d8de9530cc",
+//"stock" : -1,
+//"descriptionEn" : "慢充话费，折扣低，价格实惠",
+//"localFiat" : "CNY",
+//"localFiatAmount" : "100",
+//"nameEn" : "All provinces of China",
+//"orderTimes" : 0,
+//"upTime" : "2019-10-19 13:31:34",
+//"ispEn" : "",
+//"payFiat" : "CNY",
+//"imgPath" : "/userfiles/1/images/topup/2019/10/3a117d16c4654ab78a332db30613dadb.jpg",
+//"name" : "全国通用",
+//"haveGroupBuy" : "no",
+//"items" : "",
+//"provinceEn" : ""
 
 
 + (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM;

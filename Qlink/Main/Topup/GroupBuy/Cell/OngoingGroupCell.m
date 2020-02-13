@@ -105,7 +105,7 @@
     NSMutableArray *itemArr = [NSMutableArray array];
     [itemArr addObjectsFromArray:model.items];
     [itemArr addObject:itemM];
-    [_groupPeopleV config:itemArr];
+    [_groupPeopleV configGroupBuy:itemArr];
 }
 
 - (IBAction)joinAction:(id)sender {

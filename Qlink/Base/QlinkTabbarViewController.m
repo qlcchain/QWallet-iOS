@@ -25,7 +25,7 @@
 #import "NEOWalletUtil.h"
 #import "GlobalConstants.h"
 #import "UIColor+Random.h"
-#import "Topup1ViewController.h"
+#import "Topup3ViewController.h"
 
 //static NSInteger const tabbaritems = 3;
 
@@ -70,7 +70,7 @@
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
-    _topupVC = [[Topup1ViewController alloc] init];
+    _topupVC = [[Topup3ViewController alloc] init];
     [self addChildViewController:_topupVC text:kLang(@"top_up") imageName:@"topup"];
 //    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
     [self addChildViewController:[[HomeBuySellViewController alloc] init] text:kLang(@"finance") imageName:@"finance"];

@@ -119,8 +119,9 @@
 - (void)requestQLCAddressInfo:(NSString *)address {
     kWeakSelf(self);
 //    NSString *address1 = @"qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [QLCLedgerRpc accountHistoryTopnWithAddress:address isMainNetwork:isMainNetwork successHandler:^(id _Nonnull responseObject) {
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
+    [QLCLedgerRpc accountHistoryTopnWithAddress:address baseUrl:baseUrl successHandler:^(id _Nonnull responseObject) {
         if (responseObject != nil) {
             [weakself.addressHistoryArr removeAllObjects];
             [responseObject enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -139,8 +140,9 @@
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window userInteractionEnabled:NO hideTime:0];
     }
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
-    [QLCLedgerRpc tokensWithIsMainNetwork:isMainNetwork successHandler:^(id _Nullable responseObject) {
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
+    [QLCLedgerRpc tokensWithBaseUrl:baseUrl successHandler:^(id _Nullable responseObject) {
         if (showLoad) {
             [kAppD.window hideToast];
         }

@@ -25,7 +25,8 @@
 + (NSString *)get_qlc_staking_node;
 
 // QLC
-+ (NSString *)get_qlc_node;
++ (NSString *)get_qlc_node_release;
++ (NSString *)get_qlc_node_normal;
 
 // 货币
 + (void)setLocalUsingCurrency:(NSString *)currency;

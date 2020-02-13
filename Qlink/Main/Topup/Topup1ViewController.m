@@ -44,10 +44,16 @@
 #import <QLCFramework/QLCFramework.h>
 //#import "StakingProcessAnimateView.h"
 //#import "StakingProcessView.h"
+#import "AgentRewardViewController.h"
+#import "GroupBuyUtil.h"
 
 static NSString *const TopupNetworkSize = @"20";
 static NSInteger const insetForSectionDistance = 16;
 static NSInteger const miniSpacingDistance = 8;
+
+static NSString *const Show_Make_More = @"Show_Make_More";
+static NSString *const Show_Sheet_Mining = @"Show_Sheet_Mining";
+static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 
 @interface Topup1ViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate>
 
@@ -88,6 +94,7 @@ static NSInteger const miniSpacingDistance = 8;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *makeMoreWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sheetMiningWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *parterPlanWidth;
 
 @property (weak, nonatomic) IBOutlet UIView *qlcTradeBack;
 @property (weak, nonatomic) IBOutlet UILabel *qlcPriceLab;
@@ -106,6 +113,11 @@ static NSInteger const miniSpacingDistance = 8;
 @property (weak, nonatomic) IBOutlet UIView *countryBack;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *countryBackHeight; // 48
 
+@property (weak, nonatomic) IBOutlet UILabel *parterPlanLab;
+@property (weak, nonatomic) IBOutlet UIView *parterPlanBack;
+@property (weak, nonatomic) IBOutlet UIButton *parterPlan_detailBtn;
+
+
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
@@ -116,6 +128,7 @@ static NSInteger const miniSpacingDistance = 8;
 @property (nonatomic) BOOL showQLC;
 @property (nonatomic, strong) TopupMobilePlanCountry *countryV;
 @property (nonatomic, strong) TopupCountryModel *selectCountryM;
+@property (nonatomic, strong) NSMutableArray *cycleContentArr;
 
 @end
 
@@ -154,6 +167,7 @@ static NSInteger const miniSpacingDistance = 8;
     
     [self handlerPushJump];
     [self getSheetMining];
+    [self getParterPlan];
     [self addChart];
     [self getTokenPrice];
     [self getRedDotOfMe];
@@ -177,6 +191,7 @@ static NSInteger const miniSpacingDistance = 8;
 - (void)configInit {
     [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
     
+    _cycleContentArr = [NSMutableArray array];
     _showQLC = NO;
     _qlcBackHeight.constant = _showQLC?318:0;
     
@@ -188,11 +203,18 @@ static NSInteger const miniSpacingDistance = 8;
     _miningBack.layer.masksToBounds = YES;
     _mining_detailBtn.layer.cornerRadius = 2;
     _mining_detailBtn.layer.masksToBounds = YES;
+    _parterPlanBack.layer.cornerRadius = 6;
+    _parterPlanBack.layer.masksToBounds = YES;    _parterPlan_detailBtn.layer.cornerRadius = 2;
+    _parterPlan_detailBtn.layer.masksToBounds = YES;
+    
     _makeMoreWidth.constant = SCREEN_WIDTH;
-    _sheetMiningWidth.constant = SCREEN_WIDTH;
-    _cycleContentWidth.constant = SCREEN_WIDTH;
+    [_cycleContentArr addObject:Show_Make_More];
+    _sheetMiningWidth.constant = 0;
+    _parterPlanWidth.constant = 0;
+    _cycleContentWidth.constant = SCREEN_WIDTH*_cycleContentArr.count;
+    _cyclePageC.numberOfPages = _cycleContentArr.count;
     _cycleScrollV.delegate = self;
-    _cyclePageC.numberOfPages = 1;
+//    _cyclePageC.numberOfPages = 1;
     _cyclePageC.userInteractionEnabled = NO;
     _numBack.layer.cornerRadius = 8;
     _numBack.layer.masksToBounds = YES;
@@ -247,11 +269,28 @@ static NSInteger const miniSpacingDistance = 8;
             if (arr.count > 0) {
                 MiningActivityModel *model = arr.firstObject;
                 weakself.miningActivityM = model;
-                weakself.cycleContentWidth.constant = SCREEN_WIDTH*2;
-                weakself.cyclePageC.numberOfPages = 2;
+                weakself.sheetMiningWidth.constant = SCREEN_WIDTH;
+                [weakself.cycleContentArr addObject:Show_Make_More];
+                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
+                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
                 [weakself refreshMiningTip];
             }
         }]; // 交易挖矿活动列表
+    });
+}
+
+- (void)getParterPlan {
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [GroupBuyUtil requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
+            if (haveGroupBuyActivity) {
+                weakself.parterPlanWidth.constant = SCREEN_WIDTH;
+                [weakself.cycleContentArr addObject:Show_Partner_Plan];
+                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
+                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
+//                [weakself refreshParterPlan];
+            }
+        }];
     });
 }
 
@@ -273,7 +312,6 @@ static NSInteger const miniSpacingDistance = 8;
     _titleLab.text = kLang(@"top_up");
     _sendRechargeLab.text = kLang(@"send_recharge_to");
     _inputTipLab.text = kLang(@"enter_your_phone_number_or_select_from_your_contacts_");
-    _earnMoreLab.text = kLang(@"earn_more_qgas");
     [_actNowBtn setTitle:kLang(@"act_now__") forState:UIControlStateNormal];
     _introduceFriendLab.text = kLang(@"refer_friends_");
     _carrierPackageLab.text = kLang(@"carrier_package");
@@ -286,6 +324,24 @@ static NSInteger const miniSpacingDistance = 8;
 //    [_yearBtn setTitle:kLang(@"qlc_year") forState:UIControlStateNormal];
     
     [_mining_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
+    [_parterPlan_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
+    
+    NSString *parterPlanTipShowStr = kLang(@"join_the_q_wallet_recharge_sales_partner_plan_for_commissions");
+    NSString *commissionsStr = kLang(@"commissions");
+    NSMutableAttributedString *parterPlan_tipAtt = [[NSMutableAttributedString alloc] initWithString:parterPlanTipShowStr];
+    [parterPlan_tipAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"STHeitiSC-Medium" size:14] range:NSMakeRange(0, parterPlanTipShowStr.length)];
+//    [parterPlan_tipAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"STHeitiSC-Medium" size:14] range:[tipShowStr rangeOfString:tipStr]];
+    [parterPlan_tipAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x29282A) range:NSMakeRange(0, parterPlanTipShowStr.length)];
+    [parterPlan_tipAtt addAttribute:NSForegroundColorAttributeName value:MAIN_BLUE_COLOR range:[parterPlanTipShowStr rangeOfString:commissionsStr]];
+    _parterPlanLab.attributedText = parterPlan_tipAtt;
+    
+    NSString *moreQGASShowStr = kLang(@"earn_more_qgas");
+    NSString *QGASStr = kLang(@"qgas");
+    NSMutableAttributedString *moreQGAS_tipAtt = [[NSMutableAttributedString alloc] initWithString:moreQGASShowStr];
+    [moreQGAS_tipAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"STHeitiSC-Medium" size:16] range:NSMakeRange(0, moreQGASShowStr.length)];
+    [moreQGAS_tipAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x29282A) range:NSMakeRange(0, moreQGASShowStr.length)];
+    [moreQGAS_tipAtt addAttribute:NSForegroundColorAttributeName value:MAIN_BLUE_COLOR range:[moreQGASShowStr rangeOfString:QGASStr]];
+    _earnMoreLab.attributedText = moreQGAS_tipAtt;
     
     [self refreshMiningTip];
 }
@@ -392,13 +448,19 @@ static NSInteger const miniSpacingDistance = 8;
 }
 
 - (void)cycleScrollChange {
-    if (_cyclePageC.currentPage == 0) {
-        if (_cycleContentWidth.constant > SCREEN_WIDTH) {
-            [_cycleScrollV setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
-        }
-    } else if (_cyclePageC.currentPage == 1) {
+    if (_cyclePageC.currentPage == _cycleContentArr.count-1) {
         [_cycleScrollV setContentOffset:CGPointMake(0, 0) animated:YES];
+    } else {
+        [_cycleScrollV setContentOffset:CGPointMake(SCREEN_WIDTH*(_cyclePageC.currentPage+1), 0) animated:YES];
     }
+    
+//    if (_cyclePageC.currentPage == 0) {
+//        if (_cycleContentWidth.constant > SCREEN_WIDTH) {
+//            [_cycleScrollV setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
+//        }
+//    } else if (_cyclePageC.currentPage == 1) {
+//        [_cycleScrollV setContentOffset:CGPointMake(0, 0) animated:YES];
+//    }
 }
 
 #pragma mark - Request
@@ -601,6 +663,14 @@ static NSInteger const miniSpacingDistance = 8;
 #pragma mark - Action
 
 - (IBAction)menuAction:(id)sender {
+    
+//    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@",@"18812341234"];
+//    NSURL *URL = [NSURL URLWithString:str];
+//    [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:^(BOOL success) {
+//        //OpenSuccess=选择 呼叫 为 1  选择 取消 为0
+//        NSLog(@"OpenSuccess=%d",success);
+//    }];
+
     [self jumpToMyTopupOrder];
 }
 
@@ -645,6 +715,9 @@ static NSInteger const miniSpacingDistance = 8;
     [self jumpToShareFriends];
 }
 
+- (IBAction)parterPlanAction:(id)sender {
+    [self jumpToAgentReward];
+}
 
 
 #pragma mark - Transition
@@ -681,6 +754,11 @@ static NSInteger const miniSpacingDistance = 8;
 //    ShareFriendsViewController *vc = [ShareFriendsViewController new];
 //    [self.navigationController pushViewController:vc animated:YES];
     InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToAgentReward {
+    AgentRewardViewController *vc = [AgentRewardViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

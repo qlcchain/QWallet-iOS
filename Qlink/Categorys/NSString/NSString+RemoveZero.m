@@ -55,10 +55,14 @@
 //}
 
 
-
 + (NSString *)doubleToString:(double)doubleV {
-    NSString *str = [[[NSDecimalNumber alloc] initWithDouble:doubleV] stringValue];
-    return str;
+//    NSString *str = [[[NSDecimalNumber alloc] initWithDouble:doubleV] stringValue];
+//    return str;
+    
+    NSString *doubleString        = [NSString stringWithFormat:@"%lf", doubleV];
+    NSDecimalNumber *decNumber    = [NSDecimalNumber decimalNumberWithString:doubleString];
+    return [decNumber stringValue];
 }
+
 
 @end

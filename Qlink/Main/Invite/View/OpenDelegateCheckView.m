@@ -15,7 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *tipBack;
 
-
 @end
 
 @implementation OpenDelegateCheckView
@@ -53,6 +52,5 @@
 - (IBAction)closeAction:(id)sender {
     [self hide];
 }
-
 
 @end

@@ -47,6 +47,7 @@
 #import "NEOWalletInfo.h"
 #import "OTCOrderTodo.h"
 #import "TradeOrderDetailViewController.h"
+#import <QLCFramework/QLCDPKIManager.h>
 
 @interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -77,6 +78,8 @@
     // 1577959002  // 美国   4：56    北京   17：56
     // 1577959108  // 日本   18：58   北京   17：58
         
+    
+    
     [KeychainUtil resetKeyService]; // 重置keyservice
     [NEOWalletInfo updateNEOWallet_local]; // 更新NEO本地
     

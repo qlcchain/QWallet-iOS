@@ -124,10 +124,11 @@
     NSString *message = nil;
     NSString *data = _memoTF.text?:@"";
     BOOL workInLocal = YES;
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data baseUrl:baseUrl workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
 //    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
         [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];

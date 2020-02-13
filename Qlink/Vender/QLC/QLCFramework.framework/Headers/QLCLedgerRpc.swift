@@ -31,12 +31,12 @@ public class QLCLedgerRpc : NSObject {
      * @throws QlcException
      * @throws IOException
      */
-    @objc public static func  accountHistoryTopn(address : String,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func  accountHistoryTopn(address : String,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = AccountHistoryTopn(
             address: address
         )
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
     /**
@@ -47,12 +47,12 @@ public class QLCLedgerRpc : NSObject {
      * @throws QlcException
      * @throws IOException
      */
-    @objc public static func  accountInfo(address : String,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func  accountInfo(address : String,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = AccountInfo(
             address: address
         )
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
         
     }
     
@@ -139,13 +139,13 @@ public class QLCLedgerRpc : NSObject {
      * @throws IOException
      */
 //    @objc public static func  accountsPending(addressArr: Array<String>, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
-    @objc public static func  accountsPending(addressArr: Array<String>,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func  accountsPending(addressArr: Array<String>,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = AccountsPending(
             addressArr: addressArr
 //            address: address
         )
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
     /**
@@ -240,12 +240,12 @@ public class QLCLedgerRpc : NSObject {
      * @throws QlcException
      * @throws IOException
      */
-    @objc public static func  blocksInfo(hashArr : Array<String>,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func  blocksInfo(hashArr : Array<String>,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = BlocksInfo(
             hashArr: hashArr
         )
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
     
@@ -348,12 +348,12 @@ public class QLCLedgerRpc : NSObject {
      * @throws QlcException
      * @throws IOException
      */
-    @objc public static func  process(dic : Dictionary<String, Any>,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func  process(dic : Dictionary<String, Any>,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = Process(
             dic: dic
         )
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
     /**
@@ -377,10 +377,10 @@ public class QLCLedgerRpc : NSObject {
      * @throws QlcException
      * @throws IOException
      */
-    @objc public static func  tokens(isMainNetwork:Bool,successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func  tokens(baseUrl:String,successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = Tokens()
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
     /**
@@ -404,13 +404,13 @@ public class QLCLedgerRpc : NSObject {
      * @throws QlcException
      * @throws IOException
      */
-    @objc public static func tokenInfoByName(token : String,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func tokenInfoByName(token : String,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = TokenInfoByName(
             token: token
         )
         let client : QlcClient = QlcClient()
 //        let callbackQueue : CallbackQueue? = isMainQueue ? .main : nil
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
     /**
@@ -427,15 +427,15 @@ public class QLCLedgerRpc : NSObject {
         //client.call(method: "ledger_transactionsCount", params: params, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    @objc public static func rewards_getReceiveRewardBlock(hashHex: String,isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func rewards_getReceiveRewardBlock(hashHex: String,baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = GetReceiveRewardBlock(hashHex: hashHex)
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
     
-    @objc public static func pov_getFittestHeader(isMainNetwork:Bool, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
+    @objc public static func pov_getFittestHeader(baseUrl:String, successHandler: @escaping QlcClientSuccessHandler, failureHandler: @escaping QlcClientFailureHandler) {
         let request = GetFittestHeader()
         let client : QlcClient = QlcClient()
-        client.call(request,isMainNetwork:isMainNetwork, successHandler: successHandler, failureHandler: failureHandler)
+        client.call(request,baseUrl:baseUrl, successHandler: successHandler, failureHandler: failureHandler)
     }
 }

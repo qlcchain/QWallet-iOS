@@ -21,7 +21,7 @@
 #import "ClaimQGASViewController.h"
 #import "ClaimConstants.h"
 #import "RefreshHelper.h"
-#import <NinaPagerView/NinaPagerView.h>
+#import "NinaPagerView.h"
 #import "ShareFriendsSubViewController.h"
 #import "AgentRewardViewController.h"
 #import "RLArithmetic.h"

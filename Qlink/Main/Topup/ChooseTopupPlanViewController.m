@@ -35,7 +35,7 @@
 #import "NeoTransferUtil.h"
 #import "GroupBuyDetialViewController.h"
 #import "GroupBuyListModel.h"
-#import "ClaimConstants.h"
+#import "GroupBuyUtil.h"
 
 static NSInteger DeductionTokenBtnTag = 6649;
 static NSInteger DeductionTokenTickTag = 9223;
@@ -523,27 +523,6 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }];
 }
 
-- (void)requestHaveGroupBuyActiviy:(void(^)(BOOL haveGroupBuyActivity))completeBlock {
-//    kWeakSelf(self);
-    NSDictionary *params = @{@"dictType":app_dict};
-    [RequestService requestWithUrl10:sys_dict_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            BOOL haveGroupBuyActivity = NO;
-            NSString *topupGroupStartDateStr = responseObject[Server_Data][@"topupGroupStartDate"]?:@"";
-            NSString *topopGroupEndDateStr = responseObject[Server_Data][@"topopGroupEndDate"]?:@"";
-            NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
-            NSDate *startDate = [NSDate dateFromTime:topupGroupStartDateStr];
-            NSDate *endDate = [NSDate dateFromTime:topopGroupEndDateStr];
-            NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
-            haveGroupBuyActivity = [startDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:endDate];
-            if (completeBlock) {
-                completeBlock(haveGroupBuyActivity);
-            }
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-    }];
-}
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField == _phoneTF) {
@@ -631,7 +610,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
         
         kWeakSelf(self);
-        [self requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
+        [GroupBuyUtil requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
             if (haveGroupBuyActivity) {
                 [weakself jumpToGroupBuyDetial:model];
             } else {
@@ -931,8 +910,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 - (void)jumpToGroupBuyDetial:(TopupProductModel *)model {
     GroupBuyDetialViewController *vc = [GroupBuyDetialViewController new];
     vc.inputProductM = model;
-    vc.inputCountryM = _inputCountryM;
-    vc.inputPhoneNum = _phoneTF.text?:@"";
+//    vc.inputCountryM = _inputCountryM;
+//    vc.inputPhoneNum = _phoneTF.text?:@"";
     vc.inputDeductionTokenM = _selectDeductionTokenM;
     [self.navigationController pushViewController:vc animated:YES];
 }

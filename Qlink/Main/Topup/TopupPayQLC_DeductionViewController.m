@@ -163,11 +163,12 @@
     NSString *message = nil;
     NSString *data = _memoTV.text?:@"";
     BOOL workInLocal = NO;
-    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
 //    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     [self showPayLoadView];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data baseUrl:baseUrl workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
 //    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
 //        [kAppD.window makeToastInView:kAppD.window text:[NSString stringWithFormat:kLang(@"_has_been_paid_successfully_Please_wait_for_a_moment"),weakself.selectAsset.tokenName] userInteractionEnabled:NO hideTime:0];

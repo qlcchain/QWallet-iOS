@@ -10,6 +10,7 @@
 #import "TopupDeductionTokenModel.h"
 #import "RLArithmetic.h"
 #import "NSString+RemoveZero.h"
+#import "GroupBuyListModel.h"
 
 @implementation TopupProductModel
 
@@ -17,10 +18,15 @@
     return @{@"Description" : @"description", @"ID" : @"id"};
 }
 
++ (NSDictionary *) mj_objectClassInArray
+{
+    return @{@"items" : @"GroupBuyListItemModel"};
+}
+
 + (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM {
-    NSString *fait1Str = productM.discount.mul(productM.payTokenMoney);
-//    NSString *faitMoneyStr = [productM.discount.mul(productM.payTokenMoney) showfloatStr:4];
-    NSString *deduction1Str = productM.payTokenMoney.mul(productM.qgasDiscount);
+    NSString *fait1Str = productM.discount.mul(productM.payFiatAmount);
+//    NSString *faitMoneyStr = [productM.discount.mul(productM.payFiatAmount) showfloatStr:4];
+    NSString *deduction1Str = productM.payFiatAmount.mul(productM.qgasDiscount);
     NSNumber *deductionTokenPrice = @(1);
     if ([productM.payFiat isEqualToString:@"CNY"]) {
         deductionTokenPrice = tokenM.price;
@@ -44,9 +50,9 @@
 
 #pragma mark - 团购
 + (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM groupDiscount:(NSString *)groupDiscount {
-    NSString *fait1Str = productM.payTokenMoney.mul(groupDiscount);
-//    NSString *faitMoneyStr = [productM.discount.mul(productM.payTokenMoney) showfloatStr:4];
-    NSString *deduction1Str = productM.payTokenMoney.mul(productM.qgasDiscount).mul(groupDiscount);
+    NSString *fait1Str = productM.payFiatAmount.mul(groupDiscount);
+//    NSString *faitMoneyStr = [productM.discount.mul(productM.payFiatAmount) showfloatStr:4];
+    NSString *deduction1Str = productM.payFiatAmount.mul(productM.qgasDiscount).mul(groupDiscount);
     NSNumber *deductionTokenPrice = @(1);
     if ([productM.payFiat isEqualToString:@"CNY"]) {
         deductionTokenPrice = tokenM.price;
@@ -66,6 +72,14 @@
     }
     
     return topupAmountShowStr;
+}
+
+- (NSString *)orderTimes {
+    NSString *result = _orderTimes;
+    if ([_orderTimes integerValue] <= 100) {
+        result = @"100+";
+    }
+    return result;
 }
 
 @end

@@ -52,7 +52,7 @@
         NSLog(@"signResult = %@",signResult);
     } else if ([blockChain isEqualToString:@"QLC"]) {
         pubKeyResult = pubKey;
-        NSString *sign = [QLCUtil signWithMessage:myP2pId secretKey:privateKey publicKey:pubKey]?:@"";
+        NSString *sign = [QLCUtil signWithMessageHex:myP2pId secretKey:privateKey publicKey:pubKey]?:@"";
         [signResult appendString:sign];
         NSLog(@"signResult = %@",signResult);
     }

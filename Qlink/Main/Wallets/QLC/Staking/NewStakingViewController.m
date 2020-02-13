@@ -7,7 +7,7 @@
 //
 
 #import "NewStakingViewController.h"
-#import <NinaPagerView.h>
+#import "NinaPagerView.h"
 #import "TokenMintageViewController.h"
 #import "ConfidantViewController.h"
 #import "VotingMiningNodeViewController.h"
@@ -48,7 +48,7 @@
     _ninaPageView.titleFont = 14;
     _ninaPageView.titleScale = 1;
     _ninaPageView.selectBottomLinePer = 0.8;
-    _ninaPageView.selectBottomLineHeight = 2;
+    _ninaPageView.selectBottomLineHeight = 1;
     _ninaPageView.underlineColor = MAIN_BLUE_COLOR;
     _ninaPageView.underLineHidden = YES;
     _ninaPageView.topTabHeight = 44;

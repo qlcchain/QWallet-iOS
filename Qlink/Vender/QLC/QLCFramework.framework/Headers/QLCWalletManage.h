@@ -29,14 +29,16 @@ extern  NSString * _Nonnull const QLC_AccountPending_Done_Noti;
 - (BOOL)walletAddressIsValid:(NSString *)address;
 - (BOOL)switchWalletWithSeed:(NSString *)seed;
 
-- (void)sendAssetWithTokenName:(NSString *)tokenName to:(NSString *)to amount:(NSUInteger)amount sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message data:(nullable NSString *)data isMainNetwork:(BOOL)isMainNetwork workInLocal:(BOOL)workInLocal successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+- (void)sendAssetWithTokenName:(NSString *)tokenName to:(NSString *)to amount:(NSUInteger)amount sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message data:(nullable NSString *)data baseUrl:(NSString *)baseUrl workInLocal:(BOOL)workInLocal successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
 
-- (void)sendAssetWithTokenName:(NSString *)tokenName from:(NSString *)from to:(NSString *)to amount:(NSUInteger)amount privateKey:(NSString *)privateKey sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message data:(nullable NSString *)data isMainNetwork:(BOOL)isMainNetwork workInLocal:(BOOL)workInLocal successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+// send
+- (void)sendAssetWithTokenName:(NSString *)tokenName from:(NSString *)from to:(NSString *)to amount:(NSUInteger)amount privateKey:(NSString *)privateKey sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message data:(nullable NSString *)data baseUrl:(NSString *)baseUrl workInLocal:(BOOL)workInLocal successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
 
-- (void)receive_accountsPending:(NSString *)address isMainNetwork:(BOOL)isMainNetwork;
+// receive
+- (void)receive_accountsPending:(NSString *)address baseUrl:(NSString *)baseUrl privateKey:(NSString *)privateKey;
+
 + (void)signAndWork:(NSDictionary *)dic publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey resultHandler:(void(^_Nonnull)(NSDictionary * _Nullable responseDic))resultHandler;
-+ (NSString *)qlcSign:(NSString *)message publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey;
 
-+ (void)test:(void(^)(NSInteger tag))cancelBlock;
++ (NSString *)qlcSign:(NSString *)messageHex publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey;
 
 @end

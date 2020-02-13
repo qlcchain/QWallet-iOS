@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.0'
 inhibit_all_warnings!
 
 use_frameworks!
@@ -53,12 +53,35 @@ def qlc
 #  pod 'HandyJSON'   #(已集成在QLCFramework中)
 end
 
+def pack_framework
+
+    pod 'AFNetworking'
+    pod 'APIKit'
+    pod 'Eureka', '4.2.0'
+    pod 'IQKeyboardManager'
+    pod 'KeychainSwift'
+    pod 'Masonry'
+    pod 'MJExtension'
+    pod 'MBProgressHUD'
+    pod 'SDWebImage'
+    pod 'Hero'
+    pod 'CocoaLumberjack/Swift'
+    pod 'Bugly'
+    pod 'KeychainAccess'
+    pod 'RealmSwift', '3.18.0'
+    pod 'MJRefresh'
+    pod 'TMCache'
+    pod 'SwiftTheme'
+    pod 'Charts'
+#    pod 'NinaPagerView'
+
+end
+
 def app
 
 #    pod 'Firebase/Core'
     pod 'Firebase/Analytics'
     pod 'TTGTagCollectionView'
-    pod 'NinaPagerView'
     pod 'BGFMDB'
     pod 'TYCyclePagerView'
     pod 'dsBridge'
@@ -66,28 +89,20 @@ def app
     pod 'JPush', '3.2.4-noidfa' # 必选项
   
 end
+
+def bnb
+    
+#    pod 'BinanceChain', :path => '.'
+#    pod 'BinanceChain/Test', :path => '.'
+    pod 'BinanceChain', :git => 'https://github.com/mh7821/SwiftBinanceChain.git'
+    pod 'SwiftProtobuf', :inhibit_warnings => true
+    pod 'Starscream', :inhibit_warnings => true
+    pod 'HDWalletKit', :inhibit_warnings => true
+    pod 'CryptoSwift', :inhibit_warnings => true
+    
+end
   
 target "Qlink" do
-  
-   pod 'AFNetworking'
-   pod 'APIKit'
-   pod 'Eureka', '4.2.0'
-   pod 'IQKeyboardManager'
-   pod 'KeychainSwift'
-   pod 'Masonry'
-   pod 'MJExtension'
-   pod 'MBProgressHUD'
-   pod 'SDWebImage'
-   pod 'Hero'
-   pod 'CocoaLumberjack/Swift'
-   pod 'Bugly'
-   pod 'KeychainAccess'
-   pod 'RealmSwift', '3.18.0'
-   pod 'MJRefresh'
-   pod 'TMCache'
-   pod 'SwiftTheme'
-   pod 'Charts'
-   pod 'NinaPagerView'
 
 #  shadowsock
 #    pod 'MMWormhole'
@@ -102,5 +117,7 @@ target "Qlink" do
     eth
     qlc
     app
-
+#    bnb
+    pack_framework
+    
 end

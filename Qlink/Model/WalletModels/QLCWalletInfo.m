@@ -198,7 +198,7 @@
     NSString *messageHex = [NSString hexStringFromString:message];
     NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:address];
     NSString *publicKey = [QLCWalletInfo getQLCPublicKeyWithAddress:address];
-    NSString *sign = [QLCUtil signWithMessage:messageHex secretKey:privateKey publicKey:publicKey];
+    NSString *sign = [QLCUtil signWithMessageHex:messageHex secretKey:privateKey publicKey:publicKey];
     BOOL signCheck = [QLCUtil signOpenWithMessage:messageHex publicKey:publicKey signature:sign];
     return sign;
 }

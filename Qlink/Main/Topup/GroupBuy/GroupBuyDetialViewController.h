@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GroupBuyDetialViewController : QBaseViewController
 
 @property (nonatomic, strong) TopupProductModel *inputProductM;
-@property (nonatomic, strong) TopupCountryModel *inputCountryM;
+//@property (nonatomic, strong) TopupCountryModel *inputCountryM;
 @property (nonatomic, strong) TopupDeductionTokenModel *inputDeductionTokenM;
-@property (nonatomic, strong) NSString *inputPhoneNum;
+//@property (nonatomic, strong) NSString *inputPhoneNum;
 
 @end
 

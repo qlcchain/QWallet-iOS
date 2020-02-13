@@ -79,7 +79,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
     //    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"];
-    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"qwallet_js" ofType:@"html"];
+    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"qwallet_index" ofType:@"html"];
     NSString * htmlContent = [NSString stringWithContentsOfFile:htmlPath
                                                        encoding:NSUTF8StringEncoding
                                                           error:nil];
@@ -101,15 +101,21 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
         _stageBlock(Stage_MultiSig);
     }
     
-    NSArray *argu1 = @[neo_publicKey,PublicKeyB];
+    NSArray *argu1 = @[neo_publicKey?:@"",PublicKeyB];
     DDLogDebug(@"staking.createMultiSig argu1 = %@",argu1);
     kWeakSelf(self);
-    [_dwebview callHandler:@"staking.createMultiSig" arguments:argu1 completionHandler:^(NSDictionary * _Nullable value) {
+    [_dwebview callHandler:@"staking.createMultiSig" arguments:argu1 completionHandler:^(id value) {
         DDLogDebug(@"createMultiSig: %@",value);
         
-        NSString *toAddress = value[@"_address"];
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            NSString *toAddress = value[@"_address"];
+            
+            [weakself benefit_contractLock:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress toAddress:toAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
+        } else {
+            resultHandler(nil, NO, @"staking.createMultiSig response error");
+            
+        }
         
-        [weakself benefit_contractLock:neo_publicKey neo_wifKey:neo_wifKey fromAddress:fromAddress toAddress:toAddress qlcAddress:qlcAddress qlcAmount:qlcAmount lockTime:lockTime qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
     }];
 }
 

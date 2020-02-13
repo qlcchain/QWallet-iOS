@@ -130,7 +130,7 @@
     NSMutableArray *itemArr = [NSMutableArray array];
     [itemArr addObjectsFromArray:joinM.items];
     [itemArr addObject:itemM];
-    [_groupPeopleV config:itemArr];
+    [_groupPeopleV configGroupBuy:itemArr];
 }
 
 - (void)handlerGroupBuyPayToken {

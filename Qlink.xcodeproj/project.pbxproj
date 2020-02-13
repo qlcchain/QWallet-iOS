@@ -328,6 +328,27 @@
 		581F835822F7C42D00F8291E /* PasswordManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581F835A22F7C42D00F8291E /* PasswordManagementViewController.xib */; };
 		581F835F22F7C43A00F8291E /* WalletsManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581F836122F7C43A00F8291E /* WalletsManageViewController.xib */; };
 		581F836622F7C44D00F8291E /* JoinCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581F836822F7C44D00F8291E /* JoinCommunityViewController.xib */; };
+		5821964723F1089500704E23 /* contract_js in Resources */ = {isa = PBXBuildFile; fileRef = 5821964623F1089500704E23 /* contract_js */; };
+		5821964B23F13F9D00704E23 /* Topup3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821964823F13F9C00704E23 /* Topup3ViewController.m */; };
+		5821964C23F13F9D00704E23 /* Topup3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821964923F13F9D00704E23 /* Topup3ViewController.xib */; };
+		5821965023F2551E00704E23 /* TopupProductSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821964E23F2551E00704E23 /* TopupProductSubViewController.m */; };
+		5821965123F2551E00704E23 /* TopupProductSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821964F23F2551E00704E23 /* TopupProductSubViewController.xib */; };
+		5821965523F2587B00704E23 /* TopupProductSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821965323F2587B00704E23 /* TopupProductSubCell.m */; };
+		5821965623F2587B00704E23 /* TopupProductSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821965423F2587B00704E23 /* TopupProductSubCell.xib */; };
+		5821965A23F26D1500704E23 /* ChooseDeductionTokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821965823F26D1500704E23 /* ChooseDeductionTokenViewController.m */; };
+		5821965B23F26D1500704E23 /* ChooseDeductionTokenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821965923F26D1500704E23 /* ChooseDeductionTokenViewController.xib */; };
+		5821965F23F26F0D00704E23 /* ChooseTokenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821965D23F26F0D00704E23 /* ChooseTokenCell.m */; };
+		5821966023F26F0D00704E23 /* ChooseTokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821965E23F26F0D00704E23 /* ChooseTokenCell.xib */; };
+		5821966923F28CC800704E23 /* UIView+ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821966223F28CC800704E23 /* UIView+ViewController.m */; };
+		5821966A23F28CC800704E23 /* NinaPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821966323F28CC800704E23 /* NinaPagerView.m */; };
+		5821966B23F28CC800704E23 /* NinaBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821966423F28CC800704E23 /* NinaBaseView.m */; };
+		5821967023F4040300704E23 /* PhoneNumerInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821966D23F4040200704E23 /* PhoneNumerInputView.m */; };
+		5821967423F4069900704E23 /* TopupPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821967323F4069900704E23 /* TopupPayHelper.m */; };
+		5821967523F40E5E00704E23 /* PhoneNumerInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821967723F40E5E00704E23 /* PhoneNumerInputView.xib */; };
+		5821968123F5104F00704E23 /* StartGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821967F23F5104E00704E23 /* StartGroupViewController.m */; };
+		5821968323F51F8200704E23 /* StartGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821968523F51F8200704E23 /* StartGroupViewController.xib */; };
+		5821968F23F5225300704E23 /* JoinGroupBuyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821968D23F5225300704E23 /* JoinGroupBuyViewController.m */; };
+		5821969123F547DC00704E23 /* JoinGroupBuyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821969323F547DC00704E23 /* JoinGroupBuyViewController.xib */; };
 		5821CD38217DB5A400F81F8B /* ETHCreateWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821CD36217DB5A400F81F8B /* ETHCreateWalletViewController.m */; };
 		5821CD3D217DBCB500F81F8B /* NEOCreateWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821CD3A217DBCB400F81F8B /* NEOCreateWalletViewController.m */; };
 		5821CD44217DCBA700F81F8B /* ETHMnemonicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821CD42217DCBA700F81F8B /* ETHMnemonicViewController.m */; };
@@ -481,7 +502,7 @@
 		5840927823052A2C0054BCBB /* VotingMiningNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927623052A2C0054BCBB /* VotingMiningNodeViewController.m */; };
 		5840927D23052A410054BCBB /* ConfidantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927B23052A410054BCBB /* ConfidantViewController.m */; };
 		5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840928023052A640054BCBB /* TokenMintageViewController.m */; };
-		5842E0C72368181D001BB0D6 /* qwallet_js.html in Resources */ = {isa = PBXBuildFile; fileRef = 5842E0C62368181D001BB0D6 /* qwallet_js.html */; };
+		5842E0C72368181D001BB0D6 /* qwallet_index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5842E0C62368181D001BB0D6 /* qwallet_index.html */; };
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
 		5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117C2105AEF4005232A2 /* LocationTracker.m */; };
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
@@ -493,6 +514,7 @@
 		584F4EDE23D0758A004F579B /* GroupBuyGoStakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584F4EE023D0758A004F579B /* GroupBuyGoStakeView.xib */; };
 		584F4EEA23D17EBD004F579B /* AgentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 584F4EE823D17EBD004F579B /* AgentDetailsViewController.m */; };
 		584F4EEB23D17EBD004F579B /* AgentDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584F4EE923D17EBD004F579B /* AgentDetailsViewController.xib */; };
+		584F4EEE23D587DC004F579B /* GroupBuyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 584F4EED23D587DC004F579B /* GroupBuyUtil.m */; };
 		58517B5023682B2B008396EE /* NEOJSUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58517B4F23682B2B008396EE /* NEOJSUtil.m */; };
 		5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */; };
 		585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C9A1C2181A16B00DD12DB /* WalletsViewController.m */; };
@@ -1661,6 +1683,49 @@
 		581F836722F7C44D00F8291E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/JoinCommunityViewController.xib; sourceTree = "<group>"; };
 		581F836A22F7C45000F8291E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JoinCommunityViewController.strings; sourceTree = "<group>"; };
 		581F836C22F7C45500F8291E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/JoinCommunityViewController.strings"; sourceTree = "<group>"; };
+		5821964623F1089500704E23 /* contract_js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = contract_js; sourceTree = "<group>"; };
+		5821964823F13F9C00704E23 /* Topup3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topup3ViewController.m; sourceTree = "<group>"; };
+		5821964923F13F9D00704E23 /* Topup3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Topup3ViewController.xib; sourceTree = "<group>"; };
+		5821964A23F13F9D00704E23 /* Topup3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topup3ViewController.h; sourceTree = "<group>"; };
+		5821964D23F2551E00704E23 /* TopupProductSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupProductSubViewController.h; sourceTree = "<group>"; };
+		5821964E23F2551E00704E23 /* TopupProductSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupProductSubViewController.m; sourceTree = "<group>"; };
+		5821964F23F2551E00704E23 /* TopupProductSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupProductSubViewController.xib; sourceTree = "<group>"; };
+		5821965223F2587B00704E23 /* TopupProductSubCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupProductSubCell.h; sourceTree = "<group>"; };
+		5821965323F2587B00704E23 /* TopupProductSubCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupProductSubCell.m; sourceTree = "<group>"; };
+		5821965423F2587B00704E23 /* TopupProductSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupProductSubCell.xib; sourceTree = "<group>"; };
+		5821965723F26D1500704E23 /* ChooseDeductionTokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseDeductionTokenViewController.h; sourceTree = "<group>"; };
+		5821965823F26D1500704E23 /* ChooseDeductionTokenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseDeductionTokenViewController.m; sourceTree = "<group>"; };
+		5821965923F26D1500704E23 /* ChooseDeductionTokenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseDeductionTokenViewController.xib; sourceTree = "<group>"; };
+		5821965C23F26F0D00704E23 /* ChooseTokenCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseTokenCell.h; sourceTree = "<group>"; };
+		5821965D23F26F0D00704E23 /* ChooseTokenCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseTokenCell.m; sourceTree = "<group>"; };
+		5821965E23F26F0D00704E23 /* ChooseTokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTokenCell.xib; sourceTree = "<group>"; };
+		5821966223F28CC800704E23 /* UIView+ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewController.m"; sourceTree = "<group>"; };
+		5821966323F28CC800704E23 /* NinaPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NinaPagerView.m; sourceTree = "<group>"; };
+		5821966423F28CC800704E23 /* NinaBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NinaBaseView.m; sourceTree = "<group>"; };
+		5821966523F28CC800704E23 /* UIView+ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewController.h"; sourceTree = "<group>"; };
+		5821966623F28CC800704E23 /* NinaPagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NinaPagerView.h; sourceTree = "<group>"; };
+		5821966723F28CC800704E23 /* UIParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIParameter.h; sourceTree = "<group>"; };
+		5821966823F28CC800704E23 /* NinaBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NinaBaseView.h; sourceTree = "<group>"; };
+		5821966D23F4040200704E23 /* PhoneNumerInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumerInputView.m; sourceTree = "<group>"; };
+		5821966E23F4040200704E23 /* PhoneNumerInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumerInputView.h; sourceTree = "<group>"; };
+		5821967223F4069900704E23 /* TopupPayHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupPayHelper.h; sourceTree = "<group>"; };
+		5821967323F4069900704E23 /* TopupPayHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupPayHelper.m; sourceTree = "<group>"; };
+		5821967623F40E5E00704E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PhoneNumerInputView.xib; sourceTree = "<group>"; };
+		5821967923F40E6700704E23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PhoneNumerInputView.strings; sourceTree = "<group>"; };
+		5821967B23F40E6A00704E23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PhoneNumerInputView.strings"; sourceTree = "<group>"; };
+		5821967D23F40E6E00704E23 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/PhoneNumerInputView.strings; sourceTree = "<group>"; };
+		5821967E23F5104E00704E23 /* StartGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartGroupViewController.h; sourceTree = "<group>"; };
+		5821967F23F5104E00704E23 /* StartGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartGroupViewController.m; sourceTree = "<group>"; };
+		5821968423F51F8200704E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StartGroupViewController.xib; sourceTree = "<group>"; };
+		5821968723F51FAE00704E23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StartGroupViewController.strings; sourceTree = "<group>"; };
+		5821968923F51FB200704E23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StartGroupViewController.strings"; sourceTree = "<group>"; };
+		5821968B23F51FB500704E23 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/StartGroupViewController.strings; sourceTree = "<group>"; };
+		5821968C23F5225300704E23 /* JoinGroupBuyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinGroupBuyViewController.h; sourceTree = "<group>"; };
+		5821968D23F5225300704E23 /* JoinGroupBuyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinGroupBuyViewController.m; sourceTree = "<group>"; };
+		5821969223F547DC00704E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/JoinGroupBuyViewController.xib; sourceTree = "<group>"; };
+		5821969523F547E300704E23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JoinGroupBuyViewController.strings; sourceTree = "<group>"; };
+		5821969723F547E800704E23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/JoinGroupBuyViewController.strings"; sourceTree = "<group>"; };
+		5821969923F547EB00704E23 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/JoinGroupBuyViewController.strings; sourceTree = "<group>"; };
 		5821CD35217DB5A400F81F8B /* ETHCreateWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETHCreateWalletViewController.h; sourceTree = "<group>"; };
 		5821CD36217DB5A400F81F8B /* ETHCreateWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETHCreateWalletViewController.m; sourceTree = "<group>"; };
 		5821CD3A217DBCB400F81F8B /* NEOCreateWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEOCreateWalletViewController.m; sourceTree = "<group>"; };
@@ -1958,7 +2023,7 @@
 		5840927B23052A410054BCBB /* ConfidantViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfidantViewController.m; sourceTree = "<group>"; };
 		5840927F23052A640054BCBB /* TokenMintageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMintageViewController.h; sourceTree = "<group>"; };
 		5840928023052A640054BCBB /* TokenMintageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMintageViewController.m; sourceTree = "<group>"; };
-		5842E0C62368181D001BB0D6 /* qwallet_js.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = qwallet_js.html; sourceTree = "<group>"; };
+		5842E0C62368181D001BB0D6 /* qwallet_index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = qwallet_index.html; sourceTree = "<group>"; };
 		584911782105AEF4005232A2 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
 		584911792105AEF4005232A2 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
 		5849117A2105AEF4005232A2 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
@@ -2007,6 +2072,8 @@
 		584F4EE723D17EBD004F579B /* AgentDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentDetailsViewController.h; sourceTree = "<group>"; };
 		584F4EE823D17EBD004F579B /* AgentDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentDetailsViewController.m; sourceTree = "<group>"; };
 		584F4EE923D17EBD004F579B /* AgentDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentDetailsViewController.xib; sourceTree = "<group>"; };
+		584F4EEC23D587DC004F579B /* GroupBuyUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupBuyUtil.h; sourceTree = "<group>"; };
+		584F4EED23D587DC004F579B /* GroupBuyUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupBuyUtil.m; sourceTree = "<group>"; };
 		58517B4E23682B2B008396EE /* NEOJSUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEOJSUtil.h; sourceTree = "<group>"; };
 		58517B4F23682B2B008396EE /* NEOJSUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NEOJSUtil.m; sourceTree = "<group>"; };
 		5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteFriendNowViewController.h; sourceTree = "<group>"; };
@@ -3179,7 +3246,6 @@
 			isa = PBXGroup;
 			children = (
 				58688F1E239115730016AB2F /* CountryCodeList.json */,
-				5842E0C62368181D001BB0D6 /* qwallet_js.html */,
 				58178AEF234C944900A96A29 /* GoogleService-Info.plist */,
 				58A4DEA9206234AC00E72F52 /* AppDelegate.h */,
 				58A4DEAA206234AC00E72F52 /* AppDelegate.m */,
@@ -3419,6 +3485,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				5821966123F28CC800704E23 /* NinaPagerView */,
 				5875B1F12386895B00FCA894 /* WZLBadge */,
 				587213362361748600E50744 /* RLArithmetic */,
 				58E0DADA2334DACE00549018 /* OLImageView */,
@@ -3624,6 +3691,8 @@
 				586E7D30238CD6E1005718B4 /* AppJumpHelper.m */,
 				58CD53DB238E2AF400D5C245 /* TokenListHelper.h */,
 				58CD53DC238E2AF400D5C245 /* TokenListHelper.m */,
+				584F4EEC23D587DC004F579B /* GroupBuyUtil.h */,
+				584F4EED23D587DC004F579B /* GroupBuyUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3672,6 +3741,9 @@
 		5810F47123628D4A00346A43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5821966E23F4040200704E23 /* PhoneNumerInputView.h */,
+				5821966D23F4040200704E23 /* PhoneNumerInputView.m */,
+				5821967723F40E5E00704E23 /* PhoneNumerInputView.xib */,
 				5810F47423628DE800346A43 /* TopupPayLoadView.h */,
 				5810F47223628DE700346A43 /* TopupPayLoadView.m */,
 				5810F47323628DE700346A43 /* TopupPayLoadView.xib */,
@@ -4079,6 +4151,38 @@
 				581F82D522F7C2F300F8291E /* WalletsSwitchViewController.xib */,
 			);
 			path = Wallets;
+			sourceTree = "<group>";
+		};
+		5821964423F107E100704E23 /* Html */ = {
+			isa = PBXGroup;
+			children = (
+				5842E0C62368181D001BB0D6 /* qwallet_index.html */,
+				5821964623F1089500704E23 /* contract_js */,
+			);
+			path = Html;
+			sourceTree = "<group>";
+		};
+		5821966123F28CC800704E23 /* NinaPagerView */ = {
+			isa = PBXGroup;
+			children = (
+				5821966223F28CC800704E23 /* UIView+ViewController.m */,
+				5821966323F28CC800704E23 /* NinaPagerView.m */,
+				5821966423F28CC800704E23 /* NinaBaseView.m */,
+				5821966523F28CC800704E23 /* UIView+ViewController.h */,
+				5821966623F28CC800704E23 /* NinaPagerView.h */,
+				5821966723F28CC800704E23 /* UIParameter.h */,
+				5821966823F28CC800704E23 /* NinaBaseView.h */,
+			);
+			path = NinaPagerView;
+			sourceTree = "<group>";
+		};
+		5821967123F4067800704E23 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5821967223F4069900704E23 /* TopupPayHelper.h */,
+				5821967323F4069900704E23 /* TopupPayHelper.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		5821CD31217DB55E00F81F8B /* ETH */ = {
@@ -4941,10 +5045,14 @@
 		58639D772338BA52005B39FA /* Topup */ = {
 			isa = PBXGroup;
 			children = (
+				5821967123F4067800704E23 /* Util */,
 				5810F47123628D4A00346A43 /* View */,
 				5874E350234DD461000835A0 /* huagaotx */,
 				5884736B233A07E800BB6F76 /* Cell */,
 				589AE86923CC52E300476D53 /* GroupBuy */,
+				5821964A23F13F9D00704E23 /* Topup3ViewController.h */,
+				5821964823F13F9C00704E23 /* Topup3ViewController.m */,
+				5821964923F13F9D00704E23 /* Topup3ViewController.xib */,
 				5836CFBB23B49AA40072187A /* TopupPayNEO_PayViewController.h */,
 				5836CFBD23B49AA50072187A /* TopupPayNEO_PayViewController.m */,
 				5836CFDE23B5D9B30072187A /* TopupPayNEO_PayViewController.xib */,
@@ -4980,6 +5088,12 @@
 				58A34A9423B307F300670577 /* ChooseCountryCodeViewController.h */,
 				58A34A9523B307F300670577 /* ChooseCountryCodeViewController.m */,
 				58A34A9623B307F300670577 /* ChooseCountryCodeViewController.xib */,
+				5821964D23F2551E00704E23 /* TopupProductSubViewController.h */,
+				5821964E23F2551E00704E23 /* TopupProductSubViewController.m */,
+				5821964F23F2551E00704E23 /* TopupProductSubViewController.xib */,
+				5821965723F26D1500704E23 /* ChooseDeductionTokenViewController.h */,
+				5821965823F26D1500704E23 /* ChooseDeductionTokenViewController.m */,
+				5821965923F26D1500704E23 /* ChooseDeductionTokenViewController.xib */,
 			);
 			path = Topup;
 			sourceTree = "<group>";
@@ -5644,6 +5758,12 @@
 				58A34A9923B30AB500670577 /* ChooseCountryCodeCell.h */,
 				58A34A9A23B30AB500670577 /* ChooseCountryCodeCell.m */,
 				58A34A9B23B30AB500670577 /* ChooseCountryCodeCell.xib */,
+				5821965223F2587B00704E23 /* TopupProductSubCell.h */,
+				5821965323F2587B00704E23 /* TopupProductSubCell.m */,
+				5821965423F2587B00704E23 /* TopupProductSubCell.xib */,
+				5821965C23F26F0D00704E23 /* ChooseTokenCell.h */,
+				5821965D23F26F0D00704E23 /* ChooseTokenCell.m */,
+				5821965E23F26F0D00704E23 /* ChooseTokenCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -5857,6 +5977,12 @@
 				589AE86A23CC532900476D53 /* GroupBuyDetialViewController.h */,
 				589AE86B23CC532900476D53 /* GroupBuyDetialViewController.m */,
 				5871923723CEF75400728E15 /* GroupBuyDetialViewController.xib */,
+				5821967E23F5104E00704E23 /* StartGroupViewController.h */,
+				5821967F23F5104E00704E23 /* StartGroupViewController.m */,
+				5821968523F51F8200704E23 /* StartGroupViewController.xib */,
+				5821968C23F5225300704E23 /* JoinGroupBuyViewController.h */,
+				5821968D23F5225300704E23 /* JoinGroupBuyViewController.m */,
+				5821969323F547DC00704E23 /* JoinGroupBuyViewController.xib */,
 			);
 			path = GroupBuy;
 			sourceTree = "<group>";
@@ -5988,6 +6114,7 @@
 		58A4DEA8206234AC00E72F52 /* Qlink */ = {
 			isa = PBXGroup;
 			children = (
+				5821964423F107E100704E23 /* Html */,
 				589DA89A2329FF0900CC22BD /* Framework */,
 				588BFCB320EF211F00B1E860 /* Config */,
 				588BFCAF20EF211F00B1E860 /* Macros */,
@@ -6586,6 +6713,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */,
+				5821966023F26F0D00704E23 /* ChooseTokenCell.xib in Resources */,
 				580D91B92063AE5300B12506 /* Roboto-Thin.ttf in Resources */,
 				581F80D422F7BE6F00F8291E /* ComplaintDetailViewController.xib in Resources */,
 				581F826322F7C20800F8291E /* NEOBackupDetailViewController.xib in Resources */,
@@ -6600,6 +6728,7 @@
 				5834A3522387D7E9004EB81A /* ClaimSuccessTipView.xib in Resources */,
 				58FB8D7D226587620075698E /* FinanceHistoryViewController.xib in Resources */,
 				581F823922F7C1B900F8291E /* EOSActivateAccountViewController.xib in Resources */,
+				5821965B23F26D1500704E23 /* ChooseDeductionTokenViewController.xib in Resources */,
 				58FB8D56226434AF0075698E /* EarningsRankingViewController.xib in Resources */,
 				5871921E23CD8CBC00728E15 /* ShareFriendsSubViewController.xib in Resources */,
 				581F82B722F7C2B800F8291E /* ETHExportKeystoreViewController.xib in Resources */,
@@ -6649,6 +6778,7 @@
 				73FF64F220F599E700E29B3B /* CountryList.json in Resources */,
 				581F80CD22F7BE5F00F8291E /* WalletSelectViewController.xib in Resources */,
 				583E6C0D22FAA2AC004F1134 /* InviteRankingViewController.xib in Resources */,
+				5821968323F51F8200704E23 /* StartGroupViewController.xib in Resources */,
 				5885D451231F49B400F9DEDE /* StakingTypesViewController.xib in Resources */,
 				581F809A22F7BD8200F8291E /* VerifyTipView.xib in Resources */,
 				5885D443231F498E00F9DEDE /* ConfidantViewController.xib in Resources */,
@@ -6702,6 +6832,7 @@
 				58A8B1FC233C87CC007E2CE3 /* TopupPayQLC_Deduction_CNYViewController.xib in Resources */,
 				58FB8D8C2265AB970075698E /* GuangGaoCollectionCell.xib in Resources */,
 				5825553F22EACF9200F0B9F0 /* Kaiti.ttf in Resources */,
+				5821964723F1089500704E23 /* contract_js in Resources */,
 				5825554322EACF9200F0B9F0 /* PEPhotoCropEditor.bundle in Resources */,
 				581F829B22F7C27D00F8291E /* ETHWalletDetailViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
@@ -6715,7 +6846,7 @@
 				581F824722F7C1D500F8291E /* NEOTransactionRecordViewController.xib in Resources */,
 				73899C9C2152003100962B14 /* GuidePageView1.xib in Resources */,
 				581F811A22F7BF0A00F8291E /* MyCell.xib in Resources */,
-				5842E0C72368181D001BB0D6 /* qwallet_js.html in Resources */,
+				5842E0C72368181D001BB0D6 /* qwallet_index.html in Resources */,
 				58A6500121BE16BD00E52FFF /* TipOKView.xib in Resources */,
 				58D8E8802361410900209BB2 /* TopupPayETH_Deduction_CNYViewController.xib in Resources */,
 				581F819822F7C06400F8291E /* NeoQueryWGasView.xib in Resources */,
@@ -6752,6 +6883,7 @@
 				58882ED6239A21E500330EB6 /* JoinTelegramTipView.xib in Resources */,
 				58FC12C3230D391F0069474C /* OTCPayNEOViewController.xib in Resources */,
 				581F81BB22F7C0A200F8291E /* HistoryChartView.xib in Resources */,
+				5821967523F40E5E00704E23 /* PhoneNumerInputView.xib in Resources */,
 				581F832722F7C3B200F8291E /* SettingsCell.xib in Resources */,
 				58A8B1F5233C87B3007E2CE3 /* MyTopupOrderCell.xib in Resources */,
 				581F824E22F7C1E100F8291E /* NEOTransferViewController.xib in Resources */,
@@ -6777,6 +6909,7 @@
 				5871925623CEFAAB00728E15 /* JoinGroupBuyView.xib in Resources */,
 				585CDC20225C99EE00199FE1 /* CountryCode.json in Resources */,
 				581F819122F7C05700F8291E /* DeleteWalletConfirmView.xib in Resources */,
+				5821965623F2587B00704E23 /* TopupProductSubCell.xib in Resources */,
 				581F80E222F7BE8E00F8291E /* PayReceiveAddressViewController.xib in Resources */,
 				5825554022EACF9200F0B9F0 /* SimHei.ttf in Resources */,
 				581F82CC22F7C2E800F8291E /* WalletsViewController.xib in Resources */,
@@ -6784,6 +6917,7 @@
 				581F831922F7C38700F8291E /* SetPWViewController.xib in Resources */,
 				581F830422F7C35600F8291E /* ChooseAreaCodeViewController.xib in Resources */,
 				5871922B23CEE48100728E15 /* ShareRewardCell.xib in Resources */,
+				5821965123F2551E00704E23 /* TopupProductSubViewController.xib in Resources */,
 				580D91B72063AE5300B12506 /* Roboto-Medium.ttf in Resources */,
 				58FB8D822265A8B30075698E /* GuangGaoView.xib in Resources */,
 				58231D4B237BFF10009CDE90 /* MiningDailyDetailCell.xib in Resources */,
@@ -6838,12 +6972,14 @@
 				58FB34BF23D004700045CAB4 /* AgentRewardViewController.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
+				5821964C23F13F9D00704E23 /* Topup3ViewController.xib in Resources */,
 				58FB349B23CFF5400045CAB4 /* OpenDelegateCheckView.xib in Resources */,
 				58A8B211233C8812007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */,
 				581925852114363E009AE406 /* NewRankView.xib in Resources */,
 				581F828D22F7C25500F8291E /* ETHMnemonicConfirmViewController.xib in Resources */,
 				58FB8D65226436820075698E /* EarningRankingCell.xib in Resources */,
 				581F80FE22F7BECC00F8291E /* RecordListViewController.xib in Resources */,
+				5821969123F547DC00704E23 /* JoinGroupBuyViewController.xib in Resources */,
 				5860ACA420CFB42E00EEB6CE /* MyAssetsViewController.xib in Resources */,
 				5860AD2920CFB52600EEB6CE /* MyAssetsCell.xib in Resources */,
 				581F812F22F7BF3300F8291E /* PersonalInfoViewController.xib in Resources */,
@@ -6899,7 +7035,6 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/NinaPagerView/NinaPagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -6940,7 +7075,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NinaPagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -7161,6 +7295,7 @@
 				5894A7232260628B008B0854 /* FinanceRedeemConfirmView.m in Sources */,
 				587ABD6B21B8F8F800C3D81A /* RichListRequest.m in Sources */,
 				587ABD6721B8F8F800C3D81A /* EOS_BaseResult.m in Sources */,
+				5821967023F4040300704E23 /* PhoneNumerInputView.m in Sources */,
 				587ABD4121B8F8F700C3D81A /* GetBlockChainInfoRequest.m in Sources */,
 				58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */,
 				5825552D22EACF9100F0B9F0 /* ZQImageRotationController.m in Sources */,
@@ -7180,6 +7315,7 @@
 				5839F52B2069EB21004C4A54 /* DigestUtils.m in Sources */,
 				580D916820625A4400B12506 /* UIViewController+ShowSubViewAnimate.m in Sources */,
 				581C227121A6B9180009888B /* NeoClaimGasTipView.m in Sources */,
+				5821965F23F26F0D00704E23 /* ChooseTokenCell.m in Sources */,
 				58D689CB230B88EC00115610 /* ServerConstants.m in Sources */,
 				7362EB2920AAC17900F554FE /* UIView+Toast.m in Sources */,
 				580D914B20625A4400B12506 /* UIImage+Resize.m in Sources */,
@@ -7187,6 +7323,7 @@
 				5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */,
 				581AF7AA21B6646E001A37E1 /* EOSTransactionRecordViewController.m in Sources */,
 				5834A3512387D7E9004EB81A /* ClaimSuccessTipView.m in Sources */,
+				5821966923F28CC800704E23 /* UIView+ViewController.m in Sources */,
 				58245C5422E192550093E747 /* LxGridViewFlowLayout.m in Sources */,
 				5894A71C226040FA008B0854 /* MyPortfolioCell.m in Sources */,
 				73A05A342081D91600974483 /* UIImage+HYBImageCliped.m in Sources */,
@@ -7196,6 +7333,7 @@
 				589E59C922D43427000338B7 /* HomeBuySellCell.m in Sources */,
 				581D32DA219C158B001F88C3 /* Peer.swift in Sources */,
 				7384A29E2074DC0B00EA60E0 /* NSDate+Category.m in Sources */,
+				5821968123F5104F00704E23 /* StartGroupViewController.m in Sources */,
 				581D32D9219C158B001F88C3 /* Token.swift in Sources */,
 				58245BE122E00C830093E747 /* EntrustOrderDetailViewController.m in Sources */,
 				5825556822EECBD400F0B9F0 /* WalletSelectViewController.m in Sources */,
@@ -7238,6 +7376,7 @@
 				581D31C8219BC5AE001F88C3 /* MarketsCell.m in Sources */,
 				582844012189407B00AD65C8 /* SettingsCell.m in Sources */,
 				587ABD5B21B8F8F800C3D81A /* EOS_AccountResult.m in Sources */,
+				5821965A23F26D1500704E23 /* ChooseDeductionTokenViewController.m in Sources */,
 				5821CD38217DB5A400F81F8B /* ETHCreateWalletViewController.m in Sources */,
 				58F3186522D3464F0024B4F0 /* RecordListViewController.m in Sources */,
 				585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */,
@@ -7295,6 +7434,7 @@
 				5825552A22EACF9100F0B9F0 /* ZQBrightnessController.m in Sources */,
 				58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */,
 				58A57D3A22DDA22F00699C3F /* WalletTransferUtil.m in Sources */,
+				584F4EEE23D587DC004F579B /* GroupBuyUtil.m in Sources */,
 				583D9549211430FA0057A90C /* VPNRankMode.m in Sources */,
 				58CDBAB023BDCEA300982D54 /* StakingProcessAnimateView.m in Sources */,
 				587ABD5421B8F8F800C3D81A /* EOS_Rate.m in Sources */,
@@ -7368,6 +7508,7 @@
 				5832CB37228125040011160D /* Wallet.swift in Sources */,
 				58245C4722E192550093E747 /* TZAssetModel.m in Sources */,
 				58FB8D8B2265AB970075698E /* GuangGaoCollectionCell.m in Sources */,
+				5821966B23F28CC800704E23 /* NinaBaseView.m in Sources */,
 				7377D1A8206DCAB50072E628 /* RefreshTableView.m in Sources */,
 				581B679521919D280061BEDB /* SuccessTipView.m in Sources */,
 				5839F5222068F8E0004C4A54 /* NSString+UrlEncode.m in Sources */,
@@ -7458,6 +7599,7 @@
 				58A8B1E6233C5C20007E2CE3 /* TopupConstants.m in Sources */,
 				5894EC45217EB93A007F5D39 /* MnemonicTipView.m in Sources */,
 				58FB8D6C22645AF10075698E /* InviteRankingCell.m in Sources */,
+				5821965023F2551E00704E23 /* TopupProductSubViewController.m in Sources */,
 				58245C4A22E192550093E747 /* TZPhotoPreviewController.m in Sources */,
 				58245C4F22E192550093E747 /* TZPhotoPreviewCell.m in Sources */,
 				581D32D8219C158B001F88C3 /* Asset.swift in Sources */,
@@ -7483,6 +7625,7 @@
 				58D689D5230B9FEA00115610 /* QConstants.m in Sources */,
 				58D689C8230A535A00115610 /* PairsModel.m in Sources */,
 				58CD53DD238E2AF400D5C245 /* TokenListHelper.m in Sources */,
+				5821965523F2587B00704E23 /* TopupProductSubCell.m in Sources */,
 				580D914C20625A4400B12506 /* UILabel+Block.m in Sources */,
 				58231D4A237BFF10009CDE90 /* MiningDailyDetailCell.m in Sources */,
 				58161532235ED4A50041A92B /* JPushConstants.m in Sources */,
@@ -7557,14 +7700,17 @@
 				5825554422EACF9200F0B9F0 /* UIImage+PECrop.m in Sources */,
 				58EE817D23054D4B00299261 /* StakingTypesViewController.m in Sources */,
 				58EBECFC234ED963007EEF1F /* ClaimConstants.m in Sources */,
+				5821964B23F13F9D00704E23 /* Topup3ViewController.m in Sources */,
 				58FB34CA23D055570045CAB4 /* InviteeListModel.m in Sources */,
 				5827BC26219EBDBD00B7730E /* ETHExportMnemonicViewController.m in Sources */,
+				5821967423F4069900704E23 /* TopupPayHelper.m in Sources */,
 				58DF7F702189860F00228718 /* ResetPWSuccessView.m in Sources */,
 				5827BC2F21A28B2400B7730E /* HistoryChartView.m in Sources */,
 				5871922523CDB61E00728E15 /* GroupBuyListModel.m in Sources */,
 				58A3EB55237D375900AEF7C8 /* QLCHistoryChartView.m in Sources */,
 				581D32F1219D10F9001F88C3 /* NeoQueryWGasModel.m in Sources */,
 				58D2D89B2193E9BB00C5B4C9 /* ExportPrivateKeyView.m in Sources */,
+				5821968F23F5225300704E23 /* JoinGroupBuyViewController.m in Sources */,
 				581F5FD1219D4FFF00604352 /* ReportUtil.m in Sources */,
 				58DF7F762189917600228718 /* NEOWalletDetailViewController.m in Sources */,
 				5812DDBD20A1A7D20043A8A8 /* UIView+TL.m in Sources */,
@@ -7640,6 +7786,7 @@
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
 				5827BC1D219EA87300B7730E /* BinaTpcsModel.m in Sources */,
 				58270FD820720D3600C08784 /* ProfileViewController.m in Sources */,
+				5821966A23F28CC800704E23 /* NinaPagerView.m in Sources */,
 				589AE86323CC4C4200476D53 /* OpenDelegateSuccessView.m in Sources */,
 				58A801D4226DC7DC00640BBC /* SetPWViewController.m in Sources */,
 				580D916720625A4400B12506 /* NSString+Base64Image.m in Sources */,
@@ -8921,6 +9068,39 @@
 			name = JoinCommunityViewController.xib;
 			sourceTree = "<group>";
 		};
+		5821967723F40E5E00704E23 /* PhoneNumerInputView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5821967623F40E5E00704E23 /* Base */,
+				5821967923F40E6700704E23 /* en */,
+				5821967B23F40E6A00704E23 /* zh-Hans */,
+				5821967D23F40E6E00704E23 /* id */,
+			);
+			name = PhoneNumerInputView.xib;
+			sourceTree = "<group>";
+		};
+		5821968523F51F8200704E23 /* StartGroupViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5821968423F51F8200704E23 /* Base */,
+				5821968723F51FAE00704E23 /* en */,
+				5821968923F51FB200704E23 /* zh-Hans */,
+				5821968B23F51FB500704E23 /* id */,
+			);
+			name = StartGroupViewController.xib;
+			sourceTree = "<group>";
+		};
+		5821969323F547DC00704E23 /* JoinGroupBuyViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5821969223F547DC00704E23 /* Base */,
+				5821969523F547E300704E23 /* en */,
+				5821969723F547E800704E23 /* zh-Hans */,
+				5821969923F547EB00704E23 /* id */,
+			);
+			name = JoinGroupBuyViewController.xib;
+			sourceTree = "<group>";
+		};
 		5836CFCC23B5D91E0072187A /* TopupPayETH_DeductionViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9750,7 +9930,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9770,7 +9950,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9827,7 +10007,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -9878,7 +10058,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = "";
@@ -9895,7 +10075,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7047;
+				CURRENT_PROJECT_VERSION = 7331;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9918,7 +10098,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9940,7 +10120,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7047;
+				CURRENT_PROJECT_VERSION = 7331;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9962,7 +10142,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
