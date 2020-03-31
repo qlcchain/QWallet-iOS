@@ -82,4 +82,11 @@
     return result;
 }
 
+- (TopupProductModel *)v2ToV3 {
+    TopupProductModel *modelV3 = [TopupProductModel getObjectWithKeyValues:self.mj_keyValues];
+    modelV3.localFiatAmount = self.localFaitMoney;
+    modelV3.payFiatAmount = self.payTokenMoney;
+    return modelV3;
+}
+
 @end

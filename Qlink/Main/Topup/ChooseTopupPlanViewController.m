@@ -314,7 +314,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 }
 
 - (void)handlerPayCNY:(TopupProductModel *)model {
-    NSString *amountNum = model.localFaitMoney;
+    NSString *amountNum = model.localFiatAmount;
     NSString *faitStr = [model.discount.mul(model.payTokenMoney) showfloatStr:4];
     NSNumber *deductionTokenPrice = @(1);
     if ([model.payFiat isEqualToString:@"CNY"]) {
@@ -350,7 +350,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
 }
 
 - (void)handlerPayToken:(TopupProductModel *)model {
-    NSString *amountNum = model.localFaitMoney;
+    NSString *amountNum = model.localFiatAmount;
     NSString *fait1Str = model.discount.mul(model.payTokenMoney);
 //    NSString *faitMoneyStr = [model.discount.mul(model.payTokenMoney) showfloatStr:4];
     NSString *deduction1Str = model.payTokenMoney.mul(model.qgasDiscount);
@@ -364,7 +364,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     NSNumber *payTokenPrice = [model.payFiat isEqualToString:@"CNY"]?model.payTokenCnyPrice:[model.payFiat isEqualToString:@"USD"]?model.payTokenUsdPrice:@(0);
     NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
     // Top-up value %@ %@\npay %@ %@ and %@ %@
-    // localFaitMoney  lacalFait    qgasStr        payTokenAmount
+    // localFiatAmount  lacalFait    qgasStr        payTokenAmount
     NSString *message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction_1"),amountNum, model.localFiat, deductionAmountStr,_selectDeductionTokenM.symbol,payAmountStr, model.payTokenSymbol];
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
@@ -422,7 +422,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
                     if (![model1.payFiatAmount isEmptyString]) {
                         model2.payTokenMoney = [model1.payFiatAmount componentsSeparatedByString:@","][idx]?:@"0";
                     }
-                    [weakself.sourceArr addObject:model2];
+                    [weakself.sourceArr addObject:[model2 v2ToV3]];
                 }];
             }];
             weakself.currentPage += 1;
@@ -499,7 +499,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     NSString *p2pId = [UserModel getTopupP2PId];
     NSString *productId = model.ID?:@"";
     NSString *phoneNumber = _phoneTF.text?:@"";
-    NSString *localFiatAmount = [NSString stringWithFormat:@"%@",model.localFaitMoney];
+    NSString *localFiatAmount = [NSString stringWithFormat:@"%@",model.localFiatAmount];
     NSString *deductionTokenId = _selectDeductionTokenM.ID?:@"";
     NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"phoneNumber":phoneNumber,@"localFiatAmount":localFiatAmount,@"deductionTokenId":deductionTokenId?:@""};
     [kAppD.window makeToastInView:kAppD.window];
@@ -610,8 +610,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
         
         kWeakSelf(self);
-        [GroupBuyUtil requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
-            if (haveGroupBuyActivity) {
+        [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
+            if (isInGroupBuyActiviyTime) {
                 [weakself jumpToGroupBuyDetial:model];
             } else {
                 [weakself handlerPayToken:model];
@@ -819,7 +819,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     TopupPayETH_Deduction_CNYViewController *vc = [TopupPayETH_Deduction_CNYViewController new];
     vc.sendAmount = [NSString stringWithFormat:@"%@",deductionAmountStr];
     vc.sendToAddress = ethAddress;
-//    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.localFaitMoney,okbStr,_selectDeductionTokenM.symbol,okbFaitStr];
+//    vc.sendMemo = [NSString stringWithFormat:kLang(@"recharge__yuan_phone_charge_deduction__yuan"),model.localFiatAmount,okbStr,_selectDeductionTokenM.symbol,okbFaitStr];
     vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",model.ID?:@"",faitMoneyStr?:@""];
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"OKB";
     vc.inputProductM = model;

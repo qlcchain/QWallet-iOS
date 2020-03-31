@@ -276,6 +276,33 @@ static NSString *const NetworkSize = @"20";
     
 }
 
+- (void)handleSeg0 {
+    if (_currentBuyPage == 1) {
+        [self requestEntrust_order_list];
+    } else {
+        _sourceArr = _buyArr;
+        [_mainTable reloadData];
+        _mainTable.mj_footer.hidden = _buyFooterHidden;
+    }
+}
+
+- (void)handleSeg1 {
+    if (_currentSellPage == 1) {
+        [self requestEntrust_order_list];
+    } else {
+        _sourceArr = _sellArr;
+        [_mainTable reloadData];
+        _mainTable.mj_footer.hidden = _sellFooterHidden;
+    }
+}
+
+- (void)showSellView {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _mainSeg.selectedSegmentIndex = 1;
+        [self handleSeg1];
+    });
+}
+
 #pragma mark - Request
 - (void)requestEntrust_order_list {
     kWeakSelf(self);
@@ -447,21 +474,9 @@ static NSString *const NetworkSize = @"20";
 - (IBAction)segAction:(id)sender {
 
     if (_mainSeg.selectedSegmentIndex == 0) {
-        if (_currentBuyPage == 1) {
-            [self requestEntrust_order_list];
-        } else {
-            _sourceArr = _buyArr;
-            [_mainTable reloadData];
-            _mainTable.mj_footer.hidden = _buyFooterHidden;
-        }
+        [self handleSeg0];
     } else {
-        if (_currentSellPage == 1) {
-            [self requestEntrust_order_list];
-        } else {
-            _sourceArr = _sellArr;
-            [_mainTable reloadData];
-            _mainTable.mj_footer.hidden = _sellFooterHidden;
-        }
+        [self handleSeg1];
     }
 }
 
@@ -541,13 +556,6 @@ static NSString *const NetworkSize = @"20";
     if (!haveLogin) {
         [kAppD presentLoginNew];
         return;
-    }
-    if ([model.tradeToken isEqualToString:@"QGAS"] && [model.totalAmount doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
-        UserModel *userM = [UserModel fetchUserOfLogin];
-        if (![userM.vStatus isEqualToString:kyc_success]) {
-            [self showVerifyTipView];
-            return;
-        }
     }
     
     BuySellDetailViewController *vc = [BuySellDetailViewController new];

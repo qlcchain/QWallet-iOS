@@ -19,9 +19,12 @@ typedef void(^TopupUpdateTableHeightBlock)(CGFloat tableHeight);
 @property (nonatomic, strong) NSString *inputGlobalRoaming;
 @property (nonatomic, strong) TopupDeductionTokenModel *inputDeductionTokenM;
 @property (nonatomic, strong) TopupCountryModel *inputCountryM;
+@property (nonatomic) BOOL isInGroupBuyActivityTime;
+@property (nonatomic, strong) NSString *groupBuyMinimumDiscount;
 @property (nonatomic, copy) TopupUpdateTableHeightBlock updateTableHeightBlock;
 
 - (void)pullRefresh;
+- (void)refreshTable;
 - (CGFloat)getTableHeight;
 
 @end

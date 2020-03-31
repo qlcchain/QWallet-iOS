@@ -134,7 +134,7 @@
 }
 
 - (void)handlerGroupBuyPayToken {
-    NSString *amountNum = _productM.localFaitMoney;
+    NSString *amountNum = _productM.localFiatAmount;
     NSString *groupDiscount = _joinM.discount?:@"1";
     NSString *fait1Str = _productM.payTokenMoney.mul(groupDiscount);
         NSString *deduction1Str = _productM.payTokenMoney.mul(_productM.qgasDiscount).mul(groupDiscount);

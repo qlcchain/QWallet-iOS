@@ -24,6 +24,7 @@
 #import "SuccessTipView.h"
 #import "ClaimSuccessTipView.h"
 #import "AppJumpHelper.h"
+#import <UIImageView+WebCache.h>
 
 @interface ClaimQGASViewController ()
 
@@ -43,6 +44,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletAddressLab;
 
+@property (weak, nonatomic) IBOutlet UITextField *codeTF;
+@property (weak, nonatomic) IBOutlet UIImageView *codeImg;
+@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+
+
 @property (nonatomic, strong) WalletCommonModel *sendQgasWalletM;
 
 @end
@@ -54,6 +60,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self configInit];
+    [self getCode];
 }
 
 #pragma mark - Operation
@@ -67,8 +74,18 @@
     _canClaimAmountLab.text = [NSString stringWithFormat:@"%@ QGAS",_inputCanClaimAmount?:@"0"];
 }
 
+- (void)getCode {
+    if (_claimQGASType == ClaimQGASTypeDailyEarnings) {
+        NSString *type = @"CLAIM_BIND";
+        [self requestVcode_verify_code:type];
+    } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
+        NSString *type = @"CLAIM_INVITE";
+        [self requestVcode_verify_code:type];
+    }
+}
+
 #pragma mark - Request
-- (void)requestReward_claim_bind {
+- (void)requestReward_claim_bind_v2 {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -80,9 +97,10 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = _qgasSendTF.text?:@"";
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress};
+    NSString *code = _codeTF.text?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl11:reward_claim_bind_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl11:reward_claim_bind_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             ClaimSuccessTipView *view = [ClaimSuccessTipView getInstance];
@@ -92,13 +110,15 @@
                 [AppJumpHelper jumpToTopup];
                 [weakself.navigationController popToRootViewControllerAnimated:YES];
             });
-        }
+        } else {
+           [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+       }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
     }];
 }
 
-- (void)requestReward_claim_invite {
+- (void)requestReward_claim_invite_v2 {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -110,15 +130,38 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = _qgasSendTF.text?:@"";
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress};
+    NSString *code = _codeTF.text?:@"";
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl11:reward_claim_invite_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl11:reward_claim_invite_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             SuccessTipView *view = [SuccessTipView getInstance];
             [view showWithTitle:kLang(@"successful")];
             
             [weakself backAction:nil];
+        } else {
+           [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+       }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+- (void)requestVcode_verify_code:(NSString *)type {
+    kWeakSelf(self);
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    NSString *account = userM.account?:@"";
+    NSDictionary *params = @{@"account":account,@"type":type};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:vcode_verify_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
+            NSString *codeUrl = responseObject[@"codeUrl"];
+            [weakself.codeImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrl]] placeholderImage:nil completed:nil];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -164,10 +207,15 @@
         return;
     }
     
+    if ([_codeTF.text isEmptyString]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
+        return;
+    }
+    
     if (_claimQGASType == ClaimQGASTypeDailyEarnings) {
-        [self requestReward_claim_bind];
+        [self requestReward_claim_bind_v2];
     } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
-        [self requestReward_claim_invite];
+        [self requestReward_claim_invite_v2];
     }
 }
 
@@ -175,6 +223,15 @@
     _sendQgasWalletM = nil;
     _sendQgasWalletBack.hidden = YES;
     _qgasSendTF.text = nil;
+}
+
+- (IBAction)codeAction:(id)sender {
+    if (![UserModel haveLoginAccount]) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
+    [self getCode];
 }
 
 

@@ -35,7 +35,7 @@ extern  NSString * _Nonnull const QLC_AccountPending_Done_Noti;
 - (void)sendAssetWithTokenName:(NSString *)tokenName from:(NSString *)from to:(NSString *)to amount:(NSUInteger)amount privateKey:(NSString *)privateKey sender:(nullable NSString *)sender receiver:(nullable NSString *)receiver message:(nullable NSString *)message data:(nullable NSString *)data baseUrl:(NSString *)baseUrl workInLocal:(BOOL)workInLocal successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
 
 // receive
-- (void)receive_accountsPending:(NSString *)address baseUrl:(NSString *)baseUrl privateKey:(NSString *)privateKey;
+- (void)receive_accountsPending:(NSString *)address baseUrl:(NSString *)baseUrl privateKey:(NSString *)privateKey toastView:(UIView *)toastView;
 
 + (void)signAndWork:(NSDictionary *)dic publicKey:(NSString *)publicKey privateKey:(NSString *)privateKey resultHandler:(void(^_Nonnull)(NSDictionary * _Nullable responseDic))resultHandler;
 

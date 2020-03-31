@@ -34,6 +34,7 @@
 #import <ContactsUI/ContactsUI.h>
 #import "ChooseCountryUtil.h"
 #import "PhoneNumerInputView.h"
+#import "TopupBuyConfirmViewController.h"
 
 static NSString *const TopupNetworkSize = @"30";
 
@@ -123,7 +124,6 @@ static NSString *const TopupNetworkSize = @"30";
 }
 
 - (void)refreshProductView {
-    BOOL haveGroupBuy = [_inputProductM.haveGroupBuy isEqualToString:@"no"]?NO:YES;
             
     NSString *language = [Language currentLanguageCode];
     NSString *country = @"";
@@ -140,11 +140,11 @@ static NSString *const TopupNetworkSize = @"30";
         name = _inputProductM.nameEn;
         explain = _inputProductM.explainEn;
         des = _inputProductM.descriptionEn;
-        if (haveGroupBuy) {
+//        if (haveGroupBuy) {
             alreadyStr = [NSString stringWithFormat:@"%@ open",_inputProductM.orderTimes];
-        } else {
-            alreadyStr = [NSString stringWithFormat:@"%@ sold",_inputProductM.orderTimes];
-        }
+//        } else {
+//            alreadyStr = [NSString stringWithFormat:@"%@ sold",_inputProductM.orderTimes];
+//        }
     } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
         country = _inputProductM.country;
         province = _inputProductM.province;
@@ -152,11 +152,11 @@ static NSString *const TopupNetworkSize = @"30";
         name = _inputProductM.name;
         explain = _inputProductM.explain;
         des = _inputProductM.Description;
-        if (haveGroupBuy) {
+//        if (haveGroupBuy) {
             alreadyStr = [NSString stringWithFormat:@"已拼%@+件",_inputProductM.orderTimes];
-        } else {
-            alreadyStr = [NSString stringWithFormat:@"已售%@+件",_inputProductM.orderTimes];
-        }
+//        } else {
+//            alreadyStr = [NSString stringWithFormat:@"已售%@+件",_inputProductM.orderTimes];
+//        }
     } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
         country = _inputProductM.countryEn;
         province = _inputProductM.provinceEn;
@@ -164,11 +164,11 @@ static NSString *const TopupNetworkSize = @"30";
         name = _inputProductM.nameEn;
         explain = _inputProductM.explainEn;
         des = _inputProductM.descriptionEn;
-        if (haveGroupBuy) {
+//        if (haveGroupBuy) {
             alreadyStr = [NSString stringWithFormat:@"%@ open",_inputProductM.orderTimes];
-        } else {
-            alreadyStr = [NSString stringWithFormat:@"%@ sold",_inputProductM.orderTimes];
-        }
+//        } else {
+//            alreadyStr = [NSString stringWithFormat:@"%@ sold",_inputProductM.orderTimes];
+//        }
     }
 //    _phoneNumberLab.text = [NSString stringWithFormat:@"%@：%@ %@",kLang(@"phone_number"),_inputCountryM.globalRoaming?:@"",_inputPhoneNum?:@""];
 //    _countryLab.text = country?:@"";
@@ -183,19 +183,26 @@ static NSString *const TopupNetworkSize = @"30";
 //    _productPhoneNumLab;
     
 //    NSString *localFiatStr = _inputProductM.localFiat?:@"";
-//    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",_inputProductM.localFaitMoney,localFiatStr];
+//    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",_inputProductM.localFiatAmount,localFiatStr];
 //    _productRechargeLab.text = [NSString stringWithFormat:@"%@：%@",kLang(@"recharge_phone_bill"),amountShowStr];
     
     
     NSString *localFiatStr = _inputProductM.localFiat?:@"";
-    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",_inputProductM.localFiatAmount,localFiatStr];
+    NSString *localAmountShowStr  = [NSString stringWithFormat:@"%@ %@",_inputProductM.localFiatAmount,localFiatStr];
+    NSString *fait1Str = _inputProductM.discount.mul(_inputProductM.payFiatAmount);
+//        NSString *deduction1Str = productM.payFiatAmount.mul(productM.qgasDiscount);
+    NSString *payTokenSymbol = _inputProductM.payTokenSymbol?:@"";
+    NSNumber *payTokenPrice = [_inputProductM.payFiat isEqualToString:@"CNY"]?_inputProductM.payTokenCnyPrice:[_inputProductM.payFiat isEqualToString:@"USD"]?_inputProductM.payTokenUsdPrice:@(0);
+//        NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
+    NSString *payAmountStr = [fait1Str.div(payTokenPrice) showfloatStr:3];
+    NSString *amountShowStr = [NSString stringWithFormat:@"%@ %@",payAmountStr,payTokenSymbol];
     //中划线
     NSDictionary *amountAttribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
     NSMutableAttributedString *amountAttribtStr = [[NSMutableAttributedString alloc]initWithString:amountShowStr attributes:amountAttribtDic];
     _productOriginLab.attributedText = amountAttribtStr;
     
 //    NSString *desStr = [NSString stringWithFormat:@"%@%@%@",countryStr,provinceStr,ispStr];
-    NSString *titleShowStr = [NSString stringWithFormat:@"%@ %@ %@\n%@",country,isp,amountShowStr,explain];
+    NSString *titleShowStr = [NSString stringWithFormat:@"%@ %@ %@\n%@",country,isp,localAmountShowStr,explain];
     NSMutableAttributedString *titleAtt = [[NSMutableAttributedString alloc] initWithString:titleShowStr];
     [titleAtt addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, titleShowStr.length)];
 //    [discountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:14] range:[discountShowStr rangeOfString:discountStr]];
@@ -208,7 +215,7 @@ static NSString *const TopupNetworkSize = @"30";
     _productPriceLab.text = [TopupProductModel getAmountShow:_inputProductM tokenM:_selectDeductionTokenM];
     
     _phonetopupLab.text = kLang(@"recharge_phone_bill");
-    _phonetopupValLab.text = amountShowStr;
+    _phonetopupValLab.text = localAmountShowStr;
     _provinceLab.text = [NSString stringWithFormat:@"%@ %@",province,isp];
     
     NSString *topImgStr = @"";
@@ -298,7 +305,7 @@ static NSString *const TopupNetworkSize = @"30";
     NSNumber *payTokenPrice = [model.payFiat isEqualToString:@"CNY"]?model.payTokenCnyPrice:[model.payFiat isEqualToString:@"USD"]?model.payTokenUsdPrice:@(0);
     NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
     // Top-up value %@ %@\npay %@ %@ and %@ %@
-    // localFaitMoney  lacalFait    qgasStr        payTokenAmount
+    // localFiatAmount  lacalFait    qgasStr        payTokenAmount
     NSString *message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction_1"),amountNum, model.localFiat, deductionAmountStr,_selectDeductionTokenM.symbol,payAmountStr, model.payTokenSymbol];
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
@@ -433,27 +440,29 @@ static NSString *const TopupNetworkSize = @"30";
 //}
 
 - (IBAction)buyAlongAction:(id)sender {
-    kWeakSelf(self);
-    PhoneNumerInputView *inputV = [PhoneNumerInputView getInstance];
-    __weak typeof(inputV) weakInput = inputV;
-    inputV.confirmBlock = ^(NSString * _Nonnull phoneNum) {
-        [weakself.view endEditing:YES];
-        if (phoneNum == nil || [phoneNum isEmptyString]) {
-//            _phoneBackHeight.constant = 52;
-            [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
-            return;
-        }
-        if ([[phoneNum stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || phoneNum.length < 6) { // 大于6位的纯数字
-            [kAppD.window makeToastDisappearWithText:kLang(@"please_fill_in_a_valid_phone_number")];
-            return;
-        }
-        [weakInput hide];
-
-        weakself.selectPhoneNum = phoneNum;
-        weakself.currentPayType = TopupPayTypeNormal;
-        [weakself handlerPayToken:_inputProductM];
-    };
-    [inputV show];
+//    kWeakSelf(self);
+//    PhoneNumerInputView *inputV = [PhoneNumerInputView getInstance];
+//    __weak typeof(inputV) weakInput = inputV;
+//    inputV.confirmBlock = ^(NSString * _Nonnull phoneNum) {
+//        [weakself.view endEditing:YES];
+//        if (phoneNum == nil || [phoneNum isEmptyString]) {
+////            _phoneBackHeight.constant = 52;
+//            [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
+//            return;
+//        }
+//        if ([[phoneNum stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || phoneNum.length < 6) { // 大于6位的纯数字
+//            [kAppD.window makeToastDisappearWithText:kLang(@"please_fill_in_a_valid_phone_number")];
+//            return;
+//        }
+//        [weakInput hide];
+//
+//        weakself.selectPhoneNum = phoneNum;
+//        weakself.currentPayType = TopupPayTypeNormal;
+//        [weakself handlerPayToken:_inputProductM];
+//    };
+//    [inputV show];
+    
+    [self jumpToTopupBuyConfirm];
 }
 
 - (IBAction)startGroupBuyAction:(id)sender {
@@ -507,7 +516,7 @@ static NSString *const TopupNetworkSize = @"30";
         vc.inputPayToken = orderM.payToken;
     }
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
+//    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
@@ -585,6 +594,13 @@ static NSString *const TopupNetworkSize = @"30";
         [weakself requestTopup_group_list];
         [weakself handlerGroupBuyPay:model];
     };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToTopupBuyConfirm {
+    TopupBuyConfirmViewController *vc = [TopupBuyConfirmViewController new];
+    vc.inputProductM = _inputProductM;
+    vc.inputDeductionTokenM = _selectDeductionTokenM;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

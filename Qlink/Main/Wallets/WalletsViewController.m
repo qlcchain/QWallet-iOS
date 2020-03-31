@@ -71,6 +71,8 @@
 #import "ETHMnemonicViewController.h"
 #import "TokenListHelper.h"
 #import "EOSAddressInfoModel.h"
+#import "NEOJSUtil.h"
+#import "NEOGasClaimModel.h"
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -78,8 +80,6 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *refreshScroll;
 
-//@property (weak, nonatomic) IBOutlet UILabel *totalLab;
-//@property (weak, nonatomic) IBOutlet UILabel *winqgasLab;
 @property (weak, nonatomic) IBOutlet UILabel *walletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *walletAddressLab;
 @property (weak, nonatomic) IBOutlet UILabel *walletBalanceLab;
@@ -87,20 +87,19 @@
 
 @property (weak, nonatomic) IBOutlet UIView *walletBack;
 
-// Staking
+// QLC Staking
 @property (weak, nonatomic) IBOutlet UILabel *myStakingsLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stakingHeight; // 53
 
-// Gas
+// NEO Gas
 @property (weak, nonatomic) IBOutlet UILabel *claimgasLab;
 @property (weak, nonatomic) IBOutlet UILabel *claimLab;
 @property (weak, nonatomic) IBOutlet UIImageView *claimStatusIcon;
 @property (weak, nonatomic) IBOutlet UIView *claimBtnBack;
-// Resources
-@property (weak, nonatomic) IBOutlet UILabel *eosResourceLab;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasBackHeight; // 71
 
+// EOS Resources
+@property (weak, nonatomic) IBOutlet UILabel *eosResourceLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *eosResourcesHeight; // 53
 
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *totalBackheight; // 147
@@ -269,7 +268,6 @@
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
 //    _walletBalanceLab.text = [NSString stringWithFormat:@"$ %@",currentWalletM.balance];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-//    _gasBackHeight.constant = 0;
 //    _eosResourcesHeight.constant = 0;
     _walletIcon.image = [UIImage imageNamed:@"eth_wallet"];
     
@@ -330,7 +328,6 @@
     _walletNameLab.text = currentWalletM.name;
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-//    _gasBackHeight.constant = 0;
 //    _eosResourcesHeight.constant = 0;
     _stakingHeight.constant = 53;
     _walletIcon.image = [UIImage imageNamed:@"qlc_wallet"];
@@ -370,8 +367,6 @@
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
     //    _walletBalanceLab.text = [NSString stringWithFormat:@"$ %@",currentWalletM.balance];
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-    _gasBackHeight.constant = 71;
-//    _eosResourcesHeight.constant = 0;
     _walletIcon.image = [UIImage imageNamed:@"neo_wallet"];
     
     [_sourceArr removeAllObjects];
@@ -413,7 +408,6 @@
 //    _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
     _walletAddressLab.text = currentWalletM.account_name;
     _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],@"0"];
-//    _gasBackHeight.constant = 0;
     _eosResourcesHeight.constant = 53;
     _walletIcon.image = [UIImage imageNamed:@"eos_wallet"];
     
@@ -553,20 +547,26 @@
 - (void)neoGasStatusInit {
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeNEO) {
-        [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusSync; // 初始化
+        _gasBackHeight.constant = 0;
+//        _gasBackHeight.constant = 71;
+        [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusNone; // 初始化
     }
 }
 
 - (void)refreshClaimGas:(NSString *)amount {
     NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
     _claimStatusIcon.hidden = YES;
-    if (status == NEOGasClaimStatusSync) {
-        _claimLab.text = @"Sync";
+    if (status == NEOGasClaimStatusNone) {
+        _claimLab.text = @"Claim";
         _claimLab.hidden = NO;
         _claimgasLab.text = amount?:@"0";
-    } else if (status == NEOGasClaimStatusSyncLoading) {
-        _claimLab.hidden = YES;
-        _claimgasLab.text = amount?:@"0";
+//    } else if (status == NEOGasClaimStatusSync) {
+//        _claimLab.text = @"Sync";
+//        _claimLab.hidden = NO;
+//        _claimgasLab.text = amount?:@"0";
+//    } else if (status == NEOGasClaimStatusSyncLoading) {
+//        _claimLab.hidden = YES;
+//        _claimgasLab.text = amount?:@"0";
     } else if (status == NEOGasClaimStatusClaim) {
         _claimLab.text = @"Claim";
         _claimLab.hidden = NO;
@@ -580,50 +580,69 @@
         _claimgasLab.text = amount?:@"0";
         _claimStatusIcon.hidden = NO;
         _claimStatusIcon.image = [UIImage imageNamed:@"icon_success_orange"];
+        kWeakSelf(self);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weakself.gasBackHeight.constant = 0;
+        });
     } else if (status == NEOGasClaimStatusClaimFail) {
         _claimLab.text = @"Claim";
         _claimLab.hidden = NO;
     }
 }
 
-- (void)requestGetNeoCliamGas {
-    // 刷新neo claimgas
-    kWeakSelf(self);
-    [NEOGasUtil.sharedInstance loadClaimableGAS:^(NSString * amount) {
-        NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
-        if (status == NEOGasClaimStatusSyncLoading) {
-            [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaim;
-        }
-        [weakself refreshClaimGas:amount];
-    }];
-}
-
 - (void)neoClaimGasActionWithShowLoad:(BOOL)showLoad {
     kWeakSelf(self);
     if (showLoad) {
         [kAppD.window makeToastInView:kAppD.window];
-    } dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NEOGasUtil.sharedInstance neoClaimGas:^(BOOL success) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (showLoad) {
-                    [kAppD.window hideToast];
-                }
-                NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
-                if (success) {
-                    if (status == NEOGasClaimStatusClaimLoading) {
-                        [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimSuccess;
-                        [weakself refreshClaimGas:nil];
-                    }
+    }
+    
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    NSString *privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:currentWalletM.address]?:@"";
+    NSString *wif = [NEOWalletInfo getNEOEncryptedKeyWithAddress:currentWalletM.address]?:@"";
+    [NEOJSUtil addNEOJSView];
+    [NEOJSUtil claimgasWithPrivateKey:privateKey resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        if (showLoad) {
+            [kAppD.window hideToast];
+        }
+        NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
+        if (success) {
+            if (status == NEOGasClaimStatusClaimLoading) {
+                [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimSuccess;
+                [weakself refreshClaimGas:nil];
+            }
 //                    [weakself requestGetNeoCliamGas];
-                    [kAppD.window makeToastDisappearWithText:kLang(@"claimed_successfully")];
-                } else {
-                    [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimFail;
-                    [weakself refreshClaimGas:nil];
-                    [kAppD.window makeToastDisappearWithText:kLang(@"claimed_failed")];
-                }
-            });
-        }];
-    });
+            [kAppD.window makeToastDisappearWithText:kLang(@"claimed_successfully")];
+        } else {
+            [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimFail;
+            [weakself refreshClaimGas:nil];
+            [kAppD.window makeToastDisappearWithText:kLang(@"claimed_failed")];
+        }
+        
+        [NEOJSUtil removeNEOJSView];
+    }];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [NEOGasUtil.sharedInstance neoClaimGas:^(BOOL success) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (showLoad) {
+//                    [kAppD.window hideToast];
+//                }
+//                NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
+//                if (success) {
+//                    if (status == NEOGasClaimStatusClaimLoading) {
+//                        [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimSuccess;
+//                        [weakself refreshClaimGas:nil];
+//                    }
+////                    [weakself requestGetNeoCliamGas];
+//                    [kAppD.window makeToastDisappearWithText:kLang(@"claimed_successfully")];
+//                } else {
+//                    [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimFail;
+//                    [weakself refreshClaimGas:nil];
+//                    [kAppD.window makeToastDisappearWithText:kLang(@"claimed_failed")];
+//                }
+//            });
+//        }];
+//    });
 }
 
 - (void)showNeoClaimGasTip:(NSString *)amount {
@@ -650,39 +669,6 @@
 - (void)showNeoGotWGas:(NeoGotWGasModel *)model {
     [kAppD.window makeToastDisappearWithText:model.tips];
 }
-
-//- (void)refreshTokenList {
-//    _gasBackHeight.constant = 0;
-//    _eosResourcesHeight.constant = 0;
-//    _stakingHeight.constant = 0;
-//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-//    DDLogDebug(@"refreshTokenList:%@",@(currentWalletM.walletType));
-//    switch (currentWalletM.walletType) {
-//        case WalletTypeETH:
-//        {
-//            [self requestETHAddressInfo:currentWalletM.address?:@"" showLoad:NO];
-//        }
-//            break;
-//        case WalletTypeEOS:
-//        {
-//            [self requestEOSTokenList:currentWalletM.account_name?:@"" showLoad:NO];
-//        }
-//            break;
-//        case WalletTypeNEO:
-//        {
-//            [self requestNEOAddressInfo:currentWalletM.address?:@"" showLoad:NO];
-//        }
-//            break;
-//        case WalletTypeQLC:
-//        {
-//            [self requestQLCAddressInfo:currentWalletM.address?:@"" showLoad:NO];
-//        }
-//            break;
-//
-//        default:
-//            break;
-//    }
-//}
 
 - (void)handlerWithETH:(ETHAddressInfoModel *)infoM {
     self.ethAddressInfoM = infoM;
@@ -788,7 +774,7 @@
 //        BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
         NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
         NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:currentWalletM.address]?:@"";
-        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address baseUrl:baseUrl privateKey:privateKey]; // QLC钱包接收sendblock
+        [[QLCWalletManage shareInstance] receive_accountsPending:currentWalletM.address baseUrl:baseUrl privateKey:privateKey toastView:[UIApplication sharedApplication].keyWindow]; // QLC钱包接收sendblock
     }
 }
 
@@ -1022,6 +1008,40 @@
 }
 
 #pragma mark - Request
+- (void)requestGetNeoCliamGas {
+    // 刷新neo claimgas
+    kWeakSelf(self);
+    if (![NEOWalletManage.sharedInstance haveDefaultWallet]) {
+        return;
+    }
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    NSDictionary *params = @{@"address" : currentWalletM.address};
+//    RequestService.request(withUrl5: "/api/neo/getClaims.json", params: dict, httpMethod: HttpMethodPost, successBlock:
+    [RequestService requestWithUrl10:neoGetClaims_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//    [RequestService requestWithUrl5:neoGetClaims_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            
+            NEOGasClaimModel *model = [NEOGasClaimModel getObjectWithKeyValues:responseObject[Server_Data]];
+            if ([model.unclaimed_str doubleValue] > 0) {
+                NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
+                if (status == NEOGasClaimStatusNone) {
+                    _gasBackHeight.constant = 71;
+                    [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaim;
+                }
+            } else {
+                _gasBackHeight.constant = 0;
+//                _gasBackHeight.constant = 71;
+                [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusNone;
+            }
+            [weakself refreshClaimGas:model.unclaimed_str];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+//    [NEOGasUtil.sharedInstance loadClaimableGAS:^(NSString * amount) {
+//
+//    }];
+}
+
 //- (void)requestETHAddressInfo:(NSString *)address showLoad:(BOOL)showLoad {
 //    // 检查地址有效性
 //    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:address];
@@ -1435,8 +1455,8 @@
 
 - (IBAction)neoClaimAction:(id)sender {
     NEOGasClaimStatus status = [NEOGasClaimUtil shareInstance].claimStatus;
-    if (status == NEOGasClaimStatusSync) {
-        [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusSyncLoading;
+    if (status == NEOGasClaimStatusNone) {
+//        [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusSyncLoading;
         [self requestGetNeoCliamGas];
     } else if (status == NEOGasClaimStatusClaim || status == NEOGasClaimStatusClaimFail) {
         [NEOGasClaimUtil shareInstance].claimStatus = NEOGasClaimStatusClaimLoading;
@@ -1448,6 +1468,9 @@
             [self showNeoClaimGasTip:gas];
         }
     }
+    
+//    NSString *gas = _claimgasLab.text?:@"0";
+//    [self showNeoClaimGasTip:gas];
 }
 
 - (IBAction)eosResourcesAction:(id)sender {
@@ -1545,15 +1568,10 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == _refreshScroll) {
         if (_refreshScroll.contentOffset.y < 0) {
-//            _refreshScroll.backgroundColor = MAIN_BLUE_COLOR;
             _refreshScroll.theme_backgroundColor = globalBackgroundColorPicker;
-//        } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - _refreshScroll.visibleSize.height) {
         } else if (_refreshScroll.contentOffset.y > _refreshScroll.contentSize.height - [self scrollViewVisibleSize:_refreshScroll].height) {
             _refreshScroll.backgroundColor = MAIN_WHITE_COLOR;
         }
-//        if (_slimeView) {
-//            [_slimeView scrollViewDidScroll];
-//        }
     }
 }
     
@@ -1573,11 +1591,6 @@
     }
 }
 
-#pragma mark - slimeRefresh delegate
-//- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView {
-//    [self pullToRefresh];
-//}
-
 - (void)pullToRefresh {
     [self startReceiveQLC];
     
@@ -1596,9 +1609,6 @@
 
 - (void)endRefresh {
     [_refreshScroll.mj_header endRefreshing];
-//    if (_slimeView) {
-//        [_slimeView endRefresh];
-//    }
 }
 
 #pragma mark - Transition
@@ -1934,17 +1944,6 @@
 }
 
 #pragma mark - Lazy
-//- (SRRefreshView *)slimeView {
-//    if (_slimeView == nil) {
-//        _slimeView = [[SRRefreshView alloc] initWithHeight:SRHeight width:_refreshScroll.width];
-//        _slimeView.upInset = 0;
-//        _slimeView.delegate = self;
-//        _slimeView.slimeMissWhenGoingBack = YES;
-//        _slimeView.slime.bodyColor = SRREFRESH_BACK_COLOR;
-//        _slimeView.slime.skinColor = SRREFRESH_BACK_COLOR;
-//    }
-//
-//    return _slimeView;
-//}
+
 
 @end

@@ -52,6 +52,13 @@
 #import "ChooseDeductionTokenViewController.h"
 #import "TopupDeductionTokenModel.h"
 #import <UIButton+WebCache.h>
+#import "GroupKindModel.h"
+#import "QgasVoteUtil.h"
+#import "BuybackBurnUtil.h"
+#import "WebViewController.h"
+#import "QlinkTabbarViewController.h"
+#import "HomeBuySellViewController.h"
+#import "BuybackDetailViewController.h"
 
 static NSString *const TopupNetworkSize = @"20";
 static NSInteger const insetForSectionDistance = 16;
@@ -60,6 +67,7 @@ static NSInteger const miniSpacingDistance = 8;
 static NSString *const Show_Make_More = @"Show_Make_More";
 static NSString *const Show_Sheet_Mining = @"Show_Sheet_Mining";
 static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
+static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
 
 @interface Topup3ViewController () <UIScrollViewDelegate,NinaPagerViewDelegate>
 
@@ -101,9 +109,16 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 @property (weak, nonatomic) IBOutlet UIButton *mining_detailBtn;
 @property (weak, nonatomic) IBOutlet UILabel *mining_tipLab;
 
+@property (weak, nonatomic) IBOutlet UILabel *buyback_tipLab;
+@property (weak, nonatomic) IBOutlet UIButton *buyback_detailBtn;
+@property (weak, nonatomic) IBOutlet UIButton *buyback_joinBtn;
+@property (weak, nonatomic) IBOutlet UIView *buybackBack;
+
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *makeMoreWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sheetMiningWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *parterPlanWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buybackBurnWidth;
 
 @property (weak, nonatomic) IBOutlet UIView *tableBack;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBackHeight; // 300
@@ -135,6 +150,7 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 @property (nonatomic, strong) QLCHistoryChartView *chartV;
 @property (nonatomic, strong) NSString *qlcFrequency;
 @property (nonatomic, strong) MiningActivityModel *miningActivityM;
+@property (nonatomic, strong) BuybackBurnModel *buybackBurnM;
 @property (nonatomic) BOOL showQLC;
 @property (nonatomic, strong) TopupMobilePlanCountry *countryV;
 @property (nonatomic, strong) TopupCountryModel *selectCountryM;
@@ -143,6 +159,8 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 @property (nonatomic, strong) NSMutableArray *countrySource;
 @property (nonatomic, strong) NSMutableArray *ninaObjectSource;
 @property (nonatomic, strong) TopupDeductionTokenModel *selectDeductionTokenM;
+@property (nonatomic) BOOL isInGroupBuyActiviyTime;
+@property (nonatomic, strong) NSString *groupBuyMinimumDiscount;
 
 @end
 
@@ -182,6 +200,7 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     
     [self handlerPushJump];
     [self getSheetMining];
+    [self getBuybackBurn];
     [self getParterPlan];
 //    [self addChart];
 //    [self getTokenPrice];
@@ -189,7 +208,13 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 //    [self addCountryView];
     
     [self requestTopup_pay_token];
-    
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        [weakself requestIsInGroupBuyActiviyTime];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        [weakself requestTopup_group_kind_list];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -214,11 +239,19 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     _cycleContentArr = [NSMutableArray array];
     _showQLC = NO;
 //    _qlcBackHeight.constant = _showQLC?318:0;
+    _isInGroupBuyActiviyTime = NO;
+    _groupBuyMinimumDiscount = @"0";
     
 //    _qlcTradeBack.layer.cornerRadius = 2;
 //    _qlcTradeBack.layer.masksToBounds = YES;
 //    _qlcLineBack.layer.cornerRadius = 6;
 //    _qlcLineBack.layer.masksToBounds = YES;
+    _buybackBack.layer.cornerRadius = 6;
+    _buybackBack.layer.masksToBounds = YES;
+    _buyback_detailBtn.layer.cornerRadius = 2;
+    _buyback_detailBtn.layer.masksToBounds = YES;
+    _buyback_joinBtn.layer.cornerRadius = 2;
+    _buyback_joinBtn.layer.masksToBounds = YES;
     _miningBack.layer.cornerRadius = 6;
     _miningBack.layer.masksToBounds = YES;
     _mining_detailBtn.layer.cornerRadius = 2;
@@ -231,6 +264,7 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     [_cycleContentArr addObject:Show_Make_More];
     _sheetMiningWidth.constant = 0;
     _parterPlanWidth.constant = 0;
+    _buybackBurnWidth.constant = 0;
     _cycleContentWidth.constant = SCREEN_WIDTH*_cycleContentArr.count;
     _cyclePageC.numberOfPages = _cycleContentArr.count;
     _cycleScrollV.delegate = self;
@@ -273,6 +307,9 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
             [weakself.countryV refreshCountryView];
         }
         
+        [weakself getBuybackBurn];
+        [weakself getSheetMining];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [weakself.mainScroll.mj_header endRefreshing];
         });
@@ -297,7 +334,9 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
                 MiningActivityModel *model = arr.firstObject;
                 weakself.miningActivityM = model;
                 weakself.sheetMiningWidth.constant = SCREEN_WIDTH;
-                [weakself.cycleContentArr addObject:Show_Make_More];
+                if (![weakself.cycleContentArr containsObject:Show_Sheet_Mining]) {
+                    [weakself.cycleContentArr addObject:Show_Sheet_Mining];
+                }
                 weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
                 weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
                 [weakself refreshMiningTip];
@@ -306,11 +345,31 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     });
 }
 
+#pragma mark - QGas回购销毁
+- (void)getBuybackBurn {
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [BuybackBurnUtil requestBuybackBurn_list_v2:^(NSArray<BuybackBurnModel *> * _Nonnull arr) {
+            if (arr.count > 0) {
+                BuybackBurnModel *model = arr.firstObject;
+                weakself.buybackBurnM = model;
+                weakself.buybackBurnWidth.constant = SCREEN_WIDTH;
+                if (![weakself.cycleContentArr containsObject:Show_Buyback_Burn]) {
+                    [weakself.cycleContentArr addObject:Show_Buyback_Burn];
+                }
+                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
+                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
+//                [weakself refreshBuybackBurn];
+            }
+        }];
+    });
+}
+
 - (void)getParterPlan {
     kWeakSelf(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [GroupBuyUtil requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
-            if (haveGroupBuyActivity) {
+        [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
+            if (isInGroupBuyActiviyTime) {
                 weakself.parterPlanWidth.constant = SCREEN_WIDTH;
                 [weakself.cycleContentArr addObject:Show_Partner_Plan];
                 weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
@@ -350,6 +409,8 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 //    [_monthBtn setTitle:kLang(@"qlc_month") forState:UIControlStateNormal];
 //    [_yearBtn setTitle:kLang(@"qlc_year") forState:UIControlStateNormal];
     
+    [_buyback_joinBtn setTitle:kLang(@"join_now_1") forState:UIControlStateNormal];
+    [_buyback_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
     [_mining_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
     [_parterPlan_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
     
@@ -369,6 +430,14 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     [moreQGAS_tipAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x29282A) range:NSMakeRange(0, moreQGASShowStr.length)];
     [moreQGAS_tipAtt addAttribute:NSForegroundColorAttributeName value:MAIN_BLUE_COLOR range:[moreQGASShowStr rangeOfString:QGASStr]];
     _earnMoreLab.attributedText = moreQGAS_tipAtt;
+    
+    NSString *buybackQGasStr = @"QGas";
+    NSString *buybackShowStr = [NSString stringWithFormat:@"%@ %@",buybackQGasStr,kLang(@"buyback_destruction_plan")];
+    NSMutableAttributedString *buyback_tipAtt = [[NSMutableAttributedString alloc] initWithString:buybackShowStr];
+    [buyback_tipAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"STHeitiSC-Medium" size:16] range:NSMakeRange(0, buybackShowStr.length)];
+    [buyback_tipAtt addAttribute:NSForegroundColorAttributeName value:MAIN_BLUE_COLOR range:NSMakeRange(0, buybackShowStr.length)];
+    [buyback_tipAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x29282A) range:[buybackShowStr rangeOfString:buybackQGasStr]];
+    _buyback_tipLab.attributedText = buyback_tipAtt;
     
     [self refreshMiningTip];
 }
@@ -470,7 +539,11 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
             vc.inputDeductionTokenM = weakself.selectDeductionTokenM;
             if (idx > 0) {
                 vc.inputCountryM = weakself.countrySource[idx-1];
+            } else {
+                vc.inputCountryM = allModel;
             }
+            vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActiviyTime;
+            vc.groupBuyMinimumDiscount = weakself.groupBuyMinimumDiscount;
             vc.updateTableHeightBlock = ^(CGFloat tableHeight) {
                 weakself.tableBackHeight.constant = tableHeight + weakself.ninaPagerView.topTabHeight;
                 weakself.ninaPagerView.ninaBaseView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.left, weakself.ninaPagerView.ninaBaseView.top, weakself.ninaPagerView.ninaBaseView.width, weakself.tableBackHeight.constant);
@@ -519,7 +592,15 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     if (_ninaPagerView) {
         TopupProductSubViewController *vc = _ninaObjectSource[_ninaPagerView.pageIndex];
         vc.inputDeductionTokenM = _selectDeductionTokenM;
+        vc.groupBuyMinimumDiscount = _groupBuyMinimumDiscount;
+        vc.isInGroupBuyActivityTime = _isInGroupBuyActiviyTime;
         [vc pullRefresh];
+    } else {
+        if (_selectDeductionTokenM) {
+            [self requestTopup_country_list];
+        } else {
+            [self requestTopup_pay_token];
+        }
     }
 }
 
@@ -661,6 +742,46 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     }];
 }
 
+- (void)requestIsInGroupBuyActiviyTime {
+    kWeakSelf(self);
+    [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
+        weakself.isInGroupBuyActiviyTime = isInGroupBuyActiviyTime;
+        if (weakself.ninaPagerView) {
+            TopupProductSubViewController *vc = weakself.ninaObjectSource[weakself.ninaPagerView.pageIndex];
+            vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActiviyTime;
+            [vc refreshTable];
+        }
+    }];
+}
+
+- (void)requestTopup_group_kind_list {
+    kWeakSelf(self);
+    NSString *page = @"1";
+    NSString *size = TopupNetworkSize;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"page":page,@"size":size}];
+    [RequestService requestWithUrl10:topup_group_kind_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            NSArray *arr = [GroupKindModel mj_objectArrayWithKeyValuesArray:responseObject[@"groupKindList"]];
+            arr = [arr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                    GroupKindModel *m1 = obj1;
+                    GroupKindModel *m2 = obj2;
+                return ([m1.discount doubleValue] > [m2.discount doubleValue]);
+//                    return NSOrderedAscending;
+            }];
+            if (arr && arr.count > 0) {
+                weakself.groupBuyMinimumDiscount = ((GroupKindModel *)arr.firstObject).discount;
+                if (weakself.ninaPagerView) {
+                    TopupProductSubViewController *vc = weakself.ninaObjectSource[weakself.ninaPagerView.pageIndex];
+                    vc.groupBuyMinimumDiscount = weakself.groupBuyMinimumDiscount;
+                    [vc refreshTable];
+                }
+            }
+            
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
 //- (void)requestTokenPriceOfQLC {
 //    kWeakSelf(self);
 //    NSString *symbol = @"QLC";
@@ -694,6 +815,8 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 #pragma mark - NinaPagerViewDelegate
 - (void)ninaCurrentPageIndex:(NSInteger)currentPage currentObject:(id)currentObject lastObject:(id)lastObject {    
     TopupProductSubViewController *vc = currentObject;
+    vc.isInGroupBuyActivityTime = _isInGroupBuyActiviyTime;
+    vc.groupBuyMinimumDiscount = _groupBuyMinimumDiscount;
     if (vc.updateTableHeightBlock) {
         vc.updateTableHeightBlock([vc getTableHeight]);
     }
@@ -885,6 +1008,20 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
     [self jumpToChooseDeductionToken];
 }
 
+- (IBAction)buybackBurnDetailAction:(id)sender {
+    [self jumpToBuybackDetail];
+    return;
+    
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = @"https://medium.com/@QLC_team/qlc-chain-is-conducting-qgas-buyback-and-burn-program-in-q-wallet-otc-173cc8c9153b";
+    vc.inputTitle = kLang(@"qgas_buyback_destruction_plan");
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)buybackBurnJoinAction:(id)sender {
+    [AppJumpHelper jumpToOTC];
+    [kAppD.tabbarC.homeBuySellVC showSellView];
+}
 
 
 #pragma mark - Transition
@@ -939,6 +1076,12 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
             [self refreshNinaPagerViewVC];
         }
     };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToBuybackDetail {
+    BuybackDetailViewController *vc = [BuybackDetailViewController new];
+    vc.inputBuybackBurnM = _buybackBurnM;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

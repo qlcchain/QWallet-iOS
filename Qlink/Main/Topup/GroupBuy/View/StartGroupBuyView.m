@@ -168,7 +168,7 @@ static NSString *const TopupNetworkSize = @"30";
     GroupKindModel *groupKindM = _sourceArr[_selectIndex];
     NSString *groupKindId = groupKindM.ID?:@"";
     NSString *productId = _productM.ID?:@"";
-    NSString *localFiatMoney = _productM.localFaitMoney?:@"";
+    NSString *localFiatMoney = _productM.localFiatAmount?:@"";
     NSString *deductionTokenId = _deductionTokenM.ID?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"groupKindId":groupKindId,@"productId":productId,@"localFiatMoney":localFiatMoney,@"deductionTokenId":deductionTokenId};
     [kAppD.window makeToastInView:kAppD.window];

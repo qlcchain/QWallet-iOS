@@ -437,6 +437,11 @@
 }
 
 - (void)jumpToClaimQGAS {
+    if (![UserModel haveLoginAccount]) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
     ClaimQGASViewController *vc = [ClaimQGASViewController new];
     NSString *canClaim = @"0";
     if (_isCanClaim_invite) { // 推广领取

@@ -14,7 +14,7 @@
 #import "RefreshHelper.h"
 #import "EntrustOrderInfoModel.h"
 #import "TradeOrderListModel.h"
-
+#import "RLArithmetic.h"
 
 //#import "GlobalConstants.h"
 
@@ -118,18 +118,19 @@
             _addressLab.text = _orderInfoM.usdtAddress;
             _typeLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"entrust_sell"),_orderInfoM.tradeToken];
             _typeLab.textColor = UIColorFromRGB(0xFF3669);
-            _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount doubleValue] - [_orderInfoM.lockingAmount doubleValue] - [_orderInfoM.completeAmount doubleValue])];
+            
+            _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str)];
             _remainLab.textColor = UIColorFromRGB(0xFF3669);
         } else if ([_orderInfoM.type isEqualToString:@"BUY"]) {
             _addressTitleLab.text = kLang(@"receive_from");
             _addressLab.text = _orderInfoM.qgasAddress;
             _typeLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"entrust_buy"),_orderInfoM.tradeToken];
             _typeLab.textColor = MAIN_BLUE_COLOR;
-            _remainLab.text = [NSString stringWithFormat:@"%@ %@",@([_orderInfoM.totalAmount doubleValue] - [_orderInfoM.lockingAmount doubleValue] - [_orderInfoM.completeAmount doubleValue]),_orderInfoM.tradeToken];
+            _remainLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str),_orderInfoM.tradeToken];
             _remainLab.textColor = MAIN_BLUE_COLOR;
         }
-        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount,_orderInfoM.tradeToken];
-        _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice,_orderInfoM.payToken];
+        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount_str,_orderInfoM.tradeToken];
+        _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice_str,_orderInfoM.payToken];
         _volumeLab.text = [NSString stringWithFormat:@"%@-%@ %@",_orderInfoM.minAmount,_orderInfoM.maxAmount,_orderInfoM.tradeToken];
         
         

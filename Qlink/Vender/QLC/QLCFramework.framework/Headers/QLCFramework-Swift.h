@@ -211,6 +211,10 @@ SWIFT_CLASS("_TtC12QLCFramework7DPKIRpc")
 + (void)getPubKeyByTypeAndIDWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)getUnPublishBlockWithBaseUrl:(NSString * _Nonnull)baseUrl params:(NSDictionary<NSString *, id> * _Nonnull)params successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)processWithBaseUrl:(NSString * _Nonnull)baseUrl dic:(NSDictionary<NSString *, id> * _Nonnull)dic successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getActiveVerifiersWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getRecommendPubKeyWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getVerifiersByTypeWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getAccountPublicKeyWithBaseUrl:(NSString * _Nonnull)baseUrl address:(NSString * _Nonnull)address successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -697,6 +701,10 @@ SWIFT_CLASS("_TtC12QLCFramework7DPKIRpc")
 + (void)getPubKeyByTypeAndIDWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)getUnPublishBlockWithBaseUrl:(NSString * _Nonnull)baseUrl params:(NSDictionary<NSString *, id> * _Nonnull)params successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)processWithBaseUrl:(NSString * _Nonnull)baseUrl dic:(NSDictionary<NSString *, id> * _Nonnull)dic successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getActiveVerifiersWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getRecommendPubKeyWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getVerifiersByTypeWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getAccountPublicKeyWithBaseUrl:(NSString * _Nonnull)baseUrl address:(NSString * _Nonnull)address successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1183,6 +1191,10 @@ SWIFT_CLASS("_TtC12QLCFramework7DPKIRpc")
 + (void)getPubKeyByTypeAndIDWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)getUnPublishBlockWithBaseUrl:(NSString * _Nonnull)baseUrl params:(NSDictionary<NSString *, id> * _Nonnull)params successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)processWithBaseUrl:(NSString * _Nonnull)baseUrl dic:(NSDictionary<NSString *, id> * _Nonnull)dic successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getActiveVerifiersWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getRecommendPubKeyWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getVerifiersByTypeWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getAccountPublicKeyWithBaseUrl:(NSString * _Nonnull)baseUrl address:(NSString * _Nonnull)address successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1669,6 +1681,10 @@ SWIFT_CLASS("_TtC12QLCFramework7DPKIRpc")
 + (void)getPubKeyByTypeAndIDWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)getUnPublishBlockWithBaseUrl:(NSString * _Nonnull)baseUrl params:(NSDictionary<NSString *, id> * _Nonnull)params successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 + (void)processWithBaseUrl:(NSString * _Nonnull)baseUrl dic:(NSDictionary<NSString *, id> * _Nonnull)dic successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getActiveVerifiersWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getRecommendPubKeyWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type ID:(NSString * _Nonnull)ID successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getVerifiersByTypeWithBaseUrl:(NSString * _Nonnull)baseUrl type:(NSString * _Nonnull)type successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
++ (void)getAccountPublicKeyWithBaseUrl:(NSString * _Nonnull)baseUrl address:(NSString * _Nonnull)address successHandler:(void (^ _Nonnull)(id _Nullable))successHandler failureHandler:(void (^ _Nonnull)(NSError * _Nullable, NSString * _Nullable))failureHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

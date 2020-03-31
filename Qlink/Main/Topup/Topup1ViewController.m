@@ -282,8 +282,8 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 - (void)getParterPlan {
     kWeakSelf(self);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [GroupBuyUtil requestHaveGroupBuyActiviy:^(BOOL haveGroupBuyActivity) {
-            if (haveGroupBuyActivity) {
+        [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
+            if (isInGroupBuyActiviyTime) {
                 weakself.parterPlanWidth.constant = SCREEN_WIDTH;
                 [weakself.cycleContentArr addObject:Show_Partner_Plan];
                 weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;

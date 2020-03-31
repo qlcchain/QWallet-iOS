@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addNEOJSView;
 + (void)removeNEOJSView;
 + (void)neoTransferWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress assetHash:(NSString *)assetHash amount:(NSString *)amount numOfDecimals:(NSString *)numOfDecimals wif:(NSString *)wif resultHandler:(NEOJSResultBlock)resultHandler;
++ (void)claimgasWithPrivateKey:(NSString *)privateKey resultHandler:(NEOJSResultBlock)resultHandler;
 
 @end
 

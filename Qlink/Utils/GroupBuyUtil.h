@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GroupBuyUtil : NSObject
 
-+ (void)requestHaveGroupBuyActiviy:(void(^)(BOOL haveGroupBuyActivity))completeBlock;
++ (void)requestIsInGroupBuyActiviyTime:(void(^)(BOOL isInGroupBuyActiviyTime))completeBlock;
 
 @end
 

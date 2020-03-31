@@ -303,7 +303,7 @@
         // @"https://shop.huagaotx.cn/wap/charge_v3.html?sid=8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96&trace_id=mm_1000001_998902&package=0&mobile=15989246851"
         NSString *sid = Topup_Pay_H5_sid;
         NSString *trace_id = [NSString stringWithFormat:@"%@_%@_%@",Topup_Pay_H5_trace_id,_orderM.userId?:@"",_orderM.ID?:@""];
-        NSString *package = [NSString stringWithFormat:@"%@",_inputProductM.localFaitMoney];
+        NSString *package = [NSString stringWithFormat:@"%@",_inputProductM.localFiatAmount];
         NSString *mobile = _inputPhoneNumber;
         NSMutableString *urlStr = [NSMutableString stringWithFormat:@"%@?sid=%@&trace_id=%@&package=%@&mobile=%@",Topup_Pay_H5_Url,sid,trace_id,package,mobile];
         [self jumpToTopupH5:urlStr];
@@ -347,7 +347,7 @@
     NSString *productId = _inputProductM.ID?:@"";
     NSString *areaCode = _inputAreaCode?:@"";
     NSString *phoneNumber = _inputPhoneNumber?:@"";
-    NSString *amount = [NSString stringWithFormat:@"%@",_inputProductM.localFaitMoney];
+    NSString *amount = [NSString stringWithFormat:@"%@",_inputProductM.localFiatAmount];
     NSString *deductionTokenId = _inputDeductionTokenId?:@"";
     NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"areaCode":areaCode,@"phoneNumber":phoneNumber,@"amount":amount,@"txid":_payTxid?:@"",@"payTokenId":deductionTokenId};
 //    NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"phoneNumber":phoneNumber,@"localFiatAmount":amount,@"deductionTokenId":deductionTokenId?:@""};

@@ -260,6 +260,11 @@ static NSInteger const DailyEarnings_PageFirst = 1;
 
 #pragma mark - Transition
 - (void)jumpToClaimQGAS {
+    if (![UserModel haveLoginAccount]) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
     ClaimQGASViewController *vc = [ClaimQGASViewController new];
     vc.inputCanClaimAmount = _canClaimAmountLab.text?:@"0";
     vc.claimQGASType = ClaimQGASTypeDailyEarnings;

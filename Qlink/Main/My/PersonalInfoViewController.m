@@ -83,7 +83,7 @@
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
     model.key = kLang(@"my_invitation_code");
-    model.val = [NSString stringWithFormat:@"%@",userM.number];
+    model.val = [NSString stringWithFormat:@"%@",userM.number?:@""];
     model.showCopy = YES;
     model.showArrow = NO;
     model.showHead = NO;

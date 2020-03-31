@@ -32,6 +32,8 @@
 #import "AppJumpHelper.h"
 #import "JoinTelegramTipView.h"
 #import "WebViewController.h"
+#import "QgasVoteUtil.h"
+#import "QVoteViewController.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -39,6 +41,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLab;
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
+
+@property (weak, nonatomic) IBOutlet UIView *voteBack;
+@property (weak, nonatomic) IBOutlet UILabel *vote_titleLab;
+@property (weak, nonatomic) IBOutlet UIView *vote_btnBack;
+@property (weak, nonatomic) IBOutlet UILabel *voteLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voteBackHeight; // 110
+
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSString *invite_user_amount;
 @property (nonatomic, strong) NSString *no_award_amount;
@@ -84,6 +93,14 @@
     _no_award_amount = @"0";
     _no_award_miningReward_amount = @"0";
     
+    _voteBack.layer.cornerRadius = 12;
+    _voteBack.layer.masksToBounds = YES;
+    _vote_btnBack.layer.cornerRadius = _vote_btnBack.height/2.0;
+    _vote_btnBack.layer.masksToBounds = YES;
+    _vote_btnBack.layer.borderColor = UIColorFromRGB(0x3699FF).CGColor;
+    _vote_btnBack.layer.borderWidth = 0.5;
+    _voteBackHeight.constant = 0;
+    
     [self configInit];
     
     kWeakSelf(self);
@@ -97,6 +114,9 @@
 //    });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakself getTrade_mining_list];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakself getQgasVoteState];
     });
 }
 
@@ -131,6 +151,13 @@
     }];
     [_mainTable reloadData];
     [self refreshTabbarRedOfMe];
+    
+    [self refreshVoteView];
+}
+
+- (void)refreshVoteView {
+    _vote_titleLab.text = kLang(@"qgas_buyback_destruction_plan");
+    _voteLab.text = kLang(@"go_vote");
 }
 
 - (void)checkJoinTelegram {
@@ -372,6 +399,20 @@
     }];
 }
 
+#pragma mark - 投票活动
+- (void)getQgasVoteState {
+    kWeakSelf(self);
+    [QgasVoteUtil requestState:^(QgasVoteState state) {
+        if (state == QgasVoteStateNotyet) {
+            weakself.voteBackHeight.constant = 0;
+        } else if (state == QgasVoteStateOngoing) {
+            weakself.voteBackHeight.constant = 110;
+        } else if (state == QgasVoteStateDone) {
+            weakself.voteBackHeight.constant = 110;
+        }
+    }];
+}
+
 #pragma mark - Action
 
 - (IBAction)clickUserAction:(id)sender {
@@ -411,6 +452,15 @@
     [WalletTransferUtil requestServerMainAddress];
 #endif
 }
+
+- (IBAction)qgasVoteAction:(id)sender {
+    if ([UserModel haveLoginAccount]) {
+        [self jumpToQgasVote];
+    } else {
+        [kAppD presentLoginNew];
+    }
+}
+
 
 #pragma mark - Request
 - (void)requestReward_reward_total:(NSString *)type status:(NSString *)status completeBlock:(void(^)(NSString *reward))completeBlock {
@@ -629,6 +679,11 @@
     WebViewController *vc = [[WebViewController alloc] init];
     vc.inputUrl = url;
     vc.inputTitle = title;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToQgasVote {
+    QVoteViewController *vc = [QVoteViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

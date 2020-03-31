@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (nonatomic, strong) RevokingProcessView *revokingProcessV;
 @property (nonatomic, strong) QContractView *contractV;
+@property (nonatomic, strong) NSString *neoAddress;
 
 @end
 
@@ -49,6 +50,7 @@
     
     [self configRefresh];
     [self configInit];
+    [self requestGetLockInfo:NO];
 }
 
 #pragma mark - Operation
@@ -109,9 +111,14 @@
     }
     _revokeOnLab.text = withdrawTimeStr;
     _stakingTypeLab.text = typeStr;
-    _stakeFromLab.text = _inputPledgeM.multiSigAddress;
+//    _stakeFromLab.text = _inputPledgeM.multiSigAddress;
+    _stakeFromLab.text = @"";
     _stakeToLab.text = _inputPledgeM.beneficial;
     _transactionLab.text = _inputPledgeM.nep5TxId;
+}
+
+- (void)refreshNeoAddressView {
+    _stakeFromLab.text = _neoAddress?:@"";
 }
 
 - (void)startBenefitWithdraw {
@@ -275,6 +282,33 @@
 }
 
 #pragma mark - Request
+- (void)requestGetLockInfo:(BOOL)showLoad {
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    // Invocation with Parameters and Request ID
+    NSString *requestId = [NSString randomOf32];
+    //qlc_178gc7sgefmfbmn1fi8uqhecwyewt6wu1y9rko1fb9snu89uupm1moc65gxu
+    kWeakSelf(self);
+    if (showLoad) {
+        [kAppD.window makeToastInView:kAppD.window];
+    }
+    NSArray *params = @[_inputPledgeM.nep5TxId?:@""];
+    // ledger_pledgeInfoByBeneficial   ledger_pledgeInfoByPledge
+    DDLogDebug(@"nep5_getLockInfo params = %@",params);
+    [client invokeMethod:@"nep5_getLockInfo" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (showLoad) {
+            [kAppD.window hideToast];
+        }
+        NSLog(@"nep5_getLockInfo result=%@",responseObject);
+        weakself.neoAddress = responseObject[@"neoAddress"];
+        [weakself refreshNeoAddressView];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (showLoad) {
+            [kAppD.window hideToast];
+        }
+        NSLog(@"error=%@",error);
+    }];
+}
+
 - (void)ledger_pledgeInfoByTransactionID {
     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
     // Invocation with Parameters and Request ID

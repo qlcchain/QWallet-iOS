@@ -13,21 +13,21 @@
 
 @implementation GroupBuyUtil
 
-+ (void)requestHaveGroupBuyActiviy:(void(^)(BOOL haveGroupBuyActivity))completeBlock {
++ (void)requestIsInGroupBuyActiviyTime:(void(^)(BOOL isInGroupBuyActiviyTime))completeBlock {
 //    kWeakSelf(self);
     NSDictionary *params = @{@"dictType":app_dict};
     [RequestService requestWithUrl10:sys_dict_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            BOOL haveGroupBuyActivity = NO;
+            BOOL isInGroupBuyActiviyTime = NO;
             NSString *topupGroupStartDateStr = responseObject[Server_Data][@"topupGroupStartDate"]?:@"";
             NSString *topopGroupEndDateStr = responseObject[Server_Data][@"topopGroupEndDate"]?:@"";
             NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
             NSDate *startDate = [NSDate dateFromTime:topupGroupStartDateStr];
             NSDate *endDate = [NSDate dateFromTime:topopGroupEndDateStr];
             NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
-            haveGroupBuyActivity = [startDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:endDate];
+            isInGroupBuyActiviyTime = [startDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:endDate];
             if (completeBlock) {
-                completeBlock(haveGroupBuyActivity);
+                completeBlock(isInGroupBuyActiviyTime);
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

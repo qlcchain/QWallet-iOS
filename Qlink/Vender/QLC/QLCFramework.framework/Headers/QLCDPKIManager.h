@@ -64,6 +64,43 @@ NS_ASSUME_NONNULL_BEGIN
 ///     block : unpublish block
 + (void)getUnPublishBlock:(NSString *)baseUrl params:(NSDictionary *)params successHandler:(void(^_Nonnull)(NSDictionary * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
 
+/// Get up to 5 active verifiers of specified type, active means have sent a oracle block in last 24 hours.
+/// Parameters:
+/// type : verifier type (email/weChat)
+/// Returns:
+/// account : verifier account
+/// type : verifier type
+/// id : verifier address to receive verify request
++ (void)getActiveVerifiers:(NSString *)baseUrl type:(NSString *)type successHandler:(void(^_Nonnull)(NSArray * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+
+/// Get the recommend public key by type and id, will only return one record.
+/// Parameters:
+/// type : id type (email/weChat)
+/// id : id address
+/// Returns:
+/// publishInfo : published infos
+/// publishHeight : publish time
+/// verifiedHeight : the time of this record's state changed from unverified to verified
+/// verifiedStatus : verified status(0:unverified 1:verified)
+/// oracleAccounts : verifiers that make the proof for this publish
++ (void)getRecommendPubKey:(NSString *)baseUrl type:(NSString *)type ID:(NSString *)ID successHandler:(void(^_Nonnull)(NSArray * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+
+/// Get all the specified type of verifiers
+/// Parameters:
+/// type : verifier type (email/weChat)
+/// Returns:
+/// account : verifier account
+/// type : verifier type
+/// id : verifier address to receive verify request
++ (void)getVerifiersByType:(NSString *)baseUrl type:(NSString *)type successHandler:(void(^_Nonnull)(NSArray * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+
+/// Return public key for account address
+/// Parameters:
+/// string : account address
+/// Returns:
+/// string : public key
++ (void)getAccountPublicKey:(NSString *)baseUrl address:(NSString *)address successHandler:(void(^_Nonnull)(NSString * _Nullable responseObj))successHandler failureHandler:(void(^_Nonnull)(NSError * _Nullable error, NSString *_Nullable message))failureHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END

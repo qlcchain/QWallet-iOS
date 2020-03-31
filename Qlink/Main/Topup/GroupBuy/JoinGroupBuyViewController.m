@@ -255,6 +255,10 @@
 }
 
 - (IBAction)confirmAction:(id)sender {
+    if (![UserModel haveLoginAccount]) {
+        [kAppD presentLoginNew];
+    }
+    
 //    if (_okBlock) {
 //        _okBlock();
 //    }

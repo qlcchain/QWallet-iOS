@@ -20,6 +20,8 @@ typedef void(^NEOJSResultBlock)(id _Nullable result, BOOL success,  NSString * _
 
 - (void)neoTransferWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress assetHash:(NSString *)assetHash amount:(NSString *)amount numOfDecimals:(NSString *)numOfDecimals wif:(NSString *)wif resultHandler:(NEOJSResultBlock)resultHandler;
 
+- (void)claimgasWithPrivateKey:(NSString *)privateKey resultHandler:(NEOJSResultBlock)resultHandler;
+
 
 
 @end

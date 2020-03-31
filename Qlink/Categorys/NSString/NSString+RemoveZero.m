@@ -55,14 +55,23 @@
 //}
 
 
+//+ (NSString *)doubleToString:(double)doubleV {
+//    NSString *doubleString        = [NSString stringWithFormat:@"%lf", doubleV];
+//    NSDecimalNumber *decNumber    = [NSDecimalNumber decimalNumberWithString:doubleString];
+//    return [decNumber stringValue];
+//}
+
 + (NSString *)doubleToString:(double)doubleV {
-//    NSString *str = [[[NSDecimalNumber alloc] initWithDouble:doubleV] stringValue];
-//    return str;
-    
-    NSString *doubleString        = [NSString stringWithFormat:@"%lf", doubleV];
-    NSDecimalNumber *decNumber    = [NSDecimalNumber decimalNumberWithString:doubleString];
-    return [decNumber stringValue];
+    int precision = 100;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//    formatter.numberStyle = NSNumberFormatterScientificStyle;
+    formatter.usesSignificantDigits = YES;
+    formatter.minimumFractionDigits = precision;
+    formatter.maximumFractionDigits = precision;
+    NSString *result = [formatter stringFromNumber:@(doubleV)];
+    return result;
 }
 
 
 @end
+

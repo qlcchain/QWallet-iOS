@@ -71,9 +71,10 @@
     
     _walletsVC = [[WalletsViewController alloc] init];
     _topupVC = [[Topup3ViewController alloc] init];
+    _homeBuySellVC = [[HomeBuySellViewController alloc] init];
     [self addChildViewController:_topupVC text:kLang(@"top_up") imageName:@"topup"];
 //    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
-    [self addChildViewController:[[HomeBuySellViewController alloc] init] text:kLang(@"finance") imageName:@"finance"];
+    [self addChildViewController:_homeBuySellVC text:kLang(@"finance") imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:kLang(@"wallet") imageName:@"wallet"];
     [self addChildViewController:[[MyViewController alloc] init] text:kLang(@"me") imageName:@"settings"];

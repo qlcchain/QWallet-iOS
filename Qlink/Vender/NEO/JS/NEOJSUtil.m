@@ -42,4 +42,8 @@
     [[NEOJSUtil shareInstance].neojsV neoTransferWithFromAddress:fromAddress toAddress:toAddress assetHash:assetHash amount:amount numOfDecimals:numOfDecimals wif:wif resultHandler:resultHandler];
 }
 
++ (void)claimgasWithPrivateKey:(NSString *)privateKey resultHandler:(NEOJSResultBlock)resultHandler {
+    [[NEOJSUtil shareInstance].neojsV claimgasWithPrivateKey:privateKey resultHandler:resultHandler];
+}
+
 @end

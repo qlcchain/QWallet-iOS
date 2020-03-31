@@ -121,7 +121,7 @@
 //    支付代币数量  =    支付代币金额/支付代币价格
     
     NSString *rmbStr = productM.localFiat?:@"";
-    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",productM.localFaitMoney,rmbStr];
+    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",productM.localFiatAmount,rmbStr];
     NSString *amountLabFontName = _amountLab.font.fontName;
     NSMutableAttributedString *amountAtt = [[NSMutableAttributedString alloc] initWithString:amountShowStr];
     // .SFUIDisplay-Semibold  .SFUI-Semibold

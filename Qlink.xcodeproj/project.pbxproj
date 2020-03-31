@@ -87,6 +87,7 @@
 		58105D4221882E4200B8B701 /* NavWhiteShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58105D4121882E4200B8B701 /* NavWhiteShadowView.m */; };
 		5810F47523628DE800346A43 /* TopupPayLoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810F47223628DE700346A43 /* TopupPayLoadView.m */; };
 		5810F47623628DE800346A43 /* TopupPayLoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5810F47323628DE700346A43 /* TopupPayLoadView.xib */; };
+		5811338E2430ADD7002FA7CF /* NEOGasClaimModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811338D2430ADD7002FA7CF /* NEOGasClaimModel.m */; };
 		5811B7432293D4B900F657B5 /* QLCWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B7422293D4B900F657B5 /* QLCWalletInfo.m */; };
 		5811B7552293D81500F657B5 /* QLCTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B7492293D80D00F657B5 /* QLCTransferViewController.m */; };
 		5811B7582293D81500F657B5 /* QLCTransactionRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5811B74D2293D81000F657B5 /* QLCTransactionRecordViewController.m */; };
@@ -357,6 +358,7 @@
 		58231D44237BFD74009CDE90 /* MiningDailyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58231D41237BFD73009CDE90 /* MiningDailyDetailViewController.m */; };
 		58231D4A237BFF10009CDE90 /* MiningDailyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58231D48237BFF10009CDE90 /* MiningDailyDetailCell.m */; };
 		58231D4B237BFF10009CDE90 /* MiningDailyDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58231D49237BFF10009CDE90 /* MiningDailyDetailCell.xib */; };
+		5823983E241F693A00C4E4FD /* airdrop_tx.json in Resources */ = {isa = PBXBuildFile; fileRef = 5823983D241F693A00C4E4FD /* airdrop_tx.json */; };
 		58245BCE22DF1BC70093E747 /* QLCTransferToServerConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58245BCB22DF1BC60093E747 /* QLCTransferToServerConfirmView.m */; };
 		58245BE122E00C830093E747 /* EntrustOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58245BDF22E00C830093E747 /* EntrustOrderDetailViewController.m */; };
 		58245BE622E016770093E747 /* EntrustOrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58245BE422E016770093E747 /* EntrustOrderDetailCell.m */; };
@@ -564,6 +566,10 @@
 		586E7D31238CD6E1005718B4 /* AppJumpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E7D30238CD6E1005718B4 /* AppJumpHelper.m */; };
 		586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EE0972089951D009EAF40 /* FriendStatusModel.m */; };
 		586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */ = {isa = PBXBuildFile; fileRef = 586F371E207B049400E12F95 /* ContinentAndCountryBean.json */; };
+		586F67F92408FF8C008E4D4C /* BuybackBurnUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 586F67F82408FF8B008E4D4C /* BuybackBurnUtil.m */; };
+		586F67FD24090432008E4D4C /* BuybackBurnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 586F67FC24090432008E4D4C /* BuybackBurnModel.m */; };
+		5870B5D923F667D800EB4D34 /* TopupBuyConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5870B5D723F667D800EB4D34 /* TopupBuyConfirmViewController.m */; };
+		5870B5DA23F687F900EB4D34 /* TopupBuyConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5870B5DC23F687F900EB4D34 /* TopupBuyConfirmViewController.xib */; };
 		5871921D23CD8CBC00728E15 /* ShareFriendsSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5871921B23CD8CBC00728E15 /* ShareFriendsSubViewController.m */; };
 		5871921E23CD8CBC00728E15 /* ShareFriendsSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5871921C23CD8CBC00728E15 /* ShareFriendsSubViewController.xib */; };
 		5871922223CDB21B00728E15 /* GroupKindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5871922123CDB21B00728E15 /* GroupKindModel.m */; };
@@ -583,6 +589,7 @@
 		5872133C2361748600E50744 /* NSNumber+RLArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 587213372361748600E50744 /* NSNumber+RLArithmetic.m */; };
 		5872133D2361748600E50744 /* NSString+RLArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872133B2361748600E50744 /* NSString+RLArithmetic.m */; };
 		587213422361A87B00E50744 /* TopupDeductionTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587213412361A87B00E50744 /* TopupDeductionTokenModel.m */; };
+		5872EF3424095B26000F2DFF /* BuybackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5872EF3224095B26000F2DFF /* BuybackDetailViewController.m */; };
 		5874E33E234DB2ED000835A0 /* ClaimQGASTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5874E33C234DB2ED000835A0 /* ClaimQGASTipView.m */; };
 		5874E33F234DB2ED000835A0 /* ClaimQGASTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5874E33D234DB2ED000835A0 /* ClaimQGASTipView.xib */; };
 		5874E344234DC9D8000835A0 /* DailyEarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5874E342234DC9D8000835A0 /* DailyEarningsViewController.m */; };
@@ -678,6 +685,9 @@
 		58882ED6239A21E500330EB6 /* JoinTelegramTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58882ED3239A21E500330EB6 /* JoinTelegramTipView.xib */; };
 		588A7022208DD29C004B41D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 588A7021208DD29B004B41D4 /* Assets.xcassets */; };
 		588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 588A7026208DE67F004B41D4 /* ToxRequestModel.m */; };
+		588B4EA224064BB2003BE791 /* QVoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588B4EA024064BB2003BE791 /* QVoteViewController.m */; };
+		588B4EA624065683003BE791 /* QgasVoteUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 588B4EA524065683003BE791 /* QgasVoteUtil.m */; };
+		588B4EA724066CE4003BE791 /* QVoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588B4EA924066CE4003BE791 /* QVoteViewController.xib */; };
 		588EA75423CD67A400889F7D /* StartGroupBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 588EA75123CD67A300889F7D /* StartGroupBuyView.m */; };
 		588EA75C23CD6BEC00889F7D /* StartGroupBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588EA75A23CD6BEC00889F7D /* StartGroupBuyCell.m */; };
 		588EA75D23CD6BEC00889F7D /* StartGroupBuyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588EA75B23CD6BEC00889F7D /* StartGroupBuyCell.xib */; };
@@ -719,6 +729,7 @@
 		589E59CF22D49875000338B7 /* PayReceiveAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589E59CC22D49875000338B7 /* PayReceiveAddressViewController.m */; };
 		589E59D322D592AE000338B7 /* MyOrderListEntrustCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589E59D122D592AE000338B7 /* MyOrderListEntrustCell.m */; };
 		589E59D822D6E4C9000338B7 /* BackupKeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589E59D522D6E4C8000338B7 /* BackupKeyView.m */; };
+		589FC660240A735100288046 /* BuybackDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589FC662240A735100288046 /* BuybackDetailViewController.xib */; };
 		58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A074232092FD8400470E37 /* NeoTransferUtil.m */; };
 		58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A2495820D0F60C00781549 /* WebKit.framework */; };
 		58A2495C20D207AB00781549 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A2495B20D207AB00781549 /* VersionManager.m */; };
@@ -1147,6 +1158,8 @@
 		5810F47223628DE700346A43 /* TopupPayLoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupPayLoadView.m; sourceTree = "<group>"; };
 		5810F47323628DE700346A43 /* TopupPayLoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopupPayLoadView.xib; sourceTree = "<group>"; };
 		5810F47423628DE800346A43 /* TopupPayLoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupPayLoadView.h; sourceTree = "<group>"; };
+		5811338C2430ADD7002FA7CF /* NEOGasClaimModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEOGasClaimModel.h; sourceTree = "<group>"; };
+		5811338D2430ADD7002FA7CF /* NEOGasClaimModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NEOGasClaimModel.m; sourceTree = "<group>"; };
 		5811B7412293D4B900F657B5 /* QLCWalletInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCWalletInfo.h; sourceTree = "<group>"; };
 		5811B7422293D4B900F657B5 /* QLCWalletInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCWalletInfo.m; sourceTree = "<group>"; };
 		5811B7492293D80D00F657B5 /* QLCTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCTransferViewController.m; sourceTree = "<group>"; };
@@ -1741,6 +1754,7 @@
 		58231D47237BFF0F009CDE90 /* MiningDailyDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiningDailyDetailCell.h; sourceTree = "<group>"; };
 		58231D48237BFF10009CDE90 /* MiningDailyDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiningDailyDetailCell.m; sourceTree = "<group>"; };
 		58231D49237BFF10009CDE90 /* MiningDailyDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MiningDailyDetailCell.xib; sourceTree = "<group>"; };
+		5823983D241F693A00C4E4FD /* airdrop_tx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airdrop_tx.json; sourceTree = "<group>"; };
 		58245BCB22DF1BC60093E747 /* QLCTransferToServerConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCTransferToServerConfirmView.m; sourceTree = "<group>"; };
 		58245BCD22DF1BC70093E747 /* QLCTransferToServerConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCTransferToServerConfirmView.h; sourceTree = "<group>"; };
 		58245BDE22E00C830093E747 /* EntrustOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntrustOrderDetailViewController.h; sourceTree = "<group>"; };
@@ -2169,6 +2183,16 @@
 		586EE0962089951D009EAF40 /* FriendStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendStatusModel.h; sourceTree = "<group>"; };
 		586EE0972089951D009EAF40 /* FriendStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendStatusModel.m; sourceTree = "<group>"; };
 		586F371E207B049400E12F95 /* ContinentAndCountryBean.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ContinentAndCountryBean.json; sourceTree = "<group>"; };
+		586F67F72408FF8B008E4D4C /* BuybackBurnUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuybackBurnUtil.h; sourceTree = "<group>"; };
+		586F67F82408FF8B008E4D4C /* BuybackBurnUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuybackBurnUtil.m; sourceTree = "<group>"; };
+		586F67FB24090432008E4D4C /* BuybackBurnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuybackBurnModel.h; sourceTree = "<group>"; };
+		586F67FC24090432008E4D4C /* BuybackBurnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuybackBurnModel.m; sourceTree = "<group>"; };
+		5870B5D523F667D700EB4D34 /* TopupBuyConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupBuyConfirmViewController.h; sourceTree = "<group>"; };
+		5870B5D723F667D800EB4D34 /* TopupBuyConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupBuyConfirmViewController.m; sourceTree = "<group>"; };
+		5870B5DB23F687F900EB4D34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TopupBuyConfirmViewController.xib; sourceTree = "<group>"; };
+		5870B5DE23F687FF00EB4D34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TopupBuyConfirmViewController.strings; sourceTree = "<group>"; };
+		5870B5E023F6880100EB4D34 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TopupBuyConfirmViewController.strings"; sourceTree = "<group>"; };
+		5870B5E223F6880400EB4D34 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/TopupBuyConfirmViewController.strings; sourceTree = "<group>"; };
 		5871921A23CD8CBC00728E15 /* ShareFriendsSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareFriendsSubViewController.h; sourceTree = "<group>"; };
 		5871921B23CD8CBC00728E15 /* ShareFriendsSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareFriendsSubViewController.m; sourceTree = "<group>"; };
 		5871921C23CD8CBC00728E15 /* ShareFriendsSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareFriendsSubViewController.xib; sourceTree = "<group>"; };
@@ -2215,6 +2239,8 @@
 		5872133B2361748600E50744 /* NSString+RLArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RLArithmetic.m"; sourceTree = "<group>"; };
 		587213402361A87B00E50744 /* TopupDeductionTokenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupDeductionTokenModel.h; sourceTree = "<group>"; };
 		587213412361A87B00E50744 /* TopupDeductionTokenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupDeductionTokenModel.m; sourceTree = "<group>"; };
+		5872EF3124095B25000F2DFF /* BuybackDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuybackDetailViewController.h; sourceTree = "<group>"; };
+		5872EF3224095B26000F2DFF /* BuybackDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuybackDetailViewController.m; sourceTree = "<group>"; };
 		5874E33B234DB2EC000835A0 /* ClaimQGASTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClaimQGASTipView.h; sourceTree = "<group>"; };
 		5874E33C234DB2ED000835A0 /* ClaimQGASTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClaimQGASTipView.m; sourceTree = "<group>"; };
 		5874E33D234DB2ED000835A0 /* ClaimQGASTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimQGASTipView.xib; sourceTree = "<group>"; };
@@ -2410,6 +2436,14 @@
 		588A7021208DD29B004B41D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		588A7025208DE67F004B41D4 /* ToxRequestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToxRequestModel.h; sourceTree = "<group>"; };
 		588A7026208DE67F004B41D4 /* ToxRequestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToxRequestModel.m; sourceTree = "<group>"; };
+		588B4E9F24064BB2003BE791 /* QVoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QVoteViewController.h; sourceTree = "<group>"; };
+		588B4EA024064BB2003BE791 /* QVoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QVoteViewController.m; sourceTree = "<group>"; };
+		588B4EA424065683003BE791 /* QgasVoteUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QgasVoteUtil.h; sourceTree = "<group>"; };
+		588B4EA524065683003BE791 /* QgasVoteUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QgasVoteUtil.m; sourceTree = "<group>"; };
+		588B4EA824066CE4003BE791 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/QVoteViewController.xib; sourceTree = "<group>"; };
+		588B4EAB24066CEA003BE791 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QVoteViewController.strings; sourceTree = "<group>"; };
+		588B4EAD24066CED003BE791 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QVoteViewController.strings"; sourceTree = "<group>"; };
+		588B4EAF24066CF0003BE791 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/QVoteViewController.strings; sourceTree = "<group>"; };
 		588EA75123CD67A300889F7D /* StartGroupBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupBuyView.m; sourceTree = "<group>"; };
 		588EA75323CD67A400889F7D /* StartGroupBuyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupBuyView.h; sourceTree = "<group>"; };
 		588EA75923CD6BEC00889F7D /* StartGroupBuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartGroupBuyCell.h; sourceTree = "<group>"; };
@@ -2483,6 +2517,10 @@
 		589E59D122D592AE000338B7 /* MyOrderListEntrustCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOrderListEntrustCell.m; sourceTree = "<group>"; };
 		589E59D522D6E4C8000338B7 /* BackupKeyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupKeyView.m; sourceTree = "<group>"; };
 		589E59D722D6E4C9000338B7 /* BackupKeyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackupKeyView.h; sourceTree = "<group>"; };
+		589FC661240A735100288046 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BuybackDetailViewController.xib; sourceTree = "<group>"; };
+		589FC664240A735400288046 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BuybackDetailViewController.strings; sourceTree = "<group>"; };
+		589FC666240A735700288046 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BuybackDetailViewController.strings"; sourceTree = "<group>"; };
+		589FC668240A735900288046 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/BuybackDetailViewController.strings; sourceTree = "<group>"; };
 		58A074222092FD8400470E37 /* NeoTransferUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeoTransferUtil.h; sourceTree = "<group>"; };
 		58A074232092FD8400470E37 /* NeoTransferUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NeoTransferUtil.m; sourceTree = "<group>"; };
 		58A2495820D0F60C00781549 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -3584,6 +3622,7 @@
 		580D913520625A4300B12506 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				586F67FA24090403008E4D4C /* BuybackBurn */,
 				5871921F23CDB20400728E15 /* GroupBuy */,
 				58A3EB58237D572500AEF7C8 /* TradeMining */,
 				58EBECFD234F1F3C007EEF1F /* ClaimQGASModel */,
@@ -3616,6 +3655,8 @@
 		580D913A20625A4300B12506 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				586F67F72408FF8B008E4D4C /* BuybackBurnUtil.h */,
+				586F67F82408FF8B008E4D4C /* BuybackBurnUtil.m */,
 				58FB8D922265C44F0075698E /* RefreshHelper.h */,
 				58FB8D932265C4500075698E /* RefreshHelper.m */,
 				589D4714225B502200A4A4E3 /* MyThemes.h */,
@@ -3693,6 +3734,8 @@
 				58CD53DC238E2AF400D5C245 /* TokenListHelper.m */,
 				584F4EEC23D587DC004F579B /* GroupBuyUtil.h */,
 				584F4EED23D587DC004F579B /* GroupBuyUtil.m */,
+				588B4EA424065683003BE791 /* QgasVoteUtil.h */,
+				588B4EA524065683003BE791 /* QgasVoteUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4741,6 +4784,7 @@
 		582B114A22952B3D005E2288 /* QLC */ = {
 			isa = PBXGroup;
 			children = (
+				5823983D241F693A00C4E4FD /* airdrop_tx.json */,
 				584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */,
 				589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */,
 			);
@@ -5000,6 +5044,7 @@
 		585D1EF1225DEA9A00468C4A /* My */ = {
 			isa = PBXGroup;
 			children = (
+				588B4E9E24064B99003BE791 /* Vote */,
 				58882ED1239A21A800330EB6 /* View */,
 				585D1EF7225DEE5400468C4A /* Cell */,
 				585D1EF2225DEAB100468C4A /* MyViewController.h */,
@@ -5050,9 +5095,15 @@
 				5874E350234DD461000835A0 /* huagaotx */,
 				5884736B233A07E800BB6F76 /* Cell */,
 				589AE86923CC52E300476D53 /* GroupBuy */,
+				5872EF3124095B25000F2DFF /* BuybackDetailViewController.h */,
+				5872EF3224095B26000F2DFF /* BuybackDetailViewController.m */,
+				589FC662240A735100288046 /* BuybackDetailViewController.xib */,
 				5821964A23F13F9D00704E23 /* Topup3ViewController.h */,
 				5821964823F13F9C00704E23 /* Topup3ViewController.m */,
 				5821964923F13F9D00704E23 /* Topup3ViewController.xib */,
+				5870B5D523F667D700EB4D34 /* TopupBuyConfirmViewController.h */,
+				5870B5D723F667D800EB4D34 /* TopupBuyConfirmViewController.m */,
+				5870B5DC23F687F900EB4D34 /* TopupBuyConfirmViewController.xib */,
 				5836CFBB23B49AA40072187A /* TopupPayNEO_PayViewController.h */,
 				5836CFBD23B49AA50072187A /* TopupPayNEO_PayViewController.m */,
 				5836CFDE23B5D9B30072187A /* TopupPayNEO_PayViewController.xib */,
@@ -5109,6 +5160,15 @@
 				5827BC3721A3AD2800B7730E /* ToxRequestModel1.m */,
 			);
 			path = P2PModel;
+			sourceTree = "<group>";
+		};
+		586F67FA24090403008E4D4C /* BuybackBurn */ = {
+			isa = PBXGroup;
+			children = (
+				586F67FB24090432008E4D4C /* BuybackBurnModel.h */,
+				586F67FC24090432008E4D4C /* BuybackBurnModel.m */,
+			);
+			path = BuybackBurn;
 			sourceTree = "<group>";
 		};
 		5871921F23CDB20400728E15 /* GroupBuy */ = {
@@ -5807,6 +5867,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		588B4E9E24064B99003BE791 /* Vote */ = {
+			isa = PBXGroup;
+			children = (
+				588B4E9F24064BB2003BE791 /* QVoteViewController.h */,
+				588B4EA024064BB2003BE791 /* QVoteViewController.m */,
+				588B4EA924066CE4003BE791 /* QVoteViewController.xib */,
+			);
+			path = Vote;
+			sourceTree = "<group>";
+		};
 		588BFCAF20EF211F00B1E860 /* Macros */ = {
 			isa = PBXGroup;
 			children = (
@@ -6257,6 +6327,8 @@
 				581D32ED219D107F001F88C3 /* NeoGotWGasModel.m */,
 				581D32EF219D10F9001F88C3 /* NeoQueryWGasModel.h */,
 				581D32F0219D10F9001F88C3 /* NeoQueryWGasModel.m */,
+				5811338C2430ADD7002FA7CF /* NEOGasClaimModel.h */,
+				5811338D2430ADD7002FA7CF /* NEOGasClaimModel.m */,
 			);
 			path = NEOModel;
 			sourceTree = "<group>";
@@ -6616,7 +6688,6 @@
 				58B4716F20D9FA05007D9D7E /* UploadBuglySymbol */,
 				581D509B217890B30064F60C /* TODO */,
 				09D7B0261B241149721BA6FE /* [CP] Copy Pods Resources */,
-				587ABD8A21BA4D6800C3D81A /* BuildNum */,
 				58C07BA12328FD3B0088D18E /* Embed Frameworks */,
 				5885C71B2339C9F300E5AFF9 /* AppStore Framework */,
 			);
@@ -6736,6 +6807,7 @@
 				581F817C22F7C02C00F8291E /* EOSTransferConfirmView.xib in Resources */,
 				583E6C1422FAA2E3004F1134 /* InviteRankingCell.xib in Resources */,
 				5860ADAE20CFB60500EEB6CE /* LaunchViewController.xib in Resources */,
+				5823983E241F693A00C4E4FD /* airdrop_tx.json in Resources */,
 				581F824022F7C1C800F8291E /* NEOWalletAddressViewController.xib in Resources */,
 				581F810C22F7BEEB00F8291E /* ComplaintSubmitViewController.xib in Resources */,
 				5894A7222260628B008B0854 /* FinanceRedeemConfirmView.xib in Resources */,
@@ -6806,6 +6878,7 @@
 				581F829422F7C26F00F8291E /* ETHImportWalletViewController.xib in Resources */,
 				586F371F207B049400E12F95 /* ContinentAndCountryBean.json in Resources */,
 				58CDBAB123BDD9B100982D54 /* StakingProcessAnimateView.xib in Resources */,
+				589FC660240A735100288046 /* BuybackDetailViewController.xib in Resources */,
 				581F823222F7C1AE00F8291E /* EOSRegisterAccountViewController.xib in Resources */,
 				581F835F22F7C43A00F8291E /* WalletsManageViewController.xib in Resources */,
 				73A05A1E2081A02200974483 /* icon_map_refresh@2x.png in Resources */,
@@ -6908,6 +6981,7 @@
 				58A34A9823B307F300670577 /* ChooseCountryCodeViewController.xib in Resources */,
 				5871925623CEFAAB00728E15 /* JoinGroupBuyView.xib in Resources */,
 				585CDC20225C99EE00199FE1 /* CountryCode.json in Resources */,
+				5870B5DA23F687F900EB4D34 /* TopupBuyConfirmViewController.xib in Resources */,
 				581F819122F7C05700F8291E /* DeleteWalletConfirmView.xib in Resources */,
 				5821965623F2587B00704E23 /* TopupProductSubCell.xib in Resources */,
 				581F80E222F7BE8E00F8291E /* PayReceiveAddressViewController.xib in Resources */,
@@ -6929,6 +7003,7 @@
 				581F822B22F7C1A100F8291E /* EOSRAMViewController.xib in Resources */,
 				581F81C222F7C0B800F8291E /* QLCImportWalletViewController.xib in Resources */,
 				5860AD1B20CFB51200EEB6CE /* WalletSelectCell.xib in Resources */,
+				588B4EA724066CE4003BE791 /* QVoteViewController.xib in Resources */,
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
 				581F82FD22F7C34A00F8291E /* ForgetPWViewController.xib in Resources */,
 				581F814B22F7BF7800F8291E /* WalletHomeSwitchCell.xib in Resources */,
@@ -7112,20 +7187,6 @@
 			shellPath = /bin/sh;
 			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
 		};
-		587ABD8A21BA4D6800C3D81A /* BuildNum */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = BuildNum;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\nif [ $ACTION == install ]; then\necho \"Bumping build number...\"\necho $ACTION\nplist=${PROJECT_DIR}/${INFOPLIST_FILE}\n \n#increment the build number (ie 115 to 116)\nbuildnum=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${plist}\")\nif [[ \"${buildnum}\" == \"\" ]]; then\necho \"No build number in $plist\"\nexit 2\nfi\n \nbuildnum=$(expr $buildnum + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $buildnum\" \"${plist}\"\necho \"Bumped build number to $buildnum\"\n \nelse\necho $CONFIGURATION \" build - Not bumping build number.\"\n \n fi\n\n";
-		};
 		587ABD8E21BA7C4300C3D81A /* BuildNum */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -7170,7 +7231,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n#\n# Copyright 2016 Bugly, Tencent. All rights reserved.\n#\n# V1.4.0\n#\n# 2016.08.03\n#\n#\n#\n######################################################\n# 1. 脚本集成到Xcode工程的Target\n######################################################\n#\n# --- Copy the SCRIPT to the Run Script of Build Phases in the Xcode project ---\n#\n# #\nBUGLY_APP_ID=\"30b074db54\"\n# #\nBUGLY_APP_KEY=\"102e08a6-e9ef-404f-aa38-4f5e02024b76\"\n# #\nBUNDLE_IDENTIFIER=\"com.qlcchain.qwallet\"\n# #\nUPLOAD_DSYM_ONLY=1\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n# # Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\nUPLOAD_DEBUG_SYMBOLS=0\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\nUPLOAD_SIMULATOR_SYMBOLS=0\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\nUPLOAD_ARCHIVE_ONLY=1\n#\n# #\n# source dSYMUpload.sh\n#\n# --- END OF SCRIPT ---\n#\n#\n#\n#\n#######################################################\n# 2. 脚本根据输入参数处理\n#######################################################\n#\n# #命令行下输入应用基本信息, .dSYM文件的父目录路径, 输出文件目录即可\n#\n# sh dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir>\n#\n# #\n#\n# #注意:\n# # 1. dSYMUpload.sh会调用buglySymboliOS.jar进行.dSYM解析，所以依赖Java运行时环境\n# # 2. dSYMUpload.sh和buglySymboliOS.jar的文件路径需一致\n#\n#\n\n#\n# --- CONTENT OF SCRIPT ---\n#\n\n# Bugly服务域名\nBUGLY_DSYM_UPLOAD_DOMAIN=\"api.bugly.qq.com\"\n\n# 注意jar工具的路径跟dSYMUpload.sh脚本路径一致, 请务必保证jar路径的正确性\nBUGLY_SYMBOL_JAR_PATH=\"dsymtool/buglySymboliOS.jar\"\n# 查找添加到系统目录的jar工具\nif [ ! -f \"${BUGLY_SYMBOL_JAR_PATH}\" ]; then\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\nfi\n\n# 打印错误信息\nfunction exitWithMessage(){\n    echo \"--------------------------------\"\n    echo \"${1}\"\n    echo \"--------------------------------\"\n    exit ${2}\n}\n\n# 上传bSYMBOL文件\nfunction dSYMUpload() {\n    P_APP_ID=\"$1\"\n    P_APP_KEY=\"$2\"\n    P_APP_BUNDLE_ID=\"$3\"\n    P_APP_VERSION=\"$4\"\n    P_BSYMBOL_ZIP_FILE=\"$5\"\n    \n    #\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE##*/}\n        P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE_NAME//&/_}\n            P_BSYMBOL_ZIP_FILE_NAME=\"${P_BSYMBOL_ZIP_FILE_NAME// /_}\"\n            \n            DSYM_UPLOAD_URL=\"https://${BUGLY_DSYM_UPLOAD_DOMAIN}/openapi/file/upload/symbol?app_id=${P_APP_ID}&app_key=${P_APP_KEY}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            echo \"-----------------------------\"\n            STATUS=$(/usr/bin/curl -k \"${DSYM_UPLOAD_URL}\" --form \"api_version=1\" --form \"app_id=${P_APP_ID}\" --form \"app_key=${P_APP_KEY}\" --form \"symbolType=2\"  --form \"bundleId=${BUNDLE_IDENTIFIER}\" --form \"productVersion=${BUGLY_APP_VERSION}\" --form \"fileName=${P_BSYMBOL_ZIP_FILE_NAME}\" --form \"file=@${P_BSYMBOL_ZIP_FILE}\" --verbose)\n            echo \"-----------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\"{\\\"reponseCode\\\":\\\"0\\\"}\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            #echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n        }\n        \n        # .dSYM解析为bSYMBOL文件\n        function dSYMParse() {\n            DSYM_FILE=\"$1\"\n            DSYM_SYMBOL_FILE=\"$2\"\n            \n            echo \"--------------------------------\"\n            echo \"Extract symbol info from .dSYM file. to ${DSYM_SYMBOL_FILE}\"\n            (/usr/bin/java -Xms512m -Xmx1024m -Dfile.encoding=UTF8 -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_FILE}\" -o \"${DSYM_SYMBOL_FILE}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n            echo \"--------------------------------\"\n            \n        }\n        \n        # 执行\n        function run() {\n            \n            CONFIG_BUGLY_APP_ID=\"$1\"\n            CONFIG_BUGLY_APP_KEY=\"$2\"\n            \n            CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER=\"$3\"\n            CONFIG_BUGLY_APP_VERSION=\"$4\"\n            CONFIG_DSYM_SOURCE_DIR=\"$5\"\n            CONFIG_DSYM_DEST_DIR=\"$6\"\n            CONFIG_UPLOAD_DSYM_ONLY=\"$7\"\n            \n            # 检查必须参数是否设置\n            if [ ! \"${CONFIG_BUGLY_APP_ID}\" ]; then\n            exitWithMessage \"Error: Bugly App ID not defined. Please set 'BUGLY_APP_ID' \" 0\n            fi\n            \n            if [[ \"${CONFIG_BUGLY_APP_ID}\" == *\"App ID\"* ]]; then\n            exitWithMessage \"Error: Bugly App ID not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_KEY}\" ]; then\n            exitWithMessage \"Error: Bugly App Key not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER}\" ]; then\n            exitWithMessage \"Error: Bundle Identifier not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_VERSION}\" ]; then\n            exitWithMessage \"Error: App Version not defined.\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_SOURCE_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_SOURCE_DIR}\" 0\n            fi\n            \n            if [ ! \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_DEST_DIR}\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            mkdir ${CONFIG_DSYM_DEST_DIR}\n            fi\n            \n            DSYM_FOLDER=\"${CONFIG_DSYM_SOURCE_DIR}\"\n            IFS=$'\\n'\n            \n            echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n            RET=\"F\"\n            \n            #\n            for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n            RET=\"T\"\n            echo \"Found dSYM file: $dsymFile\"\n            \n            DSYM_FILE_NAME=${dsymFile##*/}\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_FILE_NAME}.zip\"\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_SYMBOL_ZIP_FILE_NAME// /_}\"\n                DSYM_SYMBOL_ZIP_FILE=${CONFIG_DSYM_DEST_DIR}/${DSYM_SYMBOL_ZIP_FILE_NAME}\n                \n                if [ $CONFIG_UPLOAD_DSYM_ONLY -eq 1 ]; then\n                if [ -e $DSYM_SYMBOL_ZIP_FILE ]; then\n                rm -f $DSYM_SYMBOL_ZIP_FILE\n                fi\n                # 如果只上传dSYM，直接压缩dSYM目录\n                zip -r -j $DSYM_SYMBOL_ZIP_FILE $dsymFile -x *.plist\n                else\n                # 使用符号表工具来生成Symbol文件\n                dSYMParse $dsymFile $DSYM_SYMBOL_ZIP_FILE\n                fi\n                \n                # 上传\n                dSYMUpload $CONFIG_BUGLY_APP_ID $CONFIG_BUGLY_APP_KEY $CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER $CONFIG_BUGLY_APP_VERSION $DSYM_SYMBOL_ZIP_FILE\n                done\n                \n                if [ $RET = \"F\" ]; then\n                exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n                fi\n            }\n            \n            # 在Xcode工程中执行\n            function runInXcode(){\n                echo \"Uploading dSYM to Bugly in Xcode ...\"\n                \n                echo \"Info.Plist : ${INFOPLIST_FILE}\"\n                \n                BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\n                BUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n                \n                # 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\n                if [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\n                BUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\n                else\n                BUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\n                fi\n                \n                echo \"--------------------------------\"\n                echo \"Prepare application information.\"\n                echo \"--------------------------------\"\n                \n                echo \"Product Name: ${PRODUCT_NAME}\"\n                echo \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\n                echo \"Version: ${BUNDLE_SHORT_VERSION}\"\n                echo \"Build: ${BUNDLE_VERSION}\"\n                \n                echo \"Bugly App ID: ${BUGLY_APP_ID}\"\n                echo \"Bugly App key: ${BUGLY_APP_KEY}\"\n                echo \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n                \n                echo \"--------------------------------\"\n                echo \"Check the arguments ...\"\n                \n                ##检查模拟器编译是否允许上传符号\n                if [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\n                if [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否是Release模式编译\n                if [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\n                if [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否Archive操作\n                if [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\n                if [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\n                echo \"Archive the package\"\n                else\n                exitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\n                fi\n                fi\n                \n                #\n                run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${BUILD_DIR}/BuglySymbolTemp ${UPLOAD_DSYM_ONLY}\n            }\n            \n            # 根据Xcode的环境变量判断是否处于Xcode环境\n            INFO_PLIST_FILE=\"${INFOPLIST_FILE}\"\n            \n            BuildInXcode=\"F\"\n            if [ -f \"${INFO_PLIST_FILE}\" ]; then\n            BuildInXcode=\"T\"\n            fi\n            \n            if [ $BuildInXcode = \"T\" ]; then\n            runInXcode\n            else\n            echo \"\\nUsage: dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir> [upload_dsym_only]\\n\"\n            # 你可以在此处直接设置BuglyAppID和BuglyAppKey，排除不常变参数的输入\n            BUGLY_APP_ID=\"$1\"\n            BUGLY_APP_KEY=\"$2\"\n            BUNDLE_IDENTIFIER=\"$3\"\n            BUGLY_APP_VERSION=\"$4\"\n            DWARF_DSYM_FOLDER_PATH=\"$5\"\n            SYMBOL_OUTPUT_PATH=\"$6\"\n            UPLOAD_DSYM_ONLY=$7\n            run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${SYMBOL_OUTPUT_PATH} ${UPLOAD_DSYM_ONLY}\n            fi\n";
+			shellScript = "
+";
 		};
 		7BC2CB92FE7CE103DCF7755A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7264,6 +7326,7 @@
 				587ABD4521B8F8F800C3D81A /* Abi_json_to_binRequest.m in Sources */,
 				5812DDA820A1A7890043A8A8 /* ZXChatBoxFaceView.m in Sources */,
 				58FB8D74226572840075698E /* ShareFriendsCell.m in Sources */,
+				588B4EA624065683003BE791 /* QgasVoteUtil.m in Sources */,
 				73A05A332081D91600974483 /* HYBImageClipedManager.m in Sources */,
 				58105D3E21882A1A00B8B701 /* ETHWalletAddressViewController.m in Sources */,
 				581D32DE219C158B001F88C3 /* UserDefaultsManager.swift in Sources */,
@@ -7298,6 +7361,7 @@
 				5821967023F4040300704E23 /* PhoneNumerInputView.m in Sources */,
 				587ABD4121B8F8F700C3D81A /* GetBlockChainInfoRequest.m in Sources */,
 				58AE1AEA2074D28800CE983B /* WalletQRViewController.m in Sources */,
+				5870B5D923F667D800EB4D34 /* TopupBuyConfirmViewController.m in Sources */,
 				5825552D22EACF9100F0B9F0 /* ZQImageRotationController.m in Sources */,
 				58F3185122D33CB60024B4F0 /* HomeBuySellViewController.m in Sources */,
 				587ABD5E21B8F8F800C3D81A /* EOSResourceResult.m in Sources */,
@@ -7382,6 +7446,7 @@
 				585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */,
 				58A3EB51237D2E7100AEF7C8 /* SheetMiningUtil.m in Sources */,
 				58D689D2230B9C6600115610 /* DeviceConstants.m in Sources */,
+				5872EF3424095B26000F2DFF /* BuybackDetailViewController.m in Sources */,
 				58957019218957F200DB7497 /* ChooseCurrencyViewController.m in Sources */,
 				58A4DEAE206234AC00E72F52 /* LaunchViewController.m in Sources */,
 				583D959D211432110057A90C /* RankMenuView.m in Sources */,
@@ -7520,6 +7585,7 @@
 				5872133D2361748600E50744 /* NSString+RLArithmetic.m in Sources */,
 				585D1EFB225DEEE000468C4A /* MyCell.m in Sources */,
 				58CD53E4238FA3DE00D5C245 /* UISegmentedControl+Adapt.m in Sources */,
+				586F67FD24090432008E4D4C /* BuybackBurnModel.m in Sources */,
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
 				581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
@@ -7658,6 +7724,7 @@
 				587ABD5721B8F8F800C3D81A /* EOS_Keys.m in Sources */,
 				73C1BA05207DB2290080C59F /* SystemUtil.m in Sources */,
 				7377D199206CFCD10072E628 /* SRSlimeView.m in Sources */,
+				588B4EA224064BB2003BE791 /* QVoteViewController.m in Sources */,
 				58A64FFE21BE16B100E52FFF /* TipOKView.m in Sources */,
 				5827BC3D21A3FA6300B7730E /* NEOGasUtil.swift in Sources */,
 				581D32CD219C158B001F88C3 /* Claims.swift in Sources */,
@@ -7670,6 +7737,7 @@
 				5806C10421C3C3AC000E693B /* GetBlockRequest.m in Sources */,
 				58245C5022E192550093E747 /* TZImagePickerController.m in Sources */,
 				5811B7432293D4B900F657B5 /* QLCWalletInfo.m in Sources */,
+				586F67F92408FF8C008E4D4C /* BuybackBurnUtil.m in Sources */,
 				7377D179206B9E730072E628 /* VPNMode.m in Sources */,
 				585D1EEB225D8E5E00468C4A /* UserModel.m in Sources */,
 				5840927D23052A410054BCBB /* ConfidantViewController.m in Sources */,
@@ -7844,6 +7912,7 @@
 				5812DDAB20A1A7890043A8A8 /* ZXChatBoxMoreView.m in Sources */,
 				7351508D20D3B71300194711 /* DBManageUtil.m in Sources */,
 				58A8B1AF233B0061007E2CE3 /* MyTopupOrderViewController.m in Sources */,
+				5811338E2430ADD7002FA7CF /* NEOGasClaimModel.m in Sources */,
 				58990B7221951EA00036FF4F /* NSString+RemoveZero.m in Sources */,
 				58F3186A22D346600024B4F0 /* TradeOrderDetailViewController.m in Sources */,
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,
@@ -9431,6 +9500,17 @@
 			name = NotifactionView.xib;
 			sourceTree = "<group>";
 		};
+		5870B5DC23F687F900EB4D34 /* TopupBuyConfirmViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5870B5DB23F687F900EB4D34 /* Base */,
+				5870B5DE23F687FF00EB4D34 /* en */,
+				5870B5E023F6880100EB4D34 /* zh-Hans */,
+				5870B5E223F6880400EB4D34 /* id */,
+			);
+			name = TopupBuyConfirmViewController.xib;
+			sourceTree = "<group>";
+		};
 		5871922E23CEF35200728E15 /* GroupBuyKnowDelegateView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9583,6 +9663,28 @@
 				58D5B00823A9D09000A84986 /* id */,
 			);
 			name = StakingDetailViewController.xib;
+			sourceTree = "<group>";
+		};
+		588B4EA924066CE4003BE791 /* QVoteViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				588B4EA824066CE4003BE791 /* Base */,
+				588B4EAB24066CEA003BE791 /* en */,
+				588B4EAD24066CED003BE791 /* zh-Hans */,
+				588B4EAF24066CF0003BE791 /* id */,
+			);
+			name = QVoteViewController.xib;
+			sourceTree = "<group>";
+		};
+		589FC662240A735100288046 /* BuybackDetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				589FC661240A735100288046 /* Base */,
+				589FC664240A735400288046 /* en */,
+				589FC666240A735700288046 /* zh-Hans */,
+				589FC668240A735900288046 /* id */,
+			);
+			name = BuybackDetailViewController.xib;
 			sourceTree = "<group>";
 		};
 		58A3EB5E237D786500AEF7C8 /* SheetMiningTipView.xib */ = {
@@ -9930,7 +10032,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.9;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9950,7 +10052,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.2.9;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -10075,7 +10177,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7331;
+				CURRENT_PROJECT_VERSION = 7601;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -10098,7 +10200,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.9;
+				MARKETING_VERSION = 1.3.6;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10120,7 +10222,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7331;
+				CURRENT_PROJECT_VERSION = 7601;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -10142,7 +10244,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.2.9;
+				MARKETING_VERSION = 1.3.6;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -57,9 +57,9 @@
     }];
     _nameLab.text = model.showNickName;
     _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
-    _priceLab.text = [NSString stringWithFormat:@"%@ %@",model.unitPrice,model.payToken];
+    _priceLab.text = [NSString stringWithFormat:@"%@ %@",model.unitPrice_str,model.payToken];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ %@",model.minAmount,model.maxAmount,model.tradeToken];
-    _totalLab.text = [NSString stringWithFormat:@"%@ %@",model.totalAmount,model.tradeToken];
+    _totalLab.text = [NSString stringWithFormat:@"%@ %@",model.totalAmount_str,model.tradeToken];
     _typeLab.text = [model.type isEqualToString:@"SELL"]?[NSString stringWithFormat:@"%@ %@",kLang(@"entrust_sell"),model.tradeToken]:[NSString stringWithFormat:@"%@ %@",kLang(@"entrust_buy"),model.tradeToken];
     _typeLab.textColor = [model.type isEqualToString:@"SELL"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     NSString *_status = model.status;

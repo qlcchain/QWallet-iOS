@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *descriptionEn; //" : "1",
 @property (nonatomic, strong) NSString *isp; //" : "移动",
 @property (nonatomic, strong) NSString *Description; //" : "1",
-@property (nonatomic, strong) NSNumber *discount; //" : 0.95,
+@property (nonatomic, strong) NSNumber *discount; // 产品的折扣 " : 0.95,
 @property (nonatomic, strong) NSNumber *qgasDiscount;
 @property (nonatomic, strong) NSString *nameEn; //" : "广东移动",
 @property (nonatomic, strong) NSString *amountOfMoney; //" : "50,100,200,300,400,500",
@@ -79,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *orderTimes;
 @property (nonatomic, strong) NSString *haveGroupBuy;
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSNumber *groupDiscount; // 团购最低的折扣
 
 //"countryEn" : "All Operators in China",
 //"explain" : "72小时内到账 急用勿拍",
@@ -110,6 +111,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM;
 + (NSString *)getAmountShow:(TopupProductModel *)productM tokenM:(TopupDeductionTokenModel *)tokenM groupDiscount:(NSString *)groupDiscount;
+- (TopupProductModel *)v2ToV3;
+
 
 @end
 

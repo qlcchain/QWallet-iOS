@@ -71,12 +71,25 @@
     _alreadyLab.text = nil;
 }
 
-- (void)config:(TopupProductModel *)productM token:(TopupDeductionTokenModel *)tokenM {
+- (void)config:(TopupProductModel *)productM token:(TopupDeductionTokenModel *)tokenM isInGroupBuyActivityTime:(BOOL)isInGroupBuyActivityTime groupBuyMinimumDiscount:(NSString *)groupBuyMinimumDiscount {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],productM.imgPath]];
     [_icon sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"topup_guangdong_mobile"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     
-    BOOL haveGroupBuy = [productM.haveGroupBuy isEqualToString:@"no"]?NO:YES;
+    BOOL supportGroupBuy = NO;
+    if ([productM.payWay isEqualToString:@"FIAT"]) { // 法币支付
+        if ([productM.payFiat isEqualToString:@"CNY"]) {
+
+        } else if ([productM.payFiat isEqualToString:@"USD"]) {
+
+        }
+    } else if ([productM.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+        if (isInGroupBuyActivityTime) {
+//            if ([productM.haveGroupBuy isEqualToString:@"yes"]) {
+                supportGroupBuy = YES;
+//            }
+        }
+    }
     
     NSString *language = [Language currentLanguageCode];
     NSString *countryStr = @"";
@@ -93,11 +106,12 @@
         ispStr = productM.ispEn;
         nameStr = productM.nameEn;
         explainStr = productM.explainEn;
-        discountNumStr = @(100).sub(productM.discount.mul(@(100)));
-        if (haveGroupBuy) {
+        if (supportGroupBuy) {
+            discountNumStr = @(100).sub(groupBuyMinimumDiscount.mul(@(100)));
             discountShowStr = [NSString stringWithFormat:@"Up to %@%% off",discountNumStr];
             alreadyStr = [NSString stringWithFormat:@"%@ open",productM.orderTimes];
         } else {
+            discountNumStr = @(100).sub(productM.discount.mul(@(100)));
             discountShowStr = [NSString stringWithFormat:@"Limited offering of %@%% off dicount",discountNumStr];
             alreadyStr = [NSString stringWithFormat:@"%@ sold",productM.orderTimes];
         }
@@ -108,11 +122,13 @@
         ispStr = productM.isp;
         nameStr = productM.name;
         explainStr = productM.explain;
-        discountNumStr = productM.discount.mul(@(10));
-        if (haveGroupBuy) {
+        
+        if (supportGroupBuy) {
+            discountNumStr = groupBuyMinimumDiscount.mul(@(10));
             discountShowStr = [NSString stringWithFormat:@"团购低至%@折",discountNumStr];
             alreadyStr = [NSString stringWithFormat:@"已拼%@+件",productM.orderTimes];
         } else {
+            discountNumStr = productM.discount.mul(@(10));
             discountShowStr = [NSString stringWithFormat:@"限时优惠%@折",discountNumStr];
             alreadyStr = [NSString stringWithFormat:@"已售%@+件",productM.orderTimes];
         }
@@ -122,11 +138,13 @@
         ispStr = productM.ispEn;
         nameStr = productM.nameEn;
         explainStr = productM.explainEn;
-        discountNumStr = @(100).sub(productM.discount.mul(@(100)));
-        if (haveGroupBuy) {
+        
+        if (supportGroupBuy) {
+            discountNumStr = @(100).sub(groupBuyMinimumDiscount.mul(@(100)));
             discountShowStr = [NSString stringWithFormat:@"Up to %@%% off",discountNumStr];
             alreadyStr = [NSString stringWithFormat:@"%@ open",productM.orderTimes];
         } else {
+            discountNumStr = @(100).sub(productM.discount.mul(@(100)));
             discountShowStr = [NSString stringWithFormat:@"Limited offering of %@%% off dicount",discountNumStr];
             alreadyStr = [NSString stringWithFormat:@"%@ sold",productM.orderTimes];
         }
@@ -134,27 +152,36 @@
     }
     
     NSString *localFiatStr = productM.localFiat?:@"";
-    NSString *amountShowStr  = [NSString stringWithFormat:@"%@ %@",productM.localFiatAmount,localFiatStr];
+    NSString *localAmountShowStr  = [NSString stringWithFormat:@"%@ %@",productM.localFiatAmount,localFiatStr];
+    NSString *amountShowStr  = localAmountShowStr;
+    if (supportGroupBuy) {
+        NSString *fait1Str = productM.discount.mul(productM.payFiatAmount);
+//        NSString *deduction1Str = productM.payFiatAmount.mul(productM.qgasDiscount);
+        NSString *payTokenSymbol = productM.payTokenSymbol?:@"";
+        NSNumber *payTokenPrice = [productM.payFiat isEqualToString:@"CNY"]?productM.payTokenCnyPrice:[productM.payFiat isEqualToString:@"USD"]?productM.payTokenUsdPrice:@(0);
+//        NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
+        NSString *payAmountStr = [fait1Str.div(payTokenPrice) showfloatStr:3];
+        amountShowStr = [NSString stringWithFormat:@"%@ %@",payAmountStr,payTokenSymbol];
+    }
     //中划线
     NSDictionary *amountAttribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
     NSMutableAttributedString *amountAttribtStr = [[NSMutableAttributedString alloc]initWithString:amountShowStr attributes:amountAttribtDic];
     _originLab.attributedText = amountAttribtStr;
     
 //    NSString *desStr = [NSString stringWithFormat:@"%@%@%@",countryStr,provinceStr,ispStr];
-    NSString *titleShowStr = [NSString stringWithFormat:@"%@ %@ %@\n%@",countryStr,ispStr,amountShowStr,explainStr];
+    NSString *titleShowStr = [NSString stringWithFormat:@"%@ %@ %@\n%@",countryStr,ispStr,localAmountShowStr,explainStr];
     NSMutableAttributedString *titleAtt = [[NSMutableAttributedString alloc] initWithString:titleShowStr];
     [titleAtt addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, titleShowStr.length)];
-//    [discountAtt addAttribute:NSFontAttributeName value:[UIFont fontWithName:@".SFUIDisplay-Semibold" size:14] range:[discountShowStr rangeOfString:discountStr]];
     [titleAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x2B2B2B) range:NSMakeRange(0, titleShowStr.length)];
     [titleAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xF32A40) range:[titleShowStr rangeOfString:countryStr]];
     _titleLab.attributedText = titleAtt;
     
     _discountLab.text = discountShowStr;
     _alreadyLab.text = alreadyStr;
-    
-    
-    NSString *fait1Str = productM.discount.mul(productM.payFiatAmount);
-    NSString *faitMoneyStr = [productM.discount.mul(productM.payFiatAmount) showfloatStr:4];
+
+    NSString *discount = [NSString stringWithFormat:@"%@",productM.discount];
+    NSString *fait1Str = discount.mul(productM.payFiatAmount);
+    NSString *faitMoneyStr = [discount.mul(productM.payFiatAmount) showfloatStr:4];
     NSString *deduction1Str = productM.payFiatAmount.mul(productM.qgasDiscount);
     NSNumber *deductionTokenPrice = @(1);
     if ([productM.payFiat isEqualToString:@"CNY"]) {
@@ -171,14 +198,18 @@
         payTokenSymbol = localFiatStr;
         topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",faitMoneyStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
     } else if ([productM.payWay isEqualToString:@"TOKEN"]) {
-        payTokenSymbol = productM.payTokenSymbol?:@"";
-        NSNumber *payTokenPrice = [productM.payFiat isEqualToString:@"CNY"]?productM.payTokenCnyPrice:[productM.payFiat isEqualToString:@"USD"]?productM.payTokenUsdPrice:@(0);
-        NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
-        topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payAmountStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
+        if (supportGroupBuy) {
+            topupAmountShowStr = [TopupProductModel getAmountShow:productM tokenM:tokenM groupDiscount:groupBuyMinimumDiscount];
+        } else {
+            payTokenSymbol = productM.payTokenSymbol?:@"";
+            NSNumber *payTokenPrice = [productM.payFiat isEqualToString:@"CNY"]?productM.payTokenCnyPrice:[productM.payFiat isEqualToString:@"USD"]?productM.payTokenUsdPrice:@(0);
+            NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
+            topupAmountShowStr = [NSString stringWithFormat:@"%@%@%@%@%@",payAmountStr,payTokenSymbol,addStr,deductionAmountStr,deductionSymbolStr];
+        }
     }
     _priceLab.text = topupAmountShowStr;
     
-    if (productM.items && [productM.items isKindOfClass:[NSArray class]]) {
+    if ([productM.haveGroupBuy isEqualToString:@"yes"] && productM.items && [productM.items isKindOfClass:[NSArray class]]) {
         _peopleBack.hidden = NO;
         [_groupPeopleV configAssemble:productM.items];
     } else {

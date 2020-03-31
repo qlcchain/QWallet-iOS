@@ -263,6 +263,9 @@ static NSString *const TopupNetworkSize = @"30";
 //    if (_okBlock) {
 //        _okBlock();
 //    }
+    if (![UserModel haveLoginAccount]) {
+        [kAppD presentLoginNew];
+    }
     
     if (_selectIndex < 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_select_groupbuy_type")];

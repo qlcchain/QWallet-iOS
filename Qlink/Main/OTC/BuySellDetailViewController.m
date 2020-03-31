@@ -35,6 +35,8 @@
 #import "NSString+Valid.h"
 #import "TxidBackUtil.h"
 #import "TradeOrderListModel.h"
+#import "VerifyTipView.h"
+#import "VerificationViewController.h"
 
 @interface BuySellDetailViewController () <UITextFieldDelegate>
 
@@ -134,40 +136,49 @@
         _qgasSendBackHeight.constant = 102;
     }
     
-    _usdtLab.text = _inputEntrustOrderListM.unitPrice;
+    _usdtLab.text = _inputEntrustOrderListM.unitPrice_str;
 //    _totalLab.text = [NSString stringWithFormat:@"%@",_inputEntrustOrderListM.totalAmount];
-    _totalLab.text = [NSString stringWithFormat:@"%@ %@",@([_inputEntrustOrderListM.totalAmount doubleValue] - [_inputEntrustOrderListM.lockingAmount doubleValue] - [_inputEntrustOrderListM.completeAmount doubleValue]),_inputTradeToken];
+    _totalLab.text = [NSString stringWithFormat:@"%@ %@",_inputEntrustOrderListM.totalAmount_str.sub(_inputEntrustOrderListM.lockingAmount_str).sub(_inputEntrustOrderListM.completeAmount_str),_inputTradeToken];
     _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_inputEntrustOrderListM.minAmount,_inputEntrustOrderListM.maxAmount];
     
-    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount.mul(_inputEntrustOrderListM.unitPrice)];
+    _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount.mul(_inputEntrustOrderListM.unitPrice_str)];
     _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_inputEntrustOrderListM.maxAmount];
 }
 
 - (void)refreshView {
     if (_orderInfoM) {
-        _usdtLab.text = _orderInfoM.unitPrice;
+        _usdtLab.text = _orderInfoM.unitPrice_str;
 //        _totalLab.text = [NSString stringWithFormat:@"%@",_orderInfoM.totalAmount];
-        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount doubleValue] - [_orderInfoM.lockingAmount doubleValue] - [_orderInfoM.completeAmount doubleValue])];
+        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str)];
         _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@",_orderInfoM.minAmount,_orderInfoM.maxAmount];
         
-        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount.mul(_orderInfoM.unitPrice)];
+        _usdtMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount.mul(_orderInfoM.unitPrice_str)];
         _qgasMaxTF.placeholder = [NSString stringWithFormat:@"%@ %@",kLang(@"max"),_orderInfoM.maxAmount];
     }
 }
 
 - (void)changedTextField:(UITextField *)tf {
     if (tf == _usdtMaxTF) {
-        NSString *str = _usdtMaxTF.text.div(_orderInfoM.unitPrice);
+        NSString *str = _usdtMaxTF.text.div(_orderInfoM.unitPrice_str);
         _qgasMaxTF.text = [NSString stringWithFormat:@"%@",str];
     } else if (tf == _qgasMaxTF) {
         if ([tf.text isEmptyString]) {
             _usdtMaxTF.text = nil;
         } else {
-            NSString *str = _qgasMaxTF.text.mul(_orderInfoM.unitPrice);
+            NSString *str = _qgasMaxTF.text.mul(_orderInfoM.unitPrice_str);
             NSString *str3 = str.roundPlain(3);
             _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str3];
         }
     }
+}
+
+- (void)showVerifyTipView {
+    VerifyTipView *view = [VerifyTipView getInstance];
+    kWeakSelf(self);
+    view.okBlock = ^{
+        [weakself jumpToVerification];
+    };
+    [view showWithTitle:kLang(@"please_finish_the_verification_on_me_page")];
 }
 
 //- (void)showSubmitSuccess {
@@ -479,6 +490,7 @@
 
 - (IBAction)submitAction:(id)sender {
     UserModel *userM = [UserModel fetchUserOfLogin];
+    
     if ([_orderInfoM.userId isEqualToString:userM.ID]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"you_can_not_buy_or_sell_your_own_entrust_order")];
         return;
@@ -488,7 +500,7 @@
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputPayToken,kLang(@"is_empty")]];
         return;
     }
-    if ([_usdtMaxTF.text doubleValue] > [_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice doubleValue]) {
+    if ([_usdtMaxTF.text doubleValue] > [_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice_str doubleValue]) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputPayToken,kLang(@"is_over_max")]];
         return;
     }
@@ -510,11 +522,19 @@
         return;
     }
     // 检查剩余QGAS量
-    NSInteger restAmount = [_orderInfoM.totalAmount doubleValue]-[_orderInfoM.lockingAmount doubleValue]-[_orderInfoM.completeAmount doubleValue];
-    if (restAmount<[_qgasMaxTF.text doubleValue]) { // 交易量不足
-        NSString *tip = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"remain")],@(restAmount)];
+    NSString *restAmount = _orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str);
+    if ([restAmount doubleValue]<[_qgasMaxTF.text doubleValue]) { // 交易量不足
+        NSString *tip = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"remain")],restAmount];
         [kAppD.window makeToastDisappearWithText:tip];
         return;
+    }
+    
+    if ([_inputEntrustOrderListM.tradeToken isEqualToString:@"QGAS"] && [_qgasMaxTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if (![userM.vStatus isEqualToString:kyc_success]) {
+            [self showVerifyTipView];
+            return;
+        }
     }
     
     if ([_inputEntrustOrderListM.type isEqualToString:@"SELL"]) { // 我要买
@@ -670,6 +690,11 @@
 - (void)jumpToChooseWallet {
     ChooseWalletViewController *vc = [[ChooseWalletViewController alloc] init];
     vc.showBack = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToVerification {
+    VerificationViewController *vc = [VerificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

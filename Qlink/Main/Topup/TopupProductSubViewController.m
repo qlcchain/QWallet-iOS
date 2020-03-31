@@ -17,6 +17,8 @@
 #import "TopupPayHelper.h"
 #import "GroupBuyDetialViewController.h"
 #import "ChooseTopupPlanViewController.h"
+#import <TMCache/TMCache.h>
+#import "TopupCountryModel.h"
 
 static NSString *TopupNetworkSize = @"30";
 
@@ -40,6 +42,19 @@ static NSString *TopupNetworkSize = @"30";
     
     [self configInit];
     [self requestTopup_product_list_v3];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self handlerListData];
 }
 
 #pragma mark - Operation
@@ -55,10 +70,30 @@ static NSString *TopupNetworkSize = @"30";
     [self requestTopup_product_list_v3];
 }
 
+- (void)refreshTable {
+    [self.mainTable reloadData];
+}
+
 - (CGFloat)getTableHeight {
     return _tableHeight;
 }
 
+- (NSString *)getChachKey {
+    return [NSString stringWithFormat:@"TM_TopupProductSub_%@",_inputCountryM.nameEn?:@""];
+}
+
+- (void)handlerListData {
+    NSArray *cacheArr = [[TMCache sharedCache] objectForKey:[self getChachKey]]?:@[];
+    [_sourceArr removeAllObjects];
+    [_sourceArr addObjectsFromArray:cacheArr];
+
+    _tableHeight = _sourceArr.count*TopupProductSubCell_Height;
+    [_mainTable reloadData];
+    
+    if (_updateTableHeightBlock) {
+        _updateTableHeightBlock(_tableHeight);
+    }
+}
 
 
 #pragma mark - Request
@@ -77,27 +112,12 @@ static NSString *TopupNetworkSize = @"30";
 //        [weakself.mainScroll.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [TopupProductModel mj_objectArrayWithKeyValuesArray:responseObject[@"productList"]];
-//            if (weakself.currentPage == 1) {
-                [weakself.sourceArr removeAllObjects];
-//            }
-//
-            [weakself.sourceArr addObjectsFromArray:arr];
-//            weakself.currentPage += 1;
-
-            weakself.tableHeight = weakself.sourceArr.count*TopupProductSubCell_Height;
-            [weakself.mainTable reloadData];
+            [[TMCache sharedCache] setObject:arr forKey:[weakself getChachKey]];
             
-            if (weakself.updateTableHeightBlock) {
-                weakself.updateTableHeightBlock(weakself.tableHeight);
-            }
-            
-//            CGFloat line = ceil(weakself.sourceArr.count/2.0);
-//            weakself.mainCollectionHeight.constant = line*TopupMobilePlanCell_Height+(line-1)*miniSpacingDistance;
-//            [weakself.mainCollection reloadData];
+            [weakself handlerListData];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-//        [weakself.mainScroll.mj_header endRefreshing];
-//        [weakself.mainScroll.mj_footer endRefreshing];
+
     }];
 }
 
@@ -149,24 +169,30 @@ static NSString *TopupNetworkSize = @"30";
         return;
     }
     
-    BOOL haveGroupBuy = NO;
     if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
-        if ([model.payFiat isEqualToString:@"CNY"]) {
+       if ([model.payFiat isEqualToString:@"CNY"]) {
+           [self jumpToChooseTopupPlan];
+       } else if ([model.payFiat isEqualToString:@"USD"]) {
+           
+       }
+   } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
+       
+       kWeakSelf(self);
+       [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
+           if (isInGroupBuyActiviyTime) {
+//               if ([model.haveGroupBuy isEqualToString:@"yes"]) {
+                   [weakself jumpToGroupBuyDetial:model];
+//               } else {
+//                   [weakself jumpToChooseTopupPlan];
+//               }
+               
+           } else {
+               [weakself jumpToChooseTopupPlan];
+           }
+       }];
+       
+   }
 
-        } else if ([model.payFiat isEqualToString:@"USD"]) {
-
-        }
-    } else if ([model.payWay isEqualToString:@"TOKEN"]) { // 代币支付
-        if (![model.haveGroupBuy isEqualToString:@"no"]) {
-            haveGroupBuy = YES;
-        }
-    }
-
-    if (haveGroupBuy) {
-        [self jumpToGroupBuyDetial:model];
-    } else {
-        [self jumpToChooseTopupPlan];
-    }
     
     
 //    if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
@@ -239,7 +265,7 @@ static NSString *TopupNetworkSize = @"30";
     TopupProductSubCell *cell = [tableView dequeueReusableCellWithIdentifier:TopupProductSubCell_Reuse];
     
     TopupProductModel *model = _sourceArr[indexPath.row];
-    [cell config:model token:_selectDeductionTokenM];
+    [cell config:model token:_selectDeductionTokenM isInGroupBuyActivityTime:_isInGroupBuyActivityTime groupBuyMinimumDiscount:_groupBuyMinimumDiscount];
     
     return cell;
 }

@@ -95,25 +95,64 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
                     if (resultHandler) {
                         resultHandler(nil,NO,@"");
                     }
-                    [NEOJSView saveLog:value];
+                    [NEOJSView saveSendLog:value];
                 }
             } else {
                 if (resultHandler) {
                     resultHandler(nil,NO,@"");
                 }
-                [NEOJSView saveLog:value];
+                [NEOJSView saveSendLog:value];
             }
         } else {
             if (resultHandler) {
                 resultHandler(nil,NO,@"");
             }
-            [NEOJSView saveLog:value];
+            [NEOJSView saveSendLog:value];
         }
     }];
 }
 
-+ (void)saveLog:(NSDictionary *)dic {
+#pragma mark - Claimgas
+- (void)claimgasWithPrivateKey:(NSString *)privateKey resultHandler:(NEOJSResultBlock)resultHandler {
+    
+    NSArray *argu1 = @[privateKey];
+    DDLogDebug(@"staking.claimGas argu1 = %@",argu1);
+//    kWeakSelf(self);
+    [_dwebview callHandler:@"staking.claimGas" arguments:argu1 completionHandler:^(NSDictionary *value) {
+        DDLogDebug(@"staking.claimGas: %@",value);
+        
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            NSNumber *claimed = value[@"claimed"];
+//            NSDictionary *claimed = value[@"claimed"];
+            NSDictionary *msg = value[@"msg"];
+            if ([claimed boolValue] == YES) {
+                if (resultHandler) {
+                    resultHandler(nil,YES,@"");
+                }
+            } else {
+                if (resultHandler) {
+                    resultHandler(nil,NO,@"");
+                }
+                [NEOJSView saveClaimgasLog:value];
+            }
+        } else {
+            if (resultHandler) {
+                resultHandler(nil,NO,@"");
+            }
+            [NEOJSView saveClaimgasLog:value];
+        }
+    }];
+}
+
++ (void)saveSendLog:(NSDictionary *)dic {
     NSString *des = [@"staking.send error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"staking.send",dic];
+    NSString *className = NSStringFromClass([self class]);
+    NSString *methodName = NSStringFromSelector(_cmd);
+    [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];
+}
+
++ (void)saveClaimgasLog:(NSDictionary *)dic {
+    NSString *des = [@"staking.claimGas error" stringByAppendingFormat:@"   ***method:%@   ***error:%@",@"staking.claimGas",dic];
     NSString *className = NSStringFromClass([self class]);
     NSString *methodName = NSStringFromSelector(_cmd);
     [QLogHelper requestLog_saveWithClass:className method:methodName logStr:des];

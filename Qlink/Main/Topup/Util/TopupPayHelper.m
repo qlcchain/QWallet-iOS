@@ -85,7 +85,7 @@
     NSNumber *payTokenPrice = [model.payFiat isEqualToString:@"CNY"]?model.payTokenCnyPrice:[model.payFiat isEqualToString:@"USD"]?model.payTokenUsdPrice:@(0);
     NSString *payAmountStr = [fait1Str.sub(deduction1Str).div(payTokenPrice) showfloatStr:3];
     // Top-up value %@ %@\npay %@ %@ and %@ %@
-    // localFaitMoney  lacalFait    qgasStr        payTokenAmount
+    // localFiatAmount  lacalFait    qgasStr        payTokenAmount
     NSString *message = [NSString stringWithFormat:kLang(@"use_to_purchase__yuan_of_phone_charge_for_deduction_1"),amountNum, model.localFiat, deductionAmountStr,_selectDeductionTokenM.symbol,payAmountStr, model.payTokenSymbol];
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
@@ -186,10 +186,10 @@
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"QGAS";
 //    vc.inputProductM = productM;

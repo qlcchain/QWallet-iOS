@@ -17,7 +17,7 @@ static NSString *TopupProductSubCell_Reuse = @"TopupProductSubCell";
 
 @interface TopupProductSubCell : UITableViewCell
 
-- (void)config:(TopupProductModel *)productM token:(TopupDeductionTokenModel *)tokenM;
+- (void)config:(TopupProductModel *)productM token:(TopupDeductionTokenModel *)tokenM isInGroupBuyActivityTime:(BOOL)isInGroupBuyActivityTime groupBuyMinimumDiscount:(NSString *)groupBuyMinimumDiscount;
 
 @end
 
