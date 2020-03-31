@@ -167,7 +167,7 @@
     return mnemonic;
 }
 
-+ (void)createQLCWalletInAuto {
++ (void)createQLCWalletInAuto:(void(^)(NSString *mnemonic))completeBlock {
     BOOL isSuccess = [QLCWalletManage.shareInstance createWallet];
     if (isSuccess) {
         QLCWalletInfo *walletInfo = [[QLCWalletInfo alloc] init];
@@ -178,6 +178,11 @@
         walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
+        
+        if (completeBlock) {
+            NSString *mnemonic = [[QLCWalletManage shareInstance] exportMnemonicWithSeed:walletInfo.seed]?:@"";
+            completeBlock(mnemonic);
+        }
         
         [ReportUtil requestWalletReportWalletCreateWithBlockChain:@"QLC" address:walletInfo.address pubKey:walletInfo.publicKey privateKey:walletInfo.privateKey]; // 上报钱包创建
         

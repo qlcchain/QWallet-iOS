@@ -37,9 +37,11 @@ typedef enum : NSUInteger {
 + (void)refreshTrustWallet;
 + (BOOL)deleteFromKeyChain:(NSString *)address;
 + (ETHWalletInfo *)getWalletInKeychain:(NSString *)address;
++ (NSArray *)getAllWalletInKeychain;
 + (BOOL)deleteAllWallet;
 
 + (void)createETHWalletInAuto;
++ (void)createETHWalletInAuto_Mnemonic:(NSString *)mnemonic;
 + (BOOL)haveETHWallet;
 
 @end

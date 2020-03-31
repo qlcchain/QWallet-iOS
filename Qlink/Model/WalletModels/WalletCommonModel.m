@@ -22,8 +22,23 @@
 @implementation WalletCommonModel
 
 + (void)deleteAllWallet {
+    NSArray *arr = [WalletCommonModel getAllWalletModel];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WalletCommonModel *model = obj;
+        [WalletCommonModel deleteWalletModel:model];
+    }];
+    NSArray *arr1 = [WalletCommonModel getAllWalletModel];
+    
     [ETHWalletInfo deleteAllWallet];
+    
+    NSArray *arr2 = [ETHWalletInfo getAllWalletInKeychain];
+    
     [NEOWalletInfo deleteAllWallet];
+    [QLCWalletInfo deleteAllWallet];
+    [EOSWalletInfo deleteAllWallet];
+
+    
+    
 }
 
 + (void)walletInit {
@@ -317,21 +332,33 @@
     BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
     BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
     BOOL haveQlcWallet = [QLCWalletInfo haveQLCWallet];
-    if (!haveEthWallet) {
+    
+    if (!haveQlcWallet) { // 创建QLC钱包
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [ETHWalletInfo createETHWalletInAuto];
+            [QLCWalletInfo createQLCWalletInAuto:^(NSString *mnemonic) {
+                if (mnemonic && mnemonic.length > 0) { // 用相同助记词创建钱包
+                    if (!haveEthWallet) { // 创建ETH钱包
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                            [ETHWalletInfo createETHWalletInAuto_Mnemonic:mnemonic];
+                        });
+                    }
+                } else { // 无助记词
+                    if (!haveEthWallet) { // 创建ETH钱包
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                            [ETHWalletInfo createETHWalletInAuto];
+                        });
+                    }
+                }
+            }];
         });
     }
+    
     if (!haveNeoWallet) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [NEOWalletInfo createNEOWalletInAuto];
         });
     }
-    if (!haveQlcWallet) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [QLCWalletInfo createQLCWalletInAuto];
-        });
-    }
+    
 }
 
 #pragma mark - ETH

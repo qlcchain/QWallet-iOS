@@ -15,6 +15,13 @@
 @implementation ETHWalletInfo
 
 + (BOOL)deleteAllWallet {
+    NSArray *arr = [ETHWalletInfo getAllWalletInKeychain];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        ETHWalletInfo *model = obj;
+        [TrustWalletManage.sharedInstance deleteWithAddress:model.address?:@"" :^(BOOL success) {
+            DDLogDebug(@"ETH wallet %@ delete %@",model.address?:@"",@(success));
+        }];
+    }];
     BOOL success = [KeychainUtil removeKeyWithKeyName:ETH_WALLET_KEYCHAIN];
     return success;
 }
@@ -156,6 +163,41 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
             });
         }];
+    }];
+}
+
++ (void)createETHWalletInAuto_Mnemonic:(NSString *)mnemonic {
+//    kWeakSelf(self);
+    NSString *pw = @"";
+//    NSString *mnemonic = _mnemonicTV.text;
+    [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:nil privateKeyInput:nil addressInput:nil mnemonicInput:mnemonic password:pw :^(BOOL success, NSString *address) {
+        if (success) {
+            [TrustWalletManage.sharedInstance exportPrivateKeyWithAddress:address?:@"" :^(NSString * privateKey) {
+                
+                ETHWalletInfo *walletInfo = [[ETHWalletInfo alloc] init];
+                walletInfo.privatekey = privateKey;
+                walletInfo.mnemonic = mnemonic;
+                walletInfo.keystore = @"";
+                walletInfo.password = pw;
+                walletInfo.address = address;
+                walletInfo.type = @"1"; // mnemonic
+                walletInfo.isBackup = @(NO);
+                // 存储keychain
+                [walletInfo saveToKeyChain];
+                
+                [TrustWalletManage.sharedInstance exportPublicKeyWithAddress:walletInfo.address :^(NSString * _Nullable publicKey) {
+                    [ReportUtil requestWalletReportWalletCreateWithBlockChain:@"ETH" address:walletInfo.address pubKey:publicKey?:@"" privateKey:walletInfo.privatekey]; // 上报钱包创建
+                }];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                    [[NSNotificationCenter defaultCenter] postNotificationName:Add_ETH_Wallet_Noti object:nil];
+                });
+//                [weakself showImportSuccessView];
+//                [weakself performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
+            }];
+        } else {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"import_fail")];
+        }
     }];
 }
 

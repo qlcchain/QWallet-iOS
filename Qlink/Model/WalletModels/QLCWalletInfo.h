@@ -30,7 +30,7 @@
 + (NSString *)getQLCPublicKeyWithAddress:(NSString *)address;
 + (NSString *)signWithMessage:(NSString *)message address:(NSString *)address;
 
-+ (void)createQLCWalletInAuto;
++ (void)createQLCWalletInAuto:(void(^)(NSString *mnemonic))completeBlock;
 + (BOOL)haveQLCWallet;
 
 @end
