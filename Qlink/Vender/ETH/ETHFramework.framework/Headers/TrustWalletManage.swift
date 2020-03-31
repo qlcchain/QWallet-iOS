@@ -501,7 +501,7 @@ public class TrustWalletManage: NSObject {
                         deleteComplete(false)
                     }
                     
-                    deleteComplete(true)
+//                    deleteComplete(true)
                 }
                 break
             }

@@ -1592,6 +1592,7 @@
 }
 
 - (void)pullToRefresh {
+    
     [self startReceiveQLC];
     
     [self neoGasStatusInit]; // neo gas 状态初始化
