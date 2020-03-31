@@ -10,6 +10,7 @@
 #import "VPNRankMode.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 //#import "RequestService.h"
+#import "GlobalConstants.h"
 
 @implementation RankingStartCell
 
@@ -23,9 +24,9 @@
 }
 
 - (void) setVPNRankMode:(VPNRankMode *) mode withRow:(NSInteger)row {
-    _lblconnet.textColor = RGB(51, 51, 51);
-    _lblCount.textColor = RGB(51, 51, 51);
-    _lblNumber.textColor = RGB(51, 51, 51);
+    _lblconnet.textColor = UIColor_RGB(51, 51, 51);
+    _lblCount.textColor = UIColor_RGB(51, 51, 51);
+    _lblNumber.textColor = UIColor_RGB(51, 51, 51);
     
     if (row == 0) {
         _trophyImgView.hidden = mode.totalQlc < 50?YES:NO;

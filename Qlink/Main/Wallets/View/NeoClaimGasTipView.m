@@ -8,6 +8,7 @@
 
 #import "NeoClaimGasTipView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface NeoClaimGasTipView ()
 

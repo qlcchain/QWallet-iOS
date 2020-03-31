@@ -17,6 +17,8 @@
 #import "FailTipView.h"
 #import "ComplaintInfoViewController.h"
 
+//#import "GlobalConstants.h"
+
 @interface ComplaintDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
@@ -24,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *statusSubTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
+@property (weak, nonatomic) IBOutlet UILabel *typeUnitLab;
 @property (weak, nonatomic) IBOutlet UILabel *buyOrSellLab;
 @property (weak, nonatomic) IBOutlet UILabel *buyOrSellNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *totalLab;
@@ -70,6 +73,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
     [self configInit];
     [self requestTrade_order_info];
 }
@@ -96,7 +101,7 @@
         _orderIDHeight.constant = 56;
         _orderIDLab.text = _orderInfoM.number;
         _orderTimeHeight.constant = 56;
-        _orderTimeLab.text = _orderInfoM.orderTime;
+        _orderTimeLab.text = [NSDate getOutputDate:_orderInfoM.orderTime formatStr:yyyyMMddHHmmss];
         _orderStatusHeight.constant = 56;
         _infoAddressHeight.constant = 76;
         _infoAddressLab.text = _orderInfoM.usdtFromAddress;
@@ -119,10 +124,16 @@
             
         }
         
-        if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
+        if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TRADE_TOKEN_PENDING]) { // 已转交易币 等待转成功
+            _orderStatusLab.text = kLang(@"transaction_pending");
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_TO_PLATFORM]) { // 未支付USDT
             _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
-        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID] || [_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) { // 买家已付款
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TXID_ERROR]) { // 未支付USDT
+           _orderStatusLab.text = kLang(@"waiting_for_buyer_payment");
+       } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PAID]) { // 买家已付款
             _orderStatusLab.text = kLang(@"waiting_for_seller_confirmation");
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_USDT_PENDING]) {
+            _orderStatusLab.text = kLang(@"waiting_for_public_Chain_confirmation");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_QGAS_PAID]) { // 完成
             _orderStatusLab.text = kLang(@"successful_deal");
         } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) { // 超时
@@ -135,10 +146,12 @@
         BOOL i_am_buyer = [loginM.ID isEqualToString:_orderInfoM.buyerId];
         if (i_am_buyer) {
             _typeLab.text = kLang(@"buy");
+            _typeLab.text = _orderInfoM.tradeToken;
             _buyOrSellLab.text = kLang(@"seller");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
         } else {
             _typeLab.text = kLang(@"sell");
+            _typeLab.text = _orderInfoM.tradeToken;
             _buyOrSellLab.text = kLang(@"buyer");
             _buyOrSellNameLab.text = _orderInfoM.showNickName;
 //            _payKeyLab.text = @"Amount";
@@ -146,10 +159,10 @@
 //            _payValLab.textColor = MAIN_BLUE_COLOR;
         }
         _payKeyLab.text = kLang(@"amount_price");
-        _payValLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.usdtAmount];
+        _payValLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.usdtAmount,_orderInfoM.payToken];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
-        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.qgasAmount];
-        _unitPriceLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.unitPrice];
+        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.qgasAmount,_orderInfoM.tradeToken];
+        _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice_str,_orderInfoM.payToken];
     }
 }
 
@@ -162,12 +175,12 @@
     kWeakSelf(self);
     NSString *account = userM.account?:@"";
     NSString *md5PW = userM.md5PW?:@"";
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@""}];
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:trade_order_info_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_order_info_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.orderInfoM = [TradeOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];

@@ -8,6 +8,7 @@
 
 #import "FailTipView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface FailTipView ()
 

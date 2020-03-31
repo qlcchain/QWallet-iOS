@@ -7,6 +7,7 @@
 //
 
 #import "NavWhiteShadowView.h"
+#import "GlobalConstants.h"
 
 @implementation NavWhiteShadowView
 

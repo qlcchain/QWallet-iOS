@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong) NSString *account_active_private_key;
 @property (nonatomic ,strong) NSString *account_owner_public_key;
 @property (nonatomic ,strong) NSString *account_owner_private_key;
+@property (nonatomic ,strong) NSNumber *isBackup;
 
 - (BOOL)saveToKeyChain;
 + (BOOL)deleteFromKeyChain:(NSString *)account_name;
@@ -27,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getActivePublicKey:(NSString *)account_name;
 + (NSString *)getOwnerPrivateKey:(NSString *)account_name;
 + (NSString *)getActivePrivateKey:(NSString *)account_name;
+
++ (BOOL)haveEOSWallet;
 
 @end
 

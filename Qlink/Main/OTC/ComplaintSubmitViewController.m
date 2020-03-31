@@ -18,6 +18,8 @@
 #import "RSAUtil.h"
 #import "ComplaintSubmitViewController.h"
 
+//#import "GlobalConstants.h"
+
 static NSInteger maxCount = 4;
 static NSInteger columnNumber = 3;
 
@@ -289,6 +291,7 @@ static NSInteger columnNumber = 3;
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         
     }];
+    imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
@@ -394,7 +397,7 @@ static NSInteger columnNumber = 3;
     NSString *reason = _textV.text?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@"",@"reason":reason};
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:trade_appeal_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:trade_appeal_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [_selectedPhotos enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UIImage *image = obj;
             NSString *dateStr = [NSString stringWithFormat:@"%llu",[NSDate getMillisecondTimestampFromDate:[NSDate date]]];

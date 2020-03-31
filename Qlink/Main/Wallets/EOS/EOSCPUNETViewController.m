@@ -17,6 +17,9 @@
 #import "SuccessTipView.h"
 #import "EOSWalletUtil.h"
 #import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
+
+//#import "GlobalConstants.h"
 
 @interface EOSCPUNETViewController () {
     NSString *stakeOrReclaimCpuAmount;
@@ -207,7 +210,7 @@
     [kAppD.window makeToastInView:kAppD.window];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSDictionary *params = @{@"account":currentWalletM.account_name?:@""};
-    [RequestService requestWithUrl:eosGet_account_resource_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_account_resource_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.refreshControl endRefreshing];
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
@@ -224,7 +227,7 @@
 - (void)requestEosEos_resource_price {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data];
             weakself.resourcePriceM = [EOSResourcePriceModel getObjectWithKeyValues:dic];
@@ -238,7 +241,7 @@
     kWeakSelf(self);
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSDictionary *params = @{@"account":currentWalletM.account_name?:@"", @"symbol":@"EOS"};
-    [RequestService requestWithUrl:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_token_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data][Server_Data];
@@ -316,8 +319,10 @@
         stakeOrReclaimTo = _recipientAccountTF.text?:@"";
         stakeOrReclaimOperationType = EOSOperationTypeStake;
         showAmount = [NSString stringWithFormat:@"%@ EOS",_stakeAmountTF.text?:@""];
-        stakeOrReclaimCpuAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*[_sliderVal doubleValue])] removeFloatAllZero];
-        stakeOrReclaimNetAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*(1-[_sliderVal doubleValue]))] removeFloatAllZero];
+//        stakeOrReclaimCpuAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*[_sliderVal doubleValue])] removeFloatAllZero];
+        stakeOrReclaimCpuAmount = _stakeAmountTF.text.mul(_sliderVal);
+//        stakeOrReclaimNetAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*(1-[_sliderVal doubleValue]))] removeFloatAllZero];
+        stakeOrReclaimNetAmount = _stakeAmountTF.text.mul(@((1-[_sliderVal doubleValue])));
     } else { // 赎回
         if (!_reclaimCpuAmountTF.text || _reclaimCpuAmountTF.text.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_cpu_amount")];
@@ -342,8 +347,10 @@
         NSNumber *cpuEOSNum = @([_reclaimCpuAmountTF.text doubleValue]*[_resourcePriceM.cpuPrice doubleValue]);
         NSNumber *netEOSNum = @([_reclaimNetAmountTF.text doubleValue]*[_resourcePriceM.netPrice doubleValue]);
         showAmount = [NSString stringWithFormat:@"%@ EOS",@([cpuEOSNum doubleValue]+[netEOSNum doubleValue])];
-        stakeOrReclaimCpuAmount = [[NSString stringWithFormat:@"%@",cpuEOSNum] removeFloatAllZero];
-        stakeOrReclaimNetAmount = [[NSString stringWithFormat:@"%@",netEOSNum] removeFloatAllZero];
+//        stakeOrReclaimCpuAmount = [[NSString stringWithFormat:@"%@",cpuEOSNum] removeFloatAllZero];
+        stakeOrReclaimCpuAmount = cpuEOSNum.mul(@(1));
+//        stakeOrReclaimNetAmount = [[NSString stringWithFormat:@"%@",netEOSNum] removeFloatAllZero];
+        stakeOrReclaimNetAmount = netEOSNum.mul(@(1));
     }
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     stakeOrReclaimFrom = currentWalletM.account_name?:@"";

@@ -23,8 +23,11 @@
 //#import "NounView.h"
 #import <Masonry/Masonry.h>
 #import "NEOWalletUtil.h"
+#import "GlobalConstants.h"
+#import "UIColor+Random.h"
+#import "Topup3ViewController.h"
 
-#define tabbaritems 3
+//static NSInteger const tabbaritems = 3;
 
 @interface QlinkTabbarViewController ()<UITabBarControllerDelegate>
 
@@ -67,8 +70,11 @@
     self.delegate = self;
     
     _walletsVC = [[WalletsViewController alloc] init];
+    _topupVC = [[Topup3ViewController alloc] init];
+    _homeBuySellVC = [[HomeBuySellViewController alloc] init];
+    [self addChildViewController:_topupVC text:kLang(@"top_up") imageName:@"topup"];
 //    [self addChildViewController:[[FinanceViewController alloc] init] text:@"Finance" imageName:@"finance"];
-    [self addChildViewController:[[HomeBuySellViewController alloc] init] text:kLang(@"finance") imageName:@"finance"];
+    [self addChildViewController:_homeBuySellVC text:kLang(@"finance") imageName:@"finance"];
 //    [self addChildViewController:[[MarketsViewController alloc] init] text:@"Markets" imageName:@"markets"];
     [self addChildViewController:_walletsVC text:kLang(@"wallet") imageName:@"wallet"];
     [self addChildViewController:[[MyViewController alloc] init] text:kLang(@"me") imageName:@"settings"];
@@ -128,11 +134,13 @@
 #pragma mark - Noti
 - (void)languageChangeNoti:(NSNotification *)noti {
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx == 0) {
+        if (idx == TabbarIndexTopup) {
+            obj.title = kLang(@"top_up");
+        } else if (idx == TabbarIndexFinance) {
             obj.title = kLang(@"finance");
-        } else if (idx == 1) {
+        } else if (idx == TabbarIndexWallet) {
             obj.title = kLang(@"wallet");
-        } else if (idx == 2) {
+        } else if (idx == TabbarIndexMy) {
             obj.title = kLang(@"me");
         }
     }];

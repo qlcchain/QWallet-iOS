@@ -9,6 +9,7 @@
 #import "RankingSubCell.h"
 #import "VPNRankMode.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalConstants.h"
 
 @implementation RankingSubCell
 

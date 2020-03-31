@@ -9,7 +9,7 @@
 #import "Get_account_permission_service.h"
 #import "EOS_Keys.h"
 #import <eosFramework/AppConstant.h>
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation Get_account_permission_service
 

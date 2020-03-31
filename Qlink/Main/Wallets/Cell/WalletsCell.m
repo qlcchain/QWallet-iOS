@@ -13,6 +13,7 @@
 #import "NEOAddressInfoModel.h"
 #import "EOSSymbolModel.h"
 #import "QLCAddressInfoModel.h"
+#import "GlobalConstants.h"
 
 @implementation WalletsCell
 
@@ -45,8 +46,10 @@
     
     NSString *num = [model getTokenNum];
     NSString *price = [model getPrice:tokenPriceArr];
+    
     _balanceLab.text = [NSString stringWithFormat:@"%@",num];
     _priceLab.text = [NSString stringWithFormat:@"%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
+    _priceLab.hidden = [price doubleValue]<= 0?YES:NO;
 }
 
 - (void)configCellWithAsset:(NEOAssetModel *)model tokenPriceArr:(NSArray *)tokenPriceArr {
@@ -60,6 +63,7 @@
     NSString *price = [model getPrice:tokenPriceArr];
     _balanceLab.text = [NSString stringWithFormat:@"%@",num];
     _priceLab.text = [NSString stringWithFormat:@"%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
+    _priceLab.hidden = [price doubleValue]<= 0?YES:NO;
 }
 
 - (void)configCellWithSymbol:(EOSSymbolModel *)model tokenPriceArr:(NSArray *)tokenPriceArr {
@@ -73,6 +77,7 @@
     NSString *price = [model getPrice:tokenPriceArr];
     _balanceLab.text = [NSString stringWithFormat:@"%@",num];
     _priceLab.text = [NSString stringWithFormat:@"%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
+    _priceLab.hidden = [price doubleValue]<= 0?YES:NO;
 }
 
 - (void)configCellWithQLCToken:(QLCTokenModel *)model tokenPriceArr:(NSArray *)tokenPriceArr {
@@ -86,6 +91,7 @@
     NSString *price = [model getPrice:tokenPriceArr];
     _balanceLab.text = [NSString stringWithFormat:@"%@",num];
     _priceLab.text = [NSString stringWithFormat:@"%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
+    _priceLab.hidden = [price doubleValue]<= 0?YES:NO;
 }
 
 

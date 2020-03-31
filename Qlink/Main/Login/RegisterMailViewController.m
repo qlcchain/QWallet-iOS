@@ -10,6 +10,11 @@
 #import "NSString+RegexCategory.h"
 #import "MD5Util.h"
 #import "UserModel.h"
+#import "UIColor+Random.h"
+//#import "GlobalConstants.h"
+#import "FirebaseUtil.h"
+#import "SystemUtil.h"
+#import "JPushTagHelper.h"
 
 @interface RegisterMailViewController ()
 
@@ -147,7 +152,7 @@
 - (void)requestSignup_code {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":_emailTF.text?:@""};
-    [RequestService requestWithUrl:signup_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:signup_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];
@@ -156,6 +161,7 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window makeToastDisappearWithText:error.localizedDescription?:@""];
     }];
 }
 
@@ -166,7 +172,7 @@
     NSString *md5PW = [MD5Util md5:_pwTF.text?:@""];
     NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":_verifyCodeTF.text?:@"",@"number":_inviteCodeTF.text?:@"",@"p2pId":[UserModel getOwnP2PId]};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:sign_up_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:sign_up_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
@@ -175,10 +181,16 @@
             model.md5PW = md5PW;
             //            model.rsaPublicKey = rsaPublicKey;
             model.isLogin = @(YES);
-            [UserModel storeUser:model useLogin:NO];
+            [UserModel storeUserByID:model];
             [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            
+            [SystemUtil requestBind_jpush]; // 绑定极光推送
+            [JPushTagHelper setTags]; // 极光设置tag
+            
+            [FirebaseUtil logEventWithItemID:Firebase_Event_Register itemName:Firebase_Event_Register contentType:Firebase_Event_Register];
+            
             [weakself dismiss];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];

@@ -30,7 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *sellerId;// = 61be9c09c0784827af303005f983c705;
 @property (nonatomic, strong) NSString *status;// = "QGAS_TO_PLATFORM";
 @property (nonatomic, strong) NSString *txid;// = "";
-@property (nonatomic, strong) NSString *unitPrice;// = "0.001";
+//@property (nonatomic, strong) NSString *unitPrice;// = "0.001";
+@property (nonatomic) double unitPrice;
+@property (nonatomic, strong) NSString *unitPrice_str;
 @property (nonatomic, strong) NSString *usdtAmount;// = "0.01";
 @property (nonatomic, strong) NSString *usdtFromAddress;// = "";
 @property (nonatomic, strong) NSString *usdtToAddress;// = 0x9B833b57eFF94c45C91C5D28302CF481a9c766D0;
@@ -42,6 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *photo3;
 @property (nonatomic, strong) NSString *photo4;
 @property (nonatomic, strong) NSString *auditFeedback;
+@property (nonatomic, strong) NSString *payToken;// = QLC;
+@property (nonatomic, strong) NSString *payTokenChain;// = "NEO_CHAIN";
+@property (nonatomic, strong) NSString *tradeToken;// = QGAS;
+@property (nonatomic, strong) NSString *tradeTokenChain;// = "QLC_CHAIN";
 
 @property (nonatomic, strong) NSString *showNickName;
 

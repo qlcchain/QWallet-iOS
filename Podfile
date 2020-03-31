@@ -1,110 +1,123 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.0'
 inhibit_all_warnings!
 
 use_frameworks!
 
+#更新pod请用pod install
+
 #  shadowsock-----pod
-
-def model
-#    3.11.1
-    pod 'RealmSwift', '3.7.6'
-end
-
 def socket
-    pod 'CocoaAsyncSocket', '~> 7.4.3'
+#    pod 'CocoaAsyncSocket', '~> 7.4.3'
 end
 
 def library
-    pod 'KissXML', '~> 5.2.2'
+#    pod 'KissXML', '~> 5.2.2'
     #pod 'ICSMainFramework', :path => "./Library/ICSMainFramework/"
-    pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainAccess'
+#    pod 'MMWormhole', '~> 2.0.0'
 end
 
 def tunnel
-    pod 'MMWormhole', '~> 2.0.0'
+#    pod 'MMWormhole', '~> 2.0.0'
 end
 
 def eth
-    pod 'BigInt', '~> 3.0'
     pod 'R.swift'
-#    pod 'JSONRPCKit', :git=> 'https://github.com/bricklife/JSONRPCKit.git'
-    pod 'JSONRPCKit', '3.0.0'
-    pod 'PromiseKit', '~> 6.0'
-    pod 'APIKit'
-#    pod 'Eureka'
-    pod 'Eureka', '4.2.0'
-    pod 'KeychainSwift'
+    pod 'PromiseKit'
+#    pod 'KeychainSwift'
+#    pod 'APIKit'
+    pod 'JSONRPCKit'
+#    pod 'Eureka', '4.2.0'
     pod 'Moya', '~> 10.0.1'
-    pod 'TrustCore', :git=>'https://github.com/TrustWallet/trust-core', :branch=>'master'
-    pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master'
+    
+    pod 'BigInt', '~> 3.0' #参考ETHFramework
+    pod 'TrustCore', :git=>'https://github.com/TrustWallet/trust-core', :branch=>'master' #参考ETHFramework
+    pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master' #参考ETHFramework
+    pod 'TrustWalletSDK', :git=>'https://github.com/TrustWallet/TrustSDK-iOS', :branch=>'master' #参考ETHFramework
+    pod 'TrustWeb3Provider', :git=>'https://github.com/TrustWallet/trust-web3-provider', :commit=>'f4e0ebb1b8fa4812637babe85ef975d116543dfd' #参考ETHFramework
+
+#    pod 'Eureka'
 #    pod 'TrezorCrypto'
-    pod 'TrustWeb3Provider', :git=>'https://github.com/TrustWallet/trust-web3-provider', :commit=>'f4e0ebb1b8fa4812637babe85ef975d116543dfd'
-    pod 'TrustWalletSDK', :git=>'https://github.com/TrustWallet/TrustSDK-iOS', :branch=>'master'
 #    pod 'Result', '~> 3.0'
 end
 
-target "Qlink" do
+def qlc
+#  pod 'APIKit'
+#  pod 'JSONRPCKit'
+#  pod 'PromiseKit'
+#  pod 'Result'
+#  pod 'CryptoSwift'
+#  pod 'MJExtension'
+#  pod 'MBProgressHUD'
+#  pod 'BigInt'  #(已集成在QLCFramework中)
+#  pod 'HandyJSON'   #(已集成在QLCFramework中)
+end
+
+def pack_framework
 
     pod 'AFNetworking'
+    pod 'APIKit'
+    pod 'Eureka', '4.2.0'
     pod 'IQKeyboardManager'
+    pod 'KeychainSwift'
     pod 'Masonry'
     pod 'MJExtension'
     pod 'MBProgressHUD'
     pod 'SDWebImage'
-#    pod 'MJRefresh'
     pod 'Hero'
-#    pod 'FMDB'
-    pod 'BGFMDB'
     pod 'CocoaLumberjack/Swift'
     pod 'Bugly'
-    pod 'OLImageView'
-    pod 'Firebase/Core', '~> 5.4.1'
-#    pod 'MMWormhole'
-#    pod 'TagListView'
-    pod 'TTGTagCollectionView'
-    pod 'Charts', '3.1.0'
-    pod 'SwiftTheme', '0.4.1'
-    pod 'TYCyclePagerView'
+    pod 'KeychainAccess'
+    pod 'RealmSwift', '3.18.0'
     pod 'MJRefresh'
-
-#  shadowsock
-    pod 'SwiftColor'
-    pod 'AsyncSwift'
-    pod 'Appirater'
-    pod 'HandyJSON'
+    pod 'TMCache'
+    pod 'SwiftTheme'
+    pod 'Charts'
 #    pod 'NinaPagerView'
 
-    # qlc_sign
-#    pod 'TrezorCryptoEd25519WithBlake2b'
+end
+
+def app
+
+#    pod 'Firebase/Core'
+    pod 'Firebase/Analytics'
+    pod 'TTGTagCollectionView'
+    pod 'BGFMDB'
+    pod 'TYCyclePagerView'
+    pod 'dsBridge'
+    pod 'JCore', '2.1.4-noidfa' # 必选项
+    pod 'JPush', '3.2.4-noidfa' # 必选项
+  
+end
+
+def bnb
+    
+#    pod 'BinanceChain', :path => '.'
+#    pod 'BinanceChain/Test', :path => '.'
+    pod 'BinanceChain', :git => 'https://github.com/mh7821/SwiftBinanceChain.git'
+    pod 'SwiftProtobuf', :inhibit_warnings => true
+    pod 'Starscream', :inhibit_warnings => true
+    pod 'HDWalletKit', :inhibit_warnings => true
+    pod 'CryptoSwift', :inhibit_warnings => true
+    
+end
+  
+target "Qlink" do
+
+#  shadowsock
+#    pod 'MMWormhole'
+#    pod 'SwiftColor'
+#    pod 'AsyncSwift'
+#    pod 'Appirater'
 
     tunnel
     library
     #fabric
     socket
-    model
     eth
-
-end
-
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-#        if ['JSONRPCKit'].include? target.name
-#            target.build_configurations.each do |config|
-#                config.build_settings['SWIFT_VERSION'] = '3.0'
-#            end
-#        end
-        if ['TrustKeystore'].include? target.name
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
-            end
-        end
-        # if target.name != 'Realm'
-        #     target.build_configurations.each do |config|
-        #         config.build_settings['MACH_O_TYPE'] = 'staticlib'
-        #     end
-        # end
-    end
+    qlc
+    app
+#    bnb
+    pack_framework
+    
 end

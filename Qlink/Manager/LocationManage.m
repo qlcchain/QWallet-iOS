@@ -8,6 +8,7 @@
 
 #import "LocationManage.h"
 #import "ChooseCountryUtil.h"
+#import "GlobalConstants.h"
 
 @implementation LocationManage
 + (instancetype) shareInstanceLocationManager

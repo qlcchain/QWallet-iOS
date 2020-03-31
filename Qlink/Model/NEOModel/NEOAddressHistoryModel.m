@@ -7,12 +7,14 @@
 //
 
 #import "NEOAddressHistoryModel.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation NEOAddressHistoryModel
 
 - (NSString *)getTokenNum {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.amount] removeFloatAllZero];
+    NSString *num = self.amount.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.amount] removeFloatAllZero];
     return num;
 }
 

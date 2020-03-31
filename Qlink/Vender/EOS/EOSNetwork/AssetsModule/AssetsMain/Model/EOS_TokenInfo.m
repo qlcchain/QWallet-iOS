@@ -7,7 +7,7 @@
 //
 
 #import "EOS_TokenInfo.h"
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation EOS_TokenInfo
 MJCodingImplementation

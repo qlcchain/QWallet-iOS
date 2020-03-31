@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class EntrustOrderListModel;
 
 static NSString *HomeBuySellCellReuse = @"HomeBuySellCell";
-#define HomeBuySellCell_Height 161
+#define HomeBuySellCell_Height 190
 
 @interface HomeBuySellCell : UITableViewCell
 

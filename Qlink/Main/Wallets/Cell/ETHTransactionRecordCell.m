@@ -14,6 +14,7 @@
 #import "ETHAddressTransactionsModel.h"
 #import "EOSTraceModel.h"
 #import "QLCAddressHistoryModel.h"
+#import "GlobalConstants.h"
 
 @interface ETHTransactionRecordCell ()
 
@@ -139,7 +140,7 @@
 }
 
 - (void)configCellWithQLCModel:(QLCAddressHistoryModel *)model {
-//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     BOOL isSend = [model.type isEqualToString:@"Send"]||[model.type isEqualToString:@"ContractSend"]?YES:NO;
     if (!isSend) {
         _icon.image = [UIImage imageNamed:@"icons_eth_trade_confirm"];

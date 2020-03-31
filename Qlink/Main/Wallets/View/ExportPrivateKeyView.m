@@ -9,6 +9,8 @@
 #import "ExportPrivateKeyView.h"
 #import "UIView+Visuals.h"
 #import "ExportPrivateKeyQRView.h"
+#import "GlobalConstants.h"
+#import "GlobalConstants.h"
 
 @interface ExportPrivateKeyView ()
 

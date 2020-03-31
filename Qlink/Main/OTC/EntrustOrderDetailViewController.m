@@ -14,6 +14,9 @@
 #import "RefreshHelper.h"
 #import "EntrustOrderInfoModel.h"
 #import "TradeOrderListModel.h"
+#import "RLArithmetic.h"
+
+//#import "GlobalConstants.h"
 
 @interface EntrustOrderDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -47,6 +50,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
     [self configInit];
     [self requestEntrust_order_info];
 }
@@ -76,17 +81,32 @@
     if (_orderInfoM) {
         _contentBack.hidden = NO;
         
-        if ([_orderInfoM.status isEqualToString:@"NORMAL"]) {
+        if ([_orderInfoM.status isEqualToString:ORDER_STATUS_PENDING]) {
+            _orderStatusBack.backgroundColor = UIColorFromRGB(0x999999);
+            _statusTitleLab.text = kLang(@"pending");
+            _statusSubTitleLab.text = kLang(@"pending");
+            _bottomBackHeight.constant = 0;
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_NORMAL]) {
             _orderStatusBack.backgroundColor = MAIN_BLUE_COLOR;
             _statusTitleLab.text = kLang(@"active");
             _statusSubTitleLab.text = kLang(@"active");
             _bottomBackHeight.constant = 59;
-        } else if ([_orderInfoM.status isEqualToString:@"CANCEL"]) {
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_OVERTIME]) {
+           _orderStatusBack.backgroundColor = MAIN_BLUE_COLOR;
+           _statusTitleLab.text = kLang(@"overtime");
+           _statusSubTitleLab.text = kLang(@"overtime");
+           _bottomBackHeight.constant = 59;
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+            _orderStatusBack.backgroundColor = MAIN_BLUE_COLOR;
+            _statusTitleLab.text = kLang(@"transaction_parsing_failed");
+            _statusSubTitleLab.text = kLang(@"transaction_parsing_failed");
+            _bottomBackHeight.constant = 59;
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_CANCEL]) {
             _orderStatusBack.backgroundColor = UIColorFromRGB(0x999999);
             _statusTitleLab.text = kLang(@"revoked");
             _statusSubTitleLab.text = kLang(@"revoked");
             _bottomBackHeight.constant = 0;
-        } else if ([_orderInfoM.status isEqualToString:@"END"]) {
+        } else if ([_orderInfoM.status isEqualToString:ORDER_STATUS_END]) {
             _orderStatusBack.backgroundColor = UIColorFromRGB(0x4ACCAF);
             _statusTitleLab.text = kLang(@"completed");
             _statusSubTitleLab.text = kLang(@"completed");
@@ -94,23 +114,24 @@
         }
         
         if ([_orderInfoM.type isEqualToString:@"SELL"]) {
-            _addressTitleLab.text = kLang(@"erc-20_address_to_receive_usdt");
+            _addressTitleLab.text = kLang(@"receive_from");
             _addressLab.text = _orderInfoM.usdtAddress;
-            _typeLab.text = kLang(@"entrust_sell_qgas");
+            _typeLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"entrust_sell"),_orderInfoM.tradeToken];
             _typeLab.textColor = UIColorFromRGB(0xFF3669);
-            _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
+            
+            _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str)];
             _remainLab.textColor = UIColorFromRGB(0xFF3669);
         } else if ([_orderInfoM.type isEqualToString:@"BUY"]) {
-            _addressTitleLab.text = kLang(@"qlc_chain_address_to_receive_qgas");
+            _addressTitleLab.text = kLang(@"receive_from");
             _addressLab.text = _orderInfoM.qgasAddress;
-            _typeLab.text = kLang(@"entrust_buy_qgas");
+            _typeLab.text = [NSString stringWithFormat:@"%@ %@",kLang(@"entrust_buy"),_orderInfoM.tradeToken];
             _typeLab.textColor = MAIN_BLUE_COLOR;
-            _remainLab.text = [NSString stringWithFormat:@"%@ QGAS",@([_orderInfoM.totalAmount integerValue] - [_orderInfoM.lockingAmount integerValue] - [_orderInfoM.completeAmount integerValue])];
+            _remainLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str),_orderInfoM.tradeToken];
             _remainLab.textColor = MAIN_BLUE_COLOR;
         }
-        _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",_orderInfoM.totalAmount];
-        _unitPriceLab.text = [NSString stringWithFormat:@"%@ USDT",_orderInfoM.unitPrice];
-        _volumeLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",_orderInfoM.minAmount,_orderInfoM.maxAmount];
+        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount_str,_orderInfoM.tradeToken];
+        _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice_str,_orderInfoM.payToken];
+        _volumeLab.text = [NSString stringWithFormat:@"%@-%@ %@",_orderInfoM.minAmount,_orderInfoM.maxAmount,_orderInfoM.tradeToken];
         
         
     }
@@ -121,7 +142,7 @@
     NSDictionary *params = @{@"entrustOrderId":_inputEntrustOrderId?:@""};
     kWeakSelf(self);
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:entrust_order_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:entrust_order_info_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.orderInfoM = [EntrustOrderInfoModel getObjectWithKeyValues:responseObject[@"order"]];
@@ -142,7 +163,7 @@
     kWeakSelf(self);
     NSString *account = userM.account?:@"";
     NSString *md5PW = userM.md5PW?:@"";
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
@@ -150,7 +171,7 @@
     NSString *size = @"20";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"page":page,@"size":size,@"entrustOrderId":_inputEntrustOrderId?:@""}];
 
-    [RequestService requestWithUrl:trade_order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
@@ -177,18 +198,18 @@
     kWeakSelf(self);
     NSString *account = userM.account?:@"";
     NSString *md5PW = userM.md5PW?:@"";
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"entrustOrderId":_inputEntrustOrderId?:@""}];
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:entrust_cancel_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:entrust_cancel_order_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself requestEntrust_order_info];
         } else {
-            [kAppD.window makeToastDisappearWithText:kLang(@"failed_")];
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];

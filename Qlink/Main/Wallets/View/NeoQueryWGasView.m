@@ -8,6 +8,7 @@
 
 #import "NeoQueryWGasView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface NeoQueryWGasView ()
 

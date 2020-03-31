@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="KmZ-c1-dpz" customClass="ClaimQGASTipView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aK-65-9di">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wO-ck-vii">
+                    <rect key="frame" x="47.5" y="180" width="280" height="307"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-sh-B3P">
+                            <rect key="frame" x="236" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="0Y2-uU-poX"/>
+                                <constraint firstAttribute="width" constant="44" id="HuH-65-JaG"/>
+                            </constraints>
+                            <state key="normal" image="mnemonic_tip_close"/>
+                            <connections>
+                                <action selector="closeAction:" destination="KmZ-c1-dpz" eventType="touchUpInside" id="FGp-wI-5he"/>
+                            </connections>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="icon_tips_gift" translatesAutoresizingMaskIntoConstraints="NO" id="nQp-s9-G5C">
+                            <rect key="frame" x="42.5" y="-45" width="195" height="99"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="195" id="438-kn-rYl"/>
+                                <constraint firstAttribute="height" constant="99" id="MnD-5E-MBV"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费借得抵押金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMw-XB-74o">
+                            <rect key="frame" x="90" y="70" width="100" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcB-0t-LfR">
+                            <rect key="frame" x="109" y="97" width="62" height="43"/>
+                            <attributedString key="attributedText">
+                                <fragment content="0">
+                                    <attributes>
+                                        <color key="NSColor" red="0.9882352941176471" green="0.3529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="deviceRGB"/>
+                                        <font key="NSFont" metaFont="system" size="36"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="QLC">
+                                    <attributes>
+                                        <color key="NSColor" red="0.9882352941176471" green="0.3529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="deviceRGB"/>
+                                        <font key="NSFont" metaFont="system" size="20"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="icon_tips_qgas" translatesAutoresizingMaskIntoConstraints="NO" id="ET2-AJ-rEg">
+                            <rect key="frame" x="50" y="154.5" width="24" height="20"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每日免费赚QGAS收益" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUi-Jt-xtj">
+                            <rect key="frame" x="80" y="156" width="140" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5E-5h-YYY">
+                            <rect key="frame" x="25" y="223" width="230" height="50"/>
+                            <color key="backgroundColor" red="0.9882352941176471" green="0.31764705882352939" blue="0.25098039215686274" alpha="1" colorSpace="deviceRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="XFk-gW-BAF"/>
+                                <constraint firstAttribute="width" constant="230" id="bCe-tk-Nzc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                            <state key="normal" title="立即领取"/>
+                            <connections>
+                                <action selector="okAction:" destination="KmZ-c1-dpz" eventType="touchUpInside" id="Y80-Yd-kUV"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="I5E-5h-YYY" secondAttribute="bottom" constant="34" id="0lY-l1-s9H"/>
+                        <constraint firstItem="VUi-Jt-xtj" firstAttribute="leading" secondItem="ET2-AJ-rEg" secondAttribute="trailing" constant="6" id="3HE-xz-4Zl"/>
+                        <constraint firstItem="HcB-0t-LfR" firstAttribute="top" secondItem="MMw-XB-74o" secondAttribute="bottom" constant="10" id="3sP-zZ-ix6"/>
+                        <constraint firstItem="ET2-AJ-rEg" firstAttribute="centerY" secondItem="VUi-Jt-xtj" secondAttribute="centerY" id="8Md-6x-IoB"/>
+                        <constraint firstAttribute="trailing" secondItem="VUi-Jt-xtj" secondAttribute="trailing" constant="60" id="AJC-hU-Hjb"/>
+                        <constraint firstItem="nQp-s9-G5C" firstAttribute="centerX" secondItem="0wO-ck-vii" secondAttribute="centerX" id="HKq-Fx-ZKR"/>
+                        <constraint firstAttribute="trailing" secondItem="l7S-sh-B3P" secondAttribute="trailing" id="JLS-I0-DfN"/>
+                        <constraint firstItem="l7S-sh-B3P" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" id="LxT-kW-qAd"/>
+                        <constraint firstItem="ET2-AJ-rEg" firstAttribute="leading" secondItem="0wO-ck-vii" secondAttribute="leading" constant="50" id="QHL-3h-GPN"/>
+                        <constraint firstAttribute="width" constant="280" id="Qqi-qc-Qfo"/>
+                        <constraint firstItem="nQp-s9-G5C" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" constant="-45" id="QzG-Ph-8We"/>
+                        <constraint firstAttribute="height" constant="307" id="d3K-RM-FoZ"/>
+                        <constraint firstItem="MMw-XB-74o" firstAttribute="centerX" secondItem="0wO-ck-vii" secondAttribute="centerX" id="ehq-0C-ffP"/>
+                        <constraint firstItem="VUi-Jt-xtj" firstAttribute="top" secondItem="HcB-0t-LfR" secondAttribute="bottom" constant="16" id="lqN-YC-IBU"/>
+                        <constraint firstItem="HcB-0t-LfR" firstAttribute="centerX" secondItem="0wO-ck-vii" secondAttribute="centerX" id="tLm-1k-Bfb"/>
+                        <constraint firstItem="VUi-Jt-xtj" firstAttribute="centerX" secondItem="0wO-ck-vii" secondAttribute="centerX" constant="10" id="tXG-Mg-o42"/>
+                        <constraint firstItem="MMw-XB-74o" firstAttribute="top" secondItem="nQp-s9-G5C" secondAttribute="bottom" constant="16" id="xtD-XF-4Mf"/>
+                        <constraint firstItem="I5E-5h-YYY" firstAttribute="centerX" secondItem="0wO-ck-vii" secondAttribute="centerX" id="y1D-7j-htd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8aK-65-9di" secondAttribute="trailing" id="HLL-n1-27k"/>
+                <constraint firstItem="0wO-ck-vii" firstAttribute="centerY" secondItem="KmZ-c1-dpz" secondAttribute="centerY" id="TR6-Iz-dOM"/>
+                <constraint firstItem="0wO-ck-vii" firstAttribute="centerX" secondItem="KmZ-c1-dpz" secondAttribute="centerX" id="W0t-eU-zDw"/>
+                <constraint firstItem="8aK-65-9di" firstAttribute="leading" secondItem="KmZ-c1-dpz" secondAttribute="leading" id="ccC-9b-YMF"/>
+                <constraint firstItem="8aK-65-9di" firstAttribute="top" secondItem="KmZ-c1-dpz" secondAttribute="top" id="eZp-PC-tvK"/>
+                <constraint firstAttribute="bottom" secondItem="8aK-65-9di" secondAttribute="bottom" id="pbk-m9-dqt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="H3L-5l-45G"/>
+            <connections>
+                <outlet property="amountLab" destination="HcB-0t-LfR" id="8kZ-9Y-f6W"/>
+                <outlet property="claimBtn" destination="I5E-5h-YYY" id="Z8Q-j3-QYo"/>
+                <outlet property="tipBack" destination="0wO-ck-vii" id="4TA-Aa-wCC"/>
+                <outlet property="tipLab" destination="VUi-Jt-xtj" id="h8D-mz-9Ek"/>
+                <outlet property="titleLab" destination="MMw-XB-74o" id="Ixd-xO-kdj"/>
+            </connections>
+            <point key="canvasLocation" x="85.599999999999994" y="30.134932533733135"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_tips_gift" width="195" height="99"/>
+        <image name="icon_tips_qgas" width="20" height="20"/>
+        <image name="mnemonic_tip_close" width="24" height="24"/>
+    </resources>
+</document>

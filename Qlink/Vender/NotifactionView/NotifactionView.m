@@ -7,6 +7,7 @@
 //
 
 #import "NotifactionView.h"
+#import "GlobalConstants.h"
 
 @implementation NotifactionView
 + (instancetype) loadNotifactionView

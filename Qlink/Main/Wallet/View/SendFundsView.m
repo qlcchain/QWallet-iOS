@@ -8,7 +8,7 @@
 
 #import "SendFundsView.h"
 #import "UIView+Animation.h"
-
+#import "GlobalConstants.h"
 #import "NSString+RegexCategory.h"
 
 @implementation SendFundsView

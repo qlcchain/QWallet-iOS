@@ -8,6 +8,9 @@
 
 #import "AFHTTPClientV2.h"
 #import "NSString+EmptyUtil.h"
+#import "GlobalConstants.h"
+#import "AgentModel.h"
+#import "UserModel.h"
 
 @interface AFHTTPClientV2 ()
 
@@ -28,15 +31,15 @@
     return shareObject;
 }
 
-+ (AFURLSessionManager *)getURLManager {
-    if (![AFHTTPClientV2 shareInstance].urlManager) {
-        [AFHTTPClientV2 shareInstance].urlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-        AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
-        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
-        [AFHTTPClientV2 shareInstance].urlManager.responseSerializer = responseSerializer;
-    }
-    return [AFHTTPClientV2 shareInstance].urlManager;
-}
+//+ (AFURLSessionManager *)getURLManager {
+//    if (![AFHTTPClientV2 shareInstance].urlManager) {
+//        [AFHTTPClientV2 shareInstance].urlManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//        AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+//        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
+//        [AFHTTPClientV2 shareInstance].urlManager.responseSerializer = responseSerializer;
+//    }
+//    return [AFHTTPClientV2 shareInstance].urlManager;
+//}
 
 + (AFHTTPSessionManager *)getHTTPManager {
     if (![AFHTTPClientV2 shareInstance].httpManager) {
@@ -51,8 +54,12 @@
         
         //    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platform"];
         //    [manager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"application/json;charset=utf-8"forHTTPHeaderField:@"Content-Type"];
-        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0"forHTTPHeaderField:@"User-Agent"];
+        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
+        
+        NSString *userAgent = [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
+        userAgent = [AFHTTPClientV2 getAgent:userAgent].mj_JSONString;
+        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     }
     
     return [AFHTTPClientV2 shareInstance].httpManager;
@@ -61,15 +68,16 @@
 + (AFHTTPSessionManager *) getJSONManager {
     if (![AFHTTPClientV2 shareInstance].jsonManager) {
         [AFHTTPClientV2 shareInstance].jsonManager = [AFHTTPSessionManager manager];
-        [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
         
         [AFHTTPClientV2 shareInstance].jsonManager.requestSerializer = [AFJSONRequestSerializer serializer];//[AFHTTPRequestSerializer serializer];
         [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];//[AFHTTPResponseSerializer serializer];
     //    manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
         [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setTimeoutInterval:TimeOut_Request];
+//        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"ios"forHTTPHeaderField:@"User-Agent"];
     //    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platform"];
-        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    //    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [AFHTTPClientV2 shareInstance].jsonManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml", @"text/plain", nil];
     
     /**** SSL Pinning ****/
 //    if ([[RequestHelper getInstance].prefix_Url containsString:@"https"]) { //
@@ -83,6 +91,10 @@
 //    securityPolicy.validatesDomainName = NO;
 //    /**** SSL Pinning ****/
 //    [manager setSecurityPolicy:securityPolicy];
+        
+        NSString *userAgent = [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
+        userAgent = [AFHTTPClientV2 getAgent:userAgent].mj_JSONString;
+        [[AFHTTPClientV2 shareInstance].jsonManager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     }
     return [AFHTTPClientV2 shareInstance].jsonManager;
 }
@@ -161,25 +173,54 @@
     return dataTask;
 }
 
-+ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
-                                         params:(id)params
-                                     httpMethod:(HttpMethod)httpMethod
-                                       userInfo:(NSDictionary*)userInfo
-                                   successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
-                                    failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
-{
++ (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString params:(id)params httpMethod:(HttpMethod)httpMethod userInfo:(NSDictionary*)userInfo requestManagerType:(QRequestManagerType)requestManagerType successBlock:(HTTPRequestV2SuccessBlock)successReqBlock  failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     NSURLSessionDataTask *dataTask;
     
+    AFHTTPSessionManager *manager = nil;
+    if (requestManagerType == QRequestManagerTypeHTTP) {
+        manager = [self getHTTPManager];
+    } else if (requestManagerType == QRequestManagerTypeJSON) {
+        manager = [self getJSONManager];
+    }
     if (httpMethod == HttpMethodGet) {
         
         DDLogDebug(@"url = %@ param = %@",URLString,params);
         
-        dataTask = [[self getHTTPManager] GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        dataTask = [manager GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
             NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             if (successReqBlock) {
                 successReqBlock(dataTask, jsonStr);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self printHTTPLogWithMethod:URLString Response:nil Error:error];
+            
+            if (failedReqBlock) {
+                failedReqBlock(dataTask, error);
+            }
+        }];
+        
+    } else if (httpMethod == HttpMethodPost) {
+        
+        DDLogDebug(@"url = %@ param = %@",URLString,params);
+        
+        dataTask = [manager POST:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                if (successReqBlock) {
+                    successReqBlock(dataTask, jsonStr);
+                }
+            } else if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                if (successReqBlock) {
+                    successReqBlock(dataTask, responseObject);
+                }
+            } else {
+                if (successReqBlock) {
+                    successReqBlock(dataTask, responseObject);
+                }
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self printHTTPLogWithMethod:URLString Response:nil Error:error];
@@ -232,7 +273,7 @@
         if (!isJson) {
             NSMutableURLRequest *request = [[self getHTTPManager].requestSerializer requestWithMethod:@"POST" URLString:URLString parameters:nil error:nil];
             [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-            [request setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
+//            [request setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
             request.timeoutInterval = TimeOut_Request;
             NSData *body = [params dataUsingEncoding:NSUTF8StringEncoding];
             [request setHTTPBody:body];
@@ -425,6 +466,16 @@
     }
     
     return result;
+}
+
++ (AgentModel *)getAgent:(NSString *)userAgent {
+    AgentModel *model = [AgentModel new];
+    model.agent = userAgent;
+    model.uuid = [UserModel getTopupP2PId];
+    model.platform = Platform_iOS;
+    model.appVersion = APP_Version;
+    model.appBuild = APP_Build;
+    return model;
 }
 
 @end

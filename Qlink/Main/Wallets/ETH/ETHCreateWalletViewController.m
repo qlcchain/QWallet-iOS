@@ -8,6 +8,7 @@
 
 #import "ETHCreateWalletViewController.h"
 #import "ETHMnemonicViewController.h"
+#import "ETHWalletInfo.h"
 
 @interface ETHCreateWalletViewController ()
 
@@ -45,6 +46,7 @@
 #pragma mark - Transition
 - (void)jumpToETHMnemonic {
     ETHMnemonicViewController *vc = [[ETHMnemonicViewController alloc] init];
+    vc.walletInfo = _walletInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NewOrderViewController : QBaseViewController
 
+@property (nonatomic, strong) NSArray *inputPairsArr;
+
 @end
 
 NS_ASSUME_NONNULL_END

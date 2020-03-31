@@ -42,7 +42,9 @@ public class ListBase: RLMListBase {
 /**
  `List` is the container type in Realm used to define to-many relationships.
 
- Like Swift's `Array`, `List` is a generic type that is parameterized on the type of `Object` it stores.
+ Like Swift's `Array`, `List` is a generic type that is parameterized on the type it stores. This can be either an `Object`
+ subclass or one of the following types: `Bool`, `Int`, `Int8`, `Int16`, `Int32`, `Int64`, `Float`, `Double`, `String`, `Data`,
+ and `Date` (and their optional versions)
 
  Unlike Swift's native collections, `List`s are reference types, and are only immutable if the Realm that manages them
  is opened as read-only.
@@ -617,7 +619,7 @@ extension List: MutableCollection {
 
      - warning: This method may only be called during a write transaction.
      */
-    public func removeSubrange<R>(_ boundsExpression: R) where R : RangeExpression, List<Element>.Index == R.Bound {
+    public func removeSubrange<R>(_ boundsExpression: R) where R: RangeExpression, List<Element>.Index == R.Bound {
         let bounds = boundsExpression.relative(to: self)
         for _ in bounds {
             remove(at: bounds.lowerBound)
@@ -703,19 +705,29 @@ extension List: RangeReplaceableCollection {
         _rlmArray.removeLastObject()
     }
 
-#if swift(>=3.2)
-    // The issue described below is fixed in Swift 3.2 and above.
-#else
-    // These should not be necessary, but Swift 3.1's compiler fails to infer the `SubSequence`,
-    // and the standard library neglects to provide the default implementation of `subscript`
-    /// :nodoc:
-    public typealias SubSequence = RangeReplaceableRandomAccessSlice<List>
-
-    /// :nodoc:
-    public subscript(slice: Range<Int>) -> SubSequence {
-        return SubSequence(base: self, bounds: slice)
-    }
+}
 #endif
+
+// MARK: - Codable
+
+#if swift(>=4.1)
+extension List: Decodable where Element: Decodable {
+    public convenience init(from decoder: Decoder) throws {
+        self.init()
+        var container = try decoder.unkeyedContainer()
+        while !container.isAtEnd {
+            append(try container.decode(Element.self))
+        }
+    }
+}
+
+extension List: Encodable where Element: Encodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        for value in self {
+            try container.encode(value)
+        }
+    }
 }
 #endif
 

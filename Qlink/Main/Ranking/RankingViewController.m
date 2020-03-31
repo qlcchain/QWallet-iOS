@@ -22,6 +22,8 @@
 #import "NSDateFormatter+Category.h"
 #import "SkyRadiusView.h"
 #import "RankingStartCell.h"
+//#import "GlobalConstants.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 #define PAGE_PADDING 86
 #define PAGE_HEIGHT 150//(SCREEN_WIDTH - PAGE_PADDING) * 9 / 16
@@ -274,7 +276,7 @@
 // 获取活动列表接口
 - (void) sendQueryActsRequest {
     [self.view makeToastInView:self.view userInteractionEnabled:YES hideTime:0];
-    [RequestService requestWithUrl:queryActs_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:queryActs_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
          [self.view hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
            _currentTime = [[responseObject objectForKey:Server_Data] objectForKey:@"currentDate"];
@@ -307,7 +309,7 @@
 }
 
 - (void) sendQueryVpnRankingsRequestWithActId:(NSString *) actId {
-    [RequestService requestWithUrl:queryVpnRankings_Url params:@{@"actId":actId} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:queryVpnRankings_Url params:@{@"actId":actId} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [self.myTabV.slimeView endRefresh];
          if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
               NSArray *array = [[responseObject objectForKey:Server_Data] objectForKey:@"vpnRanking"];

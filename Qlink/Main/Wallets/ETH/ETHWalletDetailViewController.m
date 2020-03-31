@@ -18,6 +18,7 @@
 #import "ETHExportMnemonicViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ETHExportKeystorePWViewController.h"
+//#import "GlobalConstants.h"
 
 @interface ETHWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -54,6 +55,9 @@ NSString *exportPrivateKey = @"Export private key";
 }
 
 - (void)showExportPrivateKey {
+//    ETHWalletInfo *walletInfo = [ETHWalletInfo getWalletInKeychain:_inputWalletCommonM.address?:@""];
+//    [TrustWalletManage.sharedInstance exportPrivateKeyTest];
+//    return;
     ExportPrivateKeyView *view = [ExportPrivateKeyView getInstance];
 //    kWeakSelf(self);
     [TrustWalletManage.sharedInstance exportPrivateKeyWithAddress:_inputWalletCommonM.address?:@"" :^(NSString * privateKey) {

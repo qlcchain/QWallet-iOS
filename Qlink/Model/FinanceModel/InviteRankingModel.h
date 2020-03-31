@@ -15,8 +15,11 @@
 @property (nonatomic, strong) NSString *name; // = "";
 @property (nonatomic, strong) NSNumber *sequence; // = 29;
 @property (nonatomic, strong) NSNumber *totalInvite; // = 0;
+
 @property (nonatomic, strong) NSNumber *myRanking; // = 29;
 @property (nonatomic, strong) NSString *number; // = "";
+@property (nonatomic, strong) NSNumber *totalReward; // = 0;
+@property (nonatomic, strong) NSNumber *level; // 1:一级  2:二级  3:三级  7:团长   8:团员一级  9:团员二级
 
 @property (nonatomic, strong) NSString *showName;
 

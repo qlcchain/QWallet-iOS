@@ -10,6 +10,8 @@
 #import "RequestService.h"
 #import "UserModel.h"
 
+#import "GlobalConstants.h"
+
 @interface UserManage ()
 @property (nonatomic, strong) NSString *headUrl;
 @property (nonatomic) NSInteger randomNameIndex;
@@ -75,7 +77,7 @@
         return;
     }
     NSDictionary *params = @{@"p2pId":p2pId};
-    [RequestService requestWithUrl:getHeadView_Url params:params httpMethod:HttpMethodGet isSign:NO successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl2:getHeadView_Url params:params httpMethod:HttpMethodGet isSign:NO successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
 //            NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],responseObject[@"head"]];
             NSString *head = responseObject[@"head"];

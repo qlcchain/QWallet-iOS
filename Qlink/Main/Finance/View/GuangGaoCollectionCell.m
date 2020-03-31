@@ -9,6 +9,8 @@
 #import "GuangGaoCollectionCell.h"
 #import "ShareFriendsModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GlobalConstants.h"
+#import "UIColor+Random.h"
 
 @implementation GuangGaoCollectionCell
 

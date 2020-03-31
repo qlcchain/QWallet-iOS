@@ -16,6 +16,9 @@
 #import "ForgetPWViewController.h"
 #import "VerificationViewController.h"
 #import "UserUtil.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+
+//#import "GlobalConstants.h"
 
 @interface PersonalInfoViewController () <UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -46,6 +49,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
 
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:PersonalInfoCellReuse bundle:nil] forCellReuseIdentifier:PersonalInfoCellReuse];
@@ -78,7 +83,7 @@
     [_sourceArr addObject:model];
     model = [PersonalInfoShowModel new];
     model.key = kLang(@"my_invitation_code");
-    model.val = [NSString stringWithFormat:@"%@",userM.number];
+    model.val = [NSString stringWithFormat:@"%@",userM.number?:@""];
     model.showCopy = YES;
     model.showArrow = NO;
     model.showHead = NO;
@@ -101,13 +106,13 @@
     model.key = kLang(@"verification");
 //    model.val = person_title5;
     NSString *vStatusStr = @"";
-    if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+    if ([userM.vStatus isEqualToString:kyc_not_upload]) {
         vStatusStr = @"Unverified";
-    } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
+    } else if ([userM.vStatus isEqualToString:kyc_uploaded]) {
         vStatusStr = @"Under review";
-    } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
+    } else if ([userM.vStatus isEqualToString:kyc_success]) {
         vStatusStr = @"Verified";
-    } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
+    } else if ([userM.vStatus isEqualToString:kyc_fail]) {
         vStatusStr = @"Not approved";
     }
     model.val = vStatusStr;
@@ -122,7 +127,7 @@
 - (void)handleCopy:(NSString *)str {
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:str];
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (void)showPhotoAlert {
@@ -139,6 +144,7 @@
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action3];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -218,7 +224,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:user_upload_headview_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:user_upload_headview_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName = [NSString stringWithFormat:@"%ld",[NSDate getTimestampFromDate:[NSDate date]]];
         NSData *data = UIImagePNGRepresentation(img);
         if (!data || [data isKindOfClass:[NSNull class]]) { // 不为png则转成jpg
@@ -238,7 +244,7 @@
             //            NSString *head = [NSString stringWithFormat:@"%@%@",[RequestService getPrefixUrl],responseObject[@"head"]];
             NSString *head = responseObject[@"head"];
             userM.head = head;
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [weakself configInit];
 //            [UserManage setHeadUrl:head];
@@ -272,6 +278,7 @@
     pickerController.delegate = self;
     //使用模态呈现相册
     //[self showDetailViewController:pickerController sender:nil];
+    pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:pickerController animated:YES completion:nil];
     
 }

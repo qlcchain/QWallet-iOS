@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="KmZ-c1-dpz" customClass="StakingProcessView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aK-65-9di">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wO-ck-vii">
+                    <rect key="frame" x="59.5" y="239.5" width="256" height="188"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUs-Ou-4WY">
+                            <rect key="frame" x="9" y="18" width="238" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The staking process can take up to a couple of minutes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1Y-Dv-bv3">
+                            <rect key="frame" x="16" y="45" width="224" height="33.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important: Don' t leave or close this page" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwO-4e-U3W">
+                            <rect key="frame" x="16" y="136.5" width="224" height="33.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wait_for" translatesAutoresizingMaskIntoConstraints="NO" id="Guf-hj-I6B">
+                            <rect key="frame" x="99" y="102.5" width="58" height="9"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="58" id="c6e-04-tJo"/>
+                                <constraint firstAttribute="height" constant="9" id="q98-lu-gW7"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="mUs-Ou-4WY" secondAttribute="trailing" constant="9" id="1Si-im-DXe"/>
+                        <constraint firstItem="TwO-4e-U3W" firstAttribute="leading" secondItem="0wO-ck-vii" secondAttribute="leading" constant="16" id="50H-Le-20I"/>
+                        <constraint firstItem="Guf-hj-I6B" firstAttribute="centerX" secondItem="0wO-ck-vii" secondAttribute="centerX" id="Aei-Lh-wT9"/>
+                        <constraint firstAttribute="height" constant="188" id="HZK-gA-YHd"/>
+                        <constraint firstItem="Guf-hj-I6B" firstAttribute="top" secondItem="s1Y-Dv-bv3" secondAttribute="bottom" constant="24" id="Lvd-JJ-E20"/>
+                        <constraint firstAttribute="trailing" secondItem="TwO-4e-U3W" secondAttribute="trailing" constant="16" id="M5h-zZ-rF5"/>
+                        <constraint firstAttribute="trailing" secondItem="s1Y-Dv-bv3" secondAttribute="trailing" constant="16" id="N4n-C3-Dwy"/>
+                        <constraint firstItem="s1Y-Dv-bv3" firstAttribute="top" secondItem="mUs-Ou-4WY" secondAttribute="bottom" constant="6" id="frF-PS-j4l"/>
+                        <constraint firstItem="mUs-Ou-4WY" firstAttribute="leading" secondItem="0wO-ck-vii" secondAttribute="leading" constant="9" id="l83-M2-nh8"/>
+                        <constraint firstAttribute="bottom" secondItem="TwO-4e-U3W" secondAttribute="bottom" constant="18" id="lPB-Tf-gAc"/>
+                        <constraint firstItem="s1Y-Dv-bv3" firstAttribute="leading" secondItem="0wO-ck-vii" secondAttribute="leading" constant="16" id="nG4-Jl-ImF"/>
+                        <constraint firstAttribute="width" constant="256" id="sda-KY-t2D"/>
+                        <constraint firstItem="mUs-Ou-4WY" firstAttribute="top" secondItem="0wO-ck-vii" secondAttribute="top" constant="18" id="w2q-gx-RA7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8aK-65-9di" secondAttribute="trailing" id="HLL-n1-27k"/>
+                <constraint firstItem="0wO-ck-vii" firstAttribute="centerX" secondItem="KmZ-c1-dpz" secondAttribute="centerX" id="LOV-RA-YWB"/>
+                <constraint firstItem="0wO-ck-vii" firstAttribute="centerY" secondItem="KmZ-c1-dpz" secondAttribute="centerY" id="TR6-Iz-dOM"/>
+                <constraint firstItem="8aK-65-9di" firstAttribute="leading" secondItem="KmZ-c1-dpz" secondAttribute="leading" id="ccC-9b-YMF"/>
+                <constraint firstItem="8aK-65-9di" firstAttribute="top" secondItem="KmZ-c1-dpz" secondAttribute="top" id="eZp-PC-tvK"/>
+                <constraint firstAttribute="bottom" secondItem="8aK-65-9di" secondAttribute="bottom" id="pbk-m9-dqt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="H3L-5l-45G"/>
+            <connections>
+                <outlet property="importantLab" destination="TwO-4e-U3W" id="gfZ-uE-Mvz"/>
+                <outlet property="tipBack" destination="0wO-ck-vii" id="4TA-Aa-wCC"/>
+                <outlet property="tipLab" destination="s1Y-Dv-bv3" id="qKT-DZ-9Ad"/>
+                <outlet property="titleLab" destination="mUs-Ou-4WY" id="Fpr-y8-X3R"/>
+            </connections>
+            <point key="canvasLocation" x="85.599999999999994" y="30.134932533733135"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="wait_for" width="58" height="9"/>
+    </resources>
+</document>

@@ -8,8 +8,10 @@
 
 #import "MyOrderListEntrustCell.h"
 #import "EntrustOrderListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "OrderStatusUtil.h"
+#import "NSDate+Category.h"
+#import "GlobalConstants.h"
 
 @interface MyOrderListEntrustCell ()
 
@@ -54,17 +56,26 @@
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     _nameLab.text = model.showNickName;
-    _timeLab.text = model.orderTime;
-    _priceLab.text = [NSString stringWithFormat:@"%@ USDT",model.unitPrice];
-    _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ QGAS",model.minAmount,model.maxAmount];
-    _totalLab.text = [NSString stringWithFormat:@"%@ QGAS",model.totalAmount];
-    _typeLab.text = [model.type isEqualToString:@"SELL"]?kLang(@"entrust_sell_qgas"):kLang(@"entrust_buy_qgas");
+    _timeLab.text = [NSDate getOutputDate:model.orderTime formatStr:yyyyMMddHHmmss];
+    _priceLab.text = [NSString stringWithFormat:@"%@ %@",model.unitPrice_str,model.payToken];
+    _volumeSettingLab.text = [NSString stringWithFormat:@"%@-%@ %@",model.minAmount,model.maxAmount,model.tradeToken];
+    _totalLab.text = [NSString stringWithFormat:@"%@ %@",model.totalAmount_str,model.tradeToken];
+    _typeLab.text = [model.type isEqualToString:@"SELL"]?[NSString stringWithFormat:@"%@ %@",kLang(@"entrust_sell"),model.tradeToken]:[NSString stringWithFormat:@"%@ %@",kLang(@"entrust_buy"),model.tradeToken];
     _typeLab.textColor = [model.type isEqualToString:@"SELL"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;
     NSString *_status = model.status;
     NSString *statusStr = @"";
     UIColor *statusColor = nil;
-    if ([_status isEqualToString:ORDER_STATUS_NORMAL]) {
+    if ([_status isEqualToString:ORDER_STATUS_PENDING]) {
+        statusStr = kLang(@"pending");
+        statusColor = MAIN_BLUE_COLOR;
+    } else if ([_status isEqualToString:ORDER_STATUS_NORMAL]) {
         statusStr = kLang(@"active");
+        statusColor = MAIN_BLUE_COLOR;
+    } else if ([_status isEqualToString:ORDER_STATUS_OVERTIME]) {
+        statusStr = kLang(@"overtime");
+        statusColor = MAIN_BLUE_COLOR;
+    } else if ([_status isEqualToString:ORDER_STATUS_TXID_ERROR]) {
+        statusStr = kLang(@"transaction_parsing_failed");
         statusColor = MAIN_BLUE_COLOR;
     } else if ([_status isEqualToString:ORDER_STATUS_CANCEL]) {
         statusStr = kLang(@"revoked");

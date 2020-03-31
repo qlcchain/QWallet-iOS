@@ -15,6 +15,8 @@
 #import "SuccessTipView.h"
 #import "EOSResourcePriceModel.h"
 #import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
+//#import "GlobalConstants.h"
 
 @interface EOSActivateAccountViewController () {
     BOOL stakeCpuAndNetOK;
@@ -167,7 +169,8 @@
         return;
     }
     
-    _eosAmount = [[NSString stringWithFormat:@"%@",@(0.1883+0.0400+0.2500+[_resourcePriceM.ramPrice doubleValue]*4)] removeFloatAllZero];
+//    _eosAmount = [[NSString stringWithFormat:@"%@",@(0.1883+0.0400+0.2500+[_resourcePriceM.ramPrice doubleValue]*4)] removeFloatAllZero];
+    _eosAmount = @(0.1883+0.0400+0.2500+[_resourcePriceM.ramPrice doubleValue]*4).mul(@(1));
     NSString *showAmount = [NSString stringWithFormat:@"≈%@ EOS",_eosAmount];
     
     [self showEOSTransferConfirmView:showAmount];
@@ -177,7 +180,7 @@
 - (void)requestEosEos_resource_price {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosEos_resource_price_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data];
             weakself.resourcePriceM = [EOSResourcePriceModel getObjectWithKeyValues:dic];
@@ -190,6 +193,7 @@
 - (void)jumpToWalletsSwitch {
     WalletsSwitchViewController *vc = [[WalletsSwitchViewController alloc] init];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
 

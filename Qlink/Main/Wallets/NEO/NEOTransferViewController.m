@@ -17,6 +17,10 @@
 #import "NEOWalletUtil.h"
 #import "WalletQRViewController.h"
 #import "Qlink-Swift.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+#import "NEOJSUtil.h"
+#import "NEOWalletInfo.h"
+//#import "GlobalConstants.h"
 
 @interface NEOTransferViewController () <UITextViewDelegate>
 
@@ -34,25 +38,25 @@
 
 @implementation NEOTransferViewController
 
-#pragma mark - Observe
-- (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferSuccess:) name:NEO_Transfer_Success_Noti object:nil];
-}
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+//
+//#pragma mark - Observe
+//- (void)addObserve {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferSuccess:) name:NEO_Transfer_Success_Noti object:nil];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self addObserve];
+//    [self addObserve];
     
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     [self renderView];
     [self configInit];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Operation
@@ -81,13 +85,15 @@
 }
 
 - (void)showNEOTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.asset_symbol];
     NEOTransferConfirmView *view = [NEOTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
+//    [view configWithAddress:address amount:amount];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -107,22 +113,50 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
-    NSInteger decimals = 8;
+- (void)sendTransfer:(NSString *)from_address {
+    NSInteger decimals = [NEO_Decimals integerValue];
     NSString *tokenHash = _selectAsset.asset_hash;
     NSString *assetName = _selectAsset.asset;
     NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = _amountTF.text;
     NSString *symbol = _selectAsset.asset_symbol;
-    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
+//    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
+    NSString *fromAddress = from_address;
     NSString *remarkStr = _memoTF.text;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
         assetType = 0;
     }
-    BOOL isMainNetTransfer = YES;
+    BOOL isNEOMainNetTransfer = YES;
     double fee = NEO_fee;
-    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isMainNetTransfer remarkStr:remarkStr fee:fee];
+    kWeakSelf(self);
+    [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
+    
+    NSString *wif = [NEOWalletInfo getNEOEncryptedKeyWithAddress:fromAddress]?:@"";
+    NSString *decimalStr = NEO_Decimals;
+    [NEOJSUtil addNEOJSView];
+    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];
+    [NEOJSUtil neoTransferWithFromAddress:fromAddress toAddress:toAddress assetHash:tokenHash amount:amount numOfDecimals:decimalStr wif:wif resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        [kAppD.window hideToast];
+        [NEOJSUtil removeNEOJSView];
+        if (success) {
+//            NSString *txid = result;
+            [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"transfer_tip") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"transfer_processed")] isShowTwoBtn:NO block:^{
+                [weakself backToRoot];
+            }];
+        } else {
+            [kAppD.window makeToastDisappearWithText:NSStringLocalizable(@"neo_transfer_fail")];
+        }
+    }];
+    
+    
+    // 原生NEO转账(服务器已关)
+//    [NEOWalletUtil sendNEOWithTokenHash:tokenHash decimals:decimals assetName:assetName amount:amount toAddress:toAddress fromAddress:fromAddress symbol:symbol assetType:assetType mainNet:isNEOMainNetTransfer remarkStr:remarkStr fee:fee successBlock:^(NSString *txid) {
+//        [kAppD.window hideToast];
+//        [weakself backToRoot];
+//    } failureBlock:^{
+//        [kAppD.window hideToast];
+//    }];
 }
 
 - (void)backToRoot {
@@ -134,7 +168,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_selectAsset.asset_symbol],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -192,20 +226,21 @@
         return;
     }
     
-    // 转QLC需要gas检查
-    if ([_selectAsset.asset_symbol isEqualToString:@"QLC"]) {
-        __block NSNumber *gas = @(0);
-        [_inputSourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NEOAssetModel *asset = obj;
-            if ([asset.asset_symbol isEqualToString:@"GAS"]) {
-                gas = asset.amount;
-            }
-        }];
-        if (([gas doubleValue] < GAS_Control)) {
-            [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"sendig_gas_tran")] isShowTwoBtn:NO block:nil];
-            return;
-        }
-    }
+//    // 转QLC需要gas检查
+//    if ([_selectAsset.asset_symbol isEqualToString:@"QLC"]) {
+//        __block NSNumber *gas = @(0);
+//        [_inputSourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            NEOAssetModel *asset = obj;
+//            if ([asset.asset_symbol isEqualToString:@"GAS"]) {
+//                gas = asset.amount;
+//            }
+//        }];
+//        if (([gas doubleValue] < GAS_Control)) {
+//            [kAppD.window showWalletAlertViewWithTitle:NSStringLocalizable(@"prompt") msg:[[NSMutableAttributedString alloc] initWithString:NSStringLocalizable(@"neo_nep5_gas_less")] isShowTwoBtn:NO block:^{
+//            }];
+//            return;
+//        }
+//    }
     
     [self showNEOTransferConfirmView];
 }
@@ -224,12 +259,13 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
-#pragma mark - Noti
-- (void)transferSuccess:(NSNotification *)noti {
-    [self backToRoot];
-}
+//#pragma mark - Noti
+//- (void)transferSuccess:(NSNotification *)noti {
+//    [self backToRoot];
+//}
 
 @end

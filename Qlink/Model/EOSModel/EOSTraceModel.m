@@ -7,12 +7,14 @@
 //
 
 #import "EOSTraceModel.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation EOSTraceModel
 
 - (NSString *)getTokenNum {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.quantity] removeFloatAllZero];
+    NSString *num = self.quantity.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.quantity] removeFloatAllZero];
     return num;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "UnderlineView.h"
+#import "GlobalConstants.h"
 
 #define Underline_Image_Edit [UIImage imageNamed:@"bg_shape"]
 #define Underline_Image_Normal [UIImage imageNamed:@"bg_shape_two"]

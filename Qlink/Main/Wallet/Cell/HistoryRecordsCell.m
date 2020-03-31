@@ -7,6 +7,7 @@
 //
 
 #import "HistoryRecordsCell.h"
+#import "GlobalConstants.h"
 
 @implementation HistoryRecordsCell
 

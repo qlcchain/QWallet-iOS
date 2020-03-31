@@ -14,4 +14,11 @@
 - (NSString *)base64EncodedString;
 - (NSString *)base64DecodedString;
 - (NSData *)base64DecodedData;
+
++(NSString *)base64EncodeString:(NSString *)string;
++(NSString *)base64DecodeString:(NSString *)string;
+
+
+
+
 @end

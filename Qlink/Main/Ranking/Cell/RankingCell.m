@@ -10,6 +10,8 @@
 #import "VPNRankMode.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 //#import "RequestService.h"
+#import "GlobalConstants.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
 
 @implementation RankingCell
 
@@ -24,11 +26,11 @@
 
 - (void) setVPNRankMode:(VPNRankMode *) mode withType:(NSString *) type withEnd:(BOOL)isEnd
 {
-    _lblSub1.textColor = RGB(51, 51, 51);
-    _lblSub2.textColor = RGB(168, 166, 174);
-    _lblconnet.textColor = RGB(51, 51, 51);
-    _lblCount.textColor = RGB(51, 51, 51);
-    _lblNumber.textColor = RGB(51, 51, 51);
+    _lblSub1.textColor = UIColor_RGB(51, 51, 51);
+    _lblSub2.textColor = UIColor_RGB(168, 166, 174);
+    _lblconnet.textColor = UIColor_RGB(51, 51, 51);
+    _lblCount.textColor = UIColor_RGB(51, 51, 51);
+    _lblNumber.textColor = UIColor_RGB(51, 51, 51);
     
     if ([type isEqualToString:@"END"] || [type isEqualToString:@"PRIZED"]) {
         if (isEnd) {

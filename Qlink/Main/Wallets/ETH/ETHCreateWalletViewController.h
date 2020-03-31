@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ETHWalletInfo;
+
 @interface ETHCreateWalletViewController : QBaseViewController
+
+@property (nonatomic, strong) ETHWalletInfo *walletInfo;
 
 @end
 

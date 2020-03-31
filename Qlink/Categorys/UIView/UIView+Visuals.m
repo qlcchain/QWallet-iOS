@@ -206,4 +206,13 @@
 }
 
 
+- (void)addCornerWithType:(UIRectCorner)aCorners size:(CGSize)aSize {
+    // 根据矩形画带圆角的曲线
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:aCorners cornerRadii:aSize];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+}
+
 @end

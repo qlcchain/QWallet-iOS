@@ -15,6 +15,8 @@
 #import "ODRefreshControl.h"
 #import "NSString+RemoveZero.h"
 
+//#import "GlobalConstants.h"
+
 @interface EOSResourcesViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *totalAssetsLab;
@@ -97,7 +99,7 @@
     [kAppD.window makeToastInView:kAppD.window];
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSDictionary *params = @{@"account":currentWalletM.account_name?:@""};
-    [RequestService requestWithUrl:eosGet_account_resource_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_account_resource_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
 //        [weakself.slimeView endRefresh];
         [weakself.refreshControl endRefreshing];
         [kAppD.window hideToast];

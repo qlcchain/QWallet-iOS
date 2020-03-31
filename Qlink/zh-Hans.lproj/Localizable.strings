@@ -16,15 +16,19 @@
 "title_screen_lock" = "屏幕锁";
 "english" = "英文";
 "chinese" = "中文";
+"indonesian" = "印度尼西亚语";
 
 // 我的---
 "crypto_wallet" = "加密钱包";
-"share_with_friends" = "与好友分享";
+"share_with_friends" = "推荐奖励";
 "join_the_community" = "加入社区";
 "contact_us" = "联系我们";
 "settings" = "设置";
 "login_signup" = "登录/注册";
 "me" = "我的";
+"daily_earnings"="每日收益";
+"join_us_on_telegram_to_get_the_latest_qgas_news" = "加入我们的电报群\n获得最新QGAS动态";
+"join_now" = "立即加入";
 
 // 个人信息---
 "profile_photo" = "档案照片";
@@ -74,14 +78,21 @@
 "appeal_failed" = "申诉失败";
 "sell" = "卖出";
 "buy" = "买入";
-"entrust_sell_qgas" = "卖出QGAS";
-"entrust_buy_qgas" = "买入QGAS";
+"entrust_sell" = "卖出";
+"entrust_buy" = "买入";
 "active" = "正常";
 "revoked" = "已撤单";
 "completed" = "已完成";
 "seller" = "卖家";
 "buyer" = "买家";
 "amount_price" = "总价";
+"pending" = "等待中";
+"the_order_status_is_not_correct_and_cannot_be_transferred" = "订单状态错误, 不能转账. ";
+"filter" = "筛选";
+"trading_pairs" = "交易对";
+"reset" = "重置";
+"filter_confirm" = "确定";
+"team" = "团队";
 
 // 支付USDT---
 "eth_wallet_address" = "ETH钱包地址";
@@ -93,8 +104,12 @@
 "amount_is_zero" = "数量为0";
 "balance_is_not_enough" = "余额不足";
 "eth_wallet_address_is_invalidate" = "ETH钱包地址是无效的";
-"eth_wallet_address_have_not_eth_balance" = "ETH钱包地址没有ETH余额";
-"current_qlc_wallet_have_not_usdt" = "当前的QLC钱包没有USD";
+"eth_wallet_have_not_eth_balance" = "ETH钱包没有ETH余额";
+"wallet_have_not_balance_of" = "钱包没有余额->";
+"please_choose_wallet_first" = "请先选择钱包";
+"current_eth_wallet_have_not" = "当前的ETH钱包没有";
+"current_neo_wallet_have_not" = "当前的NEO钱包没有";
+"current_qlc_wallet_have_not" = "当前的QLC钱包没有";
 
 // 申诉详情
 "appeallant_buyer" = "申诉人：买家";
@@ -105,21 +120,20 @@
 "appeal_failed" = "申诉失败";
 "waiting_for_buyer_payment" = "等待买家付款";
 "waiting_for_seller_confirmation" = "等待卖家确认";
+"waiting_for_public_Chain_confirmation" = "等待公链确认";
 "amount" = "数量";
 "copied" = "已复制";
-
-// 委托单详情---
-"erc-20_address_to_receive_usdt" = "接收USDT的ERC-20地址";
-"qlc_chain_address_to_receive_qgas" = "接收QGAS的QLC Chain地址";
+"transaction_pending" = "交易等待中";
+"new_order" = "新订单";
 
 // USDT接收地址---
-"usdt_receivable_address" = "USDT接收地址";
+"receivable_address" = "接收地址";
 "please_send" = "请发送";
-"to_the_erc-20_address_as_below_to_place_your_order" = "到以下ERC-20地址订购。";
+"to_the_address_as_below_to_place_your_order" = "to the address as 到以下地址订购. ";
 
 // Buy\Sell List---
 "please_finish_the_verification_on_me_page" = "请在我的页面上完成验证. ";
-"volume_settings" = "限值设置";
+"limits" = "限额";
 
 // New Order---
 "unit_price_is_empty" = "单价为空";
@@ -129,29 +143,40 @@
 "max_amount_is_empty" = "最大数量为空";
 "address_is_empty" = "地址为空";
 "qlc_wallet_address_is_invalidate" = "QLC钱包地址无效";
+"wallet_address_is_invalidate" = "钱包地址无效";
 "amount_need_greater_than_or_equal_to_max_amount" = "数量必须大于等于最大数量";
-"qlc_chain_address_is_empty" = "QLC Chain地址为空";
+"max_amount_need_greater_than_or_equal_to_min_amount" = "最大数量必须大于等于最小数量";
+"the_min_amount_should_be_equal_or_greater_than_1" = "最小值应该等于或大于1";
+"buying_amount_need_greater_than_or_equal_to_min_amount" = "买入数量必须大于等于最小数量";
+"selling_amount_need_greater_than_or_equal_to_min_amount" = "卖出数量必须大于等于最小数量";
 "please_switch_to_qlc_wallet" = "请切换到QLC钱包";
-"current_qlc_wallet_have_not_qgas" = "当前的QLC钱包没有QGAS";
-"current_qlc_wallet_have_not_enough_qgas" = "当前的QLC钱包没有足够的QGAS";
-"qlc_server_address_is_empty" = "QLC主网地址为空";
+"please_switch_to_neo_wallet" = "请切换到NEO钱包";
+"please_switch_to_eos_wallet" = "请切换到EOS钱包";
+"please_switch_to_eth_wallet" = "请切换到ETH钱包";
+"current_wallet_have_not" = "当前钱包没有";
+"current_wallet_have_not_enough" = "当前钱包没有足够的";
+"server_address_is_empty" = "主网地址为空";
 "process___" = "请稍等...";
 "transfer_successful" = "转账成功.";
 
 // Buy\Sell Detail---
-"qlc_chain_wallet_address" = "QLC Chain钱包地址";
-"erc-20_wallet_address" = "ERC-20钱包地址";
 "max" = "最大";
 "you_can_not_buy_or_sell_your_own_entrust_order" = "您不能买卖自己的委单.";
-"usdt_is_empty" = "USDT为空";
-"usdt_is_over_max" = "USDT超过了最大值";
-"qgas_is_empty" = "QGAS为空";
-"qgas_is_greater_than_max_volume" = "QGAS大于最大值";
-"qgas_is_less_than_min_volume" = "QGAS小于最小值";
-"qgas_remain" = "QGAS剩余";
+"is_empty" = "为空";
+"is_over_max" = "超过了最大值";
+"is_greater_than_max_volume" = "大于最大值";
+"is_less_than_min_volume" = "小于最小值";
+"remain" = "剩余";
+"unit_price" = "单价";
+"volume_amount" = "剩余数量";
+"receive_from" = "支付钱包";
+"send_to" = "收币钱包";
+"to_receive" = "接收数量";
+"to_pay" = "支付数量";
 
 // 订单详情---
 "the_order_will_be_closed_automatically____30" = "如果30分钟内没有进一步确认, 订单将自动关闭. ";
+"please_be_patient_" = "请耐心等待.";
 "fail_appeal" = "申诉失败";
 "successful" = "成功";
 "the_order_will_be_closed_automatically_if_no_further_confirmation_within" = "订单将自动关闭, 如果没有确认在";
@@ -160,8 +185,13 @@
 "title_appeal" = "申诉";
 "title_appeal_details" = "申诉详情";
 "title_appeal_result" = "查看申诉结果";
-"account_payable" = "应付数量";
-"account_receivable" = "应收数量";
+"buying_amount" = "买入数量";
+"selling_amount" = "卖出数量";
+"i_ve_received" = "我已经接收";
+"ok_" = "确定";
+"please_be_patiently_it_hasnt_been_30_minutes_" = "请耐心等待. 还不到30分钟. ";
+"transaction_parsing_failed" = "交易解析失败";
+"overtime" = "超时";
 
 // Appeal---
 "for_example_incorrect_amount_no_payment_received_etc" = "例如, 金额不正确, 没有收到付款等. ";
@@ -184,7 +214,7 @@
 
 // 钱包---
 "export_qrcode" = "导出二维码";
-"please_use_space_to_separate_the_mnemonic_phase" = "请用空格分隔助记词";
+"please_use_space_to_separate_the_mnemonic_phrase" = "请用空格分隔助记词";
 "please_input_wallet_seed" = "请输入钱包种子";
 "import_success" = "导入成功";
 "please_agree_first" = "请先同意";
@@ -250,9 +280,14 @@
 "the_passwords_are_different" = "密码匹配不同";
 "wallet" = "钱包";
 "resources" = "资源";
+"security_reminders" = "安全提醒";
+"please_back_up_your_private_key_mnemonic_phrase_now_" = "请立即备份您的私钥/助记词。";
+"if_your_lose_your_mobile_devices_you_could_use_your_private_key_or_mnemonic_phrase_to_recover_your_wallet_" = "如果应用删除、手机丢失等情况，则可以使用私钥或助记词来恢复钱包。";
+"backup_now" = "现在备份";
 
 // Tabbar---
-"finance" = "理财";
+"finance" = "交易";
+"top_up" = "充值";
 
 // 邀请好友---
 "invited__" = "共邀请";
@@ -261,3 +296,170 @@
 // 更新版本---
 "install_now" = "现在安装";
 "a_new_version_of_my_qwallet__" = "My QWallet有了一个新版本. 现在就从App Store安装它. ";
+
+// 转NEO token
+"neo_transfer_fail" = "NEO转账失败";
+"neo_nep5_gas_less" = "NEO(nep5)转账需要gas";
+"transfer_tip" = "转账提示";
+"transfer_processed" = "转账进行中";
+"transfer_error" = "转账失败";
+
+// Staking
+"staking_will_end_on" = "抵押结束时间: ";
+"the_minimum_period_is_10_days" = "最小周期是10天";
+"the_minimum_period_is_180_days" = "最小周期是180天";
+"voting_mining_node" = "投票/挖掘节点";
+"token_mintage" = "铸币";
+"staking_in_progress" = "抵押中";
+"staking_in_progress_redeemable" = "抵押中, 可赎回";
+"withdraw_start" = "赎回开始";
+"withdraw_process" = "赎回中";
+"withdraw_done" = "赎回完成";
+"not_succeed" = "抵押未成功";
+"not_succeed_continue_to_invoke" = "抵押未成功, 继续抵押";
+"pledge_process" = "抵押进行中";
+"withdraw_complete" = "赎回完成";
+"stake_from_is_empty" = "抵押自为空";
+"stake_to_is_empty" = "抵押至为空";
+"amount_is_at_least_1_qlc" = "最小抵押数量是 1.00 QLC";
+"staking_period_is_empty" = "抵押周期为空";
+"staking_period_is_at_least_10_days" = "抵押周期至少10天";
+"staking_period_is_at_least_180_days" = "抵押周期至少180天";
+"your_email_is_empty" = "您的邮箱为空";
+"security_code_is_empty" = "安全码为空";
+"token_symbol_is_empty" = "Token符号为空";
+"token_supply_is_empty" = "Token总量为空";
+"token_amount_is_empty" = "Token位数为空";
+"token_name_is_empty" = "Token名称为空";
+"for" = "用于";
+"my_stakings" = "我的抵押";
+"revoke" = "赎回";
+"the_wallet_is_none___" = "钱包不存在";
+
+// Topup
+"rmb" = "元";
+"_discount" = "折";
+"_has_been_paid_successfully_Please_wait_for_a_moment" = "支付%@成功, 等待链确认";
+"please_wait_for_confirmation" = "等待链确认";
+"insufficient_balance_go_to_otc_page_to_purchase_" = "余额不足\n到OTC页面购买%@";
+"purchase" = "购买";
+"send_recharge_to" = "发送充值到";
+"enter_your_phone_number_or_select_from_your_contacts_" = "输入手机号码或从联系人中选择：";
+"earn_more_qgas" = "赚取更多 QGAS";
+"act_now__" = "马上行动 >";
+"carrier_package" = "运营商套餐";
+"you_do_not_have_wallet_created_immediately" = "您还没有%@钱包\n立即创建";
+"create" = "创建";
+"use_to_purchase__yuan_of_phone_charge_for_deduction" = "充值%@元话费\n需要支付%@ %@和%@元";
+"use_to_purchase__yuan_of_phone_charge_for_deduction_1" = "充值%@ %@话费\n需要支付%@ %@和%@ %@";
+"choose_international_and_regional" = "选择国家和地区";
+"please_enter_your_mobile_phone_number" = "请输入手机号码";
+"recharge__yuan_phone_charge_deduction__yuan" = "充值%@元话费, %@%@抵扣%@元";
+"recharge_phone_bill" = "充值话费";
+"view_your_exclusive_offers" = "查看您的专属优惠";
+"waiting_for_to_arrive" = "等待%@到账";
+"no_phone_bill_paid" = "待支付";
+"waiting_for_the_bill" = "待发货";
+"phone_charge_successfully_charged" = "成功";
+"phone_charge_failed" = "话费充值失败";
+"qgas_parsing_failed" = "链确认失败";
+"phone_charge_recharge_failed_has_been_returned" = "已退回%@";
+"pay_token_returned" = "支付币已退回";
+"cancelled" = "已取消";
+"pay_txid_error" = "支付币解析失败";
+"deduction_txid_error" = "抵扣币解析失败";
+"pay_token_paid" = "支付币已支付";
+"_will_be_returned_to_the_payment_address" = "%@将退回至支付钱包";
+"confirm" = "确认";
+"coming_soon_next_month" = "次月优惠即将上架";
+"sold_out" = "本月已售完";
+"_is_being_paid" = "正在支付%@";
+"generate_recharge_vouchers_on_the_chain" = "生成链上充值凭证";
+"successfully_paid_" = "成功支付%@";
+"generating_recharge_vouchers_on_the_chain" = "正在生成链上充值凭证";
+"the_recharge_voucher_on_the_chain_was_successfully_generated" = "成功生成链上充值凭证";
+"refer_friends_" = "介绍朋友 >";
+
+// 领取QGAS
+"free_qlc_lending_for_staking" = "免费借得抵押金";
+"claim_entitled_qgas_earnings_everyday" = "每日免费赚QGAS收益";
+"receive_now" = "立即领取";
+"no_qgas_can_claim" = "没有可以领取的QGAS";
+"copy" = "点击复制";
+"immediately_invite" = "立即邀请";
+"ranking_in_the_last_30_days" = "最近30天推荐奖励排名";
+"00000000_Copy" = "00000000（点击复制）";
+"use_qgas_to_get_phone_bill_discount_or_just_trade_in_otc_market_" = "使用QGAS享受话费充值优惠，更可直接在OTC市场交易。";
+
+// 交易挖矿
+"sheet_mining" = "挂单挖矿";
+"minging_more_details" = "了解详情";
+"daily_qgas_trade_mining_pool_up_to_" = "QGAS挂单挖矿, 挂单即可瓜分每日最多";
+"no_qlc_can_claim" = "没有可以领取的QLC";
+"qgas_trade_mining_pool_up_to" = "挂单挖矿瓜分最高";
+"mined_qlc_redeem_every_day" = "每日挂单挖矿得奖励，每日结算";
+
+// QLC k线
+"qlc_go_trade" = "去交易  >";
+"qlc_hour" = "小时";
+"qlc_day" = "天";
+"qlc_week" = "周";
+"qlc_month" = "月";
+"qlc_year" = "年";
+
+// Sheet mining
+"___qgas_traded" = "已成交%@ QGAS";
+"i_have_claimed__qlc" = "已领取奖励：%@ QLC";
+
+// Topup Credential
+"top_up__phone_bill__" = "话费充值-%@%@ 手机话费-%@";
+
+// Share friends
+"i_have_claimed__qgas" = "已领取奖励：%@ QGAS";
+"__friends_referred" = "已邀请%@人";
+"you_can_claim_the_reward_when_successfully_invited_more_than__friends_" = "邀请好友满%@位可立即领取";
+"get__qgas" = "获得%@QGAS";
+
+// Topup Choose Country Code
+"please_choose_country_code_first" = "请先选择国家区号";
+"please_choose_operator_first" = "请先选择运营商";
+"optional" = "选填";
+"phone_number_cannot_be_empty" = "手机号不能为空";
+"please_fill_in_a_valid_phone_number" = "请输入有效的电话号码";
+
+// Group Buy
+"please_select_groupbuy_type" = "请选择团购类型";
+"phone_number" = "手机号";
+"valid_till" = "截止";
+"time_out" = "超时";
+"time_out_down" = "超时";
+"ordered" = "已生成订单";
+"isp" = "运营商";
+"region" = "地区";
+
+// Invite Reward
+"opened" = "已开通";
+"unopen" = "未开通";
+"ranking" = "邀请奖励榜";
+"friends_referred" = "邀请成功好友";
+"sales_partner_commission" = "代理提成奖励";
+"referred" = "已接受邀请";
+"recharge_commission" = "充值佣金";
+"group_plan_commission" = "拼团佣金";
+"join_the_q_wallet_recharge_sales_partner_plan_for_commissions" = "成为 Q-Wallet 充值销售代理，得持续收益";
+"commissions" = "收益";
+"qgas" = "QGAS";
+
+// Vote
+"qgas_buyback_destruction_plan" = "QGas回购销毁计划";
+"go_vote" = "去投票";
+"please_select_one" = "请选择";
+"if_you_got_more_to_share_with_us_leave_your_opinions_and_comments_below_" = "如果您有其他反馈意见，请在以下输入框中留言：";
+"you_have_voted_successfully_thanks_for_your_engagement" = "您已投票，感谢您的支持与帮助。";
+"the_voting_has_been_closed" = "投票已结束，以上是最后的投票结果";
+"buyback_destruction_plan" = "回购销毁计划";
+"join_now_1" = "去交易";
+
+// Buyback burn
+"1qgas_2qlc" = "1QGas= %@ QLC（略高于市场价)";
+"one_campaign_day___" = "* 一个活动日定义为前一天晚7点至次日晚7点\n* 每天晚7点以后团队开始挂买单，每天买单总量为 2万QGas，分批挂单时间： 晚7：00， 12：00， 凌晨2：00，凌晨5：00，早9：00\n* 单个用户一个活动日内交易数量不得超过10，000 QGas\n* 专门创建一个用于接收QGas的地址，并事先向社群公示，接受监督\n* 前一天没有成交的买单延续到次日，次日继续新投放总量2万 QGas买单，收购价格%@ QLC\n* 所有买单的QGas接收地址均统一使用上述地址\n* 活动后48小时内，进行QGas销毁操作";

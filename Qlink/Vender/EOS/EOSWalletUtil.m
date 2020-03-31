@@ -17,7 +17,7 @@
 #import <eosFramework/NSString+Extention.h>
 #import <eosFramework/ContractConstant.h>
 #import "EOS_BaseResult.h"
-#import "MJExtension.h"
+#import <MJExtension/MJExtension.h>
 #import <eosFramework/StringConstant.h>
 #import "GetAccountRequest.h"
 #import <eosFramework/EosPrivateKey.h>
@@ -37,6 +37,8 @@
 #import "Create_account_abi_json_to_bin_request.h"
 #import "CreateAccountTransferService.h"
 #import "ReportUtil.h"
+#import "RLArithmetic.h"
+#import "GlobalConstants.h"
 
 @interface EOSWalletUtil () <TransferServiceDelegate,CreateAccountTransferServiceDelegate> {
     // 从网络获取的公钥
@@ -91,7 +93,6 @@
 #pragma mark - 创建
 - (void)createAccountWithAccountName:(NSString *)accountName {
 //    if (self.headerView.agreeItemBtn.isSelected) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"请勾选同意条款!", nil)];
 //        return;
 //    }
 //    if (![RegularExpression validateEosAccountName:accountName]) {
@@ -370,7 +371,7 @@
 
     kWeakSelf(self);
     NSDictionary *params = @{@"account":accountName?:@""};
-    [RequestService requestWithUrl:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = responseObject[Server_Data][Server_Data];
             EOSAccountInfoModel *model = [EOSAccountInfoModel getObjectWithKeyValues:dic];
@@ -433,6 +434,7 @@
         walletInfo.account_owner_public_key = owner_public_key_from_local;
         walletInfo.account_owner_private_key = private_ownerKey;
     }
+    walletInfo.isBackup = @(NO);
     // 存储keychain
     [walletInfo saveToKeyChain];
     
@@ -505,7 +507,6 @@
     // 验证密码输入是否正确
 //    Wallet *current_wallet = CURRENT_WALLET;
 //    if (![WalletUtil validateWalletPasswordWithSha256:current_wallet.wallet_shapwd password:self.loginPasswordView.inputPasswordTF.text]) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"密码输入错误!", nil)];
 //        return;
 //    }
 //    if (IsNilOrNull(self.currentToken)) {
@@ -515,10 +516,9 @@
 //    self.transferAbi_json_to_bin_request.code = self.currentToken.contract_name;
     self.transferAbi_json_to_bin_request.code = symbolM.code;
     
-//    NSString *percision = [NSString stringWithFormat:@"%lu", [NSString getDecimalStringPercisionWithDecimalStr:self.currentToken.balance]];
-    NSString *decimalBalance = [[NSString stringWithFormat:@"%@",symbolM.balance] removeFloatAllZero];
+//    NSString *decimalBalance = [[NSString stringWithFormat:@"%@",symbolM.balance] removeFloatAllZero];
+    NSString *decimalBalance = symbolM.balance.mul(@(1));
     NSString *percision = [NSString stringWithFormat:@"%lu", [NSString getDecimalStringPercisionWithDecimalStr:decimalBalance]];
-//    self.transferAbi_json_to_bin_request.quantity = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"%.*f", percision.intValue, amount.doubleValue], self.currentToken.token_symbol];
     self.transferAbi_json_to_bin_request.quantity = [NSString stringWithFormat:@"%@ %@", [NSString stringWithFormat:@"%.*f", percision.intValue, amount.doubleValue], symbolM.symbol];
     
     self.transferAbi_json_to_bin_request.action = ContractAction_TRANSFER;
@@ -591,7 +591,6 @@
     // 验证密码输入是否正确
 //    Wallet *current_wallet = CURRENT_WALLET;
 //    if (![WalletUtil validateWalletPasswordWithSha256:current_wallet.wallet_shapwd password:self.loginPasswordView.inputPasswordTF.text]) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"密码输入错误!", nil)];
 //        return;
 //    }
     
@@ -735,7 +734,6 @@
     // 验证密码输入是否正确
 //    Wallet *current_wallet = CURRENT_WALLET;
 //    if (![WalletUtil validateWalletPasswordWithSha256:current_wallet.wallet_shapwd password:self.loginPasswordView.inputPasswordTF.text]) {
-//        [TOASTVIEW showWithText:NSLocalizedString(@"密码输入错误!", nil)];
 //        return;
 //    }
     

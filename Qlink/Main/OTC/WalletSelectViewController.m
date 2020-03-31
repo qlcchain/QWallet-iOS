@@ -62,24 +62,30 @@
 }
 
 - (void)refreshData {
-    [_sourceArr removeAllObjects];
+    NSMutableArray *tempArr = [NSMutableArray array];
     if (_inputWalletType == WalletTypeAll) {
         NSArray *arr = [WalletCommonModel getAllWalletModel];
-        [_sourceArr addObjectsFromArray:arr];
+        [tempArr addObjectsFromArray:arr];
     } else if (_inputWalletType == WalletTypeEOS) {
         NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeEOS];
-        [_sourceArr addObjectsFromArray:arr];
+        [tempArr addObjectsFromArray:arr];
     } else if (_inputWalletType == WalletTypeETH) {
         NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeETH];
-        [_sourceArr addObjectsFromArray:arr];
+        [tempArr addObjectsFromArray:arr];
     } else if (_inputWalletType == WalletTypeNEO) {
         NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeNEO];
-        [_sourceArr addObjectsFromArray:arr];
+        [tempArr addObjectsFromArray:arr];
     } else if (_inputWalletType == WalletTypeQLC) {
         NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
-        [_sourceArr addObjectsFromArray:arr];
+        [tempArr addObjectsFromArray:arr];
     }
     
+    [_sourceArr removeAllObjects];
+    NSArray *sortArr = [tempArr sortedArrayUsingComparator:^NSComparisonResult(WalletCommonModel *obj1, WalletCommonModel *obj2) {
+        return [obj1.name compare:obj2.name];
+    }];
+    [_sourceArr addObjectsFromArray:sortArr];
+    [_mainTable reloadData];
 }
 
 //- (void)checkEOS_Share_Register_Account_Is_Active { // 检查本地 需要注册的EOS账号是否激活了

@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+BarItem.h"
-#import "UIView+Frame.h"
+#import "GlobalConstants.h"
 
 #define KK_Orange_Color [UIColor colorWithRed:255.0/255.0 green:199.0/255.0 blue:6.0/255.0 alpha:1]
 

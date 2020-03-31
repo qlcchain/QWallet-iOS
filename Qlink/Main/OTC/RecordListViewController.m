@@ -17,6 +17,10 @@
 #import "EntrustOrderListModel.h"
 #import "TradeOrderDetailViewController.h"
 #import "EntrustOrderDetailViewController.h"
+#import "PairsModel.h"
+//#import "GlobalConstants.h"
+
+static NSString *RecordListRequestSize = @"20";
 
 @interface RecordListViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
     BOOL needRefreshSlider;
@@ -67,9 +71,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = MAIN_WHITE_COLOR;
+    
     needRefreshSlider = YES;
     [self configInit];
-    [self requestEntrust_order_list];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,7 +83,14 @@
     
     if (needRefreshSlider) {
         needRefreshSlider = NO;
-        [self refreshSelect:_postedBtn];
+        if (_inputType == RecordListTypePosted) {
+            [self postedAction:_postedBtn];
+        } else if (_inputType == RecordListTypeProcessing) {
+            [self processingAction:_processingBtn];
+        } else if (_inputType == OTCRecordListTypeCompleted) {
+            [self completedAction:_completedBtn];
+        }
+        
     }
 }
 
@@ -94,8 +107,17 @@
     _closedPage = 1;
     _appealedArr = [NSMutableArray array];
     _appealedPage = 1;
-    _postedBtn.selected = YES;
-    _recordListType = RecordListTypePosted;
+    if (_inputType == RecordListTypePosted) {
+        _postedBtn.selected = YES;
+        _recordListType = RecordListTypePosted;
+    } else if (_inputType == RecordListTypeProcessing) {
+        _processingBtn.selected = YES;
+        _recordListType = RecordListTypeProcessing;
+    } else if (_inputType == OTCRecordListTypeCompleted) {
+       _completedBtn.selected = YES;
+       _recordListType = RecordListTypeCompleted;
+   }
+    
     
     kWeakSelf(self)
     [_postedTable registerNib:[UINib nibWithNibName:MyOrderListEntrustCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListEntrustCellReuse];
@@ -183,6 +205,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_postedBtn.selected) {
+        if (tableView != _postedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListEntrustCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListEntrustCellReuse];
         
         EntrustOrderListModel *model = _postedArr[indexPath.row];
@@ -190,6 +216,10 @@
         
         return cell;
     } else if (_processingBtn.selected) {
+        if (tableView != _processingTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _processingArr[indexPath.row];
@@ -197,6 +227,10 @@
         
         return cell;
     } else if (_completedBtn.selected) {
+        if (tableView != _completedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _completedArr[indexPath.row];
@@ -204,6 +238,10 @@
         
         return cell;
     } else if (_appealedBtn.selected) {
+        if (tableView != _appealedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _appealedArr[indexPath.row];
@@ -211,6 +249,10 @@
         
         return cell;
     } else if (_closedBtn.selected) {
+        if (tableView != _closedTable) {
+            return [UITableViewCell new];
+        }
+        
         MyOrderListTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyOrderListTradeCellReuse];
         
         TradeOrderListModel *model = _closedArr[indexPath.row];
@@ -333,7 +375,7 @@
     kWeakSelf(self);
     NSString *account = userM.account?:@"";
     NSString *md5PW = userM.md5PW?:@"";
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
@@ -354,15 +396,14 @@
         page = [NSString stringWithFormat:@"%@",@(_closedPage)];
         status = @"closed";
     }
-    NSString *size = @"20";
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"page":page,@"size":size}];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"page":page,@"size":RecordListRequestSize}];
     if (_postedBtn.selected) { // 委托单
         [params setObject:@"" forKey:@"entrustOrderId"];
     } else { // 交易单
         [params setObject:status forKey:@"status"];
     }
-    [RequestService requestWithUrl:trade_order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:trade_order_list_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself hideHeaderAndFooter];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [TradeOrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"orderList"]];
@@ -372,28 +413,68 @@
                 }
                 [weakself.processingArr addObjectsFromArray:arr];
                 weakself.processingPage += 1;
-                [weakself.processingTable reloadData];
+                
+                if (weakself.recordListType == RecordListTypeProcessing) {
+                    [weakself.processingTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.processingTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.processingTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.processingTable.mj_footer.hidden = NO;
+                    }
+                }
             } else if (weakself.completedBtn.selected) {
                 if (weakself.completedPage == 1) {
                     [weakself.completedArr removeAllObjects];
                 }
                 [weakself.completedArr addObjectsFromArray:arr];
                 weakself.completedPage += 1;
-                [weakself.completedTable reloadData];
+                
+                if (weakself.recordListType == RecordListTypeCompleted) {
+                    [weakself.completedTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.completedTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.completedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.completedTable.mj_footer.hidden = NO;
+                    }
+                }
             } else if (weakself.appealedBtn.selected) {
                 if (weakself.appealedPage == 1) {
                     [weakself.appealedArr removeAllObjects];
                 }
                 [weakself.appealedArr addObjectsFromArray:arr];
                 weakself.appealedPage += 1;
-                [weakself.appealedTable reloadData];
+                
+                if (weakself.recordListType == RecordListTypeAppealed) {
+                    [weakself.appealedTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.appealedTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.appealedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.appealedTable.mj_footer.hidden = NO;
+                    }
+                }
             } else if (weakself.closedBtn.selected) {
                 if (weakself.closedPage == 1) {
                     [weakself.closedArr removeAllObjects];
                 }
                 [weakself.closedArr addObjectsFromArray:arr];
                 weakself.closedPage += 1;
-                [weakself.closedTable reloadData];
+                
+                if (weakself.recordListType == RecordListTypeClosed) {
+                    [weakself.closedTable reloadData];
+                    
+                    if (arr.count < [RecordListRequestSize integerValue]) {
+                        [weakself.closedTable.mj_footer endRefreshingWithNoMoreData];
+                        weakself.closedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                    } else {
+                        weakself.closedTable.mj_footer.hidden = NO;
+                    }
+                }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
@@ -407,8 +488,8 @@
     NSString *size = @"20";
     NSString *type = @"";
     NSString *userId = [UserModel fetchUserOfLogin].ID;
-    NSDictionary *params = @{@"userId":userId?:@"",@"type":type,@"page":page,@"size":size};
-    [RequestService requestWithUrl:entrust_order_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"userId":userId?:@"",@"type":type,@"page":page,@"size":size,@"pairsId":@""};
+    [RequestService requestWithUrl10:entrust_order_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.postedTable.mj_header endRefreshing];
         [weakself.postedTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
@@ -418,7 +499,17 @@
             }
             [weakself.postedArr addObjectsFromArray:arr];
             weakself.postedPage += 1;
-            [weakself.postedTable reloadData];
+            
+            if (weakself.recordListType == RecordListTypePosted) {
+                [weakself.postedTable reloadData];
+                
+                if (arr.count < [RecordListRequestSize integerValue]) {
+                    [weakself.postedTable.mj_footer endRefreshingWithNoMoreData];
+                    weakself.postedTable.mj_footer.hidden = arr.count<=0?YES:NO;
+                } else {
+                    weakself.postedTable.mj_footer.hidden = NO;
+                }
+            }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.postedTable.mj_header endRefreshing];

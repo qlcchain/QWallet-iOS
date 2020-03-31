@@ -11,9 +11,10 @@
 #define kHttpsServiceCer @"server"
 
 #import "BaseHttpsNetworkRequest.h"
-#import "AppDelegate.h"
+#import "GlobalConstants.h"
 #import "RequestUrlConstant.h"
 #import <eosFramework/AppConstant.h>
+#import "GlobalConstants.h"
 
 // nakedAddress
 //#define REQUEST_APIPATH [NSString stringWithFormat: @"/v1/chain%@", [self requestUrlPath]]

@@ -16,6 +16,7 @@
 #import "EOSResourcesViewController.h"
 #import "EOSSymbolModel.h"
 #import "EOSWalletInfo.h"
+//#import "GlobalConstants.h"
 
 NSString *EOSResources = @"Resources";
 NSString *EOSExport_owner_private_key = @"Export owner private key";

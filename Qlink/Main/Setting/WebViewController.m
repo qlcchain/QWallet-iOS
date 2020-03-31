@@ -8,6 +8,7 @@
 
 #import "WebViewController.h"
 #import <WebKit/WebKit.h>
+//#import "GlobalConstants.h"
 
 #define TELEGRAM_URL @"https://t.me/winqdapp"
 #define FB_URL       @"https://www.facebook.com/dAppWINQ"

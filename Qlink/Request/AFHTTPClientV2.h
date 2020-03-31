@@ -11,11 +11,16 @@
 #import <AFNetworking/AFNetworking.h>
 #define TimeOut_Request 30
 
-typedef enum HttpMethod {
+typedef enum : NSUInteger {
     HttpMethodGet      = 0,
     HttpMethodPost     = 1,
     HttpMethodDelete   = 2,
-}HttpMethod;
+} HttpMethod;
+
+typedef enum : NSUInteger {
+    QRequestManagerTypeHTTP      = 0,
+    QRequestManagerTypeJSON     = 1,
+} QRequestManagerType;
 
 @class AFHTTPClientV2;
 
@@ -67,8 +72,7 @@ typedef void (^HTTPRequestV2FailedBlock)(NSURLSessionDataTask *dataTask, NSError
 + (NSURLSessionDataTask *)testRequestWithBaseURLStr:(NSString *)URLString
                                          params:(id)params
                                      httpMethod:(HttpMethod)httpMethod
-                                       userInfo:(NSDictionary*)userInfo
-                                   successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                                           userInfo:(NSDictionary*)userInfo requestManagerType:(QRequestManagerType)requestManagerType successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
                                     failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock;
 
 @end

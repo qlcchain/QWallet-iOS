@@ -10,7 +10,8 @@
 #import "QLCWalletInfo.h"
 #import "QlinkTabbarViewController.h"
 #import "SuccessTipView.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
+//#import "GlobalConstants.h"
 
 @interface QLCBackupDetailViewController () {
     BOOL isTip;
@@ -51,7 +52,8 @@
 
 - (void)showCreateSuccessView {
     SuccessTipView *tip = [SuccessTipView getInstance];
-    [tip showWithTitle:kLang(@"create_success")];
+//    [tip showWithTitle:kLang(@"create_success")];
+    [tip showWithTitle:kLang(@"success")];
 }
 
 - (void)backToRoot {
@@ -63,6 +65,15 @@
     if (!isTip) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
+    }
+    
+    QLCWalletInfo *backupWalletInfo = [QLCWalletInfo getQLCWalletWithAddress:_walletInfo.address?:@""];
+    if (backupWalletInfo) {
+        backupWalletInfo.isBackup = @(YES);
+        // 存储keychain
+        [backupWalletInfo saveToKeyChain];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:QLC_Wallet_Backup_Update_Noti object:nil];
     }
     
     [self showCreateSuccessView];

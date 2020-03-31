@@ -9,6 +9,7 @@
 #import "QBaseViewController.h"
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
+#import "GlobalConstants.h"
 
 @interface QBaseViewController ()
 
@@ -22,6 +23,11 @@
 //    self.navigationController.navigationBarHidden = YES;
     if ([self.view.backgroundColor isEqual:MAIN_WHITE_COLOR]) {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        if (@available(iOS 13.0, *)) {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+        } else {
+            // Fallback on earlier versions
+        }
     } else {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     }
@@ -36,6 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (@available(iOS 13.0, *)) {
+        self.view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
 //    self.view.backgroundColor = [UIColor RandomColor];
 //    self.view.backgroundColor = MAIN_BLUE_COLOR;
 //    self.view.theme_backgroundColor = globalBackgroundColorPicker;
@@ -58,8 +67,7 @@
     [self refreshContent];
 }
 
-- (void) initVariables
-{
+- (void) initVariables {
     showRightNavBarItem = NO;
     showNavigationBar = YES;
 }
@@ -98,11 +106,11 @@
     
 }
 
-- (void)presentModalVC:(UIViewController *)VC animated:(BOOL)animated
-{
+- (void)presentModalVC:(UIViewController *)VC animated:(BOOL)animated {
 //    QlinkNavViewController *navController = [[QlinkNavViewController alloc] initWithRootViewController:VC] ;
     QNavigationController *navController = [[QNavigationController alloc] initWithRootViewController:VC];
     if([self respondsToSelector:@selector(presentViewController:animated:completion:)]){
+        navController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentViewController:navController animated:animated completion:nil];
     }
 }

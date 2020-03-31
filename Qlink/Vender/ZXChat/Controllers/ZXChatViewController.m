@@ -21,6 +21,8 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "ChatTipView.h"
 #import "UserModel.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+#import "GlobalConstants.h"
 
 #define SenderName @"Jim"
 

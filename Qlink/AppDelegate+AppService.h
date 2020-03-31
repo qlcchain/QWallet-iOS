@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppDelegate (AppService)
 
+- (void)configFirebase;
 - (void)configDDLog;
 - (void)configAppLanguage;
 - (void)configTouch;
@@ -23,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchUserInfo;
 - (void)configChat;
 - (void)checkGuidenPage;
+- (void)configJPush:(NSDictionary *)launchOptions;
+- (void)handlerPushJump:(NSDictionary *)userInfo isTapLaunch:(BOOL)isTapLaunch;
 
 /**
  当前顶层控制器

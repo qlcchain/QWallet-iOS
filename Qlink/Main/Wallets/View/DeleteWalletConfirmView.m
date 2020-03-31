@@ -8,6 +8,7 @@
 
 #import "DeleteWalletConfirmView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface DeleteWalletConfirmView ()
 

@@ -142,7 +142,6 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 
 - (void)showAnimated:(BOOL)animated {
     MBMainThreadAssert();
-    
     [self.minShowTimer invalidate];
     self.useAnimation = animated;
     self.finished = NO;
@@ -156,9 +155,6 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     else {
         [self showUsingAnimation:self.useAnimation];
     }
-    
-    
-   // self.bezelView.alpha = .6f;
 }
 
 - (void)hideAnimated:(BOOL)animated {
@@ -236,7 +232,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         self.bezelView.alpha = self.opacity;
 #pragma clang diagnostic pop
-        self.backgroundView.alpha = 1.0f;
+        self.backgroundView.alpha = 1.f;
     }
 }
 

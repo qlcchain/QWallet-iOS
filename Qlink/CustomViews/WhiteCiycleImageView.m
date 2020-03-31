@@ -7,6 +7,7 @@
 //
 
 #import "WhiteCiycleImageView.h"
+#import "GlobalConstants.h"
 
 @implementation WhiteCiycleImageView
 

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StakingTypesViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dL4-b1-oHR">
+                    <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCx-R2-Lh0">
+                            <rect key="frame" x="0.0" y="44" width="414" height="672"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Voting/Mining Node" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAw-ys-9KW">
+                                    <rect key="frame" x="16" y="15.999999999999998" width="175.33333333333334" height="19.333333333333329"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                    <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUp-SX-BOR">
+                                    <rect key="frame" x="16" y="39.333333333333329" width="382" height="167.33333333333337"/>
+                                    <string key="text">Minimum Amount: 1 QLC
+Minimum Staking Period: 10 days
+Voting Earning per day:
+Your staked amount/whole network staked amount x 8,302 QGAS
+Mining Earning per day:
+Miners to share the pool of 8219 QGAS Miner Earning = Voting + Mining Earning
+*Stake 1 million QLC or above is entitled to be a mining node, or run a mining pool</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Confidant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKb-lK-QpV">
+                                    <rect key="frame" x="16.000000000000007" y="218.66666666666669" width="101.66666666666669" height="19.333333333333343"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                    <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96t-8F-Mzd">
+                                    <rect key="frame" x="16" y="242" width="382" height="117"/>
+                                    <string key="text">Minimum Amount: 2000 QLC
+Minimum Staking Period: 90 days
+Rewards: Same as voting node - QGAS consumption 
+*First three month promotional period QGAS consumption will be 0 
+Purchase a Confidant with 20% discount with Crypto Payment </string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Token Mintage " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIE-Dw-bEO">
+                                    <rect key="frame" x="16" y="371" width="141.33333333333334" height="19.333333333333314"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                    <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-DE-7GH">
+                                    <rect key="frame" x="16" y="394.33333333333331" width="382" height="67"/>
+                                    <string key="text">Minimum Amount: 500000 QLC
+Minimum Staking Period: 180 days
+Rewards: Same as voting node and entitled to issue a token</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="uUp-SX-BOR" firstAttribute="leading" secondItem="kCx-R2-Lh0" secondAttribute="leading" constant="16" id="5fB-1j-NGq"/>
+                                <constraint firstAttribute="trailing" secondItem="96t-8F-Mzd" secondAttribute="trailing" constant="16" id="5sE-7g-KFO"/>
+                                <constraint firstItem="PIE-Dw-bEO" firstAttribute="top" secondItem="96t-8F-Mzd" secondAttribute="bottom" constant="12" id="DPd-vH-1IM"/>
+                                <constraint firstItem="dcY-DE-7GH" firstAttribute="top" secondItem="PIE-Dw-bEO" secondAttribute="bottom" constant="4" id="FDp-LM-Afv"/>
+                                <constraint firstItem="dcY-DE-7GH" firstAttribute="leading" secondItem="kCx-R2-Lh0" secondAttribute="leading" constant="16" id="UZN-Ag-xQU"/>
+                                <constraint firstItem="PIE-Dw-bEO" firstAttribute="leading" secondItem="kCx-R2-Lh0" secondAttribute="leading" constant="16" id="bMh-GG-Kiz"/>
+                                <constraint firstItem="uUp-SX-BOR" firstAttribute="top" secondItem="UAw-ys-9KW" secondAttribute="bottom" constant="4" id="cgG-bs-RIx"/>
+                                <constraint firstItem="96t-8F-Mzd" firstAttribute="leading" secondItem="kCx-R2-Lh0" secondAttribute="leading" constant="16" id="e3z-1d-BNK"/>
+                                <constraint firstItem="96t-8F-Mzd" firstAttribute="top" secondItem="QKb-lK-QpV" secondAttribute="bottom" constant="4" id="frs-48-79X"/>
+                                <constraint firstAttribute="trailing" secondItem="uUp-SX-BOR" secondAttribute="trailing" constant="16" id="ima-8d-zhm"/>
+                                <constraint firstItem="QKb-lK-QpV" firstAttribute="top" secondItem="uUp-SX-BOR" secondAttribute="bottom" constant="12" id="k5A-4N-hdr"/>
+                                <constraint firstItem="UAw-ys-9KW" firstAttribute="leading" secondItem="kCx-R2-Lh0" secondAttribute="leading" constant="16" id="kiH-A7-8tH"/>
+                                <constraint firstItem="QKb-lK-QpV" firstAttribute="leading" secondItem="kCx-R2-Lh0" secondAttribute="leading" constant="16" id="lUF-rW-bqP"/>
+                                <constraint firstAttribute="trailing" secondItem="dcY-DE-7GH" secondAttribute="trailing" constant="16" id="mlX-Rv-lvU"/>
+                                <constraint firstItem="UAw-ys-9KW" firstAttribute="top" secondItem="kCx-R2-Lh0" secondAttribute="top" constant="16" id="xZ1-JZ-GUl"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrh-zX-8fg" customClass="NavWhiteShadowView">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-vi-xLq">
+                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="9Pr-So-07e"/>
+                                        <constraint firstAttribute="width" constant="44" id="dDe-P1-hvd"/>
+                                    </constraints>
+                                    <state key="normal" image="eth_gray_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="6ok-Hi-7FI"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Staking Types" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmN-8b-tbJ">
+                                    <rect key="frame" x="123.33333333333333" y="11.33333333333333" width="167.33333333333337" height="21.666666666666671"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="tFM-vi-xLq" firstAttribute="centerY" secondItem="Qrh-zX-8fg" secondAttribute="centerY" id="8j4-i9-1IA"/>
+                                <constraint firstItem="GmN-8b-tbJ" firstAttribute="centerY" secondItem="Qrh-zX-8fg" secondAttribute="centerY" id="YoO-Gl-Use"/>
+                                <constraint firstItem="GmN-8b-tbJ" firstAttribute="centerX" secondItem="Qrh-zX-8fg" secondAttribute="centerX" id="e5n-9D-9Y4"/>
+                                <constraint firstItem="tFM-vi-xLq" firstAttribute="leading" secondItem="Qrh-zX-8fg" secondAttribute="leading" constant="8" id="f8a-eg-Rrp"/>
+                                <constraint firstAttribute="height" constant="44" id="gCy-Rv-zVe"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.2901960784" green="0.0" blue="0.50588235290000005" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstItem="kCx-R2-Lh0" firstAttribute="leading" secondItem="dL4-b1-oHR" secondAttribute="leading" id="AQV-HL-Gvb"/>
+                        <constraint firstAttribute="trailing" secondItem="Qrh-zX-8fg" secondAttribute="trailing" id="BoA-4E-QnV"/>
+                        <constraint firstItem="kCx-R2-Lh0" firstAttribute="top" secondItem="Qrh-zX-8fg" secondAttribute="bottom" id="LRN-Gb-AOM"/>
+                        <constraint firstAttribute="trailing" secondItem="kCx-R2-Lh0" secondAttribute="trailing" id="ThP-d9-rQR"/>
+                        <constraint firstAttribute="bottom" secondItem="kCx-R2-Lh0" secondAttribute="bottom" id="dub-M5-0B6"/>
+                        <constraint firstItem="Qrh-zX-8fg" firstAttribute="top" secondItem="dL4-b1-oHR" secondAttribute="top" id="kaf-Of-6J2"/>
+                        <constraint firstItem="Qrh-zX-8fg" firstAttribute="leading" secondItem="dL4-b1-oHR" secondAttribute="leading" id="xJs-9d-C15"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izB-FA-uA1">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dL4-b1-oHR" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="44b-da-NFz"/>
+                <constraint firstItem="dL4-b1-oHR" firstAttribute="top" secondItem="izB-FA-uA1" secondAttribute="bottom" id="CDI-F6-BUM"/>
+                <constraint firstItem="izB-FA-uA1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SsL-d0-Akj"/>
+                <constraint firstItem="izB-FA-uA1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZgA-0V-682"/>
+                <constraint firstAttribute="trailing" secondItem="dL4-b1-oHR" secondAttribute="trailing" id="hpV-Km-H8E"/>
+                <constraint firstAttribute="bottom" secondItem="dL4-b1-oHR" secondAttribute="bottom" id="iQI-DM-eQ1"/>
+                <constraint firstItem="dL4-b1-oHR" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="nEy-th-pA5"/>
+                <constraint firstAttribute="trailing" secondItem="izB-FA-uA1" secondAttribute="trailing" id="rlF-sc-6IU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="eth_gray_back" width="24" height="24"/>
+    </resources>
+</document>

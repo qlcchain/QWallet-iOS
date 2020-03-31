@@ -8,6 +8,7 @@
 
 #import "LoginPWModel.h"
 #import "Qlink-Swift.h"
+#import "GlobalConstants.h"
 
 @implementation LoginPWModel
 

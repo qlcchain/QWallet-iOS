@@ -7,6 +7,7 @@
 //
 
 #import "PageOneView.h"
+#import "GlobalConstants.h"
 
 @implementation PageOneView
 - (void) dealloc

@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
+    TabbarIndexTopup,
     TabbarIndexFinance,
 //    TabbarIndexMarkets,
     TabbarIndexWallet,
     TabbarIndexMy,
 } TabbarIndex;
 
-@class WalletsViewController;
+@class WalletsViewController,Topup3ViewController, HomeBuySellViewController;
 
 @interface QlinkTabbarViewController : UITabBarController
 
 @property (nonatomic, strong) WalletsViewController *walletsVC;
+@property (nonatomic, strong) Topup3ViewController *topupVC;
+@property (nonatomic, strong) HomeBuySellViewController *homeBuySellVC;
 
 @end

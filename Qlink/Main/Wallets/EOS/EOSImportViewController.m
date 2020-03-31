@@ -17,6 +17,7 @@
 #import "EOSWalletUtil.h"
 #import <eosFramework/EOS_Key_Encode.h>
 #import "WebViewController.h"
+//#import "GlobalConstants.h"
 
 @interface EOSImportViewController () {
     BOOL privatekeyAgree;

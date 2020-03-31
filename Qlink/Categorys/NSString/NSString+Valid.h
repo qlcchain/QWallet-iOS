@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)containUppercase;
 - (BOOL)containLowercase;
 - (BOOL)containDigital;
+- (BOOL)isNumber;
+- (BOOL)isNumberDecimal;
 
 @end
 

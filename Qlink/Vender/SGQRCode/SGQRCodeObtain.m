@@ -298,6 +298,7 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             }];
             
             [alertC addAction:alertA];
+            alertC.modalPresentationStyle = UIModalPresentationFullScreen;
             [_controller presentViewController:alertC animated:YES completion:nil];
         } else if (status == PHAuthorizationStatusRestricted) {
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"由于系统原因, 无法访问相册" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -306,6 +307,7 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
             }];
             
             [alertC addAction:alertA];
+            alertC.modalPresentationStyle = UIModalPresentationFullScreen;
             [_controller presentViewController:alertC animated:YES completion:nil];
         }
     }
@@ -315,6 +317,7 @@ void soundCompleteCallback(SystemSoundID soundID, void *clientData){
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
+    imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
     [_controller presentViewController:imagePicker animated:YES completion:nil];
 }
 

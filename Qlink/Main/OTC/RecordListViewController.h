@@ -7,10 +7,15 @@
 //
 
 #import "QBaseViewController.h"
+#import "ProjectEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PairsModel;
+
 @interface RecordListViewController : QBaseViewController
+
+@property (nonatomic) OTCRecordListType inputType;
 
 @end
 

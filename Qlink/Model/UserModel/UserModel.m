@@ -9,6 +9,7 @@
 #import "UserModel.h"
 #import "NEOWalletUtil.h"
 #import "Qlink-Swift.h"
+#import <QLCFramework/QLCFramework-Swift.h>
 
 @implementation UserModel
 
@@ -26,7 +27,7 @@
 + (NSString *)getOwnP2PId {
     NSString *p2pid = [NEOWalletUtil getKeyValue:P2P_KEY];
     if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
-        p2pid = [[RandomString getRandomStringOfLengthWithLength:76] uppercaseString];
+        p2pid = [[QLCUtil getRandomStringOfLengthWithLength:76] uppercaseString];
         [NEOWalletUtil setKeyValue:P2P_KEY value:p2pid];
     }
 //    if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
@@ -42,7 +43,19 @@
     return p2pid?:@"";
 }
 
-+ (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin {
++ (NSString *)getTopupP2PId {
+    NSString *p2pid = [NEOWalletUtil getKeyValue:Topup_p2p_key];
+    if ([[NSStringUtil getNotNullValue:p2pid] isEmptyString]) {
+        p2pid = [[QLCUtil getRandomStringOfLengthWithLength:32] uppercaseString];
+        [NEOWalletUtil setKeyValue:Topup_p2p_key value:p2pid];
+    }
+    return p2pid?:@"";
+}
+
++ (void)storeUserByID:(UserModel *)model {
+    if (!model) {
+        return;
+    }
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     NSMutableArray *muArr = [NSMutableArray array];
     if (!data) {
@@ -54,20 +67,39 @@
         __block NSInteger existIndex = 0;
         [muArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if (useLogin) { // 根据登录用户
-                if ([tempM.isLogin boolValue]) {
-                    isExist = YES;
-                    existIndex = idx;
-                    *stop = YES;
-                }
-            } else {
-                if ([tempM.ID isEqualToString:model.ID]) {
-                    isExist = YES;
-                    existIndex = idx;
-                    *stop = YES;
-                }
+            if ([tempM.ID isEqualToString:model.ID]) {
+                isExist = YES;
+                existIndex = idx;
+                *stop = YES;
             }
-            
+        }];
+        if (!isExist) {
+            [muArr addObject:model];
+        } else {
+            [muArr replaceObjectAtIndex:existIndex withObject:model];
+        }
+    }
+    NSData *archiverData = [NSKeyedArchiver archivedDataWithRootObject:muArr];
+    [HWUserdefault insertObj:archiverData withkey:UserModel_Local];
+}
+
++ (void)storeUserByLogin:(UserModel *)model {
+    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+    NSMutableArray *muArr = [NSMutableArray array];
+    if (!data) {
+        [muArr addObject:model];
+    } else {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [muArr addObjectsFromArray:arr];
+        __block BOOL isExist = NO;
+        __block NSInteger existIndex = 0;
+        [muArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UserModel *tempM = obj;
+            if ([tempM.isLogin boolValue]) {
+                isExist = YES;
+                existIndex = idx;
+                *stop = YES;
+            }
         }];
         if (!isExist) {
             [muArr addObject:model];
@@ -80,13 +112,14 @@
 }
 
 + (UserModel *)fetchUser:(NSString *)account {
+    NSString *compareAccount = [account lowercaseString];
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     __block UserModel *model = nil;
     if (data) {
         NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             UserModel *tempM = obj;
-            if ([tempM.account isEqualToString:account] || [tempM.email isEqualToString:account] || [tempM.phone isEqualToString:account]) {
+            if ([[tempM.account lowercaseString] isEqualToString:compareAccount] || [[tempM.email lowercaseString] isEqualToString:compareAccount] || [[tempM.phone lowercaseString] isEqualToString:compareAccount]) {
                 model = tempM;
                 *stop = YES;
             }
@@ -153,7 +186,7 @@
         }];
         if (model) {
             model.isLogin = @(NO);
-            [UserModel storeUser:model useLogin:NO];
+            [UserModel storeUserByID:model];
         }
     }
 }
@@ -190,6 +223,26 @@
     return isLogin;
 }
 
++ (void)removeMul { // 去重
+    NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
+    if (data) {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSMutableArray *muArr = [NSMutableArray arrayWithArray:arr];
+        for (int i = 0; i < arr.count-1; i++) {
+            UserModel *tempM1 = arr[i];
+            for (int j = i + 1; j < arr.count; j++) {
+                UserModel *tempM2 = arr[j];
+                if ([tempM1.ID isEqualToString:tempM2.ID]) {
+                    [muArr removeObject:tempM2];
+                }
+            }
+        }
+        
+        NSData *archiverData = [NSKeyedArchiver archivedDataWithRootObject:muArr];
+        [HWUserdefault insertObj:archiverData withkey:UserModel_Local];
+    }
+}
+
 + (BOOL)haveAccountInLocal {
     NSData *data = [HWUserdefault getObjectWithKey:UserModel_Local];
     __block BOOL haveAccount = NO;
@@ -222,6 +275,28 @@
         NSData *archiverData = [NSKeyedArchiver archivedDataWithRootObject:muArr];
         [HWUserdefault insertObj:archiverData withkey:UserModel_Local];
     }
+}
+
++ (BOOL)isBind {
+    BOOL bind = NO;
+    if ([UserModel haveLoginAccount]) {
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if (userM.bindDate && ![userM.bindDate isEmptyString]) {
+            bind = YES;
+        }
+    }
+    return bind;
+}
+
++ (BOOL)isTestAccount {
+    BOOL isTest = NO;
+    if ([UserModel haveLoginAccount]) {
+        UserModel *userM = [UserModel fetchUserOfLogin];
+        if ([userM.account isEqualToString:@"741229443@qq.com"]) {
+            isTest = YES;
+        }
+    }
+    return isTest;
 }
 
 @end

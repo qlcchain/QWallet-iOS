@@ -44,6 +44,36 @@
     return time;
 }
 
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime addMin:(NSInteger)addMin {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:fromDate];
+    components.minute += addMin;
+    NSDate *date = [CURRENT_CALENDAR dateFromComponents:components];
+    NSString *time = [format stringFromDate:date];
+    
+    return time;
+}
+
++ (NSString*)getOutputDate:(NSString*)inputTime formatStr:(NSString*)formatStr {
+    // 中国东八区
+    NSDateFormatter*inputFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
+    [inputFormatter setTimeZone:timeZone];
+    [inputFormatter setDateFormat:formatStr];
+    NSDate*inputDate = [inputFormatter dateFromString:inputTime];
+    // 转换当前系统时区
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+//    NSTimeZone *timeZone1 = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0900"];
+//    [outputFormatter setTimeZone:timeZone1];
+    [outputFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [outputFormatter setDateFormat:formatStr];
+    NSString*dateString = [outputFormatter stringFromDate:inputDate];
+    return dateString;
+}
+
 + (NSDate *)dateFromTime:(NSString *)fromTime {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
     format.timeZone = [NSTimeZone localTimeZone];
@@ -58,6 +88,25 @@
 
 + (UInt64)getMillisecondTimestampFromDate:(NSDate *)date {
     return (UInt64)([date timeIntervalSince1970]*1000);
+}
+
++ (NSDate *)getDateWithTimestamp:(NSString *)timestamp isMil:(BOOL)isMil
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone localTimeZone];
+//    [formatter setDateStyle:NSDateFormatterMediumStyle];
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+//    [formatter setDateFormat:format];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSTimeInterval timeI = [timestamp doubleValue];
+    if (isMil) {
+        timeI = timeI/1000.0;
+    }
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeI];
+//    NSString* dateString = [formatter stringFromDate:date];
+    return date;
 }
 
 + (NSString *)getTimeWithTimestamp:(NSString *)timestamp format:(NSString *)format isMil:(BOOL)isMil

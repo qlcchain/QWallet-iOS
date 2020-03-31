@@ -15,6 +15,9 @@
 #import "NSDate+Category.h"
 #import "RequestService.h"
 #import "UserModel.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+
+//#import "GlobalConstants.h"
 
 @interface ProfileViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -62,7 +65,7 @@
     NSDictionary *params = @{@"p2pId":p2pId};
     kWeakSelf(self);
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:uploadHeadView_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:uploadHeadView_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName = [NSString stringWithFormat:@"%ld",[NSDate getTimestampFromDate:[NSDate date]]];
         NSData *data = UIImagePNGRepresentation(img);
         if (!data || [data isKindOfClass:[NSNull class]]) { // 不为png则转成jpg
@@ -112,6 +115,7 @@
     pickerController.delegate = self;
     //使用模态呈现相册
     //[self showDetailViewController:pickerController sender:nil];
+    pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:pickerController animated:YES completion:nil];
     
 }

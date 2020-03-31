@@ -8,6 +8,7 @@
 
 #import "MnemonicTipView.h"
 #import "UIView+Visuals.h"
+#import "GlobalConstants.h"
 
 @interface MnemonicTipView ()
 

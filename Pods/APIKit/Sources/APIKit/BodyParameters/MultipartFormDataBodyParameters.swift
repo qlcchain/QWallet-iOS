@@ -58,7 +58,7 @@ public struct MultipartFormDataBodyParameters: BodyParameters {
 
 public extension MultipartFormDataBodyParameters {
     /// Part represents single part of multipart/form-data.
-    public struct Part {
+    struct Part {
         public enum Error: Swift.Error {
             case illegalValue(Any)
             case illegalFileURL(URL)
@@ -317,12 +317,18 @@ public extension MultipartFormDataBodyParameters {
             set { }
         }
 
-        override func schedule(in aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+        override func schedule(in aRunLoop: RunLoop, forMode mode: RunLoop.Mode) {
 
         }
 
-        override func remove(from aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+        override func remove(from aRunLoop: RunLoop, forMode mode: RunLoop.Mode) {
 
         }
     }
 }
+
+#if !swift(>=4.2)
+extension RunLoop {
+    internal typealias Mode = RunLoopMode
+}
+#endif

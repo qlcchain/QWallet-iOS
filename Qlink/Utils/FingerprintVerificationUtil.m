@@ -8,6 +8,7 @@
 
 #import "FingerprintVerificationUtil.h"
 #import <LocalAuthentication/LocalAuthentication.h>
+#import "GlobalConstants.h"
 
 @implementation FingerprintVerificationUtil
 
@@ -152,6 +153,7 @@
         [FingerprintVerificationUtil exitAPP];
     }];
     [alertC addAction:alertConfirm];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [kAppD.window.rootViewController presentViewController:alertC animated:YES completion:nil];
 }
 

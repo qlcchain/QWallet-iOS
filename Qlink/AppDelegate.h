@@ -8,16 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
-#import "BalanceInfo.h"
 #import "LoginPWModel.h"
 
-@class QlinkTabbarViewController;
+@class QlinkTabbarViewController,NEOAddressInfoModel;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) BalanceInfo *balanceInfo;
-@property (nonatomic , assign) BOOL checkPassLock;
+@property (nonatomic, assign) BOOL checkPassLock;
 @property (nonatomic) BOOL needFingerprintVerification;
 //@property (nonatomic) BOOL openShowPresentLogin;
 @property (nonatomic) BOOL pushToOrderList;
@@ -28,7 +26,11 @@
 - (void)setRootTabbar;
 - (void)presentLoginNew;
 - (void)presentFingerprintVerify:(LoginPWCompleteBlock)completeBlock;
-- (void)jumpToWallet;
+//- (void)jumpToWallet;
+//- (void)jumpToOTC;
+//- (void)jumpToTopup;
+//- (void)jumpToDailyEarnings;
+//- (void)jumpToOTCTradeOrderDetail;
 - (void)logout;
 
 @end

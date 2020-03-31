@@ -15,8 +15,11 @@
 #import "NSString+RemoveZero.h"
 #import "NEOWalletUtil.h"
 #import "WalletQRViewController.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "QLCTokenInfoModel.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+#import "QLCWalletInfo.h"
+//#import "GlobalConstants.h"
 
 @interface QLCTransferViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -34,25 +37,25 @@
 
 @implementation QLCTransferViewController
 
-#pragma mark - Observe
-- (void)addObserve {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferSuccess:) name:NEO_Transfer_Success_Noti object:nil];
-}
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+//
+//#pragma mark - Observe
+//- (void)addObserve {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferSuccess:) name:NEO_Transfer_Success_Noti object:nil];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self addObserve];
+//    [self addObserve];
     
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     [self renderView];
     [self configInit];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Operation
@@ -81,13 +84,15 @@
 }
 
 - (void)showQLCTransferConfirmView {
-    NSString *address = _sendtoAddressTV.text;
+    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
+    NSString *toAddress = _sendtoAddressTV.text;
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName];
     QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
-    [view configWithAddress:address amount:amount];
+    [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
+//    [view configWithAddress:address amount:amount];
     kWeakSelf(self);
     view.confirmBlock = ^{
-        [weakself sendTransfer];
+        [weakself sendTransfer:fromAddress];
     };
     [view show];
 }
@@ -107,7 +112,9 @@
     [self checkSendBtnEnable];
 }
 
-- (void)sendTransfer {
+- (void)sendTransfer:(NSString *)fromAddress {
+    NSString *from = fromAddress;
+    NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:fromAddress]?:@"";
     NSString *tokenName = _selectAsset.tokenName;
     NSString *to = _sendtoAddressTV.text;
     NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text];
@@ -115,9 +122,14 @@
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
+    NSString *data = _memoTF.text?:@"";
+    BOOL workInLocal = YES;
+//    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
+    NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
     [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___") userInteractionEnabled:NO hideTime:0];
     kWeakSelf(self);
-    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message successHandler:^(NSString * _Nullable responseObj) {
+    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName from:from to:to amount:amount privateKey:privateKey sender:sender receiver:receiver message:message data:data baseUrl:baseUrl workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
+//    [[QLCWalletManage shareInstance] sendAssetWithTokenName:tokenName to:to amount:amount sender:sender receiver:receiver message:message data:data isMainNetwork:isMainNetwork workInLocal:workInLocal successHandler:^(NSString * _Nullable responseObj) {
         [kAppD.window hideToast];
         [kAppD.window makeToastDisappearWithText:kLang(@"transfer_successful")];
         [weakself backToRoot];
@@ -135,7 +147,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":@[_selectAsset.tokenName],@"coin":coin};
-    [RequestService requestWithUrl:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.tokenPriceArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -234,12 +246,13 @@
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertC addAction:alertCancel];
+    alertC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
-#pragma mark - Noti
-- (void)transferSuccess:(NSNotification *)noti {
-    [self backToRoot];
-}
+//#pragma mark - Noti
+//- (void)transferSuccess:(NSNotification *)noti {
+//    [self backToRoot];
+//}
 
 @end

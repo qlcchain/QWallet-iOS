@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UserUtil : NSObject
 
 + (void)updateUserInfo;
++ (void)updateUserInfoAfterLogin;
 
 @end
 

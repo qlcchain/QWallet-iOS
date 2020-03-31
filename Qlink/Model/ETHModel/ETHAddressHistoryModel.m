@@ -7,7 +7,8 @@
 //
 
 #import "ETHAddressHistoryModel.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation Operation
 
@@ -15,8 +16,9 @@
     NSString *decimals = [NSString stringWithFormat:@"1e-%@",self.tokenInfo.decimals];
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSNumber *balanceNum = @([[NSString stringWithFormat:@"%@",self.value] doubleValue]);
-    NSNumber *numberNum = @([decimalsNum doubleValue]*[balanceNum doubleValue]);
-    NSString *num = [[NSString stringWithFormat:@"%@",numberNum] removeFloatAllZero];
+//    NSNumber *numberNum = @([decimalsNum doubleValue]*[balanceNum doubleValue]);
+//    NSString *num = [[NSString stringWithFormat:@"%@",numberNum] removeFloatAllZero];
+    NSString *num = decimalsNum.mul(balanceNum);
     return num;
 }
 

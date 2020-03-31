@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    RecordListTypePosted,
+    RecordListTypePosted = 0,
     RecordListTypeProcessing,
     RecordListTypeCompleted,
     RecordListTypeClosed,
@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 @class TradeOrderListModel;
 
 static NSString *MyOrderListTradeCellReuse = @"MyOrderListTradeCell";
-#define MyOrderListTradeCell_Height 137
+static NSInteger const MyOrderListTradeCell_Height = 137;
 
 @interface MyOrderListTradeCell : UITableViewCell
 

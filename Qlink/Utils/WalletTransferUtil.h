@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)getShareObject;
 - (void)startFetchServerMainAddress;
++ (void)requestServerMainAddress;
 
 @end
 

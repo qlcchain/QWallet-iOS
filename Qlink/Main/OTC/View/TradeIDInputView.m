@@ -9,6 +9,7 @@
 #import "TradeIDInputView.h"
 //#import "UIView+Visuals.h"
 #import "UITextView+ZWPlaceHolder.h"
+#import "GlobalConstants.h"
 
 @interface TradeIDInputView ()
 

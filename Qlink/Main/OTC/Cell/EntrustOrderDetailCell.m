@@ -8,9 +8,11 @@
 
 #import "EntrustOrderDetailCell.h"
 #import "TradeOrderListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "UserModel.h"
 #import "OrderStatusUtil.h"
+#import "NSDate+Category.h"
+#import "GlobalConstants.h"
 
 @interface EntrustOrderDetailCell ()
 
@@ -51,7 +53,7 @@
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     _nameLab.text = model.showNickName;
-    _timeLab.text = model.createDate;
+    _timeLab.text = [NSDate getOutputDate:model.createDate formatStr:yyyyMMddHHmmss];
     UserModel *loginM = [UserModel fetchUserOfLogin];
     _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?kLang(@"seller"):kLang(@"buyer");
     _typeLab.textColor = [loginM.ID isEqualToString:model.buyerId]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;

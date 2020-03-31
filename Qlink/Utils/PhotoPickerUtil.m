@@ -9,6 +9,8 @@
 #import "PhotoPickerUtil.h"
 #import "ZQImageCropController.h"
 #import "UINavigationController+CurrentNav.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+#import "GlobalConstants.h"
 
 @interface PhotoPickerUtil () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -51,6 +53,7 @@
     pickerController.delegate = self;
     //使用模态呈现相册
     //[self showDetailViewController:pickerController sender:nil];
+    pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UINavigationController currentNC] presentViewController:pickerController animated:YES completion:nil];
     //    [UIApplication sharedApplication].statusBarHidden = YES;//防止出现20px下移
     
@@ -103,6 +106,7 @@
             weakself.selectBlock(image);
         }
     }];
+    cropVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UINavigationController currentNC] presentViewController:cropVC animated:true completion:nil];
 }
 

@@ -20,6 +20,8 @@
 #import "TipOKView.h"
 #import "EOSWalletInfo.h"
 #import "EOSAccountInfoModel.h"
+#import "RLArithmetic.h"
+//#import "GlobalConstants.h"
 
 @implementation EOSCreateSourceModel
 
@@ -91,17 +93,19 @@
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSInteger gasLimit = 60000;
     NSInteger gasPrice = 6;
-    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
+//    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
+    NSString *ethFloatStr = @(gasPrice).mul(@(gasLimit)).mul(decimalsNum);
     
     __block WalletCommonModel *transferETHM = nil;
     // 判断是否有eth钱包
     if ([TrustWalletManage.sharedInstance isHavaWallet]) {
         // 判断是否有足够余额的eth钱包
-        NSNumber *enoughBalanceNum = @([ethFloatNum doubleValue]+[_ethAmount doubleValue]);
+//        NSNumber *enoughBalanceNum = @([ethFloatNum doubleValue]+[_ethAmount doubleValue]);
+        NSString *enoughBalanceStr = ethFloatStr.add(_ethAmount);
         [[WalletCommonModel getAllWalletModel] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             WalletCommonModel *model = obj;
             if (model.walletType==WalletTypeETH) {
-                if ([model.balance doubleValue] >= [enoughBalanceNum doubleValue]) {
+                if ([model.balance doubleValue] >= [enoughBalanceStr doubleValue]) {
                     transferETHM = model;
                     *stop = YES;
                 }
@@ -117,8 +121,8 @@
         return;
     }
     
-//    NSString *gasCostETH = [[NSString stringWithFormat:@"%Lf",ethFloat] removeFloatAllZero];
-    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
+//    NSString *gasCostETH = [[NSString stringWithFormat:@"%@",ethFloatNum] removeFloatAllZero];
+    NSString *gasCostETH = ethFloatStr;
     NSString *fromAddress = transferETHM.address;
     NSString *name = transferETHM.name;
     NSString *toAddress = _toEthAddress;
@@ -138,9 +142,10 @@
     NSString *symbol = @"ETH";
     NSInteger decimals = 0;
     NSString *value = @"";
+    NSString *memo = @"";
     BOOL isCoin = YES;
     kWeakSelf(self);
-    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
+    [TrustWalletManage.sharedInstance sendFromAddress:fromAddress contractAddress:contractAddress toAddress:toAddress name:name symbol:symbol amount:amount gasLimit:gasLimit gasPrice:gasPrice memo:memo decimals:decimals value:value isCoin:isCoin :^(BOOL success, NSString *txId) {
         if (success) {
             [kAppD.window makeToastDisappearWithText:kLang(@"send_success")];
             NSString *blockChain = @"ETH";
@@ -174,7 +179,7 @@
         if (_accountNameTF.text.length == 12) {
             kWeakSelf(self);
             NSDictionary *params = @{@"account":_accountNameTF.text?:@""};
-            [RequestService requestWithUrl:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+            [RequestService requestWithUrl5:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
                 if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
                     NSDictionary *dic = responseObject[Server_Data][Server_Data];
                     EOSAccountInfoModel *model = [EOSAccountInfoModel getObjectWithKeyValues:dic];
@@ -208,6 +213,7 @@
     if (_switchQRCodeBtn.selected == YES) {
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[_qrImg.image] applicationActivities:nil];
         activityVC.excludedActivityTypes = @[UIActivityTypeAirDrop];
+        activityVC.modalPresentationStyle = UIModalPresentationFullScreen;
         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:activityVC animated:YES completion:nil];
         activityVC.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
             if (completed) {
@@ -297,7 +303,7 @@
 - (void)requestEthEth_for_activate_eos_wallet {
     kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl:ethEth_for_activate_eos_wallet params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:ethEth_for_activate_eos_wallet params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSDictionary *dic = [responseObject objectForKey:Server_Data];
             weakself.ethAmount = dic[@"ethAmount"];
@@ -314,7 +320,7 @@
     NSString *owner = _eosCreateSourceM.ownerPublicKey;
     NSString *active = _eosCreateSourceM.activePublicKey;
     NSDictionary *params = @{@"txid":txid?:@"",@"name":name?:@"",@"owner":owner?:@"",@"active":active?:@""};
-    [RequestService requestWithUrl:eosNew_account_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:eosNew_account_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         
         NSString *msg = [responseObject objectForKey:Server_Msg];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {

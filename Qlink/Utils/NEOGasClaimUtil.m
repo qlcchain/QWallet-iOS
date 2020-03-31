@@ -21,7 +21,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.claimStatus = NEOGasClaimStatusSync;
+        self.claimStatus = NEOGasClaimStatusNone;
     }
     return self;
 }

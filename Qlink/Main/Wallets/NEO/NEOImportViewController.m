@@ -15,6 +15,8 @@
 #import "WalletQRViewController.h"
 #import "ReportUtil.h"
 #import "WebViewController.h"
+//#import "GlobalConstants.h"
+#import "NEOWalletInfo.h"
 
 @interface NEOImportViewController () {
     BOOL privatekeyAgree;
@@ -86,7 +88,7 @@
     
     NSString *privatekey = _privateTV.text.trim;
     [kAppD.window makeToastInView:kAppD.window];
-    BOOL isScueess = [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:privatekey];
+    BOOL isScueess = [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privatekey];
     [kAppD.window hideToast];
     if (isScueess) {
         NEOWalletInfo *walletInfo = [[NEOWalletInfo alloc] init];
@@ -94,6 +96,7 @@
         walletInfo.wif = [NEOWalletManage.sharedInstance getWalletWif];
         walletInfo.privateKey = [NEOWalletManage.sharedInstance getWalletPrivateKey];
         walletInfo.publicKey = [NEOWalletManage.sharedInstance getWalletPublicKey];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         

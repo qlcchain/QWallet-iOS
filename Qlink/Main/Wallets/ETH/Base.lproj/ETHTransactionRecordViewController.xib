@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,16 +27,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgF-5c-hH8">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hg-JO-son">
-                            <rect key="frame" x="0.0" y="44" width="375" height="603"/>
+                            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEz-La-aiI">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.28934" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-zK-KLb">
-                                            <rect key="frame" x="122.5" y="16" width="130" height="36"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.28934" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-zK-KLb">
+                                            <rect key="frame" x="8" y="16" width="359" height="36"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="RC0-QV-Ewq"/>
                                             </constraints>
@@ -46,8 +44,8 @@
                                             <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="≈$112,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5b-ee-yKd">
-                                            <rect key="frame" x="151.5" y="56" width="72.5" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="≈$112,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5b-ee-yKd">
+                                            <rect key="frame" x="8" y="56" width="359" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="Weq-Yw-l3o"/>
                                             </constraints>
@@ -62,19 +60,23 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="j5b-ee-yKd" secondAttribute="trailing" constant="8" id="7o2-nA-fhB"/>
+                                        <constraint firstItem="SNB-zK-KLb" firstAttribute="leading" secondItem="PEz-La-aiI" secondAttribute="leading" constant="8" id="9Dc-Ec-TKX"/>
                                         <constraint firstItem="j5b-ee-yKd" firstAttribute="centerX" secondItem="PEz-La-aiI" secondAttribute="centerX" id="BvF-ry-B0g"/>
+                                        <constraint firstAttribute="trailing" secondItem="SNB-zK-KLb" secondAttribute="trailing" constant="8" id="GUh-kr-LLd"/>
                                         <constraint firstItem="SNB-zK-KLb" firstAttribute="top" secondItem="PEz-La-aiI" secondAttribute="top" constant="16" id="Kwd-lV-9NT"/>
                                         <constraint firstItem="SNB-zK-KLb" firstAttribute="centerX" secondItem="PEz-La-aiI" secondAttribute="centerX" id="UNB-uE-anf"/>
                                         <constraint firstItem="j5b-ee-yKd" firstAttribute="top" secondItem="SNB-zK-KLb" secondAttribute="bottom" constant="4" id="UWJ-YI-bs5"/>
                                         <constraint firstItem="71R-n5-zGv" firstAttribute="leading" secondItem="PEz-La-aiI" secondAttribute="leading" id="XaP-Bd-9sN"/>
                                         <constraint firstItem="71R-n5-zGv" firstAttribute="top" secondItem="j5b-ee-yKd" secondAttribute="bottom" constant="1" id="dl9-2a-J1d"/>
                                         <constraint firstAttribute="height" constant="219" id="gUe-Ja-G7K"/>
+                                        <constraint firstItem="j5b-ee-yKd" firstAttribute="leading" secondItem="PEz-La-aiI" secondAttribute="leading" constant="8" id="lHx-DS-km1"/>
                                         <constraint firstAttribute="bottom" secondItem="71R-n5-zGv" secondAttribute="bottom" id="nPe-69-Vhe"/>
                                         <constraint firstAttribute="trailing" secondItem="71R-n5-zGv" secondAttribute="trailing" id="rXZ-Yy-Ppm"/>
                                     </constraints>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2E2-sA-GWi">
-                                    <rect key="frame" x="0.0" y="219" width="375" height="336"/>
+                                    <rect key="frame" x="0.0" y="219" width="375" height="356"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="vyc-1G-sMD"/>
@@ -82,7 +84,7 @@
                                     </connections>
                                 </tableView>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQX-dM-aWc">
-                                    <rect key="frame" x="0.0" y="555" width="375" height="48"/>
+                                    <rect key="frame" x="0.0" y="575" width="375" height="48"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WIy-g5-oIz">
                                             <rect key="frame" x="0.0" y="0.0" width="187.5" height="48"/>
@@ -236,7 +238,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e1P-Ta-UKH">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>

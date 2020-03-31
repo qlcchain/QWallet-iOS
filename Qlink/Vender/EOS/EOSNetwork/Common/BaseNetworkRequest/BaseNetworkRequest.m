@@ -14,6 +14,7 @@
 //#import "SVProgressHUD.h"
 #import <eosFramework/AppConstant.h>
 #import <eosFramework/NSString+Extention.h>
+#import "GlobalConstants.h"
 
 @interface BaseNetworkRequest()
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,14 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="167.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsM-pH-KIu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="167.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHL-HY-a4i">
-                                <rect key="frame" x="12" y="5" width="296" height="157.5"/>
+                                <rect key="frame" x="12" y="5" width="296" height="158"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-Vp-cgl">
                                         <rect key="frame" x="0.0" y="0.0" width="296" height="48"/>
@@ -70,7 +68,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nA0-zC-lcQ">
-                                        <rect key="frame" x="0.0" y="48" width="296" height="109.5"/>
+                                        <rect key="frame" x="0.0" y="48" width="296" height="110"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEi-bJ-i50">
                                                 <rect key="frame" x="12" y="12" width="55.5" height="14.5"/>
@@ -96,14 +94,14 @@
                                                 <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已撤单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7g-4H-qbi">
-                                                <rect key="frame" x="241" y="67.5" width="43" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Revoked" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7g-4H-qbi">
+                                                <rect key="frame" x="228.5" y="67.5" width="55.5" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx2-tb-Bts">
-                                                <rect key="frame" x="12" y="28.5" width="92.5" height="14.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx2-tb-Bts">
+                                                <rect key="frame" x="12" y="28.5" width="34" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -114,8 +112,8 @@
                                                 <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="买入QGAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shR-4K-iAg">
-                                                <rect key="frame" x="12" y="65.5" width="86.5" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="BUY QGAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shR-4K-iAg">
+                                                <rect key="frame" x="12" y="65.5" width="91" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                 <color key="textColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -135,6 +133,7 @@
                                             <constraint firstItem="Vvg-XS-afy" firstAttribute="leading" secondItem="nA0-zC-lcQ" secondAttribute="leading" constant="12" id="czJ-K3-LzX"/>
                                             <constraint firstItem="iEi-bJ-i50" firstAttribute="leading" secondItem="nA0-zC-lcQ" secondAttribute="leading" constant="12" id="fQA-ht-PyQ"/>
                                             <constraint firstItem="Xx2-tb-Bts" firstAttribute="leading" secondItem="nA0-zC-lcQ" secondAttribute="leading" constant="12" id="g6B-1H-y56"/>
+                                            <constraint firstItem="m7g-4H-qbi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="shR-4K-iAg" secondAttribute="trailing" id="gJ1-Fs-tRR"/>
                                             <constraint firstAttribute="trailing" secondItem="r8k-9q-55M" secondAttribute="trailing" constant="12" id="iCw-Oh-qkz"/>
                                             <constraint firstItem="Xx2-tb-Bts" firstAttribute="top" secondItem="iEi-bJ-i50" secondAttribute="bottom" constant="2" id="pMH-Hq-gcT"/>
                                             <constraint firstAttribute="trailing" secondItem="tQj-2g-a0u" secondAttribute="trailing" constant="12" id="rj8-FX-GJf"/>
@@ -182,6 +181,7 @@
                 <outlet property="typeLab" destination="shR-4K-iAg" id="ymc-JP-1bm"/>
                 <outlet property="volumeSettingLab" destination="tQj-2g-a0u" id="hwh-mV-aid"/>
             </connections>
+            <point key="canvasLocation" x="132" y="128"/>
         </tableViewCell>
     </objects>
 </document>

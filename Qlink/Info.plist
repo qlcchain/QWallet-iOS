@@ -17,9 +17,27 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.1</string>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>shop.huagaotx.cn</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>2965</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>weixin</string>
+		<string>wechat</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MiSDKAppID</key>
@@ -37,6 +55,8 @@
 	<string>"My QWallet" Would Like to Access the Camera To set profile picture.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Face ID/ Touch ID is used to confirm your identity when reading encrypted messages.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>"My QWallet" Would Like to Access Your Photos To save share picture.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>"My QWallet" Would Like to Access Your Photos To set profile picture.</string>
 	<key>UIAppFonts</key>
@@ -55,6 +75,10 @@
 		<string>Roboto-ThinItalic.ttf</string>
 		<string>VAGRounded-Bold.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -72,6 +96,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

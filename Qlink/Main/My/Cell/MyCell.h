@@ -15,6 +15,7 @@ static NSString *MyCellReuse = @"MyCell";
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *icon;
+@property (nonatomic) BOOL showRed;
 
 @end
 
@@ -22,6 +23,7 @@ static NSString *MyCellReuse = @"MyCell";
 
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UIView *redView;
 
 
 - (void)configCellWithModel:(MyShowModel *)model;

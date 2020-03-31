@@ -10,8 +10,11 @@
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
 #import "SGQRCodeObtain.h"
-#import "PayUsdtViewController.h"
+#import "OTCPayETHViewController.h"
 #import "TradeOrderInfoModel.h"
+//#import "GlobalConstants.h"
+#import "OTCPayNEOViewController.h"
+#import "OTCPayQLCViewController.h"
 
 @interface PayReceiveAddressViewController ()
 
@@ -55,9 +58,9 @@
 - (void)configInit {
     NSString *gasStr = @"";
     NSString *topTipStr = @"";
-    _titleLab.text = kLang(@"usdt_receivable_address");
-    gasStr = [NSString stringWithFormat:@"%@ USDT",_tradeM.usdtAmount?:@""];
-    topTipStr = [NSString stringWithFormat:@"%@ %@ %@",kLang(@"please_send"),gasStr,kLang(@"to_the_erc-20_address_as_below_to_place_your_order")];
+    _titleLab.text = [NSString stringWithFormat:@"%@ %@",_tradeM.payToken,kLang(@"receivable_address")];
+    gasStr = [NSString stringWithFormat:@"%@ %@",_tradeM.usdtAmount?:@"",_tradeM.payToken];
+    topTipStr = [NSString stringWithFormat:@"%@ %@ %@",kLang(@"please_send"),gasStr,kLang(@"to_the_address_as_below_to_place_your_order")];
 //    if (_inputAddressType == PayReceiveAddressTypeUSDT) {
 //    } else if (_inputAddressType == PayReceiveAddressTypeQGAS) {
 //        _titleLab.text = @"QGAS Receivable Address";
@@ -72,7 +75,10 @@
     
     _addressLab.text = _tradeM.usdtToAddress?:@"";
     
-    UIImage *img = [UIImage imageNamed:@"eth_usdt"];
+    // @"eth_usdt"
+    NSString *chain = [WalletCommonModel chainFromTokenChain:_tradeM.payTokenChain];
+    NSString *imgStr = [NSString stringWithFormat:@"%@_%@",[chain lowercaseString],[_tradeM.payToken lowercaseString]];
+    UIImage *img = [UIImage imageNamed:imgStr];
 //    UIImage *img = _inputAddressType == PayReceiveAddressTypeUSDT?[UIImage imageNamed:@"eth_usdt"]:[UIImage imageNamed:@"qlc_qgas"];
     _qrcodeImgV.image = [SGQRCodeObtain generateQRCodeWithData:_tradeM.usdtToAddress?:@"" size:_qrcodeImgV.width logoImage:img ratio:0.2 logoImageCornerRadius:0 logoImageBorderWidth:0 logoImageBorderColor:[UIColor clearColor]];
 }
@@ -96,6 +102,7 @@
 - (IBAction)shareAction:(id)sender {
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[_qrcodeImgV.image] applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAirDrop];
+    activityVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:activityVC animated:YES completion:nil];
     activityVC.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
         if (completed) {
@@ -109,29 +116,59 @@
 - (IBAction)copyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _addressLab.text?:@"";
-    [kAppD.window makeToastDisappearWithText:@"Copied"];
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
     
 }
 
 - (IBAction)confirmAction:(id)sender {
-//    if (_backToRoot) {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//    } else {
-//        [self backAction:nil];
-//    }
-//    return;
-    [self jumpToPayUsdt];
+    NSString *tokenChain = _tradeM.payTokenChain;
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        [self jumpToPayQLC];
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        [self jumpToPayNEO];
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        [self jumpToPayETH];
+    }
+    
 }
 
 #pragma mark - Transition
-- (void)jumpToPayUsdt {
-    PayUsdtViewController *vc = [PayUsdtViewController new];
+- (void)jumpToPayETH {
+    OTCPayETHViewController *vc = [OTCPayETHViewController new];
     vc.transferToRoot = _backToRoot;
     vc.transferToTradeDetail = _transferToTradeDetail;
-    vc.sendUsdtAmount = _tradeM.usdtAmount?:@"";
+    vc.sendAmount = _tradeM.usdtAmount?:@"";
     vc.sendToAddress = _tradeM.usdtToAddress?:@"";
     vc.sendMemo = _tradeM.number?:@"";
     vc.inputTradeOrderId = _tradeM.ID;
+    vc.inputPayToken = _tradeM.payToken;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToPayNEO {
+    OTCPayNEOViewController *vc = [OTCPayNEOViewController new];
+    vc.transferToRoot = _backToRoot;
+    vc.transferToTradeDetail = _transferToTradeDetail;
+    vc.sendAmount = _tradeM.usdtAmount?:@"";
+    vc.sendToAddress = _tradeM.usdtToAddress?:@"";
+    vc.sendMemo = _tradeM.number?:@"";
+    vc.inputTradeOrderId = _tradeM.ID;
+    vc.inputPayToken = _tradeM.payToken;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToPayQLC {
+    OTCPayQLCViewController *vc = [OTCPayQLCViewController new];
+    vc.transferToRoot = _backToRoot;
+    vc.transferToTradeDetail = _transferToTradeDetail;
+    vc.sendAmount = _tradeM.usdtAmount?:@"";
+    vc.sendToAddress = _tradeM.usdtToAddress?:@"";
+//    vc.sendMemo = _tradeM.number?:@"";
+    vc.sendMemo = [NSString stringWithFormat:@"%@_%@_%@_%@",@"otc",@"trade",_isBuyOrder?@"buy":@"sell",_tradeM.ID?:@""];
+    vc.inputTradeOrderId = _tradeM.ID;
+    vc.inputPayToken = _tradeM.payToken;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

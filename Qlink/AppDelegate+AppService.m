@@ -25,10 +25,9 @@
 #import <BGFMDB/BGDB.h>
 #import "SystemUtil.h"
 #import "NeoTransferUtil.h"
-//#import "MiPushSDK.h"
 #import "DBManageUtil.h"
 #import "GuidePageViewController.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "WalletCommonModel.h"
 //#import "LocationTracker.h"
 //#import "LoginSetPWViewController.h"
@@ -36,12 +35,27 @@
 //#import "LoginPWModel.h"
 //#import "WalletCommonModel.h"
 #import "NSBundle+Language.h"
+#import "FirebaseUtil.h"
+@import Firebase;
+#import "JPUSHService.h"
+#import <UserNotifications/UserNotifications.h>
+#import "JPushTagHelper.h"
+#import "JPushConstants.h"
+#import "AppJumpHelper.h"
+#import "ProjectEnum.h"
 
-@interface AppDelegate () <BuglyDelegate>
+@interface AppDelegate () <BuglyDelegate,JPUSHRegisterDelegate>
 
 @end
 
 @implementation AppDelegate (AppService)
+
+#pragma mark - 配置Firebase
+- (void)configFirebase {
+    [FIRApp configure];
+    
+    [FirebaseUtil logEventWithItemID:Firebase_Event_StartApp itemName:Firebase_Event_StartApp contentType:Firebase_Event_StartApp];
+}
 
 #pragma mark - 配置DDLog
 - (void)configDDLog {
@@ -72,10 +86,18 @@
 
 #pragma mark - 配置App语言
 - (void)configAppLanguage {
-    NSString *languages = [Language currentLanguageCode];
+    NSString *languages = [Language currentLanguageCode]?:@"";
     if ([languages isEmptyString]) {
-        [Language userSelectedLanguage:LanguageCode[0]];
-//        [NSBundle setLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:LANGUAGES]];
+        NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+        NSString *languageName = appLanguages[0];
+        // 默认用系统语言
+        if (languageName && [languageName containsString:LanguageCode[1]]) {
+            [Language userSelectedLanguage:LanguageCode[1]];
+        } else {
+            [Language userSelectedLanguage:LanguageCode[0]];
+        }
+    } else {
+        [Language userSelectedLanguage:languages];
     }
 }
 
@@ -155,6 +177,40 @@
     [ChatUtil shareInstance];
 }
 
+#pragma mark - 配置极光推送
+- (void)configJPush:(NSDictionary *)launchOptions {
+    //Required
+    //notice: 3.0.0 及以后版本注册可以这样写，也可以继续用之前的注册方式
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    if (@available(iOS 12.0, *)) {
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
+    } else {
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    }
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        // 可以添加自定义 categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    NSString *channel = @"";
+    BOOL isProduction = NO;
+#if DEBUG
+    channel = @"Develop";
+    isProduction = NO;
+#else
+    channel = @"App Store";
+    isProduction = YES;
+#endif
+    // init Push
+    // notice: 2.1.5 版本的 SDK 新增的注册方法，改成可上报 IDFA，如果没有使用 IDFA 直接传 nil
+    [JPUSHService setupWithOption:launchOptions appKey:JPush_AppKey
+                          channel:channel
+                 apsForProduction:isProduction
+            advertisingIdentifier:nil];
+}
+
 #pragma mark - 是否需要显示引导页
 - (void)checkGuidenPage {
     NSString *version = [HWUserdefault getStringWithKey:VERSION_KEY];
@@ -218,6 +274,92 @@
 - (NSString *)attachmentForException:(NSException *)exception  {
     [SystemUtil configureAPPTerminate];
     return nil;
+}
+
+
+#pragma mark - 推送回调
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    /// Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+    
+    [SystemUtil requestBind_jpush]; // 绑定极光推送
+    [JPushTagHelper setTags]; // 极光设置tag
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+#pragma mark- JPUSHRegisterDelegate
+
+// iOS 12 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
+    if (notification && [notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //从通知界面直接进入应用
+    }else{
+        //从通知设置界面进入应用
+    }
+}
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    // Required
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    
+    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
+}
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    // Required
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    [self handlerPushJump:userInfo isTapLaunch:NO];
+    
+    completionHandler();  // 系统要求执行这个方法
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // Required, iOS 7 Support
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required, For systems with less than or equal to iOS 6
+    [JPUSHService handleRemoteNotification:userInfo];
+}
+
+#pragma mark - 处理推送跳转
+- (void)handlerPushJump:(NSDictionary *)userInfo isTapLaunch:(BOOL)isTapLaunch {
+    NSString *skip = userInfo[JPush_Extra_Skip];
+    if (skip) {
+        if ([skip isEqualToString:JPush_Extra_Skip_Debit]) {
+            if (isTapLaunch) { // 点击推送启动
+                [HWUserdefault insertObj:userInfo withkey:JPush_Tag_Jump];
+            } else { // app运行时点击推送
+                [HWUserdefault deleteObjectWithKey:JPush_Tag_Jump];
+                [AppJumpHelper jumpToDailyEarnings];
+            }
+        } else if ([skip isEqualToString:JPush_Extra_Skip_Trade_Order]) {
+            if (isTapLaunch) { // 点击推送启动
+                [HWUserdefault insertObj:userInfo withkey:JPush_Tag_Jump];
+            } else { // app运行时点击推送
+                [HWUserdefault deleteObjectWithKey:JPush_Tag_Jump];
+                [AppJumpHelper jumpToMyOrderList:OTCRecordListTypeCompleted];
+            }
+        }
+    }
 }
 
 @end

@@ -19,12 +19,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *nickname;// = 18670819116;
 @property (nonatomic, strong) NSNumber *otcTimes;// = 0;
 @property (nonatomic, strong) NSString *status;// = NORMAL;
-@property (nonatomic, strong) NSNumber *totalAmount;// = 1000;
+//@property (nonatomic, strong) NSNumber *totalAmount;// = 1000;
+@property (nonatomic) double totalAmount;
+@property (nonatomic, strong) NSString *totalAmount_str;
 @property (nonatomic, strong) NSString *type;// = BUY;
-@property (nonatomic, strong) NSString *unitPrice;// = "0.001";
+//@property (nonatomic, strong) NSString *unitPrice;// = "0.001";
+@property (nonatomic) double unitPrice;
+@property (nonatomic, strong) NSString *unitPrice_str;
 @property (nonatomic, strong) NSString *orderTime;
-@property (nonatomic, strong) NSNumber *lockingAmount;
-@property (nonatomic, strong) NSNumber *completeAmount;
+//@property (nonatomic, strong) NSNumber *lockingAmount;
+@property (nonatomic) double lockingAmount;
+@property (nonatomic, strong) NSString *lockingAmount_str;
+//@property (nonatomic, strong) NSNumber *completeAmount;
+@property (nonatomic) double completeAmount;
+@property (nonatomic, strong) NSString *completeAmount_str;
+@property (nonatomic, strong) NSString *payToken;
+@property (nonatomic, strong) NSString *payTokenChain;
+@property (nonatomic, strong) NSString *tradeToken;
+@property (nonatomic, strong) NSString *tradeTokenChain;
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString *isBurnQgasOrder;
 
 @property (nonatomic, strong) NSString *showNickName;
 

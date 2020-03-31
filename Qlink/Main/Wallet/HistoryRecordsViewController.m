@@ -15,6 +15,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "NEOWalletUtil.h"
 #import "HistoryRecrdInfo.h"
+#import "GlobalConstants.h"
 
 @interface HistoryRecordsViewController () <UITableViewDelegate, UITableViewDataSource,SRRefreshDelegate>
 
@@ -41,7 +42,7 @@
      */
     NSArray* finfAlls = nil;
 //    [HistoryRecrdInfo bg_findAll:HISTORYRECRD_TABNAME];
-    if ([ConfigUtil isMainNetOfServerNetwork]) {
+    if ([ConfigUtil isMainNetOfChainNetwork]) {
         finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%d",bg_sqlKey(@"isMainNet"),1]];
     } else {
         finfAlls = [HistoryRecrdInfo bg_find:HISTORYRECRD_TABNAME where:[NSString stringWithFormat:@"where %@=%d or %@ isnull",bg_sqlKey(@"isMainNet"),0,bg_sqlKey(@"isMainNet")]];
@@ -113,6 +114,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:okAction];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 #endif
 }

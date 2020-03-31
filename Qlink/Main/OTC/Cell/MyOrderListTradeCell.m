@@ -8,9 +8,11 @@
 
 #import "MyOrderListTradeCell.h"
 #import "TradeOrderListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "UserModel.h"
 #import "OrderStatusUtil.h"
+#import "NSDate+Category.h"
+#import "GlobalConstants.h"
 
 @interface MyOrderListTradeCell ()
 
@@ -21,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
 @property (weak, nonatomic) IBOutlet UILabel *amountLab;
 @property (weak, nonatomic) IBOutlet UILabel *statusLab;
+@property (weak, nonatomic) IBOutlet UILabel *payUnitLab;
 
 @end
 
@@ -53,10 +56,11 @@
     [_icon sd_setImageWithURL:url placeholderImage:User_DefaultImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
     }];
     _nameLab.text = model.showNickName;
-    _timeLab.text = model.createDate;
+    _timeLab.text = [NSDate getOutputDate:model.createDate formatStr:yyyyMMddHHmmss];
     UserModel *loginM = [UserModel fetchUserOfLogin];
-    _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?kLang(@"buy_qgas"):kLang(@"sell_qgas");
+    _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?[NSString stringWithFormat:@"%@ %@",kLang(@"buy"),model.tradeToken]:[NSString stringWithFormat:@"%@ %@",kLang(@"sell"),model.tradeToken];
     _typeLab.textColor = [loginM.ID isEqualToString:model.buyerId]?MAIN_BLUE_COLOR:UIColorFromRGB(0xFF3669);
+    _payUnitLab.text = model.payToken;
     _amountLab.text = model.usdtAmount;
     NSString *statusStr = @"";
     UIColor *statusColor = nil;

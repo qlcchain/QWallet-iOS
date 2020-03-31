@@ -10,6 +10,7 @@
 #import "WalletCommonModel.h"
 #import "UIView+DottedBox.h"
 #import "SGQRCodeObtain.h"
+//#import "GlobalConstants.h"
 
 @interface ETHWalletAddressViewController ()
 
@@ -62,6 +63,7 @@
 - (IBAction)shareAction:(id)sender {
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[_qrcodeImgV.image] applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAirDrop];
+    activityVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:activityVC animated:YES completion:nil];
     activityVC.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
         if (completed) {

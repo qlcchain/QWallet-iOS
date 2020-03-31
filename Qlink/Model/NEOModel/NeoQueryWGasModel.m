@@ -7,12 +7,14 @@
 //
 
 #import "NeoQueryWGasModel.h"
-#import "NSString+RemoveZero.h"
+//#import "NSString+RemoveZero.h"
+#import "RLArithmetic.h"
 
 @implementation NeoQueryWGasModel
 
 - (NSString *)getNum {
-    NSString *num = [[NSString stringWithFormat:@"%@",self.winqGas] removeFloatAllZero];
+    NSString *num = self.winqGas.mul(@(1));
+//    NSString *num = [[NSString stringWithFormat:@"%@",self.winqGas] removeFloatAllZero];
     return num;
 }
 

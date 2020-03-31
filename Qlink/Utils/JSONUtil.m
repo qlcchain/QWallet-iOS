@@ -7,6 +7,7 @@
 //
 
 #import "JSONUtil.h"
+#import "GlobalConstants.h"
 
 @implementation JSONUtil
 

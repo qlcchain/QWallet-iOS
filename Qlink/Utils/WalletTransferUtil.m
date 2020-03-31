@@ -9,7 +9,10 @@
 #import "WalletTransferUtil.h"
 #import "RequestService.h"
 #import "NeoTransferUtil.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
+//#import <QLCFramework/QLCFramework.h>
+#import "GlobalConstants.h"
+#import "ETHWalletManage.h"
 
 dispatch_source_t _mainAddressTimer;
 
@@ -41,12 +44,14 @@ dispatch_source_t _mainAddressTimer;
 
 + (void)requestServerMainAddress {
     // 获取主网交换地址
-    [RequestService requestWithUrl:mainAddressV2_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:mainAddressV2_Url params:@{} httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [NeoTransferUtil getShareObject].neoMainAddress = responseObject[Server_Data][@"NEO"][@"address"];
             NSLog(@"NEO主地址:%@",[NeoTransferUtil getShareObject].neoMainAddress);
             [QLCWalletManage shareInstance].qlcMainAddress = responseObject[Server_Data][@"QLCCHIAN"][@"address"];
             NSLog(@"QLC主地址:%@",[QLCWalletManage shareInstance].qlcMainAddress);
+            [ETHWalletManage shareInstance].ethMainAddress = responseObject[Server_Data][@"ETH"][@"address"];
+            NSLog(@"ETH主地址:%@",[ETHWalletManage shareInstance].ethMainAddress);
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
 //        [WalletTransferUtil requestServerMainAddress];

@@ -19,7 +19,7 @@
 
 //+ (void) sendFundsRequestWithType:(int)type withVPNInfo:(VPNInfo *) vpnInfo;
 + (void) sendLocalNotificationWithQLC:(NSString *) qlc isIncome:(BOOL) isIncome;
-+ (void) sendGetBalanceRequest;
+//+ (void) sendGetBalanceRequest;
 //+ (void) startVPNConnectTran;
 // 检查钱包 gas qlc 是否允许连接资产
 //+ (BOOL) isConnectionAssetsAllowedWithCost:(NSString *) cost;

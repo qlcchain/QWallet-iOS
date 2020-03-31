@@ -81,17 +81,19 @@
                                         <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="待付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gZ-wB-gXh">
-                                        <rect key="frame" x="241" y="86.5" width="43" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Waiting for public chain confirmation" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gZ-wB-gXh">
+                                        <rect key="frame" x="134" y="78.5" width="150" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="hX3-07-9FH"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MM-j5-Kw2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MM-j5-Kw2">
                                         <rect key="frame" x="81.5" y="87.5" width="33" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="tF2-Al-ydB"/>
-                                            <constraint firstAttribute="width" constant="33" id="z1I-li-fiP"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -137,6 +139,7 @@
                 <outlet property="contentBack" destination="eyH-Wc-kYw" id="sN8-I5-rds"/>
                 <outlet property="icon" destination="VOF-vk-WkL" id="hgU-bA-Jlo"/>
                 <outlet property="nameLab" destination="Qct-fN-lHi" id="IJP-dP-Tfw"/>
+                <outlet property="payUnitLab" destination="3MM-j5-Kw2" id="DJa-5q-Zlf"/>
                 <outlet property="statusLab" destination="3gZ-wB-gXh" id="zWL-Ow-8Gj"/>
                 <outlet property="timeLab" destination="yXk-2G-SR4" id="BVy-La-0A8"/>
                 <outlet property="typeLab" destination="7eq-V1-49a" id="Lwb-wG-4yF"/>

@@ -12,7 +12,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define yyyyMMddHHmmss @"yyyyMMddHHmmss"
+#define yyyyMMddHHmmss @"yyyy-MM-dd HH:mm:ss"
 #define MMddHHmm @"MM-dd HH:mm"
 
 #define D_MINUTE	60
@@ -23,9 +23,12 @@
 
 @interface NSDate (Category)
 
++ (NSString*)getOutputDate:(NSString*)inputTime formatStr:(NSString*)formatStr; // 时区转换
 + (NSString *)getTimeWithFromDate:(NSDate *)fromDate addDay:(NSInteger)addDay;
 + (NSString *)getTimeWithFromTime:(NSString *)fromTime addDay:(NSInteger)addDay;
++ (NSString *)getTimeWithFromTime:(NSString *)fromTime addMin:(NSInteger)addMin;
 + (NSDate *)dateFromTime:(NSString *)fromTime;
++ (NSDate *)getDateWithTimestamp:(NSString *)timestamp isMil:(BOOL)isMil;
 /**
  *  秒时间戳
  */

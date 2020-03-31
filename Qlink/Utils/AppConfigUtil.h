@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppConfigUtil : NSObject
 
-//@property (nonatomic) BOOL hideBottomWhenPush;
-@property (nonatomic, strong) NSArray *mnemonicArr;
+//@property (nonatomic, strong) NSArray *ethMnemonicArr;
+//@property (nonatomic, strong) NSString *ethBackupAddress;
 
 + (instancetype)shareInstance;
 

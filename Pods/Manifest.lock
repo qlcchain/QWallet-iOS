@@ -14,11 +14,8 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - Alamofire (4.7.3)
-  - APIKit (3.2.1):
-    - Result (~> 3.0)
-  - Appirater (2.3.1)
-  - AsyncSwift (2.0.4)
+  - Alamofire (4.8.2)
+  - APIKit (5.0.0)
   - BGFMDB (2.0.13):
     - BGFMDB/BG (= 2.0.13)
     - BGFMDB/FMDB (= 2.0.13)
@@ -28,53 +25,87 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - Bugly (2.5.0)
-  - Charts (3.1.0):
-    - Charts/Core (= 3.1.0)
-  - Charts/Core (3.1.0)
-  - CocoaAsyncSocket (7.4.3):
-    - CocoaAsyncSocket/All (= 7.4.3)
-  - CocoaAsyncSocket/All (7.4.3):
-    - CocoaAsyncSocket/GCD
-    - CocoaAsyncSocket/RunLoop
-  - CocoaAsyncSocket/GCD (7.4.3)
-  - CocoaAsyncSocket/RunLoop (7.4.3)
-  - CocoaLumberjack/Default (3.4.2)
-  - CocoaLumberjack/Swift (3.4.2):
-    - CocoaLumberjack/Default
-  - CryptoSwift (0.13.0)
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
+  - CocoaLumberjack/Core (3.6.0)
+  - CocoaLumberjack/Swift (3.6.0):
+    - CocoaLumberjack/Core
+  - CryptoSwift (1.1.2)
+  - dsBridge (3.0.6)
   - Eureka (4.2.0)
-  - Firebase/Core (5.4.1):
+  - Firebase/Analytics (6.6.0):
+    - Firebase/Core
+  - Firebase/Core (6.6.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.0.1)
-  - Firebase/CoreOnly (5.4.1):
-    - FirebaseCore (= 5.0.6)
-  - FirebaseAnalytics (5.0.1):
-    - FirebaseCore (~> 5.0)
-    - FirebaseInstanceID (~> 3.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - FirebaseAnalytics (= 6.1.0)
+  - Firebase/CoreOnly (6.6.0):
+    - FirebaseCore (= 6.2.0)
+  - FirebaseAnalytics (6.1.0):
+    - FirebaseCore (~> 6.2)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleAppMeasurement (= 6.1.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.0.6):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (3.1.1):
-    - FirebaseCore (~> 5.0)
-  - GoogleToolboxForMac/Defines (2.1.4)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
-    - GoogleToolboxForMac/Defines (= 2.1.4)
-  - HandyJSON (5.0.0)
+  - FirebaseCore (6.2.0):
+    - FirebaseCoreDiagnostics (~> 1.0)
+    - FirebaseCoreDiagnosticsInterop (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Logger (~> 6.2)
+  - FirebaseCoreDiagnostics (1.0.1):
+    - FirebaseCoreDiagnosticsInterop (~> 1.0)
+    - GoogleDataTransportCCTSupport (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Logger (~> 6.2)
+  - FirebaseCoreDiagnosticsInterop (1.0.0)
+  - FirebaseInstanceID (4.2.3):
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/UserDefaults (~> 6.0)
+  - GoogleAppMeasurement (6.1.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3)
+  - GoogleDataTransport (1.1.1)
+  - GoogleDataTransportCCTSupport (1.0.1):
+    - GoogleDataTransport (~> 1.1)
+    - nanopb
+  - GoogleUtilities/AppDelegateSwizzler (6.2.5):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.2.5)
+  - GoogleUtilities/Logger (6.2.5):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.2.5):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.2.5):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.2.5)"
+  - GoogleUtilities/Reachability (6.2.5):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.2.5):
+    - GoogleUtilities/Logger
   - Hero (1.4.0)
-  - IQKeyboardManager (6.2.0)
+  - IQKeyboardManager (6.5.0)
+  - JCore (2.1.4-noidfa)
+  - JPush (3.2.4-noidfa):
+    - JCore (< 3.0.0, >= 2.0.0)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
-  - KeychainAccess (3.1.2)
-  - KeychainSwift (13.0.0)
-  - KissXML (5.2.3)
+  - KeychainAccess (3.2.1)
+  - KeychainSwift (17.0.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
-  - MJExtension (3.0.15.1)
-  - MJRefresh (3.1.16)
-  - MMWormhole (2.0.0):
-    - MMWormhole/Core (= 2.0.0)
-  - MMWormhole/Core (2.0.0)
+  - MJExtension (3.2.1)
+  - MJRefresh (3.2.0)
   - Moya (10.0.2):
     - Moya/Core (= 10.0.2)
   - Moya/Core (10.0.2):
@@ -85,33 +116,30 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - OLImageView (1.5.1):
-    - OLImageView/Core (= 1.5.1)
-  - OLImageView/Core (1.5.1)
-  - PromiseKit (6.5.2):
-    - PromiseKit/CorePromise (= 6.5.2)
-    - PromiseKit/Foundation (= 6.5.2)
-    - PromiseKit/UIKit (= 6.5.2)
-  - PromiseKit/CorePromise (6.5.2)
-  - PromiseKit/Foundation (6.5.2):
+  - PromiseKit (6.10.0):
+    - PromiseKit/CorePromise (= 6.10.0)
+    - PromiseKit/Foundation (= 6.10.0)
+    - PromiseKit/UIKit (= 6.10.0)
+  - PromiseKit/CorePromise (6.10.0)
+  - PromiseKit/Foundation (6.10.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.5.2):
+  - PromiseKit/UIKit (6.10.0):
     - PromiseKit/CorePromise
-  - R.swift (4.0.0):
-    - R.swift.Library (~> 4.0.0)
-  - R.swift.Library (4.0.0)
-  - Realm (3.7.6):
-    - Realm/Headers (= 3.7.6)
-  - Realm/Headers (3.7.6)
-  - RealmSwift (3.7.6):
-    - Realm (= 3.7.6)
+  - R.swift (5.0.3):
+    - R.swift.Library (~> 5.0.0)
+  - R.swift.Library (5.0.1)
+  - Realm (3.18.0):
+    - Realm/Headers (= 3.18.0)
+  - Realm/Headers (3.18.0)
+  - RealmSwift (3.18.0):
+    - Realm (= 3.18.0)
   - Result (3.2.4)
-  - SDWebImage (4.4.2):
-    - SDWebImage/Core (= 4.4.2)
-  - SDWebImage/Core (4.4.2)
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
   - SipHash (1.2.2)
-  - SwiftColor (1.0.0)
-  - SwiftTheme (0.4.1)
+  - SwiftTheme (0.4.7)
+  - TMCache (2.1.0)
   - TrezorCrypto (0.0.9)
   - TrustCore (0.0.7):
     - BigInt
@@ -131,36 +159,32 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - APIKit
-  - Appirater
-  - AsyncSwift
   - BGFMDB
   - BigInt (~> 3.0)
   - Bugly
-  - Charts (= 3.1.0)
-  - CocoaAsyncSocket (~> 7.4.3)
+  - Charts
   - CocoaLumberjack/Swift
+  - dsBridge
   - Eureka (= 4.2.0)
-  - Firebase/Core (~> 5.4.1)
-  - HandyJSON
+  - Firebase/Analytics
   - Hero
   - IQKeyboardManager
-  - JSONRPCKit (= 3.0.0)
+  - JCore (= 2.1.4-noidfa)
+  - JPush (= 3.2.4-noidfa)
+  - JSONRPCKit
   - KeychainAccess
   - KeychainSwift
-  - KissXML (~> 5.2.2)
   - Masonry
   - MBProgressHUD
   - MJExtension
   - MJRefresh
-  - MMWormhole (~> 2.0.0)
   - Moya (~> 10.0.1)
-  - OLImageView
-  - PromiseKit (~> 6.0)
+  - PromiseKit
   - R.swift
-  - RealmSwift (= 3.7.6)
+  - RealmSwift (= 3.18.0)
   - SDWebImage
-  - SwiftColor
-  - SwiftTheme (= 0.4.1)
+  - SwiftTheme
+  - TMCache
   - TrustCore (from `https://github.com/TrustWallet/trust-core`, branch `master`)
   - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
   - TrustWalletSDK (from `https://github.com/TrustWallet/TrustSDK-iOS`, branch `master`)
@@ -169,40 +193,41 @@ DEPENDENCIES:
   - TYCyclePagerView
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - Alamofire
     - APIKit
-    - Appirater
-    - AsyncSwift
     - BGFMDB
     - BigInt
     - Bugly
     - Charts
-    - CocoaAsyncSocket
     - CocoaLumberjack
     - CryptoSwift
+    - dsBridge
     - Eureka
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
-    - GoogleToolboxForMac
-    - HandyJSON
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
+    - GoogleUtilities
     - Hero
     - IQKeyboardManager
+    - JCore
+    - JPush
     - JSONRPCKit
     - KeychainAccess
     - KeychainSwift
-    - KissXML
     - Masonry
     - MBProgressHUD
     - MJExtension
     - MJRefresh
-    - MMWormhole
     - Moya
     - nanopb
-    - OLImageView
     - PromiseKit
     - R.swift
     - R.swift.Library
@@ -211,8 +236,8 @@ SPEC REPOS:
     - Result
     - SDWebImage
     - SipHash
-    - SwiftColor
     - SwiftTheme
+    - TMCache
     - TrezorCrypto
     - TTGTagCollectionView
     - TYCyclePagerView
@@ -247,56 +272,57 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  APIKit: a39ff72ac44efc15513fd1b98800f63c525be61b
-  Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
-  AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  APIKit: b27d79b022733b2f50e7a092e67c4cb9ea30f968
   BGFMDB: 48e6823027232402a678acc7f71484b1fc9171d0
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
-  Charts: 0b0c96f6118b6ce63f11adbcaa3b31045ee4d772
-  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
-  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
-  CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
+  CryptoSwift: 31dacd1f13427439ddae5b5cbaae4c8dbc43047e
+  dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
   Eureka: 0748c7bbb2560130e43c7bfa83e99c98854a1f42
-  Firebase: 355bd535bfdacaa82a7fe8d9784115edefd6fc03
-  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
-  FirebaseCore: 4c28e3b9708ba48a765e76515f913a71596eb5dd
-  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
-  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
+  Firebase: a2b5951f30ff38fd3b3bdae9c7d340f940fd3c51
+  FirebaseAnalytics: 48414ae5cbf6976d8a2f7177e0466540e5ab33ce
+  FirebaseCore: 8c9e08bce0c72a3affd83927d8184cf244918bc8
+  FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
+  FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
+  FirebaseInstanceID: 8b42755db950682e7de0d167bc6fb26a57b244af
+  GoogleAppMeasurement: 47285fa897e5a125df56b9ef8750a1d81e4598a8
+  GoogleDataTransport: ffbadce4ab93c88fb9dd8e6366c47bfcb4a32193
+  GoogleDataTransportCCTSupport: 3451e7d8ba19093e533362a6d78d6d9014c6a037
+  GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
-  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
+  IQKeyboardManager: 700e5155d6a292383b54e8678aec769e14fc78fc
+  JCore: 2f15311e6889ab43ed5d629802ef793cac566465
+  JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
-  KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
-  KeychainSwift: 23d6c16cbc33f20fafa30c3d783241b4b87d998c
-  KissXML: 09f88ff8161fd058d67b70740b8b516687b52823
+  KeychainAccess: d5470352939ced6d6f7fb51cb2e67aae51fc294f
+  KeychainSwift: 9f43f562dffc88af6efadb57d74b14c598eb337f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
-  MJRefresh: 7798e16e53a5ef7f332dd05b27664db4e29530fd
-  MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  OLImageView: e03cd533ce6b1a155acb9f708ab9b2e71ea070d5
-  PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
-  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
-  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  Realm: 9eaecad54712d6246d08ba34c10f354e4715d7d3
-  RealmSwift: 1fe08b4ebaeeaacf17f9ba0343f7b25c9fc31fa6
+  PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
+  R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
+  R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
+  Realm: 7b3d04740facf45e958a514b466a32b04f1113d6
+  RealmSwift: c817b5f374668cf08f649afb05f55d92a787649c
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
-  SwiftColor: aad338783abbcdd78df9031a38a7a96aae3d9122
-  SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
+  SwiftTheme: 67bbb51f2ef69570164562376f441655a143399d
+  TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
   TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
-  TrustCore: 6c7deb45f03664d650da712bb5a19b33df0534a6
+  TrustCore: 3f0a67efb643c14cedefdb6ca0e720de4702bb91
   TrustKeystore: c54b52ade9c97d31d23ded9ae2518c62dd73b5fe
-  TrustWalletSDK: 12451433bda69bc07e5a27408449b1f4692879e4
+  TrustWalletSDK: f5c609b94df568afad223b5b884b5eda153cf1c0
   TrustWeb3Provider: 50fa391bdf170feb43dd4419992931510a5751d8
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: 43415298065c163cc731c5d8069070f8ba3a6c83
+PODFILE CHECKSUM: fd37cb343abcfa22f7cc73d66b5d70ef419f37bd
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

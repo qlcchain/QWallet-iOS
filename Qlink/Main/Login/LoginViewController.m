@@ -16,6 +16,11 @@
 #import "RSAUtil.h"
 #import "NSString+RegexCategory.h"
 #import "RegisterMailViewController.h"
+#import "UIColor+Random.h"
+//#import "GlobalConstants.h"
+#import "FirebaseUtil.h"
+#import "SystemUtil.h"
+#import "JPushTagHelper.h"
 
 @interface LoginViewController ()
 
@@ -188,12 +193,12 @@
     UserModel *userM = [UserModel fetchUser:account];
     kWeakSelf(self);
     NSString *md5PW = [MD5Util md5:_loginPWTF.text?:@""];
-    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
+    NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSDictionary *params = @{@"account":account,@"token":token};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:sign_in_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl6:sign_in_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             UserModel *tempM = [UserModel getObjectWithKeyValues:responseObject];
@@ -203,10 +208,16 @@
             userM.phone = tempM.phone;
             userM.nickname = tempM.nickname;
             userM.isLogin = @(YES);
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             [UserModel storeLastLoginAccount:account];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:User_Login_Success_Noti object:nil];
+            
+            [SystemUtil requestBind_jpush]; // 绑定极光推送
+            [JPushTagHelper setTags]; // 极光设置tag
+            
+            [FirebaseUtil logEventWithItemID:Firebase_Event_Login itemName:Firebase_Event_Login contentType:Firebase_Event_Login];
+            
             [weakself backAction:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
@@ -220,7 +231,7 @@
 - (void)requestVcode_signin_code {
     kWeakSelf(self);
     NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
-    [RequestService requestWithUrl:vcode_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:vcode_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
@@ -238,7 +249,9 @@
     NSString *account = _loginAccountTF.text?:@"";
     NSString *code = _loginVerifyCodeTF.text?:@"";
     NSDictionary *params = @{@"account":account,@"code":code};
-    [RequestService requestWithUrl:user_signin_code_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:user_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            NSString *rsaPublicKey = responseObject[Server_Data]?:@"";
             UserModel *model = [UserModel getObjectWithKeyValues:responseObject];
@@ -246,7 +259,7 @@
 //            model.md5PW = md5PW;
 //            model.rsaPublicKey = rsaPublicKey;
             model.isLogin = @(NO);
-            [UserModel storeUser:model useLogin:NO];
+            [UserModel storeUserByID:model];
             
             [weakself requestSign_in];
             
@@ -256,6 +269,7 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

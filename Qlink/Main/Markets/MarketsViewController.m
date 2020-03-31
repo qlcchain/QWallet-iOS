@@ -16,6 +16,7 @@
 #import "AddMarketsViewController.h"
 #import "RefreshTableView.h"
 
+
 @interface MarketsViewController () <UITableViewDelegate, UITableViewDataSource,SRRefreshDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MarketSortBtn *assetsBtn;
@@ -143,7 +144,7 @@
     kWeakSelf(self);
     NSString *coin = [ConfigUtil getLocalUsingCurrency];
     NSDictionary *params = @{@"symbols":_tokenSymbolArr,@"coin":coin};
-    [RequestService requestWithUrl:binaTpcs_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:binaTpcs_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [weakself.mainTable.slimeView endRefresh];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.sourceArr removeAllObjects];

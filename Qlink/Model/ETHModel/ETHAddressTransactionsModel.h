@@ -17,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *Hash;
 @property (nonatomic, strong) NSString *input;
 @property (nonatomic, strong) NSNumber *success;
-@property (nonatomic, strong) NSNumber *value;
+//@property (nonatomic, strong) NSNumber *value;
+@property (nonatomic) double value;
+@property (nonatomic, strong) NSString *value_str;
 @property (nonatomic, strong) NSNumber *timestamp;
 
 - (NSString *)getTokenNum;

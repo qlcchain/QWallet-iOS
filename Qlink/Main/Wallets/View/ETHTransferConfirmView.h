@@ -17,7 +17,7 @@ typedef void(^ETHTransferConfirmBlock)(void);
 @property (nonatomic, copy) ETHTransferConfirmBlock confirmBlock;
 
 + (instancetype)getInstance;
-- (void)configWithAddress:(NSString *)sendto amount:(NSString *)amount gasfee:(NSString *)gasfee;
+- (void)configWithFromAddress:(NSString *)fromAddress toAddress:(NSString *)toAddress amount:(NSString *)amount gasfee:(NSString *)gasfee;
 - (void)configWithName:(NSString *)nameFrom sendFrom:(NSString *)sendFrom sendTo:(NSString *)sendTo amount:(NSString *)amount gasfee:(NSString *)gasfee;
 - (void)show;
 

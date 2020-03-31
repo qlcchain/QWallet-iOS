@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    NEOGasClaimStatusSync,
-    NEOGasClaimStatusSyncLoading,
+    NEOGasClaimStatusNone,
+//    NEOGasClaimStatusSync,
+//    NEOGasClaimStatusSyncLoading,
     NEOGasClaimStatusClaim,
     NEOGasClaimStatusClaimLoading,
     NEOGasClaimStatusClaimSuccess,

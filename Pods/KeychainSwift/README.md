@@ -36,7 +36,7 @@ Simply add [KeychainSwiftDistrib.swift](https://github.com/evgenyneu/keychain-sw
 
 #### Setup with Carthage (iOS 8+)
 
-Alternatively, add `github "evgenyneu/keychain-swift" ~> 13.0` to your Cartfile and run `carthage update`.
+Alternatively, add `github "evgenyneu/keychain-swift" ~> 17.0` to your Cartfile and run `carthage update`.
 
 #### Setup with CocoaPods (iOS 8+)
 
@@ -44,7 +44,7 @@ If you are using CocoaPods add this text to your Podfile and run `pod install`.
 
     use_frameworks!
     target 'Your target name'
-    pod 'KeychainSwift', '~> 13.0'
+    pod 'KeychainSwift', '~> 17.0'
 
 
 #### Setup with Swift Package Manager
@@ -52,18 +52,19 @@ If you are using CocoaPods add this text to your Podfile and run `pod install`.
 Here is an example of a Package.swift file.
 
 ```Swift
+// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
     name: "MyApp",
     dependencies: [
-        .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "13.0.0"),
+        .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "17.0.0")
     ],
     targets: [
-        on.
         .target(
             name: "MyApp",
-            dependencies: ["KeychainSwift"]),
+            dependencies: ["KeychainSwift"],
+            path: "Sources")
     ]
 )
 ```
@@ -201,13 +202,29 @@ keychain.set("hello world", forKey: "my key")
 if keychain.lastResultCode != noErr { /* Report error */ }
 ```
 
+### Returning data as reference
+
+Use the `asReference: true` parameter to return the data as reference, which is needed for  [NEVPNProtocol](https://developer.apple.com/documentation/networkextension/nevpnprotocol).
+
+```Swift
+let keychain = KeychainSwift()
+keychain.set(dataObject, forKey: "my key")
+keychain.getData("my key", asReference: true)
+```
+
 ## Using KeychainSwift from Objective-C
 
 [This manual](https://github.com/evgenyneu/keychain-swift/wiki/Using-KeychainSwift-in-Objective-C-project) describes how to use KeychainSwift in Objective-C apps.
 
-## Known serious issue
+## ❗️Known critical issue - call to action❗️
 
-It [has been reported](https://github.com/evgenyneu/keychain-swift/issues/15) that the library sometimes returns `nil`  instead of the stored Keychain value. The issue seems to be random and hard to reproduce. It may be connected with [the Keychain issue](https://forums.developer.apple.com/thread/4743) reported on Apple developer forums. If you experienced this problem feel free to create an issue so we can discuss it and find solutions.
+It [has been reported](https://github.com/evgenyneu/keychain-swift/issues/15) that the library sometimes returns `nil`  instead of the stored Keychain value. It may be connected with [the Keychain issue](https://forums.developer.apple.com/thread/4743) reported on Apple developer forums. The issue is random and hard to reproduce. If you experienced this problem feel free to create an issue and share your story, so we can find solutions.
+
+## Video tutorial
+
+Thanks to Alex Nagy from [rebeloper.com](https://rebeloper.com/) for creating this two-part [video tutorial](https://www.youtube.com/watch?v=1R-VIzjD4yo&list=PL_csAAO9PQ8bLfPF7JsnF-t4q63WKZ9O9).
+
+<a href="https://www.youtube.com/watch?v=1R-VIzjD4yo&list=PL_csAAO9PQ8bLfPF7JsnF-t4q63WKZ9O9" target="_blank"><img src='graphics/keychain_swift_video_tutorial.jpg' width='800' alt='Keychain Swift video tutorial'></a>
 
 ## Demo app
 
@@ -221,7 +238,6 @@ Here are some other Keychain libraries.
 * [jrendel/SwiftKeychainWrapper](https://github.com/jrendel/SwiftKeychainWrapper)
 * [kishikawakatsumi/KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
 * [matthewpalmer/Locksmith](https://github.com/matthewpalmer/Locksmith)
-* [phuonglm86/SwiftyKey](https://github.com/phuonglm86/SwiftyKey)
 * [s-aska/KeyClip](https://github.com/s-aska/KeyClip)
 * [yankodimitrov/SwiftKeychain](https://github.com/yankodimitrov/SwiftKeychain)
 
@@ -240,6 +256,9 @@ Here are some other Keychain libraries.
 * Thanks to [elikohen](https://github.com/elikohen) for fixing concurrency issues.
 * Thanks to [beny](https://github.com/beny) for adding Swift 4.2 support.
 * Thanks to [xuaninbox](https://github.com/xuaninbox) for fixing watchOS deployment target for Xcode 10.
+* Thanks to [schayes04](https://github.com/schayes04) for adding Swift 5.0 support.
+* Thanks to [mediym41](https://github.com/mediym41) for adding ability to return data as reference.
+* Thanks to [AnthonyOliveri](https://github.com/AnthonyOliveri) for adding ability to run unit tests from Swift Package Manager.
 
 
 

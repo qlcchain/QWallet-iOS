@@ -9,6 +9,11 @@
 #import "SystemUtil.h"
 #import "Qlink-Swift.h"
 #import "NeoTransferUtil.h"
+#import "GlobalConstants.h"
+#import "NSDate+Category.h"
+#import "UserModel.h"
+#import "RSAUtil.h"
+#import "JPUSHService.h"
 
 @implementation SystemUtil
 
@@ -67,7 +72,7 @@
 
 + (void)checkAPPUpdate {
 //    NSString * url = [[NSString alloc] initWithFormat:@"http://itunes.apple.com/lookup?id=%@",AppStore_ID];
-    [RequestService requestWithUrl:sys_version_info_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:sys_version_info_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSDictionary *data = responseObject[Server_Data];
             // 线上
@@ -95,12 +100,71 @@
                     }];
                     [alert addAction:ok];
                     [alert addAction:update];
+                    alert.modalPresentationStyle = UIModalPresentationFullScreen;
                     [kAppD.window.rootViewController presentViewController:alert animated:YES completion:nil];
                 }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         NSLog(@"版本更新出错，%@",error.description);
+    }];
+}
+
++ (void)requestLogout:(void (^)(void))completeBlock {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+//    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token}];
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl5:user_logout_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            [kAppD logout];
+            
+            if (completeBlock) {
+                completeBlock();
+            }
+            
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
++ (void)requestBind_jpush {
+    if (![UserModel haveLoginAccount]) {
+        return;
+    }
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    
+    NSString *jpushId = [JPUSHService registrationID]?:@"";
+    if ([jpushId isEmptyString]) {
+        return;
+    }
+    
+    //    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: @{@"account":account,@"token":token,@"appOs":@"IOS",@"pushPlatform":@"JIGUANG",@"pushId":jpushId}];
+    [RequestService requestWithUrl5:user_bind_jpush_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
 }
 

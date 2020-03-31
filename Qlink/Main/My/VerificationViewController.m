@@ -16,6 +16,8 @@
 #import "TipOKView.h"
 #import "PhotoPickerUtil.h"
 
+//#import "GlobalConstants.h"
+
 typedef enum : NSUInteger {
     VerificationPicType1,
     VerificationPicType2,
@@ -62,18 +64,18 @@ typedef enum : NSUInteger {
 - (void)refreshPhotoStatus {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (userM) {
-        if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+        if ([userM.vStatus isEqualToString:kyc_not_upload]) {
             _tipLab.text = kLang(@"please_upload_the_required_information_of_your_passport");
-        } else if ([userM.vStatus isEqualToString:@"UPLOADED"]) {
+        } else if ([userM.vStatus isEqualToString:kyc_uploaded]) {
             _tipLab.text = kLang(@"status_under_review");
-        } else if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"]) {
+        } else if ([userM.vStatus isEqualToString:kyc_success]) {
             _tipLab.text = kLang(@"status_verified");
-        } else if ([userM.vStatus isEqualToString:@"KYC_FAIL"]) {
+        } else if ([userM.vStatus isEqualToString:kyc_fail]) {
             _tipLab.text = kLang(@"status_not_approved");
             [self showNotApproved];
         }
         
-        if ([userM.vStatus isEqualToString:@"NOT_UPLOAD"]) {
+        if ([userM.vStatus isEqualToString:kyc_not_upload]) {
             _pic1.image = [UIImage imageNamed:@"icon_passport_back"];
             _pic2.image = [UIImage imageNamed:@"icon_hand_passport_back"];
         } else {
@@ -89,7 +91,7 @@ typedef enum : NSUInteger {
             }];
         }
         
-        if ([userM.vStatus isEqualToString:@"KYC_SUCCESS"] || [userM.vStatus isEqualToString:@"UPLOADED"]) {
+        if ([userM.vStatus isEqualToString:kyc_success] || [userM.vStatus isEqualToString:kyc_uploaded]) {
             _picBtn1.userInteractionEnabled = NO;
             _picBtn2.userInteractionEnabled = NO;
             _submitBtn.hidden = YES;
@@ -115,6 +117,7 @@ typedef enum : NSUInteger {
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action3];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -141,6 +144,7 @@ typedef enum : NSUInteger {
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertVC addAction:action1];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -189,7 +193,7 @@ typedef enum : NSUInteger {
     UIImage *img1 = _selectImage1;
     UIImage *img2 = _selectImage2;
     [kAppD.window makeToastInView:self.view text:nil];
-    [RequestService postImage:upload_id_card_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [RequestService postImage7:upload_id_card_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSString *fileName1 = [NSString stringWithFormat:@"%llu",[NSDate getMillisecondTimestampFromDate:[NSDate date]]];
         NSData *data1 = [img1 compressJPGImage:img1 toMaxFileSize:Upload_ID_Image_Size];
         NSString *name1 = [NSString stringWithFormat:@"%@.jpg", fileName1];
@@ -206,7 +210,7 @@ typedef enum : NSUInteger {
             userM.vStatus = @"UPLOADED";
             userM.facePhoto = responseObject[@"facePhoto"];
             userM.holdingPhoto = responseObject[@"holdingPhoto"];
-            [UserModel storeUser:userM useLogin:NO];
+            [UserModel storeUserByID:userM];
             
             [UserUtil updateUserInfo];
             [weakself backAction:nil];

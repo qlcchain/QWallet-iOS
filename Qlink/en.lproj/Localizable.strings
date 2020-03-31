@@ -16,20 +16,24 @@
 "title_screen_lock" = "Screen Lock";
 "english" = "English";
 "chinese" = "Chinese(Simplified)";
+"indonesian" = "Bahasa Indonesia";
 
 // 我的---
 "crypto_wallet" = "Crypto Wallet";
-"share_with_friends" = "Share with Friends";
+"share_with_friends" = "Referral Rewards";
 "join_the_community" = "Join the Community";
 "contact_us" = "Contact Us";
 "settings" = "Settings";
 "login_signup" = "Log In/Sign Up";
 "me" = "Me";
+"daily_earnings"="Earning Details";
+"join_us_on_telegram_to_get_the_latest_qgas_news" = "Join us on Telegram To get the latest QGAS news";
+"join_now" = "Join Now";
 
 // 个人信息---
 "profile_photo" = "Profile Photo";
 "username" = "Username";
-"my_invitation_code" = "My Invitation Code";
+"my_invitation_code" = "My Referral Code";
 "email" = "Email";
 "mobile" = "Mobile";
 "verification" = "Verification";
@@ -65,8 +69,6 @@
 
 // OTC---
 "transaction_id" = "Transaction ID";
-"sell_qgas" = "SELL QGAS";
-"buy_qgas" = "BUY QGAS";
 "successful_deal" = "Successful Deal";
 "closed" = "Closed";
 "appeal_processing" = "Appeal Processing";
@@ -74,14 +76,21 @@
 "appeal_failed" = "Appeal Failed";
 "sell" = "SELL";
 "buy" = "BUY";
-"entrust_sell_qgas" = "ENTRUST SELL QGAS";
-"entrust_buy_qgas" = "ENTRUST BUY QGAS";
+"entrust_sell" = "SELL";
+"entrust_buy" = "BUY";
 "active" = "Active";
 "revoked" = "Revoked";
 "completed" = "Completed";
 "seller" = "Seller";
 "buyer" = "Buyer";
 "amount_price" = "Amount";
+"pending" = "Pending";
+"the_order_status_is_not_correct_and_cannot_be_transferred" = "The order status is not correct and cannot be transferred.";
+"filter" = "Filter";
+"trading_pairs" = "Trading Pairs";
+"reset" = "Reset";
+"filter_confirm" = "Confirm";
+"team" = "Team";
 
 // 支付USDT---
 "eth_wallet_address" = "ETH Wallet Address";
@@ -93,8 +102,12 @@
 "amount_is_zero" = "Amount is zero";
 "balance_is_not_enough" = "Balance is not enough";
 "eth_wallet_address_is_invalidate" = "ETH Wallet Address is invalidate";
-"eth_wallet_address_have_not_eth_balance" = "ETH Wallet Address have not ETH balance";
-"current_qlc_wallet_have_not_usdt" = "Current QLC Wallet have not USDT";
+"eth_wallet_have_not_eth_balance" = "ETH Wallet Address have not ETH balance";
+"wallet_have_not_balance_of" = "Wallet have not balance of";
+"please_choose_wallet_first" = "Please choose wallet first";
+"current_eth_wallet_have_not" = "Current ETH Wallet have not";
+"current_neo_wallet_have_not" = "Current NEO Wallet have not";
+"current_qlc_wallet_have_not" = "Current QLC Wallet have not";
 
 // 申诉详情
 "appeallant_buyer" = "Appeallant：Buyer";
@@ -105,21 +118,20 @@
 "appeal_failed" = "Appeal Failed";
 "waiting_for_buyer_payment" = "Waiting for Buyer's payment";
 "waiting_for_seller_confirmation" = "Waiting for Seller's confirmation";
+"waiting_for_public_Chain_confirmation" = "Waiting for public chain confirmation";
 "amount" = "Amount";
 "copied" = "Copied";
-
-// 委托单详情---
-"erc-20_address_to_receive_usdt" = "ERC-20 Address to receive USDT";
-"qlc_chain_address_to_receive_qgas" = "QLC Chain Address to receive QGAS";
+"transaction_pending" = "Transaction Pending";
+"new_order" = "New Order";
 
 // USDT接收地址---
-"usdt_receivable_address" = "USDT Receivable Address";
+"receivable_address" = "Receivable Address";
 "please_send" = "Please send";
-"to_the_erc-20_address_as_below_to_place_your_order" = "to the ERC-20 address as below to place your order.";
+"to_the_address_as_below_to_place_your_order" = "to the address as below to place your order.";
 
 // Buy\Sell List---
 "please_finish_the_verification_on_me_page" = "Please finish the verification on Me Page.";
-"volume_settings" = "Volume Settings";
+"limits" = "Limits";
 
 // New Order---
 "unit_price_is_empty" = "Unit Price is empty";
@@ -129,29 +141,40 @@
 "max_amount_is_empty" = "Max Amount is empty";
 "address_is_empty" = "Address is empty";
 "qlc_wallet_address_is_invalidate" = "QLC Wallet Address is invalidate";
+"wallet_address_is_invalidate" = "Wallet Address is invalidate";
 "amount_need_greater_than_or_equal_to_max_amount" = "Amount need greater than or equal to Max Amount";
-"qlc_chain_address_is_empty" = "QLC Chain Address is empty";
+"max_amount_need_greater_than_or_equal_to_min_amount" = "Max Amount need greater than or equal to Min Amount";
+"the_min_amount_should_be_equal_or_greater_than_1" = "The Min Amount should be equal or greater than 1";
+"buying_amount_need_greater_than_or_equal_to_min_amount" = "Buying Amount need greater than or equal to Min Amount";
+"selling_amount_need_greater_than_or_equal_to_min_amount" = "Selling Amount need greater than or equal to Min Amount";
 "please_switch_to_qlc_wallet" = "Please switch to QLC Wallet";
-"current_qlc_wallet_have_not_qgas" = "Current QLC Wallet have not QGAS";
-"current_qlc_wallet_have_not_enough_qgas" = "Current QLC Wallet have not enough QGAS";
-"qlc_server_address_is_empty" = "QLC Server Address is empty";
+"please_switch_to_neo_wallet" = "Please switch to NEO Wallet";
+"please_switch_to_eos_wallet" = "Please switch to EOS Wallet";
+"please_switch_to_eth_wallet" = "Please switch to ETH Wallet";
+"current_wallet_have_not" = "Current Wallet have not";
+"current_wallet_have_not_enough" = "Current Wallet have not enough";
+"server_address_is_empty" = "Server Address is empty";
 "process___" = "Process...";
 "transfer_successful" = "Transfer Successful.";
 
 // Buy\Sell Detail---
-"qlc_chain_wallet_address" = "QLC Chain Wallet Address";
-"erc-20_wallet_address" = "ERC-20 Wallet Address";
 "max" = "Max";
 "you_can_not_buy_or_sell_your_own_entrust_order" = "You can not buy or sell your own entrust order.";
-"usdt_is_empty" = "USDT is empty";
-"usdt_is_over_max" = "USDT is over max";
-"qgas_is_empty" = "QGAS is empty";
-"qgas_is_greater_than_max_volume" = "QGAS is greater than max volume";
-"qgas_is_less_than_min_volume" = "QGAS is less than min volume";
-"qgas_remain" = "QGAS remain";
+"is_empty" = "is empty";
+"is_over_max" = "is over max";
+"is_greater_than_max_volume" = "is greater than max volume";
+"is_less_than_min_volume" = "is less than min volume";
+"remain" = "remain";
+"unit_price" = "Unit Price";
+"volume_amount" = "Volume Amount";
+"receive_from" = "Payment Wallet";
+"send_to" = "Receiving Wallet";
+"to_receive" = "To Receive";
+"to_pay" = "To Pay";
 
 // 订单详情---
 "the_order_will_be_closed_automatically____30" = "The order will be closed automatically, if no further confirmation within 30 minutes.";
+"please_be_patient_" = "Please be patient.";
 "fail_appeal" = "Fail Appeal";
 "successful" = "Successful";
 "the_order_will_be_closed_automatically_if_no_further_confirmation_within" = "The order will be closed automatically, if no further confirmation within";
@@ -160,8 +183,13 @@
 "title_appeal" = "Appeal";
 "title_appeal_details" = "Appeal Deals";
 "title_appeal_result" = "Check the Appeal Result";
-"account_payable" = "Account Payable";
-"account_receivable" = "Account Receivable";
+"buying_amount" = "Buying Amount";
+"selling_amount" = "Selling Amount";
+"i_ve_received" = "I've received";
+"ok_" = "OK";
+"please_be_patiently_it_hasnt_been_30_minutes_" = "Please be patiently. It hasn't been 30 minutes.";
+"transaction_parsing_failed" = "Transaction parsing failed";
+"overtime" = "OverTime";
 
 // Appeal---
 "for_example_incorrect_amount_no_payment_received_etc" = "For example, incorrect amount, no payment received, etc.";
@@ -184,7 +212,7 @@
 
 // 钱包---
 "export_qrcode" = "Export QRCode";
-"please_use_space_to_separate_the_mnemonic_phase" = "Please use space to separate the mnemonic phase";
+"please_use_space_to_separate_the_mnemonic_phrase" = "Please use space to separate the mnemonic phrase";
 "please_input_wallet_seed" = "Please input wallet seed";
 "import_success" = "Import Success";
 "please_agree_first" = "Please Agree First";
@@ -250,9 +278,14 @@
 "the_passwords_are_different" = "The passwords are different";
 "wallet" = "Wallet";
 "resources" = "Resources";
+"security_reminders" = "Security Reminders";
+"please_back_up_your_private_key_mnemonic_phrase_now_" = "Please back up your Private Key/Mnemonic Phrase now.";
+"if_your_lose_your_mobile_devices_you_could_use_your_private_key_or_mnemonic_phrase_to_recover_your_wallet_" = "If your lose your mobile devices, you could use your private key or mnemonic phrase to recover your wallet.";
+"backup_now" = "Backup Now";
 
 // Tabbar---
-"finance" = "Finance";
+"finance" = "Trades";
+"top_up" = "Topup";
 
 // 邀请好友---
 "invited__" = "Invited";
@@ -262,3 +295,168 @@
 "install_now" = "Install Now";
 "a_new_version_of_my_qwallet__" = "A new version of My QWallet is available. Install it now from App Store.";
 
+// 转NEO token
+"neo_transfer_fail" = "NEO transfer fail";
+"neo_nep5_gas_less" = "NEO(nep5) transfer need gas";
+"transfer_tip" = "Transfer tip";
+"transfer_processed" = "Transfer processed";
+"transfer_error" = "Transfer error";
+
+// Staking
+"staking_will_end_on" = "Staking will end on: ";
+"the_minimum_period_is_10_days" = "The minimum period is 10 days";
+"the_minimum_period_is_180_days" = "The minimum period is 180 days";
+"voting_mining_node" = "Voting/Mining Node";
+"token_mintage" = "Token Mintage";
+"staking_in_progress" = "Staking in Progress";
+"staking_in_progress_redeemable" = "Staking in Progress, redeemable";
+"withdraw_start" = "Withdraw start";
+"withdraw_process" = "Withdraw process";
+"withdraw_done" = "Withdraw done";
+"not_succeed" = "Not succeed";
+"not_succeed_continue_to_invoke" = "Not succeed, continue to invoke";
+"pledge_process" = "Pledge process";
+"stake_from_is_empty" = "Stake From is empty";
+"stake_to_is_empty" = "Stake To is empty";
+"amount_is_at_least_1_qlc" = "Amount is at least 1 QLC";
+"staking_period_is_empty" = "Staking Period is empty";
+"staking_period_is_at_least_10_days" = "Staking Period is at least 10 days";
+"staking_period_is_at_least_180_days" = "Staking Period is at least 180 days";
+"your_email_is_empty" = "Your Email is empty";
+"security_code_is_empty" = "Security code is empty";
+"token_symbol_is_empty" = "Token Symbol is empty";
+"token_supply_is_empty" = "Token Supply is empty";
+"token_amount_is_empty" = "Token Amount is empty";
+"token_name_is_empty" = "Token Name is empty";
+"for" = "For";
+"my_stakings" = "My Stakings";
+"revoke" = "Revoke";
+"the_wallet_is_none___" = "The wallet is not exist";
+
+// Topup
+"rmb" = "￥";
+"_discount" = "% Off";
+"_has_been_paid_successfully_Please_wait_for_a_moment" = "%@ has been paid, please wait for confirmation";
+"please_wait_for_confirmation" = "Please wait for confirmation";
+"insufficient_balance_go_to_otc_page_to_purchase_" = "Insufficient balance\n purchase %@";
+"purchase" = "BUY";
+"send_recharge_to" = "Top up this number";
+"enter_your_phone_number_or_select_from_your_contacts_" = "Enter your mobile number or select from your contacts:";
+"earn_more_qgas" = "Get more QGAS";
+"act_now__" = "Stake QLC >";
+"carrier_package" = "Mobile Plan";
+"you_do_not_have_wallet_created_immediately" = "You don‘t have a %@ Wallet yet\n Create one";
+"create" = "Create";
+"use_to_purchase__yuan_of_phone_charge_for_deduction" = "Top-up value ￥%@\npay %@ %@ and ￥%@";
+"use_to_purchase__yuan_of_phone_charge_for_deduction_1" = "Top-up value %@ %@\npay %@ %@ and %@ %@";
+"choose_international_and_regional" = "Choose a country and a region";
+"please_enter_your_mobile_phone_number" = "Please enter your mobile number";
+"recharge__yuan_phone_charge_deduction__yuan" = "Top-up value ￥%@, Use %@ %@ to for ￥%@off";
+"recharge_phone_bill" = "Phone top up";
+"view_your_exclusive_offers" = "Promotions";
+"waiting_for_to_arrive" = "Your %@ is on its way!";
+"no_phone_bill_paid" = "Unpaid";
+"waiting_for_the_bill" = "In progress";
+"phone_charge_successfully_charged" = "SUCCESS";
+"phone_charge_failed" = "Top-up failure";
+"qgas_parsing_failed" = "Confirmation failed on the Blockchain";
+"phone_charge_recharge_failed_has_been_returned" = "%@ has been returned";
+"pay_token_returned" = "Pay token returned";
+"cancelled" = "Cancelled";
+"deduction_txid_error" = "Deduction txid error";
+"pay_txid_error" = "Pay txid error";
+"pay_token_paid" = "Pay token paid";
+"_will_be_returned_to_the_payment_address" = "%@ will be returned to the payment address";
+"confirm" = "Confirm";
+"coming_soon_next_month" = "Coming soon next month";
+"sold_out" = "Sold Out";
+"_is_being_paid" = "Transferring %@";
+"generate_recharge_vouchers_on_the_chain" = "Creating Blockchain Invoice";
+"successfully_paid_" = "%@ Transferred";
+"generating_recharge_vouchers_on_the_chain" = "To Create Blockchain Invoice";
+"the_recharge_voucher_on_the_chain_was_successfully_generated" = "Blockchain Inoice Created";
+"refer_friends_" = "Refer Friends >";
+
+// 领取QGAS
+"free_qlc_lending_for_staking" = "Free QLC lending for staking";
+"claim_entitled_qgas_earnings_everyday" = "Claim entitled QGAS earnings everyday";
+"receive_now" = "Receive Now";
+"no_qgas_can_claim" = "No QGAS can claim";
+"copy" = "Copy";
+"immediately_invite" = "Refer NOW";
+"ranking_in_the_last_30_days" = "Ranking in the Last 30 Days";
+"00000000_Copy" = "00000000（Copy）";
+"use_qgas_to_get_phone_bill_discount_or_just_trade_in_otc_market_" = "Use QGAS to get phone bill discount or just trade in OTC market.";
+
+// 交易挖矿
+"sheet_mining" = "Trade Mining";
+"minging_more_details" = "More Details";
+"daily_qgas_trade_mining_pool_up_to_" = "Daily QGAS Trade Mining Pool up to ";
+"no_qlc_can_claim" = "No QLC can claim";
+"qgas_trade_mining_pool_up_to" = "QGAS Trade Mining Pool up to";
+"mined_qlc_redeem_every_day" = "Mined QLC Redeem Every Day";
+
+// QLC k线
+"qlc_go_trade" = "trade  >";
+"qlc_hour" = "1H";
+"qlc_day" = "1D";
+"qlc_week" = "1W";
+"qlc_month" = "1M";
+"qlc_year" = "1Y";
+
+// Sheet mining
+"___qgas_traded" = "%@ QGAS traded";
+"i_have_claimed__qlc" = "I have claimed %@ QLC";
+
+// Topup Credential
+"top_up__phone_bill__" = "Top up-%@%@ Phone bill-%@";
+
+// Share friends
+"i_have_claimed__qgas" = "I have claimed %@ QGAS";
+"__friends_referred" = "%@ friends referred ";
+"you_can_claim_the_reward_when_successfully_invited_more_than__friends_" = "You can claim the reward when successfully invited more than %@ friends.";
+"get__qgas" = "Get %@ QGAS";
+
+// Topup Choose Country Code
+"please_choose_country_code_first" = "Please choose country code first";
+"please_choose_operator_first" = "Please choose operator first";
+"optional" = "Optional";
+"phone_number_cannot_be_empty" = "Phone number cannot be empty";
+"please_fill_in_a_valid_phone_number" = "Please fill in a valid phone number";
+
+// Group Buy
+"please_select_groupbuy_type" = "Please select groupbuy type";
+"phone_number" = "Phone Number";
+"valid_till" = "Valid till";
+"time_out" = "Time out";
+"time_out_down" = "Time out down";
+"ordered" = "Ordered";
+"isp" = "Operator";
+"region" = "Region";
+
+// Invite Reward
+"opened" = "sales partner";
+"unopen" = "non-sales partner";
+"ranking" = "Ranking";
+"friends_referred" = "Friends Referred";
+"sales_partner_commission" = "Sales Partner Commission";
+"referred" = "Referred";
+"recharge_commission" = "Recharge Commission";
+"group_plan_commission" = "Group Plan Commission";
+"join_the_q_wallet_recharge_sales_partner_plan_for_commissions" = "Join the Q-Wallet recharge sales partner plan for COMMISSIONS";
+"commissions" = "COMMISSIONS";
+"qgas" = "QGAS";
+
+// Vote
+"qgas_buyback_destruction_plan" = "QGas Buyback and Burn";
+"go_vote" = "Vote";
+"please_select_one" = "Please select one";
+"if_you_got_more_to_share_with_us_leave_your_opinions_and_comments_below_" = "If you got more to share with us, leave your opinions and comments below:";
+"you_have_voted_successfully_thanks_for_your_engagement" = "You have voted successfully, thanks for your engagement.";
+"the_voting_has_been_closed" = "The voting has been closed.";
+"buyback_destruction_plan" = "Buyback and Burn";
+"join_now_1" = "Join Now";
+
+// Buyback burn
+"1qgas_2qlc" = "1QGas= %@ QLC";
+"one_campaign_day___" = "* One campaign day starts from 7:00 pm till 7:00 pm the next day lasting for 24 hours.\n* During each campaign, the team will gradually publish the QGas buy orders in Q-Wallet OTC  at 5 different time points, 7:00 pm, 12:00 am, 2:00 am, 5:00 am, 9:00 am (UTC+8) .\n* Each time there will be several QGas buy orders splitting the 4000 QGas placed, the QGas buyback amount may vary in each order.\n* All the Q-Wallet users with no less than 1 QGas balance in their Q-Wallet are eligible to trade their QGas for QLC .\n* The buyback program is expected to buy back a total of 20K QGas for burning later, at the buyback price of 1QGas=%@ QLC which is slightly higher than the average public market price. The 40K QLC traded for QGas will be released to the QLC community.\n* A dedicated QGas buyback pool which is a QGas address will be published to the public.\n* Once the buyback concludes, all the QGas in the pool shall be burnt within 48 hours after the buyback completion.";

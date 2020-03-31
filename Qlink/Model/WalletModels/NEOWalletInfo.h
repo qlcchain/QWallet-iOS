@@ -8,6 +8,8 @@
 
 #import "BBaseModel.h"
 
+@class NEOAssetModel;
+
 @interface NEOWalletInfo : BBaseModel
 
 @property (nonatomic ,strong) NSString *privateKey;
@@ -15,14 +17,30 @@
 //@property (nonatomic ,strong) NSString *scriptHash;
 @property (nonatomic ,strong) NSString *address;
 @property (nonatomic ,strong) NSString *wif;
+@property (nonatomic ,strong) NSNumber *isBackup;
 
+//#pragma mark - OLD
+//- (BOOL)saveToKeyChain_old;
+//+ (void)deleteAllWallet_old;
+//+ (NSArray *)getAllNEOWallet_old;
+//+ (NEOWalletInfo *)getNEOWalletWithAddress_old:(NSString *)address;
+//+ (NSString *)getNEOPrivateKeyWithAddress_old:(NSString *)address;
+//+ (NSString *)getNEOEncryptedKeyWithAddress_old:(NSString *)address;
+//+ (NSString *)getNEOPublickKeyWithAddress_old:(NSString *)address;
+//+ (BOOL)deleteNEOWalletWithAddress_old:(NSString *)address;
+
+#pragma mark - NEW
++ (void)updateNEOWallet_local;
++ (BOOL)deleteAllWallet;
++ (NSArray *)getAllWalletInKeychain;
++ (BOOL)deleteFromKeyChain:(NSString *)address;
 - (BOOL)saveToKeyChain;
-+ (void)deleteAllWallet;
-+ (NSArray *)getAllNEOWallet;
 + (NEOWalletInfo *)getNEOWalletWithAddress:(NSString *)address;
-+ (NSString *)getNEOPrivateKeyWithAddress:(NSString *)address;
 + (NSString *)getNEOEncryptedKeyWithAddress:(NSString *)address;
-+ (NSString *)getNEOPublickKeyWithAddress:(NSString *)address;
-+ (BOOL)deleteNEOWalletWithAddress:(NSString *)address;
++ (NSString *)getNEOPrivateKeyWithAddress:(NSString *)address;
++ (NSString *)getNEOPublicKeyWithAddress:(NSString *)address;
++ (NSString *)getNEOPublicKeyWithPrivateKey:(NSString *)privateKey;
++ (void)createNEOWalletInAuto;
++ (BOOL)haveNEOWallet;
 
 @end

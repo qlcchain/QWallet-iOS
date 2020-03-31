@@ -6,7 +6,9 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "BBaseModel.h"
+#import "ProjectEnum.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,8 +45,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)refreshCurrentWallet;
 + (void)setDefaulNEOWallet:(NSString *)address;
 
++ (UIImage *)walletIcon:(WalletType)type;
++ (BOOL)validAddress:(NSString *)address tokenChain:(NSString *)tokenChain;
++ (WalletType)walletTypeFromTokenChain:(NSString *)tokenChain;
++ (NSString *)chainFromTokenChain:(NSString *)tokenChain;
+
++ (void)handlerCreateWalletInAuto;
+
 #pragma mark - ETH
 + (void)refreshETHWallet;
++ (BOOL)haveETHWallet;
 
 #pragma mark - NEO
 + (void)refreshNEOWallet;
@@ -54,6 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - QLC
 + (void)refreshQLCWallet;
++ (BOOL)haveQLCWallet;
 
 
 @end

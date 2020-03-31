@@ -12,6 +12,8 @@
 #import "NEOWalletUtil.h"
 //#import "VPNOperationUtil.h"
 
+#import "GlobalConstants.h"
+
 @implementation MyAssetsView
 
 //- (IBAction)clickCancel:(id)sender {
@@ -78,7 +80,7 @@
  */
 - (void)checkData {
     NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"order by %@ desc",bg_sqlKey(@"bg_id")]];
-//    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ order by %@ desc",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([ConfigUtil isMainNetOfServerNetwork])),bg_sqlKey(@"bg_id")]];
+//    NSArray *finfAlls = [VPNInfo bg_find:VPNREGISTER_TABNAME where:[NSString stringWithFormat:@"where %@=%@ order by %@ desc",bg_sqlKey(@"isMainNet"),bg_sqlValue(@([ConfigUtil isMainNetOfChainNetwork])),bg_sqlKey(@"bg_id")]];
     
     //NSArray* finfAlls = [VPNInfo bg_findAll:VPNREGISTER_TABNAME];
     if (self.soureArray.count > 0) { // 更新keyChain
@@ -124,7 +126,7 @@
  获取资产信息
  */
 - (void) sendGetAssetsRequest {
-    [RequestService requestWithUrl:ssIdquerys_Url params:@{@"ssIds":[self getVPNNames]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:ssIdquerys_Url params:@{@"ssIds":[self getVPNNames]} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         //[self hideHud];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             NSArray *dataArray = [responseObject objectForKey:Server_Data];

@@ -10,6 +10,7 @@
 #import "ZXChatHelper.h"
 #import "UIDevice+TL.h"
 #import "NSDate+Category.h"
+#import "GlobalConstants.h"
 
 static UILabel *messageTextLab = nil;
 static UILabel *messageNameLab = nil;

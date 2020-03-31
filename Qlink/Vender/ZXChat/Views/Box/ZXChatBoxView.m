@@ -11,6 +11,7 @@
 #import "UIDevice+TL.h"
 //#import "UITextView+PlaceHolder.h"
 #import "UITextView+ZWPlaceHolder.h"
+#import "GlobalConstants.h"
 
 #define     CHATBOX_BUTTON_WIDTH        37
 //#define     HEIGHT_TEXTVIEW             HEIGHT_CHATBOX * 0.74

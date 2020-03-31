@@ -11,6 +11,11 @@
 #define UserModel_Local @"UserModel_Local"
 #define UserModel_LastLoginAccount @"UserModel_LastLoginAccount"
 
+static NSString *const kyc_success = @"KYC_SUCCESS";
+static NSString *const kyc_not_upload = @"NOT_UPLOAD";
+static NSString *const kyc_uploaded = @"UPLOADED";
+static NSString *const kyc_fail = @"KYC_FAIL";
+
 @interface UserModel : BBaseModel
 
 @property (nonatomic, copy) NSString *email; // = "";
@@ -28,9 +33,13 @@
 @property (nonatomic, copy) NSNumber *number;
 @property (nonatomic, copy) NSNumber *totalInvite;
 @property (nonatomic, copy) NSString *vStatus; // 验证状态[NOT_UPLOAD/未上传,UPLOADED/已上传,KYC_SUCCESS/KYC成功,KYC_FAIL/KYC失败]
+@property (nonatomic, copy) NSString *bindDate;
+@property (nonatomic, copy) NSString *qlcAddress; // 领取奖励 绑定的qlcAddress
 
 + (NSString *)getOwnP2PId;
-+ (void)storeUser:(UserModel *)model useLogin:(BOOL)useLogin;
++ (NSString *)getTopupP2PId;
++ (void)storeUserByID:(UserModel *)model;
++ (void)storeUserByLogin:(UserModel *)model;
 + (UserModel *)fetchUserOfLogin;
 + (UserModel *)fetchUser:(NSString *)account;
 + (void)logout:(NSString *)account;
@@ -42,5 +51,8 @@
 + (void)storeLastLoginAccount:(NSString *)account; // 刷新最后一次登录的账号
 + (NSString *)getLastLoginAccount; // 获取最后一次登录的账号
 + (void)deleteOneAccount;
++ (BOOL)isBind; // 领取QGAS
++ (BOOL)isTestAccount;
++ (void)removeMul;
 
 @end

@@ -10,6 +10,8 @@
 #import "AddMarketsCell.h"
 #import "BinaTpcsModel.h"
 
+//#import "GlobalConstants.h"
+
 #define AddMarkets_Select_Tag 2950
 
 @interface TokenSelectModel : BBaseModel
@@ -140,7 +142,7 @@
     kWeakSelf(self);
     NSDictionary *params = @{};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl:binaGetTokens_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl5:binaGetTokens_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.sourceArr removeAllObjects];

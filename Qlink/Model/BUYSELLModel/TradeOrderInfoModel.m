@@ -8,6 +8,7 @@
 
 #import "TradeOrderInfoModel.h"
 #import "OTCUtil.h"
+#import "NSString+RemoveZero.h"
 
 @implementation TradeOrderInfoModel
 
@@ -17,6 +18,10 @@
 
 - (NSString *)showNickName {
     return [OTCUtil getShowNickName:_nickname];
+}
+
+- (NSString *)unitPrice_str {
+    return [NSString doubleToString:_unitPrice];
 }
 
 @end

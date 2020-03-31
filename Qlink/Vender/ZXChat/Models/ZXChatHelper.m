@@ -9,7 +9,7 @@
 #import "ZXChatHelper.h"
 #import "ChatFace.h"
 #import "ChatFaceHeleper.h"
-
+#import "GlobalConstants.h"
 
 @implementation ZXChatHelper
 

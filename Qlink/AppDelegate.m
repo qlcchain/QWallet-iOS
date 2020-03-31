@@ -22,7 +22,7 @@
 #import "SystemUtil.h"
 #import "WalletTransferUtil.h"
 #import "NEOTransferUtil.h"
-#import "MiPushSDK.h"
+//#import "MiPushSDK.h"
 #import "LoginSetPWViewController.h"
 #import "LoginInputPWViewController.h"
 #import "WalletCommonModel.h"
@@ -37,10 +37,19 @@
 #import "FingerprintVerificationUtil.h"
 #import "NSDate+Category.h"
 #import "UserUtil.h"
+#import "QLogHelper.h"
+#import "ClaimQGASTipView.h"
+#import "NSString+Base64.h"
+#import "JPUSHService.h"
+#import "JPushTagHelper.h"
+#import "TopupPayOrderTodo.h"
+#import "DailyEarningsViewController.h"
+#import "NEOWalletInfo.h"
+#import "OTCOrderTodo.h"
+#import "TradeOrderDetailViewController.h"
+#import <QLCFramework/QLCDPKIManager.h>
 
-@import Firebase;
-
-@interface AppDelegate () <MiPushSDKDelegate, UNUserNotificationCenterDelegate, UIApplicationDelegate> {
+@interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
 }
 
@@ -57,19 +66,29 @@
     [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
     
 //    [UserModel deleteOneAccount];
-//    [NEOWalletUtil deleteAllWallet];
+//    [NEOWalletInfo deleteAllWallet];
 //    [LoginPWModel deleteLoginPW];
 //    [WalletCommonModel deleteAllWallet];
 //    [UserModel cleanAllUser];
     
-    [KeychainUtil resetKeyService]; // 先重置keyservice  以后1掉
+//    NSDate *date = [NSDate date];
+//    NSInteger timestamp = [NSDate getTimestampFromDate:date];
+//    NSLog(@"timestamp = %@",@(timestamp));
+    // 1577958919  // 北京   17：55
+    // 1577959002  // 美国   4：56    北京   17：56
+    // 1577959108  // 日本   18：58   北京   17：58
+        
+    
+    
+    [KeychainUtil resetKeyService]; // 重置keyservice
+    [NEOWalletInfo updateNEOWallet_local]; // 更新NEO本地
     
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
    // 配置Firebase
-    [FIRApp configure];
+    [self configFirebase];
     // 配置DDLog
     [self configDDLog];
     // 配置app语言
@@ -108,8 +127,10 @@
     [self setUserNotifationSettings:application];
     // 配置群聊
     [self configChat];
-    // 配置小米推送
-    [self configPush];
+//    // 配置小米推送
+//    [self configPush];
+    // 配置JPush
+    [self configJPush:launchOptions];
     // Root
 //    [self setTabbarRoot];
     // 是否需要显示引导页
@@ -155,20 +176,66 @@
     
     _tabbarC = [[QlinkTabbarViewController alloc] init];
     self.window.rootViewController = _tabbarC;
-    [self jumpToWallet];
+//    [self jumpToWallet];
     
     [SystemUtil checkAPPUpdate]; // 检查app更新
+    
+//    NSDictionary *params = @{@"account":@"111",@"p2pId":@"sgsd",@"productId":@"sagag",@"areaCode":@"agag",@"phoneNumber":@"0099",@"amount":@"222",@"txid":@"1234567",@"payTokenId":@"sndksdj"};
+//    TopupPayOrderParamsModel *paramsM = [TopupPayOrderParamsModel getObjectWithKeyValues:params];
+//    [[TopupPayOrderTodo shareInstance] savePayOrder:paramsM];
+//    [[TopupPayOrderTodo shareInstance] handlerPayOrderSuccess:paramsM];
+//    [[TopupPayOrderTodo shareInstance] cleanPayOrder];
+    
+    [self startTodo];
 }
 
-- (void)jumpToWallet {
-    if (kAppD.needFingerprintVerification) {
-        [kAppD presentFingerprintVerify:^{
-            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
-        }];
-    } else {
-        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
-    }
+- (void)startTodo {
+    [[TopupPayOrderTodo shareInstance] checkLocalPayOrder];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Entrust_Buy];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Entrust_Sell];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Buysell_Sell];
+    [[OTCOrderTodo shareInstance] checkLocalPayOrder_Buysell_Buy_Confirm];
 }
+
+//- (void)jumpToWallet {
+//    if (kAppD.needFingerprintVerification) {
+//        [kAppD presentFingerprintVerify:^{
+//            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+//        }];
+//    } else {
+//        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+//    }
+//}
+//
+//- (void)jumpToOTC {
+//    kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
+//}
+//
+//- (void)jumpToTopup {
+//    kAppD.tabbarC.selectedIndex = TabbarIndexTopup;
+//}
+//
+//- (void)jumpToDailyEarnings {
+//    BOOL haveLogin = [UserModel haveLoginAccount];
+//    if (!haveLogin) {
+//        [kAppD presentLoginNew];
+//        return;
+//    }
+//    
+//    if (![UserModel isBind]) {
+//        [ClaimQGASTipView show:^{
+//        }];
+//        return;
+//    }
+//    
+//    DailyEarningsViewController *vc = [DailyEarningsViewController new];
+//    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+//}
+//
+//- (void)jumpToOTCTradeOrderDetail {
+//    TradeOrderDetailViewController *vc = [TradeOrderDetailViewController new];
+//    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+//}
 
 #pragma mark - Login
 //- (void)setRootLoginNew {
@@ -181,6 +248,7 @@
     LoginViewController *vc = [[LoginViewController alloc] init];
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     __weak typeof(vc) weakvc = vc;
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
         if ([UserModel haveAccountInLocal]) {
             [weakvc showLastLoginAccount];
@@ -193,9 +261,14 @@
     if (![UserModel haveLoginAccount]) {
         return;
     }
+    [UserModel removeMul];
     UserModel *userM = [UserModel fetchUserOfLogin];
     userM.isLogin = @(NO);
-    [UserModel storeUser:userM useLogin:NO];
+    [UserModel storeUserByID:userM];
+    
+    [JPushTagHelper cleanTags]; // 清除tag
+    
+    [HWUserdefault insertObj:@(YES) withkey:Join_Telegram_Key]; // 设置加入电报key
     
     [[NSNotificationCenter defaultCenter] postNotificationName:User_Logout_Success_Noti object:nil];
 }
@@ -242,10 +315,10 @@
 //    [[self getCurrentVC] presentViewController:nav animated:YES completion:^{}];
 }
 
-#pragma mark - 配置小米推送
-- (void)configPush {
-    [MiPushSDK registerMiPush:self];
-}
+//#pragma mark - 配置小米推送
+//- (void)configPush {
+//    [MiPushSDK registerMiPush:self];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -271,6 +344,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];//进入前台取消应用消息图标
+    [JPUSHService setBadge:0];
     
     // 进入后台大于5分钟需要开启指纹验证
     NSInteger seconds = [[HWUserdefault getObjectWithKey:In_Background_Time] integerValue];
@@ -292,6 +366,7 @@
 //        [[RunInBackground sharedBg] stopAudioPlay];
 //        isBackendRun = NO;
 //    }
+    
     
 }
 
@@ -321,17 +396,17 @@
 //}
 
 #pragma mark - UIApplicationDelegate
-- (void)application:(UIApplication *)app
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // 注册APNS成功, 注册deviceToken
-    [MiPushSDK bindDeviceToken:deviceToken];
-}
-
-- (void)application:(UIApplication *)app
-didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    // 注册APNS失败
-    // 自行处理
-}
+//- (void)application:(UIApplication *)app
+//didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//    // 注册APNS成功, 注册deviceToken
+//    [MiPushSDK bindDeviceToken:deviceToken];
+//}
+//
+//- (void)application:(UIApplication *)app
+//didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+//    // 注册APNS失败
+//    // 自行处理
+//}
 
 #pragma mark - 注册本地通知
 - (void) setUserNotifationSettings:(UIApplication *) application
@@ -387,74 +462,80 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 }
 
 #pragma mark - 收到推送
-- ( void )application:( UIApplication *)application didReceiveRemoteNotification:( NSDictionary *)userInfo
-{
-    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
-    // 使用此方法后，所有消息会进行去重，然后通过miPushReceiveNotification:回调返回给App
-}
-
-// iOS10新加入的回调方法
-// 应用在前台收到通知
-- (void) userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {
-    NSDictionary * userInfo = notification.request.content.userInfo;
-    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
-    }
-    
-    if ([notification.request.trigger isKindOfClass:[UNTimeIntervalNotificationTrigger class]]) {
-        NSDictionary *dic = notification.request.content.userInfo;
-        [self showNotificationAlertViewWtihDic:dic];
-    }
-    
-    //    completionHandler(UNNotificationPresentationOptionAlert);
-}
-
-// 点击通知进入应用
-- (void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {
-    NSDictionary * userInfo = response.notification.request.content.userInfo;
-    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
-    }
-    completionHandler();
-}
-
-#pragma mark - MiPushSDKDelegate
-- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data {
-    // 请求成功
-    // 可在此获取regId
-    DDLogDebug(@"小米推送请求方法 selector = %@ data = %@",selector,data);
-    if ([selector isEqualToString:@"bindDeviceToken:"]) {
-        DDLogDebug(@"regid = %@", data[@"regid"]);
-    }
-}
-
-- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data {
-    // 请求失败
-    DDLogDebug(@"小米推送失败方法  selector = %@  error = %i  data = %@",selector,error,data);
-}
+//- ( void )application:( UIApplication *)application didReceiveRemoteNotification:( NSDictionary *)userInfo
+//{
+//    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
+//    // 使用此方法后，所有消息会进行去重，然后通过miPushReceiveNotification:回调返回给App
+//}
+//
+//// iOS10新加入的回调方法
+//// 应用在前台收到通知
+//- (void) userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {
+//    NSDictionary * userInfo = notification.request.content.userInfo;
+//    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+//    }
+//
+//    if ([notification.request.trigger isKindOfClass:[UNTimeIntervalNotificationTrigger class]]) {
+//        NSDictionary *dic = notification.request.content.userInfo;
+//        [self showNotificationAlertViewWtihDic:dic];
+//    }
+//
+//    //    completionHandler(UNNotificationPresentationOptionAlert);
+//}
+//
+//// 点击通知进入应用
+//- (void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {
+//    NSDictionary * userInfo = response.notification.request.content.userInfo;
+//    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+//    }
+//    completionHandler();
+//}
+//
+//#pragma mark - MiPushSDKDelegate
+//- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data {
+//    // 请求成功
+//    // 可在此获取regId
+//    DDLogDebug(@"小米推送请求方法 selector = %@ data = %@",selector,data);
+//    if ([selector isEqualToString:@"bindDeviceToken:"]) {
+//        DDLogDebug(@"regid = %@", data[@"regid"]);
+//    }
+//}
+//
+//- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data {
+//    // 请求失败
+//    DDLogDebug(@"小米推送失败方法  selector = %@  error = %i  data = %@",selector,error,data);
+//}
 
 
 #pragma mark - 第三方app传输文件回调
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_9_0
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
-{
-
-    return YES;
-}
-
-#else
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_9_0
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
+//{
+//
+//    return YES;
+//}
+//
+//#else
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options
 {
-    if ([_window.rootViewController isKindOfClass:[QlinkTabbarViewController class]]) {
-        [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:.5f];
-    } else {
-        NSTimeInterval timeI = [LaunchViewController getGifDuration];
-        [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:timeI + 0.2f];
+//    if ([_window.rootViewController isKindOfClass:[QlinkTabbarViewController class]]) {
+//        [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:.5f];
+//    } else {
+//        NSTimeInterval timeI = [LaunchViewController getGifDuration];
+//        [self performSelector:@selector(showVPNFileView:) withObject:url afterDelay:timeI + 0.2f];
+//    }
+    
+    // H5微信支付的回调
+    if ([url.scheme isEqualToString:Weixin_Pay_Url_Scheme]) {
+        NSLog(@"********走微信支付回调 %@",url);
+        [[NSNotificationCenter defaultCenter] postNotificationName:Weixin_Pay_Back_Noti object:nil];
     }
     
     return YES;
 }
-#endif
+//#endif
 
 - (void) showVPNFileView:(NSURL *) url {
     NSString *fileURL = url.absoluteString;
@@ -475,12 +556,15 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
 #pragma mark - 点击推送启动app
 - (void)handleLaunchWithPush:(NSDictionary *)launchOptions {
     // 处理点击通知打开app的逻辑
-    NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(userInfo){//推送信息
-        NSString *messageId = [userInfo objectForKey:@"_id_"];
-        if (messageId!=nil) {
-            [MiPushSDK openAppNotify:messageId];
-        }
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(userInfo) {
+        // 小米推送
+//        NSString *messageId = [userInfo objectForKey:@"_id_"];
+//        if (messageId!=nil) {
+//            [MiPushSDK openAppNotify:messageId];
+//        }
+        // 极光推送
+        [self handlerPushJump:userInfo isTapLaunch:YES];
     }
 }
 

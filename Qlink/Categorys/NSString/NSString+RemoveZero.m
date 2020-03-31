@@ -10,10 +10,10 @@
 
 @implementation NSString (RemoveZero)
 
-- (NSString *)removeFloatAllZero {
-    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:self];
-    return [dn stringValue];
-}
+//- (NSString *)removeFloatAllZero {
+//    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:self];
+//    return [dn stringValue];
+//}
 
 - (NSString *)show4floatStr {
     NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:4 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
@@ -28,24 +28,50 @@
     return [dn stringValue];
 }
 
-+ (double)doubleFormString:(NSString *)str {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *num = [numberFormatter numberFromString:str];
-    double dou = num.doubleValue;
-    return dou;
+- (NSString *)showfloatStrWith2Decimal {
+    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumber *dn = [[NSDecimalNumber decimalNumberWithString:self] decimalNumberByRoundingAccordingToBehavior:hander];
+    return [NSString stringWithFormat:@"%.2f",[dn floatValue]];
 }
 
-+ (NSString *)stringFromDouble:(double)doubleVal {
-    NSString* stringValue = @"0.00";
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    formatter.usesSignificantDigits = true;
-    formatter.maximumSignificantDigits = 100;
-    formatter.groupingSeparator = @"";
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    stringValue = [formatter stringFromNumber:@(doubleVal)];
-    
-    return stringValue;
+//+ (double)doubleFormString:(NSString *)str {
+//    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+//    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    NSNumber *num = [numberFormatter numberFromString:str];
+//    double dou = num.doubleValue;
+//    return dou;
+//}
+//
+//+ (NSString *)stringFromDouble:(double)doubleVal {
+//    NSString* stringValue = @"0.00";
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+//    formatter.usesSignificantDigits = true;
+//    formatter.maximumSignificantDigits = 100;
+//    formatter.groupingSeparator = @"";
+//    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    stringValue = [formatter stringFromNumber:@(doubleVal)];
+//
+//    return stringValue;
+//}
+
+
+//+ (NSString *)doubleToString:(double)doubleV {
+//    NSString *doubleString        = [NSString stringWithFormat:@"%lf", doubleV];
+//    NSDecimalNumber *decNumber    = [NSDecimalNumber decimalNumberWithString:doubleString];
+//    return [decNumber stringValue];
+//}
+
++ (NSString *)doubleToString:(double)doubleV {
+    int precision = 100;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//    formatter.numberStyle = NSNumberFormatterScientificStyle;
+    formatter.usesSignificantDigits = YES;
+    formatter.minimumFractionDigits = precision;
+    formatter.maximumFractionDigits = precision;
+    NSString *result = [formatter stringFromNumber:@(doubleV)];
+    return result;
 }
+
 
 @end
+

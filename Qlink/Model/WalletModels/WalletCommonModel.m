@@ -15,7 +15,9 @@
 #import "ETHWalletInfo.h"
 #import "EOSWalletInfo.h"
 #import "QLCWalletInfo.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
+#import "NEOWalletInfo.h"
+#import <eosFramework/RegularExpression.h>
 
 @implementation WalletCommonModel
 
@@ -26,8 +28,8 @@
 
 + (void)walletInit {
     [ETHWalletInfo refreshTrustWallet]; // 如果keychain中的钱包在Trust中没有则自动导入
-    BOOL haveEthWallet = TrustWalletManage.sharedInstance.isHavaWallet;
-    BOOL haveNeoWallet = [NEOWalletInfo getAllNEOWallet].count>0?YES:NO;
+    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
+    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
     BOOL haveEosWallet = NO;
     if (haveEthWallet) {
         [WalletCommonModel refreshETHWallet];
@@ -186,7 +188,7 @@
     } else if (currentWalletM.walletType == WalletTypeNEO) {
         [WalletCommonModel setDefaulNEOWallet:currentWalletM.address];
     } else if (currentWalletM.walletType == WalletTypeEOS) {
-        //TODO:切换EOS钱包
+        
     } else if (currentWalletM.walletType == WalletTypeQLC) {
         [WalletCommonModel switchQLCWallet:currentWalletM.address];
     }
@@ -200,15 +202,15 @@
 + (void)setDefaulNEOWallet:(NSString *)address {
     NSString *privateKey = [NEOWalletInfo getNEOPrivateKeyWithAddress:address];
     // 得到当前钱包对象
-    [NEOWalletManage.sharedInstance getWalletWithPrivatekeyWithPrivatekey:privateKey];
+    [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privateKey];
     // 选取交易网络
     [NEOWalletManage configO3NetworkWithIsMain:[NEOWalletUtil isMainNetOfNeo]];
     // 重新初始化 Account->将Account设为当前钱包
     [NEOWalletManage.sharedInstance configureAccountWithMainNet:[NEOWalletUtil isMainNetOfNeo]];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-        // 查询当前NEO钱包资产
-        [NeoTransferUtil sendGetBalanceRequest];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+//        // 查询当前NEO钱包资产
+//        [NeoTransferUtil sendGetBalanceRequest];
+//    });
     if ([NEOWalletManage.sharedInstance haveDefaultWallet]) {
         DDLogDebug(@"重新选择neo钱包：%@",[NEOWalletManage.sharedInstance getWalletAddress]);
     }
@@ -251,6 +253,87 @@
     return result;
 }
 
++ (UIImage *)walletIcon:(WalletType)type {
+    UIImage *image = nil;
+    if (type == WalletTypeEOS) {
+        image = [UIImage imageNamed:@"eos_wallet"];
+    } else if (type == WalletTypeQLC) {
+        image = [UIImage imageNamed:@"qlc_wallet"];
+    } else if (type == WalletTypeETH) {
+        image = [UIImage imageNamed:@"eth_wallet"];
+    } else if (type == WalletTypeNEO) {
+        image = [UIImage imageNamed:@"neo_wallet"];
+    }
+    return image;
+}
+
++ (BOOL)validAddress:(NSString *)address tokenChain:(NSString *)tokenChain {
+    BOOL addressValid = NO;
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        addressValid = [QLCWalletManage.shareInstance walletAddressIsValid:address];
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        addressValid = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:address];
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        addressValid = [RegularExpression validateEosAccountName:address];
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        addressValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:address];
+    }
+    
+    return addressValid;
+}
+
++ (WalletType)walletTypeFromTokenChain:(NSString *)tokenChain {
+    WalletType type = WalletTypeAll;
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        type = WalletTypeQLC;
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        type = WalletTypeNEO;
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        type = WalletTypeEOS;
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        type = WalletTypeETH;
+    }
+    
+    return type;
+}
+
++ (NSString *)chainFromTokenChain:(NSString *)tokenChain {
+    NSString *chain = nil;
+    if ([tokenChain isEqualToString:QLC_Chain]) {
+        chain = @"QLC";
+    } else if ([tokenChain isEqualToString:NEO_Chain]) {
+        chain = @"NEO";
+    } else if ([tokenChain isEqualToString:EOS_Chain]) {
+        chain = @"EOS";
+    } else if ([tokenChain isEqualToString:ETH_Chain]) {
+        chain = @"ETH";
+    }
+    
+    return chain;
+}
+
++ (void)handlerCreateWalletInAuto {
+    // 如果当前有钱包  自动生成暂无的钱包（ETH\QLC\NEO）不包括EOS
+    BOOL haveEthWallet = [ETHWalletInfo haveETHWallet];
+    BOOL haveNeoWallet = [NEOWalletInfo haveNEOWallet];
+    BOOL haveQlcWallet = [QLCWalletInfo haveQLCWallet];
+    if (!haveEthWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [ETHWalletInfo createETHWalletInAuto];
+        });
+    }
+    if (!haveNeoWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [NEOWalletInfo createNEOWalletInAuto];
+        });
+    }
+    if (!haveQlcWallet) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+            [QLCWalletInfo createQLCWalletInAuto];
+        });
+    }
+}
+
 #pragma mark - ETH
 + (void)refreshETHWallet {
     NSArray *ethWalletArr = [TrustWalletManage.sharedInstance getAllWalletModel];
@@ -273,7 +356,7 @@
 
 #pragma mark - NEO
 + (void)refreshNEOWallet {
-    NSArray *walletArr = [NEOWalletInfo getAllNEOWallet];
+    NSArray *walletArr = [NEOWalletInfo getAllWalletInKeychain];
     // 赋值名字
     [walletArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NEOWalletInfo *walletM = obj;
@@ -295,7 +378,7 @@
 + (NSString *)getDefaultNEOWalletAddress {
     NSString *address = [HWUserdefault getObjectWithKey:Default_NEOWallet_Address];
     if (address == nil) {
-        NSArray *walletArr = [NEOWalletInfo getAllNEOWallet];
+        NSArray *walletArr = [NEOWalletInfo getAllWalletInKeychain];
         if (walletArr.count > 0) {
             NEOWalletInfo *walletM = walletArr.firstObject;
             address = walletM.address;
@@ -336,6 +419,16 @@
         commonM.isSelect = NO;
         [WalletCommonModel addWalletModel:commonM];
     }];
+}
+
++ (BOOL)haveQLCWallet {
+    NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeQLC];
+    return arr.count>0?YES:NO;
+}
+
++ (BOOL)haveETHWallet {
+    NSArray *arr = [WalletCommonModel getWalletModelWithType:WalletTypeETH];
+    return arr.count>0?YES:NO;
 }
 
 

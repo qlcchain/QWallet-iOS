@@ -7,6 +7,7 @@
 //
 
 #import "HMScannerMaskView.h"
+#import "GlobalConstants.h"
 
 @implementation HMScannerMaskView
 
@@ -30,7 +31,7 @@
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    [RGB(220, 220, 220) setFill];
+    [UIColor_RGB(220, 220, 220) setFill];
     //[[UIColor colorWithWhite:RGB(231.0, 231.0, 231.0) alpha:0.9f] setFill];
     CGContextFillRect(ctx, rect);
     

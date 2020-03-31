@@ -7,6 +7,7 @@
 //
 
 #import "LocationMode.h"
+#import "NSString+EmptyUtil.h"
 
 @implementation LocationMode
 

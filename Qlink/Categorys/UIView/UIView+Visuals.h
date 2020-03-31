@@ -76,4 +76,6 @@
 //获取截图
 - (UIImage *) getImageFromView;
 
+- (void)addCornerWithType:(UIRectCorner)aCorners size:(CGSize)aSize;
+
 @end

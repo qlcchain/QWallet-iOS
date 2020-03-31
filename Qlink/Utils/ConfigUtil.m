@@ -7,10 +7,11 @@
 //
 
 #import "ConfigUtil.h"
+#import "GlobalConstants.h"
 
 @interface ConfigUtil ()
 
-@property (nonatomic, strong) NSNumber *mainNet;
+//@property (nonatomic, strong) NSNumber *mainNet;
 
 @end
 
@@ -25,20 +26,41 @@
     return sharedObj;
 }
 
-+ (void)setServerNetworkEnvironment:(BOOL)mainNet {
-    [ConfigUtil shareInstance].mainNet = @(mainNet);
-}
+//+ (void)setServerNetworkEnvironment:(BOOL)mainNet {
+//    [ConfigUtil shareInstance].mainNet = @(mainNet);
+//}
 
 + (BOOL)isMainNetOfServerNetwork {
-    NSNumber *mainNet = [ConfigUtil shareInstance].mainNet;
-    if (mainNet == nil || [mainNet boolValue] == YES) {
+    NSString *environment = [HWUserdefault getObjectWithKey:QLCServer_Environment];
+    if (environment == nil || [environment integerValue] == 1) {
         return YES;
     } else {
         return NO;
     }
 }
+
++ (BOOL)isMainNetOfChainNetwork {
+    NSString *environment = [HWUserdefault getObjectWithKey:QLCChain_Environment];
+    if (environment == nil || [environment integerValue] == 1) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (NSDictionary *)getConfig_ChainNetwork {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = @"";
+    if ([ConfigUtil isMainNetOfChainNetwork]) {
+        path = [bundle pathForResource:@"ConfigurationRelease" ofType:@"plist"];
+    } else {
+        path = [bundle pathForResource:@"ConfigurationDebug" ofType:@"plist"];
+    }
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
     
-+ (NSDictionary *)getConfig {
++ (NSDictionary *)getConfig_ServerNetwork {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = @"";
     if ([ConfigUtil isMainNetOfServerNetwork]) {
@@ -50,24 +72,77 @@
     return config;
 }
 
++ (NSDictionary *)getReleaseConfig {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"ConfigurationRelease" ofType:@"plist"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
+
++ (NSDictionary *)getDebugConfig {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"ConfigurationDebug" ofType:@"plist"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
+
 + (NSString *)getServerDomain {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *serverDomain = config[@"ServerDomain"];
 //    NSLog(@"配置文件url = %@",serverDomain);
     return serverDomain;
 }
+
++ (NSString *)getReleaseServerDomain {
+    NSDictionary *config = [ConfigUtil getReleaseConfig];
+    NSString *serverDomain = config[@"ServerDomain"];
+    return serverDomain;
+}
+
++ (NSString *)getDebugServerDomain {
+    NSDictionary *config = [ConfigUtil getDebugConfig];
+    NSString *serverDomain = config[@"ServerDomain"];
+    return serverDomain;
+}
     
 + (NSString *)getMIFI {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *mifi = config[@"MIFI"];
     return mifi;
 }
 
 + (NSString *)getChannel {
-    NSDictionary *config = [ConfigUtil getConfig];
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
     NSString *channel = config[@"Channel"];
     return channel;
 }
+
++ (NSString *)get_qlc_staking_node {
+    NSDictionary *config = [ConfigUtil getConfig_ServerNetwork];
+    NSString *channel = config[@"qlc_staking_node"];
+    return channel;
+}
+
++ (NSString *)get_qlc_node_release {
+    NSDictionary *config = [ConfigUtil getReleaseConfig];
+    NSString *channel = config[@"qlc_node"];
+    return channel;
+}
+
++ (NSString *)get_qlc_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_ChainNetwork];
+    NSString *channel = config[@"qlc_node"];
+    return channel;
+}
+
+
+
+
+
+
+
+
+
 
 + (void)setLocalUsingCurrency:(NSString *)currency {
     [HWUserdefault insertObj:currency withkey:Local_Currency];

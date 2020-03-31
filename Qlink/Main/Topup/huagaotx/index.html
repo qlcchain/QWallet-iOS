@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>手机支付测试</title>
+  <script type="text/javascript" src="js/zepto.min.js"></script>
+  <script src="js/common.js"></script>
+  <style type="text/css">
+  *{margin: 8px;}
+  button,input{padding: 5px;}
+  </style>
+</head>
+
+<body>
+  <!-- <div id='box'>
+    <header id='header'>支付</header>
+    <dl>
+        <dt>充值号码</dt>
+        <dd>用来计算的仪器 ... ...</dd>
+        <dt>支付方式</dt>
+        <dd>以视觉方式显示信息的装置 ... ...</dd>
+     </dl>
+  </div> -->
+
+  <button id='buy'>获得商品明细 </button><br>
+  <select id="goods_spec_value">
+    <option value ="100274">"100元"</option>
+    <option value ="100275">"200元"</option>
+    <option value="100276">"300元"</option>
+    <option value="100277">"500元"</option>
+    <option value="100296">"0.1"</option>
+  </select><br>
+  <button id='charge'>确定手机号 </button><br>
+  <button id='buy_step1'>购卖步骤1 </button><br>
+  <button id='buy_step2'>购卖步骤2 </button><br>
+  <input type="tel" id='sn'><br>
+  <button id='wxsn'>生成订单号</button>
+  <div id='content' style="width:720px">
+    <P></P>
+    <P></P>
+  </div>
+  <div id='debug'>
+
+  </div>
+  <script type="text/javascript">
+    var t = function (e, t) {
+      e = parseFloat(e) || 0;
+      if (e < 1) {
+        return ""
+      }
+      var o = new Date;
+      o.setTime(e * 1e3);
+      var a = "" + o.getFullYear() + "-" + (1 + o.getMonth()) + "-" + o.getDate();
+      if (t) {
+        a += " " + o.getHours() + ":" + o.getMinutes() + ":" + o.getSeconds()
+      }
+      return a
+    };
+    var o = function (e, t) {
+      e = parseInt(e) || 0;
+      t = parseInt(t) || 0;
+      var o = 0;
+      if (e > 0) {
+        o = e
+      }
+      if (t > 0 && o > 0 && t < o) {
+        o = t
+      }
+      return o
+    };
+
+    function toPay(a, e, p) {
+      $.ajax({
+        type: "post",
+        url: ApiUrl + "/mobile.php?act=" + e + "&op=" + p,
+        data: {
+          key: getCookie("key"),
+          pay_sn: a,
+          trace_id: 'mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd'
+        },
+        dataType: "json",
+        success: function (p) {
+          console.log('toPay', p);
+          $("#debug").text(JSON.stringify(p) ||p)
+          console.log(p.datas.pay_info.pay_sn)
+          $("#sn").val(`${p.datas.pay_info.pay_sn}`);
+
+        }
+      })
+      
+    }
+
+    var apihtml = 'https://shop.huagaotx.cn/wap/tmpl/order/buy_step1_1.html?goods_id=100296&buynum=1&mb=MTU5ODkyNDY4NTE=&trace_id=mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd'
+    ApiUrl = 'https://shop.huagaotx.cn'
+    var key = undefined;
+    var sid = '8a51FmcnWGH-j2F-g9Ry2KT4FyZ_Rr5xcKdt7i96'
+    var trace_id = 'mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd'
+    var cart_id = 0;
+    var vat_hash = 0;
+    $(function () {
+      $('#buy').click(function () {
+        // https://shop.huagaotx.cn/mobile.php?act=goods&op=goods_detail&goods_id=100277&key=
+
+        $.ajax({
+          type: "get",
+          url: `${ApiUrl}/mobile.php?act=goods&op=goods_detail&goods_id=100277&key=`,
+          success: function (e) {
+            let obj = JSON.parse(e)
+            console.log('获得商品明细:', obj)
+            $("#debug").text(e)
+            key = obj.datas
+          }
+        }).done(function (e) { 
+          let obj = JSON.parse(e)
+            console.log('获得商品明细done:', obj)
+            key = obj.datas
+          }).fail(function () { 
+              // on error
+          });
+
+        // $.ajax({
+        //   type:'get',
+        //   url:apihtml,
+        //   success:function(e){
+        //     $('#content').html(e)
+        //   }
+        // })
+
+                
+      })
+
+      $("#goods_spec_value").change(function(e){
+        let val = $(this).val()
+        cart_id = val+'|1'
+      })
+
+
+      $("#charge").click(function () {
+        $.ajax({
+          url: `${ApiUrl}/mobile.php?act=recharge_goods&op=charge`,
+          type: 'post',
+          data: {
+            key: getCookie("key"),
+            sid: sid,
+            trace_id: trace_id,
+            package: getQueryString('package')
+          },
+          dataType: 'json',
+          success: function (e) {
+            console.log('charge:', e)
+            $("#debug").text(JSON.stringify(e) ||e)
+          }
+        });
+      })
+
+
+      // $('#go').click(function () {
+      //   var o = {};
+      //   if (!key) {
+      //     return false
+      //   }
+      //   key = getCookie("key");
+      //   o.key = key;      // e = key = getCookie("key");
+      //   o.cart_id = key.spec_list['544'];  // 商品id
+      //   o.quantity = t;  //一个获得时间日期的函数（固定的）
+      //   $.ajax({
+      //     type: "post",
+      //     url: ApiUrl + "/mobile.php?act=member_vr_buy&op=buy_step1",
+      //     data: o,
+      //     dataType: "json",
+      //     success: function (e) {
+      //       console.log('buy_step1接口:', e)
+      //     }
+      //   })
+
+      // })
+
+      $('#buy_step1').click(function () {
+        var o = {};
+        o.key = getCookie("key");
+        o.ifcart = ''
+        o.cart_id = cart_id||'100296|1'
+        o.address_id = ''
+        o.trace_id = 'mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd'
+        $.ajax({
+          type: "post",
+          url: 'https://shop.huagaotx.cn/mobile.php?act=member_buy&op=buy_step1',
+          data: o,
+          dataType: "json",
+          success: function (e) {
+            console.log('buy_step1接口:', e)
+            console.log(e.datas.vat_hash)
+            vat_hash = e.datas.vat_hash
+           
+            $("#debug").text(JSON.stringify(e) ||e)
+          }
+        })
+
+      })
+
+      $('#buy_step2').click(function () {
+        //  url: ApiUrl + "/mobile.php?act=member_buy&op=buy_step2",
+        /*
+        key: 
+        ifcart: 
+        cart_id: 100296|1 //商品编号|购买数量
+        address_id: 
+        vat_hash: L9vymnfFf_jrf8h0n6COR3k0xJm_FQFEyeg //通过step1获取
+        offpay_hash: 
+        offpay_hash_batch: 
+        pay_name: online //固定的，在线支付
+        invoice_id: 0
+        voucher: undefined|5|undefined  // 暂时认为是固定的
+        pd_pay: 0
+        password: 
+        fcode: 
+        rcb_pay: 0
+        rpt: 
+        pay_message: 5|,  // 暂时认为是固定的
+        account: 15989246851 //要充值的手机号码，必须是移动
+        goods_type: charge //固定的
+        trace_id: mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd //固定的
+        */
+        let o = {
+          key: "",
+          ifcart: "",
+          cart_id: cart_id||'100296|1', //商品编号|购买数量
+          address_id: "",
+          vat_hash:vat_hash|| 'u7sc5intahqBWwoRDzdExav5tj1hMO74mIp',//通过step1获取
+          offpay_hash: "",
+          offpay_hash_batch: "",
+          pay_name: 'online', //固定的，在线支付
+          invoice_id: 0,
+          voucher: 'undefined|5|undefined',  // 暂时认为是固定的
+          pd_pay: 0,
+          password: "",
+          fcode: "",
+          rcb_pay: 0,
+          rpt: "",
+          pay_message: '5|',  // 暂时认为是固定的
+          account: 15989246851, //要充值的手机号码，必须是移动
+          goods_type: 'charge', //固定的
+          trace_id: 'mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd' //固定的
+        }
+        $.ajax({
+          type: "post",
+          url: ApiUrl + "/mobile.php?act=member_buy&op=buy_step2",
+          data: o,
+          dataType: "json",
+          success: function (e) {
+            console.log('buy_step2接口:', e)
+            console.log(e.datas.pay_sn)
+            
+            $("#debug").text(JSON.stringify(e) ||e)
+            toPay(e.datas.pay_sn, "member_buy", "pay")
+            
+          }
+        })
+      })
+
+      $('#wxsn').click(function () {
+        var sn = $("#sn").val()
+        var code = `https://shop.huagaotx.cn/mobile.php?act=member_payment&op=pay_new&key=null&pay_sn=${sn}&password=&rcb_pay=0&pd_pay=0&payment_code=wxpay_jsapi&trace_id=mm_1000001_998902_sdkfalsdhfoaieofslkdfjlasjd`
+        //$("#content").html(code)
+        $cp = $("#content p")
+        $cp.eq(0).html(code)
+        $cp.eq(1).html(`<a href="${code}">确认支付</a>`)
+
+      })
+    });
+
+
+
+  </script>
+</body>
+
+</html>

@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *unitPrice;// = "0.001";
 @property (nonatomic, strong) NSString *usdtAmount;// = "0.1";
 @property (nonatomic, strong) NSString *appealStatus;
+@property (nonatomic, strong) NSString *payToken;// = QLC;
+@property (nonatomic, strong) NSString *payTokenChain;// = "NEO_CHAIN";
+@property (nonatomic, strong) NSString *tradeToken;// = QGAS;
+@property (nonatomic, strong) NSString *tradeTokenChain;// = "QLC_CHAIN";
 
 @property (nonatomic, strong) NSString *showNickName;
 

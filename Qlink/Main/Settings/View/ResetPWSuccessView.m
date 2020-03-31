@@ -7,6 +7,7 @@
 //
 
 #import "ResetPWSuccessView.h"
+#import "GlobalConstants.h"
 
 @interface ResetPWSuccessView ()
 

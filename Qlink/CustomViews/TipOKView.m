@@ -7,6 +7,7 @@
 //
 
 #import "TipOKView.h"
+#import "GlobalConstants.h"
 
 @interface TipOKView ()
 

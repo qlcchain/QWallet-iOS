@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GlobalConstants.h"
 
 @interface QBaseViewController : UIViewController
 {

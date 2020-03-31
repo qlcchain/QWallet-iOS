@@ -19,6 +19,8 @@
 #import "WalletCommonModel.h"
 #import "UserModel.h"
 
+#import "GlobalConstants.h"
+
 #define TIMER_SEC  35
 #define Time_ReTransfer 60
 
@@ -312,38 +314,38 @@ dispatch_source_t _timer;
 //    return isConnect;
 //}
 
-#pragma -mark 获取资产
-+ (void)sendGetBalanceRequest {
-//    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-    if (![NEOWalletManage.sharedInstance haveDefaultWallet]) {
-        return;
-    }
-    NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
-//    NSString *address = @"AbepoJwqkEhdqprPe9qmBLxPGGF7QDz744";
-    [RequestService requestWithUrl:getTokenBalance_Url params:@{@"address":address} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
-            NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
-            if(dataDic)  {
-                kAppD.balanceInfo = [BalanceInfo mj_objectWithKeyValues:dataDic];
-            } else {
-                kAppD.balanceInfo = nil;
-            }
-        } else {
-            kAppD.balanceInfo = nil;
-            DDLogDebug(@"获取资产失败");
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        kAppD.balanceInfo = nil;
-        DDLogDebug(@"获取资产失败：%@",error.description);
-        requestCont ++;
-        if (requestCont <2) {
-            [NeoTransferUtil sendGetBalanceRequest];
-        } else {
-            requestCont = 0;
-        }
-        
-    }];
-}
+//#pragma -mark 获取资产
+//+ (void)sendGetBalanceRequest {
+////    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+//    if (![NEOWalletManage.sharedInstance haveDefaultWallet]) {
+//        return;
+//    }
+//    NSString *address = [NEOWalletManage.sharedInstance getWalletAddress];
+////    NSString *address = @"AbepoJwqkEhdqprPe9qmBLxPGGF7QDz744";
+//    [RequestService requestWithUrl:neoAddressInfo_Url params:@{@"address":address} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+//            NSDictionary *dataDic = [responseObject objectForKey:Server_Data];
+//            if(dataDic)  {
+//                kAppD.balanceInfo = [BalanceInfo mj_objectWithKeyValues:dataDic];
+//            } else {
+//                kAppD.balanceInfo = nil;
+//            }
+//        } else {
+//            kAppD.balanceInfo = nil;
+//            DDLogDebug(@"获取资产失败");
+//        }
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//        kAppD.balanceInfo = nil;
+//        DDLogDebug(@"获取资产失败：%@",error.description);
+//        requestCont ++;
+//        if (requestCont <2) {
+//            [NeoTransferUtil sendGetBalanceRequest];
+//        } else {
+//            requestCont = 0;
+//        }
+//
+//    }];
+//}
 
 //#pragma -mark 连接成功后，发消息给提供方记录
 //+ (void) sendVPNConnectSuccessMessageWithVPNInfo:(id) vpnObject withType:(NSInteger) type

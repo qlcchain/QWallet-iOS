@@ -15,6 +15,8 @@
 #import "JoinCommunityViewController.h"
 #import "WebViewController.h"
 #import "UserModel.h"
+//#import "GlobalConstants.h"
+#import "SystemUtil.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -76,7 +78,19 @@
             model.detail = [NSString stringWithFormat:@"Version %@(%@)",APP_Version,APP_Build];
         } else if ([obj isEqualToString:kLang(@"language")]) {
             NSString *language = [Language currentLanguageCode];
-            model.detail = [language isEmptyString]?kLang(@"chinese"):[language isEqualToString:LanguageCode[0]]?kLang(@"english"):kLang(@"chinese");
+            NSString *detail = kLang(@"chinese");
+            if ([language isEmptyString]) {
+                detail = kLang(@"chinese");
+            } else {
+                if ([language isEqualToString:LanguageCode[0]]) {
+                    detail = kLang(@"english");
+                } else if ([language isEqualToString:LanguageCode[1]]) {
+                    detail = kLang(@"chinese");
+                } else if ([language isEqualToString:LanguageCode[2]]) {
+                    detail = kLang(@"indonesian");
+                }
+            }
+            model.detail = detail;
         } else {
             model.detail = nil;
         }
@@ -98,9 +112,10 @@
 }
 
 - (void)logout {
-    [kAppD logout];
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    kWeakSelf(self);
+    [SystemUtil requestLogout:^{
+        [weakself.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 
 - (void)showSelectLanguage {
@@ -113,9 +128,14 @@
         [Language userSelectedLanguage:LanguageCode[1]];
     }];
     [alertVC addAction:action2];
-    UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"indonesian") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [Language userSelectedLanguage:LanguageCode[2]];
     }];
     [alertVC addAction:action3];
+    UIAlertAction *actionC = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertVC addAction:actionC];
+    alertVC.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -140,7 +160,8 @@
     if ([model.title isEqualToString:kLang(@"currency_unit")]) {
         [self jumpToChooseCurrency];
     } else if ([model.title isEqualToString:kLang(@"service_agreement")]) {
-        NSString *url = @"https://docs.google.com/document/d/1yTr1EDXmOclDuSt4o0RRUc0fVjJU3zPREK97C1RmYdI/edit?usp=sharing";
+//        NSString *url = @"https://docs.google.com/document/d/1yTr1EDXmOclDuSt4o0RRUc0fVjJU3zPREK97C1RmYdI/edit?usp=sharing";
+        NSString *url = @"https://qwallet.network/en/terms-and-privacy";
         [self jumpToWeb:url title:kLang(@"service_agreement")];
     } else if ([model.title isEqualToString:kLang(@"log_out")]) {
         [self logout];

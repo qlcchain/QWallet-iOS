@@ -11,6 +11,9 @@
 @interface CountryModel : BBaseModel
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *dial_code;
+@property (nonatomic, strong) NSString *code;
+
 @property (nonatomic, strong) NSString *countryImage;
 @property (nonatomic, strong) NSString *countryCode;
 @property (nonatomic, strong) NSString *continent;

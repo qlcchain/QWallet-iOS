@@ -10,6 +10,8 @@
 #import <SDWebImage/UIImage+GIF.h>
 #import "OLImage.h"
 #import "OLImageView.h"
+#import <SwiftTheme/SwiftTheme-Swift.h>
+#import "GlobalConstants.h"
 
 @interface LaunchViewController ()
 

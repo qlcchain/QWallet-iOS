@@ -8,6 +8,8 @@
 
 #import "HistoryChartView.h"
 #import <Charts/Charts-Swift.h>
+#import "UIColor+Random.h"
+#import "GlobalConstants.h"
 
 @interface HistoryChartView ()  <ChartViewDelegate>
 
@@ -15,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *lineArr;
 @property (nonatomic, strong) NSString *currentSymbol;
 @property (nonatomic, copy) HistoryChartNoDataBlock noDataB;
+@property (nonatomic, copy) HistoryChartHaveDataBlock haveDataB;
 
 @end
 
@@ -42,7 +45,7 @@
     ChartLimitLine *llXAxis = [[ChartLimitLine alloc] initWithLimit:10.0 label:@"Index 10"];
     llXAxis.lineWidth = 4.0;
     llXAxis.lineDashLengths = @[@(10.f), @(10.f), @(0.f)];
-    llXAxis.labelPosition = ChartLimitLabelPositionRightBottom;
+    llXAxis.labelPosition = ChartLimitLabelPositionBottomRight;
     llXAxis.valueFont = [UIFont systemFontOfSize:10.f];
     
     //[_chartView.xAxis addLimitLine:llXAxis];
@@ -101,10 +104,18 @@
     leftAxis.axisMinimum = min;
 }
 
-- (void)updateWithSymbol:(NSString *)symbol noDataBlock:(HistoryChartNoDataBlock)noDataBlock {
+- (void)updateWithSymbol:(NSString *)symbol noDataBlock:(HistoryChartNoDataBlock)noDataBlock haveDataBlock:(HistoryChartHaveDataBlock)haveDataBlock {
     _noDataB = noDataBlock;
+    _haveDataB = haveDataBlock;
     _currentSymbol = symbol;
-    [self requestBinaKlinesWithSymbol:symbol];
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+        [weakself requestBinaKlinesWithSymbol:symbol];
+    });
+    
+    if (_noDataB) {
+        _noDataB();
+    }
 }
 
 - (void)updateChartData {
@@ -129,16 +140,17 @@
     if (_chartView.data.dataSetCount > 0)
     {
         set1 = (LineChartDataSet *)_chartView.data.dataSets[0];
-        set1.values = values;
+        [set1 replaceEntries: values];
+        set1.drawValuesEnabled = NO;
         [_chartView.data notifyDataChanged];
         [_chartView notifyDataSetChanged];
     }
     else
     {
-        set1 = [[LineChartDataSet alloc] initWithValues:values label:_currentSymbol?:@""];
+        set1 = [[LineChartDataSet alloc] initWithEntries:values label:_currentSymbol?:@""];
         
         set1.drawIconsEnabled = NO;
-        
+        set1.drawValuesEnabled = NO;
         set1.lineDashLengths = @[@5.f, @2.5f];
         set1.highlightLineDashLengths = @[@5.f, @2.5f];
 //        [set1 setColor:UIColor.blackColor];
@@ -191,8 +203,8 @@
 - (void)requestBinaKlinesWithSymbol:(NSString *)symbol {
     kWeakSelf(self);
     NSString *interval = @"1m";
-    NSDictionary *params = @{@"symbol":symbol,@"interval":interval, @"size":@(20)};
-    [RequestService requestWithUrl:binaKlines_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    NSDictionary *params = @{@"symbol":symbol,@"interval":interval, @"size":@(500)};
+    [RequestService requestWithUrl5:binaKlines_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
             [weakself.lineArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
@@ -202,10 +214,16 @@
                 if (weakself.noDataB) {
                     weakself.noDataB();
                 }
+            } else {
+                if (weakself.haveDataB) {
+                    weakself.haveDataB();
+                }
             }
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        
+        if (weakself.noDataB) {
+            weakself.noDataB();
+        }
     }];
 }
 

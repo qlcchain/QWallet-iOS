@@ -11,6 +11,8 @@
 #import <TYCyclePagerView/TYPageControl.h>
 #import "GuangGaoCollectionCell.h"
 #import "ShareFriendsModel.h"
+#import "GlobalConstants.h"
+#import "UIColor+Random.h"
 
 @interface GuangGaoView () <TYCyclePagerViewDelegate,TYCyclePagerViewDataSource>
 

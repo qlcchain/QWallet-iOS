@@ -13,8 +13,9 @@
 #import "WalletQRViewController.h"
 #import "ReportUtil.h"
 #import "QLCWalletInfo.h"
-#import "QLCWalletManage.h"
+#import <QLCFramework/QLCFramework.h>
 #import "WebViewController.h"
+//#import "GlobalConstants.h"
 
 typedef enum : NSUInteger {
     QLCImportTypeMnemonic,
@@ -78,7 +79,7 @@ typedef enum : NSUInteger {
 
 - (void)renderMnemonicView {
     [_mnemonicTVBack cornerRadius:6 strokeSize:1 color:UIColorFromRGB(0xECEFF1)];
-    _mnemonicTV.placeholder = kLang(@"please_use_space_to_separate_the_mnemonic_phase");
+    _mnemonicTV.placeholder = kLang(@"please_use_space_to_separate_the_mnemonic_phrase");
     UIColor *btnShadowColor = [UIColorFromRGB(0x1F314A) colorWithAlphaComponent:0.12];
     [_mnemonicStartImportBtn addShadowWithOpacity:1 shadowColor:btnShadowColor shadowOffset:CGSizeMake(0, 2) shadowRadius:4 andCornerRadius:6];
 }
@@ -178,6 +179,7 @@ typedef enum : NSUInteger {
         walletInfo.seed = [QLCWalletManage.shareInstance walletSeed];
         walletInfo.privateKey = [QLCWalletManage.shareInstance walletPrivateKeyStr];
         walletInfo.publicKey = [QLCWalletManage.shareInstance walletPublicKeyStr];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         
@@ -212,6 +214,7 @@ typedef enum : NSUInteger {
         walletInfo.seed = [QLCWalletManage.shareInstance walletSeed];
         walletInfo.privateKey = [QLCWalletManage.shareInstance walletPrivateKeyStr];
         walletInfo.publicKey = [QLCWalletManage.shareInstance walletPublicKeyStr];
+        walletInfo.isBackup = @(NO);
         // 存储keychain
         [walletInfo saveToKeyChain];
         

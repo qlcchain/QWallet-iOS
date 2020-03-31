@@ -70,4 +70,36 @@
     return isContain;
 }
 
+- (BOOL)isNumber {
+//    BOOL res = YES;
+//    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+//    int i = 0;
+//    while (i < self.length) {
+//        NSString * string = [self substringWithRange:NSMakeRange(i, 1)];
+//        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+//        if (range.length == 0) {
+//            res = NO;
+//            break;
+//        }
+//        i++;
+//    }
+//    return res;
+    
+    BOOL res = YES;
+    NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    if ([self rangeOfCharacterFromSet:characterSet].location != NSNotFound) {
+        res = NO;
+    }
+    return res;
+}
+
+- (BOOL)isNumberDecimal {
+    BOOL res = YES;
+    NSCharacterSet *characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+    if ([self rangeOfCharacterFromSet:characterSet].location != NSNotFound) {
+        res = NO;
+    }
+    return res;
+}
+
 @end
