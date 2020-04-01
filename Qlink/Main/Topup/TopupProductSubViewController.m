@@ -67,6 +67,7 @@ static NSString *TopupNetworkSize = @"30";
 }
 
 - (void)pullRefresh {
+    _selectDeductionTokenM = _inputDeductionTokenM;
     [self requestTopup_product_list_v3];
 }
 

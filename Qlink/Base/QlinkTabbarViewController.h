@@ -16,12 +16,12 @@ typedef enum : NSUInteger {
     TabbarIndexMy,
 } TabbarIndex;
 
-@class WalletsViewController,Topup3ViewController, HomeBuySellViewController;
+@class WalletsViewController,Topup3ViewController,Topup4ViewController, HomeBuySellViewController;
 
 @interface QlinkTabbarViewController : UITabBarController
 
 @property (nonatomic, strong) WalletsViewController *walletsVC;
-@property (nonatomic, strong) Topup3ViewController *topupVC;
+@property (nonatomic, strong) Topup4ViewController *topupVC;
 @property (nonatomic, strong) HomeBuySellViewController *homeBuySellVC;
 
 @end

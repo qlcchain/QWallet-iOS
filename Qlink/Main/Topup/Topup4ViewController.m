@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import "Topup3ViewController.h"
+#import "Topup4ViewController.h"
 //#import "TopupCell.h"
 #import "TopupMobilePlanCell.h"
 #import "MyThemes.h"
@@ -60,19 +60,22 @@
 #import "HomeBuySellViewController.h"
 #import "BuybackDetailViewController.h"
 #import <TMCache/TMCache.h>
+#import "NSDate+Category.h"
+#import "ClaimConstants.h"
 
 static NSString *const TopupNetworkSize = @"20";
-static NSInteger const insetForSectionDistance = 16;
-static NSInteger const miniSpacingDistance = 8;
+//static NSInteger const insetForSectionDistance = 16;
+//static NSInteger const miniSpacingDistance = 8;
 
 static NSString *const Show_Make_More = @"Show_Make_More";
 static NSString *const Show_Sheet_Mining = @"Show_Sheet_Mining";
 static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
 
-static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_List";
+//static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_List";
+static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
-@interface Topup3ViewController () <UIScrollViewDelegate,NinaPagerViewDelegate>
+@interface Topup4ViewController () <UIScrollViewDelegate,NinaPagerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 //@property (weak, nonatomic) IBOutlet UILabel *sendRechargeLab;
@@ -164,10 +167,11 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
 @property (nonatomic, strong) TopupDeductionTokenModel *selectDeductionTokenM;
 @property (nonatomic) BOOL isInGroupBuyActiviyTime;
 @property (nonatomic, strong) NSString *groupBuyMinimumDiscount;
+@property (nonatomic) BOOL refreshAllProductPage;
 
 @end
 
-@implementation Topup3ViewController
+@implementation Topup4ViewController
 
 #pragma mark - Observe
 - (void)addObserve {
@@ -205,24 +209,30 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
     
     
     [self handlerPushJump];
-    [self getSheetMining];
-    [self getBuybackBurn];
-    [self getParterPlan];
+    [self requestSys_index];
+    
+//    [self getSheetMining];
+//    [self getBuybackBurn];
+//    [self getParterPlan];
+//    [self requestTopup_pay_token];
+    
+    [self getRedDotOfMe];
+    
+    
 //    [self addChart];
 //    [self getTokenPrice];
-    [self getRedDotOfMe];
 //    [self addCountryView];
     
-    [self requestTopup_pay_token];
-    kWeakSelf(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-        [weakself requestIsInGroupBuyActiviyTime];
-    });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-        [weakself requestTopup_group_kind_list];
-    });
     
-    [self handlerTopupCountryList];
+//    kWeakSelf(self);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+//        [weakself requestIsInGroupBuyActiviyTime];
+//    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+//        [weakself requestTopup_group_kind_list];
+//    });
+    
+    [self handlerSysIndex];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -249,6 +259,7 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
 //    _qlcBackHeight.constant = _showQLC?318:0;
     _isInGroupBuyActiviyTime = NO;
     _groupBuyMinimumDiscount = @"0";
+    _refreshAllProductPage = YES;
     
 //    _qlcTradeBack.layer.cornerRadius = 2;
 //    _qlcTradeBack.layer.masksToBounds = YES;
@@ -304,7 +315,7 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
-//        [weakself requestTopup_product_list];
+        _refreshAllProductPage = NO;
         [weakself refreshNinaPagerViewVC];
         
         if (weakself.inviteRankV) {
@@ -315,12 +326,9 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
             [weakself.countryV refreshCountryView];
         }
         
-        [weakself getBuybackBurn];
-        [weakself getSheetMining];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [weakself.mainScroll.mj_header endRefreshing];
-        });
+        [weakself requestSys_index];
+//        [weakself getBuybackBurn];
+//        [weakself getSheetMining];
     }];
 //    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
 //        [weakself requestTopup_product_list];
@@ -334,71 +342,59 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
     });
 }
 
-- (void)getSheetMining {
-    kWeakSelf(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [SheetMiningUtil requestTrade_mining_list:^(NSArray<MiningActivityModel *> * _Nonnull arr) {
-            if (arr.count > 0) {
-                MiningActivityModel *model = arr.firstObject;
-                weakself.miningActivityM = model;
-                weakself.sheetMiningWidth.constant = SCREEN_WIDTH;
-                if (![weakself.cycleContentArr containsObject:Show_Sheet_Mining]) {
-                    [weakself.cycleContentArr addObject:Show_Sheet_Mining];
-                }
-                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
-                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
-                [weakself refreshMiningTip];
-            }
-        }]; // 交易挖矿活动列表
-    });
-}
+//- (void)getSheetMining {
+//    kWeakSelf(self);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SheetMiningUtil requestTrade_mining_list:^(NSArray<MiningActivityModel *> * _Nonnull arr) {
+//            if (arr.count > 0) {
+//                MiningActivityModel *model = arr.firstObject;
+//                weakself.miningActivityM = model;
+//                weakself.sheetMiningWidth.constant = SCREEN_WIDTH;
+//                if (![weakself.cycleContentArr containsObject:Show_Sheet_Mining]) {
+//                    [weakself.cycleContentArr addObject:Show_Sheet_Mining];
+//                }
+//                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
+//                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
+//                [weakself refreshMiningTip];
+//            }
+//        }]; // 交易挖矿活动列表
+//    });
+//}
 
-- (void)handlerTopupCountryList {
-    NSArray *cacheArr = [[TMCache sharedCache] objectForKey:TM_Chache_Topup_Country_List]?:@[];
-    
-    [_countrySource removeAllObjects];
-    [_countrySource addObjectsFromArray:cacheArr];
-    if (_countrySource.count > 0) {
-        _selectCountryM = _countrySource.firstObject;
-        
-        [self setupNinaPage];
-    }
-}
+//#pragma mark - QGas回购销毁
+//- (void)getBuybackBurn {
+//    kWeakSelf(self);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [BuybackBurnUtil requestBuybackBurn_list_v2:^(NSArray<BuybackBurnModel *> * _Nonnull arr) {
+//            if (arr.count > 0) {
+//                BuybackBurnModel *model = arr.firstObject;
+//                weakself.buybackBurnM = model;
+//                weakself.buybackBurnWidth.constant = SCREEN_WIDTH;
+//                if (![weakself.cycleContentArr containsObject:Show_Buyback_Burn]) {
+//                    [weakself.cycleContentArr addObject:Show_Buyback_Burn];
+//                }
+//                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
+//                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
+////                [weakself refreshBuybackBurn];
+//            }
+//        }];
+//    });
+//}
 
-#pragma mark - QGas回购销毁
-- (void)getBuybackBurn {
-    kWeakSelf(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [BuybackBurnUtil requestBuybackBurn_list_v2:^(NSArray<BuybackBurnModel *> * _Nonnull arr) {
-            if (arr.count > 0) {
-                BuybackBurnModel *model = arr.firstObject;
-                weakself.buybackBurnM = model;
-                weakself.buybackBurnWidth.constant = SCREEN_WIDTH;
-                if (![weakself.cycleContentArr containsObject:Show_Buyback_Burn]) {
-                    [weakself.cycleContentArr addObject:Show_Buyback_Burn];
-                }
-                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
-                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
-//                [weakself refreshBuybackBurn];
-            }
-        }];
-    });
-}
-
-- (void)getParterPlan {
-    kWeakSelf(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
-            if (isInGroupBuyActiviyTime) {
-                weakself.parterPlanWidth.constant = SCREEN_WIDTH;
-                [weakself.cycleContentArr addObject:Show_Partner_Plan];
-                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
-                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
-//                [weakself refreshParterPlan];
-            }
-        }];
-    });
-}
+//- (void)getParterPlan {
+//    kWeakSelf(self);
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
+//            if (isInGroupBuyActiviyTime) {
+//                weakself.parterPlanWidth.constant = SCREEN_WIDTH;
+//                [weakself.cycleContentArr addObject:Show_Partner_Plan];
+//                weakself.cycleContentWidth.constant = SCREEN_WIDTH*weakself.cycleContentArr.count;
+//                weakself.cyclePageC.numberOfPages = weakself.cycleContentArr.count;
+////                [weakself refreshParterPlan];
+//            }
+//        }];
+//    });
+//}
 
 - (void)configInviteRankView {
     kWeakSelf(self);
@@ -620,11 +616,11 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
         vc.isInGroupBuyActivityTime = _isInGroupBuyActiviyTime;
         [vc pullRefresh];
     } else {
-        if (_selectDeductionTokenM) {
-            [self requestTopup_country_list];
-        } else {
-            [self requestTopup_pay_token];
-        }
+//        if (_selectDeductionTokenM) {
+//            [self requestTopup_country_list];
+//        } else {
+//            [self requestTopup_pay_token];
+//        }
     }
 }
 
@@ -638,6 +634,114 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
                 [weakself.chooseDeductionBtn setImage:img forState:UIControlStateNormal];
             }
         }];
+    }
+}
+
+- (void)handlerSysIndex {
+    NSDictionary *responseObject = [[TMCache sharedCache] objectForKey:TM_Chache_Topup_Sys_Index]?:@{};
+    
+    if (responseObject.count <= 0) {
+        return;
+    }
+    
+    // 交易挖矿活动列表
+    NSArray *tradeMiningList = [MiningActivityModel mj_objectArrayWithKeyValuesArray:responseObject[@"tradeMiningList"]]?:@[];
+    if (tradeMiningList.count > 0) {
+        MiningActivityModel *model = tradeMiningList.firstObject;
+        self.miningActivityM = model;
+        self.sheetMiningWidth.constant = SCREEN_WIDTH;
+        if (![self.cycleContentArr containsObject:Show_Sheet_Mining]) {
+            [self.cycleContentArr addObject:Show_Sheet_Mining];
+        }
+        self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
+        self.cyclePageC.numberOfPages = self.cycleContentArr.count;
+        [self refreshMiningTip];
+    }
+
+
+    // PayTokenList
+    NSArray *payTokenList = [TopupDeductionTokenModel mj_objectArrayWithKeyValuesArray:responseObject[@"payTokenList"]];
+    self.selectDeductionTokenM = (payTokenList&&payTokenList.count>0)?payTokenList.firstObject:nil;
+    [self refreshSelectDeductionTokenView];
+
+
+    // BurnQgasList
+    NSArray *burnQgasList = [BuybackBurnModel mj_objectArrayWithKeyValuesArray:responseObject[@"burnQgasList"]]?:@[];
+    if (burnQgasList.count > 0) {
+        BuybackBurnModel *model = burnQgasList.firstObject;
+        self.buybackBurnM = model;
+        self.buybackBurnWidth.constant = SCREEN_WIDTH;
+        if (![self.cycleContentArr containsObject:Show_Buyback_Burn]) {
+            [self.cycleContentArr addObject:Show_Buyback_Burn];
+        }
+        self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
+        self.cyclePageC.numberOfPages = self.cycleContentArr.count;
+    //                [weakself refreshBuybackBurn];
+    }
+
+    // TopupCountryList
+    if (_refreshAllProductPage) {
+        NSArray *countryList = [TopupCountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"countryList"]]?:@[];
+        [self.countrySource removeAllObjects];
+        [self.countrySource addObjectsFromArray:countryList];
+        if (self.countrySource.count > 0) {
+            self.selectCountryM = self.countrySource.firstObject;
+            
+            [self setupNinaPage];
+        }
+    }
+    
+
+    NSString *currentTimeMillis = responseObject[@"currentTimeMillis"];
+
+
+    NSDictionary *dictList = responseObject[@"dictList"];
+    BOOL isInGroupBuyActiviyTime = NO;
+    NSString *topupGroupStartDateStr = dictList[@"topupGroupStartDate"]?:@"";
+    NSString *topopGroupEndDateStr = dictList[@"topopGroupEndDate"]?:@"";
+    NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
+    NSDate *topupStartDate = [NSDate dateFromTime:topupGroupStartDateStr];
+    NSDate *topupEndDate = [NSDate dateFromTime:topopGroupEndDateStr];
+    NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
+    isInGroupBuyActiviyTime = [topupStartDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:topupEndDate];
+    // ParterPlan
+    if (isInGroupBuyActiviyTime) {
+        self.parterPlanWidth.constant = SCREEN_WIDTH;
+        if (![self.cycleContentArr containsObject:Show_Partner_Plan]) {
+            [self.cycleContentArr addObject:Show_Partner_Plan];
+        }
+        self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
+        self.cyclePageC.numberOfPages = self.cycleContentArr.count;
+    //                [weakself refreshParterPlan];
+    }
+    // 刷新TopupProduct GroupBuyAcitivityTime
+    self.isInGroupBuyActiviyTime = isInGroupBuyActiviyTime;
+    if (self.ninaPagerView) {
+        TopupProductSubViewController *vc = self.ninaObjectSource[self.ninaPagerView.pageIndex];
+        vc.isInGroupBuyActivityTime = self.isInGroupBuyActiviyTime;
+        [vc refreshTable];
+    }
+    // 排名列表
+    NSString *winqInviteRewardAmount = dictList[winq_invite_reward_amount];
+    if (_inviteRankV) {
+        [_inviteRankV updateTable:winqInviteRewardAmount];
+    }
+
+    // 获取TopupProduct groupBuyMinimumDiscount
+    NSArray *groupKindList = [GroupKindModel mj_objectArrayWithKeyValuesArray:responseObject[@"groupKindList"]]?:@[];
+    groupKindList = [groupKindList sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            GroupKindModel *m1 = obj1;
+            GroupKindModel *m2 = obj2;
+        return ([m1.discount doubleValue] > [m2.discount doubleValue]);
+    //                    return NSOrderedAscending;
+    }];
+    if (groupKindList && groupKindList.count > 0) {
+        self.groupBuyMinimumDiscount = ((GroupKindModel *)groupKindList.firstObject).discount;
+        if (self.ninaPagerView) {
+            TopupProductSubViewController *vc = self.ninaObjectSource[self.ninaPagerView.pageIndex];
+            vc.groupBuyMinimumDiscount = self.groupBuyMinimumDiscount;
+            [vc refreshTable];
+        }
     }
 }
 
@@ -687,121 +791,25 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
 }
 
 #pragma mark - Request
-//- (void)requestTopup_product_list {
-//    kWeakSelf(self);
-////    NSString *phoneNumber = @"";
-//    NSString *page = [NSString stringWithFormat:@"%li",_currentPage];
+- (void)requestSys_index {
+    kWeakSelf(self);
+//    NSString *page = @"1";
 //    NSString *size = TopupNetworkSize;
-//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"page":page,@"size":size}];
-//    NSString *selectGlobalRoaming = _selectCountryM?_selectCountryM.globalRoaming:@"";
-//    if (selectGlobalRoaming != nil && ![selectGlobalRoaming isEmptyString]) {
-//        [params setObject:selectGlobalRoaming forKey:@"globalRoaming"];
-//    }
-//    [RequestService requestWithUrl10:topup_product_list_v2_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-////    [RequestService requestWithUrl5:topup_product_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-//        [weakself.mainScroll.mj_header endRefreshing];
-//        [weakself.mainScroll.mj_footer endRefreshing];
-//        if ([responseObject[Server_Code] integerValue] == 0) {
-//            NSArray *arr = [TopupProductModel mj_objectArrayWithKeyValuesArray:responseObject[@"productList"]];
-//            if (weakself.currentPage == 1) {
-//                [weakself.sourceArr removeAllObjects];
-//            }
-//
-//            [weakself.sourceArr addObjectsFromArray:arr];
-//            weakself.currentPage += 1;
-//
-////            weakself.mainTableHeight.constant = weakself.sourceArr.count*TopupCell_Height;
-////            [weakself.mainTable reloadData];
-//            CGFloat line = ceil(weakself.sourceArr.count/2.0);
-////            weakself.mainCollectionHeight.constant = line*TopupMobilePlanCell_Height+(line-1)*miniSpacingDistance;
-////            [weakself.mainCollection reloadData];
-//
-//            if (arr.count < [TopupNetworkSize integerValue]) {
-//                [weakself.mainScroll.mj_footer endRefreshingWithNoMoreData];
-////                weakself.mainScroll.mj_footer.hidden = arr.count<=0?YES:NO;
-//                weakself.mainScroll.mj_footer.hidden = YES;
-//            } else {
-//                weakself.mainScroll.mj_footer.hidden = NO;
-//            }
-//        }
-//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-//        [weakself.mainScroll.mj_header endRefreshing];
-//        [weakself.mainScroll.mj_footer endRefreshing];
-//    }];
-//}
-
-- (void)requestTopup_country_list {
-    kWeakSelf(self);
-    NSString *page = @"1";
-    NSString *size = TopupNetworkSize;
-    NSDictionary *params = @{@"page":page,@"size":size};
-    [RequestService requestWithUrl10:topup_country_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            NSArray *arr = [TopupCountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"countryList"]];
-            
-            [[TMCache sharedCache] setObject:arr forKey:TM_Chache_Topup_Country_List];
-            
-            [weakself handlerTopupCountryList];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-
-    }];
-}
-
-- (void)requestTopup_pay_token {
-    kWeakSelf(self);
     NSDictionary *params = @{};
-    [RequestService requestWithUrl10:topup_pay_token_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl10:sys_index_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [weakself.mainScroll.mj_header endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
-            NSArray *arr = [TopupDeductionTokenModel mj_objectArrayWithKeyValuesArray:responseObject[@"payTokenList"]];
-            weakself.selectDeductionTokenM = (arr&&arr.count>0)?arr.firstObject:nil;
-            [weakself refreshSelectDeductionTokenView];
             
-            [weakself requestTopup_country_list];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-    }];
-}
-
-- (void)requestIsInGroupBuyActiviyTime {
-    kWeakSelf(self);
-    [GroupBuyUtil requestIsInGroupBuyActiviyTime:^(BOOL isInGroupBuyActiviyTime) {
-        weakself.isInGroupBuyActiviyTime = isInGroupBuyActiviyTime;
-        if (weakself.ninaPagerView) {
-            TopupProductSubViewController *vc = weakself.ninaObjectSource[weakself.ninaPagerView.pageIndex];
-            vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActiviyTime;
-            [vc refreshTable];
-        }
-    }];
-}
-
-- (void)requestTopup_group_kind_list {
-    kWeakSelf(self);
-    NSString *page = @"1";
-    NSString *size = TopupNetworkSize;
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"page":page,@"size":size}];
-    [RequestService requestWithUrl10:topup_group_kind_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            NSArray *arr = [GroupKindModel mj_objectArrayWithKeyValuesArray:responseObject[@"groupKindList"]];
-            arr = [arr sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                    GroupKindModel *m1 = obj1;
-                    GroupKindModel *m2 = obj2;
-                return ([m1.discount doubleValue] > [m2.discount doubleValue]);
-//                    return NSOrderedAscending;
-            }];
-            if (arr && arr.count > 0) {
-                weakself.groupBuyMinimumDiscount = ((GroupKindModel *)arr.firstObject).discount;
-                if (weakself.ninaPagerView) {
-                    TopupProductSubViewController *vc = weakself.ninaObjectSource[weakself.ninaPagerView.pageIndex];
-                    vc.groupBuyMinimumDiscount = weakself.groupBuyMinimumDiscount;
-                    [vc refreshTable];
-                }
-            }
+            [[TMCache sharedCache] setObject:responseObject forKey:TM_Chache_Topup_Sys_Index];
+            
+            [weakself handlerSysIndex];
             
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [weakself.mainScroll.mj_header endRefreshing];
     }];
 }
+
 
 //- (void)requestTokenPriceOfQLC {
 //    kWeakSelf(self);
@@ -1112,12 +1120,13 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
     [_mainScroll.mj_header beginRefreshing];
     [_inviteRankV startRefresh];
     
-//    [self getTokenPrice];
-    if (_selectDeductionTokenM) {
-        [self requestTopup_country_list];
-    } else {
-        [self requestTopup_pay_token];
-    }
+    _refreshAllProductPage = YES;
+    [self requestSys_index];
+//    if (_selectDeductionTokenM) {
+//        [self requestTopup_country_list];
+//    } else {
+//        [self requestTopup_pay_token];
+//    }
     
 }
 

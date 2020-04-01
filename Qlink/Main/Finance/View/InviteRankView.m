@@ -20,6 +20,7 @@
 #import "AppDelegate.h"
 #import "QlinkTabbarViewController.h"
 #import "Topup3ViewController.h"
+#import "Topup4ViewController.h"
 
 static CGFloat InviteRankTopHeight = 172;
 
@@ -63,10 +64,12 @@ static CGFloat InviteRankTopHeight = 172;
     _mainTableHeight.constant = 0;
     
     [_mainTable reloadData];
+    
     if ([UserModel haveLoginAccount]) {
         kWeakSelf(self);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
-            [weakself requestWinq_invite_reward_amount]; // 邀请一个用户奖励QGAS数量
+//            [weakself requestWinq_invite_reward_amount]; // 邀请一个用户奖励QGAS数量
+            [weakself requestInvite];
         });
     }
     
@@ -96,20 +99,25 @@ static CGFloat InviteRankTopHeight = 172;
     _invitationCodeLab.text = [NSString stringWithFormat:@"%@（%@）",_myInfoM.number?:@"",kLang(@"copy")];
 }
 
-#pragma mark - Request
-- (void)requestWinq_invite_reward_amount { // 邀请一个用户奖励QGAS数量
-    kWeakSelf(self);
-    NSDictionary *params = @{@"dictType":winq_invite_reward_amount};
-    [RequestService requestWithUrl10:sys_dict_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            NSString *valueStr = responseObject[Server_Data][@"value"];
-            
-            weakself.invite_reward_amount = valueStr?:@"0";
-            [weakself requestInvite];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-    }];
+- (void)updateTable:(NSString *)invite_reward_amount {
+    _invite_reward_amount = invite_reward_amount;
+    [_mainTable reloadData];
 }
+
+#pragma mark - Request
+//- (void)requestWinq_invite_reward_amount { // 邀请一个用户奖励QGAS数量
+//    kWeakSelf(self);
+//    NSDictionary *params = @{@"dictType":winq_invite_reward_amount};
+//    [RequestService requestWithUrl10:sys_dict_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//        if ([responseObject[Server_Code] integerValue] == 0) {
+//            NSString *valueStr = responseObject[Server_Data][@"value"];
+//
+//            weakself.invite_reward_amount = valueStr?:@"0";
+//            [weakself requestInvite];
+//        }
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//    }];
+//}
 
 - (void)requestInvite {
     UserModel *userM = [UserModel fetchUserOfLogin];
