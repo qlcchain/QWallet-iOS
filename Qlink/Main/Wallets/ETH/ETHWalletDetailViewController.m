@@ -44,6 +44,8 @@ NSString *exportPrivateKey = @"Export private key";
     _sourceArr = [NSMutableArray array];
     [_sourceArr addObjectsFromArray:@[exportMnemonicPhrase,exportKeystore,exportPrivateKey]];
     [_mainTable registerNib:[UINib nibWithNibName:ETHWalletDetailCellReuse bundle:nil] forCellReuseIdentifier:ETHWalletDetailCellReuse];
+    self.baseTable = _mainTable;
+    
     [self configInit];
 }
 

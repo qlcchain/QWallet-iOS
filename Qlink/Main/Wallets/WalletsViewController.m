@@ -158,6 +158,8 @@
     _sourceArr = [NSMutableArray array];
     _contentView.hidden = YES;
     [_mainTable registerNib:[UINib nibWithNibName:WalletsCellReuse bundle:nil] forCellReuseIdentifier:WalletsCellReuse];
+    self.baseTable = _mainTable;
+    
     [self refreshTitle];
     [self renderView];
     [self configInit];

@@ -28,6 +28,7 @@
     _sourceArr = [NSMutableArray array];
     [_sourceArr addObjectsFromArray:@[@[@"icon_twitter_url",@"Twitter",@"twitter.com/QLCchain"],@[@"icon_telegram_url",@"Telegram",@"t.me/qlinkmobile"],@[@"icon_facebook_url",@"Facebook",@"www.facebook.com/QLCchain/"],@[@"icon_qlcchain_url",@"QLC Chain",@"qlcchain.org/"]]];
     [_mainTable registerNib:[UINib nibWithNibName:JoinCommunityCellReuse bundle:nil] forCellReuseIdentifier:JoinCommunityCellReuse];
+    self.baseTable = _mainTable;
     
     [self renderView];
     [self configInit];

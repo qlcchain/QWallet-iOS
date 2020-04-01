@@ -49,6 +49,7 @@
     
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:SettingsCellReuse bundle:nil] forCellReuseIdentifier:SettingsCellReuse];
+    self.baseTable = _mainTable;
     
     [self configInit];
 }

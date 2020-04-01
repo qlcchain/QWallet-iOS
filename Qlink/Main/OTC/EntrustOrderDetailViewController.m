@@ -61,6 +61,8 @@
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:EntrustOrderDetailCellReuse bundle:nil] forCellReuseIdentifier:EntrustOrderDetailCellReuse];
+    self.baseTable = _mainTable;
+    
     kWeakSelf(self);
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;

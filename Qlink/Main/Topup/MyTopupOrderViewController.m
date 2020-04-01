@@ -47,6 +47,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyTopupOrderCellReuse bundle:nil] forCellReuseIdentifier:MyTopupOrderCellReuse];
+    self.baseTable = _mainTable;
     
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{

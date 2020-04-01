@@ -57,6 +57,7 @@ static NSString *const NetworkSize = @"20";
     [_mainTable registerNib:[UINib nibWithNibName:ShareFriendsCellReuse bundle:nil] forCellReuseIdentifier:ShareFriendsCellReuse];
     [_mainTable registerNib:[UINib nibWithNibName:ShareRewardCell_Reuse bundle:nil] forCellReuseIdentifier:ShareRewardCell_Reuse];
     _mainTableHeight = 0;
+    self.baseTable = _mainTable;
     
 //    _invite_reward_amount = @"0";
     kWeakSelf(self)

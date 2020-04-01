@@ -165,7 +165,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 @property (nonatomic, strong) NSMutableArray *countrySource;
 @property (nonatomic, strong) NSMutableArray *ninaObjectSource;
 @property (nonatomic, strong) TopupDeductionTokenModel *selectDeductionTokenM;
-@property (nonatomic) BOOL isInGroupBuyActiviyTime;
+@property (nonatomic) BOOL isInGroupBuyActivityTime;
 @property (nonatomic, strong) NSString *groupBuyMinimumDiscount;
 @property (nonatomic) BOOL refreshAllProductPage;
 
@@ -257,7 +257,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     _cycleContentArr = [NSMutableArray array];
     _showQLC = NO;
 //    _qlcBackHeight.constant = _showQLC?318:0;
-    _isInGroupBuyActiviyTime = NO;
+    _isInGroupBuyActivityTime = NO;
     _groupBuyMinimumDiscount = @"0";
     _refreshAllProductPage = YES;
     
@@ -558,7 +558,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
             } else {
                 vc.inputCountryM = allModel;
             }
-            vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActiviyTime;
+            vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActivityTime;
             vc.groupBuyMinimumDiscount = weakself.groupBuyMinimumDiscount;
             vc.updateTableHeightBlock = ^(CGFloat tableHeight) {
                 weakself.tableBackHeight.constant = tableHeight + weakself.ninaPagerView.topTabHeight;
@@ -613,7 +613,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         TopupProductSubViewController *vc = _ninaObjectSource[_ninaPagerView.pageIndex];
         vc.inputDeductionTokenM = _selectDeductionTokenM;
         vc.groupBuyMinimumDiscount = _groupBuyMinimumDiscount;
-        vc.isInGroupBuyActivityTime = _isInGroupBuyActiviyTime;
+        vc.isInGroupBuyActivityTime = _isInGroupBuyActivityTime;
         [vc pullRefresh];
     } else {
 //        if (_selectDeductionTokenM) {
@@ -696,16 +696,16 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 
     NSDictionary *dictList = responseObject[@"dictList"];
-    BOOL isInGroupBuyActiviyTime = NO;
+    BOOL isInGroupBuyActivityTime = NO;
     NSString *topupGroupStartDateStr = dictList[@"topupGroupStartDate"]?:@"";
     NSString *topopGroupEndDateStr = dictList[@"topopGroupEndDate"]?:@"";
     NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
     NSDate *topupStartDate = [NSDate dateFromTime:topupGroupStartDateStr];
     NSDate *topupEndDate = [NSDate dateFromTime:topopGroupEndDateStr];
     NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
-    isInGroupBuyActiviyTime = [topupStartDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:topupEndDate];
+    isInGroupBuyActivityTime = [topupStartDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:topupEndDate];
     // ParterPlan
-    if (isInGroupBuyActiviyTime) {
+    if (isInGroupBuyActivityTime) {
         self.parterPlanWidth.constant = SCREEN_WIDTH;
         if (![self.cycleContentArr containsObject:Show_Partner_Plan]) {
             [self.cycleContentArr addObject:Show_Partner_Plan];
@@ -715,10 +715,10 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     //                [weakself refreshParterPlan];
     }
     // 刷新TopupProduct GroupBuyAcitivityTime
-    self.isInGroupBuyActiviyTime = isInGroupBuyActiviyTime;
+    self.isInGroupBuyActivityTime = isInGroupBuyActivityTime;
     if (self.ninaPagerView) {
         TopupProductSubViewController *vc = self.ninaObjectSource[self.ninaPagerView.pageIndex];
-        vc.isInGroupBuyActivityTime = self.isInGroupBuyActiviyTime;
+        vc.isInGroupBuyActivityTime = self.isInGroupBuyActivityTime;
         [vc refreshTable];
     }
     // 排名列表
@@ -844,7 +844,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 #pragma mark - NinaPagerViewDelegate
 - (void)ninaCurrentPageIndex:(NSInteger)currentPage currentObject:(id)currentObject lastObject:(id)lastObject {    
     TopupProductSubViewController *vc = currentObject;
-    vc.isInGroupBuyActivityTime = _isInGroupBuyActiviyTime;
+    vc.isInGroupBuyActivityTime = _isInGroupBuyActivityTime;
     vc.groupBuyMinimumDiscount = _groupBuyMinimumDiscount;
     if (vc.updateTableHeightBlock) {
         vc.updateTableHeightBlock([vc getTableHeight]);

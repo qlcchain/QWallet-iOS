@@ -33,6 +33,7 @@
 - (void)configInit {
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:InviteRankingCellReuse bundle:nil] forCellReuseIdentifier:InviteRankingCellReuse];
+    self.baseTable = _mainTable;
 }
 
 #pragma mark - Action

@@ -39,6 +39,7 @@ NSString *exportPrivateKeyWIF = @"Export Private Key(WIF)";
     _sourceArr = [NSMutableArray array];
     [_sourceArr addObjectsFromArray:@[exportEncryptedKeyWIF,exportPrivateKeyWIF]];
     [_mainTable registerNib:[UINib nibWithNibName:ETHWalletDetailCellReuse bundle:nil] forCellReuseIdentifier:ETHWalletDetailCellReuse];
+    self.baseTable = _mainTable;
     
     [self configInit];
 }

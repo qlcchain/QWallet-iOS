@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic,strong) UIButton *rightNavBtn;
+@property (nonatomic, strong) UITableView *baseTable;
 
 - (id)initWithShowCustomNavigationBar:(BOOL)_showNavigationBar;
 - (void)leftNavBarItemPressedWithPop:(BOOL) isPop;
@@ -29,4 +30,6 @@
 - (void) moveNavgationBackOneViewController;
 // 检查自己当前
 - (void) showUserConnectStatus;
+- (void)configEmptyView:(UITableView *)tableV;
+
 @end

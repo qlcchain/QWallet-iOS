@@ -98,6 +98,7 @@ static NSString *const TopupNetworkSize = @"30";
 - (void)configInit {
     _sourceArr = [NSMutableArray array];
     [_groupTable registerNib:[UINib nibWithNibName:OngoingGroupCell_Reuse bundle:nil] forCellReuseIdentifier:OngoingGroupCell_Reuse];
+    self.baseTable = _groupTable;
     
     _phoneBackHeight.constant = 0;
     

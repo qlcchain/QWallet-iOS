@@ -39,6 +39,7 @@ NSString *exportQLCMnemonic = @"Export Mnemonic";
     _sourceArr = [NSMutableArray array];
     [_sourceArr addObjectsFromArray:@[exportQLCSeed,exportQLCMnemonic]];
     [_mainTable registerNib:[UINib nibWithNibName:ETHWalletDetailCellReuse bundle:nil] forCellReuseIdentifier:ETHWalletDetailCellReuse];
+    self.baseTable = _mainTable;
     
     [self configInit];
 }

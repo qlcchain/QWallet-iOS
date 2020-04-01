@@ -63,6 +63,7 @@ static NSString *const TopupNetworkSize = @"30";
     _mainTable.delegate = self;
     _mainTable.dataSource = self;
     [_mainTable registerNib:[UINib nibWithNibName:StartGroupBuyCell_Reuse bundle:nil] forCellReuseIdentifier:StartGroupBuyCell_Reuse];
+    self.baseTable = _mainTable;
     
     _confirmBtn.layer.cornerRadius = 4;
     _confirmBtn.layer.masksToBounds = YES;

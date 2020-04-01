@@ -88,6 +88,7 @@ static NSInteger const PledgeInfo_PageFirst = 0;
     _invokeBtn.layer.cornerRadius = 4.0f;
     _invokeBtn.layer.masksToBounds = YES;
     [_mainTable registerNib:[UINib nibWithNibName:MyStakingsCellReuse bundle:nil] forCellReuseIdentifier:MyStakingsCellReuse];
+    self.baseTable = _mainTable;
     _sourceArr = [NSMutableArray array];
     _currentPage = PledgeInfo_PageFirst;
     _freeStakingAmount = @"0";
