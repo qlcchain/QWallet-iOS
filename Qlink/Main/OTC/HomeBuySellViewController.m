@@ -112,6 +112,8 @@ static NSString *const NetworkSize = @"20";
     _sellArr = [NSMutableArray array];
     _sourceArr = _buyArr;
     [_mainTable registerNib:[UINib nibWithNibName:HomeBuySellCellReuse bundle:nil] forCellReuseIdentifier:HomeBuySellCellReuse];
+    self.baseTable = _mainTable;
+    
     _pairsArr = [NSMutableArray array];
     _resetBtn.layer.borderColor = MAIN_BLUE_COLOR.CGColor;
     _resetBtn.layer.borderWidth = 0.5;

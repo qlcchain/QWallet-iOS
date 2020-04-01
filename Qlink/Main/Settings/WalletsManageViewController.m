@@ -36,6 +36,8 @@
     
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:WalletsManageCellReuse bundle:nil] forCellReuseIdentifier:WalletsManageCellReuse];
+    self.baseTable = _mainTable;
+    
     [self renderView];
     [self configInit];
 }

@@ -54,6 +54,7 @@
 
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:PersonalInfoCellReuse bundle:nil] forCellReuseIdentifier:PersonalInfoCellReuse];
+    self.baseTable = _mainTable;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

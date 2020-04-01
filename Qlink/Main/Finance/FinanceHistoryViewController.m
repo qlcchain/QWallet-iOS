@@ -39,6 +39,8 @@
     _sourceArr = [NSMutableArray array];
     _currentPage = 1;
     [_mainTable registerNib:[UINib nibWithNibName:FinanceHistoryCellReuse bundle:nil] forCellReuseIdentifier:FinanceHistoryCellReuse];
+    self.baseTable = _mainTable;
+    
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;

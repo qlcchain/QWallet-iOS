@@ -91,6 +91,7 @@ static NSInteger Mining_PageSize = 20;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:ShareFriendsCellReuse bundle:nil] forCellReuseIdentifier:ShareFriendsCellReuse];
     _mainTableHeight.constant = 0;
+    self.baseTable = _mainTable;
     
     _tradeBtn.layer.cornerRadius = 20;
     _tradeBtn.layer.masksToBounds = YES;

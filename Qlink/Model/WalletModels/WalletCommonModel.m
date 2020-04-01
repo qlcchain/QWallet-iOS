@@ -351,9 +351,15 @@
                 }
             }];
         });
+    } else {
+        if (!haveEthWallet) { // 创建ETH钱包
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
+                [ETHWalletInfo createETHWalletInAuto];
+            });
+        }
     }
     
-    if (!haveNeoWallet) {
+    if (!haveNeoWallet) { // 创建NEO钱包
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [NEOWalletInfo createNEOWalletInAuto];
         });

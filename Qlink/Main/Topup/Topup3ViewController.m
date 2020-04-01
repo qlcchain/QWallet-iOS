@@ -59,6 +59,7 @@
 #import "QlinkTabbarViewController.h"
 #import "HomeBuySellViewController.h"
 #import "BuybackDetailViewController.h"
+#import <TMCache/TMCache.h>
 
 static NSString *const TopupNetworkSize = @"20";
 static NSInteger const insetForSectionDistance = 16;
@@ -68,6 +69,8 @@ static NSString *const Show_Make_More = @"Show_Make_More";
 static NSString *const Show_Sheet_Mining = @"Show_Sheet_Mining";
 static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
+
+static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_List";
 
 @interface Topup3ViewController () <UIScrollViewDelegate,NinaPagerViewDelegate>
 
@@ -218,6 +221,8 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
         [weakself requestTopup_group_kind_list];
     });
+    
+    [self handlerTopupCountryList];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -346,6 +351,18 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
             }
         }]; // 交易挖矿活动列表
     });
+}
+
+- (void)handlerTopupCountryList {
+    NSArray *cacheArr = [[TMCache sharedCache] objectForKey:TM_Chache_Topup_Country_List]?:@[];
+    
+    [_countrySource removeAllObjects];
+    [_countrySource addObjectsFromArray:cacheArr];
+    if (_countrySource.count > 0) {
+        _selectCountryM = _countrySource.firstObject;
+        
+        [self setupNinaPage];
+    }
 }
 
 #pragma mark - QGas回购销毁
@@ -518,12 +535,12 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
 }
 
 - (void)setupNinaPage {
-    if (_ninaPagerView) {
-        [_ninaPagerView removeFromSuperview];
-        _ninaPagerView = nil;
-    }
+//    if (_ninaPagerView) {
+//        [_ninaPagerView removeFromSuperview];
+//        _ninaPagerView = nil;
+//    }
     
-    if (!_ninaPagerView) {
+//    if (!_ninaPagerView) {
         kWeakSelf(self);
         NSMutableArray *titleArr = [NSMutableArray array];
         _ninaObjectSource = [NSMutableArray array];
@@ -566,6 +583,7 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
             [weakself.ninaObjectSource addObject:vc];
         }];
         
+    if (!_ninaPagerView) {
         _ninaPagerView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100) WithTitles:titleArr WithObjects:_ninaObjectSource];
         _ninaPagerView.unSelectTitleColor = UIColorFromRGB(0x505050);
         _ninaPagerView.selectTitleColor = UIColorFromRGB(0xF50B6E);
@@ -582,13 +600,16 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
         _ninaPagerView.backgroundColor = [UIColor whiteColor];
         _ninaPagerView.underLineHidden = YES;
         [_tableBack addSubview:_ninaPagerView];
-        
         [_ninaPagerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.right.mas_equalTo(weakself.tableBack).offset(0);
         }];
+    } else {
+        [_ninaPagerView reloadTopTabByTitles:titleArr WithObjects:_ninaObjectSource];
+    }
+        
         _tableBackHeight.constant = _ninaPagerView.topTabHeight;
         
-    }
+//    }
 }
 
 - (void)refreshNinaPagerViewVC {
@@ -716,14 +737,11 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
     NSDictionary *params = @{@"page":page,@"size":size};
     [RequestService requestWithUrl10:topup_country_list_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [weakself.countrySource removeAllObjects];
             NSArray *arr = [TopupCountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"countryList"]];
-            [weakself.countrySource addObjectsFromArray:arr];
-            if (weakself.countrySource.count > 0) {
-                weakself.selectCountryM = weakself.countrySource.firstObject;
-            }
-
-            [weakself setupNinaPage];
+            
+            [[TMCache sharedCache] setObject:arr forKey:TM_Chache_Topup_Country_List];
+            
+            [weakself handlerTopupCountryList];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
 

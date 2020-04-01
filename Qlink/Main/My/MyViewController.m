@@ -87,6 +87,7 @@
     _userIcon.layer.masksToBounds = YES;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyCellReuse bundle:nil] forCellReuseIdentifier:MyCellReuse];
+    self.baseTable = _mainTable;
     
     _haveTrade_mining_list = NO;
     _invite_user_amount = @"0";

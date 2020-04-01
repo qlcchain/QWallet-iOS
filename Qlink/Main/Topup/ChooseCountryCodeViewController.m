@@ -38,6 +38,7 @@ static NSString * const NetworkSize = @"20";
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:ChooseCountryCodeCellReuse bundle:nil] forCellReuseIdentifier:ChooseCountryCodeCellReuse];
+    self.baseTable = _mainTable;
     
     [self configRefresh];
     

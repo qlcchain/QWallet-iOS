@@ -64,9 +64,11 @@ static NSString *TopupNetworkSize = @"30";
     _selectDeductionTokenM = _inputDeductionTokenM;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:TopupProductSubCell_Reuse bundle:nil] forCellReuseIdentifier:TopupProductSubCell_Reuse];
+    self.baseTable = _mainTable;
 }
 
 - (void)pullRefresh {
+    _selectDeductionTokenM = _inputDeductionTokenM;
     [self requestTopup_product_list_v3];
 }
 

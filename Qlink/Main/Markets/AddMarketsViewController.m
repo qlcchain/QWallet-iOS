@@ -66,6 +66,8 @@
     _searchArr = [NSMutableArray array];
     _showArr = [NSArray array];
     [_mainTable registerNib:[UINib nibWithNibName:AddMarketsCellReuse bundle:nil] forCellReuseIdentifier:AddMarketsCellReuse];
+    self.baseTable = _mainTable;
+    
     [_searchTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self configDataAndRefresh];

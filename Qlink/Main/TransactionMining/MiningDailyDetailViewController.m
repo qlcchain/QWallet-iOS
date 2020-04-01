@@ -46,6 +46,7 @@ static NSString *const MiningDailyDetailNetworkSize = @"20";
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MiningDailyDetailCell_Reuse bundle:nil] forCellReuseIdentifier:MiningDailyDetailCell_Reuse];
+    self.baseTable = _mainTable;
     
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{

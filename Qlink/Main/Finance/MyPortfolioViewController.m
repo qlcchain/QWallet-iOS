@@ -55,6 +55,7 @@
     
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyPortfolioCellReuse bundle:nil] forCellReuseIdentifier:MyPortfolioCellReuse];
+    self.baseTable = _mainTable;
     
     kWeakSelf(self)
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{

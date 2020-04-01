@@ -66,6 +66,7 @@
     _centerScrollWidth.constant = SCREEN_WIDTH*2;
     _productArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:FinanceCellReuse bundle:nil] forCellReuseIdentifier:FinanceCellReuse];
+    self.baseTable = _mainTable;
     
     _dailyBack.layer.cornerRadius = 6;
 //    _dailyBack.layer.masksToBounds = YES;

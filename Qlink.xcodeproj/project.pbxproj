@@ -445,6 +445,12 @@
 		5827BC3D21A3FA6300B7730E /* NEOGasUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC3C21A3FA6300B7730E /* NEOGasUtil.swift */; };
 		582843FA21885EEA00AD65C8 /* LoginInputPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582843F821885EEA00AD65C8 /* LoginInputPWViewController.m */; };
 		582844012189407B00AD65C8 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582843FF2189407B00AD65C8 /* SettingsCell.m */; };
+		582CDF4E243435380094A70E /* Topup4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF4B243435370094A70E /* Topup4ViewController.m */; };
+		582CDF4F243435380094A70E /* Topup4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582CDF4D243435370094A70E /* Topup4ViewController.xib */; };
+		582CDF5A243480720094A70E /* LYEmptyBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF51243480710094A70E /* LYEmptyBaseView.m */; };
+		582CDF5B243480720094A70E /* UIView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF53243480710094A70E /* UIView+Empty.m */; };
+		582CDF5C243480720094A70E /* UIView+LYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF54243480710094A70E /* UIView+LYExtension.m */; };
+		582CDF5D243480720094A70E /* LYEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF57243480710094A70E /* LYEmptyView.m */; };
 		582F238A21BF99A500A000D1 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F238821BF99A400A000D1 /* ODRefreshControl.m */; };
 		582F239621C1126C00A000D1 /* EOSActivateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239421C1126C00A000D1 /* EOSActivateAccountViewController.m */; };
 		582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239A21C1FDD300A000D1 /* EOSResourcePriceModel.m */; };
@@ -1919,6 +1925,18 @@
 		582843F821885EEA00AD65C8 /* LoginInputPWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginInputPWViewController.m; sourceTree = "<group>"; };
 		582843FE2189407B00AD65C8 /* SettingsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsCell.h; sourceTree = "<group>"; };
 		582843FF2189407B00AD65C8 /* SettingsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsCell.m; sourceTree = "<group>"; };
+		582CDF4B243435370094A70E /* Topup4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topup4ViewController.m; sourceTree = "<group>"; };
+		582CDF4C243435370094A70E /* Topup4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topup4ViewController.h; sourceTree = "<group>"; };
+		582CDF4D243435370094A70E /* Topup4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Topup4ViewController.xib; sourceTree = "<group>"; };
+		582CDF51243480710094A70E /* LYEmptyBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyBaseView.m; sourceTree = "<group>"; };
+		582CDF52243480710094A70E /* LYEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyView.h; sourceTree = "<group>"; };
+		582CDF53243480710094A70E /* UIView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Empty.m"; sourceTree = "<group>"; };
+		582CDF54243480710094A70E /* UIView+LYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYExtension.m"; sourceTree = "<group>"; };
+		582CDF55243480710094A70E /* LYEmptyBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyBaseView.h; sourceTree = "<group>"; };
+		582CDF56243480710094A70E /* LYEmptyViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyViewHeader.h; sourceTree = "<group>"; };
+		582CDF57243480710094A70E /* LYEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyView.m; sourceTree = "<group>"; };
+		582CDF58243480710094A70E /* UIView+LYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYExtension.h"; sourceTree = "<group>"; };
+		582CDF59243480710094A70E /* UIView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Empty.h"; sourceTree = "<group>"; };
 		582F238721BF99A400A000D1 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		582F238821BF99A400A000D1 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		582F239321C1126C00A000D1 /* EOSActivateAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOSActivateAccountViewController.h; sourceTree = "<group>"; };
@@ -3523,6 +3541,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				582CDF50243480710094A70E /* LYEmptyView */,
 				5821966123F28CC800704E23 /* NinaPagerView */,
 				5875B1F12386895B00FCA894 /* WZLBadge */,
 				587213362361748600E50744 /* RLArithmetic */,
@@ -4791,6 +4810,22 @@
 			path = QLC;
 			sourceTree = "<group>";
 		};
+		582CDF50243480710094A70E /* LYEmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				582CDF55243480710094A70E /* LYEmptyBaseView.h */,
+				582CDF51243480710094A70E /* LYEmptyBaseView.m */,
+				582CDF52243480710094A70E /* LYEmptyView.h */,
+				582CDF57243480710094A70E /* LYEmptyView.m */,
+				582CDF56243480710094A70E /* LYEmptyViewHeader.h */,
+				582CDF59243480710094A70E /* UIView+Empty.h */,
+				582CDF53243480710094A70E /* UIView+Empty.m */,
+				582CDF58243480710094A70E /* UIView+LYExtension.h */,
+				582CDF54243480710094A70E /* UIView+LYExtension.m */,
+			);
+			path = LYEmptyView;
+			sourceTree = "<group>";
+		};
 		582F238621BF99A400A000D1 /* ODRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -5098,9 +5133,15 @@
 				5872EF3124095B25000F2DFF /* BuybackDetailViewController.h */,
 				5872EF3224095B26000F2DFF /* BuybackDetailViewController.m */,
 				589FC662240A735100288046 /* BuybackDetailViewController.xib */,
+				582CDF4C243435370094A70E /* Topup4ViewController.h */,
+				582CDF4B243435370094A70E /* Topup4ViewController.m */,
+				582CDF4D243435370094A70E /* Topup4ViewController.xib */,
 				5821964A23F13F9D00704E23 /* Topup3ViewController.h */,
 				5821964823F13F9C00704E23 /* Topup3ViewController.m */,
 				5821964923F13F9D00704E23 /* Topup3ViewController.xib */,
+				58EC937C23B096290054C074 /* Topup1ViewController.h */,
+				58EC937E23B096290054C074 /* Topup1ViewController.m */,
+				58EC937D23B096290054C074 /* Topup1ViewController.xib */,
 				5870B5D523F667D700EB4D34 /* TopupBuyConfirmViewController.h */,
 				5870B5D723F667D800EB4D34 /* TopupBuyConfirmViewController.m */,
 				5870B5DC23F687F900EB4D34 /* TopupBuyConfirmViewController.xib */,
@@ -5113,9 +5154,6 @@
 				5836CFC623B49DA10072187A /* TopupPayETH_DeductionViewController.h */,
 				5836CFC723B49DA10072187A /* TopupPayETH_DeductionViewController.m */,
 				5836CFCC23B5D91E0072187A /* TopupPayETH_DeductionViewController.xib */,
-				58EC937C23B096290054C074 /* Topup1ViewController.h */,
-				58EC937E23B096290054C074 /* Topup1ViewController.m */,
-				58EC937D23B096290054C074 /* Topup1ViewController.xib */,
 				58BE6F7A233E4AFF00684A73 /* TopupWebViewController.h */,
 				58BE6F7B233E4AFF00684A73 /* TopupWebViewController.m */,
 				58BE6F81233E4B3F00684A73 /* TopupWebViewController.xib */,
@@ -6795,6 +6833,7 @@
 				582F87BE2153338F0008331D /* RankingStartCell.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				5836CFD323B5D96B0072187A /* TopupPayQLC_DeductionViewController.xib in Resources */,
+				582CDF4F243435380094A70E /* Topup4ViewController.xib in Resources */,
 				581F82B022F7C2AB00F8291E /* ETHTransferViewController.xib in Resources */,
 				5834A3522387D7E9004EB81A /* ClaimSuccessTipView.xib in Resources */,
 				58FB8D7D226587620075698E /* FinanceHistoryViewController.xib in Resources */,
@@ -7397,8 +7436,10 @@
 				589E59C922D43427000338B7 /* HomeBuySellCell.m in Sources */,
 				581D32DA219C158B001F88C3 /* Peer.swift in Sources */,
 				7384A29E2074DC0B00EA60E0 /* NSDate+Category.m in Sources */,
+				582CDF5C243480720094A70E /* UIView+LYExtension.m in Sources */,
 				5821968123F5104F00704E23 /* StartGroupViewController.m in Sources */,
 				581D32D9219C158B001F88C3 /* Token.swift in Sources */,
+				582CDF5D243480720094A70E /* LYEmptyView.m in Sources */,
 				58245BE122E00C830093E747 /* EntrustOrderDetailViewController.m in Sources */,
 				5825556822EECBD400F0B9F0 /* WalletSelectViewController.m in Sources */,
 				581D32D4219C158B001F88C3 /* Script.swift in Sources */,
@@ -7508,6 +7549,7 @@
 				583944F8229BEFEA0068852A /* QLCAddressInfoModel.m in Sources */,
 				5862C6DA2340A785006F4AC5 /* QLogHelper.m in Sources */,
 				585DD83E229CE0E7007944E9 /* QLCTransferConfirmView.m in Sources */,
+				582CDF5A243480720094A70E /* LYEmptyBaseView.m in Sources */,
 				7377D18B206CC3820072E628 /* NSString+Localizable.m in Sources */,
 				58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */,
 				581D32D2219C158B001F88C3 /* Block.swift in Sources */,
@@ -7518,6 +7560,7 @@
 				58A801CA226DC7A200640BBC /* RegisterMailViewController.m in Sources */,
 				58EBED00234F1F51007EEF1F /* RewardListModel.m in Sources */,
 				589E59D322D592AE000338B7 /* MyOrderListEntrustCell.m in Sources */,
+				582CDF5B243480720094A70E /* UIView+Empty.m in Sources */,
 				587ABD5321B8F8F800C3D81A /* EOS_TokenInfo.m in Sources */,
 				581D32E0219C158B001F88C3 /* validator.swift in Sources */,
 				5812DDA120A1A7890043A8A8 /* TLUserHelper.m in Sources */,
@@ -7705,6 +7748,7 @@
 				586E7D31238CD6E1005718B4 /* AppJumpHelper.m in Sources */,
 				581C227C21AD17F80009888B /* UIView+JKToast.m in Sources */,
 				581AF7C021B66B9B001A37E1 /* EOSTransferConfirmView.m in Sources */,
+				582CDF4E243435380094A70E /* Topup4ViewController.m in Sources */,
 				5885D426231E5A4600F9DEDE /* PledgeInfoByBeneficialModel.m in Sources */,
 				5827BC21219EBAF800B7730E /* ETHVerifyPWViewController.m in Sources */,
 				73F9557720FF33E400A3E0F5 /* FreeRecordMode.m in Sources */,
@@ -10177,7 +10221,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7653;
+				CURRENT_PROJECT_VERSION = 7669;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -10222,7 +10266,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7653;
+				CURRENT_PROJECT_VERSION = 7669;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;

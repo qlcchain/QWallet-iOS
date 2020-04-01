@@ -42,6 +42,7 @@ NSString *EOSExport_active_private_key = @"Export active private key";
     _sourceArr = [NSMutableArray array];
     [_sourceArr addObjectsFromArray:@[EOSResources,EOSExport_owner_private_key,EOSExport_active_private_key]];
     [_mainTable registerNib:[UINib nibWithNibName:ETHWalletDetailCellReuse bundle:nil] forCellReuseIdentifier:ETHWalletDetailCellReuse];
+    self.baseTable = _mainTable;
     
     [self configInit];
 }

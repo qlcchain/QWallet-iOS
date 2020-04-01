@@ -10,6 +10,7 @@
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
 #import "GlobalConstants.h"
+#import "LYEmptyViewHeader.h"
 
 @interface QBaseViewController ()
 
@@ -160,6 +161,18 @@
 #pragma mark - 子类继承刷新子view
 - (void)refreshContent {
     
+}
+
+- (void)configEmptyView:(UITableView *)tableV {
+    tableV.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
+    tableV.ly_emptyView.contentViewY = 160;
+}
+
+#pragma mark - Lazy
+- (void)setBaseTable:(UITableView *)baseTable {
+    _baseTable = baseTable;
+    _baseTable.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
+    _baseTable.ly_emptyView.contentViewY = 160;
 }
 
 - (void)didReceiveMemoryWarning {

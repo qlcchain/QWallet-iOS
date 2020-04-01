@@ -45,6 +45,8 @@
     
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:ETHTransactionRecordCellReuse bundle:nil] forCellReuseIdentifier:ETHTransactionRecordCellReuse];
+    self.baseTable = _mainTable;
+    
     [self renderView];
     [self configInit];
     

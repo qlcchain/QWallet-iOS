@@ -30,6 +30,7 @@
      _sourceArr = [NSMutableArray array];
     [_sourceArr addObjectsFromArray:[ConfigUtil getLocalCurrencyArr]];
     [_mainTable registerNib:[UINib nibWithNibName:ChooseCurrencyCellReuse bundle:nil] forCellReuseIdentifier:ChooseCurrencyCellReuse];
+    self.baseTable = _mainTable;
 }
 
 #pragma mark - Action

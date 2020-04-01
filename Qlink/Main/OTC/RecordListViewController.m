@@ -121,6 +121,7 @@ static NSString *RecordListRequestSize = @"20";
     
     kWeakSelf(self)
     [_postedTable registerNib:[UINib nibWithNibName:MyOrderListEntrustCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListEntrustCellReuse];
+    [self configEmptyView:_postedTable];
     _postedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.postedPage = 1;
         [weakself requestEntrust_order_list];
@@ -128,7 +129,9 @@ static NSString *RecordListRequestSize = @"20";
     _postedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestEntrust_order_list];
     }];
+    
     [_processingTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
+    [self configEmptyView:_processingTable];
     _processingTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.processingPage = 1;
         [weakself requestTrade_order_list];
@@ -136,7 +139,9 @@ static NSString *RecordListRequestSize = @"20";
     _processingTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
     }];
+    
     [_completedTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
+    [self configEmptyView:_completedTable];
     _completedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.completedPage = 1;
         [weakself requestTrade_order_list];
@@ -144,7 +149,9 @@ static NSString *RecordListRequestSize = @"20";
     _completedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
     }];
+    
     [_closedTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
+    [self configEmptyView:_closedTable];
     _closedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.closedPage = 1;
         [weakself requestTrade_order_list];
@@ -152,7 +159,9 @@ static NSString *RecordListRequestSize = @"20";
     _closedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
     }];
+    
     [_appealedTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
+    [self configEmptyView:_appealedTable];
     _appealedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.appealedPage = 1;
         [weakself requestTrade_order_list];

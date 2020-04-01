@@ -31,6 +31,7 @@
 - (void)configInit {
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:ChooseTokenCell_Reuse bundle:nil] forCellReuseIdentifier:ChooseTokenCell_Reuse];
+    self.baseTable = _mainTable;
 }
 
 #pragma mark - Request

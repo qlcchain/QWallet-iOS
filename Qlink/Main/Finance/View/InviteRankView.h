@@ -17,6 +17,7 @@ typedef void(^InviteRankHeightBlock)(CGFloat height);
 + (instancetype)getInstance;
 - (void)startRefresh;
 - (void)config:(InviteRankHeightBlock)heightB;
+- (void)updateTable:(NSString *)invite_reward_amount;
 
 @end
 

@@ -31,6 +31,7 @@
 - (void)dataInit {
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:ChooseAreaCodeCellReuse bundle:nil] forCellReuseIdentifier:ChooseAreaCodeCellReuse];
+    self.baseTable = _mainTable;
     
     NSData *jsonData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CountryCode" ofType:@"json"]];
     NSArray *arr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];

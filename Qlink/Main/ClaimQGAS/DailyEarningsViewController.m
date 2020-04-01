@@ -70,6 +70,7 @@ static NSInteger const DailyEarnings_PageFirst = 1;
     _claimBtn.layer.cornerRadius = 4.0f;
     _claimBtn.layer.masksToBounds = YES;
     [_mainTable registerNib:[UINib nibWithNibName:DailyEarningsCellReuse bundle:nil] forCellReuseIdentifier:DailyEarningsCellReuse];
+    self.baseTable = _mainTable;
     _sourceArr = [NSMutableArray array];
     _currentPage = DailyEarnings_PageFirst;
 //    _totalStakingVolume = @(0);
