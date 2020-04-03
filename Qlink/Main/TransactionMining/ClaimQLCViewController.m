@@ -9,6 +9,7 @@
 #import "ClaimQLCViewController.h"
 #import "WalletCommonModel.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "ChooseWalletViewController.h"
 #import "NSString+RemoveZero.h"
 #import "WalletSelectViewController.h"

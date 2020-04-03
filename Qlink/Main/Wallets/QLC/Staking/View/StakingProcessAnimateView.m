@@ -9,6 +9,7 @@
 #import "StakingProcessAnimateView.h"
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface StakingProcessAnimateView ()
 

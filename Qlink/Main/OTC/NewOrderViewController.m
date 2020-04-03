@@ -13,6 +13,7 @@
 #import <QLCFramework/QLCFramework.h>
 #import "WalletCommonModel.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QLCAddressInfoModel.h"
 #import <ETHFramework/ETHFramework.h>
@@ -34,6 +35,7 @@
 #import "NSString+Valid.h"
 #import "TxidBackUtil.h"
 #import "TokenListHelper.h"
+#import "FirebaseUtil.h"
 
 @interface NewOrderViewController () <UITextFieldDelegate>
 
@@ -451,6 +453,9 @@
     [self buy_transfer:fromAddress amountStr:transferAmount tokenChain:_buy_PairsM.payTokenChain tokenName:_buy_PairsM.payToken memo:memo];
 //    // 下买单
 //    [self requestEntrustBuyOrder];
+    
+    
+    [FirebaseUtil logEventWithItemID:OTC_NewOrder_BUY_Confirm itemName:OTC_NewOrder_BUY_Confirm contentType:OTC_NewOrder_BUY_Confirm];
 }
 
 - (IBAction)sellNextAction:(id)sender {
@@ -517,6 +522,9 @@
     NSString *fromAddress = _sellTradeAddressTF.text?:@"";
     NSString *memo = [NSString stringWithFormat:@"%@_%@_%@",@"otc",@"entrust",@"sell"];
     [self sell_transfer:fromAddress amountStr:_sellTradeAmountTF.text tokenChain:_sell_PairsM.tradeTokenChain tokenName:_sell_PairsM.tradeToken memo:memo];
+    
+    
+    [FirebaseUtil logEventWithItemID:OTC_NewOrder_SELL_Confirm itemName:OTC_NewOrder_SELL_Confirm contentType:OTC_NewOrder_SELL_Confirm];
 }
 
 - (IBAction)buyReceiveQgasWalletCloseAction:(id)sender {
@@ -647,6 +655,8 @@
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
 //            [weakself showSubmitSuccess];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
+            
+            [FirebaseUtil logEventWithItemID:OTC_Entrust_BUY_Submit_Success itemName:OTC_Entrust_BUY_Submit_Success contentType:OTC_Entrust_BUY_Submit_Success];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
             
@@ -712,6 +722,8 @@
             
 //            [weakself showSubmitSuccess];
             [weakself.navigationController popToRootViewControllerAnimated:YES];
+            
+            [FirebaseUtil logEventWithItemID:OTC_Entrust_SELL_Submit_Success itemName:OTC_Entrust_SELL_Submit_Success contentType:OTC_Entrust_SELL_Submit_Success];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
             

@@ -107,7 +107,7 @@
     if ([topVC isKindOfClass:[WalletsViewController class]]){
         if (kAppD.needFingerprintVerification) {
             [kAppD presentFingerprintVerify:^{
-                kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+                kAppD.qtabbarC.selectedIndex = TabbarIndexWallet;
             }];
             return NO;
         }
@@ -115,7 +115,7 @@
 //    if ([topVC isKindOfClass:[MyViewController class]]){
 //        if (kAppD.allowPresentLogin) {
 //            [kAppD presentLogin:^{
-//                kAppD.tabbarC.selectedIndex = TabbarIndexMy;
+//                kAppD.mtabbarC.selectedIndex = TabbarIndexMy;
 //            }];
 //            return NO;
 //        }
@@ -130,6 +130,18 @@
 //            [WalletUtil checkWalletPassAndPrivateKey:(WalletViewController *)(((QlinkNavViewController *)viewController).topViewController) TransitionFrom:CheckProcess_WALLET_TABBAR];
 //        }
 //    }
+}
+
+//缩放动画
+- (void)addScaleAnimationOnView:(UIView *)animationView repeatCount:(float)repeatCount {
+    //需要实现的帧动画，这里根据需求自定义
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = @"transform.scale";
+    animation.values = @[@1.0,@1.3,@0.9,@1.15,@0.95,@1.02,@1.0];
+    animation.duration = 1;
+    animation.repeatCount = repeatCount;
+    animation.calculationMode = kCAAnimationCubic;
+    [animationView.layer addAnimation:animation forKey:nil];
 }
 
 #pragma mark - Noti

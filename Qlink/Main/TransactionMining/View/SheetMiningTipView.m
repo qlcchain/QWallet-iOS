@@ -18,6 +18,7 @@
 #import "SuccessTipView.h"
 #import "JPushTagHelper.h"
 #import "MiningActivityModel.h"
+#import "UIView+PopAnimate.h"
 
 @interface SheetMiningTipView ()
 
@@ -56,6 +57,7 @@
         view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [kAppD.window addSubview:view];
         view.confirmBlock = block;
+        [view.tipBack showPopAnimate];
         
         NSString *valueStr = model.totalRewardAmount;
         NSString *amountShowStr = [NSString stringWithFormat:@"%@ %@",valueStr,model.rewardToken];

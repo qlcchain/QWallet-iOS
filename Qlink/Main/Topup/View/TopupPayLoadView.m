@@ -10,6 +10,7 @@
 #import "UIView+Visuals.h"
 #import "WalletCommonModel.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface TopupPayLoadView ()
 

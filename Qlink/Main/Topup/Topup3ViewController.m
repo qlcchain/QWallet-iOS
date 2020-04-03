@@ -32,7 +32,6 @@
 #import "TokenPriceModel.h"
 #import "RLArithmetic.h"
 #import "TabbarHelper.h"
-#import "QlinkTabbarViewController.h"
 #import "WZLBadgeImport.h"
 #import "RedPointModel.h"
 #import "ShareFriendsViewController.h"
@@ -57,6 +56,7 @@
 #import "BuybackBurnUtil.h"
 #import "WebViewController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "HomeBuySellViewController.h"
 #import "BuybackDetailViewController.h"
 #import <TMCache/TMCache.h>
@@ -321,7 +321,7 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [weakself.mainScroll.mj_header endRefreshing];
         });
-    }];
+    } type:RefreshTypeColor];
 //    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
 //        [weakself requestTopup_product_list];
 //    }];
@@ -526,7 +526,7 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
 - (void)getRedDotOfMe {
     [TabbarHelper requestUser_red_pointWithCompleteBlock:^(RedPointModel *redPointM) {
         if ([redPointM.dailyIncomePoint integerValue] == 1 || [redPointM.invitePoint integerValue] == 1 || [redPointM.rewardTotal integerValue] == 1) {
-            UITabBarItem *item = kAppD.tabbarC.tabBar.items[TabbarIndexMy];
+            UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
             [item setBadgeCenterOffset:CGPointMake(0, 5)];
             [item setBadgeColor:UIColorFromRGB(0xD0021B)];
             [item showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone];
@@ -1041,7 +1041,7 @@ static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_
 
 - (IBAction)buybackBurnJoinAction:(id)sender {
     [AppJumpHelper jumpToOTC];
-    [kAppD.tabbarC.homeBuySellVC showSellView];
+    [kAppD.mtabbarC.homeBuySellVC showSellView];
 }
 
 

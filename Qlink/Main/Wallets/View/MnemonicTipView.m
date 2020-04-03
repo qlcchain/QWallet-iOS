@@ -9,6 +9,7 @@
 #import "MnemonicTipView.h"
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface MnemonicTipView ()
 
@@ -27,6 +28,7 @@
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {

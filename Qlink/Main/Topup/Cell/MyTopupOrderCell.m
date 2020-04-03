@@ -197,7 +197,7 @@
 //    }
     _topupAmountLab.text = topupAmountStr;
     _payAmountLab.text = payAmountStr;
-    NSNumber *qgasNum = model.qgasAmount;
+    NSString *qgasNum = model.qgasAmount_str;
 //    _discountAmountLab.text = discountAmountStr;
     _qgasAmountLab.text = [NSString stringWithFormat:@"%@%@",qgasNum,model.symbol?:@""];
     
@@ -211,7 +211,7 @@
     topupAmountStr = [NSString stringWithFormat:@"%@%@",model.localFiatMoney,model.localFiat];
     payAmountStr = [NSString stringWithFormat:@"%@%@",model.payTokenAmount_str,model.payTokenSymbol];
 //    discountAmountStr = [NSString stringWithFormat:@"-%@%@",discountNumStr,model.symbol];
-    NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.qgasAmount,model.symbol?:@""];
+    NSString *qgasNumStr = [NSString stringWithFormat:@"%@%@",model.qgasAmount_str,model.symbol?:@""];
     
     _topupAmountLab.text = topupAmountStr;
     _payAmountLab.text = payAmountStr;

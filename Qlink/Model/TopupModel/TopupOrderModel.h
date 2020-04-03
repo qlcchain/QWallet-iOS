@@ -70,7 +70,8 @@ static NSString *const Topup_Order_Status_ORDERED = @"ORDERED"; // 已生成充�
 @property (nonatomic, strong) NSString *productProvince; //" : "广东",
 @property (nonatomic, strong) NSString *status; //" : "NEW"
 @property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSNumber *qgasAmount;
+@property (nonatomic) double qgasAmount;
+@property (nonatomic, strong) NSString *qgasAmount_str;
 @property (nonatomic, strong) NSString *txid;
 @property (nonatomic, strong) NSString *symbol;
 @property (nonatomic, strong) NSString *chain;

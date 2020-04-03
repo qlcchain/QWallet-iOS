@@ -16,7 +16,6 @@
 #import "SystemUtil.h"
 #import "NeoTransferUtil.h"
 #import "GlobalConstants.h"
-#import "QlinkTabbarViewController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "VPNMode.h"
 #import "NEOWalletInfo.h"
@@ -26,6 +25,7 @@
 #import "ReportUtil.h"
 #import "WalletCommonModel.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "GlobalConstants.h"
 
@@ -410,7 +410,7 @@
     switch (checkFrom) {
         case CheckProcess_WALLET_TABBAR:
         {
-            kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
+            kAppD.mtabbarC.selectedIndex = TabbarIndexFinance;
         }
             break;
         case CheckProcess_VPN_ADD:

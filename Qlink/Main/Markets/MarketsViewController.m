@@ -9,6 +9,7 @@
 #import "MarketsViewController.h"
 #import "MarketsCell.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "BinaTpcsModel.h"
 #import "TokenPriceModel.h"

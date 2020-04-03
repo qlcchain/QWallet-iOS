@@ -49,10 +49,10 @@ static NSString * const NetworkSize = @"20";
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTopup_country_list];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTopup_country_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 #pragma mark - Request

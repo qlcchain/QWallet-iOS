@@ -156,6 +156,8 @@
 
 - (IBAction)openDelegateAction:(id)sender {
     [self jumpToOpenDelegate];
+    
+    
 }
 
 

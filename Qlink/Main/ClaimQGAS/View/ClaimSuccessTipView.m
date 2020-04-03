@@ -9,6 +9,7 @@
 #import "ClaimSuccessTipView.h"
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface ClaimSuccessTipView ()
 
@@ -30,8 +31,9 @@
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
     _titleLab.text = title;
+    [self.tipBack showPopAnimate];
     
-    [self performSelector:@selector(hide) withObject:nil afterDelay:1.5];
+    [self performSelector:@selector(hide) withObject:nil afterDelay:2];
 }
 
 - (void)hide {

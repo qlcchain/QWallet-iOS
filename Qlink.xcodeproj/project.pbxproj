@@ -447,10 +447,7 @@
 		582844012189407B00AD65C8 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582843FF2189407B00AD65C8 /* SettingsCell.m */; };
 		582CDF4E243435380094A70E /* Topup4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF4B243435370094A70E /* Topup4ViewController.m */; };
 		582CDF4F243435380094A70E /* Topup4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582CDF4D243435370094A70E /* Topup4ViewController.xib */; };
-		582CDF5A243480720094A70E /* LYEmptyBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF51243480710094A70E /* LYEmptyBaseView.m */; };
-		582CDF5B243480720094A70E /* UIView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF53243480710094A70E /* UIView+Empty.m */; };
-		582CDF5C243480720094A70E /* UIView+LYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF54243480710094A70E /* UIView+LYExtension.m */; };
-		582CDF5D243480720094A70E /* LYEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF57243480710094A70E /* LYEmptyView.m */; };
+		582CDF6024359A710094A70E /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF5F24359A700094A70E /* MainTabBarViewController.m */; };
 		582F238A21BF99A500A000D1 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F238821BF99A400A000D1 /* ODRefreshControl.m */; };
 		582F239621C1126C00A000D1 /* EOSActivateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239421C1126C00A000D1 /* EOSActivateAccountViewController.m */; };
 		582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239A21C1FDD300A000D1 /* EOSResourcePriceModel.m */; };
@@ -567,6 +564,7 @@
 		58644E372357FA7E00EFA9A2 /* FirebaseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E362357FA7E00EFA9A2 /* FirebaseConstants.m */; };
 		58644E3A2358034200EFA9A2 /* FirebaseUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E392358034200EFA9A2 /* FirebaseUtil.m */; };
 		58644E3E235817ED00EFA9A2 /* TopupCredentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */; };
+		58673E752435DC5900C7D7F5 /* UIView+PopAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58673E742435DC5900C7D7F5 /* UIView+PopAnimate.m */; };
 		58688F1F239115740016AB2F /* CountryCodeList.json in Resources */ = {isa = PBXBuildFile; fileRef = 58688F1E239115730016AB2F /* CountryCodeList.json */; };
 		5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5869C5AE2359A84F0016BD38 /* InviteRankView.m */; };
 		586E7D31238CD6E1005718B4 /* AppJumpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E7D30238CD6E1005718B4 /* AppJumpHelper.m */; };
@@ -1928,15 +1926,8 @@
 		582CDF4B243435370094A70E /* Topup4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topup4ViewController.m; sourceTree = "<group>"; };
 		582CDF4C243435370094A70E /* Topup4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topup4ViewController.h; sourceTree = "<group>"; };
 		582CDF4D243435370094A70E /* Topup4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Topup4ViewController.xib; sourceTree = "<group>"; };
-		582CDF51243480710094A70E /* LYEmptyBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyBaseView.m; sourceTree = "<group>"; };
-		582CDF52243480710094A70E /* LYEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyView.h; sourceTree = "<group>"; };
-		582CDF53243480710094A70E /* UIView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Empty.m"; sourceTree = "<group>"; };
-		582CDF54243480710094A70E /* UIView+LYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYExtension.m"; sourceTree = "<group>"; };
-		582CDF55243480710094A70E /* LYEmptyBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyBaseView.h; sourceTree = "<group>"; };
-		582CDF56243480710094A70E /* LYEmptyViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyViewHeader.h; sourceTree = "<group>"; };
-		582CDF57243480710094A70E /* LYEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyView.m; sourceTree = "<group>"; };
-		582CDF58243480710094A70E /* UIView+LYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYExtension.h"; sourceTree = "<group>"; };
-		582CDF59243480710094A70E /* UIView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Empty.h"; sourceTree = "<group>"; };
+		582CDF5E24359A700094A70E /* MainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
+		582CDF5F24359A700094A70E /* MainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
 		582F238721BF99A400A000D1 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		582F238821BF99A400A000D1 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		582F239321C1126C00A000D1 /* EOSActivateAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOSActivateAccountViewController.h; sourceTree = "<group>"; };
@@ -2193,6 +2184,8 @@
 		58644E392358034200EFA9A2 /* FirebaseUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUtil.m; sourceTree = "<group>"; };
 		58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupCredentialViewController.m; sourceTree = "<group>"; };
 		58644E3D235817EC00EFA9A2 /* TopupCredentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupCredentialViewController.h; sourceTree = "<group>"; };
+		58673E732435DC5900C7D7F5 /* UIView+PopAnimate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+PopAnimate.h"; sourceTree = "<group>"; };
+		58673E742435DC5900C7D7F5 /* UIView+PopAnimate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+PopAnimate.m"; sourceTree = "<group>"; };
 		58688F1E239115730016AB2F /* CountryCodeList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodeList.json; sourceTree = "<group>"; };
 		5869C5AD2359A84F0016BD38 /* InviteRankView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteRankView.h; sourceTree = "<group>"; };
 		5869C5AE2359A84F0016BD38 /* InviteRankView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteRankView.m; sourceTree = "<group>"; };
@@ -3457,6 +3450,8 @@
 				58D2D8942193E26100C5B4C9 /* UIView+DottedBox.m */,
 				581C227E21AD1B2D0009888B /* UIView+ToastAlert.h */,
 				581C227F21AD1B2D0009888B /* UIView+ToastAlert.m */,
+				58673E732435DC5900C7D7F5 /* UIView+PopAnimate.h */,
+				58673E742435DC5900C7D7F5 /* UIView+PopAnimate.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -3541,7 +3536,6 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				582CDF50243480710094A70E /* LYEmptyView */,
 				5821966123F28CC800704E23 /* NinaPagerView */,
 				5875B1F12386895B00FCA894 /* WZLBadge */,
 				587213362361748600E50744 /* RLArithmetic */,
@@ -3634,6 +3628,8 @@
 				580D916F20625F9C00B12506 /* QBaseViewController.m */,
 				73E52BCF2062978200063ED6 /* QlinkTabbarViewController.h */,
 				73E52BD02062978200063ED6 /* QlinkTabbarViewController.m */,
+				582CDF5E24359A700094A70E /* MainTabBarViewController.h */,
+				582CDF5F24359A700094A70E /* MainTabBarViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -4808,22 +4804,6 @@
 				589AE1BA2338656400C0A666 /* TrezorCrytoEd25519.framework */,
 			);
 			path = QLC;
-			sourceTree = "<group>";
-		};
-		582CDF50243480710094A70E /* LYEmptyView */ = {
-			isa = PBXGroup;
-			children = (
-				582CDF55243480710094A70E /* LYEmptyBaseView.h */,
-				582CDF51243480710094A70E /* LYEmptyBaseView.m */,
-				582CDF52243480710094A70E /* LYEmptyView.h */,
-				582CDF57243480710094A70E /* LYEmptyView.m */,
-				582CDF56243480710094A70E /* LYEmptyViewHeader.h */,
-				582CDF59243480710094A70E /* UIView+Empty.h */,
-				582CDF53243480710094A70E /* UIView+Empty.m */,
-				582CDF58243480710094A70E /* UIView+LYExtension.h */,
-				582CDF54243480710094A70E /* UIView+LYExtension.m */,
-			);
-			path = LYEmptyView;
 			sourceTree = "<group>";
 		};
 		582F238621BF99A400A000D1 /* ODRefreshControl */ = {
@@ -7134,6 +7114,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BGFMDB/BGFMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
@@ -7144,6 +7125,7 @@
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -7174,6 +7156,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BGFMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
@@ -7184,6 +7167,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -7270,8 +7254,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "#!/bin/sh\n#\n# Copyright 2016 Bugly, Tencent. All rights reserved.\n#\n# V1.4.0\n#\n# 2016.08.03\n#\n#\n#\n######################################################\n# 1. 脚本集成到Xcode工程的Target\n######################################################\n#\n# --- Copy the SCRIPT to the Run Script of Build Phases in the Xcode project ---\n#\n# #\nBUGLY_APP_ID=\"30b074db54\"\n# #\nBUGLY_APP_KEY=\"102e08a6-e9ef-404f-aa38-4f5e02024b76\"\n# #\nBUNDLE_IDENTIFIER=\"com.qlcchain.qwallet\"\n# #\nUPLOAD_DSYM_ONLY=1\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n# # Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\nUPLOAD_DEBUG_SYMBOLS=0\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\nUPLOAD_SIMULATOR_SYMBOLS=0\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\nUPLOAD_ARCHIVE_ONLY=1\n#\n# #\n# source dSYMUpload.sh\n#\n# --- END OF SCRIPT ---\n#\n#\n#\n#\n#######################################################\n# 2. 脚本根据输入参数处理\n#######################################################\n#\n# #命令行下输入应用基本信息, .dSYM文件的父目录路径, 输出文件目录即可\n#\n# sh dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir>\n#\n# #\n#\n# #注意:\n# # 1. dSYMUpload.sh会调用buglySymboliOS.jar进行.dSYM解析，所以依赖Java运行时环境\n# # 2. dSYMUpload.sh和buglySymboliOS.jar的文件路径需一致\n#\n#\n\n#\n# --- CONTENT OF SCRIPT ---\n#\n\n# Bugly服务域名\nBUGLY_DSYM_UPLOAD_DOMAIN=\"api.bugly.qq.com\"\n\n# 注意jar工具的路径跟dSYMUpload.sh脚本路径一致, 请务必保证jar路径的正确性\nBUGLY_SYMBOL_JAR_PATH=\"dsymtool/buglySymboliOS.jar\"\n# 查找添加到系统目录的jar工具\nif [ ! -f \"${BUGLY_SYMBOL_JAR_PATH}\" ]; then\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\nfi\n\n# 打印错误信息\nfunction exitWithMessage(){\n    echo \"--------------------------------\"\n    echo \"${1}\"\n    echo \"--------------------------------\"\n    exit ${2}\n}\n\n# 上传bSYMBOL文件\nfunction dSYMUpload() {\n    P_APP_ID=\"$1\"\n    P_APP_KEY=\"$2\"\n    P_APP_BUNDLE_ID=\"$3\"\n    P_APP_VERSION=\"$4\"\n    P_BSYMBOL_ZIP_FILE=\"$5\"\n    \n    #\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE##*/}\n        P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE_NAME//&/_}\n            P_BSYMBOL_ZIP_FILE_NAME=\"${P_BSYMBOL_ZIP_FILE_NAME// /_}\"\n            \n            DSYM_UPLOAD_URL=\"https://${BUGLY_DSYM_UPLOAD_DOMAIN}/openapi/file/upload/symbol?app_id=${P_APP_ID}&app_key=${P_APP_KEY}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            echo \"-----------------------------\"\n            STATUS=$(/usr/bin/curl -k \"${DSYM_UPLOAD_URL}\" --form \"api_version=1\" --form \"app_id=${P_APP_ID}\" --form \"app_key=${P_APP_KEY}\" --form \"symbolType=2\"  --form \"bundleId=${BUNDLE_IDENTIFIER}\" --form \"productVersion=${BUGLY_APP_VERSION}\" --form \"fileName=${P_BSYMBOL_ZIP_FILE_NAME}\" --form \"file=@${P_BSYMBOL_ZIP_FILE}\" --verbose)\n            echo \"-----------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\"{\\\"reponseCode\\\":\\\"0\\\"}\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            #echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n        }\n        \n        # .dSYM解析为bSYMBOL文件\n        function dSYMParse() {\n            DSYM_FILE=\"$1\"\n            DSYM_SYMBOL_FILE=\"$2\"\n            \n            echo \"--------------------------------\"\n            echo \"Extract symbol info from .dSYM file. to ${DSYM_SYMBOL_FILE}\"\n            (/usr/bin/java -Xms512m -Xmx1024m -Dfile.encoding=UTF8 -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_FILE}\" -o \"${DSYM_SYMBOL_FILE}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n            echo \"--------------------------------\"\n            \n        }\n        \n        # 执行\n        function run() {\n            \n            CONFIG_BUGLY_APP_ID=\"$1\"\n            CONFIG_BUGLY_APP_KEY=\"$2\"\n            \n            CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER=\"$3\"\n            CONFIG_BUGLY_APP_VERSION=\"$4\"\n            CONFIG_DSYM_SOURCE_DIR=\"$5\"\n            CONFIG_DSYM_DEST_DIR=\"$6\"\n            CONFIG_UPLOAD_DSYM_ONLY=\"$7\"\n            \n            # 检查必须参数是否设置\n            if [ ! \"${CONFIG_BUGLY_APP_ID}\" ]; then\n            exitWithMessage \"Error: Bugly App ID not defined. Please set 'BUGLY_APP_ID' \" 0\n            fi\n            \n            if [[ \"${CONFIG_BUGLY_APP_ID}\" == *\"App ID\"* ]]; then\n            exitWithMessage \"Error: Bugly App ID not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_KEY}\" ]; then\n            exitWithMessage \"Error: Bugly App Key not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER}\" ]; then\n            exitWithMessage \"Error: Bundle Identifier not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_VERSION}\" ]; then\n            exitWithMessage \"Error: App Version not defined.\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_SOURCE_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_SOURCE_DIR}\" 0\n            fi\n            \n            if [ ! \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_DEST_DIR}\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            mkdir ${CONFIG_DSYM_DEST_DIR}\n            fi\n            \n            DSYM_FOLDER=\"${CONFIG_DSYM_SOURCE_DIR}\"\n            IFS=$'\\n'\n            \n            echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n            RET=\"F\"\n            \n            #\n            for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n            RET=\"T\"\n            echo \"Found dSYM file: $dsymFile\"\n            \n            DSYM_FILE_NAME=${dsymFile##*/}\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_FILE_NAME}.zip\"\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_SYMBOL_ZIP_FILE_NAME// /_}\"\n                DSYM_SYMBOL_ZIP_FILE=${CONFIG_DSYM_DEST_DIR}/${DSYM_SYMBOL_ZIP_FILE_NAME}\n                \n                if [ $CONFIG_UPLOAD_DSYM_ONLY -eq 1 ]; then\n                if [ -e $DSYM_SYMBOL_ZIP_FILE ]; then\n                rm -f $DSYM_SYMBOL_ZIP_FILE\n                fi\n                # 如果只上传dSYM，直接压缩dSYM目录\n                zip -r -j $DSYM_SYMBOL_ZIP_FILE $dsymFile -x *.plist\n                else\n                # 使用符号表工具来生成Symbol文件\n                dSYMParse $dsymFile $DSYM_SYMBOL_ZIP_FILE\n                fi\n                \n                # 上传\n                dSYMUpload $CONFIG_BUGLY_APP_ID $CONFIG_BUGLY_APP_KEY $CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER $CONFIG_BUGLY_APP_VERSION $DSYM_SYMBOL_ZIP_FILE\n                done\n                \n                if [ $RET = \"F\" ]; then\n                exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n                fi\n            }\n            \n            # 在Xcode工程中执行\n            function runInXcode(){\n                echo \"Uploading dSYM to Bugly in Xcode ...\"\n                \n                echo \"Info.Plist : ${INFOPLIST_FILE}\"\n                \n                BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\n                BUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n                \n                # 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\n                if [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\n                BUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\n                else\n                BUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\n                fi\n                \n                echo \"--------------------------------\"\n                echo \"Prepare application information.\"\n                echo \"--------------------------------\"\n                \n                echo \"Product Name: ${PRODUCT_NAME}\"\n                echo \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\n                echo \"Version: ${BUNDLE_SHORT_VERSION}\"\n                echo \"Build: ${BUNDLE_VERSION}\"\n                \n                echo \"Bugly App ID: ${BUGLY_APP_ID}\"\n                echo \"Bugly App key: ${BUGLY_APP_KEY}\"\n                echo \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n                \n                echo \"--------------------------------\"\n                echo \"Check the arguments ...\"\n                \n                ##检查模拟器编译是否允许上传符号\n                if [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\n                if [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否是Release模式编译\n                if [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\n                if [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否Archive操作\n                if [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\n                if [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\n                echo \"Archive the package\"\n                else\n                exitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\n                fi\n                fi\n                \n                #\n                run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${BUILD_DIR}/BuglySymbolTemp ${UPLOAD_DSYM_ONLY}\n            }\n            \n            # 根据Xcode的环境变量判断是否处于Xcode环境\n            INFO_PLIST_FILE=\"${INFOPLIST_FILE}\"\n            \n            BuildInXcode=\"F\"\n            if [ -f \"${INFO_PLIST_FILE}\" ]; then\n            BuildInXcode=\"T\"\n            fi\n            \n            if [ $BuildInXcode = \"T\" ]; then\n            runInXcode\n            else\n            echo \"\\nUsage: dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir> [upload_dsym_only]\\n\"\n            # 你可以在此处直接设置BuglyAppID和BuglyAppKey，排除不常变参数的输入\n            BUGLY_APP_ID=\"$1\"\n            BUGLY_APP_KEY=\"$2\"\n            BUNDLE_IDENTIFIER=\"$3\"\n            BUGLY_APP_VERSION=\"$4\"\n            DWARF_DSYM_FOLDER_PATH=\"$5\"\n            SYMBOL_OUTPUT_PATH=\"$6\"\n            UPLOAD_DSYM_ONLY=$7\n            run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${SYMBOL_OUTPUT_PATH} ${UPLOAD_DSYM_ONLY}\n            fi\n\n";
 		};
 		7BC2CB92FE7CE103DCF7755A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7434,12 +7417,11 @@
 				581F5FEE219E92B300604352 /* NSString+Valid.m in Sources */,
 				5806C11621C3E4C8000E693B /* CreateAccountSignTransactionRequest.m in Sources */,
 				589E59C922D43427000338B7 /* HomeBuySellCell.m in Sources */,
+				58673E752435DC5900C7D7F5 /* UIView+PopAnimate.m in Sources */,
 				581D32DA219C158B001F88C3 /* Peer.swift in Sources */,
 				7384A29E2074DC0B00EA60E0 /* NSDate+Category.m in Sources */,
-				582CDF5C243480720094A70E /* UIView+LYExtension.m in Sources */,
 				5821968123F5104F00704E23 /* StartGroupViewController.m in Sources */,
 				581D32D9219C158B001F88C3 /* Token.swift in Sources */,
-				582CDF5D243480720094A70E /* LYEmptyView.m in Sources */,
 				58245BE122E00C830093E747 /* EntrustOrderDetailViewController.m in Sources */,
 				5825556822EECBD400F0B9F0 /* WalletSelectViewController.m in Sources */,
 				581D32D4219C158B001F88C3 /* Script.swift in Sources */,
@@ -7549,7 +7531,6 @@
 				583944F8229BEFEA0068852A /* QLCAddressInfoModel.m in Sources */,
 				5862C6DA2340A785006F4AC5 /* QLogHelper.m in Sources */,
 				585DD83E229CE0E7007944E9 /* QLCTransferConfirmView.m in Sources */,
-				582CDF5A243480720094A70E /* LYEmptyBaseView.m in Sources */,
 				7377D18B206CC3820072E628 /* NSString+Localizable.m in Sources */,
 				58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */,
 				581D32D2219C158B001F88C3 /* Block.swift in Sources */,
@@ -7560,7 +7541,6 @@
 				58A801CA226DC7A200640BBC /* RegisterMailViewController.m in Sources */,
 				58EBED00234F1F51007EEF1F /* RewardListModel.m in Sources */,
 				589E59D322D592AE000338B7 /* MyOrderListEntrustCell.m in Sources */,
-				582CDF5B243480720094A70E /* UIView+Empty.m in Sources */,
 				587ABD5321B8F8F800C3D81A /* EOS_TokenInfo.m in Sources */,
 				581D32E0219C158B001F88C3 /* validator.swift in Sources */,
 				5812DDA120A1A7890043A8A8 /* TLUserHelper.m in Sources */,
@@ -7652,6 +7632,7 @@
 				583D959C211432110057A90C /* RankingSubCell.m in Sources */,
 				5825552B22EACF9100F0B9F0 /* ZQImageMosaicController.m in Sources */,
 				582717C922C9DC56003DC080 /* SGQRCodeObtain.m in Sources */,
+				582CDF6024359A710094A70E /* MainTabBarViewController.m in Sources */,
 				58A57D7322DED1C600699C3F /* MyOrderListTradeCell.m in Sources */,
 				58245C5122E192550093E747 /* TZLocationManager.m in Sources */,
 				5875B2022386895B00FCA894 /* UITabBarItem+WZLBadge.m in Sources */,
@@ -10221,7 +10202,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7669;
+				CURRENT_PROJECT_VERSION = 7790;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -10266,7 +10247,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7669;
+				CURRENT_PROJECT_VERSION = 7790;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;

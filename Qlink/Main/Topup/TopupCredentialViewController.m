@@ -53,7 +53,7 @@
     NSString *qgasStr = @"0";
     NSString *symbolStr = @"";
     if (_inputPayType == TopupPayTypeNormal) {
-        qgasStr = [NSString stringWithFormat:@"%@",_inputCredentailM.qgasAmount];
+        qgasStr = [NSString stringWithFormat:@"%@",_inputCredentailM.qgasAmount_str];
         symbolStr = _inputCredentailM.symbol;
     } else if (_inputPayType == TopupPayTypeGroupBuy) {
         qgasStr = [NSString doubleToString:_inputCredentailM.deductionTokenAmount];

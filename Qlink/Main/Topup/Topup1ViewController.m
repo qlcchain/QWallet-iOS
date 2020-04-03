@@ -33,6 +33,7 @@
 #import "RLArithmetic.h"
 #import "TabbarHelper.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WZLBadgeImport.h"
 #import "RedPointModel.h"
 #import "ShareFriendsViewController.h"
@@ -249,10 +250,10 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
         if (weakself.countryV) {
             [weakself.countryV refreshCountryView];
         }
-    }];
+    } type:RefreshTypeColor];
     _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTopup_product_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)handlerPushJump {
@@ -410,7 +411,7 @@ static NSString *const Show_Partner_Plan = @"Show_Partner_Plan";
 - (void)getRedDotOfMe {
     [TabbarHelper requestUser_red_pointWithCompleteBlock:^(RedPointModel *redPointM) {
         if ([redPointM.dailyIncomePoint integerValue] == 1 || [redPointM.invitePoint integerValue] == 1 || [redPointM.rewardTotal integerValue] == 1) {
-            UITabBarItem *item = kAppD.tabbarC.tabBar.items[TabbarIndexMy];
+            UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
             [item setBadgeCenterOffset:CGPointMake(0, 5)];
             [item setBadgeColor:UIColorFromRGB(0xD0021B)];
             [item showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone];

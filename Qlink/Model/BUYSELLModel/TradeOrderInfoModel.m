@@ -24,4 +24,8 @@
     return [NSString doubleToString:_unitPrice];
 }
 
+- (NSString *)qgasAmount_str {
+    return [NSString doubleToString:_qgasAmount];
+}
+
 @end

@@ -58,7 +58,7 @@
     kWeakSelf(self);
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         [weakself ledger_pledgeInfoByTransactionID];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)configInit {

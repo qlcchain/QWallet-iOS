@@ -122,10 +122,10 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTopup_product_list_v2];
-    }];
+    } type:RefreshTypeColor];
     _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTopup_product_list_v2];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)refreshCountrySelect:(TopupCountryModel *)model {
@@ -844,12 +844,12 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }
     
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = qlcAddress;
     vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"QGAS";
 //    vc.inputProductM = productM;
@@ -875,9 +875,9 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }
     
     TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = ethAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];

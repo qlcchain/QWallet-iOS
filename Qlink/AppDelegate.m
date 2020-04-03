@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "Qlink-Swift.h"
 #import "LaunchViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
@@ -174,8 +175,13 @@
     [WalletCommonModel walletInit]; // 钱包初始化
     [UserUtil updateUserInfo];
     
-    _tabbarC = [[QlinkTabbarViewController alloc] init];
-    self.window.rootViewController = _tabbarC;
+//    _qtabbarC = [[QlinkTabbarViewController alloc] init];
+//    self.window.rootViewController = _qtabbarC;
+    
+    _mtabbarC = [[MainTabBarViewController alloc] initWithContext:nil];
+    self.window.rootViewController = _mtabbarC;
+    
+    
 //    [self jumpToWallet];
     
     [SystemUtil checkAPPUpdate]; // 检查app更新
@@ -249,7 +255,7 @@
     QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
     __weak typeof(vc) weakvc = vc;
     nav.modalPresentationStyle = UIModalPresentationFullScreen;
-    [_tabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
+    [_mtabbarC.selectedViewController presentViewController:nav animated:YES completion:^{
         if ([UserModel haveAccountInLocal]) {
             [weakvc showLastLoginAccount];
         }

@@ -111,7 +111,7 @@ static NSInteger Mining_PageSize = 20;
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
 //        [weakself getPullRequest];
         [weakself requestTrade_mining_index];
-    }];
+    } type:RefreshTypeColor];
     
 //    _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
 //        weakself.currentPage = 1;

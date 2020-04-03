@@ -10,7 +10,7 @@
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
 #import "GlobalConstants.h"
-#import "LYEmptyViewHeader.h"
+#import <LYEmptyViewHeader.h>
 
 @interface QBaseViewController ()
 
@@ -163,9 +163,13 @@
     
 }
 
-- (void)configEmptyView:(UITableView *)tableV {
-    tableV.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
-    tableV.ly_emptyView.contentViewY = 160;
+- (void)configEmptyView:(UIView *)view {
+    view.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
+    view.ly_emptyView.contentViewY = 160;
+}
+
+- (void)refreshEmptyView:(UIView *)view {
+    view.ly_emptyView.titleStr = kLang(@"no_data");
 }
 
 #pragma mark - Lazy

@@ -24,6 +24,7 @@
 #import "RLArithmetic.h"
 #import "NSString+RemoveZero.h"
 #import "TopupOrderModel.h"
+#import "FirebaseUtil.h"
 
 @interface JoinGroupBuyViewController () <CNContactPickerDelegate> {
     CNContactPickerViewController * _peoplePickVC;
@@ -231,6 +232,8 @@
 //            [weakself backAction:nil];
 
 //            [kAppD.window makeToastDisappearWithText:kLang(@"success")];
+            
+            [FirebaseUtil logEventWithItemID:Topup_GroupBuy_JoinGroup_Success itemName:Topup_GroupBuy_JoinGroup_Success contentType:Topup_GroupBuy_JoinGroup_Success];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }

@@ -125,50 +125,50 @@ static NSString *RecordListRequestSize = @"20";
     _postedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.postedPage = 1;
         [weakself requestEntrust_order_list];
-    }];
+    } type:RefreshTypeColor];
     _postedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestEntrust_order_list];
-    }];
+    } type:RefreshTypeColor];
     
     [_processingTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
     [self configEmptyView:_processingTable];
     _processingTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.processingPage = 1;
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     _processingTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     
     [_completedTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
     [self configEmptyView:_completedTable];
     _completedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.completedPage = 1;
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     _completedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     
     [_closedTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
     [self configEmptyView:_closedTable];
     _closedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.closedPage = 1;
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     _closedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     
     [_appealedTable registerNib:[UINib nibWithNibName:MyOrderListTradeCellReuse bundle:nil] forCellReuseIdentifier:MyOrderListTradeCellReuse];
     [self configEmptyView:_appealedTable];
     _appealedTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.appealedPage = 1;
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     _appealedTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)refreshSelect:(UIButton *)sender {

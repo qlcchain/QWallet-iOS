@@ -10,6 +10,7 @@
 #import "TradeOrderDetailViewController.h"
 #import "GlobalConstants.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "QNavigationController.h"
 #import "UserModel.h"
 #import "ClaimQGASTipView.h"
@@ -21,19 +22,19 @@
 + (void)jumpToWallet {
     if (kAppD.needFingerprintVerification) {
         [kAppD presentFingerprintVerify:^{
-            kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+            kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
         }];
     } else {
-        kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+        kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
     }
 }
 
 + (void)jumpToOTC {
-    kAppD.tabbarC.selectedIndex = TabbarIndexFinance;
+    kAppD.mtabbarC.selectedIndex = TabbarIndexFinance;
 }
 
 + (void)jumpToTopup {
-    kAppD.tabbarC.selectedIndex = TabbarIndexTopup;
+    kAppD.mtabbarC.selectedIndex = TabbarIndexTopup;
 }
 
 + (void)jumpToDailyEarnings {
@@ -50,7 +51,7 @@
     }
     
     DailyEarningsViewController *vc = [DailyEarningsViewController new];
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+    [((QNavigationController *)kAppD.mtabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 + (void)jumpToMyOrderList:(OTCRecordListType)listType {
@@ -62,7 +63,7 @@
     
     RecordListViewController *vc = [RecordListViewController new];
     vc.inputType = listType;
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+    [((QNavigationController *)kAppD.mtabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 @end

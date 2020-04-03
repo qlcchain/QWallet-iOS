@@ -10,6 +10,7 @@
 #import "UIView+Visuals.h"
 #import "LoginPWModel.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
@@ -116,7 +117,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
 }
 
 @end

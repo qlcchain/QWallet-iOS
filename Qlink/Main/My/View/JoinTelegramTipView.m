@@ -9,6 +9,7 @@
 #import "JoinTelegramTipView.h"
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface JoinTelegramTipView ()
 
@@ -40,6 +41,7 @@
     view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:view];
     view.confirmBlock = block;
+    [view.tipBack showPopAnimate];
 }
 
 - (void)hide {

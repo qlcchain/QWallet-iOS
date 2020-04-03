@@ -45,10 +45,10 @@
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestHistory_record];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestHistory_record];
-    }];
+    } type:RefreshTypeColor];
 }
 
 #pragma mark - Action

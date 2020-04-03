@@ -27,6 +27,7 @@
 #import "OpenDelegateCheckView.h"
 #import "AppJumpHelper.h"
 #import "MyStakingsViewController.h"
+#import "FirebaseUtil.h"
 
 @interface OpenAgentViewController ()
 
@@ -158,6 +159,8 @@
                 weakself.isStake1500 = YES;
                 [weakself showOpenDelegateSuccessView];
                 [weakself refreshPersonView];
+                
+                [FirebaseUtil logEventWithItemID:PartnerPlan_OpenDelegate_Success itemName:PartnerPlan_OpenDelegate_Success contentType:PartnerPlan_OpenDelegate_Success];
             } else {
                 weakself.isStake1500 = NO;
                 [weakself showOpenDelegateCheckView];

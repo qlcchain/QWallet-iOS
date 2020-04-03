@@ -32,7 +32,6 @@
 #import "TokenPriceModel.h"
 #import "RLArithmetic.h"
 #import "TabbarHelper.h"
-#import "QlinkTabbarViewController.h"
 #import "WZLBadgeImport.h"
 #import "RedPointModel.h"
 #import "ShareFriendsViewController.h"
@@ -57,11 +56,13 @@
 #import "BuybackBurnUtil.h"
 #import "WebViewController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "HomeBuySellViewController.h"
 #import "BuybackDetailViewController.h"
 #import <TMCache/TMCache.h>
 #import "NSDate+Category.h"
 #import "ClaimConstants.h"
+#import "FirebaseUtil.h"
 
 static NSString *const TopupNetworkSize = @"20";
 //static NSInteger const insetForSectionDistance = 16;
@@ -329,7 +330,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         [weakself requestSys_index];
 //        [weakself getBuybackBurn];
 //        [weakself getSheetMining];
-    }];
+    } type:RefreshTypeWhite];
 //    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
 //        [weakself requestTopup_product_list];
 //    }];
@@ -522,7 +523,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 - (void)getRedDotOfMe {
     [TabbarHelper requestUser_red_pointWithCompleteBlock:^(RedPointModel *redPointM) {
         if ([redPointM.dailyIncomePoint integerValue] == 1 || [redPointM.invitePoint integerValue] == 1 || [redPointM.rewardTotal integerValue] == 1) {
-            UITabBarItem *item = kAppD.tabbarC.tabBar.items[TabbarIndexMy];
+            UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
             [item setBadgeCenterOffset:CGPointMake(0, 5)];
             [item setBadgeColor:UIColorFromRGB(0xD0021B)];
             [item showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone];
@@ -599,11 +600,12 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         [_ninaPagerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.right.mas_equalTo(weakself.tableBack).offset(0);
         }];
+        _tableBackHeight.constant = _ninaPagerView.topTabHeight;
     } else {
         [_ninaPagerView reloadTopTabByTitles:titleArr WithObjects:_ninaObjectSource];
     }
         
-        _tableBackHeight.constant = _ninaPagerView.topTabHeight;
+        
         
 //    }
 }
@@ -678,18 +680,6 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         self.cyclePageC.numberOfPages = self.cycleContentArr.count;
     //                [weakself refreshBuybackBurn];
     }
-
-    // TopupCountryList
-    if (_refreshAllProductPage) {
-        NSArray *countryList = [TopupCountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"countryList"]]?:@[];
-        [self.countrySource removeAllObjects];
-        [self.countrySource addObjectsFromArray:countryList];
-        if (self.countrySource.count > 0) {
-            self.selectCountryM = self.countrySource.firstObject;
-            
-            [self setupNinaPage];
-        }
-    }
     
 
     NSString *currentTimeMillis = responseObject[@"currentTimeMillis"];
@@ -741,6 +731,18 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
             TopupProductSubViewController *vc = self.ninaObjectSource[self.ninaPagerView.pageIndex];
             vc.groupBuyMinimumDiscount = self.groupBuyMinimumDiscount;
             [vc refreshTable];
+        }
+    }
+    
+    // TopupCountryList
+    if (_refreshAllProductPage) {
+        NSArray *countryList = [TopupCountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"countryList"]]?:@[];
+        [self.countrySource removeAllObjects];
+        [self.countrySource addObjectsFromArray:countryList];
+        if (self.countrySource.count > 0) {
+            self.selectCountryM = self.countrySource.firstObject;
+            
+            [self setupNinaPage];
         }
     }
 }
@@ -986,6 +988,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 //    }];
 
     [self jumpToMyTopupOrder];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_MyOrders itemName:Topup_Home_MyOrders contentType:Topup_Home_MyOrders];
 }
 
 //- (IBAction)inputNumAction:(id)sender {
@@ -995,10 +999,14 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 - (IBAction)makeQGASAction:(id)sender {
     [AppJumpHelper jumpToWallet];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_getMoreQGAS_StakeQLC itemName:Topup_Home_getMoreQGAS_StakeQLC contentType:Topup_Home_getMoreQGAS_StakeQLC];
 }
 
 - (IBAction)miningDetaiAction:(id)sender {
     [self jumpToSheetMining];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_TradeMining_MoreDetails itemName:Topup_Home_TradeMining_MoreDetails contentType:Topup_Home_TradeMining_MoreDetails];
 }
 
 //- (IBAction)chartHourAction:(UIButton *)sender {
@@ -1027,18 +1035,28 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 - (IBAction)introduceFriendAction:(id)sender {
     [self jumpToShareFriends];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_getMoreQGAS_ReferFriends itemName:Topup_Home_getMoreQGAS_ReferFriends contentType:Topup_Home_getMoreQGAS_ReferFriends];
 }
 
 - (IBAction)parterPlanAction:(id)sender {
     [self jumpToAgentReward];
+    
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_PartnerPlan_MoreDetails itemName:Topup_Home_PartnerPlan_MoreDetails contentType:Topup_Home_PartnerPlan_MoreDetails];
 }
 
 - (IBAction)chooseTokenAction:(id)sender {
     [self jumpToChooseDeductionToken];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_ChooseToken itemName:Topup_Home_ChooseToken contentType:Topup_Home_ChooseToken];
 }
 
 - (IBAction)buybackBurnDetailAction:(id)sender {
     [self jumpToBuybackDetail];
+    
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_QGASBuyBack_MoreDetails itemName:Topup_Home_QGASBuyBack_MoreDetails contentType:Topup_Home_QGASBuyBack_MoreDetails];
     return;
     
     WebViewController *vc = [[WebViewController alloc] init];
@@ -1049,7 +1067,10 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 - (IBAction)buybackBurnJoinAction:(id)sender {
     [AppJumpHelper jumpToOTC];
-    [kAppD.tabbarC.homeBuySellVC showSellView];
+    [kAppD.mtabbarC.homeBuySellVC showSellView];
+    
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_QGASBuyBack_JoinNow itemName:Topup_Home_QGASBuyBack_JoinNow contentType:Topup_Home_QGASBuyBack_JoinNow];
 }
 
 
@@ -1058,6 +1079,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     MyTopupOrderViewController *vc = [MyTopupOrderViewController new];
     vc.inputBackToRoot = NO;
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 //- (void)jumpToChooseTopupPlan {
@@ -1122,6 +1144,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
     _refreshAllProductPage = YES;
     [self requestSys_index];
+        
 //    if (_selectDeductionTokenM) {
 //        [self requestTopup_country_list];
 //    } else {

@@ -11,6 +11,7 @@
 #import "WalletCommonModel.h"
 #import "GlobalConstants.h"
 #import "QLCWalletInfo.h"
+#import "UIView+PopAnimate.h"
 
 @interface QLCTransferConfirmView ()
 
@@ -49,6 +50,7 @@
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {

@@ -9,6 +9,7 @@
 #import "XYTransition.h"
 #import "XYTransitionProtocol.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "UIView+Screenshot.h"
 #import "GlobalConstants.h"
 
@@ -90,7 +91,7 @@
                                     -(nowViewPoint.y)*_animationScale + toViewPoint.y,
                                     fromVC.view.frame.size.width,
                                     fromVC.view.frame.size.height);
-        kAppD.tabbarC.tabBar.alpha = 0;
+        kAppD.mtabbarC.tabBar.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished) {
             //没有这句过滤动画就不会结束
@@ -160,19 +161,19 @@
     
     [containerView addSubview:whiteViewContainer];
     [containerView insertSubview:whiteViewContainer belowSubview:toView];
-    kAppD.tabbarC.tabBar.alpha = 0;
+    kAppD.mtabbarC.tabBar.alpha = 0;
     [UIView animateWithDuration:self.animationDuration animations:^{
         snapShot.transform = CGAffineTransformIdentity; //恢复原来大小
         [snapShot setOrigin:leftUperPoint]; //设置相对位置
         toView.transform = CGAffineTransformIdentity;
         toView.alpha = 1.0;
         [toView setFrame:originFrame];
-        kAppD.tabbarC.tabBar.alpha = 1;
+        kAppD.mtabbarC.tabBar.alpha = 1;
     } completion:^(BOOL finished) {
         //        if (finished) {
         if (transitionContext.transitionWasCancelled) {
             NSLog(@"动画取消");
-            kAppD.tabbarC.tabBar.alpha = 0;
+            kAppD.mtabbarC.tabBar.alpha = 0;
         }else{
             NSLog(@"动画完成");
         }
