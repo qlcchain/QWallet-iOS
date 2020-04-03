@@ -52,10 +52,10 @@ static NSString *const MiningDailyDetailNetworkSize = @"20";
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTrade_mining_reward_list];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_mining_reward_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)backToRoot {

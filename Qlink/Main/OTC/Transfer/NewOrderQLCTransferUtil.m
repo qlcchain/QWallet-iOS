@@ -12,6 +12,7 @@
 #import "GlobalConstants.h"
 #import "WalletsViewController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "QLCTransferToServerConfirmView.h"
 #import <QLCFramework/QLCFramework.h>
 #import "TokenListHelper.h"

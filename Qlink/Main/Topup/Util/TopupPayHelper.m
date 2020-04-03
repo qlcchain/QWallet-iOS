@@ -24,6 +24,7 @@
 #import "TopupPayETH_DeductionViewController.h"
 #import "QNavigationController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "AppDelegate.h"
 #import "TopupPayQLC_DeductionViewController.h"
 #import <QLCFramework/QLCWalletManage.h>
@@ -153,9 +154,9 @@
     }
     
     TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = ethAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
@@ -167,7 +168,7 @@
 //    vc.inputPhoneNumber = _phoneTF.text?:@"";
 //    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
     vc.inputPayType = TopupPayTypeNormal;
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+    [((QNavigationController *)kAppD.mtabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 - (void)jumpToTopupPayQLC_Deduction:(TopupOrderModel *)orderM {
@@ -184,9 +185,9 @@
     }
     
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
@@ -198,7 +199,7 @@
 //    vc.inputPhoneNumber = _phoneTF.text?:@"";
 //    vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
     vc.inputPayType = TopupPayTypeNormal;
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+    [((QNavigationController *)kAppD.mtabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 @end

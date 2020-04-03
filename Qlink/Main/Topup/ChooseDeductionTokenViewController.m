@@ -9,6 +9,9 @@
 #import "ChooseDeductionTokenViewController.h"
 #import "TopupDeductionTokenModel.h"
 #import "ChooseTokenCell.h"
+#import <TMCache/TMCache.h>
+
+static NSString *const TM_Cache_Topup_pay_token = @"TM_Cache_Topup_pay_token";
 
 @interface ChooseDeductionTokenViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -25,6 +28,8 @@
     
     [self configInit];
     [self requestTopup_pay_token];
+    
+    [self handlerPayToken];
 }
 
 #pragma mark - Operation
@@ -34,16 +39,27 @@
     self.baseTable = _mainTable;
 }
 
+- (void)handlerPayToken {
+    NSArray *cacheArr = [[TMCache sharedCache] objectForKey:TM_Cache_Topup_pay_token]?:@[];
+    
+    [_sourceArr removeAllObjects];
+    [_sourceArr addObjectsFromArray:cacheArr];
+    [_mainTable reloadData];
+}
+
 #pragma mark - Request
 - (void)requestTopup_pay_token {
     kWeakSelf(self);
     NSDictionary *params = @{};
     [RequestService requestWithUrl10:topup_pay_token_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            [weakself.sourceArr removeAllObjects];
             NSArray *arr = [TopupDeductionTokenModel mj_objectArrayWithKeyValuesArray:responseObject[@"payTokenList"]];
-            [weakself.sourceArr addObjectsFromArray:arr];
-            [weakself.mainTable reloadData];
+            
+            [[TMCache sharedCache] setObject:arr forKey:TM_Cache_Topup_pay_token];
+            
+            [weakself handlerPayToken];
+            
+            
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];

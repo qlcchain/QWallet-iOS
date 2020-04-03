@@ -23,6 +23,7 @@
 #import "WalletSelectViewController.h"
 //#import "TradeOrderDetailViewController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QNavigationController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>

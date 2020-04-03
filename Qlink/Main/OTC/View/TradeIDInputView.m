@@ -10,6 +10,7 @@
 //#import "UIView+Visuals.h"
 #import "UITextView+ZWPlaceHolder.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface TradeIDInputView ()
 
@@ -35,6 +36,7 @@
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {

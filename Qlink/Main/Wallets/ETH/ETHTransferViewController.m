@@ -20,6 +20,7 @@
 #import "RLArithmetic.h"
 //#import "GlobalConstants.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 
 @interface ETHTransferViewController () <UITextViewDelegate>

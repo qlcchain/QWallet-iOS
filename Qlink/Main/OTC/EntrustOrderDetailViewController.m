@@ -67,10 +67,10 @@
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTrade_order_list];
-    }];
+    } type:RefreshTypeColor];
     
     _contentBack.hidden = YES;
     

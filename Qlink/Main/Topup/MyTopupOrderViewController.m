@@ -21,6 +21,7 @@
 #import <QLCFramework/QLCFramework.h>
 #import "TopupPayNEO_PayViewController.h"
 #import "MyGroupBuyOrderViewController.h"
+#import "FirebaseUtil.h"
 
 static NSString *const MyTopupOrderNetworkSize = @"20";
 
@@ -53,10 +54,10 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestTopup_order_list];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestTopup_order_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)backToRoot {
@@ -225,6 +226,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     TopupOrderModel *model = _sourceArr[indexPath.row];
     [cell config:model cancelB:^{
         [weakself cancelHandler:model];
+        
+        
+        [FirebaseUtil logEventWithItemID:Topup_MyOrders_Cancel itemName:Topup_MyOrders_Cancel contentType:Topup_MyOrders_Cancel];
     } payB:^{
         if ([model.payWay isEqualToString:@"FIAT"]) { // 法币支付
             if ([model.payFiat isEqualToString:@"CNY"]) {
@@ -236,8 +240,13 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
             [weakself handlerPayToken:model];
         }
         
+        
+        [FirebaseUtil logEventWithItemID:Topup_MyOrders_PayNow itemName:Topup_MyOrders_PayNow contentType:Topup_MyOrders_PayNow];
     } credentialB:^{
         [weakself credentialHandler:model];
+        
+        
+        [FirebaseUtil logEventWithItemID:Topup_MyOrders_BlockchainInvoice itemName:Topup_MyOrders_BlockchainInvoice contentType:Topup_MyOrders_BlockchainInvoice];
     } credetialDetalB:^{
         [weakself jumpToCredentialDetail:model];
     }];
@@ -257,6 +266,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 
 - (IBAction)groupOrderAction:(id)sender {
     [self jumpToGroupOrder];
+    
+    
+    [FirebaseUtil logEventWithItemID:Topup_MyOrders_GroupOrders itemName:Topup_MyOrders_GroupOrders contentType:Topup_MyOrders_GroupOrders];
 }
 
 
@@ -297,9 +309,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     }
     
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
@@ -328,9 +340,9 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
     }
     
     TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
-    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
+    vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = ethAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
     vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];

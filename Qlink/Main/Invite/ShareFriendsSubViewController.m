@@ -70,7 +70,7 @@ static NSString *const NetworkSize = @"20";
         } else if (weakself.inputType == InviteAwardTypeDelegate) {
             [weakself requestInviteDelegate];
         }
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         if (weakself.inputType == InviteAwardTypeInvite) {
             [weakself requestInviteRanking];
@@ -79,7 +79,7 @@ static NSString *const NetworkSize = @"20";
         } else if (weakself.inputType == InviteAwardTypeDelegate) {
             [weakself requestInviteDelegate];
         }
-    }];
+    } type:RefreshTypeColor];
 }
 
 #pragma mark - Request

@@ -19,6 +19,7 @@
 #import "SGQRCodeObtain.h"
 #import "RefreshHelper.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "GlobalConstants.h"
 
@@ -81,7 +82,7 @@
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         NSString *addressFrom = [NEOWalletManage.sharedInstance getWalletAddress];
         [weakself requestNEOAddressInfo:addressFrom showLoad:NO];
-    }];
+    } type:RefreshTypeColor];
     
     NSString *mainAddress = [NeoTransferUtil getShareObject].neoMainAddress;
     _sendToAddressLab.text = mainAddress;

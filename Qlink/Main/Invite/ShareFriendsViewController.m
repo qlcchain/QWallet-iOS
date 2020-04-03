@@ -123,7 +123,7 @@
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         [weakself requestWinq_invite_reward_amount]; // 邀请一个用户奖励QGAS数量
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)setupNinaPage {

@@ -156,4 +156,8 @@
     return [NSString doubleToString:_payTokenAmount];
 }
 
+- (NSString *)qgasAmount_str {
+    return [NSString doubleToString:_qgasAmount];
+}
+
 @end

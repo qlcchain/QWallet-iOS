@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *nickname;// = "ios_test";
 @property (nonatomic, strong) NSString *number;// = 20190718154158708852;
 @property (nonatomic, strong) NSString *orderTime;// = "2019-07-18 15:41:59";
-@property (nonatomic, strong) NSNumber *qgasAmount;// = 10;
+@property (nonatomic) double qgasAmount;// = 10;
+@property (nonatomic, strong) NSString *qgasAmount_str;
 @property (nonatomic, strong) NSString *qgasFromAddress;// = "qlc_1ek43jimwtcg9efmgznbozt7zi4qyz73wz9zi6b65ydrzbsywxy897tznpxm";
 @property (nonatomic, strong) NSString *qgasToAddress;// = "qlc_1ek43jimwtcg9efmgznbozt7zi4qyz73wz9zi6b65ydrzbsywxy897tznpxm";
 @property (nonatomic, strong) NSString *qgasTransferAddress;// = "qlc_3wpp343n1kfsd4r6zyhz3byx4x74hi98r6f1es4dw5xkyq8qdxcxodia4zbb";

@@ -84,10 +84,10 @@
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestProduct_list];
-    }];
+    } type:RefreshTypeColor];
     _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestProduct_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)refreshDailyView {

@@ -25,6 +25,7 @@
 #import "SheetMiningTipView.h"
 #import "SheetMiningViewController.h"
 #import "UISegmentedControl+Adapt.h"
+#import "FirebaseUtil.h"
 
 static NSString *const NetworkSize = @"20";
 //#import "GlobalConstants.h"
@@ -130,10 +131,10 @@ static NSString *const NetworkSize = @"20";
             weakself.currentSellPage=1;
         }
         [weakself requestEntrust_order_list];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestEntrust_order_list];
-    }];
+    } type:RefreshTypeColor];
     
     [self configTagList];
 }
@@ -328,6 +329,9 @@ static NSString *const NetworkSize = @"20";
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [EntrustOrderListModel mj_objectArrayWithKeyValuesArray:responseObject[@"orderList"]];
             if (weakself.mainSeg.selectedSegmentIndex == 0) {
+                if (![type isEqualToString:@"SELL"]) {
+                    return;
+                }
                 if (weakself.currentBuyPage == 1) {
                     [weakself.buyArr removeAllObjects];
                 }
@@ -337,6 +341,10 @@ static NSString *const NetworkSize = @"20";
                 
                 weakself.currentBuyPage += 1;
             } else {
+                if (![type isEqualToString:@"BUY"]) {
+                    return;
+                }
+                
                 if (weakself.currentSellPage == 1) {
                     [weakself.sellArr removeAllObjects];
                 }
@@ -448,6 +456,12 @@ static NSString *const NetworkSize = @"20";
     
     EntrustOrderListModel *model = _sourceArr[indexPath.row];
     [self jumpToBuySellDetail:model];
+    
+    if ([model.type isEqualToString:@"BUY"]) {
+        [FirebaseUtil logEventWithItemID:OTC_Home_SELL itemName:OTC_Home_SELL contentType:OTC_Home_SELL];
+    } else {
+        [FirebaseUtil logEventWithItemID:OTC_Home_BUY itemName:OTC_Home_BUY contentType:OTC_Home_BUY];
+    }
 }
 
 #pragma mark - TTGTextTagCollectionViewDelegate
@@ -467,10 +481,16 @@ static NSString *const NetworkSize = @"20";
 
 - (IBAction)addAction:(id)sender {
     [self jumpToNewOrder];
+    
+    
+    [FirebaseUtil logEventWithItemID:OTC_Home_NewOrder itemName:OTC_Home_NewOrder contentType:OTC_Home_NewOrder];
 }
 
 - (IBAction)listAction:(id)sender {
     [self jumpToMyOrderList:OTCRecordListTypePosted];
+    
+    
+    [FirebaseUtil logEventWithItemID:OTC_Home_Record itemName:OTC_Home_Record contentType:OTC_Home_Record];
 }
 
 - (IBAction)segAction:(id)sender {
@@ -489,6 +509,9 @@ static NSString *const NetworkSize = @"20";
     } else {
         [self hideSlideView];
     }
+    
+    
+    [FirebaseUtil logEventWithItemID:OTC_Home_Filter itemName:OTC_Home_Filter contentType:OTC_Home_Filter];
 }
 
 - (IBAction)resetAction:(id)sender {
@@ -565,6 +588,8 @@ static NSString *const NetworkSize = @"20";
     vc.inputPayToken = model.payToken;
     vc.inputEntrustOrderListM = model;
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 
 - (void)jumpToVerification {
@@ -588,6 +613,7 @@ static NSString *const NetworkSize = @"20";
     [self refreshSegTitle];
     [self refreshFilterView];
     [_mainTable.mj_header beginRefreshing];
+    [self refreshEmptyView:self.mainTable];
 }
 
 #pragma mark - Lazy

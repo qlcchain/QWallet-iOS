@@ -13,6 +13,7 @@
 #import "NEOWalletUtil.h"
 #import "WalletsViewController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "NeoTransferUtil.h"
 #import "NEOTransferConfirmView.h"
 #import "NEOWalletInfo.h"

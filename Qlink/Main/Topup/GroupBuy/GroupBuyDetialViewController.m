@@ -508,8 +508,8 @@ static NSString *const TopupNetworkSize = @"30";
     
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
     if (_currentPayType == TopupPayTypeNormal) {
-        vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
-        vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+        vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
+        vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
         vc.inputPayToken = orderM.payTokenSymbol;
     } else if (_currentPayType == TopupPayTypeGroupBuy) {
         vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.deductionTokenAmount_str];
@@ -542,8 +542,8 @@ static NSString *const TopupNetworkSize = @"30";
     
     TopupPayETH_DeductionViewController *vc = [TopupPayETH_DeductionViewController new];
     if (_currentPayType == TopupPayTypeNormal) {
-        vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount];
-        vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount?:@""];
+        vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
+        vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
         
         vc.inputPayToken = orderM.payTokenSymbol;
     } else if (_currentPayType == TopupPayTypeGroupBuy) {

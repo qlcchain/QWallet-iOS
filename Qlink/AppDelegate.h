@@ -10,7 +10,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "LoginPWModel.h"
 
-@class QlinkTabbarViewController,NEOAddressInfoModel;
+@class QlinkTabbarViewController,MainTabBarViewController,NEOAddressInfoModel;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate>
 
@@ -19,7 +19,8 @@
 @property (nonatomic) BOOL needFingerprintVerification;
 //@property (nonatomic) BOOL openShowPresentLogin;
 @property (nonatomic) BOOL pushToOrderList;
-@property (nonatomic, strong) QlinkTabbarViewController *tabbarC;
+@property (nonatomic, strong) QlinkTabbarViewController *qtabbarC;
+@property (nonatomic, strong) MainTabBarViewController *mtabbarC;
 
 - (void)addLaunchAnimation;
 //- (void)setRootLogin;

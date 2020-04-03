@@ -61,10 +61,10 @@
     _mainTable.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         weakself.currentPage = 1;
         [weakself requestOrder_list];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestOrder_list];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)refreshView {

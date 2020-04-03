@@ -105,10 +105,10 @@ static NSInteger const PledgeInfo_PageFirst = 0;
         weakself.currentPage = PledgeInfo_PageFirst;
 //        [weakself requestPledgeInfoByPledge:NO];
         [weakself pullToRequest];
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestPledgeInfoByPledge:NO];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)pullToRequest {

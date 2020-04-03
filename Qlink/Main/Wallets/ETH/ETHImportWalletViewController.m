@@ -9,6 +9,7 @@
 #import "ETHImportWalletViewController.h"
 #import "UITextView+ZWPlaceHolder.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import <ETHFramework/ETHFramework.h>
 #import "LoginPWModel.h"
@@ -432,7 +433,7 @@ typedef enum : NSUInteger {
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
 }
 
 - (void)jumpToTerms {

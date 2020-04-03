@@ -28,6 +28,7 @@
 #import "SheetMiningUtil.h"
 #import "WZLBadgeImport.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "TabbarHelper.h"
 #import "AppJumpHelper.h"
 #import "JoinTelegramTipView.h"
@@ -351,7 +352,7 @@
             *stop = YES;
         }
     }];
-    UITabBarItem *item = kAppD.tabbarC.tabBar.items[TabbarIndexMy];
+    UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
     if (showRed) {
         [item setBadgeCenterOffset:CGPointMake(0, 5)];
         [item setBadgeColor:UIColorFromRGB(0xD0021B)];

@@ -19,8 +19,10 @@
 #import "UIView+Visuals.h"
 #import "AppDelegate.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "Topup3ViewController.h"
 #import "Topup4ViewController.h"
+#import "FirebaseUtil.h"
 
 static CGFloat InviteRankTopHeight = 172;
 
@@ -184,16 +186,22 @@ static CGFloat InviteRankTopHeight = 172;
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     [pab setString:_myInfoM.number?:@""];
     [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
+    
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_MyReferralCode_Copy itemName:Topup_Home_MyReferralCode_Copy contentType:Topup_Home_MyReferralCode_Copy];
 }
 
 - (IBAction)inviteAction:(id)sender {
     [self jumpToInviteFriendNow];
+    
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_MyReferralCode_ReferNOW itemName:Topup_Home_MyReferralCode_ReferNOW contentType:Topup_Home_MyReferralCode_ReferNOW];
 }
 
 #pragma mark - Transition
 - (void)jumpToInviteFriendNow {
     InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
-    [kAppD.tabbarC.topupVC.navigationController pushViewController:vc animated:YES];
+    [kAppD.mtabbarC.topupVC.navigationController pushViewController:vc animated:YES];
 }
 
 

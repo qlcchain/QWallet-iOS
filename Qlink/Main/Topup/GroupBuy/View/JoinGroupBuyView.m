@@ -22,6 +22,7 @@
 #import "RLArithmetic.h"
 #import "NSString+RemoveZero.h"
 #import "TopupOrderModel.h"
+#import "UIView+PopAnimate.h"
 
 @interface JoinGroupBuyView ()
 
@@ -78,6 +79,7 @@
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {

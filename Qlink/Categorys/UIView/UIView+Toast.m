@@ -71,6 +71,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     }
     
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view];
+//    HUD.offset = CGPointMake(0, 100);
     HUD.label.text = nil;
     HUD.label.numberOfLines = 0;
     [self setHUD:HUD];

@@ -524,7 +524,7 @@
         _payKeyLab.text = kLang(@"amount_price");
         _payValLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.usdtAmount,_orderInfoM.payToken];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
-        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.qgasAmount,_orderInfoM.tradeToken];
+        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.qgasAmount_str,_orderInfoM.tradeToken];
         _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice_str,_orderInfoM.payToken];
     }
 }
@@ -971,7 +971,7 @@
             NSString *fromAddress = _orderInfoM.qgasFromAddress?:@"";
             NSString *tokenName = _orderInfoM.tradeToken?:@"";
             NSString *toAddress = [QLCWalletManage shareInstance].qlcMainAddress?:@"";
-            NSString *amountStr = [NSString stringWithFormat:@"%@",_orderInfoM.qgasAmount?:@""];
+            NSString *amountStr = [NSString stringWithFormat:@"%@",_orderInfoM.qgasAmount_str?:@""];
             NSString *privateKey = wallet.privateKey?:@"";
             NSString *memo = [NSString stringWithFormat:@"%@_%@_%@_%@",@"otc",@"trade",@"sell",_orderInfoM.ID?:@""];
             [kAppD.window makeToastInView:kAppD.window];
@@ -982,7 +982,7 @@
                     [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
                     return;
                 }
-                if ([weakself.orderInfoM.qgasAmount doubleValue] > [[tokenM getTokenNum] doubleValue]) {
+                if ([weakself.orderInfoM.qgasAmount_str doubleValue] > [[tokenM getTokenNum] doubleValue]) {
                     [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
                     return;
                 }

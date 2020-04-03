@@ -22,10 +22,12 @@
 #import "AgentRewardViewController.h"
 #import "QNavigationController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "AppDelegate.h"
 #import "AppJumpHelper.h"
 #import "GroupBuyGoStakeView.h"
 #import "MyStakingsViewController.h"
+#import "UIView+PopAnimate.h"
 
 static NSString *const TopupNetworkSize = @"30";
 
@@ -95,6 +97,7 @@ static NSString *const TopupNetworkSize = @"30";
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {
@@ -245,7 +248,7 @@ static NSString *const TopupNetworkSize = @"30";
 #pragma mark - Transition
 - (void)jumpToAgentReward {
     AgentRewardViewController *vc = [AgentRewardViewController new];
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+    [((QNavigationController *)kAppD.mtabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 - (void)jumpToMyStakings {
@@ -257,7 +260,7 @@ static NSString *const TopupNetworkSize = @"30";
     }
     MyStakingsViewController *vc = [MyStakingsViewController new];
     vc.inputAddress = inputAddress;
-    [((QNavigationController *)kAppD.tabbarC.selectedViewController) pushViewController:vc animated:YES];
+    [((QNavigationController *)kAppD.mtabbarC.selectedViewController) pushViewController:vc animated:YES];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "ETHVerifyPWViewController.h"
 #import "LoginPWModel.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import "ETHExportMnemonicViewController.h"

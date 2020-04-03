@@ -18,6 +18,7 @@
 #import "QLCAddressInfoModel.h"
 #import "WalletCommonModel.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QLCTransferToServerConfirmView.h"
 #import "ChooseWalletViewController.h"
@@ -37,6 +38,7 @@
 #import "TradeOrderListModel.h"
 #import "VerifyTipView.h"
 #import "VerificationViewController.h"
+#import "FirebaseUtil.h"
 
 @interface BuySellDetailViewController () <UITextFieldDelegate>
 
@@ -392,6 +394,8 @@
             //            [weakself showSubmitSuccess];
             kAppD.pushToOrderList = YES;
             [weakself.navigationController popToRootViewControllerAnimated:YES];
+            
+            [FirebaseUtil logEventWithItemID:OTC_SELL_Order_Success itemName:OTC_SELL_Order_Success contentType:OTC_SELL_Order_Success];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
             
@@ -552,6 +556,10 @@
     
 //        [self buy_transfer:_usdtMaxTF.text tokenChain:_inputEntrustOrderListM.payTokenChain tokenName:_inputEntrustOrderListM.payToken];
         [self requestTrade_buy_order];
+        
+        
+        
+        [FirebaseUtil logEventWithItemID:OTC_BUY_Submit itemName:OTC_BUY_Submit contentType:OTC_BUY_Submit];
     } else { // 我要卖
         if ([_qgasSendTF.text isEmptyString]) {
             [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
@@ -598,6 +606,8 @@
 //        }
 //
 //        [self showSellComfirmView:qlcAddress qgasAsset:qgasAsset fromAddress:currentWalletM.address];
+        
+        [FirebaseUtil logEventWithItemID:OTC_SELL_Submit itemName:OTC_SELL_Submit contentType:OTC_SELL_Submit];
     }
 }
 

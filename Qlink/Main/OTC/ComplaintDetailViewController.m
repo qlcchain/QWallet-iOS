@@ -161,7 +161,7 @@
         _payKeyLab.text = kLang(@"amount_price");
         _payValLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.usdtAmount,_orderInfoM.payToken];
         _payValLab.textColor = UIColorFromRGB(0xFF3669);
-        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.qgasAmount,_orderInfoM.tradeToken];
+        _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.qgasAmount_str,_orderInfoM.tradeToken];
         _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice_str,_orderInfoM.payToken];
     }
 }

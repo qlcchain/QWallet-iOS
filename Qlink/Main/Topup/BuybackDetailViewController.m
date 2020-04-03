@@ -8,6 +8,7 @@
 
 #import "BuybackDetailViewController.h"
 #import "BuybackBurnUtil.h"
+#import "UIView+PopAnimate.h"
 
 @interface BuybackDetailViewController ()
 

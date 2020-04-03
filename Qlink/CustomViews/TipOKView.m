@@ -8,6 +8,7 @@
 
 #import "TipOKView.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface TipOKView ()
 
@@ -28,6 +29,7 @@
     _titleLab.text = title;
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {

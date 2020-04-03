@@ -19,6 +19,7 @@
 #import "WalletSelectViewController.h"
 #import "QNavigationController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "TradeOrderDetailViewController.h"
 #import "NSDate+Category.h"

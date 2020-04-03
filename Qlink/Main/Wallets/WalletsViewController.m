@@ -73,6 +73,7 @@
 #import "EOSAddressInfoModel.h"
 #import "NEOJSUtil.h"
 #import "NEOGasClaimModel.h"
+#import <LYEmptyViewHeader.h>
 
 @interface WalletsViewController () <UITableViewDataSource, UITableViewDelegate/*,SRRefreshDelegate,UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -156,7 +157,6 @@
     
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     _sourceArr = [NSMutableArray array];
-    _contentView.hidden = YES;
     [_mainTable registerNib:[UINib nibWithNibName:WalletsCellReuse bundle:nil] forCellReuseIdentifier:WalletsCellReuse];
     self.baseTable = _mainTable;
     
@@ -200,10 +200,15 @@
     _contentHeight.constant = SCREEN_HEIGHT-Height_NavBar-Height_TabBar;
     _backupBackHeight.constant = 0;
     
+    _contentView.hidden = YES;
+    _refreshScroll.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
+    _refreshScroll.ly_emptyView.contentViewY = 160;
+    [_refreshScroll ly_showEmptyView];
+    
     kWeakSelf(self)
     _refreshScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
         [weakself pullToRefresh];
-    }];
+    } type:RefreshTypeWhite];
     
     [self refreshClaimGas:nil];
     [self judgeWallet];
@@ -248,6 +253,7 @@
 
 - (void)showContentView {
     _contentView.hidden = NO;
+    [_refreshScroll ly_hideEmptyView];
 }
 
 - (void)updateWalletWithETH:(ETHAddressInfoModel *)ethModel {
@@ -1928,6 +1934,8 @@
     [_refreshScroll.mj_header beginRefreshing];
     
     [self refreshBackupView];
+    
+    [self refreshEmptyView:_refreshScroll];
 }
 
 - (void)loginSuccessNoti:(NSNotification *)noti {

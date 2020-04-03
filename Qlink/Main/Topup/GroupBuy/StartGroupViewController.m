@@ -22,10 +22,12 @@
 #import "AgentRewardViewController.h"
 #import "QNavigationController.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "AppDelegate.h"
 #import "AppJumpHelper.h"
 #import "GroupBuyGoStakeView.h"
 #import "MyStakingsViewController.h"
+#import "FirebaseUtil.h"
 
 static NSString *const TopupNetworkSize = @"30";
 
@@ -212,6 +214,8 @@ static NSString *const TopupNetworkSize = @"30";
 //            [weakself hide];
             [weakself backAction:nil];
             [kAppD.window makeToastDisappearWithText:kLang(@"success")];
+            
+            [FirebaseUtil logEventWithItemID:Topup_GroupBuy_StartGroup_Success itemName:Topup_GroupBuy_StartGroup_Success contentType:Topup_GroupBuy_StartGroup_Success];
             
         } else {
             NSString *msg = responseObject[Server_Msg];

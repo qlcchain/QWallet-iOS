@@ -30,6 +30,7 @@
 - (void) moveNavgationBackOneViewController;
 // 检查自己当前
 - (void) showUserConnectStatus;
-- (void)configEmptyView:(UITableView *)tableV;
+- (void)configEmptyView:(UIView *)view;
+- (void)refreshEmptyView:(UIView *)view;
 
 @end

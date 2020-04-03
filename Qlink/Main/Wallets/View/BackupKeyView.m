@@ -11,6 +11,7 @@
 #import "SGQRCodeObtain.h"
 #import "UIImage+Capture.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface BackupKeyView ()
 
@@ -40,6 +41,7 @@
     _textV.text = _privateKey;
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
     
     _qrImage.image = [SGQRCodeObtain generateQRCodeWithData:_privateKey?:@"" size:_qrImage.width logoImage:nil ratio:0.15];
 }

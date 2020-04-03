@@ -9,6 +9,7 @@
 #import "QLCImportWalletViewController.h"
 #import "UITextView+ZWPlaceHolder.h"
 #import "QlinkTabbarViewController.h"
+#import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import "WalletQRViewController.h"
 #import "ReportUtil.h"
@@ -236,7 +237,7 @@ typedef enum : NSUInteger {
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.tabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
 }
 
 - (void)jumpToTerms {

@@ -9,6 +9,7 @@
 #import "NeoClaimGasTipView.h"
 #import "UIView+Visuals.h"
 #import "GlobalConstants.h"
+#import "UIView+PopAnimate.h"
 
 @interface NeoClaimGasTipView ()
 
@@ -29,6 +30,7 @@
     _tipLab.text = [NSString stringWithFormat:@"There are %@ GAS available to claim.",num];
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [kAppD.window addSubview:self];
+    [self.tipBack showPopAnimate];
 }
 
 - (void)hide {

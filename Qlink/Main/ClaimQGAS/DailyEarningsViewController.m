@@ -91,10 +91,10 @@ static NSInteger const DailyEarnings_PageFirst = 1;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 延时
             [weakself requestReward_reward_list:NO];
         });
-    }];
+    } type:RefreshTypeColor];
     _mainTable.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
         [weakself requestReward_reward_list:NO];
-    }];
+    } type:RefreshTypeColor];
 }
 
 - (void)getCanClaimAmount {
