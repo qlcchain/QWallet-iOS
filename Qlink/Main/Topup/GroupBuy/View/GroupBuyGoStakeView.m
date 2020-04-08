@@ -11,6 +11,7 @@
 #import "WalletCommonModel.h"
 #import "GlobalConstants.h"
 #import "UIView+PopAnimate.h"
+#import "FirebaseUtil.h"
 
 @interface GroupBuyGoStakeView ()
 
@@ -46,6 +47,8 @@
 }
 
 - (IBAction)okAction:(id)sender {
+    [FirebaseUtil logEventWithItemID:Topup_GroupPlan_Stake itemName:Topup_GroupPlan_Stake contentType:Topup_GroupPlan_Stake];
+    
     if (_okBlock) {
         _okBlock();
     }

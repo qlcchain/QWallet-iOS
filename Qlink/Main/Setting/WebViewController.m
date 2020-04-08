@@ -59,8 +59,9 @@
                     context:nil];
 
     NSString *httpsStr = @"https://";
+    NSString *httpStr = @"http://";
     NSMutableString *url = [NSMutableString string];
-    if (![_inputUrl containsString:httpsStr]) {
+    if (![_inputUrl containsString:httpsStr] && ![_inputUrl containsString:httpStr]) {
         [url appendString:httpsStr];
     }
     [url appendString:_inputUrl?:@""];

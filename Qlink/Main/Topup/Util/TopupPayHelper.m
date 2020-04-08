@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "TopupPayQLC_DeductionViewController.h"
 #import <QLCFramework/QLCWalletManage.h>
+#import "FirebaseUtil.h"
 
 @implementation TopupPayHelper
 
@@ -91,10 +92,15 @@
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     kWeakSelf(self);
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        [FirebaseUtil logEventWithItemID:Topup_Confirm_Cancel itemName:Topup_Confirm_Cancel contentType:Topup_Confirm_Cancel];
     }];
     [alertC addAction:alertCancel];
     UIAlertAction *alertBuy = [UIAlertAction actionWithTitle:kLang(@"purchase") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakself requestTopup_order:model];
+        
+        [FirebaseUtil logEventWithItemID:Topup_Confirm_buy itemName:Topup_Confirm_buy contentType:Topup_Confirm_buy];
+        
     }];
     [alertC addAction:alertBuy];
     alertC.modalPresentationStyle = UIModalPresentationFullScreen;

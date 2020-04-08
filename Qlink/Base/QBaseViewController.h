@@ -31,6 +31,7 @@
 // 检查自己当前
 - (void) showUserConnectStatus;
 - (void)configEmptyView:(UIView *)view;
+- (void)configEmptyView:(UIView *)view contentViewY:(CGFloat)contentViewY;
 - (void)refreshEmptyView:(UIView *)view;
 
 @end

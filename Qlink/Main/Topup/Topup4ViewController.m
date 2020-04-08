@@ -254,6 +254,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
     _chooseDeductionBtn.layer.cornerRadius = _chooseDeductionBtn.width/2.0;
     _chooseDeductionBtn.layer.masksToBounds = YES;
+    [_chooseDeductionBtn setBackgroundImage:kClickEffectImage forState:UIControlStateHighlighted];
     
     _cycleContentArr = [NSMutableArray array];
     _showQLC = NO;
@@ -562,10 +563,13 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
             vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActivityTime;
             vc.groupBuyMinimumDiscount = weakself.groupBuyMinimumDiscount;
             vc.updateTableHeightBlock = ^(CGFloat tableHeight) {
-                weakself.tableBackHeight.constant = tableHeight + weakself.ninaPagerView.topTabHeight;
-                weakself.ninaPagerView.ninaBaseView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.left, weakself.ninaPagerView.ninaBaseView.top, weakself.ninaPagerView.ninaBaseView.width, weakself.tableBackHeight.constant);
-                weakself.ninaPagerView.ninaBaseView.scrollView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.scrollView.left, weakself.ninaPagerView.ninaBaseView.scrollView.top, weakself.ninaPagerView.ninaBaseView.scrollView.width, tableHeight);
-                
+                DDLogDebug(@"更新TopupTableHeight = %@",@(tableHeight));
+                if (weakself.ninaPagerView) {
+                    CGFloat nianHeight = tableHeight + weakself.ninaPagerView.topTabHeight;
+                    weakself.tableBackHeight.constant = nianHeight;
+                    weakself.ninaPagerView.ninaBaseView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.left, weakself.ninaPagerView.ninaBaseView.top, weakself.ninaPagerView.ninaBaseView.width, nianHeight);
+                    weakself.ninaPagerView.ninaBaseView.scrollView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.scrollView.left, weakself.ninaPagerView.ninaBaseView.scrollView.top, weakself.ninaPagerView.ninaBaseView.scrollView.width, tableHeight);
+                }
             };
             NSString *title = @"";
             NSString *language = [Language currentLanguageCode];
@@ -602,7 +606,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         }];
         _tableBackHeight.constant = _ninaPagerView.topTabHeight;
     } else {
-        [_ninaPagerView reloadTopTabByTitles:titleArr WithObjects:_ninaObjectSource];
+//        [_ninaPagerView reloadTopTabByTitles:titleArr WithObjects:_ninaObjectSource];
+        [self refreshNinaPagerViewVC];
     }
         
         
@@ -851,6 +856,14 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     if (vc.updateTableHeightBlock) {
         vc.updateTableHeightBlock([vc getTableHeight]);
     }
+    
+    if ([vc.inputCountryM.nameEn isEqualToString:@"China"]) {
+        [FirebaseUtil logEventWithItemID:Topup_China itemName:Topup_China contentType:Topup_China];
+    } else if ([vc.inputCountryM.nameEn isEqualToString:@"Singapore"]) {
+        [FirebaseUtil logEventWithItemID:Topup_Singapore itemName:Topup_Singapore contentType:Topup_Singapore];
+    } else if ([vc.inputCountryM.nameEn isEqualToString:@"Indonesia"]) {
+       [FirebaseUtil logEventWithItemID:Topup_Indonesia itemName:Topup_Indonesia contentType:Topup_Indonesia];
+   }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -1072,6 +1085,14 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
     [FirebaseUtil logEventWithItemID:Topup_Home_QGASBuyBack_JoinNow itemName:Topup_Home_QGASBuyBack_JoinNow contentType:Topup_Home_QGASBuyBack_JoinNow];
 }
+
+- (IBAction)globalOutbreakAction:(id)sender {
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = @"http://covid19.qlink.mobi/covid-19trend/dist";
+    vc.inputTitle = @"COVID-19 Live Updates";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 
 #pragma mark - Transition

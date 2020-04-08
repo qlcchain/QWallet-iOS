@@ -35,6 +35,7 @@
 #import "ChooseCountryUtil.h"
 #import "PhoneNumerInputView.h"
 #import "TopupBuyConfirmViewController.h"
+#import "FirebaseUtil.h"
 
 static NSString *const TopupNetworkSize = @"30";
 
@@ -464,12 +465,16 @@ static NSString *const TopupNetworkSize = @"30";
 //    [inputV show];
     
     [self jumpToTopupBuyConfirm];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Recharge_directly itemName:Topup_Recharge_directly contentType:Topup_Recharge_directly];
 }
 
 - (IBAction)startGroupBuyAction:(id)sender {
     _currentPayType = TopupPayTypeGroupBuy;
 //    [self showStartGroupBuyView];
     [self jumpToStartGroupBuy];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Group_Plan itemName:Topup_Group_Plan contentType:Topup_Group_Plan];
 }
 
 - (IBAction)chooseTokenAction:(id)sender {

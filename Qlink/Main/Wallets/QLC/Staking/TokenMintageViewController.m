@@ -17,6 +17,7 @@
 #import "Qlink-Swift.h"
 #import "NSDate+Category.h"
 #import "StakingProcessView.h"
+#import "FirebaseUtil.h"
 
 @interface TokenMintageViewController ()
 
@@ -213,6 +214,8 @@
 }
 
 - (IBAction)invokeAction:(id)sender {
+    [FirebaseUtil logEventWithItemID:Wallet_MyStakings_InvokeNewStakings_Invoke itemName:Wallet_MyStakings_InvokeNewStakings_Invoke contentType:Wallet_MyStakings_InvokeNewStakings_Invoke];
+    
     [self.view endEditing:YES];
     if (!_stakeFromWalletM) {
         [kAppD.window makeToastDisappearWithText:kLang(@"stake_from_is_empty")];

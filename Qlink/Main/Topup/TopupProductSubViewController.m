@@ -19,6 +19,7 @@
 #import "ChooseTopupPlanViewController.h"
 #import <TMCache/TMCache.h>
 #import "TopupCountryModel.h"
+#import "FirebaseUtil.h"
 
 static NSString *TopupNetworkSize = @"30";
 
@@ -43,6 +44,12 @@ static NSString *TopupNetworkSize = @"30";
     [self configInit];
     [self requestTopup_product_list_v3];
     
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakself handlerListData];
+    });
+//    [self handlerListData];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,7 +61,7 @@ static NSString *TopupNetworkSize = @"30";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self handlerListData];
+    
 }
 
 #pragma mark - Operation
@@ -74,6 +81,7 @@ static NSString *TopupNetworkSize = @"30";
 
 - (void)refreshTable {
     [self.mainTable reloadData];
+//    [self.mainTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (CGFloat)getTableHeight {
@@ -86,14 +94,15 @@ static NSString *TopupNetworkSize = @"30";
 
 - (void)handlerListData {
     NSArray *cacheArr = [[TMCache sharedCache] objectForKey:[self getChachKey]]?:@[];
-    [_sourceArr removeAllObjects];
-    [_sourceArr addObjectsFromArray:cacheArr];
+    [self.sourceArr removeAllObjects];
+    [self.sourceArr addObjectsFromArray:cacheArr];
 
-    _tableHeight = _sourceArr.count*TopupProductSubCell_Height;
-    [_mainTable reloadData];
+    self.tableHeight = cacheArr.count*TopupProductSubCell_Height;
+    [self.mainTable reloadData];
+//    [_mainTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     
-    if (_updateTableHeightBlock) {
-        _updateTableHeightBlock(_tableHeight);
+    if (self.updateTableHeightBlock) {
+        self.updateTableHeightBlock(self.tableHeight);
     }
 }
 
@@ -130,6 +139,8 @@ static NSString *TopupNetworkSize = @"30";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Choose_a_plan itemName:Topup_Choose_a_plan contentType:Topup_Choose_a_plan];
     
     // 抵扣币
     if ([_selectDeductionTokenM.chain isEqualToString:ETH_Chain]) {
@@ -265,6 +276,7 @@ static NSString *TopupNetworkSize = @"30";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TopupProductSubCell *cell = [tableView dequeueReusableCellWithIdentifier:TopupProductSubCell_Reuse];
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     
     TopupProductModel *model = _sourceArr[indexPath.row];
     [cell config:model token:_selectDeductionTokenM isInGroupBuyActivityTime:_isInGroupBuyActivityTime groupBuyMinimumDiscount:_groupBuyMinimumDiscount];
@@ -292,6 +304,13 @@ static NSString *TopupNetworkSize = @"30";
     ChooseTopupPlanViewController *vc = [ChooseTopupPlanViewController new];
     vc.inputCountryM = _inputCountryM;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Lazy
+- (void)setSourceArr:(NSMutableArray *)sourceArr {
+    if (!_sourceArr) {
+        _sourceArr = [NSMutableArray arrayWithArray:sourceArr];
+    }
 }
 
 @end

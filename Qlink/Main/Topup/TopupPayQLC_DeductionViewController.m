@@ -38,6 +38,7 @@
 #import "TokenListHelper.h"
 #import "QLCWalletInfo.h"
 #import "TopupPayNEO_PayViewController.h"
+#import "FirebaseUtil.h"
 
 @interface TopupPayQLC_DeductionViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -491,6 +492,8 @@
 }
 
 - (IBAction)sendAction:(id)sender {
+    [FirebaseUtil logEventWithItemID:Topup_Confirm_Send_QGas itemName:Topup_Confirm_Send_QGas contentType:Topup_Confirm_Send_QGas];
+    
     if (!_payWalletM) {
         [kAppD.window makeToastDisappearWithText:kLang(@"payment_wallet_is_empty")];
         return;

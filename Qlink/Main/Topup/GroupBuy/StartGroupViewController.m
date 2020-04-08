@@ -240,6 +240,14 @@ static NSString *const TopupNetworkSize = @"30";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self selectToIndex:indexPath.row];
+    
+    if (indexPath.row == 0) {
+        [FirebaseUtil logEventWithItemID:Topup_GroupPlan_10_off itemName:Topup_GroupPlan_10_off contentType:Topup_GroupPlan_10_off];
+    } else if (indexPath.row == 1) {
+        [FirebaseUtil logEventWithItemID:Topup_GroupPlan_20_off itemName:Topup_GroupPlan_20_off contentType:Topup_GroupPlan_20_off];
+    } else if (indexPath.row == 2) {
+       [FirebaseUtil logEventWithItemID:Topup_GroupPlan_30_off itemName:Topup_GroupPlan_30_off contentType:Topup_GroupPlan_30_off];
+   }
 }
 
 #pragma mark - UITableViewDataSource

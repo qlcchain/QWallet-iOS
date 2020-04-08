@@ -8,6 +8,8 @@
 
 #import "RefreshHelper.h"
 #import "GlobalConstants.h"
+#import "UIImage+Resize.h"
+#import <UIImageView+WebCache.h>
 
 @implementation RefreshHelper
 
@@ -54,6 +56,9 @@
 
 
 + (MJRefreshGifHeader *)headerWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)block type:(RefreshType)type {
+//    UIImage *logoImage = [UIImage imageNamed:@"icon_login_logo"];
+//    logoImage = [[logoImage sd_resizedImageWithSize:CGSizeMake(30, 30) scaleMode:SDImageScaleModeAspectFit] sd_roundedCornerImageWithRadius:4 corners:UIRectCornerAllCorners borderWidth:0 borderColor:[UIColor whiteColor]];
+    NSMutableArray *logoImages = [NSMutableArray array];
     NSArray *images = @[];
     NSMutableArray *refreshingImages = [NSMutableArray array];
     if (type == RefreshTypeWhite) {
@@ -62,11 +67,19 @@
             UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_%@",@(i)]];
             [refreshingImages addObject:loadingImg];
         }
+        for (int i = 4; i>=1; i--) {
+            UIImage *logoImage = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_logo_%@",@(i)]];
+            [logoImages addObject:logoImage];
+        }
     } else if (type == RefreshTypeColor) {
         images = @[[UIImage imageNamed:@"loading_color_2"]];
         for (int i = 2; i <= 17; i++) {
             UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_color_%@",@(i)]];
             [refreshingImages addObject:loadingImg];
+        }
+        for (int i = 4; i>=1; i--) {
+            UIImage *logoImage = [UIImage imageNamed:[NSString stringWithFormat:@"loading_colour_logo_%@",@(i)]];
+            [logoImages addObject:logoImage];
         }
     }
    
@@ -80,11 +93,13 @@
     // 隐藏状态
     header.stateLabel.hidden = YES;
     // 设置普通状态的动画图片
-    [header setImages:images forState:MJRefreshStateIdle];
+    [header setImages:logoImages forState:MJRefreshStateIdle];
     // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
-    [header setImages:images forState:MJRefreshStatePulling];
+//    [header setImages:logoImages forState:MJRefreshStatePulling];
     // 设置正在刷新状态的动画图片
     [header setImages:refreshingImages duration:1.4 forState:MJRefreshStateRefreshing];
+//    [header setImages:logoImages1 forState:MJRefreshStateWillRefresh];
+    
     
 //    header.pullingPercent = 0.5;
     
@@ -92,6 +107,7 @@
 }
 
 + (MJRefreshBackGifFooter *)footerBackNormalWithRefreshingBlock:(MJRefreshComponentRefreshingBlock)block type:(RefreshType)type {
+    NSMutableArray *logoImages = [NSMutableArray array];
     NSArray *images = @[];
     NSMutableArray *refreshingImages = [NSMutableArray array];
     if (type == RefreshTypeWhite) {
@@ -100,11 +116,19 @@
             UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_%@",@(i)]];
             [refreshingImages addObject:loadingImg];
         }
+        for (int i = 4; i>=1; i--) {
+            UIImage *logoImage = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_logo_%@",@(i)]];
+            [logoImages addObject:logoImage];
+        }
     } else if (type == RefreshTypeColor) {
         images = @[[UIImage imageNamed:@"loading_color_2"]];
         for (int i = 2; i <= 17; i++) {
             UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_color_%@",@(i)]];
             [refreshingImages addObject:loadingImg];
+        }
+        for (int i = 4; i>=1; i--) {
+            UIImage *logoImage = [UIImage imageNamed:[NSString stringWithFormat:@"loading_colour_logo_%@",@(i)]];
+            [logoImages addObject:logoImage];
         }
     }
     
@@ -115,11 +139,11 @@
 //    footer.refreshingTitleHidden = YES;
     footer.stateLabel.hidden = YES;
     // 设置普通状态的动画图片
-    [footer setImages:images forState:MJRefreshStateIdle];
+    [footer setImages:logoImages forState:MJRefreshStateIdle];
     // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
-    [footer setImages:images forState:MJRefreshStatePulling];
+//    [footer setImages:images forState:MJRefreshStatePulling];
     // 设置正在刷新状态的动画图片
-    [footer setImages:refreshingImages forState:MJRefreshStateRefreshing];
+    [footer setImages:refreshingImages duration:1.4 forState:MJRefreshStateRefreshing];
     
 //    footer.pullingPercent = 0;
     

@@ -27,6 +27,7 @@
 #import "RSAUtil.h"
 #import "ClaimConstants.h"
 #import "NSString+RemoveZero.h"
+#import "FirebaseUtil.h"
 
 static NSInteger const PledgeInfo_PageCount = 10;
 static NSInteger const PledgeInfo_PageFirst = 0;
@@ -374,6 +375,8 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 
 - (IBAction)invokeNewStakingAction:(id)sender {
     [self jumpToNewStaking];
+    
+    [FirebaseUtil logEventWithItemID:Wallet_MyStakings_InvokeNewStakings itemName:Wallet_MyStakings_InvokeNewStakings contentType:Wallet_MyStakings_InvokeNewStakings];
 }
 
 - (IBAction)txidAction:(id)sender {

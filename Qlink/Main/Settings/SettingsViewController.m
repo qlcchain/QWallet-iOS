@@ -17,6 +17,7 @@
 #import "UserModel.h"
 //#import "GlobalConstants.h"
 #import "SystemUtil.h"
+#import "FirebaseUtil.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -123,14 +124,20 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"english") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[0]];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages_English itemName:Me_Settings_Languages_English contentType:Me_Settings_Languages_English];
     }];
     [alertVC addAction:action1];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:kLang(@"chinese") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[1]];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages_Chinese itemName:Me_Settings_Languages_Chinese contentType:Me_Settings_Languages_Chinese];
     }];
     [alertVC addAction:action2];
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"indonesian") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[2]];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages_Indonesian itemName:Me_Settings_Languages_Indonesian contentType:Me_Settings_Languages_Indonesian];
     }];
     [alertVC addAction:action3];
     UIAlertAction *actionC = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -168,6 +175,8 @@
         [self logout];
     } else if ([model.title isEqualToString:kLang(@"language")]) {
         [self showSelectLanguage];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages itemName:Me_Settings_Languages contentType:Me_Settings_Languages];
     }
 }
 

@@ -112,7 +112,8 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:ChooseTopupPlanCellReuse bundle:nil] forCellReuseIdentifier:ChooseTopupPlanCellReuse];
-    self.baseTable = _mainTable;
+//    self.baseTable = _mainTable;
+//    [self configEmptyView:_mainTable contentViewY:20];
     
     [_phoneTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
     [_phoneTF addTarget:self action:@selector(textFieldEditDidEnd:) forControlEvents:UIControlEventEditingDidEnd];

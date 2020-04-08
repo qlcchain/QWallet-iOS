@@ -25,6 +25,7 @@
 #import "NSString+RemoveZero.h"
 #import "TopupOrderModel.h"
 #import "TopupPayHelper.h"
+#import "FirebaseUtil.h"
 
 @interface TopupBuyConfirmViewController () <CNContactPickerDelegate> {
     CNContactPickerViewController * _peoplePickVC;
@@ -288,6 +289,8 @@
     [TopupPayHelper shareInstance].selectPhoneNum = phoneNum;
     [TopupPayHelper shareInstance].selectDeductionTokenM = _inputDeductionTokenM;
     [[TopupPayHelper shareInstance] handlerPayToken:_inputProductM];
+    
+    [FirebaseUtil logEventWithItemID:Topup_order_confirm itemName:Topup_order_confirm contentType:Topup_order_confirm];
 }
 
 #pragma mark - CNContactPickerDelegate

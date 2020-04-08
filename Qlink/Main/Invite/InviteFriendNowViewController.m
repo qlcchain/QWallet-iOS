@@ -10,6 +10,7 @@
 #import "UserModel.h"
 #import "SGQRCodeObtain.h"
 #import "UIView+Visuals.h"
+#import "FirebaseUtil.h"
 
 @interface InviteFriendNowViewController ()
 
@@ -66,6 +67,8 @@
 }
 
 - (IBAction)shareAction:(id)sender {
+    [FirebaseUtil logEventWithItemID:Topup_Home_MyReferralCode_Share itemName:Topup_Home_MyReferralCode_Share contentType:Topup_Home_MyReferralCode_Share];
+    
     UIImage *img = [_shareBack getImageFromView];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[img] applicationActivities:nil];
     activityVC.excludedActivityTypes = @[UIActivityTypeAirDrop];

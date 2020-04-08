@@ -35,6 +35,7 @@
 #import "WebViewController.h"
 #import "QgasVoteUtil.h"
 #import "QVoteViewController.h"
+#import "FirebaseUtil.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -566,8 +567,12 @@
         }];
         [_mainTable reloadData];
         [self refreshTabbarRedOfMe];
+        
+        [FirebaseUtil logEventWithItemID:Me_Referral_Rewards itemName:Me_Referral_Rewards contentType:Me_Referral_Rewards];
     } else if ([model.title isEqualToString:kLang(@"join_the_community")]) {
         [self jumpToJoinCommunity];
+        
+        [FirebaseUtil logEventWithItemID:Me_Join_the_community itemName:Me_Join_the_community contentType:Me_Join_the_community];
     } else if ([model.title isEqualToString:kLang(@"contact_us")]) {
         
     } else if ([model.title isEqualToString:kLang(@"settings")]) {

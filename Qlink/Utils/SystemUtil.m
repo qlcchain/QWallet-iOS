@@ -90,12 +90,17 @@
                 if (arrayLocal.count == 3) {
                     localVersionInt = [arrayLocal[0] integerValue]*100 + [arrayLocal[1] integerValue]*10 + [arrayLocal[2] integerValue];
                 }
+//                localVersionInt = 135;
                 if (lineVersionInt > localVersionInt) { // 线上版本大于本地版本
                     UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil message:kLang(@"a_new_version_of_my_qwallet__") preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction * ok = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleDefault handler:nil];
                     UIAlertAction * update = [UIAlertAction actionWithTitle:kLang(@"install_now") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         //跳转到App Store
                         NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?mt=8",AppStore_ID];
+                        NSString *language = [Language currentLanguageCode];
+                        if ([language isEqualToString:LanguageCode[1]]) { // 中文
+                            urlStr = @"https://testflight.apple.com/join/ZLpohjtQ";
+                        }
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
                     }];
                     [alert addAction:ok];
