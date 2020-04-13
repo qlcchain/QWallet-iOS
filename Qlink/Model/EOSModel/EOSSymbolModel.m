@@ -20,7 +20,7 @@
 }
 
 - (NSString *)getPrice:(NSArray *)tokenPriceArr {
-    __block NSString *price = @"";
+    __block NSString *price = @"0";
     NSString *num = [self getTokenNum];
     [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         TokenPriceModel *tempM = obj;

@@ -35,6 +35,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+
     
     if (!_groupPeopleV) {
         _groupPeopleV = [GroupPeopleView getInstance];

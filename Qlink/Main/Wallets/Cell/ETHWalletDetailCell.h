@@ -6,14 +6,14 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *ETHWalletDetailCellReuse = @"ETHWalletDetailCell";
 #define ETHWalletDetailCell_Height 48
 
-@interface ETHWalletDetailCell : UITableViewCell
+@interface ETHWalletDetailCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 

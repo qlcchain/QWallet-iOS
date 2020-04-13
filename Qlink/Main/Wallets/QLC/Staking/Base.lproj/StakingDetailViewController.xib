@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,10 +33,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3c7-Lb-6vm">
-                    <rect key="frame" x="0.0" y="20" width="414" height="730"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="750"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ij-Eh-TLz">
-                            <rect key="frame" x="0.0" y="44" width="414" height="686"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ij-Eh-TLz">
+                            <rect key="frame" x="0.0" y="44" width="414" height="706"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gK-iL-4yH">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="679"/>
@@ -153,7 +151,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="eth_detail_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="paL-hf-MaV">
                                                     <rect key="frame" x="378" y="12" width="24" height="24"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLE-5o-83b">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLE-5o-83b" customClass="QBaseDarkButton">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                                     <connections>
                                                         <action selector="stateBtnAction:" destination="-1" eventType="touchUpInside" id="k5s-qi-qbS"/>
@@ -293,7 +291,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TU-4F-lwc">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TU-4F-lwc" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="374" y="12" width="40" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="1AC-rK-p7T"/>
@@ -332,7 +330,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN1-HF-hvs">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN1-HF-hvs" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="374" y="12" width="40" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="b57-p1-8Sx"/>
@@ -371,7 +369,7 @@
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nt-0A-WUm">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nt-0A-WUm" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="374" y="12" width="40" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="6TJ-Tj-5QV"/>
@@ -440,8 +438,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sv-Hg-sWV" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AwB-cq-hpy">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AwB-cq-hpy" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="UM1-yv-4R7"/>
                                         <constraint firstAttribute="height" constant="44" id="ekN-Dm-lJa"/>
@@ -452,7 +450,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voting/Mining Node" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-9j-AQi">
-                                    <rect key="frame" x="127.33333333333333" y="11.33333333333333" width="159.66666666666669" height="21.666666666666671"/>
+                                    <rect key="frame" x="127.33333333333333" y="11.333333333333334" width="159.66666666666669" height="21.666666666666664"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -473,7 +471,7 @@
                                 <constraint firstItem="Ene-9j-AQi" firstAttribute="centerY" secondItem="5Sv-Hg-sWV" secondAttribute="centerY" id="UxP-Cc-L8K"/>
                                 <constraint firstItem="AwB-cq-hpy" firstAttribute="centerY" secondItem="5Sv-Hg-sWV" secondAttribute="centerY" id="YzR-nF-aJu"/>
                                 <constraint firstAttribute="height" constant="44" id="kO0-I8-yLD"/>
-                                <constraint firstItem="AwB-cq-hpy" firstAttribute="leading" secondItem="5Sv-Hg-sWV" secondAttribute="leading" constant="8" id="pvc-7Z-JGP"/>
+                                <constraint firstItem="AwB-cq-hpy" firstAttribute="leading" secondItem="5Sv-Hg-sWV" secondAttribute="leading" id="pvc-7Z-JGP"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -489,7 +487,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qgz-4p-QI0">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>

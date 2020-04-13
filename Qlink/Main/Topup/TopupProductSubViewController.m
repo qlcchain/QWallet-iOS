@@ -44,12 +44,14 @@ static NSString *TopupNetworkSize = @"30";
     [self configInit];
     [self requestTopup_product_list_v3];
     
-    kWeakSelf(self);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakself handlerListData];
-    });
-//    [self handlerListData];
-    
+    if ([_inputGlobalRoaming isEmptyString]) {
+        kWeakSelf(self);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakself handlerListData];
+        });
+    } else {
+        [self handlerListData];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -276,7 +278,8 @@ static NSString *TopupNetworkSize = @"30";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TopupProductSubCell *cell = [tableView dequeueReusableCellWithIdentifier:TopupProductSubCell_Reuse];
-    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+//    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
     
     TopupProductModel *model = _sourceArr[indexPath.row];
     [cell config:model token:_selectDeductionTokenM isInGroupBuyActivityTime:_isInGroupBuyActivityTime groupBuyMinimumDiscount:_groupBuyMinimumDiscount];

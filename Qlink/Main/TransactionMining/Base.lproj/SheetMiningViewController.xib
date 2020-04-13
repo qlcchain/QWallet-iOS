@@ -33,7 +33,7 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ef-KV-q3g">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irD-ia-Vgb">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irD-ia-Vgb">
                             <rect key="frame" x="0.0" y="44" width="375" height="1156"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rel-a9-QbB">
@@ -55,7 +55,7 @@
                                                     <color key="textColor" red="0.16078431372549018" green="0.27450980392156865" blue="0.38039215686274508" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YzJ-9X-o23">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YzJ-9X-o23" customClass="QBaseDarkButton">
                                                     <rect key="frame" x="67.5" y="311" width="240" height="40"/>
                                                     <color key="backgroundColor" red="0.027450980392156862" green="0.76078431372549016" blue="0.72549019607843135" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
@@ -104,10 +104,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="claim_background_line_left" translatesAutoresizingMaskIntoConstraints="NO" id="pAC-BP-Knl">
-                                                    <rect key="frame" x="-141.5" y="18" width="246.5" height="4"/>
+                                                    <rect key="frame" x="-18.5" y="19" width="123.5" height="2"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="claim_background_line_right" translatesAutoresizingMaskIntoConstraints="NO" id="f78-BV-s28">
-                                                    <rect key="frame" x="270.5" y="18" width="218" height="4"/>
+                                                    <rect key="frame" x="270.5" y="19" width="109" height="2"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -125,7 +125,7 @@
                                             <rect key="frame" x="0.0" y="430" width="375" height="92"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="mining_background_mining" translatesAutoresizingMaskIntoConstraints="NO" id="9oI-2W-5BS">
-                                                    <rect key="frame" x="16" y="-46" width="343" height="184"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="92"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Claim ：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m45-yt-o2o">
                                                     <rect key="frame" x="34" y="28" width="64.5" height="14.5"/>
@@ -145,7 +145,7 @@
                                                     <color key="textColor" red="1" green="0.96862745100000003" blue="0.84705882349999995" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjW-Ym-eVC">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjW-Ym-eVC" customClass="QBaseDarkButton">
                                                     <rect key="frame" x="281" y="33" width="64" height="26"/>
                                                     <color key="backgroundColor" red="1" green="0.96862745098039216" blue="0.94901960784313721" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
@@ -169,7 +169,7 @@
                                                             <color key="textColor" red="1" green="0.96862745098039216" blue="0.84705882352941175" alpha="1" colorSpace="deviceRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ram-FQ-KzG">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ram-FQ-KzG" customClass="QBaseTouchButton">
                                                             <rect key="frame" x="0.0" y="0.0" width="141.5" height="34"/>
                                                             <connections>
                                                                 <action selector="dailyDetailAction:" destination="-1" eventType="touchUpInside" id="n9e-96-Oot"/>
@@ -322,7 +322,7 @@
                                                     <color key="textColor" red="0.027450980390000001" green="0.76078431369999999" blue="0.72549019609999998" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY8-Id-oBe">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yY8-Id-oBe" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="82" y="173.5" width="211" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <state key="normal" title="How many QLC tokens can I mine?&gt;&gt;">
@@ -432,7 +432,7 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq7-zX-Mfl">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq7-zX-Mfl" customClass="QBaseTouchButton">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="KCO-mZ-QcZ"/>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,10 +19,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dL4-b1-oHR">
-                    <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCx-R2-Lh0">
-                            <rect key="frame" x="0.0" y="44" width="414" height="672"/>
+                            <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Voting/Mining Node" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAw-ys-9KW">
                                     <rect key="frame" x="16" y="15.999999999999998" width="175.33333333333334" height="19.333333333333329"/>
@@ -100,8 +98,8 @@ Rewards: Same as voting node and entitled to issue a token</string>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrh-zX-8fg" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-vi-xLq">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-vi-xLq" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="9Pr-So-07e"/>
                                         <constraint firstAttribute="width" constant="44" id="dDe-P1-hvd"/>
@@ -112,7 +110,7 @@ Rewards: Same as voting node and entitled to issue a token</string>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Staking Types" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmN-8b-tbJ">
-                                    <rect key="frame" x="123.33333333333333" y="11.33333333333333" width="167.33333333333337" height="21.666666666666671"/>
+                                    <rect key="frame" x="123.33333333333333" y="11.333333333333334" width="167.33333333333337" height="21.666666666666664"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -123,7 +121,7 @@ Rewards: Same as voting node and entitled to issue a token</string>
                                 <constraint firstItem="tFM-vi-xLq" firstAttribute="centerY" secondItem="Qrh-zX-8fg" secondAttribute="centerY" id="8j4-i9-1IA"/>
                                 <constraint firstItem="GmN-8b-tbJ" firstAttribute="centerY" secondItem="Qrh-zX-8fg" secondAttribute="centerY" id="YoO-Gl-Use"/>
                                 <constraint firstItem="GmN-8b-tbJ" firstAttribute="centerX" secondItem="Qrh-zX-8fg" secondAttribute="centerX" id="e5n-9D-9Y4"/>
-                                <constraint firstItem="tFM-vi-xLq" firstAttribute="leading" secondItem="Qrh-zX-8fg" secondAttribute="leading" constant="8" id="f8a-eg-Rrp"/>
+                                <constraint firstItem="tFM-vi-xLq" firstAttribute="leading" secondItem="Qrh-zX-8fg" secondAttribute="leading" id="f8a-eg-Rrp"/>
                                 <constraint firstAttribute="height" constant="44" id="gCy-Rv-zVe"/>
                             </constraints>
                         </view>
@@ -140,7 +138,7 @@ Rewards: Same as voting node and entitled to issue a token</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izB-FA-uA1">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -156,6 +154,7 @@ Rewards: Same as voting node and entitled to issue a token</string>
                 <constraint firstAttribute="trailing" secondItem="izB-FA-uA1" secondAttribute="trailing" id="rlF-sc-6IU"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="139" y="152"/>
         </view>
     </objects>
     <resources>

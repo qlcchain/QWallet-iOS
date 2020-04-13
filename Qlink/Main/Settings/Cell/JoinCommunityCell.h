@@ -6,14 +6,14 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *JoinCommunityCellReuse = @"JoinCommunityCell";
 #define JoinCommunityCell_Height 72
 
-@interface JoinCommunityCell : UITableViewCell
+@interface JoinCommunityCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;

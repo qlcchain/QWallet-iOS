@@ -122,7 +122,7 @@
                                                 <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pY1-r4-JgR">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pY1-r4-JgR" customClass="QBaseDarkButton">
                                                 <rect key="frame" x="222" y="90" width="64" height="26"/>
                                                 <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -162,13 +162,23 @@
                                             <constraint firstItem="hVm-ol-QcC" firstAttribute="top" secondItem="odG-T7-XJ5" secondAttribute="bottom" constant="6" id="y6b-xW-S1f"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnz-F7-rgv" customClass="QBaseDarkButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="298" height="180"/>
+                                        <connections>
+                                            <action selector="clickAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="z7R-Wq-NQC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="vnz-F7-rgv" firstAttribute="leading" secondItem="vLP-AX-1uA" secondAttribute="leading" id="3oI-cq-hK0"/>
                                     <constraint firstAttribute="trailing" secondItem="4sE-4p-etX" secondAttribute="trailing" id="7uh-pz-GsK"/>
+                                    <constraint firstItem="vnz-F7-rgv" firstAttribute="top" secondItem="vLP-AX-1uA" secondAttribute="top" id="GJ0-77-fu7"/>
+                                    <constraint firstAttribute="bottom" secondItem="vnz-F7-rgv" secondAttribute="bottom" id="O4k-gx-BHl"/>
                                     <constraint firstAttribute="trailing" secondItem="zcM-cP-mTC" secondAttribute="trailing" id="Rsd-48-PNB"/>
                                     <constraint firstAttribute="bottom" secondItem="4sE-4p-etX" secondAttribute="bottom" id="ULf-JL-mWh"/>
                                     <constraint firstItem="zcM-cP-mTC" firstAttribute="leading" secondItem="vLP-AX-1uA" secondAttribute="leading" id="b2V-QK-Dnv"/>
+                                    <constraint firstAttribute="trailing" secondItem="vnz-F7-rgv" secondAttribute="trailing" id="cYB-qr-ahs"/>
                                     <constraint firstItem="zcM-cP-mTC" firstAttribute="top" secondItem="vLP-AX-1uA" secondAttribute="top" id="eVG-yj-kse"/>
                                     <constraint firstItem="4sE-4p-etX" firstAttribute="leading" secondItem="vLP-AX-1uA" secondAttribute="leading" id="jbi-Qn-vHJ"/>
                                     <constraint firstItem="4sE-4p-etX" firstAttribute="top" secondItem="zcM-cP-mTC" secondAttribute="bottom" id="voj-8Q-ZHe"/>

@@ -6,14 +6,14 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class FinanceHistoryModel;
 
 static NSString *FinanceHistoryCellReuse = @"FinanceHistoryCell";
 #define FinanceHistoryCell_Height 95
 
-@interface FinanceHistoryCell : UITableViewCell
+@interface FinanceHistoryCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *qlcLab;

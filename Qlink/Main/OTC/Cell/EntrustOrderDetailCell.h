@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *EntrustOrderDetailCellReuse = @"EntrustOrderDetailCell";
 #define EntrustOrderDetailCell_Height 88
 
-@interface EntrustOrderDetailCell : UITableViewCell
+@interface EntrustOrderDetailCell : QBaseTableCell
 
 - (void)config:(TradeOrderListModel *)model;
 

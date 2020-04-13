@@ -20,6 +20,7 @@
     [super awakeFromNib];
     // Initialization code
     
+    
     _whiteBack.layer.cornerRadius = 6;
     _whiteBack.layer.masksToBounds = YES;
     _contentBack.layer.cornerRadius = 8;

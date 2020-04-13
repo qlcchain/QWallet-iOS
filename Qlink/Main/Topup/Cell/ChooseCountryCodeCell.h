@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *ChooseCountryCodeCellReuse = @"ChooseCountryCodeCell";
 #define ChooseCountryCodeCell_Height 48
 
-@interface ChooseCountryCodeCell : UITableViewCell
+@interface ChooseCountryCodeCell : QBaseTableCell
 
 - (void)config:(TopupCountryModel *)model isSelect:(BOOL)isSelect;
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ typedef void(^WalletsManageMoreBlock)(void);
 static NSString *WalletsManageCellReuse = @"WalletsManageCell";
 #define WalletsManageCell_Height 120
 
-@interface WalletsManageCell : UITableViewCell
+@interface WalletsManageCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;

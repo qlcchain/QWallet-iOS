@@ -6,7 +6,7 @@
 //  Copyright © 2020 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *ShareRewardCell_Reuse = @"ShareRewardCell";
 #define ShareRewardCell_Height 64
 
-@interface ShareRewardCell : UITableViewCell
+@interface ShareRewardCell : QBaseTableCell
 
 - (void)config_friend:(InviteeListModel *)model;
 - (void)config_delegate:(InviteRankingModel *)model;

@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class FinanceOrderModel;
 
@@ -15,7 +15,7 @@ static NSString *MyPortfolioCellReuse = @"MyPortfolioCell";
 
 typedef void(^RedeemBlock)(NSInteger row);
 
-@interface MyPortfolioCell : UITableViewCell
+@interface MyPortfolioCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *principalKeyLab;

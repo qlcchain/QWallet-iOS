@@ -51,7 +51,7 @@
                                                      green:240.0/255
                                                       blue:240.0/255
                                                      alpha:1.0]];
-    _progressView.progressTintColor = [UIColor greenColor];
+    _progressView.progressTintColor = MAIN_BLUE_COLOR;
     // 添加进度观察者
     [_myWebView addObserver:self
                  forKeyPath:NSStringFromSelector(@selector(estimatedProgress))

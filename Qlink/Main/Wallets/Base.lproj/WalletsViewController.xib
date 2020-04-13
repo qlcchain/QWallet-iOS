@@ -45,7 +45,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="29G-V7-rYH">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="825"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUf-tL-BaN">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUf-tL-BaN">
                             <rect key="frame" x="0.0" y="44" width="375" height="601"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Am7-ZB-cgh">
@@ -81,7 +81,7 @@
                                                             <color key="textColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEb-Uy-Zv9">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEb-Uy-Zv9" customClass="QBaseDarkButton">
                                                             <rect key="frame" x="65" y="14" width="153.5" height="34"/>
                                                             <connections>
                                                                 <action selector="switchWalletAction:" destination="-1" eventType="touchUpInside" id="gXh-tx-sH0"/>
@@ -99,7 +99,7 @@
                                                             <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="deviceRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxD-Sp-ajE">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxD-Sp-ajE" customClass="QBaseTouchButton">
                                                             <rect key="frame" x="319" y="4" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="0nU-3x-n6X"/>
@@ -110,7 +110,7 @@
                                                                 <action selector="walletMoreAction:" destination="-1" eventType="touchUpInside" id="Qgr-ad-nJn"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3u-e1-huT">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3u-e1-huT" customClass="QBaseTouchButton">
                                                             <rect key="frame" x="231" y="44" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="5hK-kU-liq"/>
@@ -223,7 +223,7 @@
                                                                         <constraint firstAttribute="width" constant="22" id="CRW-1q-NvI"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2G-0n-LUh">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2G-0n-LUh" customClass="QBaseTouchButton">
                                                                     <rect key="frame" x="0.0" y="0.0" width="48" height="44"/>
                                                                     <connections>
                                                                         <action selector="neoClaimAction:" destination="-1" eventType="touchUpInside" id="vWn-zr-RcA"/>
@@ -306,7 +306,7 @@
                                                                 <constraint firstAttribute="width" constant="24" id="Aut-qo-Y9p"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flw-gO-aRt">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flw-gO-aRt" customClass="QBaseDarkButton">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                                             <connections>
                                                                 <action selector="eosResourcesAction:" destination="-1" eventType="touchUpInside" id="CHW-39-vJm"/>
@@ -362,7 +362,7 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="eth_detail_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="jMr-9g-nwu">
                                                             <rect key="frame" x="336" y="12" width="24" height="24"/>
                                                         </imageView>
-                                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jb4-F9-aRa">
+                                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jb4-F9-aRa" customClass="QBaseDarkButton">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                                             <connections>
                                                                 <action selector="myStakingsAction:" destination="-1" eventType="touchUpInside" id="h4b-oN-7FZ"/>
@@ -449,7 +449,7 @@
                                     <color key="textColor" red="0.58039215686274503" green="0.58823529411764708" blue="0.63137254901960782" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afd-GT-z2B">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afd-GT-z2B" customClass="QBaseDarkButton">
                                     <rect key="frame" x="111.5" y="153" width="152" height="41"/>
                                     <color key="backgroundColor" red="0.13333333333333333" green="0.58431372549019611" blue="0.95294117647058818" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
@@ -481,8 +481,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AFc-9d-anL">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVE-tI-tlh">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVE-tI-tlh" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="Prg-OK-Vsp"/>
                                         <constraint firstAttribute="height" constant="44" id="n2o-B1-5CD"/>
@@ -492,8 +492,8 @@
                                         <action selector="qrcodeAction:" destination="-1" eventType="touchUpInside" id="juj-Mk-idd"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-SH-5bl">
-                                    <rect key="frame" x="323" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-SH-5bl" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="331" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Jid-yf-967"/>
                                         <constraint firstAttribute="width" constant="44" id="L04-Aq-NTg"/>
@@ -503,8 +503,8 @@
                                         <action selector="addAction:" destination="-1" eventType="touchUpInside" id="Vwz-rR-G8A"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SN0-Bh-gSx">
-                                    <rect key="frame" x="277" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SN0-Bh-gSx" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="285" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="Cdb-0R-UYF"/>
                                         <constraint firstAttribute="height" constant="44" id="PSR-RQ-nIO"/>
@@ -527,8 +527,8 @@
                             </subviews>
                             <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
-                                <constraint firstItem="iVE-tI-tlh" firstAttribute="leading" secondItem="AFc-9d-anL" secondAttribute="leading" constant="8" id="3Rt-Te-xZm"/>
-                                <constraint firstAttribute="trailing" secondItem="YyM-SH-5bl" secondAttribute="trailing" constant="8" id="AMF-v7-hxP"/>
+                                <constraint firstItem="iVE-tI-tlh" firstAttribute="leading" secondItem="AFc-9d-anL" secondAttribute="leading" id="3Rt-Te-xZm"/>
+                                <constraint firstAttribute="trailing" secondItem="YyM-SH-5bl" secondAttribute="trailing" id="AMF-v7-hxP"/>
                                 <constraint firstItem="hcj-Ak-lwI" firstAttribute="centerY" secondItem="AFc-9d-anL" secondAttribute="centerY" id="DP8-FT-wDr"/>
                                 <constraint firstItem="hcj-Ak-lwI" firstAttribute="centerX" secondItem="AFc-9d-anL" secondAttribute="centerX" id="XcX-Vm-MaX"/>
                                 <constraint firstItem="YyM-SH-5bl" firstAttribute="leading" secondItem="SN0-Bh-gSx" secondAttribute="trailing" constant="2" id="bJj-9I-D3T"/>

@@ -6,14 +6,14 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class AreaCodeModel;
 
 static NSString *ChooseAreaCodeCellReuse = @"ChooseAreaCodeCell";
 #define ChooseAreaCodeCell_Height 44
 
-@interface ChooseAreaCodeCell : UITableViewCell
+@interface ChooseAreaCodeCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *codeLab;

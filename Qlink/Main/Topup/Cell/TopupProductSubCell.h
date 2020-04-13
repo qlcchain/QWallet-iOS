@@ -6,7 +6,7 @@
 //  Copyright © 2020 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *TopupProductSubCell_Reuse = @"TopupProductSubCell";
 #define TopupProductSubCell_Height 140
 
-@interface TopupProductSubCell : UITableViewCell
+@interface TopupProductSubCell : QBaseTableCell
 
 - (void)config:(TopupProductModel *)productM token:(TopupDeductionTokenModel *)tokenM isInGroupBuyActivityTime:(BOOL)isInGroupBuyActivityTime groupBuyMinimumDiscount:(NSString *)groupBuyMinimumDiscount;
 

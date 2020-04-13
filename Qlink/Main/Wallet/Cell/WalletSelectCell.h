@@ -6,9 +6,9 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
-@interface WalletSelectCell : UITableViewCell
+@interface WalletSelectCell : QBaseTableCell
 @property (weak, nonatomic) IBOutlet UILabel *lblWalletKey;
 @property (weak, nonatomic) IBOutlet UIImageView *selectBtn;
 

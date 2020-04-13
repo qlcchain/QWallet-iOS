@@ -7,14 +7,14 @@
 //
 
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 static NSString *RankingSubCellReuse = @"RankingSubCell";
 #define RankingSubCell_Height 75
 
 @class VPNRankMode;
 
-@interface RankingSubCell : UITableViewCell
+@interface RankingSubCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *lblconnet;
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;

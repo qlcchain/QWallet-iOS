@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
 static NSString *MyOrderListTradeCellReuse = @"MyOrderListTradeCell";
 static NSInteger const MyOrderListTradeCell_Height = 137;
 
-@interface MyOrderListTradeCell : UITableViewCell
+@interface MyOrderListTradeCell : QBaseTableCell
 
 - (void)config:(TradeOrderListModel *)model type:(RecordListType)type;
 

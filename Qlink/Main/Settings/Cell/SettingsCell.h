@@ -6,7 +6,7 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,7 +22,7 @@ static NSString *SettingsCellReuse = @"SettingsCell";
 
 @end
 
-@interface SettingsCell : UITableViewCell
+@interface SettingsCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,7 +42,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_down_blue" translatesAutoresizingMaskIntoConstraints="NO" id="SC3-gt-jog">
                                             <rect key="frame" x="59.5" y="25" width="11" height="6"/>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfX-5l-QQM">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfX-5l-QQM" customClass="QBaseTouchButton">
                                             <rect key="frame" x="24" y="11" width="70" height="34"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="37W-1K-xAW"/>
@@ -175,7 +175,7 @@
                                         <constraint firstItem="6Pt-zW-YxL" firstAttribute="top" secondItem="C9G-w1-lBA" secondAttribute="bottom" id="u2b-3d-5nP"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-LR-IwG">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-LR-IwG" customClass="QBaseDarkButton">
                                     <rect key="frame" x="24" y="294.5" width="327" height="49"/>
                                     <color key="backgroundColor" red="0.83529411764705885" green="0.84705882352941175" blue="0.8666666666666667" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
@@ -206,8 +206,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C97-Ly-dVv" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfe-75-ZX2">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfe-75-ZX2" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="cp8-A6-V5K"/>
                                         <constraint firstAttribute="height" constant="44" id="xPc-3y-vUT"/>
@@ -223,8 +223,8 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZk-19-Z40">
-                                    <rect key="frame" x="323" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZk-19-Z40" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="331" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="9R1-9F-znc"/>
                                         <constraint firstAttribute="width" constant="44" id="QwX-np-JCM"/>
@@ -237,12 +237,12 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="hZk-19-Z40" secondAttribute="trailing" constant="8" id="0SR-4e-8pJ"/>
+                                <constraint firstAttribute="trailing" secondItem="hZk-19-Z40" secondAttribute="trailing" id="0SR-4e-8pJ"/>
                                 <constraint firstItem="yfe-75-ZX2" firstAttribute="centerY" secondItem="C97-Ly-dVv" secondAttribute="centerY" id="Bgn-yP-CaI"/>
                                 <constraint firstItem="O1S-4t-zfW" firstAttribute="centerY" secondItem="C97-Ly-dVv" secondAttribute="centerY" id="NLf-pQ-deP"/>
                                 <constraint firstItem="O1S-4t-zfW" firstAttribute="centerX" secondItem="C97-Ly-dVv" secondAttribute="centerX" id="REz-r7-E6u"/>
                                 <constraint firstItem="hZk-19-Z40" firstAttribute="centerY" secondItem="C97-Ly-dVv" secondAttribute="centerY" id="S2D-KY-FYL"/>
-                                <constraint firstItem="yfe-75-ZX2" firstAttribute="leading" secondItem="C97-Ly-dVv" secondAttribute="leading" constant="8" id="fJe-Bv-EPa"/>
+                                <constraint firstItem="yfe-75-ZX2" firstAttribute="leading" secondItem="C97-Ly-dVv" secondAttribute="leading" id="fJe-Bv-EPa"/>
                                 <constraint firstAttribute="height" constant="44" id="h5s-u2-man"/>
                             </constraints>
                         </view>

@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 static NSString *MyCellReuse = @"MyCell";
 #define MyCell_Height 56
@@ -19,7 +19,7 @@ static NSString *MyCellReuse = @"MyCell";
 
 @end
 
-@interface MyCell : UITableViewCell
+@interface MyCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;

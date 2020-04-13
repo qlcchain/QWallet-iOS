@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -197,8 +197,8 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQ9-xd-hcy">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQ9-xd-hcy" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Ccn-t3-Kj4"/>
                                         <constraint firstAttribute="width" constant="44" id="XoC-je-OWw"/>
@@ -212,7 +212,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="1yL-cY-y7r"/>
-                                <constraint firstItem="EQ9-xd-hcy" firstAttribute="leading" secondItem="Ybp-fy-nBZ" secondAttribute="leading" constant="8" id="4e1-eY-Aqp"/>
+                                <constraint firstItem="EQ9-xd-hcy" firstAttribute="leading" secondItem="Ybp-fy-nBZ" secondAttribute="leading" id="4e1-eY-Aqp"/>
                                 <constraint firstItem="rnq-n3-cfb" firstAttribute="centerY" secondItem="Ybp-fy-nBZ" secondAttribute="centerY" id="FJ2-zB-1Z1"/>
                                 <constraint firstItem="EQ9-xd-hcy" firstAttribute="centerY" secondItem="Ybp-fy-nBZ" secondAttribute="centerY" id="FrQ-Ly-gcY"/>
                                 <constraint firstItem="rnq-n3-cfb" firstAttribute="centerX" secondItem="Ybp-fy-nBZ" secondAttribute="centerX" id="QxA-R0-c7G"/>

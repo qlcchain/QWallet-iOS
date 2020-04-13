@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +21,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wO-ck-vii">
                     <rect key="frame" x="47.5" y="180" width="280" height="307"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-sh-B3P">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-sh-B3P" customClass="QBaseTouchButton">
                             <rect key="frame" x="236" y="0.0" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="0Y2-uU-poX"/>
@@ -74,7 +72,7 @@
                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5E-5h-YYY">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5E-5h-YYY" customClass="QBaseDarkButton">
                             <rect key="frame" x="25" y="223" width="230" height="50"/>
                             <color key="backgroundColor" red="0.9882352941176471" green="0.31764705882352939" blue="0.25098039215686274" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
@@ -125,6 +123,7 @@
             <connections>
                 <outlet property="amountLab" destination="HcB-0t-LfR" id="8kZ-9Y-f6W"/>
                 <outlet property="claimBtn" destination="I5E-5h-YYY" id="Z8Q-j3-QYo"/>
+                <outlet property="closeBtn" destination="l7S-sh-B3P" id="IY0-XJ-xOF"/>
                 <outlet property="tipBack" destination="0wO-ck-vii" id="4TA-Aa-wCC"/>
                 <outlet property="tipLab" destination="VUi-Jt-xtj" id="h8D-mz-9Ek"/>
                 <outlet property="titleLab" destination="MMw-XB-74o" id="Ixd-xO-kdj"/>

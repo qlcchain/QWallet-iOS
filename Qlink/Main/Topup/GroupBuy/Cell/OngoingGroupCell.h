@@ -6,7 +6,7 @@
 //  Copyright © 2020 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ static NSString *OngoingGroupCell_Reuse = @"OngoingGroupCell";
 
 typedef void(^OngoingGroupJoinBlock)(GroupBuyListModel *joinM);
 
-@interface OngoingGroupCell : UITableViewCell
+@interface OngoingGroupCell : QBaseTableCell
 
 - (void)config:(GroupBuyListModel *)model joinB:(OngoingGroupJoinBlock)joinB;
 

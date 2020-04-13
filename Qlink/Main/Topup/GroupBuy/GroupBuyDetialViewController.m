@@ -75,6 +75,7 @@ static NSString *const TopupNetworkSize = @"30";
 @property (weak, nonatomic) IBOutlet UILabel *phonetopupValLab;
 @property (weak, nonatomic) IBOutlet UILabel *provinceLab;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 
 @property (nonatomic) TopupPayType currentPayType;
 
@@ -91,8 +92,15 @@ static NSString *const TopupNetworkSize = @"30";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    
     [self configInit];
     [self requestTopup_group_list];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
 }
 
 #pragma mark - Operation
@@ -100,6 +108,9 @@ static NSString *const TopupNetworkSize = @"30";
     _sourceArr = [NSMutableArray array];
     [_groupTable registerNib:[UINib nibWithNibName:OngoingGroupCell_Reuse bundle:nil] forCellReuseIdentifier:OngoingGroupCell_Reuse];
     self.baseTable = _groupTable;
+    
+    _groupTable.delaysContentTouches = NO;
+    _mainScroll.delaysContentTouches = NO;
     
     _phoneBackHeight.constant = 0;
     

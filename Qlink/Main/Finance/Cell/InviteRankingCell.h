@@ -6,14 +6,14 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class InviteRankingModel;
 
 static NSString *InviteRankingCellReuse = @"InviteRankingCell";
 #define InviteRankingCell_Height 64
 
-@interface InviteRankingCell : UITableViewCell
+@interface InviteRankingCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *numLab;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;

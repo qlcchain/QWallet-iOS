@@ -6,14 +6,14 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class TopupProductModel,TopupDeductionTokenModel;
 
 static NSString *ChooseTopupPlanCellReuse = @"ChooseTopupPlanCell";
 #define ChooseTopupPlanCell_Height 196
 
-@interface ChooseTopupPlanCell : UITableViewCell
+@interface ChooseTopupPlanCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;

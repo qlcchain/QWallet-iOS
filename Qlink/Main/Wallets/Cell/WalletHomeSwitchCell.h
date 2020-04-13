@@ -6,14 +6,14 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *WalletHomeSwitchCellReuse = @"WalletHomeSwitchCell";
 #define WalletHomeSwitchCell_Height 48
 
-@interface WalletHomeSwitchCell : UITableViewCell
+@interface WalletHomeSwitchCell : QBaseTableCell
 
 @end
 

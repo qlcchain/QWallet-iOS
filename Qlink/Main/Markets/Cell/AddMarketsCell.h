@@ -6,14 +6,14 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *AddMarketsCellReuse = @"AddMarketsCell";
 #define AddMarketsCell_Height 48
 
-@interface AddMarketsCell : UITableViewCell
+@interface AddMarketsCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIButton *selectBtn;

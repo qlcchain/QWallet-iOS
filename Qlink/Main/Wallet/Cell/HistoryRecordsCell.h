@@ -6,13 +6,13 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 #import "HistoryRecrdInfo.h"
 
 static NSString *HistoryRecordsCellReuse = @"HistoryRecordsCell";
 #define HistoryRecordsCell_Height 64
 
-@interface HistoryRecordsCell : UITableViewCell
+@interface HistoryRecordsCell : QBaseTableCell
 @property (weak, nonatomic) IBOutlet UIImageView *jtouImgView;
 @property (weak, nonatomic) IBOutlet UILabel *lblCount;
 @property (weak, nonatomic) IBOutlet UILabel *lblType;

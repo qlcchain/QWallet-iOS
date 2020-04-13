@@ -37,6 +37,8 @@
     [super awakeFromNib];
     // Initialization code
     
+//    self.selectedBackgroundView = kClickEffectImageView;
+    
     if (!_groupPeopleV) {
         _groupPeopleV = [GroupPeopleView getInstance];
         [_peopleBack addSubview:_groupPeopleV];

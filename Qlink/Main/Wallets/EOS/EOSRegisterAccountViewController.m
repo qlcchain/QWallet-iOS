@@ -22,6 +22,7 @@
 #import "EOSAccountInfoModel.h"
 #import "RLArithmetic.h"
 //#import "GlobalConstants.h"
+#import "TokenListHelper.h"
 
 @implementation EOSCreateSourceModel
 
@@ -105,7 +106,7 @@
         [[WalletCommonModel getAllWalletModel] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             WalletCommonModel *model = obj;
             if (model.walletType==WalletTypeETH) {
-                if ([model.balance doubleValue] >= [enoughBalanceStr doubleValue]) {
+                if ([model.ETHBalance doubleValue] >= [enoughBalanceStr doubleValue]) {
                     transferETHM = model;
                     *stop = YES;
                 }

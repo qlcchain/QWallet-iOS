@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,8 +51,8 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-un-4qg">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-un-4qg" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Fcs-cS-WfU"/>
                                         <constraint firstAttribute="width" constant="44" id="qnV-rq-MvA"/>
@@ -62,7 +62,7 @@
                                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="mbi-TN-Mvx"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrU-uS-LVU">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrU-uS-LVU" customClass="QBaseTouchButton">
                                     <rect key="frame" x="318" y="0.0" width="88" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="88" id="Yo6-hM-1PG"/>
@@ -79,7 +79,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="CrU-uS-LVU" secondAttribute="trailing" constant="8" id="7x4-4G-MnO"/>
-                                <constraint firstItem="Tmt-un-4qg" firstAttribute="leading" secondItem="X5W-ee-JQh" secondAttribute="leading" constant="8" id="Hn1-Xb-8iQ"/>
+                                <constraint firstItem="Tmt-un-4qg" firstAttribute="leading" secondItem="X5W-ee-JQh" secondAttribute="leading" id="Hn1-Xb-8iQ"/>
                                 <constraint firstAttribute="bottom" secondItem="CrU-uS-LVU" secondAttribute="bottom" id="ZL0-t7-Rgk"/>
                                 <constraint firstItem="Tmt-un-4qg" firstAttribute="centerY" secondItem="X5W-ee-JQh" secondAttribute="centerY" id="aeK-Np-0Wd"/>
                                 <constraint firstItem="CrU-uS-LVU" firstAttribute="top" secondItem="X5W-ee-JQh" secondAttribute="top" id="h7d-Ug-7Nq"/>

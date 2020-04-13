@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +20,7 @@ typedef void(^MyTopupOrderPayBlock)(void);
 typedef void(^MyTopupOrderCredentialBlock)(void);
 typedef void(^MyTopupOrderCredentialDetalBlock)(void);
 
-@interface MyGroupBuyOrderCell : UITableViewCell
+@interface MyGroupBuyOrderCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;

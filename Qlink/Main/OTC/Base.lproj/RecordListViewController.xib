@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,10 +32,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUh-Ag-KOy">
-                    <rect key="frame" x="0.0" y="20" width="1280" height="716"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1280" height="736"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBm-GW-3xV">
-                            <rect key="frame" x="0.0" y="44" width="1280" height="672"/>
+                            <rect key="frame" x="0.0" y="44" width="1280" height="692"/>
                             <subviews>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aO6-IO-onG">
                                     <rect key="frame" x="0.0" y="0.0" width="1280" height="44"/>
@@ -45,7 +43,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mWa-BC-7UM">
                                             <rect key="frame" x="0.0" y="0.0" width="417" height="44"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3r-4d-T93">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3r-4d-T93" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="16" y="0.0" width="51" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="1c9-NX-ql9"/>
@@ -62,7 +60,7 @@
                                                         <action selector="postedAction:" destination="-1" eventType="touchUpInside" id="BN4-vT-xE9"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhk-M7-gVi">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhk-M7-gVi" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="77" y="0.0" width="81" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="KN1-Dt-gTo"/>
@@ -79,7 +77,7 @@
                                                         <action selector="processingAction:" destination="-1" eventType="touchUpInside" id="1NA-jZ-ans"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgd-Bb-9Kf">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgd-Bb-9Kf" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="168" y="0.0" width="81" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="dEW-LZ-kK3"/>
@@ -96,7 +94,7 @@
                                                         <action selector="completedAction:" destination="-1" eventType="touchUpInside" id="N8J-Ih-pjJ"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1j-oH-kot">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1j-oH-kot" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="259" y="0.0" width="51" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="6hN-1Z-NSf"/>
@@ -113,7 +111,7 @@
                                                         <action selector="closedAction:" destination="-1" eventType="touchUpInside" id="ttA-we-2T1"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaZ-uy-dYx">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaZ-uy-dYx" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="320" y="0.0" width="81" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="81" id="Fgc-kU-C2d"/>
@@ -164,16 +162,16 @@
                                     </constraints>
                                 </scrollView>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0M-56-El1">
-                                    <rect key="frame" x="0.0" y="44" width="1280" height="628"/>
+                                    <rect key="frame" x="0.0" y="44" width="1280" height="648"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EJv-rZ-F58">
-                                            <rect key="frame" x="0.0" y="0.0" width="1280" height="628"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1280" height="648"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pu-WN-hnt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="256" height="628"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="256" height="648"/>
                                                     <subviews>
-                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R0d-Z5-oaa">
-                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="628"/>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R0d-Z5-oaa">
+                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="648"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
                                                                 <outlet property="dataSource" destination="-1" id="ImZ-ty-EMl"/>
@@ -190,10 +188,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9E-i0-kjq">
-                                                    <rect key="frame" x="256" y="0.0" width="256" height="628"/>
+                                                    <rect key="frame" x="256" y="0.0" width="256" height="648"/>
                                                     <subviews>
-                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Px-p0-6q5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="628"/>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Px-p0-6q5">
+                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="648"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
                                                                 <outlet property="dataSource" destination="-1" id="71k-ro-MPv"/>
@@ -210,10 +208,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ib-V5-3sc">
-                                                    <rect key="frame" x="512" y="0.0" width="256" height="628"/>
+                                                    <rect key="frame" x="512" y="0.0" width="256" height="648"/>
                                                     <subviews>
-                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DTq-EX-bRt">
-                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="628"/>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DTq-EX-bRt">
+                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="648"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
                                                                 <outlet property="dataSource" destination="-1" id="oo0-5S-jxu"/>
@@ -230,10 +228,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z67-pN-yfc">
-                                                    <rect key="frame" x="768" y="0.0" width="256" height="628"/>
+                                                    <rect key="frame" x="768" y="0.0" width="256" height="648"/>
                                                     <subviews>
-                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJK-ot-R6J">
-                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="628"/>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJK-ot-R6J">
+                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="648"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
                                                                 <outlet property="dataSource" destination="-1" id="PMS-mg-WeQ"/>
@@ -250,10 +248,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGv-IT-KMz">
-                                                    <rect key="frame" x="1024" y="0.0" width="256" height="628"/>
+                                                    <rect key="frame" x="1024" y="0.0" width="256" height="648"/>
                                                     <subviews>
-                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-if-SIF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="628"/>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-if-SIF">
+                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="648"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
                                                                 <outlet property="dataSource" destination="-1" id="DDj-5g-Ca2"/>
@@ -328,8 +326,8 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgZ-4T-FwG">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgZ-4T-FwG" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="22C-So-VO1"/>
                                         <constraint firstAttribute="height" constant="44" id="30T-jH-Ees"/>
@@ -343,7 +341,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="79o-ey-64t"/>
-                                <constraint firstItem="RgZ-4T-FwG" firstAttribute="leading" secondItem="GId-8G-KGb" secondAttribute="leading" constant="8" id="LuI-DP-Yk2"/>
+                                <constraint firstItem="RgZ-4T-FwG" firstAttribute="leading" secondItem="GId-8G-KGb" secondAttribute="leading" id="LuI-DP-Yk2"/>
                                 <constraint firstItem="Tcr-H6-9dd" firstAttribute="centerX" secondItem="GId-8G-KGb" secondAttribute="centerX" id="uDh-mk-KpM"/>
                                 <constraint firstItem="RgZ-4T-FwG" firstAttribute="centerY" secondItem="GId-8G-KGb" secondAttribute="centerY" id="xKy-dW-fng"/>
                                 <constraint firstItem="Tcr-H6-9dd" firstAttribute="centerY" secondItem="GId-8G-KGb" secondAttribute="centerY" id="y65-XH-ORd"/>
@@ -362,7 +360,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="niz-SD-4S0">
-                    <rect key="frame" x="0.0" y="0.0" width="1280" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1280" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>

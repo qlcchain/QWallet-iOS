@@ -63,6 +63,7 @@
 #import "NSDate+Category.h"
 #import "ClaimConstants.h"
 #import "FirebaseUtil.h"
+#import "GlobalOutbreakWebViewController.h"
 
 static NSString *const TopupNetworkSize = @"20";
 //static NSInteger const insetForSectionDistance = 16;
@@ -149,6 +150,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 @property (weak, nonatomic) IBOutlet UILabel *parterPlanLab;
 @property (weak, nonatomic) IBOutlet UIView *parterPlanBack;
 @property (weak, nonatomic) IBOutlet UIButton *parterPlan_detailBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *globalOutbreakBtn;
 
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
@@ -250,11 +253,15 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 #pragma mark - Operation
 - (void)configInit {
-    [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+//    [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
+    _topGradientBack.backgroundColor = UIColorFromRGB(0x4A7EEE);
     
     _chooseDeductionBtn.layer.cornerRadius = _chooseDeductionBtn.width/2.0;
     _chooseDeductionBtn.layer.masksToBounds = YES;
-    [_chooseDeductionBtn setBackgroundImage:kClickEffectImage forState:UIControlStateHighlighted];
+//    [_chooseDeductionBtn setBackgroundImage:kClickEffectBtnImage forState:UIControlStateHighlighted];
+    _globalOutbreakBtn.layer.cornerRadius = _globalOutbreakBtn.height/2.0;
+    _globalOutbreakBtn.layer.masksToBounds = YES;
+//    [_globalOutbreakBtn setBackgroundImage:kClickEffectBtnImage forState:UIControlStateHighlighted];
     
     _cycleContentArr = [NSMutableArray array];
     _showQLC = NO;
@@ -431,6 +438,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     [_buyback_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
     [_mining_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
     [_parterPlan_detailBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
+    [_globalOutbreakBtn setTitle:kLang(@"minging_more_details") forState:UIControlStateNormal];
     
     NSString *parterPlanTipShowStr = kLang(@"join_the_q_wallet_recharge_sales_partner_plan_for_commissions");
     NSString *commissionsStr = kLang(@"commissions");
@@ -537,8 +545,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 //        [_ninaPagerView removeFromSuperview];
 //        _ninaPagerView = nil;
 //    }
-    
-//    if (!_ninaPagerView) {
+        
+    if (!_ninaPagerView) {
         kWeakSelf(self);
         NSMutableArray *titleArr = [NSMutableArray array];
         _ninaObjectSource = [NSMutableArray array];
@@ -584,7 +592,6 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
             [weakself.ninaObjectSource addObject:vc];
         }];
         
-    if (!_ninaPagerView) {
         _ninaPagerView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100) WithTitles:titleArr WithObjects:_ninaObjectSource];
         _ninaPagerView.unSelectTitleColor = UIColorFromRGB(0x505050);
         _ninaPagerView.selectTitleColor = UIColorFromRGB(0xF50B6E);
@@ -814,6 +821,23 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.mainScroll.mj_header endRefreshing];
+    }];
+}
+
+- (void)requestSys_location {
+    kWeakSelf(self);
+    NSDictionary *params = @{};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:sys_location_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            NSString *location = responseObject[@"location"];
+            [weakself jumpToGlobalOutbreak:location];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 
@@ -1087,10 +1111,9 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 }
 
 - (IBAction)globalOutbreakAction:(id)sender {
-    WebViewController *vc = [[WebViewController alloc] init];
-    vc.inputUrl = @"http://covid19.qlink.mobi/covid-19trend/dist";
-    vc.inputTitle = @"COVID-19 Live Updates";
-    [self.navigationController pushViewController:vc animated:YES];
+//    [self jumpToGlobalOutbreak:@"domestic"];
+    
+    [self requestSys_location];
 }
 
 
@@ -1154,6 +1177,19 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 - (void)jumpToBuybackDetail {
     BuybackDetailViewController *vc = [BuybackDetailViewController new];
     vc.inputBuybackBurnM = _buybackBurnM;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToGlobalOutbreak:(NSString *)location {
+    NSString *inputUrl = @"http://covid19.qlink.mobi/covid-19trend/dist";
+    if ([location isEqualToString:@"domestic"]) {
+        inputUrl = @"http://covid19.qlink.mobi/covid-19trend/dist";
+    } else if ([location isEqualToString:@"overseas"]) {
+        inputUrl = @"https://google.com/covid19-map/?hl=en";
+    }
+    GlobalOutbreakWebViewController *vc = [[GlobalOutbreakWebViewController alloc] init];
+    vc.inputUrl = inputUrl;
+    vc.inputTitle = @"COVID-19 Live Updates";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

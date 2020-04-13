@@ -6,7 +6,7 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 #import "VPNMode.h"
 
 static NSString *MyAssetsCellReuse = @"MyAssetsCell";
@@ -14,7 +14,7 @@ static NSString *MyAssetsCellReuse = @"MyAssetsCell";
 
 typedef void(^ClickSettingBlock)(VPNInfo *vpnInfo);
 
-@interface MyAssetsCell : UITableViewCell
+@interface MyAssetsCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *headImgV;

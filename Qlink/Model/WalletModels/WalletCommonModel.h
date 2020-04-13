@@ -19,8 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isWatch;
 @property (nonatomic, strong) NSString *symbol;
 @property (nonatomic) WalletType walletType;
-@property (nonatomic, strong) NSNumber *balance;
 @property (nonatomic) BOOL isSelect; // 是否是当前钱包
+
+// ETH
+@property (nonatomic, strong) NSNumber *ETHBalance;
 
 // NEO
 @property (nonatomic ,strong) NSString *privateKey;

@@ -6,14 +6,14 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class FinanceProductModel;
 
 static NSString *FinanceCellReuse = @"FinanceCell";
 #define FinanceCell_Height 112
 
-@interface FinanceCell : UITableViewCell
+@interface FinanceCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UILabel *rateValLab;

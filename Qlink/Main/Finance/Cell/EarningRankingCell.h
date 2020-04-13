@@ -6,14 +6,14 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class EarningsRankingModel;
 
 static NSString *EarningRankingCellReuse = @"EarningRankingCell";
 #define EarningRankingCell_Height 64
 
-@interface EarningRankingCell : UITableViewCell
+@interface EarningRankingCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *numLab;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;

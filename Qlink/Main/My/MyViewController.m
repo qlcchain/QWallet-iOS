@@ -618,11 +618,11 @@
 }
 
 #pragma mark - Transition
-- (void)jumpToWalletsManage {
-    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToWalletsManage {
+//    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)jumpToJoinCommunity {
     JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];

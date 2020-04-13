@@ -6,12 +6,12 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 #import "HistoryRecrdInfo.h"
 
 static NSString *HistoryWifiCellReuse = @"HistoryWifiCell";
 
-@interface HistoryWifiCell : UITableViewCell
+@interface HistoryWifiCell : QBaseTableCell
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (weak, nonatomic) IBOutlet UIImageView *imgVIew;

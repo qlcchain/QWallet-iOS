@@ -62,9 +62,9 @@
     NSArray *images = @[];
     NSMutableArray *refreshingImages = [NSMutableArray array];
     if (type == RefreshTypeWhite) {
-        images = @[[UIImage imageNamed:@"loading_white_2"]];
+        images = @[[UIImage imageNamed:@"loading_white_0000"]];
         for (int i = 2; i <= 17; i++) {
-            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_%@",@(i)]];
+            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_000%@",@(i)]];
             [refreshingImages addObject:loadingImg];
         }
         for (int i = 4; i>=1; i--) {
@@ -72,9 +72,9 @@
             [logoImages addObject:logoImage];
         }
     } else if (type == RefreshTypeColor) {
-        images = @[[UIImage imageNamed:@"loading_color_2"]];
+        images = @[[UIImage imageNamed:@"loading_colour_0000"]];
         for (int i = 2; i <= 17; i++) {
-            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_color_%@",@(i)]];
+            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_colour_000%@",@(i)]];
             [refreshingImages addObject:loadingImg];
         }
         for (int i = 4; i>=1; i--) {
@@ -111,9 +111,9 @@
     NSArray *images = @[];
     NSMutableArray *refreshingImages = [NSMutableArray array];
     if (type == RefreshTypeWhite) {
-        images = @[[UIImage imageNamed:@"loading_white_2"]];
+        images = @[[UIImage imageNamed:@"loading_white_0000"]];
         for (int i = 2; i <= 17; i++) {
-            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_%@",@(i)]];
+            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_white_000%@",@(i)]];
             [refreshingImages addObject:loadingImg];
         }
         for (int i = 4; i>=1; i--) {
@@ -121,9 +121,9 @@
             [logoImages addObject:logoImage];
         }
     } else if (type == RefreshTypeColor) {
-        images = @[[UIImage imageNamed:@"loading_color_2"]];
+        images = @[[UIImage imageNamed:@"loading_colour_0000"]];
         for (int i = 2; i <= 17; i++) {
-            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_color_%@",@(i)]];
+            UIImage *loadingImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_colour_000%@",@(i)]];
             [refreshingImages addObject:loadingImg];
         }
         for (int i = 4; i>=1; i--) {

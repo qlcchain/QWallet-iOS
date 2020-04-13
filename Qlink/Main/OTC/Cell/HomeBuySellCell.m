@@ -30,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIView *teamBack;
 @property (weak, nonatomic) IBOutlet UILabel *teamLab;
 
+@property (nonatomic, copy) HomeBuySellClickBlock clickB;
+@property (nonatomic, strong) EntrustOrderListModel *model;
+
 
 @end
 
@@ -62,7 +65,9 @@
     
 }
 
-- (void)config:(EntrustOrderListModel *)model {
+- (void)config:(EntrustOrderListModel *)model clickB:(nonnull HomeBuySellClickBlock)clickB {
+    _clickB = clickB;
+    _model = model;
     if ([model.isBurnQgasOrder integerValue] == 1) { // QGAS销毁订单
         _icon.image = [UIImage imageNamed:@"buyback_tx"];
         _nameLab.text = kLang(@"buyback_destruction_plan");
@@ -90,5 +95,13 @@
     
     _teamLab.text = kLang(@"team");
 }
+
+
+- (IBAction)clickAction:(id)sender {
+    if (_clickB) {
+        _clickB(_model);
+    }
+}
+
 
 @end

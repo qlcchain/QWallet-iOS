@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 static NSString *PersonalInfoCellReuse = @"PersonalInfoCell";
 #define PersonalInfoCell_Height 48
@@ -21,7 +21,7 @@ static NSString *PersonalInfoCellReuse = @"PersonalInfoCell";
 
 @end
 
-@interface PersonalInfoCell : UITableViewCell
+@interface PersonalInfoCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *keyLab;
 @property (weak, nonatomic) IBOutlet UILabel *valLab;

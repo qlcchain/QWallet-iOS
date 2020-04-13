@@ -6,7 +6,7 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 static NSString *RankingStartCellReuse = @"RankingStartCell";
 #define RankingStartCell_Height 68
@@ -14,7 +14,7 @@ static NSString *RankingStartCellReuse = @"RankingStartCell";
 
 @class VPNRankMode;
 
-@interface RankingStartCell : UITableViewCell
+@interface RankingStartCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *trophyImgView;
 @property (weak, nonatomic) IBOutlet UILabel *lblconnet;
