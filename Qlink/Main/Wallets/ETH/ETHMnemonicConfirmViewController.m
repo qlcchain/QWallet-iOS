@@ -12,7 +12,7 @@
 //#import "TagListView-Swift.h"
 #import "SuccessTipView.h"
 #import <TTGTextTagCollectionView.h>
-#import "AppConfigUtil.h"
+#import "OutbreakRedUtil.h"
 #import "ETHWalletInfo.h"
 //#import "GlobalConstants.h"
 #import "QConstants.h"

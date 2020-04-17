@@ -14,7 +14,6 @@
 		5806C11021C3D15A000E693B /* CreateAccountGetRequiredPublicKeyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806C10E21C3D15A000E693B /* CreateAccountGetRequiredPublicKeyRequest.m */; };
 		5806C11321C3DB59000E693B /* CreateAccountPushTransactionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11221C3DB59000E693B /* CreateAccountPushTransactionRequest.m */; };
 		5806C11621C3E4C8000E693B /* CreateAccountSignTransactionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11521C3E4C7000E693B /* CreateAccountSignTransactionRequest.m */; };
-		5806C11821C7A6E5000E693B /* NEOSignUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5806C11721C7A6E3000E693B /* NEOSignUtil.swift */; };
 		5807D649208061A20049565D /* ShadowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5807D648208061A20049565D /* ShadowImageView.m */; };
 		5807D64A2080637F0049565D /* HMScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C1BA09207E18260080C59F /* HMScanner.m */; };
 		5809033D209B07370085FD70 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809033C209B07370085FD70 /* ChatModel.m */; };
@@ -151,7 +150,7 @@
 		581AFC4621B7BFFD001A37E1 /* EOSCPUNETViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581AFC4421B7BFFD001A37E1 /* EOSCPUNETViewController.m */; };
 		581AFC4B21B7D28B001A37E1 /* EOSRAMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581AFC4921B7D28B001A37E1 /* EOSRAMViewController.m */; };
 		581AFC5021B7D5A5001A37E1 /* EOSRegisterAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 581AFC4E21B7D5A5001A37E1 /* EOSRegisterAccountViewController.m */; };
-		581B678921916D790061BEDB /* AppConfigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B678821916D790061BEDB /* AppConfigUtil.m */; };
+		581B678921916D790061BEDB /* OutbreakRedUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B678821916D790061BEDB /* OutbreakRedUtil.m */; };
 		581B678C219178BB0061BEDB /* FingerprintVerificationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B678B219178BB0061BEDB /* FingerprintVerificationUtil.m */; };
 		581B679421919D280061BEDB /* SuccessTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581B679021919D270061BEDB /* SuccessTipView.xib */; };
 		581B679521919D280061BEDB /* SuccessTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 581B679321919D280061BEDB /* SuccessTipView.m */; };
@@ -167,48 +166,6 @@
 		581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */ = {isa = PBXBuildFile; fileRef = 581CB3A921CA2650004DED10 /* NSNumber+RemoveZero.m */; };
 		581D31C8219BC5AE001F88C3 /* MarketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 581D31C6219BC5AE001F88C3 /* MarketsCell.m */; };
 		581D31C9219BC5AE001F88C3 /* MarketsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581D31C7219BC5AE001F88C3 /* MarketsCell.xib */; };
-		581D32BB219C158B001F88C3 /* OpCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3288219C157E001F88C3 /* OpCodes.swift */; };
-		581D32BC219C158B001F88C3 /* ScriptBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3289219C157E001F88C3 /* ScriptBuilder.swift */; };
-		581D32BD219C158B001F88C3 /* NEP5Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D328A219C157E001F88C3 /* NEP5Token.swift */; };
-		581D32BE219C158B001F88C3 /* ShamirSecret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D328B219C157F001F88C3 /* ShamirSecret.swift */; };
-		581D32BF219C158B001F88C3 /* NeoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D328C219C1580001F88C3 /* NeoClient.swift */; };
-		581D32C0219C158B001F88C3 /* commoncry.m in Sources */ = {isa = PBXBuildFile; fileRef = 581D3290219C1581001F88C3 /* commoncry.m */; };
-		581D32C1219C158B001F88C3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3292219C1582001F88C3 /* Global.swift */; };
-		581D32C2219C158B001F88C3 /* NeoScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3293219C1583001F88C3 /* NeoScan.swift */; };
-		581D32C3219C158B001F88C3 /* strip-frameworks.sh in Resources */ = {isa = PBXBuildFile; fileRef = 581D3295219C1584001F88C3 /* strip-frameworks.sh */; };
-		581D32C4219C158B001F88C3 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3297219C1584001F88C3 /* AES.swift */; };
-		581D32C5219C158B001F88C3 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3298219C1584001F88C3 /* SHA256.swift */; };
-		581D32C6219C158B001F88C3 /* scrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D3299219C1584001F88C3 /* scrypt.swift */; };
-		581D32C7219C158B001F88C3 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329A219C1584001F88C3 /* RIPEMD160.swift */; };
-		581D32C8219C158B001F88C3 /* PBKDF2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329B219C1584001F88C3 /* PBKDF2.swift */; };
-		581D32C9219C158B001F88C3 /* nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 581D329D219C1585001F88C3 /* nodes.json */; };
-		581D32CB219C158B001F88C3 /* WIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D329F219C1587001F88C3 /* WIF.swift */; };
-		581D32CC219C158B001F88C3 /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A1219C1588001F88C3 /* AccountState.swift */; };
-		581D32CD219C158B001F88C3 /* Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A2219C1588001F88C3 /* Claims.swift */; };
-		581D32CE219C158B001F88C3 /* ValueIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A3219C1588001F88C3 /* ValueIn.swift */; };
-		581D32CF219C158B001F88C3 /* NEONetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A4219C1588001F88C3 /* NEONetwork.swift */; };
-		581D32D0219C158B001F88C3 /* ValueOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A5219C1588001F88C3 /* ValueOut.swift */; };
-		581D32D1219C158B001F88C3 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A6219C1588001F88C3 /* TransactionHistory.swift */; };
-		581D32D2219C158B001F88C3 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A7219C1588001F88C3 /* Block.swift */; };
-		581D32D3219C158B001F88C3 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A8219C1588001F88C3 /* Balance.swift */; };
-		581D32D4219C158B001F88C3 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32A9219C1588001F88C3 /* Script.swift */; };
-		581D32D5219C158B001F88C3 /* NeoScanTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32AA219C1588001F88C3 /* NeoScanTransactionHistory.swift */; };
-		581D32D6219C158B001F88C3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32AB219C1588001F88C3 /* Transaction.swift */; };
-		581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32AC219C1588001F88C3 /* TransactionAttritbute.swift */; };
-		581D32D8219C158B001F88C3 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32AD219C1588001F88C3 /* Asset.swift */; };
-		581D32D9219C158B001F88C3 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32AE219C1588001F88C3 /* Token.swift */; };
-		581D32DA219C158B001F88C3 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32AF219C1588001F88C3 /* Peer.swift */; };
-		581D32DB219C158B001F88C3 /* ContractResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B0219C1588001F88C3 /* ContractResult.swift */; };
-		581D32DC219C158B001F88C3 /* NeoScanBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B1219C1588001F88C3 /* NeoScanBalance.swift */; };
-		581D32DD219C158B001F88C3 /* AssetIdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B2219C1589001F88C3 /* AssetIdConstants.swift */; };
-		581D32DE219C158B001F88C3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B3219C158A001F88C3 /* UserDefaultsManager.swift */; };
-		581D32DF219C158B001F88C3 /* Array+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B5219C158B001F88C3 /* Array+Util.swift */; };
-		581D32E0219C158B001F88C3 /* validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B6219C158B001F88C3 /* validator.swift */; };
-		581D32E1219C158B001F88C3 /* NEP2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B7219C158B001F88C3 /* NEP2.swift */; };
-		581D32E2219C158B001F88C3 /* Data+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B8219C158B001F88C3 /* Data+Util.swift */; };
-		581D32E3219C158B001F88C3 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32B9219C158B001F88C3 /* Base58.swift */; };
-		581D32E4219C158B001F88C3 /* NEP9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32BA219C158B001F88C3 /* NEP9.swift */; };
-		581D32E8219C16A8001F88C3 /* NEOWalletManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581D32E7219C16A7001F88C3 /* NEOWalletManage.swift */; };
 		581D32EB219D0AFB001F88C3 /* ETHAddressTransactionsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 581D32EA219D0AFB001F88C3 /* ETHAddressTransactionsModel.m */; };
 		581D32EE219D107F001F88C3 /* NeoGotWGasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 581D32ED219D107F001F88C3 /* NeoGotWGasModel.m */; };
 		581D32F1219D10F9001F88C3 /* NeoQueryWGasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 581D32F0219D10F9001F88C3 /* NeoQueryWGasModel.m */; };
@@ -330,8 +287,6 @@
 		581F835F22F7C43A00F8291E /* WalletsManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581F836122F7C43A00F8291E /* WalletsManageViewController.xib */; };
 		581F836622F7C44D00F8291E /* JoinCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 581F836822F7C44D00F8291E /* JoinCommunityViewController.xib */; };
 		5821964723F1089500704E23 /* contract_js in Resources */ = {isa = PBXBuildFile; fileRef = 5821964623F1089500704E23 /* contract_js */; };
-		5821964B23F13F9D00704E23 /* Topup3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821964823F13F9C00704E23 /* Topup3ViewController.m */; };
-		5821964C23F13F9D00704E23 /* Topup3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821964923F13F9D00704E23 /* Topup3ViewController.xib */; };
 		5821965023F2551E00704E23 /* TopupProductSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821964E23F2551E00704E23 /* TopupProductSubViewController.m */; };
 		5821965123F2551E00704E23 /* TopupProductSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5821964F23F2551E00704E23 /* TopupProductSubViewController.xib */; };
 		5821965523F2587B00704E23 /* TopupProductSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5821965323F2587B00704E23 /* TopupProductSubCell.m */; };
@@ -428,7 +383,6 @@
 		5825556022EAD58A00F0B9F0 /* UINavigationController+CurrentNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 5825555F22EAD58A00F0B9F0 /* UINavigationController+CurrentNav.m */; };
 		5825556322EEC22A00F0B9F0 /* ProjectEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 5825556222EEC22900F0B9F0 /* ProjectEnum.m */; };
 		5825556822EECBD400F0B9F0 /* WalletSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5825556622EECBD300F0B9F0 /* WalletSelectViewController.m */; };
-		58270FC22072019400C08784 /* NEOWalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC12072019400C08784 /* NEOWalletUtil.m */; };
 		58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FC42072055800C08784 /* HistoryRecordsViewController.m */; };
 		58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FCA2072089800C08784 /* HistoryRecordsCell.m */; };
 		58270FD820720D3600C08784 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58270FD620720D3600C08784 /* ProfileViewController.m */; };
@@ -442,7 +396,6 @@
 		5827BC2F21A28B2400B7730E /* HistoryChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC2E21A28B2400B7730E /* HistoryChartView.m */; };
 		5827BC3821A3AD2800B7730E /* ToxRequestModel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC3721A3AD2800B7730E /* ToxRequestModel1.m */; };
 		5827BC3B21A3BB7600B7730E /* ETHWalletInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC3A21A3BB7600B7730E /* ETHWalletInfo.m */; };
-		5827BC3D21A3FA6300B7730E /* NEOGasUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5827BC3C21A3FA6300B7730E /* NEOGasUtil.swift */; };
 		582843FA21885EEA00AD65C8 /* LoginInputPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582843F821885EEA00AD65C8 /* LoginInputPWViewController.m */; };
 		582844012189407B00AD65C8 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582843FF2189407B00AD65C8 /* SettingsCell.m */; };
 		582CDF4E243435380094A70E /* Topup4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582CDF4B243435370094A70E /* Topup4ViewController.m */; };
@@ -453,11 +406,6 @@
 		582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F239A21C1FDD300A000D1 /* EOSResourcePriceModel.m */; };
 		582F87BE2153338F0008331D /* RankingStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F87BA2153338E0008331D /* RankingStartCell.xib */; };
 		582F87BF2153338F0008331D /* RankingStartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F87BD2153338E0008331D /* RankingStartCell.m */; };
-		5832CB2D22811E000011160D /* dAppProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB2C22811DFF0011160D /* dAppProtocol.swift */; };
-		5832CB2F22811E690011160D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB2E22811E690011160D /* AppState.swift */; };
-		5832CB352281245B0011160D /* ContractState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB342281245B0011160D /* ContractState.swift */; };
-		5832CB37228125040011160D /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB36228125030011160D /* Wallet.swift */; };
-		5832CB3A2281331A0011160D /* O3APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5832CB39228133190011160D /* O3APIClient.swift */; };
 		5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833AD0B206C8427002C6909 /* WalletMenuView.m */; };
 		5834A3512387D7E9004EB81A /* ClaimSuccessTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5834A34F2387D7E9004EB81A /* ClaimSuccessTipView.m */; };
 		5834A3522387D7E9004EB81A /* ClaimSuccessTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5834A3502387D7E9004EB81A /* ClaimSuccessTipView.xib */; };
@@ -470,6 +418,12 @@
 		5836CFDC23B5D9B30072187A /* TopupPayNEO_PayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5836CFDE23B5D9B30072187A /* TopupPayNEO_PayViewController.xib */; };
 		583910F9208495F200A19E7E /* DDLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910F8208495F200A19E7E /* DDLogUtil.m */; };
 		583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583910FB2084971F00A19E7E /* DebugLogViewController.m */; };
+		583940772444758E005EAA04 /* OutbreakRedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583940752444758E005EAA04 /* OutbreakRedViewController.m */; };
+		5839409B2445A452005EAA04 /* OutbreakRedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583940992445A452005EAA04 /* OutbreakRedCell.m */; };
+		5839409C2445A452005EAA04 /* OutbreakRedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5839409A2445A452005EAA04 /* OutbreakRedCell.xib */; };
+		583940A12445C241005EAA04 /* OutbreakRedRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839409F2445C240005EAA04 /* OutbreakRedRecordViewController.m */; };
+		583940A52445C40C005EAA04 /* OutbreakRedRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 583940A22445C40B005EAA04 /* OutbreakRedRecordCell.xib */; };
+		583940A62445C40C005EAA04 /* OutbreakRedRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583940A42445C40C005EAA04 /* OutbreakRedRecordCell.m */; };
 		583944F8229BEFEA0068852A /* QLCAddressInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 583944F7229BEFEA0068852A /* QLCAddressInfoModel.m */; };
 		5839F5192068CFA8004C4A54 /* RequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839F5182068CFA8004C4A54 /* RequestService.m */; };
 		5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839F51E2068F60E004C4A54 /* JSONUtil.m */; };
@@ -507,6 +461,7 @@
 		5840927823052A2C0054BCBB /* VotingMiningNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927623052A2C0054BCBB /* VotingMiningNodeViewController.m */; };
 		5840927D23052A410054BCBB /* ConfidantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927B23052A410054BCBB /* ConfidantViewController.m */; };
 		5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840928023052A640054BCBB /* TokenMintageViewController.m */; };
+		5842676E2446F86B00450C9B /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5842676D2446F86A00450C9B /* OutbreakRed.framework */; };
 		5842E0C72368181D001BB0D6 /* qwallet_index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5842E0C62368181D001BB0D6 /* qwallet_index.html */; };
 		5848615F244027B0004222A0 /* UIButton+ANDYHighlighted.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848615D244027AF004222A0 /* UIButton+ANDYHighlighted.m */; };
 		5849117E2105AEF4005232A2 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 584911782105AEF4005232A2 /* BackgroundTaskManager.m */; };
@@ -514,7 +469,6 @@
 		584911802105AEF4005232A2 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849117D2105AEF4005232A2 /* LocationShareModel.m */; };
 		5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */; };
 		584BFB1F236AEF2700D7CCD1 /* QLCFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */; };
-		584BFB23236AEF3D00D7CCD1 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB22236AEF3C00D7CCD1 /* neoutils.framework */; };
 		584BFB27236B0E3C00D7CCD1 /* ETHFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584BFB26236B0E3C00D7CCD1 /* ETHFramework.framework */; };
 		584F4EDD23D07536004F579B /* GroupBuyGoStakeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584F4EDB23D07536004F579B /* GroupBuyGoStakeView.m */; };
 		584F4EDE23D0758A004F579B /* GroupBuyGoStakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584F4EE023D0758A004F579B /* GroupBuyGoStakeView.xib */; };
@@ -673,6 +627,65 @@
 		587ABD8921BA3BCA00C3D81A /* EOSAccountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABD8821BA3BCA00C3D81A /* EOSAccountInfoModel.m */; };
 		587ABD8D21BA539600C3D81A /* EOSAccountResourceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587ABD8C21BA539600C3D81A /* EOSAccountResourceInfoModel.m */; };
 		587CCF7F236BDD8F00CB9DF3 /* AgentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587CCF7E236BDD8F00CB9DF3 /* AgentModel.m */; };
+		587D0C7C24470A47003EB1F9 /* OutbreakFocusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D0C7B24470A47003EB1F9 /* OutbreakFocusModel.m */; };
+		587D0C7F2447149B003EB1F9 /* GlobalOutbreakUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D0C7E2447149B003EB1F9 /* GlobalOutbreakUtil.m */; };
+		587D0C872447EE27003EB1F9 /* OutbreakRedFocusTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587D0C822447EE26003EB1F9 /* OutbreakRedFocusTipView.xib */; };
+		587D0C882447EE27003EB1F9 /* OutbreakRedFocusTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D0C832447EE27003EB1F9 /* OutbreakRedFocusTipView.m */; };
+		587D0C892447EE27003EB1F9 /* OutbreakRedInterruptTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D0C842447EE27003EB1F9 /* OutbreakRedInterruptTipView.m */; };
+		587D0C8A2447EE27003EB1F9 /* OutbreakRedInterruptTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587D0C852447EE27003EB1F9 /* OutbreakRedInterruptTipView.xib */; };
+		587D0C8B24480BF5003EB1F9 /* OutbreakRedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587D0C8D24480BF5003EB1F9 /* OutbreakRedViewController.xib */; };
+		587D0C9424480CC2003EB1F9 /* OutbreakRedRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587D0C9624480CC2003EB1F9 /* OutbreakRedRecordViewController.xib */; };
+		587D0CDC24484053003EB1F9 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0C9E24484053003EB1F9 /* AppState.swift */; };
+		587D0CDD24484053003EB1F9 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587D0C9F24484053003EB1F9 /* neoutils.framework */; };
+		587D0CDE24484053003EB1F9 /* NEOSignUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CA024484053003EB1F9 /* NEOSignUtil.swift */; };
+		587D0CDF24484053003EB1F9 /* commoncry.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CA424484053003EB1F9 /* commoncry.m */; };
+		587D0CE024484053003EB1F9 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CA724484053003EB1F9 /* AES.swift */; };
+		587D0CE124484053003EB1F9 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CA824484053003EB1F9 /* SHA256.swift */; };
+		587D0CE224484053003EB1F9 /* scrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CA924484053003EB1F9 /* scrypt.swift */; };
+		587D0CE324484053003EB1F9 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CAA24484053003EB1F9 /* RIPEMD160.swift */; };
+		587D0CE424484053003EB1F9 /* PBKDF2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CAB24484053003EB1F9 /* PBKDF2.swift */; };
+		587D0CE524484054003EB1F9 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CAC24484053003EB1F9 /* Global.swift */; };
+		587D0CE624484054003EB1F9 /* NeoScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CAD24484053003EB1F9 /* NeoScan.swift */; };
+		587D0CE724484054003EB1F9 /* Array+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CAF24484053003EB1F9 /* Array+Util.swift */; };
+		587D0CE824484054003EB1F9 /* validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB024484053003EB1F9 /* validator.swift */; };
+		587D0CE924484054003EB1F9 /* NEP2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB124484053003EB1F9 /* NEP2.swift */; };
+		587D0CEA24484054003EB1F9 /* Data+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB224484053003EB1F9 /* Data+Util.swift */; };
+		587D0CEB24484054003EB1F9 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB324484053003EB1F9 /* Base58.swift */; };
+		587D0CEC24484054003EB1F9 /* NEP9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB424484053003EB1F9 /* NEP9.swift */; };
+		587D0CED24484054003EB1F9 /* NEOGasUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB524484053003EB1F9 /* NEOGasUtil.swift */; };
+		587D0CEE24484054003EB1F9 /* dAppProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB624484053003EB1F9 /* dAppProtocol.swift */; };
+		587D0CEF24484054003EB1F9 /* OpCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB824484053003EB1F9 /* OpCodes.swift */; };
+		587D0CF024484054003EB1F9 /* ScriptBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CB924484053003EB1F9 /* ScriptBuilder.swift */; };
+		587D0CF124484054003EB1F9 /* NEP5Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CBA24484053003EB1F9 /* NEP5Token.swift */; };
+		587D0CF224484054003EB1F9 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CBC24484053003EB1F9 /* UserDefaultsManager.swift */; };
+		587D0CF324484054003EB1F9 /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CBE24484053003EB1F9 /* AccountState.swift */; };
+		587D0CF424484054003EB1F9 /* Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CBF24484053003EB1F9 /* Claims.swift */; };
+		587D0CF524484054003EB1F9 /* ValueIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC024484053003EB1F9 /* ValueIn.swift */; };
+		587D0CF624484054003EB1F9 /* NEONetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC124484053003EB1F9 /* NEONetwork.swift */; };
+		587D0CF724484054003EB1F9 /* ValueOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC224484053003EB1F9 /* ValueOut.swift */; };
+		587D0CF824484054003EB1F9 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC324484053003EB1F9 /* TransactionHistory.swift */; };
+		587D0CF924484054003EB1F9 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC424484053003EB1F9 /* Block.swift */; };
+		587D0CFA24484054003EB1F9 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC524484053003EB1F9 /* Balance.swift */; };
+		587D0CFB24484054003EB1F9 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC624484053003EB1F9 /* Script.swift */; };
+		587D0CFC24484054003EB1F9 /* NeoScanTransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC724484053003EB1F9 /* NeoScanTransactionHistory.swift */; };
+		587D0CFD24484054003EB1F9 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC824484053003EB1F9 /* Transaction.swift */; };
+		587D0CFE24484054003EB1F9 /* TransactionAttritbute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CC924484053003EB1F9 /* TransactionAttritbute.swift */; };
+		587D0CFF24484054003EB1F9 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CCA24484053003EB1F9 /* Asset.swift */; };
+		587D0D0024484054003EB1F9 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CCB24484053003EB1F9 /* Token.swift */; };
+		587D0D0124484054003EB1F9 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CCC24484053003EB1F9 /* Peer.swift */; };
+		587D0D0224484054003EB1F9 /* ContractResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CCD24484053003EB1F9 /* ContractResult.swift */; };
+		587D0D0324484054003EB1F9 /* NeoScanBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CCE24484053003EB1F9 /* NeoScanBalance.swift */; };
+		587D0D0424484054003EB1F9 /* O3APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CCF24484053003EB1F9 /* O3APIClient.swift */; };
+		587D0D0524484054003EB1F9 /* ShamirSecret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD024484053003EB1F9 /* ShamirSecret.swift */; };
+		587D0D0624484054003EB1F9 /* strip-frameworks.sh in Resources */ = {isa = PBXBuildFile; fileRef = 587D0CD224484053003EB1F9 /* strip-frameworks.sh */; };
+		587D0D0724484054003EB1F9 /* WIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD324484053003EB1F9 /* WIF.swift */; };
+		587D0D0824484054003EB1F9 /* NEOWalletUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD424484053003EB1F9 /* NEOWalletUtil.m */; };
+		587D0D0924484054003EB1F9 /* ContractState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD524484053003EB1F9 /* ContractState.swift */; };
+		587D0D0A24484054003EB1F9 /* nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 587D0CD724484053003EB1F9 /* nodes.json */; };
+		587D0D0B24484054003EB1F9 /* AssetIdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD824484053003EB1F9 /* AssetIdConstants.swift */; };
+		587D0D0C24484054003EB1F9 /* NEOWalletManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD924484053003EB1F9 /* NEOWalletManage.swift */; };
+		587D0D0D24484054003EB1F9 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CDA24484053003EB1F9 /* Wallet.swift */; };
+		587D0D0E24484054003EB1F9 /* NeoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CDB24484053003EB1F9 /* NeoClient.swift */; };
 		58822DC7230E9DF8007C8DC2 /* CQScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC3230E9DF7007C8DC2 /* CQScrollMenuView.m */; };
 		58822DC8230E9DF8007C8DC2 /* UIView+frameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */; };
 		58822DCC230F9DBE007C8DC2 /* OTCPayQLCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC9230F9DB8007C8DC2 /* OTCPayQLCViewController.m */; };
@@ -702,6 +715,9 @@
 		588EA75423CD67A400889F7D /* StartGroupBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 588EA75123CD67A300889F7D /* StartGroupBuyView.m */; };
 		588EA75C23CD6BEC00889F7D /* StartGroupBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 588EA75A23CD6BEC00889F7D /* StartGroupBuyCell.m */; };
 		588EA75D23CD6BEC00889F7D /* StartGroupBuyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588EA75B23CD6BEC00889F7D /* StartGroupBuyCell.xib */; };
+		58935D132449438B00DE53D8 /* InviteFriendOutbreakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58935D112449438B00DE53D8 /* InviteFriendOutbreakViewController.m */; };
+		58935D142449445600DE53D8 /* InviteFriendOutbreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58935D162449445600DE53D8 /* InviteFriendOutbreakViewController.xib */; };
+		58935D1F2449AE0600DE53D8 /* OutbreakCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58935D1E2449AE0600DE53D8 /* OutbreakCreateModel.m */; };
 		5893721722A664A800BD5CB6 /* QLCTokenInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5893721622A664A800BD5CB6 /* QLCTokenInfoModel.m */; };
 		5894A709225F3105008B0854 /* FinanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894A707225F3105008B0854 /* FinanceCell.m */; };
 		5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894A708225F3105008B0854 /* FinanceCell.xib */; };
@@ -878,8 +894,6 @@
 		58EBED0F234F22EE007EEF1F /* ClaimQGASViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EBED11234F22EE007EEF1F /* ClaimQGASViewController.xib */; };
 		58EC937A23B08D9A0054C074 /* TopupMobilePlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EC937823B08D9A0054C074 /* TopupMobilePlanCell.m */; };
 		58EC937B23B08D9A0054C074 /* TopupMobilePlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EC937923B08D9A0054C074 /* TopupMobilePlanCell.xib */; };
-		58EC937F23B096290054C074 /* Topup1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EC937D23B096290054C074 /* Topup1ViewController.xib */; };
-		58EC938023B096290054C074 /* Topup1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EC937E23B096290054C074 /* Topup1ViewController.m */; };
 		58EC938323B0AF1C0054C074 /* TopupMobilePlanCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EC938223B0AF1C0054C074 /* TopupMobilePlanCountry.m */; };
 		58EC938523B0AF2C0054C074 /* TopupMobilePlanCountry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58EC938423B0AF2C0054C074 /* TopupMobilePlanCountry.xib */; };
 		58EC938823B0B8AA0054C074 /* TopupCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EC938723B0B8AA0054C074 /* TopupCountryModel.m */; };
@@ -1036,7 +1050,6 @@
 		5806C11221C3DB59000E693B /* CreateAccountPushTransactionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountPushTransactionRequest.m; sourceTree = "<group>"; };
 		5806C11421C3E4C7000E693B /* CreateAccountSignTransactionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountSignTransactionRequest.h; sourceTree = "<group>"; };
 		5806C11521C3E4C7000E693B /* CreateAccountSignTransactionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountSignTransactionRequest.m; sourceTree = "<group>"; };
-		5806C11721C7A6E3000E693B /* NEOSignUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOSignUtil.swift; sourceTree = "<group>"; };
 		5807D647208061A20049565D /* ShadowImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShadowImageView.h; sourceTree = "<group>"; };
 		5807D648208061A20049565D /* ShadowImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShadowImageView.m; sourceTree = "<group>"; };
 		5809033B209B07370085FD70 /* ChatModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
@@ -1293,8 +1306,8 @@
 		581AFC4921B7D28B001A37E1 /* EOSRAMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOSRAMViewController.m; sourceTree = "<group>"; };
 		581AFC4D21B7D5A5001A37E1 /* EOSRegisterAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EOSRegisterAccountViewController.h; sourceTree = "<group>"; };
 		581AFC4E21B7D5A5001A37E1 /* EOSRegisterAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOSRegisterAccountViewController.m; sourceTree = "<group>"; };
-		581B678721916D790061BEDB /* AppConfigUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfigUtil.h; sourceTree = "<group>"; };
-		581B678821916D790061BEDB /* AppConfigUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConfigUtil.m; sourceTree = "<group>"; };
+		581B678721916D790061BEDB /* OutbreakRedUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutbreakRedUtil.h; sourceTree = "<group>"; };
+		581B678821916D790061BEDB /* OutbreakRedUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedUtil.m; sourceTree = "<group>"; };
 		581B678A219178BA0061BEDB /* FingerprintVerificationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FingerprintVerificationUtil.h; sourceTree = "<group>"; };
 		581B678B219178BB0061BEDB /* FingerprintVerificationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FingerprintVerificationUtil.m; sourceTree = "<group>"; };
 		581B679021919D270061BEDB /* SuccessTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessTipView.xib; sourceTree = "<group>"; };
@@ -1322,51 +1335,6 @@
 		581D31C5219BC5AE001F88C3 /* MarketsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarketsCell.h; sourceTree = "<group>"; };
 		581D31C6219BC5AE001F88C3 /* MarketsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarketsCell.m; sourceTree = "<group>"; };
 		581D31C7219BC5AE001F88C3 /* MarketsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketsCell.xib; sourceTree = "<group>"; };
-		581D3288219C157E001F88C3 /* OpCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpCodes.swift; sourceTree = "<group>"; };
-		581D3289219C157E001F88C3 /* ScriptBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptBuilder.swift; sourceTree = "<group>"; };
-		581D328A219C157E001F88C3 /* NEP5Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEP5Token.swift; sourceTree = "<group>"; };
-		581D328B219C157F001F88C3 /* ShamirSecret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShamirSecret.swift; sourceTree = "<group>"; };
-		581D328C219C1580001F88C3 /* NeoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoClient.swift; sourceTree = "<group>"; };
-		581D328E219C1581001F88C3 /* NeoTest5-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NeoTest5-Bridging-Header.h"; sourceTree = "<group>"; };
-		581D328F219C1581001F88C3 /* commoncry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commoncry.h; sourceTree = "<group>"; };
-		581D3290219C1581001F88C3 /* commoncry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commoncry.m; sourceTree = "<group>"; };
-		581D3291219C1581001F88C3 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		581D3292219C1582001F88C3 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		581D3293219C1583001F88C3 /* NeoScan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoScan.swift; sourceTree = "<group>"; };
-		581D3295219C1584001F88C3 /* strip-frameworks.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "strip-frameworks.sh"; sourceTree = "<group>"; };
-		581D3297219C1584001F88C3 /* AES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
-		581D3298219C1584001F88C3 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
-		581D3299219C1584001F88C3 /* scrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scrypt.swift; sourceTree = "<group>"; };
-		581D329A219C1584001F88C3 /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
-		581D329B219C1584001F88C3 /* PBKDF2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PBKDF2.swift; sourceTree = "<group>"; };
-		581D329D219C1585001F88C3 /* nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nodes.json; sourceTree = "<group>"; };
-		581D329F219C1587001F88C3 /* WIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WIF.swift; sourceTree = "<group>"; };
-		581D32A1219C1588001F88C3 /* AccountState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountState.swift; sourceTree = "<group>"; };
-		581D32A2219C1588001F88C3 /* Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claims.swift; sourceTree = "<group>"; };
-		581D32A3219C1588001F88C3 /* ValueIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueIn.swift; sourceTree = "<group>"; };
-		581D32A4219C1588001F88C3 /* NEONetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEONetwork.swift; sourceTree = "<group>"; };
-		581D32A5219C1588001F88C3 /* ValueOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueOut.swift; sourceTree = "<group>"; };
-		581D32A6219C1588001F88C3 /* TransactionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
-		581D32A7219C1588001F88C3 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		581D32A8219C1588001F88C3 /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
-		581D32A9219C1588001F88C3 /* Script.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
-		581D32AA219C1588001F88C3 /* NeoScanTransactionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoScanTransactionHistory.swift; sourceTree = "<group>"; };
-		581D32AB219C1588001F88C3 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		581D32AC219C1588001F88C3 /* TransactionAttritbute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionAttritbute.swift; sourceTree = "<group>"; };
-		581D32AD219C1588001F88C3 /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
-		581D32AE219C1588001F88C3 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		581D32AF219C1588001F88C3 /* Peer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
-		581D32B0219C1588001F88C3 /* ContractResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractResult.swift; sourceTree = "<group>"; };
-		581D32B1219C1588001F88C3 /* NeoScanBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoScanBalance.swift; sourceTree = "<group>"; };
-		581D32B2219C1589001F88C3 /* AssetIdConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetIdConstants.swift; sourceTree = "<group>"; };
-		581D32B3219C158A001F88C3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
-		581D32B5219C158B001F88C3 /* Array+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Util.swift"; sourceTree = "<group>"; };
-		581D32B6219C158B001F88C3 /* validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = validator.swift; sourceTree = "<group>"; };
-		581D32B7219C158B001F88C3 /* NEP2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEP2.swift; sourceTree = "<group>"; };
-		581D32B8219C158B001F88C3 /* Data+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Util.swift"; sourceTree = "<group>"; };
-		581D32B9219C158B001F88C3 /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
-		581D32BA219C158B001F88C3 /* NEP9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEP9.swift; sourceTree = "<group>"; };
-		581D32E7219C16A7001F88C3 /* NEOWalletManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEOWalletManage.swift; sourceTree = "<group>"; };
 		581D32E9219D0AFB001F88C3 /* ETHAddressTransactionsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETHAddressTransactionsModel.h; sourceTree = "<group>"; };
 		581D32EA219D0AFB001F88C3 /* ETHAddressTransactionsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETHAddressTransactionsModel.m; sourceTree = "<group>"; };
 		581D32EC219D107F001F88C3 /* NeoGotWGasModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeoGotWGasModel.h; sourceTree = "<group>"; };
@@ -1708,9 +1676,6 @@
 		581F836A22F7C45000F8291E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JoinCommunityViewController.strings; sourceTree = "<group>"; };
 		581F836C22F7C45500F8291E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/JoinCommunityViewController.strings"; sourceTree = "<group>"; };
 		5821964623F1089500704E23 /* contract_js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = contract_js; sourceTree = "<group>"; };
-		5821964823F13F9C00704E23 /* Topup3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topup3ViewController.m; sourceTree = "<group>"; };
-		5821964923F13F9D00704E23 /* Topup3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Topup3ViewController.xib; sourceTree = "<group>"; };
-		5821964A23F13F9D00704E23 /* Topup3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topup3ViewController.h; sourceTree = "<group>"; };
 		5821964D23F2551E00704E23 /* TopupProductSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupProductSubViewController.h; sourceTree = "<group>"; };
 		5821964E23F2551E00704E23 /* TopupProductSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupProductSubViewController.m; sourceTree = "<group>"; };
 		5821964F23F2551E00704E23 /* TopupProductSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupProductSubViewController.xib; sourceTree = "<group>"; };
@@ -1897,8 +1862,6 @@
 		5825556222EEC22900F0B9F0 /* ProjectEnum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectEnum.m; sourceTree = "<group>"; };
 		5825556522EECBD300F0B9F0 /* WalletSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletSelectViewController.h; sourceTree = "<group>"; };
 		5825556622EECBD300F0B9F0 /* WalletSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletSelectViewController.m; sourceTree = "<group>"; };
-		58270FC02072019400C08784 /* NEOWalletUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEOWalletUtil.h; sourceTree = "<group>"; };
-		58270FC12072019400C08784 /* NEOWalletUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NEOWalletUtil.m; sourceTree = "<group>"; };
 		58270FC32072055800C08784 /* HistoryRecordsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecordsViewController.h; sourceTree = "<group>"; };
 		58270FC42072055800C08784 /* HistoryRecordsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecordsViewController.m; sourceTree = "<group>"; };
 		58270FC92072089800C08784 /* HistoryRecordsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecordsCell.h; sourceTree = "<group>"; };
@@ -1925,7 +1888,6 @@
 		5827BC3721A3AD2800B7730E /* ToxRequestModel1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToxRequestModel1.m; sourceTree = "<group>"; };
 		5827BC3921A3BB7500B7730E /* ETHWalletInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETHWalletInfo.h; sourceTree = "<group>"; };
 		5827BC3A21A3BB7600B7730E /* ETHWalletInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETHWalletInfo.m; sourceTree = "<group>"; };
-		5827BC3C21A3FA6300B7730E /* NEOGasUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOGasUtil.swift; sourceTree = "<group>"; };
 		582843F721885EEA00AD65C8 /* LoginInputPWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginInputPWViewController.h; sourceTree = "<group>"; };
 		582843F821885EEA00AD65C8 /* LoginInputPWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginInputPWViewController.m; sourceTree = "<group>"; };
 		582843FE2189407B00AD65C8 /* SettingsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsCell.h; sourceTree = "<group>"; };
@@ -1944,11 +1906,6 @@
 		582F87BA2153338E0008331D /* RankingStartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingStartCell.xib; sourceTree = "<group>"; };
 		582F87BC2153338E0008331D /* RankingStartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingStartCell.h; sourceTree = "<group>"; };
 		582F87BD2153338E0008331D /* RankingStartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingStartCell.m; sourceTree = "<group>"; };
-		5832CB2C22811DFF0011160D /* dAppProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dAppProtocol.swift; sourceTree = "<group>"; };
-		5832CB2E22811E690011160D /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		5832CB342281245B0011160D /* ContractState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractState.swift; sourceTree = "<group>"; };
-		5832CB36228125030011160D /* Wallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
-		5832CB39228133190011160D /* O3APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = O3APIClient.swift; sourceTree = "<group>"; };
 		5833AD0A206C8427002C6909 /* WalletMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletMenuView.h; sourceTree = "<group>"; };
 		5833AD0B206C8427002C6909 /* WalletMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletMenuView.m; sourceTree = "<group>"; };
 		5834A34E2387D7E8004EB81A /* ClaimSuccessTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClaimSuccessTipView.h; sourceTree = "<group>"; };
@@ -1978,6 +1935,16 @@
 		583910F8208495F200A19E7E /* DDLogUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLogUtil.m; sourceTree = "<group>"; };
 		583910FA2084971F00A19E7E /* DebugLogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugLogViewController.h; sourceTree = "<group>"; };
 		583910FB2084971F00A19E7E /* DebugLogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DebugLogViewController.m; sourceTree = "<group>"; };
+		583940732444758E005EAA04 /* OutbreakRedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutbreakRedViewController.h; sourceTree = "<group>"; };
+		583940752444758E005EAA04 /* OutbreakRedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedViewController.m; sourceTree = "<group>"; };
+		583940982445A452005EAA04 /* OutbreakRedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutbreakRedCell.h; sourceTree = "<group>"; };
+		583940992445A452005EAA04 /* OutbreakRedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedCell.m; sourceTree = "<group>"; };
+		5839409A2445A452005EAA04 /* OutbreakRedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutbreakRedCell.xib; sourceTree = "<group>"; };
+		5839409E2445C240005EAA04 /* OutbreakRedRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutbreakRedRecordViewController.h; sourceTree = "<group>"; };
+		5839409F2445C240005EAA04 /* OutbreakRedRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedRecordViewController.m; sourceTree = "<group>"; };
+		583940A22445C40B005EAA04 /* OutbreakRedRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutbreakRedRecordCell.xib; sourceTree = "<group>"; };
+		583940A32445C40C005EAA04 /* OutbreakRedRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutbreakRedRecordCell.h; sourceTree = "<group>"; };
+		583940A42445C40C005EAA04 /* OutbreakRedRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedRecordCell.m; sourceTree = "<group>"; };
 		583944F6229BEFEA0068852A /* QLCAddressInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCAddressInfoModel.h; sourceTree = "<group>"; };
 		583944F7229BEFEA0068852A /* QLCAddressInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCAddressInfoModel.m; sourceTree = "<group>"; };
 		5839F5172068CFA8004C4A54 /* RequestService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestService.h; sourceTree = "<group>"; };
@@ -2053,6 +2020,7 @@
 		5840927B23052A410054BCBB /* ConfidantViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfidantViewController.m; sourceTree = "<group>"; };
 		5840927F23052A640054BCBB /* TokenMintageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMintageViewController.h; sourceTree = "<group>"; };
 		5840928023052A640054BCBB /* TokenMintageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMintageViewController.m; sourceTree = "<group>"; };
+		5842676D2446F86A00450C9B /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
 		5842E0C62368181D001BB0D6 /* qwallet_index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = qwallet_index.html; sourceTree = "<group>"; };
 		5848615D244027AF004222A0 /* UIButton+ANDYHighlighted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ANDYHighlighted.m"; sourceTree = "<group>"; };
 		5848615E244027B0004222A0 /* UIButton+ANDYHighlighted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ANDYHighlighted.h"; sourceTree = "<group>"; };
@@ -2065,7 +2033,6 @@
 		5849BE99229E8940008B291E /* QLCAddressHistoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCAddressHistoryModel.h; sourceTree = "<group>"; };
 		5849BE9A229E8940008B291E /* QLCAddressHistoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCAddressHistoryModel.m; sourceTree = "<group>"; };
 		584BFB1E236AEF2700D7CCD1 /* QLCFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QLCFramework.framework; sourceTree = "<group>"; };
-		584BFB22236AEF3C00D7CCD1 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		584BFB26236B0E3C00D7CCD1 /* ETHFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETHFramework.framework; sourceTree = "<group>"; };
 		584CE2CF22F7BB49003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GuidePageView1.strings"; sourceTree = "<group>"; };
 		584CE2D022F7BB4A003A89E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RankingRuleViewController.strings"; sourceTree = "<group>"; };
@@ -2412,6 +2379,79 @@
 		587ABD8C21BA539600C3D81A /* EOSAccountResourceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EOSAccountResourceInfoModel.m; sourceTree = "<group>"; };
 		587CCF7D236BDD8F00CB9DF3 /* AgentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AgentModel.h; sourceTree = "<group>"; };
 		587CCF7E236BDD8F00CB9DF3 /* AgentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AgentModel.m; sourceTree = "<group>"; };
+		587D0C7A24470A47003EB1F9 /* OutbreakFocusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutbreakFocusModel.h; sourceTree = "<group>"; };
+		587D0C7B24470A47003EB1F9 /* OutbreakFocusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutbreakFocusModel.m; sourceTree = "<group>"; };
+		587D0C7D2447149B003EB1F9 /* GlobalOutbreakUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalOutbreakUtil.h; sourceTree = "<group>"; };
+		587D0C7E2447149B003EB1F9 /* GlobalOutbreakUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalOutbreakUtil.m; sourceTree = "<group>"; };
+		587D0C812447EE26003EB1F9 /* OutbreakRedFocusTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutbreakRedFocusTipView.h; sourceTree = "<group>"; };
+		587D0C822447EE26003EB1F9 /* OutbreakRedFocusTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutbreakRedFocusTipView.xib; sourceTree = "<group>"; };
+		587D0C832447EE27003EB1F9 /* OutbreakRedFocusTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedFocusTipView.m; sourceTree = "<group>"; };
+		587D0C842447EE27003EB1F9 /* OutbreakRedInterruptTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutbreakRedInterruptTipView.m; sourceTree = "<group>"; };
+		587D0C852447EE27003EB1F9 /* OutbreakRedInterruptTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutbreakRedInterruptTipView.xib; sourceTree = "<group>"; };
+		587D0C862447EE27003EB1F9 /* OutbreakRedInterruptTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutbreakRedInterruptTipView.h; sourceTree = "<group>"; };
+		587D0C8C24480BF5003EB1F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OutbreakRedViewController.xib; sourceTree = "<group>"; };
+		587D0C8F24480BFA003EB1F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OutbreakRedViewController.strings; sourceTree = "<group>"; };
+		587D0C9124480BFD003EB1F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OutbreakRedViewController.strings"; sourceTree = "<group>"; };
+		587D0C9324480C00003EB1F9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OutbreakRedViewController.strings; sourceTree = "<group>"; };
+		587D0C9524480CC2003EB1F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OutbreakRedRecordViewController.xib; sourceTree = "<group>"; };
+		587D0C9824480CC8003EB1F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OutbreakRedRecordViewController.strings; sourceTree = "<group>"; };
+		587D0C9A24480CCB003EB1F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OutbreakRedRecordViewController.strings"; sourceTree = "<group>"; };
+		587D0C9C24480CCE003EB1F9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OutbreakRedRecordViewController.strings; sourceTree = "<group>"; };
+		587D0C9E24484053003EB1F9 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		587D0C9F24484053003EB1F9 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
+		587D0CA024484053003EB1F9 /* NEOSignUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEOSignUtil.swift; sourceTree = "<group>"; };
+		587D0CA224484053003EB1F9 /* NeoTest5-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NeoTest5-Bridging-Header.h"; sourceTree = "<group>"; };
+		587D0CA324484053003EB1F9 /* commoncry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commoncry.h; sourceTree = "<group>"; };
+		587D0CA424484053003EB1F9 /* commoncry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commoncry.m; sourceTree = "<group>"; };
+		587D0CA524484053003EB1F9 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		587D0CA724484053003EB1F9 /* AES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
+		587D0CA824484053003EB1F9 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
+		587D0CA924484053003EB1F9 /* scrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scrypt.swift; sourceTree = "<group>"; };
+		587D0CAA24484053003EB1F9 /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
+		587D0CAB24484053003EB1F9 /* PBKDF2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PBKDF2.swift; sourceTree = "<group>"; };
+		587D0CAC24484053003EB1F9 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		587D0CAD24484053003EB1F9 /* NeoScan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoScan.swift; sourceTree = "<group>"; };
+		587D0CAF24484053003EB1F9 /* Array+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Util.swift"; sourceTree = "<group>"; };
+		587D0CB024484053003EB1F9 /* validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = validator.swift; sourceTree = "<group>"; };
+		587D0CB124484053003EB1F9 /* NEP2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEP2.swift; sourceTree = "<group>"; };
+		587D0CB224484053003EB1F9 /* Data+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Util.swift"; sourceTree = "<group>"; };
+		587D0CB324484053003EB1F9 /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
+		587D0CB424484053003EB1F9 /* NEP9.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEP9.swift; sourceTree = "<group>"; };
+		587D0CB524484053003EB1F9 /* NEOGasUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEOGasUtil.swift; sourceTree = "<group>"; };
+		587D0CB624484053003EB1F9 /* dAppProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dAppProtocol.swift; sourceTree = "<group>"; };
+		587D0CB824484053003EB1F9 /* OpCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpCodes.swift; sourceTree = "<group>"; };
+		587D0CB924484053003EB1F9 /* ScriptBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptBuilder.swift; sourceTree = "<group>"; };
+		587D0CBA24484053003EB1F9 /* NEP5Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEP5Token.swift; sourceTree = "<group>"; };
+		587D0CBB24484053003EB1F9 /* NEOWalletUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEOWalletUtil.h; sourceTree = "<group>"; };
+		587D0CBC24484053003EB1F9 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		587D0CBE24484053003EB1F9 /* AccountState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountState.swift; sourceTree = "<group>"; };
+		587D0CBF24484053003EB1F9 /* Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claims.swift; sourceTree = "<group>"; };
+		587D0CC024484053003EB1F9 /* ValueIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueIn.swift; sourceTree = "<group>"; };
+		587D0CC124484053003EB1F9 /* NEONetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEONetwork.swift; sourceTree = "<group>"; };
+		587D0CC224484053003EB1F9 /* ValueOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueOut.swift; sourceTree = "<group>"; };
+		587D0CC324484053003EB1F9 /* TransactionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
+		587D0CC424484053003EB1F9 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		587D0CC524484053003EB1F9 /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		587D0CC624484053003EB1F9 /* Script.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
+		587D0CC724484053003EB1F9 /* NeoScanTransactionHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoScanTransactionHistory.swift; sourceTree = "<group>"; };
+		587D0CC824484053003EB1F9 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		587D0CC924484053003EB1F9 /* TransactionAttritbute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionAttritbute.swift; sourceTree = "<group>"; };
+		587D0CCA24484053003EB1F9 /* Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		587D0CCB24484053003EB1F9 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		587D0CCC24484053003EB1F9 /* Peer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
+		587D0CCD24484053003EB1F9 /* ContractResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractResult.swift; sourceTree = "<group>"; };
+		587D0CCE24484053003EB1F9 /* NeoScanBalance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoScanBalance.swift; sourceTree = "<group>"; };
+		587D0CCF24484053003EB1F9 /* O3APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = O3APIClient.swift; sourceTree = "<group>"; };
+		587D0CD024484053003EB1F9 /* ShamirSecret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShamirSecret.swift; sourceTree = "<group>"; };
+		587D0CD224484053003EB1F9 /* strip-frameworks.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "strip-frameworks.sh"; sourceTree = "<group>"; };
+		587D0CD324484053003EB1F9 /* WIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WIF.swift; sourceTree = "<group>"; };
+		587D0CD424484053003EB1F9 /* NEOWalletUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEOWalletUtil.m; sourceTree = "<group>"; };
+		587D0CD524484053003EB1F9 /* ContractState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractState.swift; sourceTree = "<group>"; };
+		587D0CD724484053003EB1F9 /* nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nodes.json; sourceTree = "<group>"; };
+		587D0CD824484053003EB1F9 /* AssetIdConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetIdConstants.swift; sourceTree = "<group>"; };
+		587D0CD924484053003EB1F9 /* NEOWalletManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEOWalletManage.swift; sourceTree = "<group>"; };
+		587D0CDA24484053003EB1F9 /* Wallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		587D0CDB24484053003EB1F9 /* NeoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoClient.swift; sourceTree = "<group>"; };
 		58822DC3230E9DF7007C8DC2 /* CQScrollMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQScrollMenuView.m; sourceTree = "<group>"; };
 		58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+frameAdjust.m"; sourceTree = "<group>"; };
 		58822DC5230E9DF7007C8DC2 /* CQScrollMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQScrollMenuView.h; sourceTree = "<group>"; };
@@ -2477,6 +2517,14 @@
 		588EA75923CD6BEC00889F7D /* StartGroupBuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartGroupBuyCell.h; sourceTree = "<group>"; };
 		588EA75A23CD6BEC00889F7D /* StartGroupBuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartGroupBuyCell.m; sourceTree = "<group>"; };
 		588EA75B23CD6BEC00889F7D /* StartGroupBuyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartGroupBuyCell.xib; sourceTree = "<group>"; };
+		58935D102449438A00DE53D8 /* InviteFriendOutbreakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendOutbreakViewController.h; sourceTree = "<group>"; };
+		58935D112449438B00DE53D8 /* InviteFriendOutbreakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendOutbreakViewController.m; sourceTree = "<group>"; };
+		58935D152449445600DE53D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InviteFriendOutbreakViewController.xib; sourceTree = "<group>"; };
+		58935D182449446100DE53D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InviteFriendOutbreakViewController.strings; sourceTree = "<group>"; };
+		58935D1A2449446600DE53D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InviteFriendOutbreakViewController.strings"; sourceTree = "<group>"; };
+		58935D1C2449446A00DE53D8 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InviteFriendOutbreakViewController.strings; sourceTree = "<group>"; };
+		58935D1D2449AE0600DE53D8 /* OutbreakCreateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutbreakCreateModel.h; sourceTree = "<group>"; };
+		58935D1E2449AE0600DE53D8 /* OutbreakCreateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutbreakCreateModel.m; sourceTree = "<group>"; };
 		5893721522A664A800BD5CB6 /* QLCTokenInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLCTokenInfoModel.h; sourceTree = "<group>"; };
 		5893721622A664A800BD5CB6 /* QLCTokenInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLCTokenInfoModel.m; sourceTree = "<group>"; };
 		5894A706225F3105008B0854 /* FinanceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinanceCell.h; sourceTree = "<group>"; };
@@ -3007,9 +3055,6 @@
 		58EC937723B08D9A0054C074 /* TopupMobilePlanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupMobilePlanCell.h; sourceTree = "<group>"; };
 		58EC937823B08D9A0054C074 /* TopupMobilePlanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupMobilePlanCell.m; sourceTree = "<group>"; };
 		58EC937923B08D9A0054C074 /* TopupMobilePlanCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupMobilePlanCell.xib; sourceTree = "<group>"; };
-		58EC937C23B096290054C074 /* Topup1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topup1ViewController.h; sourceTree = "<group>"; };
-		58EC937D23B096290054C074 /* Topup1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Topup1ViewController.xib; sourceTree = "<group>"; };
-		58EC937E23B096290054C074 /* Topup1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topup1ViewController.m; sourceTree = "<group>"; };
 		58EC938123B0AF1C0054C074 /* TopupMobilePlanCountry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopupMobilePlanCountry.h; sourceTree = "<group>"; };
 		58EC938223B0AF1C0054C074 /* TopupMobilePlanCountry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupMobilePlanCountry.m; sourceTree = "<group>"; };
 		58EC938423B0AF2C0054C074 /* TopupMobilePlanCountry.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopupMobilePlanCountry.xib; sourceTree = "<group>"; };
@@ -3231,13 +3276,14 @@
 				58C07B802328F00C0088D18E /* Pods_Qlink.framework in Frameworks */,
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
 				734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */,
-				584BFB23236AEF3D00D7CCD1 /* neoutils.framework in Frameworks */,
 				734F52A020B6BF81002D45B7 /* CFNetwork.framework in Frameworks */,
+				587D0CDD24484053003EB1F9 /* neoutils.framework in Frameworks */,
 				734F529E20B6BF76002D45B7 /* MobileCoreServices.framework in Frameworks */,
 				734F529C20B6BF6E002D45B7 /* SystemConfiguration.framework in Frameworks */,
 				734F529A20B6BF5B002D45B7 /* libz.tbd in Frameworks */,
 				734F529820B6BF4A002D45B7 /* libxml2.tbd in Frameworks */,
 				587ABD3D21B8F8F700C3D81A /* eosFramework.framework in Frameworks */,
+				5842676E2446F86B00450C9B /* OutbreakRed.framework in Frameworks */,
 				734F529620B6BF20002D45B7 /* libresolv.tbd in Frameworks */,
 				734F529420B6BEF7002D45B7 /* UserNotifications.framework in Frameworks */,
 				584BFB1F236AEF2700D7CCD1 /* QLCFramework.framework in Frameworks */,
@@ -3292,7 +3338,7 @@
 			isa = PBXGroup;
 			children = (
 				5842E0C923681AD9001BB0D6 /* JS */,
-				5842E0C823681AB7001BB0D6 /* Trust */,
+				587D0C9D24484053003EB1F9 /* Trust */,
 			);
 			path = NEO;
 			sourceTree = "<group>";
@@ -3554,6 +3600,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				583940CA2446A09D005EAA04 /* OutbreakRed */,
 				5821966123F28CC800704E23 /* NinaPagerView */,
 				5875B1F12386895B00FCA894 /* WZLBadge */,
 				587213362361748600E50744 /* RLArithmetic */,
@@ -3601,6 +3648,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5839407224447120005EAA04 /* OutbreakIncentive */,
 				5872056323C715A8009A6217 /* Invite */,
 				58231D35237BE386009CDE90 /* TransactionMining */,
 				5874E339234D9228000835A0 /* ClaimQGAS */,
@@ -3662,6 +3710,7 @@
 		580D913520625A4300B12506 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				587D0C7924470A1E003EB1F9 /* OutbreakRed */,
 				586F67FA24090403008E4D4C /* BuybackBurn */,
 				5871921F23CDB20400728E15 /* GroupBuy */,
 				58A3EB58237D572500AEF7C8 /* TradeMining */,
@@ -3734,8 +3783,8 @@
 				7351508C20D3B71300194711 /* DBManageUtil.m */,
 				735BAF39212550DB000A1B32 /* VPNDataUtil.h */,
 				735BAF3A212550DB000A1B32 /* VPNDataUtil.m */,
-				581B678721916D790061BEDB /* AppConfigUtil.h */,
-				581B678821916D790061BEDB /* AppConfigUtil.m */,
+				581B678721916D790061BEDB /* OutbreakRedUtil.h */,
+				581B678821916D790061BEDB /* OutbreakRedUtil.m */,
 				581F5FCF219D4FFF00604352 /* ReportUtil.h */,
 				581F5FD0219D4FFF00604352 /* ReportUtil.m */,
 				581AC37821AFE57200ACA80B /* NEOGasClaimUtil.h */,
@@ -3776,6 +3825,8 @@
 				584F4EED23D587DC004F579B /* GroupBuyUtil.m */,
 				588B4EA424065683003BE791 /* QgasVoteUtil.h */,
 				588B4EA524065683003BE791 /* QgasVoteUtil.m */,
+				587D0C7D2447149B003EB1F9 /* GlobalOutbreakUtil.h */,
+				587D0C7E2447149B003EB1F9 /* GlobalOutbreakUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4051,92 +4102,6 @@
 				581A347E21AE694900623685 /* AddMarketsCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		581D3287219C157E001F88C3 /* Contracts */ = {
-			isa = PBXGroup;
-			children = (
-				581D3288219C157E001F88C3 /* OpCodes.swift */,
-				581D3289219C157E001F88C3 /* ScriptBuilder.swift */,
-				581D328A219C157E001F88C3 /* NEP5Token.swift */,
-			);
-			path = Contracts;
-			sourceTree = "<group>";
-		};
-		581D328D219C1581001F88C3 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				581D328E219C1581001F88C3 /* NeoTest5-Bridging-Header.h */,
-				581D328F219C1581001F88C3 /* commoncry.h */,
-				581D3290219C1581001F88C3 /* commoncry.m */,
-				581D3291219C1581001F88C3 /* module.modulemap */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
-		581D3294219C1584001F88C3 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				581D3295219C1584001F88C3 /* strip-frameworks.sh */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
-		581D3296219C1584001F88C3 /* Crypto */ = {
-			isa = PBXGroup;
-			children = (
-				581D3297219C1584001F88C3 /* AES.swift */,
-				581D3298219C1584001F88C3 /* SHA256.swift */,
-				581D3299219C1584001F88C3 /* scrypt.swift */,
-				581D329A219C1584001F88C3 /* RIPEMD160.swift */,
-				581D329B219C1584001F88C3 /* PBKDF2.swift */,
-			);
-			path = Crypto;
-			sourceTree = "<group>";
-		};
-		581D329C219C1585001F88C3 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				581D329D219C1585001F88C3 /* nodes.json */,
-			);
-			path = data;
-			sourceTree = "<group>";
-		};
-		581D32A0219C1588001F88C3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				581D32A1219C1588001F88C3 /* AccountState.swift */,
-				581D32A2219C1588001F88C3 /* Claims.swift */,
-				581D32A3219C1588001F88C3 /* ValueIn.swift */,
-				581D32A4219C1588001F88C3 /* NEONetwork.swift */,
-				581D32A5219C1588001F88C3 /* ValueOut.swift */,
-				581D32A6219C1588001F88C3 /* TransactionHistory.swift */,
-				581D32A7219C1588001F88C3 /* Block.swift */,
-				581D32A8219C1588001F88C3 /* Balance.swift */,
-				581D32A9219C1588001F88C3 /* Script.swift */,
-				581D32AA219C1588001F88C3 /* NeoScanTransactionHistory.swift */,
-				581D32AB219C1588001F88C3 /* Transaction.swift */,
-				581D32AC219C1588001F88C3 /* TransactionAttritbute.swift */,
-				581D32AD219C1588001F88C3 /* Asset.swift */,
-				581D32AE219C1588001F88C3 /* Token.swift */,
-				581D32AF219C1588001F88C3 /* Peer.swift */,
-				581D32B0219C1588001F88C3 /* ContractResult.swift */,
-				581D32B1219C1588001F88C3 /* NeoScanBalance.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		581D32B4219C158B001F88C3 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				581D32B5219C158B001F88C3 /* Array+Util.swift */,
-				581D32B6219C158B001F88C3 /* validator.swift */,
-				581D32B7219C158B001F88C3 /* NEP2.swift */,
-				581D32B8219C158B001F88C3 /* Data+Util.swift */,
-				581D32B9219C158B001F88C3 /* Base58.swift */,
-				581D32BA219C158B001F88C3 /* NEP9.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		581D51162179814D0064F60C /* Settings */ = {
@@ -4865,6 +4830,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5839407224447120005EAA04 /* OutbreakIncentive */ = {
+			isa = PBXGroup;
+			children = (
+				587D0C802447EDC8003EB1F9 /* View */,
+				583940972445A438005EAA04 /* Cell */,
+				5839409E2445C240005EAA04 /* OutbreakRedRecordViewController.h */,
+				5839409F2445C240005EAA04 /* OutbreakRedRecordViewController.m */,
+				587D0C9624480CC2003EB1F9 /* OutbreakRedRecordViewController.xib */,
+				583940732444758E005EAA04 /* OutbreakRedViewController.h */,
+				583940752444758E005EAA04 /* OutbreakRedViewController.m */,
+				587D0C8D24480BF5003EB1F9 /* OutbreakRedViewController.xib */,
+			);
+			path = OutbreakIncentive;
+			sourceTree = "<group>";
+		};
+		583940972445A438005EAA04 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				583940A32445C40C005EAA04 /* OutbreakRedRecordCell.h */,
+				583940A42445C40C005EAA04 /* OutbreakRedRecordCell.m */,
+				583940A22445C40B005EAA04 /* OutbreakRedRecordCell.xib */,
+				583940982445A452005EAA04 /* OutbreakRedCell.h */,
+				583940992445A452005EAA04 /* OutbreakRedCell.m */,
+				5839409A2445A452005EAA04 /* OutbreakRedCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		583940CA2446A09D005EAA04 /* OutbreakRed */ = {
+			isa = PBXGroup;
+			children = (
+				5842676D2446F86A00450C9B /* OutbreakRed.framework */,
+			);
+			path = OutbreakRed;
+			sourceTree = "<group>";
+		};
 		583944F5229BEFBF0068852A /* QLCModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -4957,38 +4958,6 @@
 				5885D429231F493800F9DEDE /* MyStakingsCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		5842E0C823681AB7001BB0D6 /* Trust */ = {
-			isa = PBXGroup;
-			children = (
-				584BFB22236AEF3C00D7CCD1 /* neoutils.framework */,
-				5806C11721C7A6E3000E693B /* NEOSignUtil.swift */,
-				5832CB39228133190011160D /* O3APIClient.swift */,
-				5832CB36228125030011160D /* Wallet.swift */,
-				5832CB342281245B0011160D /* ContractState.swift */,
-				5832CB2E22811E690011160D /* AppState.swift */,
-				5832CB2C22811DFF0011160D /* dAppProtocol.swift */,
-				581D32B2219C1589001F88C3 /* AssetIdConstants.swift */,
-				581D328D219C1581001F88C3 /* CommonCrypto */,
-				581D3287219C157E001F88C3 /* Contracts */,
-				581D3296219C1584001F88C3 /* Crypto */,
-				581D329C219C1585001F88C3 /* data */,
-				581D3292219C1582001F88C3 /* Global.swift */,
-				581D32A0219C1588001F88C3 /* Models */,
-				581D328C219C1580001F88C3 /* NeoClient.swift */,
-				5827BC3C21A3FA6300B7730E /* NEOGasUtil.swift */,
-				581D3293219C1583001F88C3 /* NeoScan.swift */,
-				581D32E7219C16A7001F88C3 /* NEOWalletManage.swift */,
-				58270FC02072019400C08784 /* NEOWalletUtil.h */,
-				58270FC12072019400C08784 /* NEOWalletUtil.m */,
-				581D3294219C1584001F88C3 /* scripts */,
-				581D328B219C157F001F88C3 /* ShamirSecret.swift */,
-				581D32B3219C158A001F88C3 /* UserDefaultsManager.swift */,
-				581D32B4219C158B001F88C3 /* Util */,
-				581D329F219C1587001F88C3 /* WIF.swift */,
-			);
-			path = Trust;
 			sourceTree = "<group>";
 		};
 		5842E0C923681AD9001BB0D6 /* JS */ = {
@@ -5152,12 +5121,6 @@
 				582CDF4C243435370094A70E /* Topup4ViewController.h */,
 				582CDF4B243435370094A70E /* Topup4ViewController.m */,
 				582CDF4D243435370094A70E /* Topup4ViewController.xib */,
-				5821964A23F13F9D00704E23 /* Topup3ViewController.h */,
-				5821964823F13F9C00704E23 /* Topup3ViewController.m */,
-				5821964923F13F9D00704E23 /* Topup3ViewController.xib */,
-				58EC937C23B096290054C074 /* Topup1ViewController.h */,
-				58EC937E23B096290054C074 /* Topup1ViewController.m */,
-				58EC937D23B096290054C074 /* Topup1ViewController.xib */,
 				5870B5D523F667D700EB4D34 /* TopupBuyConfirmViewController.h */,
 				5870B5D723F667D800EB4D34 /* TopupBuyConfirmViewController.m */,
 				5870B5DC23F687F900EB4D34 /* TopupBuyConfirmViewController.xib */,
@@ -5257,6 +5220,9 @@
 				58FB8D5C226434DC0075698E /* ShareFriendsViewController.h */,
 				58FB8D5D226434DC0075698E /* ShareFriendsViewController.m */,
 				58C9282B22FA79CE0020BDC0 /* ShareFriendsViewController.xib */,
+				58935D102449438A00DE53D8 /* InviteFriendOutbreakViewController.h */,
+				58935D112449438B00DE53D8 /* InviteFriendOutbreakViewController.m */,
+				58935D162449445600DE53D8 /* InviteFriendOutbreakViewController.xib */,
 				5855EB8A22758E9A00243703 /* InviteFriendNowViewController.h */,
 				5855EB8B22758E9A00243703 /* InviteFriendNowViewController.m */,
 				583E6C1D22FAA352004F1134 /* InviteFriendNowViewController.xib */,
@@ -5841,6 +5807,148 @@
 				587ABD8621B8FF1D00C3D81A /* RequestUrlConstant.h */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		587D0C7924470A1E003EB1F9 /* OutbreakRed */ = {
+			isa = PBXGroup;
+			children = (
+				587D0C7A24470A47003EB1F9 /* OutbreakFocusModel.h */,
+				587D0C7B24470A47003EB1F9 /* OutbreakFocusModel.m */,
+				58935D1D2449AE0600DE53D8 /* OutbreakCreateModel.h */,
+				58935D1E2449AE0600DE53D8 /* OutbreakCreateModel.m */,
+			);
+			path = OutbreakRed;
+			sourceTree = "<group>";
+		};
+		587D0C802447EDC8003EB1F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				587D0C812447EE26003EB1F9 /* OutbreakRedFocusTipView.h */,
+				587D0C832447EE27003EB1F9 /* OutbreakRedFocusTipView.m */,
+				587D0C822447EE26003EB1F9 /* OutbreakRedFocusTipView.xib */,
+				587D0C862447EE27003EB1F9 /* OutbreakRedInterruptTipView.h */,
+				587D0C842447EE27003EB1F9 /* OutbreakRedInterruptTipView.m */,
+				587D0C852447EE27003EB1F9 /* OutbreakRedInterruptTipView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		587D0C9D24484053003EB1F9 /* Trust */ = {
+			isa = PBXGroup;
+			children = (
+				587D0C9E24484053003EB1F9 /* AppState.swift */,
+				587D0CD824484053003EB1F9 /* AssetIdConstants.swift */,
+				587D0CA124484053003EB1F9 /* CommonCrypto */,
+				587D0CB724484053003EB1F9 /* Contracts */,
+				587D0CD524484053003EB1F9 /* ContractState.swift */,
+				587D0CA624484053003EB1F9 /* Crypto */,
+				587D0CB624484053003EB1F9 /* dAppProtocol.swift */,
+				587D0CD624484053003EB1F9 /* data */,
+				587D0CAC24484053003EB1F9 /* Global.swift */,
+				587D0CBD24484053003EB1F9 /* Models */,
+				587D0CDB24484053003EB1F9 /* NeoClient.swift */,
+				587D0CB524484053003EB1F9 /* NEOGasUtil.swift */,
+				587D0CAD24484053003EB1F9 /* NeoScan.swift */,
+				587D0CA024484053003EB1F9 /* NEOSignUtil.swift */,
+				587D0C9F24484053003EB1F9 /* neoutils.framework */,
+				587D0CD924484053003EB1F9 /* NEOWalletManage.swift */,
+				587D0CBB24484053003EB1F9 /* NEOWalletUtil.h */,
+				587D0CD424484053003EB1F9 /* NEOWalletUtil.m */,
+				587D0CCF24484053003EB1F9 /* O3APIClient.swift */,
+				587D0CD124484053003EB1F9 /* scripts */,
+				587D0CD024484053003EB1F9 /* ShamirSecret.swift */,
+				587D0CBC24484053003EB1F9 /* UserDefaultsManager.swift */,
+				587D0CAE24484053003EB1F9 /* Util */,
+				587D0CDA24484053003EB1F9 /* Wallet.swift */,
+				587D0CD324484053003EB1F9 /* WIF.swift */,
+			);
+			path = Trust;
+			sourceTree = "<group>";
+		};
+		587D0CA124484053003EB1F9 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CA224484053003EB1F9 /* NeoTest5-Bridging-Header.h */,
+				587D0CA324484053003EB1F9 /* commoncry.h */,
+				587D0CA424484053003EB1F9 /* commoncry.m */,
+				587D0CA524484053003EB1F9 /* module.modulemap */,
+			);
+			path = CommonCrypto;
+			sourceTree = "<group>";
+		};
+		587D0CA624484053003EB1F9 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CA724484053003EB1F9 /* AES.swift */,
+				587D0CA824484053003EB1F9 /* SHA256.swift */,
+				587D0CA924484053003EB1F9 /* scrypt.swift */,
+				587D0CAA24484053003EB1F9 /* RIPEMD160.swift */,
+				587D0CAB24484053003EB1F9 /* PBKDF2.swift */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		587D0CAE24484053003EB1F9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CAF24484053003EB1F9 /* Array+Util.swift */,
+				587D0CB024484053003EB1F9 /* validator.swift */,
+				587D0CB124484053003EB1F9 /* NEP2.swift */,
+				587D0CB224484053003EB1F9 /* Data+Util.swift */,
+				587D0CB324484053003EB1F9 /* Base58.swift */,
+				587D0CB424484053003EB1F9 /* NEP9.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		587D0CB724484053003EB1F9 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CB824484053003EB1F9 /* OpCodes.swift */,
+				587D0CB924484053003EB1F9 /* ScriptBuilder.swift */,
+				587D0CBA24484053003EB1F9 /* NEP5Token.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
+		587D0CBD24484053003EB1F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CBE24484053003EB1F9 /* AccountState.swift */,
+				587D0CBF24484053003EB1F9 /* Claims.swift */,
+				587D0CC024484053003EB1F9 /* ValueIn.swift */,
+				587D0CC124484053003EB1F9 /* NEONetwork.swift */,
+				587D0CC224484053003EB1F9 /* ValueOut.swift */,
+				587D0CC324484053003EB1F9 /* TransactionHistory.swift */,
+				587D0CC424484053003EB1F9 /* Block.swift */,
+				587D0CC524484053003EB1F9 /* Balance.swift */,
+				587D0CC624484053003EB1F9 /* Script.swift */,
+				587D0CC724484053003EB1F9 /* NeoScanTransactionHistory.swift */,
+				587D0CC824484053003EB1F9 /* Transaction.swift */,
+				587D0CC924484053003EB1F9 /* TransactionAttritbute.swift */,
+				587D0CCA24484053003EB1F9 /* Asset.swift */,
+				587D0CCB24484053003EB1F9 /* Token.swift */,
+				587D0CCC24484053003EB1F9 /* Peer.swift */,
+				587D0CCD24484053003EB1F9 /* ContractResult.swift */,
+				587D0CCE24484053003EB1F9 /* NeoScanBalance.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		587D0CD124484053003EB1F9 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CD224484053003EB1F9 /* strip-frameworks.sh */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
+		587D0CD624484053003EB1F9 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				587D0CD724484053003EB1F9 /* nodes.json */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		58822DC2230E9DF7007C8DC2 /* CQScrollMenuView */ = {
@@ -6840,12 +6948,14 @@
 				58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */,
 				5821966023F26F0D00704E23 /* ChooseTokenCell.xib in Resources */,
 				580D91B92063AE5300B12506 /* Roboto-Thin.ttf in Resources */,
+				5839409C2445A452005EAA04 /* OutbreakRedCell.xib in Resources */,
 				581F80D422F7BE6F00F8291E /* ComplaintDetailViewController.xib in Resources */,
 				581F826322F7C20800F8291E /* NEOBackupDetailViewController.xib in Resources */,
 				581F81B422F7C09900F8291E /* MnemonicTipView.xib in Resources */,
 				5860AD2220CFB51D00EEB6CE /* HistoryWifiCell.xib in Resources */,
 				580D91BD2063AE5300B12506 /* Roboto-Italic.ttf in Resources */,
 				581F82E822F7C32500F8291E /* LoginSetPWViewController.xib in Resources */,
+				583940A52445C40C005EAA04 /* OutbreakRedRecordCell.xib in Resources */,
 				582F87BE2153338F0008331D /* RankingStartCell.xib in Resources */,
 				5860AC7320CFB33200EEB6CE /* ProfileViewController.xib in Resources */,
 				5836CFD323B5D96B0072187A /* TopupPayQLC_DeductionViewController.xib in Resources */,
@@ -6895,7 +7005,6 @@
 				73A05A1D2081A02200974483 /* icon_map_refresh.png in Resources */,
 				5860AD1420CFB50600EEB6CE /* HistoryRecordsCell.xib in Resources */,
 				581F825C22F7C1F900F8291E /* NEOWalletDetailViewController.xib in Resources */,
-				58EC937F23B096290054C074 /* Topup1ViewController.xib in Resources */,
 				581B679421919D280061BEDB /* SuccessTipView.xib in Resources */,
 				935F3290212BB4F500B03341 /* ConfigurationDebug.plist in Resources */,
 				58EBED01234F223C007EEF1F /* DailyEarningsViewController.xib in Resources */,
@@ -6924,12 +7033,12 @@
 				5825554222EACF9200F0B9F0 /* SimSun.ttf in Resources */,
 				581F80B822F7BE2500F8291E /* MyOrderListEntrustCell.xib in Resources */,
 				5871924723CEFA3B00728E15 /* StartGroupBuyView.xib in Resources */,
-				581D32C3219C158B001F88C3 /* strip-frameworks.sh in Resources */,
 				581F81EC22F7C10B00F8291E /* QLCCreateWalletViewController.xib in Resources */,
 				581F81A622F7C07E00F8291E /* ETHTransferConfirmView.xib in Resources */,
 				58A3EB5C237D786500AEF7C8 /* SheetMiningTipView.xib in Resources */,
 				5860AD9920CFB5E600EEB6CE /* WalletQRViewController.xib in Resources */,
 				581F833522F7C3D000F8291E /* WalletsManageCell.xib in Resources */,
+				587D0C9424480CC2003EB1F9 /* OutbreakRedRecordViewController.xib in Resources */,
 				581F832E22F7C3BF00F8291E /* ChooseCurrencyCell.xib in Resources */,
 				581F815922F7BF9400F8291E /* ETHTransactionRecordCell.xib in Resources */,
 				581F829422F7C26F00F8291E /* ETHImportWalletViewController.xib in Resources */,
@@ -6951,7 +7060,6 @@
 				581F810522F7BEDC00F8291E /* TradeOrderDetailViewController.xib in Resources */,
 				58C9283022FA7A540020BDC0 /* ShareFriendsCell.xib in Resources */,
 				581A347B21AE653400623685 /* AddMarketsViewController.xib in Resources */,
-				581D32C9219C158B001F88C3 /* nodes.json in Resources */,
 				581F825522F7C1EE00F8291E /* NEOCreateWalletViewController.xib in Resources */,
 				5894A70A225F3105008B0854 /* FinanceCell.xib in Resources */,
 				58FE26002362EAE50032ABBE /* TopupCredentialViewController.xib in Resources */,
@@ -6967,6 +7075,7 @@
 				581F829B22F7C27D00F8291E /* ETHWalletDetailViewController.xib in Resources */,
 				580D91BC2063AE5300B12506 /* Roboto-Black.ttf in Resources */,
 				581F816E22F7C01000F8291E /* QLCTransferConfirmView.xib in Resources */,
+				58935D142449445600DE53D8 /* InviteFriendOutbreakViewController.xib in Resources */,
 				584F4EEB23D17EBD004F579B /* AgentDetailsViewController.xib in Resources */,
 				5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */,
 				581F80DB22F7BE7D00F8291E /* EntrustOrderDetailViewController.xib in Resources */,
@@ -7002,6 +7111,7 @@
 				5885D43C231F497C00F9DEDE /* VotingMiningNodeViewController.xib in Resources */,
 				581F827122F7C22400F8291E /* ETHExportMnemonicViewController.xib in Resources */,
 				5874E35C234DDAA6000835A0 /* index.html in Resources */,
+				587D0C872447EE27003EB1F9 /* OutbreakRedFocusTipView.xib in Resources */,
 				5894A71D226040FA008B0854 /* MyPortfolioCell.xib in Resources */,
 				580D91B32063AE5300B12506 /* Roboto-BoldItalic.ttf in Resources */,
 				5894A713225F4E18008B0854 /* FinanceProductDetailViewController.xib in Resources */,
@@ -7010,6 +7120,7 @@
 				581F822422F7C19500F8291E /* EOSCPUNETViewController.xib in Resources */,
 				583D9598211432110057A90C /* RankingRuleViewController.xib in Resources */,
 				581F833C22F7C3E000F8291E /* JoinCommunityCell.xib in Resources */,
+				587D0C8B24480BF5003EB1F9 /* OutbreakRedViewController.xib in Resources */,
 				58882ED6239A21E500330EB6 /* JoinTelegramTipView.xib in Resources */,
 				58FC12C3230D391F0069474C /* OTCPayNEOViewController.xib in Resources */,
 				581F81BB22F7C0A200F8291E /* HistoryChartView.xib in Resources */,
@@ -7030,6 +7141,7 @@
 				58A3EB56237D375900AEF7C8 /* QLCHistoryChartView.xib in Resources */,
 				58688F1F239115740016AB2F /* CountryCodeList.json in Resources */,
 				583E6C1B22FAA352004F1134 /* InviteFriendNowViewController.xib in Resources */,
+				587D0C8A2447EE27003EB1F9 /* OutbreakRedInterruptTipView.xib in Resources */,
 				581F80C622F7BE4E00F8291E /* OTCPayETHViewController.xib in Resources */,
 				5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */,
 				580D91B42063AE5300B12506 /* Roboto-LightItalic.ttf in Resources */,
@@ -7066,10 +7178,12 @@
 				581F814B22F7BF7800F8291E /* WalletHomeSwitchCell.xib in Resources */,
 				58A3EB76237D869000AEF7C8 /* ClaimQLCViewController.xib in Resources */,
 				58A8B20A233C8805007E2CE3 /* MyTopupOrderViewController.xib in Resources */,
+				587D0D0A24484054003EB1F9 /* nodes.json in Resources */,
 				584F4EDE23D0758A004F579B /* GroupBuyGoStakeView.xib in Resources */,
 				581F81D022F7C0D500F8291E /* QLCTransferViewController.xib in Resources */,
 				581F819F22F7C07300F8291E /* NEOTransferConfirmView.xib in Resources */,
 				5871923523CEF75400728E15 /* GroupBuyDetialViewController.xib in Resources */,
+				587D0D0624484054003EB1F9 /* strip-frameworks.sh in Resources */,
 				580D91B82063AE5300B12506 /* Roboto-Light.ttf in Resources */,
 				581F831222F7C37900F8291E /* RegisterSetPWViewController.xib in Resources */,
 				581F80AA22F7BDFB00F8291E /* MyOrderListTradeCell.xib in Resources */,
@@ -7104,7 +7218,6 @@
 				58FB34BF23D004700045CAB4 /* AgentRewardViewController.xib in Resources */,
 				5812DD9E20A1A7890043A8A8 /* normal_face.plist in Resources */,
 				58CDB5E020871DBF00B74962 /* tox.json in Resources */,
-				5821964C23F13F9D00704E23 /* Topup3ViewController.xib in Resources */,
 				58FB349B23CFF5400045CAB4 /* OpenDelegateCheckView.xib in Resources */,
 				58A8B211233C8812007E2CE3 /* ChooseTopupPlanViewController.xib in Resources */,
 				581925852114363E009AE406 /* NewRankView.xib in Resources */,
@@ -7331,7 +7444,7 @@
 				5806C11021C3D15A000E693B /* CreateAccountGetRequiredPublicKeyRequest.m in Sources */,
 				583C696023696CD70009846B /* OTCOrderTodo.m in Sources */,
 				587ABD4021B8F8F700C3D81A /* UnstakeEosAbiJsonTobinRequest.m in Sources */,
-				581B678921916D790061BEDB /* AppConfigUtil.m in Sources */,
+				581B678921916D790061BEDB /* OutbreakRedUtil.m in Sources */,
 				5825553E22EACF9200F0B9F0 /* XLMosaicView.m in Sources */,
 				5812DD9F20A1A7890043A8A8 /* ZXMessageModel.m in Sources */,
 				7310AA0C20D0C71400F2261A /* NSBundle+Language.m in Sources */,
@@ -7345,17 +7458,18 @@
 				58E032B121883F500061C72D /* ETHTransferViewController.m in Sources */,
 				587ABD3E21B8F8F700C3D81A /* EOSWalletUtil.m in Sources */,
 				58A801CF226DC7B800640BBC /* RegisterSetPWViewController.m in Sources */,
-				5832CB3A2281331A0011160D /* O3APIClient.swift in Sources */,
 				58270FCC2072089800C08784 /* HistoryRecordsCell.m in Sources */,
 				580D916520625A4400B12506 /* NSString+RegexCategory.m in Sources */,
 				583FB53C22E84FE300F5AE0F /* OrderStatusUtil.m in Sources */,
 				5812DDA220A1A7890043A8A8 /* ChatFaceHeleper.m in Sources */,
+				587D0D0424484054003EB1F9 /* O3APIClient.swift in Sources */,
 				58245C4D22E192550093E747 /* TZImageManager.m in Sources */,
+				58935D1F2449AE0600DE53D8 /* OutbreakCreateModel.m in Sources */,
 				5821CD3D217DBCB500F81F8B /* NEOCreateWalletViewController.m in Sources */,
 				58FB8D7C226587620075698E /* FinanceHistoryViewController.m in Sources */,
-				5832CB352281245B0011160D /* ContractState.swift in Sources */,
 				58A57D3722DD6CCA00699C3F /* EntrustOrderInfoModel.m in Sources */,
 				58FB8D5A226434C80075698E /* InviteRankingViewController.m in Sources */,
+				587D0CDC24484053003EB1F9 /* AppState.swift in Sources */,
 				583D9596211432110057A90C /* RankingRuleViewController.m in Sources */,
 				5894EC51217ED2BC007F5D39 /* ETHImportWalletViewController.m in Sources */,
 				583D9599211432110057A90C /* RankingCell.m in Sources */,
@@ -7368,7 +7482,6 @@
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				5825552822EACF9100F0B9F0 /* ZQImageWatermarkController.m in Sources */,
 				58D689CE230B90E400115610 /* ThemeConstants.m in Sources */,
-				581D32E1219C158B001F88C3 /* NEP2.swift in Sources */,
 				58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */,
 				581AC36D21AFD6E600ACA80B /* QNavigationController.m in Sources */,
 				58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */,
@@ -7386,12 +7499,14 @@
 				5806C10121C3C377000E693B /* GetInfoRequest.m in Sources */,
 				587ABD4521B8F8F800C3D81A /* Abi_json_to_binRequest.m in Sources */,
 				5812DDA820A1A7890043A8A8 /* ZXChatBoxFaceView.m in Sources */,
+				587D0CF924484054003EB1F9 /* Block.swift in Sources */,
 				58FB8D74226572840075698E /* ShareFriendsCell.m in Sources */,
+				587D0CE824484054003EB1F9 /* validator.swift in Sources */,
 				58573DE0243ED52900A5C7A9 /* QBaseTableCell.m in Sources */,
 				588B4EA624065683003BE791 /* QgasVoteUtil.m in Sources */,
+				587D0CFF24484054003EB1F9 /* Asset.swift in Sources */,
 				73A05A332081D91600974483 /* HYBImageClipedManager.m in Sources */,
 				58105D3E21882A1A00B8B701 /* ETHWalletAddressViewController.m in Sources */,
-				581D32DE219C158B001F88C3 /* UserDefaultsManager.swift in Sources */,
 				581A348621AEA07700623685 /* ExportPrivateKeyQRView.m in Sources */,
 				58CF40B3219922A70000C3DA /* NEOTransferViewController.m in Sources */,
 				5812DDA920A1A7890043A8A8 /* ZXChatBoxItemView.m in Sources */,
@@ -7402,10 +7517,13 @@
 				581AF7B121B6646E001A37E1 /* EOSCreateWalletViewController.m in Sources */,
 				58A3EB84237E739F00AEF7C8 /* MiningConstants.m in Sources */,
 				5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */,
+				587D0CEB24484054003EB1F9 /* Base58.swift in Sources */,
 				58A3EB8D237E8D9900AEF7C8 /* MiningRewardIndexModel.m in Sources */,
 				73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */,
 				58245C4E22E192550093E747 /* TZPhotoPickerController.m in Sources */,
 				587ABD4221B8F8F800C3D81A /* GetRequiredPublicKeyRequest.m in Sources */,
+				587D0CE524484054003EB1F9 /* Global.swift in Sources */,
+				587D0CF024484054003EB1F9 /* ScriptBuilder.swift in Sources */,
 				58E0DAE12334DACE00549018 /* OLImage.m in Sources */,
 				73A05A242081D52200974483 /* UIImage+RoundedCorner.m in Sources */,
 				5812DDA620A1A7890043A8A8 /* ZXChatBoxController.m in Sources */,
@@ -7416,6 +7534,7 @@
 				583FB53F22E97B2F00F5AE0F /* UserUtil.m in Sources */,
 				5812DDAF20A1A7890043A8A8 /* ZXMessageCell.m in Sources */,
 				581D32EB219D0AFB001F88C3 /* ETHAddressTransactionsModel.m in Sources */,
+				587D0CE724484054003EB1F9 /* Array+Util.swift in Sources */,
 				5885D420231E491800F9DEDE /* AFJSONRPCClient.m in Sources */,
 				5894A7232260628B008B0854 /* FinanceRedeemConfirmView.m in Sources */,
 				587ABD6B21B8F8F800C3D81A /* RichListRequest.m in Sources */,
@@ -7426,6 +7545,8 @@
 				5870B5D923F667D800EB4D34 /* TopupBuyConfirmViewController.m in Sources */,
 				5825552D22EACF9100F0B9F0 /* ZQImageRotationController.m in Sources */,
 				58F3185122D33CB60024B4F0 /* HomeBuySellViewController.m in Sources */,
+				587D0CFD24484054003EB1F9 /* Transaction.swift in Sources */,
+				587D0CE124484053003EB1F9 /* SHA256.swift in Sources */,
 				587ABD5E21B8F8F800C3D81A /* EOSResourceResult.m in Sources */,
 				580D915120625A4400B12506 /* UIView+Debug.m in Sources */,
 				5825553122EACF9100F0B9F0 /* ImageFilterToolBar.m in Sources */,
@@ -7448,6 +7569,7 @@
 				58BE6F7D233E4B0000684A73 /* TopupWebViewController.m in Sources */,
 				5833AD0C206C8427002C6909 /* WalletMenuView.m in Sources */,
 				581AF7AA21B6646E001A37E1 /* EOSTransactionRecordViewController.m in Sources */,
+				587D0CEE24484054003EB1F9 /* dAppProtocol.swift in Sources */,
 				5834A3512387D7E9004EB81A /* ClaimSuccessTipView.m in Sources */,
 				5821966923F28CC800704E23 /* UIView+ViewController.m in Sources */,
 				58245C5422E192550093E747 /* LxGridViewFlowLayout.m in Sources */,
@@ -7457,20 +7579,18 @@
 				581F5FEE219E92B300604352 /* NSString+Valid.m in Sources */,
 				5806C11621C3E4C8000E693B /* CreateAccountSignTransactionRequest.m in Sources */,
 				589E59C922D43427000338B7 /* HomeBuySellCell.m in Sources */,
+				58935D132449438B00DE53D8 /* InviteFriendOutbreakViewController.m in Sources */,
 				58673E752435DC5900C7D7F5 /* UIView+PopAnimate.m in Sources */,
-				581D32DA219C158B001F88C3 /* Peer.swift in Sources */,
 				7384A29E2074DC0B00EA60E0 /* NSDate+Category.m in Sources */,
 				5821968123F5104F00704E23 /* StartGroupViewController.m in Sources */,
-				581D32D9219C158B001F88C3 /* Token.swift in Sources */,
 				58245BE122E00C830093E747 /* EntrustOrderDetailViewController.m in Sources */,
 				5825556822EECBD400F0B9F0 /* WalletSelectViewController.m in Sources */,
-				581D32D4219C158B001F88C3 /* Script.swift in Sources */,
 				581F5FE5219E68E800604352 /* JoinCommunityViewController.m in Sources */,
+				587D0D0924484054003EB1F9 /* ContractState.swift in Sources */,
 				73048F132079FE9000A4EFEE /* RatesMode.m in Sources */,
 				58786CD323681F75009D6ACA /* NEOJSView.m in Sources */,
 				58D2D8A121940CB800C5B4C9 /* ETHExportKeystoreViewController.m in Sources */,
 				7384A29F2074DC0B00EA60E0 /* NSDateFormatter+Category.m in Sources */,
-				581D32C8219C158B001F88C3 /* PBKDF2.swift in Sources */,
 				58245C4622E192550093E747 /* TZVideoPlayerController.m in Sources */,
 				581A347421AE39C200623685 /* MarketSortBtn.m in Sources */,
 				587ABD4921B8F8F800C3D81A /* Abi_json_to_bin_Result.m in Sources */,
@@ -7481,14 +7601,13 @@
 				58245C4C22E192550093E747 /* TZProgressView.m in Sources */,
 				5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */,
 				587ABD6321B8F8F800C3D81A /* CreateEOSAccountRequest.m in Sources */,
-				581D32C7219C158B001F88C3 /* RIPEMD160.swift in Sources */,
 				587ABD5D21B8F8F800C3D81A /* EOS_Account.m in Sources */,
 				5825553222EACF9100F0B9F0 /* EditOperatingToolBar.m in Sources */,
-				581D32CF219C158B001F88C3 /* NEONetwork.swift in Sources */,
 				58A8B1D5233B5776007E2CE3 /* TopupOrderModel.m in Sources */,
 				58CF40D2219A64350000C3DA /* NEOAddressHistoryModel.m in Sources */,
 				5827BC3B21A3BB7600B7730E /* ETHWalletInfo.m in Sources */,
 				584092682304EB1A0054BCBB /* MyStakingsViewController.m in Sources */,
+				587D0CED24484054003EB1F9 /* NEOGasUtil.swift in Sources */,
 				587ABD6C21B8F8F800C3D81A /* EOS_Follow.m in Sources */,
 				58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */,
 				587ABD4721B8F8F800C3D81A /* EOS_TransferModel.m in Sources */,
@@ -7496,18 +7615,20 @@
 				587ABD5521B8F8F800C3D81A /* EOS_GetAccountResult.m in Sources */,
 				7377D176206B8D560072E628 /* LocationMode.m in Sources */,
 				583D9543211430D90057A90C /* GlowLable.m in Sources */,
-				581D32DC219C158B001F88C3 /* NeoScanBalance.swift in Sources */,
 				581AF7A721B6646E001A37E1 /* EOSWalletDetailViewController.m in Sources */,
-				581D32BC219C158B001F88C3 /* ScriptBuilder.swift in Sources */,
 				58DF8E5D206E26AC00ACFC65 /* SendFundsView.m in Sources */,
+				587D0CDE24484053003EB1F9 /* NEOSignUtil.swift in Sources */,
+				587D0CDF24484053003EB1F9 /* commoncry.m in Sources */,
 				581D31C8219BC5AE001F88C3 /* MarketsCell.m in Sources */,
 				582844012189407B00AD65C8 /* SettingsCell.m in Sources */,
 				587ABD5B21B8F8F800C3D81A /* EOS_AccountResult.m in Sources */,
 				5821965A23F26D1500704E23 /* ChooseDeductionTokenViewController.m in Sources */,
+				587D0CF224484054003EB1F9 /* UserDefaultsManager.swift in Sources */,
 				5821CD38217DB5A400F81F8B /* ETHCreateWalletViewController.m in Sources */,
 				58F3186522D3464F0024B4F0 /* RecordListViewController.m in Sources */,
 				58573DE4243ED93000A5C7A9 /* QBaseTouchButton.m in Sources */,
 				585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */,
+				583940A62445C40C005EAA04 /* OutbreakRedRecordCell.m in Sources */,
 				58A3EB51237D2E7100AEF7C8 /* SheetMiningUtil.m in Sources */,
 				58D689D2230B9C6600115610 /* DeviceConstants.m in Sources */,
 				5872EF3424095B26000F2DFF /* BuybackDetailViewController.m in Sources */,
@@ -7518,6 +7639,7 @@
 				581AC37221AFD84500ACA80B /* XYTransition.m in Sources */,
 				587CCF7F236BDD8F00CB9DF3 /* AgentModel.m in Sources */,
 				583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */,
+				587D0C882447EE27003EB1F9 /* OutbreakRedFocusTipView.m in Sources */,
 				5825556322EEC22A00F0B9F0 /* ProjectEnum.m in Sources */,
 				580D914020625A4300B12506 /* UIImage+Orientation.m in Sources */,
 				581CB39A21C8BF9F004DED10 /* EOSSignUtil.m in Sources */,
@@ -7529,8 +7651,8 @@
 				58F3186022D346180024B4F0 /* BuySellDetailViewController.m in Sources */,
 				583FB56F22E9BBF400F5AE0F /* VerifyTipView.m in Sources */,
 				58CF40BE21995D470000C3DA /* NEOAddressInfoModel.m in Sources */,
-				581D32C4219C158B001F88C3 /* AES.swift in Sources */,
 				58BDD4F0230CDB900060FBCC /* NewOrderQLCTransferUtil.m in Sources */,
+				587D0C892447EE27003EB1F9 /* OutbreakRedInterruptTipView.m in Sources */,
 				58517B5023682B2B008396EE /* NEOJSUtil.m in Sources */,
 				58245C0A22E075C70093E747 /* TradeIDInputView.m in Sources */,
 				58FB8D7022645C9C0075698E /* InviteRankingModel.m in Sources */,
@@ -7540,30 +7662,29 @@
 				581D5120217981F40064F60C /* MarketsViewController.m in Sources */,
 				58A8B1C9233B1454007E2CE3 /* ChooseTopupPlanCell.m in Sources */,
 				73048F16207A19B500A4EFEE /* BalanceInfo.m in Sources */,
-				581D32BE219C158B001F88C3 /* ShamirSecret.swift in Sources */,
-				581D32BF219C158B001F88C3 /* NeoClient.swift in Sources */,
 				581AF7B021B6646E001A37E1 /* EOSTransferViewController.m in Sources */,
+				587D0D0C24484054003EB1F9 /* NEOWalletManage.swift in Sources */,
 				5812DDBE20A1A7D20043A8A8 /* UIDevice+TL.m in Sources */,
 				58822DC8230E9DF8007C8DC2 /* UIView+frameAdjust.m in Sources */,
 				5812DDAD20A1A7890043A8A8 /* ZXChatBoxView.m in Sources */,
 				587ABD8D21BA539600C3D81A /* EOSAccountResourceInfoModel.m in Sources */,
 				584092732305090D0054BCBB /* NewStakingViewController.m in Sources */,
-				581D32BB219C158B001F88C3 /* OpCodes.swift in Sources */,
 				58CD93A720A2CCCD0004F1F0 /* ChatHeadView.m in Sources */,
 				5825553922EACF9100F0B9F0 /* CropRatioItem.m in Sources */,
 				58FB8D5F226434DC0075698E /* ShareFriendsViewController.m in Sources */,
 				5874E34E234DCEA4000835A0 /* ClaimQGASViewController.m in Sources */,
+				5839409B2445A452005EAA04 /* OutbreakRedCell.m in Sources */,
 				583A0F6D20844DC400EF9ABD /* SelectCountryModel.m in Sources */,
 				58A4DEB9206234AC00E72F52 /* main.m in Sources */,
 				587ABD6821B8F8F800C3D81A /* EOS_OptionModel.m in Sources */,
 				73C1BA10207E18270080C59F /* HMScannerBorder.m in Sources */,
-				581D32C0219C158B001F88C3 /* commoncry.m in Sources */,
 				58CF40B7219925990000C3DA /* NEOImportViewController.m in Sources */,
 				5872056C23C71799009A6217 /* OpenAgentViewController.m in Sources */,
 				5825552A22EACF9100F0B9F0 /* ZQBrightnessController.m in Sources */,
 				58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */,
 				58A57D3A22DDA22F00699C3F /* WalletTransferUtil.m in Sources */,
 				584F4EEE23D587DC004F579B /* GroupBuyUtil.m in Sources */,
+				587D0CEC24484054003EB1F9 /* NEP9.swift in Sources */,
 				583D9549211430FA0057A90C /* VPNRankMode.m in Sources */,
 				58CDBAB023BDCEA300982D54 /* StakingProcessAnimateView.m in Sources */,
 				587ABD5421B8F8F800C3D81A /* EOS_Rate.m in Sources */,
@@ -7574,7 +7695,6 @@
 				585DD83E229CE0E7007944E9 /* QLCTransferConfirmView.m in Sources */,
 				7377D18B206CC3820072E628 /* NSString+Localizable.m in Sources */,
 				58E41C532182C1D6004C87AA /* ETHWalletDetailViewController.m in Sources */,
-				581D32D2219C158B001F88C3 /* Block.swift in Sources */,
 				5849117F2105AEF4005232A2 /* LocationTracker.m in Sources */,
 				5875B2092387B34F00FCA894 /* RedPointModel.m in Sources */,
 				584F4EEA23D17EBD004F579B /* AgentDetailsViewController.m in Sources */,
@@ -7583,7 +7703,6 @@
 				58EBED00234F1F51007EEF1F /* RewardListModel.m in Sources */,
 				589E59D322D592AE000338B7 /* MyOrderListEntrustCell.m in Sources */,
 				587ABD5321B8F8F800C3D81A /* EOS_TokenInfo.m in Sources */,
-				581D32E0219C158B001F88C3 /* validator.swift in Sources */,
 				5812DDA120A1A7890043A8A8 /* TLUserHelper.m in Sources */,
 				5811B7582293D81500F657B5 /* QLCTransactionRecordViewController.m in Sources */,
 				580D916220625A4400B12506 /* UINavigationBar+Awesome.m in Sources */,
@@ -7597,47 +7716,51 @@
 				582717C822C9DC56003DC080 /* SGQRCodeObtainConfigure.m in Sources */,
 				5875B2012386895B00FCA894 /* UIBarButtonItem+WZLBadge.m in Sources */,
 				580D913D20625A4300B12506 /* UIImage+Blur.m in Sources */,
+				587D0CF524484054003EB1F9 /* ValueIn.swift in Sources */,
 				581AF7BB21B66827001A37E1 /* EOSTraceModel.m in Sources */,
+				587D0CFA24484054003EB1F9 /* Balance.swift in Sources */,
 				5821CD44217DCBA700F81F8B /* ETHMnemonicViewController.m in Sources */,
 				58231D44237BFD74009CDE90 /* MiningDailyDetailViewController.m in Sources */,
 				58779A9922642976008590EE /* ETHExportKeystorePWViewController.m in Sources */,
 				58231D3B237BE3ED009CDE90 /* SheetMiningTipView.m in Sources */,
+				587D0D0824484054003EB1F9 /* NEOWalletUtil.m in Sources */,
 				585CDC17225C89DC00199FE1 /* ChooseAreaCodeViewController.m in Sources */,
 				581C228021AD1B2D0009888B /* UIView+ToastAlert.m in Sources */,
 				587ABD4B21B8F8F800C3D81A /* Abi_bin_to_json.m in Sources */,
 				58A3D4F5225EEBED00ABABD9 /* EditTextViewController.m in Sources */,
 				7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */,
 				5875B2032386895B00FCA894 /* UIView+WZLBadge.m in Sources */,
-				581D32E4219C158B001F88C3 /* NEP9.swift in Sources */,
 				58A8B1CE233B389A007E2CE3 /* TopupPayQLC_Deduction_CNYViewController.m in Sources */,
+				587D0C7C24470A47003EB1F9 /* OutbreakFocusModel.m in Sources */,
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
+				587D0CFE24484054003EB1F9 /* TransactionAttritbute.swift in Sources */,
 				5836CFC423B49D5A0072187A /* TopupPayQLC_DeductionViewController.m in Sources */,
 				583910F9208495F200A19E7E /* DDLogUtil.m in Sources */,
 				58644E3E235817ED00EFA9A2 /* TopupCredentialViewController.m in Sources */,
 				5812DDAA20A1A7890043A8A8 /* ZXChatFaceItemView.m in Sources */,
 				58822DC7230E9DF8007C8DC2 /* CQScrollMenuView.m in Sources */,
 				580D914720625A4400B12506 /* UIImage+Capture.m in Sources */,
-				5832CB2D22811E000011160D /* dAppProtocol.swift in Sources */,
 				58A8B1D2233B56AE007E2CE3 /* TopupProductModel.m in Sources */,
 				735310DE2111509A00537372 /* PGIndexBannerSubiew.m in Sources */,
+				587D0CEA24484054003EB1F9 /* Data+Util.swift in Sources */,
 				58DA5BAF2322330E004E8D5A /* StakingProcessView.m in Sources */,
 				580D914220625A4300B12506 /* UIImage+Vector.m in Sources */,
 				5825555D22EAD26900F0B9F0 /* PhotoPickerUtil.m in Sources */,
 				58245C5222E192550093E747 /* TZGifPhotoPreviewController.m in Sources */,
 				58A2495C20D207AB00781549 /* VersionManager.m in Sources */,
-				581D32D3219C158B001F88C3 /* Balance.swift in Sources */,
 				58D2D8912193D53900C5B4C9 /* ETHAddressHistoryModel.m in Sources */,
 				581D7AFE217D9E4000AFD0DE /* ChooseWalletViewController.m in Sources */,
 				580D915B20625A4400B12506 /* UIView+Constraints.m in Sources */,
 				58245BE622E016770093E747 /* EntrustOrderDetailCell.m in Sources */,
 				58EC938823B0B8AA0054C074 /* TopupCountryModel.m in Sources */,
 				5812DDBF20A1A7D20043A8A8 /* NSString+TL.m in Sources */,
+				587D0D0224484054003EB1F9 /* ContractResult.swift in Sources */,
 				5811B7592293D81500F657B5 /* QLCWalletAddressViewController.m in Sources */,
 				5812DDA420A1A7890043A8A8 /* ZXUser.m in Sources */,
-				5832CB37228125040011160D /* Wallet.swift in Sources */,
 				58245C4722E192550093E747 /* TZAssetModel.m in Sources */,
 				58FB8D8B2265AB970075698E /* GuangGaoCollectionCell.m in Sources */,
+				587D0CF424484054003EB1F9 /* Claims.swift in Sources */,
 				5821966B23F28CC800704E23 /* NinaBaseView.m in Sources */,
 				7377D1A8206DCAB50072E628 /* RefreshTableView.m in Sources */,
 				581B679521919D280061BEDB /* SuccessTipView.m in Sources */,
@@ -7652,12 +7775,10 @@
 				58CD53E4238FA3DE00D5C245 /* UISegmentedControl+Adapt.m in Sources */,
 				586F67FD24090432008E4D4C /* BuybackBurnModel.m in Sources */,
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
-				581D32D7219C158B001F88C3 /* TransactionAttritbute.swift in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
 				589AE86823CC4E2000476D53 /* OpenDelegateCheckView.m in Sources */,
 				585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */,
 				581F5FD6219D6C6000604352 /* PasswordManagementViewController.m in Sources */,
-				58EC938023B096290054C074 /* Topup1ViewController.m in Sources */,
 				58D2D8952193E26100C5B4C9 /* UIView+DottedBox.m in Sources */,
 				5836CFBF23B49AA50072187A /* TopupPayNEO_PayViewController.m in Sources */,
 				58D2D88C2192F41B00C5B4C9 /* WalletsSwitchCell.m in Sources */,
@@ -7666,11 +7787,10 @@
 				581B67992192DE4D0061BEDB /* ETHAddressInfoModel.m in Sources */,
 				58CF40AA219916860000C3DA /* NEOBackupDetailViewController.m in Sources */,
 				58CDB5EC208742CA00B74962 /* UserHeadBtn.m in Sources */,
-				581D32DD219C158B001F88C3 /* AssetIdConstants.swift in Sources */,
 				587ABD4A21B8F8F800C3D81A /* Abi_bin_to_json_Result.m in Sources */,
 				582843FA21885EEA00AD65C8 /* LoginInputPWViewController.m in Sources */,
 				581F5FDB219E5AB300604352 /* WalletsManageViewController.m in Sources */,
-				581D32E8219C16A8001F88C3 /* NEOWalletManage.swift in Sources */,
+				587D0D0B24484054003EB1F9 /* AssetIdConstants.swift in Sources */,
 				583D959C211432110057A90C /* RankingSubCell.m in Sources */,
 				5825552B22EACF9100F0B9F0 /* ZQImageMosaicController.m in Sources */,
 				582717C922C9DC56003DC080 /* SGQRCodeObtain.m in Sources */,
@@ -7680,20 +7800,21 @@
 				5875B2022386895B00FCA894 /* UITabBarItem+WZLBadge.m in Sources */,
 				5894A728226093D3008B0854 /* FinanceOrderListModel.m in Sources */,
 				58270FC62072055800C08784 /* HistoryRecordsViewController.m in Sources */,
+				587D0CEF24484054003EB1F9 /* OpCodes.swift in Sources */,
 				58EE81822305519900299261 /* StakingDetailViewController.m in Sources */,
 				58990B6A219431880036FF4F /* ETHTransferConfirmView.m in Sources */,
 				5806C0FE21C3BB1A000E693B /* Create_account_abi_json_to_bin_request.m in Sources */,
 				58CFD9DB2293D305006862E2 /* QLCBackupDetailViewController.m in Sources */,
 				5825553022EACF9100F0B9F0 /* ImageMosaicToolBar.m in Sources */,
-				581D32BD219C158B001F88C3 /* NEP5Token.swift in Sources */,
 				587ABD5C21B8F8F800C3D81A /* EOSResourceCellModel.m in Sources */,
 				5825553422EACF9100F0B9F0 /* ImageEditTitleView.m in Sources */,
 				5855EB8D22758E9A00243703 /* InviteFriendNowViewController.m in Sources */,
+				587D0CE924484054003EB1F9 /* NEP2.swift in Sources */,
 				580CAFBF218C29D1004C0E06 /* LoginPWModel.m in Sources */,
 				587ABD3F21B8F8F700C3D81A /* Approve_Abi_json_to_bin_request.m in Sources */,
 				580D916120625A4400B12506 /* UITextView+Select.m in Sources */,
+				583940772444758E005EAA04 /* OutbreakRedViewController.m in Sources */,
 				5812DDAC20A1A7890043A8A8 /* ZXChatFaceMenuView.m in Sources */,
-				581D32D0219C158B001F88C3 /* ValueOut.swift in Sources */,
 				58D8E87F23613AB800209BB2 /* TopupPayETH_Deduction_CNYViewController.m in Sources */,
 				585E13AB22F1842A0086488E /* OTCPayETHViewController.m in Sources */,
 				580D91C72064A27100B12506 /* QGradientView.m in Sources */,
@@ -7703,7 +7824,6 @@
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
 				585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */,
 				582717CA22C9DC56003DC080 /* SGQRCodeScanView.m in Sources */,
-				581D32C5219C158B001F88C3 /* SHA256.swift in Sources */,
 				587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */,
 				580D915320625A4400B12506 /* UIView+ViewController.m in Sources */,
 				58245C1022E159B90093E747 /* FailTipView.m in Sources */,
@@ -7719,8 +7839,8 @@
 				581D7AF82179C7AF00AFD0DE /* LoginSetPWViewController.m in Sources */,
 				587ABD4321B8F8F800C3D81A /* TransferAbi_json_to_bin_request.m in Sources */,
 				73A05A312081D91600974483 /* UIButton+HYBImageCliped.m in Sources */,
+				587D0CE424484053003EB1F9 /* PBKDF2.swift in Sources */,
 				58B947E62064A5AD007F52F6 /* UIView+Gradient.m in Sources */,
-				581D32C2219C158B001F88C3 /* NeoScan.swift in Sources */,
 				5895701F21897ACF00DB7497 /* ChooseCurrencyCell.m in Sources */,
 				58E0DAE02334DACE00549018 /* OLImageView.m in Sources */,
 				5872133C2361748600E50744 /* NSNumber+RLArithmetic.m in Sources */,
@@ -7728,14 +7848,14 @@
 				58F3185622D345530024B4F0 /* NewOrderViewController.m in Sources */,
 				58B2D49F2321120300C15465 /* NSString+RandomStr.m in Sources */,
 				581B679D2192EFFE0061BEDB /* WalletsSwitchViewController.m in Sources */,
+				587D0CF824484054003EB1F9 /* TransactionHistory.swift in Sources */,
 				58A8B1E6233C5C20007E2CE3 /* TopupConstants.m in Sources */,
 				5894EC45217EB93A007F5D39 /* MnemonicTipView.m in Sources */,
 				58FB8D6C22645AF10075698E /* InviteRankingCell.m in Sources */,
 				5821965023F2551E00704E23 /* TopupProductSubViewController.m in Sources */,
 				58245C4A22E192550093E747 /* TZPhotoPreviewController.m in Sources */,
 				58245C4F22E192550093E747 /* TZPhotoPreviewCell.m in Sources */,
-				581D32D8219C158B001F88C3 /* Asset.swift in Sources */,
-				5832CB2F22811E690011160D /* AppState.swift in Sources */,
+				587D0CE024484053003EB1F9 /* AES.swift in Sources */,
 				581C228621AD2BC10009888B /* RunInBackground.m in Sources */,
 				5812DDA020A1A7890043A8A8 /* ChatFace.m in Sources */,
 				587ABD7021B8F8F800C3D81A /* EOS_AccountInfo.m in Sources */,
@@ -7751,6 +7871,7 @@
 				582F87BF2153338F0008331D /* RankingStartCell.m in Sources */,
 				58D689D8230BA17C00115610 /* GlobalConstants.m in Sources */,
 				58245C4222E192550093E747 /* TZTestCell.m in Sources */,
+				587D0D0324484054003EB1F9 /* NeoScanBalance.swift in Sources */,
 				5839F5252068F9FA004C4A54 /* NSString+HexStr.m in Sources */,
 				58245C5322E192550093E747 /* TZImageRequestOperation.m in Sources */,
 				7348C938206E0604009ACA5C /* WalletAlertView.m in Sources */,
@@ -7772,18 +7893,19 @@
 				581C227C21AD17F80009888B /* UIView+JKToast.m in Sources */,
 				581AF7C021B66B9B001A37E1 /* EOSTransferConfirmView.m in Sources */,
 				582CDF4E243435380094A70E /* Topup4ViewController.m in Sources */,
+				587D0CF124484054003EB1F9 /* NEP5Token.swift in Sources */,
 				5885D426231E5A4600F9DEDE /* PledgeInfoByBeneficialModel.m in Sources */,
 				5827BC21219EBAF800B7730E /* ETHVerifyPWViewController.m in Sources */,
 				73F9557720FF33E400A3E0F5 /* FreeRecordMode.m in Sources */,
-				581D32CE219C158B001F88C3 /* ValueIn.swift in Sources */,
 				7377D173206B84620072E628 /* LocationManage.m in Sources */,
 				5871922A23CEE48100728E15 /* ShareRewardCell.m in Sources */,
 				58245C5822E197CE0093E747 /* ComplaintPhotoCell.m in Sources */,
 				58BDD4E3230BFF590060FBCC /* ETHWalletManage.m in Sources */,
 				584911802105AEF4005232A2 /* LocationShareModel.m in Sources */,
 				73E52BD12062978200063ED6 /* QlinkTabbarViewController.m in Sources */,
+				587D0CF724484054003EB1F9 /* ValueOut.swift in Sources */,
 				580D915920625A4400B12506 /* UIView+Visuals.m in Sources */,
-				581D32C6219C158B001F88C3 /* scrypt.swift in Sources */,
+				587D0CFC24484054003EB1F9 /* NeoScanTransactionHistory.swift in Sources */,
 				58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */,
 				589E59D822D6E4C9000338B7 /* BackupKeyView.m in Sources */,
 				58C3181A2181B829000344D3 /* WalletsCell.m in Sources */,
@@ -7793,10 +7915,9 @@
 				7377D199206CFCD10072E628 /* SRSlimeView.m in Sources */,
 				588B4EA224064BB2003BE791 /* QVoteViewController.m in Sources */,
 				58A64FFE21BE16B100E52FFF /* TipOKView.m in Sources */,
-				5827BC3D21A3FA6300B7730E /* NEOGasUtil.swift in Sources */,
-				581D32CD219C158B001F88C3 /* Claims.swift in Sources */,
 				58CF1032207CBFDF0026F28E /* UnderlineView.m in Sources */,
 				587ABD6D21B8F8F800C3D81A /* EOS_RichListResult.m in Sources */,
+				587D0D0E24484054003EB1F9 /* NeoClient.swift in Sources */,
 				58CF40CF21998D340000C3DA /* NEOTransferConfirmView.m in Sources */,
 				581B678C219178BB0061BEDB /* FingerprintVerificationUtil.m in Sources */,
 				5825552722EACF9100F0B9F0 /* WaterMarkPicModel.m in Sources */,
@@ -7814,7 +7935,7 @@
 				5825553B22EACF9200F0B9F0 /* UIImage+Rotate.m in Sources */,
 				58E41C5D2182E52D004C87AA /* ETHTransactionRecordViewController.m in Sources */,
 				581A347A21AE653400623685 /* AddMarketsViewController.m in Sources */,
-				581D32DF219C158B001F88C3 /* Array+Util.swift in Sources */,
+				587D0CE624484054003EB1F9 /* NeoScan.swift in Sources */,
 				581AFC5021B7D5A5001A37E1 /* EOSRegisterAccountViewController.m in Sources */,
 				587ABD5021B8F8F800C3D81A /* GetAccountRequest.m in Sources */,
 				58245C4422E192550093E747 /* TZImageCropManager.m in Sources */,
@@ -7835,7 +7956,6 @@
 				5825554422EACF9200F0B9F0 /* UIImage+PECrop.m in Sources */,
 				58EE817D23054D4B00299261 /* StakingTypesViewController.m in Sources */,
 				58EBECFC234ED963007EEF1F /* ClaimConstants.m in Sources */,
-				5821964B23F13F9D00704E23 /* Topup3ViewController.m in Sources */,
 				58FB34CA23D055570045CAB4 /* InviteeListModel.m in Sources */,
 				5827BC26219EBDBD00B7730E /* ETHExportMnemonicViewController.m in Sources */,
 				5821967423F4069900704E23 /* TopupPayHelper.m in Sources */,
@@ -7852,6 +7972,7 @@
 				587ABD4421B8F8F800C3D81A /* PushTransactionRequest.m in Sources */,
 				583D9595211432110057A90C /* RankingViewController.m in Sources */,
 				581AC35D21AFCEDB00ACA80B /* SandBoxHelper.m in Sources */,
+				587D0D0724484054003EB1F9 /* WIF.swift in Sources */,
 				58CF40C9219984AB0000C3DA /* NEOWalletAddressViewController.m in Sources */,
 				585D1F08225EE38D00468C4A /* PersonalInfoCell.m in Sources */,
 				5893721722A664A800BD5CB6 /* QLCTokenInfoModel.m in Sources */,
@@ -7859,13 +7980,15 @@
 				5825552E22EACF9100F0B9F0 /* ZQImageTextController.m in Sources */,
 				5807D649208061A20049565D /* ShadowImageView.m in Sources */,
 				585C9A1E2181A16B00DD12DB /* WalletsViewController.m in Sources */,
-				581D32CB219C158B001F88C3 /* WIF.swift in Sources */,
 				5825553C22EACF9200F0B9F0 /* WaterMarkControl.m in Sources */,
 				58882ED5239A21E500330EB6 /* JoinTelegramTipView.m in Sources */,
+				587D0CE324484053003EB1F9 /* RIPEMD160.swift in Sources */,
 				58BDD4F5230CE84B0060FBCC /* OTCPayNEOViewController.m in Sources */,
 				73C1BA11207E18270080C59F /* HMScannerMaskView.m in Sources */,
+				587D0D0D24484054003EB1F9 /* Wallet.swift in Sources */,
 				580D914920625A4400B12506 /* UIImage+Alpha.m in Sources */,
 				580D914520625A4400B12506 /* UIImage+Merge.m in Sources */,
+				587D0CE224484053003EB1F9 /* scrypt.swift in Sources */,
 				587ABD7121B8F8F800C3D81A /* EOS_Wallet.m in Sources */,
 				5825553A22EACF9200F0B9F0 /* ImageCropRatioChooseView.m in Sources */,
 				5812DDAE20A1A7890043A8A8 /* ZXSystemMessageCell.m in Sources */,
@@ -7877,7 +8000,6 @@
 				58FB8D942265C4500075698E /* RefreshHelper.m in Sources */,
 				5812DDA520A1A7890043A8A8 /* ZXChatMessageController.m in Sources */,
 				5871928223CF066100728E15 /* MyGroupBuyOrderViewController.m in Sources */,
-				581D32D5219C158B001F88C3 /* NeoScanTransactionHistory.swift in Sources */,
 				583D9541211430D90057A90C /* PageThreeView.m in Sources */,
 				73C200B720996B430043E889 /* MyAssetsView.m in Sources */,
 				73C200BD209996D50043E889 /* MyAssetsCell.m in Sources */,
@@ -7888,12 +8010,10 @@
 				580D915420625A4400B12506 /* UIView+Frame.m in Sources */,
 				5825553522EACF9100F0B9F0 /* ImageTextView.m in Sources */,
 				584F4EDD23D07536004F579B /* GroupBuyGoStakeView.m in Sources */,
-				581D32E3219C158B001F88C3 /* Base58.swift in Sources */,
 				5825556022EAD58A00F0B9F0 /* UINavigationController+CurrentNav.m in Sources */,
 				588EA75423CD67A400889F7D /* StartGroupBuyView.m in Sources */,
 				58105D4221882E4200B8B701 /* NavWhiteShadowView.m in Sources */,
 				587ABD5221B8F8F800C3D81A /* EOS_Permission.m in Sources */,
-				5806C11821C7A6E5000E693B /* NEOSignUtil.swift in Sources */,
 				581AFC4621B7BFFD001A37E1 /* EOSCPUNETViewController.m in Sources */,
 				587ABD5121B8F8F800C3D81A /* EOS_GetAccount.m in Sources */,
 				58A8B1B4233B048F007E2CE3 /* MyTopupOrderCell.m in Sources */,
@@ -7910,12 +8030,10 @@
 				581AC35A21AFC63B00ACA80B /* AppDelegate+AppService.m in Sources */,
 				58FB8D902265B6C10075698E /* FinanceHistoryCell.m in Sources */,
 				58FE26092362F9980032ABBE /* TopupPayOrderTodo.m in Sources */,
-				581D32D1219C158B001F88C3 /* TransactionHistory.swift in Sources */,
 				58FB8D55226434AF0075698E /* EarningsRankingViewController.m in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,
 				587ABD6121B8F8F800C3D81A /* BackupEosAccountRequest.m in Sources */,
 				5894A712225F4E18008B0854 /* FinanceProductDetailViewController.m in Sources */,
-				58270FC22072019400C08784 /* NEOWalletUtil.m in Sources */,
 				58A801C62268692B00640BBC /* FinanceHistoryModel.m in Sources */,
 				587ABD5A21B8F8F800C3D81A /* Buy_ram_abi_json_to_bin_request.m in Sources */,
 				580D917020625F9C00B12506 /* QBaseViewController.m in Sources */,
@@ -7924,6 +8042,8 @@
 				5821966A23F28CC800704E23 /* NinaPagerView.m in Sources */,
 				589AE86323CC4C4200476D53 /* OpenDelegateSuccessView.m in Sources */,
 				58A801D4226DC7DC00640BBC /* SetPWViewController.m in Sources */,
+				587D0CFB24484054003EB1F9 /* Script.swift in Sources */,
+				587D0CF624484054003EB1F9 /* NEONetwork.swift in Sources */,
 				580D916720625A4400B12506 /* NSString+Base64Image.m in Sources */,
 				587ABD6621B8F8F800C3D81A /* BaseHttpsNetworkRequest.m in Sources */,
 				581A347F21AE694900623685 /* AddMarketsCell.m in Sources */,
@@ -7935,17 +8055,16 @@
 				5839F5192068CFA8004C4A54 /* RequestService.m in Sources */,
 				735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */,
 				582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */,
-				581D32C1219C158B001F88C3 /* Global.swift in Sources */,
 				580D916B20625A4400B12506 /* BBaseModel.m in Sources */,
 				58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */,
 				5806C11321C3DB59000E693B /* CreateAccountPushTransactionRequest.m in Sources */,
-				581D32D6219C158B001F88C3 /* Transaction.swift in Sources */,
 				5825552C22EACF9100F0B9F0 /* ZQImageCropController.m in Sources */,
 				73899CA12152003100962B14 /* GuidePageViewController.m in Sources */,
 				5825554722EACF9200F0B9F0 /* PECropView.m in Sources */,
 				73A05A322081D91600974483 /* UIImageView+HYBImageCliped.m in Sources */,
 				580D91772062600A00B12506 /* AFHTTPClientV2.m in Sources */,
 				5825553622EACF9100F0B9F0 /* TextColorItem.m in Sources */,
+				587D0D0024484054003EB1F9 /* Token.swift in Sources */,
 				5871922223CDB21B00728E15 /* GroupKindModel.m in Sources */,
 				581D32F5219D13DD001F88C3 /* NeoQueryWGasView.m in Sources */,
 				5894A709225F3105008B0854 /* FinanceCell.m in Sources */,
@@ -7955,11 +8074,11 @@
 				73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */,
 				5825553722EACF9100F0B9F0 /* ImageWaterMarkView.m in Sources */,
 				582F239621C1126C00A000D1 /* EOSActivateAccountViewController.m in Sources */,
+				583940A12445C241005EAA04 /* OutbreakRedRecordViewController.m in Sources */,
 				583D9548211430FA0057A90C /* RankingMode.m in Sources */,
-				581D32CC219C158B001F88C3 /* AccountState.swift in Sources */,
 				580D914E20625A4400B12506 /* UIButton+Block.m in Sources */,
-				581D32E2219C158B001F88C3 /* Data+Util.swift in Sources */,
 				585D1EFF225ED9A700468C4A /* NSString+PinYin.m in Sources */,
+				587D0CF324484054003EB1F9 /* AccountState.swift in Sources */,
 				589AE88823CD55AE00476D53 /* GroupBuyKnowDelegateView.m in Sources */,
 				581AF7AC21B6646E001A37E1 /* EOSAccountQRViewController.m in Sources */,
 				587213422361A87B00E50744 /* TopupDeductionTokenModel.m in Sources */,
@@ -7986,11 +8105,11 @@
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,
 				588EA75C23CD6BEC00889F7D /* StartGroupBuyCell.m in Sources */,
 				588444E22359E166007882AB /* HttpRedirect302Helper.m in Sources */,
-				581D32DB219C158B001F88C3 /* ContractResult.swift in Sources */,
 				5812DDB020A1A7890043A8A8 /* ZXVoiceMessageCell.m in Sources */,
 				58EC938323B0AF1C0054C074 /* TopupMobilePlanCountry.m in Sources */,
 				73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */,
 				58CDB5F220889FA600B74962 /* QShadowView.m in Sources */,
+				587D0D0124484054003EB1F9 /* Peer.swift in Sources */,
 				580D914620625A4400B12506 /* UIImage+Color.m in Sources */,
 				5807D64A2080637F0049565D /* HMScanner.m in Sources */,
 				7377D17D206C81E90072E628 /* NSStringUtil.m in Sources */,
@@ -7999,11 +8118,13 @@
 				589AE86D23CC532900476D53 /* GroupBuyDetialViewController.m in Sources */,
 				58161535235ED56C0041A92B /* JPushTagHelper.m in Sources */,
 				5885D461231F997300F9DEDE /* QContractView.m in Sources */,
+				587D0C7F2447149B003EB1F9 /* GlobalOutbreakUtil.m in Sources */,
 				7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */,
 				5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */,
 				58CDB5E9208734D600B74962 /* UserManage.m in Sources */,
 				5825554522EACF9200F0B9F0 /* PEResizeControl.m in Sources */,
 				587ABD6E21B8F8F800C3D81A /* EOS_WalletAccountsResult.m in Sources */,
+				587D0D0524484054003EB1F9 /* ShamirSecret.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9631,6 +9752,28 @@
 			name = JoinGroupBuyView.xib;
 			sourceTree = "<group>";
 		};
+		587D0C8D24480BF5003EB1F9 /* OutbreakRedViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587D0C8C24480BF5003EB1F9 /* Base */,
+				587D0C8F24480BFA003EB1F9 /* en */,
+				587D0C9124480BFD003EB1F9 /* zh-Hans */,
+				587D0C9324480C00003EB1F9 /* id */,
+			);
+			name = OutbreakRedViewController.xib;
+			sourceTree = "<group>";
+		};
+		587D0C9624480CC2003EB1F9 /* OutbreakRedRecordViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587D0C9524480CC2003EB1F9 /* Base */,
+				587D0C9824480CC8003EB1F9 /* en */,
+				587D0C9A24480CCB003EB1F9 /* zh-Hans */,
+				587D0C9C24480CCE003EB1F9 /* id */,
+			);
+			name = OutbreakRedRecordViewController.xib;
+			sourceTree = "<group>";
+		};
 		58822DD023102442007C8DC2 /* OTCPayQLCViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -9739,6 +9882,17 @@
 				588B4EAF24066CF0003BE791 /* id */,
 			);
 			name = QVoteViewController.xib;
+			sourceTree = "<group>";
+		};
+		58935D162449445600DE53D8 /* InviteFriendOutbreakViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58935D152449445600DE53D8 /* Base */,
+				58935D182449446100DE53D8 /* en */,
+				58935D1A2449446600DE53D8 /* zh-Hans */,
+				58935D1C2449446A00DE53D8 /* id */,
+			);
+			name = InviteFriendOutbreakViewController.xib;
 			sourceTree = "<group>";
 		};
 		589FC662240A735100288046 /* BuybackDetailViewController.xib */ = {
@@ -10097,7 +10251,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.3.7;
+				MARKETING_VERSION = 1.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -10117,7 +10271,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.3.7;
+				MARKETING_VERSION = 1.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -10242,7 +10396,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8077;
+				CURRENT_PROJECT_VERSION = 8403;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -10256,6 +10410,8 @@
 					"$(PROJECT_DIR)/Qlink/Vender/QLC",
 					"$(PROJECT_DIR)/Qlink/Framework",
 					"$(PROJECT_DIR)/Qlink/Vender/NEO/Trust",
+					"$(PROJECT_DIR)/Qlink/Vender/OutbreakRed",
+					"$(PROJECT_DIR)/Qlink/Vender/NewPagedFlowView/Trust",
 				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Qlink/Info.plist;
@@ -10265,7 +10421,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.3.7;
+				MARKETING_VERSION = 1.3.8;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10287,7 +10443,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8077;
+				CURRENT_PROJECT_VERSION = 8403;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -10300,6 +10456,8 @@
 					"$(PROJECT_DIR)/Qlink/Vender/QLC",
 					"$(PROJECT_DIR)/Qlink/Framework",
 					"$(PROJECT_DIR)/Qlink/Vender/NEO/Trust",
+					"$(PROJECT_DIR)/Qlink/Vender/OutbreakRed",
+					"$(PROJECT_DIR)/Qlink/Vender/NewPagedFlowView/Trust",
 				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Qlink/Info.plist;
@@ -10309,7 +10467,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.3.7;
+				MARKETING_VERSION = 1.3.8;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

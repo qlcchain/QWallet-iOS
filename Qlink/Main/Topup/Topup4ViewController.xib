@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,6 +22,7 @@
                 <outlet property="cycleScrollV" destination="yxv-Ii-Jxt" id="bcU-N5-8ke"/>
                 <outlet property="earnMoreLab" destination="Dxa-Gn-md9" id="RIw-J9-ZR3"/>
                 <outlet property="globalOutbreakBtn" destination="aiH-bm-8PY" id="rqj-f2-72I"/>
+                <outlet property="globalOutbreakHeight" destination="hjQ-5D-AXM" id="azp-mA-X9l"/>
                 <outlet property="introduceFriendBack" destination="RCR-dx-yAw" id="KIc-9b-tgA"/>
                 <outlet property="introduceFriendLab" destination="NQK-qd-Vul" id="aKZ-71-8jw"/>
                 <outlet property="inviteRankBack" destination="lIp-sJ-FTA" id="D6J-Ak-tpI"/>
@@ -112,6 +113,10 @@
                                 <constraint firstItem="Isa-yf-lhA" firstAttribute="centerX" secondItem="nyg-8Y-Tsc" secondAttribute="centerX" id="y3z-b6-rjo"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tGH-x6-TRD">
+                            <rect key="frame" x="0.0" y="44" width="1500" height="1756"/>
+                            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8r8-Wb-9Aq">
                             <rect key="frame" x="0.0" y="44" width="1500" height="1756"/>
                             <subviews>
@@ -122,7 +127,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1500" height="1416"/>
                                             <color key="backgroundColor" red="0.27843137254901962" green="0.68235294117647061" blue="0.93333333333333335" alpha="1" colorSpace="deviceRGB"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YHO-NU-HRD">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YHO-NU-HRD">
                                             <rect key="frame" x="0.0" y="0.0" width="1500" height="616"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="banner_covud" translatesAutoresizingMaskIntoConstraints="NO" id="KZz-wc-7eW">
@@ -145,12 +150,12 @@
                                             <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="KZz-wc-7eW" secondAttribute="trailing" id="28U-gt-KCy"/>
-                                                <constraint firstAttribute="width" secondItem="YHO-NU-HRD" secondAttribute="height" multiplier="750:308" id="5H0-1e-qjV"/>
                                                 <constraint firstItem="aiH-bm-8PY" firstAttribute="centerX" secondItem="YHO-NU-HRD" secondAttribute="centerX" id="LcJ-pc-pSX"/>
                                                 <constraint firstItem="KZz-wc-7eW" firstAttribute="leading" secondItem="YHO-NU-HRD" secondAttribute="leading" id="Sym-EZ-U79"/>
                                                 <constraint firstAttribute="bottom" secondItem="aiH-bm-8PY" secondAttribute="bottom" id="Uts-iN-htH"/>
                                                 <constraint firstAttribute="bottom" secondItem="KZz-wc-7eW" secondAttribute="bottom" constant="16" id="Z7Z-cy-eib"/>
                                                 <constraint firstItem="KZz-wc-7eW" firstAttribute="top" secondItem="YHO-NU-HRD" secondAttribute="top" id="c9Z-Sp-a7N"/>
+                                                <constraint firstAttribute="height" constant="616" id="hjQ-5D-AXM"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WC5-V7-TuW">
@@ -507,7 +512,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="lIp-sJ-FTA" secondAttribute="bottom" id="0Ht-VI-fjf"/>
                                         <constraint firstAttribute="trailing" secondItem="Rrv-1b-8gr" secondAttribute="trailing" id="4Vl-ty-i6S"/>
@@ -549,10 +554,14 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="tGH-x6-TRD" secondAttribute="bottom" id="111-0k-Cwn"/>
+                        <constraint firstItem="tGH-x6-TRD" firstAttribute="leading" secondItem="Ez5-PW-RyP" secondAttribute="leading" id="1Kw-74-gaC"/>
                         <constraint firstAttribute="bottom" secondItem="8r8-Wb-9Aq" secondAttribute="bottom" id="3eA-IJ-x3m"/>
                         <constraint firstItem="8r8-Wb-9Aq" firstAttribute="leading" secondItem="Ez5-PW-RyP" secondAttribute="leading" id="7Ew-Hm-nQm"/>
                         <constraint firstAttribute="trailing" secondItem="nyg-8Y-Tsc" secondAttribute="trailing" id="AEE-nW-cD7"/>
+                        <constraint firstAttribute="trailing" secondItem="tGH-x6-TRD" secondAttribute="trailing" id="NeC-eW-3bO"/>
                         <constraint firstItem="nyg-8Y-Tsc" firstAttribute="leading" secondItem="Ez5-PW-RyP" secondAttribute="leading" id="OjN-sT-c1w"/>
+                        <constraint firstItem="tGH-x6-TRD" firstAttribute="top" secondItem="nyg-8Y-Tsc" secondAttribute="bottom" id="edt-fN-dIV"/>
                         <constraint firstItem="8r8-Wb-9Aq" firstAttribute="top" secondItem="nyg-8Y-Tsc" secondAttribute="bottom" id="hiY-W2-L9n"/>
                         <constraint firstAttribute="trailing" secondItem="8r8-Wb-9Aq" secondAttribute="trailing" id="jyl-Tz-sp1"/>
                         <constraint firstItem="nyg-8Y-Tsc" firstAttribute="top" secondItem="Ez5-PW-RyP" secondAttribute="top" id="pjx-sm-jWK"/>

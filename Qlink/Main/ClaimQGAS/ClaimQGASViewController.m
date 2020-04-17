@@ -26,6 +26,7 @@
 #import "ClaimSuccessTipView.h"
 #import "AppJumpHelper.h"
 #import <UIImageView+WebCache.h>
+#import <OutbreakRed/OutbreakRed.h>
 
 @interface ClaimQGASViewController ()
 
@@ -82,10 +83,55 @@
     } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
         NSString *type = @"CLAIM_INVITE";
         [self requestVcode_verify_code:type];
+    } else if (_claimQGASType == ClaimQGASTypeCLAIM_COVID) {
+        NSString *type = @"CLAIM_COVID";
+        [self requestVcode_verify_code:type];
     }
 }
 
 #pragma mark - Request
+
+- (void)requestGzbd_receive {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSString *code = _codeTF.text?:@"";
+    NSString *toAddress = _qgasSendTF.text?:@"";
+    NSString *recordId = _inputCovidRecordId?:@"";
+    OR_RequestModel *requestM = [OR_RequestModel new];
+    requestM.p2pId = [UserModel getTopupP2PId];
+    requestM.appBuild = APP_Build;
+    requestM.appVersion = APP_Version;
+    [kAppD.window makeToastInView:kAppD.window];
+    [OutbreakRedSDK requestGzbd_receiveWithAccount:account token:token timestamp:timestamp code:code recordId:recordId toAddress:toAddress requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+        [kAppD.window hideToast];
+        if (!error) {
+            if ([responseObject[Server_Code] integerValue] == 0) {
+                if (weakself.claimSuccessBlock) {
+                    weakself.claimSuccessBlock();
+                }
+                
+                 SuccessTipView *view = [SuccessTipView getInstance];
+                 [view showWithTitle:kLang(@"successful")];
+                 
+                 [weakself backAction:nil];
+             } else {
+                [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            }
+        } else {
+            
+        }
+    }];
+    
+}
+
 - (void)requestReward_claim_bind_v2 {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
@@ -159,8 +205,9 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
-            NSString *codeUrl = responseObject[@"codeUrl"];
-            [weakself.codeImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrl]] placeholderImage:nil completed:nil];
+            NSString *codeUrlStr = responseObject[@"codeUrl"];
+            NSURL *codeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrlStr]];
+            [weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -217,6 +264,8 @@
         [self requestReward_claim_bind_v2];
     } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
         [self requestReward_claim_invite_v2];
+    } else if (_claimQGASType == ClaimQGASTypeCLAIM_COVID) {
+        [self requestGzbd_receive];
     }
 }
 

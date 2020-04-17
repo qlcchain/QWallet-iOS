@@ -65,6 +65,7 @@
     int precision = 100;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
 //    formatter.numberStyle = NSNumberFormatterScientificStyle;
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
     formatter.usesSignificantDigits = YES;
     formatter.minimumFractionDigits = precision;
     formatter.maximumFractionDigits = precision;

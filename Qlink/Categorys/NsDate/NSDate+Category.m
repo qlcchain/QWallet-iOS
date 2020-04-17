@@ -82,6 +82,16 @@
     return fromDate;
 }
 
++ (NSString *)dateFromTime:(NSString *)fromTime dateFormat:(NSString *)dateFormat {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    format.dateFormat = dateFormat;
+    NSString* dateString = [format stringFromDate:fromDate];
+    return dateString;
+}
+
 + (NSInteger)getTimestampFromDate:(NSDate *)date {
     return (long)[date timeIntervalSince1970];
 }

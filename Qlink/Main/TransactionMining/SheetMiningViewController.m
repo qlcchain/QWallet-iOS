@@ -29,6 +29,8 @@
 #import "RLArithmetic.h"
 #import "FirebaseUtil.h"
 #import "AppJumpHelper.h"
+#import "OutbreakRedUtil.h"
+#import "InviteFriendOutbreakViewController.h"
 
 static NSInteger Mining_PageSize = 20;
 
@@ -382,8 +384,15 @@ static NSInteger Mining_PageSize = 20;
 }
 
 - (void)jumpToInviteFriendNow {
-    InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
+//    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
+    if ([appShow19 integerValue] == 1) {
+        InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)jumpToClaimQLC {

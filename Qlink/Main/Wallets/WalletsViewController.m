@@ -467,7 +467,7 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
 }
 
 - (void)refreshPriceTotal:(NSString *)total {
-    _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],total];
+    _walletBalanceLab.text = [NSString stringWithFormat:@"%@ %@",[ConfigUtil getLocalUsingCurrencySymbol],[total showfloatStr:2]];
 }
 
 - (void)refreshPrice {

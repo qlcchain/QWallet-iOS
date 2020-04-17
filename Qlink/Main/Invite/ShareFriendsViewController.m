@@ -25,6 +25,8 @@
 #import "ShareFriendsSubViewController.h"
 #import "AgentRewardViewController.h"
 #import "RLArithmetic.h"
+#import "OutbreakRedUtil.h"
+#import "InviteFriendOutbreakViewController.h"
 
 @interface ShareFriendsViewController () <NinaPagerViewDelegate>
 // <UITableViewDelegate, UITableViewDataSource>
@@ -432,8 +434,15 @@
 }
 
 - (void)jumpToInviteFriendNow {
-    InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
+//    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
+    if ([appShow19 integerValue] == 1) {
+        InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)jumpToClaimQGAS {

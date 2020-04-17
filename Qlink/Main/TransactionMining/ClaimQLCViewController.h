@@ -12,12 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, ClaimQLCType) {
     ClaimQLCTypeMiningRewards,
+    ClaimQLCTypeCLAIM_COVID,
 };
+
+typedef void(^ClaimQLCSuccessBlock)(void);
 
 @interface ClaimQLCViewController : QBaseViewController
 
 @property (nonatomic, strong) NSString *inputCanClaimAmount;
 @property (nonatomic) ClaimQLCType claimQLCType;
+@property (nonatomic, copy) ClaimQLCSuccessBlock claimSuccessBlock;
 
 @end
 

@@ -12,7 +12,7 @@
 #import "MnemonicTipView.h"
 #import "ETHMnemonicConfirmViewController.h"
 #import <TTGTextTagCollectionView.h>
-#import "AppConfigUtil.h"
+#import "OutbreakRedUtil.h"
 #import "ETHWalletInfo.h"
 
 @interface ETHMnemonicViewController ()

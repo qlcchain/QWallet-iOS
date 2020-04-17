@@ -20,9 +20,11 @@
 #import "AppDelegate.h"
 #import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
-#import "Topup3ViewController.h"
+//#import "Topup3ViewController.h"
 #import "Topup4ViewController.h"
 #import "FirebaseUtil.h"
+#import "InviteFriendOutbreakViewController.h"
+#import "OutbreakRedUtil.h"
 
 static CGFloat InviteRankTopHeight = 172;
 
@@ -200,8 +202,16 @@ static CGFloat InviteRankTopHeight = 172;
 
 #pragma mark - Transition
 - (void)jumpToInviteFriendNow {
-    InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
-    [kAppD.mtabbarC.topupVC.navigationController pushViewController:vc animated:YES];
+    NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
+//    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
+    if ([appShow19 integerValue] == 1) {
+        InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
+        [kAppD.mtabbarC.topupVC.navigationController pushViewController:vc animated:YES];
+    } else {
+        InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
+        [kAppD.mtabbarC.topupVC.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 

@@ -20,6 +20,8 @@
 #import "RSAUtil.h"
 #import "NSDate+Category.h"
 #import "SuccessTipView.h"
+#import <UIImageView+WebCache.h>
+#import <OutbreakRed/OutbreakRed.h>
 
 @interface ClaimQLCViewController ()
 
@@ -39,6 +41,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletAddressLab;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeHeight; // 80
+@property (weak, nonatomic) IBOutlet UITextField *codeTF;
+@property (weak, nonatomic) IBOutlet UIImageView *codeImg;
+@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+
+
 @property (nonatomic, strong) WalletCommonModel *sendQgasWalletM;
 
 @end
@@ -50,6 +58,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self configInit];
+    [self getCode];
 }
 
 #pragma mark - Operation
@@ -63,7 +72,57 @@
     _canClaimAmountLab.text = [NSString stringWithFormat:@"%@ QLC",_inputCanClaimAmount?:@"0"];
 }
 
+- (void)getCode {
+    if (_claimQLCType == ClaimQLCTypeMiningRewards) {
+        _codeHeight.constant = 0;
+    } else if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
+        _codeHeight.constant = 80;
+        NSString *type = @"CLAIM_COVID_QLC";
+        [self requestVcode_verify_code:type];
+    }
+}
+
 #pragma mark - Request
+- (void)requestGzbd_claim_qlc {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSString *code = _codeTF.text?:@"";
+    NSString *toAddress = _qgasSendTF.text?:@"";
+    OR_RequestModel *requestM = [OR_RequestModel new];
+    requestM.p2pId = [UserModel getTopupP2PId];
+    requestM.appBuild = APP_Build;
+    requestM.appVersion = APP_Version;
+    [kAppD.window makeToastInView:kAppD.window];
+    [OutbreakRedSDK requestGzbd_claim_qlcWithAccount:account token:token timestamp:timestamp code:code toAddress:toAddress requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+        [kAppD.window hideToast];
+        if (!error) {
+            if ([responseObject[Server_Code] integerValue] == 0) {
+                if (weakself.claimSuccessBlock) {
+                    weakself.claimSuccessBlock();
+                }
+                
+                 SuccessTipView *view = [SuccessTipView getInstance];
+                 [view showWithTitle:kLang(@"successful")];
+                 
+                 [weakself backAction:nil];
+             } else {
+                [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            }
+        } else {
+            
+        }
+    }];
+    
+}
+
 - (void)requestTrade_mining_claim {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
@@ -85,6 +144,27 @@
             [view showWithTitle:kLang(@"successful")];
             
             [weakself backAction:nil];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+- (void)requestVcode_verify_code:(NSString *)type {
+    kWeakSelf(self);
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    NSString *account = userM.account?:@"";
+    NSDictionary *params = @{@"account":account,@"type":type};
+    [kAppD.window makeToastInView:kAppD.window];
+    [RequestService requestWithUrl10:vcode_verify_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
+        if ([responseObject[Server_Code] integerValue] == 0) {
+//            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
+            NSString *codeUrlStr = responseObject[@"codeUrl"];
+            NSURL *codeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrlStr]];
+            [weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
@@ -118,6 +198,15 @@
 
 
 - (IBAction)submitAction:(id)sender {
+    if (_claimQLCType == ClaimQLCTypeMiningRewards) {
+        
+    } else if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
+        if ([_codeTF.text isEmptyString]) {
+            [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
+            return;
+        }
+    }
+    
     if ([_qgasSendTF.text isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
@@ -132,6 +221,8 @@
     
     if (_claimQLCType == ClaimQLCTypeMiningRewards) {
         [self requestTrade_mining_claim];
+    } else if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
+        [self requestGzbd_claim_qlc];
     }
 }
 
@@ -140,6 +231,16 @@
     _sendQgasWalletBack.hidden = YES;
     _qgasSendTF.text = nil;
 }
+
+- (IBAction)codeAction:(id)sender {
+    if (![UserModel haveLoginAccount]) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
+    [self getCode];
+}
+
 
 
 #pragma mark - Transition

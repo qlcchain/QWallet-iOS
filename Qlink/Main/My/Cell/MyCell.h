@@ -16,6 +16,7 @@ static NSString *MyCellReuse = @"MyCell";
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *icon;
 @property (nonatomic) BOOL showRed;
+@property (nonatomic) BOOL isShow;
 
 @end
 

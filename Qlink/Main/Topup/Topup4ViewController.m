@@ -63,7 +63,16 @@
 #import "NSDate+Category.h"
 #import "ClaimConstants.h"
 #import "FirebaseUtil.h"
-#import "GlobalOutbreakWebViewController.h"
+#import "GlobalOutbreakUtil.h"
+//#import <OutbreakRed/OutbreakRed.h>
+#import "RSAUtil.h"
+#import "OutbreakRedInterruptTipView.h"
+#import "OutbreakRedFocusTipView.h"
+#import "OutbreakRedViewController.h"
+#import "OutbreakRedUtil.h"
+#import "InviteFriendOutbreakViewController.h"
+#import "AFJSONRPCClient.h"
+#import "NSString+RandomStr.h"
 
 static NSString *const TopupNetworkSize = @"20";
 //static NSInteger const insetForSectionDistance = 16;
@@ -152,6 +161,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 @property (weak, nonatomic) IBOutlet UIButton *parterPlan_detailBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *globalOutbreakBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *globalOutbreakHeight;
 
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
@@ -262,6 +272,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     _globalOutbreakBtn.layer.cornerRadius = _globalOutbreakBtn.height/2.0;
     _globalOutbreakBtn.layer.masksToBounds = YES;
 //    [_globalOutbreakBtn setBackgroundImage:kClickEffectBtnImage forState:UIControlStateHighlighted];
+    _globalOutbreakHeight.constant = 0;
     
     _cycleContentArr = [NSMutableArray array];
     _showQLC = NO;
@@ -338,7 +349,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         [weakself requestSys_index];
 //        [weakself getBuybackBurn];
 //        [weakself getSheetMining];
-    } type:RefreshTypeWhite];
+    } type:RefreshTypeColor];
 //    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
 //        [weakself requestTopup_product_list];
 //    }];
@@ -531,11 +542,19 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 - (void)getRedDotOfMe {
     [TabbarHelper requestUser_red_pointWithCompleteBlock:^(RedPointModel *redPointM) {
-        if ([redPointM.dailyIncomePoint integerValue] == 1 || [redPointM.invitePoint integerValue] == 1 || [redPointM.rewardTotal integerValue] == 1) {
+        if ([redPointM.dailyIncomePoint integerValue] == 1 || [redPointM.invitePoint integerValue] == 1 || [redPointM.rewardTotal integerValue] == 1 || [redPointM.gzbdPoint integerValue] == 1) {
             UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
             [item setBadgeCenterOffset:CGPointMake(0, 5)];
             [item setBadgeColor:UIColorFromRGB(0xD0021B)];
             [item showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone];
+        }
+        
+        kWeakSelf(self);
+        // 疫情活动-关注中断
+        if ([redPointM.gzbdFocusInterrupt integerValue] == 1) { // 中断
+            [OutbreakRedInterruptTipView show:^{
+                [weakself jumpToOutbreakRed];
+            }];
         }
     }];
 }
@@ -670,6 +689,14 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
         self.cyclePageC.numberOfPages = self.cycleContentArr.count;
         [self refreshMiningTip];
+    } else {
+        self.miningActivityM = nil;
+        self.sheetMiningWidth.constant = 0;
+        if ([self.cycleContentArr containsObject:Show_Sheet_Mining]) {
+            [self.cycleContentArr removeObject:Show_Sheet_Mining];
+        }
+        self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
+        self.cyclePageC.numberOfPages = self.cycleContentArr.count;
     }
 
 
@@ -691,7 +718,15 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
         self.cyclePageC.numberOfPages = self.cycleContentArr.count;
     //                [weakself refreshBuybackBurn];
-    }
+    } else {
+       self.buybackBurnM = nil;
+       self.buybackBurnWidth.constant = 0;
+       if ([self.cycleContentArr containsObject:Show_Buyback_Burn]) {
+           [self.cycleContentArr removeObject:Show_Buyback_Burn];
+       }
+       self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
+       self.cyclePageC.numberOfPages = self.cycleContentArr.count;
+   }
     
 
     NSString *currentTimeMillis = responseObject[@"currentTimeMillis"];
@@ -715,7 +750,14 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
         self.cyclePageC.numberOfPages = self.cycleContentArr.count;
     //                [weakself refreshParterPlan];
-    }
+    } else {
+          self.parterPlanWidth.constant = 0;
+          if ([self.cycleContentArr containsObject:Show_Partner_Plan]) {
+              [self.cycleContentArr removeObject:Show_Partner_Plan];
+          }
+          self.cycleContentWidth.constant = SCREEN_WIDTH*self.cycleContentArr.count;
+          self.cyclePageC.numberOfPages = self.cycleContentArr.count;
+      }
     // 刷新TopupProduct GroupBuyAcitivityTime
     self.isInGroupBuyActivityTime = isInGroupBuyActivityTime;
     if (self.ninaPagerView) {
@@ -727,6 +769,23 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     NSString *winqInviteRewardAmount = dictList[winq_invite_reward_amount];
     if (_inviteRankV) {
         [_inviteRankV updateTable:winqInviteRewardAmount];
+    }
+    // COVID-19
+    NSString *show19 = dictList[@"show19"];
+    NSString *appShow19 = dictList[@"appShow19"];
+    [OutbreakRedUtil shareInstance].show19 = show19;
+    [OutbreakRedUtil shareInstance].appShow19 = appShow19;
+    _globalOutbreakHeight.constant = 0;
+    if ([show19 integerValue] == 1) { // 审核
+        //750:308
+        _globalOutbreakHeight.constant = SCREEN_WIDTH*308.0/750.0;
+    }
+    if ([appShow19 integerValue] == 1) {
+        kWeakSelf(self);
+        // 疫情活动-活动弹框
+        [OutbreakRedFocusTipView show:^{
+            [weakself jumpToOutbreakRed];
+        }];
     }
 
     // 获取TopupProduct groupBuyMinimumDiscount
@@ -824,22 +883,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     }];
 }
 
-- (void)requestSys_location {
-    kWeakSelf(self);
-    NSDictionary *params = @{};
-    [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl10:sys_location_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [kAppD.window hideToast];
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            NSString *location = responseObject[@"location"];
-            [weakself jumpToGlobalOutbreak:location];
-        } else {
-            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [kAppD.window hideToast];
-    }];
-}
+
 
 
 //- (void)requestTokenPriceOfQLC {
@@ -893,8 +937,18 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == _cycleScrollV) {
+//        CGPoint offset=[_cycleScrollV contentOffset];
+//        NSLog(@"scrollViewDidScroll offset = %@",NSStringFromCGPoint(offset));
+        
         int index = fabs(scrollView.contentOffset.x) / scrollView.frame.size.width;
         _cyclePageC.currentPage = index;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == _cycleScrollV) {
+//        CGPoint offset=[_cycleScrollV contentOffset];
+//        NSLog(@"scrollViewDidEndDecelerating offset = %@",NSStringFromCGPoint(offset));
     }
 }
 
@@ -1015,7 +1069,54 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 #pragma mark - Action
 
+- (void)eth_gasPrice {
+//    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"https://mainnet.infura.io/v3/dc2243ed5aa5488d9fcf794149f56fc2"]];
+//    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"https://mainnet.infura.io/v3/2e79b6f87f524845944a87b30702ed38"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"https://mainnet.infura.io/v3/7b1c4da5e23241809daf0d33a42e7f91"]];
+//    NSString *requestId = [NSString randomOf32];
+    NSNumber *requestId = @(5);
+    NSArray *params = @[];
+    [kAppD.window makeToastInView:kAppD.window];
+    [client invokeMethod:@"eth_protocolVersion" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
+        [kAppD.window hideToast];
+        NSLog(@"responseObject=%@",responseObject);
+        if (responseObject) {
+            
+        } else {
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error=%@",error);
+        [kAppD.window hideToast];
+    }];
+}
+
+
+- (void)ledger_accountsCount {
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_node_release]]];
+    NSString *requestId = [NSString randomOf32];
+//    kWeakSelf(self);
+    NSArray *params = @[];
+    DDLogDebug(@"ledger_accountsCount params = %@",params);
+    [kAppD.window makeToastInView:kAppD.window];
+    [client invokeMethod:@"ledger_accountsCount" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
+        [kAppD.window hideToast];
+        DDLogDebug(@"pledge_getBeneficialPledgeInfosByAddress responseObject=%@",responseObject);
+        if (responseObject) {
+            
+        } else {
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [kAppD.window hideToast];
+    }];
+}
+
+
+
 - (IBAction)menuAction:(id)sender {
+//    [self ledger_accountsCount];
+//    [self eth_gasPrice];
+//    return;
+    
     
 //    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@",@"18812341234"];
 //    NSURL *URL = [NSURL URLWithString:str];
@@ -1112,8 +1213,11 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 - (IBAction)globalOutbreakAction:(id)sender {
 //    [self jumpToGlobalOutbreak:@"domestic"];
+    [FirebaseUtil logEventWithItemID:Campaign_Covid19_more_details itemName:Campaign_Covid19_more_details contentType:Campaign_Covid19_more_details];
     
-    [self requestSys_location];
+    [GlobalOutbreakUtil transitionToGlobalOutbreak];
+    [GlobalOutbreakUtil requestGzbd_focus:^(NSString * _Nonnull subsidised, NSString * _Nonnull isolationDays, NSString * _Nonnull claimedQgas) {
+    }];
 }
 
 
@@ -1150,10 +1254,15 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         return;
     }
     
-//    ShareFriendsViewController *vc = [ShareFriendsViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];
-    InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
+//    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
+    if ([appShow19 integerValue] == 1) {
+        InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)jumpToAgentReward {
@@ -1180,16 +1289,14 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToGlobalOutbreak:(NSString *)location {
-    NSString *inputUrl = @"http://covid19.qlink.mobi/covid-19trend/dist";
-    if ([location isEqualToString:@"domestic"]) {
-        inputUrl = @"http://covid19.qlink.mobi/covid-19trend/dist";
-    } else if ([location isEqualToString:@"overseas"]) {
-        inputUrl = @"https://google.com/covid19-map/?hl=en";
+- (void)jumpToOutbreakRed {
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD presentLoginNew];
+        return;
     }
-    GlobalOutbreakWebViewController *vc = [[GlobalOutbreakWebViewController alloc] init];
-    vc.inputUrl = inputUrl;
-    vc.inputTitle = @"COVID-19 Live Updates";
+    
+    OutbreakRedViewController *vc = [OutbreakRedViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
