@@ -15,7 +15,7 @@
 #import "GlobalConstants.h"
 #import "NSString+RemoveZero.h"
 #import "WalletsViewController.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "ETHWalletManage.h"
 #import "RLArithmetic.h"

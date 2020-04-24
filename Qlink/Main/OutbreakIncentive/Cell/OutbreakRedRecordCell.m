@@ -59,7 +59,7 @@
     }
     _addressLab.text = addressText;
     _statusLab.text = nil;
-    _timeLab.text = [NSDate dateFromTime:model.createDate dateFormat:@"MM/dd HH:mm"];
+    _timeLab.text = [NSDate dateFromTime_c:model.createDate dateFormat:@"MM/dd HH:mm"];
 //    _timeLab.text = [NSDate getTimeWithTimestamp:[NSString stringWithFormat:@"%@",model.createDate] format:@"MM/dd HH:mm" isMil:NO];
     _priceLab.text = [NSString stringWithFormat:@"%@%@ %@",@"+",model.qgasAmount,@"QGAS"];
 }

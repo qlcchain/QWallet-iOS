@@ -19,7 +19,7 @@
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "RLArithmetic.h"
 //#import "GlobalConstants.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 

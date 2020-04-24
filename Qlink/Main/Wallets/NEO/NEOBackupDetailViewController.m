@@ -8,7 +8,7 @@
 
 #import "NEOBackupDetailViewController.h"
 #import "NEOWalletInfo.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import "BackupKeyView.h"
@@ -104,7 +104,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 

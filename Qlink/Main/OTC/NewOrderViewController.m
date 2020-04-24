@@ -12,7 +12,7 @@
 #import "RSAUtil.h"
 #import <QLCFramework/QLCFramework.h>
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QLCAddressInfoModel.h"

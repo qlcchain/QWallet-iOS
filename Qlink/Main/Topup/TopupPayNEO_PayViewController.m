@@ -17,7 +17,7 @@
 #import "NEOWalletUtil.h"
 #import "WalletQRViewController.h"
 #import "Qlink-Swift.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "TradeOrderDetailViewController.h"

@@ -18,7 +18,7 @@
 #import "WalletQRViewController.h"
 #import "WalletSelectViewController.h"
 #import "QNavigationController.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "TradeOrderDetailViewController.h"

@@ -7,7 +7,7 @@
 //
 
 #import "GroupPeopleView.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "GlobalConstants.h"
 #import "GroupBuyListModel.h"
 

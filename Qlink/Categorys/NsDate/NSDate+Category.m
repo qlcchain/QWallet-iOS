@@ -74,7 +74,7 @@
     return dateString;
 }
 
-+ (NSDate *)dateFromTime:(NSString *)fromTime {
++ (NSDate *)dateFromTime_c:(NSString *)fromTime {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
     format.timeZone = [NSTimeZone localTimeZone];
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -82,7 +82,7 @@
     return fromDate;
 }
 
-+ (NSString *)dateFromTime:(NSString *)fromTime dateFormat:(NSString *)dateFormat {
++ (NSString *)dateFromTime_c:(NSString *)fromTime dateFormat:(NSString *)dateFormat {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
     format.timeZone = [NSTimeZone localTimeZone];
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";

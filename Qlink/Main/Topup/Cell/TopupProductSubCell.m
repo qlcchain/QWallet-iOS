@@ -9,7 +9,7 @@
 #import "TopupProductSubCell.h"
 #import "GlobalConstants.h"
 #import "TopupProductModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+RemoveZero.h"
 #import "RLArithmetic.h"
 #import "TopupDeductionTokenModel.h"

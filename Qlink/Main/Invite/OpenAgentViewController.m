@@ -17,7 +17,7 @@
 #import "QLCWalletInfo.h"
 #import "OpenDelegateSuccessView.h"
 #import "UserUtil.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "GlobalConstants.h"
 #import "AFJSONRPCClient.h"
 #import "ConfigUtil.h"

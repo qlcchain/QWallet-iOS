@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,7 +14,6 @@
                 <outlet property="claimedLab" destination="lqD-PX-nEW" id="AZd-7c-kkV"/>
                 <outlet property="continueLab" destination="WJx-tS-yjg" id="Y7m-Hv-9Gl"/>
                 <outlet property="dailyEmptyHeight" destination="vYz-Hq-44W" id="51Y-u8-g7I"/>
-                <outlet property="dailyStepLab" destination="aWT-ec-0SO" id="aKH-on-scU"/>
                 <outlet property="focus10Lab" destination="tGs-qH-n1p" id="0Fc-tU-6F3"/>
                 <outlet property="focus11Lab" destination="m4S-ed-SDd" id="dDa-nB-82f"/>
                 <outlet property="focus12Lab" destination="fVN-Hw-nQx" id="0AC-7T-8ML"/>
@@ -79,52 +78,25 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sox-ZF-afb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Steps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrf-WX-oiZ">
-                                                    <rect key="frame" x="20" y="14" width="64" height="14.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.16078431372549018" green="0.16862745098039217" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWT-ec-0SO">
-                                                    <rect key="frame" x="20" y="36.5" width="20" height="38.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                                    <color key="textColor" red="0.16078431369999999" green="0.16862745100000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cumulative QGAS Claimed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxN-gS-ANq">
-                                                    <rect key="frame" x="197" y="14" width="150" height="14.5"/>
+                                                    <rect key="frame" x="16" y="14" width="150" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.16078431369999999" green="0.16862745100000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqD-PX-nEW">
-                                                    <rect key="frame" x="338" y="36.5" width="20" height="38.5"/>
+                                                    <rect key="frame" x="20" y="36.5" width="320" height="38.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                     <color key="textColor" red="0.16078431369999999" green="0.16862745100000001" blue="0.20000000000000001" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs5-M5-8aP" customClass="QBaseDarkButton">
-                                                    <rect key="frame" x="85" y="-0.5" width="44" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="FZY-Sm-t1B"/>
-                                                        <constraint firstAttribute="width" constant="44" id="dwa-31-02o"/>
-                                                    </constraints>
-                                                    <state key="normal" image="outbreak_me_refresh"/>
-                                                    <connections>
-                                                        <action selector="refreshDailyStepAction:" destination="-1" eventType="touchUpInside" id="HX5-bb-Z0p"/>
-                                                    </connections>
-                                                </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="outbreak_enter_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-44-k4r">
-                                                    <rect key="frame" x="347" y="14" width="16" height="16"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="2iD-Ze-OHc"/>
-                                                        <constraint firstAttribute="width" constant="16" id="Fle-ws-hqL"/>
-                                                    </constraints>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="eth_detail_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-44-k4r">
+                                                    <rect key="frame" x="341" y="34.5" width="24" height="24"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiN-Ye-fqq" customClass="QBaseDarkButton">
-                                                    <rect key="frame" x="191" y="5" width="174" height="34"/>
+                                                    <rect key="frame" x="10" y="5" width="355" height="70"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="34" id="yYM-Cy-SrN"/>
+                                                        <constraint firstAttribute="height" constant="70" id="yYM-Cy-SrN"/>
                                                     </constraints>
                                                     <connections>
                                                         <action selector="claimedAction:" destination="-1" eventType="touchUpInside" id="7TC-Ai-lDJ"/>
@@ -133,22 +105,16 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
-                                                <constraint firstItem="Qs5-M5-8aP" firstAttribute="leading" secondItem="Xrf-WX-oiZ" secondAttribute="trailing" constant="1" id="0aY-5U-Tna"/>
-                                                <constraint firstItem="QUP-44-k4r" firstAttribute="top" secondItem="Sox-ZF-afb" secondAttribute="top" constant="14" id="1zA-vc-aKL"/>
                                                 <constraint firstItem="lqD-PX-nEW" firstAttribute="top" secondItem="nxN-gS-ANq" secondAttribute="bottom" constant="8" id="2hn-Z7-r0y"/>
-                                                <constraint firstAttribute="trailing" secondItem="QUP-44-k4r" secondAttribute="trailing" constant="12" id="6m1-sE-q4L"/>
-                                                <constraint firstItem="aWT-ec-0SO" firstAttribute="leading" secondItem="Sox-ZF-afb" secondAttribute="leading" constant="20" id="6yS-VS-q8d"/>
+                                                <constraint firstAttribute="trailing" secondItem="QUP-44-k4r" secondAttribute="trailing" constant="10" id="6m1-sE-q4L"/>
                                                 <constraint firstItem="JiN-Ye-fqq" firstAttribute="leading" secondItem="nxN-gS-ANq" secondAttribute="leading" constant="-6" id="9IU-K2-0Pt"/>
-                                                <constraint firstItem="Xrf-WX-oiZ" firstAttribute="top" secondItem="Sox-ZF-afb" secondAttribute="top" constant="14" id="I3g-72-klW"/>
+                                                <constraint firstItem="QUP-44-k4r" firstAttribute="centerY" secondItem="Sox-ZF-afb" secondAttribute="centerY" id="C78-CK-iWY"/>
                                                 <constraint firstAttribute="trailing" secondItem="JiN-Ye-fqq" secondAttribute="trailing" constant="10" id="Jhu-Rg-XrD"/>
-                                                <constraint firstItem="Qs5-M5-8aP" firstAttribute="centerY" secondItem="Xrf-WX-oiZ" secondAttribute="centerY" id="KBi-7d-4dI"/>
-                                                <constraint firstItem="aWT-ec-0SO" firstAttribute="top" secondItem="Xrf-WX-oiZ" secondAttribute="bottom" constant="8" id="Oea-UW-VMF"/>
-                                                <constraint firstItem="lqD-PX-nEW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qs5-M5-8aP" secondAttribute="trailing" id="VMW-iW-cDq"/>
+                                                <constraint firstItem="lqD-PX-nEW" firstAttribute="leading" secondItem="Sox-ZF-afb" secondAttribute="leading" constant="20" id="R1R-86-AP4"/>
                                                 <constraint firstItem="nxN-gS-ANq" firstAttribute="top" secondItem="Sox-ZF-afb" secondAttribute="top" constant="14" id="WmE-6q-CKX"/>
-                                                <constraint firstAttribute="trailing" secondItem="lqD-PX-nEW" secondAttribute="trailing" constant="17" id="czJ-fC-dPG"/>
+                                                <constraint firstItem="JiN-Ye-fqq" firstAttribute="leading" secondItem="Sox-ZF-afb" secondAttribute="leading" constant="10" id="XhC-4I-T6H"/>
+                                                <constraint firstAttribute="trailing" secondItem="lqD-PX-nEW" secondAttribute="trailing" constant="35" id="czJ-fC-dPG"/>
                                                 <constraint firstItem="JiN-Ye-fqq" firstAttribute="top" secondItem="Sox-ZF-afb" secondAttribute="top" constant="5" id="dkR-Bm-4zQ"/>
-                                                <constraint firstItem="Xrf-WX-oiZ" firstAttribute="leading" secondItem="Sox-ZF-afb" secondAttribute="leading" constant="20" id="geT-6M-pBG"/>
-                                                <constraint firstItem="QUP-44-k4r" firstAttribute="leading" secondItem="nxN-gS-ANq" secondAttribute="trailing" id="ttQ-8X-I8w"/>
                                                 <constraint firstAttribute="height" constant="93" id="xhK-wt-xAE"/>
                                             </constraints>
                                         </view>
@@ -539,7 +505,7 @@
                                                     <color key="textColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have checked on the Covid-19 live updates page for consecutive 0 day, your cumulative steps is 0. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJx-tS-yjg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have checked on the Covid-19 live updates page for consecutive 0 day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJx-tS-yjg">
                                                     <rect key="frame" x="30" y="78" width="291" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -734,9 +700,8 @@ Check out the Covid-19 Live Updates page at least once a day with your daily ste
         </view>
     </objects>
     <resources>
+        <image name="eth_detail_arrow" width="24" height="24"/>
         <image name="eth_gray_back" width="24" height="24"/>
-        <image name="outbreak_enter_arrow" width="16" height="16"/>
-        <image name="outbreak_me_refresh" width="20" height="15"/>
         <image name="outbreak_sheet_red_no" width="40" height="50"/>
     </resources>
 </document>

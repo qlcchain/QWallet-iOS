@@ -23,4 +23,6 @@
 + (void)requestLogout:(void (^)(void))completeBlock;
 + (void)requestBind_jpush;
 
++ (BOOL)getIsReviewing;
+
 @end

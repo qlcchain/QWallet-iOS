@@ -75,44 +75,82 @@
     [RequestService requestWithUrl5:sys_version_info_Url params:@{} httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSDictionary *data = responseObject[Server_Data];
-            // 线上
-            NSString *versionNum = data[@"version_number"];
-            if (versionNum && versionNum.length > 0 && [versionNum containsString:@"#"]) {
-                NSString *versionLine = [[versionNum componentsSeparatedByString:@"#"] lastObject];
-                NSArray * arrayLine = [versionLine componentsSeparatedByString:@"."];
-                NSInteger lineVersionInt = 0;
-                if (arrayLine.count == 3) {
-                    lineVersionInt = [arrayLine[0] integerValue]*100 + [arrayLine[1] integerValue]*10 + [arrayLine[2] integerValue];
-                }
-                // 本地
-                NSArray *arrayLocal = [APP_Version componentsSeparatedByString:@"."];
-                NSInteger localVersionInt = 0;
-                if (arrayLocal.count == 3) {
-                    localVersionInt = [arrayLocal[0] integerValue]*100 + [arrayLocal[1] integerValue]*10 + [arrayLocal[2] integerValue];
-                }
-//                localVersionInt = 135;
-                if (lineVersionInt > localVersionInt) { // 线上版本大于本地版本
-                    UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil message:kLang(@"a_new_version_of_my_qwallet__") preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction * ok = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleDefault handler:nil];
-                    UIAlertAction * update = [UIAlertAction actionWithTitle:kLang(@"install_now") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        //跳转到App Store
-                        NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?mt=8",AppStore_ID];
-                        NSString *language = [Language currentLanguageCode];
-                        if ([language isEqualToString:LanguageCode[1]]) { // 中文
-                            urlStr = @"https://testflight.apple.com/join/ZLpohjtQ";
-                        }
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
-                    }];
-                    [alert addAction:ok];
-                    [alert addAction:update];
-                    alert.modalPresentationStyle = UIModalPresentationFullScreen;
-                    [kAppD.window.rootViewController presentViewController:alert animated:YES completion:nil];
-                }
-            }
+            
+            // APP更新逻辑
+            [SystemUtil handlerAppUpdate:data];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         NSLog(@"版本更新出错，%@",error.description);
     }];
+}
+
++ (void)handlerAppUpdate:(NSDictionary *)data {
+    // 线上
+    NSString *versionNum = data[@"version_number"];
+    if (versionNum && versionNum.length > 0 && [versionNum containsString:@"#"]) {
+        NSString *versionLine = [[versionNum componentsSeparatedByString:@"#"] lastObject];
+        NSArray * arrayLine = [versionLine componentsSeparatedByString:@"."];
+        NSInteger lineVersionInt = 0;
+        if (arrayLine.count == 3) {
+            lineVersionInt = [arrayLine[0] integerValue]*100 + [arrayLine[1] integerValue]*10 + [arrayLine[2] integerValue];
+        }
+        // 本地
+        NSArray *arrayLocal = [APP_Version componentsSeparatedByString:@"."];
+        NSInteger localVersionInt = 0;
+        if (arrayLocal.count == 3) {
+            localVersionInt = [arrayLocal[0] integerValue]*100 + [arrayLocal[1] integerValue]*10 + [arrayLocal[2] integerValue];
+        }
+//                localVersionInt = 135;
+        if (lineVersionInt > localVersionInt) { // 线上版本大于本地版本
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:nil message:kLang(@"a_new_version_of_my_qwallet__") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * ok = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleDefault handler:nil];
+            UIAlertAction * update = [UIAlertAction actionWithTitle:kLang(@"install_now") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //跳转到App Store
+                NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?mt=8",AppStore_ID];
+                NSString *language = [Language currentLanguageCode];
+                if ([language isEqualToString:LanguageCode[1]]) { // 中文
+                    urlStr = @"https://testflight.apple.com/join/ZLpohjtQ";
+                }
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr] options:@{} completionHandler:nil];
+            }];
+            [alert addAction:ok];
+            [alert addAction:update];
+            alert.modalPresentationStyle = UIModalPresentationFullScreen;
+            [kAppD.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        }
+
+        // 审核版本
+        NSString *versionUnderReview = data[@"version_under_review"];
+        if (versionUnderReview && versionUnderReview.length > 0 && [versionUnderReview containsString:@"#"]) {
+            NSString *versionLine = [[versionUnderReview componentsSeparatedByString:@"#"] lastObject];
+            NSArray * arrayLine = [versionLine componentsSeparatedByString:@"."];
+            NSInteger reviewVersionInt = 0;
+            if (arrayLine.count == 3) {
+                reviewVersionInt = [arrayLine[0] integerValue]*100 + [arrayLine[1] integerValue]*10 + [arrayLine[2] integerValue];
+            }
+            BOOL isReview = NO;
+//            reviewVersionInt = 137;
+            if (reviewVersionInt == localVersionInt && reviewVersionInt != lineVersionInt) { // 审核版本==本地版本&&审核版本!=线上版本  意思就是审核中
+                isReview = YES;
+            }
+            [SystemUtil setIsReviewing:isReview];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:IsReview_Update_Noti object:nil];
+        }
+    }
+}
+
++ (void)setIsReviewing:(BOOL)is {
+    [HWUserdefault insertObj:@(is) withkey:IS_Review_Version];
+}
+
++ (BOOL)getIsReviewing {
+    BOOL is = YES;
+    NSNumber *isNum = [HWUserdefault getObjectWithKey:IS_Review_Version];
+    if (isNum && [isNum boolValue] == NO) {
+        is = NO;
+    }
+    return is;
 }
 
 + (void)requestLogout:(void (^)(void))completeBlock {

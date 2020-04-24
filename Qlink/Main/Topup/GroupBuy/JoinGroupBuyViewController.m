@@ -15,7 +15,7 @@
 #import "TopupDeductionTokenModel.h"
 #import "TopupProductModel.h"
 #import "GroupBuyListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "RLArithmetic.h"
 #import "UserModel.h"
 #import "NSDate+Category.h"

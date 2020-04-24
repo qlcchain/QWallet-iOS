@@ -22,8 +22,8 @@
             NSString *topupGroupStartDateStr = responseObject[Server_Data][@"topupGroupStartDate"]?:@"";
             NSString *topopGroupEndDateStr = responseObject[Server_Data][@"topopGroupEndDate"]?:@"";
             NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
-            NSDate *startDate = [NSDate dateFromTime:topupGroupStartDateStr];
-            NSDate *endDate = [NSDate dateFromTime:topopGroupEndDateStr];
+            NSDate *startDate = [NSDate dateFromTime_c:topupGroupStartDateStr];
+            NSDate *endDate = [NSDate dateFromTime_c:topopGroupEndDateStr];
             NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
             isInGroupBuyActiviyTime = [startDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:endDate];
             if (completeBlock) {

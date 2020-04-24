@@ -22,6 +22,10 @@ def tunnel
 end
 
 def eth
+    
+    pod 'SwiftyJSON', '~> 4.0'
+    pod 'SwiftHTTP'
+  
     pod 'R.swift'
     pod 'PromiseKit'
 #    pod 'KeychainSwift'
@@ -55,25 +59,22 @@ end
 
 def pack_framework
 
-    pod 'AFNetworking'
-    pod 'APIKit'
-    pod 'Eureka', '4.2.0'
-    pod 'IQKeyboardManager'
-    pod 'KeychainSwift'
-    pod 'Masonry'
-    pod 'MJExtension'
-    pod 'MBProgressHUD'
-    pod 'SDWebImage'
-    pod 'Hero'
-    pod 'CocoaLumberjack/Swift'
-    pod 'Bugly'
-    pod 'KeychainAccess'
-    pod 'RealmSwift', '3.18.0'
-    pod 'MJRefresh'
-    pod 'TMCache'
-    pod 'SwiftTheme'
-    pod 'Charts'
-#    pod 'NinaPagerView'
+#    pod 'AFNetworking'
+#    pod 'APIKit'
+#    pod 'Eureka'
+#    pod 'IQKeyboardManager'
+#    pod 'KeychainSwift'
+#    pod 'Masonry'
+#    pod 'MJExtension'
+#    pod 'MBProgressHUD'
+#    pod 'SDWebImage'
+#    pod 'Hero'
+#    pod 'CocoaLumberjack/Swift'
+#    pod 'RealmSwift', '3.18.0'
+#    pod 'MJRefresh'
+#    pod 'TMCache'
+#    pod 'SwiftTheme'
+#    pod 'Charts'
 
 end
 
@@ -89,6 +90,10 @@ def app
     pod 'JPush', '3.2.4-noidfa' # 必选项
     pod 'LYEmptyView'
     pod 'CYLTabBarController'
+    pod 'Bugly'
+#    pod 'NinaPagerView'
+    pod 'KeychainAccess'  #编译成Framework会导致真机装不了
+    pod 'TOCropViewController'
   
 end
 

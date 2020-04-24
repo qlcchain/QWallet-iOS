@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "Qlink-Swift.h"
 #import "LaunchViewController.h"
@@ -88,6 +88,7 @@
     kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    [SystemUtil checkAPPUpdate]; // 检查app更新
    // 配置Firebase
     [self configFirebase];
     // 配置DDLog
@@ -126,8 +127,8 @@
     [self fetchUserInfo];
     // 注册本地通知
     [self setUserNotifationSettings:application];
-    // 配置群聊
-    [self configChat];
+//    // 配置群聊
+//    [self configChat];
 //    // 配置小米推送
 //    [self configPush];
     // 配置JPush
@@ -184,7 +185,7 @@
     
 //    [self jumpToWallet];
     
-    [SystemUtil checkAPPUpdate]; // 检查app更新
+    
     
 //    NSDictionary *params = @{@"account":@"111",@"p2pId":@"sgsd",@"productId":@"sagag",@"areaCode":@"agag",@"phoneNumber":@"0099",@"amount":@"222",@"txid":@"1234567",@"payTokenId":@"sndksdj"};
 //    TopupPayOrderParamsModel *paramsM = [TopupPayOrderParamsModel getObjectWithKeyValues:params];

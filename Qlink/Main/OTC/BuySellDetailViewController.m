@@ -17,7 +17,7 @@
 #import "PayReceiveAddressViewController.h"
 #import "QLCAddressInfoModel.h"
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QLCTransferToServerConfirmView.h"

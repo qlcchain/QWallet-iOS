@@ -8,7 +8,7 @@
 
 #import "EOSImportViewController.h"
 #import "UITextView+ZWPlaceHolder.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import "Qlink-Swift.h"
@@ -141,7 +141,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 - (void)jumpToTerms {

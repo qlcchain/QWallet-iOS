@@ -7,12 +7,13 @@
 //
 
 #import "PhotoPickerUtil.h"
-#import "ZQImageCropController.h"
+//#import "ZQImageCropController.h"
 #import "UINavigationController+CurrentNav.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "GlobalConstants.h"
+#import <TOCropViewController/TOCropViewController.h>
 
-@interface PhotoPickerUtil () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PhotoPickerUtil () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,TOCropViewControllerDelegate>
 
 @property (nonatomic, copy) PhotoPickerBlock selectBlock;
 
@@ -98,18 +99,23 @@
 
 #pragma mark - Transition
 - (void)jumpToCropImage:(UIImage *)_image {
-    ZQImageCropController* cropVC = [[ZQImageCropController alloc] init];
-    cropVC.image = _image;
-    kWeakSelf(self);
-    [cropVC addFinishBlock:^(UIImage *image) {
-        if (weakself.selectBlock) {
-            weakself.selectBlock(image);
-        }
-    }];
-    cropVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [[UINavigationController currentNC] presentViewController:cropVC animated:true completion:nil];
+    
+    TOCropViewController *cropViewController = [[TOCropViewController alloc] initWithImage:_image];
+    cropViewController.delegate = self;
+    cropViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [[UINavigationController currentNC] presentViewController:cropViewController animated:YES completion:nil];
 }
 
+
+- (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle {
+  // 'image' is the newly cropped version of the original image
+    
+    if (_selectBlock) {
+        _selectBlock(image);
+    }
+    
+    [cropViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end

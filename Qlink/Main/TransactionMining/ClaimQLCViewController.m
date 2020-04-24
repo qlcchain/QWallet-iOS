@@ -8,7 +8,7 @@
 
 #import "ClaimQLCViewController.h"
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "ChooseWalletViewController.h"
 #import "NSString+RemoveZero.h"
@@ -20,7 +20,7 @@
 #import "RSAUtil.h"
 #import "NSDate+Category.h"
 #import "SuccessTipView.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <OutbreakRed/OutbreakRed.h>
 
 @interface ClaimQLCViewController ()

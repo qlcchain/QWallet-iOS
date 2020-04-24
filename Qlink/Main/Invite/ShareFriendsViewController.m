@@ -27,6 +27,7 @@
 #import "RLArithmetic.h"
 #import "OutbreakRedUtil.h"
 #import "InviteFriendOutbreakViewController.h"
+#import "SystemUtil.h"
 
 @interface ShareFriendsViewController () <NinaPagerViewDelegate>
 // <UITableViewDelegate, UITableViewDataSource>
@@ -436,7 +437,8 @@
 - (void)jumpToInviteFriendNow {
     NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
 //    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
-    if ([appShow19 integerValue] == 1) {
+    BOOL isReview = [SystemUtil getIsReviewing];
+    if (isReview == NO && [appShow19 integerValue] == 1) {
         InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     } else {

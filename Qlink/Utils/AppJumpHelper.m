@@ -9,7 +9,7 @@
 #import "AppJumpHelper.h"
 #import "TradeOrderDetailViewController.h"
 #import "GlobalConstants.h"
-#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "QNavigationController.h"
 #import "UserModel.h"
@@ -22,19 +22,19 @@
 + (void)jumpToWallet {
     if (kAppD.needFingerprintVerification) {
         [kAppD presentFingerprintVerify:^{
-            kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+            kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
         }];
     } else {
-        kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+        kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
     }
 }
 
 + (void)jumpToOTC {
-    kAppD.mtabbarC.selectedIndex = TabbarIndexFinance;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexFinance;
 }
 
 + (void)jumpToTopup {
-    kAppD.mtabbarC.selectedIndex = TabbarIndexTopup;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexTopup;
 }
 
 + (void)jumpToDailyEarnings {

@@ -9,7 +9,7 @@
 #import "RefreshHelper.h"
 #import "GlobalConstants.h"
 #import "UIImage+Resize.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation RefreshHelper
 

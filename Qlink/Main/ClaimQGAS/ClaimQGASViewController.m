@@ -11,7 +11,7 @@
 #import "PayReceiveAddressViewController.h"
 #import "QLCAddressInfoModel.h"
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "ChooseWalletViewController.h"
 #import "NSString+RemoveZero.h"
@@ -25,7 +25,7 @@
 #import "SuccessTipView.h"
 #import "ClaimSuccessTipView.h"
 #import "AppJumpHelper.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <OutbreakRed/OutbreakRed.h>
 
 @interface ClaimQGASViewController ()

@@ -125,8 +125,8 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     
 //    NSString *userAgent =  [self.requestSerializer valueForHTTPHeaderField:@"User-Agent"];
 //    NSLog(@"userAgent = %@",userAgent);
-    
-    [self POST:@"" parameters:payload success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [self POST:@"" parameters:payload headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSInteger code = 0;
         NSString *message = nil;
         id data = nil;

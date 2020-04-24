@@ -23,7 +23,7 @@
 #import "ETHWalletManage.h"
 #import "TopupPayETH_DeductionViewController.h"
 #import "QNavigationController.h"
-#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "AppDelegate.h"
 #import "TopupPayQLC_DeductionViewController.h"

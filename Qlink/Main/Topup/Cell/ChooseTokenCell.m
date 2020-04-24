@@ -8,7 +8,7 @@
 
 #import "ChooseTokenCell.h"
 #import "TopupDeductionTokenModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "GlobalConstants.h"
 
 @interface ChooseTokenCell ()

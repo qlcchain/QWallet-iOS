@@ -8,7 +8,7 @@
 
 #import "MyViewController.h"
 #import "MyCell.h"
-#import "WalletsManageViewController.h"
+//#import "WalletsManageViewController.h"
 #import "JoinCommunityViewController.h"
 #import "SettingsViewController.h"
 #import "UserModel.h"
@@ -27,7 +27,7 @@
 #import "MiningConstants.h"
 #import "SheetMiningUtil.h"
 #import "WZLBadgeImport.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "TabbarHelper.h"
 #import "AppJumpHelper.h"
@@ -38,6 +38,7 @@
 #import "FirebaseUtil.h"
 #import "OutbreakRedViewController.h"
 #import "OutbreakRedUtil.h"
+#import "SystemUtil.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -164,7 +165,8 @@
         if ([obj isEqualToString:kLang(@"outbreak_red")]) {
             NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
 //            NSString *show19 = [OutbreakRedUtil shareInstance].show19;
-            if ([appShow19 integerValue] == 1) {
+            BOOL isReview = [SystemUtil getIsReviewing];
+            if (isReview == NO && [appShow19 integerValue] == 1) {
             } else {
                 titleM.isShow = NO;
             }
@@ -401,7 +403,7 @@
             *stop = YES;
         }
     }];
-    UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
+    UITabBarItem *item = kAppD.mtabbarC.tabBar.items[MainTabbarIndexMy];
     if (showRed) {
         [item setBadgeCenterOffset:CGPointMake(0, 5)];
         [item setBadgeColor:UIColorFromRGB(0xD0021B)];

@@ -51,7 +51,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *continueLab;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *dailyStepLab;
+//@property (weak, nonatomic) IBOutlet UILabel *dailyStepLab;
 @property (weak, nonatomic) IBOutlet UILabel *claimedLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dailyEmptyHeight; // 81
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
@@ -72,7 +72,7 @@
     
     [self configInit];
     [self setupRefresh];
-    [self fetchTodayStep];
+//    [self fetchTodayStep];
     [self requestGzbd_create];
 }
 
@@ -184,23 +184,26 @@
 }
 
 - (void)refreshContinueView:(NSString *)isolationStr stepStr:(NSString *)stepStr {
-    NSString *continueShowStr = [NSString stringWithFormat:kLang(@"you_have_checked_on_the_covid_19_live_updates_page_for_consecutive___"),isolationStr,stepStr];
+    NSString *continueShowStr = [NSString stringWithFormat:kLang(@"you_have_checked_on_the_covid_19_live_updates_page_for_consecutive___"),isolationStr];
     NSMutableAttributedString *amountAtt = [[NSMutableAttributedString alloc] initWithString:continueShowStr];
     [amountAtt addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, continueShowStr.length)];
     [amountAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x1E1E24) range:NSMakeRange(0, continueShowStr.length)];
     [amountAtt addAttribute:NSForegroundColorAttributeName value:MAIN_BLUE_COLOR range:[continueShowStr rangeOfString:isolationStr options:NSWidthInsensitiveSearch]];
-    [amountAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xF50F6D) range:[continueShowStr rangeOfString:stepStr options:NSBackwardsSearch]];
+//    [amountAtt addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0xF50F6D) range:[continueShowStr rangeOfString:stepStr options:NSBackwardsSearch]];
     _continueLab.attributedText = amountAtt;
 }
 
-- (void)fetchTodayStep {
-    kWeakSelf(self);
-    NSDate *fromDate = [NSDate date];
-   [OutbreakRedSDK getStepWithIntervalDay:0 fromDate:fromDate completeBlock:^(NSArray * _Nonnull stepArr) {
-       OR_HealthStepModel *model = stepArr.firstObject;
-       weakself.dailyStepLab.text = [NSString stringWithFormat:@"%@",model.step];
-   }];
-}
+//- (void)fetchTodayStep {
+//    _dailyStepLab.text = @"0";
+//    kWeakSelf(self);
+//    NSDate *fromDate = [NSDate date];
+//   [OutbreakRedSDK getStepWithIntervalDay:0 fromDate:fromDate completeBlock:^(NSArray * _Nonnull stepArr) {
+//       if (stepArr && stepArr.count>0) {
+//           OR_HealthStepModel *model = stepArr.firstObject;
+//           weakself.dailyStepLab.text = [NSString stringWithFormat:@"%@",model.step];
+//       }
+//   }];
+//}
 
 #pragma mark - Request
 - (void)requestGzbd_create {
@@ -281,9 +284,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)refreshDailyStepAction:(id)sender {
-    [self fetchTodayStep];
-}
+//- (IBAction)refreshDailyStepAction:(id)sender {
+//    [self fetchTodayStep];
+//}
 
 - (IBAction)claimedAction:(id)sender {
     [self jumpToOutbreakRedRecord];
@@ -300,22 +303,10 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     if ([userM.subsidised integerValue] == 0) { // 未领取
         if ([userM.isolationDays integerValue] >= [_createM.rewardQlcDays integerValue] ) { // 隔离14天
-//            __block BOOL isRightStep = YES;
-//            NSDate *fromDate = [NSDate date];
-//            [OutbreakRedSDK getStepWithIntervalDay:13 fromDate:fromDate completeBlock:^(NSArray * _Nonnull stepArr) {
-//                [stepArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                    OR_HealthStepModel *model = obj;
-//                    if ([model.step integerValue] > 1000) {
-//                        isRightStep = NO;
-//                        *stop = YES;
-//                    }
-//                }];
-//
-//                if (isRightStep) { // 每天步数<=1000
-                    [FirebaseUtil logEventWithItemID:Campaign_Covid19_QLC_Claim itemName:Campaign_Covid19_QLC_Claim contentType:Campaign_Covid19_QLC_Claim];
-                    [weakself jumpToClaimQLC];
-//                }
-//            }];
+
+            [FirebaseUtil logEventWithItemID:Campaign_Covid19_QLC_Claim itemName:Campaign_Covid19_QLC_Claim contentType:Campaign_Covid19_QLC_Claim];
+            [weakself jumpToClaimQLC];
+
         }
     }
 }

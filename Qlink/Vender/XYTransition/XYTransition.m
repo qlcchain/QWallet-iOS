@@ -8,7 +8,7 @@
 
 #import "XYTransition.h"
 #import "XYTransitionProtocol.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "UIView+Screenshot.h"
 #import "GlobalConstants.h"

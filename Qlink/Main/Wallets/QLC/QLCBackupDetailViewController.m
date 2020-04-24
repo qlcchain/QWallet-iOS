@@ -8,7 +8,7 @@
 
 #import "QLCBackupDetailViewController.h"
 #import "QLCWalletInfo.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import <QLCFramework/QLCFramework.h>
@@ -107,7 +107,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 

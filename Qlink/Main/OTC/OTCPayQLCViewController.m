@@ -22,7 +22,7 @@
 #import "RSAUtil.h"
 #import "WalletSelectViewController.h"
 #import "TradeOrderDetailViewController.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 //#import "GlobalConstants.h"

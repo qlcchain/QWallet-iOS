@@ -11,7 +11,7 @@
 #import "ChooseCurrencyViewController.h"
 #import "ResetPWViewController.h"
 #import "PasswordManagementViewController.h"
-#import "WalletsManageViewController.h"
+//#import "WalletsManageViewController.h"
 #import "JoinCommunityViewController.h"
 #import "WebViewController.h"
 #import "UserModel.h"

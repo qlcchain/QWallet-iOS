@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)configureFMDB;
 - (void)configToxP2PNetwork;
 - (void)fetchUserInfo;
-- (void)configChat;
+//- (void)configChat;
 - (void)checkGuidenPage;
 - (void)configJPush:(NSDictionary *)launchOptions;
 - (void)handlerPushJump:(NSDictionary *)userInfo isTapLaunch:(BOOL)isTapLaunch;

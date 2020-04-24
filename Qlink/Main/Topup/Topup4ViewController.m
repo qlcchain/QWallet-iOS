@@ -50,12 +50,12 @@
 #import "TopupProductSubViewController.h"
 #import "ChooseDeductionTokenViewController.h"
 #import "TopupDeductionTokenModel.h"
-#import <UIButton+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 #import "GroupKindModel.h"
 #import "QgasVoteUtil.h"
 #import "BuybackBurnUtil.h"
 #import "WebViewController.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "HomeBuySellViewController.h"
 #import "BuybackDetailViewController.h"
@@ -73,6 +73,7 @@
 #import "InviteFriendOutbreakViewController.h"
 #import "AFJSONRPCClient.h"
 #import "NSString+RandomStr.h"
+#import "SystemUtil.h"
 
 static NSString *const TopupNetworkSize = @"20";
 //static NSInteger const insetForSectionDistance = 16;
@@ -194,6 +195,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessNoti:) name:User_Login_Success_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccessNoti:) name:User_Logout_Success_Noti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInfoAfterLoginNoti:) name:User_UpdateInfoAfterLogin_Noti object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isReviewUpdateNoti:) name:IsReview_Update_Noti object:nil];
+    
 }
 
 - (void)dealloc {
@@ -543,7 +546,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 - (void)getRedDotOfMe {
     [TabbarHelper requestUser_red_pointWithCompleteBlock:^(RedPointModel *redPointM) {
         if ([redPointM.dailyIncomePoint integerValue] == 1 || [redPointM.invitePoint integerValue] == 1 || [redPointM.rewardTotal integerValue] == 1 || [redPointM.gzbdPoint integerValue] == 1) {
-            UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
+            UITabBarItem *item = kAppD.mtabbarC.tabBar.items[MainTabbarIndexMy];
             [item setBadgeCenterOffset:CGPointMake(0, 5)];
             [item setBadgeColor:UIColorFromRGB(0xD0021B)];
             [item showBadgeWithStyle:WBadgeStyleRedDot value:0 animationType:WBadgeAnimTypeNone];
@@ -737,8 +740,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     NSString *topupGroupStartDateStr = dictList[@"topupGroupStartDate"]?:@"";
     NSString *topopGroupEndDateStr = dictList[@"topopGroupEndDate"]?:@"";
     NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
-    NSDate *topupStartDate = [NSDate dateFromTime:topupGroupStartDateStr];
-    NSDate *topupEndDate = [NSDate dateFromTime:topopGroupEndDateStr];
+    NSDate *topupStartDate = [NSDate dateFromTime_c:topupGroupStartDateStr];
+    NSDate *topupEndDate = [NSDate dateFromTime_c:topopGroupEndDateStr];
     NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
     isInGroupBuyActivityTime = [topupStartDate isEarlierThanDate:currentDate]&&[currentDate isEarlierThanDate:topupEndDate];
     // ParterPlan
@@ -775,12 +778,13 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     NSString *appShow19 = dictList[@"appShow19"];
     [OutbreakRedUtil shareInstance].show19 = show19;
     [OutbreakRedUtil shareInstance].appShow19 = appShow19;
+    BOOL isReview = [SystemUtil getIsReviewing];
     _globalOutbreakHeight.constant = 0;
-    if ([show19 integerValue] == 1) { // 审核
+//    if ([show19 integerValue] == 1) { // 审核
+    if (isReview == NO && [appShow19 integerValue] == 1) {
         //750:308
         _globalOutbreakHeight.constant = SCREEN_WIDTH*308.0/750.0;
-    }
-    if ([appShow19 integerValue] == 1) {
+
         kWeakSelf(self);
         // 疫情活动-活动弹框
         [OutbreakRedFocusTipView show:^{
@@ -1256,7 +1260,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
     NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
 //    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
-    if ([appShow19 integerValue] == 1) {
+    BOOL isReview = [SystemUtil getIsReviewing];
+    if (isReview == NO && [appShow19 integerValue] == 1) {
         InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
@@ -1335,6 +1340,10 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     [ClaimQGASTipView show:^{
         
     }];
+}
+
+- (void)isReviewUpdateNoti:(NSNotification *)noti {
+    [self requestSys_index];
 }
 
 

@@ -9,7 +9,7 @@
 #import "AgentRewardViewController.h"
 #import "UIView+Gradient.h"
 #import "OpenAgentViewController.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "UserModel.h"
 #import "GlobalConstants.h"
 #import "AFJSONRPCClient.h"

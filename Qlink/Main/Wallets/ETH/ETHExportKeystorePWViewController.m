@@ -8,7 +8,7 @@
 
 #import "ETHExportKeystorePWViewController.h"
 #import "LoginPWModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "ConfigUtil.h"
 #import "ETHExportKeystoreViewController.h"
