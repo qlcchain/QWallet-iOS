@@ -845,7 +845,6 @@
 		7310AA0C20D0C71400F2261A /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 7310AA0A20D0C71300F2261A /* NSBundle+Language.m */; };
 		7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7323B76D20BCEF74005785F4 /* SettingCell.m */; };
 		7348C938206E0604009ACA5C /* WalletAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7348C937206E0603009ACA5C /* WalletAlertView.m */; };
-		734F529220B6BDEE002D45B7 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F529120B6BDED002D45B7 /* libMiPushSDK.a */; };
 		734F529420B6BEF7002D45B7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F529320B6BEF7002D45B7 /* UserNotifications.framework */; };
 		734F529620B6BF20002D45B7 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F529520B6BF20002D45B7 /* libresolv.tbd */; };
 		734F529820B6BF4A002D45B7 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 734F529720B6BF4A002D45B7 /* libxml2.tbd */; };
@@ -2818,8 +2817,6 @@
 		7323B76D20BCEF74005785F4 /* SettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		7348C936206E0603009ACA5C /* WalletAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletAlertView.h; sourceTree = "<group>"; };
 		7348C937206E0603009ACA5C /* WalletAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletAlertView.m; sourceTree = "<group>"; };
-		734F529020B6BDEC002D45B7 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
-		734F529120B6BDED002D45B7 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
 		734F529320B6BEF7002D45B7 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		734F529520B6BF20002D45B7 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		734F529720B6BF4A002D45B7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
@@ -2956,7 +2953,6 @@
 				58436CFF2451C679005DCE6F /* MJRefresh.framework in Frameworks */,
 				584BFB27236B0E3C00D7CCD1 /* ETHFramework.framework in Frameworks */,
 				589AE1BB2338656400C0A666 /* TrezorCrytoEd25519.framework in Frameworks */,
-				734F529220B6BDEE002D45B7 /* libMiPushSDK.a in Frameworks */,
 				58436CF92451C679005DCE6F /* Hero.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3284,7 +3280,6 @@
 				580CB147219047DC004C0E06 /* NEO */,
 				735310D82111508C00537372 /* NewPagedFlowView */,
 				584911772105AEF4005232A2 /* BackgroudLocation */,
-				734F528F20B6BDCC002D45B7 /* MPUSH */,
 				73C200BF209A9D290043E889 /* NotifactionView */,
 				73A05A252081D90700974483 /* ImageCliped */,
 				5807D6442080616E0049565D /* ShadowImageView */,
@@ -5741,15 +5736,6 @@
 				58A6500021BE16BD00E52FFF /* TipOKView.xib */,
 			);
 			path = CustomViews;
-			sourceTree = "<group>";
-		};
-		734F528F20B6BDCC002D45B7 /* MPUSH */ = {
-			isa = PBXGroup;
-			children = (
-				734F529120B6BDED002D45B7 /* libMiPushSDK.a */,
-				734F529020B6BDEC002D45B7 /* MiPushSDK.h */,
-			);
-			path = MPUSH;
 			sourceTree = "<group>";
 		};
 		735310D82111508C00537372 /* NewPagedFlowView */ = {
@@ -9047,7 +9033,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.3.9;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9067,7 +9053,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.3.9;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9192,7 +9178,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8563;
+				CURRENT_PROJECT_VERSION = 8612;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9217,7 +9203,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.3.9;
+				MARKETING_VERSION = 1.4.0;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9239,7 +9225,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8563;
+				CURRENT_PROJECT_VERSION = 8612;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9263,7 +9249,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
 				);
-				MARKETING_VERSION = 1.3.9;
+				MARKETING_VERSION = 1.4.0;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
