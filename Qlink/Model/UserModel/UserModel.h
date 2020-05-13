@@ -36,6 +36,9 @@ static NSString *const kyc_fail = @"KYC_FAIL";
 @property (nonatomic, copy) NSString *bindDate;
 @property (nonatomic, copy) NSString *qlcAddress; // 领取奖励 绑定的qlcAddress
 
+@property (nonatomic, copy) NSString *isolationDays; // 隔离天数
+@property (nonatomic, copy) NSString *subsidised; // 是否领取100QLC补贴
+
 + (NSString *)getOwnP2PId;
 + (NSString *)getTopupP2PId;
 + (void)storeUserByID:(UserModel *)model;

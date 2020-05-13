@@ -24,7 +24,7 @@
 //#import <NEOFramework/NEOFramework.h>
 #import "ReportUtil.h"
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "GlobalConstants.h"
@@ -410,7 +410,7 @@
     switch (checkFrom) {
         case CheckProcess_WALLET_TABBAR:
         {
-            kAppD.mtabbarC.selectedIndex = TabbarIndexFinance;
+            kAppD.mtabbarC.selectedIndex = MainTabbarIndexFinance;
         }
             break;
         case CheckProcess_VPN_ADD:

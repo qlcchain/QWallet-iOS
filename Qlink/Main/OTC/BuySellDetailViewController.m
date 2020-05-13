@@ -17,7 +17,7 @@
 #import "PayReceiveAddressViewController.h"
 #import "QLCAddressInfoModel.h"
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QLCTransferToServerConfirmView.h"
@@ -39,6 +39,7 @@
 #import "VerifyTipView.h"
 #import "VerificationViewController.h"
 #import "FirebaseUtil.h"
+#import "NSString+Trim.h"
 
 @interface BuySellDetailViewController () <UITextFieldDelegate>
 
@@ -161,13 +162,13 @@
 
 - (void)changedTextField:(UITextField *)tf {
     if (tf == _usdtMaxTF) {
-        NSString *str = _usdtMaxTF.text.div(_orderInfoM.unitPrice_str);
+        NSString *str = _usdtMaxTF.text.trim_whitespace.div(_orderInfoM.unitPrice_str);
         _qgasMaxTF.text = [NSString stringWithFormat:@"%@",str];
     } else if (tf == _qgasMaxTF) {
         if ([tf.text isEmptyString]) {
             _usdtMaxTF.text = nil;
         } else {
-            NSString *str = _qgasMaxTF.text.mul(_orderInfoM.unitPrice_str);
+            NSString *str = _qgasMaxTF.text.trim_whitespace.mul(_orderInfoM.unitPrice_str);
             NSString *str3 = str.roundPlain(3);
             _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str3];
         }
@@ -278,9 +279,9 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
     NSString *entrustOrderId = _orderInfoM.ID?:@"";
-    NSString *usdtAmount = _usdtMaxTF.text?:@"";
-    NSString *qgasAmount = _qgasMaxTF.text?:@"";
-    NSString *qgasToAddress = _receiveAddressTF.text?:@"";
+    NSString *usdtAmount = _usdtMaxTF.text.trim_whitespace?:@"";
+    NSString *qgasAmount = _qgasMaxTF.text.trim_whitespace?:@"";
+    NSString *qgasToAddress = _receiveAddressTF.text.trim_whitespace?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"entrustOrderId":entrustOrderId,@"usdtAmount":usdtAmount,@"qgasAmount":qgasAmount,@"qgasToAddress":qgasToAddress};
 //    NSString *fromAddress = _buyFromAddress?:@"";
 //       NSString *txid = _buyTxid?:@"";
@@ -339,9 +340,9 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
     NSString *entrustOrderId = _orderInfoM.ID?:@"";
-    NSString *usdtAmount = _usdtMaxTF.text?:@"";
-    NSString *qgasAmount = _qgasMaxTF.text?:@"";
-    NSString *usdtToAddress = _receiveAddressTF.text?:@"";
+    NSString *usdtAmount = _usdtMaxTF.text.trim_whitespace?:@"";
+    NSString *qgasAmount = _qgasMaxTF.text.trim_whitespace?:@"";
+    NSString *usdtToAddress = _receiveAddressTF.text.trim_whitespace?:@"";
     NSString *fromAddress = _sellFromAddress?:@"";
 //    NSString *txid = _sellTxid?:@"";
     
@@ -500,40 +501,40 @@
         return;
     }
     
-    if ([_usdtMaxTF.text isEmptyString]) {
+    if ([_usdtMaxTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputPayToken,kLang(@"is_empty")]];
         return;
     }
-    if ([_usdtMaxTF.text doubleValue] > [_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice_str doubleValue]) {
+    if ([_usdtMaxTF.text.trim_whitespace doubleValue] > [_orderInfoM.maxAmount doubleValue]*[_orderInfoM.unitPrice_str doubleValue]) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputPayToken,kLang(@"is_over_max")]];
         return;
     }
-    if ([_qgasMaxTF.text isEmptyString]) {
+    if ([_qgasMaxTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"is_empty")]];
         return;
     }
-    if ([_receiveAddressTF.text isEmptyString]) {
+    if ([_receiveAddressTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
-    if ([_qgasMaxTF.text doubleValue] > [_orderInfoM.maxAmount doubleValue]) {
+    if ([_qgasMaxTF.text.trim_whitespace doubleValue] > [_orderInfoM.maxAmount doubleValue]) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"is_greater_than_max_volume")]];
         return;
     }
-    if ([_qgasMaxTF.text doubleValue] < [_orderInfoM.minAmount doubleValue]) {
+    if ([_qgasMaxTF.text.trim_whitespace doubleValue] < [_orderInfoM.minAmount doubleValue]) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"is_less_than_min_volume")]];
         return;
     }
     // 检查剩余QGAS量
     NSString *restAmount = _orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str);
-    if ([restAmount doubleValue]<[_qgasMaxTF.text doubleValue]) { // 交易量不足
+    if ([restAmount doubleValue]<[_qgasMaxTF.text.trim_whitespace doubleValue]) { // 交易量不足
         NSString *tip = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%@ %@",_inputTradeToken,kLang(@"remain")],restAmount];
         [kAppD.window makeToastDisappearWithText:tip];
         return;
     }
     
-    if ([_inputEntrustOrderListM.tradeToken isEqualToString:@"QGAS"] && [_qgasMaxTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+    if ([_inputEntrustOrderListM.tradeToken isEqualToString:@"QGAS"] && [_qgasMaxTF.text.trim_whitespace doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
         UserModel *userM = [UserModel fetchUserOfLogin];
         if (![userM.vStatus isEqualToString:kyc_success]) {
             [self showVerifyTipView];
@@ -548,7 +549,7 @@
 //        }
         
         // 检查地址有效性
-        BOOL validReceiveAddress = [WalletCommonModel validAddress:_receiveAddressTF.text tokenChain:_inputEntrustOrderListM.tradeTokenChain];
+        BOOL validReceiveAddress = [WalletCommonModel validAddress:_receiveAddressTF.text.trim_whitespace tokenChain:_inputEntrustOrderListM.tradeTokenChain];
         if (!validReceiveAddress) {
             [kAppD.window makeToastDisappearWithText:kLang(@"wallet_address_is_invalidate")];
             return;
@@ -561,20 +562,20 @@
         
         [FirebaseUtil logEventWithItemID:OTC_BUY_Submit itemName:OTC_BUY_Submit contentType:OTC_BUY_Submit];
     } else { // 我要卖
-        if ([_qgasSendTF.text isEmptyString]) {
+        if ([_qgasSendTF.text.trim_whitespace isEmptyString]) {
             [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
             return;
         }
         
         // 检查地址有效性
-        BOOL validReceiveAddress = [WalletCommonModel validAddress:_receiveAddressTF.text tokenChain:_inputEntrustOrderListM.payTokenChain];
+        BOOL validReceiveAddress = [WalletCommonModel validAddress:_receiveAddressTF.text.trim_whitespace tokenChain:_inputEntrustOrderListM.payTokenChain];
         if (!validReceiveAddress) {
             [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
             return;
         }
         
-        _sellFromAddress = _qgasSendTF.text?:@"";
-        [self requestTrade_sell_orderWithTokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken tokenAmount:_qgasMaxTF.text];
+        _sellFromAddress = _qgasSendTF.text.trim_whitespace?:@"";
+        [self requestTrade_sell_orderWithTokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken tokenAmount:_qgasMaxTF.text.trim_whitespace];
         
 //        [self sell_transfer:_qgasMaxTF.text tokenChain:_inputEntrustOrderListM.tradeTokenChain tokenName:_inputEntrustOrderListM.tradeToken];
         

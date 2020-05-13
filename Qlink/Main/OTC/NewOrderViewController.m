@@ -12,7 +12,7 @@
 #import "RSAUtil.h"
 #import <QLCFramework/QLCFramework.h>
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 #import "QLCAddressInfoModel.h"
@@ -36,6 +36,7 @@
 #import "TxidBackUtil.h"
 #import "TokenListHelper.h"
 #import "FirebaseUtil.h"
+#import "NSString+Trim.h"
 
 @interface NewOrderViewController () <UITextFieldDelegate>
 
@@ -391,55 +392,55 @@
 //}
 
 - (IBAction)buyConfirmAction:(id)sender {
-    if ([_buyPayUnitTF.text isEmptyString]) {
+    if ([_buyPayUnitTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_is_empty")];
         return;
     }
-    if ([_buyPayUnitTF.text doubleValue] <= 0) {
+    if ([_buyPayUnitTF.text.trim_whitespace doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_needs_greater_than_0")];
         return;
     }
-    if ([_buyTradeAmountTF.text isEmptyString]) {
+    if ([_buyTradeAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if ([_buyVolumeMinAmountTF.text isEmptyString]) {
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"min_amount_is_empty")];
         return;
     }
-    if ([_buyVolumeMaxAmountTF.text isEmptyString]) {
+    if ([_buyVolumeMaxAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_is_empty")];
         return;
     }
-    if ([_buyVolumeMinAmountTF.text doubleValue] > [_buyTradeAmountTF.text doubleValue]) {
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue] > [_buyTradeAmountTF.text.trim_whitespace doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"buying_amount_need_greater_than_or_equal_to_min_amount")];
         return;
     }
-    if ([_buyVolumeMinAmountTF.text doubleValue] > [_buyVolumeMaxAmountTF.text doubleValue]) {
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue] > [_buyVolumeMaxAmountTF.text.trim_whitespace doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_need_greater_than_or_equal_to_min_amount")];
         return;
     }
-    if ([_buyVolumeMinAmountTF.text doubleValue] < 1) {
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue] < 1) {
         [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_1")];
         return;
     }
-    if ([_buyTradeTF.text isEmptyString]) {
+    if ([_buyTradeTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
-    if ([_buyPayTF.text isEmptyString]) {
+    if ([_buyPayTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
     // 检查地址有效性
-    BOOL validReceiveAddress = [WalletCommonModel validAddress:_buyTradeTF.text tokenChain:_buy_PairsM.tradeTokenChain];
+    BOOL validReceiveAddress = [WalletCommonModel validAddress:_buyTradeTF.text.trim_whitespace tokenChain:_buy_PairsM.tradeTokenChain];
     if (!validReceiveAddress) {
         [kAppD.window makeToastDisappearWithText:kLang(@"wallet_address_is_invalidate")];
         return;
     }
     
-    if ([_buy_PairsM.tradeToken isEqualToString:@"QGAS"] && [_buyTradeAmountTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+    if ([_buy_PairsM.tradeToken isEqualToString:@"QGAS"] && [_buyTradeAmountTF.text.trim_whitespace doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
         UserModel *userM = [UserModel fetchUserOfLogin];
         if (![userM.vStatus isEqualToString:kyc_success]) {
             [self showVerifyTipView];
@@ -447,8 +448,8 @@
         }
     }
     
-    NSString *transferAmount = _buyTradeAmountTF.text.mul(_buyPayUnitTF.text);
-    NSString *fromAddress = _buyPayTF.text?:@"";
+    NSString *transferAmount = _buyTradeAmountTF.text.trim_whitespace.mul(_buyPayUnitTF.text.trim_whitespace);
+    NSString *fromAddress = _buyPayTF.text.trim_whitespace?:@"";
     NSString *memo = [NSString stringWithFormat:@"%@_%@_%@",@"otc",@"entrust",@"buy"];
     [self buy_transfer:fromAddress amountStr:transferAmount tokenChain:_buy_PairsM.payTokenChain tokenName:_buy_PairsM.payToken memo:memo];
 //    // 下买单
@@ -459,59 +460,59 @@
 }
 
 - (IBAction)sellNextAction:(id)sender {
-    if ([_sellPayUnitTF.text isEmptyString]) {
+    if ([_sellPayUnitTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_is_empty")];
         return;
     }
-    if ([_sellPayUnitTF.text doubleValue] <= 0) {
+    if ([_sellPayUnitTF.text.trim_whitespace doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"unit_price_needs_greater_than_0")];
         return;
     }
-    if ([_sellTradeAmountTF.text isEmptyString]) {
+    if ([_sellTradeAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if ([_sellVolumeMinAmountTF.text isEmptyString]) {
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"min_amount_is_empty")];
         return;
     }
-    if ([_sellVolumeMaxAmountTF.text isEmptyString]) {
+    if ([_sellVolumeMaxAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_is_empty")];
         return;
     }
-    if ([_sellVolumeMinAmountTF.text doubleValue] > [_sellTradeAmountTF.text doubleValue]) {
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue] > [_sellTradeAmountTF.text.trim_whitespace doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"selling_amount_need_greater_than_or_equal_to_min_amount")];
         return;
     }
-    if ([_sellVolumeMinAmountTF.text doubleValue] > [_sellVolumeMaxAmountTF.text doubleValue]) {
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue] > [_sellVolumeMaxAmountTF.text.trim_whitespace doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_need_greater_than_or_equal_to_min_amount")];
         return;
     }
-    if ([_sellVolumeMinAmountTF.text doubleValue] < 1) {
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue] < 1) {
         [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_1")];
         return;
     }
-    if ([_sellTradeAmountTF.text doubleValue] < [_sellVolumeMaxAmountTF.text doubleValue]) {
+    if ([_sellTradeAmountTF.text.trim_whitespace doubleValue] < [_sellVolumeMaxAmountTF.text.trim_whitespace doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_need_greater_than_or_equal_to_max_amount")];
         return;
     }
-    if ([_sellPayAddressTF.text isEmptyString]) {
+    if ([_sellPayAddressTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
-    if ([_sellTradeAddressTF.text isEmptyString]) {
+    if ([_sellTradeAddressTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
     // 检查地址有效性
-    BOOL isValid = [WalletCommonModel validAddress:_sellPayAddressTF.text tokenChain:_sell_PairsM.payTokenChain];
+    BOOL isValid = [WalletCommonModel validAddress:_sellPayAddressTF.text.trim_whitespace tokenChain:_sell_PairsM.payTokenChain];
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;
     }
     
-    if ([_sell_PairsM.tradeToken isEqualToString:@"QGAS"] && [_sellTradeAmountTF.text doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
+    if ([_sell_PairsM.tradeToken isEqualToString:@"QGAS"] && [_sellTradeAmountTF.text.trim_whitespace doubleValue] > 1000) { // QGAS总额大于1000的挂单需要进行kyc验证
         UserModel *userM = [UserModel fetchUserOfLogin];
         if (![userM.vStatus isEqualToString:kyc_success]) {
             [self showVerifyTipView];
@@ -519,9 +520,9 @@
         }
     }
     
-    NSString *fromAddress = _sellTradeAddressTF.text?:@"";
+    NSString *fromAddress = _sellTradeAddressTF.text.trim_whitespace?:@"";
     NSString *memo = [NSString stringWithFormat:@"%@_%@_%@",@"otc",@"entrust",@"sell"];
-    [self sell_transfer:fromAddress amountStr:_sellTradeAmountTF.text tokenChain:_sell_PairsM.tradeTokenChain tokenName:_sell_PairsM.tradeToken memo:memo];
+    [self sell_transfer:fromAddress amountStr:_sellTradeAmountTF.text.trim_whitespace tokenChain:_sell_PairsM.tradeTokenChain tokenName:_sell_PairsM.tradeToken memo:memo];
     
     
     [FirebaseUtil logEventWithItemID:OTC_NewOrder_SELL_Confirm itemName:OTC_NewOrder_SELL_Confirm contentType:OTC_NewOrder_SELL_Confirm];
@@ -628,11 +629,11 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
-    NSString *unitPrice = _buyPayUnitTF.text?:@"";
-    NSString *totalAmount = _buyTradeAmountTF.text?:@"";
-    NSString *minAmount = _buyVolumeMinAmountTF.text?:@"";
-    NSString *maxAmount = _buyVolumeMaxAmountTF.text?:@"";
-    NSString *qgasAddress = _buyTradeTF.text?:@"";
+    NSString *unitPrice = _buyPayUnitTF.text.trim_whitespace?:@"";
+    NSString *totalAmount = _buyTradeAmountTF.text.trim_whitespace?:@"";
+    NSString *minAmount = _buyVolumeMinAmountTF.text.trim_whitespace?:@"";
+    NSString *maxAmount = _buyVolumeMaxAmountTF.text.trim_whitespace?:@"";
+    NSString *qgasAddress = _buyTradeTF.text.trim_whitespace?:@"";
     NSString *fromAddress = _buyFromAddress?:@"";
     NSString *txid = _buyTxid?:@"";
     NSString *pairsId = _buy_PairsM.ID?:@"";
@@ -694,11 +695,11 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
-    NSString *unitPrice = _sellPayUnitTF.text?:@"";
-    NSString *totalAmount = _sellTradeAmountTF.text?:@"";
-    NSString *minAmount = _sellVolumeMinAmountTF.text?:@"";
-    NSString *maxAmount = _sellVolumeMaxAmountTF.text?:@"";
-    NSString *usdtAddress = _sellPayAddressTF.text?:@"";
+    NSString *unitPrice = _sellPayUnitTF.text.trim_whitespace?:@"";
+    NSString *totalAmount = _sellTradeAmountTF.text.trim_whitespace?:@"";
+    NSString *minAmount = _sellVolumeMinAmountTF.text.trim_whitespace?:@"";
+    NSString *maxAmount = _sellVolumeMaxAmountTF.text.trim_whitespace?:@"";
+    NSString *usdtAddress = _sellPayAddressTF.text.trim_whitespace?:@"";
     NSString *fromAddress = _sellFromAddress?:@"";
     NSString *txid = _sellTxid?:@"";
     NSString *pairsId = _sell_PairsM.ID?:@"";

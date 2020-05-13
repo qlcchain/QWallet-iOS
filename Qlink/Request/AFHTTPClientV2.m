@@ -153,7 +153,7 @@
     
     if (httpMethod == HttpMethodGet) {
         
-        dataTask = [[self getHTTPManager] GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        dataTask = [[self getHTTPManager] GET:URLString  parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
             
@@ -186,7 +186,7 @@
         
         DDLogDebug(@"url = %@ param = %@",URLString,params);
         
-        dataTask = [manager GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        dataTask = [manager GET:URLString  parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
             NSMutableString *jsonStr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -205,7 +205,7 @@
         
         DDLogDebug(@"url = %@ param = %@",URLString,params);
         
-        dataTask = [manager POST:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        dataTask = [manager POST:URLString  parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             //            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
             if ([responseObject isKindOfClass:[NSData class]]) {
@@ -251,7 +251,7 @@
         
          DDLogDebug(@"url = %@ param = %@",URLString,params);
         
-        dataTask = [[self getHTTPManager] GET:URLString  parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        dataTask = [[self getHTTPManager] GET:URLString  parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
             if (successReqBlock) {
@@ -293,7 +293,7 @@
             }];
             [dataTask resume];
         } else {
-            dataTask = [[self getHTTPManager] POST:URLString parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+            dataTask = [[self getHTTPManager] POST:URLString parameters:params headers:nil  progress:^(NSProgress * _Nonnull uploadProgress) {
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
                 if (successReqBlock) {
@@ -309,7 +309,7 @@
         }
     }else if (httpMethod == HttpMethodDelete){
         
-        dataTask = [[self getHTTPManager] DELETE:URLString  parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dataTask = [[self getHTTPManager] DELETE:URLString  parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             id result = [self printJSONLogWithMethod:URLString Response:responseObject Error:nil];
             
             if (successReqBlock) {
@@ -343,6 +343,7 @@
     
     dataTask = [[self getHTTPManager] POST:URLString
                                            parameters:(id)parameters
+                                            headers:nil
                             constructingBodyWithBlock:block
                    progress:^(NSProgress * _Nonnull uploadProgress) {
                    }

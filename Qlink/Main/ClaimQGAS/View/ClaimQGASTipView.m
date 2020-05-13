@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *amountLab;
 @property (weak, nonatomic) IBOutlet UILabel *tipLab;
 @property (weak, nonatomic) IBOutlet UIButton *claimBtn;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (nonatomic, copy) ClaimQGASTipConfirmBlock confirmBlock;
 
 @end
@@ -47,6 +48,8 @@
 //    _amountLab;
     _tipLab.text = kLang(@"claim_entitled_qgas_earnings_everyday");
     [_claimBtn setTitle:kLang(@"receive_now") forState:UIControlStateNormal];
+//    [_closeBtn setBackgroundImage:kClickEffectBtnImage forState:UIControlStateHighlighted];
+//    [_claimBtn setBackgroundImage:kClickEffectBtnImage forState:UIControlStateHighlighted];
 }
 
 + (void)show:(ClaimQGASTipConfirmBlock)block {

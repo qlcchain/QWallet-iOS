@@ -29,6 +29,10 @@
 #import "RLArithmetic.h"
 #import "FirebaseUtil.h"
 #import "AppJumpHelper.h"
+#import "OutbreakRedUtil.h"
+#import "InviteFriendOutbreakViewController.h"
+#import "SystemUtil.h"
+#import "NSString+Trim.h"
 
 static NSInteger Mining_PageSize = 20;
 
@@ -243,7 +247,7 @@ static NSInteger Mining_PageSize = 20;
 }
 
 - (IBAction)claimAction:(id)sender {
-    if ([_canClaimAmountLab.text doubleValue] <= 0) {
+    if ([_canClaimAmountLab.text.trim_whitespace doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"no_qlc_can_claim")];
         return;
     }
@@ -382,13 +386,21 @@ static NSInteger Mining_PageSize = 20;
 }
 
 - (void)jumpToInviteFriendNow {
-    InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
+//    NSString *show19 = [OutbreakRedUtil shareInstance].show19;
+    BOOL isReview = [SystemUtil getIsReviewing];
+    if (isReview == NO && [appShow19 integerValue] == 1) {
+        InviteFriendOutbreakViewController *vc = [InviteFriendOutbreakViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        InviteFriendNowViewController *vc = [InviteFriendNowViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)jumpToClaimQLC {
     ClaimQLCViewController *vc = [ClaimQLCViewController new];
-    vc.inputCanClaimAmount = _canClaimAmountLab.text?:@"0";
+    vc.inputCanClaimAmount = [_canClaimAmountLab.text?:@"0" trim_whitespace];
     vc.claimQLCType = ClaimQLCTypeMiningRewards;
     [self.navigationController pushViewController:vc animated:YES];
 }

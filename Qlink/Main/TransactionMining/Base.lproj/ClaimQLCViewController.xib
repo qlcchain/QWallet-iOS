@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,6 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClaimQLCViewController">
             <connections>
                 <outlet property="canClaimAmountLab" destination="JzF-iD-ycW" id="1c9-Dp-pN9"/>
+                <outlet property="codeBtn" destination="F2P-Nh-FFQ" id="WbZ-f6-Efp"/>
+                <outlet property="codeHeight" destination="lzD-cu-0QU" id="Icn-rC-gbS"/>
+                <outlet property="codeImg" destination="OnH-3E-Jkb" id="0w8-Yp-T5N"/>
+                <outlet property="codeTF" destination="x2B-cj-87E" id="4Fm-Bc-aAV"/>
                 <outlet property="qgasSendTF" destination="eER-Z4-dk6" id="5mu-Pv-8eW"/>
                 <outlet property="receiveAddressTipLab" destination="tk0-5Q-0cu" id="sND-Nc-gV3"/>
                 <outlet property="sendAddressTipLab" destination="jtQ-M6-RZa" id="ZhX-Jl-Snl"/>
@@ -31,7 +35,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDS-iO-QIl">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-hJ-9nH">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-hJ-9nH">
                             <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26z-sD-Nvq">
@@ -93,7 +97,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGP-N8-C7K">
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGP-N8-C7K" customClass="QBaseTouchButton">
                                                     <rect key="frame" x="370" y="44" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="CMy-5m-oPg"/>
@@ -126,7 +130,7 @@
                                                             <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smq-PA-oaL">
+                                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smq-PA-oaL" customClass="QBaseTouchButton">
                                                             <rect key="frame" x="370" y="13.666666666666657" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="Fwn-qs-UTa"/>
@@ -172,9 +176,9 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8B5-Aj-fcT">
-                                            <rect key="frame" x="0.0" y="198" width="414" height="452"/>
+                                            <rect key="frame" x="0.0" y="278" width="414" height="372"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XT8-uk-PTl">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XT8-uk-PTl" customClass="QBaseDarkButton">
                                                     <rect key="frame" x="24" y="32" width="366" height="49"/>
                                                     <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
@@ -194,20 +198,74 @@
                                                 <constraint firstItem="XT8-uk-PTl" firstAttribute="top" secondItem="8B5-Aj-fcT" secondAttribute="top" constant="32" id="CuS-Ua-REP"/>
                                             </constraints>
                                         </view>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oH1-eg-vqC">
+                                            <rect key="frame" x="0.0" y="198" width="414" height="80"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Verification Code " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2B-cj-87E">
+                                                    <rect key="frame" x="16" y="0.0" width="278" height="80"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OnH-3E-Jkb">
+                                                    <rect key="frame" x="302" y="0.0" width="100" height="80"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-Nh-FFQ" customClass="QBaseTouchButton">
+                                                    <rect key="frame" x="302" y="0.0" width="100" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="jDv-o3-fqd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="deviceRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="codeAction:" destination="-1" eventType="touchUpInside" id="CVx-R0-HM5"/>
+                                                    </connections>
+                                                </button>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qC-eN-HzW">
+                                                    <rect key="frame" x="16" y="79.666666666666686" width="398" height="0.3333333333333286"/>
+                                                    <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="deviceRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="Xct-wP-2DT"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="2qC-eN-HzW" secondAttribute="bottom" id="D3c-49-YUu"/>
+                                                <constraint firstItem="2qC-eN-HzW" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="QsS-N6-eKx"/>
+                                                <constraint firstItem="x2B-cj-87E" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="RDI-nE-1Qh"/>
+                                                <constraint firstAttribute="trailing" secondItem="F2P-Nh-FFQ" secondAttribute="trailing" constant="12" id="Xa6-wH-zqt"/>
+                                                <constraint firstAttribute="bottom" secondItem="F2P-Nh-FFQ" secondAttribute="bottom" id="aJZ-YI-pbh"/>
+                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="leading" secondItem="F2P-Nh-FFQ" secondAttribute="leading" id="dtv-GU-dOa"/>
+                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="bottom" secondItem="F2P-Nh-FFQ" secondAttribute="bottom" id="eJE-Hu-6KS"/>
+                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="top" secondItem="F2P-Nh-FFQ" secondAttribute="top" id="eZb-1J-lbo"/>
+                                                <constraint firstAttribute="height" constant="80" id="lzD-cu-0QU"/>
+                                                <constraint firstAttribute="bottom" secondItem="x2B-cj-87E" secondAttribute="bottom" id="m4r-Zd-UsG"/>
+                                                <constraint firstItem="F2P-Nh-FFQ" firstAttribute="leading" secondItem="x2B-cj-87E" secondAttribute="trailing" constant="8" id="nDi-zn-bTU"/>
+                                                <constraint firstAttribute="trailing" secondItem="2qC-eN-HzW" secondAttribute="trailing" id="ncw-zD-L24"/>
+                                                <constraint firstItem="x2B-cj-87E" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="top" id="vPu-Mw-dJe"/>
+                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="trailing" secondItem="F2P-Nh-FFQ" secondAttribute="trailing" id="w3w-Kd-igb"/>
+                                                <constraint firstItem="F2P-Nh-FFQ" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="top" id="zYE-Vi-eyz"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="wuE-Kc-kyX" secondAttribute="trailing" id="0Ni-EG-EAX"/>
                                         <constraint firstItem="8B5-Aj-fcT" firstAttribute="leading" secondItem="26z-sD-Nvq" secondAttribute="leading" id="1aV-vX-Wsz"/>
+                                        <constraint firstItem="oH1-eg-vqC" firstAttribute="leading" secondItem="26z-sD-Nvq" secondAttribute="leading" id="84Y-Yn-HEi"/>
+                                        <constraint firstAttribute="trailing" secondItem="oH1-eg-vqC" secondAttribute="trailing" id="Cfv-G6-0Rr"/>
+                                        <constraint firstItem="oH1-eg-vqC" firstAttribute="top" secondItem="wuE-Kc-kyX" secondAttribute="bottom" id="Elh-xi-Jqn"/>
                                         <constraint firstAttribute="bottom" secondItem="8B5-Aj-fcT" secondAttribute="bottom" id="G5a-Rn-iVe"/>
                                         <constraint firstAttribute="height" constant="650" id="Lve-Sg-hdb"/>
-                                        <constraint firstItem="8B5-Aj-fcT" firstAttribute="top" secondItem="wuE-Kc-kyX" secondAttribute="bottom" id="O17-he-InZ"/>
                                         <constraint firstAttribute="trailing" secondItem="FfW-o6-FRR" secondAttribute="trailing" id="PFg-af-wjK"/>
                                         <constraint firstItem="wuE-Kc-kyX" firstAttribute="top" secondItem="FfW-o6-FRR" secondAttribute="bottom" id="Vqe-pk-LUp"/>
                                         <constraint firstAttribute="trailing" secondItem="8B5-Aj-fcT" secondAttribute="trailing" id="aZB-lq-RKS"/>
                                         <constraint firstItem="FfW-o6-FRR" firstAttribute="leading" secondItem="26z-sD-Nvq" secondAttribute="leading" id="evX-kj-hwa"/>
                                         <constraint firstItem="wuE-Kc-kyX" firstAttribute="leading" secondItem="26z-sD-Nvq" secondAttribute="leading" id="gXS-cl-4US"/>
                                         <constraint firstItem="FfW-o6-FRR" firstAttribute="top" secondItem="26z-sD-Nvq" secondAttribute="top" constant="16" id="iFC-83-OgW"/>
+                                        <constraint firstItem="8B5-Aj-fcT" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="bottom" id="tas-PU-62D"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -222,7 +280,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sR-ao-7g2" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hV-jA-KBm">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hV-jA-KBm" customClass="QBaseTouchButton">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="14L-dv-ED2"/>

@@ -29,6 +29,7 @@
     [super awakeFromNib];
     // Initialization code
     
+    
     _contentBack.layer.cornerRadius = 4;
     _contentBack.layer.masksToBounds = YES;
     _payBtn.layer.cornerRadius = 2;

@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *MiningDailyDetailCell_Reuse = @"MiningDailyDetailCell";
 #define MiningDailyDetailCell_Height 95
 
-@interface MiningDailyDetailCell : UITableViewCell
+@interface MiningDailyDetailCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *statusLab;

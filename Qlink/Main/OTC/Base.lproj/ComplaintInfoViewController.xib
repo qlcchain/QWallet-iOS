@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5u-yJ-hgk">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEx-AW-7QK">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEx-AW-7QK">
                             <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRd-9t-gp6">
@@ -94,7 +94,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMq-Ie-WTH">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Fm2-f7-i0Z"/>
                                         <constraint firstAttribute="width" constant="44" id="SPl-Jp-9Qf"/>
@@ -115,7 +115,7 @@
                             <constraints>
                                 <constraint firstItem="dRl-am-tYv" firstAttribute="centerY" secondItem="Tlf-d3-IIF" secondAttribute="centerY" id="1io-WY-CGn"/>
                                 <constraint firstItem="dRl-am-tYv" firstAttribute="centerX" secondItem="Tlf-d3-IIF" secondAttribute="centerX" id="EU8-SF-1Do"/>
-                                <constraint firstItem="AMq-Ie-WTH" firstAttribute="leading" secondItem="Tlf-d3-IIF" secondAttribute="leading" constant="8" id="HNJ-gt-5RA"/>
+                                <constraint firstItem="AMq-Ie-WTH" firstAttribute="leading" secondItem="Tlf-d3-IIF" secondAttribute="leading" id="HNJ-gt-5RA"/>
                                 <constraint firstItem="AMq-Ie-WTH" firstAttribute="centerY" secondItem="Tlf-d3-IIF" secondAttribute="centerY" id="maq-eK-xJ9"/>
                                 <constraint firstAttribute="height" constant="44" id="y0h-OA-tb7"/>
                             </constraints>

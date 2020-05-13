@@ -7,6 +7,7 @@
 //
 
 #import "ConfidantViewController.h"
+#import "NSString+Trim.h"
 
 @interface ConfidantViewController ()
 
@@ -43,7 +44,7 @@
 }
 
 - (void)refreshConfirmBtnState {
-    if (![_emailTF.text isEmptyString] && ![_securityCodeTF.text isEmptyString]) {
+    if (![_emailTF.text.trim_whitespace isEmptyString] && ![_securityCodeTF.text.trim_whitespace isEmptyString]) {
         _confirmBtn.userInteractionEnabled = YES;
         _confirmBtn.backgroundColor = MAIN_BLUE_COLOR;
     } else {
@@ -72,13 +73,13 @@
 
 - (IBAction)confirmAction:(id)sender {
     [self.view endEditing:YES];
-    if ([_emailTF.text isEmptyString]) {
+    if ([_emailTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"your_email_is_empty")];
         return;
     }
 
 
-    if ([_securityCodeTF.text isEmptyString]) {
+    if ([_securityCodeTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"security_code_is_empty")];
         return;
     }

@@ -39,9 +39,17 @@ public class TrustWalletManage: NSObject {
     //    }
     
     override public init() {
-        let sharedMigration = SharedMigrationInitializer()
-        sharedMigration.perform()
-        let realm = try! Realm(configuration: sharedMigration.config)
+        
+        var config = Realm.Configuration()
+        // Use the default directory, but replace the filename with the username
+        config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("ETHTest.realm")
+        // Set this as the configuration used for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        let realm = try! Realm(configuration: config)
+        
+//        let sharedMigration = SharedMigrationInitializer()
+//        sharedMigration.perform()
+//        let realm = try! Realm(configuration: sharedMigration.config)
         let walletStorage = WalletStorage(realm: realm)
         self.keystore = EtherKeystore(storage: walletStorage)
         //        self.keystore = EtherKeystore.shared
@@ -52,21 +60,21 @@ public class TrustWalletManage: NSObject {
         keystore.createAccount(with: password) { result in
             switch result {
             case .success(let account):
-                print("create account success:\(account)")
+                print("****ETH_LOG****create account success:\(account)")
 //                self.markAsMainWallet(for: account)
                 let address = self.keystore.wallets.last?.currentAccount.address.description
                 self.keystore.exportMnemonic(wallet: account) { mnemonicResult in
                     switch mnemonicResult {
                     case .success(let words):
-                        print("exportMnemonic success:\(words)")
+                        print("****ETH_LOG****exportMnemonic success:\(words)")
                         export(words, address)
                     case .failure(let error):
-                        print("exportMnemonic fail:\(error)")
+                        print("****ETH_LOG****exportMnemonic fail:\(error)")
                         export(nil, address)
                     }
                 }
             case .failure(let error):
-                print("create account fail:\(error)")
+                print("****ETH_LOG****create account fail:\(error)")
                 export(nil, nil)
             }
         }
@@ -102,11 +110,11 @@ public class TrustWalletManage: NSObject {
         keystore.importWallet(type: importType, coin: coin) { result in
             switch result {
             case .success(let account):
-                print("import account success:\(account)")
+                print("****ETH_LOG****import account success:\(account)")
                 let address = account.currentAccount.address.description
                 importResult(true, address)
             case .failure(let error):
-                print("import account fail",error)
+                print("****ETH_LOG****import account fail",error)
                 importResult(false, nil)
             }
         }
@@ -131,11 +139,11 @@ public class TrustWalletManage: NSObject {
         keystore.importWallet(type: importType, coin: coin) { result in
             switch result {
             case .success(let account):
-                print("import account success:\(account)")
+                print("****ETH_LOG****import account success:\(account)")
                 let address = account.currentAccount.address.description
                 importResult(true, address)
             case .failure(let error):
-                print("import account fail",error)
+                print("****ETH_LOG****import account fail",error)
                 importResult(false, nil)
             }
         }
@@ -174,9 +182,9 @@ public class TrustWalletManage: NSObject {
         keystore.importWallet(type: importType, coin: coin) { result in
             switch result {
             case .success(let account):
-                print("import account success:\(account)")
+                print("****ETH_LOG****import account success:\(account)")
             case .failure(let error):
-                print("import account fail",error)
+                print("****ETH_LOG****import account fail",error)
             }
         }
     }
@@ -191,7 +199,7 @@ public class TrustWalletManage: NSObject {
             }
         }
         if walletInfo == nil {
-            print("找不到钱包")
+            print("****ETH_LOG****找不到钱包")
             return
         }
         let config: Config = .current
@@ -259,7 +267,7 @@ public class TrustWalletManage: NSObject {
         
         let addressString = toAddress
         guard let address = EthereumAddress(string: addressString) else {
-            print("拿不到address")
+            print("****ETH_LOG****拿不到address")
             return
         }
         let amountString = amount
@@ -271,9 +279,9 @@ public class TrustWalletManage: NSObject {
                 return EtherNumberFormatter.full.number(from: amountString, decimals: token.decimals)
             }
         }()
-        print("拿到parsedValue")
+        print("****ETH_LOG****拿到parsedValue")
         guard let value = parsedValue else {
-            print("拿不到parsedValue")
+            print("****ETH_LOG****拿不到parsedValue")
             return
         }
         let transaction = UnconfirmedTransaction(
@@ -286,12 +294,12 @@ public class TrustWalletManage: NSObject {
 //            nonce: configuration.nonce
             nonce: .none
         )
-        print("拿到transaction")
+        print("****ETH_LOG****拿到transaction")
         switch session.account.type {
         case .privateKey, .hd:
             let first = session.account.accounts.filter { $0.coin == token.coin }.first
             guard let account = first else {
-                print("拿不到account")
+                print("****ETH_LOG****拿不到account")
                 return
             }
             
@@ -303,15 +311,17 @@ public class TrustWalletManage: NSObject {
                 chainState: ChainState(server: transfer.server)
             )
             
+            
+            
             let transaction1 = configurator.signTransaction
             let server = transfer.server
             let sendTransactionCoordinator : SendTransactionCoordinator = SendTransactionCoordinator(session: session, keystore: keystore, confirmType: .signThenSend, server: server)
-            print("开始sendTransaction")
+            print("****ETH_LOG****开始sendTransaction")
             sendTransactionCoordinator.send(transaction: transaction1) { result in
-                print("转账结果:",result)
+                print("****ETH_LOG****转账结果:",result)
                 switch result {
                 case .success(let complete) :
-                    print("send success:\(complete)")
+                    print("****ETH_LOG****send success:\(complete)")
 //                    ConfirmResult
                     var txId = ""
                     switch complete {
@@ -322,7 +332,7 @@ public class TrustWalletManage: NSObject {
                     }
                     sendComplete(true, txId)
                 case .failure(let error) :
-                    print("send fail:\(error)")
+                    print("****ETH_LOG****send fail:\(error)")
                     sendComplete(false, nil)
                 }
             }
@@ -494,10 +504,10 @@ public class TrustWalletManage: NSObject {
                     print(result)
                     switch result {
                     case .success(let complete) :
-                        print("delete success:\(complete)")
+                        print("****ETH_LOG****delete success:\(complete)")
                         deleteComplete(true)
                     case .failure(let error) :
-                        print("delete fail:\(error)")
+                        print("****ETH_LOG****delete fail:\(error)")
                         deleteComplete(false)
                     }
                     
@@ -560,10 +570,10 @@ public class TrustWalletManage: NSObject {
                 self.keystore.export(account: walletInfo.currentAccount, password: currentPassword ?? newPassword, newPassword: newPassword) { result in
                     switch result {
                     case .success(let value):
-                        print("exportKeystore success:\(value)")
+                        print("****ETH_LOG****exportKeystore success:\(value)")
                         export(value)
                     case .failure(let error):
-                        print("exportKeystore fail:\(error)")
+                        print("****ETH_LOG****exportKeystore fail:\(error)")
                         export(nil)
                     }
                 }
@@ -578,10 +588,10 @@ public class TrustWalletManage: NSObject {
                 self.keystore.exportMnemonic(wallet: walletInfo.currentAccount.wallet!) { result in
                     switch result {
                     case .success(let words):
-                        print("exportMnemonic success:\(words)")
+                        print("****ETH_LOG****exportMnemonic success:\(words)")
                         export(words)
                     case .failure(let error):
-                        print("exportMnemonic fail:\(error)")
+                        print("****ETH_LOG****exportMnemonic fail:\(error)")
                         export(nil)
                     }
                 }
@@ -614,10 +624,10 @@ public class TrustWalletManage: NSObject {
                 self.keystore.exportPrivateKey(account: walletInfo.currentAccount) { result in
                     switch result {
                     case .success(let privateKey):
-                        print("exportPrivateKey success:\(privateKey.hexString)")
+                        print("****ETH_LOG****exportPrivateKey success:\(privateKey.hexString)")
                         export(privateKey.hexString)
                     case .failure(let error):
-                        print("exportPrivateKey fail:\(error)")
+                        print("****ETH_LOG****exportPrivateKey fail:\(error)")
                         export(nil)
                     }
                 }
@@ -632,10 +642,10 @@ public class TrustWalletManage: NSObject {
                 self.keystore.exportPublicKey(account: walletInfo.currentAccount) { result in
                     switch result {
                     case .success(let publicKey):
-                        print("exportPublicKey success:\(publicKey)")
+                        print("****ETH_LOG****exportPublicKey success:\(publicKey)")
                         export(publicKey.hexString)
                     case .failure(let error):
-                        print("exportPublicKey fail:\(error)")
+                        print("****ETH_LOG****exportPublicKey fail:\(error)")
                         export(nil)
                     }
                 }
@@ -653,7 +663,7 @@ public class TrustWalletManage: NSObject {
             }
         }
         if account == nil {
-            print("ETH切换钱包失败account=nil address=\(address)")
+            print("****ETH_LOG****ETH切换钱包失败account=nil address=\(address)")
             return
         }
         let migration = MigrationInitializer(account: account!)

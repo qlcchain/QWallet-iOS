@@ -6,7 +6,7 @@
 //  Copyright © 2018 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *WalletsSwitchCellReuse = @"WalletsSwitchCell";
 #define WalletsSwitchCell_Height 72
 
-@interface WalletsSwitchCell : UITableViewCell
+@interface WalletsSwitchCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;

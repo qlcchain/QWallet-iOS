@@ -11,7 +11,7 @@
 #import "PayReceiveAddressViewController.h"
 #import "QLCAddressInfoModel.h"
 #import "WalletCommonModel.h"
-#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "ChooseWalletViewController.h"
 #import "NSString+RemoveZero.h"
@@ -25,7 +25,9 @@
 #import "SuccessTipView.h"
 #import "ClaimSuccessTipView.h"
 #import "AppJumpHelper.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <OutbreakRed/OutbreakRed.h>
+#import "NSString+Trim.h"
 
 @interface ClaimQGASViewController ()
 
@@ -82,10 +84,56 @@
     } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
         NSString *type = @"CLAIM_INVITE";
         [self requestVcode_verify_code:type];
+    } else if (_claimQGASType == ClaimQGASTypeCLAIM_COVID) {
+        NSString *type = @"CLAIM_COVID";
+        [self requestVcode_verify_code:type];
     }
 }
 
 #pragma mark - Request
+
+- (void)requestGzbd_receive {
+    UserModel *userM = [UserModel fetchUserOfLogin];
+    if (!userM.md5PW || userM.md5PW.length <= 0) {
+        return;
+    }
+    kWeakSelf(self);
+    NSString *account = userM.account?:@"";
+    NSString *md5PW = userM.md5PW?:@"";
+    NSString *timestamp = [RequestService getRequestTimestamp];
+    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
+    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
+    NSString *code = [_codeTF.text?:@"" trim_whitespace];
+    NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
+    NSString *recordId = _inputCovidRecordId?:@"";
+    OR_RequestModel *requestM = [OR_RequestModel new];
+    requestM.p2pId = [UserModel getTopupP2PId];
+    requestM.appBuild = APP_Build;
+    requestM.appVersion = APP_Version;
+    requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
+    [kAppD.window makeToastInView:kAppD.window];
+    [OutbreakRedSDK requestGzbd_receiveWithAccount:account token:token timestamp:timestamp code:code recordId:recordId toAddress:toAddress requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+        [kAppD.window hideToast];
+        if (!error) {
+            if ([responseObject[Server_Code] integerValue] == 0) {
+                if (weakself.claimSuccessBlock) {
+                    weakself.claimSuccessBlock();
+                }
+                
+                 SuccessTipView *view = [SuccessTipView getInstance];
+                 [view showWithTitle:kLang(@"successful")];
+                 
+                 [weakself backAction:nil];
+             } else {
+                [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            }
+        } else {
+            
+        }
+    }];
+    
+}
+
 - (void)requestReward_claim_bind_v2 {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
@@ -97,8 +145,8 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *toAddress = _qgasSendTF.text?:@"";
-    NSString *code = _codeTF.text?:@"";
+    NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
+    NSString *code = [_codeTF.text?:@"" trim_whitespace];
     NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_bind_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -130,8 +178,8 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *toAddress = _qgasSendTF.text?:@"";
-    NSString *code = _codeTF.text?:@"";
+    NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
+    NSString *code = [_codeTF.text?:@"" trim_whitespace];
     NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_invite_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -159,8 +207,9 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
-            NSString *codeUrl = responseObject[@"codeUrl"];
-            [weakself.codeImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrl]] placeholderImage:nil completed:nil];
+            NSString *codeUrlStr = responseObject[@"codeUrl"];
+            NSURL *codeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrlStr]];
+            [weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -196,19 +245,19 @@
 
 
 - (IBAction)submitAction:(id)sender {
-    if ([_qgasSendTF.text isEmptyString]) {
+    if ([_qgasSendTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
     // 检查地址有效性
-    BOOL validReceiveAddress = [WalletCommonModel validAddress:_qgasSendTF.text tokenChain:QLC_Chain];
+    BOOL validReceiveAddress = [WalletCommonModel validAddress:[_qgasSendTF.text trim_whitespace] tokenChain:QLC_Chain];
     if (!validReceiveAddress) {
         [kAppD.window makeToastDisappearWithText:kLang(@"wallet_address_is_invalidate")];
         return;
     }
     
-    if ([_codeTF.text isEmptyString]) {
+    if ([_codeTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
         return;
     }
@@ -217,6 +266,8 @@
         [self requestReward_claim_bind_v2];
     } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
         [self requestReward_claim_invite_v2];
+    } else if (_claimQGASType == ClaimQGASTypeCLAIM_COVID) {
+        [self requestGzbd_receive];
     }
 }
 

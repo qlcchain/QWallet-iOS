@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,13 +20,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iK-1b-3QY">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bp9-04-OEb">
-                            <rect key="frame" x="0.0" y="44" width="375" height="603"/>
+                            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             <subviews>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4TO-k0-Lp6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="ND2-hb-h6a"/>
@@ -47,8 +45,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3a-L4-3dp" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-aj-Vw5">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-aj-Vw5" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="44" id="D5M-A1-HsF"/>
                                         <constraint firstAttribute="height" constant="44" id="vYO-7i-q1O"/>
@@ -67,7 +65,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="W8f-aj-Vw5" firstAttribute="leading" secondItem="W3a-L4-3dp" secondAttribute="leading" constant="8" id="KvA-0o-nlJ"/>
+                                <constraint firstItem="W8f-aj-Vw5" firstAttribute="leading" secondItem="W3a-L4-3dp" secondAttribute="leading" id="KvA-0o-nlJ"/>
                                 <constraint firstItem="DNO-fa-9jq" firstAttribute="centerY" secondItem="W3a-L4-3dp" secondAttribute="centerY" id="NsM-z3-XIO"/>
                                 <constraint firstItem="DNO-fa-9jq" firstAttribute="centerX" secondItem="W3a-L4-3dp" secondAttribute="centerX" id="Oma-wv-hec"/>
                                 <constraint firstItem="W8f-aj-Vw5" firstAttribute="centerY" secondItem="W3a-L4-3dp" secondAttribute="centerY" id="P4D-68-Yga"/>
@@ -87,7 +85,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDp-Wd-Ob6">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -103,6 +101,7 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="0iK-1b-3QY" secondAttribute="trailing" id="rMV-1O-EtF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="140" y="153"/>
         </view>
     </objects>
     <resources>

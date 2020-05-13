@@ -22,6 +22,8 @@
 #import "EOSAccountInfoModel.h"
 #import "RLArithmetic.h"
 //#import "GlobalConstants.h"
+#import "TokenListHelper.h"
+#import "NSString+Trim.h"
 
 @implementation EOSCreateSourceModel
 
@@ -83,7 +85,7 @@
     _accountNameTF.delegate = self;
     [_accountNameTF addTarget:self action:@selector(checkAccountName:) forControlEvents:UIControlEventEditingChanged];
     
-    if (_accountNameTF.text.length > 0) {
+    if (_accountNameTF.text.trim_whitespace.length > 0) {
         [self checkAccountName:_accountNameTF];
     }
 }
@@ -105,7 +107,7 @@
         [[WalletCommonModel getAllWalletModel] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             WalletCommonModel *model = obj;
             if (model.walletType==WalletTypeETH) {
-                if ([model.balance doubleValue] >= [enoughBalanceStr doubleValue]) {
+                if ([model.ETHBalance doubleValue] >= [enoughBalanceStr doubleValue]) {
                     transferETHM = model;
                     *stop = YES;
                 }
@@ -176,9 +178,9 @@
 - (void)checkAccountName:(UITextField *)tf {
     if (tf == _accountNameTF) {
         _isValidName = NO;
-        if (_accountNameTF.text.length == 12) {
+        if (_accountNameTF.text.trim_whitespace.length == 12) {
             kWeakSelf(self);
-            NSDictionary *params = @{@"account":_accountNameTF.text?:@""};
+            NSDictionary *params = @{@"account":_accountNameTF.text.trim_whitespace?:@""};
             [RequestService requestWithUrl5:eosGet_account_info_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
                 if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
                     NSDictionary *dic = responseObject[Server_Data][Server_Data];
@@ -227,23 +229,23 @@
 
 - (IBAction)copyOwnerKeyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = _ownerKeyTV.text?:@"";
+    pasteboard.string = _ownerKeyTV.text.trim_whitespace?:@"";
     [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)copyActiveKeyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = _activeKeyTV.text?:@"";
+    pasteboard.string = _activeKeyTV.text.trim_whitespace?:@"";
     [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 
 - (IBAction)switchQRCodeAction:(UIButton *)sender {
     if (sender.selected == YES) {
-        if (_accountNameTF.text.length <= 0) {
+        if (_accountNameTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"account_name_is_empty")];
             return;
         }
-        if (![RegularExpression validateEosAccountName:_accountNameTF.text.trim]) {
+        if (![RegularExpression validateEosAccountName:_accountNameTF.text.trim_whitespace]) {
             [kAppD.window makeToastDisappearWithText:kLang(@"a_and_1_combination_of_12_characters")];
             return;
         }
@@ -252,7 +254,7 @@
             return;
         }
         
-        _eosCreateSourceM.accountName = _accountNameTF.text;
+        _eosCreateSourceM.accountName = _accountNameTF.text.trim_whitespace;
         [KeychainUtil saveValueToKeyWithKeyName:EOS_CreateSource_InKeychain keyValue:_eosCreateSourceM.mj_keyValues.mj_JSONString];
         
         NSDictionary *qrDic = @{@"accountName":_eosCreateSourceM.accountName,@"activePublicKey":_eosCreateSourceM.ownerPublicKey,@"ownerPublicKey":_eosCreateSourceM.activePublicKey};
@@ -270,11 +272,11 @@
 }
 
 - (IBAction)registerAction:(id)sender {
-    if (_accountNameTF.text.length <= 0) {
+    if (_accountNameTF.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"account_name_is_empty")];
         return;
     }
-    if (![RegularExpression validateEosAccountName:_accountNameTF.text.trim]) {
+    if (![RegularExpression validateEosAccountName:_accountNameTF.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"a_and_1_combination_of_12_characters")];
         return;
     }

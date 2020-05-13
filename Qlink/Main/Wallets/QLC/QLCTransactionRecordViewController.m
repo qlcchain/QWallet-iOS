@@ -93,7 +93,7 @@
 //        }
 //    }];
     NSString *price = [_inputAsset getPrice:_tokenPriceArr];
-    _priceLab.text = [NSString stringWithFormat:@"≈%@%@",[ConfigUtil getLocalUsingCurrencySymbol],price];
+    _priceLab.text = [NSString stringWithFormat:@"≈%@%@",[ConfigUtil getLocalUsingCurrencySymbol],[price showfloatStr:2]];
 }
 
 - (void)refreshView:(NSArray *)arr {

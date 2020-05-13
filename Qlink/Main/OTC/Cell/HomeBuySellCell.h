@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,9 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *HomeBuySellCellReuse = @"HomeBuySellCell";
 #define HomeBuySellCell_Height 190
 
-@interface HomeBuySellCell : UITableViewCell
+typedef void(^HomeBuySellClickBlock)(EntrustOrderListModel *clickM);
 
-- (void)config:(EntrustOrderListModel *)model;
+@interface HomeBuySellCell : QBaseTableCell
+
+- (void)config:(EntrustOrderListModel *)model clickB:(HomeBuySellClickBlock)clickB;
 
 @end
 

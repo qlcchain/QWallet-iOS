@@ -15,7 +15,7 @@
 //#import <ETHFramework/ETHFramework.h>
 //#import "ETHTransferConfirmView.h"
 //#import "ETHAddressInfoModel.h"
-//#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 //#import "WalletsViewController.h"
 //#import "ReportUtil.h"
 #import "PayReceiveAddressViewController.h"
@@ -226,9 +226,9 @@
             
             kWeakSelf(self);
             [self requestGetServerTime:^(NSString *serverTime) {
-                NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.orderTime];
+                NSDate *date = [NSDate dateFromTime_c:weakself.orderInfoM.orderTime];
                 NSDate *date30min = [date dateByAddingMinutes:30];
-                NSDate *dateNow = [NSDate dateFromTime:serverTime];
+                NSDate *dateNow = [NSDate dateFromTime_c:serverTime];
                 NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
                 if (countDownSecond >= 0) {
                     weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
@@ -256,9 +256,9 @@
                
                kWeakSelf(self);
                [self requestGetServerTime:^(NSString *serverTime) {
-                   NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.orderTime];
+                   NSDate *date = [NSDate dateFromTime_c:weakself.orderInfoM.orderTime];
                    NSDate *date30min = [date dateByAddingMinutes:30];
-                   NSDate *dateNow = [NSDate dateFromTime:serverTime];
+                   NSDate *dateNow = [NSDate dateFromTime_c:serverTime];
                    NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
                    if (countDownSecond >= 0) {
                        weakself.statusSubTitleLab.text = kLang(@"the_order_will_be_closed_automatically____30");
@@ -905,9 +905,9 @@
         [kAppD.window makeToastInView:kAppD.window];
         [self requestGetServerTime:^(NSString *serverTime) {
             [kAppD.window hideToast];
-            NSDate *date = [NSDate dateFromTime:weakself.orderInfoM.buyerConfirmDate];
+            NSDate *date = [NSDate dateFromTime_c:weakself.orderInfoM.buyerConfirmDate];
             NSDate *date30min = [date dateByAddingMinutes:30];
-            NSDate *dateNow = [NSDate dateFromTime:serverTime];
+            NSDate *dateNow = [NSDate dateFromTime_c:serverTime];
             NSTimeInterval countDownSecond = [date30min timeIntervalSinceDate:dateNow];
             if (countDownSecond >= 0) { // 未到30分钟
                 UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:kLang(@"please_be_patiently_it_hasnt_been_30_minutes_") preferredStyle:UIAlertControllerStyleAlert];

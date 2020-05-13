@@ -6,7 +6,7 @@
 //  Copyright © 2020 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *StartGroupBuyCell_Reuse = @"StartGroupBuyCell";
 #define StartGroupBuyCell_Height 40
 
-@interface StartGroupBuyCell : UITableViewCell
+@interface StartGroupBuyCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UIButton *typeBtn;
 

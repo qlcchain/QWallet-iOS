@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqP-If-qSJ">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-7S-rKb">
-                            <rect key="frame" x="0.0" y="44" width="375" height="603"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnz-7S-rKb">
+                            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zqi-YC-DPi">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
@@ -65,7 +63,7 @@
                                                             <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="deviceRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBC-i9-wWW">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBC-i9-wWW" customClass="QBaseTouchButton">
                                                             <rect key="frame" x="291" y="0.0" width="36" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="36" id="NgB-na-T9c"/>
@@ -93,7 +91,7 @@
                                                     <color key="textColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-Cg-Vaz">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-Cg-Vaz" customClass="QBaseDarkButton">
                                                     <rect key="frame" x="16" y="464" width="343" height="49"/>
                                                     <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
@@ -111,21 +109,21 @@
                                                         <fragment content="Please send ">
                                                             <attributes>
                                                                 <color key="NSColor" red="0.011764705882352941" green="0.011764705882352941" blue="0.011764705882352941" alpha="1" colorSpace="deviceRGB"/>
-                                                                <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                                <font key="NSFont" metaFont="menu" size="14"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                         <fragment content="XX QGAS">
                                                             <attributes>
                                                                 <color key="NSColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                                <font key="NSFont" metaFont="menu" size="14"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                         <fragment content=" to the GO-QLC address as below to place your order.">
                                                             <attributes>
                                                                 <color key="NSColor" red="0.011764705882352941" green="0.011764705882352941" blue="0.011764705882352941" alpha="1" colorSpace="deviceRGB"/>
-                                                                <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                                <font key="NSFont" metaFont="menu" size="14"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -173,8 +171,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-bJ-jYu" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyt-7I-qCp">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyt-7I-qCp" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="nEh-K6-0U7"/>
                                         <constraint firstAttribute="width" constant="44" id="o4x-cB-dAs"/>
@@ -190,8 +188,8 @@
                                     <color key="textColor" red="0.16078431372549018" green="0.15686274509803921" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9F-Aw-s8W">
-                                    <rect key="frame" x="323" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9F-Aw-s8W" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="331" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="39y-xh-8KL"/>
                                         <constraint firstAttribute="width" constant="44" id="nPg-7T-8EE"/>
@@ -206,8 +204,8 @@
                             <constraints>
                                 <constraint firstItem="ci3-ce-LeF" firstAttribute="centerY" secondItem="H5z-bJ-jYu" secondAttribute="centerY" id="Is0-jg-c2F"/>
                                 <constraint firstItem="ci3-ce-LeF" firstAttribute="centerX" secondItem="H5z-bJ-jYu" secondAttribute="centerX" id="JIk-vr-Yx5"/>
-                                <constraint firstItem="kyt-7I-qCp" firstAttribute="leading" secondItem="H5z-bJ-jYu" secondAttribute="leading" constant="8" id="d94-br-qwy"/>
-                                <constraint firstAttribute="trailing" secondItem="Q9F-Aw-s8W" secondAttribute="trailing" constant="8" id="euX-0k-7C1"/>
+                                <constraint firstItem="kyt-7I-qCp" firstAttribute="leading" secondItem="H5z-bJ-jYu" secondAttribute="leading" id="d94-br-qwy"/>
+                                <constraint firstAttribute="trailing" secondItem="Q9F-Aw-s8W" secondAttribute="trailing" id="euX-0k-7C1"/>
                                 <constraint firstItem="kyt-7I-qCp" firstAttribute="centerY" secondItem="H5z-bJ-jYu" secondAttribute="centerY" id="kew-Gl-6at"/>
                                 <constraint firstAttribute="height" constant="44" id="sNm-Jb-hZJ"/>
                                 <constraint firstItem="Q9F-Aw-s8W" firstAttribute="centerY" secondItem="H5z-bJ-jYu" secondAttribute="centerY" id="u6z-i0-kLV"/>
@@ -225,7 +223,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MK-vI-O9V">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="OutbreakRedCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8D3-Ir-biZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="outbreak_sheet_red_qlc" translatesAutoresizingMaskIntoConstraints="NO" id="JRu-6h-DVO">
+                                <rect key="frame" x="12" y="15.5" width="40" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="pMr-zw-ZE2"/>
+                                    <constraint firstAttribute="width" constant="40" id="r5o-hx-Sam"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily bounty " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE7-or-0Zt">
+                                <rect key="frame" x="64" y="10" width="84.5" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="58c-Es-rUC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.054901960780000002" green="0.054901960780000002" blue="0.054901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim QGas from 200 staked QLC by checking out the Covid-19 live updates page for 2 consecutive days." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB4-8n-qer">
+                                <rect key="frame" x="64" y="27" width="174" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ex-89-BwU" customClass="QBaseDarkButton">
+                                <rect key="frame" x="240" y="27.5" width="68" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="JDm-Ar-UwM"/>
+                                    <constraint firstAttribute="height" constant="26" id="Twa-U9-ir9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="Check">
+                                    <color key="titleColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BVb-gn-6Cg"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jF8-Bw-s2H">
+                                <rect key="frame" x="0.0" y="80" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="V3p-Ba-M5G"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jF8-Bw-s2H" firstAttribute="leading" secondItem="8D3-Ir-biZ" secondAttribute="leading" id="DqF-UC-fZ5"/>
+                            <constraint firstItem="hB4-8n-qer" firstAttribute="top" secondItem="tE7-or-0Zt" secondAttribute="bottom" id="KvC-b7-Trt"/>
+                            <constraint firstItem="JRu-6h-DVO" firstAttribute="centerY" secondItem="8D3-Ir-biZ" secondAttribute="centerY" id="X1Q-1h-djz"/>
+                            <constraint firstItem="6Ex-89-BwU" firstAttribute="centerY" secondItem="8D3-Ir-biZ" secondAttribute="centerY" id="aMR-dF-Irh"/>
+                            <constraint firstAttribute="trailing" secondItem="6Ex-89-BwU" secondAttribute="trailing" constant="12" id="aQL-MO-dgg"/>
+                            <constraint firstAttribute="trailing" secondItem="jF8-Bw-s2H" secondAttribute="trailing" id="caS-Fo-I5N"/>
+                            <constraint firstAttribute="height" constant="81" id="csQ-uP-DWQ"/>
+                            <constraint firstItem="JRu-6h-DVO" firstAttribute="leading" secondItem="8D3-Ir-biZ" secondAttribute="leading" constant="12" id="d7F-c8-Fge"/>
+                            <constraint firstItem="tE7-or-0Zt" firstAttribute="top" secondItem="8D3-Ir-biZ" secondAttribute="top" constant="10" id="dyf-xs-G1D"/>
+                            <constraint firstAttribute="bottom" secondItem="jF8-Bw-s2H" secondAttribute="bottom" id="hRb-At-6fK"/>
+                            <constraint firstItem="hB4-8n-qer" firstAttribute="leading" secondItem="JRu-6h-DVO" secondAttribute="trailing" constant="12" id="j2K-Ny-3eG"/>
+                            <constraint firstItem="tE7-or-0Zt" firstAttribute="leading" secondItem="JRu-6h-DVO" secondAttribute="trailing" constant="12" id="lW5-xb-BpU"/>
+                            <constraint firstItem="6Ex-89-BwU" firstAttribute="leading" secondItem="hB4-8n-qer" secondAttribute="trailing" constant="2" id="sxs-wP-HTk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="8D3-Ir-biZ" secondAttribute="trailing" id="4yH-9s-dlM"/>
+                    <constraint firstItem="8D3-Ir-biZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BPx-7M-u70"/>
+                    <constraint firstItem="8D3-Ir-biZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="HtQ-Ld-dya"/>
+                    <constraint firstAttribute="bottom" secondItem="8D3-Ir-biZ" secondAttribute="bottom" id="bzY-UL-lVh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="checkBtn" destination="6Ex-89-BwU" id="7CX-lv-kb7"/>
+                <outlet property="tipLab" destination="hB4-8n-qer" id="DLU-23-DWg"/>
+                <outlet property="titleLab" destination="tE7-or-0Zt" id="TyW-ee-3eM"/>
+                <outlet property="titleTopOffset" destination="dyf-xs-G1D" id="dVS-5p-IaN"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="124.88839285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="outbreak_sheet_red_qlc" width="40" height="50"/>
+    </resources>
+</document>

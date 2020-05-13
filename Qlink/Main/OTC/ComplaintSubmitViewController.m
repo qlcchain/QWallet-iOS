@@ -17,6 +17,7 @@
 #import "UserModel.h"
 #import "RSAUtil.h"
 #import "ComplaintSubmitViewController.h"
+#import "NSString+Trim.h"
 
 //#import "GlobalConstants.h"
 
@@ -360,7 +361,7 @@ static NSInteger columnNumber = 3;
 }
 
 - (IBAction)submitAction:(id)sender {
-    if ([_textV.text isEmptyString]) {
+    if ([_textV.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"reason_is_empty")];
         return;
     }
@@ -394,7 +395,7 @@ static NSInteger columnNumber = 3;
     NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *reason = _textV.text?:@"";
+    NSString *reason = _textV.text.trim_whitespace?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"tradeOrderId":_inputTradeOrderId?:@"",@"reason":reason};
     [kAppD.window makeToastInView:self.view text:nil];
     [RequestService postImage7:trade_appeal_Url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

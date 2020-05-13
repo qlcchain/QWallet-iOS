@@ -19,9 +19,10 @@
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "RLArithmetic.h"
 //#import "GlobalConstants.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
+#import "NSString+Trim.h"
 
 @interface ETHTransferViewController () <UITextViewDelegate>
 
@@ -103,8 +104,8 @@
 
 - (void)showETHTransferConfirmView {
     NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
-    NSString *toAddress = _sendtoAddressTV.text;
-    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectToken.tokenInfo.symbol];
+    NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
+    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text.trim_whitespace,_selectToken.tokenInfo.symbol];
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",_gasCostETH];
     ETHTransferConfirmView *view = [ETHTransferConfirmView getInstance];
     [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount gasfee:gasfee];
@@ -117,7 +118,7 @@
 }
 
 - (void)checkSendBtnEnable {
-    if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
+    if (_sendtoAddressTV.text.trim_whitespace && _sendtoAddressTV.text.trim_whitespace.length > 0 && _amountTF.text.trim_whitespace && _amountTF.text.trim_whitespace.length > 0) {
 //        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
@@ -136,15 +137,15 @@
 //    NSString *fromAddress = currentWalletM.address;
     NSString *fromAddress = from_address;
     NSString *contractAddress = _selectToken.tokenInfo.address;
-    NSString *toAddress = _sendtoAddressTV.text;
+    NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
     NSString *name = _selectToken.tokenInfo.name;
     NSString *symbol = _selectToken.tokenInfo.symbol;
-    NSString *amount = _amountTF.text;
+    NSString *amount = _amountTF.text.trim_whitespace;
     NSInteger gasLimit = [_gasLimitLab.text integerValue];
     NSInteger gasPrice = _gasSlider.value;
     NSInteger decimals = [_selectToken.tokenInfo.decimals integerValue];
     NSString *value = @"";
-    NSString *memo = _memoTF.text?:@"";
+    NSString *memo = _memoTF.text.trim_whitespace?:@"";
     BOOL isCoin = [_selectToken.tokenInfo.symbol isEqualToString:@"ETH"]?YES:NO;
     kWeakSelf(self);
     [kAppD.window makeToastInView:kAppD.window];
@@ -249,19 +250,19 @@
 }
 
 - (IBAction)sendAction:(id)sender {
-    if (!_amountTF.text || _amountTF.text.length <= 0) {
+    if (!_amountTF.text.trim_whitespace || _amountTF.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
+    if (!_sendtoAddressTV.text.trim_whitespace || _sendtoAddressTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_empty")];
         return;
     }
-    if ([_amountTF.text doubleValue] == 0) {
+    if ([_amountTF.text.trim_whitespace doubleValue] == 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
-    if ([_amountTF.text doubleValue] > [[_selectToken getTokenNum] doubleValue]) {
+    if ([_amountTF.text.trim_whitespace doubleValue] > [[_selectToken getTokenNum] doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
@@ -275,7 +276,7 @@
     }
     
     // 检查地址有效性
-    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text];
+    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_sendtoAddressTV.text.trim_whitespace];
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eth_wallet_address_is_invalidate")];
         return;

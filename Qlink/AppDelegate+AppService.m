@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate+AppService.h"
-//#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "Qlink-Swift.h"
 //#import "LaunchViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
@@ -20,7 +20,7 @@
 //#import "VPNFileUtil.h"
 //#import "OLImage.h"
 #import "NotifactionView.h"
-#import "ChatUtil.h"
+//#import "ChatUtil.h"
 //#import "VPNOperationUtil.h"
 #import <BGFMDB/BGDB.h>
 #import "SystemUtil.h"
@@ -172,10 +172,10 @@
     [UserManage fetchUserInfo];
 }
 
-#pragma mark - 配置群聊
-- (void)configChat {
-    [ChatUtil shareInstance];
-}
+//#pragma mark - 配置群聊
+//- (void)configChat {
+//    [ChatUtil shareInstance];
+//}
 
 #pragma mark - 配置极光推送
 - (void)configJPush:(NSDictionary *)launchOptions {

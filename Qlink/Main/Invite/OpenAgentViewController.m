@@ -17,7 +17,7 @@
 #import "QLCWalletInfo.h"
 #import "OpenDelegateSuccessView.h"
 #import "UserUtil.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "GlobalConstants.h"
 #import "AFJSONRPCClient.h"
 #import "ConfigUtil.h"
@@ -199,6 +199,9 @@
 }
 
 - (IBAction)bindAction:(id)sender {
+    
+    [FirebaseUtil logEventWithItemID:Topup_Home_PartnerPlan_Be_Recharge_Partner itemName:Topup_Home_PartnerPlan_Be_Recharge_Partner contentType:Topup_Home_PartnerPlan_Be_Recharge_Partner];
+    
     if (!_bindWalletM) {
         return;
     }

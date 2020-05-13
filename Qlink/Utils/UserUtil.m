@@ -45,6 +45,8 @@
             userM.ID = tempUserM.ID;
             userM.bindDate = tempUserM.bindDate;
             userM.qlcAddress = responseObject[@"qlcAddress"];
+            userM.isolationDays = responseObject[@"isolationDays"];
+            userM.subsidised = responseObject[@"subsidised"];
             [UserModel storeUserByLogin:userM];
             [[NSNotificationCenter defaultCenter] postNotificationName:User_UpdateInfo_Noti object:nil];
         }
@@ -83,6 +85,8 @@
             userM.ID = tempUserM.ID;
             userM.bindDate = tempUserM.bindDate;
             userM.qlcAddress = responseObject[@"qlcAddress"];
+            userM.isolationDays = responseObject[@"isolationDays"];
+            userM.subsidised = responseObject[@"subsidised"];
             [UserModel storeUserByLogin:userM];
             [[NSNotificationCenter defaultCenter] postNotificationName:User_UpdateInfo_Noti object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:User_UpdateInfoAfterLogin_Noti object:nil];

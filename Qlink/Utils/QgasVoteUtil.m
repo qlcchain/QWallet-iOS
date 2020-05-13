@@ -22,8 +22,8 @@
             NSString *topupGroupStartDateStr = responseObject[Server_Data][@"burnQgasVoteStartDate"]?:@"";
             NSString *topopGroupEndDateStr = responseObject[Server_Data][@"burnQgasVoteEndDate"]?:@"";
             NSString *currentTimestamp = responseObject[@"currentTimeMillis"]?:@"";
-            NSDate *startDate = [NSDate dateFromTime:topupGroupStartDateStr];
-            NSDate *endDate = [NSDate dateFromTime:topopGroupEndDateStr];
+            NSDate *startDate = [NSDate dateFromTime_c:topupGroupStartDateStr];
+            NSDate *endDate = [NSDate dateFromTime_c:topopGroupEndDateStr];
             NSDate *currentDate = [NSDate getDateWithTimestamp:currentTimestamp isMil:YES];
             QgasVoteState state = QgasVoteStateNotyet;
             if ([currentDate isEarlierThanDate:startDate]) {

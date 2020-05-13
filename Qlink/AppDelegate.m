@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "Qlink-Swift.h"
 #import "LaunchViewController.h"
@@ -49,6 +49,7 @@
 #import "OTCOrderTodo.h"
 #import "TradeOrderDetailViewController.h"
 #import <QLCFramework/QLCDPKIManager.h>
+#import "CYLPlusButtonSubclass.h"
 
 @interface AppDelegate () </*MiPushSDKDelegate,*/ UNUserNotificationCenterDelegate, UIApplicationDelegate> {
 //    BOOL isBackendRun;
@@ -63,8 +64,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
     
 //    [UserModel deleteOneAccount];
 //    [NEOWalletInfo deleteAllWallet];
@@ -87,7 +86,9 @@
     _checkPassLock = YES; // 处理tabbar连续点击的bug
     kAppD.needFingerprintVerification = YES; // 打开app允许弹出指纹验证
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [UIViewController new];
     
+    [SystemUtil checkAPPUpdate]; // 检查app更新
    // 配置Firebase
     [self configFirebase];
     // 配置DDLog
@@ -126,8 +127,8 @@
     [self fetchUserInfo];
     // 注册本地通知
     [self setUserNotifationSettings:application];
-    // 配置群聊
-    [self configChat];
+//    // 配置群聊
+//    [self configChat];
 //    // 配置小米推送
 //    [self configPush];
     // 配置JPush
@@ -155,7 +156,9 @@
 }
 
 #pragma mark - 添加启动页动画
-- (void)addLaunchAnimation {    
+- (void)addLaunchAnimation {
+    [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"_UIConstraintBasedLayoutLogUnsatisfiable"]; //隐藏 constraint log
+    
 //    LaunchViewController *vc = [[LaunchViewController alloc] init];
 //    self.window.rootViewController = vc;
 //    NSTimeInterval timeI = [LaunchViewController getGifDuration];
@@ -178,13 +181,19 @@
 //    _qtabbarC = [[QlinkTabbarViewController alloc] init];
 //    self.window.rootViewController = _qtabbarC;
     
+    
+    [CYLPlusButtonSubclass registerPlusButton];
     _mtabbarC = [[MainTabBarViewController alloc] initWithContext:nil];
     self.window.rootViewController = _mtabbarC;
+    
+//    _mainRoot = [[CYLMainRootViewController alloc] init];
+//    self.window.rootViewController = _mtabbarC;
+    
     
     
 //    [self jumpToWallet];
     
-    [SystemUtil checkAPPUpdate]; // 检查app更新
+    
     
 //    NSDictionary *params = @{@"account":@"111",@"p2pId":@"sgsd",@"productId":@"sagag",@"areaCode":@"agag",@"phoneNumber":@"0099",@"amount":@"222",@"txid":@"1234567",@"payTokenId":@"sndksdj"};
 //    TopupPayOrderParamsModel *paramsM = [TopupPayOrderParamsModel getObjectWithKeyValues:params];

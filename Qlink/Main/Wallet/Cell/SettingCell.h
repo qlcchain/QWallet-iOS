@@ -6,12 +6,12 @@
 //  Copyright © 2018年 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 static NSString *SettingCellReuse = @"SettingCell";
 #define SettingCellHeight 56
 
-@interface SettingCell : UITableViewCell
+@interface SettingCell : QBaseTableCell
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblDetail;

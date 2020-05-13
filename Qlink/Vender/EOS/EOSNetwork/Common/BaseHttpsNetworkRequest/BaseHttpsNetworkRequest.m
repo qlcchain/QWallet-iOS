@@ -144,7 +144,7 @@
     id parameters = [self parameters];
     NSLog(@"REQUEST_APIPATH = %@", REQUEST_APIPATH);
     NSLog(@"parameters = %@", parameters);
-    self.sessionDataTask = [self.networkingManager GET:REQUEST_APIPATH parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    self.sessionDataTask = [self.networkingManager GET:REQUEST_APIPATH parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([self validateResponseData:responseObject HttpURLResponse:task.response]) {
             if (IsNilOrNull(success)) {
@@ -185,7 +185,7 @@
     NSLog(@"REQUEST_APIPATH = %@", REQUEST_APIPATH);
     WS(weakSelf);
     
-    self.sessionDataTask = [self.networkingManager POST: REQUEST_APIPATH parameters: parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    self.sessionDataTask = [self.networkingManager POST: REQUEST_APIPATH parameters: parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if([self validateResponseData: responseObject HttpURLResponse: task.response]) {
             if(IsNilOrNull(success)){
@@ -252,7 +252,7 @@
 //        [manager.requestSerializer setValue:@"english" forHTTPHeaderField:@"language"];
 //    }
     
-    [manager POST:REQUEST_APIPATH parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:REQUEST_APIPATH parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if ([self validateResponseData:responseObject HttpURLResponse:task.response]) {

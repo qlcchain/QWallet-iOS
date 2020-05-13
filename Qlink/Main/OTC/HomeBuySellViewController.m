@@ -281,6 +281,8 @@ static NSString *const NetworkSize = @"20";
 
 - (void)handleSeg0 {
     if (_currentBuyPage == 1) {
+        _sourceArr = @[];
+        [_mainTable reloadData];
         [self requestEntrust_order_list];
     } else {
         _sourceArr = _buyArr;
@@ -291,6 +293,8 @@ static NSString *const NetworkSize = @"20";
 
 - (void)handleSeg1 {
     if (_currentSellPage == 1) {
+        _sourceArr = @[];
+        [_mainTable reloadData];
         [self requestEntrust_order_list];
     } else {
         _sourceArr = _sellArr;
@@ -440,8 +444,17 @@ static NSString *const NetworkSize = @"20";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeBuySellCell *cell = [tableView dequeueReusableCellWithIdentifier:HomeBuySellCellReuse];
     
+    kWeakSelf(self);
     EntrustOrderListModel *model = _sourceArr[indexPath.row];
-    [cell config:model];
+    [cell config:model clickB:^(EntrustOrderListModel * _Nonnull clickM) {
+        [weakself jumpToBuySellDetail:clickM];
+        
+        if ([model.type isEqualToString:@"BUY"]) {
+            [FirebaseUtil logEventWithItemID:OTC_Home_SELL itemName:OTC_Home_SELL contentType:OTC_Home_SELL];
+        } else {
+            [FirebaseUtil logEventWithItemID:OTC_Home_BUY itemName:OTC_Home_BUY contentType:OTC_Home_BUY];
+        }
+    }];
     
     return cell;
 }
@@ -454,14 +467,7 @@ static NSString *const NetworkSize = @"20";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    EntrustOrderListModel *model = _sourceArr[indexPath.row];
-    [self jumpToBuySellDetail:model];
     
-    if ([model.type isEqualToString:@"BUY"]) {
-        [FirebaseUtil logEventWithItemID:OTC_Home_SELL itemName:OTC_Home_SELL contentType:OTC_Home_SELL];
-    } else {
-        [FirebaseUtil logEventWithItemID:OTC_Home_BUY itemName:OTC_Home_BUY contentType:OTC_Home_BUY];
-    }
 }
 
 #pragma mark - TTGTextTagCollectionViewDelegate

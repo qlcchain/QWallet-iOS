@@ -15,6 +15,7 @@
 #import "FirebaseUtil.h"
 #import "SystemUtil.h"
 #import "JPushTagHelper.h"
+#import "NSString+Trim.h"
 
 @interface RegisterMailViewController ()
 
@@ -74,7 +75,7 @@
 }
 
 - (void)changeRegisterBtnState {
-    if (_emailTF.text && _emailTF.text.length > 0 && _verifyCodeTF.text && _verifyCodeTF.text.length > 0 && _pwTF.text && _pwTF.text.length >= 6 && _pwRepeatTF.text && _pwRepeatTF.text.length >= 6) {
+    if (_emailTF.text.trim_whitespace && _emailTF.text.trim_whitespace.length > 0 && _verifyCodeTF.text.trim_whitespace && _verifyCodeTF.text.trim_whitespace.length > 0 && _pwTF.text.trim_whitespace && _pwTF.text.trim_whitespace.length >= 6 && _pwRepeatTF.text.trim_whitespace && _pwRepeatTF.text.trim_whitespace.length >= 6) {
         _registerBtn.enabled = YES;
         _registerBtn.backgroundColor = [UIColor mainColor];
     } else {
@@ -126,7 +127,7 @@
 // 获取注册验证码
 - (IBAction)regVerifyCodeAction:(id)sender {
     [self.view endEditing:YES];
-    if (![_emailTF.text isEmailAddress]) {
+    if (![[_emailTF.text trim_whitespace] isEmailAddress]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
@@ -135,11 +136,11 @@
 
 - (IBAction)registerAction:(id)sender {
     [self.view endEditing:YES];
-    if (![_emailTF.text isEmailAddress]) {
+    if (![[_emailTF.text trim_whitespace] isEmailAddress]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
-    if (![_pwTF.text isEqualToString:_pwRepeatTF.text]) {
+    if (![[_pwTF.text trim_whitespace] isEqualToString:[_pwRepeatTF.text trim_whitespace]]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
@@ -150,9 +151,12 @@
 #pragma mark - Request
 // 获取注册验证码
 - (void)requestSignup_code {
+    NSString *account = [_emailTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":_emailTF.text?:@""};
+    NSDictionary *params = @{@"account":account};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:signup_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];
@@ -161,6 +165,7 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
         [kAppD.window makeToastDisappearWithText:error.localizedDescription?:@""];
     }];
 }
@@ -168,9 +173,11 @@
 // 注册
 - (void)requestSign_up {
     kWeakSelf(self);
-    NSString *account = _emailTF.text?:@"";
-    NSString *md5PW = [MD5Util md5:_pwTF.text?:@""];
-    NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":_verifyCodeTF.text?:@"",@"number":_inviteCodeTF.text?:@"",@"p2pId":[UserModel getOwnP2PId]};
+    NSString *account = [_emailTF.text?:@"" trimAndLowercase];
+    NSString *md5PW = [MD5Util md5:[_pwTF.text?:@"" trim_whitespace]];
+    NSString *code = [_verifyCodeTF.text?:@"" trim_whitespace];
+    NSString *number = [_inviteCodeTF.text?:@"" trim_whitespace];
+    NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":code,@"number":number,@"p2pId":[UserModel getOwnP2PId]};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:sign_up_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,10 +24,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZK-W3-yhb">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYy-uS-BQm">
-                            <rect key="frame" x="0.0" y="44" width="375" height="603"/>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYy-uS-BQm">
+                            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IXY-Gv-s8k">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -199,7 +198,7 @@
                                                 <constraint firstAttribute="height" constant="72" id="wvy-yr-crX"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNY-vX-qW3">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNY-vX-qW3" customClass="QBaseDarkButton">
                                             <rect key="frame" x="24" y="404" width="327" height="49"/>
                                             <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
@@ -246,8 +245,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hmd-m8-cXk" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QJ-kU-ZiY">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QJ-kU-ZiY" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="0As-NA-xmV"/>
                                         <constraint firstAttribute="width" constant="44" id="y3b-8f-oPX"/>
@@ -266,7 +265,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="6QJ-kU-ZiY" firstAttribute="leading" secondItem="Hmd-m8-cXk" secondAttribute="leading" constant="8" id="NUe-IB-GyP"/>
+                                <constraint firstItem="6QJ-kU-ZiY" firstAttribute="leading" secondItem="Hmd-m8-cXk" secondAttribute="leading" id="NUe-IB-GyP"/>
                                 <constraint firstItem="6QJ-kU-ZiY" firstAttribute="centerY" secondItem="Hmd-m8-cXk" secondAttribute="centerY" id="TNO-rM-bG0"/>
                                 <constraint firstItem="1H8-cI-3SL" firstAttribute="centerY" secondItem="Hmd-m8-cXk" secondAttribute="centerY" id="b06-K7-Ma9"/>
                                 <constraint firstAttribute="height" constant="44" id="ihJ-ub-bOx"/>
@@ -286,7 +285,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BxM-g6-D6P">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -302,6 +301,7 @@
                 <constraint firstItem="EZK-W3-yhb" firstAttribute="top" secondItem="BxM-g6-D6P" secondAttribute="bottom" id="sKB-xQ-PVP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="140" y="153"/>
         </view>
     </objects>
     <resources>

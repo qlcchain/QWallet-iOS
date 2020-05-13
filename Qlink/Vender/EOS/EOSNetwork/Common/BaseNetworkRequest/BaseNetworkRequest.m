@@ -127,8 +127,7 @@
     NSLog(@"parameters = %@" , parameters);
     NSLog(@"REQUEST_APIPATH = %@",  REQUEST_APIPATH);
     WS(weakSelf);
-    
-    self.sessionDataTask = [self.networkingManager POST: REQUEST_APIPATH parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    self.sessionDataTask = [self.networkingManager POST: REQUEST_APIPATH parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([self validateResponseData:responseObject HttpURLResponse:task.response]) {
             if (IsNilOrNull(success)) {
                 return ;
@@ -171,7 +170,7 @@
     [self.networkingManager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
     
-    self.sessionDataTask = [self.networkingManager GET:REQUEST_APIPATH parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    self.sessionDataTask = [self.networkingManager GET:REQUEST_APIPATH parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject:%@", responseObject);
         if ([self validateResponseData:responseObject HttpURLResponse:task.response]) {
@@ -212,7 +211,7 @@
     NSLog(@"REQUEST_APIPATH = %@", REQUEST_APIPATH);
     
     WS(weakSelf);
-    self.sessionDataTask = [self.networkingManager POST: REQUEST_APIPATH parameters: parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    self.sessionDataTask = [self.networkingManager POST: REQUEST_APIPATH parameters: parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if([self validateResponseData: responseObject HttpURLResponse: task.response]) {
             if(IsNilOrNull(success)){
@@ -264,7 +263,7 @@
     NSLog(@"parameters = %@", parameters);
     WS(weakSelf);
     
-    self.sessionDataTask = [self.networkingManager PUT:REQUEST_APIPATH parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    self.sessionDataTask = [self.networkingManager PUT:REQUEST_APIPATH parameters:parameters headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([self validateResponseData:responseObject HttpURLResponse:task.response]) {
             if (IsNilOrNull(success)) {
                 return ;
@@ -300,7 +299,7 @@
     NSLog(@"REQUEST_APIPATH = %@", REQUEST_APIPATH);
     WS(weakSelf);
     [self.networkingManager.requestSerializer setHTTPMethodsEncodingParametersInURI:[NSSet setWithObjects:@"GET", @"HEAD", nil]];
-    self.sessionDataTask = [self.networkingManager DELETE:REQUEST_APIPATH parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    self.sessionDataTask = [self.networkingManager DELETE:REQUEST_APIPATH parameters:parameters headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (IsNilOrNull(success)) {
             return ;
         }
@@ -358,7 +357,7 @@
     NSLog(@"REQUEST_APIPATH = %@", [self requestUrlPath]);
     WS(weakSelf);
     
-    [networkingManager POST:[self requestUrlPath] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [networkingManager POST:[self requestUrlPath] parameters:parameters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName: [@"file" randomFileName :externName] mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -392,7 +391,7 @@
     NSLog(@"parameters = %@", parameters);
     
     AFHTTPSessionManager *outerNetworkingManager = [[AFHTTPSessionManager alloc] initWithBaseURL: [NSURL URLWithString: REQUEST_BASEURL]];
-    [outerNetworkingManager GET:[self requestUrlPath] parameters:[self parameters] progress:^(NSProgress * _Nonnull downloadProgress) {
+    [outerNetworkingManager GET:[self requestUrlPath] parameters:[self parameters] headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (IsNilOrNull(success)) {
             return ;
@@ -452,7 +451,7 @@
 //        [manager.requestSerializer setValue:@"english" forHTTPHeaderField:@"language"];
 //    }
     
-    [manager POST:[self requestUrlPath] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:[self requestUrlPath] parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([self validateResponseData:responseObject HttpURLResponse:task.response]) {
@@ -490,7 +489,7 @@
     AFHTTPSessionManager *outerNetworkingManager = [[AFHTTPSessionManager alloc] init];
     [outerNetworkingManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [outerNetworkingManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [outerNetworkingManager GET:requestUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    [outerNetworkingManager GET:requestUrl parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (IsNilOrNull(success)) {
             return ;

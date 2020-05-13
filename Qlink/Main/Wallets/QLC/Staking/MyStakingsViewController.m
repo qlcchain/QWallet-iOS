@@ -27,6 +27,7 @@
 #import "RSAUtil.h"
 #import "ClaimConstants.h"
 #import "NSString+RemoveZero.h"
+#import "FirebaseUtil.h"
 
 static NSInteger const PledgeInfo_PageCount = 10;
 static NSInteger const PledgeInfo_PageFirst = 0;
@@ -150,9 +151,9 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 }
 
 - (void)refreshAmountViewOfTotal {
-    _totalStakingVolumeLab.text = [_myStakingAmount.div(@(QLC_UnitNum)).add(_freeStakingAmount) showfloatStrWith2Decimal];
+    _totalStakingVolumeLab.text = [_myStakingAmount.div(@(QLC_UnitNum)).add(_freeStakingAmount) showfloatStr:2]; //showfloatStrWith2Decimal
     NSString *dd = _myEarningsAmount.div(@(QLC_UnitNum)).add(_freeEarningsAmount);
-    _totalEarningsLab.text = [dd showfloatStrWith2Decimal];
+    _totalEarningsLab.text = [dd showfloatStr:2]; // showfloatStrWith2Decimal
 }
 
 - (void)refreshAmountViewOfFree {
@@ -374,6 +375,8 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 
 - (IBAction)invokeNewStakingAction:(id)sender {
     [self jumpToNewStaking];
+    
+    [FirebaseUtil logEventWithItemID:Wallet_MyStakings_InvokeNewStakings itemName:Wallet_MyStakings_InvokeNewStakings contentType:Wallet_MyStakings_InvokeNewStakings];
 }
 
 - (IBAction)txidAction:(id)sender {

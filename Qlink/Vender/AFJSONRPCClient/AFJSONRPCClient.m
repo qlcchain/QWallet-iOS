@@ -72,6 +72,12 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
     self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/json-rpc", @"application/jsonrequest", nil];
+    
+    
+//    ios/v1.2.1 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36
+//    [self.requestSerializer setValue:@"ios" forHTTPHeaderField:@"User-Agent"];
+//   NSString *userAgent =  [self.requestSerializer valueForHTTPHeaderField:@"User-Agent"];
+//    NSLog(@"userAgent = %@",userAgent);
 
     self.endpointURL = URL;
 
@@ -117,7 +123,10 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     payload[@"params"] = parameters;
     payload[@"id"] = [requestId description];
     
-    [self POST:@"" parameters:payload success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+//    NSString *userAgent =  [self.requestSerializer valueForHTTPHeaderField:@"User-Agent"];
+//    NSLog(@"userAgent = %@",userAgent);
+    [self POST:@"" parameters:payload headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSInteger code = 0;
         NSString *message = nil;
         id data = nil;

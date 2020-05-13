@@ -13,6 +13,7 @@
 #import "NSDate+Category.h"
 #import "NSDateFormatter+Category.h"
 
+
 #define DATE_COMPONENTS (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit |  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit)
 #define CURRENT_CALENDAR [NSCalendar currentCalendar]
 
@@ -74,12 +75,22 @@
     return dateString;
 }
 
-+ (NSDate *)dateFromTime:(NSString *)fromTime {
++ (NSDate *)dateFromTime_c:(NSString *)fromTime {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
     format.timeZone = [NSTimeZone localTimeZone];
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate *fromDate = [format dateFromString:fromTime];
     return fromDate;
+}
+
++ (NSString *)dateFromTime_c:(NSString *)fromTime dateFormat:(NSString *)dateFormat {
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];// 设置日期格式 为了转换成功
+    format.timeZone = [NSTimeZone localTimeZone];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *fromDate = [format dateFromString:fromTime];
+    format.dateFormat = dateFormat;
+    NSString* dateString = [format stringFromDate:fromDate];
+    return dateString;
 }
 
 + (NSInteger)getTimestampFromDate:(NSDate *)date {
@@ -348,7 +359,6 @@
         }
     }
 }
-
 
 
 

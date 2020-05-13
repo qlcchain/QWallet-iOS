@@ -8,7 +8,7 @@
 
 #import "QLCImportWalletViewController.h"
 #import "UITextView+ZWPlaceHolder.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import "WalletQRViewController.h"
@@ -16,6 +16,7 @@
 #import "QLCWalletInfo.h"
 #import <QLCFramework/QLCFramework.h>
 #import "WebViewController.h"
+#import "NSString+Trim.h"
 //#import "GlobalConstants.h"
 
 typedef enum : NSUInteger {
@@ -160,17 +161,17 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_mnemonicTV.text.length <= 0) {
+    if (_mnemonicTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
-    if (![[QLCWalletManage shareInstance] walletMnemonicIsValid:_mnemonicTV.text]) {
+    if (![[QLCWalletManage shareInstance] walletMnemonicIsValid:_mnemonicTV.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_valid_mnemonic")];
         return;
     }
     
 //    NSString *pw = @"";
-    NSString *mnemonic = _mnemonicTV.text;
+    NSString *mnemonic = _mnemonicTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     BOOL isSuccess = [QLCWalletManage.shareInstance importWalletWithMnemonic:mnemonic];
     [kAppD.window hideToast];
@@ -196,16 +197,16 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_seedTV.text.length <= 0) {
+    if (_seedTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
-    if (![[QLCWalletManage shareInstance] walletSeedIsValid:_seedTV.text]) {
+    if (![[QLCWalletManage shareInstance] walletSeedIsValid:_seedTV.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_valid_seed")];
         return;
     }
     
-    NSString *seed = _seedTV.text.trim;
+    NSString *seed = _seedTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     BOOL isSuccess = [QLCWalletManage.shareInstance importWalletWithSeed:seed];
     [kAppD.window hideToast];
@@ -237,7 +238,7 @@ typedef enum : NSUInteger {
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 - (void)jumpToTerms {

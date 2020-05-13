@@ -8,7 +8,7 @@
 
 #import "NEOImportViewController.h"
 #import "UITextView+ZWPlaceHolder.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "SuccessTipView.h"
 #import "Qlink-Swift.h"
@@ -18,6 +18,7 @@
 #import "WebViewController.h"
 //#import "GlobalConstants.h"
 #import "NEOWalletInfo.h"
+#import "NSString+Trim.h"
 
 @interface NEOImportViewController () {
     BOOL privatekeyAgree;
@@ -82,12 +83,12 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_privateTV.text.length <= 0) {
+    if (_privateTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
-    NSString *privatekey = _privateTV.text.trim;
+    NSString *privatekey = _privateTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     BOOL isScueess = [NEOWalletManage.sharedInstance getWalletAccountWithPrivatekey:privatekey];
     [kAppD.window hideToast];
@@ -119,7 +120,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 - (void)jumpToTerms {

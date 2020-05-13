@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *MyOrderListEntrustCellReuse = @"MyOrderListEntrustCell";
 #define MyOrderListEntrustCell_Height 168
 
-@interface MyOrderListEntrustCell : UITableViewCell
+@interface MyOrderListEntrustCell : QBaseTableCell
 
 - (void)config:(EntrustOrderListModel *)model;
 

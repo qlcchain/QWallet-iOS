@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
                 <outlet property="buyAlongBtn" destination="2jH-bx-GAp" id="n7N-3I-2az"/>
                 <outlet property="chooseDeductionBtn" destination="fL2-di-Ke7" id="JH9-rw-D5d"/>
                 <outlet property="groupTable" destination="WDx-kY-gKS" id="rN4-9E-xuU"/>
+                <outlet property="mainScroll" destination="iJy-XI-j17" id="Ykm-np-RQp"/>
                 <outlet property="ongoingEmptyHeight" destination="PLP-nW-6Y8" id="OYl-7N-RXH"/>
                 <outlet property="ongoingTableBackHeight" destination="VvT-n4-TxR" id="AtR-Lh-7Nd"/>
                 <outlet property="phoneBackHeight" destination="s8O-H8-hhe" id="c0L-sh-gX5"/>
@@ -41,7 +42,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJm-u0-UV3">
                             <rect key="frame" x="0.0" y="44" width="414" height="856"/>
                             <subviews>
-                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJy-XI-j17">
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJy-XI-j17">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="797"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aYG-Iz-tbA">
@@ -99,7 +100,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start the Group Recharge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoA-c6-Rrw">
-                                                            <rect key="frame" x="16" y="23" width="145" height="14.333333333333336"/>
+                                                            <rect key="frame" x="16" y="23" width="145" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
@@ -170,7 +171,7 @@
                                                     <rect key="frame" x="0.0" y="466" width="414" height="76"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国移动 100元充值话费，1-72小时到账    " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YA-Lx-g7n">
-                                                            <rect key="frame" x="12" y="32.333333333333371" width="390" height="41.666666666666657"/>
+                                                            <rect key="frame" x="12" y="32" width="390" height="42"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                             <color key="textColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
@@ -182,13 +183,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 价格 800QLC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJm-yI-ndk">
-                                                            <rect key="frame" x="111.66666666666666" y="16.666666666666629" width="72.666666666666657" height="13.666666666666664"/>
+                                                            <rect key="frame" x="111.66666666666669" y="16.666666666666629" width="73" height="13.333333333333336"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已拼100+件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aQ-xl-aC0">
-                                                            <rect key="frame" x="336.33333333333331" y="16" width="65.666666666666686" height="14.666666666666664"/>
+                                                            <rect key="frame" x="336.66666666666669" y="16" width="65.333333333333314" height="14.666666666666664"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
@@ -220,13 +221,13 @@
                                                             <rect key="frame" x="0.0" y="275" width="414" height="139"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone top up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjg-8e-ShF">
-                                                                    <rect key="frame" x="121.66666666666667" y="6" width="170.66666666666663" height="36"/>
+                                                                    <rect key="frame" x="121.66666666666669" y="6" width="171" height="36"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRM-2f-aYD">
-                                                                    <rect key="frame" x="134.33333333333337" y="42.000000000000007" width="145.66666666666663" height="76.666666666666686"/>
+                                                                    <rect key="frame" x="134" y="42.000000000000007" width="146" height="76.666666666666686"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -282,7 +283,7 @@
                                                                     <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VwZ-Y1-qjf">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VwZ-Y1-qjf" customClass="QBaseTouchButton">
                                                                     <rect key="frame" x="359" y="1" width="40" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="exV-mZ-Qnw"/>
@@ -366,7 +367,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9et-Au-Vhc">
                                     <rect key="frame" x="0.0" y="797" width="414" height="59"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jH-bx-GAp">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jH-bx-GAp" customClass="QBaseDarkButton">
                                             <rect key="frame" x="16" y="10" width="187.66666666666666" height="39"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <state key="normal" title="Recharge directily">
@@ -376,7 +377,7 @@
                                                 <action selector="buyAlongAction:" destination="-1" eventType="touchUpInside" id="HDQ-mx-i2C"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVq-4b-GMl">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVq-4b-GMl" customClass="QBaseDarkButton">
                                             <rect key="frame" x="210.66666666666663" y="10" width="187.33333333333337" height="39"/>
                                             <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -424,7 +425,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cwa-5H-TtA" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpf-gg-Utp">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpf-gg-Utp" customClass="QBaseTouchButton">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="mrl-3T-nyu"/>
@@ -436,7 +437,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPe-SA-NtB">
-                                    <rect key="frame" x="153.66666666666666" y="11" width="106.66666666666666" height="22"/>
+                                    <rect key="frame" x="153.66666666666666" y="11" width="106.99999999999997" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>

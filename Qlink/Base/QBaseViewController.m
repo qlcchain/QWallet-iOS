@@ -18,6 +18,10 @@
 
 @implementation QBaseViewController
 
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {// 解决底部uibutton点击反应延迟的bug
+    return UIRectEdgeBottom;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -50,6 +54,8 @@
 //    self.view.backgroundColor = MAIN_BLUE_COLOR;
 //    self.view.theme_backgroundColor = globalBackgroundColorPicker;
     self.navigationController.navigationBarHidden = !showRightNavBarItem;
+    
+    self.navigationController.interactivePopGestureRecognizer.delaysTouchesBegan=NO;
     
     // 设置右边按钮
     if (showRightNavBarItem) {
@@ -165,7 +171,12 @@
 
 - (void)configEmptyView:(UIView *)view {
     view.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
-    view.ly_emptyView.contentViewY = 160;
+    view.ly_emptyView.contentViewY = 100;
+}
+
+- (void)configEmptyView:(UIView *)view contentViewY:(CGFloat)contentViewY {
+    view.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
+    view.ly_emptyView.contentViewY = contentViewY;
 }
 
 - (void)refreshEmptyView:(UIView *)view {
@@ -176,7 +187,7 @@
 - (void)setBaseTable:(UITableView *)baseTable {
     _baseTable = baseTable;
     _baseTable.ly_emptyView = [LYEmptyView emptyViewWithImageStr:@"background_list_empty" titleStr:kLang(@"no_data") detailStr:nil];
-    _baseTable.ly_emptyView.contentViewY = 160;
+    _baseTable.ly_emptyView.contentViewY = 100;
 }
 
 - (void)didReceiveMemoryWarning {

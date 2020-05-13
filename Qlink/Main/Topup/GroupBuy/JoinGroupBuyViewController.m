@@ -15,7 +15,7 @@
 #import "TopupDeductionTokenModel.h"
 #import "TopupProductModel.h"
 #import "GroupBuyListModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "RLArithmetic.h"
 #import "UserModel.h"
 #import "NSDate+Category.h"
@@ -25,6 +25,7 @@
 #import "NSString+RemoveZero.h"
 #import "TopupOrderModel.h"
 #import "FirebaseUtil.h"
+#import "NSString+Trim.h"
 
 @interface JoinGroupBuyViewController () <CNContactPickerDelegate> {
     CNContactPickerViewController * _peoplePickVC;
@@ -218,7 +219,7 @@
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     
     NSString *groupId = _inputGroupBuyListM.ID?:@"";
-    NSString *phoneNumber = _phoneNumberTF.text?:@"";
+    NSString *phoneNumber = [_phoneNumberTF.text?:@"" trim_whitespace];
     NSDictionary *params = @{@"account":account,@"token":token,@"groupId":groupId,@"phoneNumber":phoneNumber};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:topup_join_group_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -265,11 +266,11 @@
 //    if (_okBlock) {
 //        _okBlock();
 //    }
-    if (_phoneNumberTF.text == nil || [_phoneNumberTF.text isEmptyString]) {
+    if (_phoneNumberTF.text.trim_whitespace == nil || [_phoneNumberTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
         return;
     }
-    if ([[_phoneNumberTF.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || _phoneNumberTF.text.length < 6) { // 大于6位的纯数字
+    if ([[_phoneNumberTF.text.trim_whitespace stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || _phoneNumberTF.text.trim_whitespace.length < 6) { // 大于6位的纯数字
         [kAppD.window makeToastDisappearWithText:kLang(@"please_fill_in_a_valid_phone_number")];
         return;
     }

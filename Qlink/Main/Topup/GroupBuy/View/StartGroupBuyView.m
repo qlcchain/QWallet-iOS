@@ -13,7 +13,7 @@
 #import "StartGroupBuyCell.h"
 #import "TopupDeductionTokenModel.h"
 #import "TopupProductModel.h"
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "GroupKindModel.h"
 #import "UserModel.h"
 #import "NSDate+Category.h"
@@ -21,7 +21,7 @@
 #import "GroupBuyKnowDelegateView.h"
 #import "AgentRewardViewController.h"
 #import "QNavigationController.h"
-#import "QlinkTabbarViewController.h"
+////#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "AppDelegate.h"
 #import "AppJumpHelper.h"

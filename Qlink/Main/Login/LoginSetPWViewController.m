@@ -9,12 +9,13 @@
 #import "LoginSetPWViewController.h"
 #import "UIView+Visuals.h"
 #import "LoginPWModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface LoginSetPWViewController ()
 
@@ -59,7 +60,7 @@
 }
 
 - (void)textFieldDidEnd {
-    if (_pwTF.text && _pwTF.text.length > 0 && _repeatTF.text && _repeatTF.text.length > 0) {
+    if (_pwTF.text.trim_whitespace && _pwTF.text.trim_whitespace.length > 0 && _repeatTF.text.trim_whitespace && _repeatTF.text.trim_whitespace.length > 0) {
 //        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _joinBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _joinBtn.userInteractionEnabled = YES;
@@ -91,12 +92,12 @@
 }
 
 - (IBAction)joinAction:(id)sender {
-    if (![_pwTF.text isEqualToString:_repeatTF.text]) {
+    if (![_pwTF.text.trim_whitespace isEqualToString:_repeatTF.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"the_two_passwords_were_different")];
         return;
     }
     
-    [LoginPWModel setLoginPW:_pwTF.text];
+    [LoginPWModel setLoginPW:[_pwTF.text trim_whitespace]];
     
     kAppD.needFingerprintVerification = NO; // 设置已经输入过密码
     [self dismissWithComplete:YES];
@@ -117,7 +118,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 @end

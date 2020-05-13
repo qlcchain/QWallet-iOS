@@ -8,12 +8,13 @@
 
 #import "LoginInputPWViewController.h"
 #import "LoginPWModel.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "FingerprintVerificationUtil.h"
 #import "ConfigUtil.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface LoginInputPWViewController ()
 
@@ -57,7 +58,7 @@
 }
 
 - (void)textFieldDidEnd {
-    if (_pwTF.text && _pwTF.text.length > 0) {
+    if (_pwTF.text.trim_whitespace && _pwTF.text.trim_whitespace.length > 0) {
 //        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _joinBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _joinBtn.userInteractionEnabled = YES;
@@ -90,7 +91,7 @@
 
 - (IBAction)joinAction:(id)sender {
     NSString *localPW = [LoginPWModel getLoginPW];
-    if (![localPW isEqualToString:_pwTF.text]) {
+    if (![localPW isEqualToString:[_pwTF.text trim_whitespace]]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"password_wrong")];
         return;
     }
@@ -114,7 +115,7 @@
 #pragma mark - Transition
 - (void)jumpToTabbar {
     [kAppD setRootTabbar];
-    kAppD.mtabbarC.selectedIndex = TabbarIndexWallet;
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexWallet;
 }
 
 @end

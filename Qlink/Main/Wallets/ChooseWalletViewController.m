@@ -25,7 +25,7 @@
 #import "WebViewController.h"
 #import "NEOWalletInfo.h"
 //#import "GlobalConstants.h"
-#import "AppConfigUtil.h"
+#import "OutbreakRedUtil.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 
 @interface ChooseWalletViewController () {

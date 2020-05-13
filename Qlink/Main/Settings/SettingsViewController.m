@@ -11,12 +11,14 @@
 #import "ChooseCurrencyViewController.h"
 #import "ResetPWViewController.h"
 #import "PasswordManagementViewController.h"
-#import "WalletsManageViewController.h"
+//#import "WalletsManageViewController.h"
 #import "JoinCommunityViewController.h"
 #import "WebViewController.h"
 #import "UserModel.h"
 //#import "GlobalConstants.h"
 #import "SystemUtil.h"
+#import "FirebaseUtil.h"
+#import "ForgetPWViewController.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -60,6 +62,7 @@
     [_sourceArr removeAllObjects];
     NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[kLang(@"currency_unit"),kLang(@"service_agreement"),kLang(@"help_and_feedback"),kLang(@"about_my_qwallet"),kLang(title_screen_lock),kLang(@"language")]];
     if ([UserModel haveLoginAccount]) {
+        [titleArr addObject:kLang(@"revise_password")];
         [titleArr addObject:kLang(@"log_out")];
     }
     kWeakSelf(self);
@@ -123,14 +126,20 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:kLang(@"english") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[0]];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages_English itemName:Me_Settings_Languages_English contentType:Me_Settings_Languages_English];
     }];
     [alertVC addAction:action1];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:kLang(@"chinese") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[1]];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages_Chinese itemName:Me_Settings_Languages_Chinese contentType:Me_Settings_Languages_Chinese];
     }];
     [alertVC addAction:action2];
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:kLang(@"indonesian") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [Language userSelectedLanguage:LanguageCode[2]];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages_Indonesian itemName:Me_Settings_Languages_Indonesian contentType:Me_Settings_Languages_Indonesian];
     }];
     [alertVC addAction:action3];
     UIAlertAction *actionC = [UIAlertAction actionWithTitle:kLang(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -168,6 +177,10 @@
         [self logout];
     } else if ([model.title isEqualToString:kLang(@"language")]) {
         [self showSelectLanguage];
+        
+        [FirebaseUtil logEventWithItemID:Me_Settings_Languages itemName:Me_Settings_Languages contentType:Me_Settings_Languages];
+    } else if ([model.title isEqualToString:kLang(@"revise_password")]) {
+        [self jumpToForgetPW];
     }
 }
 
@@ -210,6 +223,12 @@
     WebViewController *vc = [[WebViewController alloc] init];
     vc.inputUrl = url;
     vc.inputTitle = title;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToForgetPW {
+    ForgetPWViewController *vc = [ForgetPWViewController new];
+    vc.inputTitle = kLang(@"revise_password");
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -13,7 +13,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "RequestService.h"
 #import <MJExtension/MJExtension.h>
-#import "NEOWalletUtil.h"
+//#import "NEOWalletUtil.h"
 #import "AppDelegate.h"
 //#import <QLCFramework/QLCMnemonicBit.h>
 //#import "QLCMnemonicBit.h"

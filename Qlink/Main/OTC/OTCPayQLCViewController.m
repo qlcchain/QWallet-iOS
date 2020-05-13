@@ -22,7 +22,7 @@
 #import "RSAUtil.h"
 #import "WalletSelectViewController.h"
 #import "TradeOrderDetailViewController.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "WalletsViewController.h"
 //#import "GlobalConstants.h"
@@ -32,6 +32,7 @@
 #import "TxidBackUtil.h"
 #import "TokenListHelper.h"
 #import "QLCWalletInfo.h"
+#import "NSString+Trim.h"
 
 @interface OTCPayQLCViewController () <UITextViewDelegate, UITextFieldDelegate>
 
@@ -115,8 +116,8 @@
 
 - (void)showQLCTransferConfirmView {
     NSString *fromAddress = _payWalletM.address?:@"";
-    NSString *toAddress = _sendtoAddressTV.text;
-    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.tokenName];
+    NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
+    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text.trim_whitespace,_selectAsset.tokenName];
     QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
     [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
 //    [view configWithAddress:address amount:amount];
@@ -128,7 +129,7 @@
 }
 
 - (void)checkSendBtnEnable {
-    if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
+    if (_sendtoAddressTV.text.trim_whitespace && _sendtoAddressTV.text.trim_whitespace.length > 0 && _amountTF.text.trim_whitespace && _amountTF.text.trim_whitespace.length > 0) {
 //        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
@@ -146,13 +147,13 @@
     NSString *from = fromAddress;
     NSString *privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:fromAddress]?:@"";
     NSString *tokenName = _selectAsset.tokenName;
-    NSString *to = _sendtoAddressTV.text;
-    NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text];
+    NSString *to = _sendtoAddressTV.text.trim_whitespace;
+    NSUInteger amount = [_selectAsset getTransferNum:_amountTF.text.trim_whitespace];
 //    NSUInteger amount = [_amountTF.text integerValue];
     NSString *sender = nil;
     NSString *receiver = nil;
     NSString *message = nil;
-    NSString *data = _memoTF.text?:@"";
+    NSString *data = _memoTF.text.trim_whitespace?:@"";
     BOOL workInLocal = YES;
 //    BOOL isMainNetwork = [ConfigUtil isMainNetOfChainNetwork];
     NSString *baseUrl = [ConfigUtil get_qlc_node_normal];
@@ -324,25 +325,25 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"payment_wallet_is_empty")];
         return;
     }
-    if (!_amountTF.text || _amountTF.text.length <= 0) {
+    if (!_amountTF.text.trim_whitespace || _amountTF.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
+    if (!_sendtoAddressTV.text.trim_whitespace || _sendtoAddressTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_empty")];
         return;
     }
-    if ([_amountTF.text doubleValue] == 0) {
+    if ([_amountTF.text.trim_whitespace doubleValue] == 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
-    if ([_amountTF.text doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
+    if ([_amountTF.text.trim_whitespace doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
     
     // 检查地址有效性
-    BOOL validateAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_sendtoAddressTV.text];
+    BOOL validateAddress = [QLCWalletManage.shareInstance walletAddressIsValid:_sendtoAddressTV.text.trim_whitespace];
     if (!validateAddress) {
         [kAppD.window makeToastDisappearWithText:kLang(@"qlc_wallet_address_is_invalidate")];
         return;

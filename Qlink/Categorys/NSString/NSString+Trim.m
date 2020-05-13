@@ -26,4 +26,21 @@
  + (NSString *)trimWhitespaceAndNewline:(NSString *)val {
     return [self trim:val trimCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去掉前后空格和回车符
 }
+
+- (NSString *)trim_whitespace {
+    NSString *returnVal = @"";
+    if (self) {
+        returnVal = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]?:@"";
+    }
+    return returnVal;
+}
+
+- (NSString *)trimAndLowercase {
+    NSString *returnVal = @"";
+    if (self) {
+        returnVal = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]?:@"";
+    }
+    return [returnVal lowercaseString]?:@"";
+}
+
 @end

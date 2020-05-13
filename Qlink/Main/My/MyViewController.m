@@ -8,7 +8,7 @@
 
 #import "MyViewController.h"
 #import "MyCell.h"
-#import "WalletsManageViewController.h"
+//#import "WalletsManageViewController.h"
 #import "JoinCommunityViewController.h"
 #import "SettingsViewController.h"
 #import "UserModel.h"
@@ -27,7 +27,7 @@
 #import "MiningConstants.h"
 #import "SheetMiningUtil.h"
 #import "WZLBadgeImport.h"
-#import "QlinkTabbarViewController.h"
+//#import "QlinkTabbarViewController.h"
 #import "MainTabbarViewController.h"
 #import "TabbarHelper.h"
 #import "AppJumpHelper.h"
@@ -35,6 +35,10 @@
 #import "WebViewController.h"
 #import "QgasVoteUtil.h"
 #import "QVoteViewController.h"
+#import "FirebaseUtil.h"
+#import "OutbreakRedViewController.h"
+#import "OutbreakRedUtil.h"
+#import "SystemUtil.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -50,6 +54,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voteBackHeight; // 110
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
+@property (nonatomic, strong) NSMutableArray *titleShowArr;
+
 @property (nonatomic, strong) NSString *invite_user_amount;
 @property (nonatomic, strong) NSString *no_award_amount;
 @property (nonatomic, strong) NSString *no_award_miningReward_amount;
@@ -89,6 +95,8 @@
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:MyCellReuse bundle:nil] forCellReuseIdentifier:MyCellReuse];
     self.baseTable = _mainTable;
+    
+    _titleShowArr = [NSMutableArray array];
     
     _haveTrade_mining_list = NO;
     _invite_user_amount = @"0";
@@ -137,19 +145,41 @@
     //@"icon_my_contact"
     
     [_sourceArr removeAllObjects];
-    NSArray *titleArr = @[kLang(@"crypto_wallet"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"join_the_community"),kLang(@"settings")];
-    NSArray *iconArr = @[@"icon_my_wallet",@"icon_my_claim",@"icon_my_share",@"icon_my_community",@"icon_my_settings"];
-    if (_haveTrade_mining_list) { // 有挂单挖矿活动
-        titleArr = @[kLang(@"crypto_wallet"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"sheet_mining"),kLang(@"join_the_community"),kLang(@"settings")];
-        iconArr = @[@"icon_my_wallet",@"icon_my_claim",@"icon_my_share",@"icon_my_mining",@"icon_my_community",@"icon_my_settings"];
-    }
+    [_titleShowArr removeAllObjects];
+    
+    NSArray *tempTitleArr = @[kLang(@"crypto_wallet"),kLang(@"outbreak_red"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"sheet_mining"),kLang(@"join_the_community"),kLang(@"settings")];
+    NSArray *tempIconArr = @[@"icon_my_wallet",@"icon_my_red",@"icon_my_claim",@"icon_my_share",@"icon_my_mining",@"icon_my_community",@"icon_my_settings"];
+    
+    [tempTitleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MyShowModel *titleM = [MyShowModel new];
+        titleM.title = obj;
+        titleM.icon = tempIconArr[idx];
+        titleM.showRed = NO;
+        titleM.isShow = YES;
+        if ([obj isEqualToString:kLang(@"sheet_mining")]) {
+            if (_haveTrade_mining_list) { // 有挂单挖矿活动
+            } else {
+                titleM.isShow = NO;
+            }
+        }
+        if ([obj isEqualToString:kLang(@"outbreak_red")]) {
+            NSString *appShow19 = [OutbreakRedUtil shareInstance].appShow19;
+//            NSString *show19 = [OutbreakRedUtil shareInstance].show19;
+            BOOL isReview = [SystemUtil getIsReviewing];
+            if (isReview == NO && [appShow19 integerValue] == 1) {
+            } else {
+                titleM.isShow = NO;
+            }
+        }
+        [_titleShowArr addObject:titleM];
+    }];
+    
     kWeakSelf(self);
-    [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        MyShowModel *model = [MyShowModel new];
-        model.title = obj;
-        model.icon = iconArr[idx];
-        model.showRed = NO;
-        [weakself.sourceArr addObject:model];
+    [_titleShowArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MyShowModel *titleM = obj;
+        if (titleM.isShow) {
+            [weakself.sourceArr addObject:titleM];
+        }
     }];
     [_mainTable reloadData];
     [self refreshTabbarRedOfMe];
@@ -176,21 +206,42 @@
 }
 
 - (void)refreshMining {
-    NSArray *titleArr = @[];
-    NSArray *iconArr = @[];
+    [_sourceArr removeAllObjects];
+//    NSArray *titleArr = @[];
+//    NSArray *iconArr = @[];
     if (_haveTrade_mining_list) { // 有挂单挖矿活动
-        titleArr = @[kLang(@"crypto_wallet"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"sheet_mining"),kLang(@"join_the_community"),kLang(@"settings")];
-        iconArr = @[@"icon_my_wallet",@"icon_my_claim",@"icon_my_share",@"icon_my_mining",@"icon_my_community",@"icon_my_settings"];
-        if (![self containMining]) {
-            [self addMining];
-        }
+//        titleArr = @[kLang(@"crypto_wallet"),kLang(@"outbreak_red"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"sheet_mining"),kLang(@"join_the_community"),kLang(@"settings")];
+//        iconArr = @[@"icon_my_wallet",@"icon_my_red",@"icon_my_claim",@"icon_my_share",@"icon_my_mining",@"icon_my_community",@"icon_my_settings"];
+        [_titleShowArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            MyShowModel *titleM = obj;
+            if ([titleM.title isEqualToString:kLang(@"sheet_mining")]) {
+                titleM.isShow = YES;
+            }
+        }];
+//        if (![self containMining]) {
+//            [self addMining];
+//        }
     } else {
-        titleArr = @[kLang(@"crypto_wallet"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"join_the_community"),kLang(@"settings")];
-        iconArr = @[@"icon_my_wallet",@"icon_my_claim",@"icon_my_share",@"icon_my_community",@"icon_my_settings"];
-        if ([self containMining]) {
-            [self removeMining];
-        }
+//        titleArr = @[kLang(@"crypto_wallet"),kLang(@"outbreak_red"),kLang(@"daily_earnings"),kLang(@"share_with_friends"),kLang(@"join_the_community"),kLang(@"settings")];
+//        iconArr = @[@"icon_my_wallet",@"icon_my_red",@"icon_my_claim",@"icon_my_share",@"icon_my_community",@"icon_my_settings"];
+//        if ([self containMining]) {
+//            [self removeMining];
+//        }
+        [_titleShowArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            MyShowModel *titleM = obj;
+            if ([titleM.title isEqualToString:kLang(@"sheet_mining")]) {
+                titleM.isShow = NO;
+            }
+        }];
     }
+    
+    kWeakSelf(self);
+    [_titleShowArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MyShowModel *titleM = obj;
+        if (titleM.isShow) {
+            [weakself.sourceArr addObject:titleM];
+        }
+    }];
     [_mainTable reloadData];
     [self refreshTabbarRedOfMe];
     
@@ -211,24 +262,24 @@
     return containB;
 }
 
-- (void)removeMining {
-    kWeakSelf(self);
-    [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        MyShowModel *model = obj;
-        if ([model.title isEqualToString:kLang(@"sheet_mining")]) {
-            [weakself.sourceArr removeObject:obj];
-            *stop = YES;
-        }
-    }];
-}
-
-- (void)addMining {
-    MyShowModel *model = [MyShowModel new];
-    model.title = kLang(@"sheet_mining");
-    model.icon = @"icon_my_mining";
-    model.showRed = NO;
-    [_sourceArr insertObject:model atIndex:3];
-}
+//- (void)removeMining {
+//    kWeakSelf(self);
+//    [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        MyShowModel *model = obj;
+//        if ([model.title isEqualToString:kLang(@"sheet_mining")]) {
+//            [weakself.sourceArr removeObject:obj];
+//            *stop = YES;
+//        }
+//    }];
+//}
+//
+//- (void)addMining {
+//    MyShowModel *model = [MyShowModel new];
+//    model.title = kLang(@"sheet_mining");
+//    model.icon = @"icon_my_mining";
+//    model.showRed = NO;
+//    [_sourceArr insertObject:model atIndex:3];
+//}
 
 - (void)refreshUserInfoView {
     if ([UserModel haveLoginAccount]) {
@@ -352,7 +403,7 @@
             *stop = YES;
         }
     }];
-    UITabBarItem *item = kAppD.mtabbarC.tabBar.items[TabbarIndexMy];
+    UITabBarItem *item = kAppD.mtabbarC.tabBar.items[MainTabbarIndexMy];
     if (showRed) {
         [item setBadgeCenterOffset:CGPointMake(0, 5)];
         [item setBadgeColor:UIColorFromRGB(0xD0021B)];
@@ -396,6 +447,17 @@
             }
         }];
         
+        // 疫情活动领取
+        BOOL showRed4 = [redPointM.gzbdPoint integerValue]==1?YES:NO;
+        [weakself.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            MyShowModel *model = obj;
+            if ([model.title isEqualToString:kLang(@"outbreak_red")]) {
+                model.showRed = showRed4;
+                *stop = YES;
+            }
+        }];
+        
+        
         [weakself.mainTable reloadData];
         [weakself refreshTabbarRedOfMe];
     }];
@@ -410,7 +472,7 @@
         } else if (state == QgasVoteStateOngoing) {
             weakself.voteBackHeight.constant = 110;
         } else if (state == QgasVoteStateDone) {
-            weakself.voteBackHeight.constant = 110;
+            weakself.voteBackHeight.constant = 0;
         }
     }];
 }
@@ -566,8 +628,12 @@
         }];
         [_mainTable reloadData];
         [self refreshTabbarRedOfMe];
+        
+        [FirebaseUtil logEventWithItemID:Me_Referral_Rewards itemName:Me_Referral_Rewards contentType:Me_Referral_Rewards];
     } else if ([model.title isEqualToString:kLang(@"join_the_community")]) {
         [self jumpToJoinCommunity];
+        
+        [FirebaseUtil logEventWithItemID:Me_Join_the_community itemName:Me_Join_the_community contentType:Me_Join_the_community];
     } else if ([model.title isEqualToString:kLang(@"contact_us")]) {
         
     } else if ([model.title isEqualToString:kLang(@"settings")]) {
@@ -595,6 +661,17 @@
         }];
         [_mainTable reloadData];
         [self refreshTabbarRedOfMe];
+    } else if ([model.title isEqualToString:kLang(@"outbreak_red")]) {
+        [self jumpToOutbreakRed];
+        [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            MyShowModel *model = obj;
+            if ([model.title isEqualToString:kLang(@"outbreak_red")]) {
+                model.showRed = NO;
+                *stop = YES;
+            }
+        }];
+        [_mainTable reloadData];
+        [self refreshTabbarRedOfMe];
     }
 }
 
@@ -613,11 +690,11 @@
 }
 
 #pragma mark - Transition
-- (void)jumpToWalletsManage {
-    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToWalletsManage {
+//    WalletsManageViewController *vc = [[WalletsManageViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)jumpToJoinCommunity {
     JoinCommunityViewController *vc = [[JoinCommunityViewController alloc] init];
@@ -686,6 +763,17 @@
 
 - (void)jumpToQgasVote {
     QVoteViewController *vc = [QVoteViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToOutbreakRed {
+    BOOL haveLogin = [UserModel haveLoginAccount];
+    if (!haveLogin) {
+        [kAppD presentLoginNew];
+        return;
+    }
+    
+    OutbreakRedViewController *vc = [OutbreakRedViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

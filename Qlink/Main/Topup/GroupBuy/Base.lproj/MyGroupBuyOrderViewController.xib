@@ -25,7 +25,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8q-3x-wGI">
                             <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-GJ-7qA">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-GJ-7qA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                                     <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="deviceRGB"/>
                                     <connections>
@@ -51,8 +51,8 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-un-4qg">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-un-4qg" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Fcs-cS-WfU"/>
                                         <constraint firstAttribute="width" constant="44" id="qnV-rq-MvA"/>
@@ -65,7 +65,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="Tmt-un-4qg" firstAttribute="leading" secondItem="X5W-ee-JQh" secondAttribute="leading" constant="8" id="Hn1-Xb-8iQ"/>
+                                <constraint firstItem="Tmt-un-4qg" firstAttribute="leading" secondItem="X5W-ee-JQh" secondAttribute="leading" id="Hn1-Xb-8iQ"/>
                                 <constraint firstItem="Tmt-un-4qg" firstAttribute="centerY" secondItem="X5W-ee-JQh" secondAttribute="centerY" id="aeK-Np-0Wd"/>
                                 <constraint firstAttribute="height" constant="44" id="iFX-1S-ahR"/>
                                 <constraint firstItem="cbc-pt-t6a" firstAttribute="centerY" secondItem="X5W-ee-JQh" secondAttribute="centerY" id="t2f-WV-NzQ"/>

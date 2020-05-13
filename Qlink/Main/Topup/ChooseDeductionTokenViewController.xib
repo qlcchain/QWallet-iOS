@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,8 +51,8 @@
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-Yk-dyc">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vP-Yk-dyc" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="2yH-ho-Ylw"/>
                                         <constraint firstAttribute="width" constant="44" id="6g5-Sd-rRp"/>
@@ -65,7 +65,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="7vP-Yk-dyc" firstAttribute="leading" secondItem="oz4-Ua-XrI" secondAttribute="leading" constant="8" id="3wb-Kc-ZZj"/>
+                                <constraint firstItem="7vP-Yk-dyc" firstAttribute="leading" secondItem="oz4-Ua-XrI" secondAttribute="leading" id="3wb-Kc-ZZj"/>
                                 <constraint firstItem="Ub6-aV-HDX" firstAttribute="centerX" secondItem="oz4-Ua-XrI" secondAttribute="centerX" id="MNB-Bi-E5h"/>
                                 <constraint firstItem="Ub6-aV-HDX" firstAttribute="centerY" secondItem="oz4-Ua-XrI" secondAttribute="centerY" id="edf-9c-cGz"/>
                                 <constraint firstItem="7vP-Yk-dyc" firstAttribute="centerY" secondItem="oz4-Ua-XrI" secondAttribute="centerY" id="fso-lG-HXK"/>

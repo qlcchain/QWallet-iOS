@@ -12,7 +12,7 @@
 
 - (BOOL)isEmptyString;
 - (BOOL)isBlankString;
-- (NSString *)trim;;
+//- (NSString *)trim;
 // 时间戳 转换成 当前时间
 - (NSString *) getTimeStampTimeString;
 @end

@@ -6,7 +6,7 @@
 //  Copyright © 2019 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 @class InviteRankingModel;
 
@@ -15,7 +15,7 @@ static NSString *ShareFriendsCellReuse = @"ShareFriendsCell";
 
 typedef void(^ShareFriendsMoreBlock)(void);
 
-@interface ShareFriendsCell : UITableViewCell
+@interface ShareFriendsCell : QBaseTableCell
 
 @property (weak, nonatomic) IBOutlet UILabel *numLab;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;

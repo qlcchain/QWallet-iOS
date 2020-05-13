@@ -53,7 +53,8 @@
     __block NSString *totalPrice = @"";
 //    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (walletCommonM.walletType == WalletTypeETH) {
-        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+//        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+        NSString *num = @"0";
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"ETH"]) {
@@ -64,7 +65,8 @@
             }
         }];
     } else if (walletCommonM.walletType == WalletTypeEOS) {
-        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+//        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+        NSString *num = @"0";
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"EOS"]) {
@@ -75,7 +77,8 @@
             }
         }];
     } else if (walletCommonM.walletType == WalletTypeNEO) {
-        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+//        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+        NSString *num = @"0";
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"NEO"]) {
@@ -86,7 +89,8 @@
             }
         }];
     } else if (walletCommonM.walletType == WalletTypeQLC) {
-        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+//        NSString *num = [NSString stringWithFormat:@"%@",walletCommonM.balance];
+        NSString *num = @"0";
         [tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             TokenPriceModel *model = obj;
             if ([model.symbol isEqualToString:@"QLC"]) {

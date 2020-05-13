@@ -51,7 +51,7 @@
                                                      green:240.0/255
                                                       blue:240.0/255
                                                      alpha:1.0]];
-    _progressView.progressTintColor = [UIColor greenColor];
+    _progressView.progressTintColor = MAIN_BLUE_COLOR;
     // 添加进度观察者
     [_myWebView addObserver:self
                  forKeyPath:NSStringFromSelector(@selector(estimatedProgress))
@@ -59,8 +59,9 @@
                     context:nil];
 
     NSString *httpsStr = @"https://";
+    NSString *httpStr = @"http://";
     NSMutableString *url = [NSMutableString string];
-    if (![_inputUrl containsString:httpsStr]) {
+    if (![_inputUrl containsString:httpsStr] && ![_inputUrl containsString:httpStr]) {
         [url appendString:httpsStr];
     }
     [url appendString:_inputUrl?:@""];

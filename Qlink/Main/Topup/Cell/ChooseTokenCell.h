@@ -6,7 +6,7 @@
 //  Copyright © 2020 pan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QBaseTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *ChooseTokenCell_Reuse = @"ChooseTokenCell";
 #define ChooseTokenCell_Height 44
 
-@interface ChooseTokenCell : UITableViewCell
+@interface ChooseTokenCell : QBaseTableCell
 
 - (void)config:(TopupDeductionTokenModel *)model;
 

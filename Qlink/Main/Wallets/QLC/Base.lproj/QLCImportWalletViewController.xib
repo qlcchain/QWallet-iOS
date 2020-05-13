@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,15 +31,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGg-pL-Lzk">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AmP-dL-PM9">
-                            <rect key="frame" x="0.0" y="44" width="375" height="603"/>
+                            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5t-df-51K">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTw-55-xrf">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTw-55-xrf" customClass="QBaseTouchButton">
                                             <rect key="frame" x="57.5" y="0.0" width="120" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="7fp-y1-9lc"/>
@@ -58,7 +56,7 @@
                                                 <action selector="mnemonicAction:" destination="-1" eventType="touchUpInside" id="J92-DC-UXR"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qK5-xz-Cz6">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qK5-xz-Cz6" customClass="QBaseTouchButton">
                                             <rect key="frame" x="197.5" y="0.0" width="78" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="XzZ-D7-lTF"/>
@@ -91,7 +89,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zi0-f6-LMw">
-                                    <rect key="frame" x="0.0" y="47" width="375" height="556"/>
+                                    <rect key="frame" x="0.0" y="47" width="375" height="576"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                             </subviews>
@@ -109,8 +107,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mH2-O1-7O0" customClass="NavWhiteShadowView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBr-e7-KrV">
-                                    <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBr-e7-KrV" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="vtW-53-oym"/>
                                         <constraint firstAttribute="width" constant="44" id="yNK-mZ-Ywn"/>
@@ -126,8 +124,8 @@
                                     <color key="textColor" red="0.1215686275" green="0.19215686269999999" blue="0.2901960784" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mj-eK-q2C">
-                                    <rect key="frame" x="323" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mj-eK-q2C" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="331" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="lTw-gi-Cmc"/>
                                         <constraint firstAttribute="width" constant="44" id="sLC-Gg-149"/>
@@ -141,12 +139,12 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="FbT-i7-Dzq" firstAttribute="centerY" secondItem="mH2-O1-7O0" secondAttribute="centerY" id="2Rt-Q2-wHk"/>
-                                <constraint firstAttribute="trailing" secondItem="5mj-eK-q2C" secondAttribute="trailing" constant="8" id="BEU-UG-iEf"/>
+                                <constraint firstAttribute="trailing" secondItem="5mj-eK-q2C" secondAttribute="trailing" id="BEU-UG-iEf"/>
                                 <constraint firstItem="5mj-eK-q2C" firstAttribute="centerY" secondItem="mH2-O1-7O0" secondAttribute="centerY" id="EsT-MR-Vhk"/>
                                 <constraint firstItem="FbT-i7-Dzq" firstAttribute="centerX" secondItem="mH2-O1-7O0" secondAttribute="centerX" id="aBz-iY-AQE"/>
                                 <constraint firstAttribute="height" constant="44" id="d1j-IB-Xnt"/>
                                 <constraint firstItem="pBr-e7-KrV" firstAttribute="centerY" secondItem="mH2-O1-7O0" secondAttribute="centerY" id="gp3-TA-og6"/>
-                                <constraint firstItem="pBr-e7-KrV" firstAttribute="leading" secondItem="mH2-O1-7O0" secondAttribute="leading" constant="8" id="p07-9e-2pd"/>
+                                <constraint firstItem="pBr-e7-KrV" firstAttribute="leading" secondItem="mH2-O1-7O0" secondAttribute="leading" id="p07-9e-2pd"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -162,7 +160,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8O-wZ-Ecq">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -180,7 +178,7 @@
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
-        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" id="uEm-a3-ISA">
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" delaysContentTouches="NO" id="uEm-a3-ISA">
             <rect key="frame" x="0.0" y="0.0" width="714" height="556"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -226,7 +224,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBB-Xm-wIh">
                                     <rect key="frame" x="24" y="172" width="284" height="44"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njZ-Z7-yzz">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njZ-Z7-yzz" customClass="QBaseTouchButton">
                                             <rect key="frame" x="0.0" y="0.0" width="84" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="YJD-Jq-4SJ"/>
@@ -242,7 +240,7 @@
                                                 <action selector="mnemonicAgreeAction:" destination="-1" eventType="touchUpInside" id="hH2-dK-4ER"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfk-LU-rHy">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfk-LU-rHy" customClass="QBaseTouchButton">
                                             <rect key="frame" x="84" y="0.0" width="202" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="202" id="KgD-B5-wEM"/>
@@ -267,7 +265,7 @@
                                         <constraint firstItem="tfk-LU-rHy" firstAttribute="leading" secondItem="njZ-Z7-yzz" secondAttribute="trailing" id="dEs-xH-6gY"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9s-G0-lxl">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9s-G0-lxl" customClass="QBaseDarkButton">
                                     <rect key="frame" x="23" y="246" width="311" height="49"/>
                                     <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>
@@ -333,7 +331,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-3J-XcP">
                                     <rect key="frame" x="24" y="172" width="284" height="44"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-mS-8Qn">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TlB-mS-8Qn" customClass="QBaseTouchButton">
                                             <rect key="frame" x="0.0" y="0.0" width="84" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="Xhk-yN-eqo"/>
@@ -349,7 +347,7 @@
                                                 <action selector="privatekeyAgreeAction:" destination="-1" eventType="touchUpInside" id="iiI-RE-W7s"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q3-7a-2Ik">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1q3-7a-2Ik" customClass="QBaseTouchButton">
                                             <rect key="frame" x="84" y="0.0" width="202" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="XEM-ky-LtK"/>
@@ -374,7 +372,7 @@
                                         <constraint firstAttribute="width" constant="284" id="mRL-cz-hYU"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siQ-ZE-qsc">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siQ-ZE-qsc" customClass="QBaseDarkButton">
                                     <rect key="frame" x="23" y="246" width="311" height="49"/>
                                     <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                     <constraints>

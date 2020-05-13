@@ -12,6 +12,7 @@
 #import "LoginPWModel.h"
 //#import "GlobalConstants.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+#import "NSString+Trim.h"
 
 @interface ResetPWViewController ()
 
@@ -60,7 +61,7 @@
 }
 
 - (void)setPWTFDidEnd {
-    NSString *pw = _setPWTF.text;
+    NSString *pw = _setPWTF.text.trim_whitespace;
     if ([pw containDigital] && [pw containLowercase] && [pw containUppercase]) {
         _pwWrongLab.text = nil;
     } else {
@@ -71,7 +72,7 @@
 }
 
 - (void)textFieldDidEnd {
-    if (_currentPWTF.text && _currentPWTF.text.length > 0 && _setPWTF.text && _setPWTF.text.length > 0 && _repeatPWTF.text && _repeatPWTF.text.length > 0) {
+    if (_currentPWTF.text.trim_whitespace && _currentPWTF.text.trim_whitespace.length > 0 && _setPWTF.text.trim_whitespace && _setPWTF.text.trim_whitespace.length > 0 && _repeatPWTF.text.trim_whitespace && _repeatPWTF.text.trim_whitespace.length > 0) {
 //        [_storeBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _storeBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _storeBtn.userInteractionEnabled = YES;
@@ -105,17 +106,17 @@
 
 - (IBAction)storeAction:(id)sender {
     NSString *loginPW = [LoginPWModel getLoginPW];
-    if (![_currentPWTF.text isEqualToString:loginPW]) {
+    if (![_currentPWTF.text.trim_whitespace isEqualToString:loginPW]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"current_password_is_wrong")];
         return;
     }
     
-    if (![_setPWTF.text isEqualToString:_repeatPWTF.text]) {
+    if (![_setPWTF.text.trim_whitespace isEqualToString:_repeatPWTF.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"repeat_password_is_different_from_set_password")];
         return;
     }
     
-    [LoginPWModel setLoginPW:_setPWTF.text];
+    [LoginPWModel setLoginPW:_setPWTF.text.trim_whitespace];
     [self showStoreSuccess];
     [self performSelector:@selector(backToRoot) withObject:nil afterDelay:2];
 }

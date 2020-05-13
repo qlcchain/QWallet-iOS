@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
  + (NSString *)trimWhitespace:(NSString *)val;
  + (NSString *)trimNewline:(NSString *)val;
  + (NSString *)trimWhitespaceAndNewline:(NSString *)val;
+
+- (NSString *)trim_whitespace;
+- (NSString *)trimAndLowercase;
+
 @end
 
 NS_ASSUME_NONNULL_END

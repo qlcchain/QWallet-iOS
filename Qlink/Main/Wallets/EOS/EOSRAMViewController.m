@@ -18,7 +18,7 @@
 #import "EOSWalletUtil.h"
 #import <eosFramework/RegularExpression.h>
 #import "NSString+RemoveZero.h"
-
+#import "NSString+Trim.h"
 //#import "GlobalConstants.h"
 
 @interface EOSRAMViewController () {
@@ -255,39 +255,39 @@
     NSString *key2 = nil;
     NSString *val2 = nil;
     if (_isBuy == YES) { // 买 （amount from to type）
-        if (!_inputAmountTF.text || _inputAmountTF.text.length <= 0) {
+        if (!_inputAmountTF.text.trim_whitespace || _inputAmountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_eos_amount")];
             return;
         }
-        if ([_inputAmountTF.text doubleValue] > [_inputSymbolM.balance doubleValue]) { // 余额不足
+        if ([_inputAmountTF.text.trim_whitespace doubleValue] > [_inputSymbolM.balance doubleValue]) { // 余额不足
             [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
             return;
         }
-        if (!_recipientAccountTF.text || _recipientAccountTF.text.length <= 0) {
+        if (!_recipientAccountTF.text.trim_whitespace || _recipientAccountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_recipient_account")];
             return;
         }
         
         payInfo = @"Purchase RAM";
-        buyEosAmount = _inputAmountTF.text?:@"";
-        buyOrSellTo = _recipientAccountTF.text?:@"";
+        buyEosAmount = _inputAmountTF.text.trim_whitespace?:@"";
+        buyOrSellTo = _recipientAccountTF.text.trim_whitespace?:@"";
         buyOrSellOperationType = EOSOperationTypeBuyRam;
         showAmount = [NSString stringWithFormat:@"%@ EOS",buyEosAmount];
         key2 = @"Estimated Bytes";
         val2 = [NSString stringWithFormat:@"%@ Bytes",@([buyEosAmount doubleValue]/[self.resourcePriceM.ramPrice doubleValue]*1024)];
     } else { // 卖 （bytes from type）
-        if (!_inputAmountTF.text || _inputAmountTF.text.length <= 0) {
+        if (!_inputAmountTF.text.trim_whitespace || _inputAmountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_ram_amount")];
             return;
         }
-        if ([_inputAmountTF.text doubleValue] > [_resourceInfoM.ram.available doubleValue]-[_resourceInfoM.ram.used doubleValue]) { // 余额不足
+        if ([_inputAmountTF.text.trim_whitespace doubleValue] > [_resourceInfoM.ram.available doubleValue]-[_resourceInfoM.ram.used doubleValue]) { // 余额不足
             [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
             return;
         }
         
         payInfo = @"Sell RAM";
-        SellBytes = _inputAmountTF.text?:@"";
-        buyOrSellTo = _recipientAccountTF.text?:@"";
+        SellBytes = _inputAmountTF.text.trim_whitespace?:@"";
+        buyOrSellTo = _recipientAccountTF.text.trim_whitespace?:@"";
         buyOrSellOperationType = EOSOperationTypeSellRam;
         showAmount = [NSString stringWithFormat:@"%@ Bytes",SellBytes];
         key2 = @"Estimated Amount";

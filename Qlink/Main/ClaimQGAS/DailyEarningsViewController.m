@@ -25,6 +25,7 @@
 #import "ClaimQGASViewController.h"
 #import "WebViewController.h"
 #import "JPushConstants.h"
+#import "NSString+Trim.h"
 
 static NSInteger const DailyEarnings_PageCount = 20;
 static NSInteger const DailyEarnings_PageFirst = 1;
@@ -246,7 +247,7 @@ static NSInteger const DailyEarnings_PageFirst = 1;
 }
 
 - (IBAction)claimAction:(id)sender {
-    if ([_canClaimAmountLab.text doubleValue] <= 0) {
+    if ([_canClaimAmountLab.text.trim_whitespace doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"no_qgas_can_claim")];
         return;
     }
@@ -267,7 +268,7 @@ static NSInteger const DailyEarnings_PageFirst = 1;
     }
     
     ClaimQGASViewController *vc = [ClaimQGASViewController new];
-    vc.inputCanClaimAmount = _canClaimAmountLab.text?:@"0";
+    vc.inputCanClaimAmount = [_canClaimAmountLab.text?:@"0" trim_whitespace];
     vc.claimQGASType = ClaimQGASTypeDailyEarnings;
     [self.navigationController pushViewController:vc animated:YES];
 }

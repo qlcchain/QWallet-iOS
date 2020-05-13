@@ -148,7 +148,7 @@
 }
 
 + (void)showNotSupport {
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:@"当前设备不支持TouchID" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:nil message:@"TouchID is not supported on current device" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertConfirm = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [FingerprintVerificationUtil exitAPP];
     }];

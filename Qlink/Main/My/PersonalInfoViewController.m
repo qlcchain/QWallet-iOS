@@ -200,12 +200,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)jumpToForgetPW {
-    ForgetPWViewController *vc = [ForgetPWViewController new];
-    vc.inputTitle = kLang(@"verification");
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)jumpToVerification {
     VerificationViewController *vc = [VerificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];

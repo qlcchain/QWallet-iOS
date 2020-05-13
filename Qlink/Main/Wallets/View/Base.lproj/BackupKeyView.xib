@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,7 +45,7 @@
                                 <constraint firstAttribute="bottom" secondItem="p5W-Mp-e9e" secondAttribute="bottom" constant="7" id="wPC-hv-YfY"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gR0-wI-0Q2">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gR0-wI-0Q2" customClass="QBaseDarkButton">
                             <rect key="frame" x="133" y="300" width="133" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="BSR-Ce-lEE"/>
@@ -60,7 +58,7 @@
                                 <action selector="copyAction:" destination="KmZ-c1-dpz" eventType="touchUpInside" id="z6I-B1-2fX"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNn-V7-EFN">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNn-V7-EFN" customClass="QBaseDarkButton">
                             <rect key="frame" x="0.0" y="300" width="133" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="cLf-n9-eMw"/>
@@ -73,7 +71,7 @@
                                 <action selector="QRCode:" destination="KmZ-c1-dpz" eventType="touchUpInside" id="D04-qe-Vj8"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35c-zG-kp5">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35c-zG-kp5" customClass="QBaseTouchButton">
                             <rect key="frame" x="222" y="0.0" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="JsH-oM-VYA"/>

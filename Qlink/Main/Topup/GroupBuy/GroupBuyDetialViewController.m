@@ -29,12 +29,13 @@
 #import "TopupPayETH_DeductionViewController.h"
 #import <QLCFramework/QLCFramework.h>
 #import "ETHWalletManage.h"
-#import <UIButton+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 #import "ChooseDeductionTokenViewController.h"
 #import <ContactsUI/ContactsUI.h>
 #import "ChooseCountryUtil.h"
 #import "PhoneNumerInputView.h"
 #import "TopupBuyConfirmViewController.h"
+#import "FirebaseUtil.h"
 
 static NSString *const TopupNetworkSize = @"30";
 
@@ -74,6 +75,7 @@ static NSString *const TopupNetworkSize = @"30";
 @property (weak, nonatomic) IBOutlet UILabel *phonetopupValLab;
 @property (weak, nonatomic) IBOutlet UILabel *provinceLab;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 
 @property (nonatomic) TopupPayType currentPayType;
 
@@ -90,8 +92,15 @@ static NSString *const TopupNetworkSize = @"30";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    
     [self configInit];
     [self requestTopup_group_list];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
 }
 
 #pragma mark - Operation
@@ -99,6 +108,9 @@ static NSString *const TopupNetworkSize = @"30";
     _sourceArr = [NSMutableArray array];
     [_groupTable registerNib:[UINib nibWithNibName:OngoingGroupCell_Reuse bundle:nil] forCellReuseIdentifier:OngoingGroupCell_Reuse];
     self.baseTable = _groupTable;
+    
+    _groupTable.delaysContentTouches = NO;
+    _mainScroll.delaysContentTouches = NO;
     
     _phoneBackHeight.constant = 0;
     
@@ -464,12 +476,16 @@ static NSString *const TopupNetworkSize = @"30";
 //    [inputV show];
     
     [self jumpToTopupBuyConfirm];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Recharge_directly itemName:Topup_Recharge_directly contentType:Topup_Recharge_directly];
 }
 
 - (IBAction)startGroupBuyAction:(id)sender {
     _currentPayType = TopupPayTypeGroupBuy;
 //    [self showStartGroupBuyView];
     [self jumpToStartGroupBuy];
+    
+    [FirebaseUtil logEventWithItemID:Topup_Group_Plan itemName:Topup_Group_Plan contentType:Topup_Group_Plan];
 }
 
 - (IBAction)chooseTokenAction:(id)sender {
