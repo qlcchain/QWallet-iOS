@@ -27,6 +27,7 @@
 #import "AppJumpHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <OutbreakRed/OutbreakRed.h>
+#import "NSString+Trim.h"
 
 @interface ClaimQGASViewController ()
 
@@ -102,13 +103,14 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *code = _codeTF.text?:@"";
-    NSString *toAddress = _qgasSendTF.text?:@"";
+    NSString *code = [_codeTF.text?:@"" trim_whitespace];
+    NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
     NSString *recordId = _inputCovidRecordId?:@"";
     OR_RequestModel *requestM = [OR_RequestModel new];
     requestM.p2pId = [UserModel getTopupP2PId];
     requestM.appBuild = APP_Build;
     requestM.appVersion = APP_Version;
+    requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [kAppD.window makeToastInView:kAppD.window];
     [OutbreakRedSDK requestGzbd_receiveWithAccount:account token:token timestamp:timestamp code:code recordId:recordId toAddress:toAddress requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [kAppD.window hideToast];
@@ -143,8 +145,8 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *toAddress = _qgasSendTF.text?:@"";
-    NSString *code = _codeTF.text?:@"";
+    NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
+    NSString *code = [_codeTF.text?:@"" trim_whitespace];
     NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_bind_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -176,8 +178,8 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *toAddress = _qgasSendTF.text?:@"";
-    NSString *code = _codeTF.text?:@"";
+    NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
+    NSString *code = [_codeTF.text?:@"" trim_whitespace];
     NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_invite_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -243,19 +245,19 @@
 
 
 - (IBAction)submitAction:(id)sender {
-    if ([_qgasSendTF.text isEmptyString]) {
+    if ([_qgasSendTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
     
     // 检查地址有效性
-    BOOL validReceiveAddress = [WalletCommonModel validAddress:_qgasSendTF.text tokenChain:QLC_Chain];
+    BOOL validReceiveAddress = [WalletCommonModel validAddress:[_qgasSendTF.text trim_whitespace] tokenChain:QLC_Chain];
     if (!validReceiveAddress) {
         [kAppD.window makeToastDisappearWithText:kLang(@"wallet_address_is_invalidate")];
         return;
     }
     
-    if ([_codeTF.text isEmptyString]) {
+    if ([_codeTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
         return;
     }

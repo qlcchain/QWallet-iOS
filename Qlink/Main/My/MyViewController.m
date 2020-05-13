@@ -472,7 +472,7 @@
         } else if (state == QgasVoteStateOngoing) {
             weakself.voteBackHeight.constant = 110;
         } else if (state == QgasVoteStateDone) {
-            weakself.voteBackHeight.constant = 110;
+            weakself.voteBackHeight.constant = 0;
         }
     }];
 }

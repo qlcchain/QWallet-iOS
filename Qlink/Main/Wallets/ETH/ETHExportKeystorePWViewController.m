@@ -14,6 +14,7 @@
 #import "ETHExportKeystoreViewController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface ETHExportKeystorePWViewController ()
 
@@ -71,7 +72,7 @@
 //        [kAppD.window makeToastDisappearWithText:@"please Confirm Password"];
 //        return;
 //    }
-    if (![_confirmPWTF.text?:@"" isEqualToString:_pwTF.text?:@""]) {
+    if (![_confirmPWTF.text.trim_whitespace?:@"" isEqualToString:_pwTF.text.trim_whitespace?:@""]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
@@ -83,7 +84,7 @@
 #pragma mark - Transition
 - (void)jumpToETHExportKeystore {
     ETHExportKeystoreViewController *vc = [[ETHExportKeystoreViewController alloc] init];
-    vc.inputPW = _pwTF.text?:@"";
+    vc.inputPW = _pwTF.text.trim_whitespace?:@"";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

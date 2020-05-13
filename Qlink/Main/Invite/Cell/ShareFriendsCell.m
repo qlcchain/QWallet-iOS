@@ -49,7 +49,7 @@
     _topHeight.constant = 0;
     _bottomHeight.constant = 0;
     NSNumber *num = model.sequence;
-    _numLab.text = [NSString stringWithFormat:@"%@",num==0?@"99+":num];
+    _numLab.text = [NSString stringWithFormat:@"%@",[num integerValue]==0?@"99+":num];
     _nameLab.text = model.showName;
     
 //    _inviteLab.text = [NSString stringWithFormat:@"%@ QGAS",[NSString stringFromDouble:[model.totalInvite doubleValue]*[qgasUnit doubleValue]]];
@@ -64,7 +64,7 @@
     _topHeight.constant = 0;
     _bottomHeight.constant = 0;
     NSNumber *num = model.sequence;
-    _numLab.text = [NSString stringWithFormat:@"%@",num==0?@"99+":num];
+    _numLab.text = [NSString stringWithFormat:@"%@",[num integerValue]==0?@"99+":num];
     _nameLab.text = model.showName;
     
     _inviteLab.text = [NSString stringWithFormat:@"%@ QLC",model.totalReward.mul(@"1")];

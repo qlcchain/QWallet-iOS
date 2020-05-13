@@ -13,6 +13,7 @@
 #import "NSDate+Category.h"
 #import "NSDateFormatter+Category.h"
 
+
 #define DATE_COMPONENTS (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit |  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit)
 #define CURRENT_CALENDAR [NSCalendar currentCalendar]
 
@@ -358,7 +359,6 @@
         }
     }
 }
-
 
 
 

@@ -21,7 +21,7 @@
 #import "EOSWalletUtil.h"
 #import "SuccessTipView.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
-
+#import "NSString+Trim.h"
 //#import "GlobalConstants.h"
 
 @interface EOSTransferViewController () <UITextViewDelegate>
@@ -89,9 +89,9 @@
 
 - (void)showEOSTransferConfirmView {
     NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].account_name?:@"";
-    NSString *toAddress = _sendtoAddressTV.text;
-    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectSymbol.symbol];
-    NSString *memo = _memoTF.text?:@"";
+    NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
+    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text.trim_whitespace,_selectSymbol.symbol];
+    NSString *memo = _memoTF.text.trim_whitespace?:@"";
     EOSTransferConfirmView *view = [EOSTransferConfirmView getInstance];
     [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount memo:memo];
 //    [view configWithAddress:address amount:amount memo:memo];
@@ -103,7 +103,7 @@
 }
 
 - (void)checkSendBtnEnable {
-    if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0) {
+    if (_sendtoAddressTV.text.trim_whitespace && _sendtoAddressTV.text.trim_whitespace.length > 0 && _amountTF.text.trim_whitespace && _amountTF.text.trim_whitespace.length > 0) {
 //        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
@@ -118,9 +118,9 @@
 }
 
 - (void)sendTransfer:(NSString *)from_address {
-    NSString *name = _sendtoAddressTV.text;
-    NSString *amount = _amountTF.text;
-    NSString *memo = _memoTF.text?:@"";
+    NSString *name = _sendtoAddressTV.text.trim_whitespace;
+    NSString *amount = _amountTF.text.trim_whitespace;
+    NSString *memo = _memoTF.text.trim_whitespace?:@"";
     
 //    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSString *fromAddress = from_address;
@@ -175,15 +175,15 @@
 }
 
 - (IBAction)sendAction:(id)sender {
-    if (!_amountTF.text || _amountTF.text.length <= 0) {
+    if (!_amountTF.text.trim_whitespace || _amountTF.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
+    if (!_sendtoAddressTV.text.trim_whitespace || _sendtoAddressTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eos_account_is_empty")];
         return;
     }
-    if ([_amountTF.text doubleValue] <= 0 || [_amountTF.text doubleValue] > [[_selectSymbol getTokenNum] doubleValue]) {
+    if ([_amountTF.text.trim_whitespace doubleValue] <= 0 || [_amountTF.text.trim_whitespace doubleValue] > [[_selectSymbol getTokenNum] doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
         return;
     }
@@ -193,7 +193,7 @@
 //    }
     
     // 检查地址有效性
-    BOOL validateEOSAccountName = [RegularExpression validateEosAccountName:_sendtoAddressTV.text];
+    BOOL validateEOSAccountName = [RegularExpression validateEosAccountName:_sendtoAddressTV.text.trim_whitespace];
     if (!validateEOSAccountName) {
         [kAppD.window makeToastDisappearWithText:kLang(@"eos_account_is_invalidate")];
         return;

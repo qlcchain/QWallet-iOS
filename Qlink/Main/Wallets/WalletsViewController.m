@@ -162,7 +162,8 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     self.view.theme_backgroundColor = globalBackgroundColorPicker;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:WalletsCellReuse bundle:nil] forCellReuseIdentifier:WalletsCellReuse];
-    self.baseTable = _mainTable;
+    [self configEmptyView:_mainTable contentViewY:60];
+//    self.baseTable = _mainTable;
     
     [self refreshTitle];
     [self renderView];

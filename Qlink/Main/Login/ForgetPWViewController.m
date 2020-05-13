@@ -17,6 +17,7 @@
 #import "SetPWViewController.h"
 #import "UIColor+Random.h"
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface ForgetPWViewController ()
 
@@ -71,7 +72,7 @@
 }
 
 - (void)changeConfirmBtnState {
-    if (_emailTF.text && _emailTF.text.length > 0 && _verifyCodeTF.text && _verifyCodeTF.text.length > 0) {
+    if (_emailTF.text.trim_whitespace && _emailTF.text.trim_whitespace.length > 0 && _verifyCodeTF.text.trim_whitespace && _verifyCodeTF.text.trim_whitespace.length > 0) {
         _nextBtn.enabled = YES;
         _nextBtn.backgroundColor = [UIColor mainColor];
     } else {
@@ -119,7 +120,7 @@
 - (IBAction)nextAction:(id)sender {
     [self.view endEditing:YES];
     
-    if (![_emailTF.text isEmailAddress]) {
+    if (![[_emailTF.text trimAndLowercase] isEmailAddress]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
@@ -130,7 +131,7 @@
 - (IBAction)verifyCodeAction:(id)sender {
     [self.view endEditing:YES];
     
-    if (![_emailTF.text isEmailAddress]) {
+    if (![[_emailTF.text trimAndLowercase] isEmailAddress]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
@@ -140,9 +141,12 @@
 
 #pragma mark - Request
 - (void)requestVcode_change_password_code {
+    NSString *account = [_emailTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":_emailTF.text?:@""};
+    NSDictionary *params = @{@"account":account};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.verifyCodeBtn];
@@ -151,24 +155,28 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
+        if (error.code == Server_TimeOut_Code) {
+            [kAppD.window makeToastDisappearWithText:kLang(@"request_timeout")];
+        }
     }];
 }
 
 #pragma mark - Transition
-- (void)jumpToChooseAreaCode {
-    return;
-    ChooseAreaCodeViewController *vc = [ChooseAreaCodeViewController new];
-    kWeakSelf(self)
-    vc.chooseB = ^(AreaCodeModel *model) {
-//        weakself.areaCodeLab.text = [NSString stringWithFormat:@"+%@",@(model.code)];
-    };
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)jumpToChooseAreaCode {
+//    return;
+//    ChooseAreaCodeViewController *vc = [ChooseAreaCodeViewController new];
+//    kWeakSelf(self)
+//    vc.chooseB = ^(AreaCodeModel *model) {
+////        weakself.areaCodeLab.text = [NSString stringWithFormat:@"+%@",@(model.code)];
+//    };
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)jumpToSetPW {
     SetPWViewController *vc = [SetPWViewController new];
-    vc.inputVerifyCode = _verifyCodeTF.text?:@"";
-    vc.inputAccount = _emailTF.text?:@"";
+    vc.inputVerifyCode = _verifyCodeTF.text.trim_whitespace?:@"";
+    vc.inputAccount = _emailTF.text.trim_whitespace?:@"";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -36,6 +36,7 @@
 #import "GroupBuyDetialViewController.h"
 #import "GroupBuyListModel.h"
 #import "GroupBuyUtil.h"
+#import "NSString+Trim.h"
 
 static NSInteger DeductionTokenBtnTag = 6649;
 static NSInteger DeductionTokenTickTag = 9223;
@@ -500,7 +501,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     }
     NSString *p2pId = [UserModel getTopupP2PId];
     NSString *productId = model.ID?:@"";
-    NSString *phoneNumber = _phoneTF.text?:@"";
+    NSString *phoneNumber = _phoneTF.text.trim_whitespace?:@"";
     NSString *localFiatAmount = [NSString stringWithFormat:@"%@",model.localFiatAmount];
     NSString *deductionTokenId = _selectDeductionTokenM.ID?:@"";
     NSDictionary *params = @{@"account":account,@"p2pId":p2pId,@"productId":productId,@"phoneNumber":phoneNumber,@"localFiatAmount":localFiatAmount,@"deductionTokenId":deductionTokenId?:@""};
@@ -594,11 +595,11 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     
     TopupProductModel *model = _sourceArr[indexPath.row];
     
-    if ([_phoneTF.text isEmptyString]) {
+    if ([_phoneTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"phone_number_cannot_be_empty")];
         return;
     }
-    if ([[_phoneTF.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || _phoneTF.text.length < 6) { // 大于6位的纯数字
+    if ([[_phoneTF.text.trim_whitespace stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] > 0 || _phoneTF.text.trim_whitespace.length < 6) { // 大于6位的纯数字
         [kAppD.window makeToastDisappearWithText:kLang(@"please_fill_in_a_valid_phone_number")];
         return;
     }
@@ -737,7 +738,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     NSString *num = [ChooseCountryUtil removeCodeContain:phoneNum];
     _phoneTF.text = num;
     
-    if (![_phoneTF.text isEmptyString]) {
+    if (![_phoneTF.text.trim_whitespace isEmptyString]) {
         [_mainScroll.mj_header beginRefreshing];
     }
 }
@@ -793,7 +794,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"QGAS";
     vc.inputProductM = model;
     vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
-    vc.inputPhoneNumber = _phoneTF.text?:@"";
+    vc.inputPhoneNumber = _phoneTF.text.trim_whitespace?:@"";
     vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -826,7 +827,7 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"OKB";
     vc.inputProductM = model;
     vc.inputAreaCode = [self getGlobalRoamingFromCountryCodeLab];
-    vc.inputPhoneNumber = _phoneTF.text?:@"";
+    vc.inputPhoneNumber = _phoneTF.text.trim_whitespace?:@"";
     vc.inputDeductionTokenId = _selectDeductionTokenM.ID?:@"";
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -847,10 +848,10 @@ static NSString *const ChooseTopupPlanNetworkSize = @"20";
     TopupPayQLC_DeductionViewController *vc = [TopupPayQLC_DeductionViewController new];
     vc.sendDeductionAmount = [NSString stringWithFormat:@"%@",orderM.qgasAmount_str];
     vc.sendDeductionToAddress = qlcAddress;
-    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
+    vc.sendDeductionMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
     vc.sendPayTokenAmount = [NSString stringWithFormat:@"%@",orderM.payTokenAmount_str];
     vc.sendPayTokenToAddress = [TopupOrderModel getPayTokenChainServerAddress:orderM];
-    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.qgasAmount_str?:@""];
+    vc.sendPayTokenMemo = [NSString stringWithFormat:@"%@_%@_%@",@"topup",orderM.ID?:@"",orderM.payTokenAmount_str?:@""];
     vc.inputPayToken = orderM.payTokenSymbol;
     vc.inputDeductionToken = _selectDeductionTokenM.symbol?:@"QGAS";
 //    vc.inputProductM = productM;

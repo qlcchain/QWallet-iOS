@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeFiHistoricalstatsViewController">
+            <connections>
+                <outlet property="dateLab" destination="laT-Qg-yEM" id="nol-FC-MpK"/>
+                <outlet property="lockedLab" destination="qng-Zy-EuL" id="yj4-wJ-Yx2"/>
+                <outlet property="mainTable" destination="wUb-pw-GwQ" id="SNW-dO-8pp"/>
+                <outlet property="tvlLab" destination="mYD-Ea-YCu" id="okN-7B-xGz"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-TZ-hcn">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vis-ni-OnW">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiK-9S-cRv">
+                                    <rect key="frame" x="16" y="39.5" width="382" height="0.5"/>
+                                    <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="0.5" id="qLf-Bg-8v2"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laT-Qg-yEM">
+                                    <rect key="frame" x="16" y="11.5" width="30.5" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total ETH Locked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qng-Zy-EuL">
+                                    <rect key="frame" x="285" y="11.5" width="113" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TVL USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-Ea-YCu">
+                                    <rect key="frame" x="177.5" y="11.5" width="59" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="laT-Qg-yEM" firstAttribute="centerY" secondItem="Vis-ni-OnW" secondAttribute="centerY" id="2Xy-8A-5bK"/>
+                                <constraint firstItem="mYD-Ea-YCu" firstAttribute="centerX" secondItem="Vis-ni-OnW" secondAttribute="centerX" id="4Js-pc-8kA"/>
+                                <constraint firstAttribute="trailing" secondItem="FiK-9S-cRv" secondAttribute="trailing" constant="16" id="AIf-0J-5Ru"/>
+                                <constraint firstItem="mYD-Ea-YCu" firstAttribute="centerY" secondItem="Vis-ni-OnW" secondAttribute="centerY" id="FXF-oV-9bG"/>
+                                <constraint firstItem="qng-Zy-EuL" firstAttribute="centerY" secondItem="Vis-ni-OnW" secondAttribute="centerY" id="I1P-cv-02V"/>
+                                <constraint firstAttribute="trailing" secondItem="qng-Zy-EuL" secondAttribute="trailing" constant="16" id="T5D-P7-LZh"/>
+                                <constraint firstAttribute="bottom" secondItem="FiK-9S-cRv" secondAttribute="bottom" id="Tyb-hv-QNs"/>
+                                <constraint firstItem="FiK-9S-cRv" firstAttribute="leading" secondItem="Vis-ni-OnW" secondAttribute="leading" constant="16" id="Zfg-qs-Ior"/>
+                                <constraint firstAttribute="height" constant="40" id="flq-2d-pkv"/>
+                                <constraint firstItem="laT-Qg-yEM" firstAttribute="leading" secondItem="Vis-ni-OnW" secondAttribute="leading" constant="16" id="m8l-P4-PTD"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wUb-pw-GwQ">
+                            <rect key="frame" x="0.0" y="40" width="414" height="778"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="HRc-zA-8lB"/>
+                                <outlet property="delegate" destination="-1" id="XbY-gB-JbR"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="wUb-pw-GwQ" secondAttribute="trailing" id="1B4-rq-cGG"/>
+                        <constraint firstItem="Vis-ni-OnW" firstAttribute="top" secondItem="Bpe-TZ-hcn" secondAttribute="top" id="8bY-BJ-Rym"/>
+                        <constraint firstItem="wUb-pw-GwQ" firstAttribute="top" secondItem="Vis-ni-OnW" secondAttribute="bottom" id="Ejd-Q3-sSg"/>
+                        <constraint firstItem="Vis-ni-OnW" firstAttribute="leading" secondItem="Bpe-TZ-hcn" secondAttribute="leading" id="YTe-Ef-cCA"/>
+                        <constraint firstAttribute="trailing" secondItem="Vis-ni-OnW" secondAttribute="trailing" id="alI-TY-gx0"/>
+                        <constraint firstAttribute="bottom" secondItem="wUb-pw-GwQ" secondAttribute="bottom" id="jx7-Qh-r1B"/>
+                        <constraint firstItem="wUb-pw-GwQ" firstAttribute="leading" secondItem="Bpe-TZ-hcn" secondAttribute="leading" id="yUm-y3-rgf"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Bpe-TZ-hcn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="59r-gu-Wke"/>
+                <constraint firstItem="Bpe-TZ-hcn" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="9dN-0X-2WP"/>
+                <constraint firstItem="Bpe-TZ-hcn" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="ae9-n3-J8G"/>
+                <constraint firstItem="Bpe-TZ-hcn" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="bRm-6F-nEV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="139" y="125"/>
+        </view>
+    </objects>
+</document>

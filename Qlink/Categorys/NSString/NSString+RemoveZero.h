@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 //- (NSString*)removeFloatAllZero;
 - (NSString *)show4floatStr;
 - (NSString *)showfloatStr:(NSInteger)decimal;
+- (NSString *)showfloatStr_Defi:(NSInteger)decimal;
+- (BOOL)isBiggerAndEqual:(NSString *)compareStr;
+- (BOOL)isSmallerAndEqual:(NSString *)compareStr;
 //- (NSString *)showfloatStrWith2Decimal;
 //+ (double)doubleFormString:(NSString *)str;
 //+ (NSString*)stringFromDouble:(double)doubleVal;

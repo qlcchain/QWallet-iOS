@@ -82,6 +82,7 @@
     }
     NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:4];
     NSLog(@"———字符串=======%@",unicodeString);
+    free(myBuffer);
     return unicodeString;
 }
 

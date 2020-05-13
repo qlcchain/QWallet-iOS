@@ -13,6 +13,7 @@
 #import "RSAUtil.h"
 #import "UIColor+Random.h"
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface SetPWViewController ()
 
@@ -56,7 +57,7 @@
 }
 
 - (void)changeConfirmBtnState {
-    if (_pwNewTF.text && _pwNewTF.text.length >= 6 && _pwRepeatTF.text && _pwRepeatTF.text.length >= 6) {
+    if (_pwNewTF.text.trim_whitespace && _pwNewTF.text.trim_whitespace.length >= 6 && _pwRepeatTF.text.trim_whitespace && _pwRepeatTF.text.trim_whitespace.length >= 6) {
         _confirmBtn.enabled = YES;
         _confirmBtn.backgroundColor = [UIColor mainColor];
     } else {
@@ -81,7 +82,7 @@
 - (IBAction)confirmAction:(id)sender {
     [self.view endEditing:YES];
     
-    if (![_pwNewTF.text isEqualToString:_pwRepeatTF.text]) {
+    if (![[_pwNewTF.text trim_whitespace] isEqualToString:[_pwRepeatTF.text trim_whitespace]]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"the_passwords_are_different")];
         return;
     }
@@ -91,14 +92,16 @@
 #pragma mark - Request
 - (void)requestUser_change_password {
     kWeakSelf(self)
-    NSString *account = _inputAccount;
-    NSString *md5PW = [MD5Util md5:_pwNewTF.text?:@""];
+    NSString *account = [_inputAccount trimAndLowercase];
+    NSString *md5PW = [MD5Util md5:[_pwNewTF.text?:@"" trim_whitespace]];
 //    NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
 //    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
 //    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *code = _inputVerifyCode;
+    NSString *code = [_inputVerifyCode trim_whitespace];
     NSDictionary *params = @{@"account":account,@"password":md5PW,@"code":code};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:user_change_password_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             UserModel *userM = [UserModel fetchUser:account];
             if (!userM) { // 本地不存在则新增
@@ -109,8 +112,11 @@
             
             [kAppD.window makeToastDisappearWithText:kLang(@"success_")];
             [weakself backTwice];
+        } else {
+            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

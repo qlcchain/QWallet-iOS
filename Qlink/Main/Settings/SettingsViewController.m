@@ -18,6 +18,7 @@
 //#import "GlobalConstants.h"
 #import "SystemUtil.h"
 #import "FirebaseUtil.h"
+#import "ForgetPWViewController.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -61,6 +62,7 @@
     [_sourceArr removeAllObjects];
     NSMutableArray *titleArr = [NSMutableArray arrayWithArray:@[kLang(@"currency_unit"),kLang(@"service_agreement"),kLang(@"help_and_feedback"),kLang(@"about_my_qwallet"),kLang(title_screen_lock),kLang(@"language")]];
     if ([UserModel haveLoginAccount]) {
+        [titleArr addObject:kLang(@"revise_password")];
         [titleArr addObject:kLang(@"log_out")];
     }
     kWeakSelf(self);
@@ -177,6 +179,8 @@
         [self showSelectLanguage];
         
         [FirebaseUtil logEventWithItemID:Me_Settings_Languages itemName:Me_Settings_Languages contentType:Me_Settings_Languages];
+    } else if ([model.title isEqualToString:kLang(@"revise_password")]) {
+        [self jumpToForgetPW];
     }
 }
 
@@ -219,6 +223,12 @@
     WebViewController *vc = [[WebViewController alloc] init];
     vc.inputUrl = url;
     vc.inputTitle = title;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToForgetPW {
+    ForgetPWViewController *vc = [ForgetPWViewController new];
+    vc.inputTitle = kLang(@"revise_password");
     [self.navigationController pushViewController:vc animated:YES];
 }
 

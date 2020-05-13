@@ -18,6 +18,7 @@
 #import "NSDate+Category.h"
 #import "StakingProcessView.h"
 #import "FirebaseUtil.h"
+#import "NSString+Trim.h"
 
 @interface TokenMintageViewController ()
 
@@ -87,8 +88,8 @@
     [self refreshInvokeBtnState];
     
     if (textField == _stakingPeriodTF) {
-        if ([_stakingPeriodTF.text integerValue]) {
-            NSString *timeStr = [NSDate getTimeWithFromDate:[NSDate date] addDay:[_stakingPeriodTF.text integerValue]];
+        if ([_stakingPeriodTF.text.trim_whitespace integerValue]) {
+            NSString *timeStr = [NSDate getTimeWithFromDate:[NSDate date] addDay:[_stakingPeriodTF.text.trim_whitespace integerValue]];
             if (![timeStr isEmptyString]) {
                 NSString *periodTime = [timeStr substringToIndex:10];
                 _stakingPeriodTimeLab.text = [NSString stringWithFormat:@"%@%@, %@",kLang(@"staking_will_end_on"),periodTime,kLang(@"the_minimum_period_is_180_days")];
@@ -98,7 +99,7 @@
 }
 
 - (void)refreshInvokeBtnState {
-    if (![_amountTF.text isEmptyString] && ![_stakingPeriodTF.text isEmptyString] && ![_tokenNameTF.text isEmptyString] && ![_tokenSymbolTF.text isEmptyString] && ![_tokenSupplyTF.text isEmptyString] && ![_tokenAmountTF.text isEmptyString] && _stakeToWalletM && _stakeFromWalletM) {
+    if (![_amountTF.text.trim_whitespace isEmptyString] && ![_stakingPeriodTF.text.trim_whitespace isEmptyString] && ![_tokenNameTF.text.trim_whitespace isEmptyString] && ![_tokenSymbolTF.text.trim_whitespace isEmptyString] && ![_tokenSupplyTF.text.trim_whitespace isEmptyString] && ![_tokenAmountTF.text.trim_whitespace isEmptyString] && _stakeToWalletM && _stakeFromWalletM) {
         _invokeBtn.userInteractionEnabled = YES;
         _invokeBtn.backgroundColor = MAIN_BLUE_COLOR;
     } else {
@@ -225,39 +226,39 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"stake_to_is_empty")];
         return;
     }
-    if ([_amountTF.text isEmptyString]) {
+    if ([_amountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if ([_amountTF.text doubleValue] < 1) {
+    if ([_amountTF.text.trim_whitespace doubleValue] < 1) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_at_least_1_qlc")];
         return;
     }
-    if ([_amountTF.text doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
+    if ([_amountTF.text.trim_whitespace doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
-    if ([_stakingPeriodTF.text isEmptyString]) {
+    if ([_stakingPeriodTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"staking_period_is_empty")];
         return;
     }
-    if ([_stakingPeriodTF.text doubleValue] < 10) {
+    if ([_stakingPeriodTF.text.trim_whitespace doubleValue] < 10) {
         [kAppD.window makeToastDisappearWithText:kLang(@"staking_period_is_at_least_180_days")];
         return;
     }
-    if ([_tokenSymbolTF.text isEmptyString]) {
+    if ([_tokenSymbolTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"token_symbol_is_empty")];
         return;
     }
-    if ([_tokenSupplyTF.text isEmptyString]) {
+    if ([_tokenSupplyTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"token_supply_is_empty")];
         return;
     }
-    if ([_tokenAmountTF.text isEmptyString]) {
+    if ([_tokenAmountTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"token_amount_is_empty")];
         return;
     }
-    if ([_tokenNameTF.text isEmptyString]) {
+    if ([_tokenNameTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"token_name_is_empty")];
         return;
     }
@@ -268,11 +269,11 @@
     NSString *qlc_privateKey = [QLCWalletInfo getQLCPrivateKeyWithAddress:_stakeToWalletM.address];
     NSString *fromAddress = _stakeFromWalletM.address;
     NSString *qlcAddress = _stakeToWalletM.address;
-    NSString *qlcAmount = _amountTF.text;
-    NSString *lockTime = _stakingPeriodTF.text;
-    NSString *tokenName = _tokenNameTF.text;
-    NSString *tokenSymbol = _tokenSymbolTF.text;
-    NSString *totalSupply = _tokenSupplyTF.text;
+    NSString *qlcAmount = _amountTF.text.trim_whitespace;
+    NSString *lockTime = _stakingPeriodTF.text.trim_whitespace;
+    NSString *tokenName = _tokenNameTF.text.trim_whitespace;
+    NSString *tokenSymbol = _tokenSymbolTF.text.trim_whitespace;
+    NSString *totalSupply = _tokenSupplyTF.text.trim_whitespace;
     NSString *decimals = @"8";
     kWeakSelf(self);
 //    [kAppD.window makeToastInView:kAppD.window text:kLang(@"process___")];

@@ -92,7 +92,7 @@ static NSString *const OutbreakRedRecordNetworkSize = @"20";
     requestM.p2pId = [UserModel getTopupP2PId];
     requestM.appBuild = APP_Build;
     requestM.appVersion = APP_Version;
-    
+    requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [OutbreakRedSDK requestGzbd_listWithAccount:account token:token page:page size:size status:status orStatus:nil timestamp:timestamp requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [weakself.mainTable.mj_header endRefreshing];
         [weakself.mainTable.mj_footer endRefreshing];

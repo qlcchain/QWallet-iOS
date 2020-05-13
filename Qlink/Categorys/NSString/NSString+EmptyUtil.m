@@ -32,10 +32,10 @@
     return NO;
 }
 
-- (NSString *)trim
-{
-    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
+//- (NSString *)trim
+//{
+//    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//}
 
 - (NSString *) getTimeStampTimeString
 {

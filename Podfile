@@ -62,7 +62,6 @@ def pack_framework
 #    pod 'AFNetworking'
 #    pod 'APIKit'
 #    pod 'Eureka'
-#    pod 'IQKeyboardManager'
 #    pod 'KeychainSwift'
 #    pod 'Masonry'
 #    pod 'MJExtension'
@@ -93,7 +92,9 @@ def app
     pod 'Bugly'
 #    pod 'NinaPagerView'
     pod 'KeychainAccess'  #编译成Framework会导致真机装不了
+    pod 'IQKeyboardManager'   #编译成Framework会导致模拟器编译不过并且上传AppStore会出问题
     pod 'TOCropViewController'
+
   
 end
 

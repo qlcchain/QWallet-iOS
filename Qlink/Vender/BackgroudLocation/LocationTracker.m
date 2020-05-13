@@ -31,7 +31,7 @@
 }
 
 - (id)init {
-	if (self==[super init]) {
+	if (self=[super init]) {
         //Get the share model and also initialize myLocationArray
         self.shareModel = [LocationShareModel sharedModel];
         self.shareModel.myLocationArray = [[NSMutableArray alloc]init];

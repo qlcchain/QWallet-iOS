@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *p2pId;
 @property (nonatomic, copy) NSString *appVersion;
 @property (nonatomic, copy) NSString *appBuild;
+@property (nonatomic, copy) NSString *serverEnv;
 
 + (instancetype)shareInstance;
 

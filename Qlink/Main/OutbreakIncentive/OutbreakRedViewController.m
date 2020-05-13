@@ -117,22 +117,23 @@
     NSInteger leftDayInt = [_createM.rewardQlcDays integerValue] - isolationDays;
     leftDayInt = leftDayInt<=0?0:leftDayInt;
     NSString *leftDay = [NSString stringWithFormat:@"%@",@(leftDayInt)];
-    if (isolationDays >= [_createM.rewardQlcDays integerValue] ) { // 14天可以领取
-        [_leftBtn setTitle:kLang(@"Claim") forState:UIControlStateNormal];
-        _leftBtn.backgroundColor = MAIN_BLUE_COLOR;
-        [_leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _leftBtn.enabled = YES;
-        if (subsidised == 1) { // subsidised=1 已领取不能点击
-            [_leftBtn setTitle:kLang(@"awarded") forState:UIControlStateNormal];
+    if (subsidised == 1) { // subsidised=1 已领取不能点击
+        [_leftBtn setTitle:kLang(@"awarded") forState:UIControlStateNormal];
+        _leftBtn.backgroundColor = UIColorFromRGB(0xECEFF5);
+        [_leftBtn setTitleColor:UIColorFromRGB(0x9496A1) forState:UIControlStateNormal];
+        _leftBtn.enabled = NO;
+    } else {
+        if (isolationDays >= [_createM.rewardQlcDays integerValue] ) { // 14天可以领取
+            [_leftBtn setTitle:kLang(@"Claim") forState:UIControlStateNormal];
+            _leftBtn.backgroundColor = MAIN_BLUE_COLOR;
+            [_leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            _leftBtn.enabled = YES;
+        } else { // 未满14天不能领取
+            [_leftBtn setTitle:[NSString stringWithFormat:kLang(@"__days_left"),leftDay] forState:UIControlStateNormal];
             _leftBtn.backgroundColor = UIColorFromRGB(0xECEFF5);
             [_leftBtn setTitleColor:UIColorFromRGB(0x9496A1) forState:UIControlStateNormal];
             _leftBtn.enabled = NO;
         }
-    } else { // 未满14天不能领取
-        [_leftBtn setTitle:[NSString stringWithFormat:kLang(@"__days_left"),leftDay] forState:UIControlStateNormal];
-        _leftBtn.backgroundColor = UIColorFromRGB(0xECEFF5);
-        [_leftBtn setTitleColor:UIColorFromRGB(0x9496A1) forState:UIControlStateNormal];
-        _leftBtn.enabled = NO;
     }
     
     [_focusLabArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -221,6 +222,7 @@
     requestM.p2pId = [UserModel getTopupP2PId];
     requestM.appBuild = APP_Build;
     requestM.appVersion = APP_Version;
+    requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [OutbreakRedSDK requestGzbd_createWithAccount:account token:token timestamp:timestamp requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [weakself.mainScroll.mj_header endRefreshing];
         if (!error) {
@@ -230,8 +232,13 @@
                 
                 weakself.createM  = [OutbreakCreateModel getObjectWithKeyValues:responseObject];
                 
+                UserModel *userM = [UserModel fetchUserOfLogin];
+                userM.isolationDays = weakself.createM.isolationDays;
+                userM.subsidised = weakself.createM.subsidised;
+                [UserModel storeUserByID:userM];
+                
                 weakself.claimedLab.text = [NSString stringWithFormat:@"%@",weakself.createM.claimedQgas];
-                _claimQLCTipLab.text = [NSString stringWithFormat:kLang(@"claim__qlc_when_your_mission_is_completed"),weakself.createM.rewardQlcAmount];
+                weakself.claimQLCTipLab.text = [NSString stringWithFormat:kLang(@"claim__qlc_when_your_mission_is_completed"),weakself.createM.rewardQlcAmount];
                 NSInteger isolationDaysInt = [weakself.createM.isolationDays integerValue];
                 NSInteger subsidisedInt = [weakself.createM.subsidised integerValue];
                 [weakself refreshIsolationView:isolationDaysInt subsidised:subsidisedInt];
@@ -261,7 +268,7 @@
     requestM.p2pId = [UserModel getTopupP2PId];
     requestM.appBuild = APP_Build;
     requestM.appVersion = APP_Version;
-    
+    requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [OutbreakRedSDK requestGzbd_listWithAccount:account token:token page:nil size:nil status:nil orStatus:orStatus timestamp:timestamp requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {
@@ -300,9 +307,9 @@
     }
     
     kWeakSelf(self);
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    if ([userM.subsidised integerValue] == 0) { // 未领取
-        if ([userM.isolationDays integerValue] >= [_createM.rewardQlcDays integerValue] ) { // 隔离14天
+//    UserModel *userM = [UserModel fetchUserOfLogin];
+    if ([_createM.subsidised integerValue] == 0) { // 未领取
+        if ([_createM.isolationDays integerValue] >= [_createM.rewardQlcDays integerValue] ) { // 隔离14天
 
             [FirebaseUtil logEventWithItemID:Campaign_Covid19_QLC_Claim itemName:Campaign_Covid19_QLC_Claim contentType:Campaign_Covid19_QLC_Claim];
             [weakself jumpToClaimQLC];
@@ -341,7 +348,8 @@
                 NSInteger subsidisedInt = [subsidised integerValue];
                 [weakself refreshIsolationView:isolationDaysInt subsidised:subsidisedInt];
                 
-                [weakself requestGzbd_list]; // 关注回来刷新列表
+//                [weakself requestGzbd_list]; // 关注回来刷新列表
+                [weakself requestGzbd_create]; // 关注回来全部刷新
             }];
          } else if ([clickM.status isEqualToString:OutbreakFocusStatus_NO_AWARD]) {
              [FirebaseUtil logEventWithItemID:Campaign_Covid19_QGas_Claim itemName:Campaign_Covid19_QGas_Claim contentType:Campaign_Covid19_QGas_Claim];

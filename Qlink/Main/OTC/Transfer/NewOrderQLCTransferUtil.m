@@ -29,8 +29,10 @@
 //        return;
 //    }
     
+    [kAppD.window makeToastInView:kAppD.window];
     // 判断QLC钱包的QLC asset
     [TokenListHelper requestQLCAssetWithAddress:fromAddress tokenName:tokenName completeBlock:^(QLCAddressInfoModel * _Nonnull infoM, QLCTokenModel * _Nonnull tokenM, BOOL success) {
+        [kAppD.window hideToast];
 //        QLCTokenModel *asset = [kAppD.tabbarC.walletsVC getQLCAsset:tokenName];
         QLCTokenModel *asset = tokenM;
         if (!asset) {

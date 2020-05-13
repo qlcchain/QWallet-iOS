@@ -387,8 +387,6 @@
 		58436CEE2451C678005DCE6F /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDA2451C675005DCE6F /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		58436CEF2451C678005DCE6F /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDB2451C675005DCE6F /* Masonry.framework */; };
 		58436CF02451C678005DCE6F /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDB2451C675005DCE6F /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		58436CF12451C678005DCE6F /* IQKeyboardManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDC2451C675005DCE6F /* IQKeyboardManager.framework */; };
-		58436CF22451C678005DCE6F /* IQKeyboardManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDC2451C675005DCE6F /* IQKeyboardManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		58436CF32451C678005DCE6F /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDD2451C676005DCE6F /* MBProgressHUD.framework */; };
 		58436CF42451C678005DCE6F /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDD2451C676005DCE6F /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		58436CF52451C678005DCE6F /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CDE2451C676005DCE6F /* CocoaLumberjack.framework */; };
@@ -459,6 +457,18 @@
 		58644E372357FA7E00EFA9A2 /* FirebaseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E362357FA7E00EFA9A2 /* FirebaseConstants.m */; };
 		58644E3A2358034200EFA9A2 /* FirebaseUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E392358034200EFA9A2 /* FirebaseUtil.m */; };
 		58644E3E235817ED00EFA9A2 /* TopupCredentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */; };
+		586485412462AA8600BEBE18 /* DeFiKeystatsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5864853F2462AA8600BEBE18 /* DeFiKeystatsCell.m */; };
+		586485422462AA8600BEBE18 /* DeFiKeystatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586485402462AA8600BEBE18 /* DeFiKeystatsCell.xib */; };
+		586485462462BA3000BEBE18 /* DeFiHistoricalstatsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 586485442462BA3000BEBE18 /* DeFiHistoricalstatsCell.m */; };
+		586485472462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586485452462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib */; };
+		5864854B2462C50E00BEBE18 /* DefiProjectListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5864854A2462C50E00BEBE18 /* DefiProjectListModel.m */; };
+		5864854E2463AA1700BEBE18 /* DefiHistoricalStatsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5864854D2463AA1700BEBE18 /* DefiHistoricalStatsListModel.m */; };
+		586485592463DBB500BEBE18 /* DefiRateLoadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586485512463DBB300BEBE18 /* DefiRateLoadView.xib */; };
+		5864855D2463DBB500BEBE18 /* DefiRateLoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586485562463DBB400BEBE18 /* DefiRateLoadView.m */; };
+		586485622463DE4800BEBE18 /* DefiRatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586485602463DE4800BEBE18 /* DefiRatePopView.m */; };
+		586485632463DE4800BEBE18 /* DefiRatePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586485612463DE4800BEBE18 /* DefiRatePopView.xib */; };
+		586485672463DE9400BEBE18 /* DefiRateSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586485652463DE9300BEBE18 /* DefiRateSuccessView.xib */; };
+		586485682463DE9400BEBE18 /* DefiRateSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586485662463DE9300BEBE18 /* DefiRateSuccessView.m */; };
 		58673E752435DC5900C7D7F5 /* UIView+PopAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58673E742435DC5900C7D7F5 /* UIView+PopAnimate.m */; };
 		58688F1F239115740016AB2F /* CountryCodeList.json in Resources */ = {isa = PBXBuildFile; fileRef = 58688F1E239115730016AB2F /* CountryCodeList.json */; };
 		5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5869C5AE2359A84F0016BD38 /* InviteRankView.m */; };
@@ -620,6 +630,29 @@
 		587D0D0C24484054003EB1F9 /* NEOWalletManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CD924484053003EB1F9 /* NEOWalletManage.swift */; };
 		587D0D0D24484054003EB1F9 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CDA24484053003EB1F9 /* Wallet.swift */; };
 		587D0D0E24484054003EB1F9 /* NeoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D0CDB24484053003EB1F9 /* NeoClient.swift */; };
+		588024182465285500717C57 /* DefiChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588024152465285500717C57 /* DefiChartView.xib */; };
+		588024192465285500717C57 /* DefiChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 588024172465285500717C57 /* DefiChartView.m */; };
+		5880241C246539A100717C57 /* DefiProjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5880241B246539A100717C57 /* DefiProjectModel.m */; };
+		5881177B246257F60058B35F /* DeFiHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58811779246257F60058B35F /* DeFiHomeCell.m */; };
+		5881177C246257F60058B35F /* DeFiHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881177A246257F60058B35F /* DeFiHomeCell.xib */; };
+		5881178024625B1C0058B35F /* DeFiSub_DefiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5881177E24625B1C0058B35F /* DeFiSub_DefiViewController.m */; };
+		5881178124625B1C0058B35F /* DeFiSub_DefiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881177F24625B1C0058B35F /* DeFiSub_DefiViewController.xib */; };
+		5881178524625B340058B35F /* DeFiSub_HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5881178324625B340058B35F /* DeFiSub_HotViewController.m */; };
+		5881178624625B340058B35F /* DeFiSub_HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881178424625B340058B35F /* DeFiSub_HotViewController.xib */; };
+		5881178A24625F730058B35F /* DeFiHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881178724625F700058B35F /* DeFiHomeViewController.xib */; };
+		5881178B24625F730058B35F /* DeFiHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5881178924625F720058B35F /* DeFiHomeViewController.m */; };
+		5881178F246268E30058B35F /* DeFiRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5881178D246268E30058B35F /* DeFiRecordCell.m */; };
+		58811790246268E30058B35F /* DeFiRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881178E246268E30058B35F /* DeFiRecordCell.xib */; };
+		5881179424627DF80058B35F /* DeFiHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5881179224627DF80058B35F /* DeFiHotCell.m */; };
+		5881179524627DF80058B35F /* DeFiHotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881179324627DF80058B35F /* DeFiHotCell.xib */; };
+		58811799246287050058B35F /* DeFiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58811797246287050058B35F /* DeFiDetailViewController.m */; };
+		5881179A246287050058B35F /* DeFiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58811798246287050058B35F /* DeFiDetailViewController.xib */; };
+		5881179E2462A7190058B35F /* DeFiKeystatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5881179C2462A7190058B35F /* DeFiKeystatsViewController.m */; };
+		5881179F2462A7190058B35F /* DeFiKeystatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5881179D2462A7190058B35F /* DeFiKeystatsViewController.xib */; };
+		588117A32462A7370058B35F /* DeFiActivedataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588117A12462A7370058B35F /* DeFiActivedataViewController.m */; };
+		588117A42462A7370058B35F /* DeFiActivedataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588117A22462A7370058B35F /* DeFiActivedataViewController.xib */; };
+		588117A82462A7560058B35F /* DeFiHistoricalstatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588117A62462A7560058B35F /* DeFiHistoricalstatsViewController.m */; };
+		588117A92462A7560058B35F /* DeFiHistoricalstatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 588117A72462A7560058B35F /* DeFiHistoricalstatsViewController.xib */; };
 		58822DC7230E9DF8007C8DC2 /* CQScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC3230E9DF7007C8DC2 /* CQScrollMenuView.m */; };
 		58822DC8230E9DF8007C8DC2 /* UIView+frameAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */; };
 		58822DCC230F9DBE007C8DC2 /* OTCPayQLCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58822DC9230F9DB8007C8DC2 /* OTCPayQLCViewController.m */; };
@@ -748,6 +781,12 @@
 		58BE6F7D233E4B0000684A73 /* TopupWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BE6F7B233E4AFF00684A73 /* TopupWebViewController.m */; };
 		58BE6F7F233E4B3F00684A73 /* TopupWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58BE6F81233E4B3F00684A73 /* TopupWebViewController.xib */; };
 		58C07B802328F00C0088D18E /* Pods_Qlink.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C077C82328DB670088D18E /* Pods_Qlink.framework */; };
+		58C1CFF12466A08400D1144E /* DeFiNewsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C1CFEE2466A08400D1144E /* DeFiNewsWebViewController.m */; };
+		58C1CFF22466A08400D1144E /* DeFiNewsWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C1CFEF2466A08400D1144E /* DeFiNewsWebViewController.xib */; };
+		58C1D00624695FD200D1144E /* CYLPlusButtonSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C1D00524695FD200D1144E /* CYLPlusButtonSubclass.m */; };
+		58C1D00D246A358400D1144E /* DefiRateFailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C1D00B246A358300D1144E /* DefiRateFailView.m */; };
+		58C1D00E246A358400D1144E /* DefiRateFailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C1D00C246A358400D1144E /* DefiRateFailView.xib */; };
+		58C1D011246A7BB000D1144E /* DefiNewsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C1D010246A7BB000D1144E /* DefiNewsListModel.m */; };
 		58C3181A2181B829000344D3 /* WalletsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C318182181B829000344D3 /* WalletsCell.m */; };
 		58C9282922FA79CE0020BDC0 /* ShareFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C9282B22FA79CE0020BDC0 /* ShareFriendsViewController.xib */; };
 		58C9283022FA7A540020BDC0 /* ShareFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C9283222FA7A540020BDC0 /* ShareFriendsCell.xib */; };
@@ -937,7 +976,6 @@
 				58436CF82451C679005DCE6F /* AFNetworking.framework in Embed Frameworks */,
 				58436D062451C67A005DCE6F /* Realm.framework in Embed Frameworks */,
 				58436D042451C67A005DCE6F /* Charts.framework in Embed Frameworks */,
-				58436CF22451C678005DCE6F /* IQKeyboardManager.framework in Embed Frameworks */,
 				58436D022451C67A005DCE6F /* MJExtension.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -1781,7 +1819,6 @@
 		58436CD92451C675005DCE6F /* TMCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TMCache.framework; path = Carthage/Build/iOS/TMCache.framework; sourceTree = "<group>"; };
 		58436CDA2451C675005DCE6F /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 		58436CDB2451C675005DCE6F /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Masonry.framework; sourceTree = "<group>"; };
-		58436CDC2451C675005DCE6F /* IQKeyboardManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManager.framework; path = Carthage/Build/iOS/IQKeyboardManager.framework; sourceTree = "<group>"; };
 		58436CDD2451C676005DCE6F /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		58436CDE2451C676005DCE6F /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		58436CDF2451C676005DCE6F /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = Carthage/Build/iOS/AFNetworking.framework; sourceTree = "<group>"; };
@@ -1896,6 +1933,25 @@
 		58644E392358034200EFA9A2 /* FirebaseUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUtil.m; sourceTree = "<group>"; };
 		58644E3B235817EC00EFA9A2 /* TopupCredentialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopupCredentialViewController.m; sourceTree = "<group>"; };
 		58644E3D235817EC00EFA9A2 /* TopupCredentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopupCredentialViewController.h; sourceTree = "<group>"; };
+		5864853E2462AA8600BEBE18 /* DeFiKeystatsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiKeystatsCell.h; sourceTree = "<group>"; };
+		5864853F2462AA8600BEBE18 /* DeFiKeystatsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiKeystatsCell.m; sourceTree = "<group>"; };
+		586485402462AA8600BEBE18 /* DeFiKeystatsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiKeystatsCell.xib; sourceTree = "<group>"; };
+		586485432462BA3000BEBE18 /* DeFiHistoricalstatsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiHistoricalstatsCell.h; sourceTree = "<group>"; };
+		586485442462BA3000BEBE18 /* DeFiHistoricalstatsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiHistoricalstatsCell.m; sourceTree = "<group>"; };
+		586485452462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiHistoricalstatsCell.xib; sourceTree = "<group>"; };
+		586485492462C50E00BEBE18 /* DefiProjectListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiProjectListModel.h; sourceTree = "<group>"; };
+		5864854A2462C50E00BEBE18 /* DefiProjectListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiProjectListModel.m; sourceTree = "<group>"; };
+		5864854C2463AA1700BEBE18 /* DefiHistoricalStatsListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiHistoricalStatsListModel.h; sourceTree = "<group>"; };
+		5864854D2463AA1700BEBE18 /* DefiHistoricalStatsListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiHistoricalStatsListModel.m; sourceTree = "<group>"; };
+		586485512463DBB300BEBE18 /* DefiRateLoadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefiRateLoadView.xib; sourceTree = "<group>"; };
+		586485522463DBB300BEBE18 /* DefiRateLoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefiRateLoadView.h; sourceTree = "<group>"; };
+		586485562463DBB400BEBE18 /* DefiRateLoadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefiRateLoadView.m; sourceTree = "<group>"; };
+		5864855F2463DE4700BEBE18 /* DefiRatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefiRatePopView.h; sourceTree = "<group>"; };
+		586485602463DE4800BEBE18 /* DefiRatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefiRatePopView.m; sourceTree = "<group>"; };
+		586485612463DE4800BEBE18 /* DefiRatePopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefiRatePopView.xib; sourceTree = "<group>"; };
+		586485642463DE9300BEBE18 /* DefiRateSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefiRateSuccessView.h; sourceTree = "<group>"; };
+		586485652463DE9300BEBE18 /* DefiRateSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefiRateSuccessView.xib; sourceTree = "<group>"; };
+		586485662463DE9300BEBE18 /* DefiRateSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefiRateSuccessView.m; sourceTree = "<group>"; };
 		58673E732435DC5900C7D7F5 /* UIView+PopAnimate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+PopAnimate.h"; sourceTree = "<group>"; };
 		58673E742435DC5900C7D7F5 /* UIView+PopAnimate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+PopAnimate.m"; sourceTree = "<group>"; };
 		58688F1E239115730016AB2F /* CountryCodeList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodeList.json; sourceTree = "<group>"; };
@@ -2180,6 +2236,41 @@
 		587D0CD924484053003EB1F9 /* NEOWalletManage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEOWalletManage.swift; sourceTree = "<group>"; };
 		587D0CDA24484053003EB1F9 /* Wallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		587D0CDB24484053003EB1F9 /* NeoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeoClient.swift; sourceTree = "<group>"; };
+		588024152465285500717C57 /* DefiChartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefiChartView.xib; sourceTree = "<group>"; };
+		588024162465285500717C57 /* DefiChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefiChartView.h; sourceTree = "<group>"; };
+		588024172465285500717C57 /* DefiChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefiChartView.m; sourceTree = "<group>"; };
+		5880241A246539A100717C57 /* DefiProjectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiProjectModel.h; sourceTree = "<group>"; };
+		5880241B246539A100717C57 /* DefiProjectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiProjectModel.m; sourceTree = "<group>"; };
+		58811778246257F60058B35F /* DeFiHomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiHomeCell.h; sourceTree = "<group>"; };
+		58811779246257F60058B35F /* DeFiHomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiHomeCell.m; sourceTree = "<group>"; };
+		5881177A246257F60058B35F /* DeFiHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiHomeCell.xib; sourceTree = "<group>"; };
+		5881177D24625B1C0058B35F /* DeFiSub_DefiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiSub_DefiViewController.h; sourceTree = "<group>"; };
+		5881177E24625B1C0058B35F /* DeFiSub_DefiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiSub_DefiViewController.m; sourceTree = "<group>"; };
+		5881177F24625B1C0058B35F /* DeFiSub_DefiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiSub_DefiViewController.xib; sourceTree = "<group>"; };
+		5881178224625B340058B35F /* DeFiSub_HotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiSub_HotViewController.h; sourceTree = "<group>"; };
+		5881178324625B340058B35F /* DeFiSub_HotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiSub_HotViewController.m; sourceTree = "<group>"; };
+		5881178424625B340058B35F /* DeFiSub_HotViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiSub_HotViewController.xib; sourceTree = "<group>"; };
+		5881178724625F700058B35F /* DeFiHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeFiHomeViewController.xib; sourceTree = "<group>"; };
+		5881178824625F710058B35F /* DeFiHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeFiHomeViewController.h; sourceTree = "<group>"; };
+		5881178924625F720058B35F /* DeFiHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeFiHomeViewController.m; sourceTree = "<group>"; };
+		5881178C246268E30058B35F /* DeFiRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiRecordCell.h; sourceTree = "<group>"; };
+		5881178D246268E30058B35F /* DeFiRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiRecordCell.m; sourceTree = "<group>"; };
+		5881178E246268E30058B35F /* DeFiRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiRecordCell.xib; sourceTree = "<group>"; };
+		5881179124627DF80058B35F /* DeFiHotCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiHotCell.h; sourceTree = "<group>"; };
+		5881179224627DF80058B35F /* DeFiHotCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiHotCell.m; sourceTree = "<group>"; };
+		5881179324627DF80058B35F /* DeFiHotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiHotCell.xib; sourceTree = "<group>"; };
+		58811796246287050058B35F /* DeFiDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiDetailViewController.h; sourceTree = "<group>"; };
+		58811797246287050058B35F /* DeFiDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiDetailViewController.m; sourceTree = "<group>"; };
+		58811798246287050058B35F /* DeFiDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiDetailViewController.xib; sourceTree = "<group>"; };
+		5881179B2462A7190058B35F /* DeFiKeystatsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiKeystatsViewController.h; sourceTree = "<group>"; };
+		5881179C2462A7190058B35F /* DeFiKeystatsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiKeystatsViewController.m; sourceTree = "<group>"; };
+		5881179D2462A7190058B35F /* DeFiKeystatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiKeystatsViewController.xib; sourceTree = "<group>"; };
+		588117A02462A7370058B35F /* DeFiActivedataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiActivedataViewController.h; sourceTree = "<group>"; };
+		588117A12462A7370058B35F /* DeFiActivedataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiActivedataViewController.m; sourceTree = "<group>"; };
+		588117A22462A7370058B35F /* DeFiActivedataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiActivedataViewController.xib; sourceTree = "<group>"; };
+		588117A52462A7560058B35F /* DeFiHistoricalstatsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeFiHistoricalstatsViewController.h; sourceTree = "<group>"; };
+		588117A62462A7560058B35F /* DeFiHistoricalstatsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeFiHistoricalstatsViewController.m; sourceTree = "<group>"; };
+		588117A72462A7560058B35F /* DeFiHistoricalstatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeFiHistoricalstatsViewController.xib; sourceTree = "<group>"; };
 		58822DC3230E9DF7007C8DC2 /* CQScrollMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQScrollMenuView.m; sourceTree = "<group>"; };
 		58822DC4230E9DF7007C8DC2 /* UIView+frameAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+frameAdjust.m"; sourceTree = "<group>"; };
 		58822DC5230E9DF7007C8DC2 /* CQScrollMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQScrollMenuView.h; sourceTree = "<group>"; };
@@ -2455,6 +2546,16 @@
 		58BE6F83233E4B4300684A73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TopupWebViewController.strings; sourceTree = "<group>"; };
 		58BE6F85233E4B4700684A73 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TopupWebViewController.strings"; sourceTree = "<group>"; };
 		58C077C82328DB670088D18E /* Pods_Qlink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Qlink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58C1CFEE2466A08400D1144E /* DeFiNewsWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeFiNewsWebViewController.m; sourceTree = "<group>"; };
+		58C1CFEF2466A08400D1144E /* DeFiNewsWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeFiNewsWebViewController.xib; sourceTree = "<group>"; };
+		58C1CFF02466A08400D1144E /* DeFiNewsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeFiNewsWebViewController.h; sourceTree = "<group>"; };
+		58C1D00424695FD000D1144E /* CYLPlusButtonSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLPlusButtonSubclass.h; sourceTree = "<group>"; };
+		58C1D00524695FD200D1144E /* CYLPlusButtonSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLPlusButtonSubclass.m; sourceTree = "<group>"; };
+		58C1D00A246A358300D1144E /* DefiRateFailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefiRateFailView.h; sourceTree = "<group>"; };
+		58C1D00B246A358300D1144E /* DefiRateFailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefiRateFailView.m; sourceTree = "<group>"; };
+		58C1D00C246A358400D1144E /* DefiRateFailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefiRateFailView.xib; sourceTree = "<group>"; };
+		58C1D00F246A7BB000D1144E /* DefiNewsListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiNewsListModel.h; sourceTree = "<group>"; };
+		58C1D010246A7BB000D1144E /* DefiNewsListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiNewsListModel.m; sourceTree = "<group>"; };
 		58C318172181B829000344D3 /* WalletsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletsCell.h; sourceTree = "<group>"; };
 		58C318182181B829000344D3 /* WalletsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletsCell.m; sourceTree = "<group>"; };
 		58C9282622F960DA0020BDC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ETHMnemonicViewController.strings; sourceTree = "<group>"; };
@@ -2938,7 +3039,6 @@
 				734F529A20B6BF5B002D45B7 /* libz.tbd in Frameworks */,
 				734F529820B6BF4A002D45B7 /* libxml2.tbd in Frameworks */,
 				587ABD3D21B8F8F700C3D81A /* eosFramework.framework in Frameworks */,
-				58436CF12451C678005DCE6F /* IQKeyboardManager.framework in Frameworks */,
 				58436D032451C67A005DCE6F /* Charts.framework in Frameworks */,
 				5842676E2446F86B00450C9B /* OutbreakRed.framework in Frameworks */,
 				734F529620B6BF20002D45B7 /* libresolv.tbd in Frameworks */,
@@ -3309,6 +3409,7 @@
 		580D912F20625A4300B12506 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				58811770246250870058B35F /* DeFi */,
 				5839407224447120005EAA04 /* OutbreakIncentive */,
 				5872056323C715A8009A6217 /* Invite */,
 				58231D35237BE386009CDE90 /* TransactionMining */,
@@ -3342,12 +3443,11 @@
 		580D913420625A4300B12506 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				58C1D00324695FBE00D1144E /* Tabbar */,
 				581AC36B21AFD6E500ACA80B /* QNavigationController.h */,
 				581AC36C21AFD6E500ACA80B /* QNavigationController.m */,
 				580D916E20625F9C00B12506 /* QBaseViewController.h */,
 				580D916F20625F9C00B12506 /* QBaseViewController.m */,
-				582CDF5E24359A700094A70E /* MainTabBarViewController.h */,
-				582CDF5F24359A700094A70E /* MainTabBarViewController.m */,
 				58573DDD243ED52900A5C7A9 /* QBaseTableCell.h */,
 				58573DDE243ED52900A5C7A9 /* QBaseTableCell.m */,
 				58573DDF243ED52900A5C7A9 /* QBaseTableCell.xib */,
@@ -3362,6 +3462,7 @@
 		580D913520625A4300B12506 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				586485482462C4E800BEBE18 /* DeFi */,
 				587D0C7924470A1E003EB1F9 /* OutbreakRed */,
 				586F67FA24090403008E4D4C /* BuybackBurn */,
 				5871921F23CDB20400728E15 /* GroupBuy */,
@@ -4334,6 +4435,43 @@
 			path = Topup;
 			sourceTree = "<group>";
 		};
+		586485482462C4E800BEBE18 /* DeFi */ = {
+			isa = PBXGroup;
+			children = (
+				586485492462C50E00BEBE18 /* DefiProjectListModel.h */,
+				5864854A2462C50E00BEBE18 /* DefiProjectListModel.m */,
+				5864854C2463AA1700BEBE18 /* DefiHistoricalStatsListModel.h */,
+				5864854D2463AA1700BEBE18 /* DefiHistoricalStatsListModel.m */,
+				5880241A246539A100717C57 /* DefiProjectModel.h */,
+				5880241B246539A100717C57 /* DefiProjectModel.m */,
+				58C1D00F246A7BB000D1144E /* DefiNewsListModel.h */,
+				58C1D010246A7BB000D1144E /* DefiNewsListModel.m */,
+			);
+			path = DeFi;
+			sourceTree = "<group>";
+		};
+		5864854F2463DB1E00BEBE18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				58C1D00A246A358300D1144E /* DefiRateFailView.h */,
+				58C1D00B246A358300D1144E /* DefiRateFailView.m */,
+				58C1D00C246A358400D1144E /* DefiRateFailView.xib */,
+				588024162465285500717C57 /* DefiChartView.h */,
+				588024172465285500717C57 /* DefiChartView.m */,
+				588024152465285500717C57 /* DefiChartView.xib */,
+				586485642463DE9300BEBE18 /* DefiRateSuccessView.h */,
+				586485662463DE9300BEBE18 /* DefiRateSuccessView.m */,
+				586485652463DE9300BEBE18 /* DefiRateSuccessView.xib */,
+				5864855F2463DE4700BEBE18 /* DefiRatePopView.h */,
+				586485602463DE4800BEBE18 /* DefiRatePopView.m */,
+				586485612463DE4800BEBE18 /* DefiRatePopView.xib */,
+				586485522463DBB300BEBE18 /* DefiRateLoadView.h */,
+				586485562463DBB400BEBE18 /* DefiRateLoadView.m */,
+				586485512463DBB300BEBE18 /* DefiRateLoadView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		586EE0952089950A009EAF40 /* P2PModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -5125,6 +5263,61 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		58811770246250870058B35F /* DeFi */ = {
+			isa = PBXGroup;
+			children = (
+				5864854F2463DB1E00BEBE18 /* View */,
+				58811777246257DA0058B35F /* Cell */,
+				58C1CFF02466A08400D1144E /* DeFiNewsWebViewController.h */,
+				58C1CFEE2466A08400D1144E /* DeFiNewsWebViewController.m */,
+				58C1CFEF2466A08400D1144E /* DeFiNewsWebViewController.xib */,
+				5881178824625F710058B35F /* DeFiHomeViewController.h */,
+				5881178924625F720058B35F /* DeFiHomeViewController.m */,
+				5881178724625F700058B35F /* DeFiHomeViewController.xib */,
+				5881177D24625B1C0058B35F /* DeFiSub_DefiViewController.h */,
+				5881177E24625B1C0058B35F /* DeFiSub_DefiViewController.m */,
+				5881177F24625B1C0058B35F /* DeFiSub_DefiViewController.xib */,
+				5881178224625B340058B35F /* DeFiSub_HotViewController.h */,
+				5881178324625B340058B35F /* DeFiSub_HotViewController.m */,
+				5881178424625B340058B35F /* DeFiSub_HotViewController.xib */,
+				58811796246287050058B35F /* DeFiDetailViewController.h */,
+				58811797246287050058B35F /* DeFiDetailViewController.m */,
+				58811798246287050058B35F /* DeFiDetailViewController.xib */,
+				5881179B2462A7190058B35F /* DeFiKeystatsViewController.h */,
+				5881179C2462A7190058B35F /* DeFiKeystatsViewController.m */,
+				5881179D2462A7190058B35F /* DeFiKeystatsViewController.xib */,
+				588117A02462A7370058B35F /* DeFiActivedataViewController.h */,
+				588117A12462A7370058B35F /* DeFiActivedataViewController.m */,
+				588117A22462A7370058B35F /* DeFiActivedataViewController.xib */,
+				588117A52462A7560058B35F /* DeFiHistoricalstatsViewController.h */,
+				588117A62462A7560058B35F /* DeFiHistoricalstatsViewController.m */,
+				588117A72462A7560058B35F /* DeFiHistoricalstatsViewController.xib */,
+			);
+			path = DeFi;
+			sourceTree = "<group>";
+		};
+		58811777246257DA0058B35F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58811778246257F60058B35F /* DeFiHomeCell.h */,
+				58811779246257F60058B35F /* DeFiHomeCell.m */,
+				5881177A246257F60058B35F /* DeFiHomeCell.xib */,
+				5881178C246268E30058B35F /* DeFiRecordCell.h */,
+				5881178D246268E30058B35F /* DeFiRecordCell.m */,
+				5881178E246268E30058B35F /* DeFiRecordCell.xib */,
+				5881179124627DF80058B35F /* DeFiHotCell.h */,
+				5881179224627DF80058B35F /* DeFiHotCell.m */,
+				5881179324627DF80058B35F /* DeFiHotCell.xib */,
+				5864853E2462AA8600BEBE18 /* DeFiKeystatsCell.h */,
+				5864853F2462AA8600BEBE18 /* DeFiKeystatsCell.m */,
+				586485402462AA8600BEBE18 /* DeFiKeystatsCell.xib */,
+				586485432462BA3000BEBE18 /* DeFiHistoricalstatsCell.h */,
+				586485442462BA3000BEBE18 /* DeFiHistoricalstatsCell.m */,
+				586485452462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		58822DC2230E9DF7007C8DC2 /* CQScrollMenuView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5551,6 +5744,17 @@
 			path = Transfer;
 			sourceTree = "<group>";
 		};
+		58C1D00324695FBE00D1144E /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				58C1D00424695FD000D1144E /* CYLPlusButtonSubclass.h */,
+				58C1D00524695FD200D1144E /* CYLPlusButtonSubclass.m */,
+				582CDF5E24359A700094A70E /* MainTabBarViewController.h */,
+				582CDF5F24359A700094A70E /* MainTabBarViewController.m */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		58CD53E1238FA37200D5C245 /* UISegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -5888,7 +6092,6 @@
 				58436CDE2451C676005DCE6F /* CocoaLumberjack.framework */,
 				58436CDA2451C675005DCE6F /* Eureka.framework */,
 				58436CE02451C676005DCE6F /* Hero.framework */,
-				58436CDC2451C675005DCE6F /* IQKeyboardManager.framework */,
 				58436CE22451C676005DCE6F /* KeychainSwift.framework */,
 				58436CDB2451C675005DCE6F /* Masonry.framework */,
 				58436CDD2451C676005DCE6F /* MBProgressHUD.framework */,
@@ -6043,6 +6246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				586485672463DE9400BEBE18 /* DefiRateSuccessView.xib in Resources */,
 				58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */,
 				5821966023F26F0D00704E23 /* ChooseTokenCell.xib in Resources */,
 				580D91B92063AE5300B12506 /* Roboto-Thin.ttf in Resources */,
@@ -6075,6 +6279,7 @@
 				581F817522F7C01F00F8291E /* PaymentDetailsView.xib in Resources */,
 				5871922C23CEF35200728E15 /* GroupBuyKnowDelegateView.xib in Resources */,
 				581F82E122F7C31800F8291E /* ChooseAreaCodeCell.xib in Resources */,
+				5881178624625B340058B35F /* DeFiSub_HotViewController.xib in Resources */,
 				581F827822F7C23000F8291E /* ETHVerifyPWViewController.xib in Resources */,
 				581F82F622F7C34000F8291E /* LoginViewController.xib in Resources */,
 				582717C722C9DC56003DC080 /* SGQRCode.bundle in Resources */,
@@ -6087,6 +6292,7 @@
 				581F80A322F7BDE900F8291E /* QLCTransferToServerConfirmView.xib in Resources */,
 				58EBED08234F2295007EEF1F /* DailyEarningsCell.xib in Resources */,
 				581F80E922F7BEA100F8291E /* HomeBuySellViewController.xib in Resources */,
+				586485422462AA8600BEBE18 /* DeFiKeystatsCell.xib in Resources */,
 				58822DCE23102442007C8DC2 /* OTCPayQLCViewController.xib in Resources */,
 				58A34A9D23B30AB500670577 /* ChooseCountryCodeCell.xib in Resources */,
 				73A05A1D2081A02200974483 /* icon_map_refresh.png in Resources */,
@@ -6098,11 +6304,13 @@
 				581F835122F7C42000F8291E /* ResetPWViewController.xib in Resources */,
 				73FF64F220F599E700E29B3B /* CountryList.json in Resources */,
 				581F80CD22F7BE5F00F8291E /* WalletSelectViewController.xib in Resources */,
+				5881179F2462A7190058B35F /* DeFiKeystatsViewController.xib in Resources */,
 				583E6C0D22FAA2AC004F1134 /* InviteRankingViewController.xib in Resources */,
 				5821968323F51F8200704E23 /* StartGroupViewController.xib in Resources */,
 				58573DE1243ED52900A5C7A9 /* QBaseTableCell.xib in Resources */,
 				5885D451231F49B400F9DEDE /* StakingTypesViewController.xib in Resources */,
 				581F809A22F7BD8200F8291E /* VerifyTipView.xib in Resources */,
+				5881177C246257F60058B35F /* DeFiHomeCell.xib in Resources */,
 				5885D443231F498E00F9DEDE /* ConfidantViewController.xib in Resources */,
 				580D91BA2063AE5300B12506 /* Roboto-Bold.ttf in Resources */,
 				588EA75D23CD6BEC00889F7D /* StartGroupBuyCell.xib in Resources */,
@@ -6120,6 +6328,8 @@
 				58A3EB5C237D786500AEF7C8 /* SheetMiningTipView.xib in Resources */,
 				5860AD9920CFB5E600EEB6CE /* WalletQRViewController.xib in Resources */,
 				581F833522F7C3D000F8291E /* WalletsManageCell.xib in Resources */,
+				588117A42462A7370058B35F /* DeFiActivedataViewController.xib in Resources */,
+				586485632463DE4800BEBE18 /* DefiRatePopView.xib in Resources */,
 				587D0C9424480CC2003EB1F9 /* OutbreakRedRecordViewController.xib in Resources */,
 				581F832E22F7C3BF00F8291E /* ChooseCurrencyCell.xib in Resources */,
 				581F815922F7BF9400F8291E /* ETHTransactionRecordCell.xib in Resources */,
@@ -6136,11 +6346,14 @@
 				58245C5922E197CE0093E747 /* ComplaintPhotoCell.xib in Resources */,
 				58A8B1EE233C879F007E2CE3 /* TopupCell.xib in Resources */,
 				581F810522F7BEDC00F8291E /* TradeOrderDetailViewController.xib in Resources */,
+				5881179A246287050058B35F /* DeFiDetailViewController.xib in Resources */,
 				58C9283022FA7A540020BDC0 /* ShareFriendsCell.xib in Resources */,
 				581F825522F7C1EE00F8291E /* NEOCreateWalletViewController.xib in Resources */,
 				58FE26002362EAE50032ABBE /* TopupCredentialViewController.xib in Resources */,
+				58C1D00E246A358400D1144E /* DefiRateFailView.xib in Resources */,
 				581925832114363E009AE406 /* PageThreeView.xib in Resources */,
 				5874E35D234DDAA6000835A0 /* js in Resources */,
+				58C1CFF22466A08400D1144E /* DeFiNewsWebViewController.xib in Resources */,
 				581F80B122F7BE1200F8291E /* HomeBuySellCell.xib in Resources */,
 				581F835822F7C42D00F8291E /* PasswordManagementViewController.xib in Resources */,
 				58A8B1FC233C87CC007E2CE3 /* TopupPayQLC_Deduction_CNYViewController.xib in Resources */,
@@ -6153,8 +6366,10 @@
 				5860ADC320CFB62200EEB6CE /* NotifactionView.xib in Resources */,
 				581F80DB22F7BE7D00F8291E /* EntrustOrderDetailViewController.xib in Resources */,
 				58A3EB6A237D83C500AEF7C8 /* MiningDailyDetailViewController.xib in Resources */,
+				588024182465285500717C57 /* DefiChartView.xib in Resources */,
 				58178AF0234C944A00A96A29 /* GoogleService-Info.plist in Resources */,
 				581F824722F7C1D500F8291E /* NEOTransactionRecordViewController.xib in Resources */,
+				58811790246268E30058B35F /* DeFiRecordCell.xib in Resources */,
 				73899C9C2152003100962B14 /* GuidePageView1.xib in Resources */,
 				581F811A22F7BF0A00F8291E /* MyCell.xib in Resources */,
 				5842E0C72368181D001BB0D6 /* qwallet_index.html in Resources */,
@@ -6204,6 +6419,7 @@
 				5885D427231F493800F9DEDE /* MyStakingsCell.xib in Resources */,
 				5874E33F234DB2ED000835A0 /* ClaimQGASTipView.xib in Resources */,
 				5836CFCA23B5D91E0072187A /* TopupPayETH_DeductionViewController.xib in Resources */,
+				586485472462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib in Resources */,
 				58A3EB56237D375900AEF7C8 /* QLCHistoryChartView.xib in Resources */,
 				58688F1F239115740016AB2F /* CountryCodeList.json in Resources */,
 				583E6C1B22FAA352004F1134 /* InviteFriendNowViewController.xib in Resources */,
@@ -6235,6 +6451,8 @@
 				581F830B22F7C36A00F8291E /* RegisterMailViewController.xib in Resources */,
 				581F822B22F7C1A100F8291E /* EOSRAMViewController.xib in Resources */,
 				581F81C222F7C0B800F8291E /* QLCImportWalletViewController.xib in Resources */,
+				5881179524627DF80058B35F /* DeFiHotCell.xib in Resources */,
+				5881178A24625F730058B35F /* DeFiHomeViewController.xib in Resources */,
 				588B4EA724066CE4003BE791 /* QVoteViewController.xib in Resources */,
 				5860AD3720CFB55200EEB6CE /* WalletAlertView.xib in Resources */,
 				581F82FD22F7C34A00F8291E /* ForgetPWViewController.xib in Resources */,
@@ -6253,9 +6471,11 @@
 				5885D42E231F495800F9DEDE /* MyStakingsViewController.xib in Resources */,
 				581F813622F7BF4100F8291E /* EditTextViewController.xib in Resources */,
 				580D91BB2063AE5300B12506 /* Roboto-MediumItalic.ttf in Resources */,
+				586485592463DBB500BEBE18 /* DefiRateLoadView.xib in Resources */,
 				581F812122F7BF1500F8291E /* PersonalInfoCell.xib in Resources */,
 				581F816722F7BFFD00F8291E /* BackupKeyView.xib in Resources */,
 				581F821622F7C17C00F8291E /* EOSWalletDetailViewController.xib in Resources */,
+				5881178124625B1C0058B35F /* DeFiSub_DefiViewController.xib in Resources */,
 				5860AD3020CFB53000EEB6CE /* SettingCell.xib in Resources */,
 				581F814422F7BF6400F8291E /* WalletsCell.xib in Resources */,
 				5809A13E22F7FB73008B982A /* Localizable.strings in Resources */,
@@ -6271,6 +6491,7 @@
 				581F80BF22F7BE3B00F8291E /* EntrustOrderDetailCell.xib in Resources */,
 				581F81C922F7C0C600F8291E /* QLCTransactionRecordViewController.xib in Resources */,
 				580D91C02063B27300B12506 /* VAGRounded-Bold.ttf in Resources */,
+				588117A92462A7560058B35F /* DeFiHistoricalstatsViewController.xib in Resources */,
 				581F81F322F7C11E00F8291E /* EOSCreateWalletViewController.xib in Resources */,
 				581F828622F7C24900F8291E /* ETHMnemonicViewController.xib in Resources */,
 				581F82DA22F7C30600F8291E /* QToastView.xib in Resources */,
@@ -6321,6 +6542,7 @@
 				"${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
@@ -6349,6 +6571,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CYLTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
@@ -6402,7 +6625,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Eureka.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Hero.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManager.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Masonry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
@@ -6547,6 +6769,7 @@
 				5875B20623869A6B00FCA894 /* TabbarHelper.m in Sources */,
 				5806C10121C3C377000E693B /* GetInfoRequest.m in Sources */,
 				587ABD4521B8F8F800C3D81A /* Abi_json_to_binRequest.m in Sources */,
+				5881178024625B1C0058B35F /* DeFiSub_DefiViewController.m in Sources */,
 				587D0CF924484054003EB1F9 /* Block.swift in Sources */,
 				58FB8D74226572840075698E /* ShareFriendsCell.m in Sources */,
 				587D0CE824484054003EB1F9 /* validator.swift in Sources */,
@@ -6565,6 +6788,7 @@
 				58A3EB84237E739F00AEF7C8 /* MiningConstants.m in Sources */,
 				5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */,
 				587D0CEB24484054003EB1F9 /* Base58.swift in Sources */,
+				586485622463DE4800BEBE18 /* DefiRatePopView.m in Sources */,
 				58A3EB8D237E8D9900AEF7C8 /* MiningRewardIndexModel.m in Sources */,
 				73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */,
 				58245C4E22E192550093E747 /* TZPhotoPickerController.m in Sources */,
@@ -6631,6 +6855,7 @@
 				58D2D8A121940CB800C5B4C9 /* ETHExportKeystoreViewController.m in Sources */,
 				7384A29F2074DC0B00EA60E0 /* NSDateFormatter+Category.m in Sources */,
 				58245C4622E192550093E747 /* TZVideoPlayerController.m in Sources */,
+				5864854B2462C50E00BEBE18 /* DefiProjectListModel.m in Sources */,
 				587ABD4921B8F8F800C3D81A /* Abi_json_to_bin_Result.m in Sources */,
 				58847370233A083D00BB6F76 /* TopupCell.m in Sources */,
 				5871921D23CD8CBC00728E15 /* ShareFriendsSubViewController.m in Sources */,
@@ -6638,6 +6863,7 @@
 				58245C4C22E192550093E747 /* TZProgressView.m in Sources */,
 				5849BE9B229E8940008B291E /* QLCAddressHistoryModel.m in Sources */,
 				587ABD6321B8F8F800C3D81A /* CreateEOSAccountRequest.m in Sources */,
+				5881178524625B340058B35F /* DeFiSub_HotViewController.m in Sources */,
 				587ABD5D21B8F8F800C3D81A /* EOS_Account.m in Sources */,
 				58A8B1D5233B5776007E2CE3 /* TopupOrderModel.m in Sources */,
 				58CF40D2219A64350000C3DA /* NEOAddressHistoryModel.m in Sources */,
@@ -6648,14 +6874,17 @@
 				58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */,
 				587ABD4721B8F8F800C3D81A /* EOS_TransferModel.m in Sources */,
 				581F5FEA219E6AF900604352 /* JoinCommunityCell.m in Sources */,
+				58C1D00D246A358400D1144E /* DefiRateFailView.m in Sources */,
 				587ABD5521B8F8F800C3D81A /* EOS_GetAccountResult.m in Sources */,
 				7377D176206B8D560072E628 /* LocationMode.m in Sources */,
 				583D9543211430D90057A90C /* GlowLable.m in Sources */,
 				581AF7A721B6646E001A37E1 /* EOSWalletDetailViewController.m in Sources */,
 				587D0CDE24484053003EB1F9 /* NEOSignUtil.swift in Sources */,
+				586485462462BA3000BEBE18 /* DeFiHistoricalstatsCell.m in Sources */,
 				587D0CDF24484053003EB1F9 /* commoncry.m in Sources */,
 				582844012189407B00AD65C8 /* SettingsCell.m in Sources */,
 				587ABD5B21B8F8F800C3D81A /* EOS_AccountResult.m in Sources */,
+				58811799246287050058B35F /* DeFiDetailViewController.m in Sources */,
 				5821965A23F26D1500704E23 /* ChooseDeductionTokenViewController.m in Sources */,
 				587D0CF224484054003EB1F9 /* UserDefaultsManager.swift in Sources */,
 				5821CD38217DB5A400F81F8B /* ETHCreateWalletViewController.m in Sources */,
@@ -6712,6 +6941,7 @@
 				58A57D3A22DDA22F00699C3F /* WalletTransferUtil.m in Sources */,
 				584F4EEE23D587DC004F579B /* GroupBuyUtil.m in Sources */,
 				587D0CEC24484054003EB1F9 /* NEP9.swift in Sources */,
+				58C1D00624695FD200D1144E /* CYLPlusButtonSubclass.m in Sources */,
 				583D9549211430FA0057A90C /* VPNRankMode.m in Sources */,
 				58CDBAB023BDCEA300982D54 /* StakingProcessAnimateView.m in Sources */,
 				587ABD5421B8F8F800C3D81A /* EOS_Rate.m in Sources */,
@@ -6729,6 +6959,7 @@
 				58EBED00234F1F51007EEF1F /* RewardListModel.m in Sources */,
 				589E59D322D592AE000338B7 /* MyOrderListEntrustCell.m in Sources */,
 				587ABD5321B8F8F800C3D81A /* EOS_TokenInfo.m in Sources */,
+				588117A32462A7370058B35F /* DeFiActivedataViewController.m in Sources */,
 				5811B7582293D81500F657B5 /* QLCTransactionRecordViewController.m in Sources */,
 				580D916220625A4400B12506 /* UINavigationBar+Awesome.m in Sources */,
 				58A3EB8A237E888200AEF7C8 /* MiningRewardListModel.m in Sources */,
@@ -6759,6 +6990,7 @@
 				587D0C7C24470A47003EB1F9 /* OutbreakFocusModel.m in Sources */,
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
+				5881178B24625F730058B35F /* DeFiHomeViewController.m in Sources */,
 				587D0CFE24484054003EB1F9 /* TransactionAttritbute.swift in Sources */,
 				5836CFC423B49D5A0072187A /* TopupPayQLC_DeductionViewController.m in Sources */,
 				583910F9208495F200A19E7E /* DDLogUtil.m in Sources */,
@@ -6789,6 +7021,7 @@
 				587ABD4C21B8F8F800C3D81A /* Abi_json_to_bin.m in Sources */,
 				583A0F6A20844D8A00EF9ABD /* ContinentModel.m in Sources */,
 				5839F5282068FC70004C4A54 /* MD5Util.m in Sources */,
+				588117A82462A7560058B35F /* DeFiHistoricalstatsViewController.m in Sources */,
 				580D915520625A4400B12506 /* UIView+BlockGesture.m in Sources */,
 				5872133D2361748600E50744 /* NSString+RLArithmetic.m in Sources */,
 				585D1EFB225DEEE000468C4A /* MyCell.m in Sources */,
@@ -6796,10 +7029,12 @@
 				586F67FD24090432008E4D4C /* BuybackBurnModel.m in Sources */,
 				58105D3821880E9B00B8B701 /* ETHTransactionRecordCell.m in Sources */,
 				58D2D8872192F38800C5B4C9 /* WalletCommonModel.m in Sources */,
+				5881178F246268E30058B35F /* DeFiRecordCell.m in Sources */,
 				589AE86823CC4E2000476D53 /* OpenDelegateCheckView.m in Sources */,
 				585CDC23225C9B9700199FE1 /* AreaCodeModel.m in Sources */,
 				581F5FD6219D6C6000604352 /* PasswordManagementViewController.m in Sources */,
 				58D2D8952193E26100C5B4C9 /* UIView+DottedBox.m in Sources */,
+				58C1CFF12466A08400D1144E /* DeFiNewsWebViewController.m in Sources */,
 				5836CFBF23B49AA50072187A /* TopupPayNEO_PayViewController.m in Sources */,
 				58D2D88C2192F41B00C5B4C9 /* WalletsSwitchCell.m in Sources */,
 				587ABD4E21B8F8F800C3D81A /* TransferService.m in Sources */,
@@ -6871,6 +7106,7 @@
 				581C228621AD2BC10009888B /* RunInBackground.m in Sources */,
 				587ABD7021B8F8F800C3D81A /* EOS_AccountInfo.m in Sources */,
 				58BDD4EE230CDB900060FBCC /* NewOrderETHTransferUtil.m in Sources */,
+				586485682463DE9400BEBE18 /* DefiRateSuccessView.m in Sources */,
 				73B1AEBF20BE57C600947749 /* WebViewController.m in Sources */,
 				58DA5BB52322361D004E8D5A /* RevokingProcessView.m in Sources */,
 				58A6500621BE196600E52FFF /* PaymentDetailsView.m in Sources */,
@@ -6902,17 +7138,21 @@
 				587D0CF124484054003EB1F9 /* NEP5Token.swift in Sources */,
 				5885D426231E5A4600F9DEDE /* PledgeInfoByBeneficialModel.m in Sources */,
 				5827BC21219EBAF800B7730E /* ETHVerifyPWViewController.m in Sources */,
+				5864854E2463AA1700BEBE18 /* DefiHistoricalStatsListModel.m in Sources */,
 				73F9557720FF33E400A3E0F5 /* FreeRecordMode.m in Sources */,
 				7377D173206B84620072E628 /* LocationManage.m in Sources */,
 				5871922A23CEE48100728E15 /* ShareRewardCell.m in Sources */,
 				58245C5822E197CE0093E747 /* ComplaintPhotoCell.m in Sources */,
+				58C1D011246A7BB000D1144E /* DefiNewsListModel.m in Sources */,
 				58BDD4E3230BFF590060FBCC /* ETHWalletManage.m in Sources */,
 				584911802105AEF4005232A2 /* LocationShareModel.m in Sources */,
 				587D0CF724484054003EB1F9 /* ValueOut.swift in Sources */,
 				580D915920625A4400B12506 /* UIView+Visuals.m in Sources */,
 				587D0CFC24484054003EB1F9 /* NeoScanTransactionHistory.swift in Sources */,
+				586485412462AA8600BEBE18 /* DeFiKeystatsCell.m in Sources */,
 				58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */,
 				589E59D822D6E4C9000338B7 /* BackupKeyView.m in Sources */,
+				5881177B246257F60058B35F /* DeFiHomeCell.m in Sources */,
 				58C3181A2181B829000344D3 /* WalletsCell.m in Sources */,
 				587ABD5721B8F8F800C3D81A /* EOS_Keys.m in Sources */,
 				73C1BA05207DB2290080C59F /* SystemUtil.m in Sources */,
@@ -6926,6 +7166,7 @@
 				581B678C219178BB0061BEDB /* FingerprintVerificationUtil.m in Sources */,
 				58A57D3422DC7D6100699C3F /* EntrustOrderListModel.m in Sources */,
 				5806C10421C3C3AC000E693B /* GetBlockRequest.m in Sources */,
+				5881179424627DF80058B35F /* DeFiHotCell.m in Sources */,
 				58245C5022E192550093E747 /* TZImagePickerController.m in Sources */,
 				5811B7432293D4B900F657B5 /* QLCWalletInfo.m in Sources */,
 				586F67F92408FF8C008E4D4C /* BuybackBurnUtil.m in Sources */,
@@ -6941,12 +7182,15 @@
 				58245C4422E192550093E747 /* TZImageCropManager.m in Sources */,
 				581C226B21A6B7160009888B /* DeleteWalletConfirmView.m in Sources */,
 				58A57D7622DEEE7200699C3F /* TradeOrderListModel.m in Sources */,
+				5881179E2462A7190058B35F /* DeFiKeystatsViewController.m in Sources */,
+				588024192465285500717C57 /* DefiChartView.m in Sources */,
 				58AE1ADD2074D23C00CE983B /* NEOWalletInfo.m in Sources */,
 				588A7027208DE67F004B41D4 /* ToxRequestModel.m in Sources */,
 				580D916C20625A4400B12506 /* HWUserdefault.m in Sources */,
 				58245C4822E192550093E747 /* NSBundle+TZImagePicker.m in Sources */,
 				580D915E20625A4400B12506 /* NSData+Base64.m in Sources */,
 				58957024218980DD00DB7497 /* ResetPWViewController.m in Sources */,
+				5864855D2463DBB500BEBE18 /* DefiRateLoadView.m in Sources */,
 				583D9542211430D90057A90C /* NewRankView.m in Sources */,
 				588518982361C4FB00CC8858 /* QRadiusView.m in Sources */,
 				5874E349234DCB7E000835A0 /* DailyEarningsCell.m in Sources */,
@@ -7012,6 +7256,7 @@
 				589AE87823CC65A600476D53 /* OngoingGroupCell.m in Sources */,
 				735310DB2111508C00537372 /* NewPagedFlowView.m in Sources */,
 				58245C6722E1ACF30093E747 /* ComplaintDetailViewController.m in Sources */,
+				5880241C246539A100717C57 /* DefiProjectModel.m in Sources */,
 				581AC35A21AFC63B00ACA80B /* AppDelegate+AppService.m in Sources */,
 				58FE26092362F9980032ABBE /* TopupPayOrderTodo.m in Sources */,
 				5839F51F2068F60E004C4A54 /* JSONUtil.m in Sources */,
@@ -9033,7 +9278,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9053,7 +9298,7 @@
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9178,7 +9423,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8612;
+				CURRENT_PROJECT_VERSION = 8739;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9199,11 +9444,8 @@
 				INFOPLIST_FILE = Qlink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
-				);
-				MARKETING_VERSION = 1.4.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.4.1;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9225,7 +9467,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8612;
+				CURRENT_PROJECT_VERSION = 8739;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9245,11 +9487,8 @@
 				INFOPLIST_FILE = Qlink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Qlink/Vender/MPUSH",
-				);
-				MARKETING_VERSION = 1.4.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.4.1;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

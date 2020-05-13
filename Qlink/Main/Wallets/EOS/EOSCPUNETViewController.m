@@ -18,6 +18,7 @@
 #import "EOSWalletUtil.h"
 #import "NSString+RemoveZero.h"
 #import "RLArithmetic.h"
+#import "NSString+Trim.h"
 
 //#import "GlobalConstants.h"
 
@@ -164,8 +165,8 @@
 }
 
 - (void)refreshCurrenPriceWithModel:(EOSResourcePriceModel *)model {
-    _stakeRadioCpu.text = [NSString stringWithFormat:@"CPU ≈ %@ ms",@(([_sliderVal doubleValue]*[_stakeAmountTF.text doubleValue])/[_resourcePriceM.cpuPrice doubleValue])];
-    _stakeRadioNet.text = [NSString stringWithFormat:@"NET ≈ %@ KB",@((fabs(1- [_sliderVal doubleValue])*[_stakeAmountTF.text doubleValue])/[_resourcePriceM.netPrice doubleValue])];
+    _stakeRadioCpu.text = [NSString stringWithFormat:@"CPU ≈ %@ ms",@(([_sliderVal doubleValue]*[_stakeAmountTF.text.trim_whitespace doubleValue])/[_resourcePriceM.cpuPrice doubleValue])];
+    _stakeRadioNet.text = [NSString stringWithFormat:@"NET ≈ %@ KB",@((fabs(1- [_sliderVal doubleValue])*[_stakeAmountTF.text.trim_whitespace doubleValue])/[_resourcePriceM.netPrice doubleValue])];
 }
 
 - (void)showInsufficientResources {
@@ -291,9 +292,9 @@
     [slider setValue:index animated:NO];
     _sliderVal = @([_sliderNumbers[index] doubleValue]);
     
-    if (_stakeAmountTF.text && _stakeAmountTF.text.length > 0) {
-        _stakeRadioCpu.text = [NSString stringWithFormat:@"CPU ≈ %@ ms",@(([_sliderVal doubleValue]*[_stakeAmountTF.text doubleValue])/[_resourcePriceM.cpuPrice doubleValue])];
-        _stakeRadioNet.text = [NSString stringWithFormat:@"NET ≈ %@ KB",@((fabs(1- [_sliderVal doubleValue])*[_stakeAmountTF.text doubleValue])/[_resourcePriceM.netPrice doubleValue])];
+    if (_stakeAmountTF.text.trim_whitespace && _stakeAmountTF.text.trim_whitespace.length > 0) {
+        _stakeRadioCpu.text = [NSString stringWithFormat:@"CPU ≈ %@ ms",@(([_sliderVal doubleValue]*[_stakeAmountTF.text.trim_whitespace doubleValue])/[_resourcePriceM.cpuPrice doubleValue])];
+        _stakeRadioNet.text = [NSString stringWithFormat:@"NET ≈ %@ KB",@((fabs(1- [_sliderVal doubleValue])*[_stakeAmountTF.text.trim_whitespace doubleValue])/[_resourcePriceM.netPrice doubleValue])];
     }
 
 }
@@ -302,50 +303,50 @@
     NSString *payInfo = nil;
     NSString *showAmount = nil;
     if (_isStake == YES) { // 抵押
-        if (!_stakeAmountTF.text || _stakeAmountTF.text.length <= 0) {
+        if (!_stakeAmountTF.text.trim_whitespace || _stakeAmountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_eos_amount")];
             return;
         }
-        if ([_stakeAmountTF.text doubleValue] > [_inputSymbolM.balance doubleValue]) { // 余额不足
+        if ([_stakeAmountTF.text.trim_whitespace doubleValue] > [_inputSymbolM.balance doubleValue]) { // 余额不足
             [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_balance")];
             return;
         }
-        if (!_recipientAccountTF.text || _recipientAccountTF.text.length <= 0) {
+        if (!_recipientAccountTF.text.trim_whitespace || _recipientAccountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_recipient_account")];
             return;
         }
         
         payInfo = @"Stake";
-        stakeOrReclaimTo = _recipientAccountTF.text?:@"";
+        stakeOrReclaimTo = _recipientAccountTF.text.trim_whitespace?:@"";
         stakeOrReclaimOperationType = EOSOperationTypeStake;
-        showAmount = [NSString stringWithFormat:@"%@ EOS",_stakeAmountTF.text?:@""];
+        showAmount = [NSString stringWithFormat:@"%@ EOS",_stakeAmountTF.text.trim_whitespace?:@""];
 //        stakeOrReclaimCpuAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*[_sliderVal doubleValue])] removeFloatAllZero];
-        stakeOrReclaimCpuAmount = _stakeAmountTF.text.mul(_sliderVal);
+        stakeOrReclaimCpuAmount = _stakeAmountTF.text.trim_whitespace.mul(_sliderVal);
 //        stakeOrReclaimNetAmount = [[NSString stringWithFormat:@"%@",@([_stakeAmountTF.text doubleValue]*(1-[_sliderVal doubleValue]))] removeFloatAllZero];
-        stakeOrReclaimNetAmount = _stakeAmountTF.text.mul(@((1-[_sliderVal doubleValue])));
+        stakeOrReclaimNetAmount = _stakeAmountTF.text.trim_whitespace.mul(@((1-[_sliderVal doubleValue])));
     } else { // 赎回
-        if (!_reclaimCpuAmountTF.text || _reclaimCpuAmountTF.text.length <= 0) {
+        if (!_reclaimCpuAmountTF.text.trim_whitespace || _reclaimCpuAmountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_cpu_amount")];
             return;
         }
-        if ([_reclaimCpuAmountTF.text doubleValue] > [_resourceInfoM.cpu.available doubleValue]/1000) { // 余额不足
+        if ([_reclaimCpuAmountTF.text.trim_whitespace doubleValue] > [_resourceInfoM.cpu.available doubleValue]/1000) { // 余额不足
             [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_cpu_balance")];
             return;
         }
-        if (!_reclaimNetAmountTF.text || _reclaimNetAmountTF.text.length <= 0) {
+        if (!_reclaimNetAmountTF.text.trim_whitespace || _reclaimNetAmountTF.text.trim_whitespace.length <= 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"input_net_amount")];
             return;
         }
-        if ([_reclaimNetAmountTF.text doubleValue] > [_resourceInfoM.net.available doubleValue]/1024) { // 余额不足
+        if ([_reclaimNetAmountTF.text.trim_whitespace doubleValue] > [_resourceInfoM.net.available doubleValue]/1024) { // 余额不足
             [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_net_balance")];
             return;
         }
         
         payInfo = @"Sell RAM";
-        stakeOrReclaimTo = _recipientAccountTF.text?:@"";
+        stakeOrReclaimTo = _recipientAccountTF.text.trim_whitespace?:@"";
         stakeOrReclaimOperationType = EOSOperationTypeReclaim;
-        NSNumber *cpuEOSNum = @([_reclaimCpuAmountTF.text doubleValue]*[_resourcePriceM.cpuPrice doubleValue]);
-        NSNumber *netEOSNum = @([_reclaimNetAmountTF.text doubleValue]*[_resourcePriceM.netPrice doubleValue]);
+        NSNumber *cpuEOSNum = @([_reclaimCpuAmountTF.text.trim_whitespace doubleValue]*[_resourcePriceM.cpuPrice doubleValue]);
+        NSNumber *netEOSNum = @([_reclaimNetAmountTF.text.trim_whitespace doubleValue]*[_resourcePriceM.netPrice doubleValue]);
         showAmount = [NSString stringWithFormat:@"%@ EOS",@([cpuEOSNum doubleValue]+[netEOSNum doubleValue])];
 //        stakeOrReclaimCpuAmount = [[NSString stringWithFormat:@"%@",cpuEOSNum] removeFloatAllZero];
         stakeOrReclaimCpuAmount = cpuEOSNum.mul(@(1));

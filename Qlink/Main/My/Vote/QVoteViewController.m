@@ -11,6 +11,7 @@
 #import "UserModel.h"
 #import "RSAUtil.h"
 #import "RLArithmetic.h"
+#import "NSString+Trim.h"
 
 @interface QVoteViewController ()
 
@@ -220,7 +221,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *choose = _chooseBtn1.selected?@"1":_chooseBtn2.selected?@"2":_chooseBtn3.selected?@"3":_chooseBtn4.selected?@"4":@"";
-    NSString *opinion = _textV.text?:@"";
+    NSString *opinion = _textV.text.trim_whitespace?:@"";
     NSDictionary *params = @{@"account":account,@"token":token,@"choose":choose,@"opinion":opinion};
     [RequestService requestWithUrl11:sys_vote_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {

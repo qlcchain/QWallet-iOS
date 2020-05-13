@@ -14,6 +14,7 @@
 #import "ConfigUtil.h"
 #import "ETHExportMnemonicViewController.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
+#import "NSString+Trim.h"
 
 @interface ETHVerifyPWViewController ()
 
@@ -52,7 +53,7 @@
 }
 
 - (void)textFieldDidEnd {
-    if (_pwTF.text && _pwTF.text.length > 0) {
+    if (_pwTF.text.trim_whitespace && _pwTF.text.trim_whitespace.length > 0) {
 //        [_joinBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _joinBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _joinBtn.userInteractionEnabled = YES;

@@ -115,7 +115,7 @@ static NSString *const MyTopupOrderNetworkSize = @"20";
 }
 
 - (void)credentialHandler:(TopupOrderModel *)model {
-    NSURL *url = nil;
+    NSURL *url = [NSURL URLWithString:@""];
     if ([model.deductionTokenChain isEqualToString:ETH_Chain]) {
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ETH_Transaction_Url,model.deductionTokenInTxid?:@""]];
         [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];

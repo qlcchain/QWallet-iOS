@@ -28,11 +28,67 @@
     return [dn stringValue];
 }
 
-- (NSString *)showfloatStrWith2Decimal {
-    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
-    NSDecimalNumber *dn = [[NSDecimalNumber decimalNumberWithString:self] decimalNumberByRoundingAccordingToBehavior:hander];
-    return [NSString stringWithFormat:@"%.2f",[dn floatValue]];
+- (NSString *)showfloatStr_Defi:(NSInteger)decimal {
+    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:decimal raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSString *str = [NSString stringWithFormat:@"%@",self];
+    
+    NSString *kStr1 = @"1000";
+    NSString *kStr2 = @"-1000";
+    NSString *mStr1 = @"1000000";
+    NSString *mStr2 = @"-1000000";
+    NSString *appendStr = @"";
+    NSString *dividingStr = @"1";
+    if ([self isBiggerAndEqual:kStr1] && ![self isBiggerAndEqual:mStr1]) { // 1000000 > v >= 1000
+        dividingStr = kStr1;
+        appendStr = @"K";
+    } else if ([self isBiggerAndEqual:mStr1]) { // v >= 10000000
+        dividingStr = mStr1;
+        appendStr = @"M";
+    } else if ([self isSmallerAndEqual:kStr2] && ![self isSmallerAndEqual:mStr2]) { // -1000 >= v > -1000000
+        dividingStr = kStr1;
+        appendStr = @"K";
+    } else if ([self isSmallerAndEqual:mStr2]) { // v <= -10000000
+       dividingStr = mStr1;
+       appendStr = @"M";
+   }
+    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:str];
+    NSDecimalNumber *div = [NSDecimalNumber decimalNumberWithString:dividingStr];
+    NSDecimalNumber *result = [dn decimalNumberByDividingBy:div];
+    
+    NSString *handerResult = [[result decimalNumberByRoundingAccordingToBehavior:hander] stringValue];
+    
+    return [handerResult stringByAppendingString:appendStr];
 }
+
+- (BOOL)isBiggerAndEqual:(NSString *)compareStr {
+    NSString *str = [NSString stringWithFormat:@"%@",self];
+    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:str];
+    NSDecimalNumber *zero = [NSDecimalNumber decimalNumberWithString:compareStr];
+    NSComparisonResult result = [zero compare:dn];
+    BOOL big = NO;
+    if (result == NSOrderedAscending || result == NSOrderedSame) {
+        big = YES;
+    }
+    return big;
+}
+
+- (BOOL)isSmallerAndEqual:(NSString *)compareStr {
+    NSString *str = [NSString stringWithFormat:@"%@",self];
+    NSDecimalNumber *dn = [NSDecimalNumber decimalNumberWithString:str];
+    NSDecimalNumber *zero = [NSDecimalNumber decimalNumberWithString:compareStr];
+    NSComparisonResult result = [zero compare:dn];
+    BOOL big = NO;
+    if (result == NSOrderedDescending || result == NSOrderedSame) {
+        big = YES;
+    }
+    return big;
+}
+
+//- (NSString *)showfloatStrWith2Decimal {
+//    NSDecimalNumberHandler *hander = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+//    NSDecimalNumber *dn = [[NSDecimalNumber decimalNumberWithString:self] decimalNumberByRoundingAccordingToBehavior:hander];
+//    return [NSString stringWithFormat:@"%.2f",[dn floatValue]];
+//}
 
 //+ (double)doubleFormString:(NSString *)str {
 //    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];

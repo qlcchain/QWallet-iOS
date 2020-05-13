@@ -21,6 +21,7 @@
 #import "FirebaseUtil.h"
 #import "SystemUtil.h"
 #import "JPushTagHelper.h"
+#import "NSString+Trim.h"
 
 @interface LoginViewController ()
 
@@ -71,7 +72,7 @@
             [_loginVerifyCodeBtn setTitleColor:UIColorFromRGB(0xB3B3B3) forState:UIControlStateNormal];
         }
         
-        UserModel *userM = [UserModel fetchUser:tf.text?:@""];
+        UserModel *userM = [UserModel fetchUser:[tf.text?:@"" trim_whitespace]];
         if (!userM) { // 本地没有rsaPublicKey 验证码登录
             _loginVerifyCodeHeight.constant = 49;
         } else { // 密码登录
@@ -87,9 +88,9 @@
 }
 
 - (void)changeLoginBtnState {
-    if (_loginPWTF.text && _loginPWTF.text.length >= 6 && _loginAccountTF.text && _loginAccountTF.text.length > 0) {
+    if (_loginPWTF.text.trim_whitespace && _loginPWTF.text.trim_whitespace.length >= 6 && _loginAccountTF.text.trim_whitespace && _loginAccountTF.text.trim_whitespace.length > 0) {
         if (_loginVerifyCodeHeight.constant > 0) {
-            if (_loginVerifyCodeTF.text && _loginVerifyCodeTF.text.length > 0) {
+            if (_loginVerifyCodeTF.text.trim_whitespace && _loginVerifyCodeTF.text.trim_whitespace.length > 0) {
                 _loginBtn.enabled = YES;
                 _loginBtn.backgroundColor = [UIColor mainColor];
             } else {
@@ -156,7 +157,7 @@
 
 - (IBAction)loginVerifyCodeAction:(id)sender {
     [self.view endEditing:YES];
-    if (![_loginAccountTF.text isEmailAddress] && ![_loginAccountTF.text isMobileNumber]) {
+    if (![_loginAccountTF.text.trim_whitespace isEmailAddress] && ![_loginAccountTF.text.trim_whitespace isMobileNumber]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address_or_phone_number")];
         return;
     }
@@ -166,12 +167,12 @@
 
 - (IBAction)loginAction:(id)sender {
     [self.view endEditing:YES];
-    if (![_loginAccountTF.text isEmailAddress] && ![_loginAccountTF.text isMobileNumber]) {
+    if (![_loginAccountTF.text.trim_whitespace isEmailAddress] && ![_loginAccountTF.text.trim_whitespace isMobileNumber]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address_or_phone_number")];
         return;
     }
     
-    UserModel *userM = [UserModel fetchUser:_loginAccountTF.text?:@""];
+    UserModel *userM = [UserModel fetchUser:[_loginAccountTF.text?:@"" trim_whitespace]];
     if (!userM) { // 本地没有rsaPublicKey 验证码登录
         [self requestUser_signin_code];
     } else { // 密码登录
@@ -189,10 +190,10 @@
 
 // 密码登录
 - (void)requestSign_in {
-    NSString *account = _loginAccountTF.text?:@"";
+    NSString *account = [_loginAccountTF.text?:@"" trimAndLowercase];
     UserModel *userM = [UserModel fetchUser:account];
     kWeakSelf(self);
-    NSString *md5PW = [MD5Util md5:_loginPWTF.text?:@""];
+    NSString *md5PW = [MD5Util md5:[_loginPWTF.text?:@"" trim_whitespace]];
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
@@ -229,9 +230,12 @@
 
 // 获取登录验证码
 - (void)requestVcode_signin_code {
+    NSString *account = [_loginAccountTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":_loginAccountTF.text?:@""};
+    NSDictionary *params = @{@"account":account};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             [weakself openCountdown:weakself.loginVerifyCodeBtn];
@@ -240,14 +244,15 @@
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 
 // 验证码登录
 - (void)requestUser_signin_code {
     kWeakSelf(self);
-    NSString *account = _loginAccountTF.text?:@"";
-    NSString *code = _loginVerifyCodeTF.text?:@"";
+    NSString *account = [_loginAccountTF.text?:@"" trimAndLowercase];
+    NSString *code = [_loginVerifyCodeTF.text?:@"" trim_whitespace];
     NSDictionary *params = @{@"account":account,@"code":code};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:user_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {

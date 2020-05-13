@@ -281,6 +281,8 @@ static NSString *const NetworkSize = @"20";
 
 - (void)handleSeg0 {
     if (_currentBuyPage == 1) {
+        _sourceArr = @[];
+        [_mainTable reloadData];
         [self requestEntrust_order_list];
     } else {
         _sourceArr = _buyArr;
@@ -291,6 +293,8 @@ static NSString *const NetworkSize = @"20";
 
 - (void)handleSeg1 {
     if (_currentSellPage == 1) {
+        _sourceArr = @[];
+        [_mainTable reloadData];
         [self requestEntrust_order_list];
     } else {
         _sourceArr = _sellArr;

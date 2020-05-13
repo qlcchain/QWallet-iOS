@@ -74,6 +74,7 @@
 #import "AFJSONRPCClient.h"
 #import "NSString+RandomStr.h"
 #import "SystemUtil.h"
+#import "NSString+Trim.h"
 
 static NSString *const TopupNetworkSize = @"20";
 //static NSInteger const insetForSectionDistance = 16;

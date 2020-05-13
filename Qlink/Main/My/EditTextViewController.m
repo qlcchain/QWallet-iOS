@@ -100,7 +100,7 @@
 }
 
 - (IBAction)verifyCodeAction:(id)sender {
-    NSString *name = [NSString trimWhitespaceAndNewline:_nameTF.text?:@""];
+    NSString *name = _nameTF.text.trim_whitespace?:@"";
     switch (self.editType) {
         case EditUsername:
         {
@@ -125,8 +125,8 @@
 - (IBAction)okAction:(id)sender {
     [self.view endEditing:YES];
     
-    NSString *name = [NSString trimWhitespaceAndNewline:_nameTF.text?:@""];
-    NSString *code = [NSString trimWhitespaceAndNewline:_codeTF.text?:@""];
+    NSString *name = _nameTF.text.trim_whitespace?:@"";
+    NSString *code = [NSString trimWhitespaceAndNewline:_codeTF.text.trim_whitespace?:@""];
     switch (self.editType) {
         case EditUsername:
         {
@@ -223,13 +223,16 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
     NSDictionary *params = @{@"account":account,@"email":email};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 
@@ -269,13 +272,16 @@
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
     NSDictionary *params = @{@"account":account,@"phone":phone};
+    [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_change_phone_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        [kAppD.window hideToast];
     }];
 }
 

@@ -19,15 +19,6 @@
  @return yes
  */
 - (BOOL)saveToKeyChain_old {
-//    BOOL isFirstWallet = NO;
-//    // 判断是否是第一个钱包。第一个则默认为当前钱包
-//    if (![NEOWalletUtil isExistWalletPrivateKey]) {
-//        [NEOWalletUtil setKeyValue:CURRENT_WALLET_KEY value:@"0"];
-//        isFirstWallet = YES;
-//    } else {
-//        // 重新初始化 Account->将Account设为当前钱包
-//        [NEOWalletManage.sharedInstance configureAccountWithMainNet:[NEOWalletUtil isMainNetOfNeo]];
-//    }
     
     // 已经存在返回NO
     BOOL isExist= [NEOWalletUtil setWalletkeyWithKey:WALLET_PRIVATE_KEY withWalletValue:self.privateKey];
@@ -37,14 +28,6 @@
     [NEOWalletUtil setWalletkeyWithKey:WALLET_PUBLIC_KEY withWalletValue:self.publicKey];
     [NEOWalletUtil setWalletkeyWithKey:WALLET_ADDRESS_KEY withWalletValue:self.address];
     [NEOWalletUtil setWalletkeyWithKey:WALLET_WIF_KEY withWalletValue:self.wif];
-    
-//    // 是第一个钱包
-//    if (isFirstWallet) {
-//        [NEOWalletUtil getCurrentWalletInfo];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:WALLET_CHANGE_TZ object:nil];
-//        // 查询当前钱包资产
-//        [NeoTransferUtil sendGetBalanceRequest];
-//    }
     
     return YES;
     

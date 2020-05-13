@@ -20,6 +20,7 @@
 #import "NSString+HexStr.h"
 #import "WebViewController.h"
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 typedef enum : NSUInteger {
     ETHImportTypeMnemonic,
@@ -241,11 +242,11 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_mnemonicTV.text.length <= 0) {
+    if (_mnemonicTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
-    NSArray *arr = [_mnemonicTV.text componentsSeparatedByString:@" "];
+    NSArray *arr = [_mnemonicTV.text.trim_whitespace componentsSeparatedByString:@" "];
     if (!arr || arr.count != 12) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_valid_mnemonic")];
         return;
@@ -255,7 +256,7 @@ typedef enum : NSUInteger {
     kWeakSelf(self);
 //    NSString *pw = [LoginPWModel getLoginPW];
     NSString *pw = @"";
-    NSString *mnemonic = _mnemonicTV.text;
+    NSString *mnemonic = _mnemonicTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:nil privateKeyInput:nil addressInput:nil mnemonicInput:mnemonic password:pw :^(BOOL success, NSString *address) {
         [kAppD.window hideToast];
@@ -293,15 +294,15 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_officialTV.text.length <= 0) {
+    if (_officialTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
     kWeakSelf(self);
 //    NSString *pw = [LoginPWModel getLoginPW];
-    NSString *pw = _officialPWTF.text?:@"";
-    NSString *keystore = _officialTV.text;
+    NSString *pw = _officialPWTF.text.trim_whitespace?:@"";
+    NSString *keystore = _officialTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:keystore privateKeyInput:nil addressInput:nil mnemonicInput:nil password:pw :^(BOOL success, NSString *address) {
         [kAppD.window hideToast];
@@ -337,13 +338,13 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_privateTV.text.length <= 0) {
+    if (_privateTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
     kWeakSelf(self);
-    NSString *privatekey =_privateTV.text;
+    NSString *privatekey =_privateTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:nil privateKeyInput:privatekey addressInput:nil mnemonicInput:nil password:nil :^(BOOL success, NSString *address) {
         [kAppD.window hideToast];
@@ -376,20 +377,20 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_watchTV.text.length <= 0) {
+    if (_watchTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_first")];
         return;
     }
     
     // 检查地址有效性
-    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_watchTV.text];
+    BOOL isValid = [TrustWalletManage.sharedInstance isValidAddressWithAddress:_watchTV.text.trim_whitespace];
     if (!isValid) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_invalidate")];
         return;
     }
     
     kWeakSelf(self);
-    NSString *address = _watchTV.text;
+    NSString *address = _watchTV.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     [TrustWalletManage.sharedInstance importWalletWithKeystoreInput:nil privateKeyInput:nil addressInput:address mnemonicInput:nil password:nil :^(BOOL success, NSString *address) {
         [kAppD.window hideToast];

@@ -11,6 +11,7 @@
 #import "WalletCommonModel.h"
 #import "LoginPWModel.h"
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface ETHExportKeystoreViewController ()
 
@@ -54,7 +55,7 @@
 
 - (void)copyKeystore {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = _textV.text;
+    pasteboard.string = _textV.text.trim_whitespace;
     [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 

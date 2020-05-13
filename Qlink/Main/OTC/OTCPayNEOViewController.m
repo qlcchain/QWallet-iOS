@@ -34,6 +34,7 @@
 #import "OTCOrderTodo.h"
 #import "TxidBackUtil.h"
 #import "TokenListHelper.h"
+#import "NSString+Trim.h"
 
 @interface OTCPayNEOViewController () <UITextViewDelegate>
 
@@ -118,8 +119,8 @@
 
 - (void)showNEOTransferConfirmView {
     NSString *fromAddress = _payWalletM.address?:@"";
-    NSString *toAddress = _sendtoAddressTV.text;
-    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text,_selectAsset.asset_symbol];
+    NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
+    NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text.trim_whitespace,_selectAsset.asset_symbol];
     NEOTransferConfirmView *view = [NEOTransferConfirmView getInstance];
     [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];
 //    [view configWithAddress:address amount:amount];
@@ -131,7 +132,7 @@
 }
 
 - (void)checkSendBtnEnable {
-    if (_sendtoAddressTV.text && _sendtoAddressTV.text.length > 0 && _amountTF.text && _amountTF.text.length > 0 && _payWalletM != nil) {
+    if (_sendtoAddressTV.text.trim_whitespace && _sendtoAddressTV.text.trim_whitespace.length > 0 && _amountTF.text.trim_whitespace && _amountTF.text.trim_whitespace.length > 0 && _payWalletM != nil) {
 //        [_sendBtn setBackgroundColor:MAIN_BLUE_COLOR];
         _sendBtn.theme_backgroundColor = globalBackgroundColorPicker;
         _sendBtn.userInteractionEnabled = YES;
@@ -149,12 +150,12 @@
     NSInteger decimals = [NEO_Decimals integerValue];
     NSString *tokenHash = _selectAsset.asset_hash;
     NSString *assetName = _selectAsset.asset;
-    NSString *toAddress = _sendtoAddressTV.text;
-    NSString *amount = _amountTF.text;
+    NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
+    NSString *amount = _amountTF.text.trim_whitespace;
     NSString *symbol = _selectAsset.asset_symbol;
 //    NSString *fromAddress = [WalletCommonModel getCurrentSelectWallet].address;
     NSString *fromAddress = from_address;
-    NSString *remarkStr = _memoTF.text;
+    NSString *remarkStr = _memoTF.text.trim_whitespace;
     NSInteger assetType = 1; // 0:neo、gas  1:代币
     if ([symbol isEqualToString:@"GAS"] || [symbol isEqualToString:@"NEO"]) {
         assetType = 0;
@@ -322,25 +323,25 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"payment_wallet_is_empty")];
         return;
     }
-    if (!_amountTF.text || _amountTF.text.length <= 0) {
+    if (!_amountTF.text.trim_whitespace || _amountTF.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_empty")];
         return;
     }
-    if (!_sendtoAddressTV.text || _sendtoAddressTV.text.length <= 0) {
+    if (!_sendtoAddressTV.text.trim_whitespace || _sendtoAddressTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"neo_wallet_address_is_empty")];
         return;
     }
-    if ([_amountTF.text doubleValue] == 0) {
+    if ([_amountTF.text.trim_whitespace doubleValue] == 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_zero")];
         return;
     }
-    if ([_amountTF.text doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
+    if ([_amountTF.text.trim_whitespace doubleValue] > [[_selectAsset getTokenNum] doubleValue]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
     
     // 检查地址有效性
-    BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:_sendtoAddressTV.text];
+    BOOL validateNEOAddress = [NEOWalletManage.sharedInstance validateNEOAddressWithAddress:_sendtoAddressTV.text.trim_whitespace];
     if (!validateNEOAddress) {
         [kAppD.window makeToastDisappearWithText:kLang(@"neo_wallet_address_is_invalidate")];
         return;

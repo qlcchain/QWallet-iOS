@@ -19,6 +19,7 @@
 #import <eosFramework/EOS_Key_Encode.h>
 #import "WebViewController.h"
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface EOSImportViewController () {
     BOOL privatekeyAgree;
@@ -74,10 +75,10 @@
 - (IBAction)scanAction:(id)sender {
     kWeakSelf(self);
     WalletQRViewController *vc = [[WalletQRViewController alloc] initWithCodeQRCompleteBlock:^(NSString *codeValue) {
-        if (weakself.ownerPrivateTV.text == nil) {
+        if (weakself.ownerPrivateTV.text.trim_whitespace == nil) {
             weakself.ownerPrivateTV.text = codeValue;
         }
-        if (weakself.activePrivateTV.text == nil) {
+        if (weakself.activePrivateTV.text.trim_whitespace == nil) {
             weakself.activePrivateTV.text = codeValue;
         }
     } needPop:YES];
@@ -94,31 +95,31 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"please_agree_first")];
         return;
     }
-    if (_ownerPrivateTV.text.length <= 0) {
+    if (_ownerPrivateTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_owner_private_key")];
         return;
     }
-    if (_activePrivateTV.text.length <= 0) {
+    if (_activePrivateTV.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_active_private_key")];
         return;
     }
-    if (_accountNameTF.text.length <= 0) {
+    if (_accountNameTF.text.trim_whitespace.length <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_input_account_name")];
         return;
     }
     
-    if (![EOS_Key_Encode validateWif:_ownerPrivateTV.text]) {
+    if (![EOS_Key_Encode validateWif:_ownerPrivateTV.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"owner_private_key_format_error")];
         return;
     }
-    if (![EOS_Key_Encode validateWif:_activePrivateTV.text]) {
+    if (![EOS_Key_Encode validateWif:_activePrivateTV.text.trim_whitespace]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"active_private_key_format_error")];
         return;
     }
     
-    NSString *private_activeKey = _activePrivateTV.text.trim;
-    NSString *private_ownerKey = _ownerPrivateTV.text.trim;
-    NSString *accountName = _accountNameTF.text.trim;
+    NSString *private_activeKey = _activePrivateTV.text.trim_whitespace;
+    NSString *private_ownerKey = _ownerPrivateTV.text.trim_whitespace;
+    NSString *accountName = _accountNameTF.text.trim_whitespace;
     [kAppD.window makeToastInView:kAppD.window];
     kWeakSelf(self)
     [[EOSWalletUtil shareInstance] importWithAccountName:accountName private_activeKey:private_activeKey private_ownerKey:private_ownerKey complete:^(BOOL success) {

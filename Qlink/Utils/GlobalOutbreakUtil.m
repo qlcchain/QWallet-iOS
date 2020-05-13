@@ -55,6 +55,7 @@
     requestM.p2pId = [UserModel getTopupP2PId];
     requestM.appBuild = APP_Build;
     requestM.appVersion = APP_Version;
+    requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [OutbreakRedSDK requestGzbd_focusWithAccount:account token:token timestamp:timestamp requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {

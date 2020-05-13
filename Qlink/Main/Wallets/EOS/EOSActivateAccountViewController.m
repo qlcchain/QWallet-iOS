@@ -17,6 +17,7 @@
 #import "NSString+RemoveZero.h"
 #import "RLArithmetic.h"
 //#import "GlobalConstants.h"
+#import "NSString+Trim.h"
 
 @interface EOSActivateAccountViewController () {
     BOOL stakeCpuAndNetOK;
@@ -107,8 +108,8 @@
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     NSString *from = currentWalletM.account_name?:@"";
     NSString *to = _accountNameLab.text?:@"";
-    NSString *ownerPublicKey = _ownerKeyTV.text?:@"";
-    NSString *activePublicKey = _activeKeyTV.text?:@"";
+    NSString *ownerPublicKey = _ownerKeyTV.text.trim_whitespace?:@"";
+    NSString *activePublicKey = _activeKeyTV.text.trim_whitespace?:@"";
 //    NSString *createAccountAmount = @"0.1883";
     NSString *cpuAmount = @"0.2500";
     NSString *netAmount = @"0.0400";

@@ -32,6 +32,7 @@
 #import "OutbreakRedUtil.h"
 #import "InviteFriendOutbreakViewController.h"
 #import "SystemUtil.h"
+#import "NSString+Trim.h"
 
 static NSInteger Mining_PageSize = 20;
 
@@ -246,7 +247,7 @@ static NSInteger Mining_PageSize = 20;
 }
 
 - (IBAction)claimAction:(id)sender {
-    if ([_canClaimAmountLab.text doubleValue] <= 0) {
+    if ([_canClaimAmountLab.text.trim_whitespace doubleValue] <= 0) {
         [kAppD.window makeToastDisappearWithText:kLang(@"no_qlc_can_claim")];
         return;
     }
@@ -399,7 +400,7 @@ static NSInteger Mining_PageSize = 20;
 
 - (void)jumpToClaimQLC {
     ClaimQLCViewController *vc = [ClaimQLCViewController new];
-    vc.inputCanClaimAmount = _canClaimAmountLab.text?:@"0";
+    vc.inputCanClaimAmount = [_canClaimAmountLab.text?:@"0" trim_whitespace];
     vc.claimQLCType = ClaimQLCTypeMiningRewards;
     [self.navigationController pushViewController:vc animated:YES];
 }
