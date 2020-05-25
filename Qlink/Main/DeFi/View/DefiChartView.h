@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DefiChartConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,13 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^HistoryChartNoDataBlock)(void);
 typedef void(^HistoryChartHaveDataBlock)(void);
-
-typedef NS_ENUM(NSUInteger, DefiChartType) {
-    DefiChartTypeTVLUSD,
-    DefiChartTypeETH,
-    DefiChartTypeDAI,
-    DefiChartTypeBTC,
-};
 
 @interface DefiChartView : UIView
 

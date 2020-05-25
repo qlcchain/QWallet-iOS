@@ -19,9 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *views;//" : 4920,
 @property (nonatomic, strong) NSString *createDate;//" : "2020-04-27 19:36:00"
 @property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *imgPath;
 
 @property (nonatomic) BOOL isShowDetail;
 @property (nonatomic, strong) NSAttributedString *showContent;
+@property (nonatomic) BOOL requestContentSuccess;
 
 - (NSString *)formattedDefiNewsTime;
 

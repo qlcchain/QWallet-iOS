@@ -7,6 +7,7 @@
 //
 
 #import "BBaseModel.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,10 +41,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *variability;// = "";
 @property (nonatomic, strong) NSString *website;// = "";
 @property (nonatomic, strong) NSString *shortName;
+@property (nonatomic, strong) NSString *weight;
+@property (nonatomic, strong) NSString *score;
+@property (nonatomic, strong) NSString *qlcAmount;
+@property (nonatomic, strong) NSString *projectName;
 
 @property (nonatomic, strong) NSArray *tvlArr;
 
-- (NSString *)getRatingStr;
++ (NSString *)getRatingStr:(NSString *)_ratingr;
++ (UIColor *)getRatingColor:(NSString *)_rating;
+- (NSString *)getShowName;
+- (UIColor *)getCategoryColor;
++ (NSString *)getExperUrl:(NSString *)project;
++ (NSString *)getScoreStr:(NSString *)_selectRate;
 
 @end
 

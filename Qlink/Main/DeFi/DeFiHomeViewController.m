@@ -68,7 +68,7 @@
 
 - (void)refreshSegTitle {
     [_mainSeg setTitle:kLang(@"defi") forSegmentAtIndex:0];
-    [_mainSeg setTitle:kLang(@"hot") forSegmentAtIndex:1];
+    [_mainSeg setTitle:kLang(@"defi_hot") forSegmentAtIndex:1];
 }
 
 - (void)addChild {

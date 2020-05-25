@@ -97,7 +97,7 @@ NSString *const Defi_Home_Record = @"Defi_Home_Record"; // defi首页历史记�
 NSString *const Defi_Detail_KeyStats = @"Defi_Detail_KeyStats"; // defi详情KeyStats
 NSString *const Defi_Detail_ActiveData = @"Defi_Detail_ActiveData"; // defi详情ActiveData
 NSString *const Defi_Detail_HistoricalStats = @"Defi_Detail_HistoricalStats"; // defi详情HistoricalStats
-NSString *const Defi_Detail_Rate = @"Defi_Detail_Rate"; // defi详情Rate
+NSString *const Defi_Detail_Rate_ = @"Defi_Detail_Rate_"; // defi详情Rate
 NSString *const Defi_Detail_Explore = @"Defi_Detail_Explore"; // defi详情Explore
 
 

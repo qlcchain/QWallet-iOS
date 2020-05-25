@@ -212,6 +212,9 @@ extern NSString *const defi_rating_Url; // 192 DeFi项目评级
 extern NSString *const defi_category_list_Url; // 193 DeFi项目类型列表
 extern NSString *const defi_project_Url; // 194 DeFi项目详情
 extern NSString *const defi_news_list_Url; // 195 DeFi新闻列表
+extern NSString *const defi_news_Url; // 196 DeFi 新闻详情
+extern NSString *const defi_rating_info_Url; // 197 DeFi 项目评级详情
+extern NSString *const defi_stats_cache_Url; // 198 DeFi 项目统计缓存
 
 
 extern NSString *const allUnpspentAsset_url; // 正式接口（neo及其token转账）

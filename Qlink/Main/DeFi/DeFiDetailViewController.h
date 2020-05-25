@@ -12,9 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class DefiProjectListModel;
 
+typedef void(^DeFiDetailRatingCompleteBlock)(DefiProjectListModel *listM);
+
 @interface DeFiDetailViewController : QBaseViewController
 
 @property (nonatomic, strong) DefiProjectListModel *inputProjectListM;
+@property (nonatomic, copy) DeFiDetailRatingCompleteBlock rateCompleteB;
 
 @end
 

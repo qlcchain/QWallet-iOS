@@ -58,6 +58,7 @@ static NSInteger TypeBtn_Tag = 4000;
 @property (nonatomic, strong) NSString *lockedStr;
 @property (nonatomic) NSInteger selectTypeIndex;
 @property (nonatomic, strong) NSString *selectTypeStr;
+@property (nonatomic) BOOL isRequestEnable;
 
 @end
 
@@ -83,11 +84,11 @@ static NSInteger TypeBtn_Tag = 4000;
     [self configInit];
     [self refreshTypeView:YES];
     
-    [self request_defi_category_list];
-//    kWeakSelf(self);
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [weakself request_defi_project_list];
-//    });
+    
+    kWeakSelf(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakself request_defi_category_list];
+    });
     
 }
 
@@ -99,6 +100,7 @@ static NSInteger TypeBtn_Tag = 4000;
 
 #pragma mark - Operation
 - (void)configInit {
+    _isRequestEnable = YES;
     _recordContentBack.hidden = YES;
     _selectTypeIndex = 0;
     _selectTypeStr = Defi_type_all;
@@ -107,7 +109,7 @@ static NSInteger TypeBtn_Tag = 4000;
     _lockedBtn.selected = YES;
     NSArray *tm_defi_project_list = [[TMCache sharedCache] objectForKey:TM_defi_project_list]?:@[];
     _sourceArr = [NSMutableArray arrayWithArray:tm_defi_project_list];
-//    _sourceShowArr = _sourceArr;
+//    _sourceArr = [NSMutableArray array];
     _tpyeTitleEnArr = [NSMutableArray arrayWithObject:Defi_type_all];
     [_mainTable registerNib:[UINib nibWithNibName:DeFiHomeCell_Reuse bundle:nil] forCellReuseIdentifier:DeFiHomeCell_Reuse];
     self.baseTable = _mainTable;
@@ -145,6 +147,7 @@ static NSInteger TypeBtn_Tag = 4000;
 //}
 
 - (void)refreshTypeView:(BOOL)isRequestFirst {
+    _isRequestEnable = isRequestFirst;
     kWeakSelf(self);
     [_scrollContent.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj removeFromSuperview];
@@ -193,15 +196,16 @@ static NSInteger TypeBtn_Tag = 4000;
     }
     _scrollContentWidth.constant = contentWidth;
     
-    if (isRequestFirst) {
-        if (_tpyeTitleEnArr.count > 0) {
-            UIButton *firstBtn = [weakself.scrollContent viewWithTag:TypeBtn_Tag];
-            [self typeHandler:firstBtn];
-        }
+    if (_tpyeTitleEnArr.count > 0) {
+        UIButton *firstBtn = [weakself.scrollContent viewWithTag:TypeBtn_Tag];
+        [self typeHandler:firstBtn];
     }
 }
 
 - (void)typeHandler:(UIButton *)btn {
+    if (_recordBtn.selected == YES) {
+        [self recordAction:_recordBtn];
+    }
     if (btn.selected == YES) {
         return;
     }
@@ -215,9 +219,13 @@ static NSInteger TypeBtn_Tag = 4000;
 
     _selectTypeIndex = index;
     _selectTypeStr = _tpyeTitleEnArr[_selectTypeIndex];
-    [self refreshDataByType];
+    if (_isRequestEnable) {
+        [self refreshDataByType];
+    }
     NSString *event = [NSString stringWithFormat:@"%@%@",Defi_Home_Category_,_selectTypeStr];
     [FirebaseUtil logEventWithItemID:event itemName:event contentType:event];
+    
+    _isRequestEnable = YES;
 }
 
 - (void)refreshDataByType {
@@ -261,9 +269,10 @@ static NSInteger TypeBtn_Tag = 4000;
         [weakself.mainTable.mj_footer endRefreshing];
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = [DefiProjectListModel mj_objectArrayWithKeyValuesArray:responseObject[@"projectList"]];
-            if (weakself.currentPage == 1) {
+            if ([page integerValue] == 1) {
                 [weakself.sourceArr removeAllObjects];
                 [[TMCache sharedCache] setObject:arr forKey:TM_defi_project_list];
+                weakself.currentPage = [page integerValue];
             }
             
             [weakself.sourceArr addObjectsFromArray:arr];
@@ -279,6 +288,8 @@ static NSInteger TypeBtn_Tag = 4000;
             } else {
                 weakself.mainTable.mj_footer.hidden = NO;
             }
+            
+            [weakself request_defi_stats_cache];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [weakself.mainTable.mj_header endRefreshing];
@@ -293,11 +304,50 @@ static NSInteger TypeBtn_Tag = 4000;
         if ([responseObject[Server_Code] integerValue] == 0) {
             NSArray *arr = responseObject[@"categoryList"];
             [weakself.tpyeTitleEnArr addObjectsFromArray:arr];
-            [weakself refreshTypeView:YES];
+            [weakself refreshTypeView:NO];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
 }
+
+- (void)request_defi_stats_cache {
+    kWeakSelf(self);
+    NSMutableString *projectIds = [NSMutableString string];
+    [_sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        DefiProjectListModel *model = obj;
+        if (model.cache == nil) {
+            [projectIds appendFormat:@"%@,",model.ID];
+        }
+    }];
+    if (projectIds.length > 0) {
+        [projectIds deleteCharactersInRange:NSMakeRange(projectIds.length-1, 1)];
+    }
+    
+    if (projectIds.length <= 0) {
+        return;
+    }
+    
+    NSDictionary *params = @{@"projectIds":projectIds};
+    [RequestService requestWithUrl5:defi_stats_cache_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            NSArray *arr = responseObject[@"statsCache"];
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDictionary *dic = obj;
+                [weakself.sourceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    DefiProjectListModel *model = obj;
+                    if ([model.ID isEqualToString:dic[@"id"]]) {
+                        model.cache = dic[@"cache"];
+                        *stop = YES;
+                    }
+                }];
+            }];
+            [weakself.mainTable reloadData];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+    }];
+}
+
+
 
 
 #pragma mark - UITableViewDataSource
@@ -391,6 +441,24 @@ static NSInteger TypeBtn_Tag = 4000;
 - (void)jumpToDeFiDetail:(DefiProjectListModel *)model {
     DeFiDetailViewController *vc = [DeFiDetailViewController new];
     vc.inputProjectListM = model;
+    kWeakSelf(self);
+    vc.rateCompleteB = ^(DefiProjectListModel * _Nonnull listM) {
+        __block NSInteger replaceIndex = -1;
+        NSArray *tempArr = [NSArray arrayWithArray:weakself.sourceArr];
+        [tempArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            DefiProjectListModel *tempM = obj;
+            if ([tempM.ID isEqualToString:listM.ID]) {
+                [weakself.sourceArr replaceObjectAtIndex:idx withObject:listM];
+                replaceIndex = idx;
+                *stop = YES;
+            }
+        }];
+        
+        if (replaceIndex >= 0) {
+            [weakself.mainTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:replaceIndex inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 

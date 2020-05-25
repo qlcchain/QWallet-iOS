@@ -11,6 +11,7 @@
 #import "RefreshHelper.h"
 #import "WebViewController.h"
 #import "DefiNewsListModel.h"
+#import "DeFiNewsWebViewController.h"
 
 static NSString *const NetworkSize = @"20";
 
@@ -51,6 +52,8 @@ static NSString *const NetworkSize = @"20";
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:DeFiHotCell_Reuse bundle:nil] forCellReuseIdentifier:DeFiHotCell_Reuse];
+    _mainTable.estimatedRowHeight = 60;
+    _mainTable.rowHeight = UITableViewAutomaticDimension;
     self.baseTable = _mainTable;
     
     kWeakSelf(self)
@@ -97,6 +100,38 @@ static NSString *const NetworkSize = @"20";
     }];
 }
 
+//- (void)request_defi_news:(DefiNewsListModel *)model {
+//    kWeakSelf(self);
+//    NSDictionary *params = @{@"newsId":model.ID};
+//    [kAppD.window makeToastInView:kAppD.window];
+//    [RequestService requestWithUrl5:defi_news_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+//        [kAppD.window hideToast];
+//        if ([responseObject[Server_Code] integerValue] == 0) {
+//            DefiNewsListModel *resultM = [DefiNewsListModel mj_objectWithKeyValues:responseObject[@"news"]];
+//            
+//            NSString *inputJson = resultM.content;
+//            [weakself jumpToDeFiNewsWeb:inputJson title:resultM.title];
+//            return;
+//            
+//            resultM.requestContentSuccess = YES;
+//            resultM.isShowDetail = YES;
+//            
+//            NSArray *tempArr = [NSArray arrayWithArray:weakself.sourceArr];
+//            [tempArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                DefiNewsListModel *tempM = obj;
+//                if ([tempM.ID isEqualToString:resultM.ID]) {
+//                    [weakself.sourceArr replaceObjectAtIndex:idx withObject:resultM];
+//                    *stop = YES;
+//                }
+//            }];
+//
+//            [weakself.mainTable reloadData];
+//        }
+//    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+//        [kAppD.window hideToast];
+//    }];
+//}
+
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -107,11 +142,17 @@ static NSString *const NetworkSize = @"20";
     DeFiHotCell *cell = [tableView dequeueReusableCellWithIdentifier:DeFiHotCell_Reuse];
     
     DefiNewsListModel *model = _sourceArr[indexPath.row];
-    kWeakSelf(self);
+//    kWeakSelf(self);
     [cell config:model index:indexPath.row contentB:^(DefiNewsListModel * _Nonnull newsM, NSInteger index) {
 //        if (newsM.content && newsM.content.length > 0) {
 //            [weakself.mainTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0] ] withRowAnimation:UITableViewRowAnimationNone];
-            [weakself.mainTable reloadData];
+        
+//        if (newsM.requestContentSuccess) {
+//            [weakself.mainTable reloadData];
+//        } else {
+//            [weakself request_defi_news:newsM];
+//        }
+            
 //        }
     }];
     
@@ -119,26 +160,34 @@ static NSString *const NetworkSize = @"20";
 }
 
 #pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DefiNewsListModel *model = _sourceArr[indexPath.row];
-    return [DeFiHotCell cellHeight:model];
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    DefiNewsListModel *model = _sourceArr[indexPath.row];
+//    return [DeFiHotCell cellHeight:model];
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-//    https://www.chainnews.com/articles/360764508535.htm
-    NSString *url = @"https://www.chainnews.com/articles/360764508535.htm";
-//    NSString *url = @"https://cointelegraph.com/tags/defi";
-    [self jumpToWeb:url];
+//    NSString *url = @"https://www.chainnews.com/articles/360764508535.htm"; // 中文
+//    NSString *url = @"https://cointelegraph.com/tags/defi"; // 英文
+//    [self jumpToWeb:url];
+    DefiNewsListModel *model = _sourceArr[indexPath.row];
+    [self jumpToDeFiNewsWeb:model.title newsID:model.ID];
 }
 
 #pragma mark - Transition
 - (void)jumpToWeb:(NSString *)url {
     WebViewController *vc = [WebViewController new];
-    vc.inputTitle = kLang(@"hot");
+    vc.inputTitle = kLang(@"defi_hot");
     vc.inputUrl = url;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jumpToDeFiNewsWeb:(NSString *)title newsID:(NSString *)newsID {
+    DeFiNewsWebViewController *vc = [DeFiNewsWebViewController new];
+//    vc.inputTitle = title;
+    vc.projectID = newsID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

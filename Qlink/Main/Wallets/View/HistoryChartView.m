@@ -10,6 +10,7 @@
 #import <Charts/Charts-Swift.h>
 #import "UIColor+Random.h"
 #import "GlobalConstants.h"
+#import "HistoryChartXValueFormatter.h"
 
 @interface HistoryChartView ()  <ChartViewDelegate>
 
@@ -40,10 +41,14 @@
     [_chartView setScaleEnabled:YES];
     _chartView.pinchZoomEnabled = YES;
     _chartView.drawGridBackgroundEnabled = NO;
+    _chartView.legend.enabled = NO;
+    _chartView.xAxis.labelPosition = XAxisLabelPositionBottom;
+    _chartView.xAxis.labelFont = [UIFont systemFontOfSize:8.f];
+    _chartView.xAxis.labelRotationAngle = -30;
     
     // x-axis limit line
     ChartLimitLine *llXAxis = [[ChartLimitLine alloc] initWithLimit:10.0 label:@"Index 10"];
-    llXAxis.lineWidth = 4.0;
+    llXAxis.lineWidth = 2.0;
     llXAxis.lineDashLengths = @[@(10.f), @(10.f), @(0.f)];
     llXAxis.labelPosition = ChartLimitLabelPositionBottomRight;
     llXAxis.valueFont = [UIFont systemFontOfSize:10.f];
@@ -52,6 +57,7 @@
     
     _chartView.xAxis.gridLineDashLengths = @[@10.0, @10.0];
     _chartView.xAxis.gridLineDashPhase = 0.f;
+    _chartView.xAxis.valueFormatter = [[HistoryChartXValueFormatter alloc] init];
     
 //    ChartLimitLine *ll1 = [[ChartLimitLine alloc] initWithLimit:150.0 label:@"Upper Limit"];
 //    ll1.lineWidth = 4.0;
@@ -132,8 +138,9 @@
     NSMutableArray *values = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < _lineArr.count; i++) {
+        double key = [_lineArr[i][0] doubleValue];
         double val = [_lineArr[i][1] doubleValue];
-        [values addObject:[[ChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+        [values addObject:[[ChartDataEntry alloc] initWithX:key y:val icon: [UIImage imageNamed:@"icon"]]];
     }
     
     LineChartDataSet *set1 = nil;
@@ -158,7 +165,7 @@
         [set1 setColor:[UIColor mainColor]];
         [set1 setCircleColor:[UIColor mainColor]];
         set1.lineWidth = 1.0;
-        set1.circleRadius = 3.0;
+        set1.circleRadius = 2.0;
         set1.drawCircleHoleEnabled = NO;
         set1.valueFont = [UIFont systemFontOfSize:9.f];
         set1.formLineDashLengths = @[@5.f, @2.5f];
@@ -209,6 +216,13 @@
             [weakself.lineArr removeAllObjects];
             NSArray *arr = [responseObject objectForKey:Server_Data];
             [weakself.lineArr addObjectsFromArray:arr];
+            [weakself.lineArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NSArray *arr1 = obj1;
+                NSInteger time1 = [arr1[0] integerValue];
+                NSArray *arr2 = obj2;
+                NSInteger time2 = [arr2[0] integerValue];
+                return time1>time2;
+            }];
             [weakself updateChartData];
             if (weakself.lineArr.count <= 0) {
                 if (weakself.noDataB) {
