@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +32,7 @@
                             <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEz-La-aiI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.28934" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNB-zK-KLb">
                                             <rect key="frame" x="8" y="16" width="359" height="36"/>
@@ -53,7 +53,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NuP-ac-nXk">
-                                            <rect key="frame" x="0.0" y="75" width="375" height="144"/>
+                                            <rect key="frame" x="0.0" y="75" width="375" height="185"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
@@ -69,13 +69,13 @@
                                         <constraint firstAttribute="trailing" secondItem="NuP-ac-nXk" secondAttribute="trailing" id="c9H-VZ-VmF"/>
                                         <constraint firstItem="SNB-zK-KLb" firstAttribute="leading" secondItem="PEz-La-aiI" secondAttribute="leading" constant="8" id="dFG-Z6-dtf"/>
                                         <constraint firstItem="j5b-ee-yKd" firstAttribute="leading" secondItem="PEz-La-aiI" secondAttribute="leading" constant="8" id="e93-CM-Lu1"/>
-                                        <constraint firstAttribute="height" constant="219" id="gUe-Ja-G7K"/>
+                                        <constraint firstAttribute="height" constant="260" id="gUe-Ja-G7K"/>
                                         <constraint firstItem="NuP-ac-nXk" firstAttribute="top" secondItem="j5b-ee-yKd" secondAttribute="bottom" constant="1" id="gb7-Gd-iNm"/>
                                         <constraint firstAttribute="trailing" secondItem="SNB-zK-KLb" secondAttribute="trailing" constant="8" id="rRw-Yf-sz5"/>
                                     </constraints>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2E2-sA-GWi">
-                                    <rect key="frame" x="0.0" y="219" width="375" height="356"/>
+                                    <rect key="frame" x="0.0" y="260" width="375" height="315"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="vyc-1G-sMD"/>

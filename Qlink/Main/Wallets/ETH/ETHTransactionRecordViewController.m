@@ -91,13 +91,14 @@
     [_chartBack addSubview:_chartV];
     kWeakSelf(self);
     [_chartV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(weakself.chartBack).offset(0);
+        make.top.left.bottom.mas_equalTo(weakself.chartBack).offset(0);
+        make.right.mas_equalTo(weakself.chartBack).offset(-10);
     }];
     
     [_chartV updateWithSymbol:_inputToken.tokenInfo.symbol noDataBlock:^{
-        weakself.chartBackHeight.constant = 219-144;
+        weakself.chartBackHeight.constant = 260-144;
     } haveDataBlock:^{
-        weakself.chartBackHeight.constant = 219;
+        weakself.chartBackHeight.constant = 260;
     }];
 }
 

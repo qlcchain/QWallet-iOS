@@ -26,6 +26,7 @@
 #import "FirebaseConstants.h"
 #import "FirebaseUtil.h"
 #import "DefiRateFailView.h"
+#import "DeFiRatingViewController.h"
 
 @interface DeFiDetailViewController () <UIScrollViewDelegate>
 
@@ -60,8 +61,8 @@
 @property (nonatomic, strong) DeFiKeystatsViewController *keystats;
 
 @property (nonatomic, strong) DefiRateLoadView *rateLoadView;
-@property (nonatomic, strong) __block NSString *qlcAmount_Neo;
-@property (nonatomic, strong) NSString *selectScore;
+//@property (nonatomic, strong) __block NSString *qlcAmount_Neo;
+@property (nonatomic, strong) DefiProjectModel *projectM;
 
 @end
 
@@ -184,78 +185,7 @@
     }];
 }
 
-- (void)getUserQLCAmount_NEO {
-    _rateLoadView = [DefiRateLoadView getInstance];
-    [_rateLoadView show];
-    
-    _qlcAmount_Neo = @"0";
-    NSArray *neoWallet = [NEOWalletInfo getAllWalletInKeychain];
-    if (neoWallet.count > 0) {
-        [self getUserQLCAmountOneByOne_NEO:neoWallet];
-    } else { // 所有neo钱包的qlc总量=0
-        [[DefiRateFailView getInstance] show];
-//        [self request_defi_rating];
-    }
-}
-
-- (void)getUserQLCAmountOneByOne_NEO:(NSArray *)neoArr {
-    kWeakSelf(self);
-    NSMutableArray *tempArr = [NSMutableArray arrayWithArray:neoArr];
-    NEOWalletInfo *model = tempArr.firstObject;
-    [TokenListHelper requestNEOAddressInfo:model.address?:@"" showLoad:NO completeBlock:^(NEOAddressInfoModel *infoM, BOOL success) {
-        if (success) {
-            [infoM.balance enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                NEOAssetModel *assetModel = obj;
-                if ([assetModel.asset_symbol isEqualToString:@"QLC"]) {
-                    weakself.qlcAmount_Neo = weakself.qlcAmount_Neo.add(assetModel.amount);
-                    *stop = YES;
-                }
-            }];
-            [tempArr removeObjectAtIndex:0];
-            if (tempArr.count > 0) {
-                [weakself getUserQLCAmountOneByOne_NEO:tempArr];
-            } else { // 所有neo钱包的qlc总量
-                RLComparisonResult result = weakself.qlcAmount_Neo.compare(@"0");
-                if (result == RLOrderedSame || result == RLOrderedAscending) {
-                    [[DefiRateFailView getInstance] show];
-                } else {
-                    [weakself request_defi_rating];
-                }
-            }
-        } else {
-            [weakself.rateLoadView hide];
-            [kAppD.window makeToastDisappearWithText:@"defi_load_qlc_amount_fail"];
-        }
-    }];
-}
-
 #pragma mark - Request
-- (void)request_defi_rating {
-    UserModel *userM = [UserModel fetchUserOfLogin];
-    if (!userM.md5PW || userM.md5PW.length <= 0) {
-        return;
-    }
-    kWeakSelf(self);
-    NSString *account = userM.account?:@"";
-    NSString *md5PW = userM.md5PW?:@"";
-    NSString *timestamp = [RequestService getRequestTimestamp];
-    NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
-    NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *projectId = _inputProjectListM.ID?:@"";
-    NSString *qlcAmount = _qlcAmount_Neo?:@"";
-    NSString *score = _selectScore?:@"";
-    NSDictionary *params = @{@"account":account,@"token":token,@"projectId":projectId,@"score":score,@"qlcAmount":qlcAmount};
-    [RequestService requestWithUrl6:defi_rating_Url params:params timestamp:timestamp httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
-        [weakself.rateLoadView hide];
-        if ([responseObject[Server_Code] integerValue] == 0) {
-            [weakself request_defi_project];
-        } else {
-            [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
-        }
-    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
-        [weakself.rateLoadView hide];
-    }];
-}
 
 - (void)request_defi_project {
     kWeakSelf(self);
@@ -263,12 +193,14 @@
     NSDictionary *params = @{@"projectId":projectId};
     [RequestService requestWithUrl5:defi_project_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
-            DefiProjectModel *model = [DefiProjectModel mj_objectWithKeyValues:responseObject[@"project"]];
-            weakself.detailLab.text = model.Description;
-            weakself.rateBack.hidden = [model.rating integerValue] == 0?YES:NO;
-            weakself.ratingValLab.text = [model getRatingStr];
+            weakself.projectM = [DefiProjectModel mj_objectWithKeyValues:responseObject[@"project"]];
+            weakself.detailLab.text = weakself.projectM.Description;
+//            weakself.rateBack.hidden = [weakself.projectM.rating integerValue] == 0?YES:NO;
+            weakself.rateBack.hidden = NO;
+            weakself.rateBack.backgroundColor = [DefiProjectModel getRatingColor:weakself.projectM.rating];
+            weakself.ratingValLab.text = [DefiProjectModel getRatingStr:weakself.projectM.rating];
             
-            [weakself.keystats refreshView:model.tvlArr];
+            [weakself.keystats refreshView:weakself.projectM.tvlArr];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -308,13 +240,13 @@
         return;
     }
     
-    kWeakSelf(self);
-    [[DefiRatePopView getInstance] show:^(NSString * _Nonnull score) {
-        weakself.selectScore = score;
-        [weakself getUserQLCAmount_NEO];
-    }];
+    [self jumpToDeFiRating];
     
-    [FirebaseUtil logEventWithItemID:Defi_Detail_Rate itemName:Defi_Detail_Rate contentType:Defi_Detail_Rate];
+//    kWeakSelf(self);
+//    [[DefiRatePopView getInstance] show:^(NSString * _Nonnull score) {
+//        weakself.selectScore = score;
+//        [weakself getUserQLCAmount_NEO];
+//    }];
 }
 
 - (IBAction)experAction:(id)sender {
@@ -400,6 +332,22 @@
 //    [self.navigationController pushViewController:webVC animated:YES];
 //}
 
-
+#pragma mark - Transition
+- (void)jumpToDeFiRating {
+    if (!_projectM) {
+        return;
+    }
+    kWeakSelf(self);
+    DeFiRatingViewController *vc = [DeFiRatingViewController new];
+    vc.inputProjectM = _projectM;
+    vc.ratingSuccessB = ^(NSString * _Nonnull rating) {
+        if (weakself.rateCompleteB) {
+            weakself.inputProjectListM.rating = rating;
+            weakself.rateCompleteB(weakself.inputProjectListM);
+        }
+        [weakself request_defi_project];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

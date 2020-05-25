@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic) double tvlUsd;// = "0E-12";
 //@property (nonatomic, strong) NSString *tvlUsd_str;// = "";
 @property (nonatomic, strong) NSString *shortName;
+@property (nonatomic, strong) NSString *rating;
+@property (nonatomic, strong) NSArray *cache;
 
 - (NSString *)getShowName;
 - (UIColor *)getCategoryColor;

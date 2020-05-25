@@ -14,6 +14,8 @@
 
 #define yyyyMMddHHmmss @"yyyy-MM-dd HH:mm:ss"
 #define MMddHHmm @"MM-dd HH:mm"
+#define yyyyMMdd @"yyyy-MM-dd"
+#define yyyyMMddHHmm @"yyyy-MM-dd HH:mm"
 
 #define D_MINUTE	60
 #define D_HOUR		3600

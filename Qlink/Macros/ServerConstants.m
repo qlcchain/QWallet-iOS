@@ -209,6 +209,9 @@ NSString *const defi_rating_Url = @"/api/defi/rating.json"; // 192 DeFi项目评
 NSString *const defi_category_list_Url = @"/api/defi/category_list.json"; // 193 DeFi项目类型列表
 NSString *const defi_project_Url = @"/api/defi/project.json"; // 194 DeFi项目详情
 NSString *const defi_news_list_Url = @"/api/defi/news_list.json"; // 195 DeFi新闻列表
+NSString *const defi_news_Url = @"/api/defi/news.json"; // 196 DeFi 新闻详情
+NSString *const defi_rating_info_Url = @"/api/defi/rating_info.json"; // 197 DeFi 项目评级详情
+NSString *const defi_stats_cache_Url = @"/api/defi/stats_cache.json"; // 198 DeFi 项目统计缓存
 
 
 NSString *const allUnpspentAsset_url = @"/api/neo/mainNet/allUnpspentAsset.json"; // 正式接口（neo及其token转账）

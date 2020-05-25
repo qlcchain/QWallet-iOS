@@ -13,6 +13,9 @@
 #import "DefiHistoricalStatsListModel.h"
 #import "DefiProjectListModel.h"
 #import "NSString+RemoveZero.h"
+#import "DefiChartXValueFormatter.h"
+#import "DefiChartYValueFormatter.h"
+#import "NSDate+Category.h"
 
 @interface DefiChartView ()  <ChartViewDelegate>
 
@@ -41,12 +44,14 @@
     _chartView.chartDescription.enabled = NO;
     _chartView.noDataText = @"No Data";
     _chartView.drawMarkers = NO;
-    _chartView.doubleTapToZoomEnabled = NO;
+    _chartView.doubleTapToZoomEnabled = YES;
+    _chartView.legend.enabled = NO;
     
-    _chartView.dragEnabled = NO;
-    [_chartView setScaleEnabled:NO];
-    _chartView.pinchZoomEnabled = NO;
+    _chartView.dragEnabled = YES;
+    [_chartView setScaleEnabled:YES];
+    _chartView.pinchZoomEnabled = YES;
     _chartView.drawGridBackgroundEnabled = NO;
+    _chartView.xAxis.labelPosition = XAxisLabelPositionBottom;
     
     // x-axis limit line
 //    ChartLimitLine *llXAxis = [[ChartLimitLine alloc] initWithLimit:10.0 label:@"Index 10"];
@@ -81,6 +86,7 @@
     leftAxis.gridLineDashLengths = @[@5.f, @5.f];
     leftAxis.drawZeroLineEnabled = NO;
     leftAxis.drawLimitLinesBehindDataEnabled = YES;
+//    leftAxis.inverted = YES;
     
     _chartView.rightAxis.enabled = NO;
     
@@ -111,10 +117,17 @@
     leftAxis.axisMinimum = min;
 }
 
+- (void)refreshXAxisWithMax:(double)max min:(double)min {
+    ChartXAxis *xAxis = _chartView.xAxis;
+    xAxis.axisMaximum = max;
+    xAxis.axisMinimum = min;
+}
+
 - (void)configWithNoDataBlock:(HistoryChartNoDataBlock)noDataBlock haveDataBlock:(HistoryChartHaveDataBlock)haveDataBlock {
     _noDataB = noDataBlock;
     _haveDataB = haveDataBlock;
 //    [self request_defi_stats_list];
+    
     
     if (_noDataB) {
         _noDataB();
@@ -126,19 +139,43 @@
 }
 
 - (void)refreshChart {
+    DefiChartYValueFormatter *yF = [[DefiChartYValueFormatter alloc] init];
+    yF.inputType = _inputType;
+    _chartView.leftAxis.valueFormatter = yF;
+//    _chartView.xAxis.labelPosition = XAxisLabelPositionTopInside;
+//    _chartView.xAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.f];
+    _chartView.xAxis.labelFont = [UIFont systemFontOfSize:8.f];
+    _chartView.xAxis.labelRotationAngle = -15;
+//    _chartView.xAxis.labelTextColor = [UIColor colorWithRed:255/255.0 green:192/255.0 blue:56/255.0 alpha:1.0];
+    DefiChartXValueFormatter *xF = [[DefiChartXValueFormatter alloc] init];
+    _chartView.xAxis.valueFormatter = xF;
+    
     kWeakSelf(self);
     [_lineArr removeAllObjects];
     [_statsListArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         DefiHistoricalStatsListModel *model = obj;
+        NSInteger x = [NSDate getTimestampFromDate:[NSDate dateFromTime_c:model.statsDate]];
+        NSString *xStr = [NSString stringWithFormat:@"%@",@(x)];
         if (weakself.inputType == DefiChartTypeTVLUSD) {
-            [weakself.lineArr addObject:model.tvlUsd];
+            NSDictionary *dic = @{@"x":xStr,@"y":model.tvlUsd};
+            [weakself.lineArr addObject:dic];
         } else if (weakself.inputType == DefiChartTypeETH) {
-            [weakself.lineArr addObject:model.eth];
+            NSDictionary *dic = @{@"x":xStr,@"y":model.eth};
+            [weakself.lineArr addObject:dic];
         } else if (weakself.inputType == DefiChartTypeDAI) {
-            [weakself.lineArr addObject:model.dai];
-        } else if (weakself.inputType == DefiChartTypeDAI) {
-           [weakself.lineArr addObject:model.btc];
+            NSDictionary *dic = @{@"x":xStr,@"y":model.dai};
+            [weakself.lineArr addObject:dic];
+        } else if (weakself.inputType == DefiChartTypeBTC) {
+            NSDictionary *dic = @{@"x":xStr,@"y":model.btc};
+           [weakself.lineArr addObject:dic];
        }
+    }];
+    [_lineArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        NSDictionary *dic1 = obj1;
+        NSInteger x1 = [dic1[@"x"] doubleValue];
+        NSDictionary *dic2 = obj2;
+        NSInteger x2 = [dic2[@"x"] doubleValue];
+        return x1>x2;
     }];
     
     if (_lineArr.count <= 0) {
@@ -156,17 +193,31 @@
 
 - (void)updateChartData {
 //    NSInteger usingIndex = 1;
-    NSMutableArray *usingDataArr = [NSMutableArray array];
-    [usingDataArr addObjectsFromArray:_lineArr];
-    double maxLeftAxis = [[usingDataArr valueForKeyPath:@"@max.doubleValue"] doubleValue];
-    double minLeftAxis = [[usingDataArr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+    NSMutableArray *yDataArr = [NSMutableArray array];
+    [_lineArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = obj;
+        [yDataArr addObject:dic[@"y"]];
+    }];
+    double maxLeftAxis = [[yDataArr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+    double minLeftAxis = [[yDataArr valueForKeyPath:@"@min.doubleValue"] doubleValue];
     [self refreshLeftAxisWithMax:maxLeftAxis min:minLeftAxis];
+//    NSMutableArray *xDataArr = [NSMutableArray array];
+//    [_lineArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSDictionary *dic = obj;
+//        [xDataArr addObject:dic[@"x"]];
+//    }];
+//    double maxXAxis = [[xDataArr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+//    double minXAxis = [[xDataArr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+//    [self refreshXAxisWithMax:maxXAxis min:minXAxis];
     
     NSMutableArray *values = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < _lineArr.count; i++) {
-        double val = [_lineArr[i] doubleValue];
-        [values addObject:[[ChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+        NSDictionary *dic = _lineArr[i];
+        double x = [dic[@"x"] doubleValue];
+        double y = [dic[@"y"] doubleValue];
+        [values addObject:[[ChartDataEntry alloc] initWithX:x y:y]];
+//        [values addObject:[[ChartDataEntry alloc] initWithX:x y:y icon:[UIImage imageNamed:@"icon"]]];
     }
     
     LineChartDataSet *set1 = nil;

@@ -51,35 +51,27 @@
                                     <constraint firstAttribute="width" constant="1" id="7Ld-NH-VKg"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maker 基金会任命 4 名董事会成员，新增 2 名外部独立董事" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1b7-BC-nJ4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Maker 基金会任命 4 名董事会成员，新增 2 名外部独立董事" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1b7-BC-nJ4">
                                 <rect key="frame" x="28.5" y="40.5" width="275.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="链闻消息，Maker 基金会重新任命董事会成员，将由两位基金会成员和两名独立成员组成。这四名成员分别是 MakerDAO 创始人和 Maker 基金会首席执行官 Rune Christensen、Maker 基金会…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yv-6B-hEU">
-                                <rect key="frame" x="28.5" y="84.5" width="275.5" height="107.5"/>
+                                <rect key="frame" x="28.5" y="84.5" width="275.5" height="95.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vmf-Hx-tYj">
-                                <rect key="frame" x="28.5" y="84.5" width="275.5" height="107.5"/>
-                                <connections>
-                                    <action selector="contentAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uoi-nC-5kL"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5Yv-6B-hEU" firstAttribute="leading" secondItem="1b7-BC-nJ4" secondAttribute="leading" id="2IE-B1-5X8"/>
                             <constraint firstItem="4c2-1T-fTb" firstAttribute="top" secondItem="7B1-NC-0aN" secondAttribute="top" constant="18" id="3HH-TE-Ycf"/>
                             <constraint firstItem="5Yv-6B-hEU" firstAttribute="trailing" secondItem="1b7-BC-nJ4" secondAttribute="trailing" id="4FZ-g5-nwg"/>
+                            <constraint firstAttribute="bottom" secondItem="5Yv-6B-hEU" secondAttribute="bottom" constant="10" id="9p9-5f-IBa"/>
                             <constraint firstAttribute="bottom" secondItem="Qhs-UZ-NWf" secondAttribute="bottom" id="CZU-7m-69J"/>
-                            <constraint firstItem="Vmf-Hx-tYj" firstAttribute="top" secondItem="5Yv-6B-hEU" secondAttribute="top" id="Fm1-2X-xoL"/>
-                            <constraint firstItem="Vmf-Hx-tYj" firstAttribute="trailing" secondItem="5Yv-6B-hEU" secondAttribute="trailing" id="No4-eZ-1Az"/>
                             <constraint firstItem="1b7-BC-nJ4" firstAttribute="top" secondItem="VMJ-Fz-YIO" secondAttribute="bottom" constant="11" id="RTj-Qh-Aay"/>
-                            <constraint firstItem="Vmf-Hx-tYj" firstAttribute="bottom" secondItem="5Yv-6B-hEU" secondAttribute="bottom" id="SQc-Ie-Pts"/>
                             <constraint firstItem="VMJ-Fz-YIO" firstAttribute="leading" secondItem="4c2-1T-fTb" secondAttribute="trailing" constant="10" id="U7a-bH-YUP"/>
                             <constraint firstItem="Qhs-UZ-NWf" firstAttribute="top" secondItem="4c2-1T-fTb" secondAttribute="bottom" id="Zdt-ID-a8G"/>
                             <constraint firstItem="5Yv-6B-hEU" firstAttribute="top" secondItem="1b7-BC-nJ4" secondAttribute="bottom" constant="8" id="b5s-cT-Ibl"/>
@@ -91,7 +83,6 @@
                             <constraint firstItem="4c2-1T-fTb" firstAttribute="leading" secondItem="7B1-NC-0aN" secondAttribute="leading" constant="11" id="phn-gG-c7X"/>
                             <constraint firstItem="Qhs-UZ-NWf" firstAttribute="centerX" secondItem="4c2-1T-fTb" secondAttribute="centerX" id="s5x-xo-8bf"/>
                             <constraint firstItem="dan-pJ-66F" firstAttribute="top" secondItem="7B1-NC-0aN" secondAttribute="top" id="xOr-1O-xqy"/>
-                            <constraint firstItem="Vmf-Hx-tYj" firstAttribute="leading" secondItem="5Yv-6B-hEU" secondAttribute="leading" id="z62-Cr-EP9"/>
                         </constraints>
                     </view>
                 </subviews>

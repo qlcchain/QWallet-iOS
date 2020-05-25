@@ -31,7 +31,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomBack;
 @property (weak, nonatomic) IBOutlet UIView *chartBack;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chartBackHeight; // 219-144
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chartBackHeight; // 260-144
 
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic, strong) NSMutableArray *tokenPriceArr;
@@ -107,13 +107,14 @@
     [_chartBack addSubview:_chartV];
     kWeakSelf(self);
     [_chartV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.mas_equalTo(weakself.chartBack).offset(0);
+        make.top.left.bottom.mas_equalTo(weakself.chartBack).offset(0);
+        make.right.mas_equalTo(weakself.chartBack).offset(-10);
     }];
     
     [_chartV updateWithSymbol:_inputAsset.tokenName noDataBlock:^{
-        weakself.chartBackHeight.constant = 219-144;
+        weakself.chartBackHeight.constant = 260-144;
     } haveDataBlock:^{
-        weakself.chartBackHeight.constant = 219;
+        weakself.chartBackHeight.constant = 260;
     }];
 }
 

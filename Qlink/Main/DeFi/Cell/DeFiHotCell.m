@@ -43,10 +43,15 @@
     
     _topLine.hidden = index==0?YES:NO;
     
-    _timeLab.text = [model formattedDefiNewsTime];
+//    _timeLab.text = [model formattedDefiNewsTime];
+    NSString *timeStr = model.createDate;
+    if (model.createDate && model.createDate.length >= 10) {
+        timeStr = [model.createDate substringToIndex:10];
+    }
+    _timeLab.text = timeStr;
     _titleLab.text = model.title;
-//    _contentLab.text = model.showContent;
-    _contentLab.attributedText = model.showContent;
+    _contentLab.text = model.leadText;
+//    _contentLab.attributedText = model.showContent;
     
 }
 
@@ -60,8 +65,9 @@
     UIFont *titleFont = [UIFont systemFontOfSize:15];
     titleHeight = [model.title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-28-16, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:titleFont} context:nil].size.height+2;
     
-//    UIFont *contentFont = [UIFont systemFontOfSize:15];
-    contentHeight = [model.showContent boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-28-16, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil].size.height+2;
+    UIFont *contentFont = [UIFont systemFontOfSize:15];
+    contentHeight = [model.leadText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-28-16, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:contentFont} context:nil].size.height+2;
+//    contentHeight = [model.leadText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-28-16, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil].size.height+2;
     
     return topOffset+titleHeight+centerOffset+contentHeight+bottomOffset;
 }
@@ -74,7 +80,6 @@
 }
 
 - (IBAction)contentAction:(UIButton *)sender {
-    
     _newsM.isShowDetail = !_newsM.isShowDetail;
     if (_contentB) {
         _contentB(_newsM,_index);

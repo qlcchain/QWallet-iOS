@@ -276,7 +276,7 @@
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-2q-27w">
-                                            <rect key="frame" x="347.5" y="2" width="40.5" height="40"/>
+                                            <rect key="frame" x="348" y="2" width="40" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRM-cq-DYd">
                                                     <rect key="frame" x="6" y="3" width="28.5" height="11"/>
@@ -284,8 +284,8 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A++" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28F-Wy-eJy">
-                                                    <rect key="frame" x="4" y="16" width="32.5" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28F-Wy-eJy">
+                                                    <rect key="frame" x="4" y="16" width="32" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -300,8 +300,7 @@
                                                 <constraint firstAttribute="height" constant="40" id="gAr-EK-9o0"/>
                                                 <constraint firstItem="28F-Wy-eJy" firstAttribute="leading" secondItem="ycc-2q-27w" secondAttribute="leading" constant="4" id="gyz-iJ-pWq"/>
                                                 <constraint firstItem="nRM-cq-DYd" firstAttribute="centerX" secondItem="ycc-2q-27w" secondAttribute="centerX" id="lsl-cS-ucj"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nRM-cq-DYd" secondAttribute="trailing" constant="6" id="nq4-QJ-pk7"/>
-                                                <constraint firstItem="nRM-cq-DYd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ycc-2q-27w" secondAttribute="leading" constant="6" id="xyy-UX-Yq0"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="tmm-Db-FlN"/>
                                             </constraints>
                                         </view>
                                     </subviews>

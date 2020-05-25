@@ -18,6 +18,8 @@
 
 //@property (nonatomic) WebFromType fromType;
 //@property (nonatomic, strong) NSString *inputTitle;
-@property (nonatomic, strong) NSString *inputUrl;
+//@property (nonatomic, strong) NSString *inputUrl;
+//@property (nonatomic, strong) NSString *inputJson;
+@property (nonatomic, strong) NSString *projectID;
 
 @end
