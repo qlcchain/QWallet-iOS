@@ -22,6 +22,7 @@
 #import "SystemUtil.h"
 #import "JPushTagHelper.h"
 #import "NSString+Trim.h"
+#import "SignView.h"
 
 @interface LoginViewController ()
 
@@ -35,8 +36,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *loginPWTF;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginVerifyCodeHeight; // 49
 @property (weak, nonatomic) IBOutlet UIButton *loginVerifyCodeBtn;
+@property (weak, nonatomic) IBOutlet UIView *codeView;
 
-
+// 人机验证
+@property (nonatomic, strong) SignView *signView;
+@property (nonatomic, strong) NSDictionary *signDic;
 @end
 
 @implementation LoginViewController
@@ -46,6 +50,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [self viewInit];
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+    self.signView.hidden = YES;
 }
 
 #pragma mark - Operation
@@ -161,7 +167,14 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address_or_phone_number")];
         return;
     }
-    [self requestVcode_signin_code];
+    
+   if (self.signDic) {
+        self.signDic = nil;
+       [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+    }
+    if (self.signView.hidden) {
+        self.signView.hidden = NO;
+    }
 }
 
 
@@ -232,7 +245,7 @@
 - (void)requestVcode_signin_code {
     NSString *account = [_loginAccountTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":account};
+    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_signin_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -298,6 +311,27 @@
     RegisterMailViewController *vc = [RegisterMailViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
+#pragma mark - WebViewUIDelegate
+
+- (SignView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignView alloc] initWithFrame:_codeView.bounds];
+        
+        kWeakSelf(self)
+        [_signView setSignResultBlock:^(NSDictionary * _Nonnull resultDic) {
+            weakself.signDic = resultDic;
+            [weakself requestVcode_signin_code];
+        }];
+        
+        [_codeView addSubview:_signView];
+        
+    }
+    return _signView;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

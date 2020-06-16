@@ -23,6 +23,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <OutbreakRed/OutbreakRed.h>
 #import "NSString+Trim.h"
+#import "SignView.h"
 
 @interface ClaimQLCViewController ()
 
@@ -42,11 +43,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletAddressLab;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeHeight; // 80
-@property (weak, nonatomic) IBOutlet UITextField *codeTF;
-@property (weak, nonatomic) IBOutlet UIImageView *codeImg;
-@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeHeight; // 55
 
+@property (weak, nonatomic) IBOutlet UIView *codeView;
+@property (nonatomic, strong) NSDictionary *signDic;
+@property (nonatomic, strong) SignView *signView;
 
 @property (nonatomic, strong) WalletCommonModel *sendQgasWalletM;
 
@@ -59,7 +60,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [self configInit];
-    [self getCode];
+    //[self getCode];
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"activieSign"];
 }
 
 #pragma mark - Operation
@@ -77,7 +79,7 @@
     if (_claimQLCType == ClaimQLCTypeMiningRewards) {
         _codeHeight.constant = 0;
     } else if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
-        _codeHeight.constant = 80;
+        _codeHeight.constant = 55;
         NSString *type = @"CLAIM_COVID_QLC";
         [self requestVcode_verify_code:type];
     }
@@ -95,7 +97,6 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *code = [_codeTF.text?:@"" trim_whitespace];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
     OR_RequestModel *requestM = [OR_RequestModel new];
     requestM.p2pId = [UserModel getTopupP2PId];
@@ -103,7 +104,8 @@
     requestM.appVersion = APP_Version;
     requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [kAppD.window makeToastInView:kAppD.window];
-    [OutbreakRedSDK requestGzbd_claim_qlcWithAccount:account token:token timestamp:timestamp code:code toAddress:toAddress requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+  
+    [OutbreakRedSDK requestGzbd_claim_qlc2WithAccount:account token:token timestamp:timestamp signDic:self.signDic toAddress:toAddress appKey:Sign_Key scene:Sign_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [kAppD.window hideToast];
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {
@@ -162,9 +164,9 @@
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
 //            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
-            NSString *codeUrlStr = responseObject[@"codeUrl"];
-            NSURL *codeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrlStr]];
-            [weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
+            //NSString *codeUrlStr = responseObject[@"codeUrl"];
+            //NSURL *codeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrlStr]];
+            //[weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -203,8 +205,8 @@
     if (_claimQLCType == ClaimQLCTypeMiningRewards) {
         
     } else if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
-        if ([_codeTF.text.trim_whitespace isEmptyString]) {
-            [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
+        if (!self.signDic || self.signDic.count == 0) {
+            [kAppD.window makeToastDisappearWithText:kLang(@"please_slide_erify")];
             return;
         }
     }
@@ -253,4 +255,23 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
+
+
+#pragma mark - WebViewUIDelegate
+- (SignView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignView alloc] initWithFrame:_codeView.bounds];
+        
+        kWeakSelf(self)
+        [_signView setSignResultBlock:^(NSDictionary * _Nonnull resultDic) {
+            weakself.signDic = resultDic;
+        }];
+        
+        [_codeView addSubview:_signView];
+        
+    }
+    return _signView;
+}
 @end

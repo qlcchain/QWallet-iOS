@@ -378,7 +378,6 @@
 		5840927823052A2C0054BCBB /* VotingMiningNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927623052A2C0054BCBB /* VotingMiningNodeViewController.m */; };
 		5840927D23052A410054BCBB /* ConfidantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840927B23052A410054BCBB /* ConfidantViewController.m */; };
 		5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5840928023052A640054BCBB /* TokenMintageViewController.m */; };
-		5842676E2446F86B00450C9B /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5842676D2446F86A00450C9B /* OutbreakRed.framework */; };
 		5842E0C72368181D001BB0D6 /* qwallet_index.html in Resources */ = {isa = PBXBuildFile; fileRef = 5842E0C62368181D001BB0D6 /* qwallet_index.html */; };
 		58436CE72451C677005DCE6F /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CD72451C674005DCE6F /* APIKit.framework */; };
 		58436CE82451C677005DCE6F /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 58436CD72451C674005DCE6F /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -891,6 +890,7 @@
 		73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */; };
 		73048F132079FE9000A4EFEE /* RatesMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F122079FE9000A4EFEE /* RatesMode.m */; };
 		73048F16207A19B500A4EFEE /* BalanceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F15207A19B500A4EFEE /* BalanceInfo.m */; };
+		730B985524937A190022A8EF /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B985424937A180022A8EF /* SignView.m */; };
 		7310AA0C20D0C71400F2261A /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 7310AA0A20D0C71300F2261A /* NSBundle+Language.m */; };
 		7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7323B76D20BCEF74005785F4 /* SettingCell.m */; };
 		7348C938206E0604009ACA5C /* WalletAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7348C937206E0603009ACA5C /* WalletAlertView.m */; };
@@ -908,6 +908,10 @@
 		735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BAF3A212550DB000A1B32 /* VPNDataUtil.m */; };
 		73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625ED02092FAC10027C62A /* HeartbeatUtil.m */; };
 		7362EB2920AAC17900F554FE /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7362EB2820AAC17900F554FE /* UIView+Toast.m */; };
+		736DA1F12498961A00576055 /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736DA1F02498961A00576055 /* OutbreakRed.framework */; };
+		736DA1F32498A09500576055 /* activieSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F22498A09500576055 /* activieSign.html */; };
+		736DA1F62498A0A000576055 /* loginSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F42498A0A000576055 /* loginSign.html */; };
+		736DA1F72498A0A000576055 /* registerSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F52498A0A000576055 /* registerSign.html */; };
 		7377D173206B84620072E628 /* LocationManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D172206B84610072E628 /* LocationManage.m */; };
 		7377D176206B8D560072E628 /* LocationMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D175206B8D560072E628 /* LocationMode.m */; };
 		7377D179206B9E730072E628 /* VPNMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D178206B9E730072E628 /* VPNMode.m */; };
@@ -1828,7 +1832,6 @@
 		5840927B23052A410054BCBB /* ConfidantViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfidantViewController.m; sourceTree = "<group>"; };
 		5840927F23052A640054BCBB /* TokenMintageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenMintageViewController.h; sourceTree = "<group>"; };
 		5840928023052A640054BCBB /* TokenMintageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenMintageViewController.m; sourceTree = "<group>"; };
-		5842676D2446F86A00450C9B /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
 		5842E0C62368181D001BB0D6 /* qwallet_index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = qwallet_index.html; sourceTree = "<group>"; };
 		58436CD72451C674005DCE6F /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = Carthage/Build/iOS/APIKit.framework; sourceTree = "<group>"; };
 		58436CD82451C675005DCE6F /* SwiftTheme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftTheme.framework; path = Carthage/Build/iOS/SwiftTheme.framework; sourceTree = "<group>"; };
@@ -2941,6 +2944,8 @@
 		73048F122079FE9000A4EFEE /* RatesMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatesMode.m; sourceTree = "<group>"; };
 		73048F14207A19B500A4EFEE /* BalanceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BalanceInfo.h; sourceTree = "<group>"; };
 		73048F15207A19B500A4EFEE /* BalanceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BalanceInfo.m; sourceTree = "<group>"; };
+		730B985324937A180022A8EF /* SignView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
+		730B985424937A180022A8EF /* SignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
 		7310AA0A20D0C71300F2261A /* NSBundle+Language.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Language.m"; sourceTree = "<group>"; };
 		7310AA0B20D0C71400F2261A /* NSBundle+Language.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Language.h"; sourceTree = "<group>"; };
 		7323B76C20BCEF74005785F4 /* SettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
@@ -2967,6 +2972,10 @@
 		73625ED02092FAC10027C62A /* HeartbeatUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeartbeatUtil.m; sourceTree = "<group>"; };
 		7362EB2720AAC17900F554FE /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		7362EB2820AAC17900F554FE /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		736DA1F02498961A00576055 /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
+		736DA1F22498A09500576055 /* activieSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = activieSign.html; sourceTree = "<group>"; };
+		736DA1F42498A0A000576055 /* loginSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loginSign.html; sourceTree = "<group>"; };
+		736DA1F52498A0A000576055 /* registerSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = registerSign.html; sourceTree = "<group>"; };
 		7377D171206B84610072E628 /* LocationManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManage.h; sourceTree = "<group>"; };
 		7377D172206B84610072E628 /* LocationManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManage.m; sourceTree = "<group>"; };
 		7377D174206B8D560072E628 /* LocationMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMode.h; sourceTree = "<group>"; };
@@ -3060,6 +3069,7 @@
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
 				734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */,
 				734F52A020B6BF81002D45B7 /* CFNetwork.framework in Frameworks */,
+				736DA1F12498961A00576055 /* OutbreakRed.framework in Frameworks */,
 				587D0CDD24484053003EB1F9 /* neoutils.framework in Frameworks */,
 				58436CFD2451C679005DCE6F /* KeychainSwift.framework in Frameworks */,
 				734F529E20B6BF76002D45B7 /* MobileCoreServices.framework in Frameworks */,
@@ -3069,7 +3079,6 @@
 				734F529820B6BF4A002D45B7 /* libxml2.tbd in Frameworks */,
 				587ABD3D21B8F8F700C3D81A /* eosFramework.framework in Frameworks */,
 				58436D032451C67A005DCE6F /* Charts.framework in Frameworks */,
-				5842676E2446F86B00450C9B /* OutbreakRed.framework in Frameworks */,
 				734F529620B6BF20002D45B7 /* libresolv.tbd in Frameworks */,
 				58436CE72451C677005DCE6F /* APIKit.framework in Frameworks */,
 				58436D052451C67A005DCE6F /* Realm.framework in Frameworks */,
@@ -3674,6 +3683,8 @@
 				58193AB2226EC0FA0034E4B9 /* QToastView.h */,
 				58193AB3226EC0FA0034E4B9 /* QToastView.m */,
 				581F82DC22F7C30600F8291E /* QToastView.xib */,
+				730B985324937A180022A8EF /* SignView.h */,
+				730B985424937A180022A8EF /* SignView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3837,6 +3848,9 @@
 		5821964423F107E100704E23 /* Html */ = {
 			isa = PBXGroup;
 			children = (
+				736DA1F42498A0A000576055 /* loginSign.html */,
+				736DA1F52498A0A000576055 /* registerSign.html */,
+				736DA1F22498A09500576055 /* activieSign.html */,
 				5842E0C62368181D001BB0D6 /* qwallet_index.html */,
 				5821964623F1089500704E23 /* contract_js */,
 			);
@@ -4202,7 +4216,7 @@
 		583940CA2446A09D005EAA04 /* OutbreakRed */ = {
 			isa = PBXGroup;
 			children = (
-				5842676D2446F86A00450C9B /* OutbreakRed.framework */,
+				736DA1F02498961A00576055 /* OutbreakRed.framework */,
 			);
 			path = OutbreakRed;
 			sourceTree = "<group>";
@@ -6174,7 +6188,6 @@
 				5860FD1920B7B0F1005AA1DA /* Sources */,
 				5860FD1A20B7B0F1005AA1DA /* Frameworks */,
 				5860FD1B20B7B0F1005AA1DA /* Resources */,
-				587ABD8E21BA7C4300C3D81A /* BuildNum */,
 			);
 			buildRules = (
 			);
@@ -6224,7 +6237,7 @@
 				TargetAttributes = {
 					5860FD1C20B7B0F1005AA1DA = {
 						CreatedOnToolsVersion = 9.3.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -6234,7 +6247,7 @@
 					58A4DEA5206234AC00E72F52 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -6320,6 +6333,7 @@
 				5823983E241F693A00C4E4FD /* airdrop_tx.json in Resources */,
 				581F824022F7C1C800F8291E /* NEOWalletAddressViewController.xib in Resources */,
 				581F810C22F7BEEB00F8291E /* ComplaintSubmitViewController.xib in Resources */,
+				736DA1F72498A0A000576055 /* registerSign.html in Resources */,
 				581F832022F7C3A200F8291E /* ResetPWSuccessView.xib in Resources */,
 				5836CFDC23B5D9B30072187A /* TopupPayNEO_PayViewController.xib in Resources */,
 				581F82C522F7C2D900F8291E /* ChooseWalletViewController.xib in Resources */,
@@ -6331,6 +6345,7 @@
 				581F827822F7C23000F8291E /* ETHVerifyPWViewController.xib in Resources */,
 				581F82F622F7C34000F8291E /* LoginViewController.xib in Resources */,
 				582717C722C9DC56003DC080 /* SGQRCode.bundle in Resources */,
+				736DA1F62498A0A000576055 /* loginSign.html in Resources */,
 				5885D435231F496C00F9DEDE /* NewStakingViewController.xib in Resources */,
 				581F836622F7C44D00F8291E /* JoinCommunityViewController.xib in Resources */,
 				58C9282922FA79CE0020BDC0 /* ShareFriendsViewController.xib in Resources */,
@@ -6553,6 +6568,7 @@
 				581F828D22F7C25500F8291E /* ETHMnemonicConfirmViewController.xib in Resources */,
 				581F80FE22F7BECC00F8291E /* RecordListViewController.xib in Resources */,
 				5821969123F547DC00704E23 /* JoinGroupBuyViewController.xib in Resources */,
+				736DA1F32498A09500576055 /* activieSign.html in Resources */,
 				581F812F22F7BF3300F8291E /* PersonalInfoViewController.xib in Resources */,
 				581F816022F7BFAF00F8291E /* WalletsSwitchCell.xib in Resources */,
 			);
@@ -6694,20 +6710,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/Carthage copy-frameworks\n";
-		};
-		587ABD8E21BA7C4300C3D81A /* BuildNum */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = BuildNum;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "version=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $PRODUCT_SETTINGS_PATH`\nversion=`expr $version + 1`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $version\" $PRODUCT_SETTINGS_PATH\n\n\n";
 		};
 		5885C71B2339C9F300E5AFF9 /* AppStore Framework */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7015,6 +7017,7 @@
 				589E59D322D592AE000338B7 /* MyOrderListEntrustCell.m in Sources */,
 				587ABD5321B8F8F800C3D81A /* EOS_TokenInfo.m in Sources */,
 				588117A32462A7370058B35F /* DeFiActivedataViewController.m in Sources */,
+				730B985524937A190022A8EF /* SignView.m in Sources */,
 				5811B7582293D81500F657B5 /* QLCTransactionRecordViewController.m in Sources */,
 				580D916220625A4400B12506 /* UINavigationBar+Awesome.m in Sources */,
 				58A3EB8A237E888200AEF7C8 /* MiningRewardListModel.m in Sources */,
@@ -9331,14 +9334,16 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 9416;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -9351,14 +9356,16 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 9416;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -9480,8 +9487,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9413;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 9416;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9504,12 +9511,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = QWalletDevProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Qlink/Qlink-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -9525,8 +9532,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9413;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 9416;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9548,12 +9555,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = QWalletDevProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Qlink/Qlink-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

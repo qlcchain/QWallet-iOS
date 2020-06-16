@@ -15,7 +15,7 @@
 #import "RSAUtil.h"
 #import "NSDate+Category.h"
 #import "UIColor+Random.h"
-//#import "GlobalConstants.h"
+#import "SignView.h"
 
 @interface EditTextViewController ()
 
@@ -27,6 +27,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *phonePrefixLab;
 
 @property (nonatomic ,assign) EditType editType;
+
+@property (nonatomic, strong) NSDictionary *signDic;
+@property (nonatomic, strong) SignView *signView;
+@property (weak, nonatomic) IBOutlet UIView *codeView;
 
 @end
 
@@ -92,6 +96,9 @@
     
     [self performSelector:@selector(beginFirst) withObject:self afterDelay:0.7];
     
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+    self.signView.hidden = YES;
+    
 }
 
 #pragma mark - Action
@@ -108,7 +115,13 @@
             break;
         case EditEmail:
         {
-            [self requestVcode_change_email_code:name];
+            if (self.signDic) {
+                self.signDic = nil;
+                [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+            }
+            if (self.signView.hidden) {
+                self.signView.hidden = NO;
+            }
         }
             break;
         case EditPhone:
@@ -222,7 +235,7 @@
     //    kWeakSelf(self);
     UserModel *userM = [UserModel fetchUserOfLogin];
     NSString *account = userM.account?:@"";
-    NSDictionary *params = @{@"account":account,@"email":email};
+    NSDictionary *params = @{@"account":account,@"email":email,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_change_email_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -315,8 +328,26 @@
     }];
 }
 
-#pragma mark - Noti
 
+#pragma mark - WebViewUIDelegate
+
+- (SignView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignView alloc] initWithFrame:_codeView.bounds];
+        
+        kWeakSelf(self)
+        [_signView setSignResultBlock:^(NSDictionary * _Nonnull resultDic) {
+            weakself.signDic = resultDic;
+            NSString *name = weakself.nameTF.text.trim_whitespace?:@"";
+            [weakself requestVcode_change_email_code:name];
+        }];
+        
+        [_codeView addSubview:_signView];
+        
+    }
+    return _signView;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

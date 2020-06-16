@@ -32,7 +32,7 @@ static NSString *const JoinCommunity_QLCChain = @"QLC Chain";
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     _sourceArr = [NSMutableArray array];
-    [_sourceArr addObjectsFromArray:@[@[@"icon_twitter_url",JoinCommunity_Twitter,@"twitter.com/QLCchain"],@[@"icon_telegram_url",JoinCommunity_Telegram,@"t.me/qlinkmobile"],@[@"icon_facebook_url",JoinCommunity_Facebook,@"www.facebook.com/QLCchain/"],@[@"icon_qlcchain_url",JoinCommunity_QLCChain,@"qlcchain.org/"]]];
+    [_sourceArr addObjectsFromArray:@[@[@"icon_twitter_url",JoinCommunity_Twitter,@"twitter.com/QLCchain"],@[@"icon_telegram_url",JoinCommunity_Telegram,@"t.me/myqwallet"],@[@"icon_facebook_url",JoinCommunity_Facebook,@"www.facebook.com/QLCchain/"],@[@"icon_qlcchain_url",JoinCommunity_QLCChain,@"qlcchain.org/"]]];
     [_mainTable registerNib:[UINib nibWithNibName:JoinCommunityCellReuse bundle:nil] forCellReuseIdentifier:JoinCommunityCellReuse];
     self.baseTable = _mainTable;
     

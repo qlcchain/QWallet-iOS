@@ -19,7 +19,7 @@
 @implementation QBaseViewController
 
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {// 解决底部uibutton点击反应延迟的bug
-    return UIRectEdgeBottom;
+    return UIRectEdgeNone;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

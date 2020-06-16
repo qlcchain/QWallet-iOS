@@ -16,8 +16,9 @@
 #import "SystemUtil.h"
 #import "JPushTagHelper.h"
 #import "NSString+Trim.h"
+#import "SignView.h"
 
-@interface RegisterMailViewController ()
+@interface RegisterMailViewController()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;
 @property (weak, nonatomic) IBOutlet UITextField *verifyCodeTF;
@@ -26,7 +27,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwRepeatTF;
 @property (weak, nonatomic) IBOutlet UITextField *inviteCodeTF;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
-
+@property (weak, nonatomic) IBOutlet UIView *codeView;
+@property (nonatomic, strong) NSDictionary *signDic;
+@property (nonatomic, strong) SignView *signView;
 
 @end
 
@@ -37,6 +40,8 @@
     // Do any additional setup after loading the view from its nib.
 
     [self viewInit];
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"registerSign"];
+    self.signView.hidden = YES;
 }
 
 #pragma mark - Operation
@@ -131,7 +136,14 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"please_enter_a_valid_email_address")];
         return;
     }
-    [self requestSignup_code];
+    if (self.signDic) {
+        self.signDic = nil;
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"registerSign"];
+    }
+    if (self.signView.hidden) {
+        self.signView.hidden = NO;
+    }
+    
 }
 
 - (IBAction)registerAction:(id)sender {
@@ -153,7 +165,7 @@
 - (void)requestSignup_code {
     NSString *account = [_emailTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":account};
+    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:signup_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -206,6 +218,30 @@
         [kAppD.window hideToast];
     }];
 }
+
+
+
+
+
+#pragma mark - WebViewUIDelegate
+
+- (SignView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignView alloc] initWithFrame:_codeView.bounds];
+        
+        kWeakSelf(self)
+        [_signView setSignResultBlock:^(NSDictionary * _Nonnull resultDic) {
+            weakself.signDic = resultDic;
+            [weakself requestSignup_code];
+        }];
+        
+        [_codeView addSubview:_signView];
+        
+    }
+    return _signView;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

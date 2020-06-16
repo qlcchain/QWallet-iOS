@@ -18,6 +18,7 @@
 #import "UIColor+Random.h"
 //#import "GlobalConstants.h"
 #import "NSString+Trim.h"
+#import "SignView.h"
 
 @interface ForgetPWViewController ()
 
@@ -26,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;
 @property (weak, nonatomic) IBOutlet UITextField *verifyCodeTF;
+@property (nonatomic, strong) NSDictionary *signDic;
+@property (nonatomic, strong) SignView *signView;
+@property (weak, nonatomic) IBOutlet UIView *codeView;
 
 @end
 
@@ -37,6 +41,9 @@
     
     [self dataInit];
     [self viewInit];
+    
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+    self.signView.hidden = YES;
 }
 
 #pragma mark - Operation
@@ -136,14 +143,20 @@
         return;
     }
     
-    [self requestVcode_change_password_code];
+    if (self.signDic) {
+        self.signDic = nil;
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+    }
+    if (self.signView.hidden) {
+        self.signView.hidden = NO;
+    }
 }
 
 #pragma mark - Request
 - (void)requestVcode_change_password_code {
     NSString *account = [_emailTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":account};
+    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -178,6 +191,27 @@
     vc.inputVerifyCode = _verifyCodeTF.text.trim_whitespace?:@"";
     vc.inputAccount = _emailTF.text.trim_whitespace?:@"";
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+
+#pragma mark - WebViewUIDelegate
+
+- (SignView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignView alloc] initWithFrame:_codeView.bounds];
+        
+        kWeakSelf(self)
+        [_signView setSignResultBlock:^(NSDictionary * _Nonnull resultDic) {
+            weakself.signDic = resultDic;
+            [weakself requestVcode_change_password_code];
+        }];
+        
+        [_codeView addSubview:_signView];
+        
+    }
+    return _signView;
 }
 
 - (void)didReceiveMemoryWarning {

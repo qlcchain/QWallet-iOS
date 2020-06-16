@@ -10,7 +10,6 @@
 #import <WebKit/WebKit.h>
 #import "GlobalConstants.h"
 #import "DefiNewsListModel.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DeFiNewsWebViewController ()<WKNavigationDelegate>
 
@@ -67,8 +66,6 @@
     _personNameLab.text = model.authod;
     _titleLab.text = model.title;
     _viewLab.text = [NSString stringWithFormat:@"%@%@",model.views,kLang(@"defi_views")];
-    [_personIcon sd_setImageWithURL:[NSURL URLWithString:model.imgPath] placeholderImage:[UIImage imageNamed:@"defi_news_head"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-    }];
 }
 
 - (void)addWebView:(NSString *)json {

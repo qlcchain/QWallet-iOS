@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,10 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClaimQLCViewController">
             <connections>
                 <outlet property="canClaimAmountLab" destination="JzF-iD-ycW" id="1c9-Dp-pN9"/>
-                <outlet property="codeBtn" destination="F2P-Nh-FFQ" id="WbZ-f6-Efp"/>
                 <outlet property="codeHeight" destination="lzD-cu-0QU" id="Icn-rC-gbS"/>
-                <outlet property="codeImg" destination="OnH-3E-Jkb" id="0w8-Yp-T5N"/>
-                <outlet property="codeTF" destination="x2B-cj-87E" id="4Fm-Bc-aAV"/>
+                <outlet property="codeView" destination="TXj-kx-UxH" id="BLg-iv-FXc"/>
                 <outlet property="qgasSendTF" destination="eER-Z4-dk6" id="5mu-Pv-8eW"/>
                 <outlet property="receiveAddressTipLab" destination="tk0-5Q-0cu" id="sND-Nc-gV3"/>
                 <outlet property="sendAddressTipLab" destination="jtQ-M6-RZa" id="ZhX-Jl-Snl"/>
@@ -176,7 +174,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8B5-Aj-fcT">
-                                            <rect key="frame" x="0.0" y="278" width="414" height="372"/>
+                                            <rect key="frame" x="0.0" y="253" width="414" height="397"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XT8-uk-PTl" customClass="QBaseDarkButton">
                                                     <rect key="frame" x="24" y="32" width="366" height="49"/>
@@ -199,54 +197,30 @@
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oH1-eg-vqC">
-                                            <rect key="frame" x="0.0" y="198" width="414" height="80"/>
+                                            <rect key="frame" x="0.0" y="198" width="414" height="55"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Verification Code " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2B-cj-87E">
-                                                    <rect key="frame" x="16" y="0.0" width="278" height="80"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OnH-3E-Jkb">
-                                                    <rect key="frame" x="302" y="0.0" width="100" height="80"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-Nh-FFQ" customClass="QBaseTouchButton">
-                                                    <rect key="frame" x="302" y="0.0" width="100" height="80"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="jDv-o3-fqd"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal">
-                                                        <color key="titleColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="deviceRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="codeAction:" destination="-1" eventType="touchUpInside" id="CVx-R0-HM5"/>
-                                                    </connections>
-                                                </button>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qC-eN-HzW">
-                                                    <rect key="frame" x="16" y="79.666666666666686" width="398" height="0.3333333333333286"/>
+                                                    <rect key="frame" x="16" y="54.666666666666686" width="398" height="0.3333333333333357"/>
                                                     <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="Xct-wP-2DT"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TXj-kx-UxH">
+                                                    <rect key="frame" x="16" y="0.0" width="382" height="54.666666666666664"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="TXj-kx-UxH" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="top" id="1AA-Ex-30k"/>
+                                                <constraint firstAttribute="trailing" secondItem="TXj-kx-UxH" secondAttribute="trailing" constant="16" id="5mi-2P-KDB"/>
                                                 <constraint firstAttribute="bottom" secondItem="2qC-eN-HzW" secondAttribute="bottom" id="D3c-49-YUu"/>
+                                                <constraint firstItem="2qC-eN-HzW" firstAttribute="top" secondItem="TXj-kx-UxH" secondAttribute="bottom" id="ILq-WQ-izw"/>
                                                 <constraint firstItem="2qC-eN-HzW" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="QsS-N6-eKx"/>
-                                                <constraint firstItem="x2B-cj-87E" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="RDI-nE-1Qh"/>
-                                                <constraint firstAttribute="trailing" secondItem="F2P-Nh-FFQ" secondAttribute="trailing" constant="12" id="Xa6-wH-zqt"/>
-                                                <constraint firstAttribute="bottom" secondItem="F2P-Nh-FFQ" secondAttribute="bottom" id="aJZ-YI-pbh"/>
-                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="leading" secondItem="F2P-Nh-FFQ" secondAttribute="leading" id="dtv-GU-dOa"/>
-                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="bottom" secondItem="F2P-Nh-FFQ" secondAttribute="bottom" id="eJE-Hu-6KS"/>
-                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="top" secondItem="F2P-Nh-FFQ" secondAttribute="top" id="eZb-1J-lbo"/>
-                                                <constraint firstAttribute="height" constant="80" id="lzD-cu-0QU"/>
-                                                <constraint firstAttribute="bottom" secondItem="x2B-cj-87E" secondAttribute="bottom" id="m4r-Zd-UsG"/>
-                                                <constraint firstItem="F2P-Nh-FFQ" firstAttribute="leading" secondItem="x2B-cj-87E" secondAttribute="trailing" constant="8" id="nDi-zn-bTU"/>
+                                                <constraint firstItem="TXj-kx-UxH" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="eHd-2q-Mtc"/>
+                                                <constraint firstAttribute="height" constant="55" id="lzD-cu-0QU"/>
                                                 <constraint firstAttribute="trailing" secondItem="2qC-eN-HzW" secondAttribute="trailing" id="ncw-zD-L24"/>
-                                                <constraint firstItem="x2B-cj-87E" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="top" id="vPu-Mw-dJe"/>
-                                                <constraint firstItem="OnH-3E-Jkb" firstAttribute="trailing" secondItem="F2P-Nh-FFQ" secondAttribute="trailing" id="w3w-Kd-igb"/>
-                                                <constraint firstItem="F2P-Nh-FFQ" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="top" id="zYE-Vi-eyz"/>
                                             </constraints>
                                         </view>
                                     </subviews>

@@ -78,13 +78,26 @@
 + (NSURLSessionDataTask *)requestWithUrl9:(NSString *)url params:(id)params httpMethod:(HttpMethod)httpMethod isSign:(BOOL)isSign timestamp:(nullable NSString *)timestamp addBase:(BOOL)addBase serverType:(NSInteger)serverType successBlock:(HTTPRequestV2SuccessBlock)successReqBlock failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock {
     
     NSString *prefix = [RequestService getInstance].prefix_Url;
-    if (serverType == RequestServerTypeNormal) {
-        prefix = [RequestService getInstance].prefix_Url;
-    } else if (serverType == RequestServerTypeDebug) {
-        prefix = [RequestService getInstance].prefix_UrlOfDebug;
-    } else if (serverType == RequestServerTypeRelease) {
-        prefix = [RequestService getInstance].prefix_UrlOfRelease;
-    }
+    
+     #if DEBUG
+        NSInteger mainT = [HWUserdefault getIntWithKey:QLCServer_Environment];
+          if (mainT == 0) {
+              prefix = [RequestService getInstance].prefix_UrlOfDebug;
+          } else {
+              prefix = [RequestService getInstance].prefix_Url;
+          }
+    #else
+       if (serverType == RequestServerTypeNormal) {
+           prefix = [RequestService getInstance].prefix_Url;
+       } else if (serverType == RequestServerTypeDebug) {
+           prefix = [RequestService getInstance].prefix_UrlOfDebug;
+       } else if (serverType == RequestServerTypeRelease) {
+           prefix = [RequestService getInstance].prefix_UrlOfRelease;
+       }
+    #endif
+    
+    NSLog(@"parames = %@",params);
+    
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",prefix,url];
     if (!addBase) {
         requestUrl = url;

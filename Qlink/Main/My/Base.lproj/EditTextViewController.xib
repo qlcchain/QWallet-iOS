@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
                 <outlet property="codeBackHeight" destination="Pby-oC-8na" id="PL8-uQ-II7"/>
                 <outlet property="codeBtn" destination="k1G-Oh-hwW" id="bcl-p6-d6E"/>
                 <outlet property="codeTF" destination="DGh-GG-XYA" id="Ou2-xU-jjS"/>
+                <outlet property="codeView" destination="WAh-Oz-TR9" id="tIK-XK-Sax"/>
                 <outlet property="lblNavTitle" destination="3N2-yY-u9z" id="fqC-oj-FNP"/>
                 <outlet property="nameTF" destination="uC3-rU-Y1B" id="MkK-Il-JP5"/>
                 <outlet property="phonePrefixLab" destination="msy-OK-F4C" id="ACx-rW-yjb"/>
@@ -55,15 +56,15 @@
                             </constraints>
                         </view>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAh-Oz-TR9">
-                            <rect key="frame" x="0.0" y="122.5" width="375" height="49"/>
+                            <rect key="frame" x="0.0" y="122.5" width="375" height="50"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Verification Code " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGh-GG-XYA">
-                                    <rect key="frame" x="8" y="0.0" width="259" height="49"/>
+                                    <rect key="frame" x="8" y="0.0" width="259" height="50"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1G-Oh-hwW" customClass="QBaseTouchButton">
-                                    <rect key="frame" x="267" y="0.0" width="100" height="49"/>
+                                    <rect key="frame" x="267" y="0.0" width="100" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="JLK-0F-E9W"/>
                                     </constraints>
@@ -78,7 +79,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="49" id="Pby-oC-8na"/>
+                                <constraint firstAttribute="height" constant="50" id="Pby-oC-8na"/>
                                 <constraint firstAttribute="bottom" secondItem="k1G-Oh-hwW" secondAttribute="bottom" id="Rt5-WV-7uX"/>
                                 <constraint firstItem="k1G-Oh-hwW" firstAttribute="top" secondItem="WAh-Oz-TR9" secondAttribute="top" id="Vdn-jW-Zrv"/>
                                 <constraint firstAttribute="bottom" secondItem="DGh-GG-XYA" secondAttribute="bottom" id="Ytc-QI-BrP"/>

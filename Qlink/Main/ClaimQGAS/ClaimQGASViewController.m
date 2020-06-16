@@ -28,6 +28,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <OutbreakRed/OutbreakRed.h>
 #import "NSString+Trim.h"
+#import "SignView.h"
+
 
 @interface ClaimQGASViewController ()
 
@@ -47,9 +49,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletAddressLab;
 
-@property (weak, nonatomic) IBOutlet UITextField *codeTF;
-@property (weak, nonatomic) IBOutlet UIImageView *codeImg;
-@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+@property (weak, nonatomic) IBOutlet UIView *codeView;
+@property (nonatomic, strong) NSDictionary *signDic;
+@property (nonatomic, strong) SignView *signView;
 
 
 @property (nonatomic, strong) WalletCommonModel *sendQgasWalletM;
@@ -63,7 +65,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [self configInit];
-    [self getCode];
+    //[self getCode];
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"activieSign"];
 }
 
 #pragma mark - Operation
@@ -103,7 +106,6 @@
     NSString *timestamp = [RequestService getRequestTimestamp];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSString *code = [_codeTF.text?:@"" trim_whitespace];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
     NSString *recordId = _inputCovidRecordId?:@"";
     OR_RequestModel *requestM = [OR_RequestModel new];
@@ -112,7 +114,7 @@
     requestM.appVersion = APP_Version;
     requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [kAppD.window makeToastInView:kAppD.window];
-    [OutbreakRedSDK requestGzbd_receiveWithAccount:account token:token timestamp:timestamp code:code recordId:recordId toAddress:toAddress requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+    [OutbreakRedSDK requestGzbd_receive2WithAccount:account token:token timestamp:timestamp signDic:self.signDic recordId:recordId toAddress:toAddress appKey:Sign_Key scene:Sign_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [kAppD.window hideToast];
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {
@@ -134,7 +136,7 @@
     
 }
 
-- (void)requestReward_claim_bind_v2 {
+- (void)requestReward_claim_bind_v3 {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -146,10 +148,9 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
-    NSString *code = [_codeTF.text?:@"" trim_whitespace];
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl11:reward_claim_bind_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl11:reward_claim_bind_v3_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             ClaimSuccessTipView *view = [ClaimSuccessTipView getInstance];
@@ -167,7 +168,7 @@
     }];
 }
 
-- (void)requestReward_claim_invite_v2 {
+- (void)requestReward_claim_invite_v3 {
     UserModel *userM = [UserModel fetchUserOfLogin];
     if (!userM.md5PW || userM.md5PW.length <= 0) {
         return;
@@ -179,10 +180,9 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
-    NSString *code = [_codeTF.text?:@"" trim_whitespace];
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"code":code};
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
-    [RequestService requestWithUrl11:reward_claim_invite_v2_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [RequestService requestWithUrl11:reward_claim_invite_v3_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
         if ([responseObject[Server_Code] integerValue] == 0) {
             SuccessTipView *view = [SuccessTipView getInstance];
@@ -209,7 +209,7 @@
 //            [kAppD.window makeToastDisappearWithText:kLang(@"the_verification_code_has_been_sent_successfully")];
             NSString *codeUrlStr = responseObject[@"codeUrl"];
             NSURL *codeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",codeUrlStr]];
-            [weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
+           // [weakself.codeImg sd_setImageWithURL:codeUrl placeholderImage:nil completed:nil];
         } else {
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
@@ -257,15 +257,15 @@
         return;
     }
     
-    if ([_codeTF.text.trim_whitespace isEmptyString]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"code_cannot_be_empty")];
+    if (!self.signDic || self.signDic.count == 0) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_slide_erify")];
         return;
     }
     
     if (_claimQGASType == ClaimQGASTypeDailyEarnings) {
-        [self requestReward_claim_bind_v2];
+        [self requestReward_claim_bind_v3];
     } else if (_claimQGASType == ClaimQGASTypeReferralRewards) {
-        [self requestReward_claim_invite_v2];
+        [self requestReward_claim_invite_v3];
     } else if (_claimQGASType == ClaimQGASTypeCLAIM_COVID) {
         [self requestGzbd_receive];
     }
@@ -295,4 +295,20 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - WebViewUIDelegate
+- (SignView *)signView
+{
+    if (!_signView) {
+        _signView = [[SignView alloc] initWithFrame:_codeView.bounds];
+        
+        kWeakSelf(self)
+        [_signView setSignResultBlock:^(NSDictionary * _Nonnull resultDic) {
+            weakself.signDic = resultDic;
+        }];
+        
+        [_codeView addSubview:_signView];
+        
+    }
+    return _signView;
+}
 @end
