@@ -165,7 +165,7 @@
 - (void)requestSignup_code {
     NSString *account = [_emailTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
+    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":Sign_Register_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:signup_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -237,6 +237,9 @@
         }];
         
         [_codeView addSubview:_signView];
+        [_signView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.codeView).offset(0);
+        }];
         
     }
     return _signView;

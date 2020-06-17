@@ -148,7 +148,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Activity_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_bind_v3_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -180,7 +180,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Activity_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_invite_v3_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -307,6 +307,9 @@
         }];
         
         [_codeView addSubview:_signView];
+        [_signView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.codeView).offset(0);
+        }];
         
     }
     return _signView;

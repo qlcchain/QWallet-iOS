@@ -7,6 +7,7 @@
 //
 
 #import "SignView.h"
+#import <Masonry/Masonry.h>
 
 @interface SignView ()<WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler>
 
@@ -14,9 +15,11 @@
 
 @implementation SignView
 
+
+
 #pragma mark------------人机验证 webview
 - (void)loadLocalHtmlForJsWithHtmlName:(NSString *)htmlName{
-    
+    self.hName = htmlName;
     NSString *path = [[NSBundle mainBundle] pathForResource:htmlName ofType:@"html"];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]];
     [self.webView loadRequest:req];
@@ -36,11 +39,14 @@
             _signResultBlock(callData);
         }
         
-        [UIView animateWithDuration:0.5 animations:^{
-            
-        } completion:^(BOOL finished) {
-            self.hidden = YES;
-        }];
+        if (![_hName isEqualToString:@"activieSign"]) {
+            [UIView animateWithDuration:0.5 animations:^{
+                
+            } completion:^(BOOL finished) {
+                self.hidden = YES;
+            }];
+        }
+        
     }
     
     
@@ -72,7 +78,7 @@
 #pragma mark - getter
 - (WKWebView *)webView {
     if( !_webView ){
-        
+        self.backgroundColor = [UIColor redColor];
         //进行配置控制器
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
         //实例化对象
@@ -93,6 +99,10 @@
         _webView.scrollView.showsVerticalScrollIndicator = NO;
         _webView.scrollView.showsHorizontalScrollIndicator = NO;
         [self addSubview:_webView];
+        
+        [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
+                   make.top.left.bottom.right.mas_equalTo(self).offset(0);
+        }];
     }
     
     return _webView;

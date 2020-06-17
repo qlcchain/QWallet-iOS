@@ -908,10 +908,10 @@
 		735BAF3B212550DB000A1B32 /* VPNDataUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 735BAF3A212550DB000A1B32 /* VPNDataUtil.m */; };
 		73625ED12092FAC10027C62A /* HeartbeatUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 73625ED02092FAC10027C62A /* HeartbeatUtil.m */; };
 		7362EB2920AAC17900F554FE /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7362EB2820AAC17900F554FE /* UIView+Toast.m */; };
-		736DA1F12498961A00576055 /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736DA1F02498961A00576055 /* OutbreakRed.framework */; };
 		736DA1F32498A09500576055 /* activieSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F22498A09500576055 /* activieSign.html */; };
 		736DA1F62498A0A000576055 /* loginSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F42498A0A000576055 /* loginSign.html */; };
 		736DA1F72498A0A000576055 /* registerSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F52498A0A000576055 /* registerSign.html */; };
+		736DA1F92499E92E00576055 /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736DA1F82499E92D00576055 /* OutbreakRed.framework */; };
 		7377D173206B84620072E628 /* LocationManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D172206B84610072E628 /* LocationManage.m */; };
 		7377D176206B8D560072E628 /* LocationMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D175206B8D560072E628 /* LocationMode.m */; };
 		7377D179206B9E730072E628 /* VPNMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D178206B9E730072E628 /* VPNMode.m */; };
@@ -2972,10 +2972,10 @@
 		73625ED02092FAC10027C62A /* HeartbeatUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeartbeatUtil.m; sourceTree = "<group>"; };
 		7362EB2720AAC17900F554FE /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		7362EB2820AAC17900F554FE /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
-		736DA1F02498961A00576055 /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
 		736DA1F22498A09500576055 /* activieSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = activieSign.html; sourceTree = "<group>"; };
 		736DA1F42498A0A000576055 /* loginSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loginSign.html; sourceTree = "<group>"; };
 		736DA1F52498A0A000576055 /* registerSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = registerSign.html; sourceTree = "<group>"; };
+		736DA1F82499E92D00576055 /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
 		7377D171206B84610072E628 /* LocationManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManage.h; sourceTree = "<group>"; };
 		7377D172206B84610072E628 /* LocationManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManage.m; sourceTree = "<group>"; };
 		7377D174206B8D560072E628 /* LocationMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMode.h; sourceTree = "<group>"; };
@@ -3069,7 +3069,7 @@
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
 				734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */,
 				734F52A020B6BF81002D45B7 /* CFNetwork.framework in Frameworks */,
-				736DA1F12498961A00576055 /* OutbreakRed.framework in Frameworks */,
+				736DA1F92499E92E00576055 /* OutbreakRed.framework in Frameworks */,
 				587D0CDD24484053003EB1F9 /* neoutils.framework in Frameworks */,
 				58436CFD2451C679005DCE6F /* KeychainSwift.framework in Frameworks */,
 				734F529E20B6BF76002D45B7 /* MobileCoreServices.framework in Frameworks */,
@@ -4216,7 +4216,7 @@
 		583940CA2446A09D005EAA04 /* OutbreakRed */ = {
 			isa = PBXGroup;
 			children = (
-				736DA1F02498961A00576055 /* OutbreakRed.framework */,
+				736DA1F82499E92D00576055 /* OutbreakRed.framework */,
 			);
 			path = OutbreakRed;
 			sourceTree = "<group>";
@@ -9335,12 +9335,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9416;
+				CURRENT_PROJECT_VERSION = 9417;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
@@ -9357,12 +9357,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9416;
+				CURRENT_PROJECT_VERSION = 9417;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
@@ -9488,7 +9488,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9416;
+				CURRENT_PROJECT_VERSION = 9417;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9511,7 +9511,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9533,7 +9533,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9416;
+				CURRENT_PROJECT_VERSION = 9417;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9555,7 +9555,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

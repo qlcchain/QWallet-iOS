@@ -27,20 +27,20 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDS-iO-QIl">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="736"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-hJ-9nH">
-                            <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                            <rect key="frame" x="0.0" y="44" width="375" height="692"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26z-sD-Nvq">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="650"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="650"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfW-o6-FRR">
-                                            <rect key="frame" x="0.0" y="16" width="414" height="80"/>
+                                            <rect key="frame" x="0.0" y="16" width="375" height="80"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiveable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tk0-5Q-0cu">
                                                     <rect key="frame" x="16" y="9.9999999999999982" width="87.333333333333329" height="19.333333333333329"/>
@@ -49,7 +49,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwr-kV-Qhq">
-                                                    <rect key="frame" x="16" y="79.666666666666657" width="398" height="0.3333333333333286"/>
+                                                    <rect key="frame" x="16" y="79.666666666666657" width="343" height="0.3333333333333286"/>
                                                     <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="i25-Qn-0Dc"/>
@@ -71,11 +71,11 @@
                                                 <constraint firstItem="tk0-5Q-0cu" firstAttribute="top" secondItem="FfW-o6-FRR" secondAttribute="top" constant="10" id="7nJ-Um-6hU"/>
                                                 <constraint firstItem="JzF-iD-ycW" firstAttribute="leading" secondItem="tk0-5Q-0cu" secondAttribute="leading" id="D1L-HV-gkM"/>
                                                 <constraint firstAttribute="height" constant="80" id="ESK-KI-cUw"/>
-                                                <constraint firstAttribute="trailing" secondItem="hwr-kV-Qhq" secondAttribute="trailing" id="aJQ-NQ-b2m"/>
+                                                <constraint firstAttribute="trailing" secondItem="hwr-kV-Qhq" secondAttribute="trailing" constant="16" id="aJQ-NQ-b2m"/>
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuE-Kc-kyX">
-                                            <rect key="frame" x="0.0" y="96" width="414" height="102"/>
+                                            <rect key="frame" x="0.0" y="96" width="375" height="102"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receiving Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtQ-M6-RZa">
                                                     <rect key="frame" x="15.999999999999993" y="10.999999999999998" width="119.33333333333331" height="19.333333333333329"/>
@@ -84,19 +84,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbN-sL-F6g">
-                                                    <rect key="frame" x="16" y="101.66666666666666" width="398" height="0.3333333333333286"/>
+                                                    <rect key="frame" x="16" y="101.66666666666666" width="343" height="0.3333333333333286"/>
                                                     <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="0lL-ib-pEw"/>
                                                     </constraints>
                                                 </view>
                                                 <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="QLC Chain Wallet Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eER-Z4-dk6">
-                                                    <rect key="frame" x="16" y="30.333333333333336" width="354" height="71.333333333333314"/>
+                                                    <rect key="frame" x="16" y="30.333333333333336" width="315" height="71.333333333333314"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGP-N8-C7K" customClass="QBaseTouchButton">
-                                                    <rect key="frame" x="370" y="44" width="44" height="44"/>
+                                                    <rect key="frame" x="331" y="44" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="CMy-5m-oPg"/>
                                                         <constraint firstAttribute="width" constant="44" id="rp5-mr-Z6P"/>
@@ -107,7 +107,7 @@
                                                     </connections>
                                                 </button>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fww-AD-57n">
-                                                    <rect key="frame" x="0.0" y="30.333333333333336" width="414" height="71.333333333333314"/>
+                                                    <rect key="frame" x="0.0" y="30.333333333333336" width="375" height="71.333333333333314"/>
                                                     <subviews>
                                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="neo_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="sZx-7c-nPY">
                                                             <rect key="frame" x="13" y="12.666666666666657" width="46" height="46"/>
@@ -129,7 +129,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smq-PA-oaL" customClass="QBaseTouchButton">
-                                                            <rect key="frame" x="370" y="13.666666666666657" width="44" height="44"/>
+                                                            <rect key="frame" x="331" y="13.666666666666657" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="Fwn-qs-UTa"/>
                                                                 <constraint firstAttribute="width" constant="44" id="Xqx-Qx-7Ll"/>
@@ -162,7 +162,7 @@
                                                 <constraint firstAttribute="height" constant="102" id="Pio-dH-fYD"/>
                                                 <constraint firstAttribute="trailing" secondItem="mGP-N8-C7K" secondAttribute="trailing" id="TDy-Wu-MqG"/>
                                                 <constraint firstItem="eER-Z4-dk6" firstAttribute="leading" secondItem="wuE-Kc-kyX" secondAttribute="leading" constant="16" id="Uv5-ec-ZTP"/>
-                                                <constraint firstAttribute="trailing" secondItem="fbN-sL-F6g" secondAttribute="trailing" id="Vyl-aj-W7Z"/>
+                                                <constraint firstAttribute="trailing" secondItem="fbN-sL-F6g" secondAttribute="trailing" constant="16" id="Vyl-aj-W7Z"/>
                                                 <constraint firstItem="fww-AD-57n" firstAttribute="leading" secondItem="wuE-Kc-kyX" secondAttribute="leading" id="aeo-Om-KOm"/>
                                                 <constraint firstItem="jtQ-M6-RZa" firstAttribute="leading" secondItem="wuE-Kc-kyX" secondAttribute="leading" constant="16" id="as2-dZ-XIY"/>
                                                 <constraint firstItem="mGP-N8-C7K" firstAttribute="centerY" secondItem="eER-Z4-dk6" secondAttribute="centerY" id="fXw-kE-zPx"/>
@@ -174,10 +174,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8B5-Aj-fcT">
-                                            <rect key="frame" x="0.0" y="253" width="414" height="397"/>
+                                            <rect key="frame" x="0.0" y="248" width="375" height="402"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XT8-uk-PTl" customClass="QBaseDarkButton">
-                                                    <rect key="frame" x="24" y="32" width="366" height="49"/>
+                                                    <rect key="frame" x="24" y="32" width="327" height="49"/>
                                                     <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="49" id="M2y-hg-qab"/>
@@ -197,18 +197,21 @@
                                             </constraints>
                                         </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oH1-eg-vqC">
-                                            <rect key="frame" x="0.0" y="198" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="198" width="375" height="50"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qC-eN-HzW">
-                                                    <rect key="frame" x="16" y="54.666666666666686" width="398" height="0.3333333333333357"/>
+                                                    <rect key="frame" x="16" y="49.666666666666686" width="343" height="0.3333333333333357"/>
                                                     <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="Xct-wP-2DT"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TXj-kx-UxH">
-                                                    <rect key="frame" x="16" y="0.0" width="382" height="54.666666666666664"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="3fh-UC-pdF"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -216,11 +219,10 @@
                                                 <constraint firstItem="TXj-kx-UxH" firstAttribute="top" secondItem="oH1-eg-vqC" secondAttribute="top" id="1AA-Ex-30k"/>
                                                 <constraint firstAttribute="trailing" secondItem="TXj-kx-UxH" secondAttribute="trailing" constant="16" id="5mi-2P-KDB"/>
                                                 <constraint firstAttribute="bottom" secondItem="2qC-eN-HzW" secondAttribute="bottom" id="D3c-49-YUu"/>
-                                                <constraint firstItem="2qC-eN-HzW" firstAttribute="top" secondItem="TXj-kx-UxH" secondAttribute="bottom" id="ILq-WQ-izw"/>
                                                 <constraint firstItem="2qC-eN-HzW" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="QsS-N6-eKx"/>
                                                 <constraint firstItem="TXj-kx-UxH" firstAttribute="leading" secondItem="oH1-eg-vqC" secondAttribute="leading" constant="16" id="eHd-2q-Mtc"/>
-                                                <constraint firstAttribute="height" constant="55" id="lzD-cu-0QU"/>
-                                                <constraint firstAttribute="trailing" secondItem="2qC-eN-HzW" secondAttribute="trailing" id="ncw-zD-L24"/>
+                                                <constraint firstAttribute="height" constant="50" id="lzD-cu-0QU"/>
+                                                <constraint firstAttribute="trailing" secondItem="2qC-eN-HzW" secondAttribute="trailing" constant="16" id="ncw-zD-L24"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -252,7 +254,7 @@
                             </constraints>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sR-ao-7g2" customClass="NavWhiteShadowView">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hV-jA-KBm" customClass="QBaseTouchButton">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -266,7 +268,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7W-v3-qSH">
-                                    <rect key="frame" x="184.33333333333334" y="11" width="45.333333333333343" height="22"/>
+                                    <rect key="frame" x="165" y="11" width="45.333333333333343" height="22"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -293,7 +295,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckW-xx-Zv9">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
@@ -308,8 +310,9 @@
                 <constraint firstAttribute="bottom" secondItem="CDS-iO-QIl" secondAttribute="bottom" id="aEd-57-xAr"/>
                 <constraint firstItem="CDS-iO-QIl" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="vmt-OW-y3a"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="69.565217391304358" y="43.206521739130437"/>
+            <point key="canvasLocation" x="-96" y="-218"/>
         </view>
     </objects>
     <resources>

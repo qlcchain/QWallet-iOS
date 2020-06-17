@@ -43,7 +43,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *sendQgasWalletAddressLab;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeHeight; // 55
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *codeHeight; // 50
 
 @property (weak, nonatomic) IBOutlet UIView *codeView;
 @property (nonatomic, strong) NSDictionary *signDic;
@@ -79,7 +79,7 @@
     if (_claimQLCType == ClaimQLCTypeMiningRewards) {
         _codeHeight.constant = 0;
     } else if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
-        _codeHeight.constant = 55;
+        _codeHeight.constant = 50;
         NSString *type = @"CLAIM_COVID_QLC";
         [self requestVcode_verify_code:type];
     }
@@ -105,7 +105,7 @@
     requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [kAppD.window makeToastInView:kAppD.window];
   
-    [OutbreakRedSDK requestGzbd_claim_qlc2WithAccount:account token:token timestamp:timestamp signDic:self.signDic toAddress:toAddress appKey:Sign_Key scene:Sign_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+    [OutbreakRedSDK requestGzbd_claim_qlc2WithAccount:account token:token timestamp:timestamp signDic:self.signDic toAddress:toAddress appKey:Sign_Key scene:Sign_Activity_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [kAppD.window hideToast];
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {
@@ -270,6 +270,9 @@
         }];
         
         [_codeView addSubview:_signView];
+        [_signView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.codeView).offset(0);
+        }];
         
     }
     return _signView;

@@ -51,7 +51,7 @@
     
     [self viewInit];
     [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
-    self.signView.hidden = YES;
+     self.signView.hidden = YES;
 }
 
 #pragma mark - Operation
@@ -327,6 +327,10 @@
         }];
         
         [_codeView addSubview:_signView];
+        
+        [_signView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.codeView).offset(0);
+        }];
         
     }
     return _signView;

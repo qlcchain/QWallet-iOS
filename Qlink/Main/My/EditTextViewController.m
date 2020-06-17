@@ -344,6 +344,9 @@
         }];
         
         [_codeView addSubview:_signView];
+        [_signView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.right.mas_equalTo(weakself.codeView).offset(0);
+        }];
         
     }
     return _signView;

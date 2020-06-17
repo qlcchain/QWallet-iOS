@@ -15,6 +15,7 @@ typedef void(^SignResultBlock)(NSDictionary *resultDic);
 
 @interface SignView : UIView
 @property (nonatomic, strong) WKWebView *webView;
+@property (nonatomic, strong) NSString *hName;
 @property (nonatomic, copy) SignResultBlock signResultBlock;
 - (void)loadLocalHtmlForJsWithHtmlName:(NSString *) htmlName;
 @end
