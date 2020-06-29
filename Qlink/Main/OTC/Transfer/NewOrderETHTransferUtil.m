@@ -24,7 +24,7 @@
 @implementation NewOrderETHTransferUtil
 
 #pragma mark - Transfer
-+ (void)transferETH:(NSString *)fromAddress tokenName:(NSString *)tokenName amountStr:(NSString *)amountStr successB:(ETHTransferSuccessBlock)successB {
++ (void)transferETH:(NSString *)fromAddress tokenName:(NSString *)tokenName amountStr:(NSString *)amountStr ethFee:(NSInteger) ethFee successB:(ETHTransferSuccessBlock)successB {
 //    // 判断当前钱包
 //    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
 //    if (!currentWalletM || currentWalletM.walletType != WalletTypeETH) {
@@ -54,7 +54,7 @@
             return;
         }
         
-        [NewOrderETHTransferUtil showETHTransferConfirmView:asset amountStr:amountStr from_address:fromAddress to_address:serverAddress successB:successB];
+        [NewOrderETHTransferUtil showETHTransferConfirmView:asset amountStr:amountStr from_address:fromAddress to_address:serverAddress ethFee:ethFee successB:successB];
     }];
 }
 
@@ -77,7 +77,7 @@
     return haveEthAssetNum;
 }
 
-+ (void)showETHTransferConfirmView:(Token *)token amountStr:(NSString *)amountStr from_address:(NSString *)from_address to_address:(NSString *)to_address successB:(ETHTransferSuccessBlock)successB {
++ (void)showETHTransferConfirmView:(Token *)token amountStr:(NSString *)amountStr from_address:(NSString *)from_address to_address:(NSString *)to_address ethFee:(NSInteger) ethFee successB:(ETHTransferSuccessBlock)successB {
 //    NSString *decimals = ETH_Decimals;
 //    NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
 //    NSInteger gasLimit = 60000;
@@ -128,7 +128,10 @@
     NSString *decimals = ETH_Decimals;
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSInteger gasLimit = 60000;
-    NSInteger gasPrice = 6;
+    NSInteger gasPrice = ETH_FeeValue;
+    if (ethFee != 0) {
+        gasPrice = ethFee;
+    }
 //    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
     NSString *gasCostETH = @(gasPrice).mul(@(gasLimit)).mul(decimalsNum);
     NSString *gasfee = [NSString stringWithFormat:@"%@ ETH",gasCostETH];

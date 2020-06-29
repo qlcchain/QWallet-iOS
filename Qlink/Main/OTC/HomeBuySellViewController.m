@@ -397,7 +397,7 @@ static NSString *const NetworkSize = @"20";
             }];
             
             NSArray *localSelectArr = [PairsModel fetchLocalSelect];
-            if (!localSelectArr) {
+            if (!localSelectArr || localSelectArr.count > 0) {
                 [weakself.selectPairsTagArr removeAllObjects];
                 [weakself.selectPairsTagArr addObjectsFromArray:weakself.pairsArr];
             } else {

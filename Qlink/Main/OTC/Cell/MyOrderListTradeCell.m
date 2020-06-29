@@ -12,6 +12,7 @@
 #import "UserModel.h"
 #import "OrderStatusUtil.h"
 #import "NSDate+Category.h"
+#import "NSString+RemoveZero.h"
 #import "GlobalConstants.h"
 
 @interface MyOrderListTradeCell ()
@@ -61,7 +62,8 @@
     _typeLab.text = [loginM.ID isEqualToString:model.buyerId]?[NSString stringWithFormat:@"%@ %@",kLang(@"buy"),model.tradeToken]:[NSString stringWithFormat:@"%@ %@",kLang(@"sell"),model.tradeToken];
     _typeLab.textColor = [loginM.ID isEqualToString:model.buyerId]?MAIN_BLUE_COLOR:UIColorFromRGB(0xFF3669);
     _payUnitLab.text = model.payToken;
-    _amountLab.text = model.usdtAmount;
+    double priceD = [[NSString stringWithFormat:@"%@",model.usdtAmount] doubleValue];
+    _amountLab.text = [NSString doubleToString:priceD];
     NSString *statusStr = @"";
     UIColor *statusColor = nil;
     if (type == RecordListTypeProcessing) {

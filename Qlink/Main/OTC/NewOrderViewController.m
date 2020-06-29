@@ -37,6 +37,7 @@
 #import "TokenListHelper.h"
 #import "FirebaseUtil.h"
 #import "NSString+Trim.h"
+#import "TokenPriceModel.h"
 
 @interface NewOrderViewController () <UITextFieldDelegate>
 
@@ -95,6 +96,11 @@
 @property (nonatomic, strong) NSString *sellTxid;
 @property (nonatomic, strong) NSString *buyFromAddress;
 @property (nonatomic, strong) NSString *buyTxid;
+@property (nonatomic, strong) NSString *gasCostETH;
+@property (nonatomic, strong) NSMutableArray *tokenPriceArr;
+
+@property (nonatomic, strong) NSMutableArray *sellTokenPriceArr;
+@property (nonatomic, strong) NSString *sellGasCostETH;
 
 @property (nonatomic, strong) WalletCommonModel *buy_PayWalletM;
 @property (nonatomic, strong) WalletCommonModel *buy_TradeWalletM;
@@ -103,6 +109,21 @@
 @property (nonatomic) BOOL isFirstAppear;
 @property (nonatomic, strong) PairsModel *buy_PairsM;
 @property (nonatomic, strong) PairsModel *sell_PairsM;
+
+@property (weak, nonatomic) IBOutlet UILabel *gasLimitLab;
+@property (weak, nonatomic) IBOutlet UILabel *gascostLab;
+@property (weak, nonatomic) IBOutlet UISlider *gasSlider;
+@property (weak, nonatomic) IBOutlet UIButton *gasDetailBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasDetailHeight; // 143
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasCostHeight; // 48
+
+
+@property (weak, nonatomic) IBOutlet UILabel *sellGasLimitLab;
+@property (weak, nonatomic) IBOutlet UILabel *sellGascostLab;
+@property (weak, nonatomic) IBOutlet UISlider *sellGasSlider;
+@property (weak, nonatomic) IBOutlet UIButton *sellGasDetailBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sellGasDetailHeight; // 143
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sellGasCostHeight; // 48
 
 @end
 
@@ -113,6 +134,13 @@
     // Do any additional setup after loading the view from its nib.
     
     self.view.backgroundColor = MAIN_WHITE_COLOR;
+    _gasCostHeight.constant = 0;
+    _gasDetailHeight.constant = 0;
+    _tokenPriceArr = [NSMutableArray array];
+    
+    _sellGasCostHeight.constant = 0;
+    _sellGasDetailHeight.constant = 0;
+    _sellTokenPriceArr = [NSMutableArray array];
     
     _isFirstAppear = YES;
     [self configInit];
@@ -168,6 +196,8 @@
         _buyTradeWalletBack.hidden = YES;
         _buyTradeTF.text = nil;
         _buy_TradeWalletM = nil;
+        
+        [self clearBuyETHCost];
     }
 }
 
@@ -188,7 +218,25 @@
         _sellPayWalletBack.hidden = YES;
         _sellPayAddressTF.text = nil;
         _sell_PayWalletM = nil;
+        
+        [self clearSellETHCost];
     }
+}
+
+- (void) clearBuyETHCost
+{
+    _gasDetailHeight.constant = 0;
+    _gasCostHeight.constant = 0;
+    _gasSlider.value = ETH_FeeValue;
+    [_tokenPriceArr removeAllObjects];
+}
+
+- (void) clearSellETHCost
+{
+    _sellGasCostHeight.constant = 0;
+    _sellGasDetailHeight.constant = 0;
+    _sellGasSlider.value = ETH_FeeValue;
+    [_sellTokenPriceArr removeAllObjects];
 }
 
 - (void)refreshSelect:(UIButton *)sender {
@@ -266,7 +314,7 @@
     } else if ([tokenChain isEqualToString:EOS_Chain]) {
         
     } else if ([tokenChain isEqualToString:ETH_Chain]) {
-        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr ethFee:_gasSlider.value successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下买单
             weakself.buyFromAddress = sendAddress;
             weakself.buyTxid = txid;
@@ -294,7 +342,7 @@
     } else if ([tokenChain isEqualToString:EOS_Chain]) {
         
     } else if ([tokenChain isEqualToString:ETH_Chain]) {
-        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr ethFee:_sellGasSlider.value successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下卖单
             weakself.sellFromAddress = sendAddress;
             weakself.sellTxid = txid;
@@ -312,10 +360,58 @@
     [view showWithTitle:kLang(@"please_finish_the_verification_on_me_page")];
 }
 
+- (void)refreshGasCost {
+    NSString *decimals = ETH_Decimals;
+    NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
+//    NSNumber *ethFloatNum = @(_gasSlider.value*[_gasLimitLab.text doubleValue]*[decimalsNum doubleValue]);
+    if (_buySegBtn.isSelected) {
+        NSString *ethFloatStr = @(_gasSlider.value).mul(_gasLimitLab.text).mul(decimalsNum);
+            _gasCostETH = [NSString stringWithFormat:@"%@",ethFloatStr];
+            __block NSString *price = @"";
+            [_tokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                TokenPriceModel *model = obj;
+                if ([model.symbol isEqualToString:@"ETH"]) {
+        //            NSNumber *priceNum = @([_gasCostETH doubleValue]*[model.price doubleValue]);
+        //            price = [NSString stringWithFormat:@"%@",priceNum];
+                    price = _gasCostETH.mul(model.price);
+                    *stop = YES;
+                }
+            }];
+            _gascostLab.text = [NSString stringWithFormat:@"%@ ETH ≈ %@%@",_gasCostETH,[ConfigUtil getLocalUsingCurrencySymbol],price];
+    } else {
+        NSString *ethFloatStr = @(_sellGasSlider.value).mul(_sellGasLimitLab.text).mul(decimalsNum);
+            _sellGasCostETH = [NSString stringWithFormat:@"%@",ethFloatStr];
+            __block NSString *price = @"";
+            [_sellTokenPriceArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                TokenPriceModel *model = obj;
+                if ([model.symbol isEqualToString:@"ETH"]) {
+        //            NSNumber *priceNum = @([_gasCostETH doubleValue]*[model.price doubleValue]);
+        //            price = [NSString stringWithFormat:@"%@",priceNum];
+                    price = _sellGasCostETH.mul(model.price);
+                    *stop = YES;
+                }
+            }];
+            _sellGascostLab.text = [NSString stringWithFormat:@"%@ ETH ≈ %@%@",_sellGasCostETH,[ConfigUtil getLocalUsingCurrencySymbol],price];
+    }
+    
+}
+
 #pragma mark - Action
+- (IBAction)gasDetailAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender == _gasDetailBtn) {
+        _gasDetailHeight.constant = sender.selected?143:0;
+    } else {
+        _sellGasDetailHeight.constant = sender.selected?143:0;
+    }
+}
 
 - (IBAction)backAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)sliderAction:(UISlider *)sender {
+    [self refreshGasCost];
 }
 
 - (IBAction)showQLCAddressAction:(id)sender {
@@ -342,7 +438,17 @@
             weakself.buyPayWalletNameLab.text = model.name;
             weakself.buyPayWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
             weakself.buyPayTF.text = model.address;
-//            [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
+            
+            // 显示手续费
+            if ([_buy_PairsM.payTokenChain isEqualToString:ETH_Chain]) {
+                
+                [weakself refreshGasCost];
+                [weakself requestTokenPrice];
+                weakself.gasCostHeight.constant = 48;
+            }
+            
+            
+
             
         }];
     }
@@ -373,6 +479,14 @@
             weakself.sellTradeWalletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[model.address substringToIndex:8],[model.address substringWithRange:NSMakeRange(model.address.length - 8, 8)]];
             weakself.sellTradeAddressTF.text = model.address;
 //            [WalletCommonModel setCurrentSelectWallet:model]; // 切换钱包
+            
+            // 显示手续费
+            if ([_sell_PairsM.tradeTokenChain isEqualToString:ETH_Chain]) {
+                [weakself refreshGasCost];
+                [weakself requestTokenPrice];
+                weakself.sellGasCostHeight.constant = 48;
+            }
+            
         }];
     }
 }
@@ -420,8 +534,8 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_need_greater_than_or_equal_to_min_amount")];
         return;
     }
-    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue] < 1) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_1")];
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue] == 0) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_0.001")];
         return;
     }
     if ([_buyTradeTF.text.trim_whitespace isEmptyString]) {
@@ -430,6 +544,10 @@
     }
     if ([_buyPayTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
+        return;
+    }
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue]*[_buyPayUnitTF.text.trim_whitespace doubleValue] < 0.00000001) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_amoun")];
         return;
     }
     
@@ -488,8 +606,8 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"max_amount_need_greater_than_or_equal_to_min_amount")];
         return;
     }
-    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue] < 1) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_1")];
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue] == 0) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_0.001")];
         return;
     }
     if ([_sellTradeAmountTF.text.trim_whitespace doubleValue] < [_sellVolumeMaxAmountTF.text.trim_whitespace doubleValue]) {
@@ -502,6 +620,10 @@
     }
     if ([_sellTradeAddressTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
+        return;
+    }
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue]*[_sellPayUnitTF.text.trim_whitespace doubleValue] < 0.00000001) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_amoun")];
         return;
     }
     
@@ -538,6 +660,8 @@
     _buy_PayWalletM = nil;
     _buyPayWalletBack.hidden = YES;
     _buyPayTF.text = nil;
+    
+    [self clearBuyETHCost];
 }
 
 - (IBAction)sellReceiveUsdtWalletCloseAction:(id)sender {
@@ -550,6 +674,8 @@
     _sell_TradeWalletM = nil;
     _sellTradeWalletBack.hidden = YES;
     _sellTradeAddressTF.text = nil;
+    
+    [self clearSellETHCost];
 }
 
 - (IBAction)buy_buyingAction:(id)sender {
@@ -587,6 +713,8 @@
     [self showPairsSheet];
 }
 
+
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 //    if (textField == _buyTradeAmountTF || textField == _buyVolumeMinAmountTF || textField == _buyVolumeMaxAmountTF || textField == _sellTradeAmountTF || textField == _sellVolumeMinAmountTF || textField == _sellVolumeMaxAmountTF) {
@@ -604,6 +732,15 @@
         NSString *checkStr = [textField.text stringByReplacingCharactersInRange:range withString:string];
         //正则表达式（只支持3位小数）
         NSString *regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,3})?$";
+       
+        if (textField == _buyPayUnitTF) {
+            regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,8})?$";
+        }
+   
+        if (textField == _sellPayUnitTF) {
+            regex = @"^\\-?([1-9]\\d*|0)(\\.\\d{0,8})?$";
+        }
+        
         return [self isValid:checkStr withRegex:regex];
     }
     
@@ -744,6 +881,35 @@
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
         [kAppD.window hideToast];
+    }];
+}
+
+- (void)requestTokenPrice {
+    kWeakSelf(self);
+    NSString *coin = [ConfigUtil getLocalUsingCurrency];
+    NSDictionary *params = @{@"symbols":@[@"ETH"],@"coin":coin};
+    [RequestService requestWithUrl5:tokenPrice_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if ([[responseObject objectForKey:Server_Code] integerValue] == 0) {
+            if (weakself.buySegBtn.isSelected) {
+                [weakself.tokenPriceArr removeAllObjects];
+            } else {
+                [weakself.sellTokenPriceArr removeAllObjects];
+            }
+            
+            NSArray *arr = [responseObject objectForKey:Server_Data];
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                TokenPriceModel *model = [TokenPriceModel getObjectWithKeyValues:obj];
+                model.coin = coin;
+                if (weakself.buySegBtn.isSelected) {
+                    [weakself.tokenPriceArr addObject:model];
+                } else {
+                    [weakself.sellTokenPriceArr addObject:model];
+                }
+                
+            }];
+            [self refreshGasCost];
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
     }];
 }
 

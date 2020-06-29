@@ -169,7 +169,7 @@
             _usdtMaxTF.text = nil;
         } else {
             NSString *str = _qgasMaxTF.text.trim_whitespace.mul(_orderInfoM.unitPrice_str);
-            NSString *str3 = str.roundPlain(3);
+            NSString *str3 = str.roundPlain(8);
             _usdtMaxTF.text = [NSString stringWithFormat:@"%@",str3];
         }
     }
@@ -213,7 +213,7 @@
     } else if ([tokenChain isEqualToString:EOS_Chain]) {
         
     } else if ([tokenChain isEqualToString:ETH_Chain]) {
-        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr ethFee:0  successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下买单
             weakself.buyFromAddress = sendAddress;
             weakself.buyTxid = txid;
@@ -243,7 +243,7 @@
     } else if ([tokenChain isEqualToString:EOS_Chain]) {
         
     } else if ([tokenChain isEqualToString:ETH_Chain]) {
-        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
+        [NewOrderETHTransferUtil transferETH:fromAddress tokenName:tokenName amountStr:amountStr ethFee:0 successB:^(NSString * _Nonnull sendAddress, NSString * _Nonnull txid) {
             // 下卖单
             weakself.sellFromAddress = sendAddress;
             weakself.sellTxid = txid;

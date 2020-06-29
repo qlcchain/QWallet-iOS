@@ -58,7 +58,7 @@
 }
 
 - (void)addLineView:(NSArray *)arr {
-    if (arr==nil || arr.count <= 0) {
+    if (arr==nil || ![arr isKindOfClass:[NSArray class]] || arr.count <= 0) {
         return;
     }
     DefiLineView *view = [DefiLineView new];

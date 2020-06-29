@@ -94,7 +94,7 @@
     NSString *decimals = ETH_Decimals;
     NSNumber *decimalsNum = @([[NSString stringWithFormat:@"%@",decimals] doubleValue]);
     NSInteger gasLimit = 60000;
-    NSInteger gasPrice = 6;
+    NSInteger gasPrice = ETH_FeeValue;
 //    NSNumber *ethFloatNum = @(gasPrice*gasLimit*[decimalsNum doubleValue]);
     NSString *ethFloatStr = @(gasPrice).mul(@(gasLimit)).mul(decimalsNum);
     

@@ -419,7 +419,7 @@ static NSString *const TopupNetworkSize = @"30";
     [cell config:model joinB:^(GroupBuyListModel * _Nonnull joinM) {
         weakself.currentPayType = TopupPayTypeGroupBuy;
         [weakself jumpToJoinGroupBuy:joinM];
-//        [weakself showJoinGroupBuyView:joinM];
+        [FirebaseUtil logEventWithItemID:Topup_Join_Now itemName:Topup_Join_Now contentType:Topup_Join_Now];
     }];
     
     return cell;

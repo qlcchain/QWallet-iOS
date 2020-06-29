@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -146,7 +146,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fh-VI-7n8">
-                                            <rect key="frame" x="0.0" y="276.5" width="375" height="72"/>
+                                            <rect key="frame" x="0.0" y="276.5" width="375" height="73"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9G-w1-lBA">
                                                     <rect key="frame" x="24" y="11" width="45.5" height="19.5"/>
@@ -158,14 +158,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sld-8k-KXf">
-                                                    <rect key="frame" x="24" y="71" width="351" height="1"/>
+                                                    <rect key="frame" x="24" y="72" width="351" height="1"/>
                                                     <color key="backgroundColor" red="0.90980392160000001" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="36a-9g-jwU"/>
                                                     </constraints>
                                                 </view>
                                                 <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="if any" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Pt-zW-YxL">
-                                                    <rect key="frame" x="24" y="40.5" width="327" height="20"/>
+                                                    <rect key="frame" x="24" y="40.5" width="327" height="21"/>
                                                     <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -185,7 +185,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggc-3e-Cnv">
-                                            <rect key="frame" x="0.0" y="348.5" width="375" height="192"/>
+                                            <rect key="frame" x="0.0" y="349.5" width="375" height="192"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feB-eb-rYD">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
@@ -242,7 +242,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLD-UT-Dnq">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                                             <subviews>
-                                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Dep-gB-H5u">
+                                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Dep-gB-H5u">
                                                                     <rect key="frame" x="22" y="15" width="333" height="31"/>
                                                                     <color key="tintColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
                                                                     <color key="thumbTintColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
@@ -343,7 +343,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4C3-LR-IwG" customClass="QBaseDarkButton">
-                                            <rect key="frame" x="24" y="575.5" width="327" height="49"/>
+                                            <rect key="frame" x="24" y="576.5" width="327" height="49"/>
                                             <color key="backgroundColor" red="0.83529411764705885" green="0.84705882352941175" blue="0.8666666666666667" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="49" id="yqS-TG-YNR"/>

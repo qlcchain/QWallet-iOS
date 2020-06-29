@@ -25,7 +25,7 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     
-    if (!_inputArr) {
+    if (!_inputArr || _inputArr.count == 0) {
         return;
     }
     

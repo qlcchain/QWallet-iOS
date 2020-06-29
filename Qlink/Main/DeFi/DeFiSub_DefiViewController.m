@@ -371,7 +371,6 @@ static NSInteger TypeBtn_Tag = 4000;
     } else if (tableView == _recordTable) {
         
         DeFiRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:DeFiRecordCell_Reuse];
-        
         DefiProjectListModel *model = _recordArr[indexPath.row];
         [cell config:model];
         

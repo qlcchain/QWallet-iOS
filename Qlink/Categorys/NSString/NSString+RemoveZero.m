@@ -120,16 +120,14 @@
 + (NSString *)doubleToString:(double)doubleV {
     int precision = 100;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-//    formatter.numberStyle = NSNumberFormatterScientificStyle;
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
-//    formatter.decimalSeparator = @"";
-//    formatter.currencyGroupingSeparator = @"";
     formatter.usesGroupingSeparator = NO;
     formatter.usesSignificantDigits = YES;
     formatter.minimumFractionDigits = precision;
     formatter.maximumFractionDigits = precision;
     NSString *result = [formatter stringFromNumber:@(doubleV)];
     return result;
+    
 }
 
 
