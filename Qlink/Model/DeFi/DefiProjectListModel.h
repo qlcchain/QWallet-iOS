@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, strong) NSString *tvlUsd_str;// = "";
 @property (nonatomic, strong) NSString *shortName;
 @property (nonatomic, strong) NSString *rating;
+@property (nonatomic, strong) NSString *logo;
 @property (nonatomic, strong) NSArray *cache;
 
 - (NSString *)getShowName;

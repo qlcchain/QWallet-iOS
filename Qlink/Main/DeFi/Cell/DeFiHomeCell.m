@@ -11,6 +11,9 @@
 #import "NSString+RemoveZero.h"
 #import "DefiProjectModel.h"
 #import "DefiLineView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "RequestService.h"
+#import "GlobalConstants.h"
 
 @interface DeFiHomeCell ()
 
@@ -43,7 +46,18 @@
 - (void)config:(DefiProjectListModel *)model index:(NSInteger)index {
     _numLab.text = [NSString stringWithFormat:@"%@",@(index+1)];
     NSString *iconStr = [[model.name lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    _icon.image = [UIImage imageNamed:iconStr];
+    UIImage *iconImg = [UIImage imageNamed:iconStr];
+    if (iconImg) {
+        _icon.image = iconImg;
+    } else {
+        if (model.logo && model.logo.length > 0) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.logo]];
+            [_icon sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            }];
+        }
+        
+    }
+    
     _nameLab.text = [model getShowName];
     NSString *usd_defi = [model.tvlUsd showfloatStr_Defi:2];
     _usdLab.text = [NSString stringWithFormat:@"$%@",usd_defi];

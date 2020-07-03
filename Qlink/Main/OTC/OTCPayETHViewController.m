@@ -177,6 +177,11 @@
     NSString *name = _selectToken.tokenInfo.name;
     NSString *symbol = _selectToken.tokenInfo.symbol;
     NSString *amount = _amountTF.text.trim_whitespace;
+    
+   
+    double priceD = [[NSString stringWithFormat:@"%@",amount] doubleValue];
+    amount = [NSString doubleToString:priceD];
+    
     NSInteger gasLimit = [_gasLimitLab.text integerValue];
     NSInteger gasPrice = _gasSlider.value;
     NSInteger decimals = [_selectToken.tokenInfo.decimals integerValue];

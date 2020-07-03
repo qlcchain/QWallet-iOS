@@ -117,6 +117,9 @@
 - (void)showQLCTransferConfirmView {
     NSString *fromAddress = _payWalletM.address?:@"";
     NSString *toAddress = _sendtoAddressTV.text.trim_whitespace;
+    
+    
+    
     NSString *amount = [NSString stringWithFormat:@"%@ %@",_amountTF.text.trim_whitespace,_selectAsset.tokenName];
     QLCTransferConfirmView *view = [QLCTransferConfirmView getInstance];
     [view configWithFromAddress:fromAddress toAddress:toAddress amount:amount];

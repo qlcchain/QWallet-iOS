@@ -55,6 +55,9 @@
 #define POINT(_INDEX_) [(NSValue *)[points objectAtIndex:_INDEX_] CGPointValue]
 - (void)smoothedPathWithPoints:(NSArray *) pointsArray andGranularity:(NSInteger)granularity lineColor:(UIColor *)lineColor {
     
+    if (pointsArray.count == 0) {
+        return;
+    }
     NSMutableArray *points = [pointsArray mutableCopy];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
