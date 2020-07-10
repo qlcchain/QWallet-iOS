@@ -66,7 +66,14 @@
     
     [self configInit];
     //[self getCode];
-    [self.signView loadLocalHtmlForJsWithHtmlName:@"activieSign"];
+    if (_claimQGASType == ClaimQGASTypeCLAIM_COVID) {
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"coveReward"];
+    } else if (_claimQGASType == ClaimQGASTypeDailyEarnings) {
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"activieSign"];
+    } else {
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"rewardOther"];
+    }
+    
 }
 
 #pragma mark - Operation
@@ -114,7 +121,7 @@
     requestM.appVersion = APP_Version;
     requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [kAppD.window makeToastInView:kAppD.window];
-    [OutbreakRedSDK requestGzbd_receive2WithAccount:account token:token timestamp:timestamp signDic:self.signDic recordId:recordId toAddress:toAddress appKey:Sign_Key scene:Sign_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+    [OutbreakRedSDK requestGzbd_receive2WithAccount:account token:token timestamp:timestamp signDic:self.signDic recordId:recordId toAddress:toAddress appKey:Sign_Key_1N scene:Sign_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [kAppD.window hideToast];
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {
@@ -148,7 +155,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Activity_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key_ON,@"scene":other_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_bind_v3_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];
@@ -180,7 +187,7 @@
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
     NSString *toAddress = [_qgasSendTF.text?:@"" trim_whitespace];
-    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key,@"scene":Sign_Activity_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
+    NSDictionary *params = @{@"account":account,@"token":token,@"toAddress":toAddress,@"appKey":Sign_Key_ON,@"scene":Sign_Activity_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl11:reward_claim_invite_v3_Url params:params timestamp:timestamp httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];

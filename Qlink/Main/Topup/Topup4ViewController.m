@@ -89,7 +89,9 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
 static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 @interface Topup4ViewController () <UIScrollViewDelegate,NinaPagerViewDelegate>
-
+{
+    BOOL isfirst;
+}
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 //@property (weak, nonatomic) IBOutlet UILabel *sendRechargeLab;
 //@property (weak, nonatomic) IBOutlet UILabel *inputTipLab;
@@ -200,6 +202,11 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeCycleTimer];
@@ -251,12 +258,16 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 //    });
     
     [self handlerSysIndex];
+    
+
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+   
     [self addCycleTimer];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

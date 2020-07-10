@@ -12,7 +12,7 @@
 #import "MnemonicTipView.h"
 #import "WalletCommonModel.h"
 #import <ETHFramework/ETHFramework.h>
-#import <TTGTextTagCollectionView.h>
+#import <TTGTagCollectionView/TTGTextTagCollectionView.h>
 
 
 @interface ETHExportMnemonicViewController ()

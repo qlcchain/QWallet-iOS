@@ -38,6 +38,7 @@
 #import "FirebaseUtil.h"
 #import "NSString+Trim.h"
 #import "TokenPriceModel.h"
+#import "NSString+RemoveZero.h"
 
 @interface NewOrderViewController () <UITextFieldDelegate>
 
@@ -125,6 +126,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sellGasDetailHeight; // 143
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *sellGasCostHeight; // 48
 
+
+@property (weak, nonatomic) IBOutlet UILabel *lblBuyDesc;
+@property (weak, nonatomic) IBOutlet UILabel *lblSellDesc;
+
+
 @end
 
 @implementation NewOrderViewController
@@ -176,7 +182,21 @@
         [self clearBuyView];
         _sell_PairsM = _inputPairsArr.firstObject;
         [self clearSellView];
+        
+        _lblBuyDesc.text = [NSString stringWithFormat:kLang(@"buying_min_desc"),[NSString doubleToString:_buy_PairsM.minTradeTokenAmount]];
+        _lblSellDesc.text = [NSString stringWithFormat:kLang(@"buying_min_desc"),[NSString doubleToString:_sell_PairsM.minTradeTokenAmount]];
+       
     }
+}
+
+- (void) showBuyingDesc
+{
+    if (_buySegBtn.isSelected) {
+         _lblBuyDesc.text = [NSString stringWithFormat:kLang(@"buying_min_desc"),[NSString doubleToString:_buy_PairsM.minTradeTokenAmount]];
+    } else {
+         _lblSellDesc.text = [NSString stringWithFormat:kLang(@"buying_min_desc"),[NSString doubleToString:_sell_PairsM.minTradeTokenAmount]];
+    }
+   
 }
 
 - (void)clearBuyView {
@@ -264,6 +284,7 @@
                 weakself.sell_PairsM = model;
                 [weakself clearSellView];
             }
+            [weakself showBuyingDesc];
         }];
         [alertVC addAction:action];
     }];
@@ -535,7 +556,8 @@
         return;
     }
     if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue] == 0) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_0.001")];
+        
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:kLang(@"the_min_amount_should_be_equal_or_greater_than_1"),_buy_PairsM.minTradeTokenAmount]];
         return;
     }
     if ([_buyTradeTF.text.trim_whitespace isEmptyString]) {
@@ -546,10 +568,11 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
-    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue]*[_buyPayUnitTF.text.trim_whitespace doubleValue] < 0.00000001) {
+    if ([_buyVolumeMinAmountTF.text.trim_whitespace doubleValue]*[_buyPayUnitTF.text.trim_whitespace doubleValue] < _buy_PairsM.minPayTokenAmount) {
         [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_amoun")];
         return;
     }
+    
     
     // 检查地址有效性
     BOOL validReceiveAddress = [WalletCommonModel validAddress:_buyTradeTF.text.trim_whitespace tokenChain:_buy_PairsM.tradeTokenChain];
@@ -607,7 +630,7 @@
         return;
     }
     if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue] == 0) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"the_min_amount_should_be_equal_or_greater_than_0.001")];
+        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:kLang(@"the_min_amount_should_be_equal_or_greater_than_1"),_sell_PairsM.minTradeTokenAmount]];
         return;
     }
     if ([_sellTradeAmountTF.text.trim_whitespace doubleValue] < [_sellVolumeMaxAmountTF.text.trim_whitespace doubleValue]) {
@@ -622,7 +645,7 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"address_is_empty")];
         return;
     }
-    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue]*[_sellPayUnitTF.text.trim_whitespace doubleValue] < 0.00000001) {
+    if ([_sellVolumeMinAmountTF.text.trim_whitespace doubleValue]*[_sellPayUnitTF.text.trim_whitespace doubleValue] < _sell_PairsM.minPayTokenAmount) {
         [kAppD.window makeToastDisappearWithText:kLang(@"insufficient_amoun")];
         return;
     }
@@ -750,6 +773,23 @@
 - (BOOL) isValid:(NSString*)checkStr withRegex:(NSString*)regex {
     NSPredicate *predicte = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     return [predicte evaluateWithObject:checkStr];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (_buySegBtn.isSelected) {
+        if (_buyVolumeMinAmountTF.text.length > 0){
+            if ( [_buyVolumeMinAmountTF.text doubleValue] < _buy_PairsM.minTradeTokenAmount) {
+                _buyVolumeMinAmountTF.text = [NSString doubleToString:_buy_PairsM.minTradeTokenAmount];
+            }
+        }
+    } else {
+        if (_sellVolumeMinAmountTF.text.length > 0){
+            if ( [_sellVolumeMinAmountTF.text doubleValue] < _sell_PairsM.minTradeTokenAmount) {
+                _sellVolumeMinAmountTF.text = [NSString doubleToString:_sell_PairsM.minTradeTokenAmount];
+            }
+        }
+    }
 }
 
 

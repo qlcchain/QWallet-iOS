@@ -73,7 +73,7 @@
 #import "EOSAddressInfoModel.h"
 #import "NEOJSUtil.h"
 #import "NEOGasClaimModel.h"
-#import <LYEmptyViewHeader.h>
+#import <LYEmptyView/LYEmptyViewHeader.h>
 #import <TMCache/TMCache.h>
 
 static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";

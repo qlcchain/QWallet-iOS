@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -126,7 +126,7 @@
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BD7-op-y3e">
-                                    <rect key="frame" x="79" y="0.0" width="256" height="44"/>
+                                    <rect key="frame" x="16" y="0.0" width="319" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                             </subviews>
@@ -141,7 +141,7 @@
                                 <constraint firstItem="3gP-FP-CyO" firstAttribute="centerY" secondItem="uaf-ed-0v3" secondAttribute="centerY" id="aLb-5s-ERQ"/>
                                 <constraint firstAttribute="bottom" secondItem="cea-BH-Sla" secondAttribute="bottom" id="tY1-0J-grf"/>
                                 <constraint firstAttribute="trailing" secondItem="BD7-op-y3e" secondAttribute="trailing" constant="79" id="uFK-2b-eZ5"/>
-                                <constraint firstItem="BD7-op-y3e" firstAttribute="leading" secondItem="uaf-ed-0v3" secondAttribute="leading" constant="79" id="uVj-nQ-1kZ"/>
+                                <constraint firstItem="BD7-op-y3e" firstAttribute="leading" secondItem="uaf-ed-0v3" secondAttribute="leading" constant="16" id="uVj-nQ-1kZ"/>
                             </constraints>
                         </view>
                     </subviews>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeFiHomeViewController">
             <connections>
+                <outlet property="cycleBackView" destination="rvT-JV-Rjb" id="IXM-pB-zm9"/>
+                <outlet property="cycleHeight" destination="K7F-4D-gsZ" id="lTO-TZ-2ey"/>
                 <outlet property="mainScroll" destination="bLD-Pq-SuO" id="3P2-e9-1s3"/>
                 <outlet property="mainScrollContent" destination="e92-1d-Dqq" id="fUh-RT-i4X"/>
                 <outlet property="mainScrollContentWidth" destination="8vA-XI-163" id="C7m-15-ZCm"/>
@@ -54,13 +56,13 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KhX-tr-9Jw">
-                            <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                            <rect key="frame" x="0.0" y="79" width="414" height="657"/>
                             <subviews>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bLD-Pq-SuO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="657"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e92-1d-Dqq">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="692"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="657"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="240" id="8vA-XI-163"/>
@@ -87,13 +89,23 @@
                                 <constraint firstItem="bLD-Pq-SuO" firstAttribute="leading" secondItem="KhX-tr-9Jw" secondAttribute="leading" id="xAS-N5-4gb"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvT-JV-Rjb">
+                            <rect key="frame" x="0.0" y="44" width="414" height="35"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="K7F-4D-gsZ"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="KhX-tr-9Jw" firstAttribute="leading" secondItem="NdH-5K-Afd" secondAttribute="leading" id="120-bg-BMm"/>
+                        <constraint firstItem="rvT-JV-Rjb" firstAttribute="top" secondItem="Y8f-Di-A6I" secondAttribute="bottom" id="Fct-Hf-Kep"/>
+                        <constraint firstItem="rvT-JV-Rjb" firstAttribute="leading" secondItem="NdH-5K-Afd" secondAttribute="leading" id="HaI-5Y-GNz"/>
+                        <constraint firstAttribute="trailing" secondItem="rvT-JV-Rjb" secondAttribute="trailing" id="Rot-sf-rGt"/>
+                        <constraint firstItem="KhX-tr-9Jw" firstAttribute="top" secondItem="rvT-JV-Rjb" secondAttribute="bottom" id="cr4-a3-vof"/>
                         <constraint firstAttribute="bottom" secondItem="KhX-tr-9Jw" secondAttribute="bottom" id="k69-fF-GbP"/>
                         <constraint firstItem="Y8f-Di-A6I" firstAttribute="top" secondItem="NdH-5K-Afd" secondAttribute="top" id="kwp-ca-CMF"/>
-                        <constraint firstItem="KhX-tr-9Jw" firstAttribute="top" secondItem="Y8f-Di-A6I" secondAttribute="bottom" id="rco-ww-daZ"/>
                         <constraint firstItem="Y8f-Di-A6I" firstAttribute="leading" secondItem="NdH-5K-Afd" secondAttribute="leading" id="rtj-0t-d5E"/>
                         <constraint firstAttribute="trailing" secondItem="Y8f-Di-A6I" secondAttribute="trailing" id="wL3-KA-WV1"/>
                         <constraint firstAttribute="trailing" secondItem="KhX-tr-9Jw" secondAttribute="trailing" id="wem-5K-vHe"/>

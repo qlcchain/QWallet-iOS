@@ -890,6 +890,11 @@
 		73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */; };
 		73048F132079FE9000A4EFEE /* RatesMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F122079FE9000A4EFEE /* RatesMode.m */; };
 		73048F16207A19B500A4EFEE /* BalanceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F15207A19B500A4EFEE /* BalanceInfo.m */; };
+		730A7A1B24B5CF5E00D086FF /* DefiTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 730A7A1A24B5CF5E00D086FF /* DefiTokenModel.m */; };
+		730A7A1E24B6B44F00D086FF /* NSString+Calculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 730A7A1D24B6B44F00D086FF /* NSString+Calculate.m */; };
+		730A7A2024B801F700D086FF /* other.html in Resources */ = {isa = PBXBuildFile; fileRef = 730A7A1F24B801F700D086FF /* other.html */; };
+		730A7A2224B802A200D086FF /* rewardOther.html in Resources */ = {isa = PBXBuildFile; fileRef = 730A7A2124B802A200D086FF /* rewardOther.html */; };
+		730A7A2424B8035E00D086FF /* coveReward.html in Resources */ = {isa = PBXBuildFile; fileRef = 730A7A2324B8035E00D086FF /* coveReward.html */; };
 		730B985524937A190022A8EF /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B985424937A180022A8EF /* SignView.m */; };
 		7310AA0C20D0C71400F2261A /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 7310AA0A20D0C71300F2261A /* NSBundle+Language.m */; };
 		7323B76F20BCEF74005785F4 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7323B76D20BCEF74005785F4 /* SettingCell.m */; };
@@ -911,7 +916,6 @@
 		736DA1F32498A09500576055 /* activieSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F22498A09500576055 /* activieSign.html */; };
 		736DA1F62498A0A000576055 /* loginSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F42498A0A000576055 /* loginSign.html */; };
 		736DA1F72498A0A000576055 /* registerSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F52498A0A000576055 /* registerSign.html */; };
-		736DA1F92499E92E00576055 /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736DA1F82499E92D00576055 /* OutbreakRed.framework */; };
 		7377D173206B84620072E628 /* LocationManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D172206B84610072E628 /* LocationManage.m */; };
 		7377D176206B8D560072E628 /* LocationMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D175206B8D560072E628 /* LocationMode.m */; };
 		7377D179206B9E730072E628 /* VPNMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D178206B9E730072E628 /* VPNMode.m */; };
@@ -925,6 +929,9 @@
 		73899C992152003100962B14 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 73899C7D2152003100962B14 /* GuidePageView1.m */; };
 		73899C9C2152003100962B14 /* GuidePageView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73899C852152003100962B14 /* GuidePageView1.xib */; };
 		73899CA12152003100962B14 /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73899C942152003100962B14 /* GuidePageViewController.m */; };
+		73A0000424B569D1006F2A5D /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A0000324B569D1006F2A5D /* OutbreakRed.framework */; };
+		73A0000824B5C551006F2A5D /* DefiPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A0000624B5C551006F2A5D /* DefiPriceCell.m */; };
+		73A0000924B5C551006F2A5D /* DefiPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A0000724B5C551006F2A5D /* DefiPriceCell.xib */; };
 		73A05A1D2081A02200974483 /* icon_map_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 73A05A1B2081A02100974483 /* icon_map_refresh.png */; };
 		73A05A1E2081A02200974483 /* icon_map_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73A05A1C2081A02200974483 /* icon_map_refresh@2x.png */; };
 		73A05A242081D52200974483 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A05A232081D52100974483 /* UIImage+RoundedCorner.m */; };
@@ -940,6 +947,9 @@
 		73C1BA13207E184F0080C59F /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73C1BA12207E184F0080C59F /* HMScanner.bundle */; };
 		73C200C2209A9D460043E889 /* NotifactionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C200C1209A9D460043E889 /* NotifactionView.m */; };
 		73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D048A120F87AC100382BD5 /* VPNTranferMode.m */; };
+		73D9580124B83FBA006A9081 /* LFAdvertScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D9580024B83FBA006A9081 /* LFAdvertScrollView.m */; };
+		73D9580524B8543C006A9081 /* cycleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D9580324B8543C006A9081 /* cycleCell.m */; };
+		73D9580624B8543C006A9081 /* cycleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D9580424B8543C006A9081 /* cycleCell.xib */; };
 		73F9557720FF33E400A3E0F5 /* FreeRecordMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */; };
 		73FF64F220F599E700E29B3B /* CountryList.json in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64F120F599E600E29B3B /* CountryList.json */; };
 		935F3290212BB4F500B03341 /* ConfigurationDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935F328D212BB4F500B03341 /* ConfigurationDebug.plist */; };
@@ -2944,6 +2954,13 @@
 		73048F122079FE9000A4EFEE /* RatesMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatesMode.m; sourceTree = "<group>"; };
 		73048F14207A19B500A4EFEE /* BalanceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BalanceInfo.h; sourceTree = "<group>"; };
 		73048F15207A19B500A4EFEE /* BalanceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BalanceInfo.m; sourceTree = "<group>"; };
+		730A7A1924B5CF5E00D086FF /* DefiTokenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiTokenModel.h; sourceTree = "<group>"; };
+		730A7A1A24B5CF5E00D086FF /* DefiTokenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiTokenModel.m; sourceTree = "<group>"; };
+		730A7A1C24B6B44F00D086FF /* NSString+Calculate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Calculate.h"; sourceTree = "<group>"; };
+		730A7A1D24B6B44F00D086FF /* NSString+Calculate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Calculate.m"; sourceTree = "<group>"; };
+		730A7A1F24B801F700D086FF /* other.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = other.html; sourceTree = "<group>"; };
+		730A7A2124B802A200D086FF /* rewardOther.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = rewardOther.html; sourceTree = "<group>"; };
+		730A7A2324B8035E00D086FF /* coveReward.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = coveReward.html; sourceTree = "<group>"; };
 		730B985324937A180022A8EF /* SignView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
 		730B985424937A180022A8EF /* SignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
 		7310AA0A20D0C71300F2261A /* NSBundle+Language.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Language.m"; sourceTree = "<group>"; };
@@ -2975,7 +2992,6 @@
 		736DA1F22498A09500576055 /* activieSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = activieSign.html; sourceTree = "<group>"; };
 		736DA1F42498A0A000576055 /* loginSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loginSign.html; sourceTree = "<group>"; };
 		736DA1F52498A0A000576055 /* registerSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = registerSign.html; sourceTree = "<group>"; };
-		736DA1F82499E92D00576055 /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
 		7377D171206B84610072E628 /* LocationManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManage.h; sourceTree = "<group>"; };
 		7377D172206B84610072E628 /* LocationManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManage.m; sourceTree = "<group>"; };
 		7377D174206B8D560072E628 /* LocationMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMode.h; sourceTree = "<group>"; };
@@ -3002,6 +3018,10 @@
 		73899C872152003100962B14 /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		73899C902152003100962B14 /* GuidePageView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		73899C942152003100962B14 /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
+		73A0000324B569D1006F2A5D /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
+		73A0000524B5C551006F2A5D /* DefiPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiPriceCell.h; sourceTree = "<group>"; };
+		73A0000624B5C551006F2A5D /* DefiPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiPriceCell.m; sourceTree = "<group>"; };
+		73A0000724B5C551006F2A5D /* DefiPriceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefiPriceCell.xib; sourceTree = "<group>"; };
 		73A05A1B2081A02100974483 /* icon_map_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_map_refresh.png; sourceTree = "<group>"; };
 		73A05A1C2081A02200974483 /* icon_map_refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_map_refresh@2x.png"; sourceTree = "<group>"; };
 		73A05A222081D52100974483 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
@@ -3032,6 +3052,11 @@
 		73C200C1209A9D460043E889 /* NotifactionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifactionView.m; sourceTree = "<group>"; };
 		73D048A020F87AC100382BD5 /* VPNTranferMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNTranferMode.h; sourceTree = "<group>"; };
 		73D048A120F87AC100382BD5 /* VPNTranferMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNTranferMode.m; sourceTree = "<group>"; };
+		73D957FF24B83FBA006A9081 /* LFAdvertScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAdvertScrollView.h; sourceTree = "<group>"; };
+		73D9580024B83FBA006A9081 /* LFAdvertScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAdvertScrollView.m; sourceTree = "<group>"; };
+		73D9580224B8543C006A9081 /* cycleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cycleCell.h; sourceTree = "<group>"; };
+		73D9580324B8543C006A9081 /* cycleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cycleCell.m; sourceTree = "<group>"; };
+		73D9580424B8543C006A9081 /* cycleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cycleCell.xib; sourceTree = "<group>"; };
 		73F9557520FF33E400A3E0F5 /* FreeRecordMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeRecordMode.h; sourceTree = "<group>"; };
 		73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeRecordMode.m; sourceTree = "<group>"; };
 		73FF64F120F599E600E29B3B /* CountryList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryList.json; sourceTree = "<group>"; };
@@ -3069,7 +3094,7 @@
 				58A2495920D0F60C00781549 /* WebKit.framework in Frameworks */,
 				734F52A220B6BF90002D45B7 /* CoreTelephony.framework in Frameworks */,
 				734F52A020B6BF81002D45B7 /* CFNetwork.framework in Frameworks */,
-				736DA1F92499E92E00576055 /* OutbreakRed.framework in Frameworks */,
+				73A0000424B569D1006F2A5D /* OutbreakRed.framework in Frameworks */,
 				587D0CDD24484053003EB1F9 /* neoutils.framework in Frameworks */,
 				58436CFD2451C679005DCE6F /* KeychainSwift.framework in Frameworks */,
 				734F529E20B6BF76002D45B7 /* MobileCoreServices.framework in Frameworks */,
@@ -3382,6 +3407,8 @@
 				58A3D4F8225EEC7700ABABD9 /* NSString+Trim.m */,
 				58B2D49D2321120300C15465 /* NSString+RandomStr.h */,
 				58B2D49E2321120300C15465 /* NSString+RandomStr.m */,
+				730A7A1C24B6B44F00D086FF /* NSString+Calculate.h */,
+				730A7A1D24B6B44F00D086FF /* NSString+Calculate.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -3402,6 +3429,7 @@
 		580D912B20625A4300B12506 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				73D957FE24B83F80006A9081 /* DefiLFAdverScrollView */,
 				583940CA2446A09D005EAA04 /* OutbreakRed */,
 				5821966123F28CC800704E23 /* NinaPagerView */,
 				5875B1F12386895B00FCA894 /* WZLBadge */,
@@ -3848,6 +3876,9 @@
 		5821964423F107E100704E23 /* Html */ = {
 			isa = PBXGroup;
 			children = (
+				730A7A2324B8035E00D086FF /* coveReward.html */,
+				730A7A2124B802A200D086FF /* rewardOther.html */,
+				730A7A1F24B801F700D086FF /* other.html */,
 				736DA1F42498A0A000576055 /* loginSign.html */,
 				736DA1F52498A0A000576055 /* registerSign.html */,
 				736DA1F22498A09500576055 /* activieSign.html */,
@@ -4216,7 +4247,7 @@
 		583940CA2446A09D005EAA04 /* OutbreakRed */ = {
 			isa = PBXGroup;
 			children = (
-				736DA1F82499E92D00576055 /* OutbreakRed.framework */,
+				73A0000324B569D1006F2A5D /* OutbreakRed.framework */,
 			);
 			path = OutbreakRed;
 			sourceTree = "<group>";
@@ -4491,6 +4522,8 @@
 				58C1D010246A7BB000D1144E /* DefiNewsListModel.m */,
 				5814636F246E4D3C0019A377 /* DeFiRatingInfoModel.h */,
 				58146370246E4D3C0019A377 /* DeFiRatingInfoModel.m */,
+				730A7A1924B5CF5E00D086FF /* DefiTokenModel.h */,
+				730A7A1A24B5CF5E00D086FF /* DefiTokenModel.m */,
 			);
 			path = DeFi;
 			sourceTree = "<group>";
@@ -5374,6 +5407,12 @@
 				586485432462BA3000BEBE18 /* DeFiHistoricalstatsCell.h */,
 				586485442462BA3000BEBE18 /* DeFiHistoricalstatsCell.m */,
 				586485452462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib */,
+				73A0000524B5C551006F2A5D /* DefiPriceCell.h */,
+				73A0000624B5C551006F2A5D /* DefiPriceCell.m */,
+				73A0000724B5C551006F2A5D /* DefiPriceCell.xib */,
+				73D9580224B8543C006A9081 /* cycleCell.h */,
+				73D9580324B8543C006A9081 /* cycleCell.m */,
+				73D9580424B8543C006A9081 /* cycleCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6128,6 +6167,15 @@
 			path = NotifactionView;
 			sourceTree = "<group>";
 		};
+		73D957FE24B83F80006A9081 /* DefiLFAdverScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				73D957FF24B83FBA006A9081 /* LFAdvertScrollView.h */,
+				73D9580024B83FBA006A9081 /* LFAdvertScrollView.m */,
+			);
+			path = DefiLFAdverScrollView;
+			sourceTree = "<group>";
+		};
 		935F328C212BB4F500B03341 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -6348,6 +6396,7 @@
 				736DA1F62498A0A000576055 /* loginSign.html in Resources */,
 				5885D435231F496C00F9DEDE /* NewStakingViewController.xib in Resources */,
 				581F836622F7C44D00F8291E /* JoinCommunityViewController.xib in Resources */,
+				730A7A2024B801F700D086FF /* other.html in Resources */,
 				58C9282922FA79CE0020BDC0 /* ShareFriendsViewController.xib in Resources */,
 				73C1BA13207E184F0080C59F /* HMScanner.bundle in Resources */,
 				581F82D322F7C2F300F8291E /* WalletsSwitchViewController.xib in Resources */,
@@ -6358,6 +6407,7 @@
 				581F80E922F7BEA100F8291E /* HomeBuySellViewController.xib in Resources */,
 				586485422462AA8600BEBE18 /* DeFiKeystatsCell.xib in Resources */,
 				58822DCE23102442007C8DC2 /* OTCPayQLCViewController.xib in Resources */,
+				730A7A2424B8035E00D086FF /* coveReward.html in Resources */,
 				58A34A9D23B30AB500670577 /* ChooseCountryCodeCell.xib in Resources */,
 				73A05A1D2081A02200974483 /* icon_map_refresh.png in Resources */,
 				581F825C22F7C1F900F8291E /* NEOWalletDetailViewController.xib in Resources */,
@@ -6448,6 +6498,7 @@
 				5860AD0D20CFB4FB00EEB6CE /* DebugLogViewController.xib in Resources */,
 				581F81D722F7C0E200F8291E /* QLCWalletAddressViewController.xib in Resources */,
 				580D91B62063AE5300B12506 /* Roboto-ThinItalic.ttf in Resources */,
+				73D9580624B8543C006A9081 /* cycleCell.xib in Resources */,
 				581F81FA22F7C12B00F8291E /* EOSImportViewController.xib in Resources */,
 				581F80F722F7BEBF00F8291E /* BuySellDetailViewController.xib in Resources */,
 				580D91BE2063AE5300B12506 /* Roboto-BlackItalic.ttf in Resources */,
@@ -6461,6 +6512,7 @@
 				581F815222F7BF8500F8291E /* ETHWalletDetailCell.xib in Resources */,
 				5885D43C231F497C00F9DEDE /* VotingMiningNodeViewController.xib in Resources */,
 				581F827122F7C22400F8291E /* ETHExportMnemonicViewController.xib in Resources */,
+				730A7A2224B802A200D086FF /* rewardOther.html in Resources */,
 				5874E35C234DDAA6000835A0 /* index.html in Resources */,
 				587D0C872447EE27003EB1F9 /* OutbreakRedFocusTipView.xib in Resources */,
 				580D91B32063AE5300B12506 /* Roboto-BoldItalic.ttf in Resources */,
@@ -6476,6 +6528,7 @@
 				581F832722F7C3B200F8291E /* SettingsCell.xib in Resources */,
 				58A8B1F5233C87B3007E2CE3 /* MyTopupOrderCell.xib in Resources */,
 				581F824E22F7C1E100F8291E /* NEOTransferViewController.xib in Resources */,
+				73A0000924B5C551006F2A5D /* DefiPriceCell.xib in Resources */,
 				58BE6F7F233E4B3F00684A73 /* TopupWebViewController.xib in Resources */,
 				58A4DEB6206234AC00E72F52 /* LaunchScreen.storyboard in Resources */,
 				58FB34A423CFF5960045CAB4 /* OpenDelegateSuccessView.xib in Resources */,
@@ -6583,7 +6636,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TrustWeb3Provider/TrustWeb3Provider.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -6592,7 +6645,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		46635BD433FE66F8EA6F4E93 /* [CP] Embed Pods Frameworks */ = {
@@ -6601,7 +6654,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BGFMDB/BGFMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
@@ -6613,6 +6666,7 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/ORCycleLabel/ORCycleLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -6642,6 +6696,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ORCycleLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -6660,7 +6715,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		581D509B217890B30064F60C /* TODO */ = {
@@ -6821,6 +6876,7 @@
 				585CDC12225C785500199FE1 /* ForgetPWViewController.m in Sources */,
 				580D916020625A4400B12506 /* UITextView+PinchZoom.m in Sources */,
 				5875B20623869A6B00FCA894 /* TabbarHelper.m in Sources */,
+				73D9580124B83FBA006A9081 /* LFAdvertScrollView.m in Sources */,
 				5806C10121C3C377000E693B /* GetInfoRequest.m in Sources */,
 				587ABD4521B8F8F800C3D81A /* Abi_json_to_binRequest.m in Sources */,
 				5881178024625B1C0058B35F /* DeFiSub_DefiViewController.m in Sources */,
@@ -6954,6 +7010,7 @@
 				58957019218957F200DB7497 /* ChooseCurrencyViewController.m in Sources */,
 				58A4DEAE206234AC00E72F52 /* LaunchViewController.m in Sources */,
 				587ABD6F21B8F8F800C3D81A /* EOS_WalletAccount.m in Sources */,
+				73A0000824B5C551006F2A5D /* DefiPriceCell.m in Sources */,
 				581AC37221AFD84500ACA80B /* XYTransition.m in Sources */,
 				587CCF7F236BDD8F00CB9DF3 /* AgentModel.m in Sources */,
 				583910FD2084971F00A19E7E /* DebugLogViewController.m in Sources */,
@@ -6962,6 +7019,7 @@
 				580D914020625A4300B12506 /* UIImage+Orientation.m in Sources */,
 				581CB39A21C8BF9F004DED10 /* EOSSignUtil.m in Sources */,
 				587ABD6921B8F8F800C3D81A /* BaseService.m in Sources */,
+				730A7A1E24B6B44F00D086FF /* NSString+Calculate.m in Sources */,
 				58A34A9C23B30AB500670577 /* ChooseCountryCodeCell.m in Sources */,
 				58245C1422E170FA0093E747 /* ComplaintSubmitViewController.m in Sources */,
 				587ABD5621B8F8F800C3D81A /* EOS_GetRateResult.m in Sources */,
@@ -7208,6 +7266,7 @@
 				584911802105AEF4005232A2 /* LocationShareModel.m in Sources */,
 				587D0CF724484054003EB1F9 /* ValueOut.swift in Sources */,
 				580D915920625A4400B12506 /* UIView+Visuals.m in Sources */,
+				730A7A1B24B5CF5E00D086FF /* DefiTokenModel.m in Sources */,
 				587D0CFC24484054003EB1F9 /* NeoScanTransactionHistory.swift in Sources */,
 				586485412462AA8600BEBE18 /* DeFiKeystatsCell.m in Sources */,
 				58E41C4D2181CA36004C87AA /* WalletHomeSwitchCell.m in Sources */,
@@ -7292,6 +7351,7 @@
 				5811B7552293D81500F657B5 /* QLCTransferViewController.m in Sources */,
 				583D9540211430D90057A90C /* PageOneView.m in Sources */,
 				5806C10D21C3CB1D000E693B /* CreateAccountTransferService.m in Sources */,
+				73D9580524B8543C006A9081 /* cycleCell.m in Sources */,
 				58FB8D942265C4500075698E /* RefreshHelper.m in Sources */,
 				5871928223CF066100728E15 /* MyGroupBuyOrderViewController.m in Sources */,
 				583D9541211430D90057A90C /* PageThreeView.m in Sources */,
@@ -9335,12 +9395,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9421;
+				CURRENT_PROJECT_VERSION = 9423;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
@@ -9357,12 +9417,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9421;
+				CURRENT_PROJECT_VERSION = 9423;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
@@ -9488,7 +9548,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9421;
+				CURRENT_PROJECT_VERSION = 9423;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9511,8 +9571,102 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.3;
 				MiSDKRun = debug;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"jcore-noidfa-ios-2.1.4\"",
+					"-l\"jpush-noidfa-ios-3.2.4\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BGFMDB\"",
+					"-framework",
+					"\"BigInt\"",
+					"-framework",
+					"\"Bugly\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CYLTabBarController\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CryptoSwift\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleDataTransportCCTSupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"IQKeyboardManager\"",
+					"-framework",
+					"\"JSONRPCKit\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ORCycleLabel\"",
+					"-framework",
+					"\"PromiseKit\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Rswift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SipHash\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SwiftHTTP\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TOCropViewController\"",
+					"-framework",
+					"\"TrezorCrypto\"",
+					"-framework",
+					"\"TrustCore\"",
+					"-framework",
+					"\"TrustKeystore\"",
+					"-framework",
+					"\"TrustWalletSDK\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"dsBridge\"",
+					"-framework",
+					"\"nanopb\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -9533,7 +9687,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9421;
+				CURRENT_PROJECT_VERSION = 9423;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9555,8 +9709,102 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.3;
 				MiSDKRun = online;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"jcore-noidfa-ios-2.1.4\"",
+					"-l\"jpush-noidfa-ios-3.2.4\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BGFMDB\"",
+					"-framework",
+					"\"BigInt\"",
+					"-framework",
+					"\"Bugly\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CYLTabBarController\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CryptoSwift\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleDataTransportCCTSupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"IQKeyboardManager\"",
+					"-framework",
+					"\"JSONRPCKit\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ORCycleLabel\"",
+					"-framework",
+					"\"PromiseKit\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Rswift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SipHash\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SwiftHTTP\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TOCropViewController\"",
+					"-framework",
+					"\"TrezorCrypto\"",
+					"-framework",
+					"\"TrustCore\"",
+					"-framework",
+					"\"TrustKeystore\"",
+					"-framework",
+					"\"TrustWalletSDK\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"dsBridge\"",
+					"-framework",
+					"\"nanopb\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

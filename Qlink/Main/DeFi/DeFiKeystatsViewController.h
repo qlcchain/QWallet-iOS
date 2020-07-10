@@ -11,12 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class DefiProjectListModel;
+@class DefiTokenModel;
+
 
 @interface DeFiKeystatsViewController : QBaseViewController
 
 
 //@property (nonatomic, strong) NSArray *inputTvlArr;
-- (void)refreshView:(NSArray *)arr;
+- (void)refreshView:(NSArray *)arr withDefiTokenModel:(DefiTokenModel *) tokenM;
 
 
 @end

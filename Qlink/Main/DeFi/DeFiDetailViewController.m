@@ -27,6 +27,9 @@
 #import "FirebaseUtil.h"
 #import "DefiRateFailView.h"
 #import "DeFiRatingViewController.h"
+#import "GlobalConstants.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "DefiTokenModel.h"
 
 @interface DeFiDetailViewController () <UIScrollViewDelegate>
 
@@ -63,7 +66,7 @@
 @property (nonatomic, strong) DefiRateLoadView *rateLoadView;
 //@property (nonatomic, strong) __block NSString *qlcAmount_Neo;
 @property (nonatomic, strong) DefiProjectModel *projectM;
-
+@property (nonatomic, strong) DefiTokenModel *tokenM;
 @end
 
 @implementation DeFiDetailViewController
@@ -77,6 +80,7 @@
     [self addChildVC];
     [self handlerRecordLocal];
     [self request_defi_project];
+    //[self request_defi_list];
 }
 
 #pragma mark - Operation
@@ -108,7 +112,17 @@
 
 - (void)refreshProjectView {
     NSString *iconStr = [[_inputProjectListM.name lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    _icon.image = [UIImage imageNamed:iconStr];
+    UIImage *iconImg = [UIImage imageNamed:iconStr];
+    if (iconImg) {
+        _icon.image = iconImg;
+    } else {
+        if (_inputProjectListM.logo && _inputProjectListM.logo.length > 0) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],_inputProjectListM.logo]];
+            [_icon sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            }];
+        }
+    }
+    
     _nameLab.text = [_inputProjectListM getShowName];
 //    _detailLab.text = _inputProjectListM.description;
     
@@ -143,6 +157,21 @@
         [tempArr addObject:_inputProjectListM];
         [[TMCache sharedCache] setObject:tempArr forKey:Defi_Record_Local];
     }
+}
+
+- (void) handleDelLocalDeifiObject
+{
+    kWeakSelf(self);
+    NSArray *localArr = [[TMCache sharedCache] objectForKey:Defi_Record_Local]?:@[];
+     NSMutableArray *tempArr = [NSMutableArray arrayWithArray:localArr];
+    [tempArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        DefiProjectListModel *model = obj;
+        if ([model.ID isEqualToString:weakself.inputProjectListM.ID]) {
+            [tempArr removeObject:model];
+        }
+    }];
+    [[TMCache sharedCache] setObject:tempArr forKey:Defi_Record_Local];
+    
 }
 
 - (void)addChild {
@@ -194,14 +223,18 @@
     [RequestService requestWithUrl5:defi_project_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if ([responseObject[Server_Code] integerValue] == 0) {
             weakself.projectM = [DefiProjectModel mj_objectWithKeyValues:responseObject[@"project"]];
+            weakself.tokenM = [DefiTokenModel mj_objectWithKeyValues:responseObject[@"project"][@"token"]];
             weakself.detailLab.text = weakself.projectM.Description;
 //            weakself.rateBack.hidden = [weakself.projectM.rating integerValue] == 0?YES:NO;
             weakself.rateBack.hidden = NO;
             weakself.rateBack.backgroundColor = [DefiProjectModel getRatingColor:weakself.projectM.rating];
             weakself.ratingValLab.text = [DefiProjectModel getRatingStr:weakself.projectM.rating];
             
-            [weakself.keystats refreshView:weakself.projectM.tvlArr];
+            [weakself.keystats refreshView:weakself.projectM.tvlArr withDefiTokenModel:weakself.tokenM];
         } else {
+            if ([responseObject[@"code"] integerValue] == 99999) {
+                [weakself handleDelLocalDeifiObject];
+            }
             [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {

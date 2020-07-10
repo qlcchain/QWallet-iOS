@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *isBurnQgasOrder;
 
 @property (nonatomic, strong) NSString *showNickName;
+@property (nonatomic, strong) NSString *payTokenLogo;
+@property (nonatomic, strong) NSString *tradeTokenLogo;
 
 @end
 

@@ -80,6 +80,7 @@ end
 def app
 
 #    pod 'Firebase/Core'
+    pod 'ORCycleLabel'
     pod 'Firebase/Analytics'
     pod 'TTGTagCollectionView'
     pod 'BGFMDB'

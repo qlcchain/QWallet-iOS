@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 有关浮点型数据，后台传字符串的格式，防止丢失精度。*/
 /** 直接传入精度丢失有问题的Double类型*/
 + (NSString *)doubleToString:(double)doubleV;
++ (NSString *)formartScientificNotationWithString:(NSNumber *)num;
 
 @end
 

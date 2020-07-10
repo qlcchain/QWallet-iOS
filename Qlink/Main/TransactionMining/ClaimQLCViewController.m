@@ -61,7 +61,12 @@
     
     [self configInit];
     //[self getCode];
-    [self.signView loadLocalHtmlForJsWithHtmlName:@"activieSign"];
+    if (_claimQLCType == ClaimQLCTypeCLAIM_COVID) {
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"coveReward"];
+    } else {
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"activieSign"];
+    }
+    
 }
 
 #pragma mark - Operation
@@ -105,7 +110,7 @@
     requestM.serverEnv = [HWUserdefault getObjectWithKey:QLCServer_Environment];
     [kAppD.window makeToastInView:kAppD.window];
   
-    [OutbreakRedSDK requestGzbd_claim_qlc2WithAccount:account token:token timestamp:timestamp signDic:self.signDic toAddress:toAddress appKey:Sign_Key scene:Sign_Activity_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
+    [OutbreakRedSDK requestGzbd_claim_qlc2WithAccount:account token:token timestamp:timestamp signDic:self.signDic toAddress:toAddress appKey:Sign_Key_1N scene:Sign_Activity_Scene requestM:requestM completeBlock:^(NSURLSessionDataTask * _Nonnull dataTask, id  _Nonnull responseObject, NSError * _Nonnull error) {
         [kAppD.window hideToast];
         if (!error) {
             if ([responseObject[Server_Code] integerValue] == 0) {

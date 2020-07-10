@@ -10,7 +10,7 @@
 //#import "QlinkNavViewController.h"
 #import "QNavigationController.h"
 #import "GlobalConstants.h"
-#import <LYEmptyViewHeader.h>
+#import <LYEmptyView/LYEmptyViewHeader.h>
 
 @interface QBaseViewController ()
 

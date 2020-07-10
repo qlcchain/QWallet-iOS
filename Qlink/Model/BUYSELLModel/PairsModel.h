@@ -20,6 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *tradeTokenChain;// = QLCCHAIN;
 @property (nonatomic, strong) NSString *tradeTokenHash;// = 0xdac17f958d2ee523a2206206994597c13d831ec7;
 
+@property (nonatomic, assign) double minTradeTokenAmount;
+
+@property (nonatomic, assign) double minPayTokenAmount;
+
+//@property (nonatomic, strong) NSNumber *payTokenDecimal;
+//
+//@property (nonatomic, strong) NSNumber *tradeTokenDecimal;
+
+@property (nonatomic, strong) NSString *payTokenLogo;
+@property (nonatomic, strong) NSString *tradeTokenLogo;
+
 + (void)storeLocalSelect:(NSArray *)arr;
 + (NSArray *)fetchLocalSelect;
 + (void)removeLocalSelect;

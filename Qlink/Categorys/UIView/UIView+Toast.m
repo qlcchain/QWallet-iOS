@@ -148,7 +148,15 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 
 - (void)makeToastDisappearWithText:(NSString *)text {
     
-    [QToastView showWithTitle:text];
+    if (text && text.length > 0) {
+        NSArray *msgArr = [text componentsSeparatedByString:@"|"];
+        if (msgArr && msgArr.count >1) {
+            [QToastView showWithTitle:[msgArr lastObject]];
+        } else {
+            [QToastView showWithTitle:text];
+        }
+    }
+    
     return;
     
     if ([self HUD]) {

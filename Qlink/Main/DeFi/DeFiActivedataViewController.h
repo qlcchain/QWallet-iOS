@@ -12,9 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class DefiProjectListModel;
 
+
 @interface DeFiActivedataViewController : QBaseViewController
 
 @property (nonatomic, strong) DefiProjectListModel *inputProjectListM;
+
 
 @end
 

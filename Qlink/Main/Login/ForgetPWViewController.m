@@ -42,7 +42,7 @@
     [self dataInit];
     [self viewInit];
     
-    [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+    [self.signView loadLocalHtmlForJsWithHtmlName:@"other"];
     self.signView.hidden = YES;
 }
 
@@ -145,7 +145,7 @@
     
     if (self.signDic) {
         self.signDic = nil;
-        [self.signView loadLocalHtmlForJsWithHtmlName:@"loginSign"];
+        [self.signView loadLocalHtmlForJsWithHtmlName:@"other"];
     }
     if (self.signView.hidden) {
         self.signView.hidden = NO;
@@ -156,7 +156,7 @@
 - (void)requestVcode_change_password_code {
     NSString *account = [_emailTF.text?:@"" trimAndLowercase];
     kWeakSelf(self);
-    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":Sign_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
+    NSDictionary *params = @{@"account":account,@"appKey":Sign_Key,@"scene":other_Scene,@"sig":self.signDic[@"sig"]?:@"",@"afsToken":self.signDic[@"token"]?:@"",@"sessionId":self.signDic[@"sid"]?:@""};
     [kAppD.window makeToastInView:kAppD.window];
     [RequestService requestWithUrl10:vcode_change_password_code_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         [kAppD.window hideToast];

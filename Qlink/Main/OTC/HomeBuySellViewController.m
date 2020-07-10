@@ -18,7 +18,7 @@
 #import "VerificationViewController.h"
 #import "VerifyTipView.h"
 #import "CQScrollMenuView.h"
-#import <TTGTextTagCollectionView.h>
+#import <TTGTagCollectionView/TTGTextTagCollectionView.h>
 #import "PairsModel.h"
 #import <SwiftTheme/SwiftTheme-Swift.h>
 #import "SheetMiningUtil.h"
@@ -146,7 +146,7 @@ static NSString *const NetworkSize = @"20";
     }
     _menuView = [CQScrollMenuView new];
     _menuView.menuButtonClickedDelegate = self;
-    _menuView.frame = CGRectMake(0, 0, SCREEN_WIDTH-2*79, 44);
+    _menuView.frame = CGRectMake(0, 0, SCREEN_WIDTH-79-16, 44);
     NSMutableArray *titleArr = [NSMutableArray array];
     [_selectPairsTagArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         PairsModel *model = obj;

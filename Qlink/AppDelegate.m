@@ -165,6 +165,8 @@
 //    [self performSelector:@selector(configRootAndBackground) withObject:nil afterDelay:timeI];
     
     [self configRootAndBackground];
+    kAppD.mtabbarC.selectedIndex = MainTabbarIndexDefi;
+   
 }
 
 - (void)configRootAndBackground {

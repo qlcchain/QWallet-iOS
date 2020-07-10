@@ -33,6 +33,9 @@
 @property (nonatomic, copy) HomeBuySellClickBlock clickB;
 @property (nonatomic, strong) EntrustOrderListModel *model;
 
+@property (weak, nonatomic) IBOutlet UIImageView *payIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *tradeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *switchIcon;
 
 @end
 
@@ -78,6 +81,18 @@
         }];
         _nameLab.text = model.showNickName;
         _teamBack.hidden = YES;
+        
+        if (model.tradeTokenLogo && model.tradeTokenLogo.length > 0) {
+            NSURL *tradeUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.tradeTokenLogo]];
+            [_tradeIcon sd_setImageWithURL:tradeUrl placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            }];
+        }
+        
+        if (model.payTokenLogo && model.payTokenLogo.length > 0) {
+            NSURL *payUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.payTokenLogo]];
+            [_payIcon sd_setImageWithURL:payUrl placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            }];
+        }
     }
     
     _usdtLab.textColor = [model.type isEqualToString:@"BUY"]?UIColorFromRGB(0xFF3669):MAIN_BLUE_COLOR;

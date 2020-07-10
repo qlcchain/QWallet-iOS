@@ -30,7 +30,9 @@
 #import "DeFiHomeViewController.h"
 
 @interface MainTabBarViewController () <UITabBarControllerDelegate,CYLTabBarControllerDelegate>
-
+{
+    NSInteger firstCount; // 记录第一次图标不动画
+}
 @end
 
 @implementation MainTabBarViewController
@@ -79,6 +81,7 @@
         self.tabBar.layer.shadowColor = UIColorFromRGB(0xdddddd).CGColor;
         self.tabBar.layer.shadowOffset = CGSizeMake(0, -5);
         self.tabBar.layer.shadowOpacity = 0.3;
+        
     }
     return self;
 }
@@ -346,6 +349,10 @@
     UIView *animationView;
     //    NSLog(@"🔴类名与方法名：%@（在第%@行），描述：control : %@ ,tabBarChildViewControllerIndex: %@, tabBarItemVisibleIndex : %@", @(__PRETTY_FUNCTION__), @(__LINE__), control, @(control.cyl_tabBarChildViewControllerIndex), @(control.cyl_tabBarItemVisibleIndex));
     if ([control cyl_isTabButton]) {
+        if (firstCount == 0) {
+            firstCount = 1;
+            //return;
+        }
 //        //更改红标状态
 //        if ([self.selectedViewController cyl_isShowBadge]) {
 //            [self.selectedViewController cyl_clearBadge];
@@ -371,6 +378,7 @@
         //        [self setSelectedCoverShow:shouldSelectedCoverShow];
     }
 }
+
 
 //缩放动画
 - (void)addScaleAnimationOnView:(UIView *)animationView repeatCount:(float)repeatCount {

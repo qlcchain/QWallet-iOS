@@ -130,6 +130,14 @@
     
 }
 
++ (NSString *)formartScientificNotationWithString:(NSNumber *)num{
+
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc]init];
+    formatter.numberStyle = kCFNumberFormatterNoStyle;
+    NSString * string = [formatter stringFromNumber:num];
+    return string;
+
+ }
 
 @end
 

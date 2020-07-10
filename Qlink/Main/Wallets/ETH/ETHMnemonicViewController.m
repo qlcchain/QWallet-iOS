@@ -11,7 +11,7 @@
 //#import <TagListView/TagListView-Swift.h>
 #import "MnemonicTipView.h"
 #import "ETHMnemonicConfirmViewController.h"
-#import <TTGTextTagCollectionView.h>
+#import <TTGTagCollectionView/TTGTextTagCollectionView.h>
 #import "OutbreakRedUtil.h"
 #import "ETHWalletInfo.h"
 

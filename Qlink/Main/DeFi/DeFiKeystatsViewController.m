@@ -12,6 +12,8 @@
 #import "DefiProjectListModel.h"
 #import "DefiHistoricalStatsListModel.h"
 #import "DefiProjectModel.h"
+#import "DefiPriceCell.h"
+#import "DefiTokenModel.h"
 
 static NSString *const NetworkSize = @"30";
 
@@ -23,6 +25,7 @@ static NSString *const NetworkSize = @"30";
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
+@property (nonatomic, strong) DefiTokenModel *tokenM;
 
 @end
 
@@ -40,34 +43,57 @@ static NSString *const NetworkSize = @"30";
     _currentPage = 1;
     _sourceArr = [NSMutableArray array];
     [_mainTable registerNib:[UINib nibWithNibName:DeFiKeystatsCell_Reuse bundle:nil] forCellReuseIdentifier:DeFiKeystatsCell_Reuse];
+    [_mainTable registerNib:[UINib nibWithNibName:DefiPriceCell_Reuse bundle:nil] forCellReuseIdentifier:DefiPriceCell_Reuse];
     self.baseTable = _mainTable;
     
     _lockedLab.text = kLang(@"defi_total_value_locked");
 
 }
 
-- (void)refreshView:(NSArray *)arr {
+- (void)refreshView:(NSArray *)arr withDefiTokenModel:(DefiTokenModel *) tokenM{
+    self.tokenM = tokenM;
     [_sourceArr removeAllObjects];
     [_sourceArr addObjectsFromArray:arr];
     [_mainTable reloadData];
 }
 
 #pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _sourceArr.count;
+    if (section == 0) {
+        return _sourceArr.count;
+    }
+    if (!_tokenM || _tokenM.price.length == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DeFiKeystatsCell *cell = [tableView dequeueReusableCellWithIdentifier:DeFiKeystatsCell_Reuse];
     
-    DefiProject_KeyModel *model = _sourceArr[indexPath.row];
-    [cell config:model];
+    if (indexPath.section == 1) {
+        DefiPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:DefiPriceCell_Reuse];
+        [cell config:_tokenM];
+        return cell;
+    } else {
+        DeFiKeystatsCell *cell = [tableView dequeueReusableCellWithIdentifier:DeFiKeystatsCell_Reuse];
+        DefiProject_KeyModel *model = _sourceArr[indexPath.row];
+        [cell config:model];
+        return cell;
+    }
     
-    return cell;
+    
+   
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        return DefiPriceCell_Height;
+    }
     return DeFiKeystatsCell_Height;
 }
 

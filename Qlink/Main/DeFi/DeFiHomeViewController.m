@@ -15,6 +15,11 @@
 #import "FirebaseUtil.h"
 #import "FirebaseConstants.h"
 #import "DeFiNewsWebViewController.h"
+#import "DefiTokenModel.h"
+#import "LFAdvertScrollView.h"
+#import <TMCache/TMCache.h>
+#import "OutbreakRedUtil.h"
+
 
 @interface DeFiHomeViewController () <UIScrollViewDelegate>
 
@@ -23,6 +28,11 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScroll;
 @property (weak, nonatomic) IBOutlet UIView *mainScrollContent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainScrollContentWidth;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cycleHeight;
+@property (weak, nonatomic) IBOutlet UIView *cycleBackView;
+
+@property (nonatomic, strong) LFAdvertScrollView *cycleView;
 
 @end
 
@@ -48,6 +58,13 @@
     [self configInit];
     [self addChild];
     [self addChildVC];
+    
+    _cycleHeight.constant = 0;
+    [self request_defi_list];
+    [self requestSys_index];
+    
+    
+    self.tabBarController.selectedIndex = 2;
     
 }
 
@@ -103,6 +120,80 @@
         make.width.mas_equalTo(SCREEN_WIDTH);
     }];
 }
+
+- (void) showORCycleLabel:(NSArray *) modes
+{
+    _cycleHeight.constant = 35;
+    if (self.cycleView) {
+        
+    } else {
+        _cycleView = [[LFAdvertScrollView alloc] initWithFrame:CGRectMake(5, 0, SCREEN_WIDTH-10, 35) withDataSuources:modes];
+        [_cycleBackView addSubview:_cycleView];
+        
+//        kWeakSelf(self);
+//        [_cycleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.left.bottom.right.mas_equalTo(weakself.cycleBackView).offset(0);
+//        }];
+    }
+}
+
+- (void)handlerSysIndex {
+    NSDictionary *responseObject = [[TMCache sharedCache] objectForKey:@"TM_Chache_Topup_Sys_Index"]?:@{};
+    
+    if (responseObject.count <= 0) {
+        return;
+    }
+
+    NSDictionary *dictList = responseObject[@"dictList"];
+    // COVID-19
+    NSString *show19 = dictList[@"show19"];
+    NSString *appShow19 = dictList[@"appShow19"];
+    [OutbreakRedUtil shareInstance].show19 = show19;
+    [OutbreakRedUtil shareInstance].appShow19 = appShow19;
+    
+}
+
+
+#pragma reqeust-- 网络请求
+- (void) request_defi_list {
+    kWeakSelf(self);
+    NSDictionary *params = @{@"page":@(1),@"size":@(20)};
+    [RequestService requestWithUrl5:defi_list_Url params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+            if ([responseObject[Server_Code] integerValue] == 0) {
+                NSArray *tokenModels = [DefiTokenModel mj_objectArrayWithKeyValuesArray:responseObject[@"deFiTokenList"]];
+                if (tokenModels && tokenModels.count > 0) {
+                    [weakself showORCycleLabel:tokenModels];
+                }
+                
+            } else {
+                [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            }
+        } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+            
+        }];
+}
+
+#pragma mark - Request
+- (void)requestSys_index {
+    kWeakSelf(self);
+//    NSString *page = @"1";
+//    NSString *size = TopupNetworkSize;
+    NSDictionary *params = @{};
+    [RequestService requestWithUrl10:sys_index_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeNormal successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        
+        if ([responseObject[Server_Code] integerValue] == 0) {
+            
+            [[TMCache sharedCache] setObject:responseObject forKey:@"TM_Chache_Topup_Sys_Index"];
+            
+            [weakself handlerSysIndex];
+            
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+       
+    }];
+}
+
+
 
 #pragma mark - UIScrollViewDelegate
 //执行动画结束跳转到这里

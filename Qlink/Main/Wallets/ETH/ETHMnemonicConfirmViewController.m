@@ -11,7 +11,7 @@
 //#import <TagListView/TagListView-Swift.h>
 //#import "TagListView-Swift.h"
 #import "SuccessTipView.h"
-#import <TTGTextTagCollectionView.h>
+#import <TTGTagCollectionView/TTGTextTagCollectionView.h>
 #import "OutbreakRedUtil.h"
 #import "ETHWalletInfo.h"
 //#import "GlobalConstants.h"

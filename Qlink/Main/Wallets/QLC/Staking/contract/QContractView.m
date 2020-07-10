@@ -246,6 +246,8 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     kWeakSelf(self);
     NSArray *params = @[lockTxId];
     DDLogDebug(@"nep5_benefitPledge params = %@",params);
+    // nep5_benefitPledgeAsync
+    // nep5_benefitPledge
     [client invokeMethod:@"nep5_benefitPledge" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
         DDLogDebug(@"nep5_benefitPledge responseObject=%@",responseObject);
         
@@ -715,7 +717,7 @@ static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e
     if (unlockTxParams) {
         params = @[blockDic,lockTxId,unlockTxParams];
     }
-    
+    //ledger_processAsync // ledger_process
     DDLogDebug(@"ledger_process params = %@",params);
     [client invokeMethod:@"ledger_process" withParameters:params requestId:requestId success:^(NSURLSessionDataTask *task, id responseObject) {
         DDLogDebug(@"ledger_process responseObject=%@",responseObject);
