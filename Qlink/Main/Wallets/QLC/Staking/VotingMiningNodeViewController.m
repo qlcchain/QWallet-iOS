@@ -60,6 +60,26 @@
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     [self configInit];
+    
+}
+
+- (void) getTestNetQlcBalance:(NSString *) address
+{
+    // 刷新neo claimgas
+    kWeakSelf(self);
+
+    NSDictionary *parames = @{@"jsonrpc":@"2.0",@"method":@"getnep5balanceofaddress",@"params":@[@"b9d7ea3062e6aeeb3e8ad9548220c4ba1361d263",address],@"id":@(3)};
+    NSString *parameStr = [parames mj_JSONString];
+    [AFHTTPClientV2 requestWithBaseURLStr:@"https://api.nel.group/api/testnet" params:parameStr httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        
+         if ([responseObject[Server_Code] integerValue] == 0) {
+             
+             weakself.balanceLab.text = responseObject[@"result"][0][@"nep5balance"];
+        }
+        
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Operation
@@ -128,6 +148,11 @@
     if (!validateNEOAddress) {
         return;
     }
+    
+    [self getTestNetQlcBalance:address];
+    
+    return;
+    
     kWeakSelf(self);
     NSDictionary *params = @{@"address":address};
     [RequestService requestWithUrl10:neoAddressInfo_Url params:params httpMethod:HttpMethodPost serverType:RequestServerTypeRelease successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
@@ -144,6 +169,7 @@
             }];
             weakself.currentNEOAsset = model;
             [weakself refreshBalanceView];
+            [weakself getTestNetQlcBalance:address];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
 
@@ -228,10 +254,11 @@
         [kAppD.window makeToastDisappearWithText:kLang(@"amount_is_at_least_1_qlc")];
         return;
     }
-    if ([_amountTF.text.trim_whitespace doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
-        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
-        return;
-    }
+    // 暂时注释 配合测试网 正式要取消注释
+//    if ([_amountTF.text.trim_whitespace doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
+//        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+//        return;
+//    }
     if ([_stakingPeriodTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"staking_period_is_empty")];
         return;

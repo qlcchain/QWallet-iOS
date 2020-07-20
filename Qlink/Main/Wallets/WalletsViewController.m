@@ -1080,7 +1080,10 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     }
 }
 
+
+
 - (void)requestGetNeoCliamGas {
+    
     // 刷新neo claimgas
     kWeakSelf(self);
     if (![NEOWalletManage.sharedInstance haveDefaultWallet]) {

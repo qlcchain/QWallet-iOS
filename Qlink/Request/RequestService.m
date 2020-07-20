@@ -96,6 +96,11 @@
        }
     #endif
     
+    // 暂时注掉
+    if ([url isEqualToString:sys_contract_unlock_Url]) {
+        prefix = @"http://192.168.0.103:8080/dapp";
+    }
+    
     NSLog(@"parames = %@",params);
     
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@",prefix,url];
