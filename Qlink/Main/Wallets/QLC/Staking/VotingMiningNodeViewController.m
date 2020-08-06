@@ -148,10 +148,10 @@
     if (!validateNEOAddress) {
         return;
     }
-    
-    [self getTestNetQlcBalance:address];
-    
-    return;
+    // 暂时注掉
+//    [self getTestNetQlcBalance:address];
+//
+//    return;
     
     kWeakSelf(self);
     NSDictionary *params = @{@"address":address};
@@ -169,7 +169,6 @@
             }];
             weakself.currentNEOAsset = model;
             [weakself refreshBalanceView];
-            [weakself getTestNetQlcBalance:address];
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
 
@@ -255,10 +254,11 @@
         return;
     }
     // 暂时注释 配合测试网 正式要取消注释
-//    if ([_amountTF.text.trim_whitespace doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
-//        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
-//        return;
-//    }
+    if ([_amountTF.text.trim_whitespace doubleValue] > [[_currentNEOAsset getTokenNum] doubleValue]) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+        return;
+    }
+    
     if ([_stakingPeriodTF.text.trim_whitespace isEmptyString]) {
         [kAppD.window makeToastDisappearWithText:kLang(@"staking_period_is_empty")];
         return;

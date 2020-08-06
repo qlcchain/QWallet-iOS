@@ -296,8 +296,8 @@ static NSInteger const PledgeInfo_PageFirst = 0;
 
 - (void)requestPledgeInfoByPledge:(BOOL)showLoad {
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
     //qlc_178gc7sgefmfbmn1fi8uqhecwyewt6wu1y9rko1fb9snu89uupm1moc65gxu

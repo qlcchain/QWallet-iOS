@@ -22,7 +22,6 @@ def tunnel
 end
 
 def eth
-    
     pod 'SwiftyJSON', '~> 4.0'
     pod 'SwiftHTTP'
   
@@ -112,7 +111,6 @@ def bnb
 end
   
 target "Qlink" do
-
 #  shadowsock
 #    pod 'MMWormhole'
 #    pod 'SwiftColor'
@@ -128,5 +126,5 @@ target "Qlink" do
     app
 #    bnb
     pack_framework
-    
+   
 end

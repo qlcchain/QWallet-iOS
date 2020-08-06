@@ -20,8 +20,9 @@
 #import "NSString+RandomStr.h"
 #import "QLogHelper.h"
 
-//static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e513fd299d2cb844318b1b8ad5";
-static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc6a6993d7bbea39e7379661afb";
+// 暂时注掉
+static NSString * const PublicKeyB = @"02c6e68c61480003ed163f72b41cbb50ded29d79e513fd299d2cb844318b1b8ad5"; // 正式
+//static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc6a6993d7bbea39e7379661afb"; // 测试
 
 
 @interface QContractView () <WKNavigationDelegate> {
@@ -163,8 +164,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
         _stageBlock(Stage_PrePareBenefitPledge);
     }
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
     kWeakSelf(self);
@@ -209,27 +210,28 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
     }
     
     // 暂时注掉
-    int64_t delayInSeconds = 25.0; // 延迟的时间
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self nep5_benefitPledge:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
-    });
-    
-    return;
+//    int64_t delayInSeconds = 25.0; // 延迟的时间
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self nep5_benefitPledge:lockTxId qlc_publicKey:qlc_publicKey qlc_privateKey:qlc_privateKey resultHandler:resultHandler];
+//    });
+//
+//    return;
     
     
 //    NSString *requestId = [NSString randomOf32];
 //    NSDictionary *params = @{@"jsonrpc":@"2.0",@"method":@"getnep5transferbytxid",@"params":[[NSString stringWithFormat:@"[\"%@\"]",lockTxId] stringByReplacingOccurrencesOfString:@"\\" withString:@""],@"id":requestId};
 //    NSString *urlStr = @"https://api.nel.group/api/mainnet";
+    
     NSDictionary *params = nil;
     NSString *urlStr = [NSString stringWithFormat:@"https://api.neoscan.io/api/main_net/v1/get_transaction/%@",lockTxId];
     
-    #if DEBUG
-         
-        urlStr = [NSString stringWithFormat:@"https://api.neoscan.io/api/test_net/v1/get_transaction/%@",lockTxId];
-            
-    #else
-      
-    #endif
+//    #if DEBUG
+//
+//        urlStr = [NSString stringWithFormat:@"https://api.neoscan.io/api/test_net/v1/get_transaction/%@",lockTxId];
+//
+//    #else
+//
+//    #endif
     
     kWeakSelf(self);
     DDLogDebug(@"benefit_getnep5transferbytxid urlStr = %@",urlStr);
@@ -265,8 +267,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
         _stageBlock(Stage_BenefitPledge);
     }
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+     //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
     kWeakSelf(self);
@@ -317,8 +319,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
     }
     _nepCheckCount ++;
     // 暂时注掉
-   // AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-     AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     
     // Invocation with Parameters and Request ID
    
@@ -446,8 +448,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
 
 - (void)nep5_getLockInfo:(NSString *)lockTxId resultHandler:(QContractResultBlock)resultHandler {
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+   // AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     NSString *requestId = [NSString randomOf32];
     //    kWeakSelf(self);
     NSArray *params = @[lockTxId];
@@ -486,8 +488,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
 
 - (void)nep5_benefitWithdraw:(NSString *)lockTxId beneficial:(NSString *)beneficial amount:(NSString *)amount qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey neo_publicKey:(NSString *)neo_publicKey neo_privateKey:(NSString *)neo_privateKey multisigAddress:(NSString *)multisigAddress resultHandler:(QContractResultBlock)resultHandler {
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
     kWeakSelf(self);
@@ -802,8 +804,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
         }
     });
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     
     // Invocation with Parameters and Request ID
     NSString *requestId = [NSString randomOf32];
@@ -843,8 +845,8 @@ static NSString * const PublicKeyB = @"0292a55eb2f213d087d71cf0e2e4b047762b6eccc
     });
     _processCheckCount ++;
     // 暂时注掉
-    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
-    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
+    AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:[ConfigUtil get_qlc_staking_node]]];
+    //AFJSONRPCClient *client = [AFJSONRPCClient clientWithEndpointURL:[NSURL URLWithString:@"http://47.103.54.171:19740"]];
     // Invocation with Parameters and Request ID
    
     NSString *requestId = [NSString randomOf32];

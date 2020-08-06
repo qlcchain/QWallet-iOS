@@ -39,6 +39,8 @@
 #import "OutbreakRedViewController.h"
 #import "OutbreakRedUtil.h"
 #import "SystemUtil.h"
+#import <PromiseKit/PromiseKit.h>
+#import "Qlink-Swift.h"
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -795,4 +797,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSError *error;
+   // [QETHManager testAndReturnError:&error];
+   // NSString *resultStr = [QETHManager infuratestResolver2WithEncodeStr:@"132323" error:&error];
+    // NSString *resultStr = [QETHManager infuratestResolverWithEncodeStr:@"" error:&error];
+   // NSLog(@"result = %@,error = %@",resultStr,error.description);
+
+}
 @end

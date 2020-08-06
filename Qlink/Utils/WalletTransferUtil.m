@@ -14,6 +14,7 @@
 #import "GlobalConstants.h"
 #import "ETHWalletManage.h"
 
+
 dispatch_source_t _mainAddressTimer;
 
 @implementation WalletTransferUtil
@@ -52,6 +53,7 @@ dispatch_source_t _mainAddressTimer;
             NSLog(@"QLC主地址:%@",[QLCWalletManage shareInstance].qlcMainAddress);
             [ETHWalletManage shareInstance].ethMainAddress = responseObject[Server_Data][@"ETH"][@"address"];
             NSLog(@"ETH主地址:%@",[ETHWalletManage shareInstance].ethMainAddress);
+           
         }
     } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
 //        [WalletTransferUtil requestServerMainAddress];

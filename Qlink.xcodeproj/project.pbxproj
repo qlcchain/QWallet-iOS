@@ -887,6 +887,7 @@
 		58FE26002362EAE50032ABBE /* TopupCredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FE26022362EAE50032ABBE /* TopupCredentialViewController.xib */; };
 		58FE26092362F9980032ABBE /* TopupPayOrderTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */; };
 		73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */; };
+		73017E8B24DC31AA00A7E32A /* WebManageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73017E8A24DC31AA00A7E32A /* WebManageUtil.swift */; };
 		73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */; };
 		73048F132079FE9000A4EFEE /* RatesMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F122079FE9000A4EFEE /* RatesMode.m */; };
 		73048F16207A19B500A4EFEE /* BalanceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F15207A19B500A4EFEE /* BalanceInfo.m */; };
@@ -2948,6 +2949,7 @@
 		58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupPayOrderTodo.m; sourceTree = "<group>"; };
 		73007F9A207C98D100F11341 /* HistoryRecrdInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecrdInfo.h; sourceTree = "<group>"; };
 		73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecrdInfo.m; sourceTree = "<group>"; };
+		73017E8A24DC31AA00A7E32A /* WebManageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebManageUtil.swift; sourceTree = "<group>"; };
 		73048F0B2079B5BB00A4EFEE /* UILabel+Copy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Copy.h"; sourceTree = "<group>"; };
 		73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Copy.m"; sourceTree = "<group>"; };
 		73048F112079FE9000A4EFEE /* RatesMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatesMode.h; sourceTree = "<group>"; };
@@ -4531,6 +4533,7 @@
 		5864854F2463DB1E00BEBE18 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				73017E8A24DC31AA00A7E32A /* WebManageUtil.swift */,
 				5814636B246D1B140019A377 /* LandScapePicker.h */,
 				5814636A246D1B140019A377 /* LandScapePicker.m */,
 				58C1D0BA246CD8BF00D1144E /* DefiRateCircleView.h */,
@@ -6864,6 +6867,7 @@
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				58D689CE230B90E400115610 /* ThemeConstants.m in Sources */,
 				58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */,
+				73017E8B24DC31AA00A7E32A /* WebManageUtil.swift in Sources */,
 				581AC36D21AFD6E600ACA80B /* QNavigationController.m in Sources */,
 				58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */,
 				58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */,
