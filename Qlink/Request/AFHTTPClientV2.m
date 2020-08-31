@@ -479,4 +479,43 @@
     return model;
 }
 
+
+/**
+ *  异步POST请求:以body方式,支持数组
+ *
+ *  @param url     请求的url
+ *  @param body    body数据
+ *  @param show    是否显示HUD
+ *  @param success 成功回调
+ *  @param failure 失败回调
+ */
++ (void)postWithUrl:(NSString *)url body:(NSData *)body showLoading:(BOOL)show success:(void(^)(NSDictionary *response))success failure:(void(^)(NSError *error))failure
+{
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+ 
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    request.timeoutInterval= TimeOut_Request;
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    // 设置body
+    [request setHTTPBody:body];
+ 
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+                                                                      @"text/html",
+                                                                      @"text/json",
+                                                                      @"text/javascript",
+                                                                      @"text/plain",
+                                                                      nil];
+    manager.responseSerializer = responseSerializer;
+    
+    [manager dataTaskWithRequest:request uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+    }];
+ 
+}
 @end

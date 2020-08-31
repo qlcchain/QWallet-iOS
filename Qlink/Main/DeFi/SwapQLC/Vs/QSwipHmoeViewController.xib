@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QSwipHmoeViewController">
+            <connections>
+                <outlet property="contentBack" destination="SZd-sM-fFa" id="ldj-3V-Vho"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wuv-88-mTg">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZd-sM-fFa">
+                            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaj-yD-2so" customClass="NavWhiteShadowView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XkM-GD-4iV" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="alq-hf-w4g"/>
+                                        <constraint firstAttribute="height" constant="44" id="am2-0h-wrF"/>
+                                    </constraints>
+                                    <state key="normal" image="eth_gray_back"/>
+                                    <connections>
+                                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="B1H-1R-Ktz"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QLC Cross-chain Swap" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzD-fz-ZC2">
+                                    <rect key="frame" x="99" y="12" width="177" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZuB-3O-r7g" customClass="QBaseTouchButton">
+                                    <rect key="frame" x="331" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="Y9Q-3d-NEy"/>
+                                        <constraint firstAttribute="width" constant="44" id="nCu-hO-pdl"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_question_blue"/>
+                                    <connections>
+                                        <action selector="helpAction:" destination="-1" eventType="touchUpInside" id="ivZ-tr-rwZ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="ZuB-3O-r7g" firstAttribute="centerY" secondItem="yaj-yD-2so" secondAttribute="centerY" id="DWL-JM-h9b"/>
+                                <constraint firstAttribute="trailing" secondItem="ZuB-3O-r7g" secondAttribute="trailing" id="KnG-5Y-d27"/>
+                                <constraint firstItem="XkM-GD-4iV" firstAttribute="leading" secondItem="yaj-yD-2so" secondAttribute="leading" id="QEt-Jc-oQb"/>
+                                <constraint firstItem="XkM-GD-4iV" firstAttribute="centerY" secondItem="yaj-yD-2so" secondAttribute="centerY" id="bgI-0h-nfg"/>
+                                <constraint firstItem="TzD-fz-ZC2" firstAttribute="centerY" secondItem="yaj-yD-2so" secondAttribute="centerY" id="jmC-Po-LUh"/>
+                                <constraint firstItem="TzD-fz-ZC2" firstAttribute="centerX" secondItem="yaj-yD-2so" secondAttribute="centerX" id="mi8-9l-MyI"/>
+                                <constraint firstAttribute="height" constant="44" id="w75-Le-NdF"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="SZd-sM-fFa" firstAttribute="leading" secondItem="Wuv-88-mTg" secondAttribute="leading" id="0OT-fP-YhU"/>
+                        <constraint firstAttribute="trailing" secondItem="SZd-sM-fFa" secondAttribute="trailing" id="4h2-9b-dyd"/>
+                        <constraint firstItem="yaj-yD-2so" firstAttribute="leading" secondItem="Wuv-88-mTg" secondAttribute="leading" id="Psy-oD-fB8"/>
+                        <constraint firstAttribute="bottom" secondItem="SZd-sM-fFa" secondAttribute="bottom" id="YI8-JR-PWU"/>
+                        <constraint firstItem="SZd-sM-fFa" firstAttribute="top" secondItem="yaj-yD-2so" secondAttribute="bottom" id="g3n-i8-bid"/>
+                        <constraint firstItem="yaj-yD-2so" firstAttribute="top" secondItem="Wuv-88-mTg" secondAttribute="top" id="k8E-dl-Tle"/>
+                        <constraint firstAttribute="trailing" secondItem="yaj-yD-2so" secondAttribute="trailing" id="s98-Ui-na3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Wuv-88-mTg" secondAttribute="trailing" id="9Gs-mm-QUH"/>
+                <constraint firstAttribute="bottom" secondItem="Wuv-88-mTg" secondAttribute="bottom" id="Mzy-Rs-nb7"/>
+                <constraint firstItem="Wuv-88-mTg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VeR-7y-oqd"/>
+                <constraint firstItem="Wuv-88-mTg" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="raA-Zs-MtS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="124" y="-17.541229385307346"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="eth_gray_back" width="24" height="24"/>
+        <image name="icon_question_blue" width="20" height="20"/>
+    </resources>
+</document>

@@ -19,6 +19,7 @@
 #import "LFAdvertScrollView.h"
 #import <TMCache/TMCache.h>
 #import "OutbreakRedUtil.h"
+#import "QSwipHmoeViewController.h"
 
 
 @interface DeFiHomeViewController () <UIScrollViewDelegate>
@@ -231,5 +232,11 @@
     [self refreshSegTitle];
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    QSwipHmoeViewController *vc = [QSwipHmoeViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

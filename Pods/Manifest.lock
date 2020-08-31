@@ -105,7 +105,9 @@ PODS:
     - R.swift.Library (~> 5.0.0)
   - R.swift.Library (5.0.1)
   - Result (3.2.4)
+  - secp256k1.c (0.1.2)
   - SipHash (1.2.2)
+  - Starscream (3.1.1)
   - SwiftHTTP (3.0.1)
   - SwiftyJSON (4.3.0)
   - TOCropViewController (2.5.2)
@@ -129,6 +131,7 @@ DEPENDENCIES:
   - BGFMDB
   - BigInt (~> 3.0)
   - Bugly
+  - CryptoSwift (~> 1.0)
   - CYLTabBarController
   - dsBridge
   - Firebase/Analytics
@@ -142,6 +145,8 @@ DEPENDENCIES:
   - ORCycleLabel
   - PromiseKit
   - R.swift
+  - secp256k1.c (~> 0.1.2)
+  - Starscream (~> 3.1.1)
   - SwiftHTTP
   - SwiftyJSON (~> 4.0)
   - TOCropViewController
@@ -153,7 +158,7 @@ DEPENDENCIES:
   - TYCyclePagerView
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - BGFMDB
     - BigInt
@@ -184,7 +189,9 @@ SPEC REPOS:
     - R.swift
     - R.swift.Library
     - Result
+    - secp256k1.c
     - SipHash
+    - Starscream
     - SwiftHTTP
     - SwiftyJSON
     - TOCropViewController
@@ -251,7 +258,9 @@ SPEC CHECKSUMS:
   R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
   R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftHTTP: e94f1aa8cde58637dcc0100f6349de31a3337fde
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   TOCropViewController: e9da34f484aedd4e5d5a8ab230ba217cfe16c729
@@ -263,6 +272,6 @@ SPEC CHECKSUMS:
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: 1245d3205bf322477c457a073eaf4bfdeb7b71ed
+PODFILE CHECKSUM: c65fe7d464986546988e903172f1feba7b6258b5
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.3

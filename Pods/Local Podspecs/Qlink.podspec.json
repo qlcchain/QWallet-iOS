@@ -1,0 +1,60 @@
+{
+  "name": "Qlink",
+  "version": "0.0.1",
+  "license": "Apache License, Version 2.0",
+  "authors": {
+    "gRPC contributors": "grpc-io@googlegroups.com"
+  },
+  "homepage": "https://grpc.io/",
+  "summary": "Qlink example",
+  "source": {
+    "git": "https://github.com/grpc/grpc.git"
+  },
+  "platforms": {
+    "ios": "7.1",
+    "osx": "10.9"
+  },
+  "dependencies": {
+    "!ProtoCompiler-gRPCPlugin": [
+      "~> 1.0"
+    ]
+  },
+  "prepare_command": "mkdir -p Pods/Qlink\nPods/!ProtoCompiler/protoc         --plugin=protoc-gen-grpc=Pods/!ProtoCompiler-gRPCPlugin/grpc_objective_c_plugin         --objc_out=Pods/Qlink         --grpc_out=Pods/Qlink         -I ../../protos         -I Pods/!ProtoCompiler         ../../protos/qlink.proto",
+  "pod_target_xcconfig": {
+    "GCC_PREPROCESSOR_DEFINITIONS": "$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1",
+    "CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES": "YES"
+  },
+  "subspecs": [
+    {
+      "name": "Messages",
+      "source_files": [
+        "Pods/Qlink/*.pbobjc.{h,m}",
+        "Pods/Qlink/**/*.pbobjc.{h,m}"
+      ],
+      "header_mappings_dir": "Pods/Qlink",
+      "requires_arc": false,
+      "dependencies": {
+        "Protobuf": [
+
+        ]
+      }
+    },
+    {
+      "name": "Services",
+      "source_files": [
+        "Pods/Qlink/*.pbrpc.{h,m}",
+        "Pods/Qlink/**/*.pbrpc.{h,m}"
+      ],
+      "header_mappings_dir": "Pods/Qlink",
+      "requires_arc": true,
+      "dependencies": {
+        "gRPC-ProtoRPC": [
+
+        ],
+        "Qlink/Messages": [
+
+        ]
+      }
+    }
+  ]
+}

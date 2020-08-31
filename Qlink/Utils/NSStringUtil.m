@@ -7,6 +7,7 @@
 //
 
 #import "NSStringUtil.h"
+#import "QConstants.h"
 
 @implementation NSStringUtil
 
@@ -16,5 +17,27 @@
         str = @"";
     }
     return str;
+}
++ (NSString *)notRounding:(NSString*)price afterPoint:(NSInteger)position
+
+{
+
+    NSDecimalNumber *numberA = [NSDecimalNumber decimalNumberWithString:price];
+    NSDecimalNumber *numberB = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld",ERC20_UnitNum]];
+    
+    NSDecimalNumber *numResult = [numberA decimalNumberByDividingBy:numberB];
+    
+    NSDecimalNumberHandler *roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                                         scale:2
+                                                                                              raiseOnExactness:NO
+                                                                                               raiseOnOverflow:NO
+                                                                                              raiseOnUnderflow:NO
+                                                                                           raiseOnDivideByZero:NO];
+      
+      
+       NSString *tempStr =[[numResult decimalNumberByRoundingAccordingToBehavior:roundingBehavior] stringValue];
+       NSLog(@"NSDecimalNumber method  rounding = %@",tempStr);
+    return tempStr;
+
 }
 @end

@@ -59,6 +59,18 @@
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
     return config;
 }
+
++ (NSDictionary *)getConfig_Wraper_ChainNetwork {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = @"";
+    if ([ConfigUtil isMainNetOfChainNetwork]) {
+        path = [bundle pathForResource:@"ConfigurationWraperRelease" ofType:@"plist"];
+    } else {
+        path = [bundle pathForResource:@"ConfigurationWraperDebug" ofType:@"plist"];
+    }
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
     
 + (NSDictionary *)getConfig_ServerNetwork {
     NSBundle *bundle = [NSBundle mainBundle];
@@ -75,6 +87,18 @@
 + (NSDictionary *)getReleaseConfig {
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"ConfigurationRelease" ofType:@"plist"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
++ (NSDictionary *)getWraperReleaseConfig {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"ConfigurationWraperRelease" ofType:@"plist"];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
+    return config;
+}
++ (NSDictionary *)getWraperDebugConfig {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *path = [bundle pathForResource:@"ConfigurationWraperDebug" ofType:@"plist"];
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
     return config;
 }
@@ -135,6 +159,31 @@
     return channel;
 }
 
++ (NSString *)get_wraper_node_release {
+    NSDictionary *config = [ConfigUtil getWraperReleaseConfig];
+    NSString *channel = config[@"wraper_node"];
+    return channel;
+}
++ (NSString *)get_wraper_node_debug {
+    NSDictionary *config = [ConfigUtil getWraperDebugConfig];
+    NSString *channel = config[@"wraper_node"];
+    return channel;
+}
++ (NSString *)get_wraper_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_Wraper_ChainNetwork];
+    NSString *channel = config[@"wraper_node"];
+    return channel;
+}
++ (NSString *)get_eth_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_Wraper_ChainNetwork];
+    NSString *channel = config[@"eth_node"];
+    return channel;
+}
++ (NSString *)get_qlc_hub_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_Wraper_ChainNetwork];
+    NSString *channel = config[@"qlc_hub_node"];
+    return channel;
+}
 
 
 

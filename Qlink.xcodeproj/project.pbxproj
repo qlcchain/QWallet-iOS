@@ -887,7 +887,6 @@
 		58FE26002362EAE50032ABBE /* TopupCredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FE26022362EAE50032ABBE /* TopupCredentialViewController.xib */; };
 		58FE26092362F9980032ABBE /* TopupPayOrderTodo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */; };
 		73007F9C207C98D100F11341 /* HistoryRecrdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */; };
-		73017E8B24DC31AA00A7E32A /* WebManageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73017E8A24DC31AA00A7E32A /* WebManageUtil.swift */; };
 		73048F0D2079B5BB00A4EFEE /* UILabel+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */; };
 		73048F132079FE9000A4EFEE /* RatesMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F122079FE9000A4EFEE /* RatesMode.m */; };
 		73048F16207A19B500A4EFEE /* BalanceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73048F15207A19B500A4EFEE /* BalanceInfo.m */; };
@@ -917,6 +916,20 @@
 		736DA1F32498A09500576055 /* activieSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F22498A09500576055 /* activieSign.html */; };
 		736DA1F62498A0A000576055 /* loginSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F42498A0A000576055 /* loginSign.html */; };
 		736DA1F72498A0A000576055 /* registerSign.html in Resources */ = {isa = PBXBuildFile; fileRef = 736DA1F52498A0A000576055 /* registerSign.html */; };
+		7371DBB524E2331E003FA480 /* QRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7371DBB324E2331E003FA480 /* QRecordCell.m */; };
+		7371DBB624E2331E003FA480 /* QRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBB424E2331E003FA480 /* QRecordCell.xib */; };
+		7371DBB924E26772003FA480 /* QClaimAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7371DBB824E26772003FA480 /* QClaimAlertView.m */; };
+		7371DBBB24E2677A003FA480 /* QClaimAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBBA24E2677A003FA480 /* QClaimAlertView.xib */; };
+		7371DBBE24E267DF003FA480 /* QRecordAlrtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7371DBBD24E267DF003FA480 /* QRecordAlrtView.m */; };
+		7371DBC024E267EE003FA480 /* QRecordAlrtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBBF24E267EE003FA480 /* QRecordAlrtView.xib */; };
+		7371DBC424E62298003FA480 /* QSwipWrapperRequestUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7371DBC324E62298003FA480 /* QSwipWrapperRequestUtil.m */; };
+		7371DBC624E62448003FA480 /* ConfigurationWraperDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBC524E62448003FA480 /* ConfigurationWraperDebug.plist */; };
+		7371DBC824E62459003FA480 /* ConfigurationWraperRelease.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBC724E62459003FA480 /* ConfigurationWraperRelease.plist */; };
+		7371DBCA24E67020003FA480 /* eth.html in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBC924E6701F003FA480 /* eth.html */; };
+		7371DBCC24E6702B003FA480 /* neonjs.html in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBCB24E6702B003FA480 /* neonjs.html */; };
+		7371DBD024E67121003FA480 /* ContractNeoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7371DBCF24E67121003FA480 /* ContractNeoRequest.m */; };
+		7371DBD324E6C086003FA480 /* ContractETHRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7371DBD224E6C086003FA480 /* ContractETHRequest.m */; };
+		7371DBD524E7BD4C003FA480 /* ethERC20.html in Resources */ = {isa = PBXBuildFile; fileRef = 7371DBD424E7BD4B003FA480 /* ethERC20.html */; };
 		7377D173206B84620072E628 /* LocationManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D172206B84610072E628 /* LocationManage.m */; };
 		7377D176206B8D560072E628 /* LocationMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D175206B8D560072E628 /* LocationMode.m */; };
 		7377D179206B9E730072E628 /* VPNMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D178206B9E730072E628 /* VPNMode.m */; };
@@ -925,11 +938,25 @@
 		7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D193206CFCCD0072E628 /* SRRefreshView.m */; };
 		7377D199206CFCD10072E628 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D194206CFCCE0072E628 /* SRSlimeView.m */; };
 		7377D1A8206DCAB50072E628 /* RefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7377D1A7206DCAB50072E628 /* RefreshTableView.m */; };
+		73799A4E24DD644C00C5FFAA /* WebUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73799A4D24DD644C00C5FFAA /* WebUtil.swift */; };
+		73799AE424E142C100C5FFAA /* QSwipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73799AE224E142C100C5FFAA /* QSwipViewController.m */; };
+		73799AE524E142C100C5FFAA /* QSwipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73799AE324E142C100C5FFAA /* QSwipViewController.xib */; };
+		73799AE924E1455200C5FFAA /* QSwipHmoeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73799AE724E1455200C5FFAA /* QSwipHmoeViewController.m */; };
+		73799AEA24E1455200C5FFAA /* QSwipHmoeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73799AE824E1455200C5FFAA /* QSwipHmoeViewController.xib */; };
+		73799AEE24E1486700C5FFAA /* QRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73799AEC24E1486700C5FFAA /* QRecordViewController.m */; };
+		73799AEF24E1486700C5FFAA /* QRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73799AED24E1486700C5FFAA /* QRecordViewController.xib */; };
 		7384A29E2074DC0B00EA60E0 /* NSDate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384A29B2074DC0A00EA60E0 /* NSDate+Category.m */; };
 		7384A29F2074DC0B00EA60E0 /* NSDateFormatter+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 7384A29C2074DC0B00EA60E0 /* NSDateFormatter+Category.m */; };
 		73899C992152003100962B14 /* GuidePageView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 73899C7D2152003100962B14 /* GuidePageView1.m */; };
 		73899C9C2152003100962B14 /* GuidePageView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73899C852152003100962B14 /* GuidePageView1.xib */; };
 		73899CA12152003100962B14 /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73899C942152003100962B14 /* GuidePageViewController.m */; };
+		7398343A24EE68AF00008CF0 /* QSwapHashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398343924EE68AF00008CF0 /* QSwapHashModel.m */; };
+		7398343D24EE6BAC00008CF0 /* KeyCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398343C24EE6BAC00008CF0 /* KeyCUtil.m */; };
+		7398344424F1144300008CF0 /* QSwapDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398344224F1144300008CF0 /* QSwapDetailViewController.m */; };
+		7398344824F38B0E00008CF0 /* QSwapStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398344724F38B0E00008CF0 /* QSwapStatusManager.m */; };
+		7398344B24F3C71F00008CF0 /* QSwapProcessAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398344A24F3C71F00008CF0 /* QSwapProcessAnimateView.m */; };
+		7398345524F3C96300008CF0 /* QSwapDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7398345424F3C96300008CF0 /* QSwapDetailViewController.xib */; };
+		7398345624F3C9C300008CF0 /* QSwapProcessAnimateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7398345824F3C9C300008CF0 /* QSwapProcessAnimateView.xib */; };
 		73A0000424B569D1006F2A5D /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A0000324B569D1006F2A5D /* OutbreakRed.framework */; };
 		73A0000824B5C551006F2A5D /* DefiPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A0000624B5C551006F2A5D /* DefiPriceCell.m */; };
 		73A0000924B5C551006F2A5D /* DefiPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A0000724B5C551006F2A5D /* DefiPriceCell.xib */; };
@@ -948,6 +975,7 @@
 		73C1BA13207E184F0080C59F /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73C1BA12207E184F0080C59F /* HMScanner.bundle */; };
 		73C200C2209A9D460043E889 /* NotifactionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C200C1209A9D460043E889 /* NotifactionView.m */; };
 		73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D048A120F87AC100382BD5 /* VPNTranferMode.m */; };
+		73D2300124FCF0CD00FBA4D8 /* QSwapAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D2300024FCF0CD00FBA4D8 /* QSwapAddressModel.m */; };
 		73D9580124B83FBA006A9081 /* LFAdvertScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D9580024B83FBA006A9081 /* LFAdvertScrollView.m */; };
 		73D9580524B8543C006A9081 /* cycleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D9580324B8543C006A9081 /* cycleCell.m */; };
 		73D9580624B8543C006A9081 /* cycleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D9580424B8543C006A9081 /* cycleCell.xib */; };
@@ -2949,7 +2977,6 @@
 		58FE26082362F9970032ABBE /* TopupPayOrderTodo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopupPayOrderTodo.m; sourceTree = "<group>"; };
 		73007F9A207C98D100F11341 /* HistoryRecrdInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRecrdInfo.h; sourceTree = "<group>"; };
 		73007F9B207C98D100F11341 /* HistoryRecrdInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRecrdInfo.m; sourceTree = "<group>"; };
-		73017E8A24DC31AA00A7E32A /* WebManageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebManageUtil.swift; sourceTree = "<group>"; };
 		73048F0B2079B5BB00A4EFEE /* UILabel+Copy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Copy.h"; sourceTree = "<group>"; };
 		73048F0C2079B5BB00A4EFEE /* UILabel+Copy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Copy.m"; sourceTree = "<group>"; };
 		73048F112079FE9000A4EFEE /* RatesMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatesMode.h; sourceTree = "<group>"; };
@@ -2994,6 +3021,26 @@
 		736DA1F22498A09500576055 /* activieSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = activieSign.html; sourceTree = "<group>"; };
 		736DA1F42498A0A000576055 /* loginSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = loginSign.html; sourceTree = "<group>"; };
 		736DA1F52498A0A000576055 /* registerSign.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = registerSign.html; sourceTree = "<group>"; };
+		7371DBB224E2331E003FA480 /* QRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRecordCell.h; sourceTree = "<group>"; };
+		7371DBB324E2331E003FA480 /* QRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRecordCell.m; sourceTree = "<group>"; };
+		7371DBB424E2331E003FA480 /* QRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRecordCell.xib; sourceTree = "<group>"; };
+		7371DBB724E26772003FA480 /* QClaimAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QClaimAlertView.h; sourceTree = "<group>"; };
+		7371DBB824E26772003FA480 /* QClaimAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QClaimAlertView.m; sourceTree = "<group>"; };
+		7371DBBA24E2677A003FA480 /* QClaimAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QClaimAlertView.xib; sourceTree = "<group>"; };
+		7371DBBC24E267DF003FA480 /* QRecordAlrtView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRecordAlrtView.h; sourceTree = "<group>"; };
+		7371DBBD24E267DF003FA480 /* QRecordAlrtView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRecordAlrtView.m; sourceTree = "<group>"; };
+		7371DBBF24E267EE003FA480 /* QRecordAlrtView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRecordAlrtView.xib; sourceTree = "<group>"; };
+		7371DBC224E62298003FA480 /* QSwipWrapperRequestUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwipWrapperRequestUtil.h; sourceTree = "<group>"; };
+		7371DBC324E62298003FA480 /* QSwipWrapperRequestUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwipWrapperRequestUtil.m; sourceTree = "<group>"; };
+		7371DBC524E62448003FA480 /* ConfigurationWraperDebug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ConfigurationWraperDebug.plist; sourceTree = "<group>"; };
+		7371DBC724E62459003FA480 /* ConfigurationWraperRelease.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ConfigurationWraperRelease.plist; sourceTree = "<group>"; };
+		7371DBC924E6701F003FA480 /* eth.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = eth.html; sourceTree = "<group>"; };
+		7371DBCB24E6702B003FA480 /* neonjs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = neonjs.html; sourceTree = "<group>"; };
+		7371DBCE24E67121003FA480 /* ContractNeoRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContractNeoRequest.h; sourceTree = "<group>"; };
+		7371DBCF24E67121003FA480 /* ContractNeoRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContractNeoRequest.m; sourceTree = "<group>"; };
+		7371DBD124E6C086003FA480 /* ContractETHRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContractETHRequest.h; sourceTree = "<group>"; };
+		7371DBD224E6C086003FA480 /* ContractETHRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContractETHRequest.m; sourceTree = "<group>"; };
+		7371DBD424E7BD4B003FA480 /* ethERC20.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ethERC20.html; sourceTree = "<group>"; };
 		7377D171206B84610072E628 /* LocationManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManage.h; sourceTree = "<group>"; };
 		7377D172206B84610072E628 /* LocationManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManage.m; sourceTree = "<group>"; };
 		7377D174206B8D560072E628 /* LocationMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMode.h; sourceTree = "<group>"; };
@@ -3011,6 +3058,16 @@
 		7377D197206CFCD00072E628 /* SRRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRefreshView.h; sourceTree = "<group>"; };
 		7377D1A6206DCAB40072E628 /* RefreshTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefreshTableView.h; sourceTree = "<group>"; };
 		7377D1A7206DCAB50072E628 /* RefreshTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshTableView.m; sourceTree = "<group>"; };
+		73799A4D24DD644C00C5FFAA /* WebUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebUtil.swift; sourceTree = "<group>"; };
+		73799AE124E142C100C5FFAA /* QSwipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwipViewController.h; sourceTree = "<group>"; };
+		73799AE224E142C100C5FFAA /* QSwipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwipViewController.m; sourceTree = "<group>"; };
+		73799AE324E142C100C5FFAA /* QSwipViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QSwipViewController.xib; sourceTree = "<group>"; };
+		73799AE624E1455200C5FFAA /* QSwipHmoeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwipHmoeViewController.h; sourceTree = "<group>"; };
+		73799AE724E1455200C5FFAA /* QSwipHmoeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwipHmoeViewController.m; sourceTree = "<group>"; };
+		73799AE824E1455200C5FFAA /* QSwipHmoeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QSwipHmoeViewController.xib; sourceTree = "<group>"; };
+		73799AEB24E1486700C5FFAA /* QRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRecordViewController.h; sourceTree = "<group>"; };
+		73799AEC24E1486700C5FFAA /* QRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRecordViewController.m; sourceTree = "<group>"; };
+		73799AED24E1486700C5FFAA /* QRecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRecordViewController.xib; sourceTree = "<group>"; };
 		7384A29A2074DC0A00EA60E0 /* NSDate+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Category.h"; sourceTree = "<group>"; };
 		7384A29B2074DC0A00EA60E0 /* NSDate+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Category.m"; sourceTree = "<group>"; };
 		7384A29C2074DC0B00EA60E0 /* NSDateFormatter+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Category.m"; sourceTree = "<group>"; };
@@ -3020,6 +3077,21 @@
 		73899C872152003100962B14 /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		73899C902152003100962B14 /* GuidePageView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageView1.h; sourceTree = "<group>"; };
 		73899C942152003100962B14 /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
+		7398343824EE68AF00008CF0 /* QSwapHashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwapHashModel.h; sourceTree = "<group>"; };
+		7398343924EE68AF00008CF0 /* QSwapHashModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapHashModel.m; sourceTree = "<group>"; };
+		7398343B24EE6BAB00008CF0 /* KeyCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyCUtil.h; sourceTree = "<group>"; };
+		7398343C24EE6BAC00008CF0 /* KeyCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyCUtil.m; sourceTree = "<group>"; };
+		7398344124F1144300008CF0 /* QSwapDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwapDetailViewController.h; sourceTree = "<group>"; };
+		7398344224F1144300008CF0 /* QSwapDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapDetailViewController.m; sourceTree = "<group>"; };
+		7398344624F38B0E00008CF0 /* QSwapStatusManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwapStatusManager.h; sourceTree = "<group>"; };
+		7398344724F38B0E00008CF0 /* QSwapStatusManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapStatusManager.m; sourceTree = "<group>"; };
+		7398344924F3C71F00008CF0 /* QSwapProcessAnimateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwapProcessAnimateView.h; sourceTree = "<group>"; };
+		7398344A24F3C71F00008CF0 /* QSwapProcessAnimateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapProcessAnimateView.m; sourceTree = "<group>"; };
+		7398345424F3C96300008CF0 /* QSwapDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QSwapDetailViewController.xib; sourceTree = "<group>"; };
+		7398345A24F3C9CA00008CF0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QSwapProcessAnimateView.strings"; sourceTree = "<group>"; };
+		7398345B24F3C9D200008CF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/QSwapProcessAnimateView.xib; sourceTree = "<group>"; };
+		7398345D24F3C9F600008CF0 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/QSwapProcessAnimateView.strings; sourceTree = "<group>"; };
+		7398345F24F3CA2A00008CF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QSwapProcessAnimateView.strings; sourceTree = "<group>"; };
 		73A0000324B569D1006F2A5D /* OutbreakRed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OutbreakRed.framework; sourceTree = "<group>"; };
 		73A0000524B5C551006F2A5D /* DefiPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefiPriceCell.h; sourceTree = "<group>"; };
 		73A0000624B5C551006F2A5D /* DefiPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefiPriceCell.m; sourceTree = "<group>"; };
@@ -3054,6 +3126,8 @@
 		73C200C1209A9D460043E889 /* NotifactionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotifactionView.m; sourceTree = "<group>"; };
 		73D048A020F87AC100382BD5 /* VPNTranferMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VPNTranferMode.h; sourceTree = "<group>"; };
 		73D048A120F87AC100382BD5 /* VPNTranferMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VPNTranferMode.m; sourceTree = "<group>"; };
+		73D22FFF24FCF0CD00FBA4D8 /* QSwapAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwapAddressModel.h; sourceTree = "<group>"; };
+		73D2300024FCF0CD00FBA4D8 /* QSwapAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapAddressModel.m; sourceTree = "<group>"; };
 		73D957FF24B83FBA006A9081 /* LFAdvertScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFAdvertScrollView.h; sourceTree = "<group>"; };
 		73D9580024B83FBA006A9081 /* LFAdvertScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFAdvertScrollView.m; sourceTree = "<group>"; };
 		73D9580224B8543C006A9081 /* cycleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cycleCell.h; sourceTree = "<group>"; };
@@ -3586,6 +3660,8 @@
 				5839F51D2068F60E004C4A54 /* JSONUtil.h */,
 				5839F51E2068F60E004C4A54 /* JSONUtil.m */,
 				58AE1AD82074D21A00CE983B /* KeyChainUitl.swift */,
+				7398343B24EE6BAB00008CF0 /* KeyCUtil.h */,
+				7398343C24EE6BAC00008CF0 /* KeyCUtil.m */,
 				5839F5272068FC70004C4A54 /* MD5Util.h */,
 				5839F5262068FC70004C4A54 /* MD5Util.m */,
 				585D1EEE225D9F4500468C4A /* RSAUtil.h */,
@@ -3878,6 +3954,9 @@
 		5821964423F107E100704E23 /* Html */ = {
 			isa = PBXGroup;
 			children = (
+				7371DBD424E7BD4B003FA480 /* ethERC20.html */,
+				7371DBCB24E6702B003FA480 /* neonjs.html */,
+				7371DBC924E6701F003FA480 /* eth.html */,
 				730A7A2324B8035E00D086FF /* coveReward.html */,
 				730A7A2124B802A200D086FF /* rewardOther.html */,
 				730A7A1F24B801F700D086FF /* other.html */,
@@ -4533,7 +4612,6 @@
 		5864854F2463DB1E00BEBE18 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				73017E8A24DC31AA00A7E32A /* WebManageUtil.swift */,
 				5814636B246D1B140019A377 /* LandScapePicker.h */,
 				5814636A246D1B140019A377 /* LandScapePicker.m */,
 				58C1D0BA246CD8BF00D1144E /* DefiRateCircleView.h */,
@@ -4561,6 +4639,7 @@
 				58B4F38F2476153300EA133F /* DefiChartYValueFormatter.h */,
 				58B4F3902476153300EA133F /* DefiChartYValueFormatter.m */,
 				58B4F39224761D4500EA133F /* DefiChartConstants.h */,
+				73799A4D24DD644C00C5FFAA /* WebUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5359,6 +5438,7 @@
 		58811770246250870058B35F /* DeFi */ = {
 			isa = PBXGroup;
 			children = (
+				73799ADD24E1425100C5FFAA /* SwapQLC */,
 				5864854F2463DB1E00BEBE18 /* View */,
 				58811777246257DA0058B35F /* Cell */,
 				58C1CFF02466A08400D1144E /* DeFiNewsWebViewController.h */,
@@ -6068,6 +6148,28 @@
 			path = NewPagedFlowView;
 			sourceTree = "<group>";
 		};
+		7371DBC124E62231003FA480 /* WarpingAPI */ = {
+			isa = PBXGroup;
+			children = (
+				7371DBC224E62298003FA480 /* QSwipWrapperRequestUtil.h */,
+				7371DBC324E62298003FA480 /* QSwipWrapperRequestUtil.m */,
+				7398344624F38B0E00008CF0 /* QSwapStatusManager.h */,
+				7398344724F38B0E00008CF0 /* QSwapStatusManager.m */,
+			);
+			path = WarpingAPI;
+			sourceTree = "<group>";
+		};
+		7371DBCD24E670D6003FA480 /* ContractHtml */ = {
+			isa = PBXGroup;
+			children = (
+				7371DBCE24E67121003FA480 /* ContractNeoRequest.h */,
+				7371DBCF24E67121003FA480 /* ContractNeoRequest.m */,
+				7371DBD124E6C086003FA480 /* ContractETHRequest.h */,
+				7371DBD224E6C086003FA480 /* ContractETHRequest.m */,
+			);
+			path = ContractHtml;
+			sourceTree = "<group>";
+		};
 		7377D17A206B9FDC0072E628 /* VPNModes */ = {
 			isa = PBXGroup;
 			children = (
@@ -6105,6 +6207,64 @@
 			path = SRRefreshView;
 			sourceTree = "<group>";
 		};
+		73799ADD24E1425100C5FFAA /* SwapQLC */ = {
+			isa = PBXGroup;
+			children = (
+				7398343724EE684600008CF0 /* Models */,
+				7371DBCD24E670D6003FA480 /* ContractHtml */,
+				7371DBC124E62231003FA480 /* WarpingAPI */,
+				73799AE024E1427800C5FFAA /* Vs */,
+				73799ADF24E1426F00C5FFAA /* View */,
+				73799ADE24E1426500C5FFAA /* Cell */,
+			);
+			path = SwapQLC;
+			sourceTree = "<group>";
+		};
+		73799ADE24E1426500C5FFAA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7371DBB224E2331E003FA480 /* QRecordCell.h */,
+				7371DBB324E2331E003FA480 /* QRecordCell.m */,
+				7371DBB424E2331E003FA480 /* QRecordCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		73799ADF24E1426F00C5FFAA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7371DBB724E26772003FA480 /* QClaimAlertView.h */,
+				7371DBB824E26772003FA480 /* QClaimAlertView.m */,
+				7371DBBA24E2677A003FA480 /* QClaimAlertView.xib */,
+				7371DBBC24E267DF003FA480 /* QRecordAlrtView.h */,
+				7371DBBD24E267DF003FA480 /* QRecordAlrtView.m */,
+				7371DBBF24E267EE003FA480 /* QRecordAlrtView.xib */,
+				7398344924F3C71F00008CF0 /* QSwapProcessAnimateView.h */,
+				7398344A24F3C71F00008CF0 /* QSwapProcessAnimateView.m */,
+				7398345824F3C9C300008CF0 /* QSwapProcessAnimateView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		73799AE024E1427800C5FFAA /* Vs */ = {
+			isa = PBXGroup;
+			children = (
+				73799AE124E142C100C5FFAA /* QSwipViewController.h */,
+				73799AE224E142C100C5FFAA /* QSwipViewController.m */,
+				73799AE324E142C100C5FFAA /* QSwipViewController.xib */,
+				73799AE624E1455200C5FFAA /* QSwipHmoeViewController.h */,
+				73799AE724E1455200C5FFAA /* QSwipHmoeViewController.m */,
+				73799AE824E1455200C5FFAA /* QSwipHmoeViewController.xib */,
+				73799AEB24E1486700C5FFAA /* QRecordViewController.h */,
+				73799AEC24E1486700C5FFAA /* QRecordViewController.m */,
+				73799AED24E1486700C5FFAA /* QRecordViewController.xib */,
+				7398344124F1144300008CF0 /* QSwapDetailViewController.h */,
+				7398344224F1144300008CF0 /* QSwapDetailViewController.m */,
+				7398345424F3C96300008CF0 /* QSwapDetailViewController.xib */,
+			);
+			path = Vs;
+			sourceTree = "<group>";
+		};
 		7384A2992074DBF400EA60E0 /* NSDate */ = {
 			isa = PBXGroup;
 			children = (
@@ -6126,6 +6286,17 @@
 				73899C942152003100962B14 /* GuidePageViewController.m */,
 			);
 			path = GuidePage;
+			sourceTree = "<group>";
+		};
+		7398343724EE684600008CF0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7398343824EE68AF00008CF0 /* QSwapHashModel.h */,
+				7398343924EE68AF00008CF0 /* QSwapHashModel.m */,
+				73D22FFF24FCF0CD00FBA4D8 /* QSwapAddressModel.h */,
+				73D2300024FCF0CD00FBA4D8 /* QSwapAddressModel.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		73A05A252081D90700974483 /* ImageCliped */ = {
@@ -6183,6 +6354,7 @@
 			isa = PBXGroup;
 			children = (
 				935F328D212BB4F500B03341 /* ConfigurationDebug.plist */,
+				7371DBC524E62448003FA480 /* ConfigurationWraperDebug.plist */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -6191,6 +6363,7 @@
 			isa = PBXGroup;
 			children = (
 				935F328F212BB4F500B03341 /* ConfigurationRelease.plist */,
+				7371DBC724E62459003FA480 /* ConfigurationWraperRelease.plist */,
 			);
 			path = Release;
 			sourceTree = "<group>";
@@ -6358,12 +6531,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7371DBC624E62448003FA480 /* ConfigurationWraperDebug.plist in Resources */,
 				586485672463DE9400BEBE18 /* DefiRateSuccessView.xib in Resources */,
 				58D709982359A9EE008880A0 /* InviteRankView.xib in Resources */,
 				5821966023F26F0D00704E23 /* ChooseTokenCell.xib in Resources */,
+				7371DBCA24E67020003FA480 /* eth.html in Resources */,
 				580D91B92063AE5300B12506 /* Roboto-Thin.ttf in Resources */,
 				5839409C2445A452005EAA04 /* OutbreakRedCell.xib in Resources */,
 				581F80D422F7BE6F00F8291E /* ComplaintDetailViewController.xib in Resources */,
+				7371DBC824E62459003FA480 /* ConfigurationWraperRelease.plist in Resources */,
 				581F826322F7C20800F8291E /* NEOBackupDetailViewController.xib in Resources */,
 				581F81B422F7C09900F8291E /* MnemonicTipView.xib in Resources */,
 				580D91BD2063AE5300B12506 /* Roboto-Italic.ttf in Resources */,
@@ -6384,6 +6560,7 @@
 				5823983E241F693A00C4E4FD /* airdrop_tx.json in Resources */,
 				581F824022F7C1C800F8291E /* NEOWalletAddressViewController.xib in Resources */,
 				581F810C22F7BEEB00F8291E /* ComplaintSubmitViewController.xib in Resources */,
+				7398345624F3C9C300008CF0 /* QSwapProcessAnimateView.xib in Resources */,
 				736DA1F72498A0A000576055 /* registerSign.html in Resources */,
 				581F832022F7C3A200F8291E /* ResetPWSuccessView.xib in Resources */,
 				5836CFDC23B5D9B30072187A /* TopupPayNEO_PayViewController.xib in Resources */,
@@ -6429,6 +6606,7 @@
 				581F809A22F7BD8200F8291E /* VerifyTipView.xib in Resources */,
 				5881177C246257F60058B35F /* DeFiHomeCell.xib in Resources */,
 				5885D443231F498E00F9DEDE /* ConfidantViewController.xib in Resources */,
+				73799AEA24E1455200C5FFAA /* QSwipHmoeViewController.xib in Resources */,
 				580D91BA2063AE5300B12506 /* Roboto-Bold.ttf in Resources */,
 				588EA75D23CD6BEC00889F7D /* StartGroupBuyCell.xib in Resources */,
 				58A8B1E7233C874A007E2CE3 /* ChooseTopupPlanCell.xib in Resources */,
@@ -6461,6 +6639,7 @@
 				5885D44A231F499E00F9DEDE /* TokenMintageViewController.xib in Resources */,
 				581F820F22F7C17000F8291E /* EOSAccountQRViewController.xib in Resources */,
 				58245C5922E197CE0093E747 /* ComplaintPhotoCell.xib in Resources */,
+				7398345524F3C96300008CF0 /* QSwapDetailViewController.xib in Resources */,
 				58A8B1EE233C879F007E2CE3 /* TopupCell.xib in Resources */,
 				581F810522F7BEDC00F8291E /* TradeOrderDetailViewController.xib in Resources */,
 				5881179A246287050058B35F /* DeFiDetailViewController.xib in Resources */,
@@ -6484,6 +6663,7 @@
 				581F80DB22F7BE7D00F8291E /* EntrustOrderDetailViewController.xib in Resources */,
 				58A3EB6A237D83C500AEF7C8 /* MiningDailyDetailViewController.xib in Resources */,
 				588024182465285500717C57 /* DefiChartView.xib in Resources */,
+				7371DBC024E267EE003FA480 /* QRecordAlrtView.xib in Resources */,
 				58178AF0234C944A00A96A29 /* GoogleService-Info.plist in Resources */,
 				581F824722F7C1D500F8291E /* NEOTransactionRecordViewController.xib in Resources */,
 				58811790246268E30058B35F /* DeFiRecordCell.xib in Resources */,
@@ -6513,6 +6693,7 @@
 				581F82A922F7C29D00F8291E /* ETHWalletAddressViewController.xib in Resources */,
 				5810F47623628DE800346A43 /* TopupPayLoadView.xib in Resources */,
 				581F815222F7BF8500F8291E /* ETHWalletDetailCell.xib in Resources */,
+				7371DBBB24E2677A003FA480 /* QClaimAlertView.xib in Resources */,
 				5885D43C231F497C00F9DEDE /* VotingMiningNodeViewController.xib in Resources */,
 				581F827122F7C22400F8291E /* ETHExportMnemonicViewController.xib in Resources */,
 				730A7A2224B802A200D086FF /* rewardOther.html in Resources */,
@@ -6542,9 +6723,11 @@
 				586485472462BA3000BEBE18 /* DeFiHistoricalstatsCell.xib in Resources */,
 				58A3EB56237D375900AEF7C8 /* QLCHistoryChartView.xib in Resources */,
 				58688F1F239115740016AB2F /* CountryCodeList.json in Resources */,
+				73799AEF24E1486700C5FFAA /* QRecordViewController.xib in Resources */,
 				583E6C1B22FAA352004F1134 /* InviteFriendNowViewController.xib in Resources */,
 				587D0C8A2447EE27003EB1F9 /* OutbreakRedInterruptTipView.xib in Resources */,
 				581F80C622F7BE4E00F8291E /* OTCPayETHViewController.xib in Resources */,
+				7371DBCC24E6702B003FA480 /* neonjs.html in Resources */,
 				5860AC9D20CFB42000EEB6CE /* WebViewController.xib in Resources */,
 				580D91B42063AE5300B12506 /* Roboto-LightItalic.ttf in Resources */,
 				58A8B1DD233C52DA007E2CE3 /* StakingProcessView.xib in Resources */,
@@ -6555,14 +6738,17 @@
 				5870B5DA23F687F900EB4D34 /* TopupBuyConfirmViewController.xib in Resources */,
 				581F819122F7C05700F8291E /* DeleteWalletConfirmView.xib in Resources */,
 				5821965623F2587B00704E23 /* TopupProductSubCell.xib in Resources */,
+				7371DBD524E7BD4C003FA480 /* ethERC20.html in Resources */,
 				581F80E222F7BE8E00F8291E /* PayReceiveAddressViewController.xib in Resources */,
 				581F82CC22F7C2E800F8291E /* WalletsViewController.xib in Resources */,
 				581F82A222F7C28D00F8291E /* ETHTransactionRecordViewController.xib in Resources */,
 				581F831922F7C38700F8291E /* SetPWViewController.xib in Resources */,
 				581F830422F7C35600F8291E /* ChooseAreaCodeViewController.xib in Resources */,
 				5871922B23CEE48100728E15 /* ShareRewardCell.xib in Resources */,
+				7371DBB624E2331E003FA480 /* QRecordCell.xib in Resources */,
 				5821965123F2551E00704E23 /* TopupProductSubViewController.xib in Resources */,
 				580D91B72063AE5300B12506 /* Roboto-Medium.ttf in Resources */,
+				73799AE524E142C100C5FFAA /* QSwipViewController.xib in Resources */,
 				58231D4B237BFF10009CDE90 /* MiningDailyDetailCell.xib in Resources */,
 				581F811322F7BEF800F8291E /* ComplaintInfoViewController.xib in Resources */,
 				935F3291212BB4F500B03341 /* ConfigurationRelease.plist in Resources */,
@@ -6639,7 +6825,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TrustWeb3Provider/TrustWeb3Provider.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -6648,7 +6834,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		46635BD433FE66F8EA6F4E93 /* [CP] Embed Pods Frameworks */ = {
@@ -6657,7 +6843,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BGFMDB/BGFMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
@@ -6674,6 +6860,7 @@
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftHTTP/SwiftHTTP.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TOCropViewController/TOCropViewController.framework",
@@ -6685,6 +6872,7 @@
 				"${BUILT_PRODUCTS_DIR}/TrustWalletSDK/TrustWalletSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/dsBridge/dsBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -6704,6 +6892,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHTTP.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOCropViewController.framework",
@@ -6715,10 +6904,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustWalletSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dsBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qlink/Pods-Qlink-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		581D509B217890B30064F60C /* TODO */ = {
@@ -6867,7 +7057,6 @@
 				580D913F20625A4300B12506 /* UIImage+GIF.m in Sources */,
 				58D689CE230B90E400115610 /* ThemeConstants.m in Sources */,
 				58F2BCA4225C42410091DD53 /* LoginViewController.m in Sources */,
-				73017E8B24DC31AA00A7E32A /* WebManageUtil.swift in Sources */,
 				581AC36D21AFD6E600ACA80B /* QNavigationController.m in Sources */,
 				58E64E2020807DB3007B996B /* SkyRadiusView.m in Sources */,
 				58990B6F219457EC0036FF4F /* TokenPriceModel.m in Sources */,
@@ -6899,6 +7088,7 @@
 				586EE0982089951D009EAF40 /* FriendStatusModel.m in Sources */,
 				589AE87D23CC6ADC00476D53 /* GroupPeopleView.m in Sources */,
 				581AF7B121B6646E001A37E1 /* EOSCreateWalletViewController.m in Sources */,
+				73799AEE24E1486700C5FFAA /* QRecordViewController.m in Sources */,
 				58A3EB84237E739F00AEF7C8 /* MiningConstants.m in Sources */,
 				5869C5AF2359A84F0016BD38 /* InviteRankView.m in Sources */,
 				587D0CEB24484054003EB1F9 /* Base58.swift in Sources */,
@@ -6916,6 +7106,7 @@
 				58DC64F9206B6748002CF682 /* ConfigUtil.m in Sources */,
 				583FB53F22E97B2F00F5AE0F /* UserUtil.m in Sources */,
 				581D32EB219D0AFB001F88C3 /* ETHAddressTransactionsModel.m in Sources */,
+				7371DBB524E2331E003FA480 /* QRecordCell.m in Sources */,
 				587D0CE724484054003EB1F9 /* Array+Util.swift in Sources */,
 				5885D420231E491800F9DEDE /* AFJSONRPCClient.m in Sources */,
 				587ABD6B21B8F8F800C3D81A /* RichListRequest.m in Sources */,
@@ -6931,6 +7122,8 @@
 				58B4F38E2476120E00EA133F /* DefiChartXValueFormatter.m in Sources */,
 				580D915120625A4400B12506 /* UIView+Debug.m in Sources */,
 				5840927823052A2C0054BCBB /* VotingMiningNodeViewController.m in Sources */,
+				7398344824F38B0E00008CF0 /* QSwapStatusManager.m in Sources */,
+				7398344424F1144300008CF0 /* QSwapDetailViewController.m in Sources */,
 				587ABD4821B8F8F800C3D81A /* EOS_TransactionResult.m in Sources */,
 				580D913E20625A4300B12506 /* UIImage+FileName.m in Sources */,
 				58A3EB75237D848F00AEF7C8 /* ClaimQLCViewController.m in Sources */,
@@ -6987,6 +7180,7 @@
 				587D0CED24484054003EB1F9 /* NEOGasUtil.swift in Sources */,
 				587ABD6C21B8F8F800C3D81A /* EOS_Follow.m in Sources */,
 				58E7C5E320A3F63000EDDD09 /* UITextView+ZWPlaceHolder.m in Sources */,
+				73799AE924E1455200C5FFAA /* QSwipHmoeViewController.m in Sources */,
 				5814636C246D1B150019A377 /* LandScapePicker.m in Sources */,
 				587ABD4721B8F8F800C3D81A /* EOS_TransferModel.m in Sources */,
 				581F5FEA219E6AF900604352 /* JoinCommunityCell.m in Sources */,
@@ -7007,6 +7201,7 @@
 				58F3186522D3464F0024B4F0 /* RecordListViewController.m in Sources */,
 				58573DE4243ED93000A5C7A9 /* QBaseTouchButton.m in Sources */,
 				585CDC1D225C8FCE00199FE1 /* ChooseAreaCodeCell.m in Sources */,
+				73D2300124FCF0CD00FBA4D8 /* QSwapAddressModel.m in Sources */,
 				583940A62445C40C005EAA04 /* OutbreakRedRecordCell.m in Sources */,
 				58A3EB51237D2E7100AEF7C8 /* SheetMiningUtil.m in Sources */,
 				58D689D2230B9C6600115610 /* DeviceConstants.m in Sources */,
@@ -7058,6 +7253,7 @@
 				5872056C23C71799009A6217 /* OpenAgentViewController.m in Sources */,
 				58CF102B207CA4640026F28E /* ChooseCountryUtil.m in Sources */,
 				58A57D3A22DDA22F00699C3F /* WalletTransferUtil.m in Sources */,
+				7371DBB924E26772003FA480 /* QClaimAlertView.m in Sources */,
 				584F4EEE23D587DC004F579B /* GroupBuyUtil.m in Sources */,
 				587D0CEC24484054003EB1F9 /* NEP9.swift in Sources */,
 				58C1D00624695FD200D1144E /* CYLPlusButtonSubclass.m in Sources */,
@@ -7110,6 +7306,7 @@
 				587D0C7C24470A47003EB1F9 /* OutbreakFocusModel.m in Sources */,
 				73899C992152003100962B14 /* GuidePageView1.m in Sources */,
 				580D915820625A4400B12506 /* UIView+Recursion.m in Sources */,
+				7371DBC424E62298003FA480 /* QSwipWrapperRequestUtil.m in Sources */,
 				5881178B24625F730058B35F /* DeFiHomeViewController.m in Sources */,
 				587D0CFE24484054003EB1F9 /* TransactionAttritbute.swift in Sources */,
 				5836CFC423B49D5A0072187A /* TopupPayQLC_DeductionViewController.m in Sources */,
@@ -7193,6 +7390,7 @@
 				589D4716225B502300A4A4E3 /* MyThemes.m in Sources */,
 				581CB3AA21CA2651004DED10 /* NSNumber+RemoveZero.m in Sources */,
 				585D1EF5225DEAB100468C4A /* MyViewController.m in Sources */,
+				7398344B24F3C71F00008CF0 /* QSwapProcessAnimateView.m in Sources */,
 				582717CA22C9DC56003DC080 /* SGQRCodeScanView.m in Sources */,
 				587ABD7221B8F8F800C3D81A /* AskQuestion_abi_to_json_request.m in Sources */,
 				580D915320625A4400B12506 /* UIView+ViewController.m in Sources */,
@@ -7226,6 +7424,7 @@
 				58245C4F22E192550093E747 /* TZPhotoPreviewCell.m in Sources */,
 				587D0CE024484053003EB1F9 /* AES.swift in Sources */,
 				581C228621AD2BC10009888B /* RunInBackground.m in Sources */,
+				7398343A24EE68AF00008CF0 /* QSwapHashModel.m in Sources */,
 				587ABD7021B8F8F800C3D81A /* EOS_AccountInfo.m in Sources */,
 				58BDD4EE230CDB900060FBCC /* NewOrderETHTransferUtil.m in Sources */,
 				586485682463DE9400BEBE18 /* DefiRateSuccessView.m in Sources */,
@@ -7346,6 +7545,7 @@
 				58BDD4F5230CE84B0060FBCC /* OTCPayNEOViewController.m in Sources */,
 				73C1BA11207E18270080C59F /* HMScannerMaskView.m in Sources */,
 				587D0D0D24484054003EB1F9 /* Wallet.swift in Sources */,
+				7371DBD024E67121003FA480 /* ContractNeoRequest.m in Sources */,
 				580D914920625A4400B12506 /* UIImage+Alpha.m in Sources */,
 				580D914520625A4400B12506 /* UIImage+Merge.m in Sources */,
 				587D0CE224484053003EB1F9 /* scrypt.swift in Sources */,
@@ -7405,6 +7605,7 @@
 				582F239B21C1FDD300A000D1 /* EOSResourcePriceModel.m in Sources */,
 				580D916B20625A4400B12506 /* BBaseModel.m in Sources */,
 				58A074242092FD8400470E37 /* NeoTransferUtil.m in Sources */,
+				73799A4E24DD644C00C5FFAA /* WebUtil.swift in Sources */,
 				5806C11321C3DB59000E693B /* CreateAccountPushTransactionRequest.m in Sources */,
 				73899CA12152003100962B14 /* GuidePageViewController.m in Sources */,
 				73A05A322081D91600974483 /* UIImageView+HYBImageCliped.m in Sources */,
@@ -7426,6 +7627,7 @@
 				581AF7AC21B6646E001A37E1 /* EOSAccountQRViewController.m in Sources */,
 				587213422361A87B00E50744 /* TopupDeductionTokenModel.m in Sources */,
 				5872056723C71653009A6217 /* AgentRewardViewController.m in Sources */,
+				7398343D24EE6BAC00008CF0 /* KeyCUtil.m in Sources */,
 				581AFC4B21B7D28B001A37E1 /* EOSRAMViewController.m in Sources */,
 				58A4DEAB206234AC00E72F52 /* AppDelegate.m in Sources */,
 				580CF61E22A7C9AA00B0995C /* QLCImportWalletViewController.m in Sources */,
@@ -7433,6 +7635,7 @@
 				580D915220625A4400B12506 /* UIView+Nib.m in Sources */,
 				580D914F20625A4400B12506 /* UIColor+Random.m in Sources */,
 				5836CFC923B49DA10072187A /* TopupPayETH_DeductionViewController.m in Sources */,
+				73799AE424E142C100C5FFAA /* QSwipViewController.m in Sources */,
 				587ABD4621B8F8F800C3D81A /* Abi_bin_to_jsonRequest.m in Sources */,
 				587ABD6521B8F8F800C3D81A /* BackupEOSAccountService.m in Sources */,
 				580D916420625A4400B12506 /* NSString+Base64.m in Sources */,
@@ -7447,6 +7650,7 @@
 				58CDB5EF20888E7600B74962 /* WhiteCiycleImageView.m in Sources */,
 				588EA75C23CD6BEC00889F7D /* StartGroupBuyCell.m in Sources */,
 				588444E22359E166007882AB /* HttpRedirect302Helper.m in Sources */,
+				7371DBBE24E267DF003FA480 /* QRecordAlrtView.m in Sources */,
 				58EC938323B0AF1C0054C074 /* TopupMobilePlanCountry.m in Sources */,
 				73D048A220F87AC100382BD5 /* VPNTranferMode.m in Sources */,
 				58CDB5F220889FA600B74962 /* QShadowView.m in Sources */,
@@ -7461,6 +7665,7 @@
 				587D0C7F2447149B003EB1F9 /* GlobalOutbreakUtil.m in Sources */,
 				7377D198206CFCD10072E628 /* SRRefreshView.m in Sources */,
 				5840928223052A640054BCBB /* TokenMintageViewController.m in Sources */,
+				7371DBD324E6C086003FA480 /* ContractETHRequest.m in Sources */,
 				58CDB5E9208734D600B74962 /* UserManage.m in Sources */,
 				587ABD6E21B8F8F800C3D81A /* EOS_WalletAccountsResult.m in Sources */,
 				587D0D0524484054003EB1F9 /* ShamirSecret.swift in Sources */,
@@ -9388,6 +9593,17 @@
 			name = GuidePageView1.xib;
 			sourceTree = "<group>";
 		};
+		7398345824F3C9C300008CF0 /* QSwapProcessAnimateView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7398345A24F3C9CA00008CF0 /* zh-Hans */,
+				7398345B24F3C9D200008CF0 /* Base */,
+				7398345D24F3C9F600008CF0 /* id */,
+				7398345F24F3CA2A00008CF0 /* en */,
+			);
+			name = QSwapProcessAnimateView.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -9399,7 +9615,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9423;
+				CURRENT_PROJECT_VERSION = 9424;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9421,7 +9637,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9423;
+				CURRENT_PROJECT_VERSION = 9424;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9552,7 +9768,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9423;
+				CURRENT_PROJECT_VERSION = 9424;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9691,7 +9907,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9423;
+				CURRENT_PROJECT_VERSION = 9424;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;

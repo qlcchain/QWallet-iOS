@@ -1,5 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
+install! 'cocoapods', :deterministic_uuids => false
 inhibit_all_warnings!
 
 use_frameworks!
@@ -10,6 +11,7 @@ use_frameworks!
 def socket
 #    pod 'CocoaAsyncSocket', '~> 7.4.3'
 end
+
 
 def library
 #    pod 'KissXML', '~> 5.2.2'
@@ -22,6 +24,12 @@ def tunnel
 end
 
 def eth
+  
+   pod 'Qlink', :path => '.'
+   pod 'CryptoSwift', '~> 1.0'
+   pod 'Starscream', '~> 3.1.1'
+   pod 'secp256k1.c', '~> 0.1.2'
+   
     pod 'SwiftyJSON', '~> 4.0'
     pod 'SwiftHTTP'
   
@@ -117,6 +125,7 @@ target "Qlink" do
 #    pod 'AsyncSwift'
 #    pod 'Appirater'
 
+   
     tunnel
     library
     #fabric

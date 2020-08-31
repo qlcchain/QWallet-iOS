@@ -41,6 +41,7 @@
 #import "SystemUtil.h"
 #import <PromiseKit/PromiseKit.h>
 #import "Qlink-Swift.h"
+//#import <Web3Framework/Web3Framework-Swift.h>
 
 @interface MyViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -201,7 +202,7 @@
         kWeakSelf(self);
         [JoinTelegramTipView show:^{
             NSString *title = @"Telegram";
-            NSString *url = @"t.me/qlinkmobile";
+            NSString *url = @"t.me/myqwallet";
             [weakself jumpToWeb:url title:title];
         }];
     }
@@ -805,6 +806,11 @@
    // NSString *resultStr = [QETHManager infuratestResolver2WithEncodeStr:@"132323" error:&error];
     // NSString *resultStr = [QETHManager infuratestResolverWithEncodeStr:@"" error:&error];
    // NSLog(@"result = %@,error = %@",resultStr,error.description);
-
+    
+  //  NSData *reseultArr = [WebManageUtil.sharedInstance testststAndReturnError:&error];
+    
+    //NSLog(@"res = %@",reseultArr);
+    
+ 
 }
 @end

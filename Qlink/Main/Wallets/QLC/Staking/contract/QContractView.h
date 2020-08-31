@@ -29,6 +29,7 @@ typedef void(^QContractStageBlock)(NSString *stage);
 - (void)config;
 
 #pragma mark - Benefit Pledge
+- (void) testNeoContract;
 - (void)benefit_createMultiSig:(NSString *)neo_publicKey neo_wifKey:(NSString *)neo_wifKey fromAddress:(NSString *)fromAddress qlcAddress:(NSString *)qlcAddress qlcAmount:(NSString *)qlcAmount lockTime:(NSString *)lockTime qlc_privateKey:(NSString *)qlc_privateKey qlc_publicKey:(NSString *)qlc_publicKey resultHandler:(QContractResultBlock)resultHandler stageHandler:(QContractStageBlock)stageHandler;
 #pragma mark - Benefit Pledge pledge_start 状态调用
 - (void)benefit_getnep5transferbytxid:(NSString *)lockTxId qlc_publicKey:(NSString *)qlc_publicKey qlc_privateKey:(NSString *)qlc_privateKey resultHandler:(QContractResultBlock)resultHandler;

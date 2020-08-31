@@ -75,6 +75,8 @@
 #import "NEOGasClaimModel.h"
 #import <LYEmptyView/LYEmptyViewHeader.h>
 #import <TMCache/TMCache.h>
+#import "QSwipHmoeViewController.h"
+#import "ContractETHRequest.h"
 
 static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
 
@@ -156,6 +158,9 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // 提前初始化
+    [ContractETHRequest addContractETHRequest];
     
     [self addObserve];
     
@@ -371,7 +376,8 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     _walletNameLab.text = currentWalletM.name;
     _walletAddressLab.text = [NSString stringWithFormat:@"%@...%@",[currentWalletM.address substringToIndex:8],[currentWalletM.address substringWithRange:NSMakeRange(currentWalletM.address.length - 8, 8)]];
 //    [self refreshPriceTotal:@"0"];
-    _stakingHeight.constant = 53;
+    
+    [self updateStakingUI];
     _walletIcon.image = [UIImage imageNamed:@"qlc_wallet"];
     
     [_sourceArr removeAllObjects];
@@ -720,11 +726,34 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     [kAppD.window makeToastDisappearWithText:model.tips];
 }
 
+#pragma mark-- update ui
+- (void) updateStakingUI
+{
+     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeQLC) {
+        
+        _stakingHeight.constant = 53;
+        _myStakingsLab.text = @"My Stakings";
+        
+    } else if (currentWalletM.walletType == WalletTypeETH) {
+        
+        _stakingHeight.constant = 53;
+        _myStakingsLab.text = @"QLC Cross-chain Swap";
+        
+    } else if (currentWalletM.walletType == WalletTypeNEO) {
+        
+        _stakingHeight.constant = 53;
+        _myStakingsLab.text = @"QLC Cross-chain Swap";
+        
+    }
+}
+
 - (void)handlerWithETH {
     ETHAddressInfoModel *infoM = [[TMCache sharedCache] objectForKey:TM_Wallet_Source]?:nil;
     if (!infoM || ![infoM isKindOfClass:[ETHAddressInfoModel class]]) {
         return;
     }
+    [self updateStakingUI];
     self.ethAddressInfoM = infoM;
     [self updateWalletWithETH:_ethAddressInfoM];
     [self refreshDataWithETH];
@@ -751,6 +780,8 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     if (!infoM || ![infoM isKindOfClass:[NEOAddressInfoModel class]]) {
         return;
     }
+    
+    [self updateStakingUI];
     
     self.neoAddressInfoM = infoM;
     
@@ -1901,10 +1932,24 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
 }
 
 - (void)jumpToMyStakings {
-    MyStakingsViewController *vc = [MyStakingsViewController new];
-    vc.inputAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+    if (currentWalletM.walletType == WalletTypeQLC) {
+        MyStakingsViewController *vc = [MyStakingsViewController new];
+        vc.inputAddress = [WalletCommonModel getCurrentSelectWallet].address?:@"";
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (currentWalletM.walletType == WalletTypeNEO) {
+        QSwipHmoeViewController *vc = [[QSwipHmoeViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }  else if (currentWalletM.walletType == WalletTypeETH) {
+        QSwipHmoeViewController *vc = [[QSwipHmoeViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
 }
 
 - (void)jumpToNEOBackupDetail:(NEOWalletInfo *)walletInfo {

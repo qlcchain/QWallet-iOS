@@ -11,4 +11,6 @@
 @interface NSStringUtil : NSObject
 // 当nsstring 为 nil 时  置为@""
 + (NSString *)getNotNullValue:(NSString *)str;
+
++ (NSString *)notRounding:(NSString*)price afterPoint:(NSInteger)position;
 @end

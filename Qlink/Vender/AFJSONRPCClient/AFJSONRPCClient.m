@@ -123,8 +123,7 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
     payload[@"params"] = parameters;
     payload[@"id"] = [requestId description];
     
-//    NSString *userAgent =  [self.requestSerializer valueForHTTPHeaderField:@"User-Agent"];
-//    NSLog(@"userAgent = %@",userAgent);
+    NSLog(@"payloads = %@",payload);
     [self POST:@"" parameters:payload headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSInteger code = 0;
@@ -176,6 +175,34 @@ static NSString * AFJSONRPCLocalizedErrorMessageForCode(NSInteger code) {
             NSError *error = [NSError errorWithDomain:AFJSONRPCErrorDomain code:code userInfo:userInfo];
             
             failure(task, error);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(task, error);
+        }
+    }];
+}
+// 123
+- (void)invokeWrapperMethod:(NSString *)method
+      withParameters:(id)parameters
+           requestId:(id)requestId
+             success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+             failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+{
+    NSParameterAssert(method);
+
+    if (!parameters) {
+        parameters = @[];
+    }
+
+    
+//  NSString *userAgent =  [self.requestSerializer valueForHTTPHeaderField:@"User-Agent"];
+    [self POST:@"" parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if (success) {
+            success(task, responseObject);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -118,6 +118,12 @@
  */
 - (id)proxyWithProtocol:(Protocol *)protocol;
 
+- (void)invokeWrapperMethod:(NSString *)method
+withParameters:(id)parameters
+     requestId:(id)requestId
+       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                    failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+
 @end
 
 ///----------------

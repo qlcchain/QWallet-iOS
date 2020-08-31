@@ -28,6 +28,13 @@
 + (NSString *)get_qlc_node_release;
 + (NSString *)get_qlc_node_normal;
 
+// Wraper
++ (NSString *)get_wraper_node_normal;
++ (NSString *)get_wraper_node_debug;
++ (NSString *)get_wraper_node_release;
+// eth合约
++ (NSString *)get_eth_node_normal;
++ (NSString *)get_qlc_hub_node_normal;
 // 货币
 + (void)setLocalUsingCurrency:(NSString *)currency;
 + (NSString *)getLocalUsingCurrency;
