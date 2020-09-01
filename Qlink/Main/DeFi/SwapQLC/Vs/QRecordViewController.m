@@ -99,8 +99,8 @@
             
                     [QSwipWrapperRequestUtil checkEventStatWithRhash:hashM.rHash resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
                         if (success) {
-                            NSInteger state = [result[@"status"] integerValue];
-                            NSString *rHash = result[@"hash"]; //[@"0x" stringByAppendingString:result[@"hash"]];
+                            NSInteger state = [result[@"state"] integerValue];
+                            NSString *rHash = result[@"rHash"]; //[@"0x" stringByAppendingString:result[@"hash"]];
                             if (hashM.state >= 20) {
                                 if (state == 11 || state == 14) {
                                     [weakself updateSwapHashStatelWithRhash:rHash state:state];

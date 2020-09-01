@@ -85,7 +85,7 @@
 {
      NSString *urlStr = [ConfigUtil get_eth_node_normal];
     //    [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
-        [_dwebview callHandler:@"ethSmartContract.IssueUnlock" arguments:@[urlStr,privateKey,address,gasPrice,rHash,oHash] completionHandler:^(id  _Nullable value) {
+        [_dwebview callHandler:@"ethSmartContract.IssueUnlock" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",urlStr,privateKey,address,gasPrice,rHash,oHash] completionHandler:^(id  _Nullable value) {
             NSLog(@"responseObjecgt = %@",value);
             
            // [kAppD.window hideToast];
@@ -105,7 +105,7 @@
     
     NSString *urlStr = [ConfigUtil get_eth_node_normal];
     [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"loading")];
-    [_dwebview callHandler:@"ethSmartContract.destoryFetch" arguments:@[urlStr,privateKey,address,rhash] completionHandler:^(id  _Nullable value) {
+    [_dwebview callHandler:@"ethSmartContract.destoryFetch" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",urlStr,privateKey,address,rhash] completionHandler:^(id  _Nullable value) {
            NSLog(@"value = %@",value);
             
             [kAppD.window hideToast];
@@ -135,7 +135,7 @@
 - (void) getBalanceOfhWithAddress:(NSString *) address completionHandler:(void (^)(id responseObject)) success {
     // balanceOf
     NSString *urlStr = [ConfigUtil get_eth_node_normal];
-    [_dwebview callHandler:@"ethSmartContract.balanceOf" arguments:@[[QSwapAddressModel getShareObject].ethContract,urlStr,address] completionHandler:^(id  _Nullable value) {
+    [_dwebview callHandler:@"ethSmartContract.balanceOf" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",urlStr,address] completionHandler:^(id  _Nullable value) {
         NSLog(@"responseObjecgt = %@",value);
         NSInteger reCode = [value[0] integerValue];
         if (reCode < 0) {
@@ -176,7 +176,7 @@
     NSLog(@"原文hash:%@",rHash);
     
     
-    [_dwebview callHandler:@"ethSmartContract.destoryLock" arguments:@[[QSwapAddressModel getShareObject].ethContract,gasPrice,urlStr,privateKey,address,rHash,@(amount),wrapperAddress] completionHandler:^(id  _Nullable value) {
+    [_dwebview callHandler:@"ethSmartContract.destoryLock" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",gasPrice,urlStr,privateKey,address,rHash,@(amount),wrapperAddress] completionHandler:^(id  _Nullable value) {
         
         NSLog(@"responseObjecgt = %@",value);
         
@@ -228,5 +228,12 @@
     }];
     */
 }
-
+- (void) tarnsrefTo {
+     NSString *urlStr = [ConfigUtil get_eth_node_normal];
+     NSString *privateKey = @"67652fa52357b65255ac38d0ef8997b5608527a7c1d911ecefb8bc184d74e92e";
+       NSString *address = @"0x0A8EFAacbeC7763855b9A39845DDbd03b03775C1";
+       [_dwebview callHandler:@"ethSmartContract.transfer" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",urlStr,privateKey,address,@"0xE0632e90d6eB6649CfD82f6d625769cCf9E7762f",@(1000)] completionHandler:^(id  _Nullable value) {
+           NSLog(@"value = %@",value);
+       }];
+}
 @end

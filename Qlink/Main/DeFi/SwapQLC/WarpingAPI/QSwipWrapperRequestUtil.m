@@ -25,11 +25,10 @@
     DDLogDebug(@"qlcch_wrapperOnline params = %@",params);
     [AFHTTPClientV2 requestWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject && [responseObject[@"code"] intValue] == 0) {
-            NSDictionary *resultDic = responseObject[@"details"]?:@{};
-            [QSwapAddressModel getShareObject].ethAddress = resultDic[@"ethAddress"];
-            [QSwapAddressModel getShareObject].ethContract = resultDic[@"ethContract"];
-            [QSwapAddressModel getShareObject].neoAddress = resultDic[@"neoAddress"];
-            [QSwapAddressModel getShareObject].neoContract = resultDic[@"neoContract"];
+            [QSwapAddressModel getShareObject].ethAddress = responseObject[@"ethAddress"];
+            [QSwapAddressModel getShareObject].ethContract = responseObject[@"ethContract"];
+            [QSwapAddressModel getShareObject].neoAddress = responseObject[@"neoAddress"];
+            [QSwapAddressModel getShareObject].neoContract = responseObject[@"neoContract"];
             resultHandler(nil,YES,@"");
         } else {
             if (resultHandler) {
@@ -59,7 +58,7 @@
 + (void) checkEventStatWithRhash:(NSString *) rHash resultHandler:(QWrapperResultBlock)resultHandler {
     
    NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/debug/lockerState"];
-    NSDictionary *params = @{@"value":rHash};
+    NSDictionary *params = @{@"value":[rHash substringFromIndex:2]};
     DDLogDebug(@"depositApiLock params = %@",params);
     [AFHTTPClientV2 requestWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject) {

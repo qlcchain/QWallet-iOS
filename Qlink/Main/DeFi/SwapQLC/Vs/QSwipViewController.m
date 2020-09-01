@@ -33,6 +33,7 @@ static NSInteger minCount = 5;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (nonatomic, strong) ContractNeoRequest *neoRequest;
 
+@property (nonatomic, assign) NSInteger warpperCheckStatu;
 
 //// Stake From
 //@property (weak, nonatomic) IBOutlet UITextField *swipFromTF;
@@ -62,15 +63,11 @@ static NSInteger minCount = 5;
 
 @implementation QSwipViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self getWrapperAddresss];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     [self configInit];
+  
 }
 
 #pragma mark---layz
@@ -94,10 +91,27 @@ static NSInteger minCount = 5;
     
      WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeETH) {
-        _swipToTsLab.text = @"Select a NEP-5 Wallet";
-        _swipToTF.placeholder = @"Select a NEP-5 Wallet";
+        _swipToTsLab.text = kLang(@"select_NEP5_Wallet");
+        _swipToTF.placeholder = kLang(@"select_NEP5_Wallet");
+    } else {
+        _swipToTsLab.text = kLang(@"select_ERC20_Wallet");
+        _swipToTF.placeholder = kLang(@"select_ERC20_Wallet");
     }
-    [self getAddressBlanceOfWithAddress:currentWalletM.address];
+    kWeakSelf(self)
+    [self getWrapperAddresssAndBlaneOfHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        if (!success) {
+            [weakself getWrapperAddresssAndBlaneOfHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+                if (success) {
+                    weakself.warpperCheckStatu = 1;
+                } else {
+                    weakself.warpperCheckStatu = -1;
+                }
+                
+            }];
+        } else {
+            weakself.warpperCheckStatu = 1;
+        }
+    }];
     _swipFromIcon.image = [WalletCommonModel walletIcon:currentWalletM.walletType];
     _swipFromWalletAddressLab.text = currentWalletM.address;
     _swipFromWalletNameLab.text = currentWalletM.name;
@@ -105,21 +119,26 @@ static NSInteger minCount = 5;
     [_amountTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
 }
 #pragma mark ------------request
-- (void) getWrapperAddresss {
+- (void) getWrapperAddresssAndBlaneOfHandler:(QWrapperResultBlock)resultHandler {
     // 获取wrapper 地址
     if (![QSwapAddressModel getShareObject].ethAddress || [QSwapAddressModel getShareObject].ethAddress.length == 0) {
         kWeakSelf(self)
         [QSwipWrapperRequestUtil checkWrapperOnlineResultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
             if (success) {
                 WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
-                [weakself getAddressBlanceOfWithAddress:currentWalletM.address];
+                [weakself getAddressBlanceOfWithAddress:currentWalletM.address Handler:resultHandler];
+            } else {
+                resultHandler(nil,NO,nil);
             }
         }];
+    } else {
+        WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+        [self getAddressBlanceOfWithAddress:currentWalletM.address Handler:resultHandler];
     }
 }
 /// 得到当前钱包佘额
 /// @param address address
-- (void) getAddressBlanceOfWithAddress:(NSString *) address
+- (void) getAddressBlanceOfWithAddress:(NSString *) address Handler:(QWrapperResultBlock)resultHandler
 {
     
     kWeakSelf(self)
@@ -127,7 +146,12 @@ static NSInteger minCount = 5;
         if (responseObject && !([responseObject containsString:@"null"] || [responseObject containsString:@"NULL"])  && [responseObject doubleValue]>0) {
             NSString *blanceStr = [NSStringUtil notRounding:responseObject afterPoint:2]?:@"";
             weakself.blaneOf = [blanceStr doubleValue];
-            weakself.balanceLab.text = [NSString stringWithFormat:@"Balance: %@ QLC",blanceStr];
+            weakself.balanceLab.text = [NSString stringWithFormat:@"%@: %@ QLC",kLang(@"balance"),blanceStr];
+            resultHandler(nil,YES,nil);
+        } else if (responseObject && [responseObject doubleValue] == 0) {
+            resultHandler(nil,YES,nil);
+        } else {
+            resultHandler(nil,NO,nil);
         }
     }];
 }
@@ -163,6 +187,7 @@ static NSInteger minCount = 5;
 - (IBAction)confirmAction:(id)sender {
     
     [self.view endEditing:YES];
+    
     if (!_swipToWalletM) {
         [kAppD.window makeToastDisappearWithText:@"Swap To is empty"];
         return;
@@ -170,6 +195,18 @@ static NSInteger minCount = 5;
     if ([_amountTF.text.trim_whitespace doubleValue] < minCount) {
         [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"Swap quantity must be greater than %ld",minCount]];
         return;
+    }
+    
+    if (_warpperCheckStatu == 0) {
+        [kAppD.window makeToastDisappearWithText:@"Please wait"];
+        return;
+    }
+    
+    if (_warpperCheckStatu == -1) {
+        _warpperCheckStatu = 0;
+        [self getWrapperAddresssAndBlaneOfHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+            
+        }];
     }
 
     if ([_amountTF.text.trim_whitespace doubleValue] > _blaneOf) {

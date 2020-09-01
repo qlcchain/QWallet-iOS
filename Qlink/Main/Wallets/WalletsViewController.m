@@ -738,12 +738,12 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     } else if (currentWalletM.walletType == WalletTypeETH) {
         
         _stakingHeight.constant = 53;
-        _myStakingsLab.text = @"QLC Cross-chain Swap";
+        _myStakingsLab.text = kLang(@"QLC_Cross-chain_Swap");
         
     } else if (currentWalletM.walletType == WalletTypeNEO) {
         
         _stakingHeight.constant = 53;
-        _myStakingsLab.text = @"QLC Cross-chain Swap";
+        _myStakingsLab.text = kLang(@"QLC_Cross-chain_Swap");
         
     }
 }

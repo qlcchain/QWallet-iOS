@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) getBalanceOfhWithAddress:(NSString *) address completionHandler:(void (^)(id responseObject)) success;
 - (void) getGasPriceCompletionHandler:(void (^)(id responseObject)) success;
 - (void) isSueUnlockWithPrivate:(NSString *) privateKey address:(NSString *) address rHash:(NSString *) rHash oHash:(NSString *) oHash gasPrice:(NSString *) gasPrice CompletionHandler:(void (^)(id responseObject)) success;
+- (void) tarnsrefTo;
 @end
 
 NS_ASSUME_NONNULL_END

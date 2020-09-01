@@ -11,23 +11,30 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    cchEthRedemptionStatusInit                      = 0,  //初始化状态
-    cchEthRedemptionStatusWaitEthLockVerify         = 1,  //等待eth链上lock数据确认
-    cchEthRedemptionStatusTryNeoLock                = 2, //准备调用neo contrack lock
-    cchEthRedemptionStatusWaitNeoLockVerify         = 3,  //等待neo链上lock数据确认
-    cchEthRedemptionStatusWaitClaim                 = 4,  //neo lock完成，等待用户claim
-    cchEthRedemptionStatusWaitNeoUnlockVerify       = 5,  //等待neo链上unlock数据确认
-    cchEthRedemptionStatusTryEthBlackhole           = 6,  //准备调用eth unlock 销毁之前锁定的用户erc20 token
-    cchEthRedemptionStatusWaitEthUnlockVerify       = 7,  //eth unlock数据验证
-    cchEthRedemptionStatusClaimOk                   = 8,  //用户正常赎回erc20资产完成
-    cchEthRedemptionStatusTimeoutTryUnlock          = 9,  //用户在正常时间内没有claim，wrapper尝试去eth上unlock对应的erc20 token
-    cchEthRedemptionStatusTimeoutUnlockVerify       = 10, //用户等待eth上unlock数据确认
-    cchEthRedemptionStatusTimeoutUnlockOk           = 11, //用户超时，eth上erc20资产正常释放
-    cchEthRedemptionStatusTimeoutDesLock            = 12, //抵押超时，可以赎回
-    cchEthRedemptionStatusFailed                    = 13, //本次赎回失败，没有锁定成功
-    cchEthRedemptionStatusFailedFetchTimeout        = 14, //本次抵押失败，fetch超时，用户可以赎回
-    cchEthRedemptionStatusRevoking                  = 20, //超时赎回中
-    cchEthRedemptionStatusClaimking                 = 21 //赎回中
+  // deposit
+    DepositInitLockerState = 0,
+    DepositNeoLockedDone = 1,
+    DepositEthLockedPending =2,
+    DepositEthLockedDone =3,
+    DepositEthUnLockedDone =4,
+    DepositNeoUnLockedPending =5,
+    DepositNeoUnLockedDone =6,
+    DepositEthFetchPending =7,
+    DepositEthFetchDone =8,
+    DepositNeoFetchDone =9,
+    // withdraw
+    WithDrawEthLockedDone =10,
+    WithDrawNeoLockedPending =11,
+    WithDrawNeoLockedDone =12, // 等待unlock
+    WithDrawNeoUnLockedDone =13,
+    WithDrawEthUnlockPending =14,
+    WithDrawEthUnlockDone =15,
+    WithDrawNeoFetchPending =16,
+    WithDrawNeoFetchDone =17,
+    WithDrawEthFetchDone =18,
+    // 失败
+    Failed =19,
+    Invalid =20
 } ETHTokenLockState;
 
 typedef enum : NSUInteger {

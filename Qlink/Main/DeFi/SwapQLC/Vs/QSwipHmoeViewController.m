@@ -14,6 +14,8 @@
 
 @interface QSwipHmoeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *contentBack;
+@property (weak, nonatomic) IBOutlet UILabel *navTitle;
+
 
 @end
 
@@ -27,11 +29,13 @@
 
 #pragma mark - Operation
 - (void)setupNinaPage {
+    
+    _navTitle.text = kLang(@"QLC_Cross-chain_Swap");
     QSwipViewController *vc1 = [QSwipViewController new];
 
     QRecordViewController *vc2 = [QRecordViewController new];
 
-    NSArray *titles = @[@"Swap",@"Record"];
+    NSArray *titles = @[kLang(@"swap"),kLang(@"record")];
 
     NSArray *objs = @[vc1, vc2];
     
