@@ -8,6 +8,9 @@
 
 #import "QSwapDetailViewController.h"
 #import "QSwapHashModel.h"
+#import "ConfigUtil.h"
+#import "WebViewController.h"
+#import "QSwapStatusManager.h"
 
 @interface QSwapDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblType;
@@ -19,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTxHash;
 @property (weak, nonatomic) IBOutlet UILabel *lblClaimTitle;
 @property (weak, nonatomic) IBOutlet UIButton *claimCopyBtn;
+@property (weak, nonatomic) IBOutlet UIButton *claimTxBtn;
 
 @property (nonatomic, strong) NSString *statuString;
 
@@ -50,12 +54,13 @@
         _lblTxHash.hidden = YES;
         _lblClaimTitle.hidden = YES;
         _claimCopyBtn.hidden = YES;
+        _claimTxBtn.hidden = YES;
     } else {
-        if (self.hashM.state == 20 || self.hashM.state == 11) {
-            _lblClaimTitle.text = @"Revoke Tx";
-        } else if (self.hashM.state == 21 || self.hashM.state == 8) {
-            _lblClaimTitle.text = @"Claim Tx";
-        }
+//        if (self.hashM.state == 31 || self.hashM.state == 19) {
+//            _lblClaimTitle.text = @"Revoke Tx";
+//        } else if (self.hashM.state == 30 || self.hashM.state == 9) {
+//            _lblClaimTitle.text = @"Claim Tx";
+//        }
         _lblTxHash.text = self.hashM.swaptxHash?:@"";
     }
     
@@ -65,6 +70,42 @@
 - (IBAction)clickBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)clickSwapTX:(id)sender {
+    NSString *url = @"";
+    if (_hashM.type == 2) {
+        url = [[ConfigUtil get_eth_check_node_normal] stringByAppendingString:_hashM.txHash];
+    } else {
+        url = [[ConfigUtil get_neo_check_node_normal] stringByAppendingString:_hashM.txHash];
+    }
+    
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = url;
+    vc.inputTitle = kLang(@"transfer_deail");
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (IBAction)clickClaimTX:(id)sender {
+    NSString *url = @"";
+    if (_hashM.type == 2) {
+        if ([QSwapStatusManager isClaimSuccessWithState:_hashM.state]) {
+            url = [[ConfigUtil get_neo_check_node_normal] stringByAppendingString:_hashM.txHash];
+        } else {
+            url = [[ConfigUtil get_eth_check_node_normal] stringByAppendingString:_hashM.txHash];
+        }
+    } else {
+        if ([QSwapStatusManager isClaimSuccessWithState:_hashM.state]) {
+            url = [[ConfigUtil get_eth_check_node_normal] stringByAppendingString:_hashM.txHash];
+        } else {
+            url = [[ConfigUtil get_neo_check_node_normal] stringByAppendingString:_hashM.txHash];
+        }
+    }
+    
+    
+    WebViewController *vc = [[WebViewController alloc] init];
+    vc.inputUrl = url;
+    vc.inputTitle = kLang(@"transfer_deail");
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (IBAction)copyClick:(UIButton *)sender {
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];

@@ -158,10 +158,10 @@
         
         if (reCode < 0) {
             success(nil);
-            [kAppD.window makeToastDisappearWithText:@"Failed!"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"failed")];
         } else {
             success(value[1]);
-            [kAppD.window makeToastDisappearWithText:@"successfully!"];
+            [kAppD.window makeToastDisappearWithText:kLang(@"success")];
             // 删除本地hash记录
         }
     }];
@@ -188,7 +188,7 @@
             
         } else {
             
-            success(value[1]);
+           
             [kAppD.window makeToastDisappearWithText:@"Lock successfully!"];
             // 锁定成功 初始化对象
             QSwapHashModel *hashM = [[QSwapHashModel alloc] init];
@@ -204,6 +204,8 @@
             hashM.lockTime = [NSDate getTimestampFromDate:[NSDate date]];
             // 写入本地
             [QSwapHashModel addSwapHashWithSwapHashModel:hashM];
+            
+            success(hashM);
         }
         
     }];

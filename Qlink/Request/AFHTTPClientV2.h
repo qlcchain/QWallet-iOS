@@ -34,7 +34,11 @@ typedef void (^HTTPRequestV2FailedBlock)(NSURLSessionDataTask *dataTask, NSError
 //@property (nonatomic, strong) NSDictionary *userInfo;
 
 + (void)cancelAllOperations;
-
++ (NSURLSessionDataTask *)requestWrapperWithBaseURLStr:(NSString *)URLString
+      params:(id)params
+  httpMethod:(HttpMethod)httpMethod
+successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                                           failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock;
 + (NSURLSessionDataTask *)requestWithBaseURLStr:(NSString *)URLString
                                    params:(id)params
                                httpMethod:(HttpMethod)httpMethod

@@ -953,7 +953,6 @@
 		7398344424F1144300008CF0 /* QSwapDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398344224F1144300008CF0 /* QSwapDetailViewController.m */; };
 		7398344824F38B0E00008CF0 /* QSwapStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398344724F38B0E00008CF0 /* QSwapStatusManager.m */; };
 		7398344B24F3C71F00008CF0 /* QSwapProcessAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7398344A24F3C71F00008CF0 /* QSwapProcessAnimateView.m */; };
-		7398345524F3C96300008CF0 /* QSwapDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7398345424F3C96300008CF0 /* QSwapDetailViewController.xib */; };
 		7398345624F3C9C300008CF0 /* QSwapProcessAnimateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7398345824F3C9C300008CF0 /* QSwapProcessAnimateView.xib */; };
 		73A0000424B569D1006F2A5D /* OutbreakRed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A0000324B569D1006F2A5D /* OutbreakRed.framework */; };
 		73A0000824B5C551006F2A5D /* DefiPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A0000624B5C551006F2A5D /* DefiPriceCell.m */; };
@@ -979,6 +978,7 @@
 		73D9580124B83FBA006A9081 /* LFAdvertScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D9580024B83FBA006A9081 /* LFAdvertScrollView.m */; };
 		73D9580524B8543C006A9081 /* cycleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73D9580324B8543C006A9081 /* cycleCell.m */; };
 		73D9580624B8543C006A9081 /* cycleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D9580424B8543C006A9081 /* cycleCell.xib */; };
+		73DB9CE12501E60300C2EAC9 /* QSwapDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73DB9CE32501E60300C2EAC9 /* QSwapDetailViewController.xib */; };
 		73F9557720FF33E400A3E0F5 /* FreeRecordMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */; };
 		73FF64F220F599E700E29B3B /* CountryList.json in Resources */ = {isa = PBXBuildFile; fileRef = 73FF64F120F599E600E29B3B /* CountryList.json */; };
 		935F3290212BB4F500B03341 /* ConfigurationDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935F328D212BB4F500B03341 /* ConfigurationDebug.plist */; };
@@ -3085,7 +3085,6 @@
 		7398344724F38B0E00008CF0 /* QSwapStatusManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapStatusManager.m; sourceTree = "<group>"; };
 		7398344924F3C71F00008CF0 /* QSwapProcessAnimateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSwapProcessAnimateView.h; sourceTree = "<group>"; };
 		7398344A24F3C71F00008CF0 /* QSwapProcessAnimateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSwapProcessAnimateView.m; sourceTree = "<group>"; };
-		7398345424F3C96300008CF0 /* QSwapDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QSwapDetailViewController.xib; sourceTree = "<group>"; };
 		7398345A24F3C9CA00008CF0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QSwapProcessAnimateView.strings"; sourceTree = "<group>"; };
 		7398345B24F3C9D200008CF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/QSwapProcessAnimateView.xib; sourceTree = "<group>"; };
 		7398345D24F3C9F600008CF0 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/QSwapProcessAnimateView.strings; sourceTree = "<group>"; };
@@ -3139,6 +3138,10 @@
 		73D9580224B8543C006A9081 /* cycleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cycleCell.h; sourceTree = "<group>"; };
 		73D9580324B8543C006A9081 /* cycleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cycleCell.m; sourceTree = "<group>"; };
 		73D9580424B8543C006A9081 /* cycleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cycleCell.xib; sourceTree = "<group>"; };
+		73DB9CE22501E60300C2EAC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/QSwapDetailViewController.xib; sourceTree = "<group>"; };
+		73DB9CE62501E65C00C2EAC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QSwapDetailViewController.strings; sourceTree = "<group>"; };
+		73DB9CE72501E66F00C2EAC9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/QSwapDetailViewController.strings; sourceTree = "<group>"; };
+		73DB9CE92501E67300C2EAC9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QSwapDetailViewController.strings"; sourceTree = "<group>"; };
 		73F9557520FF33E400A3E0F5 /* FreeRecordMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeRecordMode.h; sourceTree = "<group>"; };
 		73F9557620FF33E400A3E0F5 /* FreeRecordMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FreeRecordMode.m; sourceTree = "<group>"; };
 		73FF64F120F599E600E29B3B /* CountryList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryList.json; sourceTree = "<group>"; };
@@ -6266,7 +6269,7 @@
 				73799AED24E1486700C5FFAA /* QRecordViewController.xib */,
 				7398344124F1144300008CF0 /* QSwapDetailViewController.h */,
 				7398344224F1144300008CF0 /* QSwapDetailViewController.m */,
-				7398345424F3C96300008CF0 /* QSwapDetailViewController.xib */,
+				73DB9CE32501E60300C2EAC9 /* QSwapDetailViewController.xib */,
 			);
 			path = Vs;
 			sourceTree = "<group>";
@@ -6645,7 +6648,7 @@
 				5885D44A231F499E00F9DEDE /* TokenMintageViewController.xib in Resources */,
 				581F820F22F7C17000F8291E /* EOSAccountQRViewController.xib in Resources */,
 				58245C5922E197CE0093E747 /* ComplaintPhotoCell.xib in Resources */,
-				7398345524F3C96300008CF0 /* QSwapDetailViewController.xib in Resources */,
+				73DB9CE12501E60300C2EAC9 /* QSwapDetailViewController.xib in Resources */,
 				58A8B1EE233C879F007E2CE3 /* TopupCell.xib in Resources */,
 				581F810522F7BEDC00F8291E /* TradeOrderDetailViewController.xib in Resources */,
 				5881179A246287050058B35F /* DeFiDetailViewController.xib in Resources */,
@@ -9632,6 +9635,17 @@
 			name = QSwipViewController.xib;
 			sourceTree = "<group>";
 		};
+		73DB9CE32501E60300C2EAC9 /* QSwapDetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				73DB9CE22501E60300C2EAC9 /* Base */,
+				73DB9CE62501E65C00C2EAC9 /* en */,
+				73DB9CE72501E66F00C2EAC9 /* id */,
+				73DB9CE92501E67300C2EAC9 /* zh-Hans */,
+			);
+			name = QSwapDetailViewController.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -9643,12 +9657,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9424;
+				CURRENT_PROJECT_VERSION = 9426;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
@@ -9665,12 +9679,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9424;
+				CURRENT_PROJECT_VERSION = 9426;
 				DEVELOPMENT_TEAM = 2JK8V69373;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlcchain.qwallet.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = QWalletPushDevProfile;
@@ -9796,7 +9810,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9424;
+				CURRENT_PROJECT_VERSION = 9426;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9819,7 +9833,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.6;
 				MiSDKRun = debug;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -9935,7 +9949,7 @@
 				CODE_SIGN_ENTITLEMENTS = Qlink/Qlink.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9424;
+				CURRENT_PROJECT_VERSION = 9426;
 				CustomAppBundleld = com.qlcchain.qwallet;
 				CustomProductName = "My QWallet";
 				DEVELOPMENT_TEAM = 2JK8V69373;
@@ -9957,7 +9971,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.6;
 				MiSDKRun = online;
 				OTHER_LDFLAGS = (
 					"$(inherited)",

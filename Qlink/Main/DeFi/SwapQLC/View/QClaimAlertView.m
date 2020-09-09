@@ -61,6 +61,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *gasPriceHeight;
+@property (weak, nonatomic) IBOutlet UILabel *lblGasFee;
 
 
 @property (nonatomic, strong) NSArray *ethSource;
@@ -229,9 +230,11 @@
         [self getGasPrice];
         [self requestTokenPrice];
     } else {
+        self.acrivityView.hidden = YES;
         self.ethAssetNum = @"";
+        self.lblGasFee.text = @"";
         self.gasPriceHeight.constant = 0;
-        self.tipHeight.constant = 480-85;
+        self.tipHeight.constant = 480-125;
     }
     
 }

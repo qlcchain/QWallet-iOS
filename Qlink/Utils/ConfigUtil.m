@@ -184,9 +184,16 @@
     NSString *channel = config[@"qlc_hub_node"];
     return channel;
 }
-
-
-
++ (NSString *)get_neo_check_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_Wraper_ChainNetwork];
+    NSString *channel = config[@"neo_check_node"];
+    return channel;
+}
++ (NSString *)get_eth_check_node_normal {
+    NSDictionary *config = [ConfigUtil getConfig_Wraper_ChainNetwork];
+    NSString *channel = config[@"eth_check_node"];
+    return channel;
+}
 
 
 

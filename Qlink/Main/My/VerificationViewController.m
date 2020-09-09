@@ -15,6 +15,7 @@
 #import "UserUtil.h"
 #import "TipOKView.h"
 #import "PhotoPickerUtil.h"
+#import "NSString+Trim.h"
 
 //#import "GlobalConstants.h"
 
@@ -31,6 +32,8 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIButton *picBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet UILabel *tipLab;
+@property (weak, nonatomic) IBOutlet UITextField *cardTF;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cardHeight;
 
 @property (nonatomic, strong) UIImage *selectImage1;
 @property (nonatomic, strong) UIImage *selectImage2;
@@ -57,6 +60,7 @@ typedef enum : NSUInteger {
 - (void)configInit {
     _submitBtn.layer.cornerRadius = 4.0;
     _submitBtn.layer.masksToBounds = YES;
+    _cardTF.placeholder = kLang(@"please_input_the_id");
     
     [self refreshPhotoStatus];
 }
@@ -94,6 +98,7 @@ typedef enum : NSUInteger {
         if ([userM.vStatus isEqualToString:kyc_success] || [userM.vStatus isEqualToString:kyc_uploaded]) {
             _picBtn1.userInteractionEnabled = NO;
             _picBtn2.userInteractionEnabled = NO;
+            _cardHeight.constant = 0;
             _submitBtn.hidden = YES;
         } else {
             _picBtn1.userInteractionEnabled = YES;
@@ -173,6 +178,10 @@ typedef enum : NSUInteger {
         [kAppD.window makeToastDisappearWithText:kLang(@"please_upload_the_required_information_of_your_passport")];
         return;
     }
+    if (_cardTF.text.trim_whitespace.length == 0) {
+        [kAppD.window makeToastDisappearWithText:kLang(@"please_input_the_id")];
+        return;
+    }
     
     [self requestUploadIDCard];
 }
@@ -189,7 +198,7 @@ typedef enum : NSUInteger {
     NSString *timestamp = [NSString stringWithFormat:@"%@",@([NSDate getTimestampFromDate:[NSDate date]])];
     NSString *encryptString = [NSString stringWithFormat:@"%@,%@",timestamp,md5PW];
     NSString *token = [RSAUtil encryptString:encryptString publicKey:userM.rsaPublicKey?:@""];
-    NSDictionary *params = @{@"account":account,@"token":token};
+    NSDictionary *params = @{@"account":account,@"token":token,@"idNumber":_cardTF.text.trim_whitespace};
     UIImage *img1 = _selectImage1;
     UIImage *img2 = _selectImage2;
     [kAppD.window makeToastInView:self.view text:nil];

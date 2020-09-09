@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QSwapStatusManager : NSObject
 + (instancetype) getShareQSwapStatusManager;
-- (void) updateSwapStatusWithPrames:(NSArray *) parames;
+- (void) updateSwapStatusWithRhash:(NSString *) rHash;
++ (BOOL) isClaimSuccessWithState:(NSInteger) state;
 
 @end
 

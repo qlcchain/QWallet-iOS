@@ -35,6 +35,9 @@
 // eth合约
 + (NSString *)get_eth_node_normal;
 + (NSString *)get_qlc_hub_node_normal;
+// 交易hash查看
++ (NSString *)get_neo_check_node_normal;
++ (NSString *)get_eth_check_node_normal;
 // 货币
 + (void)setLocalUsingCurrency:(NSString *)currency;
 + (NSString *)getLocalUsingCurrency;

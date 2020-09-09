@@ -38,6 +38,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomBackHeight; // 59
 @property (weak, nonatomic) IBOutlet UIView *bottomBack;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblTransHash;
+@property (weak, nonatomic) IBOutlet UILabel *lblTransTitle;
+
+
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic, strong) EntrustOrderInfoModel *orderInfoM;
@@ -131,6 +135,8 @@
             _remainLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount_str.sub(_orderInfoM.lockingAmount_str).sub(_orderInfoM.completeAmount_str),_orderInfoM.tradeToken];
             _remainLab.textColor = MAIN_BLUE_COLOR;
         }
+        _lblTransTitle.text = kLang(@"transaction_id");
+        _lblTransHash.text = _orderInfoM.txid;
         _totalLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.totalAmount_str,_orderInfoM.tradeToken];
         _unitPriceLab.text = [NSString stringWithFormat:@"%@ %@",_orderInfoM.unitPrice_str,_orderInfoM.payToken];
         _volumeLab.text = [NSString stringWithFormat:@"%@-%@ %@",_orderInfoM.minAmount,_orderInfoM.maxAmount,_orderInfoM.tradeToken];
@@ -252,6 +258,11 @@
 - (IBAction)addressCopyAction:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = _addressLab.text?:@"";
+    [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
+}
+- (IBAction)transactionCopyAction:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = _lblTransHash.text?:@"";
     [kAppD.window makeToastDisappearWithText:kLang(@"copied")];
 }
 

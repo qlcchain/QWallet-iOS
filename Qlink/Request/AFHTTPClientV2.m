@@ -11,6 +11,7 @@
 #import "GlobalConstants.h"
 #import "AgentModel.h"
 #import "UserModel.h"
+#import "QConstants.h"
 
 @interface AFHTTPClientV2 ()
 
@@ -55,7 +56,7 @@
         //    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"platform"];
         //    [manager.requestSerializer setValue: @"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
         [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-//        [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer setValue:@"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0" forHTTPHeaderField:@"User-Agent"];
+       
         
         NSString *userAgent = [[AFHTTPClientV2 shareInstance].httpManager.requestSerializer  valueForHTTPHeaderField:@"User-Agent"];
         userAgent = [AFHTTPClientV2 getAgent:userAgent].mj_JSONString;
@@ -136,6 +137,16 @@
 {
 
     return [self requestWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:nil successBlock:successReqBlock failedBlock:failedReqBlock];
+}
+
++ (NSURLSessionDataTask *)requestWrapperWithBaseURLStr:(NSString *)URLString
+                                   params:(id)params
+                               httpMethod:(HttpMethod)httpMethod
+                             successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                              failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
+{
+
+    return [self requestWrapperWithBaseURLStr:URLString params:params httpMethod:httpMethod userInfo:nil successBlock:successReqBlock failedBlock:failedReqBlock];
 }
 
 + (NSURLSessionDataTask *)requestXMLWithBaseURLStr:(NSString *)URLString
@@ -307,6 +318,98 @@
                 }
             }];
         }
+    }else if (httpMethod == HttpMethodDelete){
+        
+        dataTask = [[self getHTTPManager] DELETE:URLString  parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            id result = [self printJSONLogWithMethod:URLString Response:responseObject Error:nil];
+            
+            if (successReqBlock) {
+                successReqBlock(dataTask, result);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self printJSONLogWithMethod:URLString Response:nil Error:error];
+            
+            if (failedReqBlock) {
+                failedReqBlock(dataTask, error);
+            }
+        }];
+    }
+
+    return dataTask;
+}
+
++ (NSURLSessionDataTask *)requestWrapperWithBaseURLStr:(NSString *)URLString
+                                   params:(id)params
+                               httpMethod:(HttpMethod)httpMethod
+                                 userInfo:(NSDictionary*)userInfo
+                             successBlock:(HTTPRequestV2SuccessBlock)successReqBlock
+                              failedBlock:(HTTPRequestV2FailedBlock)failedReqBlock
+{
+    NSURLSessionDataTask *dataTask;
+//    AFHTTPClientV2 *httpV2 =  [[AFHTTPClientV2 alloc] init];
+//    httpV2.userInfo = userInfo;
+    
+//    DDLogDebug(@"url = %@ param = %@",URLString,params);
+    
+    if (httpMethod == HttpMethodGet) {
+        
+         DDLogDebug(@"url = %@ param = %@",URLString,params);
+        // clienthead 加 token
+        AFHTTPSessionManager *manager = [self getHTTPManager];
+        [manager.requestSerializer setValue:Wrapper_Token forHTTPHeaderField:@"authorization"];
+        
+        dataTask = [[self getHTTPManager] GET:URLString  parameters:params headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            id result = [self printHTTPLogWithMethod:URLString Response:responseObject Error:nil];
+            if (successReqBlock) {
+                successReqBlock(dataTask, result);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self printHTTPLogWithMethod:URLString Response:nil Error:error];
+            
+            if (failedReqBlock) {
+                failedReqBlock(dataTask, error);
+            }
+        }];
+        
+    }else if (httpMethod == HttpMethodPost){
+        DDLogDebug(@"url = %@ param = %@",URLString,params);
+        
+      
+        // 请求参数数据
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:&error];
+        
+        // 创建配置信息
+        NSURLSessionConfiguration *configure = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configure.timeoutIntervalForRequest = 10;// 设置超时时间
+        configure.HTTPAdditionalHeaders = @{@"authorization":Wrapper_Token};
+        // 创建会话
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configure delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        // 请求
+        NSURL *url = [NSURL URLWithString:URLString];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
+        [request addValue:@"raw" forHTTPHeaderField:@"Content-Type"];// 设置请求类型
+        [request setHTTPMethod:@"POST"];// 设置请求方法
+        [request setHTTPBody:jsonData];// 设置请求参数
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+           
+            
+            if (error == nil) {
+               
+                NSDictionary *object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                if (successReqBlock) {
+                    successReqBlock(dataTask,object);
+                }
+      
+            } else {
+                if (failedReqBlock) {
+                    failedReqBlock(dataTask, error);
+                }
+            }
+        }];
+        [task resume];
+        
     }else if (httpMethod == HttpMethodDelete){
         
         dataTask = [[self getHTTPManager] DELETE:URLString  parameters:params headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

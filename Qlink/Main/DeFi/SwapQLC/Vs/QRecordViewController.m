@@ -70,6 +70,7 @@
 #pragma mark - operation
 - (void) loadLocalHashData
 {
+   // [QSwapHashModel deleteAllLocationHashs];
     if (self.hashArray.count > 0) {
         [self.hashArray removeAllObjects];
     }
@@ -95,14 +96,22 @@
             
             [weakself.hashArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                    QSwapHashModel *hashM = obj;
-                if (!(hashM.state == 8 || hashM.state == 11 || hashM.state == 13)) {
+                if (!(hashM.state == DepositNeoFetchDone || hashM.state == WithDrawEthFetchDone || hashM.state == 29 || [QSwapStatusManager isClaimSuccessWithState:hashM.state])) {
             
                     [QSwipWrapperRequestUtil checkEventStatWithRhash:hashM.rHash resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
                         if (success) {
-                            NSInteger state = [result[@"state"] integerValue];
-                            NSString *rHash = result[@"rHash"]; //[@"0x" stringByAppendingString:result[@"hash"]];
-                            if (hashM.state >= 20) {
-                                if (state == 11 || state == 14) {
+                            NSInteger state = [result[@"state"]?:@"" integerValue];
+                            NSString *rHash = [@"0x" stringByAppendingString:result[@"rHash"]?:@""];
+                            
+                            BOOL neoTimeout = [result[@"neoTimeout"] boolValue];
+                            BOOL ethTimeout = [result[@"ethTimeout"] boolValue];
+                            if (neoTimeout || ethTimeout) {
+                                state = 29;
+                            }
+                            
+                            [weakself updateSwapHashStatelWithRhash:rHash state:state];
+                            if (hashM.state >= 30) {
+                                if (state == WithDrawEthUnlockDone || state == WithDrawEthFetchDone || state == DepositNeoUnLockedDone || state == DepositNeoFetchDone) {
                                     [weakself updateSwapHashStatelWithRhash:rHash state:state];
                                 }
                             } else {
@@ -158,58 +167,82 @@
     
     cell.claimBtn.hidden = YES;
     cell.lblExpierTime.text = @"";
-    if (hashM.state == 4) { // 等待兑换
-        cell.lblStatus.text = @"Waitting for Claim";
-        [cell.claimBtn setTitle:@"Claim" forState:UIControlStateNormal];
+    if (hashM.state == 3 || hashM.state == 4 || hashM.state == 13) { // 等待兑换
+        cell.lblStatus.text = kLang(@"waiting_for_claim");
+        [cell.claimBtn setTitle:kLang(@"claim") forState:UIControlStateNormal];
         cell.claimBtn.hidden = NO;
-        cell.lblExpierTime.text = @"expire in 10 hours";
-    } else if (hashM.state == 8) { // 兑换完成
-        cell.lblStatus.text = @"Completed";
-    } else if (hashM.state == 14 || hashM.state == 12) { // 超时，用户可以续回
-        cell.lblStatus.text = @"Expired";
-        [cell.claimBtn setTitle:@"Revoke" forState:UIControlStateNormal];
+        //cell.lblExpierTime.text = @"expire in 10 hours";
+    } else if ([QSwapStatusManager isClaimSuccessWithState:hashM.state]) { // unlock完成
+        cell.lblStatus.text = kLang(@"completed");
+    } else if (hashM.state == WithDrawNeoFetchDone || hashM.state == DepositEthFetchDone || hashM.state == 29) { // 超时，用户可以续回 19:erc20 8:nep5 29:超时
+        cell.lblStatus.text = kLang(@"expired");
+        [cell.claimBtn setTitle:kLang(@"swap_revoke") forState:UIControlStateNormal];
         cell.claimBtn.hidden = NO;
-    } else if (hashM.state == 11) { // 超时赎回完成，资产正常释放
-        cell.lblStatus.text = @"Revoked";
-    } else if (hashM.state == 13) { // 没有锁定成功，失败
-           cell.lblStatus.text = @"Failed";
-    }else if (hashM.state == 20) { // 赎回中
-        cell.lblStatus.text = @"Revoking";
-    } else if (hashM.state == 21) { // 兑换中
-        cell.lblStatus.text = @"Claiming";
+    } else if (hashM.state == 20 || hashM.state == 10) { // 超时赎回完成，资产正常释放
+        cell.lblStatus.text = kLang(@"swap_revoked");
+    } else if (hashM.state == 31) { // 赎回中
+        cell.lblStatus.text = kLang(@"revoking");
+    } else if (hashM.state == 30) { // 兑换中
+        cell.lblStatus.text = kLang(@"claiming");
     } else {
-        cell.lblStatus.text = @"Pending";
-        [cell.claimBtn setTitle:@"Revoke" forState:UIControlStateNormal];
-        cell.claimBtn.hidden = NO;
+        cell.lblStatus.text = kLang(@"swap_pending");
     }
     kWeakSelf(self)
     [cell setClaimBlock:^{
        
-        NSString *alertTitle = @"Claim";
+        NSString *alertTitle = kLang(@"claim");
         if (hashM.state == 9) {
-            alertTitle = @"Revoke";
+            alertTitle = kLang(@"swap_revoke");
+        }
+        NSString *ethAddress = hashM.fromAddress;
+        if (hashM.type == 2 && hashM.state == 13) { // unlock到neo 不需要手续费
+            ethAddress = @"";
         }
         QClaimAlertView *alertView = [QClaimAlertView getInstance];
-        [alertView configWithFromAddress:hashM.fromAddress toAddress:hashM.toAddress amount:[NSString stringWithFormat:@"%ld",hashM.amount] tokenName:@"ETH-Wallet" fromType:hashM.type==1? WalletTypeNEO:WalletTypeETH alertTitle:alertTitle ethAddress:hashM.fromAddress];
+        [alertView configWithFromAddress:hashM.fromAddress toAddress:hashM.toAddress amount:[NSString stringWithFormat:@"%ld",hashM.amount] tokenName:@"ETH-Wallet" fromType:hashM.type==1? WalletTypeNEO:WalletTypeETH alertTitle:alertTitle ethAddress:ethAddress];
 
         [alertView setConfirmBlock:^(NSString * _Nonnull gasPrice){
             // 显示loading
-            [weakself showSwapProcessView];
-            
-            [weakself.ethRequest destoryFetchWithPrivate:hashM.privateKey address:hashM.fromAddress rhash:hashM.rHash gasPrice:gasPrice completionHandler:^(id  _Nonnull responseObject) {
-                // 隐藏loading
-                [weakself hideSwapProcessView];
-                
-                if (responseObject) {
-                    hashM.state = 20;
-                    [weakself.mainTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                    // 更新本地状态
-                    [QSwapHashModel updateSwapHashStateWithHash:hashM.rHash withState:20 swapTxhash:responseObject];
-                    // 延时查看wrapper状态
-                    [[QSwapStatusManager getShareQSwapStatusManager] updateSwapStatusWithPrames:@[[NSString stringWithFormat:@"%ld",hashM.type],hashM.rHash]];
-                }
-                
-            }];
+            //[weakself showSwapProcessView];
+           
+            if (hashM.type == 2 && hashM.state == 13) { // unlock 到 nep5
+                [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"claiming")];
+                [QSwipWrapperRequestUtil unLockToNep5WithRhash:hashM.rOrigin userNep5Addr:hashM.toAddress resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+                    if (success) {
+                        [kAppD.window hideToast];
+                        [kAppD.window makeToastDisappearWithText:kLang(@"success")];
+                        hashM.state = 30;
+                        hashM.swaptxHash = result;
+                        [weakself.mainTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        // 更新本地状态
+                        [QSwapHashModel updateSwapHashStateWithHash:hashM.rHash withState:30 swapTxhash:result];
+                        // 延时查看wrapper状态
+                        [[QSwapStatusManager getShareQSwapStatusManager] updateSwapStatusWithRhash:hashM.rHash];
+                    } else {
+                        //[weakself hideSwapProcessView];
+                        [kAppD.window hideToast];
+                        [kAppD.window makeToastDisappearWithText:kLang(@"failed")];
+                    }
+                }];
+            } else if (hashM.type == 2 && (hashM.state == WithDrawNeoFetchDone || hashM.state == 29)) { // eth -> nep 超时赎回
+                [kAppD.window makeToastInView:kAppD.window text:NSStringLocalizable(@"revoking")];
+                [weakself.ethRequest destoryFetchWithPrivate:hashM.privateKey address:hashM.fromAddress rhash:hashM.rHash gasPrice:gasPrice completionHandler:^(id  _Nonnull responseObject) {
+                    // 隐藏loading
+                    //[weakself hideSwapProcessView];
+                    [kAppD.window hideToast];
+                    if (responseObject) {
+                        
+                        hashM.state = 31;
+                        hashM.swaptxHash = responseObject;
+                        [weakself.mainTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        // 更新本地状态
+                        [QSwapHashModel updateSwapHashStateWithHash:hashM.rHash withState:31 swapTxhash:responseObject];
+                        // 延时查看wrapper状态
+                        [[QSwapStatusManager getShareQSwapStatusManager] updateSwapStatusWithRhash:hashM.rHash];
+                    }
+                    
+                }];
+            }
             
         }];
         [alertView show];

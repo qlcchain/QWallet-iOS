@@ -20,10 +20,10 @@
 /// @param resultHandler 成功回调
 + (void) checkWrapperOnlineResultHandler:(QWrapperResultBlock)resultHandler {
  
-    NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/debug/ping"];
+    NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/info/ping"];
     NSDictionary *params = @{};
     DDLogDebug(@"qlcch_wrapperOnline params = %@",params);
-    [AFHTTPClientV2 requestWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject && [responseObject[@"code"] intValue] == 0) {
             [QSwapAddressModel getShareObject].ethAddress = responseObject[@"ethAddress"];
             [QSwapAddressModel getShareObject].ethContract = responseObject[@"ethContract"];
@@ -57,10 +57,10 @@
 /// @param resultHandler 成功回调
 + (void) checkEventStatWithRhash:(NSString *) rHash resultHandler:(QWrapperResultBlock)resultHandler {
     
-   NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/debug/lockerState"];
+   NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/info/lockerInfo"];
     NSDictionary *params = @{@"value":[rHash substringFromIndex:2]};
     DDLogDebug(@"depositApiLock params = %@",params);
-    [AFHTTPClientV2 requestWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject) {
             resultHandler(responseObject,YES,@"");
         } else {
@@ -85,7 +85,7 @@
     NSDictionary *params = @{@"nep5TxHash":nepTxhash,@"amount":amount,@"rHash":rHash,@"addr":wrapperEthAddress
     };
     DDLogDebug(@"depositApiLock params = %@",params);
-    [AFHTTPClientV2 requestWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject) {
             resultHandler(responseObject,YES,@"");
         } else {
@@ -110,7 +110,7 @@
     NSDictionary *params = @{@"nep5TxHash":nepTxhash,@"rHash":rHash,@"rOrigin":rOright
     };
     DDLogDebug(@"depositApiLock params = %@",params);
-    [AFHTTPClientV2 requestWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+    [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject) {
             resultHandler(responseObject,YES,@"");
         } else {
@@ -128,7 +128,28 @@
         NSLog(@"error=%@",error);
     }];
 }
+// unlock 到 nepo
++ (void) unLockToNep5WithRhash:(NSString *) rOrigin userNep5Addr:(NSString *) nep5Address resultHandler:(QWrapperResultBlock)resultHandler {
+    NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/withdraw/claim"];
+    NSDictionary *params = @{@"rOrigin":rOrigin,@"userNep5Addr":nep5Address?:@""
+       };
+       DDLogDebug(@"unLockToNep5 params = %@",params);
+       [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+           if (responseObject) {
+               resultHandler(responseObject[@"value"]?:@"",YES,@"");
+           } else {
+               if (resultHandler) {
+                   resultHandler(nil, NO,kLang(@"failed"));
+               }
+           }
+       } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+           if (resultHandler) {
+               resultHandler(nil, NO, error.description);
+           }
 
+           NSLog(@"error=%@",error);
+       }];
+}
 
 /*
 /// 检查 wraper 是否在线

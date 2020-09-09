@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,8 +77,180 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g15-34-dif">
                             <rect key="frame" x="0.0" y="44" width="414" height="1356"/>
                             <subviews>
-                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAD-Wc-Gqn">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="1120"/>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVS-ss-vl6">
+                                    <rect key="frame" x="0.0" y="1297" width="414" height="59"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJS-Jv-L6n" customClass="QBaseDarkButton">
+                                            <rect key="frame" x="16" y="9" width="382" height="41"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="Check the Appeal Result"/>
+                                            <connections>
+                                                <action selector="viewComplaintAction:" destination="-1" eventType="touchUpInside" id="kYx-7p-GnP"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="mJS-Jv-L6n" secondAttribute="bottom" constant="9" id="CIq-xV-HJr"/>
+                                        <constraint firstAttribute="trailing" secondItem="mJS-Jv-L6n" secondAttribute="trailing" constant="16" id="LVh-G7-Ri2"/>
+                                        <constraint firstAttribute="height" constant="59" id="WYj-cI-6gQ"/>
+                                        <constraint firstItem="mJS-Jv-L6n" firstAttribute="top" secondItem="iVS-ss-vl6" secondAttribute="top" constant="9" id="dmd-cK-oAq"/>
+                                        <constraint firstItem="mJS-Jv-L6n" firstAttribute="leading" secondItem="iVS-ss-vl6" secondAttribute="leading" constant="16" id="qAA-6x-kbv"/>
+                                    </constraints>
+                                </view>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="84g-sm-7ig">
+                                    <rect key="frame" x="0.0" y="1238" width="414" height="59"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhL-kJ-Pfc" customClass="QBaseDarkButton">
+                                            <rect key="frame" x="211" y="9" width="187" height="41"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="I've received"/>
+                                            <connections>
+                                                <action selector="confirmReceiveAction:" destination="-1" eventType="touchUpInside" id="BbR-2N-VjD"/>
+                                            </connections>
+                                        </button>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOl-mP-3AC">
+                                            <rect key="frame" x="16" y="9" width="187" height="41"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8z-ly-ubz" customClass="QBaseDarkButton">
+                                                    <rect key="frame" x="1" y="1" width="185" height="39"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal" title="Appeal">
+                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="complaintAction:" destination="-1" eventType="touchUpInside" id="l1F-tr-Gdf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="W8z-ly-ubz" firstAttribute="leading" secondItem="tOl-mP-3AC" secondAttribute="leading" constant="1" id="aUE-hA-Y5i"/>
+                                                <constraint firstAttribute="bottom" secondItem="W8z-ly-ubz" secondAttribute="bottom" constant="1" id="cdN-Jj-FOL"/>
+                                                <constraint firstAttribute="trailing" secondItem="W8z-ly-ubz" secondAttribute="trailing" constant="1" id="hzl-9r-2Nu"/>
+                                                <constraint firstItem="W8z-ly-ubz" firstAttribute="top" secondItem="tOl-mP-3AC" secondAttribute="top" constant="1" id="raB-Jf-72n"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="tOl-mP-3AC" firstAttribute="width" secondItem="yhL-kJ-Pfc" secondAttribute="width" id="1Ws-he-DCT"/>
+                                        <constraint firstItem="tOl-mP-3AC" firstAttribute="top" secondItem="84g-sm-7ig" secondAttribute="top" constant="9" id="9J4-xH-0JN"/>
+                                        <constraint firstItem="yhL-kJ-Pfc" firstAttribute="centerY" secondItem="84g-sm-7ig" secondAttribute="centerY" id="B9F-7a-cd3"/>
+                                        <constraint firstItem="tOl-mP-3AC" firstAttribute="leading" secondItem="84g-sm-7ig" secondAttribute="leading" constant="16" id="Bre-SC-eiD"/>
+                                        <constraint firstItem="yhL-kJ-Pfc" firstAttribute="top" secondItem="84g-sm-7ig" secondAttribute="top" constant="9" id="LBp-9u-Wtf"/>
+                                        <constraint firstAttribute="trailing" secondItem="yhL-kJ-Pfc" secondAttribute="trailing" constant="16" id="Qwy-aE-zYD"/>
+                                        <constraint firstItem="yhL-kJ-Pfc" firstAttribute="leading" secondItem="tOl-mP-3AC" secondAttribute="trailing" constant="8" id="bz8-gB-NEc"/>
+                                        <constraint firstAttribute="bottom" secondItem="yhL-kJ-Pfc" secondAttribute="bottom" constant="9" id="gPF-V0-gUc"/>
+                                        <constraint firstAttribute="bottom" secondItem="tOl-mP-3AC" secondAttribute="bottom" constant="9" id="iJk-ZH-lTs"/>
+                                        <constraint firstAttribute="height" constant="59" id="k6O-Sb-uYj"/>
+                                    </constraints>
+                                </view>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k47-Lb-eUf">
+                                    <rect key="frame" x="0.0" y="1179" width="414" height="59"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPj-6a-gF1" customClass="QBaseDarkButton">
+                                            <rect key="frame" x="276" y="9" width="122" height="41"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="Transfer"/>
+                                            <connections>
+                                                <action selector="payAction:" destination="-1" eventType="touchUpInside" id="KC8-hr-2Nl"/>
+                                            </connections>
+                                        </button>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="74l-Gm-UrR">
+                                            <rect key="frame" x="146" y="9" width="122" height="41"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps0-s0-PsZ" customClass="QBaseDarkButton">
+                                                    <rect key="frame" x="1" y="1" width="120" height="39"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal" title="I've transfered">
+                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="iAlreadyPaidAction:" destination="-1" eventType="touchUpInside" id="sBZ-l5-wNB"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ps0-s0-PsZ" secondAttribute="trailing" constant="1" id="0nH-OZ-Cho"/>
+                                                <constraint firstItem="Ps0-s0-PsZ" firstAttribute="leading" secondItem="74l-Gm-UrR" secondAttribute="leading" constant="1" id="aFo-1c-SdE"/>
+                                                <constraint firstItem="Ps0-s0-PsZ" firstAttribute="top" secondItem="74l-Gm-UrR" secondAttribute="top" constant="1" id="b1K-2G-m86"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ps0-s0-PsZ" secondAttribute="bottom" constant="1" id="nfe-TP-eTE"/>
+                                            </constraints>
+                                        </view>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDX-Na-mdu">
+                                            <rect key="frame" x="16" y="9" width="122" height="41"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1P-8R-lPB" customClass="QBaseDarkButton">
+                                                    <rect key="frame" x="1" y="1" width="120" height="39"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal" title="Revoke">
+                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="revokeAction:" destination="-1" eventType="touchUpInside" id="a9U-eV-830"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="A1P-8R-lPB" firstAttribute="top" secondItem="lDX-Na-mdu" secondAttribute="top" constant="1" id="FUg-sV-8zu"/>
+                                                <constraint firstAttribute="bottom" secondItem="A1P-8R-lPB" secondAttribute="bottom" constant="1" id="RPO-cT-8la"/>
+                                                <constraint firstAttribute="trailing" secondItem="A1P-8R-lPB" secondAttribute="trailing" constant="1" id="Vah-52-z0C"/>
+                                                <constraint firstItem="A1P-8R-lPB" firstAttribute="leading" secondItem="lDX-Na-mdu" secondAttribute="leading" constant="1" id="wLN-gH-n1h"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="lDX-Na-mdu" firstAttribute="top" secondItem="k47-Lb-eUf" secondAttribute="top" constant="9" id="2uy-6i-9Ef"/>
+                                        <constraint firstAttribute="bottom" secondItem="oPj-6a-gF1" secondAttribute="bottom" constant="9" id="80n-I4-oPk"/>
+                                        <constraint firstAttribute="height" constant="59" id="LLN-eY-OfQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="oPj-6a-gF1" secondAttribute="trailing" constant="16" id="QNm-hu-bqY"/>
+                                        <constraint firstAttribute="bottom" secondItem="74l-Gm-UrR" secondAttribute="bottom" constant="9" id="Tk8-rR-IQ8"/>
+                                        <constraint firstItem="74l-Gm-UrR" firstAttribute="width" secondItem="oPj-6a-gF1" secondAttribute="width" id="WZE-F7-Ou5"/>
+                                        <constraint firstItem="oPj-6a-gF1" firstAttribute="leading" secondItem="74l-Gm-UrR" secondAttribute="trailing" constant="8" id="cgy-Nq-rpI"/>
+                                        <constraint firstItem="lDX-Na-mdu" firstAttribute="width" secondItem="74l-Gm-UrR" secondAttribute="width" id="jyS-oI-XCJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="lDX-Na-mdu" secondAttribute="bottom" constant="9" id="kMe-BY-p23"/>
+                                        <constraint firstItem="oPj-6a-gF1" firstAttribute="top" secondItem="k47-Lb-eUf" secondAttribute="top" constant="9" id="lpp-Fg-Kbm"/>
+                                        <constraint firstItem="74l-Gm-UrR" firstAttribute="top" secondItem="k47-Lb-eUf" secondAttribute="top" constant="9" id="mjy-fe-yeP"/>
+                                        <constraint firstItem="oPj-6a-gF1" firstAttribute="centerY" secondItem="k47-Lb-eUf" secondAttribute="centerY" id="ngz-Cg-9R4"/>
+                                        <constraint firstItem="74l-Gm-UrR" firstAttribute="leading" secondItem="lDX-Na-mdu" secondAttribute="trailing" constant="8" id="o7v-BG-4vB"/>
+                                        <constraint firstItem="lDX-Na-mdu" firstAttribute="leading" secondItem="k47-Lb-eUf" secondAttribute="leading" constant="16" id="sKK-CE-5wx"/>
+                                    </constraints>
+                                </view>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RqC-GC-X2j">
+                                    <rect key="frame" x="0.0" y="1120" width="414" height="59"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-gu-dtQ" customClass="QBaseDarkButton">
+                                            <rect key="frame" x="16" y="9" width="382" height="41"/>
+                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="Transfer"/>
+                                            <connections>
+                                                <action selector="bottom4TransferAction:" destination="-1" eventType="touchUpInside" id="Pc1-so-UOF"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="PEc-gu-dtQ" firstAttribute="centerY" secondItem="RqC-GC-X2j" secondAttribute="centerY" id="1Ge-S2-Rk1"/>
+                                        <constraint firstAttribute="bottom" secondItem="PEc-gu-dtQ" secondAttribute="bottom" constant="9" id="GvC-V9-4ej"/>
+                                        <constraint firstAttribute="height" constant="59" id="VBq-LC-8qj"/>
+                                        <constraint firstItem="PEc-gu-dtQ" firstAttribute="leading" secondItem="RqC-GC-X2j" secondAttribute="leading" constant="16" id="X4u-vb-3tj"/>
+                                        <constraint firstAttribute="trailing" secondItem="PEc-gu-dtQ" secondAttribute="trailing" constant="16" id="a1w-sj-oAa"/>
+                                        <constraint firstItem="PEc-gu-dtQ" firstAttribute="top" secondItem="RqC-GC-X2j" secondAttribute="top" constant="9" id="hck-4g-VrX"/>
+                                    </constraints>
+                                </view>
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAD-Wc-Gqn">
+                                    <rect key="frame" x="0.0" y="143" width="414" height="1120"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uaz-qx-UsA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="1035"/>
@@ -634,178 +806,6 @@
                                         <constraint firstItem="Uaz-qx-UsA" firstAttribute="centerX" secondItem="FAD-Wc-Gqn" secondAttribute="centerX" id="ywF-UD-0af"/>
                                     </constraints>
                                 </scrollView>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVS-ss-vl6">
-                                    <rect key="frame" x="0.0" y="1297" width="414" height="59"/>
-                                    <subviews>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJS-Jv-L6n" customClass="QBaseDarkButton">
-                                            <rect key="frame" x="16" y="9" width="382" height="41"/>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <state key="normal" title="Check the Appeal Result"/>
-                                            <connections>
-                                                <action selector="viewComplaintAction:" destination="-1" eventType="touchUpInside" id="kYx-7p-GnP"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="mJS-Jv-L6n" secondAttribute="bottom" constant="9" id="CIq-xV-HJr"/>
-                                        <constraint firstAttribute="trailing" secondItem="mJS-Jv-L6n" secondAttribute="trailing" constant="16" id="LVh-G7-Ri2"/>
-                                        <constraint firstAttribute="height" constant="59" id="WYj-cI-6gQ"/>
-                                        <constraint firstItem="mJS-Jv-L6n" firstAttribute="top" secondItem="iVS-ss-vl6" secondAttribute="top" constant="9" id="dmd-cK-oAq"/>
-                                        <constraint firstItem="mJS-Jv-L6n" firstAttribute="leading" secondItem="iVS-ss-vl6" secondAttribute="leading" constant="16" id="qAA-6x-kbv"/>
-                                    </constraints>
-                                </view>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="84g-sm-7ig">
-                                    <rect key="frame" x="0.0" y="1238" width="414" height="59"/>
-                                    <subviews>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhL-kJ-Pfc" customClass="QBaseDarkButton">
-                                            <rect key="frame" x="211" y="9" width="187" height="41"/>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <state key="normal" title="I've received"/>
-                                            <connections>
-                                                <action selector="confirmReceiveAction:" destination="-1" eventType="touchUpInside" id="BbR-2N-VjD"/>
-                                            </connections>
-                                        </button>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOl-mP-3AC">
-                                            <rect key="frame" x="16" y="9" width="187" height="41"/>
-                                            <subviews>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8z-ly-ubz" customClass="QBaseDarkButton">
-                                                    <rect key="frame" x="1" y="1" width="185" height="39"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal" title="Appeal">
-                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="complaintAction:" destination="-1" eventType="touchUpInside" id="l1F-tr-Gdf"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="W8z-ly-ubz" firstAttribute="leading" secondItem="tOl-mP-3AC" secondAttribute="leading" constant="1" id="aUE-hA-Y5i"/>
-                                                <constraint firstAttribute="bottom" secondItem="W8z-ly-ubz" secondAttribute="bottom" constant="1" id="cdN-Jj-FOL"/>
-                                                <constraint firstAttribute="trailing" secondItem="W8z-ly-ubz" secondAttribute="trailing" constant="1" id="hzl-9r-2Nu"/>
-                                                <constraint firstItem="W8z-ly-ubz" firstAttribute="top" secondItem="tOl-mP-3AC" secondAttribute="top" constant="1" id="raB-Jf-72n"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="tOl-mP-3AC" firstAttribute="width" secondItem="yhL-kJ-Pfc" secondAttribute="width" id="1Ws-he-DCT"/>
-                                        <constraint firstItem="tOl-mP-3AC" firstAttribute="top" secondItem="84g-sm-7ig" secondAttribute="top" constant="9" id="9J4-xH-0JN"/>
-                                        <constraint firstItem="yhL-kJ-Pfc" firstAttribute="centerY" secondItem="84g-sm-7ig" secondAttribute="centerY" id="B9F-7a-cd3"/>
-                                        <constraint firstItem="tOl-mP-3AC" firstAttribute="leading" secondItem="84g-sm-7ig" secondAttribute="leading" constant="16" id="Bre-SC-eiD"/>
-                                        <constraint firstItem="yhL-kJ-Pfc" firstAttribute="top" secondItem="84g-sm-7ig" secondAttribute="top" constant="9" id="LBp-9u-Wtf"/>
-                                        <constraint firstAttribute="trailing" secondItem="yhL-kJ-Pfc" secondAttribute="trailing" constant="16" id="Qwy-aE-zYD"/>
-                                        <constraint firstItem="yhL-kJ-Pfc" firstAttribute="leading" secondItem="tOl-mP-3AC" secondAttribute="trailing" constant="8" id="bz8-gB-NEc"/>
-                                        <constraint firstAttribute="bottom" secondItem="yhL-kJ-Pfc" secondAttribute="bottom" constant="9" id="gPF-V0-gUc"/>
-                                        <constraint firstAttribute="bottom" secondItem="tOl-mP-3AC" secondAttribute="bottom" constant="9" id="iJk-ZH-lTs"/>
-                                        <constraint firstAttribute="height" constant="59" id="k6O-Sb-uYj"/>
-                                    </constraints>
-                                </view>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k47-Lb-eUf">
-                                    <rect key="frame" x="0.0" y="1179" width="414" height="59"/>
-                                    <subviews>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPj-6a-gF1" customClass="QBaseDarkButton">
-                                            <rect key="frame" x="276" y="9" width="122" height="41"/>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <state key="normal" title="Transfer"/>
-                                            <connections>
-                                                <action selector="payAction:" destination="-1" eventType="touchUpInside" id="KC8-hr-2Nl"/>
-                                            </connections>
-                                        </button>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="74l-Gm-UrR">
-                                            <rect key="frame" x="146" y="9" width="122" height="41"/>
-                                            <subviews>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps0-s0-PsZ" customClass="QBaseDarkButton">
-                                                    <rect key="frame" x="1" y="1" width="120" height="39"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal" title="I've transfered">
-                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="iAlreadyPaidAction:" destination="-1" eventType="touchUpInside" id="sBZ-l5-wNB"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Ps0-s0-PsZ" secondAttribute="trailing" constant="1" id="0nH-OZ-Cho"/>
-                                                <constraint firstItem="Ps0-s0-PsZ" firstAttribute="leading" secondItem="74l-Gm-UrR" secondAttribute="leading" constant="1" id="aFo-1c-SdE"/>
-                                                <constraint firstItem="Ps0-s0-PsZ" firstAttribute="top" secondItem="74l-Gm-UrR" secondAttribute="top" constant="1" id="b1K-2G-m86"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ps0-s0-PsZ" secondAttribute="bottom" constant="1" id="nfe-TP-eTE"/>
-                                            </constraints>
-                                        </view>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDX-Na-mdu">
-                                            <rect key="frame" x="16" y="9" width="122" height="41"/>
-                                            <subviews>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1P-8R-lPB" customClass="QBaseDarkButton">
-                                                    <rect key="frame" x="1" y="1" width="120" height="39"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <state key="normal" title="Revoke">
-                                                        <color key="titleColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="revokeAction:" destination="-1" eventType="touchUpInside" id="a9U-eV-830"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="A1P-8R-lPB" firstAttribute="top" secondItem="lDX-Na-mdu" secondAttribute="top" constant="1" id="FUg-sV-8zu"/>
-                                                <constraint firstAttribute="bottom" secondItem="A1P-8R-lPB" secondAttribute="bottom" constant="1" id="RPO-cT-8la"/>
-                                                <constraint firstAttribute="trailing" secondItem="A1P-8R-lPB" secondAttribute="trailing" constant="1" id="Vah-52-z0C"/>
-                                                <constraint firstItem="A1P-8R-lPB" firstAttribute="leading" secondItem="lDX-Na-mdu" secondAttribute="leading" constant="1" id="wLN-gH-n1h"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="lDX-Na-mdu" firstAttribute="top" secondItem="k47-Lb-eUf" secondAttribute="top" constant="9" id="2uy-6i-9Ef"/>
-                                        <constraint firstAttribute="bottom" secondItem="oPj-6a-gF1" secondAttribute="bottom" constant="9" id="80n-I4-oPk"/>
-                                        <constraint firstAttribute="height" constant="59" id="LLN-eY-OfQ"/>
-                                        <constraint firstAttribute="trailing" secondItem="oPj-6a-gF1" secondAttribute="trailing" constant="16" id="QNm-hu-bqY"/>
-                                        <constraint firstAttribute="bottom" secondItem="74l-Gm-UrR" secondAttribute="bottom" constant="9" id="Tk8-rR-IQ8"/>
-                                        <constraint firstItem="74l-Gm-UrR" firstAttribute="width" secondItem="oPj-6a-gF1" secondAttribute="width" id="WZE-F7-Ou5"/>
-                                        <constraint firstItem="oPj-6a-gF1" firstAttribute="leading" secondItem="74l-Gm-UrR" secondAttribute="trailing" constant="8" id="cgy-Nq-rpI"/>
-                                        <constraint firstItem="lDX-Na-mdu" firstAttribute="width" secondItem="74l-Gm-UrR" secondAttribute="width" id="jyS-oI-XCJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="lDX-Na-mdu" secondAttribute="bottom" constant="9" id="kMe-BY-p23"/>
-                                        <constraint firstItem="oPj-6a-gF1" firstAttribute="top" secondItem="k47-Lb-eUf" secondAttribute="top" constant="9" id="lpp-Fg-Kbm"/>
-                                        <constraint firstItem="74l-Gm-UrR" firstAttribute="top" secondItem="k47-Lb-eUf" secondAttribute="top" constant="9" id="mjy-fe-yeP"/>
-                                        <constraint firstItem="oPj-6a-gF1" firstAttribute="centerY" secondItem="k47-Lb-eUf" secondAttribute="centerY" id="ngz-Cg-9R4"/>
-                                        <constraint firstItem="74l-Gm-UrR" firstAttribute="leading" secondItem="lDX-Na-mdu" secondAttribute="trailing" constant="8" id="o7v-BG-4vB"/>
-                                        <constraint firstItem="lDX-Na-mdu" firstAttribute="leading" secondItem="k47-Lb-eUf" secondAttribute="leading" constant="16" id="sKK-CE-5wx"/>
-                                    </constraints>
-                                </view>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RqC-GC-X2j">
-                                    <rect key="frame" x="0.0" y="1120" width="414" height="59"/>
-                                    <subviews>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-gu-dtQ" customClass="QBaseDarkButton">
-                                            <rect key="frame" x="16" y="9" width="382" height="41"/>
-                                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="deviceRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <state key="normal" title="Transfer"/>
-                                            <connections>
-                                                <action selector="bottom4TransferAction:" destination="-1" eventType="touchUpInside" id="Pc1-so-UOF"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="PEc-gu-dtQ" firstAttribute="centerY" secondItem="RqC-GC-X2j" secondAttribute="centerY" id="1Ge-S2-Rk1"/>
-                                        <constraint firstAttribute="bottom" secondItem="PEc-gu-dtQ" secondAttribute="bottom" constant="9" id="GvC-V9-4ej"/>
-                                        <constraint firstAttribute="height" constant="59" id="VBq-LC-8qj"/>
-                                        <constraint firstItem="PEc-gu-dtQ" firstAttribute="leading" secondItem="RqC-GC-X2j" secondAttribute="leading" constant="16" id="X4u-vb-3tj"/>
-                                        <constraint firstAttribute="trailing" secondItem="PEc-gu-dtQ" secondAttribute="trailing" constant="16" id="a1w-sj-oAa"/>
-                                        <constraint firstItem="PEc-gu-dtQ" firstAttribute="top" secondItem="RqC-GC-X2j" secondAttribute="top" constant="9" id="hck-4g-VrX"/>
-                                    </constraints>
-                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>

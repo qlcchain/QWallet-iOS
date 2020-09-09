@@ -15,47 +15,31 @@ typedef enum : NSUInteger {
     DepositInitLockerState = 0,
     DepositNeoLockedDone = 1,
     DepositEthLockedPending =2,
-    DepositEthLockedDone =3,
-    DepositEthUnLockedDone =4,
+    DepositEthLockedDone =3, // 等待eth unlock
+    DepositEthUnLockedDone =4,// 等待eth unlock
     DepositNeoUnLockedPending =5,
-    DepositNeoUnLockedDone =6,
+    DepositNeoUnLockedDone =6, //unlock 完成
     DepositEthFetchPending =7,
-    DepositEthFetchDone =8,
-    DepositNeoFetchDone =9,
+    DepositEthFetchDone =8, // nep5失败，超时,等待续回
+    DepositNeoFetchPending =9, //续回中
+    DepositNeoFetchDone =10, // 续回完成
     // withdraw
-    WithDrawEthLockedDone =10,
-    WithDrawNeoLockedPending =11,
-    WithDrawNeoLockedDone =12, // 等待unlock
-    WithDrawNeoUnLockedDone =13,
-    WithDrawEthUnlockPending =14,
-    WithDrawEthUnlockDone =15,
-    WithDrawNeoFetchPending =16,
-    WithDrawNeoFetchDone =17,
-    WithDrawEthFetchDone =18,
-    // 失败
-    Failed =19,
-    Invalid =20
+    WithDrawEthLockedDone =11,
+    WithDrawNeoLockedPending =12,
+    WithDrawNeoLockedDone =13,// 等待neo unlock
+    WithDrawNeoUnLockedPending =14, // unlock中
+    WithDrawNeoUnLockedDone =15,
+    WithDrawEthUnlockPending =16,
+    WithDrawEthUnlockDone =17, // unlock 完成
+    WithDrawNeoFetchPending =18,
+    WithDrawNeoFetchDone =19, // erc20失败，超时,等待续回
+    WithDrawEthFetchDone =20, // 续回完成
+    // 自己添加状态
+    lockTimeoutState =29, // 超时
+    claimingState =30, // 兑换中
+    revokeingState =31// 续回中
+    
 } ETHTokenLockState;
-
-typedef enum : NSUInteger {
-    cchNep5MortgageStatusInit                       = 0, //初始化状态
-    cchNep5MortgageStatusWaitNeoLockVerify          = 1,  //等待neo链上lock数据确认
-    cchNep5MortgageStatusTryEthLock                 = 2,  //准备调用eth contrack lock
-    cchNep5MortgageStatusWaitEthLockVerify          = 3,  //等待eth链上lock数据确认
-    cchNep5MortgageStatusWaitClaim                  = 4,  //ethlock完成，等待用户claim
-    cchNep5MortgageStatusWaitEthUnlockVerify        = 5,  //等待eth链上unlock数据确认
-    cchNep5MortgageStatusTryNeoUnlock               = 6,  //wrapper尝试调用neo unlock to wrapper
-    cchNep5MortgageStatusWaitNeoUnlockVerify        = 7,  //等待neo链上unlock数据确认
-    cchNep5MortgageStatusClaimOk                    = 8,  //用户正常换取erc20资产完成
-    cchNep5MortgageStatusTimeoutTryDestroy          = 9,  //用户在正常时间内没有claim，wrapper尝试去eth上destroy对应的erc20资产
-    cchNep5MortgageStatusTimeoutDestroyVerify       = 10, //用户等待eth上destory数据确认
-    cchNep5MortgageStatusTimeoutDestroyOk           = 11, //用户超时，eth上erc20资产正常销毁
-    cchNep5MortgageStatusTimeoutDesLock             = 12, //抵押超时，可以赎回
-    cchNep5MortgageStatusFailed                     = 13, //本次抵押失败,没有锁定成功
-    cchNep5MortgageStatusFailedFetchTimeout         = 14, //本次抵押失败，fetch超时，用户可以赎回
-    cchNep5MortgageStatusRevoking                   = 20, //超时赎回中
-    cchNep5MortgageStatusClaimking                  = 21 //赎回中
-} NEOTokenLockState;
 
 typedef enum : NSUInteger {
     Nep5ActionUserLock = 0,
@@ -74,6 +58,8 @@ typedef void(^QWrapperResultBlock)(id _Nullable result, BOOL success,  NSString 
 + (void) checkEventStatWithRhash:(NSString *) rHash resultHandler:(QWrapperResultBlock)resultHandler;
 + (void) nep5LockNoticeWithType:(NSString *) type hash:(NSString *) hash amount:(NSString *) amount resultHandler:(QWrapperResultBlock)resultHandler;
 + (void) withdrawApiUnLockWithNepTxHash:(NSString *)nepTxhash rHash:(NSString *) rHash rOright:(NSString *) rOright resultHandler:(QWrapperResultBlock)resultHandler;
+// unlock 到 nepo
++ (void) unLockToNep5WithRhash:(NSString *) rOrigin userNep5Addr:(NSString *) nep5Address resultHandler:(QWrapperResultBlock)resultHandler;
 @end
 
 NS_ASSUME_NONNULL_END

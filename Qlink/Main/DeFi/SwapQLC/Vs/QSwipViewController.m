@@ -23,7 +23,8 @@
 #import "QSwapProcessAnimateView.h"
 #import <ETHFramework/ETHFramework.h>
 #import "QSwapAddressModel.h"
-
+#import "QSwapHashModel.h"
+#import "QSwapStatusManager.h"
 
 static NSInteger minCount = 5;
 
@@ -52,11 +53,13 @@ static NSInteger minCount = 5;
 
 @property (weak, nonatomic) IBOutlet UILabel *balanceLab;
 
+@property (nonatomic, assign) NSInteger walletType;
 @property (nonatomic, strong) WalletCommonModel *swipFromWalletM;
 @property (nonatomic, strong) WalletCommonModel *swipToWalletM;
 @property (nonatomic, assign) double blaneOf;
 
 @property (nonatomic, strong) QSwapProcessAnimateView *swapProcessV;
+@property (nonatomic, assign) BOOL userCancleSwap;
 
 
 @end
@@ -91,9 +94,11 @@ static NSInteger minCount = 5;
     
      WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     if (currentWalletM.walletType == WalletTypeETH) {
+        _walletType = 2;
         _swipToTsLab.text = kLang(@"select_NEP5_Wallet");
         _swipToTF.placeholder = kLang(@"select_NEP5_Wallet");
     } else {
+        _walletType = 1;
         _swipToTsLab.text = kLang(@"select_ERC20_Wallet");
         _swipToTF.placeholder = kLang(@"select_ERC20_Wallet");
     }
@@ -117,7 +122,10 @@ static NSInteger minCount = 5;
     _swipFromWalletNameLab.text = currentWalletM.name;
     
     [_amountTF addTarget:self action:@selector(changedTextField:) forControlEvents:UIControlEventEditingChanged];
+    
+   
 }
+
 #pragma mark ------------request
 - (void) getWrapperAddresssAndBlaneOfHandler:(QWrapperResultBlock)resultHandler {
     // 获取wrapper 地址
@@ -157,8 +165,13 @@ static NSInteger minCount = 5;
 }
 #pragma mark---进度load
 - (void)showSwapProcessView {
+    _userCancleSwap = NO;
     _swapProcessV = [QSwapProcessAnimateView getInstance];
     [_swapProcessV show];
+    kWeakSelf(self)
+    [_swapProcessV setQCloseBlock:^{
+        weakself.userCancleSwap = YES;
+    }];
 }
 
 - (void)hideSwapProcessView {
@@ -197,16 +210,19 @@ static NSInteger minCount = 5;
         return;
     }
     
+    if (_warpperCheckStatu == -1) {
+        _warpperCheckStatu = 0;
+        kWeakSelf(self)
+        [self getWrapperAddresssAndBlaneOfHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+            if (!success) {
+                weakself.warpperCheckStatu = -1;
+            }
+        }];
+    }
+    
     if (_warpperCheckStatu == 0) {
         [kAppD.window makeToastDisappearWithText:@"Please wait"];
         return;
-    }
-    
-    if (_warpperCheckStatu == -1) {
-        _warpperCheckStatu = 0;
-        [self getWrapperAddresssAndBlaneOfHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
-            
-        }];
     }
 
     if ([_amountTF.text.trim_whitespace doubleValue] > _blaneOf) {
@@ -214,9 +230,6 @@ static NSInteger minCount = 5;
         return;
     }
     
-    NSString *wrapperAddress = @"0x0A8EFAacbeC7763855b9A39845DDbd03b03775C1";
-//    NSString *privateKey = @"6048ad0d8cd9a99b8c94ae7347091cb1230f34a92ce30f2aa78c7ed59a62c3cd";
-//    NSString *address = @"0xE0632e90d6eB6649CfD82f6d625769cCf9E7762f";
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     QClaimAlertView *alertView = [QClaimAlertView getInstance];
     [alertView configWithFromAddress:currentWalletM.address toAddress:_swipToWalletM.address amount:_amountTF.text.trim_whitespace tokenName:currentWalletM.name fromType:currentWalletM.walletType alertTitle:@"Swap" ethAddress:currentWalletM.walletType == WalletTypeETH? currentWalletM.address:@""];
@@ -226,17 +239,93 @@ static NSInteger minCount = 5;
         [weakself showSwapProcessView];
         // 获取钱包私钥
         [TrustWalletManage.sharedInstance exportPrivateKeyWithAddress:currentWalletM.address?:@"" :^(NSString * privateKey) {
-           // lock
-            [[ContractETHRequest addContractETHRequest] destoryLockhWithPrivate:privateKey address:currentWalletM.address toAddress:weakself.swipToWalletM.address wrapperAddress:wrapperAddress amount:[_amountTF.text.trim_whitespace integerValue] gasPrice:gasPrice completionHandler:^(id  _Nonnull responseObject) {
-               [weakself hideSwapProcessView];
-           }];
+            // lock
+            if (weakself.walletType == 2 && !weakself.userCancleSwap) { // eth - > neo
+                //
+                [[ContractETHRequest addContractETHRequest] destoryLockhWithPrivate:privateKey address:currentWalletM.address toAddress:weakself.swipToWalletM.address wrapperAddress:[QSwapAddressModel getShareObject].ethAddress?:@"" amount:[_amountTF.text.trim_whitespace integerValue] gasPrice:gasPrice completionHandler:^(id  _Nonnull responseObject) {
+                     
+                     if (responseObject) {
+                         QSwapHashModel *hashM = responseObject;
+                         // 检测状态
+                         if (!weakself.userCancleSwap) {
+                             [weakself performSelector:@selector(checkLockStateWithModel:) withObject:hashM afterDelay:15];
+                         }
+                         
+                     } else {
+                         [weakself hideSwapProcessView];
+                     }
+                    
+                }];
+            } else { // neo -> eth
+                
+            }
+            
         }];
         
     }];
     [alertView show];
      
 }
-
+// 延时调用查询状态
+- (void) checkLockStateWithModel:(QSwapHashModel *) hashModel {
+    kWeakSelf(self)
+    [QSwipWrapperRequestUtil checkEventStatWithRhash:hashModel.rHash resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        if (success) {
+            NSInteger state = [result[@"state"]?:@"" integerValue];
+            
+            // 更新提示框状态
+            NSInteger statuState = state;
+            if (hashModel.type == 2) {
+                statuState -= 11;
+            }
+            [weakself.swapProcessV updateStage:[NSString stringWithFormat:@"%ld",statuState]];
+            
+            if (state == WithDrawNeoLockedDone) { // eth - >nep5 等待unlock
+                if (!weakself.userCancleSwap) {
+                    [QSwipWrapperRequestUtil unLockToNep5WithRhash:hashModel.rOrigin userNep5Addr:hashModel.toAddress resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+                        if (success) {
+                            // 更新本地状态
+                            [QSwapHashModel updateSwapHashStateWithHash:hashModel.rHash withState:30 swapTxhash:result];
+                            if (!weakself.userCancleSwap) {
+                                // 重新发起查看状态
+                                [weakself performSelector:@selector(checkLockStateWithModel:) withObject:hashModel afterDelay:5];
+                            }
+                        } else {
+                            [weakself hideSwapProcessView];
+                            [kAppD.window makeToastDisappearWithText:kLang(@"failed")];
+                        }
+                    }];
+                }
+            } else if (state == 3) { // nep5 - >eth 等待unlock
+                [weakself hideSwapProcessView];
+                [kAppD.window makeToastDisappearWithText:@"等待unlock"];
+            } else if (state == 6) { // nep5 - >eth unlock完成
+                [weakself hideSwapProcessView];
+                [kAppD.window makeToastDisappearWithText:kLang(@"success")];
+            } else if ([QSwapStatusManager isClaimSuccessWithState:state]){ // eth - >nep5 unlock完成
+                // 更新本地状态
+                [QSwapHashModel updateSwapHashStateWithHash:hashModel.rHash withState:state swapTxhash:message];
+                [weakself hideSwapProcessView];
+                [kAppD.window makeToastDisappearWithText:kLang(@"success")];
+            } else if (state == 19 || state == 8){ // 超时
+                [weakself hideSwapProcessView];
+                [kAppD.window makeToastDisappearWithText:@"Expired"];
+            }else {
+                // 重新发起查看状态
+                if (!weakself.userCancleSwap) {
+                    [weakself performSelector:@selector(checkLockStateWithModel:) withObject:hashModel afterDelay:5];
+                }
+            }
+            
+        } else {
+            // 重新发起查看状态
+            if (!weakself.userCancleSwap) {
+                [weakself performSelector:@selector(checkLockStateWithModel:) withObject:hashModel afterDelay:5];
+            }
+            
+        }
+    }];
+}
 //- (IBAction)clickSwipFromBtn:(id)sender {
 //    _swipFromWalletBack.hidden = YES;
 //    _swipFromWalletM = nil;

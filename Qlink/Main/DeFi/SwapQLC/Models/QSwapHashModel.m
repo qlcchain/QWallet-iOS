@@ -11,8 +11,11 @@
 #import "QSwapHashModel.h"
 #import <MJExtension/MJExtension.h>
 
-static NSString *swapHashKey = @"swapHash_Key";
-
+#ifdef DEBUG
+    static NSString *swapHashKey = @"swapHash_Key";
+#else
+    static NSString *swapHashKey = @"swapHash_main_Key";
+#endif
 @implementation QSwapHashModel
 
 + (void) deleteAllLocationHashs
@@ -133,7 +136,10 @@ static NSString *swapHashKey = @"swapHash_Key";
         QSwapHashModel *model = [QSwapHashModel getObjectWithKeyValues:obj];
         if ([model.rHash isEqualToString:rHash]) {
             model.state = state;
-            model.swaptxHash = swapTxhash;
+            if (swapTxhash && swapTxhash.length>0) {
+                model.swaptxHash = swapTxhash;
+            }
+            
         }
         [mutHashs addObject:[model mj_keyValues]];
     }];

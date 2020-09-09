@@ -26,29 +26,38 @@ static float afterDelay = 15.0;
 }
 
 /// 根据wrapper状态更新本地
-/// @param parames parames
-- (void) updateSwapStatusWithPrames:(NSArray *) parames
+/// @param rHash parames
+- (void) updateSwapStatusWithRhash:(NSString *) rHash
 {
-    [self performSelector:@selector(sendWrapperStateRequestWitPrames:) withObject:parames afterDelay:afterDelay];
+    [self performSelector:@selector(sendWrapperStateRequestWithRhash:) withObject:rHash afterDelay:afterDelay];
 }
-- (void) sendWrapperStateRequestWitPrames:(NSArray *) parames
+- (void) sendWrapperStateRequestWithRhash:(NSString *) rHash
 {
     kWeakSelf(self)
-    [QSwipWrapperRequestUtil checkEventStatWithRhash:[parames[0] substringFromIndex:2] resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+    [QSwipWrapperRequestUtil checkEventStatWithRhash:rHash resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
         if (success) {
-            NSInteger state = [result[@"status"]?:@"" integerValue];
-            NSString *rHash = [@"0x" stringByAppendingString:result[@"hash"]?:@""];
-            if (state == 11 || state == 14) {
+            NSInteger state = [result[@"state"]?:@"" integerValue];
+            NSString *resultRhash = [@"0x" stringByAppendingString:result[@"rHash"]?:@""];
+            if (state == DepositNeoFetchDone || state == WithDrawEthFetchDone || [QSwapStatusManager isClaimSuccessWithState:state]) {
                 // 更新本地状态
-                [QSwapHashModel updateSwapHashStateWithHash:rHash withState:state];
+                [QSwapHashModel updateSwapHashStateWithHash:resultRhash withState:state];
                 // 发送通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:SWAP_Status_Change_Noti object:@[rHash,@(state)]];
             } else {
-                [weakself performSelector:@selector(sendWrapperStateRequestWitPrames:) withObject:parames afterDelay:3];
+                [weakself performSelector:@selector(sendWrapperStateRequestWithRhash:) withObject:rHash afterDelay:3];
             }
         } else {
-           [weakself performSelector:@selector(sendWrapperStateRequestWitPrames:) withObject:parames afterDelay:3];
+           [weakself performSelector:@selector(sendWrapperStateRequestWithRhash:) withObject:rHash afterDelay:3];
         }
     }];
+}
+
++ (BOOL) isClaimSuccessWithState:(NSInteger) state
+{
+    if ((state >=15 && state <=17) || (state >=4 && state <=6)) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 @end

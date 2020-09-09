@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *pairsId; // 交易对ID
 @property (nonatomic, strong) NSString *tradeToken;// = QGAS;
 @property (nonatomic, strong) NSString *tradeTokenChain;// = "QLC_CHAIN";
-
+@property (nonatomic, strong) NSString *txid;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -63,8 +63,13 @@
 }
 - (IBAction)helpAction:(id)sender {
     WebViewController *vc = [[WebViewController alloc] init];
-    vc.inputUrl = @"https://github.com/qlcchain/eth-staking-contracts/wiki/NEP5-TO-ERC20-Token-Swap";
-    vc.inputTitle = @"QLC Cross-chain Swap Intro";
+    NSString *language = [Language currentLanguageCode];
+    if ([language isEqualToString:LanguageCode[1]]) { // 中文
+        vc.inputUrl = @"http://dapp-t.qlink.mobi/f/swap/faq_cn.html";
+    } else {
+        vc.inputUrl = @"http://dapp-t.qlink.mobi/f/swap/faq_en.html";
+    }
+    vc.inputTitle = kLang(@"QLC_Cross-chain_Swap_intro");
     [self.navigationController pushViewController:vc animated:YES];
 }
 

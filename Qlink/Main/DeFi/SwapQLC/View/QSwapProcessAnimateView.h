@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^QCloseSwapProcessBlock)(void);
+
 @interface QSwapProcessAnimateView : UIView
+
+@property (nonatomic, copy) QCloseSwapProcessBlock qCloseBlock;
 
 + (instancetype)getInstance;
 - (void)show;

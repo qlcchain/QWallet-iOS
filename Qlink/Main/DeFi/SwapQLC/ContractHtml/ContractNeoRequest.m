@@ -11,6 +11,8 @@
 #import "dsbridge.h"
 #import "JsApiTest.h"
 #import "GlobalConstants.h"
+#import "SystemUtil.h"
+#import "NSString+Hash.h"
 
 @interface ContractNeoRequest () <WKNavigationDelegate> {
     JsApiTest *jsApi;
@@ -73,9 +75,20 @@
     } ];
 }
 - (void) testNeoContract {
-    [_dwebview callHandler:@"staking.testContract1" arguments:@[@"7010a57c867546ea27b38b23c99eaabf39b952e55c05c9da85c390c68b8e2737"] completionHandler:^(id  _Nullable value) {
-        NSLog(@"value = %@",value);
-    }];
+    
+    NSString *hash = [SystemUtil uuidString];
+       NSLog(@"原文:%@",hash);
+    NSString *rHash = [hash sha256String];
+    NSString *wrapperAddress = @"ARNpaFJhp6SHziRomrK4cenWw66C8VVFyv";
+    NSString *prviteKey = @"bfb571c8fa917182b0965af45d0fd3464f0393bac01a2589f402d562ce61f3bb";
+//    [_dwebview callHandler:@"staking.userLock"
+//                 arguments:@[prviteKey,wrapperAddress,rHash,@(6),@(15)] completionHandler:^(id  _Nullable value) {
+//        NSLog(@"value = %@",value);
+//    }];
+    [_dwebview callHandler:@"staking.testContract1"
+                    arguments:@[prviteKey] completionHandler:^(id  _Nullable value) {
+           NSLog(@"value = %@",value);
+       }];
 }
 
 @end

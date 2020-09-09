@@ -34,7 +34,7 @@
 
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    self.stageLab.text = @"1";
+    self.stageLab.text = @"0";
     [kAppD.window addSubview:self];
     
     [self addScaleAnimate:_stageBack];
@@ -67,6 +67,9 @@
 
 #pragma mark --- Action
 - (IBAction)closeAction:(id)sender {
+    if (_qCloseBlock) {
+        _qCloseBlock();
+    }
     [self hide];
 }
 @end
