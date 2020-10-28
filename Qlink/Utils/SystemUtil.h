@@ -14,6 +14,7 @@
 // 得到时间戳
 + (NSString *) getTimeInterval;
 
++ (BOOL) isDebug;
 /**
  app退出时。配置
  */

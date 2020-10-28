@@ -46,6 +46,13 @@
     return [NSString stringWithFormat:@"%.0f",timeInterval];
 }
 
++ (BOOL) isDebug {
+    #if DEBUG
+    return true;
+    #else
+    return false;
+    #endif
+}
 /**
  app退出时。配置
  */

@@ -34,7 +34,13 @@
             // Fallback on earlier versions
         }
     } else {
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        //[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        if (@available(iOS 13.0, *)) {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
     

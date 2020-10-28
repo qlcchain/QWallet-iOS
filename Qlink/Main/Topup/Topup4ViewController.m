@@ -75,6 +75,15 @@
 #import "NSString+RandomStr.h"
 #import "SystemUtil.h"
 #import "NSString+Trim.h"
+#import "DefiListCell.h"
+#import "DefiListModel.h"
+#import <SDWebImage/SDWebImage.h>
+#import "Qlink-Swift.h"
+#import <ETHFramework/ETHFramework.h>
+#import "BrowserHistoryViewController.h"
+#import "WalletSelectViewController.h"
+#import "QNavigationController.h"
+
 
 static NSString *const TopupNetworkSize = @"20";
 //static NSInteger const insetForSectionDistance = 16;
@@ -88,7 +97,7 @@ static NSString *const Show_Buyback_Burn = @"Show_Buyback_Burn";
 //static NSString *const TM_Chache_Topup_Country_List = @"TM_Chache_Topup_Country_List";
 static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
-@interface Topup4ViewController () <UIScrollViewDelegate,NinaPagerViewDelegate>
+@interface Topup4ViewController () <UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     BOOL isfirst;
 }
@@ -144,30 +153,16 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 @property (weak, nonatomic) IBOutlet UIView *tableBack;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBackHeight; // 300
 
-//@property (weak, nonatomic) IBOutlet UIView *qlcTradeBack;
-//@property (weak, nonatomic) IBOutlet UILabel *qlcPriceLab;
-//@property (weak, nonatomic) IBOutlet UILabel *qlcGainLab;
-//@property (weak, nonatomic) IBOutlet UILabel *qlcTradeLab;
-
-//@property (weak, nonatomic) IBOutlet UIView *chartBack;
-//@property (weak, nonatomic) IBOutlet UIButton *hourBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *dayBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *weekBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *monthBtn;
-//@property (weak, nonatomic) IBOutlet UIButton *yearBtn;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chartBackHeight; // 191
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *qlcBackHeight; // 318
-
-//@property (weak, nonatomic) IBOutlet UIView *countryBack;
-
 @property (weak, nonatomic) IBOutlet UILabel *parterPlanLab;
 @property (weak, nonatomic) IBOutlet UIView *parterPlanBack;
 @property (weak, nonatomic) IBOutlet UIButton *parterPlan_detailBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *globalOutbreakBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *globalOutbreakHeight;
+@property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *sourceArr;
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic, strong) InviteRankView *inviteRankV;
@@ -224,7 +219,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     [self configInit];
     [self refreshViewText];
 //    [self requestTopup_product_list];
-    [self configInviteRankView];
+  
     
     [ClaimQGASTipView show:^{}];
     
@@ -235,6 +230,7 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
     [self handlerPushJump];
     [self requestSys_index];
+    [self request_defi_list];
     
 //    [self getSheetMining];
 //    [self getBuybackBurn];
@@ -278,6 +274,15 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 
 #pragma mark - Operation
 - (void)configInit {
+    
+    
+    _mainTableView.delegate = self;
+    _mainTableView.dataSource = self;
+    _mainTableView.scrollEnabled = NO;
+    [_mainTableView registerNib:[UINib nibWithNibName:DefiListCell_Reuse bundle:nil] forCellReuseIdentifier:DefiListCell_Reuse];
+    
+    
+    
 //    [_topGradientBack addHorizontalQGradientWithStart:UIColorFromRGB(0x4986EE) end:UIColorFromRGB(0x4752E9) frame:CGRectMake(_topGradientBack.left, _topGradientBack.top, SCREEN_WIDTH, _topGradientBack.height)];
     _topGradientBack.backgroundColor = UIColorFromRGB(0x4A7EEE);
     
@@ -349,25 +354,12 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     
     kWeakSelf(self)
     _mainScroll.mj_header = [RefreshHelper headerWithRefreshingBlock:^{
-        weakself.currentPage = 1;
-        _refreshAllProductPage = NO;
-        [weakself refreshNinaPagerViewVC];
-        
-        if (weakself.inviteRankV) {
-            [weakself.inviteRankV startRefresh];
-        }
-        
-        if (weakself.countryV) {
-            [weakself.countryV refreshCountryView];
-        }
-        
+      
         [weakself requestSys_index];
-//        [weakself getBuybackBurn];
-//        [weakself getSheetMining];
+        [weakself request_defi_list];
+
     } type:RefreshTypeColor];
-//    _mainScroll.mj_footer = [RefreshHelper footerBackNormalWithRefreshingBlock:^{
-//        [weakself requestTopup_product_list];
-//    }];
+
 }
 
 - (void)handlerPushJump {
@@ -431,18 +423,36 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
 //    });
 //}
 
-- (void)configInviteRankView {
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+
+#pragma reqeust-- 网络请求
+- (void) request_defi_list {
     kWeakSelf(self);
-    _inviteRankV = [InviteRankView getInstance];
-    [_inviteRankV config:^(CGFloat height) {
-        weakself.inviteRankHeight.constant = height;
-    }];
-    [_inviteRankV startRefresh];
-    [_inviteRankBack addSubview:_inviteRankV];
-    [_inviteRankV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakself.inviteRankBack).offset(5);
-        make.left.bottom.right.mas_equalTo(weakself.inviteRankBack).offset(0);
-    }];
+    NSDictionary *params = @{@"page":@(1),@"size":@(10),@"category":@"DEXes"};
+    [RequestService requestWithUrl5:defi_list_UrlV2 params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+            if ([responseObject[Server_Code] integerValue] == 0) {
+                NSArray *tokenModels = [DefiListModel mj_objectArrayWithKeyValuesArray:responseObject[@"projectList"]];
+                if (tokenModels && tokenModels.count > 0) {
+                    if (weakself.dataArray.count > 0) {
+                        [weakself.dataArray removeAllObjects];
+                    }
+                    weakself.tableBackHeight.constant = tokenModels.count*60+50;
+                    [weakself.dataArray addObjectsFromArray:tokenModels];
+                    [weakself.mainTableView reloadData];
+                }
+                
+            } else {
+                [kAppD.window makeToastDisappearWithText:responseObject[Server_Msg]];
+            }
+        } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+            
+        }];
 }
 
 - (void)refreshViewText {
@@ -574,102 +584,8 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     }];
 }
 
-- (void)setupNinaPage {
-//    if (_ninaPagerView) {
-//        [_ninaPagerView removeFromSuperview];
-//        _ninaPagerView = nil;
-//    }
-        
-    if (!_ninaPagerView) {
-        kWeakSelf(self);
-        NSMutableArray *titleArr = [NSMutableArray array];
-        _ninaObjectSource = [NSMutableArray array];
-        NSMutableArray *countryArr = [NSMutableArray array];
-        // 全部
-        TopupCountryModel *allModel = [TopupCountryModel new];
-        allModel.globalRoaming = @"";
-        allModel.name = @"全部";
-        allModel.nameEn = @"All";
-        [countryArr addObject:allModel];
-        [countryArr addObjectsFromArray:_countrySource];
-        [countryArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            TopupCountryModel *model = obj;
-            TopupProductSubViewController *vc = [TopupProductSubViewController new];
-            vc.inputGlobalRoaming = model.globalRoaming?:@"";
-            vc.inputDeductionTokenM = weakself.selectDeductionTokenM;
-            if (idx > 0) {
-                vc.inputCountryM = weakself.countrySource[idx-1];
-            } else {
-                vc.inputCountryM = allModel;
-            }
-            vc.isInGroupBuyActivityTime = weakself.isInGroupBuyActivityTime;
-            vc.groupBuyMinimumDiscount = weakself.groupBuyMinimumDiscount;
-            vc.updateTableHeightBlock = ^(CGFloat tableHeight) {
-                DDLogDebug(@"更新TopupTableHeight = %@",@(tableHeight));
-                if (weakself.ninaPagerView) {
-                    CGFloat nianHeight = tableHeight + weakself.ninaPagerView.topTabHeight;
-                    weakself.tableBackHeight.constant = nianHeight;
-                    weakself.ninaPagerView.ninaBaseView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.left, weakself.ninaPagerView.ninaBaseView.top, weakself.ninaPagerView.ninaBaseView.width, nianHeight);
-                    weakself.ninaPagerView.ninaBaseView.scrollView.frame = CGRectMake(weakself.ninaPagerView.ninaBaseView.scrollView.left, weakself.ninaPagerView.ninaBaseView.scrollView.top, weakself.ninaPagerView.ninaBaseView.scrollView.width, tableHeight);
-                }
-            };
-            NSString *title = @"";
-            NSString *language = [Language currentLanguageCode];
-            if ([language isEqualToString:LanguageCode[0]]) { // 英文
-                title = model.nameEn;
-            } else if ([language isEqualToString:LanguageCode[1]]) { // 中文
-                title = model.name;
-            } else if ([language isEqualToString:LanguageCode[2]]) { // 印尼
-                title = model.nameEn;
-            }
-            [titleArr addObject:title];
-            [weakself.ninaObjectSource addObject:vc];
-        }];
-        
-        _ninaPagerView = [[NinaPagerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100) WithTitles:titleArr WithObjects:_ninaObjectSource];
-        _ninaPagerView.unSelectTitleColor = UIColorFromRGB(0x505050);
-        _ninaPagerView.selectTitleColor = UIColorFromRGB(0xF50B6E);
-        _ninaPagerView.titleFont = 16;
-        _ninaPagerView.titleScale = 1;
-        _ninaPagerView.selectBottomLinePer = 0.8;
-        _ninaPagerView.selectBottomLineHeight = 0;
-        _ninaPagerView.ninaPagerStyles = NinaPagerStyleStateNormal;
-        _ninaPagerView.underlineColor = UIColorFromRGB(0xfdfdfd);
-        _ninaPagerView.topTabHeight = 40;
-//        _ninaPagerView.sliderHeight = 560;
-        _ninaPagerView.topTabBackGroundColor = [UIColor whiteColor];
-        _ninaPagerView.delegate = self;
-        _ninaPagerView.backgroundColor = [UIColor whiteColor];
-        _ninaPagerView.underLineHidden = YES;
-        [_tableBack addSubview:_ninaPagerView];
-        [_ninaPagerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.bottom.right.mas_equalTo(weakself.tableBack).offset(0);
-        }];
-        _tableBackHeight.constant = _ninaPagerView.topTabHeight;
-    } else {
-//        [_ninaPagerView reloadTopTabByTitles:titleArr WithObjects:_ninaObjectSource];
-        [self refreshNinaPagerViewVC];
-    }
-        
-        
-        
-//    }
-}
-
 - (void)refreshNinaPagerViewVC {
-    if (_ninaPagerView) {
-        TopupProductSubViewController *vc = _ninaObjectSource[_ninaPagerView.pageIndex];
-        vc.inputDeductionTokenM = _selectDeductionTokenM;
-        vc.groupBuyMinimumDiscount = _groupBuyMinimumDiscount;
-        vc.isInGroupBuyActivityTime = _isInGroupBuyActivityTime;
-        [vc pullRefresh];
-    } else {
-//        if (_selectDeductionTokenM) {
-//            [self requestTopup_country_list];
-//        } else {
-//            [self requestTopup_pay_token];
-//        }
-    }
+    
 }
 
 - (void)refreshSelectDeductionTokenView {
@@ -821,17 +737,6 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
         }
     }
     
-    // TopupCountryList
-    if (_refreshAllProductPage) {
-        NSArray *countryList = [TopupCountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"countryList"]]?:@[];
-        [self.countrySource removeAllObjects];
-        [self.countrySource addObjectsFromArray:countryList];
-        if (self.countrySource.count > 0) {
-            self.selectCountryM = self.countrySource.firstObject;
-            
-            [self setupNinaPage];
-        }
-    }
 }
 
 //- (void)addCountryView {
@@ -1293,9 +1198,6 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     vc.completeBlock = ^(TopupDeductionTokenModel * _Nonnull model) {
         weakself.selectDeductionTokenM = model;
         [weakself refreshSelectDeductionTokenView];
-        if (_ninaPagerView) {
-            [self refreshNinaPagerViewVC];
-        }
     };
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -1358,5 +1260,85 @@ static NSString *const TM_Chache_Topup_Sys_Index = @"TM_Chache_Topup_Sys_Index";
     [self requestSys_index];
 }
 
+
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return DefiListCell_Height;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DefiListCell *cell = [tableView dequeueReusableCellWithIdentifier:DefiListCell_Reuse];
+    DefiListModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.lblUrl.text = model.swapUrl;
+    cell.lblName.text = model.name;
+    NSString *iconStr = [[model.name lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    UIImage *iconImg = [UIImage imageNamed:iconStr];
+    if (iconImg) {
+        cell.iconImgView.image = iconImg;
+    } else {
+        if (model.logo && model.logo.length > 0) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[RequestService getPrefixUrl],model.logo]];
+            [cell.iconImgView sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            }];
+        }
+        
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DefiListModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    if (model.swapUrl && model.swapUrl.length > 0) {
+       
+        WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+        if (currentWalletM && currentWalletM.walletType == WalletTypeETH) {
+            
+            [self gotoBrowserWithAddress:currentWalletM.address defiListModel:model];
+           
+        } else {
+            [self jumpSelectWalletVCWithDefiListModel:model];
+        }
+        
+        
+        
+    }
+}
+
+
+- (IBAction)clickSearchBtn:(id)sender {
+    BrowserHistoryViewController *vc = [[BrowserHistoryViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void) jumpSelectWalletVCWithDefiListModel:(DefiListModel *) defiModel {
+    kWeakSelf(self);
+    WalletSelectViewController *vc = [[WalletSelectViewController alloc] init];
+    vc.inputWalletType = WalletTypeETH;
+       
+    [vc configSelectBlock:^(WalletCommonModel * _Nonnull model) {
+        [WalletCommonModel setCurrentSelectWallet:model];
+        [weakself gotoBrowserWithAddress:model.address defiListModel:defiModel];
+    }];
+    QNavigationController *nav = [[QNavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void) gotoBrowserWithAddress:(NSString *) address defiListModel:(DefiListModel *) model
+{
+     BrowserViewController *vc  = [[BrowserViewController alloc] initWithNibName:@"BrowserViewController" bundle:nil];
+     vc.defaultAddress = address;
+     vc.websitUrl = model.swapUrl;
+     vc.navTitleString = model.name;
+     [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

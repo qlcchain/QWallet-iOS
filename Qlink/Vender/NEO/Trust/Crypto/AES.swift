@@ -9,7 +9,7 @@
 import Foundation
 //import CommonCrypto
 
-struct AES {
+struct NEOAES {
     public enum KeySize: Int {
         case keySize128 = 128
         case keySize192 = 192

@@ -160,7 +160,7 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
     // Do any additional setup after loading the view from its nib.
     
     // 提前初始化
-    [ContractETHRequest addContractETHRequest];
+    //[ContractETHRequest addContractETHRequest];
     
     [self addObserve];
     
@@ -737,13 +737,13 @@ static NSString *const TM_Wallet_Source = @"TM_Wallet_Source";
         
     } else if (currentWalletM.walletType == WalletTypeETH) {
         
-        _stakingHeight.constant = 53;
-        _myStakingsLab.text = kLang(@"QLC_Cross-chain_Swap");
+        //_stakingHeight.constant = 53;
+        //_myStakingsLab.text = kLang(@"QLC_Cross-chain_Swap");
         
     } else if (currentWalletM.walletType == WalletTypeNEO) {
         
-        _stakingHeight.constant = 53;
-        _myStakingsLab.text = kLang(@"QLC_Cross-chain_Swap");
+        //_stakingHeight.constant = 53;
+        //_myStakingsLab.text = kLang(@"QLC_Cross-chain_Swap");
         
     }
 }

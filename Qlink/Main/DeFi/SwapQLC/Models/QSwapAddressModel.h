@@ -25,6 +25,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// neo 合约地址
 @property (nonatomic, strong) NSString *neoContract;
+/// eth 地址余额
+@property (nonatomic, strong) NSString *ethBalance;
+/// neo 地址余额
+@property (nonatomic, strong) NSString *neoBalance;
+// erc-20 -> nep 赎回限制 yes 为不能赎
+@property (nonatomic, assign) BOOL withdrawLimit;
+// neo -> erc20 最小抵压数量
+@property (nonatomic, strong) NSString *minDepositAmount;
+// erc20 -> nep 最小抵压数量
+@property (nonatomic, strong) NSString *minWithdrawAmount;
 
 @end
 

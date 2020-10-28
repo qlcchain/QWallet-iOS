@@ -34,7 +34,7 @@
 
 - (void)show {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    self.stageLab.text = @"0";
+    self.stageLab.text = @"1";
     [kAppD.window addSubview:self];
     
     [self addScaleAnimate:_stageBack];

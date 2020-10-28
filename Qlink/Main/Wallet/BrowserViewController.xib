@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowserViewController" customModule="Qlink" customModuleProvider="target">
+            <connections>
+                <outlet property="navTtile" destination="b8I-Nr-nva" id="pb6-2l-i3a"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webBackView" destination="gdB-5f-idw" id="p5f-9G-pp1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQA-1d-TCB" customClass="NavWhiteShadowView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8I-Nr-nva">
+                            <rect key="frame" x="45" y="11.5" width="285" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.16078431369999999" green="0.15686274510000001" blue="0.1647058824" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJ8-Xr-Lig" customClass="QBaseTouchButton">
+                            <rect key="frame" x="331" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="BVe-BX-ODL"/>
+                                <constraint firstAttribute="width" constant="44" id="o79-1A-7Tb"/>
+                            </constraints>
+                            <state key="normal" image="outbreak_me_refresh"/>
+                            <connections>
+                                <action selector="clickReloadAction:" destination="-1" eventType="touchUpInside" id="Fwf-ap-FOa"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="MJ8-Xr-Lig" secondAttribute="trailing" id="3fI-Fx-BM4"/>
+                        <constraint firstAttribute="height" constant="44" id="49q-v5-JzV"/>
+                        <constraint firstAttribute="trailing" secondItem="b8I-Nr-nva" secondAttribute="trailing" constant="45" id="8J2-tw-eae"/>
+                        <constraint firstItem="b8I-Nr-nva" firstAttribute="centerY" secondItem="oQA-1d-TCB" secondAttribute="centerY" id="PJr-yR-OCe"/>
+                        <constraint firstItem="b8I-Nr-nva" firstAttribute="leading" secondItem="oQA-1d-TCB" secondAttribute="leading" constant="45" id="WHr-RR-aAR"/>
+                        <constraint firstItem="MJ8-Xr-Lig" firstAttribute="top" secondItem="oQA-1d-TCB" secondAttribute="top" id="sY8-6x-yUs"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vek-Zp-uPV" customClass="QBaseTouchButton">
+                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="3Xy-jv-vpF"/>
+                        <constraint firstAttribute="width" constant="44" id="4p0-8a-prD"/>
+                    </constraints>
+                    <state key="normal" image="eth_gray_back"/>
+                    <connections>
+                        <action selector="clickBackActon:" destination="-1" eventType="touchUpInside" id="h4z-9Y-gII"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdB-5f-idw">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <color key="backgroundColor" red="0.90987110140000005" green="0.90972632170000001" blue="0.91764944790000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="oQA-1d-TCB" secondAttribute="trailing" id="Lfu-82-3hl"/>
+                <constraint firstItem="gdB-5f-idw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LkO-dC-unP"/>
+                <constraint firstItem="gdB-5f-idw" firstAttribute="top" secondItem="oQA-1d-TCB" secondAttribute="bottom" id="QP2-16-0fS"/>
+                <constraint firstItem="Vek-Zp-uPV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WvT-6k-ma1"/>
+                <constraint firstItem="oQA-1d-TCB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="i2x-Dh-fHM"/>
+                <constraint firstItem="oQA-1d-TCB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lXv-E2-xq9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gdB-5f-idw" secondAttribute="bottom" id="oS0-sM-kYN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gdB-5f-idw" secondAttribute="trailing" id="rJO-Jv-myZ"/>
+                <constraint firstItem="Vek-Zp-uPV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="xVy-hc-EWo"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="114" y="-17"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="eth_gray_back" width="24" height="24"/>
+        <image name="outbreak_me_refresh" width="20" height="15"/>
+    </resources>
+</document>

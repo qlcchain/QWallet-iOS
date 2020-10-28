@@ -1,5 +1,24 @@
 PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
   - Alamofire (4.8.2)
+  - Alamofire-Synchronous (4.0.0):
+    - Alamofire (~> 4.0)
+  - AlphaWalletWeb3Provider (0.3.0)
+  - APIKit (5.1.0)
   - BGFMDB (2.0.13):
     - BGFMDB/BG (= 2.0.13)
     - BGFMDB/FMDB (= 2.0.13)
@@ -9,11 +28,21 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - Bugly (2.5.0)
-  - CryptoSwift (1.1.2)
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
+  - ChartsRealm (3.4.0):
+    - Charts (~> 3.4.0)
+    - RealmSwift (~> 3.18.0)
+  - CocoaLumberjack/Core (3.6.2)
+  - CocoaLumberjack/Swift (3.6.2):
+    - CocoaLumberjack/Core
+  - CryptoSwift (1.3.2)
   - CYLTabBarController (1.28.5):
     - CYLTabBarController/Core (= 1.28.5)
   - CYLTabBarController/Core (1.28.5)
   - dsBridge (3.0.6)
+  - Eureka (5.2.1)
   - Firebase/Analytics (6.6.0):
     - Firebase/Core
   - Firebase/Core (6.6.0):
@@ -73,14 +102,21 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.2.5):
     - GoogleUtilities/Logger
+  - Hero (1.5.0)
   - IQKeyboardManager (6.5.5)
+  - JavaScriptKit (2.0.1)
   - JCore (2.1.4-noidfa)
   - JPush (3.2.4-noidfa):
     - JCore (< 3.0.0, >= 2.0.0)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
   - KeychainAccess (4.1.0)
+  - KeychainSwift (19.0.0)
   - LYEmptyView (1.3.1)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.2.0)
+  - MJExtension (3.2.2)
+  - MJRefresh (3.4.3)
   - Moya (10.0.2):
     - Moya/Core (= 10.0.2)
   - Moya/Core (10.0.2):
@@ -92,24 +128,36 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - ORCycleLabel (1.0.1)
-  - PromiseKit (6.10.0):
-    - PromiseKit/CorePromise (= 6.10.0)
-    - PromiseKit/Foundation (= 6.10.0)
-    - PromiseKit/UIKit (= 6.10.0)
-  - PromiseKit/CorePromise (6.10.0)
-  - PromiseKit/Foundation (6.10.0):
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.10.0):
+  - PromiseKit/UIKit (6.13.1):
     - PromiseKit/CorePromise
   - R.swift (5.0.3):
     - R.swift.Library (~> 5.0.0)
   - R.swift.Library (5.0.1)
+  - Realm (3.18.0):
+    - Realm/Headers (= 3.18.0)
+  - Realm/Headers (3.18.0)
+  - RealmSwift (3.18.0):
+    - Realm (= 3.18.0)
   - Result (3.2.4)
+  - SDWebImage (5.8.4):
+    - SDWebImage/Core (= 5.8.4)
+  - SDWebImage/Core (5.8.4)
   - secp256k1.c (0.1.2)
   - SipHash (1.2.2)
   - Starscream (3.1.1)
   - SwiftHTTP (3.0.1)
+  - SwiftLint (0.36.0)
+  - SwiftProtobuf (1.10.2)
+  - SwiftTheme (0.5.2)
   - SwiftyJSON (4.3.0)
+  - TMCache (2.1.0)
   - TOCropViewController (2.5.2)
   - TrezorCrypto (0.0.9)
   - TrustCore (0.0.7):
@@ -120,6 +168,12 @@ PODS:
     - CryptoSwift
     - TrezorCrypto (~> 0.0.6)
     - TrustCore
+  - TrustWalletCore (0.12.33):
+    - TrustWalletCore/Core (= 0.12.33)
+  - TrustWalletCore/Core (0.12.33):
+    - TrustWalletCore/Types
+  - TrustWalletCore/Types (0.12.33):
+    - SwiftProtobuf
   - TrustWalletSDK (0.0.1):
     - Result
     - TrustCore
@@ -128,30 +182,50 @@ PODS:
   - TYCyclePagerView (1.2.0)
 
 DEPENDENCIES:
+  - AFNetworking
+  - Alamofire-Synchronous
+  - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `1c1aafb566361e7067e69f6e38b0fdc30b801429`)
+  - APIKit
   - BGFMDB
   - BigInt (~> 3.0)
   - Bugly
-  - CryptoSwift (~> 1.0)
+  - ChartsRealm
+  - CocoaLumberjack/Swift
+  - CryptoSwift
   - CYLTabBarController
   - dsBridge
+  - Eureka
   - Firebase/Analytics
+  - Hero
   - IQKeyboardManager
+  - JavaScriptKit
   - JCore (= 2.1.4-noidfa)
   - JPush (= 3.2.4-noidfa)
   - JSONRPCKit
   - KeychainAccess
+  - KeychainSwift
   - LYEmptyView
+  - Masonry
+  - MBProgressHUD
+  - MJExtension
+  - MJRefresh
   - Moya (~> 10.0.1)
   - ORCycleLabel
   - PromiseKit
   - R.swift
+  - RealmSwift (= 3.18.0)
+  - SDWebImage
   - secp256k1.c (~> 0.1.2)
   - Starscream (~> 3.1.1)
   - SwiftHTTP
+  - SwiftLint (~> 0.36.0)
+  - SwiftTheme
   - SwiftyJSON (~> 4.0)
+  - TMCache
   - TOCropViewController
   - TrustCore (from `https://github.com/TrustWallet/trust-core`, branch `master`)
   - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
+  - TrustWalletCore (~> 0.12.25)
   - TrustWalletSDK (from `https://github.com/TrustWallet/TrustSDK-iOS`, branch `master`)
   - TrustWeb3Provider (from `https://github.com/TrustWallet/trust-web3-provider`, commit `f4e0ebb1b8fa4812637babe85ef975d116543dfd`)
   - TTGTagCollectionView
@@ -159,13 +233,20 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
     - Alamofire
+    - Alamofire-Synchronous
+    - APIKit
     - BGFMDB
     - BigInt
     - Bugly
+    - Charts
+    - ChartsRealm
+    - CocoaLumberjack
     - CryptoSwift
     - CYLTabBarController
     - dsBridge
+    - Eureka
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -176,30 +257,48 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - Hero
     - IQKeyboardManager
+    - JavaScriptKit
     - JCore
     - JPush
     - JSONRPCKit
     - KeychainAccess
+    - KeychainSwift
     - LYEmptyView
+    - Masonry
+    - MBProgressHUD
+    - MJExtension
+    - MJRefresh
     - Moya
     - nanopb
     - ORCycleLabel
     - PromiseKit
     - R.swift
     - R.swift.Library
+    - Realm
+    - RealmSwift
     - Result
+    - SDWebImage
     - secp256k1.c
     - SipHash
     - Starscream
     - SwiftHTTP
+    - SwiftLint
+    - SwiftProtobuf
+    - SwiftTheme
     - SwiftyJSON
+    - TMCache
     - TOCropViewController
     - TrezorCrypto
+    - TrustWalletCore
     - TTGTagCollectionView
     - TYCyclePagerView
 
 EXTERNAL SOURCES:
+  AlphaWalletWeb3Provider:
+    :commit: 1c1aafb566361e7067e69f6e38b0fdc30b801429
+    :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
   TrustCore:
     :branch: master
     :git: https://github.com/TrustWallet/trust-core
@@ -214,6 +313,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/TrustWallet/trust-web3-provider
 
 CHECKOUT OPTIONS:
+  AlphaWalletWeb3Provider:
+    :commit: 1c1aafb566361e7067e69f6e38b0fdc30b801429
+    :git: https://github.com/AlphaWallet/AlphaWallet-web3-provider
   TrustCore:
     :commit: f987ee12f98c2df9d1538d86448dd8e671669350
     :git: https://github.com/TrustWallet/trust-core
@@ -228,13 +330,21 @@ CHECKOUT OPTIONS:
     :git: https://github.com/TrustWallet/trust-web3-provider
 
 SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
+  AlphaWalletWeb3Provider: 80a88f0fc80443fb973b0a17f5ca0c80a2247d63
+  APIKit: 9e1a4069608bf0ae5238811e6cfc26928ad4d01e
   BGFMDB: 48e6823027232402a678acc7f71484b1fc9171d0
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
-  CryptoSwift: 31dacd1f13427439ddae5b5cbaae4c8dbc43047e
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  ChartsRealm: 2ae8bf478211a94b3b6dd20738db0b9b132eb66b
+  CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
+  CryptoSwift: 093499be1a94b0cae36e6c26b70870668cb56060
   CYLTabBarController: edd9fecba9afa3f2e9e44ed50ca6dde69941f25f
   dsBridge: 48b62ee8a411ad601a88d6f6c8cf6cb634b206b7
+  Eureka: c883105488e05bc65539f583246ecf9657cabbfe
   Firebase: a2b5951f30ff38fd3b3bdae9c7d340f940fd3c51
   FirebaseAnalytics: 48414ae5cbf6976d8a2f7177e0466540e5ab33ce
   FirebaseCore: 8c9e08bce0c72a3affd83927d8184cf244918bc8
@@ -245,33 +355,48 @@ SPEC CHECKSUMS:
   GoogleDataTransport: ffbadce4ab93c88fb9dd8e6366c47bfcb4a32193
   GoogleDataTransportCCTSupport: 3451e7d8ba19093e533362a6d78d6d9014c6a037
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
+  Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  JavaScriptKit: 33a7abbd6e03bf12e3f19f0f8ee753e748a361c1
   JCore: 2f15311e6889ab43ed5d629802ef793cac566465
   JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
   KeychainAccess: 445e28864fe6d3458b41fa211bcdc39890e8bd5a
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   LYEmptyView: b6d418cfa38b78df0cf243f9a9c25ccbdc399922
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
+  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ORCycleLabel: f50f37f42be1011e56d5b1673dc83b247ee4110d
-  PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   R.swift: f5a87643b91ea569d23d6afb3eee9c743edde239
   R.swift.Library: cfe85d569d9bae6cb262922db130e7c3a7a5fad1
+  Realm: 7b3d04740facf45e958a514b466a32b04f1113d6
+  RealmSwift: c817b5f374668cf08f649afb05f55d92a787649c
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftHTTP: e94f1aa8cde58637dcc0100f6349de31a3337fde
+  SwiftLint: fc9859e4e1752340664851f667bb1898b9c90114
+  SwiftProtobuf: bec1ae7d686ff73dd09d79866154f4970b891410
+  SwiftTheme: 8b02c479bb4441b2b6790ac126e961b1b6fb0932
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  TMCache: 95ebcc9b3c7e90fb5fd8fc3036cba3aa781c9bed
   TOCropViewController: e9da34f484aedd4e5d5a8ab230ba217cfe16c729
   TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
   TrustCore: 3f0a67efb643c14cedefdb6ca0e720de4702bb91
   TrustKeystore: c54b52ade9c97d31d23ded9ae2518c62dd73b5fe
+  TrustWalletCore: 1675a58ef295f589971d56d34d092915c1aa7ca2
   TrustWalletSDK: f5c609b94df568afad223b5b884b5eda153cf1c0
   TrustWeb3Provider: 50fa391bdf170feb43dd4419992931510a5751d8
   TTGTagCollectionView: 86fcbfa6a7493c9e860b01c2e693cffc8acf6de1
   TYCyclePagerView: 2b051dade0615c70784aa34f40c646feeddb7344
 
-PODFILE CHECKSUM: c65fe7d464986546988e903172f1feba7b6258b5
+PODFILE CHECKSUM: 1938c2778d022503589a29bc21cfd2fe735fb73c
 
 COCOAPODS: 1.9.3

@@ -26,7 +26,6 @@
 #import "QSwapHashModel.h"
 #import "QSwapStatusManager.h"
 
-static NSInteger minCount = 5;
 
 @interface QSwipViewController ()
 
@@ -52,6 +51,8 @@ static NSInteger minCount = 5;
 @property (weak, nonatomic) IBOutlet UIImageView *swipToIcon;
 
 @property (weak, nonatomic) IBOutlet UILabel *balanceLab;
+@property (weak, nonatomic) IBOutlet UILabel *lblSwapCountDesc;
+
 
 @property (nonatomic, assign) NSInteger walletType;
 @property (nonatomic, strong) WalletCommonModel *swipFromWalletM;
@@ -129,9 +130,10 @@ static NSInteger minCount = 5;
 #pragma mark ------------request
 - (void) getWrapperAddresssAndBlaneOfHandler:(QWrapperResultBlock)resultHandler {
     // 获取wrapper 地址
+    /*
     if (![QSwapAddressModel getShareObject].ethAddress || [QSwapAddressModel getShareObject].ethAddress.length == 0) {
         kWeakSelf(self)
-        [QSwipWrapperRequestUtil checkWrapperOnlineResultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        [QSwipWrapperRequestUtil checkWrapperOnlineWithFetchEthAddress:@"" resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
             if (success) {
                 WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
                 [weakself getAddressBlanceOfWithAddress:currentWalletM.address Handler:resultHandler];
@@ -143,6 +145,27 @@ static NSInteger minCount = 5;
         WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
         [self getAddressBlanceOfWithAddress:currentWalletM.address Handler:resultHandler];
     }
+     */
+    
+    kWeakSelf(self)
+    [QSwipWrapperRequestUtil checkWrapperOnlineWithFetchEthAddress:@"" resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        if (success) {
+            if (weakself.walletType == 2) {
+                NSInteger minCount = [[QSwapAddressModel getShareObject].minWithdrawAmount?:@"" doubleValue]/ERC20_UnitNum;
+                weakself.amountTF.placeholder = [NSString stringWithFormat:kLang(@"swap_amount_min"),[NSString stringWithFormat:@"%ld",minCount]];
+                weakself.lblSwapCountDesc.text = [NSString stringWithFormat:kLang(@"swap_amount_desc"),[NSString stringWithFormat:@"%ld",minCount]];
+            } else {
+                NSInteger minCount = [[QSwapAddressModel getShareObject].minDepositAmount?:@"" doubleValue]/QLC_UnitNum;
+                weakself.amountTF.placeholder = [NSString stringWithFormat:kLang(@"swap_amount_min"),[NSString stringWithFormat:@"%ld",minCount]];
+                weakself.lblSwapCountDesc.text = [NSString stringWithFormat:kLang(@"swap_amount_desc"),[NSString stringWithFormat:@"%ld",minCount]];
+            }
+            
+            WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
+            [weakself getAddressBlanceOfWithAddress:currentWalletM.address Handler:resultHandler];
+        } else {
+            resultHandler(nil,NO,nil);
+        }
+    }];
 }
 /// 得到当前钱包佘额
 /// @param address address
@@ -205,10 +228,6 @@ static NSInteger minCount = 5;
         [kAppD.window makeToastDisappearWithText:@"Swap To is empty"];
         return;
     }
-    if ([_amountTF.text.trim_whitespace doubleValue] < minCount) {
-        [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"Swap quantity must be greater than %ld",minCount]];
-        return;
-    }
     
     if (_warpperCheckStatu == -1) {
         _warpperCheckStatu = 0;
@@ -224,11 +243,31 @@ static NSInteger minCount = 5;
         [kAppD.window makeToastDisappearWithText:@"Please wait"];
         return;
     }
+    
+    if (_walletType == 2) {
+        NSInteger minCount = [[QSwapAddressModel getShareObject].minWithdrawAmount?:@"" doubleValue]/ERC20_UnitNum;
+        if ([_amountTF.text.trim_whitespace doubleValue] < minCount) {
+               [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"Swap quantity must be greater than %ld",minCount]];
+               return;
+        }
+        // wrapper 余额不足
+        if ([[QSwapAddressModel getShareObject].ethBalance doubleValue] < 0.01) {
+            [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
+            return;
+        }
+    } else {
+         NSInteger minCount = [[QSwapAddressModel getShareObject].minDepositAmount?:@"" doubleValue]/QLC_UnitNum;
+        if ([_amountTF.text.trim_whitespace doubleValue] < minCount) {
+               [kAppD.window makeToastDisappearWithText:[NSString stringWithFormat:@"Swap quantity must be greater than %ld",minCount]];
+               return;
+        }
+    }
 
     if ([_amountTF.text.trim_whitespace doubleValue] > _blaneOf) {
         [kAppD.window makeToastDisappearWithText:kLang(@"balance_is_not_enough")];
         return;
     }
+    
     
     WalletCommonModel *currentWalletM = [WalletCommonModel getCurrentSelectWallet];
     QClaimAlertView *alertView = [QClaimAlertView getInstance];
@@ -274,7 +313,7 @@ static NSInteger minCount = 5;
             NSInteger state = [result[@"state"]?:@"" integerValue];
             
             // 更新提示框状态
-            NSInteger statuState = state;
+            NSInteger statuState = state+1;
             if (hashModel.type == 2) {
                 statuState -= 11;
             }
@@ -296,10 +335,10 @@ static NSInteger minCount = 5;
                         }
                     }];
                 }
-            } else if (state == 3) { // nep5 - >eth 等待unlock
+            } else if (state == DepositEthLockedDone) { // nep5 - >eth 等待unlock
                 [weakself hideSwapProcessView];
                 [kAppD.window makeToastDisappearWithText:@"等待unlock"];
-            } else if (state == 6) { // nep5 - >eth unlock完成
+            } else if (state == DepositNeoUnLockedDone) { // nep5 - >eth unlock完成
                 [weakself hideSwapProcessView];
                 [kAppD.window makeToastDisappearWithText:kLang(@"success")];
             } else if ([QSwapStatusManager isClaimSuccessWithState:state]){ // eth - >nep5 unlock完成
@@ -307,7 +346,7 @@ static NSInteger minCount = 5;
                 [QSwapHashModel updateSwapHashStateWithHash:hashModel.rHash withState:state swapTxhash:message];
                 [weakself hideSwapProcessView];
                 [kAppD.window makeToastDisappearWithText:kLang(@"success")];
-            } else if (state == 19 || state == 8){ // 超时
+            } else if (state == WithDrawNeoFetchDone || state == DepositEthFetchDone){ // 超时
                 [weakself hideSwapProcessView];
                 [kAppD.window makeToastDisappearWithText:@"Expired"];
             }else {

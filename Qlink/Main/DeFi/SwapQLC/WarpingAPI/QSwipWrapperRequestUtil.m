@@ -18,10 +18,10 @@
 
 /// 检查 wraper 是否在线
 /// @param resultHandler 成功回调
-+ (void) checkWrapperOnlineResultHandler:(QWrapperResultBlock)resultHandler {
++ (void) checkWrapperOnlineWithFetchEthAddress:(NSString *) ethAddress resultHandler:(QWrapperResultBlock)resultHandler {
  
     NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/info/ping"];
-    NSDictionary *params = @{};
+    NSDictionary *params = @{@"value":ethAddress?:@""};
     DDLogDebug(@"qlcch_wrapperOnline params = %@",params);
     [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodGet successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
         if (responseObject && [responseObject[@"code"] intValue] == 0) {
@@ -29,6 +29,11 @@
             [QSwapAddressModel getShareObject].ethContract = responseObject[@"ethContract"];
             [QSwapAddressModel getShareObject].neoAddress = responseObject[@"neoAddress"];
             [QSwapAddressModel getShareObject].neoContract = responseObject[@"neoContract"];
+            [QSwapAddressModel getShareObject].ethBalance = responseObject[@"ethBalance"];
+            [QSwapAddressModel getShareObject].neoBalance = responseObject[@"neoBalance"];
+            [QSwapAddressModel getShareObject].withdrawLimit = [responseObject[@"withdrawLimit"] boolValue];
+            [QSwapAddressModel getShareObject].minDepositAmount = responseObject[@"minDepositAmount"];
+            [QSwapAddressModel getShareObject].minWithdrawAmount = responseObject[@"minWithdrawAmount"];
             resultHandler(nil,YES,@"");
         } else {
             if (resultHandler) {
@@ -50,6 +55,30 @@
         NSLog(@"error=%@",error);
     }];
 
+}
+
++ (void) ercLockWithdrawAPILockWithRhash:(NSString *) rHash resultHandler:(QWrapperResultBlock)resultHandler
+{
+    NSString *urlStr = [[ConfigUtil get_qlc_hub_node_normal] stringByAppendingString:@"/withdraw/lock"];
+    NSDictionary *params = @{@"value":[rHash substringFromIndex:2]};
+    DDLogDebug(@"WithdrawAPI_Lock params = %@",params);
+    [AFHTTPClientV2 requestWrapperWithBaseURLStr:urlStr params:params httpMethod:HttpMethodPost successBlock:^(NSURLSessionDataTask *dataTask, id responseObject) {
+        if (responseObject) {
+            resultHandler(responseObject,YES,@"");
+        } else {
+            if (resultHandler) {
+                NSString *showDes = @"WithdrawAPI_Lock error, try later. (error reported)";
+                resultHandler(nil, NO, showDes);
+            }
+        }
+    } failedBlock:^(NSURLSessionDataTask *dataTask, NSError *error) {
+        if (resultHandler) {
+            NSString *showDes = @"WithdrawAPI_Lock error, try later. (error reported)";
+            resultHandler(nil, NO, showDes);
+        }
+
+        NSLog(@"error=%@",error);
+    }];
 }
 
 /// 检查 事件状态

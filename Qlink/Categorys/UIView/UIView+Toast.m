@@ -5,7 +5,7 @@
 //  Created by 旷自辉 on 2018/5/15.
 //  Copyright © 2018年 pan. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import "UIView+Toast.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <objc/runtime.h>
@@ -141,7 +141,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     HUD.label.text = text;
     HUD.label.numberOfLines = 0;
     HUD.margin = 10.f;
-    HUD.yOffset = IS_iPhone_5?200.f:150.f;
+    //HUD.yOffset = IS_iPhone_5?200.f:150.f;
     HUD.removeFromSuperViewOnHide = YES;
     [HUD hideAnimated:YES afterDelay:2];
 }
@@ -165,6 +165,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     
     //显示提示信息
     //    UIView *view = [[UIApplication sharedApplication].delegate window];
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
     hud.userInteractionEnabled = YES;
     // Configure for text only and offset down
@@ -172,7 +173,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.label.text = text;
     hud.label.numberOfLines = 0;
     hud.margin = 10.f;
-    hud.yOffset = SCREEN_HEIGHT/2 - Height_TabBar - Height_StatusBar;
+    //hud.yOffset = SCREEN_HEIGHT/2 - Height_TabBar - Height_StatusBar;
     hud.removeFromSuperViewOnHide = YES;
     [self setHUD:hud];
     CGFloat delay = 2.0f;
@@ -193,8 +194,8 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.label.text = text;
     hud.label.numberOfLines = 0;
     hud.margin = 10.f;
-    hud.yOffset = IS_iPhone_5?200.f:150.f;
-    hud.yOffset += yOffset;
+   // hud.yOffset = IS_iPhone_5?200.f:150.f;
+    //hud.yOffset += yOffset;
     hud.removeFromSuperViewOnHide = YES;
     [hud hideAnimated:YES afterDelay:2];
 }

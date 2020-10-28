@@ -21,8 +21,8 @@ class NEP2 {
         let derivedHalf1 = [UInt8](derived[0..<32])
         let derivedHalf2 = [UInt8](derived[32..<64])
         
-        let decryptedHalf1 = AES.decrypt(bytes: encryptedHalf1, key: derivedHalf2, keySize: AES.KeySize.keySize256, pkcs7Padding: false).xor(other: [UInt8](derivedHalf1[0..<16]))
-        let decryptedHalf2 = AES.decrypt(bytes: encryptedHalf2, key: derivedHalf2, keySize: AES.KeySize.keySize256, pkcs7Padding: false).xor(other: [UInt8](derivedHalf1[16..<32]))
+        let decryptedHalf1 = NEOAES.decrypt(bytes: encryptedHalf1, key: derivedHalf2, keySize: NEOAES.KeySize.keySize256, pkcs7Padding: false).xor(other: [UInt8](derivedHalf1[0..<16]))
+        let decryptedHalf2 = NEOAES.decrypt(bytes: encryptedHalf2, key: derivedHalf2, keySize: NEOAES.KeySize.keySize256, pkcs7Padding: false).xor(other: [UInt8](derivedHalf1[16..<32]))
         
         let decryptedKey = decryptedHalf1 + decryptedHalf2
         
@@ -48,8 +48,8 @@ class NEP2 {
         let block1 = [UInt8](key[0..<16]).xor(other: [UInt8](derivedHalf1[0..<16]))
         let block2 = [UInt8](key[16..<32]).xor(other: [UInt8](derivedHalf1[16..<32]))
         
-        let encryptedHalf1 = AES.encrypt(bytes: block1, key: derivedHalf2, keySize: AES.KeySize.keySize256, pkcs7Padding: false)
-        let encryptedHalf2 = AES.encrypt(bytes: block2, key: derivedHalf2, keySize: AES.KeySize.keySize256, pkcs7Padding: false)
+        let encryptedHalf1 = NEOAES.encrypt(bytes: block1, key: derivedHalf2, keySize: NEOAES.KeySize.keySize256, pkcs7Padding: false)
+        let encryptedHalf2 = NEOAES.encrypt(bytes: block2, key: derivedHalf2, keySize: NEOAES.KeySize.keySize256, pkcs7Padding: false)
         
         let toEncode: [UInt8] = [0x01, 0x42, 0xE0] + addressHash + encryptedHalf1 + encryptedHalf2
         

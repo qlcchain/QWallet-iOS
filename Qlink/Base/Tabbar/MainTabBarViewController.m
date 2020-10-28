@@ -28,6 +28,8 @@
 //#import "Topup3ViewController.h"
 #import "Topup4ViewController.h"
 #import "DeFiHomeViewController.h"
+//#import "Qlink-Swift.h"
+
 
 @interface MainTabBarViewController () <UITabBarControllerDelegate,CYLTabBarControllerDelegate>
 {
@@ -36,24 +38,6 @@
 @end
 
 @implementation MainTabBarViewController
-
-//- (instancetype)init {
-//   if (!(self = [super init])) {
-//       return nil;
-//   }
-//   /**
-//    * 以下两行代码目的在于手动设置让TabBarItem只显示图标，不显示文字，并让图标垂直居中。
-//    * 等效于在 `-tabBarItemsAttributesForController` 方法中不传 `CYLTabBarItemTitle` 字段。
-//    * 更推荐后一种做法。
-//    */
-//   UIEdgeInsets imageInsets = UIEdgeInsetsZero;//UIEdgeInsetsMake(4.5, 0, -4.5, 0);
-//   UIOffset titlePositionAdjustment = UIOffsetMake(0, -3.5);
-//   CYLTabBarController *tabBarController = [CYLTabBarController tabBarControllerWithViewControllers:self.viewControllers tabBarItemsAttributes:self.tabBarItemsAttributesForController imageInsets:imageInsets titlePositionAdjustment:titlePositionAdjustment context:nil];
-//   [self customizeTabBarAppearance:tabBarController];
-//    self.delegate = self;
-//   self.navigationController.navigationBar.hidden = YES;
-//   return (self = (MainTabBarViewController *)tabBarController);
-//}
 
 - (instancetype)initWithContext:(NSString *)context {
     /**
@@ -91,7 +75,11 @@
     QNavigationController *walletsNav = [[QNavigationController alloc] initWithRootViewController:_walletsVC];
 //    [_walletsVC cyl_setHideNavigationBarSeparator:YES];
     
+    
+   
+    
     _topupVC = [[Topup4ViewController alloc] init];
+    //BrowserViewController *vc = [[BrowserViewController alloc] init];
     QNavigationController *topupNav = [[QNavigationController alloc] initWithRootViewController:_topupVC];
 //    [_topupVC cyl_setHideNavigationBarSeparator:YES];
     

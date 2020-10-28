@@ -24,16 +24,17 @@ typedef enum : NSUInteger {
     DepositNeoFetchPending =9, //续回中
     DepositNeoFetchDone =10, // 续回完成
     // withdraw
-    WithDrawEthLockedDone =11,
-    WithDrawNeoLockedPending =12,
-    WithDrawNeoLockedDone =13,// 等待neo unlock
-    WithDrawNeoUnLockedPending =14, // unlock中
-    WithDrawNeoUnLockedDone =15,
-    WithDrawEthUnlockPending =16,
-    WithDrawEthUnlockDone =17, // unlock 完成
-    WithDrawNeoFetchPending =18,
-    WithDrawNeoFetchDone =19, // erc20失败，超时,等待续回
-    WithDrawEthFetchDone =20, // 续回完成
+    WithDrawInit =11,
+    WithDrawEthLockedDone =12,
+    WithDrawNeoLockedPending =13,
+    WithDrawNeoLockedDone =14,// 等待neo unlock
+    WithDrawNeoUnLockedPending =15, // unlock中
+    WithDrawNeoUnLockedDone =16,
+    WithDrawEthUnlockPending =17,
+    WithDrawEthUnlockDone =18, // unlock 完成
+    WithDrawNeoFetchPending =19,
+    WithDrawNeoFetchDone =20, // erc20失败，超时,等待续回
+    WithDrawEthFetchDone =21, // 续回完成
     // 自己添加状态
     lockTimeoutState =29, // 超时
     claimingState =30, // 兑换中
@@ -54,12 +55,13 @@ typedef void(^QWrapperResultBlock)(id _Nullable result, BOOL success,  NSString 
 
 @interface QSwipWrapperRequestUtil : NSObject
 
-+ (void) checkWrapperOnlineResultHandler:(QWrapperResultBlock)resultHandler;
++ (void) checkWrapperOnlineWithFetchEthAddress:(NSString *) ethAddress resultHandler:(QWrapperResultBlock)resultHandler;
 + (void) checkEventStatWithRhash:(NSString *) rHash resultHandler:(QWrapperResultBlock)resultHandler;
 + (void) nep5LockNoticeWithType:(NSString *) type hash:(NSString *) hash amount:(NSString *) amount resultHandler:(QWrapperResultBlock)resultHandler;
 + (void) withdrawApiUnLockWithNepTxHash:(NSString *)nepTxhash rHash:(NSString *) rHash rOright:(NSString *) rOright resultHandler:(QWrapperResultBlock)resultHandler;
 // unlock 到 nepo
 + (void) unLockToNep5WithRhash:(NSString *) rOrigin userNep5Addr:(NSString *) nep5Address resultHandler:(QWrapperResultBlock)resultHandler;
++ (void) ercLockWithdrawAPILockWithRhash:(NSString *) rHash resultHandler:(QWrapperResultBlock)resultHandler;
 @end
 
 NS_ASSUME_NONNULL_END

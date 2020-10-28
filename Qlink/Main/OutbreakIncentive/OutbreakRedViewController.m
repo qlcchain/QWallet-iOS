@@ -46,6 +46,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *focusLabArr;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *focusConnenctArr;
+@property (weak, nonatomic) IBOutlet UILabel *lblClaimDesc;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *continueLab;
@@ -239,6 +240,7 @@
                 
                 weakself.claimedLab.text = [NSString stringWithFormat:@"%@",weakself.createM.claimedQgas];
                 weakself.claimQLCTipLab.text = [NSString stringWithFormat:kLang(@"claim__qlc_when_your_mission_is_completed"),weakself.createM.rewardQlcAmount];
+                weakself.lblClaimDesc.text = [NSString stringWithFormat:kLang(@"claim_qlc_desc"),weakself.createM.pledgeQlcBase,weakself.createM.rewardQlcAmount];
                 NSInteger isolationDaysInt = [weakself.createM.isolationDays integerValue];
                 NSInteger subsidisedInt = [weakself.createM.subsidised integerValue];
                 [weakself refreshIsolationView:isolationDaysInt subsidised:subsidisedInt];

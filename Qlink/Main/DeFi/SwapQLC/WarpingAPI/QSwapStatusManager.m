@@ -54,7 +54,7 @@ static float afterDelay = 15.0;
 
 + (BOOL) isClaimSuccessWithState:(NSInteger) state
 {
-    if ((state >=15 && state <=17) || (state >=4 && state <=6)) {
+    if ((state >=WithDrawNeoUnLockedDone && state <=WithDrawEthUnlockDone) || (state >=DepositEthUnLockedDone && state <=DepositNeoUnLockedDone)) {
         return YES;
     } else {
         return NO;

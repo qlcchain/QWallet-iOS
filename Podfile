@@ -25,10 +25,14 @@ end
 
 def eth
   
-   pod 'Qlink', :path => '.'
-   pod 'CryptoSwift', '~> 1.0'
+  # pod 'Qlink', :path => '.'
+  # pod 'CryptoSwift', '~> 1.0'
+   pod 'CryptoSwift'
    pod 'Starscream', '~> 3.1.1'
    pod 'secp256k1.c', '~> 0.1.2'
+   
+   pod 'TrustWalletCore', '~> 0.12.25'
+   pod 'SwiftLint', '~> 0.36.0'
    
     pod 'SwiftyJSON', '~> 4.0'
     pod 'SwiftHTTP'
@@ -66,22 +70,26 @@ end
 
 def pack_framework
 
-#    pod 'AFNetworking'
-#    pod 'APIKit'
-#    pod 'Eureka'
-#    pod 'KeychainSwift'
-#    pod 'Masonry'
-#    pod 'MJExtension'
-#    pod 'MBProgressHUD'
-#    pod 'SDWebImage'
-#    pod 'Hero'
-#    pod 'CocoaLumberjack/Swift'
-#    pod 'RealmSwift', '3.18.0'
-#    pod 'MJRefresh'
-#    pod 'TMCache'
-#    pod 'SwiftTheme'
-#    pod 'Charts'
-
+    pod 'AFNetworking'
+    pod 'APIKit'
+    pod 'Eureka'
+    pod 'KeychainSwift'
+    pod 'Masonry'
+    pod 'MJExtension'
+    pod 'MBProgressHUD'
+    pod 'SDWebImage'
+    pod 'Hero'
+    pod 'CocoaLumberjack/Swift'
+    pod 'RealmSwift', '3.18.0'
+    pod 'MJRefresh'
+    pod 'TMCache'
+    pod 'SwiftTheme'
+    pod 'ChartsRealm'
+    pod 'AlphaWalletWeb3Provider', :git=>'https://github.com/AlphaWallet/AlphaWallet-web3-provider', :commit => '1c1aafb566361e7067e69f6e38b0fdc30b801429'
+   # pod 'web3swift', :git => 'https://github.com/alpha-wallet/web3swift.git', :commit => '7e2b99198acb2243b6a539cb32832a96f67c893d'
+    pod 'JavaScriptKit'
+    pod 'Alamofire-Synchronous'
+    #pod 'secp256k1_ios'
 end
 
 def app
@@ -136,4 +144,12 @@ target "Qlink" do
 #    bnb
     pack_framework
    
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+        end
+    end
 end

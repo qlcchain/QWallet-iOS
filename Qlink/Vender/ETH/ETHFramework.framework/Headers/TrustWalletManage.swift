@@ -312,7 +312,6 @@ public class TrustWalletManage: NSObject {
             )
             
             
-            
             let transaction1 = configurator.signTransaction
             let server = transfer.server
             let sendTransactionCoordinator : SendTransactionCoordinator = SendTransactionCoordinator(session: session, keystore: keystore, confirmType: .signThenSend, server: server)
@@ -323,6 +322,288 @@ public class TrustWalletManage: NSObject {
                 case .success(let complete) :
                     print("****ETH_LOG****send success:\(complete)")
 //                    ConfirmResult
+                    var txId = ""
+                    switch complete {
+                    case .signedTransaction(let sentTransaction):
+                        txId = sentTransaction.id
+                    case .sentTransaction(let sentTransaction):
+                        txId = sentTransaction.id
+                    }
+                    sendComplete(true, txId)
+                case .failure(let error) :
+                    print("****ETH_LOG****send fail:\(error)")
+                    sendComplete(false, nil)
+                }
+            }
+            
+        case .address:
+            sendComplete(false, nil)
+        }
+    }
+    
+    @objc public func sendSignAndTranser(fromAddress:String,toAddress:String,amount:String,gasLimit:Int,gasPrice:Int, nonce:String,signData:String, isCoin:Bool,sendComplete:@escaping ((Bool, String?) -> Void)) {
+    //        let walletInfo : WalletInfo = self.keystore.wallets[0]
+            var walletInfo : WalletInfo? = nil
+            for tempWalletInfo in self.keystore.wallets {
+                if fromAddress.lowercased() == tempWalletInfo.currentAccount.address.description.lowercased() {
+                    walletInfo = tempWalletInfo
+                    break
+                }
+            }
+            if walletInfo == nil {
+                print("****ETH_LOG****找不到钱包")
+                return
+            }
+            let config: Config = .current
+            let migration = MigrationInitializer(account: walletInfo!)
+            migration.perform()
+            let sharedMigration = SharedMigrationInitializer()
+            sharedMigration.perform()
+            let realm = self.realm(for: migration.config)
+            let sharedRealm = self.realm(for: sharedMigration.config)
+            let session = WalletSession(
+                account: walletInfo!,
+                realm: realm,
+                sharedRealm: sharedRealm,
+                config: config
+            )
+            session.transactionsStorage.removeTransactions(for: [.failed, .unknown])
+            
+            let fullFormatter = EtherNumberFormatter.full
+            let gasPriceBig = fullFormatter.number(from: String(Int(gasPrice)), units: UnitConfiguration.gasPriceUnit) ?? BigInt()
+            let gasLimitBig = BigInt(String(Int(gasLimit)), radix: 10) ?? BigInt()
+            
+            let data = Data(hex:signData)
+            
+            let nonceBig = BigInt(nonce) ?? 0
+            let configuration = TransactionConfiguration(
+                gasPrice: gasPriceBig,
+                gasLimit: gasLimitBig,
+                data: data,
+                nonce: nonceBig
+            )
+            
+            var type: TokenObjectType = .ERC20
+            if isCoin == true {
+                type = .coin
+            }
+            
+            let token = TokenObject(
+                contract: "",
+                name: "",
+                coin: .ethereum,
+                type: type,
+                symbol: "", decimals: 0, value: "0", isCustom: false, isDisabled: false)
+            
+            let transfer: Transfer = {
+                let server = token.coin.server
+                switch token.type {
+                case .coin:
+                    return Transfer(server: server, type: .ether(token, destination: .none))
+                case .ERC20:
+                    return Transfer(server: server, type: .token(token))
+                }
+            }()
+            
+            print("拿到transfer")
+            
+            let chainState: ChainState = ChainState(server: transfer.server)
+            chainState.fetch()
+
+            
+            let addressString = toAddress
+            guard let address = EthereumAddress(string: addressString) else {
+                print("****ETH_LOG****拿不到address")
+                return
+            }
+            let transerValue = BigInt(amount.drop0x, radix: 16) ?? BigInt()
+            let transaction = UnconfirmedTransaction(
+                transfer: transfer,
+                value: transerValue,
+                to: address,
+                data: configuration.data,
+                gasLimit: configuration.gasLimit,
+                gasPrice: configuration.gasPrice,
+                nonce: .none
+            )
+            print("****ETH_LOG****拿到transaction")
+            switch session.account.type {
+            case .privateKey, .hd:
+                let first = session.account.accounts.filter { $0.coin == token.coin }.first
+                guard let account = first else {
+                    print("****ETH_LOG****拿不到account")
+                    return
+                }
+                
+                let configurator = TransactionConfigurator(
+                    session: session,
+                    account: account,
+                    transaction: transaction,
+                    server: transfer.server,
+                    chainState: ChainState(server: transfer.server)
+                )
+                
+                
+                let transaction1 = configurator.signTransaction
+                let server = transfer.server
+                let sendTransactionCoordinator : SendTransactionCoordinator = SendTransactionCoordinator(session: session, keystore: keystore, confirmType: .signThenSend, server: server)
+                print("****ETH_LOG****开始sendTransaction")
+                sendTransactionCoordinator.send(transaction: transaction1) { result in
+                    print("****ETH_LOG****转账结果:",result)
+                    switch result {
+                    case .success(let complete) :
+                        print("****ETH_LOG****send success:\(complete)")
+    //                    ConfirmResult
+                        var txId = ""
+                        switch complete {
+                        case .signedTransaction(let sentTransaction):
+                            txId = sentTransaction.id
+                            print("txId111111===========\(txId)")
+                            if (txId.hasPrefix("0-")) {
+                                sendComplete(false,txId.substring(from: 2))
+                            } else {
+                                sendComplete(true, txId)
+                            }
+                        case .sentTransaction(let sentTransaction):
+                            txId = sentTransaction.id
+                            print("txId22222===========\(txId)")
+                            if (txId.hasPrefix("0-")) {
+                                sendComplete(false,txId.substring(from: 2))
+                            } else {
+                                sendComplete(true, txId)
+                            }
+                        }
+                        
+                    case .failure(let error) :
+                        print("****ETH_LOG****send fail:\(error)")
+                        sendComplete(false, error.domain)
+                    }
+                }
+                
+            case .address:
+                sendComplete(false, nil)
+            }
+        }
+    
+    @objc public func sendSingAndSend(fromAddress:String, toAddress:String, gasLimit:String, gasPrice:String, nonce:String, value:String, signData:String,isCoin:Bool, sendComplete:@escaping ((Bool, String?) -> Void)) {
+        
+        var walletInfo : WalletInfo? = nil
+        for tempWalletInfo in self.keystore.wallets {
+            if fromAddress.lowercased() == tempWalletInfo.currentAccount.address.description.lowercased() {
+                walletInfo = tempWalletInfo
+                break
+            }
+        }
+        if walletInfo == nil {
+            print("****ETH_LOG****找不到钱包")
+            return
+        }
+        let config: Config = .current
+        let migration = MigrationInitializer(account: walletInfo!)
+        migration.perform()
+        let sharedMigration = SharedMigrationInitializer()
+        sharedMigration.perform()
+        let realm = self.realm(for: migration.config)
+        let sharedRealm = self.realm(for: sharedMigration.config)
+        let session = WalletSession(
+            account: walletInfo!,
+            realm: realm,
+            sharedRealm: sharedRealm,
+            config: config
+        )
+        session.transactionsStorage.removeTransactions(for: [.failed, .unknown])
+        
+        let fullFormatter = EtherNumberFormatter.full
+        let gasPriceBig = fullFormatter.number(from: gasPrice, units: UnitConfiguration.gasPriceUnit) ?? BigInt()
+        let gasLimitBig = BigInt(gasLimit, radix: 10) ?? BigInt()
+        
+        let data = Data(hex: signData)
+        
+        let nonceBig = BigInt(nonce) ?? 0
+        
+        var type: TokenObjectType = .ERC20
+        if isCoin == true {
+            type = .coin
+        }
+        
+        let token = TokenObject()
+        token.coin = .ethereum
+        token.type = type
+        
+        let transfer: Transfer = {
+            let server = token.coin.server
+            switch token.type {
+            case .coin:
+                return Transfer(server: server, type: .ether(token, destination: .none))
+            case .ERC20:
+                return Transfer(server: server, type: .token(token))
+            }
+        }()
+        
+        print("拿到transfer")
+        
+        let chainState: ChainState = ChainState(server: transfer.server)
+        chainState.fetch()
+        print("chainState = \(chainState)")
+        let addressString = toAddress
+        guard let address = EthereumAddress(string: addressString) else {
+            print("****ETH_LOG****拿不到address")
+            return
+        }
+        
+        let transerValue = BigInt(value.drop0x, radix: 16) ?? BigInt()
+    
+        let transaction = UnconfirmedTransaction(
+            transfer: transfer,
+            value: transerValue,
+            to: address,
+            data: data,
+            gasLimit: gasLimitBig,
+            gasPrice: gasPriceBig,
+            nonce: nonceBig
+        )
+        print("****ETH_LOG****拿到transaction")
+        
+        switch session.account.type {
+        case .privateKey, .hd:
+            let first = session.account.accounts.filter { $0.coin == .ethereum }.first
+            guard let account = first else {
+                print("****ETH_LOG****拿不到account")
+                return
+            }
+            
+//            let signTranfer = SignTransaction (
+//                value: BigInt(value, radix: 16) ?? 0,
+//                account: account,
+//                to: address,
+//                nonce: nonceBig,
+//                data: data,
+//                gasPrice: gasPriceBig,
+//                gasLimit: gasLimitBig,
+//                chainID: 1,
+//                localizedObject: nil
+//            )
+            
+            let configurator = TransactionConfigurator(
+                session: session,
+                account: account,
+                transaction: transaction,
+                server: transfer.server,
+                chainState: ChainState(server: transfer.server)
+            )
+            
+            
+            let transaction1 = configurator.signTransaction
+            let server = transfer.server
+            
+            let sendTransactionCoordinator : SendTransactionCoordinator = SendTransactionCoordinator(session: session, keystore: keystore, confirmType: .signThenSend, server: server)
+            print("****ETH_LOG****开始sendTransaction")
+            
+            sendTransactionCoordinator.send(transaction: transaction1) { result in
+                print("****ETH_LOG****转账结果:",result)
+                switch result {
+                case .success(let complete) :
+                    print("****ETH_LOG****send success:\(complete)")
                     var txId = ""
                     switch complete {
                     case .signedTransaction(let sentTransaction):

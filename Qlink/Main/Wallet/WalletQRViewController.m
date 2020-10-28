@@ -74,7 +74,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = MAIN_WHITE_COLOR;
     
     _parentView.frame = CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT-44);

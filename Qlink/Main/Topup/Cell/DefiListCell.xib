@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="DefiListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wse-lV-oD2">
+                        <rect key="frame" x="16" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="eHs-hQ-ajT"/>
+                            <constraint firstAttribute="width" constant="40" id="mCn-Y9-HK1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBG-1J-JlR">
+                        <rect key="frame" x="66" y="10" width="238" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ff3-tf-CFx">
+                        <rect key="frame" x="66" y="35" width="238" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="md0-2u-oT5">
+                        <rect key="frame" x="0.0" y="59.5" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.90987110140000005" green="0.90972632170000001" blue="0.91764944790000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.59999999999999998" id="xI0-I7-aHq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="md0-2u-oT5" secondAttribute="bottom" id="D3A-SH-API"/>
+                    <constraint firstItem="yBG-1J-JlR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Lxo-Dc-h52"/>
+                    <constraint firstItem="Ff3-tf-CFx" firstAttribute="top" secondItem="yBG-1J-JlR" secondAttribute="bottom" constant="5" id="PPo-g5-aF0"/>
+                    <constraint firstItem="Wse-lV-oD2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZZg-br-jQ6"/>
+                    <constraint firstAttribute="trailing" secondItem="yBG-1J-JlR" secondAttribute="trailing" constant="16" id="bO9-fu-PSA"/>
+                    <constraint firstItem="Wse-lV-oD2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="jBx-mL-ygK"/>
+                    <constraint firstItem="Ff3-tf-CFx" firstAttribute="trailing" secondItem="yBG-1J-JlR" secondAttribute="trailing" id="jgG-zb-G2N"/>
+                    <constraint firstItem="yBG-1J-JlR" firstAttribute="leading" secondItem="Wse-lV-oD2" secondAttribute="trailing" constant="10" id="k3k-kQ-p1c"/>
+                    <constraint firstItem="md0-2u-oT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mfI-Cl-Ia6"/>
+                    <constraint firstAttribute="trailing" secondItem="md0-2u-oT5" secondAttribute="trailing" id="tEc-iC-V9E"/>
+                    <constraint firstItem="Ff3-tf-CFx" firstAttribute="leading" secondItem="yBG-1J-JlR" secondAttribute="leading" id="w42-JN-1hQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="iconImgView" destination="Wse-lV-oD2" id="3nR-ZD-ICk"/>
+                <outlet property="lblName" destination="yBG-1J-JlR" id="AWw-MS-9s3"/>
+                <outlet property="lblUrl" destination="Ff3-tf-CFx" id="R35-S2-TIK"/>
+            </connections>
+            <point key="canvasLocation" x="57.971014492753625" y="56.25"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -28,6 +28,7 @@
                 <outlet property="focus7Lab" destination="jEq-Y8-CO5" id="UM6-Tj-80Y"/>
                 <outlet property="focus8Lab" destination="KN2-gR-hf3" id="IyF-sl-MP9"/>
                 <outlet property="focus9Lab" destination="0B2-HQ-ssI" id="xh2-aO-oY3"/>
+                <outlet property="lblClaimDesc" destination="VNn-4j-Mlv" id="E3C-aC-f0I"/>
                 <outlet property="leftBtn" destination="pe5-g6-AbO" id="Llc-Ub-DoL"/>
                 <outlet property="mainScroll" destination="irD-ia-Vgb" id="l86-61-IZc"/>
                 <outlet property="mainTable" destination="pXB-wM-cCX" id="qjC-ib-kvu"/>
@@ -192,7 +193,7 @@
                                                     <color key="textColor" red="0.054901960784313725" green="0.054901960784313725" blue="0.054901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim 100 QLC when your mission is completed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJi-jM-fGo">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim 50 QLC when your mission is completed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJi-jM-fGo">
                                                     <rect key="frame" x="64" y="37" width="199" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -591,7 +592,7 @@
                                                     <string key="text">1. How to claim QLC for staking daily bounty: Check out the Covid-19 Live Updates page at least once a day, you are entitled to claim 100 QLC for staking based on which QGas is airdropped to your QGas wallet.
         
 2. How to claim social-distancing bounty:
-Check out the Covid-19 Live Updates page at least once a day with your daily steps no greater than 1000 for consecutive 14 days, you are entitled to claim 100 QLC. The reward will be sent to your Nep-5 wallet when claimed.</string>
+Check out the Covid-19 Live Updates page at least once a day with your daily steps no greater than 1000 for consecutive 14 days, you are entitled to claim 50 QLC. The reward will be sent to your Nep-5 wallet when claimed.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

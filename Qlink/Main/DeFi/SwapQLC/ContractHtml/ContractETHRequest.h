@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ContractETHRequest : UIView
 
 + (ContractETHRequest *)addContractETHRequest;
-- (void) destoryLockhWithPrivate:(NSString *) privateKey address:(NSString *) address toAddress:(NSString *) toAddress wrapperAddress:(NSString *) wrapperAddress amount:(NSInteger) amount gasPrice:(NSString *) gasPrice completionHandler:(void (^)(id responseObject)) success;
+- (void) destoryLockhWithPrivate:(NSString *) privateKey address:(NSString *) address toAddress:(NSString *) toAddress wrapperAddress:(NSString *) wrapperAddress amount:(NSInteger) amount gasPrice:(NSString *) gasPrice completionHandler:(void (^)(id responseObject)) successed;
 - (void) destoryFetchWithPrivate:(NSString *) privateKey address:(NSString *) address rhash:(NSString *) rhash gasPrice:(NSString *) gasPrice completionHandler:(void (^)(id responseObject)) success;
 - (void) getBalanceOfhWithAddress:(NSString *) address completionHandler:(void (^)(id responseObject)) success;
 - (void) getGasPriceCompletionHandler:(void (^)(id responseObject)) success;

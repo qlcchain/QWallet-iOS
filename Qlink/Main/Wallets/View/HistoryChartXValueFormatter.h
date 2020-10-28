@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Charts/Charts.h>
+#import <ChartsRealm-Swift.h>
 //#import "DefiChartConstants.h"
+#import "Qlink-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

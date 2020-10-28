@@ -1,0 +1,25 @@
+//
+//  DefiListModel.h
+//  Qlink
+//
+//  Created by 旷自辉 on 2020/10/27.
+//  Copyright © 2020 pan. All rights reserved.
+//
+
+#import "BBaseModel.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface DefiListModel : BBaseModel
+
+@property (nonatomic, strong) NSString * name;
+
+@property (nonatomic, strong) NSString *website;
+
+@property (nonatomic, strong) NSString *logo;
+
+@property (nonatomic, strong) NSString *swapUrl;
+
+@end
+
+NS_ASSUME_NONNULL_END

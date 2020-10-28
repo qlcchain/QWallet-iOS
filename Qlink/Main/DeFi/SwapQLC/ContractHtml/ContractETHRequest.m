@@ -16,6 +16,7 @@
 #import "QSwapHashModel.h"
 #import "NSDate+Category.h"
 #import "QSwapAddressModel.h"
+#import "QSwipWrapperRequestUtil.h"
 
 @interface ContractETHRequest () <WKNavigationDelegate> {
     JsApiTest *jsApi;
@@ -166,7 +167,7 @@
         }
     }];
 }
-- (void) destoryLockhWithPrivate:(NSString *) privateKey address:(NSString *) address toAddress:(NSString *) toAddress wrapperAddress:(NSString *) wrapperAddress amount:(NSInteger) amount gasPrice:(NSString *) gasPrice completionHandler:(void (^)(id responseObject)) success {
+- (void) destoryLockhWithPrivate:(NSString *) privateKey address:(NSString *) address toAddress:(NSString *) toAddress wrapperAddress:(NSString *) wrapperAddress amount:(NSInteger) amount gasPrice:(NSString *) gasPrice completionHandler:(void (^)(id responseObject)) successed {
     
     // ETH -> NEP Lock
     NSString *urlStr = [ConfigUtil get_eth_node_normal];
@@ -174,40 +175,43 @@
     NSLog(@"原文:%@",hash);
     NSString *rHash = [@"0x" stringByAppendingString:[hash sha256String]];
     NSLog(@"原文hash:%@",rHash);
-    
-    
-    [_dwebview callHandler:@"ethSmartContract.destoryLock" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",gasPrice,urlStr,privateKey,address,rHash,@(amount),wrapperAddress] completionHandler:^(id  _Nullable value) {
-        
-        NSLog(@"responseObjecgt = %@",value);
-        
-        NSInteger reCode = [value[0] integerValue];
-        
-        if (reCode < 0) {
-            success(nil);
-            [kAppD.window makeToastDisappearWithText:@"Failed to lock"];
-            
+    kWeakSelf(self)
+    [QSwipWrapperRequestUtil ercLockWithdrawAPILockWithRhash:rHash resultHandler:^(id  _Nullable result, BOOL success, NSString * _Nullable message) {
+        if (success && [result[@"value"] boolValue]) {
+            [weakself.dwebview callHandler:@"ethSmartContract.destoryLock" arguments:@[[QSwapAddressModel getShareObject].ethContract?:@"",gasPrice,urlStr,privateKey,address,rHash,@(amount),wrapperAddress] completionHandler:^(id  _Nullable value) {
+                
+                NSLog(@"responseObjecgt = %@",value);
+                
+                NSInteger reCode = [value[0] integerValue];
+                
+                if (reCode < 0) {
+                    successed(nil);
+                    [kAppD.window makeToastDisappearWithText:@"Failed to lock"];
+                    
+                } else {
+                    // 锁定成功 初始化对象
+                    QSwapHashModel *hashM = [[QSwapHashModel alloc] init];
+                    hashM.fromAddress = address;
+                    hashM.type = 2;
+                    hashM.amount = amount;
+                    hashM.rHash = rHash;
+                    hashM.rOrigin = hash;
+                    hashM.txHash = value[1];
+                    hashM.privateKey = privateKey;
+                    hashM.toAddress = toAddress;
+                    hashM.wrapperAddress = wrapperAddress;
+                    hashM.lockTime = [NSDate getTimestampFromDate:[NSDate date]];
+                    // 写入本地
+                    [QSwapHashModel addSwapHashWithSwapHashModel:hashM];
+                    
+                    successed(hashM);
+                }
+                
+            }];
         } else {
-            
-           
-            [kAppD.window makeToastDisappearWithText:@"Lock successfully!"];
-            // 锁定成功 初始化对象
-            QSwapHashModel *hashM = [[QSwapHashModel alloc] init];
-            hashM.fromAddress = address;
-            hashM.type = 2;
-            hashM.amount = amount;
-            hashM.rHash = rHash;
-            hashM.rOrigin = hash;
-            hashM.txHash = value[1];
-            hashM.privateKey = privateKey;
-            hashM.toAddress = toAddress;
-            hashM.wrapperAddress = wrapperAddress;
-            hashM.lockTime = [NSDate getTimestampFromDate:[NSDate date]];
-            // 写入本地
-            [QSwapHashModel addSwapHashWithSwapHashModel:hashM];
-            
-            success(hashM);
+            successed(nil);
+            [kAppD.window makeToastDisappearWithText:@"Failed to lock"];
         }
-        
     }];
     
     

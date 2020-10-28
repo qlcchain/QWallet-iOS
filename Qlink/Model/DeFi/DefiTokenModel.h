@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *chain;
 
+@property (nonatomic, strong) NSString *website;
+
 @property (nonatomic, strong) NSString *percentChange24h;
 
 @property (nonatomic, strong) NSString *percentChange7d;

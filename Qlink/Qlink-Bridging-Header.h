@@ -15,6 +15,9 @@
 #import <MJExtension/MJExtension.h>
 //#import "NEOWalletUtil.h"
 #import "AppDelegate.h"
+#import "QBaseViewController.h"
+#import "WalletSignUtil.h"
+#import "ConfirmTranserView.h"
 //#import <QLCFramework/QLCMnemonicBit.h>
 //#import "QLCMnemonicBit.h"
 
